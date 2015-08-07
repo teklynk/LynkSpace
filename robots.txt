@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /css/
+Disallow: /db/
+Disallow: /font-awesome/
+Disallow: /fonts/
+Disallow: /includes/
+Disallow: /js/
+Disallow: /mail/
