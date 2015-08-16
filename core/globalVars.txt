@@ -27,19 +27,13 @@ $contactFormSendToEmail;
 $contactFormMsg;
 
 getServices()
-$sqlServicesHeading;
-$rowServicesHeading;
 $servicesHeading;
-$sqlServices;
 $servicesNumRows;
 $servicesColWidth;
 $servicesBlurb;
 $servicesCount;
 
 getTeam()
-$sqlTeamHeading;
-$rowTeamHeading;
-$sqlTeam;
 $teamHeading;
 $teamBlurb;
 $teamImage;
@@ -63,20 +57,14 @@ $setupGoogleanalytics;
 getSocialMediaIcons()
 $socialMediaIcons;
 $socialMediaHeading;
-$sqlSocialMedia;
-$rowSocialMedia;
 
 getCustomers()
-$sqlCustomerHeading;
-$rowCustomerHeading;
-$sqlCustomers;
 $customerHeading;
 $customerBlurb;
 $customerNumRows;
 $customerColWidth;
 
 getSlider()
-$sqlSlider;
 $sliderCount;
 $sliderNumRows;
 
@@ -87,6 +75,6 @@ $generalInfoHeading;
 getFeatured()
 $featuredContent;
 $featuredHeading;
-$featuredIntroText;
+$featuredBlurb;
 $featuredImage;
 $featuredImageAlign;

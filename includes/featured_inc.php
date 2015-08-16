@@ -4,7 +4,7 @@
 		
 	echo "<div class='row' id='featured'>";
 	echo "<div class='col-lg-12'>";
-	echo "<h2 class='page-header featured'>".$featuredIntroText."</h2>";
+	echo "<h2 class='page-header featured'>".$featuredBlurb."</h2>";
 	echo "</div>";
  
 	if ($featuredImage > "") {

@@ -372,14 +372,14 @@ function getGeneralInfo(){
 function getFeatured(){
 	global $featuredContent;
 	global $featuredHeading;
-	global $featuredIntroText;
+	global $featuredBlurb;
 	global $featuredImage;
 	global $featuredImageAlign;
 	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
 	$rowFeatured = mysql_fetch_array($sqlFeatured);
 
 	if (!empty($rowFeatured["introtext"])) {
-		$featuredIntroText = $rowFeatured["introtext"];
+		$featuredBlurb = $rowFeatured["introtext"];
 	}
 
 	if (!empty($rowFeatured["content"])) {
