@@ -1,17 +1,15 @@
 <!-- Header Carousel -->
 <?php
-    $sqlSlider = mysql_query("SELECT id, title, image, link, content, active FROM slider WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $num_rows = mysql_num_rows($sqlSlider);
-    $slideCount=0;
+    getSlider();
 
-    if ($num_rows > 0) {
+    if ($sliderNumRows > 0) {
         echo "<header id='myCarousel' class='carousel slide'>";
-        //Wrapper for slides -->
+        //Wrapper for slides
         echo "<div class='carousel-inner'>";
         while ($rowSlider  = mysql_fetch_array($sqlSlider)) {
-            $slideCount++;
+            $sliderCount++;
 
-            if ($slideCount==1) {
+            if ($sliderCount==1) {
                 $slideActive = "active";
             } else {
                 $slideActive = "";
@@ -19,7 +17,7 @@
 
             echo "<div class='item $slideActive'>";
 
-            if ($rowSlider["image"] != "") {
+            if ($rowSlider["image"] > "") {
                 echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
             } else {
                 echo "<div class='fill'></div>";
@@ -36,7 +34,7 @@
         }
         echo "</div>";
 
-        //Controls -->
+        //Controls
         echo "<a class='left carousel-control' href='#myCarousel' data-slide='prev'>";
         echo "<span class='icon-prev'></span>";
         echo "</a>";
