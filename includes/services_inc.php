@@ -3,9 +3,9 @@
     getServices();
 
     if ($servicesNumRows > 0) {
-        echo "<div class='row'>";
+        echo "<div class='row' id='services'>";
         echo "<div class='col-lg-12'>";
-        echo "<h2 class='page-header services' id='services'>".$servicesHeading."</h2>";
+        echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
         echo "</div>";
 
         echo "<div class='col-lg-12'>";

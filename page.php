@@ -2,12 +2,12 @@
 include 'includes/header.php';
 
 	echo "<div class='container'>"; //closed in footer
-	echo "<div class='row'>";
+	echo "<div class='row' id='page'>";
 
 		getPage();
 
 		echo "<div class='col-lg-12'>";
-	    echo "<h2 class='page-header'>".$pageTitle."</h2>";
+	    echo "<h2 class='page-header page'>".$pageTitle."</h2>";
 	    echo "</div>";
 
 	    if ($pageImage>"") {

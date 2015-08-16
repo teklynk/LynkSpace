@@ -9,9 +9,9 @@
 
             </div>
             <?php
-            echo "<div class='row socialmedia'>";
+            echo "<div class='row' id='socialmedia'>";
             echo "<div class='col-md-12'>";
-				include 'includes/socialmedia_inc.php';
+				include 'socialmedia_inc.php';
             echo "</div>";
             echo "</div>";
             ?>

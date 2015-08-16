@@ -10,18 +10,18 @@ function getPage(){
 		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active FROM pages WHERE id='$pageRefId'");
 		$rowPage = mysql_fetch_array($sqlPage);
 
-		if ($rowPage === FALSE){ 
-		    die(mysql_error()); // TODO: better error handling
-		}
-
 		if ($rowPage['active']=1 AND $_GET["ref"]>"" AND $pageRefId=$rowPage['id']) {
+
 			if ($rowPage["image"]>"") {
 				$pageImage = "<img class='img-responsive' src='uploads/".$rowPage["image"]."' alt='".$rowPage["title"]."' title='".$rowPage["title"]."'>";
 			}
+
 			$pageTitle = $rowPage['title'];
 			$pageContent = $rowPage["content"];
 			$pageImageAlign = $rowPage["image_align"];
+
 		} else {
+
 		    echo "<div class='col-lg-12'>";
 		    echo "<h2 class='page-header'>Page not found</h2>";
 		    echo "</div>";
@@ -42,10 +42,6 @@ function getAbout(){
 
 	$sqlAbout = mysql_query("SELECT heading, content, image, image_align FROM aboutus");
 	$rowAbout = mysql_fetch_array($sqlAbout);
-
-	if ($rowAbout === FALSE){ 
-	    die(mysql_error()); // TODO: better error handling
-	}
 
 	if (!empty($rowAbout["heading"])){
 		$aboutTitle = $rowAbout["heading"];
@@ -91,6 +87,8 @@ function getServices(){
         $servicesColWidth=4;
     } elseif ($servicesNumRows==4) {
         $servicesColWidth=3;
+    } else {
+    	$servicesColWidth=2;
     }
 }
 
@@ -125,22 +123,24 @@ function getTeam(){
     	$teamColWidth=4;
     } elseif ($teamNumRows==4) {
     	$teamColWidth=3;
+    } else {
+    	$teamColWidth=2;
     }
 }
 
 function getNav($navSection,$dropdown,$pull){
     echo "<ul class='nav navbar-nav navbar-$pull'>";
 		if ($dropdown=="true"){
-			$dropdownToggle = "class='dropdown-toggle'";
-			$dataToggle = "data-toggle='dropdown'";
-			$dropdown = "class='dropdown nav-$navSection'";
-			$dropdownMenu = "class='dropdown-menu'";
+			$dropdownToggle = "dropdown-toggle";
+			$dataToggle = "dropdown";
+			$dropdown = "dropdown nav-$navSection";
+			$dropdownMenu = "dropdown-menu";
 			$dropdownCaret = "<b class='caret'></b>";
 		} else {
 			$dropdownToggle = "";
 			$dataToggle = "";
-			$dropdown = "class='nav-$navSection'";
-			$dropdownMenu = "";
+			$dropdown = "nav-$navSection";
+			$dropdownMenu = "cat-links";
 			$dropdownCaret = "";
 		}
         $sqlNavLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
@@ -153,9 +153,9 @@ function getNav($navSection,$dropdown,$pull){
 					$sqlNavCatLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
 					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
 			
-                    echo "<li $dropdown>";
-						echo "<a href='#' $dropdownToggle $dataToggle>".$rowNavLinks[8]." $dropdownCaret</a>";
-						echo "<ul $dropdownMenu>";
+                    echo "<li class='$dropdown'>";
+						echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[8]." $dropdownCaret</a>";
+						echo "<ul class='$dropdownMenu'>";
 						while ($rowNavCatLinks = mysql_fetch_array($sqlNavCatLinks)) {
 							echo "<li>";
 							echo "<a href='".$rowNavCatLinks[3]."'>".$rowNavCatLinks[2]."</a>";
@@ -186,10 +186,6 @@ function getSetup(){
     $sqlSetup = mysql_query("SELECT title, author, keywords, description, headercode, googleanalytics FROM setup");
     $rowSetup  = mysql_fetch_array($sqlSetup);
 
-    if ($rowSetup === FALSE){ 
-    	die(mysql_error()); // TODO: better error handling
-	}	
-
     $setupDescription = $rowSetup["description"];
     $setupKeywords = $rowSetup["keywords"];
     $setupAuthor = $rowSetup["author"];
@@ -205,15 +201,83 @@ function getSetup(){
     }
 }
 
+function getSocialMediaIcons(){
+	global $socialMediaIcons;
+	global $socialMediaHeading;
+	global $sqlSocialMedia;
+	global $rowSocialMedia;
+
+	$sqlSocialMedia = mysql_query("SELECT * FROM socialmedia");
+	$rowSocialMedia = mysql_fetch_array($sqlSocialMedia);
+
+	$socialMediaIcons = "";
+
+	if (!empty($rowSocialMedia["heading"])){
+		$socialMediaHeading = $rowSocialMedia["heading"];
+	}
+
+    if (!empty($rowSocialMedia["facebook"])){
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["facebook"]."><i class='fa fa-facebook-square fa-2x'></i></a></li>";
+    }
+
+    if (!empty($rowSocialMedia["google"])){
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["google"]."><i class='fa fa-google-plus-square fa-2x'></i></a></li>";
+    }
+
+    if (!empty($rowSocialMedia["github"])){
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["github"]."><i class='fa fa-github-square fa-2x'></i></a></li>";
+    }
+
+    if (!empty($rowSocialMedia["twitter"])){
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["twitter"]."><i class='fa fa-twitter-square fa-2x'></i></a></li>";
+    }
+
+    if (!empty($rowSocialMedia["linkedin"])){
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["linkedin"]."><i class='fa fa-linkedin-square fa-2x'></i></a></li>";
+    }
+
+    $socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
+}
+
+function getCustomers(){
+	global $sqlCustomerHeading;
+	global $rowCustomerHeading;
+	global $sqlCustomers;
+	global $customerHeading;
+	global $customerBlurb;
+	global $customerNumRows;
+	global $customerColWidth;
+
+    $sqlCustomerHeading = mysql_query("SELECT customersheading, customerscontent FROM setup");
+    $rowCustomerHeading = mysql_fetch_array($sqlCustomerHeading);
+
+	if (!empty($rowCustomerHeading['customersheading'])) {
+	    $customerHeading = $rowCustomerHeading['customersheading'];
+	}
+
+    if (!empty($rowCustomerHeading['customerscontent'])) {
+    	$customerBlurb= $rowCustomerHeading['customerscontent'];
+	}
+
+    $sqlCustomers = mysql_query("SELECT image, name, link, active FROM customers WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $customerNumRows = mysql_num_rows($sqlCustomers);	
+
+    if ($customerNumRows==2) {
+    	$customerColWidth=6;
+    } elseif ($customerNumRows==3) {
+    	$customerColWidth=4;
+    } elseif ($customerNumRows==4) {
+    	$customerColWidth=3;
+    } else {
+    	$customerColWidth=2;
+    }
+}
+
 function getGeneralInfo(){
 	global $generalInfoContent;
 	global $generalInfoHeading;
 	$sqlGeneralinfo = mysql_query("SELECT heading, content FROM generalinfo");
 	$rowGeneralinfo = mysql_fetch_array($sqlGeneralinfo);
-	
-	if ($rowGeneralinfo === FALSE){ 
-	    die(mysql_error()); // TODO: better error handling
-	}
 
 	if (!empty($rowGeneralinfo["content"])) {
 		$generalInfoContent = $rowGeneralinfo["content"];
@@ -232,10 +296,6 @@ function getFeatured(){
 	global $featuredImageAlign;
 	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
 	$rowFeatured = mysql_fetch_array($sqlFeatured);
-
-	if ($rowFeatured === FALSE){ 
-	    die(mysql_error()); // TODO: better error handling
-	}
 
 	if (!empty($rowFeatured["introtext"])) {
 		$featuredIntroText = $rowFeatured["introtext"];

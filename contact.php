@@ -4,11 +4,11 @@ include 'includes/header.php';
 $sqlContact = mysql_query("SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
 $rowContact = mysql_fetch_array($sqlContact);
 ?>
-    <div class="container">
+    <div class="container" id="contact">
 
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header"><?php echo $rowContact['heading']; ?></h2>
+                <h2 class="page-header contact"><?php echo $rowContact['heading']; ?></h2>
             </div>
         </div>
         <div class="row">

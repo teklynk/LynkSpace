@@ -3,9 +3,9 @@
 	getTeam();
 
     if ($teamNumRows > 0) {
-		echo "<div class='row'>";
+		echo "<div class='row' id='team'>";
 			echo "<div class='col-lg-12'>";
-			echo "<h2 class='page-header team' id='team'>".$teamHeading."</h2>";
+			echo "<h2 class='page-header team'>".$teamHeading."</h2>";
 			echo "</div>";
 
 	        if (!empty($teamContent)) {
@@ -39,15 +39,6 @@
 				if (!empty($rowTeam['content'])){
 					echo "<p>".$rowTeam['content']."</p>";
 				}
-
-				//echo "<ul class='list-inline'>";
-				//echo "<li><a href='#'><i class='fa fa-2x fa-facebook-square'></i></a>";
-				//echo "</li>";
-				//echo "<li><a href='#'><i class='fa fa-2x fa-linkedin-square'></i></a>";
-				//echo "</li>";
-				//echo "<li><a href='#'><i class='fa fa-2x fa-twitter-square'></i></a>";
-				//echo "</li>";
-				//echo "</ul>";
 
 				echo "</div>";
 				echo "</div>";
