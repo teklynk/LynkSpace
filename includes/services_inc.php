@@ -1,36 +1,21 @@
 <!-- Service Panels -->
 <?php
-    $sqlServicesHeading = mysql_query("SELECT servicesheading, servicescontent FROM setup");
-    $rowServicesHeading = mysql_fetch_array($sqlServicesHeading);
+    getServices();
 
-    $sqlServices = mysql_query("SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $num_rows = mysql_num_rows($sqlServices);
-    $servicesCount=0;
-
-    if ($num_rows==2) {
-        $colWidth=6;
-    } elseif ($num_rows==3) {
-        $colWidth=4;
-    } elseif ($num_rows==4) {
-        $colWidth=3;
-    }
-
-    if ($num_rows > 0) {
+    if ($servicesNumRows > 0) {
         echo "<div class='row'>";
         echo "<div class='col-lg-12'>";
-        echo "<h2 class='page-header services' id='services'>".$rowServicesHeading['servicesheading']."</h2>";
+        echo "<h2 class='page-header services' id='services'>".$servicesHeading."</h2>";
         echo "</div>";
 
-        if (!empty($rowServicesHeading['servicescontent'])) {
-            echo "<div class='col-lg-12'>";
-            echo "<p class='text-center'>".$rowServicesHeading['servicescontent']."</p>";
-            echo "</div>";
-        }
+        echo "<div class='col-lg-12'>";
+        echo "<p class='text-center'>".$servicesBlurb."</p>";
+        echo "</div>";
+        
 
         while ($rowServices = mysql_fetch_array($sqlServices)){
-            $servicesCount++;
 
-            echo "<div class='col-md-".$colWidth." text-center'>";
+            echo "<div class='col-md-".$servicesColWidth." text-center'>";
             echo "<div class='panel panel-default text-center'>";
             echo "<div class='panel-heading'>";
             echo "<span class='fa-stack fa-5x'>";
