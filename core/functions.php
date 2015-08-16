@@ -273,6 +273,15 @@ function getCustomers(){
     }
 }
 
+function getSlider(){
+	global $sqlSlider;
+	global $sliderCount;
+	global $sliderNumRows;
+    $sqlSlider = mysql_query("SELECT id, title, image, link, content, active FROM slider WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $sliderNumRows = mysql_num_rows($sqlSlider);
+    $sliderCount=0;
+}
+
 function getGeneralInfo(){
 	global $generalInfoContent;
 	global $generalInfoHeading;
