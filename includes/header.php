@@ -83,3 +83,6 @@
     </div>
     <!-- /.container -->
 </nav>
+<?php 
+//include 'slider_inc.php'; 
+?>

@@ -16,3 +16,5 @@
 .nav-Footer>.cat-Footer {color:#333; cursor: default;}
 .nav-Footer {padding:0px 32px 0px 0px;}
 .nav-Footer>.cat-links {list-style: none; padding-left:14px;}
+
+#contact>.row>.page-header socialmedia {display:none !important; }

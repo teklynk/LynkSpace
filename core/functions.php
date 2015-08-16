@@ -58,6 +58,77 @@ function getAbout(){
 	$aboutImageAlign = $rowAbout["image_align"];
 }
 
+function getContactInfo(){
+	global $contactHeading;
+	global $contactBlurb;
+	global $contactMap;
+	global $contactAddress;
+	global $contactCity;
+	global $contactState;
+	global $contactZipcode;
+	global $contactPhone;
+	global $contactEmail;
+	global $contactHours;
+
+	global $contactFormSendToEmail;
+	global $contactFormMsg;
+
+	$sqlContact = mysql_query("SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
+	$rowContact = mysql_fetch_array($sqlContact);
+
+    if ($_GET["msgsent"]=="thankyou") {
+        $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
+    } else if ($_GET["msgsent"]=="error") {
+        $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
+    } else {
+    	$contactFormMsg = "";
+    }
+
+    if (!empty($rowContact['heading'])) {
+    	$contactHeading = $rowContact['heading'];
+    }
+
+    if (!empty($rowContact['introtext'])) {
+    	$contactBlurb = $rowContact['introtext'];
+    }
+
+    if (!empty($rowContact['mapcode'])) {
+    	$contactMap = $rowContact['mapcode'];
+    }
+
+    if (!empty($rowContact['address'])) {
+    	$contactAddress = $rowContact['address'];
+    }
+
+    if (!empty($rowContact['city'])) {
+    	$contactCity = $rowContact['city'];
+    }
+
+    if (!empty($rowContact['state'])) {
+    	$contactState = $rowContact['state'];
+    }
+
+    if (!empty($rowContact['zipcode'])) {
+    	$contactZipcode = $rowContact['zipcode'];
+    }
+
+    if (!empty($rowContact['phone'])) {
+    	$contactPhone = $rowContact['phone'];
+    }
+
+    if (!empty($rowContact['email'])) {
+    	$contactEmail = $rowContact['email'];
+    }
+
+    if (!empty($rowContact['hours'])) {
+    	$contactHours = $rowContact['hours'];
+    }
+
+    if (!empty($rowContact['sendtoemail'])) {
+    	$contactFormSendToEmail = $rowContact['sendtoemail'];
+    }
+}
+
 function getServices(){
 	global $sqlServicesHeading;
 	global $rowServicesHeading;
@@ -129,6 +200,7 @@ function getTeam(){
 }
 
 function getNav($navSection,$dropdown,$pull){
+	//EXAMPLE: getNav('Top','true','right')
     echo "<ul class='nav navbar-nav navbar-$pull'>";
 		if ($dropdown=="true"){
 			$dropdownToggle = "dropdown-toggle";
