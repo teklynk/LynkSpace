@@ -1,6 +1,5 @@
 <!-- Service Panels -->
 <?php
-    getServices();
 
     if ($servicesNumRows > 0) {
         echo "<div class='row' id='services'>";

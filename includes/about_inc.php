@@ -2,8 +2,6 @@
 <?php
 
 	echo "<div class='row'>";
-	
-	getAbout();
 
 	echo "<div class='col-lg-12'>";
 	echo "<h2 class='page-header about' id='about'>".$aboutTitle."</h2>";

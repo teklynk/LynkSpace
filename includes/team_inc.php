@@ -1,6 +1,5 @@
 <!-- Team Members -->
 <?php
-	getTeam();
 
     if ($teamNumRows > 0) {
 		echo "<div class='row' id='team'>";

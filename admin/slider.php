@@ -63,7 +63,6 @@ if ($_GET["preview"]>""){
 			}
 		} 
         
-
 		//alert messages
 		if ($uploadMsg !="") {
 			echo $uploadMsg;

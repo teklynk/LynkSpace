@@ -5,15 +5,14 @@
     <?php
         include 'db/dbsetup.php'; //contains DB connection string and global variables
         include 'core/functions.php'; //contains functions used on every template
-        getSetup();
     ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?php echo $rowSetup["description"];?>">
-    <meta name="keywords" content="<?php echo $rowSetup["keywords"];?>">
-    <meta name="author" content="<?php echo $rowSetup["author"];?>">
+    <meta name="description" content="<?php echo $setupDescription;?>">
+    <meta name="keywords" content="<?php echo $setupKeywords;?>">
+    <meta name="author" content="<?php echo $setupAuthor;?>">
 
-    <title><?php echo $setupTitle;?></title>
+    <title><?php echo $theTitle;?></title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -54,8 +53,9 @@
             
         </script>
     <?php 
-    } 
+    }
     ?>
+
 </head>
 
 <body>

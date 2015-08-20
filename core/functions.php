@@ -34,6 +34,7 @@ function getPage(){
 	}
 }
 
+
 function getAbout(){
 	global $aboutTitle;
 	global $aboutContent;
@@ -138,6 +139,7 @@ function getServices(){
 	global $servicesColWidth;
 	global $servicesBlurb;
 	global $servicesCount;
+	global $servicesIcon;
 
     $sqlServicesHeading = mysql_query("SELECT servicesheading, servicescontent FROM setup");
     $rowServicesHeading = mysql_fetch_array($sqlServicesHeading);
@@ -394,5 +396,28 @@ function getFeatured(){
 	}
 
 	$featuredImageAlign = $rowFeatured["image_align"];
+}
+
+//Call - getSetup is used everywhere
+getSetup();
+
+//Call these functions depending on which page you are visiting
+if ($_GET['ref']>""){
+    getPage();
+    $theTitle = $setupTitle." - ".$pageTitle;
+} else if (basename($_SERVER['PHP_SELF'])=="about.php"){
+    getAbout();
+    $theTitle = $setupTitle." - ".$aboutTitle;
+} else if (basename($_SERVER['PHP_SELF'])=="contact.php"){
+    getContactInfo();
+    $theTitle = $setupTitle." - ".$contactHeading;
+} else if (basename($_SERVER['PHP_SELF'])=="services.php"){
+    getServices();
+    $theTitle = $setupTitle." - ".$servicesHeading;
+} else if (basename($_SERVER['PHP_SELF'])=="team.php"){
+    getTeam();
+    $theTitle = $setupTitle." - ".$teamHeading;
+} else {
+    $theTitle = $setupTitle;
 }
 ?>
