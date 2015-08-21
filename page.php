@@ -4,7 +4,7 @@ include 'includes/header.php';
 	echo "<div class='container'>"; //closed in footer
 	echo "<div class='row' id='page'>";
 
-		getPage();
+		//getPage(); //already being called in functions.php
 
 		echo "<div class='col-lg-12'>";
 	    echo "<h2 class='page-header page'>".$pageTitle."</h2>";

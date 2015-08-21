@@ -10,7 +10,7 @@ function getPage(){
 		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active FROM pages WHERE id='$pageRefId'");
 		$rowPage = mysql_fetch_array($sqlPage);
 
-		if ($rowPage['active']=1 AND $_GET["ref"]>"" AND $pageRefId=$rowPage['id']) {
+		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
 
 			if ($rowPage["image"]>"") {
 				$pageImage = "<img class='img-responsive' src='uploads/".$rowPage["image"]."' alt='".$rowPage["title"]."' title='".$rowPage["title"]."'>";
@@ -22,18 +22,13 @@ function getPage(){
 
 		} else {
 
-		    echo "<div class='col-lg-12'>";
-		    echo "<h2 class='page-header'>Page not found</h2>";
-		    echo "</div>";
+            $pageTitle = "Page not found";
+		    $pageContent = "This page has been removed.";
 
-		    echo "<div class='col-lg-12'>";
-		    echo "<p>This page has been removed.</p>";
-		    echo "</div>";
 		}
 
 	}
 }
-
 
 function getAbout(){
 	global $aboutTitle;
@@ -147,7 +142,7 @@ function getServices(){
     $servicesHeading = $rowServicesHeading['servicesheading'];
 
     if (!empty($rowServicesHeading['servicescontent'])) {
-    	$servicesBlurb= $rowServicesHeading['servicescontent'];
+    	$servicesBlurb = $rowServicesHeading['servicescontent'];
 	}
 
     $sqlServices = mysql_query("SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
@@ -184,7 +179,7 @@ function getTeam(){
     $teamHeading = $rowTeamHeading['teamheading'];
 
     if (!empty($rowTeamHeading['teamcontent'])) {
-    	$teamBlurb= $rowTeamHeading['servicescontent'];
+    	$teamBlurb = $rowTeamHeading['teamcontent'];
 	}
 
     $sqlTeam = mysql_query("SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
@@ -204,6 +199,7 @@ function getTeam(){
 function getNav($navSection,$dropdown,$pull){
 	//EXAMPLE: getNav('Top','true','right')
     echo "<ul class='nav navbar-nav navbar-$pull'>";
+
 		if ($dropdown=="true"){
 			$dropdownToggle = "dropdown-toggle";
 			$dataToggle = "dropdown";
@@ -217,12 +213,14 @@ function getNav($navSection,$dropdown,$pull){
 			$dropdownMenu = "cat-links";
 			$dropdownCaret = "";
 		}
+
         $sqlNavLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
         //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
         $tempLink = 0;
 		while ($rowNavLinks = mysql_fetch_array($sqlNavLinks)) {
 			
             if ($rowNavLinks[4] == $rowNavLinks[7] AND $rowNavLinks[4] != 29) { //NOTE: 29=None in the category table
+
 				if ($rowNavLinks[4] != $tempLink) {
 					$sqlNavCatLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
 					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
@@ -238,6 +236,7 @@ function getNav($navSection,$dropdown,$pull){
 						echo "</ul>";
 					echo "</li>";
 				}
+
             } else {
                 echo "<li>";
                 echo "<a href='".$rowNavLinks[3]."'>".$rowNavLinks[2]."</a>";
@@ -347,18 +346,95 @@ function getCustomers(){
     }
 }
 
-function getSlider(){
-	global $sqlSlider;
-	global $sliderCount;
-	global $sliderNumRows;
-    $sqlSlider = mysql_query("SELECT id, title, image, link, content, active FROM slider WHERE active=1 ORDER BY datetime DESC"); //While loop
+function getSlider($sliderType) {
+    //EXAMPLE: getSlider("slide")
+    //EXAMPLE: getSlider("random")
+    
+	if ($sliderType=="slide") {
+		$sliderOrderBy = "ORDER BY datetime DESC";
+	} else if ($sliderType=="random") {
+		$sliderOrderBy = "ORDER BY RAND() LIMIT 1";
+	}
+
+    $sqlSlider = mysql_query("SELECT id, title, image, link, content, active FROM slider WHERE active=1 $sliderOrderBy");
     $sliderNumRows = mysql_num_rows($sqlSlider);
     $sliderCount=0;
+
+    if ($sliderNumRows > 0) {
+        echo "<header id='myCarousel' class='carousel slide'>";
+        //Wrapper for slides
+        echo "<div class='carousel-inner'>";
+
+        if ($sliderType=="slide") {
+
+            while ($rowSlider  = mysql_fetch_array($sqlSlider)) {
+                $sliderCount++;
+
+                if ($sliderCount==1) {
+                    $slideActive = "active";
+                } else {
+                    $slideActive = "";
+                }
+
+                echo "<div class='item $slideActive'>";
+
+                if ($rowSlider["image"] > "") {
+                    echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+                } else {
+                    echo "<div class='fill'></div>";
+                }
+
+                echo "<div class='carousel-caption'>";
+                echo "<h2>".$rowSlider["title"]."</h2>";
+                echo "<p>".$rowSlider["content"]."</p>";
+
+                if (!empty($rowSlider['link'])){
+                    echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+                }
+
+                echo "</div>";
+
+                echo "</div>";
+            }
+
+        } else if ($sliderType=="random" OR $sliderCount==1) {
+        	$rowSlider  = mysql_fetch_array($sqlSlider);
+
+        	if ($rowSlider["image"] > "") {
+                echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+            } else {
+                echo "<div class='fill'></div>";
+            }
+
+            echo "<div class='carousel-caption'>";
+            echo "<h2>".$rowSlider["title"]."</h2>";
+            echo "<p>".$rowSlider["content"]."</p>";
+
+            if (!empty($rowSlider['link'])){
+                echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+            }
+        }
+
+        echo "</div>"; //.carousel-inner
+
+		if ($sliderType=="slide") {
+            //Controls
+            echo "<a class='left carousel-control' href='#myCarousel' data-slide='prev'>";
+            echo "<span class='icon-prev'></span>";
+            echo "</a>";
+            echo "<a class='right carousel-control' href='#myCarousel' data-slide='next'>";
+            echo "<span class='icon-next'></span>";
+            echo "</a>";
+        }
+
+        echo "</header>";
+    }
 }
 
 function getGeneralInfo(){
 	global $generalInfoContent;
 	global $generalInfoHeading;
+
 	$sqlGeneralinfo = mysql_query("SELECT heading, content FROM generalinfo");
 	$rowGeneralinfo = mysql_fetch_array($sqlGeneralinfo);
 
@@ -377,6 +453,7 @@ function getFeatured(){
 	global $featuredBlurb;
 	global $featuredImage;
 	global $featuredImageAlign;
+
 	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
 	$rowFeatured = mysql_fetch_array($sqlFeatured);
 

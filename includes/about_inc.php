@@ -1,11 +1,14 @@
 <!-- About Section -->
 <?php
+getAbout();
 
 	echo "<div class='row'>";
-
-	echo "<div class='col-lg-12'>";
-	echo "<h2 class='page-header about' id='about'>".$aboutTitle."</h2>";
-	echo "</div>";
+	
+	if ($aboutTitle>"") {
+		echo "<div class='col-lg-12'>";
+		echo "<h2 class='page-header about' id='about'>".$aboutTitle."</h2>";
+		echo "</div>";
+	}
 
 	if ($aboutImage>"") {
 		if ($aboutImageAlign=="right") {

@@ -1,15 +1,18 @@
 <!-- Service Panels -->
 <?php
+getServices();
 
     if ($servicesNumRows > 0) {
         echo "<div class='row' id='services'>";
         echo "<div class='col-lg-12'>";
         echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
         echo "</div>";
-
-        echo "<div class='col-lg-12'>";
-        echo "<p class='text-center'>".$servicesBlurb."</p>";
-        echo "</div>";
+        
+        if (!empty($servicesBlurb)) {
+            echo "<div class='col-lg-12'>";
+            echo "<p class='text-center'>".$servicesBlurb."</p>";
+            echo "</div>";
+        }
         
 
         while ($rowServices = mysql_fetch_array($sqlServices)){
