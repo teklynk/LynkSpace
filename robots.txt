@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /css/
+Disallow: /db/
+Disallow: /includes/
+Disallow: /mail/
