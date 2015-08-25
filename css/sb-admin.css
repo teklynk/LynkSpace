@@ -242,3 +242,7 @@ ul.alert-dropdown {
 .control-group {
     margin-bottom: 10px; /* instead of 20px */
 }
+.table-responsive {
+    min-height: 0%;
+    overflow-x: visible;
+}
