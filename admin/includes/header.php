@@ -145,8 +145,9 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
                         <li>
                             <a href="../index.php" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                         </li>
+                        <li class="divider"></li>
                         <li>
-                            <a href="index.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
