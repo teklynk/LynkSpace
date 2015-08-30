@@ -1,7 +1,3 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
 CREATE TABLE IF NOT EXISTS `aboutus` (
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -414,10 +410,3 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`username`, `password`, `level`, `id`) VALUES
 ('', '', 1, 2);
-<<<<<<< HEAD
-=======
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
->>>>>>> origin/master
