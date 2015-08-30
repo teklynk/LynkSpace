@@ -175,20 +175,22 @@ if ($_GET["preview"]>""){
 			<select class="form-control" name="service_link">
 				<option value="">None</option>
 				<?php
+					$pagesStr="";
 					$sqlServicesLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
 					while ($rowLink = mysql_fetch_array($sqlServicesLink)) {
 						$serviceLinkId=$rowLink['id'];
 						$serviceLinkTitle=$rowLink['title'];
+
 						if ($serviceLinkId===$row['link']){
 							$isSelected="SELECTED";
 						} else {
 							$isSelected="";
 						}
-						//$pagesStr "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
 
 						$pagesStr =  $pagesStr . "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
 					}
-					$pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>";
+
+					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
 					echo $pagesStr;
 				?>
 			</select>

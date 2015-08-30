@@ -89,6 +89,7 @@ include 'includes/header.php';
 		}
 		
 		//get and built pages list
+		$pagesStr="";
 		$sqlNavPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
 		//$pagesStr = "<option value=''>Custom</option>";
 		while ($rowNavPages = mysql_fetch_array($sqlNavPages)) {
@@ -96,7 +97,7 @@ include 'includes/header.php';
 			$navPageTitle=$rowNavPages['title'];
 			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
 		}
-		$pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>" . $extraPages;
+		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 		
 		//get and built existing category list
 		$sqlNavExistCat= mysql_query("SELECT id, name FROM category ORDER BY name");

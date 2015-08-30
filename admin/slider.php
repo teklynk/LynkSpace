@@ -149,17 +149,23 @@ if ($_GET["preview"]>""){
 			<select class="form-control" name="slide_link" id="slide_link">
 				<option value="">None</option>
 				<?php
-					$sqlServicesLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
-					while ($rowLink = mysql_fetch_array($sqlServicesLink)) {
-						$serviceLinkId=$rowLink['id'];
-						$serviceLinkTitle=$rowLink['title'];
-						if ($serviceLinkId===$row['link']){
+					$pagesStr="";
+					$sqlSliderLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
+					while ($rowSliderLink = mysql_fetch_array($sqlSliderLink)) {
+						$sliderLinkId=$rowSliderLink['id'];
+						$sliderLinkTitle=$rowSliderLink['title'];
+
+						if ($sliderLinkId===$row['link']){
 							$isSelected="SELECTED";
 						} else {
 							$isSelected="";
 						}
-						echo "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
+
+						$pagesStr = $pagesStr . "<option value=".$sliderLinkId." ".$isSelected.">".$sliderLinkTitle."</option>";
 					}
+
+					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
+					echo $pagesStr;
 				?>
 			</select>
 		</div>
