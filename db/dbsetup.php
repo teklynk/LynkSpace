@@ -24,18 +24,11 @@ if ($customCss_url != "") {
 $navSections = array("Top", "Footer");
 
 //Extra Pages
-<<<<<<< HEAD
 $extraPages = "<optgroup label='Other Pages'><option value='about.php'>About</option><option value='contact.php'>Contact</option><option value='services.php'>Services</option><option value='team.php'>Team</option></optgroup>";
-=======
-//$extraPages = array("About", "Contact");
-//$extraPagesURL = array("about.php", "contact.php");
-//$extraPages = "<hr/><option value='about.php'>About</option><option value='contact.php'>Contact</option>";
->>>>>>> origin/master
 
 //Establish db connection 
 $db_conn = mysql_connect($db_servername, $db_username, $db_password);
 mysql_select_db($db_name, $db_conn);
-
 
 //db connection is closed in includes/footer.php
 ?>
