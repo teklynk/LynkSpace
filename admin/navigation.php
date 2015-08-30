@@ -35,7 +35,7 @@ include 'includes/header.php';
 		
 		for($i=0; $i<$_POST["nav_count"]; $i++) {
 			if ($_POST["nav_cat"][$i]=="") {
-				$_POST["nav_cat"][$i]=29;
+				$_POST["nav_cat"][$i]=29; //None
 			}
 			if ($_POST["nav_win"][$i]=="") {
 				$_POST["nav_win"][$i]='off';
@@ -90,16 +90,17 @@ include 'includes/header.php';
 		
 		//get and built pages list
 		$sqlNavPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
-		$pagesStr = "<option value=''>Custom</option>";
+		//$pagesStr = "<option value=''>Custom</option>";
 		while ($rowNavPages = mysql_fetch_array($sqlNavPages)) {
 			$navPageId=$rowNavPages['id'];
 			$navPageTitle=$rowNavPages['title'];
 			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
 		}
+		$pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>" . $extraPages;
 		
 		//get and built existing category list
 		$sqlNavExistCat= mysql_query("SELECT id, name FROM category ORDER BY name");
-		$catExistStr = "<option value=''>Custom</option>";
+		//$catExistStr = "<option value=''>Custom</option>";
 		while ($rowNavExistCat  = mysql_fetch_array($sqlNavExistCat)) {
 			$catExistStr = $catExistStr . "<option value=".$rowNavExistCat['id']." >".$rowNavExistCat['name']."</option>";
 		}
@@ -175,6 +176,7 @@ include 'includes/header.php';
 						<label for="exist_page">Existing Page</label>
 						<select class="form-control" name="exist_page" id="exist_page">
 							<?php 
+							echo "<option value=''>Custom</option>";
 							echo $pagesStr;
 							?>
 						</select>
@@ -194,7 +196,10 @@ include 'includes/header.php';
 					<div class="form-group">
 						<label for="exist_cat">Existing Category</label>
 						<select class="form-control" name="exist_cat" id="exist_cat">
-							<?php echo $catExistStr; ?>
+							<?php 
+							echo "<option value=''>Custom</option>";
+							echo $catExistStr; 
+							?>
 						</select>
 					</div>
 				</fieldset>

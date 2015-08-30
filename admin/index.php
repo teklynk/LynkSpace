@@ -45,20 +45,31 @@ html, body {
 }
 </style>
 
-<div class="container">
+
     <div class="row">
-        <form name="frmUser" class="form-signin" method="post" action="">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<div class="message"><?php if ($message!="") {echo $message;} ?></div>
-        	<label for="username" class="sr-only">Username</label>
-            <input class="form-control" type="text" name="username" placeholder="Username" required>
-            <label for="password" class="sr-only">Password</label>
-            <input class="form-control" type="password" name="password" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
-        <p></p>
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <div class="message"><?php if ($message!="") {echo $message;} ?></div>
+                <div class="panel-body">
+                    <form name="frmUser" class="form-signin" method="post" action="">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
 <?php 
 include 'includes/footer.php';
 ?>

@@ -274,7 +274,9 @@ function getSetup(){
     }
 }
 
-function getSocialMediaIcons(){
+function getSocialMediaIcons($shape){
+    //EXAMPLE: getSocialMediaIcons("circle")
+    //EXAMPLE: getSocialMediaIcons("square")
 	global $socialMediaIcons;
 	global $socialMediaHeading;
 	global $sqlSocialMedia;
@@ -290,26 +292,26 @@ function getSocialMediaIcons(){
 	}
 
     if (!empty($rowSocialMedia["facebook"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["facebook"]."><i class='fa fa-facebook-square fa-2x'></i></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["facebook"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia["google"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["google"]."><i class='fa fa-google-plus-square fa-2x'></i></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["google"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia["github"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["github"]."><i class='fa fa-github-square fa-2x'></i></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["github"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-github fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia["twitter"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["twitter"]."><i class='fa fa-twitter-square fa-2x'></i></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["twitter"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia["linkedin"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["linkedin"]."><i class='fa fa-linkedin-square fa-2x'></i></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["linkedin"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-linkedin fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    $socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
+    //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>"; 
 }
 
 function getCustomers(){

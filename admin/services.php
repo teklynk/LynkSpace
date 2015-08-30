@@ -184,8 +184,12 @@ if ($_GET["preview"]>""){
 						} else {
 							$isSelected="";
 						}
-						echo "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
+						//$pagesStr "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
+
+						$pagesStr =  $pagesStr . "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
 					}
+					$pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>";
+					echo $pagesStr;
 				?>
 			</select>
 		</div>

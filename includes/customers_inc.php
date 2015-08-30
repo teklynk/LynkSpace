@@ -3,7 +3,9 @@
 	getCustomers();
 
     if ($customerNumRows > 0) {
+
 		echo "<div class='row' id='customers'>";
+
 		echo "<div class='col-lg-12'>";
 		echo "<h2 class='page-header customers'>".$customerHeading."</h2>";
 		echo "</div>";
@@ -23,6 +25,8 @@
 		}
 
 		echo "</div>";
+		
 		echo "</div>";
+
 	}
 ?>

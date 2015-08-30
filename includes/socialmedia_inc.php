@@ -1,5 +1,7 @@
 <?php
-    getSocialMediaIcons();
+    getSocialMediaIcons("circle");
+    //EXAMPLE: getSocialMediaIcons("circle")
+    //EXAMPLE: getSocialMediaIcons("square")
 
     echo "<div class='row'>";
 
@@ -8,9 +10,11 @@
     echo "</div>";
     
     echo "<div class='col-md-12'>";
+    echo "<ul class='list-unstyled list-inline list-social-icons'>";
 
     echo $socialMediaIcons;
 
+    echo "</ul>";
     echo "</div>";
 
     echo "</div>";

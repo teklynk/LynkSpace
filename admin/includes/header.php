@@ -76,8 +76,6 @@ include '../db/dbsetup.php';
 	
 	$sqlSocial = mysql_query("SELECT heading FROM socialmedia");
 	$rowSocial = mysql_fetch_array($sqlSocial);
-	
-
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
@@ -93,6 +91,15 @@ include '../db/dbsetup.php';
             }
             closedir($handle);
         }
+
+        //get and built pages list for TinyMCE
+        $sqlGetPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+        while ($rowGetPages = mysql_fetch_array($sqlGetPages)) {
+            $getPageId=$rowGetPages['id'];
+            $getPageTitle=$rowGetPages['title'];
+            $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";
+        }
+        
 	?>
     	<script type="text/javascript">
             $(document).ready(function () {
@@ -104,6 +111,7 @@ include '../db/dbsetup.php';
     		    document_base_url: '<?php echo $image_baseURL; ?>',
     		    resize: 'both',
     		    image_list: [<?php echo rtrim($fileListJson, ","); ?>],
+                link_list: [<?php echo rtrim($linkListJson, ","); ?>],
         		menu: {},
      			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image table | code'
     			});
@@ -145,8 +153,9 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
                         <li>
                             <a href="../index.php" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                         </li>
+                        <li class="divider"></li>
                         <li>
-                            <a href="index.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>

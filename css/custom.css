@@ -18,3 +18,20 @@
 .nav-Footer>.cat-links {list-style: none; padding-left:14px;}
 
 #contact>.row>.page-header socialmedia {display:none !important; }
+
+
+.fa-6x{
+    font-size:6.0em;
+}
+.fa-7x{
+    font-size:7.0em;
+}
+.fa-8x{
+    font-size:8.0em;
+}
+.fa-9x{
+    font-size:9.0em;
+}
+.fa-10x{
+    font-size:10em;
+}

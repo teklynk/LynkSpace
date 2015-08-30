@@ -1,30 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 3.5.8.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Aug 16, 2015 at 09:18 PM
--- Server version: 5.6.23-log
--- PHP Version: 5.3.28
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `bootstrap_business`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aboutus`
---
 
 CREATE TABLE IF NOT EXISTS `aboutus` (
   `heading` text NOT NULL,
@@ -86,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `contactus` (
 --
 
 INSERT INTO `contactus` (`heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`) VALUES
-('Contact Us', 'Let us know if you have any questions we can answer.', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503810331815!2d-77.0365298!3d38.8976763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1437848573548" width="680" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'blackwatch@iowatelecom.net', 'ryanjones153@gmail.com', 'PO Box 373', 'Manchester', 'IOWA', '52057', '(563) 927-2677', '10:00 - 6:00');
+('Contact Us', 'Let us know if you have any questions we can answer.', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503810331815!2d-77.0365298!3d38.8976763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1437848573548" width="680" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', '', '', '', '', '', '', '', '10:00 - 6:00');
 
 -- --------------------------------------------------------
 
@@ -134,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `featured` (
 --
 
 INSERT INTO `featured` (`heading`, `introtext`, `content`, `image`, `image_align`) VALUES
-('Home Page', 'Blackwatch Investigations LLC', '<p>Located in Manchester, Iowa, Blackwatch Investigations LLC is a Licensed, Bonded, and Insured, Private Investigation Agency.&nbsp; Blackwatch Investigations LLC was established in 2010 to provide a wide variety of Investigate and Professional services to Manchester and the surrounding areas.&nbsp; Investigative and Professional services offered by Blackwatch Investigations LLC are each custom designed to meet the needs of Attorneys, Insurance Companies, Businesses and Private Individuals.&nbsp;&nbsp;</p>\r\n<p>State-of-the-art video, camera and computer resources are used to meet the most stringent investigative requirements.&nbsp; Our video and photographic documentation can be provided to you on either VHS or compact (CD) format.&nbsp; Digital photographs can also be provided as photo prints.</p>\r\n<p>To determine how we may assist you, please contact Blackwatch Investigations LLC by phone, email, or complete the form on the Contact Tab of our webpage for a no fee confidential initial consultation.&nbsp;</p>\r\n<p><img style="float: left;" src="//www.teklynk.com/business/uploads/blackwatch_holmes.jpg" alt="Customers1.jpg" /></p>\r\n<p>Located in Manchester, Iowa, Blackwatch Investigations LLC is a Licensed, Bonded, and Insured, Private Investigation Agency.&nbsp; Blackwatch Investigations LLC was established in 2010 to provide a wide variety of Investigate and Professional services to Manchester and the surrounding areas.&nbsp; Investigative and Professional services offered by Blackwatch Investigations LLC are each custom designed to meet the needs of Attorneys, Insurance Companies, Businesses and Private Individuals.&nbsp;&nbsp;</p>\r\n<p>State-of-the-art video, camera and computer resources are used to meet the most stringent investigative requirements.&nbsp; Our video and photographic documentation can be provided to you on either VHS or compact (CD) format.&nbsp; Digital photographs can also be provided as photo prints.</p>\r\n<p>To determine how we may assist you, please contact Blackwatch Investigations LLC by phone, email, or complete the form on the Contact Tab of our webpage for a no fee confidential initial consultation.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>Located in Manchester, Iowa, Blackwatch Investigations LLC is a Licensed, Bonded, and Insured, Private Investigation Agency.&nbsp; Blackwatch Investigations LLC was established in 2010 to provide a wide variety of Investigate and Professional services to Manchester and the surrounding areas.&nbsp; Investigative and Professional services offered by Blackwatch Investigations LLC are each custom designed to meet the needs of Attorneys, Insurance Companies, Businesses and Private Individuals.&nbsp;&nbsp;</p>\r\n<p>State-of-the-art video, camera and computer resources are used to meet the most stringent investigative requirements.&nbsp; Our video and photographic documentation can be provided to you on either VHS or compact (CD) format.&nbsp; Digital photographs can also be provided as photo prints.</p>\r\n<p>To determine how we may assist you, please contact Blackwatch Investigations LLC by phone, email, or complete the form on the Contact Tab of our webpage for a no fee confidential initial consultation.&nbsp;</p>', 'bmgates-c.gif', 'right');
+('Home Page', 'Your Heading', '<p></p>', 'bmgates-c.gif', 'right');
 
 -- --------------------------------------------------------
 
@@ -152,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `generalinfo` (
 --
 
 INSERT INTO `generalinfo` (`heading`, `content`) VALUES
-('Resources', '<ul>\r\n<li><a href="http://www.instructables.com/member/rjwarpath/">Instructables.com</a></li>\r\n<li><a href="https://github.com/teklynk">GitHub</a></li>\r\n<li><a href="https://www.freelancer.com/u/ryanjones153.html" target="_blank">Freelancer</a></li>\r\n</ul>');
+('Resources', '<ul>\r\n<li><a href="#">Instructables.com</a></li>\r\n<li><a href="#">GitHub</a></li>\r\n<li><a href="#" target="_blank">Freelancer</a></li>\r\n</ul>');
 
 -- --------------------------------------------------------
 
@@ -338,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `setup` (
 --
 
 INSERT INTO `setup` (`title`, `keywords`, `description`, `headercode`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`) VALUES
-('Blackwatch Investigations', 'Blackwatch Investigations LLC,  Private Investigation Agency', 'Located in Manchester, Iowa, Blackwatch Investigations LLC is a Licensed, Bonded, and Insured, Private Investigation Agency.  Blackwatch Investigations LLC was established in 2010 to provide a wide variety of Investigate and Professional services to Manchester and the surrounding areas.  Investigative and Professional services offered by Blackwatch Investigations LLC are each custom designed to meet the needs of Attorneys, Insurance Companies, Businesses and Private Individuals.  ', '', 'Ryan Jones', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.');
+('My Site', 'Investigation Agency', '', '', 'John Doe', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.');
 
 -- --------------------------------------------------------
 
@@ -437,8 +413,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `level`, `id`) VALUES
-('admin', '*29AC85BACA6AA0ADBDD681AC450F16523F544BBE', 1, 2);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+('', '', 1, 2);
