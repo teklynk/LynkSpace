@@ -46,8 +46,6 @@ phpmyadmin	4:3.3.7-7
 # Screenshots
 ![screenshot01](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_1.png)
 ![screenshot02](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_2.png)
-![screenshot03](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_3.png)
-![screenshot04](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_4.png)
 ![screenshot05](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_5.png)
 ![screenshot06](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_6.png)
 ![screenshot07](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_7.png)
@@ -57,7 +55,6 @@ phpmyadmin	4:3.3.7-7
 ![screenshot11](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_11.png)
 ![screenshot12](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_12.png)
 ![screenshot13](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_13.png)
-![screenshot14](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_14.png)
 ![screenshot15](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_15.png)
 ![screenshot16](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_16.png)
 ![screenshot17](https://github.com/teklynk/businessCMS/blob/master/screenshots/screenshot_17.png)
