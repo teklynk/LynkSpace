@@ -1,6 +1,6 @@
 <?php 
 include 'includes/header.php';
-	$pageMsg="";
+
 	//update table on submit
 	if (!empty($_POST)) {
 		$socialUpdate = "UPDATE socialmedia SET heading='".$_POST["social_heading"]."', facebook='".$_POST["social_facebook"]."', youtube='".$_POST["social_youtube"]."', twitter='".$_POST["social_twitter"]."', google='".$_POST["social_google"]."', linkedin='".$_POST["social_linkedin"]."', github='".$_POST["social_github"]."'";

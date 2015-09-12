@@ -1,9 +1,7 @@
 <?php 
 include 'includes/header.php';
 
-	$pageMsg="";
 	$getNavSection = $_GET["section"];
-
 
 	//update table on submit
 	if (!empty($_POST)) {
@@ -189,7 +187,7 @@ include 'includes/header.php';
 						<label for="nav_newcat">Category</label>
 						<div class="input-group">
 							<input type="text" class="form-control" name="nav_newcat" id="nav_newcat">
-							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-pencil' style="visibility:hidden; color:#000; cursor:pointer;" title="Rename Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" title="Rename Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
 							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" title="Delete Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
 						</div>
 					</div>

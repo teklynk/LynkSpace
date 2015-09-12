@@ -1,10 +1,6 @@
 <?php 
 include 'includes/header.php';
 
-//Upload function
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$pageMsg="";
-
 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 	$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
 } else {

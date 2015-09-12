@@ -1,7 +1,6 @@
 <?php 
 include 'includes/header.php';
 
-	$pageMsg="";
 	//update table on submit
 	if (!empty($_POST)) {
 		$generalinfoUpdate = "UPDATE generalinfo SET heading='".$_POST["generalinfo_heading"]."', content='".$_POST["generalinfo_content"]."'";

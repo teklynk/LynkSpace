@@ -1,5 +1,6 @@
 <?php 
 include 'includes/header.php';
+
 //slide preview
 if ($_GET["preview"]>""){
 	$slidePreviewId=$_GET["preview"];
@@ -9,7 +10,6 @@ if ($_GET["preview"]>""){
 		echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
 		echo "<p>".$row['content']."</p>";
 		if ($row["link"]>0){
-			//echo "<br/><p>../page.php?ref=".$row['link']."</p>";
 			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$row['link']."' target='_blank'>Page Link</a></p>";
 		}
 }
@@ -27,8 +27,7 @@ if ($_GET["preview"]>""){
 <?php
 
 	if ($_GET["newslide"] OR $_GET["editslide"]) {
-		//Upload function
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
 		$slideMsg="";
 		
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -204,7 +203,7 @@ if ($_GET["preview"]>""){
 			echo $deleteMsg;
 		}
 		
-		//move slides to top of list
+		//move slide to top of list
 		if (($_GET["moveslide"] AND $_GET["movetitle"])) {
 			$slidesDateUpdate = "UPDATE slider SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveslideId'";
 			mysql_query($slidesDateUpdate);

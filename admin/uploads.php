@@ -1,8 +1,5 @@
 <?php
 include 'includes/header.php';
-		
-		//Upload function
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 			$fileExt = substr(basename( $_FILES["fileToUpload"]["name"]),-4);

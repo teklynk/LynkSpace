@@ -5,7 +5,7 @@ function getPage(){
 	global $pageContent;
 	global $pageImageAlign;
 
-	if ($_GET["ref"]>""){
+	if (is_numeric($_GET["ref"])>""){
 		$pageRefId=$_GET["ref"];
 		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active FROM pages WHERE id='$pageRefId'");
 		$rowPage = mysql_fetch_array($sqlPage);
@@ -65,7 +65,6 @@ function getContactInfo(){
 	global $contactPhone;
 	global $contactEmail;
 	global $contactHours;
-
 	global $contactFormSendToEmail;
 	global $contactFormMsg;
 

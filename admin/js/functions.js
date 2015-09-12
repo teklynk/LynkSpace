@@ -4,7 +4,7 @@ $(document).ready(function () {
 	$(':reset').click (
 		function () {
 			$('#del_cat .fa-trash').css( 'visibility', 'hidden');
-			$('#rename_cat .fa-pencil').css( 'visibility', 'hidden');
+			$('#rename_cat .fa-save').css( 'visibility', 'hidden');
 			$('#page_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#featured_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#customer_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
@@ -47,11 +47,11 @@ $(document).ready(function () {
 			if ($('#exist_cat').val()=='' || $('#exist_cat').val()==29) { //NOTE: 29=None in the category table
 				$('#nav_newcat').val('');
 				$('#del_cat .fa-trash' ).css( 'visibility', 'hidden');
-				$('#rename_cat .fa-pencil' ).css( 'visibility', 'hidden');
+				$('#rename_cat .fa-save' ).css( 'visibility', 'hidden');
 			} else {
 				$('#nav_newcat').val($('#exist_cat option:selected').text());
 				$('#del_cat .fa-trash' ).css( 'visibility', 'visible');
-				$('#rename_cat .fa-pencil' ).css( 'visibility', 'visible');
+				$('#rename_cat .fa-save' ).css( 'visibility', 'visible');
 			}
 	    }
 	);
@@ -149,8 +149,6 @@ $(document).ready(function () {
 	);
 });
 
-//anonymous functions
-
 //modal preview window
 function showMyModal(myTitle, myFile) {
    $('#myModalTitle').html(myTitle);
@@ -160,7 +158,3 @@ function showMyModal(myTitle, myFile) {
    $('#webpageDialog').modal('show');
    $('#webserviceDialog').modal('show');
 };
-
-//$(document).ready(function() {
-//    $('#dataTable').DataTable();
-//} );

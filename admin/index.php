@@ -2,13 +2,15 @@
 <?php
 unset($_SESSION["user_id"]);
 unset($_SESSION["user_name"]);
-//session_destroy();
+
+//make this page only accessible from inside your network.
+//if (!strstr($_SERVER['REMOTE_ADDR'],'192.168.') || strstr($_SERVER['REMOTE_ADDR'],'10.10.')){
+//  exit(); //Do not execute any more code
+//}
+
 $message="";
 
-
 if (!empty($_POST)) {
-
-	//session_start();
 
   	$result = mysql_query("SELECT username, password, id FROM users WHERE username='".$_POST["username"]."' AND password=password('$_POST[password]')");
 	$row  = mysql_fetch_array($result);

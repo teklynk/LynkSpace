@@ -1,7 +1,6 @@
 <?php 
 include 'includes/header.php';
 
-	$pageMsg="";
 	//update table on submit
 	if (!empty($_POST)) {
 		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$_POST["site_author"]."', keywords='".$_POST["site_keywords"]."', description='".$_POST["site_description"]."', headercode='".$_POST["site_header"]."', googleanalytics='".$_POST["site_google"]."', tinymce=".$_POST["site_tinymce"]." ";

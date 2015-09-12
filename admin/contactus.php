@@ -1,7 +1,6 @@
 <?php 
 include 'includes/header.php';
 
-	$pageMsg="";
 	//update table on submit
 	if (!empty($_POST)) {
 		$contactUpdate = "UPDATE contactus SET heading='".$_POST["contact_heading"]."', introtext='".htmlspecialchars($_POST["contact_introtext"], ENT_QUOTES)."', mapcode='".$_POST["contact_mapcode"]."', email='".$_POST["contact_email"]."', sendtoemail='".$_POST["contact_sendtoemail"]."', address='".$_POST["contact_address"]."', city='".$_POST["contact_city"]."', state='".$_POST["contact_state"]."', zipcode='".$_POST["contact_zipcode"]."', phone='".$_POST["contact_phone"]."', hours='".$_POST["contact_hours"]."'";
