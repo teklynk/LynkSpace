@@ -1,22 +1,23 @@
 <?php
+
     getSocialMediaIcons("circle");
     //EXAMPLE: getSocialMediaIcons("circle")
     //EXAMPLE: getSocialMediaIcons("square")
+    if ($socialMediaIcons > "") {
+        echo "<div class='row'>";
 
-    echo "<div class='row'>";
+        echo "<div class='col-lg-12'>";
+        echo "<h2 class='page-header socialmedia'>".$socialMediaHeading."</h2>";
+        echo "</div>";
+        
+        echo "<div class='col-md-12'>";
+        echo "<ul class='list-unstyled list-inline list-social-icons'>";
 
-    echo "<div class='col-lg-12'>";
-    echo "<h2 class='page-header socialmedia'>".$socialMediaHeading."</h2>";
-    echo "</div>";
-    
-    echo "<div class='col-md-12'>";
-    echo "<ul class='list-unstyled list-inline list-social-icons'>";
+        echo $socialMediaIcons;
 
-    echo $socialMediaIcons;
+        echo "</ul>";
+        echo "</div>";
 
-    echo "</ul>";
-    echo "</div>";
-
-    echo "</div>";
-
+        echo "</div>";
+    }
 ?>

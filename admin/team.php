@@ -185,7 +185,7 @@ include 'includes/header.php';
     }
 		
     //update heading on submit
-    if (!empty($_POST["team_heading"])) {
+    if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET teamheading='".$_POST["team_heading"]."', teamcontent='".$_POST["main_content"]."'";
         mysql_query($setupUpdate);
         $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
@@ -281,6 +281,7 @@ include 'includes/header.php';
 				?>
 				</tbody>
 			</table>
+			<input type="hidden" name="save_main" value="true" />
             <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>

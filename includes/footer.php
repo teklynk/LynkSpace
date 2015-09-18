@@ -1,4 +1,4 @@
-        <hr>
+
         <!-- Footer -->
         <footer>
             <div class="footer" id='footer'>

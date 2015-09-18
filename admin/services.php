@@ -169,7 +169,7 @@ if ($_GET["preview"]>""){
 		<div class="form-group">
 			<label>Choose a link</label>
 			<select class="form-control" name="service_link">
-				<option value="">None</option>
+				<option value="0">None</option>
 				<?php
 					$pagesStr="";
 					$sqlServicesLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
@@ -234,7 +234,7 @@ if ($_GET["preview"]>""){
     }
 		
     //update heading on submit
-    if (!empty($_POST["main_heading"])) {
+    if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET servicesheading='".$_POST["main_heading"]."', servicescontent='".$_POST["main_content"]."'";
         mysql_query($setupUpdate);
         $serviceMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
@@ -330,6 +330,7 @@ if ($_GET["preview"]>""){
 				?>
 				</tbody>
 			</table>
+			<input type="hidden" name="save_main" value="true" />
             <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>

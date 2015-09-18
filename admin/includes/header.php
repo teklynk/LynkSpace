@@ -188,7 +188,7 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
                         <a href="socialmedia.php"><i class="fa fa-fw fa-facebook-square"></i> Social Media</a>
                     </li>
                     <li>
-                        <a href="generalinfo.php"><i class="fa fa-fw fa-file-text"></i> <?php echo $rowGeneralinfo["heading"]?></a>
+                        <a href="generalinfo.php"><i class="fa fa-fw fa-file-text"></i> General Info</a>
                     </li>
                     <li>
                         <a href="services.php"><i class="fa fa-fw fa-list"></i> Services</a>
