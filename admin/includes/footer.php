@@ -5,7 +5,7 @@
 
         </div>
         <!-- /#page-wrapper -->
-
+		<div class="version text-right"><small><?php include 'core/version.txt'; ?></small></div>
     </div>
     <!-- /#wrapper -->
 

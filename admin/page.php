@@ -1,6 +1,5 @@
 <?php 
 include 'includes/header.php';
-
 //Page preview
 if ($_GET["preview"]>""){
 	$pagePreviewId=$_GET["preview"];

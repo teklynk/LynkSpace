@@ -14,11 +14,11 @@
         echo "<p class='text-center'>".$customerBlurb."</p>";
         echo "</div>";
     	
-    	echo "<div align='center' class='text-center'>";
+    	echo "<div class='text-center'>";
 
         while ($rowCustomers = mysql_fetch_array($sqlCustomers)) {
         	if (!empty($rowCustomers['image'])){
-				echo "<div class='col-md-2 col-sm-4 col-xs-".$customerColWidth." text-center'>";
+				echo "<div class='col-xs-".$customerColWidth."'>";
 				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
 				echo "</div>";
 			}

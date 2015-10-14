@@ -3,12 +3,12 @@ include 'includes/header.php';
 
 	//update table on submit
 	if (!empty($_POST)) {
-		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$_POST["site_author"]."', keywords='".$_POST["site_keywords"]."', description='".$_POST["site_description"]."', headercode='".$_POST["site_header"]."', googleanalytics='".$_POST["site_google"]."', tinymce=".$_POST["site_tinymce"]." ";
+		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$_POST["site_author"]."', keywords='".$_POST["site_keywords"]."', description='".$_POST["site_description"]."', headercode='".mysql_real_escape_string($_POST["site_header"])."', disqus='".mysql_real_escape_string($_POST['site_disqus'])."', googleanalytics='".$_POST["site_google"]."', tinymce=".$_POST["site_tinymce"]." ";
 		mysql_query($setupUpdate);
 		$pageMsg="<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php'\">×</button></div>";
 	}
 	
-	$sqlSetup = mysql_query("SELECT title, author, description, keywords, headercode, googleanalytics, tinymce FROM setup");
+	$sqlSetup = mysql_query("SELECT title, author, description, keywords, headercode, disqus, googleanalytics, tinymce FROM setup");
 	$row  = mysql_fetch_array($sqlSetup);
 	
 ?>
@@ -39,15 +39,19 @@ include 'includes/header.php';
 				</div>
 				<div class="form-group">
 					<label>Keywords</label>
-					<textarea class="form-control" name="site_keywords" rows="3"><?php echo $row['keywords']; ?></textarea>
+					<textarea class="form-control" name="site_keywords" rows="3" maxlength="255"><?php echo $row['keywords']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<textarea class="form-control" name="site_description" rows="3"><?php echo $row['description']; ?></textarea>
+					<textarea class="form-control" name="site_description" rows="3" maxlength="255"><?php echo $row['description']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Header Code</label>
 					<textarea class="form-control" name="site_header" rows="3" placeholder="Add javascript to your main page header"><?php echo $row['headercode']; ?></textarea>
+				</div>
+				<div class="form-group">
+					<label>Disqus.com Universal Code <small><a href="https://disqus.com/admin/universalcode/" target="_blank">Setup Instructions</a></small></label>
+					<textarea class="form-control" name="site_disqus" rows="3" placeholder="Add Disqus comment system to your web pages"><?php echo $row['disqus']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Google Analytics</label>

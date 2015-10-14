@@ -3,7 +3,7 @@ include 'includes/header.php';
 
 	//update table on submit
 	if (!empty($_POST)) {
-		$contactUpdate = "UPDATE contactus SET heading='".$_POST["contact_heading"]."', introtext='".htmlspecialchars($_POST["contact_introtext"], ENT_QUOTES)."', mapcode='".$_POST["contact_mapcode"]."', email='".$_POST["contact_email"]."', sendtoemail='".$_POST["contact_sendtoemail"]."', address='".$_POST["contact_address"]."', city='".$_POST["contact_city"]."', state='".$_POST["contact_state"]."', zipcode='".$_POST["contact_zipcode"]."', phone='".$_POST["contact_phone"]."', hours='".$_POST["contact_hours"]."'";
+		$contactUpdate = "UPDATE contactus SET heading='".$_POST["contact_heading"]."', introtext='".$_POST["contact_introtext"]."', mapcode='".mysql_real_escape_string($_POST["contact_mapcode"])."', email='".$_POST["contact_email"]."', sendtoemail='".$_POST["contact_sendtoemail"]."', address='".$_POST["contact_address"]."', city='".$_POST["contact_city"]."', state='".$_POST["contact_state"]."', zipcode='".$_POST["contact_zipcode"]."', phone='".$_POST["contact_phone"]."', hours='".$_POST["contact_hours"]."'";
 		mysql_query($contactUpdate);
 		$pageMsg="<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php'\">×</button></div>";
 	}
@@ -34,7 +34,7 @@ include 'includes/header.php';
 				</div>
                 <div class="form-group">
 					<label>Intro Text</label>
-					<textarea class="form-control" name="contact_introtext" rows="3"><?php echo $row['introtext']; ?></textarea>
+					<textarea class="form-control" name="contact_introtext" rows="3" maxlength="255"><?php echo $row['introtext']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Map Code</label>

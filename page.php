@@ -33,9 +33,11 @@ include 'includes/header.php';
 		    echo $pageContent;
 		    echo "</div>";
 		}
+		
+		include 'includes/disqus_inc.php';
 
 	echo "</div>";
-	//contianer is closed in footer
+	//container is closed in footer
 
 include 'includes/footer.php';
 ?>

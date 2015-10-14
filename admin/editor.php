@@ -53,7 +53,7 @@ include 'includes/header.php';
 		</form>
 
 	</div>
-
+</div><!--close main container-->
 <?php
 include 'includes/footer.php';
 ?>

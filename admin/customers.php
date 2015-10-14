@@ -236,7 +236,7 @@ include 'includes/header.php';
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our customers"><?php echo $rowSetup['customerscontent']; ?></textarea>
+                <textarea rows="3" class="form-control" name="main_content" placeholder="About our customers" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

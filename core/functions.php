@@ -253,9 +253,10 @@ function getSetup(){
 	global $setupKeywords;
 	global $setupDescription;
 	global $setupHeadercode;
+	global $setupDisqus;
 	global $setupGoogleanalytics;
 
-    $sqlSetup = mysql_query("SELECT title, author, keywords, description, headercode, googleanalytics FROM setup");
+    $sqlSetup = mysql_query("SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
     $rowSetup  = mysql_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup["description"];
@@ -266,6 +267,10 @@ function getSetup(){
 
     if (!empty($rowSetup["headercode"])) {
         $setupHeadercode = $rowSetup["headercode"]."\n";
+    }
+
+    if (!empty($rowSetup["disqus"])) {
+        $setupDisqus = $rowSetup["disqus"]."\n";
     }
 
     if (!empty($rowSetup["googleanalytics"])) {

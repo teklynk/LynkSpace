@@ -145,7 +145,7 @@ include 'includes/header.php';
 		</div>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="team_content" placeholder="Text"><?php if($_GET["editteam"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET["editteam"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editteam"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -239,7 +239,7 @@ include 'includes/header.php';
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our team"><?php echo $rowSetup['teamcontent']; ?></textarea>
+                <textarea rows="3" class="form-control" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

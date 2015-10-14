@@ -194,7 +194,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="service_content" placeholder="Text"><?php if($_GET["editservice"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET["editservice"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editservice"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -289,7 +289,7 @@ if ($_GET["preview"]>""){
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our services"><?php echo $rowSetup['servicescontent']; ?></textarea>
+                <textarea rows="3" class="form-control" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

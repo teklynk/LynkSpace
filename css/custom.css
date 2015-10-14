@@ -16,9 +16,9 @@
 .nav-Footer>.cat-Footer {color:#333; cursor: default;}
 .nav-Footer {padding:0px 32px 0px 0px;}
 .nav-Footer>.cat-links {list-style: none; padding-left:14px;}
+.footer>.navbar-nav>li>a:hover {background:none;}
 
 #contact>.row>.page-header socialmedia {display:none !important; }
-
 
 .fa-6x{
     font-size:6.0em;
@@ -34,4 +34,12 @@
 }
 .fa-10x{
     font-size:10em;
+}
+
+.disqus_box {
+	margin-top: 30px;
+}
+
+.copyright {
+    margin-top:30px;
 }

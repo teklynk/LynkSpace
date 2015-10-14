@@ -1,3 +1,31 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.8.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 14, 2015 at 11:16 AM
+-- Server version: 5.6.23-log
+-- PHP Version: 5.3.28
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `bootstrap_business`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aboutus`
+--
+
 CREATE TABLE IF NOT EXISTS `aboutus` (
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -10,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `aboutus` (
 --
 
 INSERT INTO `aboutus` (`heading`, `content`, `image`, `image_align`) VALUES
-('About Us', '<p>To create a new kind of security company addressing the challenges of the exponential increase in data and threats to our computing networks. Our purpose is to help customers achieve peace of mind by protecting what they value most with security solutions that cover a wide range of applications.</p>\r\n<p>Our expertise in large-scale enterprise&nbsp;networks&nbsp;and&nbsp;&nbsp;has&nbsp;led us to develop a full range of industry leading services and innovative products&nbsp;that help secure and maximize mission-critical operations. Our solutions and services are relied upon every day to defend against threats to some of the most high-profile networks and institutions in the world.</p>', 'thira.png', 'right');
+('About Us', '<p>To create a new kind of security company addressing the challenges of the exponential increase in data and threats to our computing networks. Our purpose is to help customers achieve peace of mind by protecting what they value most with security solutions that cover a wide range of applications.</p>\r\n<p>Our expertise in large-scale enterprise&nbsp;networks&nbsp;and&nbsp;&nbsp;has&nbsp;led us to develop a full range of industry leading services and innovative products&nbsp;that help secure and maximize mission-critical operations. Our solutions and services are relied upon every day to defend against threats to some of the most high-profile networks and institutions in the world.</p>', 'servers.jpg', 'right');
 
 -- --------------------------------------------------------
 
@@ -22,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `category`
@@ -30,8 +58,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`id`, `name`) VALUES
 (2, 'FAQ'),
-(29, 'None'),
-(32, 'About');
+(29, 'None');
 
 -- --------------------------------------------------------
 
@@ -106,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `featured` (
 --
 
 INSERT INTO `featured` (`heading`, `introtext`, `content`, `image`, `image_align`) VALUES
-('Home Page', 'Your Heading', '<p></p>', 'bmgates-c.gif', 'right');
+('Home Page', 'Creating the Future', '<p>We are known for creating disruptive technology based on out-of-the-box thinking and creative problem-solving. We also provide expert services to help customers make the most of these breakthrough technologies. We demand honesty and integrity from all our team members, and provide great attention to detail. &nbsp;We encourage diversity, engage in open debate, and explore novel approaches to insightful and innovative solutions to unique challenges. Our success is built upon strong relationships, deep understanding of client needs, and a relentless pursuit of the best answer.</p>', 'classroom.jpg', 'left');
 
 -- --------------------------------------------------------
 
@@ -124,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `generalinfo` (
 --
 
 INSERT INTO `generalinfo` (`heading`, `content`) VALUES
-('Resources', '<ul>\r\n<li><a href="#">Instructables.com</a></li>\r\n<li><a href="#">GitHub</a></li>\r\n<li><a href="#" target="_blank">Freelancer</a></li>\r\n</ul>');
+('Resources', '<ul>\r\n<li><a href="http://www.instructables.com/member/rjwarpath/">Instructables.com</a></li>\r\n<li><a href="https://github.com/teklynk">GitHub</a></li>\r\n<li><a href="https://www.freelancer.com/u/ryanjones153.html" target="_blank">Freelancer</a></li>\r\n</ul>');
 
 -- --------------------------------------------------------
 
@@ -141,21 +168,23 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `section` text NOT NULL,
   `win` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`) VALUES
-(37, 1, 'Contact Us', 'contact.php', 32, 'Footer', 'off'),
-(41, 15, 'Contact Us', 'contact.php', 29, 'Top', 'off'),
-(42, 12, 'About Us', 'about.php', 32, 'Top', 'off'),
-(43, 13, 'Careers', 'page.php?ref=28', 32, 'Top', 'off'),
+(37, 1, 'Contact Us', 'contact.php', 29, 'Footer', 'off'),
+(41, 16, 'Contact Us', 'contact.php', 29, 'Top', 'off'),
+(42, 12, 'About Us', 'about.php', 29, 'Top', 'off'),
+(43, 13, 'Careers', 'page.php?ref=28', 29, 'Top', 'off'),
 (44, 14, 'Meet The Team', 'team.php', 29, 'Top', 'off'),
-(45, 16, 'Services', 'services.php', 2, 'Top', 'off'),
-(48, 2, 'Positions', 'page.php?ref=34', 32, 'Footer', 'off'),
-(49, 3, 'test', '#', 2, 'Footer', 'off');
+(45, 15, 'Services', 'services.php', 29, 'Top', 'off'),
+(48, 4, 'Positions', 'page.php?ref=34', 29, 'Footer', 'off'),
+(49, 5, 'Blog', '#', 29, 'Footer', 'off'),
+(50, 2, 'Services', 'services.php', 29, 'Footer', 'off'),
+(51, 3, 'About', 'about.php', 29, 'Footer', 'off');
 
 -- --------------------------------------------------------
 
@@ -172,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_align` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `pages`
@@ -180,10 +209,8 @@ CREATE TABLE IF NOT EXISTS `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `image_align`) VALUES
 (28, 'Join Our Team', 'iapilogo.gif', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?ref=34">View Open Positions</a></p>', 1, '2015-08-16 05:21:56', 'right'),
-(31, 'Web Based File Manager', '', '<p style="text-align: left;">Cloud-like File Storage web app. Bootstrap, Responsive Layout, Mobile.</p>\r\n<p style="text-align: left;">Coded in classic ASP. Uses MySQL database for login information. The rest is handled by file system objects.</p>\r\n<p style="text-align: left;">&nbsp;</p>\r\n<p style="text-align: left;">&nbsp;</p>\r\n<p style="text-align: left;"><img src="//www.teklynk.com/business/uploads/cyber-security4.jpg" alt="cyber-security4.jpg" /></p>\r\n<p style="text-align: left;">&nbsp;</p>\r\n<p style="text-align: left;"><a href="http://www.teklynk.com">http://www.teklynk.com</a></p>', 0, '2015-07-27 02:47:26', ''),
 (33, 'Trusted by 15 of the 20 Largest Urban Areas to Make Smarter Risk Informed Decisions', 'Customers1.jpg', '<p>From federal, state and local law enforcement agencies to school districts, our products create an informed network of security experts that help ensure the safety of our communities.</p>\r\n<p>The&nbsp;provides a robust suite of applications that connects the front-line elements of the public safety community through data collection, prioritization, presentation and analysis. It is currently one of the most widely deployed solution in the nation&nbsp;and trusted by first responders to provide the right information at the right time, to do the right thing to keep themselves and their citizens safe</p>\r\n<p>&nbsp;</p>\r\n<p><img src="//www.teklynk.com/business/uploads/nuclear-plant.jpg" alt="nuclear-plant.jpg" /></p>', 1, '2015-08-11 00:29:10', 'right'),
-(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 1, '2015-07-26 02:24:41', ''),
-(35, 'test', 'classroom.jpg', '<p>testtest</p>', 0, '2015-08-02 04:48:19', 'right');
+(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 1, '2015-07-26 02:24:41', '');
 
 -- --------------------------------------------------------
 
@@ -208,10 +235,10 @@ CREATE TABLE IF NOT EXISTS `services` (
 --
 
 INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `active`, `datetime`) VALUES
-(2, '', 'football.jpg', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 34, 1, '2015-08-15 21:35:22'),
+(2, 'male', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 1, '2015-09-12 15:26:53'),
 (3, 'map-marker', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 1, '2015-07-27 03:51:09'),
 (4, 'copyright', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 1, '2015-08-15 21:35:42'),
-(5, 'male', '', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 0, '2015-07-27 03:53:30');
+(5, 'male', '', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 1, '2015-10-09 19:57:43');
 
 -- --------------------------------------------------------
 
@@ -302,15 +329,16 @@ CREATE TABLE IF NOT EXISTS `setup` (
   `customersheading` text NOT NULL,
   `servicescontent` text NOT NULL,
   `customerscontent` text NOT NULL,
-  `teamcontent` text NOT NULL
+  `teamcontent` text NOT NULL,
+  `disqus` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`title`, `keywords`, `description`, `headercode`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`) VALUES
-('My Site', 'Investigation Agency', '', '', 'John Doe', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.');
+INSERT INTO `setup` (`title`, `keywords`, `description`, `headercode`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`, `disqus`) VALUES
+('My Site', '', '', '', 'John Doe', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '<div id="disqus_thread"></div>\r\n<script type="text/javascript">\r\n    /* * * CONFIGURATION VARIABLES * * */\r\n    var disqus_shortname = ''teklynk'';\r\n    \r\n    /* * * DON''T EDIT BELOW THIS LINE * * */\r\n    (function() {\r\n        var dsq = document.createElement(''script''); dsq.type = ''text/javascript''; dsq.async = true;\r\n        dsq.src = ''//'' + disqus_shortname + ''.disqus.com/embed.js'';\r\n        (document.getElementsByTagName(''head'')[0] || document.getElementsByTagName(''body'')[0]).appendChild(dsq);\r\n    })();\r\n</script>\r\n<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>');
 
 -- --------------------------------------------------------
 
@@ -327,18 +355,17 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `active` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`) VALUES
-(3, 'Intelligence-Fusion1.jpg', 'INTELLIGENCE, SECURITY, PERFORMANCE', '', 'Our expertise in large-scale networks and advanced threat analytics has led us to develop a full range of innovative products and industry leading services that help secure and maximize enterprise operations.', 1, '2015-07-25 19:47:24'),
-(4, 'Home-Page1.jpg', 'SECURE AND RELIABLE', '', 'Cyber Risk Analysis', 1, '2015-07-25 19:47:14'),
-(5, 'Customers1.jpg', 'Trusted by Mission-Critical Organizations', '33', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 1, '2015-07-27 04:25:39'),
-(6, 'school-safety1.jpg', 'Know your schools, detect threats sooner and respond faster', '33', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 1, '2015-07-25 19:45:42'),
-(7, 'cyber-security4.jpg', 'New Slide', '', '', 1, '2015-07-27 04:13:26');
+(3, 'Intelligence-Fusion1.jpg', 'INTELLIGENCE, SECURITY, PERFORMANCE', '', 'Our expertise in large-scale networks and advanced threat analytics has led us to develop a full range of innovative products and industry leading services that help secure and maximize enterprise operations.', 1, '2015-09-12 15:23:58'),
+(4, 'Home-Page1.jpg', 'SECURE AND RELIABLE', '', 'Cyber Risk Analysis', 1, '2015-08-23 02:24:26'),
+(5, 'Customers1.jpg', 'Trusted by Mission-Critical Organizations', '33', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 1, '2015-09-12 15:24:18'),
+(6, 'school-safety1.jpg', 'Know your schools, detect threats sooner and respond faster', '34', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 1, '2015-09-02 02:57:02');
 
 -- --------------------------------------------------------
 
@@ -387,8 +414,8 @@ CREATE TABLE IF NOT EXISTS `team` (
 INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `datetime`) VALUES
 (3, 'placeholder-personF.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 1, '2015-07-25 20:12:58'),
 (4, 'placeholder-personM.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 1, '2015-07-25 20:13:07'),
-(5, 'placeholder-personM.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 1, '2015-07-25 20:13:10'),
-(7, 'hacker.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 1, '2015-07-30 03:48:43');
+(5, 'placeholder-personM.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 1, '2015-09-12 15:27:57'),
+(7, 'placeholder-personM.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 1, '2015-09-12 15:28:19');
 
 -- --------------------------------------------------------
 
@@ -409,4 +436,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `level`, `id`) VALUES
-('', '', 1, 2);
+('', '', 1, 1);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -171,7 +171,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="slide_content" placeholder="Text"><?php if($_GET["editslide"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET["editslide"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editslide"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>

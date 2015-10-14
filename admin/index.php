@@ -2,11 +2,7 @@
 <?php
 unset($_SESSION["user_id"]);
 unset($_SESSION["user_name"]);
-
-//make this page only accessible from inside your network.
-//if (!strstr($_SERVER['REMOTE_ADDR'],'192.168.') || strstr($_SERVER['REMOTE_ADDR'],'10.10.')){
-//  exit(); //Do not execute any more code
-//}
+unset($_SESSION["timeout"]);
 
 $message="";
 
@@ -18,12 +14,14 @@ if (!empty($_POST)) {
 	if (is_array($row)) {
 		$_SESSION["user_id"] = $row['id'];
 		$_SESSION["user_name"] = $row['username'];
+        $_SESSION['timeout'] = time();
+        
 	} else {
 		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 	}
 }
 
-if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
+if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SESSION['timeout'])) {
 	//header("Location: setup.php");
 	echo "<script>window.location.href='setup.php';</script>";
 }

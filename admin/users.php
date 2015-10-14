@@ -1,11 +1,6 @@
 <?php 
 include 'includes/header.php';
 
-	//make this page only accessible from inside your network.
-	//if (!strstr($_SERVER['REMOTE_ADDR'],'192.168.') || strstr($_SERVER['REMOTE_ADDR'],'10.10.')){
-	//	exit(); //Do not execute any more code
-	//}
-
 	//update table on submit
 	if (!empty($_POST)) {
 		$username=$_POST['user_name'];

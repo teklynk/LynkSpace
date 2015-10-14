@@ -1,5 +1,5 @@
 //gitignore
 
-mail/contact_me.php
-
 mail/sendmail.asp
+core/teklynk_logo.psd
+*.DS_Store

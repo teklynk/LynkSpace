@@ -1,5 +1,11 @@
 <?php
+//This is the main Config/Setup file for the admin panel. 
+
 include 'dbconn.php';
+
+//Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
+//example: "192.168.0."
+$IPrange = "";
 
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/"; //physical path to uploads folder
@@ -7,7 +13,6 @@ $image_url = "//".$_SERVER['HTTP_HOST']."/uploads/"; //web path to uploads folde
 $image_baseURL = "uploads/";
 
 $target_dir = $image_dir;
-
 
 //Upload function
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -34,4 +39,12 @@ $db_conn = mysql_connect($db_servername, $db_username, $db_password);
 mysql_select_db($db_name, $db_conn);
 
 //db connection is closed in includes/footer.php
+
+//Error handling . Add debug=true to the querystring
+if (isset($_GET["debug"])) {
+	error_reporting(E_ALL | E_WARNING | E_NOTICE);
+	ini_set('display_errors', TRUE);
+} else {
+    error_reporting(0);
+}
 ?>

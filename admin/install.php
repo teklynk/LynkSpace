@@ -53,7 +53,6 @@ if (!file_exists($dbFileLoc)) {
 		$userInsert = "INSERT INTO users (username, password) VALUES ('".$_POST["username"]."', password('$_POST[password]'))";
 		mysql_query($userInsert);
 		
-		//TODO: write connection info to dbconn.php. include dbconn.php in dbsetup.php which contains global variables. use dbsetup.php in the header instead of dbconn.php.
         $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
         $writeline = "<?php\n";
@@ -107,12 +106,11 @@ if (!file_exists($dbFileLoc)) {
             <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
             <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
-						<h2 class="form-signin-heading">Create an Admin user</h2>
-        		<label for="username" class="sr-only">Username</label>
+			<h2 class="form-signin-heading">Create an Admin user</h2>
+        	<label for="username" class="sr-only">Username</label>
             <input class="form-control" type="text" name="username" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>
             <input class="form-control" type="text" name="password" placeholder="Password" required>
-            
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         </form>
     </div>

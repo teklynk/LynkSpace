@@ -246,3 +246,10 @@ ul.alert-dropdown {
     min-height: 0%;
     overflow-x: visible;
 }
+/* Custom Styles */
+.version {
+    padding: 6px 12px;
+}
+.version>small {
+    color:#999;
+}

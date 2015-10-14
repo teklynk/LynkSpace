@@ -5,13 +5,19 @@ session_start();
 <html lang="en">
 <head>
 <?php
-//Uncomment to make this only accessible from inside your network.
-//if (!strstr($_SERVER['REMOTE_ADDR'],'192.168.') || strstr($_SERVER['REMOTE_ADDR'],'10.10.')){
-//	exit(); //Do not execute any more code
-//}
-
 //DB connection string and Global variables
 include '../db/dbsetup.php'; 
+
+if ($IPrange>"") {
+	if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange) ){
+		echo "</head>\n";
+		echo "<body>\n";
+		echo "<p>Permission denied</p>\n";
+		echo "</body>\n";
+		echo "</html>\n";
+		exit(); //Do not execute any more code on the page
+	}
+}
 ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +31,7 @@ include '../db/dbsetup.php';
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" type="text/css" href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/sb-admin.css">
 
     <!-- Admin Panel Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -125,13 +131,7 @@ include '../db/dbsetup.php';
 
     <div id="wrapper">
 <?php
-
-if ($_GET["debug"]) {
-	error_reporting(E_ALL | E_WARNING | E_NOTICE);
-	ini_set('display_errors', TRUE);
-}
-
-if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
+if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SESSION["timeout"])) {
 ?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -214,16 +214,18 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"])) {
 ?>
         <div id="page-wrapper">
             <div class="container-fluid">
-<?php
-	
-	//Redirect user if session not set
-	if (basename($_SERVER['PHP_SELF'])!='index.php') {
-		if (!$_SESSION["user_name"] AND !$_SESSION["user_id"]) {
-			//redirect to login page if not installing
-			if (basename($_SERVER['PHP_SELF'])!='install.php') {
-				//header("Location: index.php");
-				echo "<script>window.location.href='index.php';</script>"; //this works.
-			}
-		}
-	}
+<?php	
+//Redirect user if session not set
+if (basename($_SERVER['PHP_SELF'])!='index.php') {
+    if ($_SESSION['timeout'] + 15 * 60 < time()) { //15 minute session timeout
+    	if (!$_SESSION["user_name"] AND !$_SESSION["user_id"] AND !$_SESSION['timeout']) {
+    		//redirect to login page if not installing
+    		if (basename($_SERVER['PHP_SELF'])!='install.php') {
+    			//header("Location: index.php");
+    			echo "<script>window.location.href='index.php';</script>"; //this works.
+    		}
+    	}
+    echo "<script>window.location.href='index.php';</script>"; //this works.
+    }
+}
 ?>
