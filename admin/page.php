@@ -101,14 +101,14 @@ if ($_GET["preview"]>""){
 	<form role="pageForm" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="page_status">
+            <select class="form-control input-sm" name="page_status">
                 <option value="1" <?php if($_GET["editpage"]){echo $selActive1;}?>>Active</option>
                 <option value="0" <?php if($_GET["editpage"]){echo $selActive0;} ?>>Draft</option>
             </select>
         </div>
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
-			<input class="form-control" name="page_title" value="<?php if($_GET["editpage"]){echo $row['title'];} ?>" placeholder="Page Title">
+			<input class="form-control input-sm" name="page_title" value="<?php if($_GET["editpage"]){echo $row['title'];} ?>" placeholder="Page Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -120,7 +120,7 @@ if ($_GET["preview"]>""){
         </div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control" name="page_image" id="page_image">
+			<select class="form-control input-sm" name="page_image" id="page_image">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -144,7 +144,7 @@ if ($_GET["preview"]>""){
 		</div>
 		<div class="form-group">
 			<label>Image Alignment</label>
-			<select class="form-control" name="page_image_align">
+			<select class="form-control input-sm" name="page_image_align">
 				<option value="left" <?php echo $selAlignLeft; ?>>Left</option>
 				<option value="right" <?php echo $selAlignRight; ?>>Right</option>
 			</select>
@@ -152,7 +152,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Text / HTML</label>
-			<textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editpage"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -243,7 +243,7 @@ if ($_GET["preview"]>""){
 			<form role="pageForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="main_heading" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page">
+                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page">
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

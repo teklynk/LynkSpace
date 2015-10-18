@@ -100,14 +100,14 @@ if ($_GET["preview"]>""){
 	<form role="slideForm" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="slide_status">
+            <select class="form-control input-sm" name="slide_status">
                 <option value="1" <?php if($_GET["editslide"]){echo $selActive1;}?>>Active</option>
                 <option value="0" <?php if($_GET["editslide"]){echo $selActive0;} ?>>Draft</option>
             </select>
         </div>
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
-			<input class="form-control" name="slide_title" value="<?php if($_GET["editslide"]){echo $row['title'];} ?>" placeholder="Slide Title">
+			<input class="form-control input-sm" name="slide_title" value="<?php if($_GET["editslide"]){echo $row['title'];} ?>" placeholder="Slide Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -120,7 +120,7 @@ if ($_GET["preview"]>""){
 
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control" name="slide_image" id="slide_image">
+			<select class="form-control input-sm" name="slide_image" id="slide_image">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -145,7 +145,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Choose a link</label>
-			<select class="form-control" name="slide_link" id="slide_link">
+			<select class="form-control input-sm" name="slide_link" id="slide_link">
 				<option value="">None</option>
 				<?php
 					$pagesStr="";
@@ -171,7 +171,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET["editslide"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET["editslide"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editslide"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -262,7 +262,7 @@ if ($_GET["preview"]>""){
 			<form role="portfolioForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="main_heading" value="<?php echo $rowSetup['sliderheading']; ?>" placeholder="My Slides">
+                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['sliderheading']; ?>" placeholder="My Slides">
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

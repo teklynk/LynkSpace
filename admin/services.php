@@ -96,14 +96,14 @@ if ($_GET["preview"]>""){
 	<form role="serviceForm" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="service_status">
+            <select class="form-control input-sm" name="service_status">
                 <option value="1" <?php if($_GET["editservice"]){echo $selActive1;} ?>>Active</option>
                 <option value="0" <?php if($_GET["editservice"]){echo $selActive0;} ?>>Draft</option>
             </select>
         </div>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control" name="service_title" value="<?php if($_GET["editservice"]){echo $row['title'];} ?>" placeholder="Service Title">
+			<input class="form-control input-sm" name="service_title" value="<?php if($_GET["editservice"]){echo $row['title'];} ?>" placeholder="Service Title">
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -125,7 +125,7 @@ if ($_GET["preview"]>""){
         </div>
 		<div class="form-group">
 			<label>Choose an icon</label> 
-			<select class="form-control" name="service_icon_select" id="service_icon_select">
+			<select class="form-control input-sm" name="service_icon_select" id="service_icon_select">
 				<option value="">None</option>
 				<?php
 					$sqlServicesIcon = mysql_query("SELECT icon FROM services_icons ORDER BY icon ASC");
@@ -143,7 +143,7 @@ if ($_GET["preview"]>""){
 		</div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control" name="service_image_select" id="service_image_select">
+			<select class="form-control input-sm" name="service_image_select" id="service_image_select">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -168,7 +168,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Choose a link</label>
-			<select class="form-control" name="service_link">
+			<select class="form-control input-sm" name="service_link">
 				<option value="0">None</option>
 				<?php
 					$pagesStr="";
@@ -194,7 +194,7 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET["editservice"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET["editservice"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editservice"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -285,11 +285,11 @@ if ($_GET["preview"]>""){
 			<form role="servicesForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="main_heading" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services">
+                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services">
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
+                <textarea rows="3" class="form-control input-sm" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

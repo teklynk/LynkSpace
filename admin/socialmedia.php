@@ -28,31 +28,31 @@ include 'includes/header.php';
 			<form role="socialmediaForm" method="post" action="">
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control" name="social_heading" value="<?php echo $row['heading']; ?>"  placeholder="Follow Me">
+					<input class="form-control input-sm" name="social_heading" value="<?php echo $row['heading']; ?>"  placeholder="Follow Me">
 				</div>
 				<div class="form-group">
 					<label>Facebook</label>
-					<input class="form-control" name="social_facebook" value="<?php echo $row['facebook']; ?>"  placeholder="https://www.facebook.com/username">
+					<input class="form-control input-sm" name="social_facebook" value="<?php echo $row['facebook']; ?>"  placeholder="https://www.facebook.com/username">
 				</div>
 				<div class="form-group">
 					<label>Twitter</label>
-					<input class="form-control" name="social_twitter" value="<?php echo $row['twitter']; ?>"  placeholder="https://www.twitter.com/username">
+					<input class="form-control input-sm" name="social_twitter" value="<?php echo $row['twitter']; ?>"  placeholder="https://www.twitter.com/username">
 				</div>
 				<div class="form-group">
 					<label>Google+</label>
-					<input class="form-control" name="social_google" value="<?php echo $row['google']; ?>"  placeholder="https://plus.google.com/8675309/posts">
+					<input class="form-control input-sm" name="social_google" value="<?php echo $row['google']; ?>"  placeholder="https://plus.google.com/8675309/posts">
 				</div>
 				<div class="form-group">
 					<label>GitHub</label>
-					<input class="form-control" name="social_github" value="<?php echo $row['github']; ?>"  placeholder="https://www.github.com/username/">
+					<input class="form-control input-sm" name="social_github" value="<?php echo $row['github']; ?>"  placeholder="https://www.github.com/username/">
 				</div>
 				<div class="form-group">
 					<label>LinkedIn</label>
-					<input class="form-control" name="social_linkedin" value="<?php echo $row['linkedin']; ?>"  placeholder="https://www.linkedin.com/username/">
+					<input class="form-control input-sm" name="social_linkedin" value="<?php echo $row['linkedin']; ?>"  placeholder="https://www.linkedin.com/username/">
 				</div>
 				<div class="form-group">
 					<label>YouTube</label>
-					<input class="form-control" name="social_youtube" value="<?php echo $row['youtube']; ?>"  placeholder="https://www.youtube.com/user/username">
+					<input class="form-control input-sm" name="social_youtube" value="<?php echo $row['youtube']; ?>"  placeholder="https://www.youtube.com/user/username">
 				</div>
 
 				<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>

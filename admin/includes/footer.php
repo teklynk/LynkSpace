@@ -13,6 +13,9 @@
 
 </html>
 <?php
+//overwrite session timeout on re-load
+$_SESSION['timeout'] = time();
+
 //close all db connections
 	mysql_close($db_conn);
 	die();

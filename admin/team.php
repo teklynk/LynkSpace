@@ -97,7 +97,7 @@ include 'includes/header.php';
 	<form role="teamForm" method="post" action="" enctype="multipart/form-data">
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="team_status">
+            <select class="form-control input-sm" name="team_status">
                 <option value="1" <?php if($_GET["editteam"]){echo $selActive1;} ?>>Active</option>
                 <option value="0" <?php if($_GET["editteam"]){echo $selActive0;} ?>>Draft</option>
             </select>
@@ -112,7 +112,7 @@ include 'includes/header.php';
         </div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control" name="team_image" id="team_image">
+			<select class="form-control input-sm" name="team_image" id="team_image">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -137,15 +137,15 @@ include 'includes/header.php';
 		<hr/>
 		<div class="form-group">
 			<label>Name</label>
-			<input class="form-control" name="team_name" value="<?php if($_GET["editteam"]){echo $row['name'];} ?>" placeholder="Name">
+			<input class="form-control input-sm" name="team_name" value="<?php if($_GET["editteam"]){echo $row['name'];} ?>" placeholder="Name">
 		</div>
 		<div class="form-group">
 			<label>Title</label>
-			<input class="form-control" name="team_title" value="<?php if($_GET["editteam"]){echo $row['title'];} ?>" placeholder="Title">
+			<input class="form-control input-sm" name="team_title" value="<?php if($_GET["editteam"]){echo $row['title'];} ?>" placeholder="Title">
 		</div>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET["editteam"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET["editteam"]){echo $row['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editteam"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -235,11 +235,11 @@ include 'includes/header.php';
 			<form role="teamForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="team_heading" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team">
+                <input class="form-control input-sm" name="team_heading" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team">
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
+                <textarea rows="3" class="form-control input-sm" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

@@ -31,31 +31,31 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Site Title</label>
-					<input class="form-control" name="site_title" value="<?php echo $row['title']; ?>" placeholder="My Portfolio Site">
+					<input class="form-control input-sm" name="site_title" value="<?php echo $row['title']; ?>" placeholder="My Portfolio Site">
 				</div>
 				  <div class="form-group">
 					<label>Author</label>
-					<input class="form-control" name="site_author" value="<?php echo $row['author']; ?>" placeholder="John Doe">
+					<input class="form-control input-sm" name="site_author" value="<?php echo $row['author']; ?>" placeholder="John Doe">
 				</div>
 				<div class="form-group">
 					<label>Keywords</label>
-					<textarea class="form-control" name="site_keywords" rows="3" maxlength="255"><?php echo $row['keywords']; ?></textarea>
+					<textarea class="form-control input-sm" name="site_keywords" rows="3" maxlength="255"><?php echo $row['keywords']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<textarea class="form-control" name="site_description" rows="3" maxlength="255"><?php echo $row['description']; ?></textarea>
+					<textarea class="form-control input-sm" name="site_description" rows="3" maxlength="255"><?php echo $row['description']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Header Code</label>
-					<textarea class="form-control" name="site_header" rows="3" placeholder="Add javascript to your main page header"><?php echo $row['headercode']; ?></textarea>
+					<textarea class="form-control input-sm" name="site_header" rows="3" placeholder="Add javascript to your main page header"><?php echo $row['headercode']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Disqus.com Universal Code <small><a href="https://disqus.com/admin/universalcode/" target="_blank">Setup Instructions</a></small></label>
-					<textarea class="form-control" name="site_disqus" rows="3" placeholder="Add Disqus comment system to your web pages"><?php echo $row['disqus']; ?></textarea>
+					<textarea class="form-control input-sm" name="site_disqus" rows="3" placeholder="Add Disqus comment system to your web pages"><?php echo $row['disqus']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Google Analytics</label>
-					<input class="form-control" name="site_google" value="<?php echo $row['googleanalytics']; ?>" placeholder="UA-XXXX-Y">
+					<input class="form-control input-sm" name="site_google" value="<?php echo $row['googleanalytics']; ?>" placeholder="UA-XXXX-Y">
 				</div>
 				<?php
 					if ($row['tinymce']==1) {
@@ -68,7 +68,7 @@ include 'includes/header.php';
 				?>
 				<div class="form-group">
 					<label>TinyMCE / WYSIWYG Editor</label>
-					<select class="form-control" name="site_tinymce">
+					<select class="form-control input-sm" name="site_tinymce">
 						<option value="1" <?php echo $selEditor1; ?>>On</option>
 						<option value="0" <?php echo $selEditor0; ?>>Off</option>
 					</select>

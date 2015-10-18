@@ -72,7 +72,7 @@ include 'includes/header.php';
 		<div class="col-lg-2">
 			<div class="form-group">
 				<label for="nav_menu">Navigation Sections</label>
-				<select class="form-control" name="nav_menu" id="nav_menu">
+				<select class="form-control input-sm" name="nav_menu" id="nav_menu">
 					<?php echo $navMenuStr; ?>
 				</select>
 			</div>
@@ -165,15 +165,15 @@ include 'includes/header.php';
 				<fieldset>
 					<div class="form-group">
 						<label for="nav_newname">Link Name</label>
-						<input type="text" class="form-control" name="nav_newname" id="nav_newname" value="">
+						<input type="text" class="form-control input-sm" name="nav_newname" id="nav_newname" value="">
 					</div>
 					<div class="form-group">
 						<label for="nav_newurl">Link URL</label>
-						<input type="text" class="form-control" name="nav_newurl" id="nav_newurl">
+						<input type="text" class="form-control input-sm" name="nav_newurl" id="nav_newurl">
 					</div>
 					<div class="form-group">
 						<label for="exist_page">Existing Page</label>
-						<select class="form-control" name="exist_page" id="exist_page">
+						<select class="form-control input-sm" name="exist_page" id="exist_page">
 							<?php 
 							echo "<option value=''>Custom</option>";
 							echo $pagesStr;
@@ -186,7 +186,7 @@ include 'includes/header.php';
 					<div class="form-group">
 						<label for="nav_newcat">Category</label>
 						<div class="input-group">
-							<input type="text" class="form-control" name="nav_newcat" id="nav_newcat">
+							<input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat">
 							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" title="Rename Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
 							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" title="Delete Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
 						</div>
@@ -194,7 +194,7 @@ include 'includes/header.php';
 
 					<div class="form-group">
 						<label for="exist_cat">Existing Category</label>
-						<select class="form-control" name="exist_cat" id="exist_cat">
+						<select class="form-control input-sm" name="exist_cat" id="exist_cat">
 							<?php 
 							echo "<option value=''>Custom</option>";
 							echo $catExistStr; 
@@ -237,10 +237,10 @@ include 'includes/header.php';
 
 							echo "<tr>
 							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value=".$navId." >
-							<input class='form-control' name='nav_sort[]' value=".$navSort." type='text'></td>
-							<td><input class='form-control' name='nav_name[]' value='".$navName."' type='text'></td>
-							<td><input class='form-control' name='nav_url[]' value='".$navURL."' type='text'></td>";
-							echo "<td><select class='form-control' name='nav_cat[]'>'";
+							<input class='form-control input-sm' name='nav_sort[]' value=".$navSort." type='text'></td>
+							<td><input class='form-control input-sm' name='nav_name[]' value='".$navName."' type='text'></td>
+							<td><input class='form-control input-sm' name='nav_url[]' value='".$navURL."' type='text'></td>";
+							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
 
 							//get and built category list, find selected
 							$sqlNavCat= mysql_query("SELECT id, name FROM category ORDER BY name");

@@ -97,7 +97,7 @@ include 'includes/header.php';
 	<form role="customerForm" method="post" action="" enctype="multipart/form-data">
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="customer_status">
+            <select class="form-control input-sm" name="customer_status">
                 <option value="1" <?php if($_GET["editcustomer"]){echo $selActive1;} ?>>Active</option>
                 <option value="0" <?php if($_GET["editcustomer"]){echo $selActive0;} ?>>Draft</option>
             </select>
@@ -112,7 +112,7 @@ include 'includes/header.php';
         </div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control" name="customer_image" id="customer_image">
+			<select class="form-control input-sm" name="customer_image" id="customer_image">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -137,11 +137,11 @@ include 'includes/header.php';
 		<hr/>
 		<div class="form-group">
 			<label>Name</label>
-			<input class="form-control" name="customer_name" value="<?php if($_GET["editcustomer"]){echo $row['name'];} ?>" placeholder="Name">
+			<input class="form-control input-sm" name="customer_name" value="<?php if($_GET["editcustomer"]){echo $row['name'];} ?>" placeholder="Name">
 		</div>
 		<div class="form-group">
 			<label>Link</label>
-			<input class="form-control" name="customer_link" value="<?php if($_GET["editcustomer"]){echo $row['link'];} ?>" placeholder="http://www.google.com">
+			<input class="form-control input-sm" name="customer_link" value="<?php if($_GET["editcustomer"]){echo $row['link'];} ?>" placeholder="http://www.google.com">
 		</div>
         <div class="form-group">
 			<span><?php if($_GET["editcustomer"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
@@ -232,11 +232,11 @@ include 'includes/header.php';
 			<form role="customerForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="customer_heading" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer">
+                <input class="form-control input-sm" name="customer_heading" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer">
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control" name="main_content" placeholder="About our customers" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
+                <textarea rows="3" class="form-control input-sm" name="main_content" placeholder="About our customers" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

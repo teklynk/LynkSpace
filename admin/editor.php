@@ -36,7 +36,7 @@ include 'includes/header.php';
 
 			<div class="form-group">
 				<label><?php echo $customCss_dir; ?></label>
-				<textarea class="form-control" name="edit_css" rows="20"><?php echo $data;?></textarea>
+				<textarea class="form-control input-sm" name="edit_css" rows="20"><?php echo $data;?></textarea>
 			</div>
 			<div class="form-group">
 				<span>

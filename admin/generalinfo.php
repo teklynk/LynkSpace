@@ -29,12 +29,12 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control" name="generalinfo_heading" value="<?php echo $row['heading']; ?>" placeholder="Heading">
+					<input class="form-control input-sm" name="generalinfo_heading" value="<?php echo $row['heading']; ?>" placeholder="Heading">
 				</div>
 
 				<div class="form-group">
 					<label>Text / HTML</label>
-					<textarea class="form-control tinymce" name="generalinfo_content" rows="20"><?php echo $row['content']; ?></textarea>
+					<textarea class="form-control input-sm tinymce" name="generalinfo_content" rows="20"><?php echo $row['content']; ?></textarea>
 					
 				</div>
 

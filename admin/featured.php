@@ -52,11 +52,11 @@ include 'includes/header.php';
 		<form role="landingForm" method="post" action="" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control" name="featured_heading" value="<?php echo $row['heading']; ?>"  placeholder="Welcome">
+				<input class="form-control input-sm" name="featured_heading" value="<?php echo $row['heading']; ?>"  placeholder="Welcome">
 			</div>
 			<div class="form-group">
 				<label>Intro Title</label>
-				<input class="form-control" name="featured_introtext" value="<?php echo $row['introtext']; ?>" placeholder="John Doe">
+				<input class="form-control input-sm" name="featured_introtext" value="<?php echo $row['introtext']; ?>" placeholder="John Doe">
 			</div>
 			<hr/>
 			<div class="form-group">
@@ -68,7 +68,7 @@ include 'includes/header.php';
 	        </div>
 	        <div class="form-group">
 	            <label>Use an Existing Image</label>
-	            <select class="form-control" name="featured_image" id="featured_image">
+	            <select class="form-control input-sm" name="featured_image" id="featured_image">
 	                <option value="">None</option>
 	                <?php
 	                    if ($handle = opendir($target_dir)) {
@@ -92,7 +92,7 @@ include 'includes/header.php';
 	        </div>
 			<div class="form-group">
 				<label>Image Alignment</label>
-				<select class="form-control" name="featured_image_align">
+				<select class="form-control input-sm" name="featured_image_align">
 					<option value="left" <?php echo $selAlignLeft; ?>>Left</option>
 					<option value="right" <?php echo $selAlignRight; ?>>Right</option>
 				</select>
@@ -100,7 +100,7 @@ include 'includes/header.php';
 			<hr/>
 	        <div class="form-group">
 				<label>Text / HTML</label>
-				<textarea class="form-control tinymce" name="featured_content" rows="20"><?php echo $row['content']; ?></textarea>
+				<textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $row['content']; ?></textarea>
 			</div>
 
 			<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
