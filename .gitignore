@@ -1,6 +1,7 @@
 gitignore
 mail/sendmail.asp
 core/teklynk_logo.psd
+db/dbconn.php
 *.DS_Store
 
 .idea/.name
