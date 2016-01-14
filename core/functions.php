@@ -5,7 +5,7 @@ function getPage(){
 	global $pageContent;
 	global $pageImageAlign;
 
-	if (is_numeric($_GET["ref"])>""){
+	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
 		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active FROM pages WHERE id='$pageRefId'");
 		$rowPage = mysql_fetch_array($sqlPage);
@@ -26,7 +26,12 @@ function getPage(){
 		    $pageContent = "This page has been removed.";
 
 		}
-
+		
+	} else {
+		
+        $pageTitle = "Page not found";
+		$pageContent = "This page has been removed.";
+		
 	}
 }
 
@@ -73,7 +78,7 @@ function getContactInfo(){
 
     if ($_GET["msgsent"]=="thankyou") {
         $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
-    } else if ($_GET["msgsent"]=="error") {
+    } elseif ($_GET["msgsent"]=="error") {
         $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
     } else {
     	$contactFormMsg = "";
@@ -217,7 +222,11 @@ function getNav($navSection,$dropdown,$pull){
         //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
         $tempLink = 0;
 		while ($rowNavLinks = mysql_fetch_array($sqlNavLinks)) {
-			
+
+            if ($rowNavLinks[6]=='true'){
+                $navWin = "target='_blank'";
+            }
+
             if ($rowNavLinks[4] == $rowNavLinks[7] AND $rowNavLinks[4] != 29) { //NOTE: 29=None in the category table
 
 				if ($rowNavLinks[4] != $tempLink) {
@@ -229,7 +238,7 @@ function getNav($navSection,$dropdown,$pull){
 						echo "<ul class='$dropdownMenu'>";
 						while ($rowNavCatLinks = mysql_fetch_array($sqlNavCatLinks)) {
 							echo "<li>";
-							echo "<a href='".$rowNavCatLinks[3]."'>".$rowNavCatLinks[2]."</a>";
+							echo "<a href='".$rowNavCatLinks[3]."' $navWin>".$rowNavCatLinks[2]."</a>";
 							echo "</li>";
 						}
 						echo "</ul>";
@@ -238,11 +247,12 @@ function getNav($navSection,$dropdown,$pull){
 
             } else {
                 echo "<li>";
-                echo "<a href='".$rowNavLinks[3]."'>".$rowNavLinks[2]."</a>";
+                echo "<a href='".$rowNavLinks[3]."' $navWin>".$rowNavLinks[2]."</a>";
                 echo "</li>";
             }
 
 			$tempLink = $rowNavLinks[4];
+
 		}
     echo "</ul>";
 }
@@ -387,7 +397,7 @@ function getSlider($sliderType) {
 
                 echo "<div class='item $slideActive'>";
 
-                if ($rowSlider["image"] > "") {
+                if (!empty($rowSlider["image"])) {
                     echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
@@ -399,7 +409,11 @@ function getSlider($sliderType) {
                 echo "<p>".$rowSlider["content"]."</p>";
 
                 if (!empty($rowSlider['link'])){
-                    echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+					if (ctype_digit($rowSlider['link'])) {
+						echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+					} else {
+						echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+					}
                 }
 
                 echo "</div>"; //.carousel-caption
@@ -427,7 +441,7 @@ function getSlider($sliderType) {
 
             echo "<div class='item active'>";
 
-        	if ($rowSlider["image"] > "") {
+        	if (!empty($rowSlider["image"])) {
                 echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
             } else {
                 echo "<div class='fill'></div>";
@@ -438,9 +452,13 @@ function getSlider($sliderType) {
             echo "<h2>".$rowSlider["title"]."</h2>";
             echo "<p>".$rowSlider["content"]."</p>";
 
-            if (!empty($rowSlider['link'])){
-                echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
-            }
+			if (!empty($rowSlider['link'])){
+				if (ctype_digit($rowSlider['link'])) {
+					echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+				} else {
+					echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+				}
+			}
 
             echo "</div>"; //.carousel-caption
             
@@ -497,7 +515,7 @@ function getFeatured(){
 	if (!empty($rowFeatured["heading"])) {
 		$featuredHeading = $rowFeatured["heading"];
 	}
-	if ($rowFeatured["image"] > "") {
+	if (!empty($rowFeatured["image"])) {
 		$featuredImage = "<img class='img-responsive' src='uploads/".$rowFeatured["image"]."' alt='".$rowFeatured["image"]."' title='".$rowFeatured["image"]."'>";
 	}
 

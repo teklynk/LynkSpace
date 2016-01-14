@@ -153,17 +153,18 @@ if ($_GET["preview"]>""){
 					while ($rowSliderLink = mysql_fetch_array($sqlSliderLink)) {
 						$sliderLinkId=$rowSliderLink['id'];
 						$sliderLinkTitle=$rowSliderLink['title'];
-
-						if ($sliderLinkId===$row['link']){
-							$isSelected="SELECTED";
-						} else {
-							$isSelected="";
+						if (ctype_digit($row['link'])){
+							if ($sliderLinkId===$row['link']){
+								$isSelected="SELECTED";
+							} else {
+								$isSelected="";
+							}
 						}
-
 						$pagesStr = $pagesStr . "<option value=".$sliderLinkId." ".$isSelected.">".$sliderLinkTitle."</option>";
 					}
 
 					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
+					//$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 					echo $pagesStr;
 				?>
 			</select>
@@ -291,11 +292,11 @@ if ($_GET["preview"]>""){
 						}
 						echo "<tr>
 						<td>".$slideTitle."</td>
-						<td><button type='button' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i> Preview</button></td>
-						<td><button type='button' class='btn btn-xs btn-default' onclick=\"window.location.href='?editslide=$slideId'\"><i class='fa fa-fw fa-edit'></i> Edit</button></td>
-						<td><button type='button' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i> Delete</button></td>
-						<td><button type='button' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i> Move</button></td>
-						<td>
+						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button></td>
+						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editslide=$slideId'\"><i class='fa fa-fw fa-edit'></i></button></td>
+						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button></td>
+						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button></td>
+						<td class='col-xs-1'>
 						<span>".$isActive."</span>
 						</td>
 						</tr>";

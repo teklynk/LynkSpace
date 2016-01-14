@@ -34,6 +34,9 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php'>About</op
 //Default values
 $pageMsg="";
 
+//Session timeout
+$sessionTimeout=30; //30mins
+
 //Establish db connection 
 $db_conn = mysql_connect($db_servername, $db_username, $db_password);
 mysql_select_db($db_name, $db_conn);

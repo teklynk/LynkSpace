@@ -3,11 +3,14 @@
 getTeam();
 
     if ($teamNumRows > 0) {
-    	
+
 		echo "<div class='row' id='team'>";
-		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header team'>".$teamHeading."</h2>";
-		echo "</div>";
+		
+		if (!empty($teamHeading)) {
+			echo "<div class='col-lg-12'>";
+			echo "<h2 class='page-header team'>".$teamHeading."</h2>";
+			echo "</div>";
+		}
 
         if (!empty($teamBlurb)) {
             echo "<div class='col-lg-12'>";

@@ -6,9 +6,11 @@
 
 		echo "<div class='row' id='customers'>";
 
-		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header customers'>".$customerHeading."</h2>";
-		echo "</div>";
+		if (!empty($customerHeading)) {
+			echo "<div class='col-lg-12'>";
+			echo "<h2 class='page-header customers'>".$customerHeading."</h2>";
+			echo "</div>";
+		}
 
         echo "<div class='col-lg-12'>";
         echo "<p class='text-center'>".$customerBlurb."</p>";

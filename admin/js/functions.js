@@ -147,6 +147,16 @@ $(document).ready(function () {
 			}
 	    }
 	);
+
+	$('#nav_Table .nav_win_checkbox').change (
+		function(){
+			$.get('ajax/updateNewWin.php?update=true', { id: this.id, checked: this.checked });
+		}
+	);
+
+	//Boostrap tooltips function
+	$('[data-toggle="tooltip"]').tooltip(); 
+
 });
 
 //modal preview window

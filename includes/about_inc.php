@@ -2,15 +2,15 @@
 <?php
 getAbout();
 
-	echo "<div class='row'>";
+	echo "<div class='row' id='about'>";
 	
-	if ($aboutTitle>"") {
+	if (!empty($aboutTitle)) {
 		echo "<div class='col-lg-12'>";
 		echo "<h2 class='page-header about' id='about'>".$aboutTitle."</h2>";
 		echo "</div>";
 	}
 
-	if ($aboutImage>"") {
+	if (!empty($aboutImage)) {
 		if ($aboutImageAlign=="right") {
 			echo "<div class='col-md-10'>";
 			echo $aboutContent;

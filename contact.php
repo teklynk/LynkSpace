@@ -2,7 +2,7 @@
 include 'includes/header.php';
 
 ?>
-    <div class="container" id="contact">
+    <div class="container row_pad" id="contact">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header contact"><?php echo $contactHeading; ?></h2>
@@ -52,7 +52,7 @@ include 'includes/header.php';
         <div class="row">
             <div class="col-md-8">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me2.php">
+                <form name="sentMessage" id="contactForm" method="post" action="mail/sendmail.asp">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>

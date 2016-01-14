@@ -3,10 +3,15 @@
 getServices();
 
     if ($servicesNumRows > 0) {
+		
+		
         echo "<div class='row' id='services'>";
-        echo "<div class='col-lg-12'>";
-        echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
-        echo "</div>";
+		
+		if (!empty($servicesHeading)) {
+			echo "<div class='col-lg-12'>";
+			echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
+			echo "</div>";
+		}
         
         if (!empty($servicesBlurb)) {
             echo "<div class='col-lg-12'>";

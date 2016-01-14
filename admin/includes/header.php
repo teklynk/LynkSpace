@@ -98,7 +98,7 @@ if ($IPrange>"") {
             closedir($handle);
         }
 
-        //get and built pages list for TinyMCE
+        //get and build page list for TinyMCE
         $sqlGetPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
         while ($rowGetPages = mysql_fetch_array($sqlGetPages)) {
             $getPageId=$rowGetPages['id'];
@@ -217,7 +217,7 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SE
 <?php	
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
-    if ($_SESSION['timeout'] + 15 * 60 < time()) { //15 minute session timeout
+    if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //15 minute session timeout
     	if (!$_SESSION["user_name"] AND !$_SESSION["user_id"] AND !$_SESSION['timeout']) {
     		//redirect to login page if not installing
     		if (basename($_SERVER['PHP_SELF'])!='install.php') {

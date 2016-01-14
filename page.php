@@ -2,7 +2,7 @@
 include 'includes/header.php';
 
 	echo "<div class='container'>"; //closed in footer
-	echo "<div class='row' id='page'>";
+	echo "<div class='row row_pad' id='page'>";
 
 		//getPage(); //already being called in functions.php
 

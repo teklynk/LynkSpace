@@ -82,9 +82,9 @@ $(document).ready(function() {
 								$modDate = date('m-d-Y, H:i:s',filemtime($target_dir.$file));
 								echo "<tr data-index='".$count."'>
 								<td>".$file."</td>
-								<td>".$modDate."</td>
-								<td><button type='button' class='btn btn-xs btn-default' onclick=\"showMyModal('$file', '$target_dir$file')\"><i class='fa fa-fw fa-image'></i> Preview</button></td>
-								<td><button type='button' class='btn btn-xs btn-default' onclick=\"window.location.href='?delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i> Delete</button></td>
+								<td class='col-xs-3'>".$modDate."</td>
+								<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$file', '$target_dir$file')\"><i class='fa fa-fw fa-image'></i></button></td>
+								<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button></td>
 								</tr>";
 							}
 

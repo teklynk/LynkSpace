@@ -35,13 +35,10 @@ include 'includes/header.php';
 			if ($_POST["nav_cat"][$i]=="") {
 				$_POST["nav_cat"][$i]=29; //None
 			}
-			if ($_POST["nav_win"][$i]=="") {
-				$_POST["nav_win"][$i]='off';
-			}
-			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i].", win='".$_POST["nav_win"][$i]."' WHERE id=".$_POST["nav_id"][$i]." ";
+
+			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i]." WHERE id=".$_POST["nav_id"][$i]." ";
 			//echo $navUpdate;
 			mysql_query($navUpdate);
-		
 		}
 		
 		$pageMsg="<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
@@ -187,8 +184,8 @@ include 'includes/header.php';
 						<label for="nav_newcat">Category</label>
 						<div class="input-group">
 							<input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat">
-							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" title="Rename Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
-							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" title="Delete Category" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
 						</div>
 					</div>
 
@@ -203,7 +200,7 @@ include 'includes/header.php';
 					</div>
 				</fieldset>
 				<hr/>
-				<table class="table table-bordered table-hover table-striped">
+				<table class="table table-bordered table-hover table-striped" id="nav_Table">
 					<thead>
 						<tr>
 							<th>Sort</th>
@@ -229,7 +226,7 @@ include 'includes/header.php';
 							$navSection=$rowNav['section'];
 							$navCount++;
 
-							if ($navWin=='on') {
+							if ($navWin=='true') {
 								$isActive="CHECKED";
 							} else {
 								$isActive="";
@@ -257,8 +254,8 @@ include 'includes/header.php';
 							}
 
 							echo "</select></td>
-							<td class='col-xs-1'><input title='Open link in a new window' class='checkbox' name='nav_win[]' type='checkbox' $isActive></td>
-							<td class='col-xs-1'><button type='button' title='Delete navigation link' class='btn btn-xs btn-default' onclick=\"window.location.href='?section=".$getNavSection."&deletenav=$navId&deletename=".$navName."'\"><i class='fa fa-fw fa-trash'></i> Delete</button></td>
+							<td class='col-xs-1'><input data-toggle='tooltip' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' ".$isActive."></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?section=".$getNavSection."&deletenav=$navId&deletename=".$navName."'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
 						}
 						echo "<input type='hidden' name='nav_count' value=".$navCount." >";

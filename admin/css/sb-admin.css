@@ -253,3 +253,7 @@ ul.alert-dropdown {
 .version>small {
     color:#999;
 }
+
+.td_small {
+    width:100px;
+}
