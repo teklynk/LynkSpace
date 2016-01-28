@@ -1,7 +1,13 @@
 gitignore
+
 mail/sendmail.asp
+
 core/teklynk_logo.psd
+
 db/dbconn.php
+
+db/dbsetup.php
+
 *.DS_Store
 
 .idea/.name
@@ -19,3 +25,6 @@ db/dbconn.php
 .idea/vcs.xml
 
 .idea/workspace.xml
+
+.svn
+admin/core/functions.php

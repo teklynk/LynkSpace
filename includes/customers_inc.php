@@ -1,5 +1,8 @@
 <!-- Our Customers -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
 	getCustomers();
 
     if ($customerNumRows > 0) {
@@ -12,9 +15,11 @@
 			echo "</div>";
 		}
 
-        echo "<div class='col-lg-12'>";
-        echo "<p class='text-center'>".$customerBlurb."</p>";
-        echo "</div>";
+	    if (!empty($customerBlurb)) {
+			echo "<div class='col-lg-12'>";
+			echo "<p class='text-center'>".$customerBlurb."</p>";
+			echo "</div>";
+		}
     	
     	echo "<div class='text-center'>";
 

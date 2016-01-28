@@ -1,4 +1,6 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 	$getNavSection = $_GET["section"];
@@ -69,7 +71,7 @@ include 'includes/header.php';
 		<div class="col-lg-2">
 			<div class="form-group">
 				<label for="nav_menu">Navigation Sections</label>
-				<select class="form-control input-sm" name="nav_menu" id="nav_menu">
+				<select class="form-control input-sm" name="nav_menu" id="nav_menu" autofocus="autofocus">
 					<?php echo $navMenuStr; ?>
 				</select>
 			</div>

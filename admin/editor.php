@@ -1,4 +1,6 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 	//Read/Write from text file

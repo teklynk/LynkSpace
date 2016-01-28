@@ -1,12 +1,16 @@
 <!-- About Section -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+
 getAbout();
 
 	echo "<div class='row' id='about'>";
 	
 	if (!empty($aboutTitle)) {
 		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header about' id='about'>".$aboutTitle."</h2>";
+		echo "<h2 class='page-header about'>".$aboutTitle."</h2>";
 		echo "</div>";
 	}
 

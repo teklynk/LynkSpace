@@ -1,4 +1,6 @@
 <?php
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -62,8 +64,7 @@ $(document).ready(function() {
 						<tr>
 							<th>Name</th>
 							<th>Date</th>
-							<th class="no-sort">Preview</th>
-							<th class="no-sort">Delete</th>
+							<th class="no-sort">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,8 +84,10 @@ $(document).ready(function() {
 								echo "<tr data-index='".$count."'>
 								<td>".$file."</td>
 								<td class='col-xs-3'>".$modDate."</td>
-								<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$file', '$target_dir$file')\"><i class='fa fa-fw fa-image'></i></button></td>
-								<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button></td>
+								<td class='col-xs-1'>
+								<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$file', '$target_dir$file')\"><i class='fa fa-fw fa-image'></i></button>
+								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
+								</td>
 								</tr>";
 							}
 

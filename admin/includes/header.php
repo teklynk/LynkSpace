@@ -1,4 +1,8 @@
 <?php 
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+
 session_start();
 ?>
 <!DOCTYPE html>

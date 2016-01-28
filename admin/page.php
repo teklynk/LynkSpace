@@ -1,11 +1,13 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 //Page preview
 if ($_GET["preview"]>""){
 	$pagePreviewId=$_GET["preview"];
 	$sqlPagePreview = mysql_query("SELECT id, title, image, content FROM pages WHERE id='$pagePreviewId'");
 	$row = mysql_fetch_array($sqlPagePreview);
-		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav {display:none !important;} .row {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 		if ($row["title"]>""){
 			echo "<h4>".$row['title']."</h4>";
 		}
@@ -116,7 +118,7 @@ if ($_GET["preview"]>""){
             <input type="file" name="fileToUpload" id="fileToUpload">
         </div>
         <div class="form-group">
-        	<img src="<?php echo $image;?>" id="page_image_preview" style="max-width:140px; height:auto;"/>
+        	<img src="<?php echo $image;?>" id="page_image_preview" style="max-width:140px; height:auto; display:block;"/>
         </div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
@@ -249,10 +251,8 @@ if ($_GET["preview"]>""){
 				<thead>
 					<tr>
 						<th>Page Title</th>
-						<th>Preview</th>
-						<th>Edit</th>
-						<th>Delete</th>
-            			<th>Status</th>
+						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -271,11 +271,13 @@ if ($_GET["preview"]>""){
 						}
 						echo "<tr>
 						<td>".$pageTitle."</td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', '?preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editpage=$pageId'\"><i class='fa fa-fw fa-edit'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
+						</td>
+						<td class='col-xs-2'>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', '?preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editpage=$pageId'\"><i class='fa fa-fw fa-edit'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

@@ -1,4 +1,6 @@
 <?php
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 echo "<div class='container'>";

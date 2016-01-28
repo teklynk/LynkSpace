@@ -87,10 +87,12 @@ $(document).ready(function () {
 			if ($('#service_icon_select').val()=='') {
 				$('#service_icon').attr('class', '');
 				$('#service_image_preview').attr('src', '');
+				$('#service_image_preview').css('display', 'none');
 			} else {
-				$('#service_image_select').val('');
+				$('#service_image_select').val(''); //Sets image select value to None
 				$('#service_icon').attr('class', 'fa fa-fw fa-'+$('#service_icon_select').val());
 				$('#service_image_preview').attr('src', '');
+				$('#service_image_preview').css('display', 'none');
 			}
 	    }
 	);
@@ -99,10 +101,12 @@ $(document).ready(function () {
 	    function () {
 			if ($('#service_image_select').val()=='') {
 				$('#service_image_preview').attr('src', '');
+				$('#service_image_preview').css('display', 'none');
 				$('#service_icon').attr('class', 'fa fa-fw fa-'+$('#service_icon_select').val());
 			} else {
-				$('#service_icon_select').val('');
+				$('#service_icon_select').val(''); //Sets icon select value to None
 				$('#service_image_preview').attr('src', '../uploads/'+$('#service_image_select').val());
+				$('#service_image_preview').css('display', 'block');
 				$('#service_icon').attr('class', '');
 			}
 	    }

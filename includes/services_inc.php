@@ -1,5 +1,9 @@
 <!-- Service Panels -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+
 getServices();
 
     if ($servicesNumRows > 0) {

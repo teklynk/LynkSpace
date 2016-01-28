@@ -1,4 +1,6 @@
 <?php
+define('MyConst', TRUE);
+
     include 'includes/header.php';
 
     include 'includes/slider_inc.php';

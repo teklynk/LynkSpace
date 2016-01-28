@@ -1,3 +1,8 @@
+<?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

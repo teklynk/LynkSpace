@@ -1,4 +1,6 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 //slide preview
@@ -6,7 +8,7 @@ if ($_GET["preview"]>""){
 	$slidePreviewId=$_GET["preview"];
 	$sqlslidePreview = mysql_query("SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
 	$row  = mysql_fetch_array($sqlslidePreview);
-		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav {display:none !important;} .row {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 		echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
 		echo "<p>".$row['content']."</p>";
 		if ($row["link"]>0){
@@ -269,11 +271,8 @@ if ($_GET["preview"]>""){
 				<thead>
 					<tr>
 						<th>Slide Title</th>
-						<th>Preview</th>
-						<th>Edit</th>
-						<th>Delete</th>
-						<th>Move</th>
 						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -292,12 +291,14 @@ if ($_GET["preview"]>""){
 						}
 						echo "<tr>
 						<td>".$slideTitle."</td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editslide=$slideId'\"><i class='fa fa-fw fa-edit'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
+						</td>
+						<td class='col-xs-2'>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editslide=$slideId'\"><i class='fa fa-fw fa-edit'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

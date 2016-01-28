@@ -1,5 +1,9 @@
 <!-- Team Members -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+
 getTeam();
 
     if ($teamNumRows > 0) {

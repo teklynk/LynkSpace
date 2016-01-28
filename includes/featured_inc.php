@@ -1,12 +1,21 @@
 <!-- Featured Section -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
 	getFeatured();
 		
 	echo "<div class='row' id='featured'>";
 	
+	if (!empty($featuredHeading)) {
+		echo "<div class='col-lg-12'>";
+		echo "<h2 class='page-header featured'>".$featuredHeading."</h2>";
+		echo "</div>";
+	}
+
 	if (!empty($featuredBlurb)) {
 		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header featured'>".$featuredBlurb."</h2>";
+		echo "<p class='text-center'>".$featuredBlurb."</p>";
 		echo "</div>";
 	}
  

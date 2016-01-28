@@ -1,4 +1,7 @@
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
 
     getSocialMediaIcons("circle");
     //EXAMPLE: getSocialMediaIcons("circle")

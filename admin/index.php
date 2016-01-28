@@ -1,5 +1,8 @@
-<?php include 'includes/header.php';?>
-<?php
+<?php 
+define('MyConst', TRUE);
+
+include 'includes/header.php';
+
 unset($_SESSION["user_id"]);
 unset($_SESSION["user_name"]);
 unset($_SESSION["timeout"]);

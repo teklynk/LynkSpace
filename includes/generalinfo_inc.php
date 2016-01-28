@@ -1,5 +1,9 @@
 <!-- General Info Section -->
 <?php
+if(!defined('MyConst')) {
+   die('Direct access not permitted');
+}
+
 	getGeneralInfo();
 
 	if (!empty($generalInfoContent)) {

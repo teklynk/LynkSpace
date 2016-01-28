@@ -1,4 +1,6 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -12,8 +14,8 @@ if ($_GET["preview"]>""){
 	$pagePreviewId=$_GET["preview"];
 	$sqlServicesPreview = mysql_query("SELECT id, title, icon, image, content, link FROM services WHERE id='$pagePreviewId'");
 	$row  = mysql_fetch_array($sqlServicesPreview);
-		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav {display:none !important;} .row {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
-        echo "<div class='col-lg-12'>";
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";        
+	echo "<div class='col-lg-12'>";
 
 		if ($row["icon"]>""){
 			echo "<p style='font-size:6.0em;'><i class='fa fa-fw fa-".$row["icon"]."'></i></p><br/>";
@@ -115,12 +117,13 @@ if ($_GET["preview"]>""){
 		</div>
 		<div class="form-group">
 		<?php
-			if ($row['image']>"") {
-				$imgSrc='../uploads/'.$row['image'];
+
+	        if ($row["image"]=="") {
+				$imgSrc = "http://placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
 			} else {
-				$imgSrc='';
-        	}
-        	echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto;'/>";
+				$imgSrc = "../uploads/".$row["image"];
+			}
+        	echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block;'/>";
         ?>
         </div>
 		<div class="form-group">
@@ -295,11 +298,8 @@ if ($_GET["preview"]>""){
 				<thead>
 					<tr>
 						<th>Service Title</th>
-						<th>Preview</th>
-						<th>Edit</th>
-						<th>Delete</th>
-						<th>Move</th>
 						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -318,12 +318,14 @@ if ($_GET["preview"]>""){
 						}
 						echo "<tr>
 						<td>".$serviceTitle."</td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$serviceTitle', '?preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editservice=$serviceId'\"><i class='fa fa-fw fa-edit'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteservice=$serviceId&deletetitle=$serviceTitle'\"><i class='fa fa-fw fa-trash'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveservice=$serviceId&movetitle=$serviceTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
+						</td>
+						<td class='col-xs-2'>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$serviceTitle', '?preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editservice=$serviceId'\"><i class='fa fa-fw fa-edit'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveservice=$serviceId&movetitle=$serviceTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteservice=$serviceId&deletetitle=$serviceTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

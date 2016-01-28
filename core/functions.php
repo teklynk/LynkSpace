@@ -504,7 +504,11 @@ function getFeatured(){
 	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
 	$rowFeatured = mysql_fetch_array($sqlFeatured);
 
-	if (!empty($rowFeatured["introtext"])) {
+	if (!empty($rowFeatured["heading"])) {
+        $featuredHeading = $rowFeatured["heading"];
+    }
+
+    if (!empty($rowFeatured["introtext"])) {
 		$featuredBlurb = $rowFeatured["introtext"];
 	}
 
@@ -512,9 +516,6 @@ function getFeatured(){
 		$featuredContent = $rowFeatured["content"];
 	}
 
-	if (!empty($rowFeatured["heading"])) {
-		$featuredHeading = $rowFeatured["heading"];
-	}
 	if (!empty($rowFeatured["image"])) {
 		$featuredImage = "<img class='img-responsive' src='uploads/".$rowFeatured["image"]."' alt='".$rowFeatured["image"]."' title='".$rowFeatured["image"]."'>";
 	}

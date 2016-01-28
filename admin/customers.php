@@ -1,4 +1,6 @@
 <?php 
+define('MyConst', TRUE);
+
 include 'includes/header.php';
 
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -12,7 +14,8 @@ include 'includes/header.php';
 		$pagePreviewId=$_GET["preview"];
 		$sqlcustomerPreview = mysql_query("SELECT id, image, name, link FROM customers WHERE id='$pagePreviewId'");
 		$row  = mysql_fetch_array($sqlcustomerPreview);
-			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav {display:none !important;} .row {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+			
+			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";			
 			echo "<div class='col-lg-12'>";
 			if ($row["name"]>""){
 				echo "<h4>".$row['name']."</h4>";
@@ -242,11 +245,8 @@ include 'includes/header.php';
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Preview</th>
-						<th>Edit</th>
-						<th>Delete</th>
-						<th>Move</th>
 						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -265,12 +265,14 @@ include 'includes/header.php';
 						}
 						echo "<tr>
 						<td>".$customerName."</td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', '?preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editcustomer=$customerId'\"><i class='fa fa-fw fa-edit'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button></td>
-						<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
+						</td>
+						<td class='col-xs-2'>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', '?preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editcustomer=$customerId'\"><i class='fa fa-fw fa-edit'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}
