@@ -50,7 +50,7 @@ if ($IPrange>"") {
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- TinyMCE CDN -->
-    <script type="text/javascript" language="javascript" src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+	<script type="text/javascript" language="javascript"  src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	
 	<!-- DataTables JavaScript CDN -->
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
@@ -115,6 +115,7 @@ if ($IPrange>"") {
             $(document).ready(function () {
     			tinymce.init({
     			selector: 'textarea.tinymce',
+				theme: 'modern',
     		    plugins: 'link image table code',
     		    image_dimensions: false,
     			object_resizing: false,
