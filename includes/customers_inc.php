@@ -1,6 +1,6 @@
 <!-- Our Customers -->
 <?php
-if(!defined('MyConst')) {
+if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
 	getCustomers();

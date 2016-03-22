@@ -2,7 +2,8 @@
 //updates the new window checkboxes on navigation.php. Called from functions.js via jquery/ajax.
 session_start();
 
-if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SESSION['timeout'])) {
+//check if user is logged in and that the requesting page is valid.
+if (isset($_SESSION["loggedIn"]) AND $_SESSION["file_referer"]=="navigation.php") {
 
 	include '../../db/dbsetup.php'; 
 
@@ -17,9 +18,9 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SE
 		die();
 	}
 
-}else{
+} else {
 
-	echo "<p>You are not logged in</p>";
+	die('Direct access not permitted');
 
 }
 ?>

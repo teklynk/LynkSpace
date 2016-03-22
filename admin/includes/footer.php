@@ -1,5 +1,5 @@
 <?php
-if(!defined('MyConst')) {
+if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
 ?>
@@ -8,6 +8,7 @@ if(!defined('MyConst')) {
             <!-- /.container-fluid -->
 
         </div>
+
         <!-- /#page-wrapper -->
 		<div class="version text-right"><small><?php include 'core/version.txt'; ?></small></div>
     </div>

@@ -1,5 +1,5 @@
 <?php 
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 	

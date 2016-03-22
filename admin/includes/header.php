@@ -1,9 +1,14 @@
 <?php 
-if(!defined('MyConst')) {
+if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
 
 session_start();
+
+//overwrite session script name on reload
+//Get the page/file name and set it as a variable. Used with Ajax calls.
+$_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,10 +59,10 @@ if ($IPrange>"") {
 	
 	<!-- DataTables JavaScript CDN -->
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="js/functions.js"></script>
+    <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -136,7 +141,7 @@ if ($IPrange>"") {
 
     <div id="wrapper">
 <?php
-if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SESSION["timeout"])) {
+if (isset($_SESSION["loggedIn"])) {
 ?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -223,7 +228,7 @@ if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SE
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
     if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //15 minute session timeout
-    	if (!$_SESSION["user_name"] AND !$_SESSION["user_id"] AND !$_SESSION['timeout']) {
+    	if (!$_SESSION["loggedIn"]) {
     		//redirect to login page if not installing
     		if (basename($_SERVER['PHP_SELF'])!='install.php') {
     			//header("Location: index.php");
