@@ -6,11 +6,7 @@ if(!defined('inc_access')) {
 session_start();
 
 //overwrite session script name on reload
-<<<<<<< HEAD
 //Get the page/file name and set it as a variable. Can be used for Ajax calls or page headers.
-=======
-//Get the page/file name and set it as a variable. Used with Ajax calls.
->>>>>>> origin/master
 $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 
 ?>
@@ -226,11 +222,7 @@ if (isset($_SESSION["loggedIn"])) {
 <?php	
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
-<<<<<<< HEAD
     if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //60 minute session timeout
-=======
-    if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //15 minute session timeout
->>>>>>> origin/master
     	if (!$_SESSION["loggedIn"]) {
     		//redirect to login page if not installing
     		if (basename($_SERVER['PHP_SELF'])!='install.php') {
