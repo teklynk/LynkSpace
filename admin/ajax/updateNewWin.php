@@ -3,7 +3,11 @@
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
+<<<<<<< HEAD
 if (isset($_SESSION["loggedIn"]) AND $_SESSION["session_hash"]==md5($_SESSION["user_name"])) {
+=======
+if (isset($_SESSION["loggedIn"]) AND $_SESSION["file_referer"]=="navigation.php") {
+>>>>>>> origin/master
 
 	include '../../db/dbsetup.php'; 
 

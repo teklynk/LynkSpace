@@ -8,7 +8,10 @@ unset($_SESSION["user_name"]);
 unset($_SESSION["timeout"]);
 unset($_SESSION["loggedIn"]);
 unset($_SESSION["file_referer"]);
+<<<<<<< HEAD
 unset($_SESSION["session_hash"]);
+=======
+>>>>>>> origin/master
 
 $message="";
 
@@ -22,8 +25,11 @@ if (!empty($_POST)) {
 		$_SESSION["user_name"] = $row['username'];
         $_SESSION["timeout"] = time();
         $_SESSION["loggedIn"] = 1;
+<<<<<<< HEAD
         $_SESSION["file_referer"] = 'index.php';
         $_SESSION["session_hash"] = md5($row['username']);
+=======
+>>>>>>> origin/master
         
 	} else {
 		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
