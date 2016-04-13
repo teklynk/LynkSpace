@@ -1,12 +1,12 @@
 <?php 
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 
 	//update table on submit
 	if (!empty($_POST)) {
-		$username=$_POST['user_name'];
-		$userpass=$_POST['user_password'];
+		$username=trim($_POST['user_name']);
+		$userpass=trim($_POST['user_password']);
 		$userid=$_POST['user_id'];
 		$usersUpdate = "UPDATE users SET username='$username', password=password('$userpass'), level='1' WHERE id='$userid'";
 		//echo $usersUpdate;
@@ -16,7 +16,7 @@ include 'includes/header.php';
 	}
 	
 	$sqlUsers= mysql_query("SELECT username, password, level, id FROM users");
-	$rowUsers  = mysql_fetch_array($sqlUsers);
+	$rowUsers= mysql_fetch_array($sqlUsers);
 ?>
    <div class="row">
 		<div class="col-lg-12">
@@ -28,7 +28,7 @@ include 'includes/header.php';
 	<div class="row">
 		<div class="col-lg-12">
 			<?php 
-			if ($pageMsg !="") {
+			if ($pageMsg != "") {
 				echo $pageMsg;
 			}
 			?>
@@ -40,7 +40,7 @@ include 'includes/header.php';
 				</div>
 				<div class="form-group">
 					<label>User Password</label>
-					<input class="form-control" type="password" name="user_password" value="<?php echo $rowUsers['password']; ?>" placeholder="Password">
+					<input class="form-control" type="password" name="user_password" value="" placeholder="Password">
 				</div>
 				<input type="hidden" name="user_id" value="<?php echo $rowUsers['id']; ?>" />
 

@@ -1,30 +1,36 @@
 <?php 
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 
 unset($_SESSION["user_id"]);
 unset($_SESSION["user_name"]);
 unset($_SESSION["timeout"]);
+unset($_SESSION["loggedIn"]);
+unset($_SESSION["file_referer"]);
+unset($_SESSION["session_hash"]);
 
 $message="";
 
 if (!empty($_POST)) {
 
-  	$result = mysql_query("SELECT username, password, id FROM users WHERE username='".$_POST["username"]."' AND password=password('$_POST[password]')");
+  	$result = mysql_query("SELECT username, password, id FROM users WHERE username='".trim(mysql_real_escape_string($_POST["username"]))."' AND password=password('$_POST[password]')");
 	$row  = mysql_fetch_array($result);
 
 	if (is_array($row)) {
 		$_SESSION["user_id"] = $row['id'];
 		$_SESSION["user_name"] = $row['username'];
-        $_SESSION['timeout'] = time();
+        $_SESSION["timeout"] = time();
+        $_SESSION["loggedIn"] = 1;
+        $_SESSION["file_referer"] = 'index.php';
+        $_SESSION["session_hash"] = md5($row['username']);
         
 	} else {
 		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 	}
 }
 
-if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND isset($_SESSION['timeout'])) {
+if (isset($_SESSION["loggedIn"])) {
 	//header("Location: setup.php");
 	echo "<script>window.location.href='setup.php';</script>";
 }
