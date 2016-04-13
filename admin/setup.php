@@ -1,11 +1,11 @@
 <?php 
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 
 	//update table on submit
 	if (!empty($_POST)) {
-		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$_POST["site_author"]."', keywords='".$_POST["site_keywords"]."', description='".$_POST["site_description"]."', headercode='".mysql_real_escape_string($_POST["site_header"])."', disqus='".mysql_real_escape_string($_POST['site_disqus'])."', googleanalytics='".$_POST["site_google"]."', tinymce=".$_POST["site_tinymce"]." ";
+		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$_POST["site_author"]."', keywords='".mysql_real_escape_string($_POST["site_keywords"])."', description='".mysql_real_escape_string($_POST["site_description"])."', headercode='".mysql_real_escape_string($_POST["site_header"])."', disqus='".mysql_real_escape_string($_POST['site_disqus'])."', googleanalytics='".$_POST["site_google"]."', tinymce=".$_POST["site_tinymce"]." ";
 		mysql_query($setupUpdate);
 		$pageMsg="<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php'\">×</button></div>";
 	}

@@ -1,5 +1,5 @@
 <?php
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 
@@ -54,7 +54,7 @@ include 'includes/header.php';
         <div class="row">
             <div class="col-md-8">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php">
+                <form name="sentMessage" id="contactForm" method="post" action="mail/sendmail.asp">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>

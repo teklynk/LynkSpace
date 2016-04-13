@@ -1,10 +1,13 @@
 <?php
-define('MyConst', TRUE);
+define('inc_access', TRUE);
 
 include 'includes/header.php';
 
 unset($_SESSION["user_id"]);
 unset($_SESSION["user_name"]);
+unset($_SESSION["timeout"]);
+unset($_SESSION["loggedIn"]);
+unset($_SESSION["file_referer"]);
 
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";
