@@ -66,11 +66,11 @@ if ($IPrange > '') {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <noscript><p>Javascript is not enabled in your browser.</p></noscript>
+
   <?php
 	$sqlSetup = mysql_query("SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup");
 	$rowSetup = mysql_fetch_array($sqlSetup);
-    //$sqlSetup = mysql_query("SELECT tinymce FROM setup");
-    //$rowSetup = mysql_fetch_array($sqlSetup);
 	
 	$sqlFeatured = mysql_query("SELECT heading FROM featured");
 	$rowFeatured = mysql_fetch_array($sqlFeatured);
@@ -215,7 +215,14 @@ if (isset($_SESSION["loggedIn"])) {
             <!-- /.navbar-collapse -->
         </nav>
 <?php
-} 
+} else {
+    unset($_SESSION["user_id"]);
+    unset($_SESSION["user_name"]);
+    unset($_SESSION["timeout"]);
+    unset($_SESSION["loggedIn"]);
+    unset($_SESSION["file_referer"]);
+    unset($_SESSION["session_hash"]);
+}
 ?>
         <div id="page-wrapper">
             <div class="container-fluid">
