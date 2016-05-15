@@ -82,7 +82,8 @@ echo "<br/>";
 echo "<p><a href='setup.php'>Back</a></p>";
 echo "<p>Sitemap.xml has been updated: <a target='_blank' href=".str_replace('admin/sitemapbuilder.php/','',"http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."/sitemap.xml").">View</a><br/>";
 echo "Robots.txt has been updated: <a target='_blank' href=".str_replace('admin/sitemapbuilder.php/','',"http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."/robots.txt").">View</a></p>";
-
+echo "<br/>";
+echo "<img src='images/loading.gif' />";
 //header("Location: setup.php");
 echo "<script>window.location.href='setup.php';</script>";
 
