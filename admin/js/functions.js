@@ -159,7 +159,20 @@ $(document).ready(function () {
 	);
 
 	//Boostrap tooltips function
-	$('[data-toggle="tooltip"]').tooltip(); 
+	$('[data-toggle="tooltip"]').tooltip();
+
+	//Not a Robot
+	$('#not_robot').change (
+	    function () {
+	    	if ($('#not_robot').prop('checked')) {
+				$('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
+				$('#sign_in').removeAttr('disabled', 'disabled');
+			} else {
+				$('#not_robot').attr('value', '');
+				$('#sign_in').attr('disabled', 'disabled');
+			}
+	    }
+	);
 
 });
 
