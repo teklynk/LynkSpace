@@ -13,21 +13,24 @@ unset($_SESSION["session_hash"]);
 $message="";
 
 if (!empty($_POST)) {
+    if ($_POST["not_robot"]=='e6a52c828d56b46129fbf85c4cd164b3') {
 
-  	$result = mysql_query("SELECT username, password, id FROM users WHERE username='".trim(mysql_real_escape_string($_POST["username"]))."' AND password=password('$_POST[password]')");
-	$row  = mysql_fetch_array($result);
+      	$result = mysql_query("SELECT username, password, id FROM users WHERE username='".trim(mysql_real_escape_string($_POST["username"]))."' AND password=password('$_POST[password]')");
+    	$row  = mysql_fetch_array($result);
 
-	if (is_array($row)) {
-		$_SESSION["user_id"] = $row['id'];
-		$_SESSION["user_name"] = $row['username'];
-        $_SESSION["timeout"] = time();
-        $_SESSION["loggedIn"] = 1;
-        $_SESSION["file_referer"] = 'index.php';
-        $_SESSION["session_hash"] = md5($row['username']);
-        
-	} else {
-		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-	}
+    	if (is_array($row)) {
+    		$_SESSION["user_id"] = $row['id'];
+    		$_SESSION["user_name"] = $row['username'];
+            $_SESSION["timeout"] = time();
+            $_SESSION["loggedIn"] = 1;
+            $_SESSION["file_referer"] = 'index.php';
+            $_SESSION["session_hash"] = md5($row['username']);
+            
+    	} else {
+    		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    	}
+
+    }
 }
 
 if (isset($_SESSION["loggedIn"])) {
@@ -39,7 +42,14 @@ if (isset($_SESSION["loggedIn"])) {
 <style>
 html, body {
 	margin-top: 0px !important;
-	background-color: #fff !important;
+    background: #fff url(images/cloudsbg.png) no-repeat center center /cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#page-wrapper {
+    background-color: transparent !important;
 }
 .navbar-inverse {
 	display:none !important;
@@ -71,7 +81,10 @@ html, body {
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <div class="checkbox">
+                              <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox">I'm not a robot</label>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" name="sign_in" id="sign_in" disabled="disabled" type="submit">Sign in</button>
                         </fieldset>
                     </form>
                 </div>
