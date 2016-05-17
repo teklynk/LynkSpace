@@ -27,8 +27,13 @@ if (!empty($_POST)) {
             $_SESSION["session_hash"] = md5($row['username']);
             
     	} else {
-    		$message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    	       $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     	}
+
+            if (file_exists('install.php')) {
+                    $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+            }
+                
 
     }
 }

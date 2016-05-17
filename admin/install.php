@@ -3,12 +3,6 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-unset($_SESSION["user_id"]);
-unset($_SESSION["user_name"]);
-unset($_SESSION["timeout"]);
-unset($_SESSION["loggedIn"]);
-unset($_SESSION["file_referer"]);
-
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";
 // Name of the sql dump file
@@ -58,26 +52,27 @@ if (!file_exists($dbFileLoc)) {
 		$userInsert = "INSERT INTO users (username, password) VALUES ('".$_POST["username"]."', password('$_POST[password]'))";
 		mysql_query($userInsert);
 		
-        $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
+		$dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
-        $writeline = "<?php\n";
-        fwrite($dbfile, $writeline);
-        $writeline = "\$db_servername = '".$_POST['dbserver']."';\n";
-        fwrite($dbfile, $writeline);
-        $writeline = "\$db_username = '".$_POST['dbusername']."';\n";
-        fwrite($dbfile, $writeline);
-        $writeline = "\$db_password = '".$_POST['dbpassword']."';\n";
-        fwrite($dbfile, $writeline);
-        $writeline = "\$db_name = '".$_POST['dbname']."';\n";
-        fwrite($dbfile, $writeline);
-        $writeline = "?>";
-        fwrite($dbfile, $writeline);
+		$writeline = "<?php\n";
+		fwrite($dbfile, $writeline);
+		$writeline = "\$db_servername = '".$_POST['dbserver']."';\n";
+		fwrite($dbfile, $writeline);
+		$writeline = "\$db_username = '".$_POST['dbusername']."';\n";
+		fwrite($dbfile, $writeline);
+		$writeline = "\$db_password = '".$_POST['dbpassword']."';\n";
+		fwrite($dbfile, $writeline);
+		$writeline = "\$db_name = '".$_POST['dbname']."';\n";
+		fwrite($dbfile, $writeline);
+		$writeline = "?>";
+		fwrite($dbfile, $writeline);
 
-        fclose($dbfile);
+		fclose($dbfile);
 
-        rename("install.php","install.old"); //rename install page so that it can not be accessed after the initial install
-		header("Location: index.php");
-        //echo "<script>window.location.href='index.php';</script>"; //redirect to login page
+		rename("install.php","install.old"); //rename install page so that it can not be accessed after the initial install
+		unlink("install.php"); //delete install.php if renaming is not possible
+
+		echo "<script>window.location.href='index.php';</script>"; //redirect to login page
 
 	}//the big IF
 ?>
@@ -111,7 +106,7 @@ if (!file_exists($dbFileLoc)) {
             <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
             <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
-			<h2 class="form-signin-heading">Create an Admin user</h2>
+	<h2 class="form-signin-heading">Create an Admin user</h2>
         	<label for="username" class="sr-only">Username</label>
             <input class="form-control" type="text" name="username" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>
