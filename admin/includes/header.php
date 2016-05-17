@@ -229,15 +229,15 @@ if (isset($_SESSION["loggedIn"])) {
 <?php	
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
-    if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //60 minute session timeout
-    	if (!$_SESSION["loggedIn"]) {
-    		//redirect to login page if not installing
-    		if (basename($_SERVER['PHP_SELF'])!='install.php') {
-    			//header("Location: index.php");
-    			echo "<script>window.location.href='index.php';</script>"; //this works.
-    		}
+    if (basename($_SERVER['PHP_SELF'])!='install.php') {
+        if ($_SESSION['timeout'] + $sessionTimeout * 1 < time()) { //60 minute session timeout
+
+            if (!$_SESSION["loggedIn"]) {
+    	       echo "<script>window.location.href='index.php';</script>"; //this works.
     	}
-    echo "<script>window.location.href='index.php';</script>"; //this works.
+        
+            echo "<script>window.location.href='index.php';</script>"; //this works.
+        }
     }
 }
 ?>
