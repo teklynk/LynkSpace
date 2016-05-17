@@ -47,7 +47,7 @@ if (isset($_SESSION["loggedIn"])) {
 <style>
 html, body {
 	margin-top: 0px !important;
-    background: #fff url(images/cloudsbg.png) no-repeat center center /cover;
+    background: #FCFCFC url(images/cloudsbg.png) no-repeat center center /cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
