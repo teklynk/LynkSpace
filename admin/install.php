@@ -52,7 +52,7 @@ if (!file_exists($dbFileLoc)) {
 		$userInsert = "INSERT INTO users (username, password) VALUES ('".$_POST["username"]."', password('$_POST[password]'))";
 		mysql_query($userInsert);
 		
-		$dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
+		$dbfile = fopen($dbFileLoc, "w") or die("Unable to open dbconn.php file!");
 
 		$writeline = "<?php\n";
 		fwrite($dbfile, $writeline);
