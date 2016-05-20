@@ -106,7 +106,7 @@ if (!file_exists($dbFileLoc)) {
             <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
             <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
-	<h2 class="form-signin-heading">Create an Admin user</h2>
+			<h2 class="form-signin-heading">Create an Admin user</h2>
         	<label for="username" class="sr-only">Username</label>
             <input class="form-control" type="text" name="username" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>

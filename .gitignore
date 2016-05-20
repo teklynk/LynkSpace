@@ -6,9 +6,15 @@ core/teklynk_logo.psd
 
 sitemap.xml
 
+*sitemap.xml
+
 db/dbconn.php
 
 db/dbsetup.php
+
+*dbconn.php
+
+*dbsetup.php
 
 *.DS_Store
 
@@ -29,3 +35,5 @@ db/dbsetup.php
 .idea/workspace.xml
 
 .svn
+
+.git
