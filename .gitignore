@@ -18,6 +18,8 @@ db/dbsetup.php
 
 install.old
 
+uploads/
+
 *.DS_Store
 
 .idea/.name
