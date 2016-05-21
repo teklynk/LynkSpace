@@ -16,6 +16,8 @@ db/dbsetup.php
 
 *dbsetup.php
 
+install.old
+
 *.DS_Store
 
 .idea/.name
