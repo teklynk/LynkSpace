@@ -4,10 +4,11 @@ function getPage(){
 	global $pageTitle;
 	global $pageContent;
 	global $pageImageAlign;
+    global $pageDisqus;
 
 	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
-		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active FROM pages WHERE id='$pageRefId'");
+		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active, disqus FROM pages WHERE id='$pageRefId'");
 		$rowPage = mysql_fetch_array($sqlPage);
 
 		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
@@ -19,18 +20,19 @@ function getPage(){
 			$pageTitle = $rowPage['title'];
 			$pageContent = $rowPage["content"];
 			$pageImageAlign = $rowPage["image_align"];
+            $pageDisqus = $rowPage["disqus"];
 
 		} else {
 
             $pageTitle = "Page not found";
-		    $pageContent = "This page has been removed.";
+		    $pageContent = "This page is not available.";
 
 		}
 		
 	} else {
 		
         $pageTitle = "Page not found";
-		$pageContent = "This page has been removed.";
+		$pageContent = "This page is not available.";
 		
 	}
 }
@@ -284,7 +286,7 @@ function getSetup(){
     }
 
     if (!empty($rowSetup["googleanalytics"])) {
-        $setupGoogleanalytics = $rowSetup["googleanalytics"];
+        $setupGoogleanalytics = $rowSetup["googleanalytics"]."\n";
     }
 }
 
@@ -527,6 +529,7 @@ function getFeatured(){
 getSetup();
 
 //Call these functions depending on which page you are visiting
+//Sets the page title
 if ($_GET['ref']>""){
     getPage();
     $theTitle = $setupTitle." - ".$pageTitle;

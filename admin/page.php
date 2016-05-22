@@ -46,12 +46,12 @@ if ($_GET["preview"]>""){
 			
 			//update data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId'";
+				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", disqus=".$_POST["page_disqus"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId'";
 				mysql_query($pageUpdate);
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 			}
 			
-			$sqlPages = mysql_query("SELECT id, title, image, content, active, datetime, image_align FROM pages WHERE id='$thePageId'");
+			$sqlPages = mysql_query("SELECT id, title, image, content, active, datetime, image_align, disqus FROM pages WHERE id='$thePageId'");
 			$row  = mysql_fetch_array($sqlPages);
 			
 		//Create new page
@@ -59,7 +59,7 @@ if ($_GET["preview"]>""){
 			$pageLabel = "New Page Title";
 			//insert data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].")";
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].")";
 				mysql_query($pageInsert);
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 			}
@@ -82,6 +82,14 @@ if ($_GET["preview"]>""){
 			} else {
 				$selActive0="SELECTED";
 				$selActive1="";
+			}
+			//comments status
+			if ($row['disqus']==1) {
+				$selDisqus1="SELECTED";
+				$selDisqus0="";
+			} else {
+				$selDisqus0="SELECTED";
+				$selDisqus1="";
 			}
 		}
 
@@ -153,6 +161,14 @@ if ($_GET["preview"]>""){
 		</div>
 		<hr/>
 		<div class="form-group">
+            <label>Allow Comments (Disqus)</label>
+            <select class="form-control input-sm" name="page_disqus">
+                <option value="1" <?php if($_GET["editpage"]){echo $selDisqus1;}?>>Yes</option>
+                <option value="0" <?php if($_GET["editpage"]){echo $selDisqus0;}?>>No</option>
+            </select>
+        </div>
+        <hr/>
+		<div class="form-group">
 			<label>Text / HTML</label>
 			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $row['content'];} ?></textarea>
 		</div>
@@ -186,7 +202,7 @@ if ($_GET["preview"]>""){
 			echo $deleteMsg;
 		}
 		
-			//move pages to top of list
+		//move pages to top of list
 		if (($_GET["movepage"] AND $_GET["movetitle"])) {
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
 			mysql_query($pagesDateUpdate);
