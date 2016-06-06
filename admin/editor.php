@@ -11,7 +11,7 @@ include 'includes/header.php';
 	if (!empty($_POST)) {
 		if (file_exists($customCss_dir)) {
 			$handle = fopen($customCss_dir, 'w') or die('Cannot open file:  '.$customCss_dir);
-			$data = $_POST["edit_css"];
+			$data = filter_var($_POST["edit_css"], FILTER_SANITIZE_STRING);
 			fwrite($handle, $data);
 			//header("Location: editor.php");
 			$pageMsg="<div class='alert alert-success'>".$customCss_dir." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php'\">×</button></div>";
