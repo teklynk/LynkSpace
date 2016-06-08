@@ -1,42 +1,22 @@
-gitignore
-
 mail/sendmail.asp
 
 core/teklynk_logo.psd
 
 sitemap.xml
 
-*sitemap.xml
-
-db/dbconn.php
-
-db/dbsetup.php
-
 *dbconn.php
 
 *dbsetup.php
 
-install.old
+*.old
 
-uploads/
+uploads/*
 
 *.DS_Store
 
-.idea/.name
+.idea
 
 *.iml
-
-.idea/misc.xml
-
-.idea/modules.xml
-
-.idea/encodings.xml
-
-.idea/scopes/scope_settings.xml
-
-.idea/vcs.xml
-
-.idea/workspace.xml
 
 .svn
 

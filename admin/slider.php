@@ -42,6 +42,7 @@ if ($_GET["preview"]>""){
 		if ($_GET["editslide"]) {
 			$theslideId = $_GET["editslide"];
 			$slideLabel = "Edit Slide Title";
+
 			
 			//update data on submit
 			if (!empty($_POST["slide_title"])) {
@@ -261,13 +262,13 @@ if ($_GET["preview"]>""){
 		if ($slideMsg !="") {
 			echo $slideMsg;
 		}
-	?>
-			<form role="portfolioForm" method="post" action="">
-            <div class="form-group">
+	
+			echo "<form role='portfolioForm' method='post' action=''>
+            <div class='form-group'>
                 <label>Heading</label>
-                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['sliderheading']; ?>" placeholder="My Slides">
+                <input class='form-control input-sm' name='main_heading' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
             </div>
-			<table class="table table-bordered table-hover table-striped">
+			<table class='table table-bordered table-hover table-striped'>
 				<thead>
 					<tr>
 						<th>Slide Title</th>
@@ -275,8 +276,8 @@ if ($_GET["preview"]>""){
 						<th>Actions</th>
 					</tr>
 				</thead>
-				<tbody>
-        <?php 
+				<tbody>";
+        
 					$sqlslides = mysql_query("SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
 					while ($row  = mysql_fetch_array($sqlslides)) {
 						$slideId=$row['id'];
@@ -302,20 +303,19 @@ if ($_GET["preview"]>""){
 						</td>
 						</tr>";
 					}
-		?>
-				</tbody>
+		
+				echo "</tbody>
 			</table>
-            <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+            <button type='submit' class='btn btn-default'><i class='fa fa-fw fa-save'></i> Submit</button>
+			<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>
-		</div>
-<?php
-	} //end of long else
-?>
-		</div>
-	</div>
-	<p></p>
+		</div>";
 
-<?php
+	} //end of long else
+
+		echo "</div>
+	</div>
+	<p></p>";
+
 include 'includes/footer.php';
 ?>

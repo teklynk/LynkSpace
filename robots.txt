@@ -4,4 +4,4 @@ Disallow: /css/
 Disallow: /db/
 Disallow: /includes/
 Disallow: /mail/
-Sitemap: http://www.teklynk.com/business/sitemap.xml
+Sitemap: http://localhost/businessCMS/sitemap.xml
