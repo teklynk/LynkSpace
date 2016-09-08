@@ -268,13 +268,12 @@ include 'includes/header.php';
 							$isActive="";
 						}
 						echo "<tr>
-						<td>".$teamName."</td>
+						<td><a href='?editteam=$teamId' title='Edit'>".$teamName."</a></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$teamName', '?preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editteam=$teamId'\"><i class='fa fa-fw fa-edit'></i></button>
 						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveteam=$teamId&movetitle=$teamName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteteam=$teamId&deletetitle=$teamName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>

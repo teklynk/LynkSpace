@@ -264,13 +264,12 @@ include 'includes/header.php';
 							$isActive="";
 						}
 						echo "<tr>
-						<td>".$customerName."</td>
+						<td><a href='?editcustomer=$customerId' title='Edit'>".$customerName."</a></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', '?preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editcustomer=$customerId'\"><i class='fa fa-fw fa-edit'></i></button>
 						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>

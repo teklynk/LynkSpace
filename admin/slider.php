@@ -291,13 +291,12 @@ if ($_GET["preview"]>""){
 							$isActive="";
 						}
 						echo "<tr>
-						<td>".$slideTitle."</td>
+						<td><a href='?editslide=$slideId' title='Edit'>".$slideTitle."</a></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editslide=$slideId'\"><i class='fa fa-fw fa-edit'></i></button>
 						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>

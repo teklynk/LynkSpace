@@ -323,7 +323,6 @@ if ($_GET["preview"]>""){
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$serviceTitle', '?preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Edit' class='btn btn-xs btn-default' onclick=\"window.location.href='?editservice=$serviceId'\"><i class='fa fa-fw fa-edit'></i></button>
 						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveservice=$serviceId&movetitle=$serviceTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteservice=$serviceId&deletetitle=$serviceTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
