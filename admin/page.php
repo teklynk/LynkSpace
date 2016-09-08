@@ -286,7 +286,7 @@ if ($_GET["preview"]>""){
 							$isActive="";
 						}
 						echo "<tr>
-						<td>".$pageTitle."</td>
+						<td><a href='?editpage=$pageId' title='Edit'>".$pageTitle."</a></td>
 						<td class='col-xs-1'>
 						<span>".$isActive."</span>
 						</td>
