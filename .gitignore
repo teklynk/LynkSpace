@@ -21,3 +21,11 @@ uploads/*
 .svn
 
 .git
+
+*.sql
+
+*.asp
+
+*.xml
+
+*.txt
