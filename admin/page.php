@@ -5,8 +5,8 @@ include 'includes/header.php';
 //Page preview
 if ($_GET["preview"]>""){
 	$pagePreviewId=$_GET["preview"];
-	$sqlPagePreview = mysql_query("SELECT id, title, image, content FROM pages WHERE id='$pagePreviewId'");
-	$row = mysql_fetch_array($sqlPagePreview);
+	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content FROM pages WHERE id='$pagePreviewId'");
+	$row = mysqli_fetch_array($sqlPagePreview);
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 		if ($row["title"]>""){
 			echo "<h4>".$row['title']."</h4>";
@@ -47,12 +47,12 @@ if ($_GET["preview"]>""){
 			//update data on submit
 			if (!empty($_POST["page_title"])) {
 				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", disqus=".$_POST["page_disqus"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId'";
-				mysql_query($pageUpdate);
+				mysqli_query($db_conn, $pageUpdate);
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 			}
 			
-			$sqlPages = mysql_query("SELECT id, title, image, content, active, datetime, image_align, disqus FROM pages WHERE id='$thePageId'");
-			$row  = mysql_fetch_array($sqlPages);
+			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus FROM pages WHERE id='$thePageId'");
+			$row  = mysqli_fetch_array($sqlPages);
 			
 		//Create new page
 		} else if ($_GET["newpage"]) {
@@ -60,7 +60,7 @@ if ($_GET["preview"]>""){
 			//insert data on submit
 			if (!empty($_POST["page_title"])) {
 				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].")";
-				mysql_query($pageInsert);
+				mysqli_query($db_conn, $pageInsert);
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 			}
 		}
@@ -197,7 +197,7 @@ if ($_GET["preview"]>""){
 		} elseif ($_GET["deletepage"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete page after clicking Yes
 			$pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
-			mysql_query($pageDelete);
+			mysqli_query($db_conn, $pageDelete);
 			$deleteMsg="<div class='alert alert-success'>".$delPageTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -205,19 +205,19 @@ if ($_GET["preview"]>""){
 		//move pages to top of list
 		if (($_GET["movepage"] AND $_GET["movetitle"])) {
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
-			mysql_query($pagesDateUpdate);
+			mysqli_query($db_conn, $pagesDateUpdate);
 			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 		}
 		
 		//update heading on submit
 		if (!empty($_POST["main_heading"])) {
 			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."'";
-			mysql_query($setupUpdate);
+			mysqli_query($db_conn, $setupUpdate);
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
 		}
 		
-    $sqlSetup = mysql_query("SELECT pageheading FROM setup");
-	$rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup");
+	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -273,8 +273,8 @@ if ($_GET["preview"]>""){
 				</thead>
 				<tbody>
         <?php 
-					$sqlPages = mysql_query("SELECT id, title, image, content, active FROM pages ORDER BY datetime DESC");
-					while ($row  = mysql_fetch_array($sqlPages)) {
+					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM pages ORDER BY datetime DESC");
+					while ($row  = mysqli_fetch_array($sqlPages)) {
 						$pageId=$row['id'];
 						$pageTitle=$row['title'];
 						$pageTumbnail=$row['image'];

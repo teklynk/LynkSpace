@@ -22,7 +22,7 @@ getTeam();
             echo "</div>";
         }
 
-	    while ($rowTeam = mysql_fetch_array($sqlTeam)){
+	    while ($rowTeam = mysqli_fetch_array($sqlTeam)){
 			echo "<div class='col-md-".$teamColWidth." text-center'>";
 			echo "<div class='thumbnail'>";
 

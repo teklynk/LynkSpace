@@ -12,10 +12,10 @@ include 'includes/header.php';
 			if (!empty($_POST["nav_newcat"]) AND $_POST["exist_cat"]=="") {
 				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST["nav_newcat"]."')";
 				//echo $navNewCat;
-				mysql_query($navNewCat);
+				mysqli_query($db_conn, $navNewCat);
 
-				$sqlNavCatID = mysql_query("SELECT id FROM category ORDER BY id DESC LIMIT 1");
-				$rowMaxCat = mysql_fetch_array($sqlNavCatID);
+				$sqlNavCatID = mysqli_query($db_conn, "SELECT id FROM category ORDER BY id DESC LIMIT 1");
+				$rowMaxCat = mysqli_fetch_array($sqlNavCatID);
 				$navMaxCatId=$rowMaxCat[0];
 				//echo $navMaxCatId;
 			}
@@ -30,7 +30,7 @@ include 'includes/header.php';
 
 			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win) VALUES ('".$_POST["nav_newname"]."', '".$_POST["nav_newurl"]."', 0, $getTheCat, '".$getNavSection."','off')";
 			//echo $navNew;
-			mysql_query($navNew);
+			mysqli_query($db_conn, $navNew);
 		}
 		
 		for($i=0; $i<$_POST["nav_count"]; $i++) {
@@ -40,7 +40,7 @@ include 'includes/header.php';
 
 			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i]." WHERE id=".$_POST["nav_id"][$i]." ";
 			//echo $navUpdate;
-			mysql_query($navUpdate);
+			mysqli_query($db_conn, $navUpdate);
 		}
 		
 		$pageMsg="<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
@@ -87,9 +87,9 @@ include 'includes/header.php';
 		
 		//get and built pages list
 		$pagesStr="";
-		$sqlNavPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+		$sqlNavPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
 		//$pagesStr = "<option value=''>Custom</option>";
-		while ($rowNavPages = mysql_fetch_array($sqlNavPages)) {
+		while ($rowNavPages = mysqli_fetch_array($sqlNavPages)) {
 			$navPageId=$rowNavPages['id'];
 			$navPageTitle=$rowNavPages['title'];
 			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
@@ -97,9 +97,9 @@ include 'includes/header.php';
 		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 		
 		//get and built existing category list
-		$sqlNavExistCat= mysql_query("SELECT id, name FROM category ORDER BY name");
+		$sqlNavExistCat= mysqli_query($db_conn, "SELECT id, name FROM category ORDER BY name");
 		//$catExistStr = "<option value=''>Custom</option>";
-		while ($rowNavExistCat  = mysql_fetch_array($sqlNavExistCat)) {
+		while ($rowNavExistCat  = mysqli_fetch_array($sqlNavExistCat)) {
 			$catExistStr = $catExistStr . "<option value=".$rowNavExistCat['id']." >".$rowNavExistCat['name']."</option>";
 		}
 
@@ -117,7 +117,7 @@ include 'includes/header.php';
 		} elseif ($_GET["deletenav"] AND $_GET["deletename"] AND $_GET["confirm"]=="yes") {
 			//delete nav after clicking Yes
 			$navDelete = "DELETE FROM navigation WHERE id='$delNavId'";
-			mysql_query($navDelete);
+			mysqli_query($db_conn, $navDelete);
 			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delNavTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -132,10 +132,10 @@ include 'includes/header.php';
 			echo $deleteMsg;
 		} elseif ($_GET["deletecat"] AND $_GET["deletecatname"] AND $_GET["confirm"]=="yes") {
 			$navCatUpdate = "UPDATE navigation SET catid='29' WHERE catid='$delCatId'";
-			mysql_query($navCatUpdate);
+			mysqli_query($db_conn, $navCatUpdate);
 			//delete category after clicking Yes
 			$navCatDelete = "DELETE FROM category WHERE id='$delCatId'";
-			mysql_query($navCatDelete);
+			mysqli_query($db_conn, $navCatDelete);
 			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delCatTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -153,7 +153,7 @@ include 'includes/header.php';
 		} elseif ($_GET["renamecat"] AND $_GET["newcatname"] AND $_GET["confirm"]=="yes") {
 
 			$navRenameCatUpdate = "UPDATE category SET name='".$renameCatTitle."' WHERE id='$renameCatId'";
-			mysql_query($navRenameCatUpdate);
+			mysqli_query($db_conn, $navRenameCatUpdate);
 
 			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&'\">×</button></div>";
 			echo $renameMsg;
@@ -217,8 +217,8 @@ include 'includes/header.php';
 					<?php
 					$navCount="";
 
-						$sqlNav= mysql_query("SELECT id, name, url, sort, win, catid FROM navigation WHERE section='$getNavSection' ORDER BY sort");					
-						while ($rowNav  = mysql_fetch_array($sqlNav)) {
+						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid FROM navigation WHERE section='$getNavSection' ORDER BY sort");					
+						while ($rowNav  = mysqli_fetch_array($sqlNav)) {
 							$navId=$rowNav['id'];
 							$navName=$rowNav['name'];
 							$navURL=$rowNav['url'];
@@ -242,8 +242,8 @@ include 'includes/header.php';
 							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
 
 							//get and built category list, find selected
-							$sqlNavCat= mysql_query("SELECT id, name FROM category ORDER BY name");
-							while ($rowNavCat  = mysql_fetch_array($sqlNavCat)) {
+							$sqlNavCat= mysqli_query($db_conn, "SELECT id, name FROM category ORDER BY name");
+							while ($rowNavCat  = mysqli_fetch_array($sqlNavCat)) {
 								$navCatId=$rowNavCat['id'];
 								$navCatName=$rowNavCat['name'];
 								

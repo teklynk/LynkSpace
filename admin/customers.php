@@ -12,8 +12,8 @@ include 'includes/header.php';
 	//Page preview
 	if ($_GET["preview"]>""){
 		$pagePreviewId=$_GET["preview"];
-		$sqlcustomerPreview = mysql_query("SELECT id, image, name, link FROM customers WHERE id='$pagePreviewId'");
-		$row  = mysql_fetch_array($sqlcustomerPreview);
+		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, image, name, link FROM customers WHERE id='$pagePreviewId'");
+		$row  = mysqli_fetch_array($sqlcustomerPreview);
 			
 			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";			
 			echo "<div class='col-lg-12'>";
@@ -51,12 +51,12 @@ include 'includes/header.php';
 			//update data on submit
 			if (!empty($_POST["customer_name"])) {
 				$customerUpdate = "UPDATE customers SET name='".$_POST["customer_name"]."', image='".$_POST["customer_image"]."', link='".$_POST["customer_link"]."', active=".$_POST["customer_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId'";
-				mysql_query($customerUpdate);
+				mysqli_query($db_conn, $customerUpdate);
 				$customerMsg="<div class='alert alert-success'>The customer ".$_POST["customer_name"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			}
 			
-			$sqlcustomer = mysql_query("SELECT id, image, name, link, active, datetime FROM customers WHERE id='$thecustomerId'");
-			$row  = mysql_fetch_array($sqlcustomer);
+			$sqlcustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active, datetime FROM customers WHERE id='$thecustomerId'");
+			$row  = mysqli_fetch_array($sqlcustomer);
 			
 		//Create new customer
 		} else if ($_GET["newcustomer"]) {
@@ -64,7 +64,7 @@ include 'includes/header.php';
 			//insert data on submit
 			if (!empty($_POST["customer_name"])) {
 				$customerInsert = "INSERT INTO customers (image, name, link, active) VALUES ('".$_POST["customer_image"]."', '".$_POST["customer_name"]."', '".$_POST["customer_link"]."',  ".$_POST["customer_status"].")";
-				mysql_query($customerInsert);
+				mysqli_query($db_conn, $customerInsert);
 				//echo $customerInsert;
 				$customerMsg="<div class='alert alert-success'>The customer ".$_POST["customer_name"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			}
@@ -172,7 +172,7 @@ include 'includes/header.php';
 		} elseif ($_GET["deletecustomer"] AND $_GET["deletename"] AND $_GET["confirm"]=="yes") {
 			//delete customer after clicking Yes
 			$customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
-			mysql_query($customerDelete);
+			mysqli_query($db_conn, $customerDelete);
 			$deleteMsg="<div class='alert alert-success'>".$delcustomerName." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -180,19 +180,19 @@ include 'includes/header.php';
 	//move customer to top of list
     if (($_GET["movecustomer"] AND $_GET["movename"])) {
         $customerDateUpdate = "UPDATE customers SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movecustomerId'";
-        mysql_query($customerDateUpdate);
+        mysqli_query($db_conn, $customerDateUpdate);
         $customerMsg="<div class='alert alert-success'>".$movecustomerName." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
     }
 		
     //update heading on submit
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET customersheading='".$_POST["customer_heading"]."', customerscontent='".$_POST["main_content"]."'";
-        mysql_query($setupUpdate);
+        mysqli_query($db_conn, $setupUpdate);
         $customerMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
     }
 		
-    $sqlSetup = mysql_query("SELECT customersheading, customerscontent FROM setup");
-	$rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
+	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -251,8 +251,8 @@ include 'includes/header.php';
 				</thead>
 				<tbody>
         		<?php 
-					$sqlcustomer = mysql_query("SELECT id, image, name, link, active FROM customers ORDER BY datetime DESC");
-					while ($row  = mysql_fetch_array($sqlcustomer)) {
+					$sqlcustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active FROM customers ORDER BY datetime DESC");
+					while ($row  = mysqli_fetch_array($sqlcustomer)) {
 						$customerId=$row['id'];
 						$customerName=$row['name'];
 						$customerTumbnail=$row['image'];

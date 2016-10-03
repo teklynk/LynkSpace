@@ -6,8 +6,8 @@ include 'includes/header.php';
 //slide preview
 if ($_GET["preview"]>""){
 	$slidePreviewId=$_GET["preview"];
-	$sqlslidePreview = mysql_query("SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
-	$row  = mysql_fetch_array($sqlslidePreview);
+	$sqlslidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
+	$row  = mysqli_fetch_array($sqlslidePreview);
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 		echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
 		echo "<p>".$row['content']."</p>";
@@ -47,12 +47,12 @@ if ($_GET["preview"]>""){
 			//update data on submit
 			if (!empty($_POST["slide_title"])) {
 				$slideUpdate = "UPDATE slider SET title='".$_POST["slide_title"]."', content='".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', link='".$_POST["slide_link"]."', image='".$_POST["slide_image"]."',active=".$_POST["slide_status"].",datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId'";
-				mysql_query($slideUpdate);
+				mysqli_query($db_conn, $slideUpdate);
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST["slide_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			}
 			
-			$sqlslides = mysql_query("SELECT id, title, image, content, link, active, datetime FROM slider WHERE id='$theslideId'");
-			$row  = mysql_fetch_array($sqlslides);
+			$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime FROM slider WHERE id='$theslideId'");
+			$row  = mysqli_fetch_array($sqlslides);
 			
 		//Create new slide
 		} else if ($_GET["newslide"]) {
@@ -60,7 +60,7 @@ if ($_GET["preview"]>""){
 			//insert data on submit
 			if (!empty($_POST["slide_title"])) {
 				$slideInsert = "INSERT INTO slider (title, content, link, image, active) VALUES ('".$_POST["slide_title"]."', '".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', '".$_POST["slide_link"]."', '".$_POST["slide_image"]."', ".$_POST["slide_status"].")";
-				mysql_query($slideInsert);
+				mysqli_query($db_conn, $slideInsert);
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST["slide_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			}
 		} 
@@ -75,9 +75,9 @@ if ($_GET["preview"]>""){
 		}
 
 		//get and built pages list
-		$sqlNavPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+		$sqlNavPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
 		$pagesStr = "<option value=''>Custom</option>";
-		while ($rowNavPages = mysql_fetch_array($sqlNavPages)) {
+		while ($rowNavPages = mysqli_fetch_array($sqlNavPages)) {
 			$navPageId=$rowNavPages['id'];
 			$navPageTitle=$rowNavPages['title'];
 			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
@@ -152,8 +152,8 @@ if ($_GET["preview"]>""){
 				<option value="">None</option>
 				<?php
 					$pagesStr="";
-					$sqlSliderLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
-					while ($rowSliderLink = mysql_fetch_array($sqlSliderLink)) {
+					$sqlSliderLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
+					while ($rowSliderLink = mysqli_fetch_array($sqlSliderLink)) {
 						$sliderLinkId=$rowSliderLink['id'];
 						$sliderLinkTitle=$rowSliderLink['title'];
 						if (ctype_digit($row['link'])){
@@ -202,7 +202,7 @@ if ($_GET["preview"]>""){
 		} elseif ($_GET["deleteslide"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete slide after clicking Yes
 			$slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
-			mysql_query($slideDelete);
+			mysqli_query($db_conn, $slideDelete);
 			$deleteMsg="<div class='alert alert-success'>".$delslideTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -210,19 +210,19 @@ if ($_GET["preview"]>""){
 		//move slide to top of list
 		if (($_GET["moveslide"] AND $_GET["movetitle"])) {
 			$slidesDateUpdate = "UPDATE slider SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveslideId'";
-			mysql_query($slidesDateUpdate);
+			mysqli_query($db_conn, $slidesDateUpdate);
 			$slideMsg="<div class='alert alert-success'>".$moveslideTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 		}
 		
 		//update heading on submit
 		if (!empty($_POST["main_heading"])) {
 			$setupUpdate = "UPDATE setup SET sliderheading='".$_POST["main_heading"]."'";
-			mysql_query($setupUpdate);
+			mysqli_query($db_conn, $setupUpdate);
 			$slideMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 		}
 		
-    $sqlSetup = mysql_query("SELECT sliderheading FROM setup");
-		$rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading FROM setup");
+		$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -278,8 +278,8 @@ if ($_GET["preview"]>""){
 				</thead>
 				<tbody>";
         
-					$sqlslides = mysql_query("SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
-					while ($row  = mysql_fetch_array($sqlslides)) {
+					$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
+					while ($row  = mysqli_fetch_array($sqlslides)) {
 						$slideId=$row['id'];
 						$slideTitle=$row['title'];
 						$slideTumbnail=$row['image'];

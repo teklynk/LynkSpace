@@ -22,6 +22,6 @@ if(!defined('inc_access')) {
 $_SESSION['timeout'] = time();
 
 //close all db connections
-	mysql_close($db_conn);
+	mysqli_close($db_conn);
 	die();
 ?>

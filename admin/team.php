@@ -12,8 +12,8 @@ include 'includes/header.php';
 	//Page preview
 	if ($_GET["preview"]>""){
 		$pagePreviewId=$_GET["preview"];
-		$sqlteamPreview = mysql_query("SELECT id, title, image, content, name FROM team WHERE id='$pagePreviewId'");
-		$row  = mysql_fetch_array($sqlteamPreview);
+		$sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name FROM team WHERE id='$pagePreviewId'");
+		$row  = mysqli_fetch_array($sqlteamPreview);
 			
 			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";			
 			echo "<div class='col-lg-12'>";
@@ -52,12 +52,12 @@ include 'includes/header.php';
 			//update data on submit
 			if (!empty($_POST["team_title"])) {
 				$teamUpdate = "UPDATE team SET title='".$_POST["team_title"]."', content='".$_POST["team_content"]."', name='".$_POST["team_name"]."', image='".$_POST["team_image"]."', active=".$_POST["team_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId'";
-				mysql_query($teamUpdate);
+				mysqli_query($db_conn, $teamUpdate);
 				$teamMsg="<div class='alert alert-success'>The team member ".$_POST["team_name"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
 			}
 			
-			$sqlteam = mysql_query("SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId'");
-			$row  = mysql_fetch_array($sqlteam);
+			$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId'");
+			$row  = mysqli_fetch_array($sqlteam);
 			
 		//Create new team
 		} else if ($_GET["newteam"]) {
@@ -65,7 +65,7 @@ include 'includes/header.php';
 			//insert data on submit
 			if (!empty($_POST["team_title"])) {
 				$teamInsert = "INSERT INTO team (title, content, image, name, active) VALUES ('".$_POST["team_name"]."', '".$_POST["team_content"]."', '".$_POST["team_image"]."', '".$_POST["team_name"]."', ".$_POST["team_status"].")";
-				mysql_query($teamInsert);
+				mysqli_query($db_conn, $teamInsert);
 				$teamMsg="<div class='alert alert-success'>The team member ".$_POST["team_name"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
 			}
 		} 
@@ -175,7 +175,7 @@ include 'includes/header.php';
 		} elseif ($_GET["deleteteam"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete team after clicking Yes
 			$teamDelete = "DELETE FROM team WHERE id='$delteamId'";
-			mysql_query($teamDelete);
+			mysqli_query($db_conn, $teamDelete);
 			$deleteMsg="<div class='alert alert-success'>".$delteamTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -183,19 +183,19 @@ include 'includes/header.php';
 	//move team to top of list
     if (($_GET["moveteam"] AND $_GET["movetitle"])) {
         $teamDateUpdate = "UPDATE team SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveteamId'";
-        mysql_query($teamDateUpdate);
+        mysqli_query($db_conn, $teamDateUpdate);
         $teamMsg="<div class='alert alert-success'>".$moveteamTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
     }
 		
     //update heading on submit
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET teamheading='".$_POST["team_heading"]."', teamcontent='".$_POST["main_content"]."'";
-        mysql_query($setupUpdate);
+        mysqli_query($db_conn, $setupUpdate);
         $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
     }
 		
-    $sqlSetup = mysql_query("SELECT teamheading, teamcontent FROM setup");
-	$rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
+	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -254,8 +254,8 @@ include 'includes/header.php';
 				</thead>
 				<tbody>
         		<?php 
-					$sqlteam = mysql_query("SELECT id, title, image, content, name, active FROM team ORDER BY datetime DESC");
-					while ($row  = mysql_fetch_array($sqlteam)) {
+					$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active FROM team ORDER BY datetime DESC");
+					while ($row  = mysqli_fetch_array($sqlteam)) {
 						$teamId=$row['id'];
 						$teamTitle=$row['title'];
 						$teamName=$row['name'];

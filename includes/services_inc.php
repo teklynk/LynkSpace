@@ -24,7 +24,7 @@ getServices();
         }
         
 
-        while ($rowServices = mysql_fetch_array($sqlServices)){
+        while ($rowServices = mysqli_fetch_array($sqlServices)){
 
             echo "<div class='col-md-".$servicesColWidth." text-center'>";
             echo "<div class='panel panel-default text-center'>";

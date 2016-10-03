@@ -12,8 +12,8 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 //Page preview
 if ($_GET["preview"]>""){
 	$pagePreviewId=$_GET["preview"];
-	$sqlServicesPreview = mysql_query("SELECT id, title, icon, image, content, link FROM services WHERE id='$pagePreviewId'");
-	$row  = mysql_fetch_array($sqlServicesPreview);
+	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link FROM services WHERE id='$pagePreviewId'");
+	$row  = mysqli_fetch_array($sqlServicesPreview);
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";        
 	echo "<div class='col-lg-12'>";
 
@@ -56,12 +56,12 @@ if ($_GET["preview"]>""){
 			//update data on submit
 			if (!empty($_POST["service_title"])) {
 				$servicesUpdate = "UPDATE services SET title='".$_POST["service_title"]."', content='".$_POST["service_content"]."', link=".$_POST["service_link"].", icon='".$_POST["service_icon_select"]."', image='".$_POST["service_image_select"]."', active=".$_POST["service_status"].",datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId'";
-				mysql_query($servicesUpdate);
+				mysqli_query($db_conn, $servicesUpdate);
 				$serviceMsg="<div class='alert alert-success'>The service ".$_POST["service_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			}
 			
-			$sqlServices = mysql_query("SELECT id, title, icon, image, content, link, active, datetime FROM services WHERE id='$theserviceId'");
-			$row  = mysql_fetch_array($sqlServices);
+			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, datetime FROM services WHERE id='$theserviceId'");
+			$row  = mysqli_fetch_array($sqlServices);
 			
 		//Create new service
 		} else if ($_GET["newservice"]) {
@@ -69,7 +69,7 @@ if ($_GET["preview"]>""){
 			//insert data on submit
 			if (!empty($_POST["service_title"])) {
 				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active) VALUES ('".$_POST["service_title"]."', '".$_POST["service_content"]."', '".$_POST["service_icon_select"]."', '".$_POST["service_image_select"]."', ".$_POST["service_link"].", ".$_POST["service_status"].")";
-				mysql_query($servicesInsert);
+				mysqli_query($db_conn, $servicesInsert);
 				$serviceMsg="<div class='alert alert-success'>The service ".$_POST["service_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			}
 		} 
@@ -131,8 +131,8 @@ if ($_GET["preview"]>""){
 			<select class="form-control input-sm" name="service_icon_select" id="service_icon_select">
 				<option value="">None</option>
 				<?php
-					$sqlServicesIcon = mysql_query("SELECT icon FROM services_icons ORDER BY icon ASC");
-					while ($rowIcon = mysql_fetch_array($sqlServicesIcon)) {
+					$sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM services_icons ORDER BY icon ASC");
+					while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
 						$icon=$rowIcon['icon'];
 						if ($icon===$row['icon']){
 							$iconCheck="SELECTED";
@@ -175,8 +175,8 @@ if ($_GET["preview"]>""){
 				<option value="0">None</option>
 				<?php
 					$pagesStr="";
-					$sqlServicesLink = mysql_query("SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
-					while ($rowLink = mysql_fetch_array($sqlServicesLink)) {
+					$sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
+					while ($rowLink = mysqli_fetch_array($sqlServicesLink)) {
 						$serviceLinkId=$rowLink['id'];
 						$serviceLinkTitle=$rowLink['title'];
 
@@ -224,7 +224,7 @@ if ($_GET["preview"]>""){
 		} elseif ($_GET["deleteservice"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
-			mysql_query($servicesDelete);
+			mysqli_query($db_conn, $servicesDelete);
 			$deleteMsg="<div class='alert alert-success'>".$delserviceTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -232,19 +232,19 @@ if ($_GET["preview"]>""){
 	//move services to top of list
     if (($_GET["moveservice"] AND $_GET["movetitle"])) {
         $servicesDateUpdate = "UPDATE services SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
-        mysql_query($servicesDateUpdate);
+        mysqli_query($db_conn, $servicesDateUpdate);
         $serviceMsg="<div class='alert alert-success'>".$moveserviceTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
     }
 		
     //update heading on submit
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET servicesheading='".$_POST["main_heading"]."', servicescontent='".$_POST["main_content"]."'";
-        mysql_query($setupUpdate);
+        mysqli_query($db_conn, $setupUpdate);
         $serviceMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
     }
 		
-    $sqlSetup = mysql_query("SELECT servicesheading, servicescontent FROM setup");
-	$rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup");
+	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -304,8 +304,8 @@ if ($_GET["preview"]>""){
 				</thead>
 				<tbody>
         		<?php 
-					$sqlServices = mysql_query("SELECT id, title, icon, content, link, active FROM services ORDER BY datetime DESC");
-					while ($row  = mysql_fetch_array($sqlServices)) {
+					$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, link, active FROM services ORDER BY datetime DESC");
+					while ($row  = mysqli_fetch_array($sqlServices)) {
 						$serviceId=$row['id'];
 						$serviceTitle=$row['title'];
 						$serviceTumbnail=$row['icon'];

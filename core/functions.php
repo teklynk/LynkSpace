@@ -8,8 +8,8 @@ function getPage(){
 
 	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
-		$sqlPage = mysql_query("SELECT id, title, image, image_align, content, active, disqus FROM pages WHERE id='$pageRefId'");
-		$rowPage = mysql_fetch_array($sqlPage);
+		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus FROM pages WHERE id='$pageRefId'");
+		$rowPage = mysqli_fetch_array($sqlPage);
 
 		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
 
@@ -43,8 +43,8 @@ function getAbout(){
 	global $aboutImage;
 	global $aboutImageAlign;
 
-	$sqlAbout = mysql_query("SELECT heading, content, image, image_align FROM aboutus");
-	$rowAbout = mysql_fetch_array($sqlAbout);
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
+	$rowAbout = mysqli_fetch_array($sqlAbout);
 
 	if (!empty($rowAbout["heading"])){
 		$aboutTitle = $rowAbout["heading"];
@@ -75,8 +75,8 @@ function getContactInfo(){
 	global $contactFormSendToEmail;
 	global $contactFormMsg;
 
-	$sqlContact = mysql_query("SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
-	$rowContact = mysql_fetch_array($sqlContact);
+	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
+	$rowContact = mysqli_fetch_array($sqlContact);
 
     if ($_GET["msgsent"]=="thankyou") {
         $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
@@ -142,8 +142,8 @@ function getServices(){
 	global $servicesCount;
 	global $servicesIcon;
 
-    $sqlServicesHeading = mysql_query("SELECT servicesheading, servicescontent FROM setup");
-    $rowServicesHeading = mysql_fetch_array($sqlServicesHeading);
+    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup");
+    $rowServicesHeading = mysqli_fetch_array($sqlServicesHeading);
 
     $servicesHeading = $rowServicesHeading['servicesheading'];
 
@@ -151,8 +151,8 @@ function getServices(){
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
 	}
 
-    $sqlServices = mysql_query("SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $servicesNumRows = mysql_num_rows($sqlServices);
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount=0;
 
     if ($servicesNumRows==2) {
@@ -179,8 +179,8 @@ function getTeam(){
 	global $teamNumRows;
 	global $teamColWidth;
 
-	$sqlTeamHeading = mysql_query("SELECT teamheading, teamcontent FROM setup");
-    $rowTeamHeading = mysql_fetch_array($sqlTeamHeading);
+	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
+    $rowTeamHeading = mysqli_fetch_array($sqlTeamHeading);
 
     $teamHeading = $rowTeamHeading['teamheading'];
 
@@ -188,8 +188,8 @@ function getTeam(){
     	$teamBlurb = $rowTeamHeading['teamcontent'];
 	}
 
-    $sqlTeam = mysql_query("SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $teamNumRows = mysql_num_rows($sqlTeam);	
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $teamNumRows = mysqli_num_rows($sqlTeam);	
 
     if ($teamNumRows==2) {
     	$teamColWidth=6;
@@ -220,10 +220,10 @@ function getNav($navSection,$dropdown,$pull){
 			$dropdownCaret = "";
 		}
 
-        $sqlNavLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
+        $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
         //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
         $tempLink = 0;
-		while ($rowNavLinks = mysql_fetch_array($sqlNavLinks)) {
+		while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
             if ($rowNavLinks[6]=='true'){
                 $navWin = "target='_blank'";
@@ -232,13 +232,13 @@ function getNav($navSection,$dropdown,$pull){
             if ($rowNavLinks[4] == $rowNavLinks[7] AND $rowNavLinks[4] != 29) { //NOTE: 29=None in the category table
 
 				if ($rowNavLinks[4] != $tempLink) {
-					$sqlNavCatLinks = mysql_query("SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
+					$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
 					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
 			
                     echo "<li class='$dropdown'>";
 						echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[8]." $dropdownCaret</a>";
 						echo "<ul class='$dropdownMenu'>";
-						while ($rowNavCatLinks = mysql_fetch_array($sqlNavCatLinks)) {
+						while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)) {
 							echo "<li>";
 							echo "<a href='".$rowNavCatLinks[3]."' $navWin>".$rowNavCatLinks[2]."</a>";
 							echo "</li>";
@@ -268,8 +268,8 @@ function getSetup(){
 	global $setupDisqus;
 	global $setupGoogleanalytics;
 
-    $sqlSetup = mysql_query("SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
-    $rowSetup  = mysql_fetch_array($sqlSetup);
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
+    $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup["description"];
     $setupKeywords = $rowSetup["keywords"];
@@ -298,8 +298,8 @@ function getSocialMediaIcons($shape){
 	global $sqlSocialMedia;
 	global $rowSocialMedia;
 
-	$sqlSocialMedia = mysql_query("SELECT * FROM socialmedia");
-	$rowSocialMedia = mysql_fetch_array($sqlSocialMedia);
+	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia");
+	$rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
 	$socialMediaIcons = "";
 
@@ -339,8 +339,8 @@ function getCustomers(){
 	global $customerNumRows;
 	global $customerColWidth;
 
-    $sqlCustomerHeading = mysql_query("SELECT customersheading, customerscontent FROM setup");
-    $rowCustomerHeading = mysql_fetch_array($sqlCustomerHeading);
+    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
+    $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
 
 	if (!empty($rowCustomerHeading['customersheading'])) {
 	    $customerHeading = $rowCustomerHeading['customersheading'];
@@ -350,8 +350,8 @@ function getCustomers(){
     	$customerBlurb= $rowCustomerHeading['customerscontent'];
 	}
 
-    $sqlCustomers = mysql_query("SELECT image, name, link, active FROM customers WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $customerNumRows = mysql_num_rows($sqlCustomers);	
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active FROM customers WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $customerNumRows = mysqli_num_rows($sqlCustomers);	
 
     if ($customerNumRows==2) {
     	$customerColWidth=6;
@@ -378,8 +378,8 @@ function getSlider($sliderType) {
 		$sliderOrderBy = "ORDER BY RAND() LIMIT 1";
 	}
 
-    $sqlSlider = mysql_query("SELECT id, title, image, link, content, active FROM slider WHERE active=1 $sliderOrderBy");
-    $sliderNumRows = mysql_num_rows($sqlSlider);
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active FROM slider WHERE active=1 $sliderOrderBy");
+    $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount=0;
 
     if ($sliderNumRows > 0) {
@@ -388,7 +388,7 @@ function getSlider($sliderType) {
             echo "<header id='myCarousel' class='carousel slide'>";
             //Wrapper for slides
             echo "<div class='carousel-inner'>";
-            while ($rowSlider = mysql_fetch_array($sqlSlider)) {
+            while ($rowSlider = mysqli_fetch_array($sqlSlider)) {
                 $sliderCount++;
 
                 if ($sliderCount==1) {
@@ -436,7 +436,7 @@ function getSlider($sliderType) {
         echo "</header>";
 
         } else if ($sliderType=="random") {
-        	$rowSlider = mysql_fetch_array($sqlSlider);
+        	$rowSlider = mysqli_fetch_array($sqlSlider);
             echo "<header id='myCarousel' class='carousel slide'>";
 
             echo "<div class='carousel-inner'>";
@@ -471,7 +471,7 @@ function getSlider($sliderType) {
             echo "</header>";
 
         } else {
-            $rowSlider = mysql_fetch_array($sqlSlider);
+            $rowSlider = mysqli_fetch_array($sqlSlider);
             $sliderLink = $rowSlider['link'];
             $sliderTitle = $rowSlider["title"];
             $sliderContent = $rowSlider["content"];
@@ -484,8 +484,8 @@ function getGeneralInfo(){
 	global $generalInfoContent;
 	global $generalInfoHeading;
 
-	$sqlGeneralinfo = mysql_query("SELECT heading, content FROM generalinfo");
-	$rowGeneralinfo = mysql_fetch_array($sqlGeneralinfo);
+	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo");
+	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 	if (!empty($rowGeneralinfo["content"])) {
 		$generalInfoContent = $rowGeneralinfo["content"];
@@ -503,8 +503,8 @@ function getFeatured(){
 	global $featuredImage;
 	global $featuredImageAlign;
 
-	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
-	$rowFeatured = mysql_fetch_array($sqlFeatured);
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
+	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	if (!empty($rowFeatured["heading"])) {
         $featuredHeading = $rowFeatured["heading"];

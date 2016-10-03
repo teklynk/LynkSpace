@@ -6,12 +6,12 @@ include 'includes/header.php';
 	//update table on submit
 	if (!empty($_POST)) {
 		$generalinfoUpdate = "UPDATE generalinfo SET heading='".$_POST["generalinfo_heading"]."', content='".$_POST["generalinfo_content"]."'";
-		mysql_query($generalinfoUpdate);
+		mysqli_query($db_conn, $generalinfoUpdate);
 		$pageMsg="<div class='alert alert-success'>The general info section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='generalinfo.php'\">×</button></div>";
 	}
 	
-	$sqlGeneralinfo= mysql_query("SELECT heading, content FROM generalinfo");
-	$row  = mysql_fetch_array($sqlGeneralinfo);
+	$sqlGeneralinfo= mysqli_query($db_conn, "SELECT heading, content FROM generalinfo");
+	$row  = mysqli_fetch_array($sqlGeneralinfo);
 ?>
    <div class="row">
 		<div class="col-lg-12">

@@ -12,7 +12,7 @@ if (isset($_SESSION["loggedIn"]) AND $_SESSION["session_hash"]==md5($_SESSION["u
 		$navWinChecked = $_GET["checked"];
 
 		$navUpdate = "UPDATE navigation SET win='".$navWinChecked."' WHERE id=".$navWinID." ";
-		mysql_query($navUpdate);
+		mysqli_query($db_conn, $navUpdate);
 
 		mysql_close($db_conn);
 

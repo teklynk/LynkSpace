@@ -69,23 +69,23 @@ if ($IPrange > '') {
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
   <?php
-	$sqlSetup = mysql_query("SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup");
-	$rowSetup = mysql_fetch_array($sqlSetup);
+	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup");
+	$rowSetup = mysqli_fetch_array($sqlSetup);
 	
-	$sqlFeatured = mysql_query("SELECT heading FROM featured");
-	$rowFeatured = mysql_fetch_array($sqlFeatured);
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading FROM featured");
+	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 	
-	$sqlAbout = mysql_query("SELECT heading FROM aboutus");
-	$rowAbout = mysql_fetch_array($sqlAbout);
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading FROM aboutus");
+	$rowAbout = mysqli_fetch_array($sqlAbout);
 
-	$sqlContact = mysql_query("SELECT heading FROM contactus");
-	$rowContact = mysql_fetch_array($sqlContact);
+	$sqlContact = mysqli_query($db_conn, "SELECT heading FROM contactus");
+	$rowContact = mysqli_fetch_array($sqlContact);
 	
-	$sqlGeneralinfo = mysql_query("SELECT heading FROM generalinfo");
-	$rowGeneralinfo = mysql_fetch_array($sqlGeneralinfo);
+	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading FROM generalinfo");
+	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 	
-	$sqlSocial = mysql_query("SELECT heading FROM socialmedia");
-	$rowSocial = mysql_fetch_array($sqlSocial);
+	$sqlSocial = mysqli_query($db_conn, "SELECT heading FROM socialmedia");
+	$rowSocial = mysqli_fetch_array($sqlSocial);
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
@@ -103,8 +103,8 @@ if ($IPrange > '') {
         }
 
         //get and build page list for TinyMCE
-        $sqlGetPages= mysql_query("SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
-        while ($rowGetPages = mysql_fetch_array($sqlGetPages)) {
+        $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+        while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId=$rowGetPages['id'];
             $getPageTitle=$rowGetPages['title'];
             $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";

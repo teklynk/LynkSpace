@@ -18,8 +18,8 @@ $writeline = "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>\n";
 fwrite($sitemapfile, $writeline);
 
 //gets pages from db
-$sqlpages = mysql_query("SELECT id, datetime FROM pages WHERE active=1 ORDER BY datetime DESC");
-while ($rowPages  = mysql_fetch_array($sqlpages)) {
+$sqlpages = mysqli_query($db_conn, "SELECT id, datetime FROM pages WHERE active=1 ORDER BY datetime DESC");
+while ($rowPages  = mysqli_fetch_array($sqlpages)) {
 	$pageId=$rowPages['id'];
 	$pageDate=$rowPages['datetime'];
 

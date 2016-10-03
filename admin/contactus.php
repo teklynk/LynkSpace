@@ -6,12 +6,12 @@ include 'includes/header.php';
 	//update table on submit
 	if (!empty($_POST)) {
 		$contactUpdate = "UPDATE contactus SET heading='".$_POST["contact_heading"]."', introtext='".$_POST["contact_introtext"]."', mapcode='".mysql_real_escape_string($_POST["contact_mapcode"])."', email='".$_POST["contact_email"]."', sendtoemail='".$_POST["contact_sendtoemail"]."', address='".$_POST["contact_address"]."', city='".$_POST["contact_city"]."', state='".$_POST["contact_state"]."', zipcode='".$_POST["contact_zipcode"]."', phone='".$_POST["contact_phone"]."', hours='".$_POST["contact_hours"]."'";
-		mysql_query($contactUpdate);
+		mysqli_query($db_conn, $contactUpdate);
 		$pageMsg="<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php'\">×</button></div>";
 	}
 	
-	$sqlContact = mysql_query("SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
-	$row  = mysql_fetch_array($sqlContact);
+	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
+	$row  = mysqli_fetch_array($sqlContact);
 ?>
 
    <div class="row">

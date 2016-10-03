@@ -10,13 +10,13 @@ include 'includes/header.php';
 		$userid=$_POST['user_id'];
 		$usersUpdate = "UPDATE users SET username='$username', password=password('$userpass'), level='1' WHERE id='$userid'";
 		//echo $usersUpdate;
-		mysql_query($usersUpdate);
+		mysqli_query($db_conn, $usersUpdate);
 
 		$pageMsg="<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 	}
 	
-	$sqlUsers= mysql_query("SELECT username, password, level, id FROM users");
-	$rowUsers= mysql_fetch_array($sqlUsers);
+	$sqlUsers= mysqli_query($db_conn, "SELECT username, password, level, id FROM users");
+	$rowUsers= mysqli_fetch_array($sqlUsers);
 ?>
    <div class="row">
 		<div class="col-lg-12">

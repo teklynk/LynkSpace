@@ -37,9 +37,13 @@ $pageMsg="";
 //Session timeout
 $sessionTimeout=30; //30mins
 
-//Establish db connection
-$db_conn = mysql_connect($db_servername, $db_username, $db_password);
-mysql_select_db($db_name, $db_conn);
+//establish db connection
+$db_conn = mysqli_connect($db_servername, $db_username, $db_password);
+mysqli_select_db($db_conn, $db_name);
+
+if (mysqli_connect_errno()) {
+     die(mysqli_connect_error());
+}
 
 //db connection is closed in includes/footer.php
 

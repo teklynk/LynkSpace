@@ -12,12 +12,12 @@ include 'includes/header.php';
 	//update table on submit
 	if (!empty($_POST)) {
 		$featuredUpdate = "UPDATE featured SET heading='".$_POST["featured_heading"]."', introtext='".$_POST["featured_introtext"]."', content='".$_POST["featured_content"]."', image='".$_POST["featured_image"]."', image_align='".$_POST["featured_image_align"]."' ";
-		mysql_query($featuredUpdate);
+		mysqli_query($db_conn, $featuredUpdate);
 		$pageMsg="<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php'\">×</button></div>";
 	}
 	
-	$sqlFeatured = mysql_query("SELECT heading, introtext, content, image, image_align FROM featured");
-	$row  = mysql_fetch_array($sqlFeatured);
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
+	$row  = mysqli_fetch_array($sqlFeatured);
 ?>
    <div class="row">
 		<div class="col-lg-12">
