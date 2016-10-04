@@ -11,6 +11,9 @@ $filename = '../db/bootstrap_business.sql';
 if (!file_exists($dbFileLoc)) {
    echo "$dbFileLoc does not exist";
 }
+if (!file_exists($filename)) {
+   echo "$filename does not exist";
+}
 
 	if (!empty($_POST)) {
 		// MySQL host
@@ -21,58 +24,56 @@ if (!file_exists($dbFileLoc)) {
 		$mysql_password = $_POST["dbpassword"];
 		// Database name
 		$mysql_database = $_POST["dbname"];
-		
-		// Connect to MySQL server
-		mysql_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysql_error());
-		// Select database
-		mysql_select_db($mysql_database) or die('Error selecting MySQL database: ' . mysql_error());
-		
+
+		//establish db connection
+		$db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password)or die('Error connecting to MySQL server: ' . mysqli_error());
+		mysqli_select_db($db_conn, $mysql_database)or die('Error selecting MySQL database: ' . mysqli_error());
+
 		// Temporary variable, used to store current query
 		$templine = '';
 		// Read in entire file
 		$lines = file($filename);
-	
+
 		// Loop through each line
 		foreach ($lines as $line) {
 			// Skip it if it's a comment
 			if (substr($line, 0, 2) == '--' || $line == '')
 		    continue;
-		
+
 			// Add this line to the current segment
 			$templine .= $line;
 			// If it has a semicolon at the end, it's the end of the query
 			if (substr(trim($line), -1, 1) == ';') {
 			    // Perform the query
-			    mysqli_query($db_conn, $templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysql_error() . '<br /><br />');
+			    mysqli_query($db_conn, $templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysqli_error() . '<br /><br />');
 			    // Reset temp variable to empty
 			    $templine = '';
 			}
 		}
-		
+
 		$userInsert = "INSERT INTO users (username, password) VALUES ('".$_POST["username"]."', password('$_POST[password]'))";
 		mysqli_query($db_conn, $userInsert);
-		
-		$dbfile = fopen($dbFileLoc, "w") or die("Unable to open dbconn.php file!");
 
-		$writeline = "<?php\n";
-		fwrite($dbfile, $writeline);
-		$writeline = "\$db_servername = '".$_POST['dbserver']."';\n";
-		fwrite($dbfile, $writeline);
-		$writeline = "\$db_username = '".$_POST['dbusername']."';\n";
-		fwrite($dbfile, $writeline);
-		$writeline = "\$db_password = '".$_POST['dbpassword']."';\n";
-		fwrite($dbfile, $writeline);
-		$writeline = "\$db_name = '".$_POST['dbname']."';\n";
-		fwrite($dbfile, $writeline);
-		$writeline = "?>";
-		fwrite($dbfile, $writeline);
+		//TODO: write connection info to dbconn.php. include dbconn.php in dbsetup.php which contains global variables. use dbsetup.php in the header instead of dbconn.php.
+        $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
-		fclose($dbfile);
+        $writeline = "<?php\n";
+        fwrite($dbfile, $writeline);
+        $writeline = "\$db_servername = '".$_POST['dbserver']."';\n";
+        fwrite($dbfile, $writeline);
+        $writeline = "\$db_username = '".$_POST['dbusername']."';\n";
+        fwrite($dbfile, $writeline);
+        $writeline = "\$db_password = '".$_POST['dbpassword']."';\n";
+        fwrite($dbfile, $writeline);
+        $writeline = "\$db_name = '".$_POST['dbname']."';\n";
+        fwrite($dbfile, $writeline);
+        $writeline = "?>";
+        fwrite($dbfile, $writeline);
 
-		rename("install.php","install.old"); //rename install page so that it can not be accessed after the initial install
-		unlink("install.php"); //delete install.php if renaming is not possible
+        fclose($dbfile);
 
-		echo "<script>window.location.href='index.php';</script>"; //redirect to login page
+        rename("install.php","install.old"); //rename install page so that it can not be accessed after the initial install
+        echo "<script>window.location.href='index.php';</script>"; //redirect to login page
 
 	}//the big IF
 ?>
@@ -106,15 +107,16 @@ if (!file_exists($dbFileLoc)) {
             <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
             <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
-			<h2 class="form-signin-heading">Create an Admin user</h2>
-        	<label for="username" class="sr-only">Username</label>
+						<h2 class="form-signin-heading">Create an Admin user</h2>
+        		<label for="username" class="sr-only">Username</label>
             <input class="form-control" type="text" name="username" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>
             <input class="form-control" type="text" name="password" placeholder="Password" required>
+
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         </form>
     </div>
 </div>
-<?php 
+<?php
     include 'includes/footer.php';
 ?>
