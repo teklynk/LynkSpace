@@ -209,6 +209,7 @@ function getTeam(){
 
 function getNav($navSection,$dropdown,$pull){
 	//EXAMPLE: getNav('Top','true','right')
+		global $db_conn;
     echo "<ul class='nav navbar-nav navbar-$pull'>";
 
 		if ($dropdown=="true"){
