@@ -1,10 +1,11 @@
-<?php 
+<?php
 function getPage(){
 	global $pageImage;
 	global $pageTitle;
 	global $pageContent;
 	global $pageImageAlign;
-    global $pageDisqus;
+  global $pageDisqus;
+	global $db_conn;
 
 	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
@@ -28,12 +29,12 @@ function getPage(){
 		    $pageContent = "This page is not available.";
 
 		}
-		
+
 	} else {
-		
+
         $pageTitle = "Page not found";
 		$pageContent = "This page is not available.";
-		
+
 	}
 }
 
@@ -42,6 +43,7 @@ function getAbout(){
 	global $aboutContent;
 	global $aboutImage;
 	global $aboutImageAlign;
+	global $db_conn;
 
 	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
@@ -74,6 +76,7 @@ function getContactInfo(){
 	global $contactHours;
 	global $contactFormSendToEmail;
 	global $contactFormMsg;
+	global $db_conn;
 
 	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
 	$rowContact = mysqli_fetch_array($sqlContact);
@@ -141,6 +144,7 @@ function getServices(){
 	global $servicesBlurb;
 	global $servicesCount;
 	global $servicesIcon;
+	global $db_conn;
 
     $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup");
     $rowServicesHeading = mysqli_fetch_array($sqlServicesHeading);
@@ -178,6 +182,7 @@ function getTeam(){
 	global $teamContent;
 	global $teamNumRows;
 	global $teamColWidth;
+	global $db_conn;
 
 	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
     $rowTeamHeading = mysqli_fetch_array($sqlTeamHeading);
@@ -189,7 +194,7 @@ function getTeam(){
 	}
 
     $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $teamNumRows = mysqli_num_rows($sqlTeam);	
+    $teamNumRows = mysqli_num_rows($sqlTeam);
 
     if ($teamNumRows==2) {
     	$teamColWidth=6;
@@ -204,6 +209,7 @@ function getTeam(){
 
 function getNav($navSection,$dropdown,$pull){
 	//EXAMPLE: getNav('Top','true','right')
+		global $db_conn;
     echo "<ul class='nav navbar-nav navbar-$pull'>";
 
 		if ($dropdown=="true"){
@@ -234,7 +240,7 @@ function getNav($navSection,$dropdown,$pull){
 				if ($rowNavLinks[4] != $tempLink) {
 					$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
 					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
-			
+
                     echo "<li class='$dropdown'>";
 						echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[8]." $dropdownCaret</a>";
 						echo "<ul class='$dropdownMenu'>";
@@ -267,6 +273,7 @@ function getSetup(){
 	global $setupHeadercode;
 	global $setupDisqus;
 	global $setupGoogleanalytics;
+	global $db_conn;
 
     $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
@@ -297,6 +304,7 @@ function getSocialMediaIcons($shape){
 	global $socialMediaHeading;
 	global $sqlSocialMedia;
 	global $rowSocialMedia;
+	global $db_conn;
 
 	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia");
 	$rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
@@ -327,7 +335,7 @@ function getSocialMediaIcons($shape){
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["linkedin"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-linkedin fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>"; 
+    //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
 }
 
 function getCustomers(){
@@ -338,6 +346,7 @@ function getCustomers(){
 	global $customerBlurb;
 	global $customerNumRows;
 	global $customerColWidth;
+	global $db_conn;
 
     $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
@@ -351,7 +360,7 @@ function getCustomers(){
 	}
 
     $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active FROM customers WHERE active=1 ORDER BY datetime DESC"); //While loop
-    $customerNumRows = mysqli_num_rows($sqlCustomers);	
+    $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     if ($customerNumRows==2) {
     	$customerColWidth=6;
@@ -371,6 +380,7 @@ function getSlider($sliderType) {
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;
+		global $db_conn;
 
 	if ($sliderType=="slide") {
 		$sliderOrderBy = "ORDER BY datetime DESC";
@@ -463,7 +473,7 @@ function getSlider($sliderType) {
 			}
 
             echo "</div>"; //.carousel-caption
-            
+
             echo "</div>"; //.item
 
             echo "</div>"; //.carousel-inner
@@ -483,6 +493,7 @@ function getSlider($sliderType) {
 function getGeneralInfo(){
 	global $generalInfoContent;
 	global $generalInfoHeading;
+	global $db_conn;
 
 	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo");
 	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
@@ -502,6 +513,7 @@ function getFeatured(){
 	global $featuredBlurb;
 	global $featuredImage;
 	global $featuredImageAlign;
+	global $db_conn;
 
 	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);

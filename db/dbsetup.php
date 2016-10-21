@@ -41,20 +41,16 @@ $sessionTimeout=30; //30mins
 $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
 mysqli_select_db($db_conn, $db_name);
 
-if (mysqli_connect_errno()) {
-     die(mysqli_connect_error());
+if (mysqli_connect_errno($db_conn)){
+  echo "Failed to connect to MySQL:" . mysqli_connect_error();
 }
 
 //db connection is closed in includes/footer.php
 
 //Error handling . Add debug=true to the querystring
 if (isset($_GET["debug"])) {
-	error_reporting(E_ALL | E_WARNING | E_NOTICE | E_STRICT | E_DEPRECATED);
-	ini_set('display_errors', TRUE);
-  error_reporting(1);
+  ini_set('display_errors', TRUE);
 } else {
-  error_reporting(E_ALL | E_WARNING | E_NOTICE | E_STRICT | E_DEPRECATED);
   ini_set('display_errors', FALSE);
-  error_reporting(0);
 }
 ?>
