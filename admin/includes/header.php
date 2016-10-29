@@ -90,6 +90,11 @@ if ($IPrange > '') {
   $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE id='".$_GET["loc_id"]."'");
   $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
+  if (!empty($_GET['loc_id'])){
+    $_SESSION['loc_id'] = $_GET['loc_id'];
+    $_SESSION['loc_name'] = $rowGetLocation['name'];
+  }
+
   $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations"); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
@@ -153,7 +158,7 @@ if (isset($_SESSION["loggedIn"])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="setup.php">Admin Panel <?php echo ' - ' . $rowGetLocation['name']; ?></a>
+                <a class="navbar-brand" href="setup.php">Admin Panel <?php echo ' - ' . $_SESSION['loc_name'] . $_SESSION['loc_id']; ?></a>
 
             </div>
             <!-- Top Menu Items -->

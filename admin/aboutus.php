@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -8,17 +8,23 @@ include 'includes/header.php';
 	} else {
 		$uploadMsg = "";
 	}
-
+	$sqlAbout= mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id='".$_SESSION['loc_id']."'");
+	$row  = mysqli_fetch_array($sqlAbout);
 	//update table on submit
 	if (!empty($_POST)) {
-		$aboutUpdate = "UPDATE aboutus SET heading='".$_POST["about_heading"]."', content='".$_POST["about_content"]."', image='".$_POST["about_image"]."', image_align='".$_POST["about_image_align"]."' ";
-		mysqli_query($db_conn, $aboutUpdate);
 
-		$pageMsg="<div class='alert alert-success'>The about section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php'\">×</button></div>";
+
+		if($row['loc_id'] == $_SESSION['loc_id']){
+			$aboutUpdate = "UPDATE aboutus SET heading='".$_POST["about_heading"]."', content='".$_POST["about_content"]."', image='".$_POST["about_image"]."', image_align='".$_POST["about_image_align"]."' WHERE loc_id='".$_SESSION['loc_id']."' ";
+			mysqli_query($db_conn, $aboutUpdate);
+		} else {
+			$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, loc_id) VALUES ('".$_POST["about_heading"]."', '".$_POST["about_content"]."', '".$_POST["about_image"]."', '".$_POST["about_image_align"]."', '".$_SESSION['loc_id']."')";
+			mysqli_query($db_conn, $aboutInsert);
+		}
+		$pageMsg="<div class='alert alert-success'>The about section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php?loc_id=".$_SESSION['loc_id']."'\">×</button></div>";
 	}
-	
-	$sqlAbout= mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
-	$row  = mysqli_fetch_array($sqlAbout);
+
+
 ?>
    <div class="row">
 		<div class="col-lg-12">
@@ -29,11 +35,11 @@ include 'includes/header.php';
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<?php 
+			<?php
 			if ($uploadMsg !="") {
 				echo $uploadMsg;
 			}
-			
+
 			if ($pageMsg !="") {
 				echo $pageMsg;
 			}
@@ -43,8 +49,8 @@ include 'includes/header.php';
 			} else {
 				$thumbNail = "../uploads/".$row["image"];
 			}
-			
-			//image algin status		
+
+			//image algin status
 			if ($row['image_align']=="left") {
 				$selAlignLeft="SELECTED";
 				$selAlignRight="";
@@ -103,7 +109,7 @@ include 'includes/header.php';
 				<div class="form-group">
 					<label>Text / HTML</label>
 					<textarea class="form-control input-sm tinymce" name="about_content" rows="20"><?php echo $row['content']; ?></textarea>
-					
+
 				</div>
 
 				<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
