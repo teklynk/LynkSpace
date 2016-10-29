@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
@@ -15,7 +15,7 @@ $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 <head>
 <?php
 //DB connection string and Global variables
-include '../db/dbsetup.php'; 
+include '../db/dbsetup.php';
 
 if ($IPrange > '') {
 	if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange) ){
@@ -39,19 +39,19 @@ if ($IPrange > '') {
 
     <!-- Admin Panel Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	
+
 	<!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" >
-	
+
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-	
+
 	<!-- Admin Panel Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- TinyMCE CDN -->
 	<script type="text/javascript" language="javascript"  src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-	
+
 	<!-- DataTables JavaScript CDN -->
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
@@ -71,21 +71,26 @@ if ($IPrange > '') {
   <?php
 	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
-	
+
 	$sqlFeatured = mysqli_query($db_conn, "SELECT heading FROM featured");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
-	
+
 	$sqlAbout = mysqli_query($db_conn, "SELECT heading FROM aboutus");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
 	$sqlContact = mysqli_query($db_conn, "SELECT heading FROM contactus");
 	$rowContact = mysqli_fetch_array($sqlContact);
-	
+
 	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading FROM generalinfo");
 	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
-	
+
 	$sqlSocial = mysqli_query($db_conn, "SELECT heading FROM socialmedia");
 	$rowSocial = mysqli_fetch_array($sqlSocial);
+
+  $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE id='".$_GET["loc_id"]."'");
+  $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
+
+  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations"); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
@@ -109,7 +114,7 @@ if ($IPrange > '') {
             $getPageTitle=$rowGetPages['title'];
             $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";
         }
-        
+
 	?>
     	<script type="text/javascript">
             $(document).ready(function () {
@@ -128,7 +133,7 @@ if ($IPrange > '') {
     			});
     		});
     	</script>
-	<?php 
+	<?php
 	}
 	?>
 </head>
@@ -148,7 +153,8 @@ if (isset($_SESSION["loggedIn"])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="setup.php">Admin Panel</a>
+                <a class="navbar-brand" href="setup.php">Admin Panel <?php echo ' - ' . $rowGetLocation['name']; ?></a>
+
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -165,6 +171,18 @@ if (isset($_SESSION["loggedIn"])) {
                     </ul>
                 </li>
              </ul>
+             <ul class="nav navbar-right top-nav">
+        <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-building"></i>  Locations <b class="caret"></b></a>
+                     <ul class="dropdown-menu dropdown-menu-lg">
+                       <?php while ($rowLocations  = mysqli_fetch_array($sqlLocations)) { ?>
+                         <li>
+                             <a href="?loc_id=<?php echo $rowLocations['id']; ?>" ><i class="fa fa-fw fa-gear"></i> <?php echo $rowLocations['name']; ?></a>
+                         </li>
+                         <?php } ?>
+                     </ul>
+                 </li>
+              </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
@@ -227,7 +245,7 @@ if (isset($_SESSION["loggedIn"])) {
 ?>
         <div id="page-wrapper">
             <div class="container-fluid">
-<?php	
+<?php
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
     if (basename($_SERVER['PHP_SELF'])!='install.php') {
@@ -236,7 +254,7 @@ if (basename($_SERVER['PHP_SELF'])!='index.php') {
             if (!$_SESSION["loggedIn"]) {
         	   echo "<script>window.location.href='index.php';</script>"; //this works.
         	}
-        
+
             echo "<script>window.location.href='index.php';</script>"; //this works.
         }
     }
