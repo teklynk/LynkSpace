@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -7,7 +7,7 @@ include 'includes/header.php';
 
 	//update table on submit
 	if (!empty($_POST)) {
-	
+
 		if (!empty($_POST["nav_newname"])) {
 			if (!empty($_POST["nav_newcat"]) AND $_POST["exist_cat"]=="") {
 				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST["nav_newcat"]."')";
@@ -32,7 +32,7 @@ include 'includes/header.php';
 			//echo $navNew;
 			mysqli_query($db_conn, $navNew);
 		}
-		
+
 		for($i=0; $i<$_POST["nav_count"]; $i++) {
 			if ($_POST["nav_cat"][$i]=="") {
 				$_POST["nav_cat"][$i]=29; //None
@@ -42,10 +42,10 @@ include 'includes/header.php';
 			//echo $navUpdate;
 			mysqli_query($db_conn, $navUpdate);
 		}
-		
+
 		$pageMsg="<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
 	}
-	
+
 ?>
 
 	<?php
@@ -80,11 +80,11 @@ include 'includes/header.php';
 
 	<div class="row">
 		<div class="col-lg-12">
-		<?php 
+		<?php
 		if ($pageMsg !="") {
 			echo $pageMsg;
 		}
-		
+
 		//get and built pages list
 		$pagesStr="";
 		$sqlNavPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
@@ -95,7 +95,7 @@ include 'includes/header.php';
 			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
 		}
 		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
-		
+
 		//get and built existing category list
 		$sqlNavExistCat= mysqli_query($db_conn, "SELECT id, name FROM category ORDER BY name");
 		//$catExistStr = "<option value=''>Custom</option>";
@@ -109,7 +109,7 @@ include 'includes/header.php';
 		$pageMsg="";
 		$delNavId = $_GET["deletenav"];
 		$delNavTitle = $_GET["deletename"];
-		
+
 		//Delete nav link
 		if ($_GET["deletenav"] AND $_GET["deletename"] AND !$_GET["confirm"]) {
 			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delNavTitle."? <a href='?section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
@@ -121,11 +121,11 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delNavTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
 			echo $deleteMsg;
 		}
-		
+
 		//delete category
 		$delCatId = $_GET["deletecat"];
 		$delCatTitle = $_GET["deletecatname"];
-		
+
 		//Delete category and set nav categories to zero
 		if ($_GET["deletecat"] AND $_GET["deletecatname"] AND !$_GET["confirm"]) {
 			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delCatTitle."? <a href='?section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
@@ -139,13 +139,13 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delCatTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
 			echo $deleteMsg;
 		}
-		
+
 		//rename category
 		$renameMsg="";
 		$renameConfirm="";
 		$renameCatId = $_GET["renamecat"];
 		$renameCatTitle = $_GET["newcatname"];
-		
+
 		//Rename category and set nav categories to new name
 		if ($_GET["renamecat"] AND $_GET["newcatname"] AND !$_GET["confirm"]) {
 			$renameMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename ".$renameCatTitle."? <a href='?section=".$getNavSection."&renamecat=".$renameCatId."&newcatname=".$renameCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
@@ -158,7 +158,7 @@ include 'includes/header.php';
 			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&'\">×</button></div>";
 			echo $renameMsg;
 		}
-		
+
 		?>
 			<form role="navForm" method="post" action="">
 				<fieldset>
@@ -173,7 +173,7 @@ include 'includes/header.php';
 					<div class="form-group">
 						<label for="exist_page">Existing Page</label>
 						<select class="form-control input-sm" name="exist_page" id="exist_page">
-							<?php 
+							<?php
 							echo "<option value=''>Custom</option>";
 							echo $pagesStr;
 							?>
@@ -194,9 +194,9 @@ include 'includes/header.php';
 					<div class="form-group">
 						<label for="exist_cat">Existing Category</label>
 						<select class="form-control input-sm" name="exist_cat" id="exist_cat">
-							<?php 
+							<?php
 							echo "<option value=''>Custom</option>";
-							echo $catExistStr; 
+							echo $catExistStr;
 							?>
 						</select>
 					</div>
@@ -217,7 +217,7 @@ include 'includes/header.php';
 					<?php
 					$navCount="";
 
-						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid FROM navigation WHERE section='$getNavSection' ORDER BY sort");					
+						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid FROM navigation WHERE section='$getNavSection' ORDER BY sort");
 						while ($rowNav  = mysqli_fetch_array($sqlNav)) {
 							$navId=$rowNav['id'];
 							$navName=$rowNav['name'];
@@ -246,7 +246,7 @@ include 'includes/header.php';
 							while ($rowNavCat  = mysqli_fetch_array($sqlNavCat)) {
 								$navCatId=$rowNavCat['id'];
 								$navCatName=$rowNavCat['name'];
-								
+
 								if ($navCatId==$navCat){
 									$isSelected="SELECTED";
 								} else {

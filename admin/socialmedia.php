@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -9,20 +9,20 @@ include 'includes/header.php';
 		mysqli_query($db_conn, $socialUpdate);
 		$pageMsg="<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php'\">×</button></div>";
 	}
-	
+
 	$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, twitter, linkedin, google, github, youtube FROM socialmedia");
 	$row  = mysqli_fetch_array($sqlSocial);
 ?>
    <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<?php echo $rowSocial["heading"]?>
+				Social Media
 			</h1>
 		</div>
 	</div>
 	 <div class="row">
 		<div class="col-lg-8">
-		<?php 
+		<?php
 		if ($pageMsg !="") {
 			echo $pageMsg;
 		}
