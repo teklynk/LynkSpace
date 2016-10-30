@@ -8,8 +8,8 @@ if(!defined('inc_access')) {
 <head>
 <meta charset="utf-8">
     <?php
-        include 'db/dbsetup.php'; //contains DB connection string and global variables
-        include 'core/functions.php'; //contains functions used on every template
+      include 'db/dbsetup.php'; //contains DB connection string and global variables
+      include 'core/functions.php'; //contains functions used on every template
     ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +30,7 @@ if(!defined('inc_access')) {
 
     <!-- Custom CSS -->
     <?php
+
     echo $customCss;
 
     echo $setupHeadercode;
@@ -37,19 +38,19 @@ if(!defined('inc_access')) {
     if (!empty($setupGoogleanalytics)) {
     ?>
         <script type="text/javascript">
-            
+
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', '<?php echo $setupGoogleanalytics;?>']);
             _gaq.push(['_trackPageview']);
-            
+
             (function() {
               var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
               ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-            
+
         </script>
-    <?php 
+    <?php
     }
     ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -77,7 +78,7 @@ if(!defined('inc_access')) {
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <?php 
+            <?php
                 getNav('Top','true','right');
             ?>
         </div>
@@ -85,6 +86,7 @@ if(!defined('inc_access')) {
     </div>
     <!-- /.container -->
 </nav>
-<?php 
-//include 'slider_inc.php'; 
+<?php
+getLocation();
+//include 'slider_inc.php';
 ?>

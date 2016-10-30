@@ -79,12 +79,12 @@ if ($IPrange > '') {
 
   if (!empty($_GET['loc_id'])){
     $_SESSION['loc_id'] = $_GET['loc_id'];
-    $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE id='".$_SESSION['loc_id']."'");
+    $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_SESSION['loc_id']."'");
     $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
     $_SESSION['loc_name'] = $rowGetLocation['name'];
   }
 
-  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations"); //part of while loop
+  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1"); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
@@ -170,7 +170,7 @@ if (isset($_SESSION["loggedIn"])) {
                     <form name="loc_menu" method="get">
                     <select class="selectpicker" data-container="navbar" data-width="auto" data-size="24" data-live-search="true" name="loc_id" id="loc_id">
                       <?php
-                      while ($rowLocations  = mysqli_fetch_array($sqlLocations)) {
+                      while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
                         if ($rowLocations['id'] == $_GET["loc_id"]){
                           $loc_menu_select = "selected";
