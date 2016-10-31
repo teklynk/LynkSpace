@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
@@ -15,7 +15,7 @@ $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 <head>
 <?php
 //DB connection string and Global variables
-include '../db/dbsetup.php'; 
+include '../db/dbsetup.php';
 
 if ($IPrange > '') {
 	if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange) ){
@@ -39,25 +39,30 @@ if ($IPrange > '') {
 
     <!-- Admin Panel Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	
+
 	<!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" >
-	
+    <!--Bootstrap-Selects-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" >
+
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-	
-	<!-- Admin Panel Bootstrap Core JavaScript -->
+
+	   <!-- Admin Panel Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--Bootstrap-Selects-JS-->
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.js"></script>
 
     <!-- TinyMCE CDN -->
 	<script type="text/javascript" language="javascript"  src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-	
+
 	<!-- DataTables JavaScript CDN -->
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/functions.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,23 +74,17 @@ if ($IPrange > '') {
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
   <?php
-	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup");
+	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup WHERE id='".$_SESSION['loc_id']."'");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
-	
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading FROM featured");
-	$rowFeatured = mysqli_fetch_array($sqlFeatured);
-	
-	$sqlAbout = mysqli_query($db_conn, "SELECT heading FROM aboutus");
-	$rowAbout = mysqli_fetch_array($sqlAbout);
 
-	$sqlContact = mysqli_query($db_conn, "SELECT heading FROM contactus");
-	$rowContact = mysqli_fetch_array($sqlContact);
-	
-	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading FROM generalinfo");
-	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
-	
-	$sqlSocial = mysqli_query($db_conn, "SELECT heading FROM socialmedia");
-	$rowSocial = mysqli_fetch_array($sqlSocial);
+  if (!empty($_GET['loc_id'])){
+    $_SESSION['loc_id'] = $_GET['loc_id'];
+    $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_SESSION['loc_id']."'");
+    $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
+    $_SESSION['loc_name'] = $rowGetLocation['name'];
+  }
+
+  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1"); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
@@ -109,7 +108,7 @@ if ($IPrange > '') {
             $getPageTitle=$rowGetPages['title'];
             $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";
         }
-        
+
 	?>
     	<script type="text/javascript">
             $(document).ready(function () {
@@ -128,7 +127,7 @@ if ($IPrange > '') {
     			});
     		});
     	</script>
-	<?php 
+	<?php
 	}
 	?>
 </head>
@@ -148,7 +147,8 @@ if (isset($_SESSION["loggedIn"])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="setup.php">Admin Panel</a>
+                <a class="navbar-brand">Admin Panel <?php echo ' - ' . $_SESSION['loc_name']; ?></a>
+
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -165,50 +165,80 @@ if (isset($_SESSION["loggedIn"])) {
                     </ul>
                 </li>
              </ul>
+             <ul class="nav navbar-right top-nav">
+                  <li style="margin-top:8px;">
+                    <form name="loc_menu" method="get">
+                    <select class="selectpicker" data-container="navbar" data-width="auto" data-size="24" data-live-search="true" name="loc_id" id="loc_id">
+                      <?php
+                      while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
+
+                        if ($rowLocations['id'] == $_GET["loc_id"]){
+                          $loc_menu_select = "selected";
+                        } else {
+                          $loc_menu_select = "";
+                        }
+
+                        echo "<option data-icon='fa fa-fw fa-building' value=".$rowLocations['id']." $loc_menu_select>".$rowLocations['name']."</option>";
+                      }
+                      ?>
+                    </select>
+                    <input type="submit" name="loc_submit" class="btn btn-default" value="Go">
+                    </form>
+                   </li>
+              </ul>
+
+              <?php
+
+              if (isset($_SESSION['loc_id'])) {
+                $setLocId = "loc_id=".$_SESSION['loc_id'];
+              } else {
+                $setLocId = "";
+              }
+              ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="setup.php"><i class="fa fa-fw fa-gear"></i> Setup</a>
+                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-gear"></i> Setup</a>
                     </li>
                     <li>
-                        <a href="slider.php"><i class="fa fa-fw fa-photo"></i> Image Slider</a>
+                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-photo"></i> Image Slider</a>
                     </li>
                     <li>
-                        <a href="featured.php"><i class="fa fa-fw fa-rocket"></i> Featured</a>
+                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket"></i> Featured</a>
                     </li>
                     <li>
-                        <a href="page.php"><i class="fa fa-fw fa-list"></i> Pages</a>
+                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Pages</a>
                     </li>
                     <li>
-                        <a href="navigation.php?section=<?php echo $navSections[0];?>"><i class="fa fa-fw fa-bars"></i> Navigation</a>
+                        <a href="navigation.php?section=<?php echo $navSections[0] ."&".$setLocId;?>"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                     </li>
                     <li>
-                        <a href="aboutus.php"><i class="fa fa-fw fa-file-text"></i> About Us</a>
+                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text"></i> About Us</a>
                     </li>
                     <li>
-                        <a href="contactus.php"><i class="fa fa-fw fa-building"></i> Contact Us</a>
+                        <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-building"></i> Contact Us</a>
                     </li>
                     <li>
-                        <a href="socialmedia.php"><i class="fa fa-fw fa-facebook-square"></i> Social Media</a>
+                        <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-facebook-square"></i> Social Media</a>
                     </li>
                     <li>
-                        <a href="generalinfo.php"><i class="fa fa-fw fa-file-text"></i> General Info</a>
+                        <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text"></i> General Info</a>
                     </li>
                     <li>
-                        <a href="services.php"><i class="fa fa-fw fa-list"></i> Services</a>
+                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Services</a>
                     </li>
                     <li>
-                        <a href="team.php"><i class="fa fa-fw fa-list"></i> Team</a>
+                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Team</a>
                     </li>
                     <li>
-                        <a href="customers.php"><i class="fa fa-fw fa-list"></i> Customers</a>
+                        <a href="customers.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Customers</a>
                     </li>
                     <li>
-                        <a href="uploads.php"><i class="fa fa-fw fa-folder"></i> Uploads</a>
+                        <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder"></i> Uploads</a>
                     </li>
                     <li>
-                        <a href="editor.php"><i class="fa fa-fw fa-css3"></i> Styles</a>
+                        <a href="editor.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-css3"></i> Styles</a>
                     </li>
                 </ul>
             </div>
@@ -227,7 +257,7 @@ if (isset($_SESSION["loggedIn"])) {
 ?>
         <div id="page-wrapper">
             <div class="container-fluid">
-<?php	
+<?php
 //Redirect user if session not set
 if (basename($_SERVER['PHP_SELF'])!='index.php') {
     if (basename($_SERVER['PHP_SELF'])!='install.php') {
@@ -236,7 +266,7 @@ if (basename($_SERVER['PHP_SELF'])!='index.php') {
             if (!$_SESSION["loggedIn"]) {
         	   echo "<script>window.location.href='index.php';</script>"; //this works.
         	}
-        
+
             echo "<script>window.location.href='index.php';</script>"; //this works.
         }
     }

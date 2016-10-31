@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -9,7 +9,7 @@ include 'includes/header.php';
 		mysqli_query($db_conn, $contactUpdate);
 		$pageMsg="<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php'\">×</button></div>";
 	}
-	
+
 	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
 	$row  = mysqli_fetch_array($sqlContact);
 ?>
@@ -17,13 +17,13 @@ include 'includes/header.php';
    <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<?php echo $rowContact["heading"]?>
+				Contact Us
 			</h1>
 		</div>
 	</div>
 	 <div class="row">
 		<div class="col-lg-8">
-		<?php 
+		<?php
 		if ($pageMsg !="") {
 			echo $pageMsg;
 		}
@@ -83,6 +83,6 @@ include 'includes/header.php';
 		</div>
 	</div>
 
-<?php 
+<?php
 include 'includes/footer.php';
 ?>

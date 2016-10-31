@@ -1,38 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/page.php?ref=33</loc>
-		<lastmod>2016-10-19 13:57:23</lastmod>
+		<loc>http://localhost/businessCMS/page.php?ref=33</loc>
+		<lastmod>2016-08-26 00:29:30</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/page.php?ref=28</loc>
-		<lastmod>2016-05-22 14:13:45</lastmod>
+		<loc>http://localhost/businessCMS/page.php?ref=28</loc>
+		<lastmod>2016-08-15 17:16:49</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/page.php?ref=34</loc>
+		<loc>http://localhost/businessCMS/page.php?ref=34</loc>
 		<lastmod>2015-07-25 22:24:41</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/index.php</loc>
+		<loc>http://localhost/businessCMS/index.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/about.php</loc>
+		<loc>http://localhost/businessCMS/about.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/team.php</loc>
+		<loc>http://localhost/businessCMS/team.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/services.php</loc>
+		<loc>http://localhost/businessCMS/services.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://linuxmint-vm/businessCMS/contact.php</loc>
+		<loc>http://localhost/businessCMS/contact.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 </urlset>

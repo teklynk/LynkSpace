@@ -257,3 +257,8 @@ ul.alert-dropdown {
 .td_small {
     width:100px;
 }
+
+.dropdown-menu-lg {
+    min-width: 250px !important;
+    min-height: 400px !important;
+}

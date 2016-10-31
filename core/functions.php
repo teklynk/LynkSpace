@@ -1,4 +1,26 @@
 <?php
+function getLocation(){
+	global $locationName;
+	global $locationActive;
+	global $locationID;
+	global $db_conn;
+
+	if (ctype_digit($_GET["loc_id"])){
+
+		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_GET['loc_id']."'");
+		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
+
+		if ($rowGetLocation['active']=1 AND $_GET['loc_id']=$rowGetLocation['id']) {
+			$locationName = $rowGetLocation['name'];
+			$locationActive = $rowGetLocation["active"];
+			$locationID = $rowGetLocation["id"];
+		} else {
+			header('Location: index.php?loc_id=1');
+		}
+
+	}
+}
+
 function getPage(){
 	global $pageImage;
 	global $pageTitle;
@@ -21,18 +43,18 @@ function getPage(){
 			$pageTitle = $rowPage['title'];
 			$pageContent = $rowPage["content"];
 			$pageImageAlign = $rowPage["image_align"];
-            $pageDisqus = $rowPage["disqus"];
+      $pageDisqus = $rowPage["disqus"];
 
 		} else {
 
-            $pageTitle = "Page not found";
-		    $pageContent = "This page is not available.";
+      $pageTitle = "Page not found";
+		  $pageContent = "This page is not available.";
 
 		}
 
 	} else {
 
-        $pageTitle = "Page not found";
+    $pageTitle = "Page not found";
 		$pageContent = "This page is not available.";
 
 	}
@@ -45,7 +67,7 @@ function getAbout(){
 	global $aboutImageAlign;
 	global $db_conn;
 
-	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']."");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
 	if (!empty($rowAbout["heading"])){
@@ -153,7 +175,7 @@ function getServices(){
 
     if (!empty($rowServicesHeading['servicescontent'])) {
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
-	}
+		}
 
     $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
@@ -191,7 +213,7 @@ function getTeam(){
 
     if (!empty($rowTeamHeading['teamcontent'])) {
     	$teamBlurb = $rowTeamHeading['teamcontent'];
-	}
+		}
 
     $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
@@ -275,7 +297,7 @@ function getSetup(){
 	global $setupGoogleanalytics;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']."");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup["description"];
@@ -355,7 +377,7 @@ function getCustomers(){
 	    $customerHeading = $rowCustomerHeading['customersheading'];
 	}
 
-    if (!empty($rowCustomerHeading['customerscontent'])) {
+  if (!empty($rowCustomerHeading['customerscontent'])) {
     	$customerBlurb= $rowCustomerHeading['customerscontent'];
 	}
 
@@ -515,7 +537,7 @@ function getFeatured(){
 	global $featuredImageAlign;
 	global $db_conn;
 
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=".$_GET['loc_id']."");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	if (!empty($rowFeatured["heading"])) {

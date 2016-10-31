@@ -1,34 +1,44 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
-	
+
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, loc_id FROM featured WHERE loc_id=".$_GET['loc_id']."");
+	$rowFeatured = mysqli_fetch_array($sqlFeatured);
+
+	//update table on submit
+	if (!empty($_POST["featured_heading"])) {
+
+		if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
+			//Do Update
+			$featuredUpdate = "UPDATE featured SET heading='".$_POST["featured_heading"]."', introtext='".$_POST["featured_introtext"]."', content='".$_POST["featured_content"]."', image='".$_POST["featured_image"]."', image_align='".$_POST["featured_image_align"]."' WHERE loc_id=".$_GET['loc_id']." ";
+			mysqli_query($db_conn, $featuredUpdate);
+		} else {
+			//Do Insert
+			echo "Insert";
+			$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('".$_POST["featured_heading"]."', '".$_POST["featured_introtext"]."', '".$_POST["featured_content"]."', '".$_POST["featured_image"]."', '".$_POST["featured_image_align"]."', ".$_GET['loc_id'].")";
+			mysqli_query($db_conn, $featuredInsert);
+		}
+
+		$pageMsg="<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	}
+
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 		$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
 	} else {
 		$uploadMsg = "";
 	}
-	
-	//update table on submit
-	if (!empty($_POST)) {
-		$featuredUpdate = "UPDATE featured SET heading='".$_POST["featured_heading"]."', introtext='".$_POST["featured_introtext"]."', content='".$_POST["featured_content"]."', image='".$_POST["featured_image"]."', image_align='".$_POST["featured_image_align"]."' ";
-		mysqli_query($db_conn, $featuredUpdate);
-		$pageMsg="<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php'\">×</button></div>";
-	}
-	
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
-	$row  = mysqli_fetch_array($sqlFeatured);
 ?>
    <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<?php echo $rowFeatured["heading"]?>
+				Featured
 			</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-		<?php 
+		<?php
 		if ($uploadMsg !="") {
 			echo $uploadMsg;
 		}
@@ -39,10 +49,10 @@ include 'includes/header.php';
 		if ($row["image"]=="") {
 			$thumbNail = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$thumbNail = "../uploads/".$row["image"];
+			$thumbNail = "../uploads/".$rowFeatured["image"];
 		}
-		
-		//image algin status		
+
+		//image algin status
 		if ($row['image_align']=="left") {
 			$selAlignLeft="SELECTED";
 			$selAlignRight="";
@@ -54,11 +64,11 @@ include 'includes/header.php';
 		<form role="landingForm" method="post" action="" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm" name="featured_heading" value="<?php echo $row['heading']; ?>"  placeholder="Welcome">
+				<input class="form-control input-sm" name="featured_heading" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome">
 			</div>
 			<div class="form-group">
 				<label>Intro Title</label>
-				<input class="form-control input-sm" name="featured_introtext" value="<?php echo $row['introtext']; ?>" placeholder="John Doe">
+				<input class="form-control input-sm" name="featured_introtext" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
 			</div>
 			<hr/>
 			<div class="form-group">
@@ -102,14 +112,14 @@ include 'includes/header.php';
 			<hr/>
 	        <div class="form-group">
 				<label>Text / HTML</label>
-				<textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $row['content']; ?></textarea>
+				<textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
 			</div>
 
-			<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+			<button type="submit" name="featured_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 		</div>
 		</form>
 	</div>
-<?php 
+<?php
 include 'includes/footer.php';
 ?>

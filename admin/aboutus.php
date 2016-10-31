@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -9,43 +9,49 @@ include 'includes/header.php';
 		$uploadMsg = "";
 	}
 
-	//update table on submit
-	if (!empty($_POST)) {
-		$aboutUpdate = "UPDATE aboutus SET heading='".$_POST["about_heading"]."', content='".$_POST["about_content"]."', image='".$_POST["about_image"]."', image_align='".$_POST["about_image_align"]."' ";
-		mysqli_query($db_conn, $aboutUpdate);
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']."");
+	$rowAbout = mysqli_fetch_array($sqlAbout);
 
-		$pageMsg="<div class='alert alert-success'>The about section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php'\">×</button></div>";
+	//update table on submit
+	if (!empty($_POST["about_heading"])) {
+		if($rowAbout['loc_id'] == $_GET['loc_id']){
+			//Do Update
+			$aboutUpdate = "UPDATE aboutus SET heading='".$_POST["about_heading"]."', content='".$_POST["about_content"]."', image='".$_POST["about_image"]."', image_align='".$_POST["about_image_align"]."' WHERE loc_id=".$_GET['loc_id']." ";
+			mysqli_query($db_conn, $aboutUpdate);
+		} else {
+			//Do Insert
+			$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, loc_id) VALUES ('".$_POST["about_heading"]."', '".$_POST["about_content"]."', '".$_POST["about_image"]."', '".$_POST["about_image_align"]."', ".$_GET['loc_id'].")";
+			mysqli_query($db_conn, $aboutInsert);
+		}
+		$pageMsg="<div class='alert alert-success'>The about section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
-	
-	$sqlAbout= mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
-	$row  = mysqli_fetch_array($sqlAbout);
 ?>
    <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<?php echo $rowAbout["heading"]?>
+				About Us
 			</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<?php 
+			<?php
 			if ($uploadMsg !="") {
 				echo $uploadMsg;
 			}
-			
+
 			if ($pageMsg !="") {
 				echo $pageMsg;
 			}
 
-			if ($row["image"]=="") {
+			if ($rowAbout["image"]=="") {
 				$thumbNail = "http://placehold.it/140x100&text=No Image";
 			} else {
-				$thumbNail = "../uploads/".$row["image"];
+				$thumbNail = "../uploads/".$rowAbout["image"];
 			}
-			
-			//image algin status		
-			if ($row['image_align']=="left") {
+
+			//image algin status
+			if ($rowAbout['image_align']=="left") {
 				$selAlignLeft="SELECTED";
 				$selAlignRight="";
 			} else {
@@ -54,11 +60,11 @@ include 'includes/header.php';
 			}
 
 			?>
-			<form role="aboutForm" method="post" action="" enctype="multipart/form-data">
+			<form role="aboutForm" name="aboutForm" method="post" action="" enctype="multipart/form-data">
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="about_heading" value="<?php echo $row['heading']; ?>" placeholder="About Me">
+					<input class="form-control input-sm" name="about_heading" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me">
 				</div>
 				<hr/>
 				<div class="form-group">
@@ -102,11 +108,11 @@ include 'includes/header.php';
 				<hr/>
 				<div class="form-group">
 					<label>Text / HTML</label>
-					<textarea class="form-control input-sm tinymce" name="about_content" rows="20"><?php echo $row['content']; ?></textarea>
-					
+					<textarea class="form-control input-sm tinymce" name="about_content" rows="20"><?php echo $rowAbout['content']; ?></textarea>
+
 				</div>
 
-				<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
+				<button type="submit" name="aboutus_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i>Reset</button>
 
 			</form>
