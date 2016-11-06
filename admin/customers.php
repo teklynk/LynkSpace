@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
@@ -14,8 +14,8 @@ include 'includes/header.php';
 		$pagePreviewId=$_GET["preview"];
 		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, image, name, link FROM customers WHERE id='$pagePreviewId'");
 		$row  = mysqli_fetch_array($sqlcustomerPreview);
-			
-			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";			
+
+			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 			echo "<div class='col-lg-12'>";
 			if ($row["name"]>""){
 				echo "<h4>".$row['name']."</h4>";
@@ -32,7 +32,7 @@ include 'includes/header.php';
    <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                <?php echo $rowSetup["customersheading"]?>
+                Customers
             </h1>
         </div>
     </div>
@@ -42,22 +42,22 @@ include 'includes/header.php';
 
 	if ($_GET["newcustomer"] OR $_GET["editcustomer"]) {
 		$customerMsg="";
-		
+
 		//Update existing customer
 		if ($_GET["editcustomer"]) {
 			$thecustomerId = $_GET["editcustomer"];
 			$customerLabel = "Edit Customer Name";
-			
+
 			//update data on submit
 			if (!empty($_POST["customer_name"])) {
 				$customerUpdate = "UPDATE customers SET name='".$_POST["customer_name"]."', image='".$_POST["customer_image"]."', link='".$_POST["customer_link"]."', active=".$_POST["customer_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId'";
 				mysqli_query($db_conn, $customerUpdate);
 				$customerMsg="<div class='alert alert-success'>The customer ".$_POST["customer_name"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			}
-			
+
 			$sqlcustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active, datetime FROM customers WHERE id='$thecustomerId'");
 			$row  = mysqli_fetch_array($sqlcustomer);
-			
+
 		//Create new customer
 		} else if ($_GET["newcustomer"]) {
 			$customerLabel = "New Customer Name";
@@ -68,19 +68,19 @@ include 'includes/header.php';
 				//echo $customerInsert;
 				$customerMsg="<div class='alert alert-success'>The customer ".$_POST["customer_name"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			}
-		} 
-        
+		}
+
 		//alert messages
 		if ($uploadMsg !="") {
 			echo $uploadMsg;
 		}
-		
+
 		if ($customerMsg !="") {
 			echo $customerMsg;
 		}
-		
-		if ($_GET["editcustomer"]){ 
-			//active status		
+
+		if ($_GET["editcustomer"]){
+			//active status
 			if ($row['active']==1) {
 				$selActive1="SELECTED";
 				$selActive0="";
@@ -149,7 +149,7 @@ include 'includes/header.php';
         <div class="form-group">
 			<span><?php if($_GET["editcustomer"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
 		</div>
-		
+
 		<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
@@ -164,7 +164,7 @@ include 'includes/header.php';
 		$delcustomerName = $_GET["deletename"];
 		$movecustomerId = $_GET["movecustomer"];
 		$movecustomerName = $_GET["movename"];
-		
+
 		//delete customer
 		if ($_GET["deletecustomer"] AND $_GET["deletename"] AND !$_GET["confirm"]) {
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delcustomerName."? <a href='?deletecustomer=".$delcustomerId."&deletename=".$delcustomerName."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
@@ -176,21 +176,21 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-success'>".$delcustomerName." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
-		
+
 	//move customer to top of list
     if (($_GET["movecustomer"] AND $_GET["movename"])) {
         $customerDateUpdate = "UPDATE customers SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movecustomerId'";
         mysqli_query($db_conn, $customerDateUpdate);
         $customerMsg="<div class='alert alert-success'>".$movecustomerName." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
     }
-		
+
     //update heading on submit
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET customersheading='".$_POST["customer_heading"]."', customerscontent='".$_POST["main_content"]."'";
         mysqli_query($db_conn, $setupUpdate);
         $customerMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php'\">×</button></div>";
     }
-		
+
     $sqlSetup = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
 	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
@@ -227,7 +227,7 @@ include 'includes/header.php';
 	<button type="button" class="btn btn-default" onclick="window.location='?newcustomer=true';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Customer</button>
 		<h2></h2>
 		<div class="table-responsive">
-    <?php 
+    <?php
 		if ($customerMsg !="") {
 			echo $customerMsg;
 		}
@@ -250,7 +250,7 @@ include 'includes/header.php';
 					</tr>
 				</thead>
 				<tbody>
-        		<?php 
+        		<?php
 					$sqlcustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active FROM customers ORDER BY datetime DESC");
 					while ($row  = mysqli_fetch_array($sqlcustomer)) {
 						$customerId=$row['id'];
