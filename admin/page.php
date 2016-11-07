@@ -165,8 +165,10 @@ if ($_GET["preview"]>""){
 		$sqlSetup = mysqli_query($db_conn, "SELECT disqus, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']);
 		$rowSetup = mysqli_fetch_array($sqlSetup);
 
+// Hide Disqus option if disqus is not enabled on Setup page.
 		if (empty($rowSetup['disqus'])){
-			$_POST["page_disqus"] = 0;
+			echo "<input type='hidden' name='page_disqus' value='0'>";
+		} else {
 		?>
 		<div class="form-group">
             <label>Allow Comments (Disqus)</label>
