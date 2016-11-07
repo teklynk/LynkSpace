@@ -29,7 +29,7 @@ if ($_GET["preview"]>""){
 <?php
 
 	if ($_GET["newpage"] OR $_GET["editpage"]) {
-		//Upload function
+		// Upload function
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$pageMsg="";
 
@@ -39,7 +39,7 @@ if ($_GET["preview"]>""){
 			$uploadMsg = "";
 		}
 
-		//Update existing page
+		// Update existing page
 		if ($_GET["editpage"]) {
 			$thePageId = $_GET["editpage"];
 			$pageLabel = "Edit Page Title";

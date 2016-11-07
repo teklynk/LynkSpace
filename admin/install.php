@@ -25,7 +25,7 @@ if (!file_exists($filename)) {
 		// Database name
 		$mysql_database = $_POST["dbname"];
 
-		//establish db connection
+		// establish db connection
 		$db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password)or die('Error connecting to MySQL server: ' . mysqli_error());
 		mysqli_select_db($db_conn, $mysql_database)or die('Error selecting MySQL database: ' . mysqli_error());
 
@@ -54,7 +54,6 @@ if (!file_exists($filename)) {
 		$userInsert = "INSERT INTO users (username, password) VALUES ('".$_POST["username"]."', password('$_POST[password]'))";
 		mysqli_query($db_conn, $userInsert);
 
-		//TODO: write connection info to dbconn.php. include dbconn.php in dbsetup.php which contains global variables. use dbsetup.php in the header instead of dbconn.php.
         $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
         $writeline = "<?php\n";
@@ -72,10 +71,10 @@ if (!file_exists($filename)) {
 
         fclose($dbfile);
 
-        rename("install.php","install.old"); //rename install page so that it can not be accessed after the initial install
-        echo "<script>window.location.href='index.php';</script>"; //redirect to login page
+        rename("install.php","install.old"); // rename install page so that it can not be accessed after the initial install
+        echo "<script>window.location.href='index.php';</script>"; // redirect to login page
 
-	}//the big IF
+	}// the big IF
 ?>
 <style>
 	html, body {
