@@ -8,7 +8,7 @@ include 'includes/header.php';
 		if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
 			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		} else {
-			//Delete the file
+			//Delete the file if it does meet the fileExt rule
 			unlink($target_file);
 			$uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
@@ -81,8 +81,10 @@ $(document).ready(function() {
 								if ($file==="Thumbs.db") continue;
 								if ($file===".DS_Store") continue;
 								if ($file==="index.html") continue;
+
 								$count++;
 								$modDate = date('m-d-Y, H:i:s',filemtime($target_dir.$file));
+
 								echo "<tr data-index='".$count."'>
 								<td><a href='#' onclick=\"showMyModal('$file', '$target_dir$file')\" title='Preview'>".$file."</a></td>
 								<td class='col-xs-3'>".$modDate."</td>
@@ -118,5 +120,5 @@ $(document).ready(function() {
 </div><!-- /.modal -->
 
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

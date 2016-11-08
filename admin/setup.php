@@ -106,5 +106,5 @@ if (!empty($_POST["site_title"])) {
 		</div>
 	</div>
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

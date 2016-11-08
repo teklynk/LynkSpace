@@ -17,7 +17,8 @@ $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 //DB connection string and Global variables
 include '../db/dbsetup.php';
 
-if ($IPrange > '') {
+//IP Range is set in dbsetup
+if ($IPrange <> '') {
 	if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange) ){
 		die('Permission denied'); //Do not execute any more code on the page
 	}
@@ -48,7 +49,7 @@ if ($IPrange > '') {
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 
-	   <!-- Admin Panel Bootstrap Core JavaScript -->
+    <!-- Admin Panel Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!--Bootstrap-Selects-JS-->
@@ -79,8 +80,10 @@ if ($IPrange > '') {
 
   if (!empty($_GET['loc_id'])){
     $_SESSION['loc_id'] = $_GET['loc_id'];
+
     $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_SESSION['loc_id']."'");
     $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
+
     $_SESSION['loc_name'] = $rowGetLocation['name'];
   }
 
@@ -89,6 +92,7 @@ if ($IPrange > '') {
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
         if ($handle = opendir($image_dir)) {
+
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
                 if ('..' === $imgfile) continue;
@@ -98,6 +102,7 @@ if ($IPrange > '') {
 
                 $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$imgfile."'},";
             }
+
             closedir($handle);
         }
 
@@ -135,7 +140,7 @@ if ($IPrange > '') {
 
     <div id="wrapper">
 <?php
-if (isset($_SESSION["loggedIn"])) {
+    if (isset($_SESSION["loggedIn"])) {
 ?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -172,7 +177,7 @@ if (isset($_SESSION["loggedIn"])) {
                       <?php
                       while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
-                        if ($rowLocations['id'] == $_GET["loc_id"]){
+                        if ($rowLocations['id'] == $_GET["loc_id"]) {
                           $loc_menu_select = "selected";
                         } else {
                           $loc_menu_select = "";
@@ -245,30 +250,30 @@ if (isset($_SESSION["loggedIn"])) {
             <!-- /.navbar-collapse -->
         </nav>
 <?php
-} else {
-    //clear all session variables
-    unset($_SESSION["user_id"]);
-    unset($_SESSION["user_name"]);
-    unset($_SESSION["timeout"]);
-    unset($_SESSION["loggedIn"]);
-    unset($_SESSION["file_referer"]);
-    unset($_SESSION["session_hash"]);
-}
-?>
-        <div id="page-wrapper">
-            <div class="container-fluid">
-<?php
-//Redirect user if session not set
-if (basename($_SERVER['PHP_SELF'])!='index.php') {
-    if (basename($_SERVER['PHP_SELF'])!='install.php') {
-        if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //session timeout
+    } else {
+        //clear all session variables
+        unset($_SESSION["user_id"]);
+        unset($_SESSION["user_name"]);
+        unset($_SESSION["timeout"]);
+        unset($_SESSION["loggedIn"]);
+        unset($_SESSION["file_referer"]);
+        unset($_SESSION["session_hash"]);
+    }
 
-            if (!$_SESSION["loggedIn"]) {
-        	   echo "<script>window.location.href='index.php';</script>"; //this works.
-        	}
+    echo "<div id='page-wrapper'>";
+    echo "<div class='container-fluid'>";
 
-            echo "<script>window.location.href='index.php';</script>"; //this works.
+    //Redirect user if session not set or has expired. sessionTimeout is set in dbsetup.
+    if (basename($_SERVER['PHP_SELF'])!='index.php') {
+        if (basename($_SERVER['PHP_SELF'])!='install.php') {
+            if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //session timeout
+
+                if (!$_SESSION["loggedIn"]) {
+                   echo "<script>window.location.href='index.php';</script>"; //this works.
+                }
+
+                echo "<script>window.location.href='index.php';</script>"; //this works.
+            }
         }
     }
-}
 ?>

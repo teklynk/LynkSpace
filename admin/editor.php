@@ -49,7 +49,8 @@ include 'includes/header.php';
 					?>
 				</span>
 			</div>
-			<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+
+			<button type="submit" name="edit_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 		</form>

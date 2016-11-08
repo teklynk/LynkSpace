@@ -8,24 +8,26 @@ if ($_GET["preview"]>""){
 	$slidePreviewId=$_GET["preview"];
 	$sqlslidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
 	$row  = mysqli_fetch_array($sqlslidePreview);
+
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 		echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
 		echo "<p>".$row['content']."</p>";
+
 		if ($row["link"]>0){
 			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$row['link']."' target='_blank'>Page Link</a></p>";
 		}
 }
 ?>
 
-   <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Image Slider
-            </h1>
-        </div>
-    </div>
 	<div class="row">
-		<div class="col-lg-12">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Image Slider
+		</h1>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-12">
 <?php
 
 	if ($_GET["newslide"] OR $_GET["editslide"]) {
@@ -42,7 +44,6 @@ if ($_GET["preview"]>""){
 		if ($_GET["editslide"]) {
 			$theslideId = $_GET["editslide"];
 			$slideLabel = "Edit Slide Title";
-
 
 			//update data on submit
 			if (!empty($_POST["slide_title"])) {
@@ -77,6 +78,7 @@ if ($_GET["preview"]>""){
 		//get and built pages list
 		$sqlNavPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
 		$pagesStr = "<option value=''>Custom</option>";
+
 		while ($rowNavPages = mysqli_fetch_array($sqlNavPages)) {
 			$navPageId=$rowNavPages['id'];
 			$navPageTitle=$rowNavPages['title'];
@@ -133,11 +135,13 @@ if ($_GET["preview"]>""){
 							if ($file==="Thumbs.db") continue;
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
+
 							if ($file===$row['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
 							}
+
 							echo "<option value=".$file." $imageCheck>".$file."</option>";
 						}
 						closedir($handle);
@@ -156,6 +160,7 @@ if ($_GET["preview"]>""){
 					while ($rowSliderLink = mysqli_fetch_array($sqlSliderLink)) {
 						$sliderLinkId=$rowSliderLink['id'];
 						$sliderLinkTitle=$rowSliderLink['title'];
+
 						if (ctype_digit($row['link'])){
 							if ($sliderLinkId===$row['link']){
 								$isSelected="SELECTED";
@@ -163,6 +168,7 @@ if ($_GET["preview"]>""){
 								$isSelected="";
 							}
 						}
+
 						$pagesStr = $pagesStr . "<option value=".$sliderLinkId." ".$isSelected.">".$sliderLinkTitle."</option>";
 					}
 
@@ -180,7 +186,7 @@ if ($_GET["preview"]>""){
         <div class="form-group">
 			<span><?php if($_GET["editslide"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
 		</div>
-		<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+		<button type="submit" name="slider_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 	</form>
@@ -197,12 +203,15 @@ if ($_GET["preview"]>""){
 
 		//delete slide
 		if ($_GET["deleteslide"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delslideTitle."? <a href='?deleteslide=".$delslideId."&deletetitle=".$delslideTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			echo $deleteMsg;
+
 		} elseif ($_GET["deleteslide"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete slide after clicking Yes
 			$slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
 			mysqli_query($db_conn, $slideDelete);
+
 			$deleteMsg="<div class='alert alert-success'>".$delslideTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -211,6 +220,7 @@ if ($_GET["preview"]>""){
 		if (($_GET["moveslide"] AND $_GET["movetitle"])) {
 			$slidesDateUpdate = "UPDATE slider SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveslideId'";
 			mysqli_query($db_conn, $slidesDateUpdate);
+
 			$slideMsg="<div class='alert alert-success'>".$moveslideTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 		}
 
@@ -218,11 +228,12 @@ if ($_GET["preview"]>""){
 		if (!empty($_POST["main_heading"])) {
 			$setupUpdate = "UPDATE setup SET sliderheading='".$_POST["main_heading"]."'";
 			mysqli_query($db_conn, $setupUpdate);
+
 			$slideMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 		}
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading FROM setup");
-		$rowSetup  = mysqli_fetch_array($sqlSetup);
+	$sqlSetup = mysqli_query($db_conn, "SELECT sliderheading FROM setup");
+	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -263,58 +274,60 @@ if ($_GET["preview"]>""){
 			echo $slideMsg;
 		}
 
-			echo "<form role='portfolioForm' method='post' action=''>
-            <div class='form-group'>
-                <label>Heading</label>
-                <input class='form-control input-sm' name='main_heading' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
-            </div>
-			<table class='table table-bordered table-hover table-striped'>
-				<thead>
-					<tr>
-						<th>Slide Title</th>
-						<th>Status</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>";
+		echo "<form role='portfolioForm' method='post' action=''>
+		<div class='form-group'>
+		<label>Heading</label>
+		<input class='form-control input-sm' name='main_heading' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
+		</div>
+		<table class='table table-bordered table-hover table-striped'>
+		<thead>
+		<tr>
+		<th>Slide Title</th>
+		<th>Status</th>
+		<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody>";
 
-					$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
-					while ($row  = mysqli_fetch_array($sqlslides)) {
-						$slideId=$row['id'];
-						$slideTitle=$row['title'];
-						$slideTumbnail=$row['image'];
-						$slideContent=$row['content'];
-						$slideActive=$row['active'];
-						if ($row['active']==0){
-							$isActive="<i style='color:red;'>(Draft)</i>";
-						} else {
-							$isActive="";
-						}
-						echo "<tr>
-						<td><a href='?editslide=$slideId' title='Edit'>".$slideTitle."</a></td>
-						<td class='col-xs-1'>
-						<span>".$isActive."</span>
-						</td>
-						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button>
-						</td>
-						</tr>";
-					}
+		$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
+		while ($row  = mysqli_fetch_array($sqlslides)) {
+			$slideId=$row['id'];
+			$slideTitle=$row['title'];
+			$slideTumbnail=$row['image'];
+			$slideContent=$row['content'];
+			$slideActive=$row['active'];
 
-				echo "</tbody>
-			</table>
-            <button type='submit' class='btn btn-default'><i class='fa fa-fw fa-save'></i> Submit</button>
-			<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-refresh'></i> Reset</button>
-			</form>
+			if ($row['active']==0){
+				$isActive="<i style='color:red;'>(Draft)</i>";
+			} else {
+				$isActive="";
+			}
+
+			echo "<tr>
+			<td><a href='?editslide=$slideId' title='Edit'>".$slideTitle."</a></td>
+			<td class='col-xs-1'>
+			<span>".$isActive."</span>
+			</td>
+			<td class='col-xs-2'>
+			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
+			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+			</td>
+			</tr>";
+		}
+
+		echo "</tbody>
+		</table>
+		<button type='submit' class='btn btn-default'><i class='fa fa-fw fa-save'></i> Submit</button>
+		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-refresh'></i> Reset</button>
+		</form>
 		</div>";
 
 	} //end of long else
 
-		echo "</div>
+	echo "</div>
 	</div>
 	<p></p>";
 
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

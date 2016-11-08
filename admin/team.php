@@ -17,28 +17,32 @@ include 'includes/header.php';
 
 			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 			echo "<div class='col-lg-12'>";
+
 			if ($row["image"]>""){
 				echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p>";
 			}
+
 			if ($row["name"]>""){
 				echo "<h4>".$row['name']."</h4>";
 			}
+
 			if ($row["title"]>""){
 				echo "<p>".$row['title']."</p>";
 			}
+
 			echo "<p>".$row['content']."</p>";
 			echo "</div>";
 	}
 ?>
-   <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-              	Team
-            </h1>
-        </div>
-    </div>
 	<div class="row">
-		<div class="col-lg-12">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Team
+		</h1>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-12">
 <?php
 
 	if ($_GET["newteam"] OR $_GET["editteam"]) {
@@ -125,11 +129,13 @@ include 'includes/header.php';
 							if ($file==="Thumbs.db") continue;
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
+
 							if ($file===$row['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
 							}
+
 							echo "<option value=".$file." $imageCheck>".$file."</option>";
 						}
 						closedir($handle);
@@ -153,7 +159,8 @@ include 'includes/header.php';
         <div class="form-group">
 			<span><?php if($_GET["editteam"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
 		</div>
-		<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+
+		<button type="submit" name="team_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 	</form>
@@ -170,12 +177,15 @@ include 'includes/header.php';
 
 		//delete team
 		if ($_GET["deleteteam"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
 			echo $deleteMsg;
+
 		} elseif ($_GET["deleteteam"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete team after clicking Yes
 			$teamDelete = "DELETE FROM team WHERE id='$delteamId'";
 			mysqli_query($db_conn, $teamDelete);
+
 			$deleteMsg="<div class='alert alert-success'>".$delteamTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -184,6 +194,7 @@ include 'includes/header.php';
     if (($_GET["moveteam"] AND $_GET["movetitle"])) {
         $teamDateUpdate = "UPDATE team SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveteamId'";
         mysqli_query($db_conn, $teamDateUpdate);
+
         $teamMsg="<div class='alert alert-success'>".$moveteamTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
     }
 
@@ -191,6 +202,7 @@ include 'includes/header.php';
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET teamheading='".$_POST["team_heading"]."', teamcontent='".$_POST["main_content"]."'";
         mysqli_query($db_conn, $setupUpdate);
+
         $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
     }
 
@@ -283,7 +295,8 @@ include 'includes/header.php';
 				</tbody>
 			</table>
 			<input type="hidden" name="save_main" value="true" />
-            <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+
+            <button type="submit" name="teamNew_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>
 		</div>
@@ -295,5 +308,5 @@ include 'includes/header.php';
 	<p></p>
 
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

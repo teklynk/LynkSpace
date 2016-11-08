@@ -7,18 +7,20 @@ if(!defined('inc_access')) {
         <footer>
             <div class="footer" id='footer'>
                 
-				<?php 
-                    getNav('Footer','false','left');
-                ?>
+            <?php
+                getNav('Footer','false','left');
+            ?>
 
             </div>
+
             <?php
             echo "<div class='row' id='socialmedia'>";
-                echo "<div class='col-md-12'>";
-    				include 'socialmedia_inc.php';
-                echo "</div>";
+            echo "<div class='col-md-12'>";
+                include 'socialmedia_inc.php';
+            echo "</div>";
             echo "</div>";
             ?>
+
             <div class="row copyright">
                 <div class="col-lg-6 text-left">
                     <p>Copyright &copy; <?php echo str_replace(':8080','',$_SERVER['HTTP_HOST']."&nbsp;".date("Y"));?></p>

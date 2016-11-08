@@ -12,7 +12,7 @@ include 'includes/header.php';
 		//echo $usersUpdate;
 		mysqli_query($db_conn, $usersUpdate);
 
-		$pageMsg="<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+		$pageMsg="<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
 	}
 	
 	$sqlUsers= mysqli_query($db_conn, "SELECT username, password, level, id FROM users");

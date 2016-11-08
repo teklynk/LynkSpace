@@ -37,7 +37,6 @@ include 'includes/header.php';
 				<div class="form-group">
 					<label>Text / HTML</label>
 					<textarea class="form-control input-sm tinymce" name="generalinfo_content" rows="20"><?php echo $row['content']; ?></textarea>
-					
 				</div>
 
 				<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>

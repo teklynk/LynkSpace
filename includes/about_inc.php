@@ -15,6 +15,7 @@ getAbout();
 	}
 
 	if (!empty($aboutImage)) {
+
 		if ($aboutImageAlign=="right") {
 			echo "<div class='col-md-10'>";
 			echo $aboutContent;
@@ -30,6 +31,7 @@ getAbout();
 			echo $aboutContent;
 			echo "</div>";
 		}
+
 	} else {
 		echo "<div class='col-md-12'>";
 		echo $aboutContent;

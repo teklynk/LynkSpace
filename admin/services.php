@@ -10,66 +10,80 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 }
 
 //Page preview
-if ($_GET["preview"]>""){
+if ($_GET["preview"]>"") {
+
 	$pagePreviewId=$_GET["preview"];
+
 	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link FROM services WHERE id='$pagePreviewId'");
 	$row  = mysqli_fetch_array($sqlServicesPreview);
+
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 	echo "<div class='col-lg-12'>";
 
 		if ($row["icon"]>""){
 			echo "<p style='font-size:6.0em;'><i class='fa fa-fw fa-".$row["icon"]."'></i></p><br/>";
 		}
+
 		if ($row["image"]>""){
 			echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p>";
 		}
+
         if ($row["title"]>""){
 			echo "<h4>".$row['title']."</h4>";
 		}
+
 		echo "<p>".$row['content']."</p>";
 
 		if ($row["link"]>0){
 			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$row['link']."' target='_blank'>Page Link</a></p>";
 		}
+
 		echo "</div>";
 }
 ?>
-   <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Services
-            </h1>
-        </div>
-    </div>
 	<div class="row">
-		<div class="col-lg-12">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Services
+		</h1>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-12">
 <?php
 
 	if ($_GET["newservice"] OR $_GET["editservice"]) {
+
 		$serviceMsg="";
 
 		//Update existing service
 		if ($_GET["editservice"]) {
+
 			$theserviceId = $_GET["editservice"];
 			$serviceLabel = "Edit Service Title";
 
 			//update data on submit
 			if (!empty($_POST["service_title"])) {
+
 				$servicesUpdate = "UPDATE services SET title='".$_POST["service_title"]."', content='".$_POST["service_content"]."', link=".$_POST["service_link"].", icon='".$_POST["service_icon_select"]."', image='".$_POST["service_image_select"]."', active=".$_POST["service_status"].",datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId'";
 				mysqli_query($db_conn, $servicesUpdate);
+
 				$serviceMsg="<div class='alert alert-success'>The service ".$_POST["service_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			}
 
 			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, datetime FROM services WHERE id='$theserviceId'");
-			$row  = mysqli_fetch_array($sqlServices);
+			$row = mysqli_fetch_array($sqlServices);
 
 		//Create new service
 		} else if ($_GET["newservice"]) {
 			$serviceLabel = "New Service Title";
+
 			//insert data on submit
 			if (!empty($_POST["service_title"])) {
+
 				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active) VALUES ('".$_POST["service_title"]."', '".$_POST["service_content"]."', '".$_POST["service_icon_select"]."', '".$_POST["service_image_select"]."', ".$_POST["service_link"].", ".$_POST["service_status"].")";
 				mysqli_query($db_conn, $servicesInsert);
+
 				$serviceMsg="<div class='alert alert-success'>The service ".$_POST["service_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			}
 		}
@@ -117,12 +131,16 @@ if ($_GET["preview"]>""){
 		</div>
 		<div class="form-group">
 		<?php
-
 	        if ($row["image"]=="") {
+
 				$imgSrc = "http://placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+
 			} else {
+
 				$imgSrc = "../uploads/".$row["image"];
+
 			}
+
         	echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block;'/>";
         ?>
         </div>
@@ -133,13 +151,17 @@ if ($_GET["preview"]>""){
 				<?php
 					$sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM services_icons ORDER BY icon ASC");
 					while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
+
 						$icon=$rowIcon['icon'];
-						if ($icon===$row['icon']){
+
+						if ($icon===$row['icon']) {
 							$iconCheck="SELECTED";
 						} else {
 							$iconCheck="";
 						}
+
 						echo "<option value=".$icon." ".$iconCheck.">".$icon."</option>";
+
 					}
 				?>
 			</select>
@@ -156,11 +178,13 @@ if ($_GET["preview"]>""){
 							if ($file==="Thumbs.db") continue;
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
-							if ($file===$row['image']){
+
+							if ($file===$row['image']) {
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
 							}
+
 							echo "<option value=".$file." ".$imageCheck.">".$file."</option>";
 						}
 						closedir($handle);
@@ -176,7 +200,9 @@ if ($_GET["preview"]>""){
 				<?php
 					$pagesStr="";
 					$sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
+
 					while ($rowLink = mysqli_fetch_array($sqlServicesLink)) {
+
 						$serviceLinkId=$rowLink['id'];
 						$serviceLinkTitle=$rowLink['title'];
 
@@ -187,6 +213,7 @@ if ($_GET["preview"]>""){
 						}
 
 						$pagesStr =  $pagesStr . "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
+
 					}
 
 					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
@@ -202,7 +229,7 @@ if ($_GET["preview"]>""){
         <div class="form-group">
 			<span><?php if($_GET["editservice"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
 		</div>
-		<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+		<button type="submit" name="services_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 	</form>
@@ -219,12 +246,15 @@ if ($_GET["preview"]>""){
 
 		//delete service
 		if ($_GET["deleteservice"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
+
 		} elseif ($_GET["deleteservice"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
 			mysqli_query($db_conn, $servicesDelete);
+
 			$deleteMsg="<div class='alert alert-success'>".$delserviceTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
 		}
@@ -232,6 +262,7 @@ if ($_GET["preview"]>""){
 	//move services to top of list
     if (($_GET["moveservice"] AND $_GET["movetitle"])) {
         $servicesDateUpdate = "UPDATE services SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
+
         mysqli_query($db_conn, $servicesDateUpdate);
         $serviceMsg="<div class='alert alert-success'>".$moveserviceTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
     }
@@ -240,6 +271,7 @@ if ($_GET["preview"]>""){
     if (($_POST["save_main"])) {
         $setupUpdate = "UPDATE setup SET servicesheading='".$_POST["main_heading"]."', servicescontent='".$_POST["main_content"]."'";
         mysqli_query($db_conn, $setupUpdate);
+
         $serviceMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
     }
 
@@ -311,11 +343,13 @@ if ($_GET["preview"]>""){
 						$serviceTumbnail=$row['icon'];
 						$serviceContent=$row['content'];
 						$serviceActive=$row['active'];
+
 						if ($row['active']==0){
 							$isActive="<i style='color:red;'>(Draft)</i>";
 						} else {
 							$isActive="";
 						}
+
 						echo "<tr>
 						<td><a href='?editservice=$serviceId' title='Edit'>".$serviceTitle."</a></td>
 						<td class='col-xs-1'>
@@ -332,7 +366,7 @@ if ($_GET["preview"]>""){
 				</tbody>
 			</table>
 			<input type="hidden" name="save_main" value="true" />
-            <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+            <button type="submit" name="servicesNew_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>
 		</div>
@@ -344,5 +378,5 @@ if ($_GET["preview"]>""){
 	<p></p>
 
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

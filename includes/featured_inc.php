@@ -20,6 +20,7 @@ if(!defined('inc_access')) {
 	}
  
 	if (!empty($featuredImage)) {
+
 		if ($featuredImageAlign == "right") {
 			echo "<div class='col-md-10'>";
 			echo $featuredContent;
@@ -35,6 +36,7 @@ if(!defined('inc_access')) {
 			echo $featuredContent;
 			echo "</div>";
 		}
+
 	} else {
 		echo "<div class='col-md-12'>";
 		echo $featuredContent;

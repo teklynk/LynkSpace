@@ -24,11 +24,13 @@ if(!defined('inc_access')) {
     	echo "<div class='text-center'>";
 
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
+
         	if (!empty($rowCustomers['image'])){
 				echo "<div class='col-xs-".$customerColWidth."'>";
 				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
 				echo "</div>";
 			}
+
 		}
 
 		echo "</div>";

@@ -15,19 +15,19 @@ $message="";
 if (!empty($_POST)) {
     if ($_POST["not_robot"]=='e6a52c828d56b46129fbf85c4cd164b3') {
 
-      $user_login = mysqli_query($db_conn, "SELECT username, password, id FROM users WHERE username='".strip_tags($_POST["username"])."' AND password=password('".strip_tags($_POST["password"])."') LIMIT 1");
-    	$row  = mysqli_fetch_array($user_login);
+        $user_login = mysqli_query($db_conn, "SELECT username, password, id FROM users WHERE username='".strip_tags($_POST["username"])."' AND password=password('".strip_tags($_POST["password"])."') LIMIT 1");
+        $row  = mysqli_fetch_array($user_login);
 
     	if (is_array($row)) {
-    		$_SESSION["user_id"] = $row['id'];
+            $_SESSION["user_id"] = $row['id'];
     		$_SESSION["user_name"] = $row['username'];
-        $_SESSION["timeout"] = time();
-        $_SESSION["loggedIn"] = 1;
-        $_SESSION["file_referer"] = 'index.php';
-        $_SESSION["session_hash"] = md5($row['username']);
+            $_SESSION["timeout"] = time();
+            $_SESSION["loggedIn"] = 1;
+            $_SESSION["file_referer"] = 'index.php';
+            $_SESSION["session_hash"] = md5($row['username']);
 
     	} else {
-    	       $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+            $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     	}
     }
 }
@@ -67,33 +67,32 @@ html, body {
 }
 </style>
 
-
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
-                </div>
-                <div class="message"><?php if ($message!="") {echo $message;} ?></div>
-                <div class="panel-body">
-                    <form name="frmUser" class="form-signin" method="post" action="">
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                            </div>
-                            <div class="checkbox">
-                              <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox">I'm not a robot</label>
-                            </div>
-                            <button class="btn btn-lg btn-primary btn-block" name="sign_in" id="sign_in" disabled="disabled" type="submit">Sign in</button>
-                        </fieldset>
-                    </form>
-                </div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Please Sign In</h3>
+            </div>
+            <div class="message"><?php if ($message!="") {echo $message;} ?></div>
+            <div class="panel-body">
+                <form name="frmUser" class="form-signin" method="post" action="">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                        </div>
+                        <div class="checkbox">
+                          <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox">I'm not a robot</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit">Sign in</button>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 <?php
 include 'includes/footer.php';

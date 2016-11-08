@@ -7,6 +7,7 @@ include 'includes/header.php';
 	if (!empty($_POST)) {
 		$socialUpdate = "UPDATE socialmedia SET heading='".$_POST["social_heading"]."', facebook='".$_POST["social_facebook"]."', youtube='".$_POST["social_youtube"]."', twitter='".$_POST["social_twitter"]."', google='".$_POST["social_google"]."', linkedin='".$_POST["social_linkedin"]."', github='".$_POST["social_github"]."'";
 		mysqli_query($db_conn, $socialUpdate);
+
 		$pageMsg="<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php'\">×</button></div>";
 	}
 
@@ -57,7 +58,7 @@ include 'includes/header.php';
 					<input class="form-control input-sm" name="social_youtube" value="<?php echo $row['youtube']; ?>"  placeholder="https://www.youtube.com/user/username">
 				</div>
 
-				<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+				<button type="submit" name="socialmedia_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 			</form>
@@ -65,5 +66,5 @@ include 'includes/header.php';
 		</div>
 	</div>
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

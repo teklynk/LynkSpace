@@ -2,33 +2,41 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
+
 //Page preview
-if ($_GET["preview"]>""){
+if ($_GET["preview"]>"") {
+
 	$pagePreviewId=$_GET["preview"];
+
 	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content FROM pages WHERE id='$pagePreviewId'");
 	$row = mysqli_fetch_array($sqlPagePreview);
+
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+
 		if ($row["title"]>""){
 			echo "<h4>".$row['title']."</h4>";
 		}
+
 		if ($row["image"]>""){
 			echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p>";
 		}
+
 		echo $row['content'];
 }
 ?>
-   <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Pages
-            </h1>
-        </div>
-    </div>
-	<div class="row">
-		<div class="col-lg-12">
+<div class="row">
+<div class="col-lg-12">
+	<h1 class="page-header">
+		Pages
+	</h1>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12">
 <?php
 
 	if ($_GET["newpage"] OR $_GET["editpage"]) {
+
 		// Upload function
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$pageMsg="";
@@ -56,7 +64,9 @@ if ($_GET["preview"]>""){
 
 		//Create new page
 		} else if ($_GET["newpage"]) {
+
 			$pageLabel = "New Page Title";
+
 			//insert data on submit
 			if (!empty($_POST["page_title"])) {
 				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].")";
@@ -74,7 +84,7 @@ if ($_GET["preview"]>""){
 			echo $pageMsg;
 		}
 
-		if ($_GET["editpage"]){
+		if ($_GET["editpage"]) {
 			//active status
 			if ($row['active']==1) {
 				$selActive1="SELECTED";
@@ -134,19 +144,23 @@ if ($_GET["preview"]>""){
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
+
 						while (false !== ($file = readdir($handle))) {
 							if ('.' === $file) continue;
 							if ('..' === $file) continue;
 							if ($file==="Thumbs.db") continue;
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
+
 							if ($file===$row['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
 							}
+
 							echo "<option value=".$file." $imageCheck>".$file."</option>";
 						}
+
 						closedir($handle);
 					}
 				?>
@@ -165,9 +179,11 @@ if ($_GET["preview"]>""){
 		$sqlSetup = mysqli_query($db_conn, "SELECT disqus, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']);
 		$rowSetup = mysqli_fetch_array($sqlSetup);
 
-// Hide Disqus option if disqus is not enabled on Setup page.
-		if (empty($rowSetup['disqus'])){
+		// Hide Disqus option if disqus is not enabled on Setup page.
+		if (empty($rowSetup['disqus'])) {
+
 			echo "<input type='hidden' name='page_disqus' value='0'>";
+
 		} else {
 		?>
 		<div class="form-group">
@@ -189,7 +205,7 @@ if ($_GET["preview"]>""){
         <div class="form-group">
 			<span><?php if($_GET["editpage"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
 		</div>
-		<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+		<button type="submit" name="page_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 	</form>
@@ -206,32 +222,40 @@ if ($_GET["preview"]>""){
 
 		//delete page
 		if ($_GET["deletepage"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
+
 		} elseif ($_GET["deletepage"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
+
 			//delete page after clicking Yes
 			$pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
 			mysqli_query($db_conn, $pageDelete);
+
 			$deleteMsg="<div class='alert alert-success'>".$delPageTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 		}
 
 		//move pages to top of list
 		if (($_GET["movepage"] AND $_GET["movetitle"])) {
+
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
 			mysqli_query($db_conn, $pagesDateUpdate);
+
 			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 		//update heading on submit
 		if (!empty($_POST["main_heading"])) {
+
 			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."'";
 			mysqli_query($db_conn, $setupUpdate);
+
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup");
-	$rowSetup  = mysqli_fetch_array($sqlSetup);
+		$sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup");
+		$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
 
@@ -264,14 +288,14 @@ if ($_GET["preview"]>""){
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-	<button type="button" class="btn btn-default" onclick="window.location='?newpage=true';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Page</button>
+		<button type="button" class="btn btn-default" onclick="window.location='?newpage=true';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Page</button>
 		<h2></h2>
 		<div class="table-responsive">
-    <?php
-		if ($pageMsg !="") {
-			echo $pageMsg;
-		}
-	?>
+			<?php
+				if ($pageMsg !="") {
+					echo $pageMsg;
+				}
+			?>
 			<form role="pageForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
@@ -286,9 +310,10 @@ if ($_GET["preview"]>""){
 					</tr>
 				</thead>
 				<tbody>
-        <?php
+				<?php
 					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM pages ORDER BY datetime DESC");
 					while ($row  = mysqli_fetch_array($sqlPages)) {
+
 						$pageId=$row['id'];
 						$pageTitle=$row['title'];
 						$pageTumbnail=$row['image'];
@@ -309,21 +334,23 @@ if ($_GET["preview"]>""){
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
+
 					}
-		?>
+				?>
 				</tbody>
 			</table>
-            <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+
+            <button type="submit" name="pageNew_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>
 		</div>
 <?php
-	} //end of long else
+	} //end of long else statement
 ?>
 		</div>
 	</div>
 	<p></p>
 
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

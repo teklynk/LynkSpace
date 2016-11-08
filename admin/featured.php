@@ -52,7 +52,7 @@ include 'includes/header.php';
 			$thumbNail = "../uploads/".$rowFeatured["image"];
 		}
 
-		//image algin status
+		//image align status
 		if ($rowFeatured['image_align']=="left") {
 			$selAlignLeft="SELECTED";
 			$selAlignRight="";

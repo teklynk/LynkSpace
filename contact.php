@@ -35,10 +35,12 @@ include 'includes/header.php';
             echo "<p><i class='fa fa-phone'></i>";
             echo "&nbsp;<abbr title='Phone'>P</abbr>:&nbsp;".$contactPhone."</p>";
         }
+
         if (!empty($contactEmail)) {
             echo "<p><i class='fa fa-envelope-o'></i>";
             echo "&nbsp;<abbr title='Email'>E</abbr>:&nbsp;<a href='mailto:".$contactEmail."'>".$contactEmail."</a></p>";
         }
+
         if (!empty($contactHours)) {
             echo "<p><i class='fa fa-clock-o'></i>";
             echo "&nbsp;<abbr title='Hours'>H</abbr>:&nbsp;".$contactHours."</p>";
@@ -92,5 +94,5 @@ include 'includes/header.php';
 
         </div>
 <?php
-include 'includes/footer.php';
+    include 'includes/footer.php';
 ?>

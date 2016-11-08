@@ -88,11 +88,13 @@ include 'includes/header.php';
 		                            if ($file==="Thumbs.db") continue;
 		                            if ($file===".DS_Store") continue;
 		                            if ($file==="index.html") continue;
+
 		                            if ($file===$row['image']){
 		                                $imageCheck="SELECTED";
 		                            } else {
 		                                $imageCheck="";
 		                            }
+
 		                            echo "<option value=".$file." $imageCheck>".$file."</option>";
 		                        }
 		                        closedir($handle);
@@ -123,5 +125,5 @@ include 'includes/header.php';
 	</div>
 
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>

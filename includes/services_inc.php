@@ -35,6 +35,7 @@ getServices();
                 echo "<i class='fa fa-circle fa-stack-2x text-primary'></i>";
                 echo "<i class='fa fa-".$rowServices['icon']." fa-stack-1x fa-inverse' title='".$rowServices['title']."'></i>";
             }
+
             if (!empty($rowServices['image'])){
                 echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/".$rowServices['image']."' alt='".$rowServices['title']."' title='".$rowServices['title']."'>";
             }

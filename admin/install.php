@@ -5,7 +5,8 @@ include 'includes/header.php';
 
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";
-// Name of the sql dump file
+
+// Name of the Source sql dump file
 $filename = '../db/bootstrap_business.sql';
 
 if (!file_exists($dbFileLoc)) {
@@ -74,7 +75,7 @@ if (!file_exists($filename)) {
         rename("install.php","install.old"); // rename install page so that it can not be accessed after the initial install
         echo "<script>window.location.href='index.php';</script>"; // redirect to login page
 
-	}// the big IF
+	} // the big IF
 ?>
 <style>
 	html, body {
@@ -106,13 +107,12 @@ if (!file_exists($filename)) {
             <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
             <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
-						<h2 class="form-signin-heading">Create an Admin user</h2>
-        		<label for="username" class="sr-only">Username</label>
+			<h2 class="form-signin-heading">Create an Admin user</h2>
+			<label for="username" class="sr-only">Username</label>
             <input class="form-control" type="text" name="username" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>
             <input class="form-control" type="text" name="password" placeholder="Password" required>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+            <button class="btn btn-lg btn-primary btn-block" name="install_submit" type="submit">Create</button>
         </form>
     </div>
 </div>
