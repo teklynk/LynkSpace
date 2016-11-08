@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2016 at 09:49 PM
+-- Generation Time: Nov 07, 2016 at 10:16 PM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -207,6 +207,7 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `catid` int(11) NOT NULL DEFAULT '29',
   `section` text NOT NULL,
   `win` text NOT NULL,
+  `loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
@@ -214,17 +215,17 @@ CREATE TABLE IF NOT EXISTS `navigation` (
 -- Dumping data for table `navigation`
 --
 
-INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`) VALUES
-(37, 1, 'Contact Us', 'contact.php', 29, 'Footer', 'false'),
-(41, 5, 'Contact Us', 'contact.php', 29, 'Top', 'false'),
-(42, 1, 'About Us', 'about.php', 29, 'Top', 'false'),
-(43, 2, 'Careers', 'page.php?ref=28', 29, 'Top', 'false'),
-(44, 3, 'Meet The Team', 'team.php', 29, 'Top', 'false'),
-(45, 4, 'Services', 'services.php', 29, 'Top', 'false'),
-(48, 4, 'Positions', 'page.php?ref=34', 29, 'Footer', 'false'),
-(50, 2, 'Services', 'services.php', 29, 'Footer', 'false'),
-(51, 3, 'About', 'about.php', 29, 'Footer', 'false'),
-(52, 5, 'Instructables', '#', 29, 'Footer', 'true');
+INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`) VALUES
+(37, 1, 'Contact Us', 'contact.php', 29, 'Footer', 'false', 1),
+(41, 5, 'Contact Us', 'contact.php', 29, 'Top', 'false', 1),
+(42, 1, 'About Us', 'about.php', 29, 'Top', 'false', 1),
+(43, 2, 'Careers', 'page.php?ref=28', 29, 'Top', 'false', 1),
+(44, 3, 'Meet The Team', 'team.php', 29, 'Top', 'false', 1),
+(45, 4, 'Services', 'services.php', 29, 'Top', 'false', 1),
+(48, 4, 'Positions', 'page.php?ref=34', 29, 'Footer', 'false', 1),
+(50, 2, 'Services', 'services.php', 29, 'Footer', 'false', 1),
+(51, 3, 'About', 'about.php', 29, 'Footer', 'false', 1),
+(52, 5, 'Instructables', '#', 29, 'Footer', 'true', 1);
 
 -- --------------------------------------------------------
 
