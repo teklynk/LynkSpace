@@ -38,14 +38,17 @@ if (file_exists('install.php')) {
 
 if (isset($_SESSION["loggedIn"])) {
 	//header("Location: setup.php");
-	echo "<script>window.location.href='setup.php';</script>";
+	echo "<script>window.location.href='setup.php?loc_id=1';</script>";
 }
 
 ?>
 <style>
 html, body {
 	margin-top: 0px !important;
-    background: #FCFCFC url(images/cloudsbg.png) no-repeat center center /cover;
+    /*background: #FCFCFC url('images/sky_texture1973.png') no-repeat center center /cover;*/
+    /*background: #0033A0 center center /cover;*/
+    background: linear-gradient(-200deg, #0033a0, #008eaa);
+    background-color: #0033a0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

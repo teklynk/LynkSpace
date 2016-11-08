@@ -44,7 +44,7 @@ if ($IPrange <> '') {
 	<!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" >
     <!--Bootstrap-Selects-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" >
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" >
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -68,8 +68,8 @@ if ($IPrange <> '') {
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
@@ -79,6 +79,8 @@ if ($IPrange <> '') {
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
   if (!empty($_GET['loc_id'])){
+
+    //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
     $_SESSION['loc_id'] = $_GET['loc_id'];
 
     $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_SESSION['loc_id']."'");
@@ -96,9 +98,9 @@ if ($IPrange <> '') {
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
                 if ('..' === $imgfile) continue;
-                if ($imgfile==="Thumbs.db") continue;
-                if ($imgfile===".DS_Store") continue;
-                if ($imgfile==="index.html") continue;
+                if ($imgfile === "Thumbs.db") continue;
+                if ($imgfile === ".DS_Store") continue;
+                if ($imgfile === "index.html") continue;
 
                 $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$imgfile."'},";
             }
@@ -109,8 +111,8 @@ if ($IPrange <> '') {
         //get and build page list for TinyMCE
         $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
-            $getPageId=$rowGetPages['id'];
-            $getPageTitle=$rowGetPages['title'];
+            $getPageId = $rowGetPages['id'];
+            $getPageTitle = $rowGetPages['title'];
             $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";
         }
 
@@ -258,14 +260,16 @@ if ($IPrange <> '') {
         unset($_SESSION["loggedIn"]);
         unset($_SESSION["file_referer"]);
         unset($_SESSION["session_hash"]);
+        unset($_SESSION["loc_id"]);
+        unset($_SESSION['loc_name']);
     }
 
     echo "<div id='page-wrapper'>";
     echo "<div class='container-fluid'>";
 
     //Redirect user if session not set or has expired. sessionTimeout is set in dbsetup.
-    if (basename($_SERVER['PHP_SELF'])!='index.php') {
-        if (basename($_SERVER['PHP_SELF'])!='install.php') {
+    if (basename($_SERVER['PHP_SELF']) != 'index.php') {
+        if (basename($_SERVER['PHP_SELF']) != 'install.php') {
             if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //session timeout
 
                 if (!$_SESSION["loggedIn"]) {

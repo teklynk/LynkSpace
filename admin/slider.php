@@ -6,15 +6,16 @@ include 'includes/header.php';
 //slide preview
 if ($_GET["preview"]>""){
 	$slidePreviewId=$_GET["preview"];
-	$sqlslidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
-	$row  = mysqli_fetch_array($sqlslidePreview);
+
+	$sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image FROM slider WHERE id='$slidePreviewId'");
+	$rowSlidePreview = mysqli_fetch_array($sqlSlidePreview );
 
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
-		echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
-		echo "<p>".$row['content']."</p>";
+		echo "<p><img src=../uploads/".$rowSlidePreview['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
+		echo "<p>".$rowSlidePreview['content']."</p>";
 
-		if ($row["link"]>0){
-			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$row['link']."' target='_blank'>Page Link</a></p>";
+		if ($rowSlidePreview["link"]>0){
+			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$rowSlidePreview['link']."' target='_blank'>Page Link</a></p>";
 		}
 }
 ?>
@@ -52,8 +53,8 @@ if ($_GET["preview"]>""){
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST["slide_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php'\">×</button></div>";
 			}
 
-			$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime FROM slider WHERE id='$theslideId'");
-			$row  = mysqli_fetch_array($sqlslides);
+			$sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime FROM slider WHERE id='$theslideId'");
+			$rowSlides = mysqli_fetch_array($sqlSlides);
 
 		//Create new slide
 		} else if ($_GET["newslide"]) {
@@ -82,12 +83,12 @@ if ($_GET["preview"]>""){
 		while ($rowNavPages = mysqli_fetch_array($sqlNavPages)) {
 			$navPageId=$rowNavPages['id'];
 			$navPageTitle=$rowNavPages['title'];
-			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
+			$pagesStr = $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
 		}
 
 		if ($_GET["editslide"]){
 			//active status
-			if ($row['active']==1) {
+			if ($rowSlides['active']==1) {
 				$selActive1="SELECTED";
 				$selActive0="";
 			} else {
@@ -96,10 +97,10 @@ if ($_GET["preview"]>""){
 			}
 		}
 
-		if ($row["image"]=="") {
+		if ($rowSlides["image"]=="") {
 			$image = "http://placehold.it/350x150&text=No Image";
 		} else {
-			$image = "../uploads/".$row["image"];
+			$image = "../uploads/".$rowSlides["image"];
 		}
 ?>
 	<form role="slideForm" method="post" enctype="multipart/form-data">
@@ -112,7 +113,7 @@ if ($_GET["preview"]>""){
         </div>
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
-			<input class="form-control input-sm" name="slide_title" value="<?php if($_GET["editslide"]){echo $row['title'];} ?>" placeholder="Slide Title">
+			<input class="form-control input-sm" name="slide_title" value="<?php if($_GET["editslide"]){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -136,7 +137,7 @@ if ($_GET["preview"]>""){
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
 
-							if ($file===$row['image']){
+							if ($file===$rowSlides['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
@@ -155,14 +156,14 @@ if ($_GET["preview"]>""){
 			<select class="form-control input-sm" name="slide_link" id="slide_link">
 				<option value="">None</option>
 				<?php
-					$pagesStr="";
+					$pagesStr = "";
 					$sqlSliderLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active=1 ORDER BY title ASC");
 					while ($rowSliderLink = mysqli_fetch_array($sqlSliderLink)) {
-						$sliderLinkId=$rowSliderLink['id'];
-						$sliderLinkTitle=$rowSliderLink['title'];
+						$sliderLinkId = $rowSliderLink['id'];
+						$sliderLinkTitle = $rowSliderLink['title'];
 
-						if (ctype_digit($row['link'])){
-							if ($sliderLinkId===$row['link']){
+						if (ctype_digit($rowSlides['link'])){
+							if ($sliderLinkId===$rowSlides['link']){
 								$isSelected="SELECTED";
 							} else {
 								$isSelected="";
@@ -181,10 +182,10 @@ if ($_GET["preview"]>""){
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control input-sm" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET["editslide"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET["editslide"]){echo $rowSlides['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET["editslide"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
+			<span><?php if($_GET["editslide"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowSlides['datetime']));} ?></span>
 		</div>
 		<button type="submit" name="slider_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
@@ -290,14 +291,14 @@ if ($_GET["preview"]>""){
 		<tbody>";
 
 		$sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM slider ORDER BY datetime DESC");
-		while ($row  = mysqli_fetch_array($sqlslides)) {
-			$slideId=$row['id'];
-			$slideTitle=$row['title'];
-			$slideTumbnail=$row['image'];
-			$slideContent=$row['content'];
-			$slideActive=$row['active'];
+		while ($rowSlides = mysqli_fetch_array($sqlslides)) {
+			$slideId=$rowSlides['id'];
+			$slideTitle=$rowSlides['title'];
+			$slideTumbnail=$rowSlides['image'];
+			$slideContent=$rowSlides['content'];
+			$slideActive=$rowSlides['active'];
 
-			if ($row['active']==0){
+			if ($rowSlides['active']==0){
 				$isActive="<i style='color:red;'>(Draft)</i>";
 			} else {
 				$isActive="";
