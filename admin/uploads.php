@@ -3,26 +3,27 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-			$fileExt = substr(basename( $_FILES["fileToUpload"]["name"]),-4);
-			if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
-				$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php'\">×</button></div>";
-			} else {
-				unlink($target_file);
-				$uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php'\">×</button></div>";
-			}
+	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		$fileExt = substr(basename( $_FILES["fileToUpload"]["name"]),-4);
+		if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
+			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		} else {
-			$uploadMsg = "";
+			//Delete the file
+			unlink($target_file);
+			$uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
-		
-		$deleteMsg = "";
-		//Delete file
-		if ($_GET["delete"] AND !$_GET["confirm"]) {
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$_GET["delete"]."? <a href='?delete=".$_GET["delete"]."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php'\">×</button></div>";
-		} elseif ($_GET["delete"] AND $_GET["confirm"]=="yes") {
-			unlink($target_dir.$_GET["delete"]);
-			$deleteMsg="<div class='alert alert-success'>".$_GET["delete"]." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php'\">×</button></div>";
-		}
+	} else {
+		$uploadMsg = "";
+	}
+
+	//Delete file
+	$deleteMsg = "";
+	if ($_GET["delete"] AND !$_GET["confirm"]) {
+		$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$_GET["delete"]."? <a href='?delete=".$_GET["delete"]."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	} elseif ($_GET["delete"] AND $_GET["confirm"]=="yes") {
+		unlink($target_dir.$_GET["delete"]);
+		$deleteMsg="<div class='alert alert-success'>".$_GET["delete"]." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	}
 ?>
 <script>
 $(document).ready(function() {
@@ -70,7 +71,8 @@ $(document).ready(function() {
 					<tbody>
 					<?php
 						if ($handle = opendir($target_dir)) {
-						$count = 0;
+
+							$count = 0;
 						
 							while (false !== ($file = readdir($handle))) {
 								if ('.' === $file) continue;

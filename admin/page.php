@@ -61,7 +61,7 @@ if ($_GET["preview"]>""){
 			if (!empty($_POST["page_title"])) {
 				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].")";
 				mysqli_query($db_conn, $pageInsert);
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 
@@ -206,13 +206,13 @@ if ($_GET["preview"]>""){
 
 		//delete page
 		if ($_GET["deletepage"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 		} elseif ($_GET["deletepage"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
 			//delete page after clicking Yes
 			$pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
 			mysqli_query($db_conn, $pageDelete);
-			$deleteMsg="<div class='alert alert-success'>".$delPageTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-success'>".$delPageTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 		}
 
@@ -220,14 +220,14 @@ if ($_GET["preview"]>""){
 		if (($_GET["movepage"] AND $_GET["movetitle"])) {
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
 			mysqli_query($db_conn, $pagesDateUpdate);
-			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 		//update heading on submit
 		if (!empty($_POST["main_heading"])) {
 			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."'";
 			mysqli_query($db_conn, $setupUpdate);
-			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
     $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup");
