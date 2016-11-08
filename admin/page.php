@@ -8,20 +8,20 @@ if ($_GET["preview"]>"") {
 
 	$pagePreviewId=$_GET["preview"];
 
-	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content FROM pages WHERE id='$pagePreviewId'");
-	$row = mysqli_fetch_array($sqlPagePreview);
+	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=".$pagePreviewId." AND loc_id='".$_SESSION['loc_id']."' ");
+	$rowPagePreview = mysqli_fetch_array($sqlPagePreview);
 
-		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 
-		if ($row["title"]>""){
-			echo "<h4>".$row['title']."</h4>";
-		}
+	if ($rowPagePreview["title"]>""){
+		echo "<h4>".$rowPagePreview['title']."</h4>";
+	}
 
-		if ($row["image"]>""){
-			echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p>";
-		}
+	if ($rowPagePreview["image"]>""){
+		echo "<p><img src=../uploads/".$rowPagePreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+	}
 
-		echo $row['content'];
+	echo $rowPagePreview['content'];
 }
 ?>
 <div class="row">
@@ -54,13 +54,14 @@ if ($_GET["preview"]>"") {
 
 			//update data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", disqus=".$_POST["page_disqus"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId'";
+				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", disqus=".$_POST["page_disqus"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $pageUpdate);
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php'\">×</button></div>";
+
+				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus FROM pages WHERE id='$thePageId'");
-			$row  = mysqli_fetch_array($sqlPages);
+			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=".$thePageId." AND loc_id=".$_GET['loc_id']." ");
+			$rowPages  = mysqli_fetch_array($sqlPages);
 
 		//Create new page
 		} else if ($_GET["newpage"]) {
@@ -69,8 +70,9 @@ if ($_GET["preview"]>"") {
 
 			//insert data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].")";
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].", ".$_GET["loc_id"].")";
 				mysqli_query($db_conn, $pageInsert);
+
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
@@ -86,15 +88,16 @@ if ($_GET["preview"]>"") {
 
 		if ($_GET["editpage"]) {
 			//active status
-			if ($row['active']==1) {
+			if ($rowPages['active']==1) {
 				$selActive1="SELECTED";
 				$selActive0="";
 			} else {
 				$selActive0="SELECTED";
 				$selActive1="";
 			}
+
 			//comments status
-			if ($row['disqus']==1) {
+			if ($rowPages['disqus']==1) {
 				$selDisqus1="SELECTED";
 				$selDisqus0="";
 			} else {
@@ -103,14 +106,14 @@ if ($_GET["preview"]>"") {
 			}
 		}
 
-		if ($row["image"]=="") {
+		if ($rowPages["image"]=="") {
 			$image = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$image = "../uploads/".$row["image"];
+			$image = "../uploads/".$rowPages["image"];
 		}
 
 		//image algin status
-		if ($row['image_align']=="left") {
+		if ($rowPages['image_align']=="left") {
 			$selAlignLeft="SELECTED";
 			$selAlignRight="";
 		} else {
@@ -128,7 +131,7 @@ if ($_GET["preview"]>"") {
         </div>
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
-			<input class="form-control input-sm" name="page_title" value="<?php if($_GET["editpage"]){echo $row['title'];} ?>" placeholder="Page Title">
+			<input class="form-control input-sm" name="page_title" value="<?php if($_GET["editpage"]){echo $rowPages['title'];} ?>" placeholder="Page Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -152,7 +155,7 @@ if ($_GET["preview"]>"") {
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
 
-							if ($file===$row['image']){
+							if ($file===$rowPages['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
@@ -200,10 +203,10 @@ if ($_GET["preview"]>"") {
 
 		<div class="form-group">
 			<label>Text / HTML</label>
-			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $rowPages['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET["editpage"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
+			<span><?php if($_GET["editpage"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowPages['datetime']));} ?></span>
 		</div>
 		<button type="submit" name="page_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
@@ -271,7 +274,6 @@ if ($_GET["preview"]>"") {
 }
 </style>
 
-
  <div class="modal fade" id="webpageDialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -288,7 +290,7 @@ if ($_GET["preview"]>"") {
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-		<button type="button" class="btn btn-default" onclick="window.location='?newpage=true';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Page</button>
+		<button type="button" class="btn btn-default" onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Page</button>
 		<h2></h2>
 		<div class="table-responsive">
 			<?php
@@ -311,19 +313,21 @@ if ($_GET["preview"]>"") {
 				</thead>
 				<tbody>
 				<?php
-					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active FROM pages ORDER BY datetime DESC");
-					while ($row  = mysqli_fetch_array($sqlPages)) {
+					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, loc_id FROM pages WHERE loc_id = ".$_GET['loc_id']." ORDER BY datetime DESC");
+					while ($rowPages = mysqli_fetch_array($sqlPages)) {
 
-						$pageId=$row['id'];
-						$pageTitle=$row['title'];
-						$pageTumbnail=$row['image'];
-						$pageContent=$row['content'];
-						$pageActive=$row['active'];
-						if ($row['active']==0){
+						$pageId=$rowPages['id'];
+						$pageTitle=$rowPages['title'];
+						$pageTumbnail=$rowPages['image'];
+						$pageContent=$rowPages['content'];
+						$pageActive=$rowPages['active'];
+
+						if ($rowPages['active']==0){
 							$isActive="<i style='color:red;'>(Draft)</i>";
 						} else {
 							$isActive="";
 						}
+
 						echo "<tr>
 						<td><a href='?loc_id=".$_GET['loc_id']."&editpage=$pageId' title='Edit'>".$pageTitle."</a></td>
 						<td class='col-xs-1'>
