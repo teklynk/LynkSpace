@@ -10,7 +10,7 @@ function getLocation(){
 		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_GET['loc_id']."'");
 		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
-		if ($rowGetLocation['active']=1 AND $_GET['loc_id']=$rowGetLocation['id']) {
+		if ($rowGetLocation['active']==1 AND $_GET['loc_id']==$rowGetLocation['id']) {
 			$locationName = $rowGetLocation['name'];
 			$locationActive = $rowGetLocation["active"];
 			$locationID = $rowGetLocation["id"];
@@ -26,12 +26,12 @@ function getPage(){
 	global $pageTitle;
 	global $pageContent;
 	global $pageImageAlign;
-  global $pageDisqus;
+  	global $pageDisqus;
 	global $db_conn;
 
 	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
-		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus FROM pages WHERE id='$pageRefId'");
+		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id='$pageRefId' AND loc_id=".$_GET['loc_id']." ");
 		$rowPage = mysqli_fetch_array($sqlPage);
 
 		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
@@ -43,20 +43,18 @@ function getPage(){
 			$pageTitle = $rowPage['title'];
 			$pageContent = $rowPage["content"];
 			$pageImageAlign = $rowPage["image_align"];
-      $pageDisqus = $rowPage["disqus"];
+			$pageDisqus = $rowPage["disqus"];
 
 		} else {
 
-      $pageTitle = "Page not found";
-		  $pageContent = "This page is not available.";
-
+      		$pageTitle = "Page not found";
+		  	$pageContent = "This page is not available.";
 		}
 
 	} else {
 
-    $pageTitle = "Page not found";
+    	$pageTitle = "Page not found";
 		$pageContent = "This page is not available.";
-
 	}
 }
 
@@ -67,7 +65,7 @@ function getAbout(){
 	global $aboutImageAlign;
 	global $db_conn;
 
-	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']."");
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
 	if (!empty($rowAbout["heading"])){
@@ -100,7 +98,7 @@ function getContactInfo(){
 	global $contactFormMsg;
 	global $db_conn;
 
-	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
+	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowContact = mysqli_fetch_array($sqlContact);
 
     if ($_GET["msgsent"]=="thankyou") {
@@ -175,7 +173,7 @@ function getServices(){
 
     if (!empty($rowServicesHeading['servicescontent'])) {
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
-		}
+	}
 
     $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
@@ -192,7 +190,7 @@ function getServices(){
     }
 }
 
-function getTeam(){
+function getTeam() {
 	global $sqlTeamHeading;
 	global $rowTeamHeading;
 	global $sqlTeam;
@@ -213,7 +211,7 @@ function getTeam(){
 
     if (!empty($rowTeamHeading['teamcontent'])) {
     	$teamBlurb = $rowTeamHeading['teamcontent'];
-		}
+	}
 
     $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
@@ -248,7 +246,7 @@ function getNav($navSection,$dropdown,$pull){
 			$dropdownCaret = "";
 		}
 
-        $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
+        $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND loc_id=".$_GET['loc_id']." AND sort>0 ORDER BY sort");
         //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
         $tempLink = 0;
 		while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
@@ -297,7 +295,7 @@ function getSetup(){
 	global $setupGoogleanalytics;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']."");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup["description"];

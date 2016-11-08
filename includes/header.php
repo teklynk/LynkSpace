@@ -35,12 +35,12 @@ if(!defined('inc_access')) {
 
     echo $setupHeadercode;
 
-    if (!empty($setupGoogleanalytics)) {
+    if (!empty($googleAnalytics)) {
     ?>
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo $setupGoogleanalytics;?>']);
+            _gaq.push(['_setAccount', '<?php echo $googleAnalytics;?>']);
             _gaq.push(['_trackPageview']);
 
             (function() {

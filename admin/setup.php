@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']."");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 if (!empty($_POST["site_title"])) {
@@ -79,13 +79,9 @@ if (!empty($_POST["site_title"])) {
 						$selEditor1="";
 					}
 				?>
-				<div class="form-group">
-					<label>TinyMCE / WYSIWYG Editor</label>
-					<select class="form-control input-sm" name="site_tinymce">
-						<option value="1" <?php echo $selEditor1; ?>>On</option>
-						<option value="0" <?php echo $selEditor0; ?>>Off</option>
-					</select>
-				</div>
+
+				<input type="hidden" name="site_tinymce" value="1">
+
 				<hr/>
 				<div class="form-group">
 					<label>Other Settings</label>
@@ -101,8 +97,9 @@ if (!empty($_POST["site_title"])) {
 					}
 					?>
 				</div>
-					<button type="submit" name="setup_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-					<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+
+				<button type="submit" name="setup_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 
 			</form>
 

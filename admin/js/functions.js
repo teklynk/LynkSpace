@@ -12,7 +12,7 @@ $(document).ready(function () {
 					vars[hash[0]] = hash[1];
 			}
 			return vars;
-	};
+	}
 
 	//clear inputs on reset
 	$(':reset').click (
