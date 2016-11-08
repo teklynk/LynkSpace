@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, loc_id FROM featured WHERE loc_id=".$_GET['loc_id']."");
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, loc_id FROM featured WHERE loc_id=".$_GET['loc_id']." ");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	//update table on submit
@@ -46,14 +46,14 @@ include 'includes/header.php';
 			echo $pageMsg;
 		}
 
-		if ($row["image"]=="") {
+		if ($rowFeatured["image"]=="") {
 			$thumbNail = "http://placehold.it/140x100&text=No Image";
 		} else {
 			$thumbNail = "../uploads/".$rowFeatured["image"];
 		}
 
 		//image algin status
-		if ($row['image_align']=="left") {
+		if ($rowFeatured['image_align']=="left") {
 			$selAlignLeft="SELECTED";
 			$selAlignRight="";
 		} else {

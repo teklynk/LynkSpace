@@ -9,11 +9,12 @@ include 'includes/header.php';
 		$uploadMsg = "";
 	}
 
-	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']."");
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
 	//update table on submit
 	if (!empty($_POST["about_heading"])) {
+
 		if($rowAbout['loc_id'] == $_GET['loc_id']){
 			//Do Update
 			$aboutUpdate = "UPDATE aboutus SET heading='".$_POST["about_heading"]."', content='".$_POST["about_content"]."', image='".$_POST["about_image"]."', image_align='".$_POST["about_image_align"]."' WHERE loc_id=".$_GET['loc_id']." ";
@@ -23,6 +24,7 @@ include 'includes/header.php';
 			$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, loc_id) VALUES ('".$_POST["about_heading"]."', '".$_POST["about_content"]."', '".$_POST["about_image"]."', '".$_POST["about_image_align"]."', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $aboutInsert);
 		}
+
 		$pageMsg="<div class='alert alert-success'>The about section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 ?>
@@ -36,15 +38,15 @@ include 'includes/header.php';
 	<div class="row">
 		<div class="col-lg-12">
 			<?php
-			if ($uploadMsg !="") {
+			if ($uploadMsg != "") {
 				echo $uploadMsg;
 			}
 
-			if ($pageMsg !="") {
+			if ($pageMsg != "") {
 				echo $pageMsg;
 			}
 
-			if ($rowAbout["image"]=="") {
+			if ($rowAbout["image"] == "") {
 				$thumbNail = "http://placehold.it/140x100&text=No Image";
 			} else {
 				$thumbNail = "../uploads/".$rowAbout["image"];

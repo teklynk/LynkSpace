@@ -176,7 +176,7 @@ if ($_GET["preview"]>""){
                 <option value="1" <?php if($_GET["editpage"]){echo $selDisqus1;}?>>Yes</option>
                 <option value="0" <?php if($_GET["editpage"]){echo $selDisqus0;}?>>No</option>
             </select>
-    </div>
+    	</div>
 		<hr/>
 		<?php
 		}

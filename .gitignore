@@ -22,8 +22,6 @@ uploads/*
 
 .git
 
-*.sql
-
 *.asp
 
 *.xml
