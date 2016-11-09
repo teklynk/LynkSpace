@@ -75,6 +75,11 @@ if ($IPrange <> '') {
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
   <?php
+     //Create location upload folder if it does not exist.
+    if (!file_exists($image_dir) AND is_numeric($_GET['loc_id'])) {
+        mkdir($image_dir, 0755);
+    }
+
 	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup WHERE id='".$_SESSION['loc_id']."'");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
@@ -92,6 +97,11 @@ if ($IPrange <> '') {
   $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 "); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
+
+        //Initializing variables
+        $fileListJson = "";
+        $linkListJson = "";
+
         //Build list of images in uploads folder for tinymce editor
         if ($handle = opendir($image_dir)) {
 

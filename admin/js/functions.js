@@ -50,7 +50,7 @@ $(document).ready(function () {
 					//alert('is text');
 					$('#nav_newurl').attr('value', $('#exist_page').val());
 				} else {
-					$('#nav_newurl').attr('value', 'page.php?ref='+$('#exist_page').val());
+					$('#nav_newurl').attr('value', 'page.php?loc_id='+getUrlVars()['loc_id']+'&ref='+$('#exist_page').val());
 				}
 			}
 	    }

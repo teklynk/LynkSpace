@@ -12,13 +12,6 @@ $image_dir = "../uploads/".$_GET['loc_id']."/"; //physical path to uploads folde
 $image_url = "//".$_SERVER['HTTP_HOST']."/businessCMS/uploads/".$_GET['loc_id']."/"; //web path to uploads folder
 $image_baseURL = "uploads/".$_GET['loc_id']."/";
 
-//Create location upload folder if it does not exist.
-if (!file_exists($image_dir)) {
-    if (!is_dir('file')) {
-        mkdir($image_dir, 0755);
-    }
-}
-
 $target_dir = $image_dir;
 
 //Upload function

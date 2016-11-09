@@ -27,7 +27,7 @@ getTeam();
 			echo "<div class='thumbnail'>";
 
 			if (!empty($rowTeam['image'])){
-				echo "<img class='img-responsive' src='uploads/".$rowTeam['image']."' alt='".$rowTeam['name']."' title='".$rowTeam['name']."'>";
+				echo "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowTeam['image']."' alt='".$rowTeam['name']."' title='".$rowTeam['name']."'>";
 			}
 			
 			echo "<div class='caption'>";

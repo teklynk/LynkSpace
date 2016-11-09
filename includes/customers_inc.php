@@ -27,7 +27,7 @@ if(!defined('inc_access')) {
 
         	if (!empty($rowCustomers['image'])){
 				echo "<div class='col-xs-".$customerColWidth."'>";
-				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
+				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
 				echo "</div>";
 			}
 

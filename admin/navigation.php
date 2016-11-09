@@ -10,12 +10,14 @@ include 'includes/header.php';
 
 		if (!empty($_POST["nav_newname"])) {
 
+			//Create new category if newcat is true
 			if (!empty($_POST["nav_newcat"]) AND $_POST["exist_cat"]=="") {
 				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST["nav_newcat"]."')";
 				//echo $navNewCat;
 				mysqli_query($db_conn, $navNewCat);
 
-				$sqlNavCatID = mysqli_query($db_conn, "SELECT id FROM category ORDER BY id DESC LIMIT 1");
+				//get the new cat id
+				$sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY id DESC LIMIT 1");
 				$rowMaxCat = mysqli_fetch_array($sqlNavCatID);
 				$navMaxCatId=$rowMaxCat[0];
 				//echo $navMaxCatId;
@@ -31,7 +33,7 @@ include 'includes/header.php';
 
 			} else {
 
-				$getTheCat=29; //category equal none
+				$getTheCat=29; //None
 
 			}
 
@@ -47,7 +49,7 @@ include 'includes/header.php';
 				$_POST["nav_cat"][$i]=29; //None
 			}
 
-			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i]." WHERE id=".$_POST["nav_id"][$i]." ";
+			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i].", loc_id=".$_GET['loc_id']." WHERE id=".$_POST["nav_id"][$i]." ";
 			//echo $navUpdate;
 			mysqli_query($db_conn, $navUpdate);
 		}
@@ -101,21 +103,22 @@ include 'includes/header.php';
 
 		//get and built pages list
 		$pagesStr="";
-		$sqlNavPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+
+		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active=1 AND loc_id=".$_GET['loc_id']." ORDER BY title");
 		//$pagesStr = "<option value=''>Custom</option>";
 
-		while ($rowNavPages = mysqli_fetch_array($sqlNavPages)) {
+		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
 
-			$navPageId=$rowNavPages['id'];
-			$navPageTitle=$rowNavPages['title'];
-			$pagesStr =  $pagesStr . "<option value=".$navPageId.">".$navPageTitle."</option>";
+			$getPageId=$rowGetPages['id'];
+			$getPageTitle=$rowGetPages['title'];
+			$pagesStr =  $pagesStr . "<option value=".$getPageId.">".$getPageTitle."</option>";
 
 		}
 
 		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 
 		//get and built existing category list
-		$sqlNavExistCat= mysqli_query($db_conn, "SELECT id, name FROM category ORDER BY name");
+		$sqlNavExistCat= mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
 		//$catExistStr = "<option value=''>Custom</option>";
 		while ($rowNavExistCat  = mysqli_fetch_array($sqlNavExistCat)) {
 			$catExistStr = $catExistStr . "<option value=".$rowNavExistCat['id']." >".$rowNavExistCat['name']."</option>";
@@ -156,7 +159,7 @@ include 'includes/header.php';
 
 		} elseif ($_GET["deletecat"] AND $_GET["deletecatname"] AND $_GET["confirm"]=="yes") {
 
-			$navCatUpdate = "UPDATE navigation SET catid='29' WHERE catid='$delCatId'";
+			$navCatUpdate = "UPDATE navigation SET catid='29' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
 			mysqli_query($db_conn, $navCatUpdate);
 
 			//delete category after clicking Yes
@@ -244,7 +247,7 @@ include 'includes/header.php';
 					<?php
 						$navCount="";
 
-						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid FROM navigation WHERE section='$getNavSection' ORDER BY sort");
+						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=".$_GET['loc_id']." ORDER BY sort");
 						while ($rowNav  = mysqli_fetch_array($sqlNav)) {
 							$navId=$rowNav['id'];
 							$navName=$rowNav['name'];
@@ -269,7 +272,7 @@ include 'includes/header.php';
 							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
 
 							//get and built category list, find selected
-							$sqlNavCat= mysqli_query($db_conn, "SELECT id, name FROM category ORDER BY name");
+							$sqlNavCat= mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
 							while ($rowNavCat  = mysqli_fetch_array($sqlNavCat)) {
 
 								$navCatId=$rowNavCat['id'];

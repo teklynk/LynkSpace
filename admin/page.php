@@ -17,8 +17,8 @@ if ($_GET["preview"]>"") {
 		echo "<h4>".$rowPagePreview['title']."</h4>";
 	}
 
-	if ($rowPagePreview["image"]>""){
-		echo "<p><img src=../uploads/".$rowPagePreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+	if ($rowPagePreview["image"]>"") {
+		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowPagePreview['image']." style='max-width:350px; max-height:150px;' /></p>";
 	}
 
 	echo $rowPagePreview['content'];
@@ -36,16 +36,6 @@ if ($_GET["preview"]>"") {
 <?php
 
 	if ($_GET["newpage"] OR $_GET["editpage"]) {
-
-		// Upload function
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$pageMsg="";
-
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-			$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-		} else {
-			$uploadMsg = "";
-		}
 
 		// Update existing page
 		if ($_GET["editpage"]) {
@@ -135,10 +125,6 @@ if ($_GET["preview"]>"") {
 		</div>
 		<hr/>
         <div class="form-group">
-            <label>Upload Image</label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-        </div>
-        <div class="form-group">
         	<img src="<?php echo $image;?>" id="page_image_preview" style="max-width:140px; height:auto; display:block;"/>
         </div>
 		<div class="form-group">
@@ -179,7 +165,7 @@ if ($_GET["preview"]>"") {
 		<hr/>
 
 		<?php
-		$sqlSetup = mysqli_query($db_conn, "SELECT disqus, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']);
+		$sqlSetup = mysqli_query($db_conn, "SELECT disqus, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 		$rowSetup = mysqli_fetch_array($sqlSetup);
 
 		// Hide Disqus option if disqus is not enabled on Setup page.
@@ -226,7 +212,7 @@ if ($_GET["preview"]>"") {
 		//delete page
 		if ($_GET["deletepage"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
 		} elseif ($_GET["deletepage"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
@@ -251,13 +237,13 @@ if ($_GET["preview"]>"") {
 		//update heading on submit
 		if (!empty($_POST["main_heading"])) {
 
-			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."'";
+			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
-		$sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup");
+		$sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 		$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
@@ -313,7 +299,7 @@ if ($_GET["preview"]>"") {
 				</thead>
 				<tbody>
 				<?php
-					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, loc_id FROM pages WHERE loc_id = ".$_GET['loc_id']." ORDER BY datetime DESC");
+					$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, loc_id FROM pages WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
 					while ($rowPages = mysqli_fetch_array($sqlPages)) {
 
 						$pageId=$rowPages['id'];
@@ -335,7 +321,7 @@ if ($_GET["preview"]>"") {
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', '?preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 

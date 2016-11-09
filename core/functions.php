@@ -29,6 +29,8 @@ function getPage(){
   	global $pageDisqus;
 	global $db_conn;
 
+	$_GET['ref'] = "";
+
 	if (ctype_digit($_GET["ref"])){
 		$pageRefId=$_GET["ref"];
 		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id='$pageRefId' AND loc_id=".$_GET['loc_id']." ");
@@ -37,7 +39,7 @@ function getPage(){
 		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
 
 			if ($rowPage["image"]>"") {
-				$pageImage = "<img class='img-responsive' src='uploads/".$rowPage["image"]."' alt='".$rowPage["title"]."' title='".$rowPage["title"]."'>";
+				$pageImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowPage["image"]."' alt='".$rowPage["title"]."' title='".$rowPage["title"]."'>";
 			}
 
 			$pageTitle = $rowPage['title'];
@@ -77,7 +79,7 @@ function getAbout(){
 	}
 
 	if (!empty($rowAbout["image"])) {
-		$aboutImage = "<img class='img-responsive' src='uploads/".$rowAbout["image"]."' alt='".$rowAbout["image"]."' title='".$rowAbout["image"]."'>";
+		$aboutImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowAbout["image"]."' alt='".$rowAbout["image"]."' title='".$rowAbout["image"]."'>";
 	}
 
 	$aboutImageAlign = $rowAbout["image_align"];
@@ -249,6 +251,7 @@ function getNav($navSection,$dropdown,$pull){
 	$sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
 	//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.loc_id, category.nav_loc_id
 	$tempLink = 0;
+	$navWin = "";
 	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
 		if ($rowNavLinks[6]=='true'){
@@ -408,7 +411,7 @@ function getSlider($sliderType) {
 		$sliderOrderBy = "ORDER BY RAND() LIMIT 1";
 	}
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active FROM slider WHERE active=1 $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active=1 AND loc_id=".$_GET['loc_id']." $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount=0;
 
@@ -430,7 +433,7 @@ function getSlider($sliderType) {
                 echo "<div class='item $slideActive'>";
 
                 if (!empty($rowSlider["image"])) {
-                    echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+                    echo "<div class='fill' style='background-image:url(uploads/".$_GET['loc_id']."/".$rowSlider['image'].");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
                 }
@@ -442,7 +445,7 @@ function getSlider($sliderType) {
 
                 if (!empty($rowSlider['link'])){
 					if (ctype_digit($rowSlider['link'])) {
-						echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+						echo "<a href='page.php?loc_id=".$_GET['loc_id']."&ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 					} else {
 						echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 					}
@@ -474,7 +477,7 @@ function getSlider($sliderType) {
             echo "<div class='item active'>";
 
         	if (!empty($rowSlider["image"])) {
-                echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+                echo "<div class='fill' style='background-image:url(uploads/".$_GET['loc_id']."/".$rowSlider['image'].");'></div>";
             } else {
                 echo "<div class='fill'></div>";
             }
@@ -551,7 +554,7 @@ function getFeatured(){
 	}
 
 	if (!empty($rowFeatured["image"])) {
-		$featuredImage = "<img class='img-responsive' src='uploads/".$rowFeatured["image"]."' alt='".$rowFeatured["image"]."' title='".$rowFeatured["image"]."'>";
+		$featuredImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowFeatured["image"]."' alt='".$rowFeatured["image"]."' title='".$rowFeatured["image"]."'>";
 	}
 
 	$featuredImageAlign = $rowFeatured["image_align"];
@@ -562,7 +565,8 @@ getSetup();
 
 //Call these functions depending on which page you are visiting
 //Sets the page title
-if ($_GET['ref']>""){
+$_GET['ref'] = "";
+if (is_numeric($_GET['ref'])>""){
     getPage();
     $theTitle = $setupTitle." - ".$pageTitle;
 } else if (basename($_SERVER['PHP_SELF'])=="about.php"){

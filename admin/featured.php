@@ -23,11 +23,6 @@ include 'includes/header.php';
 		$pageMsg="<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 
-	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-	} else {
-		$uploadMsg = "";
-	}
 ?>
    <div class="row">
 		<div class="col-lg-12">
@@ -49,7 +44,7 @@ include 'includes/header.php';
 		if ($rowFeatured["image"]=="") {
 			$thumbNail = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$thumbNail = "../uploads/".$rowFeatured["image"];
+			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowFeatured["image"];
 		}
 
 		//image align status
