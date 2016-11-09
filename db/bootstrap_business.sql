@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2016 at 10:16 PM
+-- Generation Time: Nov 08, 2016 at 11:02 PM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -55,15 +55,15 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `loc_
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `loc_id` int(11) NOT NULL,
+  `nav_loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `loc_id`) VALUES
+INSERT INTO `category` (`id`, `name`, `nav_loc_id`) VALUES
 (2, 'FAQ', 1),
 (29, 'None', 1);
 
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `navigation`
@@ -217,9 +217,9 @@ CREATE TABLE IF NOT EXISTS `navigation` (
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`) VALUES
 (37, 1, 'Contact Us', 'contact.php', 29, 'Footer', 'false', 1),
-(41, 5, 'Contact Us', 'contact.php', 29, 'Top', 'false', 1),
-(42, 1, 'About Us', 'about.php', 29, 'Top', 'false', 1),
-(43, 2, 'Careers', 'page.php?ref=28', 29, 'Top', 'false', 1),
+(41, 5, 'Contact Us', 'contact.php', 29, 'Top', 'false', 0),
+(42, 1, 'About Us', 'about.php', 2, 'Top', 'false', 1),
+(43, 2, 'Careers', 'page.php?ref=28', 2, 'Top', 'false', 1),
 (44, 3, 'Meet The Team', 'team.php', 29, 'Top', 'false', 1),
 (45, 4, 'Services', 'services.php', 29, 'Top', 'false', 1),
 (48, 4, 'Positions', 'page.php?ref=34', 29, 'Footer', 'false', 1),
