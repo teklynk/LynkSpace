@@ -93,7 +93,7 @@ if ($IPrange <> '') {
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
-        if ($handle = opendir($image_dir ."/".$_GET['loc_id'])) {
+        if ($handle = opendir($image_dir)) {
 
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
@@ -102,7 +102,7 @@ if ($IPrange <> '') {
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
 
-                $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$_GET['loc_id']."/".$imgfile."'},";
+                $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$imgfile."'},";
             }
 
             closedir($handle);

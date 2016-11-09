@@ -109,10 +109,10 @@ if ($_GET["preview"]>"") {
 		if ($rowPages["image"]=="") {
 			$image = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$image = "../uploads/".$_GET['loc_id']."/".$rowPages["image"];
+			$image = "../uploads/".$_GET["loc_id"]."/".$rowPages["image"];
 		}
 
-		//image algin status
+		//image align status
 		if ($rowPages['image_align']=="left") {
 			$selAlignLeft="SELECTED";
 			$selAlignRight="";
@@ -146,7 +146,7 @@ if ($_GET["preview"]>"") {
 			<select class="form-control input-sm" name="page_image" id="page_image">
 				<option value="">None</option>
 				<?php
-					if ($handle = opendir($target_dir."/".$_GET['loc_id'])) {
+					if ($handle = opendir($target_dir)) {
 
 						while (false !== ($file = readdir($handle))) {
 							if ('.' === $file) continue;

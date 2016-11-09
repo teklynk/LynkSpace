@@ -8,14 +8,21 @@ include 'dbconn.php';
 $IPrange = "";
 
 //Edit values for your web site. leave as is in most cases.
-$image_dir = "../uploads/"; //physical path to uploads folder
-$image_url = "//".$_SERVER['HTTP_HOST']."/businessCMS/uploads/"; //web path to uploads folder
-$image_baseURL = "uploads/";
+$image_dir = "../uploads/".$_GET['loc_id']."/"; //physical path to uploads folder
+$image_url = "//".$_SERVER['HTTP_HOST']."/businessCMS/uploads/".$_GET['loc_id']."/"; //web path to uploads folder
+$image_baseURL = "uploads/".$_GET['loc_id']."/";
+
+//Create location upload folder if it does not exist.
+if (!file_exists($image_dir)) {
+    if (!is_dir('file')) {
+        mkdir($image_dir, 0755);
+    }
+}
 
 $target_dir = $image_dir;
 
 //Upload function
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
 
 //Custom CSS file paths
 $customCss_dir = '../css/custom.css'; //physical path to custom css file
