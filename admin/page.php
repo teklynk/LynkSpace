@@ -109,7 +109,7 @@ if ($_GET["preview"]>"") {
 		if ($rowPages["image"]=="") {
 			$image = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$image = "../uploads/".$rowPages["image"];
+			$image = "../uploads/".$_GET['loc_id']."/".$rowPages["image"];
 		}
 
 		//image algin status
@@ -146,7 +146,7 @@ if ($_GET["preview"]>"") {
 			<select class="form-control input-sm" name="page_image" id="page_image">
 				<option value="">None</option>
 				<?php
-					if ($handle = opendir($target_dir)) {
+					if ($handle = opendir($target_dir."/".$_GET['loc_id'])) {
 
 						while (false !== ($file = readdir($handle))) {
 							if ('.' === $file) continue;

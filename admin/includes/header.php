@@ -89,11 +89,11 @@ if ($IPrange <> '') {
     $_SESSION['loc_name'] = $rowGetLocation['name'];
   }
 
-  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1"); //part of while loop
+  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 "); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
         //Build list of images in uploads folder for tinymce editor
-        if ($handle = opendir($image_dir)) {
+        if ($handle = opendir($image_dir ."/".$_GET['loc_id'])) {
 
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
@@ -102,14 +102,14 @@ if ($IPrange <> '') {
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
 
-                $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$imgfile."'},";
+                $fileListJson = $fileListJson . "{title: '".$imgfile."', value: '".$image_url.$_GET['loc_id']."/".$imgfile."'},";
             }
 
             closedir($handle);
         }
 
         //get and build page list for TinyMCE
-        $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 ORDER BY title");
+        $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 AND loc_id='".$_GET['loc_id']."' ORDER BY title");
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
