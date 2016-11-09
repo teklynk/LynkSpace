@@ -66,10 +66,9 @@ if (!empty($_POST["site_title"])) {
 					<label>Disqus.com Universal Code <small><a href="https://disqus.com/admin/universalcode/" target="_blank">Setup Instructions</a></small></label>
 					<textarea class="form-control input-sm" name="site_disqus" rows="3" placeholder="Add Disqus comment system to your web pages"><?php echo $rowSetup['disqus']; ?></textarea>
 				</div>
-				<div class="form-group">
-					<label>Google Analytics</label>
-					<input class="form-control input-sm" name="site_google" value="<?php echo $rowSetup['googleanalytics']; ?>" placeholder="UA-XXXX-Y">
-				</div>
+
+				<input type="hidden" name="site_google" value="">
+
 				<?php
 					if ($row['tinymce']==1) {
 						$selEditor1="SELECTED";

@@ -154,7 +154,7 @@ if ($IPrange <> '') {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Admin Panel <?php echo ' - ' . $_SESSION['loc_name']; ?></a>
+                <a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name']; }?></a>
 
             </div>
             <!-- Top Menu Items -->
