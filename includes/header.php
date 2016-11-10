@@ -8,7 +8,7 @@ if(!defined('inc_access')) {
 <head>
 <meta charset="utf-8">
     <?php
-      include 'db/dbsetup.php'; //contains DB connection string and global variables
+      include 'db/config.php'; //contains DB connection string and global variables
       include 'core/functions.php'; //contains functions used on every front-end template
     ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,7 +76,7 @@ if(!defined('inc_access')) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><?php echo $setupTitle;?></a>
+            <a class="navbar-brand" href="index.php?loc_id=<?php echo $_GET['loc_id'];?>"><?php echo $setupTitle;?></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -90,5 +90,4 @@ if(!defined('inc_access')) {
 </nav>
 <?php
 getLocation();
-//include 'slider_inc.php';
 ?>

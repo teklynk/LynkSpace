@@ -112,13 +112,21 @@ if ($_GET["preview"]>"") {
 		}
 ?>
 	<form role="pageForm" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Status</label>
-            <select class="form-control input-sm" name="page_status">
-                <option value="1" <?php if($_GET["editpage"]){echo $selActive1;}?>>Active</option>
-                <option value="0" <?php if($_GET["editpage"]){echo $selActive0;}?>>Draft</option>
-            </select>
-        </div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group" id="searchoptions">
+					<label>Status</label>
+					<div class="checkbox">
+						<label>
+							<input class="page_status_checkbox" id="page_status" name="page_status" type="checkbox" <?php if($_GET["editpage"]){echo $selActive1;}?> data-toggle="toggle">
+							Active
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
 			<input class="form-control input-sm" name="page_title" value="<?php if($_GET["editpage"]){echo $rowPages['title'];} ?>" placeholder="Page Title">

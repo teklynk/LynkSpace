@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 if (!empty($_POST["site_title"])) {
@@ -14,11 +14,11 @@ if (!empty($_POST["site_title"])) {
 	//update table on submit
 	if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 		//Do Update
-		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
+		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', config='".$_POST["config"]."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
 		mysqli_query($db_conn, $setupUpdate);
 	} else {
 		//Do Insert
-		$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST["site_title"]."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', '".mysqli_real_escape_string($db_conn, $_POST["site_disqus"])."', '".$_POST["site_google"]."', ".$_POST["site_tinymce"].", ".$_GET["loc_id"].")";
+		$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST["site_title"]."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', '".$_POST['config']."', '".mysqli_real_escape_string($db_conn, $_POST["site_disqus"])."', '".$_POST["site_google"]."', ".$_POST["site_tinymce"].", ".$_GET["loc_id"].")";
 		mysqli_query($db_conn, $setupInsert);
 	}
 
@@ -38,6 +38,18 @@ if (!empty($_POST["site_title"])) {
 		<?php
 		if ($pageMsg !="") {
 			echo $pageMsg;
+		}
+
+		if ($rowSetup['ls2pac'] =='true') {
+			$isActive_ls2pac="CHECKED";
+		} else {
+			$isActive_ls2pac="";
+		}
+
+		if ($rowSetup['ls2kids'] =='true') {
+			$isActive_ls2kids="CHECKED";
+		} else {
+			$isActive_ls2kids="";
 		}
 		?>
 			<form role="setupForm" name="setupForm" method="post" action="">
@@ -62,21 +74,49 @@ if (!empty($_POST["site_title"])) {
 					<label>Header Code</label>
 					<textarea class="form-control input-sm" name="site_header" rows="3" placeholder="Add javascript to your main page header"><?php echo $rowSetup['headercode']; ?></textarea>
 				</div>
+				<hr/>
 				<div class="form-group">
-					<label>Disqus.com Universal Code <small><a href="https://disqus.com/admin/universalcode/" target="_blank">Setup Instructions</a></small></label>
-					<textarea class="form-control input-sm" name="site_disqus" rows="3" placeholder="Add Disqus comment system to your web pages"><?php echo $rowSetup['disqus']; ?></textarea>
+					<label>PAC Settings</label>
 				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>Config</label>
+							<input class="form-control input-sm" name="site_config" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group" id="searchoptions">
+							<label>Search Options</label>
+							<div class="checkbox">
+								<label>
+									<input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">
+									LS2PAC
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">
+									LS2Kids
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="site_disqus" value="">
 
 				<input type="hidden" name="site_google" value="">
 
 				<?php
-					if ($row['tinymce']==1) {
+/*					if ($row['tinymce']==1) {
 						$selEditor1="SELECTED";
 						$selEditor0="";
 					} else {
 						$selEditor0="SELECTED";
 						$selEditor1="";
-					}
+					}*/
 				?>
 
 				<input type="hidden" name="site_tinymce" value="1">

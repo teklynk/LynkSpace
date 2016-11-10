@@ -169,7 +169,13 @@ $(document).ready(function () {
 
 	$('#nav_Table .nav_win_checkbox').change (
 		function(){
-			$.get('ajax/updateNewWin.php?update=true', { id: this.id, checked: this.checked });
+			$.get('ajax/update_navwin.php?update=true', { id: this.id, checked: this.checked });
+		}
+	);
+
+	$('#searchoptions .searchopt_checkbox').change (
+		function(){
+			$.get('ajax/update_searchoptions.php?update=true', { id: this.id, checked: this.checked });
 		}
 	);
 

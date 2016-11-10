@@ -5,7 +5,7 @@ session_start();
 //check if user is logged in and that the requesting page is valid.
 if (isset($_SESSION["loggedIn"]) AND $_SESSION["session_hash"]==md5($_SESSION["user_name"])) {
 
-	include '../../db/dbsetup.php';
+	include '../../db/config.php';
 
 	if (!empty($_GET) AND $_GET["update"]) {
 		$navWinID = $_GET["id"];
@@ -16,8 +16,7 @@ if (isset($_SESSION["loggedIn"]) AND $_SESSION["session_hash"]==md5($_SESSION["u
 
 		mysqli_close($db_conn);
 
-		echo 'Navigation target set';
-		die();
+		die('Navigation target set');
 	}
 
 } else {

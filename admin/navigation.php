@@ -33,11 +33,11 @@ include 'includes/header.php';
 
 			} else {
 
-				$getTheCat=29; //None
+				$getTheCat=0; //None
 
 			}
 
-			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win) VALUES ('".$_POST["nav_newname"]."', '".$_POST["nav_newurl"]."', 0, $getTheCat, '".$getNavSection."','off')";
+			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, loc_id) VALUES ('".$_POST["nav_newname"]."', '".$_POST["nav_newurl"]."', 0, $getTheCat, '".$getNavSection."','off', ".$_GET['loc_id'].")";
 			//echo $navNew;
 			mysqli_query($db_conn, $navNew);
 
@@ -46,7 +46,7 @@ include 'includes/header.php';
 		for($i=0; $i<$_POST["nav_count"]; $i++) {
 
 			if ($_POST["nav_cat"][$i]=="") {
-				$_POST["nav_cat"][$i]=29; //None
+				$_POST["nav_cat"][$i]=0; //None
 			}
 
 			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i].", loc_id=".$_GET['loc_id']." WHERE id=".$_POST["nav_id"][$i]." ";
@@ -159,7 +159,7 @@ include 'includes/header.php';
 
 		} elseif ($_GET["deletecat"] AND $_GET["deletecatname"] AND $_GET["confirm"]=="yes") {
 
-			$navCatUpdate = "UPDATE navigation SET catid='29' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
+			$navCatUpdate = "UPDATE navigation SET catid='0' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
 			mysqli_query($db_conn, $navCatUpdate);
 
 			//delete category after clicking Yes

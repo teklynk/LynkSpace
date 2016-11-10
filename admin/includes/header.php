@@ -15,9 +15,9 @@ $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 <head>
 <?php
 //DB connection string and Global variables
-include '../db/dbsetup.php';
+include '../db/config.php';
 
-//IP Range is set in dbsetup
+//IP Range is set in config
 if ($IPrange <> '') {
 	if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange) ){
 		die('Permission denied'); //Do not execute any more code on the page
@@ -43,8 +43,12 @@ if ($IPrange <> '') {
 
 	<!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" >
-    <!--Bootstrap-Selects-->
+
+    <!--Bootstrap-Selects -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" >
+
+    <!--Bootstrap Toggle-->
+    <link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -54,6 +58,9 @@ if ($IPrange <> '') {
 
     <!--Bootstrap-Selects-JS-->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.js"></script>
+
+    <!--Bootstrap-Toggle-JS-->
+    <script type="text/javascript" language="javascript" src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <!-- TinyMCE CDN -->
 	<script type="text/javascript" language="javascript"  src="//cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -185,7 +192,7 @@ if ($IPrange <> '') {
              <ul class="nav navbar-right top-nav">
                   <li style="margin-top:8px;">
                     <form name="loc_menu" method="get">
-                    <select class="selectpicker" data-container="navbar" data-width="auto" data-size="24" data-live-search="true" name="loc_id" id="loc_id">
+                    <select class="selectpicker" data-container="top-nav" data-width="auto" data-size="5" data-live-search="true" name="loc_id" id="loc_id">
                       <?php
                       while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
@@ -277,7 +284,7 @@ if ($IPrange <> '') {
     echo "<div id='page-wrapper'>";
     echo "<div class='container-fluid'>";
 
-    //Redirect user if session not set or has expired. sessionTimeout is set in dbsetup.
+    //Redirect user if session not set or has expired. sessionTimeout is set in config.
     if (basename($_SERVER['PHP_SELF']) != 'index.php') {
         if (basename($_SERVER['PHP_SELF']) != 'install.php') {
             if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //session timeout

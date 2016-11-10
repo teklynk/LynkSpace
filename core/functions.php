@@ -258,7 +258,7 @@ function getNav($navSection,$dropdown,$pull){
 			$navWin = "target='_blank'";
 		}
 
-		if ($rowNavLinks[4] == $rowNavLinks[8] AND $rowNavLinks[4] != 29) { //NOTE: 29=None in the category table
+		if ($rowNavLinks[4] == $rowNavLinks[8] AND $rowNavLinks[4] != 0) { //NOTE: 0=None in the category table
 
 			if ($rowNavLinks[4] != $tempLink) {
 				$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
