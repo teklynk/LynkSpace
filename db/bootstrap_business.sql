@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2016 at 11:02 PM
+-- Generation Time: Nov 10, 2016 at 11:24 PM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -57,15 +57,15 @@ CREATE TABLE IF NOT EXISTS `category` (
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `nav_loc_id`) VALUES
-(2, 'FAQ', 1),
-(29, 'None', 1);
+(0, 'None', 1),
+(2, 'FAQ', 1);
 
 -- --------------------------------------------------------
 
@@ -209,23 +209,23 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`) VALUES
-(37, 1, 'Contact Us', 'contact.php', 29, 'Footer', 'false', 1),
-(41, 5, 'Contact Us', 'contact.php', 29, 'Top', 'false', 0),
-(42, 1, 'About Us', 'about.php', 2, 'Top', 'false', 1),
+(37, 1, 'Contact Us', 'contact.php', 0, 'Footer', 'false', 1),
+(41, 5, 'Contact Us', 'contact.php', 0, 'Top', 'false', 2),
+(42, 1, 'About Us', 'about.php', 2, 'Top', 'true', 1),
 (43, 2, 'Careers', 'page.php?ref=28', 2, 'Top', 'false', 1),
-(44, 3, 'Meet The Team', 'team.php', 29, 'Top', 'false', 1),
-(45, 4, 'Services', 'services.php', 29, 'Top', 'false', 1),
-(48, 4, 'Positions', 'page.php?ref=34', 29, 'Footer', 'false', 1),
-(50, 2, 'Services', 'services.php', 29, 'Footer', 'false', 1),
-(51, 3, 'About', 'about.php', 29, 'Footer', 'false', 1),
-(52, 5, 'Instructables', '#', 29, 'Footer', 'true', 1);
+(44, 3, 'Meet The Team', 'team.php', 0, 'Top', 'true', 1),
+(45, 4, 'Services', 'services.php', 0, 'Top', 'false', 1),
+(48, 4, 'Positions', 'page.php?ref=34', 0, 'Footer', 'false', 1),
+(50, 2, 'Services', 'services.php', 0, 'Footer', 'false', 1),
+(51, 3, 'About', 'about.php', 0, 'Footer', 'false', 1),
+(52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1);
 
 -- --------------------------------------------------------
 
@@ -238,22 +238,25 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `title` text NOT NULL,
   `image` text NOT NULL,
   `content` text NOT NULL,
-  `active` int(11) NOT NULL,
-  `disqus` int(2) NOT NULL DEFAULT '0',
+  `active` text NOT NULL,
+  `disqus` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `datetime`, `image_align`, `loc_id`) VALUES
-(28, 'Join Our Team', 'Intelligence-Fusion1.jpg', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?ref=34">View Open Positions</a></p>', 1, 1, '2016-08-15 21:16:49', 'right', 1),
-(33, 'Trusted by 15 of the 20 Largest Urban Areas to Make Smarter Risk Informed Decisions', 'Customers1.jpg', '<p>From federal, state and local law enforcement agencies to school districts, our products create an informed network of security experts that help ensure the safety of our communities.</p>\r\n<p>The&nbsp;provides a robust suite of applications that connects the front-line elements of the public safety community through data collection, prioritization, presentation and analysis. It is currently one of the most widely deployed solution in the nation&nbsp;and trusted by first responders to provide the right information at the right time, to do the right thing to keep themselves and their citizens safe</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><img src="//localhost/businessCMS/uploads/blackwatch_holmes.jpg" alt="blackwatch_holmes.jpg" /></p>', 1, 0, '2016-10-09 18:48:11', 'right', 1),
-(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 1, 0, '2015-07-26 02:24:41', '', 1);
+(28, 'Join Our Team', 'Intelligence-Fusion1.jpg', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?ref=34">View Open Positions</a></p>', 'true', 'false', '2016-08-15 21:16:49', 'right', 1),
+(33, 'Trusted by 15 of the 20 Largest Urban Areas to Make Smarter Risk Informed Decisions', 'cyber-security4.jpg', '<p>From federal, state and local law enforcement agencies to school districts, our products create an informed network of security experts that help ensure the safety of our communities.</p>\r\n<p>The&nbsp;provides a robust suite of applications that connects the front-line elements of the public safety community through data collection, prioritization, presentation and analysis. It is currently one of the most widely deployed solution in the nation&nbsp;and trusted by first responders to provide the right information at the right time, to do the right thing to keep themselves and their citizens safe</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><img src="//localhost/businessCMS/uploads/1/blackwatch_holmes.jpg" alt="blackwatch_holmes.jpg" /></p>', 'false', 'true', '2016-11-09 04:48:29', 'right', 1),
+(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', 'false', '2015-07-26 02:24:41', '', 1),
+(35, 'Test location 2', 'insider.jpg', '<p>test</p>', 'true', 'false', '2016-11-09 04:17:58', 'left', 2),
+(36, 'Test location 4', 'school-safety1.jpg', '', 'true', 'true', '2016-11-11 03:27:49', 'right', 1),
+(37, 'Test location 5', 'insider.jpg', '<p>test</p>', 'false', 'true', '2016-11-11 03:44:32', 'right', 1);
 
 -- --------------------------------------------------------
 
@@ -364,6 +367,9 @@ CREATE TABLE IF NOT EXISTS `setup` (
   `keywords` text NOT NULL,
   `description` text NOT NULL,
   `headercode` text NOT NULL,
+  `config` text NOT NULL,
+  `ls2pac` text NOT NULL,
+  `ls2kids` text NOT NULL,
   `author` text NOT NULL,
   `googleanalytics` text NOT NULL,
   `tinymce` int(11) NOT NULL DEFAULT '1',
@@ -384,10 +390,10 @@ CREATE TABLE IF NOT EXISTS `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`, `disqus`, `loc_id`) VALUES
-(1, 'My Site', '', '', '', 'John Doe', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '<div id="disqus_thread"></div>\r\n<script type="text/javascript">\r\n    /* * * CONFIGURATION VARIABLES * * */\r\n    var disqus_shortname = ''#'';\r\n    \r\n    /* * * DON''T EDIT BELOW THIS LINE * * */\r\n    (function() {\r\n        var dsq = document.createElement(''script''); dsq.type = ''text/javascript''; dsq.async = true;\r\n        dsq.src = ''//'' + disqus_shortname + ''.disqus.com/embed.js'';\r\n        (document.getElementsByTagName(''head'')[0] || document.getElementsByTagName(''body'')[0]).appendChild(dsq);\r\n    })();\r\n</script>\r\n<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>', 1),
-(2, 'test two 2222', '', '', '', '', '', 1, '', '', '', '', '', '', '', '', '', 2),
-(3, 'test 3', 'test, test3', '', '', '', '', 1, '', '', '', '', '', '', '', '', '', 3);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `ls2pac`, `ls2kids`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`, `disqus`, `loc_id`) VALUES
+(1, 'My Site', '', '', '', '', 'false', 'true', 'John Doe', 'UA-123123123', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Our areas of expertise.', 'Decision makers rely on our solutions everyday to protect against threats to some of the most mission-critical and high-profile networks and institutions in the world. ', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '<div id="disqus_thread"></div>\r\n<script type="text/javascript">\r\n    /* * * CONFIGURATION VARIABLES * * */\r\n    var disqus_shortname = ''#'';\r\n    \r\n    /* * * DON''T EDIT BELOW THIS LINE * * */\r\n    (function() {\r\n        var dsq = document.createElement(''script''); dsq.type = ''text/javascript''; dsq.async = true;\r\n        dsq.src = ''//'' + disqus_shortname + ''.disqus.com/embed.js'';\r\n        (document.getElementsByTagName(''head'')[0] || document.getElementsByTagName(''body'')[0]).appendChild(dsq);\r\n    })();\r\n</script>\r\n<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>', 1),
+(2, 'test two 2222', '', '', '', '', '', '', '', '', 1, '', '', '', '', '', '', '', '', '', 2),
+(3, 'test 3', 'test, test3', '', '', '', '', '', '', '', 1, '', '', '', '', '', '', '', '', '', 3);
 
 -- --------------------------------------------------------
 
@@ -401,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `title` text NOT NULL,
   `link` text NOT NULL,
   `content` text NOT NULL,
-  `active` int(11) NOT NULL,
+  `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -412,10 +418,10 @@ CREATE TABLE IF NOT EXISTS `slider` (
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`, `loc_id`) VALUES
-(3, 'Intelligence-Fusion1.jpg', 'INTELLIGENCE, SECURITY, PERFORMANCE', '', 'Our expertise in large-scale networks and advanced threat analytics has led us to develop a full range of innovative products and industry leading services that help secure and maximize enterprise operations.', 1, '2016-11-08 02:18:51', 1),
-(4, 'cyber-security4.jpg', 'SECURE AND RELIABLE', '', 'Cyber Risk Analysis', 1, '2016-11-08 02:18:56', 1),
-(5, 'insider.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 1, '2016-11-08 02:18:54', 1),
-(6, 'school-safety1.jpg', 'Know your schools, detect threats sooner and respond faster', '34', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 1, '2016-11-08 02:18:59', 1);
+(3, 'Intelligence-Fusion1.jpg', 'INTELLIGENCE, SECURITY, PERFORMANCE', '', 'Our expertise in large-scale networks and advanced threat analytics has led us to develop a full range of innovative products and industry leading services that help secure and maximize enterprise operations.', 'true', '2016-11-11 03:51:52', 1),
+(4, 'cyber-security4.jpg', 'SECURE AND RELIABLE', '', 'Cyber Risk Analysis', 'true', '2016-11-11 04:18:36', 1),
+(5, 'insider.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-11-11 03:51:57', 2),
+(6, 'school-safety1.jpg', 'Know your schools, detect threats sooner and respond faster', '34', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-11-11 04:22:26', 2);
 
 -- --------------------------------------------------------
 
