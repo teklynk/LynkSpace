@@ -58,7 +58,7 @@ if ($_GET["preview"]>"") {
 
 			//insert data on submit
 			if (!empty($_POST["slide_title"])) {
-				$slideInsert = "INSERT INTO slider (title, content, link, image, active, loc_id) VALUES ('".$_POST["slide_title"]."', '".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', '".$_POST["slide_link"]."', '".$_POST["slide_image"]."', ".$_POST["slide_status"].", ".$_GET["loc_id"].")";
+				$slideInsert = "INSERT INTO slider (title, content, link, image, active, loc_id) VALUES ('".$_POST["slide_title"]."', '".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', '".$_POST["slide_link"]."', '".$_POST["slide_image"]."', 'true', ".$_GET["loc_id"].")";
 				mysqli_query($db_conn, $slideInsert);
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST["slide_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
@@ -85,12 +85,10 @@ if ($_GET["preview"]>"") {
 
 		if ($_GET["editslide"]) {
 			//active status
-			if ($rowSlides['active']==1) {
-				$selActive1="SELECTED";
-				$selActive0="";
+			if ($rowSlides['active']=='true') {
+				$selActive="CHECKED";
 			} else {
-				$selActive0="SELECTED";
-				$selActive1="";
+				$selActive="";
 			}
 		}
 
@@ -101,13 +99,20 @@ if ($_GET["preview"]>"") {
 		}
 ?>
 	<form role="slideForm" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Status</label>
-            <select class="form-control input-sm" name="slide_status">
-                <option value="1" <?php if($_GET["editslide"]){echo $selActive1;}?>>Active</option>
-                <option value="0" <?php if($_GET["editslide"]){echo $selActive0;} ?>>Draft</option>
-            </select>
-        </div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group" id="slideractive">
+					<label>Active</label>
+					<div class="checkbox">
+						<label>
+							<input class="slider_status_checkbox" id="<?php echo $_GET["editslide"]?>" name="slider_status" type="checkbox" <?php if($_GET["editslide"]){echo $selActive;}?> data-toggle="toggle">
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
 			<input class="form-control input-sm" name="slide_title" value="<?php if($_GET["editslide"]){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
@@ -152,7 +157,7 @@ if ($_GET["preview"]>"") {
 				<option value="">None</option>
 				<?php
 					$pagesStr = "";
-					$sqlSliderLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active=1 AND loc_id=".$_GET['loc_id']." ORDER BY title ASC ");
+					$sqlSliderLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title ASC ");
 					while ($rowSliderLink = mysqli_fetch_array($sqlSliderLink)) {
 						$sliderLinkId = $rowSliderLink['id'];
 						$sliderLinkTitle = $rowSliderLink['title'];
@@ -279,7 +284,7 @@ if ($_GET["preview"]>"") {
 		<thead>
 		<tr>
 		<th>Slide Title</th>
-		<th>Status</th>
+		<th>Active</th>
 		<th>Actions</th>
 		</tr>
 		</thead>
@@ -293,8 +298,8 @@ if ($_GET["preview"]>"") {
 			$slideContent=$rowSlides['content'];
 			$slideActive=$rowSlides['active'];
 
-			if ($rowSlides['active']==0){
-				$isActive="<i style='color:red;'>(Draft)</i>";
+			if ($rowSlides['active']=='true'){
+				$isActive="CHECKED";
 			} else {
 				$isActive="";
 			}
@@ -302,7 +307,7 @@ if ($_GET["preview"]>"") {
 			echo "<tr>
 			<td><a href='?loc_id=".$_GET['loc_id']."&editslide=$slideId' title='Edit'>".$slideTitle."</a></td>
 			<td class='col-xs-1'>
-			<span>".$isActive."</span>
+			<input data-toggle='toggle' title='Page Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' ".$isActive.">
 			</td>
 			<td class='col-xs-2'>
 			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>

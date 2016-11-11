@@ -288,7 +288,7 @@ include 'includes/header.php';
 							}
 
 							echo "</select></td>
-							<td class='col-xs-1'><input data-toggle='tooltip' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' ".$isActive."></td>
+							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' ".$isActive."></td>
 							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?section=".$getNavSection."&deletenav=$navId&deletename=".$navName."'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
 						}
