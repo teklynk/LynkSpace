@@ -1,11 +1,9 @@
 <IfModule mod_rewrite.c>
-# enable rewrite engine
-RewriteEngine On
-
-# if requested url does not exist pass it as path info to index.php
-RewriteRule ^$ page.php?/ [QSA,L]
+    Options +FollowSymlinks
+    RewriteEngine On
+RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule (.*) page.php?/$1 [QSA,L]
-RewriteRule ^/page/([0-9]+)\.html /page.php?ref=$1
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ /$1.php [L,QSA]
 </IfModule>
