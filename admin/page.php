@@ -60,7 +60,7 @@ if ($_GET["preview"]>"") {
 
 			//insert data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', ".$_POST["page_status"].", ".$_POST["page_disqus"].", ".$_GET["loc_id"].")";
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', 'true', 'true', ".$_GET["loc_id"].")";
 				mysqli_query($db_conn, $pageInsert);
 
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -78,21 +78,17 @@ if ($_GET["preview"]>"") {
 
 		if ($_GET["editpage"]) {
 			//active status
-			if ($rowPages['active']==1) {
-				$selActive1="SELECTED";
-				$selActive0="";
+			if ($rowPages['active']=='true') {
+				$selActive="CHECKED";
 			} else {
-				$selActive0="SELECTED";
-				$selActive1="";
+				$selActive="";
 			}
 
 			//comments status
-			if ($rowPages['disqus']==1) {
-				$selDisqus1="CHECKED";
-				$selDisqus0="";
+			if ($rowPages['disqus']=='true') {
+				$selDisqus="CHECKED";
 			} else {
-				$selDisqus0="CHECKED";
-				$selDisqus1="";
+				$selDisqus="";
 			}
 		}
 
@@ -115,11 +111,11 @@ if ($_GET["preview"]>"") {
 
 		<div class="row">
 			<div class="col-lg-4">
-				<div class="form-group" id="searchoptions">
+				<div class="form-group" id="pageactive">
 					<label>Active</label>
 					<div class="checkbox">
 						<label>
-							<input class="page_status_checkbox" id="page_status" name="page_status" type="checkbox" <?php if($_GET["editpage"]){echo $selActive1;}?> data-toggle="toggle">
+							<input class="page_status_checkbox" id="<?php echo $_GET["editpage"]?>" name="page_status" type="checkbox" <?php if($_GET["editpage"]){echo $selActive;}?> data-toggle="toggle">
 						</label>
 					</div>
 				</div>
@@ -178,17 +174,24 @@ if ($_GET["preview"]>"") {
 		// Hide Disqus option if disqus is not enabled on Setup page.
 		if (empty($rowSetup['disqus'])) {
 
-			echo "<input type='hidden' name='page_disqus' value='0'>";
+			echo "<input type='hidden' name='page_disqus' value='false'>";
 
 		} else {
 		?>
-		<div class="form-group">
-            <label>Allow Comments (Disqus)</label>
-            <select class="form-control input-sm" name="page_disqus">
-                <option value="1" <?php if($_GET["editpage"]){echo $selDisqus1;}?>>Yes</option>
-                <option value="0" <?php if($_GET["editpage"]){echo $selDisqus0;}?>>No</option>
-            </select>
-    	</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group" id="pagedisqus">
+					<label>Allow Comments (Disqus)</label>
+					<div class="checkbox">
+						<label>
+							<input class="checkbox page_disqus_checkbox" id="<?php echo $_GET["editpage"]?>" name="page_disqus" type="checkbox" <?php if($_GET["editpage"]){echo $selDisqus;}?> data-toggle="toggle">
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<hr/>
 		<?php
 		}
@@ -300,7 +303,7 @@ if ($_GET["preview"]>"") {
 				<thead>
 					<tr>
 						<th>Page Title</th>
-						<th>Status</th>
+						<th>Active</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -315,8 +318,8 @@ if ($_GET["preview"]>"") {
 						$pageContent=$rowPages['content'];
 						$pageActive=$rowPages['active'];
 
-						if ($rowPages['active']==0){
-							$isActive="<i style='color:red;'>(Draft)</i>";
+						if ($rowPages['active']=='true'){
+							$isActive="CHECKED";
 						} else {
 							$isActive="";
 						}
@@ -324,7 +327,7 @@ if ($_GET["preview"]>"") {
 						echo "<tr>
 						<td><a href='?loc_id=".$_GET['loc_id']."&editpage=$pageId' title='Edit'>".$pageTitle."</a></td>
 						<td class='col-xs-1'>
-						<span>".$isActive."</span>
+						<input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', '?preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
