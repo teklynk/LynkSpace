@@ -262,7 +262,3 @@ div.version>small>a {
     min-width: 250px !important;
     min-height: 400px !important;
 }
-.bootstrap-select.btn-group .dropdown-menu.inner {
-    max-height: 400px;
-    overflow-x: auto;
-}

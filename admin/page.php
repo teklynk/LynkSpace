@@ -88,10 +88,10 @@ if ($_GET["preview"]>"") {
 
 			//comments status
 			if ($rowPages['disqus']==1) {
-				$selDisqus1="SELECTED";
+				$selDisqus1="CHECKED";
 				$selDisqus0="";
 			} else {
-				$selDisqus0="SELECTED";
+				$selDisqus0="CHECKED";
 				$selDisqus1="";
 			}
 		}
@@ -116,11 +116,10 @@ if ($_GET["preview"]>"") {
 		<div class="row">
 			<div class="col-lg-4">
 				<div class="form-group" id="searchoptions">
-					<label>Status</label>
+					<label>Active</label>
 					<div class="checkbox">
 						<label>
 							<input class="page_status_checkbox" id="page_status" name="page_status" type="checkbox" <?php if($_GET["editpage"]){echo $selActive1;}?> data-toggle="toggle">
-							Active
 						</label>
 					</div>
 				</div>

@@ -79,7 +79,7 @@ if (!empty($_POST["site_title"])) {
 					<label>PAC Settings</label>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-2">
 						<div class="form-group">
 							<label>Config</label>
 							<input class="form-control input-sm" name="site_config" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
