@@ -109,16 +109,6 @@ if (!empty($_POST["site_title"])) {
 
 				<input type="hidden" name="site_google" value="">
 
-				<?php
-/*					if ($row['tinymce']==1) {
-						$selEditor1="SELECTED";
-						$selEditor0="";
-					} else {
-						$selEditor0="SELECTED";
-						$selEditor1="";
-					}*/
-				?>
-
 				<input type="hidden" name="site_tinymce" value="1">
 
 				<hr/>

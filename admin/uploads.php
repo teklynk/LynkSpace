@@ -3,8 +3,15 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
+	//Create location upload folder if it does not exist.
+	if (is_numeric($_GET['loc_id'])) {
+		if (!file_exists($image_dir)) {
+			mkdir($image_dir, 0755);
+		}
+	}
+
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		$fileExt = substr(basename( $_FILES["fileToUpload"]["name"]),-4);
+		$fileExt = substr(basename($_FILES["fileToUpload"]["name"]),-4);
 		if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
 			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		} else {
@@ -27,7 +34,7 @@ include 'includes/header.php';
 ?>
 <script>
 $(document).ready(function() {
-	$('#example').dataTable({
+	$('#dataTable').dataTable({
 		"order": [[ 1, "desc" ]],
 		"columnDefs": [{
 		"targets": 'no-sort',
@@ -51,8 +58,9 @@ $(document).ready(function() {
 			<div class="form-group">
 				<label>Upload Image</label>
 				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="hidden" name="uploadFile" value="1">
 			</div>
-			<button type="submit" class="btn btn-default"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
+			<button type="submit" name="upload_submit" class="btn btn-default"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
 		</form>
 		</div>
 	</div>
@@ -60,7 +68,7 @@ $(document).ready(function() {
 		<div class="col-lg-12">
 			<h2>Images</h2>
 			<div>
-				<table class="table table-bordered table-hover table-striped dataTable" id="example">
+				<table class="table table-bordered table-hover table-striped dataTable" id="dataTable">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -73,7 +81,7 @@ $(document).ready(function() {
 						if ($handle = opendir($target_dir)) {
 
 							$count = 0;
-						
+
 							while (false !== ($file = readdir($handle))) {
 								if ('.' === $file) continue;
 								if ('..' === $file) continue;

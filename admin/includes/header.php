@@ -82,10 +82,6 @@ if ($IPrange <> '') {
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
   <?php
-     //Create location upload folder if it does not exist.
-    if (!file_exists($image_dir) AND is_numeric($_GET['loc_id'])) {
-        mkdir($image_dir, 0755);
-    }
 
 	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup WHERE id='".$_SESSION['loc_id']."'");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
