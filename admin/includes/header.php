@@ -13,6 +13,7 @@ $_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <?php
 //DB connection string and Global variables
 include '../db/config.php';
@@ -24,6 +25,7 @@ if ($IPrange <> '') {
 	}
 }
 ?>
+    <meta http-equiv="refresh" content="<?php echo $sessionTimeout * 60;?>;URL='index.php?logout=true'" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -265,32 +267,17 @@ if ($IPrange <> '') {
             <!-- /.navbar-collapse -->
         </nav>
 <?php
-    } else {
-        //clear all session variables
-        unset($_SESSION["user_id"]);
-        unset($_SESSION["user_name"]);
-        unset($_SESSION["timeout"]);
-        unset($_SESSION["loggedIn"]);
-        unset($_SESSION["file_referer"]);
-        unset($_SESSION["session_hash"]);
-        unset($_SESSION["loc_id"]);
-        unset($_SESSION['loc_name']);
+    } //end of big if
+
+    if (!$_SESSION['loggedIn']) {
+        if (basename($_SERVER['PHP_SELF']) != 'index.php') {
+            if (basename($_SERVER['PHP_SELF']) != 'install.php') {
+                echo "Not signed in!";
+                header('Location: index.php?logout=true');
+            }
+        }
     }
 
     echo "<div id='page-wrapper'>";
     echo "<div class='container-fluid'>";
-
-    //Redirect user if session not set or has expired. sessionTimeout is set in config.
-    if (basename($_SERVER['PHP_SELF']) != 'index.php') {
-        if (basename($_SERVER['PHP_SELF']) != 'install.php') {
-            if ($_SESSION['timeout'] + $sessionTimeout * 60 < time()) { //session timeout
-
-                if (!$_SESSION["loggedIn"]) {
-                   echo "<script>window.location.href='index.php';</script>"; //this works.
-                }
-
-                echo "<script>window.location.href='index.php';</script>"; //this works.
-            }
-        }
-    }
 ?>

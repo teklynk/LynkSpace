@@ -14,7 +14,7 @@ if (!empty($_POST["site_title"])) {
 	//update table on submit
 	if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 		//Do Update
-		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', config='".$_POST["config"]."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
+		$setupUpdate = "UPDATE setup SET title='".$_POST["site_title"]."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST["site_header"])."', config='".$_POST["site_config"]."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
 		mysqli_query($db_conn, $setupUpdate);
 	} else {
 		//Do Insert
@@ -70,10 +70,6 @@ if (!empty($_POST["site_title"])) {
 					<label>Description</label>
 					<textarea class="form-control input-sm" name="site_description" rows="3" maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
 				</div>
-				<div class="form-group">
-					<label>Header Code</label>
-					<textarea class="form-control input-sm" name="site_header" rows="3" placeholder="Add javascript to your main page header"><?php echo $rowSetup['headercode']; ?></textarea>
-				</div>
 				<hr/>
 				<div class="form-group">
 					<label>PAC Settings</label>
@@ -81,7 +77,7 @@ if (!empty($_POST["site_title"])) {
 				<div class="row">
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label>Config</label>
+							<label>PAC Config</label>
 							<input class="form-control input-sm" name="site_config" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
 						</div>
 					</div>
@@ -89,7 +85,7 @@ if (!empty($_POST["site_title"])) {
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group" id="searchoptions">
-							<label>Search Options</label>
+							<label>PAC Search Options</label>
 							<div class="checkbox">
 								<label>
 									<input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">
@@ -105,6 +101,9 @@ if (!empty($_POST["site_title"])) {
 						</div>
 					</div>
 				</div>
+
+                <input type="hidden" name="site_header" value="">
+
 				<input type="hidden" name="site_disqus" value="">
 
 				<input type="hidden" name="site_google" value="">

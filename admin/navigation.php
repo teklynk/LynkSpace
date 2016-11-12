@@ -104,7 +104,7 @@ include 'includes/header.php';
 		//get and built pages list
 		$pagesStr="";
 
-		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active=1 AND loc_id=".$_GET['loc_id']." ORDER BY title");
+		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
 		//$pagesStr = "<option value=''>Custom</option>";
 
 		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
