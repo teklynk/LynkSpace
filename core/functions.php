@@ -7,7 +7,7 @@ function getLocation(){
 
 	if (ctype_digit($_GET["loc_id"])){
 
-		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id='".$_GET['loc_id']."'");
+		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=".$_GET['loc_id']." ");
 		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
 		if ($rowGetLocation['active']=='true' AND $_GET['loc_id']==$rowGetLocation['id']) {

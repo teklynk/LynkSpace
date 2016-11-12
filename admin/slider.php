@@ -8,7 +8,7 @@ if ($_GET["preview"]>"") {
 
 	$slidePreviewId=$_GET["preview"];
 
-	$sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=".$slidePreviewId." AND loc_id='".$_SESSION['loc_id']."' ");
+	$sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=".$slidePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
 	$rowSlidePreview = mysqli_fetch_array($sqlSlidePreview );
 
 		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
@@ -43,7 +43,7 @@ if ($_GET["preview"]>"") {
 
 			//update data on submit
 			if (!empty($_POST["slide_title"])) {
-				$slideUpdate = "UPDATE slider SET title='".$_POST["slide_title"]."', content='".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', link='".$_POST["slide_link"]."', image='".$_POST["slide_image"]."', active=".$_POST["slide_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
+				$slideUpdate = "UPDATE slider SET title='".$_POST["slide_title"]."', content='".htmlspecialchars($_POST["slide_content"], ENT_QUOTES)."', link='".$_POST["slide_link"]."', image='".$_POST["slide_image"]."', active='".$_POST["slide_status"]."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST["slide_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
@@ -74,7 +74,7 @@ if ($_GET["preview"]>"") {
 		}
 
 		//get and built pages list
-		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 AND loc_id=".$_GET['loc_id']." ORDER BY title");
+		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
 		$pagesStr = "<option value=''>Custom</option>";
 
 		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
@@ -307,7 +307,7 @@ if ($_GET["preview"]>"") {
 			echo "<tr>
 			<td><a href='?loc_id=".$_GET['loc_id']."&editslide=$slideId' title='Edit'>".$slideTitle."</a></td>
 			<td class='col-xs-1'>
-			<input data-toggle='toggle' title='Page Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' ".$isActive.">
+			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' ".$isActive.">
 			</td>
 			<td class='col-xs-2'>
 			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', '?preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>

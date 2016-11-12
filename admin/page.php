@@ -44,7 +44,7 @@ if ($_GET["preview"]>"") {
 
 			//update data on submit
 			if (!empty($_POST["page_title"])) {
-				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active=".$_POST["page_status"].", disqus=".$_POST["page_disqus"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$thePageId' AND loc_id=".$_GET['loc_id']." ";
+				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active='".$_POST["page_status"]."', disqus='".$_POST["page_disqus"]."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
 				mysqli_query($db_conn, $pageUpdate);
 
 				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -107,7 +107,7 @@ if ($_GET["preview"]>"") {
 			$selAlignLeft="";
 		}
 ?>
-	<form role="pageForm" method="post" enctype="multipart/form-data">
+	<form role="pageForm" method="post">
 
 		<div class="row">
 			<div class="col-lg-4">

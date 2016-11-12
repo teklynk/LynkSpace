@@ -101,7 +101,7 @@ if ($IPrange <> '') {
     $_SESSION['loc_name'] = $rowGetLocation['name'];
   }
 
-  $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 "); //part of while loop
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
 	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
 
@@ -197,7 +197,7 @@ if ($IPrange <> '') {
                       while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
                         if ($rowLocations['id'] == $_GET["loc_id"]) {
-                          $loc_menu_select = "selected";
+                          $loc_menu_select = "SELECTED";
                         } else {
                           $loc_menu_select = "";
                         }
