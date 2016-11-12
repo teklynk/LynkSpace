@@ -34,9 +34,6 @@ include 'includes/header.php';
 	<div class="row">
 		<div class="col-lg-12">
 		<?php
-		if ($uploadMsg !="") {
-			echo $uploadMsg;
-		}
 		if ($pageMsg !="") {
 			echo $pageMsg;
 		}
@@ -66,10 +63,6 @@ include 'includes/header.php';
 				<input class="form-control input-sm" name="featured_introtext" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
 			</div>
 			<hr/>
-			<div class="form-group">
-	            <label>Upload Image</label>
-	            <input type="file" name="fileToUpload" id="fileToUpload">
-	    	</div>
 	        <div class="form-group">
 	        	<img src="<?php echo $thumbNail;?>" id="featured_image_preview" style="max-width:140px; height:auto;"/>
 	        </div>
