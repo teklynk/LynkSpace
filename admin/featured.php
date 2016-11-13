@@ -7,21 +7,25 @@ include 'includes/header.php';
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	//update table on submit
-	if (!empty($_POST["featured_heading"])) {
+if (!empty($_POST)) {
+	if (!empty($_POST['featured_heading'])) {
 
 		if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
 			//Do Update
-			$featuredUpdate = "UPDATE featured SET heading='".$_POST["featured_heading"]."', introtext='".$_POST["featured_introtext"]."', content='".$_POST["featured_content"]."', image='".$_POST["featured_image"]."', image_align='".$_POST["featured_image_align"]."' WHERE loc_id=".$_GET['loc_id']." ";
+			$featuredUpdate = "UPDATE featured SET heading='" . $_POST['featured_heading'] . "', introtext='" . $_POST['featured_introtext'] . "', content='" . $_POST['featured_content'] . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
 			mysqli_query($db_conn, $featuredUpdate);
 		} else {
 			//Do Insert
 			echo "Insert";
-			$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('".$_POST["featured_heading"]."', '".$_POST["featured_introtext"]."', '".$_POST["featured_content"]."', '".$_POST["featured_image"]."', '".$_POST["featured_image_align"]."', ".$_GET['loc_id'].")";
+			$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('" . $_POST['featured_heading'] . "', '" . $_POST['featured_introtext'] . "', '" . $_POST['featured_content'] . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "', " . $_GET['loc_id'] . ")";
 			mysqli_query($db_conn, $featuredInsert);
 		}
 
-		$pageMsg="<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+		echo "<script>window.location.href='featured.php?loc_id=".$_GET['loc_id']." ';</script>";
+
 	}
+	$pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+}
 
 ?>
    <div class="row">
@@ -38,10 +42,10 @@ include 'includes/header.php';
 			echo $pageMsg;
 		}
 
-		if ($rowFeatured["image"]=="") {
+		if ($rowFeatured['image']=="") {
 			$thumbNail = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowFeatured["image"];
+			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowFeatured['image'];
 		}
 
 		//image align status
@@ -53,7 +57,7 @@ include 'includes/header.php';
 			$selAlignLeft="";
 		}
 		?>
-		<form role="landingForm" method="post" action="" enctype="multipart/form-data">
+		<form name="landingForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
 				<input class="form-control input-sm" name="featured_heading" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome">

@@ -4,20 +4,20 @@ define('inc_access', TRUE);
 include 'includes/header.php';
 
 //Page preview
-if ($_GET["preview"]>"") {
+if ($_GET['preview']>"") {
 
-	$pagePreviewId=$_GET["preview"];
+	$pagePreviewId=$_GET['preview'];
 
 	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=".$pagePreviewId." AND loc_id='".$_SESSION['loc_id']."' ");
 	$rowPagePreview = mysqli_fetch_array($sqlPagePreview);
 
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 
-	if ($rowPagePreview["title"]>""){
+	if ($rowPagePreview['title']>""){
 		echo "<h4>".$rowPagePreview['title']."</h4>";
 	}
 
-	if ($rowPagePreview["image"]>"") {
+	if ($rowPagePreview['image']>"") {
 		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowPagePreview['image']." style='max-width:350px; max-height:150px;' /></p>";
 	}
 
@@ -35,35 +35,35 @@ if ($_GET["preview"]>"") {
 <div class="col-lg-12">
 <?php
 
-	if ($_GET["newpage"] OR $_GET["editpage"]) {
+	if ($_GET['newpage'] OR $_GET['editpage']) {
 
 		// Update existing page
-		if ($_GET["editpage"]) {
-			$thePageId = $_GET["editpage"];
+		if ($_GET['editpage']) {
+			$thePageId = $_GET['editpage'];
 			$pageLabel = "Edit Page Title";
 
 			//update data on submit
-			if (!empty($_POST["page_title"])) {
-				$pageUpdate = "UPDATE pages SET title='".$_POST["page_title"]."', content='".$_POST["page_content"]."', image='".$_POST["page_image"]."', image_align='".$_POST["page_image_align"]."', active='".$_POST["page_status"]."', disqus='".$_POST["page_disqus"]."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
+			if (!empty($_POST['page_title'])) {
+				$pageUpdate = "UPDATE pages SET title='".$_POST['page_title']."', content='".$_POST['page_content']."', image='".$_POST['page_image']."', image_align='".$_POST['page_image_align']."', active='".$_POST['page_status']."', disqus='".$_POST['page_disqus']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
 				mysqli_query($db_conn, $pageUpdate);
 
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=".$thePageId." AND loc_id=".$_GET['loc_id']." ");
 			$rowPages  = mysqli_fetch_array($sqlPages);
 
 		//Create new page
-		} else if ($_GET["newpage"]) {
+		} else if ($_GET['newpage']) {
 
 			$pageLabel = "New Page Title";
 
 			//insert data on submit
-			if (!empty($_POST["page_title"])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST["page_title"]."', '".$_POST["page_content"]."', '".$_POST["page_image"]."', '".$_POST["page_image_align"]."', 'true', 'true', ".$_GET["loc_id"].")";
+			if (!empty($_POST['page_title'])) {
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST['page_title']."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $pageInsert);
 
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST["page_title"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 
@@ -76,7 +76,7 @@ if ($_GET["preview"]>"") {
 			echo $pageMsg;
 		}
 
-		if ($_GET["editpage"]) {
+		if ($_GET['editpage']) {
 			//active status
 			if ($rowPages['active']=='true') {
 				$selActive="CHECKED";
@@ -92,10 +92,10 @@ if ($_GET["preview"]>"") {
 			}
 		}
 
-		if ($rowPages["image"]=="") {
+		if ($rowPages['image']=="") {
 			$image = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$image = "../uploads/".$_GET["loc_id"]."/".$rowPages["image"];
+			$image = "../uploads/".$_GET['loc_id']."/".$rowPages['image'];
 		}
 
 		//image align status
@@ -107,7 +107,7 @@ if ($_GET["preview"]>"") {
 			$selAlignLeft="";
 		}
 ?>
-	<form role="pageForm" method="post">
+	<form name="pageForm" method="post" action="">
 
 		<div class="row">
 			<div class="col-lg-4">
@@ -115,7 +115,7 @@ if ($_GET["preview"]>"") {
 					<label>Active</label>
 					<div class="checkbox">
 						<label>
-							<input class="page_status_checkbox" id="<?php echo $_GET["editpage"]?>" name="page_status" type="checkbox" <?php if($_GET["editpage"]){echo $selActive;}?> data-toggle="toggle">
+							<input class="page_status_checkbox" id="<?php echo $_GET['editpage']?>" name="page_status" type="checkbox" <?php if($_GET['editpage']){echo $selActive;}?> data-toggle="toggle">
 						</label>
 					</div>
 				</div>
@@ -124,7 +124,7 @@ if ($_GET["preview"]>"") {
 
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
-			<input class="form-control input-sm" name="page_title" value="<?php if($_GET["editpage"]){echo $rowPages['title'];} ?>" placeholder="Page Title">
+			<input class="form-control input-sm" name="page_title" value="<?php if($_GET['editpage']){echo $rowPages['title'];} ?>" placeholder="Page Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -185,7 +185,7 @@ if ($_GET["preview"]>"") {
 					<label>Allow Comments (Disqus)</label>
 					<div class="checkbox">
 						<label>
-							<input class="checkbox page_disqus_checkbox" id="<?php echo $_GET["editpage"]?>" name="page_disqus" type="checkbox" <?php if($_GET["editpage"]){echo $selDisqus;}?> data-toggle="toggle">
+							<input class="checkbox page_disqus_checkbox" id="<?php echo $_GET['editpage']?>" name="page_disqus" type="checkbox" <?php if($_GET['editpage']){echo $selDisqus;}?> data-toggle="toggle">
 						</label>
 					</div>
 				</div>
@@ -199,10 +199,10 @@ if ($_GET["preview"]>"") {
 
 		<div class="form-group">
 			<label>Text / HTML</label>
-			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET["editpage"]){echo $rowPages['content'];} ?></textarea>
+			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET['editpage']){echo $rowPages['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET["editpage"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowPages['datetime']));} ?></span>
+			<span><?php if($_GET['editpage']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowPages['datetime']));} ?></span>
 		</div>
 		<button type="submit" name="page_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
@@ -214,18 +214,18 @@ if ($_GET["preview"]>"") {
 		$deleteMsg="";
 		$deleteConfirm="";
 		$pageMsg="";
-		$delPageId = $_GET["deletepage"];
-		$delPageTitle = $_GET["deletetitle"];
-		$movePageId = $_GET["movepage"];
-		$movePageTitle = $_GET["movetitle"];
+		$delPageId = $_GET['deletepage'];
+		$delPageTitle = $_GET['deletetitle'];
+		$movePageId = $_GET['movepage'];
+		$movePageTitle = $_GET['movetitle'];
 
 		//delete page
-		if ($_GET["deletepage"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+		if ($_GET['deletepage'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
 
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET["deletepage"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
+		} elseif ($_GET['deletepage'] AND $_GET['deletetitle'] AND $_GET['confirm']=="yes") {
 
 			//delete page after clicking Yes
 			$pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
@@ -236,7 +236,7 @@ if ($_GET["preview"]>"") {
 		}
 
 		//move pages to top of list
-		if (($_GET["movepage"] AND $_GET["movetitle"])) {
+		if (($_GET['movepage'] AND $_GET['movetitle'])) {
 
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
 			mysqli_query($db_conn, $pagesDateUpdate);
@@ -245,9 +245,9 @@ if ($_GET["preview"]>"") {
 		}
 
 		//update heading on submit
-		if (!empty($_POST["main_heading"])) {
+		if (!empty($_POST['main_heading'])) {
 
-			$setupUpdate = "UPDATE setup SET pageheading='".$_POST["main_heading"]."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET pageheading='".$_POST['main_heading']."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

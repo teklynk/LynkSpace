@@ -175,10 +175,10 @@ if ($IPrange <> '') {
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
 				<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION["user_name"]?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION["user_name"];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="../index.php" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
+                            <a href="../index.php?loc_id=<?php echo $_SESSION["loc_id"];?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -194,7 +194,7 @@ if ($IPrange <> '') {
                       <?php
                       while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
-                        if ($rowLocations['id'] == $_GET["loc_id"]) {
+                        if ($rowLocations['id'] == $_GET['loc_id']) {
                           $loc_menu_select = "SELECTED";
                         } else {
                           $loc_menu_select = "";

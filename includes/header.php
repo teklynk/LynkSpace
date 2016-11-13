@@ -11,6 +11,7 @@ if(!defined('inc_access')) {
       include 'db/config.php'; //contains DB connection string and global variables
       include 'core/functions.php'; //contains functions used on every front-end template
     ?>
+    <meta http-equiv="refresh" content="3600;URL='index.php?loc_id=<?php echo $_GET['loc_id'];?>'">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?php echo $setupDescription;?>">

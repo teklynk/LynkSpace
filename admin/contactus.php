@@ -7,19 +7,24 @@ include 'includes/header.php';
 	$rowContact = mysqli_fetch_array($sqlContact);
 
 	//update table on submit
-	if (!empty($_POST["contact_heading"])) {
+	if (!empty($_POST['contact_heading'])) {
 
 		if($rowContact['loc_id'] == $_GET['loc_id']){
 			//Do Update
-			$contactUpdate = "UPDATE contactus SET heading='".$_POST["contact_heading"]."', introtext='".$_POST["contact_introtext"]."', mapcode='".mysqli_real_escape_string($_POST["contact_mapcode"])."', email='".$_POST["contact_email"]."', sendtoemail='".$_POST["contact_sendtoemail"]."', address='".$_POST["contact_address"]."', city='".$_POST["contact_city"]."', state='".$_POST["contact_state"]."', zipcode='".$_POST["contact_zipcode"]."', phone='".$_POST["contact_phone"]."', hours='".$_POST["contact_hours"]."' WHERE loc_id=".$_GET['loc_id']." ";
+			$contactUpdate = "UPDATE contactus SET heading='".$_POST['contact_heading']."', introtext='".$_POST['contact_introtext']."', mapcode='".mysqli_real_escape_string($_POST['contact_mapcode'])."', email='".$_POST['contact_email']."', sendtoemail='".$_POST['contact_sendtoemail']."', address='".$_POST['contact_address']."', city='".$_POST['contact_city']."', state='".$_POST['contact_state']."', zipcode='".$_POST['contact_zipcode']."', phone='".$_POST['contact_phone']."', hours='".$_POST['contact_hours']."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $contactUpdate);
 		} else {
 			//Do Insert
-			$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, loc_id) VALUES ('".$_POST["contact_heading"]."', '".$_POST["contact_introtext"]."', '".mysqli_real_escape_string($_POST["contact_mapcode"])."', '".$_POST["contact_email"]."', '".$_POST["contact_sendtoemail"]."', '".$_POST["contact_address"]."', '".$_POST["contact_city"]."', '".$_POST["contact_state"]."', '".$_POST["contact_zipcode"]."', '".$_POST["contact_phone"]."', '".$_POST["contact_hours"]."', ".$_GET['loc_id'].")";
+			$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, loc_id) VALUES ('".$_POST['contact_heading']."', '".$_POST['contact_introtext']."', '".mysqli_real_escape_string($_POST['contact_mapcode'])."', '".$_POST["contact_email"]."', '".$_POST['contact_sendtoemail']."', '".$_POST['contact_address']."', '".$_POST['contact_city']."', '".$_POST['contact_state']."', '".$_POST['contact_zipcode']."', '".$_POST['contact_phone']."', '".$_POST['contact_hours']."', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $contactInsert);
 		}
 
-		$pageMsg="<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+		echo "<script>window.location.href='contactus.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
+
+	}
+
+	if ($_GET['update']=='true') {
+		$pageMsg = "<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 ?>
 
@@ -38,7 +43,7 @@ include 'includes/header.php';
 				echo $pageMsg;
 			}
 			?>
-			<form role="contactForm" name="contactForm" method="post" action="">
+			<form name="contactForm" method="post" action="">
 
 				<div class="form-group">
 					<label>Heading</label>

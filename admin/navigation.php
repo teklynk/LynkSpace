@@ -3,33 +3,31 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	$getNavSection = $_GET["section"];
+	$getNavSection = $_GET['section'];
 
 	//update table on submit
 	if (!empty($_POST)) {
 
-		if (!empty($_POST["nav_newname"])) {
+		if (!empty($_POST['nav_newname'])) {
 
 			//Create new category if newcat is true
-			if (!empty($_POST["nav_newcat"]) AND $_POST["exist_cat"]=="") {
-				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST["nav_newcat"]."')";
-				//echo $navNewCat;
+			if (!empty($_POST['nav_newcat']) AND $_POST['exist_cat']=="") {
+				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST['nav_newcat']."')";
 				mysqli_query($db_conn, $navNewCat);
 
 				//get the new cat id
 				$sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY id DESC LIMIT 1");
 				$rowMaxCat = mysqli_fetch_array($sqlNavCatID);
 				$navMaxCatId=$rowMaxCat[0];
-				//echo $navMaxCatId;
 			}
 
-			if ($_POST["exist_cat"]=="" AND $_POST["nav_newcat"]>"") {
+			if ($_POST['exist_cat']=="" AND $_POST['nav_newcat']>"") {
 
 				$getTheCat=$navMaxCatId; //create & add new category name & get it's id
 
-			} elseif ($_POST["exist_cat"]>"" AND $_POST["nav_newcat"]>"") {
+			} elseif ($_POST['exist_cat']>"" AND $_POST['nav_newcat']>"") {
 
-				$getTheCat=$_POST["exist_cat"]; //use existing category id
+				$getTheCat=$_POST['exist_cat']; //use existing category id
 
 			} else {
 
@@ -37,24 +35,22 @@ include 'includes/header.php';
 
 			}
 
-			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, loc_id) VALUES ('".$_POST["nav_newname"]."', '".$_POST["nav_newurl"]."', 0, $getTheCat, '".$getNavSection."','off', ".$_GET['loc_id'].")";
-			//echo $navNew;
+			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, loc_id) VALUES ('".$_POST['nav_newname']."', '".$_POST['nav_newurl']."', 0, $getTheCat, '".$getNavSection."','off', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $navNew);
 
 		}
 
-		for($i=0; $i<$_POST["nav_count"]; $i++) {
+		for($i=0; $i<$_POST['nav_count']; $i++) {
 
-			if ($_POST["nav_cat"][$i]=="") {
-				$_POST["nav_cat"][$i]=0; //None
+			if ($_POST['nav_cat'][$i]=="") {
+				$_POST['nav_cat'][$i]=0; //None
 			}
 
-			$navUpdate = "UPDATE navigation SET sort=".$_POST["nav_sort"][$i].", name='".$_POST["nav_name"][$i]."', url='".$_POST["nav_url"][$i]."', catid=".$_POST["nav_cat"][$i].", loc_id=".$_GET['loc_id']." WHERE id=".$_POST["nav_id"][$i]." ";
-			//echo $navUpdate;
+			$navUpdate = "UPDATE navigation SET sort=".$_POST['nav_sort'][$i].", name='".$_POST['nav_name'][$i]."', url='".$_POST['nav_url'][$i]."', catid=".$_POST['nav_cat'][$i].", loc_id=".$_GET['loc_id']." WHERE id=".$_POST['nav_id'][$i]." ";
 			mysqli_query($db_conn, $navUpdate);
 		}
 
-		$pageMsg="<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
+		$pageMsg="<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 
 	//loop through the array of navSections
@@ -63,7 +59,7 @@ include 'includes/header.php';
 
 	for($x = 0; $x < $navArrlength; $x++) {
 
-		if ($navSections[$x]==$_GET["section"]) {
+		if ($navSections[$x]==$_GET['section']) {
 
 			$isSectionSelected="SELECTED";
 
@@ -79,7 +75,7 @@ include 'includes/header.php';
 	<div class="row">
 		<div class="col-lg-10">
 			<h1 class="page-header">
-				Navigation (<?php echo $_GET["section"];?>)
+				Navigation (<?php echo $_GET['section'];?>)
 			</h1>
 		</div>
 
@@ -128,16 +124,16 @@ include 'includes/header.php';
 		$deleteMsg="";
 		$deleteConfirm="";
 		$pageMsg="";
-		$delNavId = $_GET["deletenav"];
-		$delNavTitle = $_GET["deletename"];
+		$delNavId = $_GET['deletenav'];
+		$delNavTitle = $_GET['deletename'];
 
 		//Delete nav link
-		if ($_GET["deletenav"] AND $_GET["deletename"] AND !$_GET["confirm"]) {
+		if ($_GET['deletenav'] AND $_GET['deletename'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delNavTitle."? <a href='?section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delNavTitle."? <a href='?section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET["deletenav"] AND $_GET["deletename"] AND $_GET["confirm"]=="yes") {
+		} elseif ($_GET['deletenav'] AND $_GET['deletename'] AND $_GET['confirm']=="yes") {
 
 			//delete nav after clicking Yes
 			$navDelete = "DELETE FROM navigation WHERE id='$delNavId'";
@@ -148,16 +144,16 @@ include 'includes/header.php';
 		}
 
 		//delete category
-		$delCatId = $_GET["deletecat"];
-		$delCatTitle = $_GET["deletecatname"];
+		$delCatId = $_GET['deletecat'];
+		$delCatTitle = $_GET['deletecatname'];
 
 		//Delete category and set nav categories to zero
-		if ($_GET["deletecat"] AND $_GET["deletecatname"] AND !$_GET["confirm"]) {
+		if ($_GET['deletecat'] AND $_GET['deletecatname'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delCatTitle."? <a href='?section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delCatTitle."? <a href='?section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET["deletecat"] AND $_GET["deletecatname"] AND $_GET["confirm"]=="yes") {
+		} elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm']=="yes") {
 
 			$navCatUpdate = "UPDATE navigation SET catid='0' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
 			mysqli_query($db_conn, $navCatUpdate);
@@ -166,31 +162,31 @@ include 'includes/header.php';
 			$navCatDelete = "DELETE FROM category WHERE id='$delCatId'";
 			mysqli_query($db_conn, $navCatDelete);
 
-			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delCatTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-success fade in' data-alert='alert'>".$delCatTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 		}
 
 		//rename category
 		$renameMsg="";
 		$renameConfirm="";
-		$renameCatId = $_GET["renamecat"];
-		$renameCatTitle = $_GET["newcatname"];
+		$renameCatId = $_GET['renamecat'];
+		$renameCatTitle = $_GET['newcatname'];
 
 		//Rename category and set nav categories to new name
-		if ($_GET["renamecat"] AND $_GET["newcatname"] AND !$_GET["confirm"]) {
-			$renameMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename ".$renameCatTitle."? <a href='?section=".$getNavSection."&renamecat=".$renameCatId."&newcatname=".$renameCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=$getNavSection'\">×</button></div>";
+		if ($_GET['renamecat'] AND $_GET['newcatname'] AND !$_GET['confirm']) {
+			$renameMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename ".$renameCatTitle."? <a href='?section=".$getNavSection."&renamecat=".$renameCatId."&newcatname=".$renameCatTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $renameMsg;
 
-		} elseif ($_GET["renamecat"] AND $_GET["newcatname"] AND $_GET["confirm"]=="yes") {
+		} elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm']=="yes") {
 
 			$navRenameCatUpdate = "UPDATE category SET name='".$renameCatTitle."' WHERE id='$renameCatId'";
 			mysqli_query($db_conn, $navRenameCatUpdate);
 
-			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&'\">×</button></div>";
+			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $renameMsg;
 		}
 		?>
-			<form role="navForm" method="post" action="">
+			<form name="navForm" method="post" action="">
 				<fieldset>
 					<div class="form-group">
 						<label for="nav_newname">Link Name</label>
