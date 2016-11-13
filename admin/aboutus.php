@@ -12,21 +12,21 @@ include 'includes/header.php';
 
 			if ($rowAbout['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$aboutUpdate = "UPDATE aboutus SET heading='" . $_POST['about_heading'] . "', content='" . $_POST['about_content'] . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+				$aboutUpdate = "UPDATE aboutus SET heading='".$_POST['about_heading']."', content='".$_POST['about_content']."', image='".$_POST['about_image']."', image_align='".$_POST['about_image_align']."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $aboutUpdate);
 			} else {
 				//Do Insert
-				$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, loc_id) VALUES ('" . $_POST['about_heading'] . "', '" . $_POST['about_content'] . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', " . $_GET['loc_id'] . ")";
+				$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, loc_id) VALUES ('".$_POST['about_heading']."', '".$_POST['about_content']."', '".$_POST['about_image']."', '".$_POST['about_image_align']."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $aboutInsert);
 			}
 
 		}
 
-		echo "<script>window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
+		echo "<script>window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."&update=true';</script>";
 	}
 
 	if ($_GET['update']=='true') {
-		$pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+		$pageMsg = "<div class='alert alert-success'>The about us section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='aboutus.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 ?>
    <div class="row">

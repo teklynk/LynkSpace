@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$featuredUpdate = "UPDATE featured SET heading='" . $_POST['featured_heading'] . "', introtext='" . $_POST['featured_introtext'] . "', content='" . $_POST['featured_content'] . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+				$featuredUpdate = "UPDATE featured SET heading='".$_POST['featured_heading']."', introtext='".$_POST['featured_introtext']."', content='".$_POST['featured_content']."', image='".$_POST['featured_image']."', image_align='".$_POST['featured_image_align']."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $featuredUpdate);
 			} else {
 				//Do Insert
-				$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('" . $_POST['featured_heading'] . "', '" . $_POST['featured_introtext'] . "', '" . $_POST['featured_content'] . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "', " . $_GET['loc_id'] . ")";
+				$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('".$_POST['featured_heading']."', '".$_POST['featured_introtext']."', '".$_POST['featured_content']."', '".$_POST['featured_image']."', '".$_POST['featured_image_align']."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $featuredInsert);
 			}
 
@@ -39,7 +39,7 @@ include 'includes/header.php';
 	<div class="row">
 		<div class="col-lg-12">
 			<?php
-			if ($pageMsg !="") {
+			if ($pageMsg != "") {
 				echo $pageMsg;
 			}
 

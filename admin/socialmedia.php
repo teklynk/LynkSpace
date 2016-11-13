@@ -3,16 +3,31 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
+	$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id FROM socialmedia WHERE loc_id=".$_GET['loc_id']." ");
+	$rowSocial = mysqli_fetch_array($sqlSocial);
+
 	//update table on submit
 	if (!empty($_POST)) {
-		$socialUpdate = "UPDATE socialmedia SET heading='".$_POST["social_heading"]."', facebook='".$_POST["social_facebook"]."', youtube='".$_POST["social_youtube"]."', twitter='".$_POST["social_twitter"]."', google='".$_POST["social_google"]."', linkedin='".$_POST["social_linkedin"]."', github='".$_POST["social_github"]."'";
-		mysqli_query($db_conn, $socialUpdate);
+		if (!empty($_POST['social_heading'])) {
 
-		$pageMsg="<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php'\">×</button></div>";
+			if ($rowSocial['loc_id'] == $_GET['loc_id']) {
+				//Do Update
+				$socialUpdate = "UPDATE socialmedia SET heading='".$_POST['social_heading']."', facebook='".$_POST['social_facebook']."', youtube='".$_POST['social_youtube']."', twitter='".$_POST['social_twitter']."', google='".$_POST['social_google']."', pinterest='".$_POST['social_pinterest']."', instagram='".$_POST['social_instagram']."', tumblr='".$_POST['social_tumblr']."' WHERE loc_id=".$_GET['loc_id']." ";
+				mysqli_query($db_conn, $socialUpdate);
+			} else {
+				//Do Insert
+				$socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id) VALUES ('".$_POST['social_heading']."', '".$_POST['social_facebook']."', '".$_POST['social_youtube']."', '".$_POST['social_twitter']."', '".$_POST['social_google']."', '".$_POST['social_pinterest']."', '".$_POST['social_instagram']."', '".$_POST['social_tumblr']."', ".$_GET['loc_id'].")";
+				mysqli_query($db_conn, $socialInsert);
+			}
+
+		}
+
+		echo "<script>window.location.href='socialmedia.php?loc_id=".$_GET['loc_id']."&update=true';</script>";
 	}
 
-	$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, twitter, linkedin, google, github, youtube FROM socialmedia");
-	$row  = mysqli_fetch_array($sqlSocial);
+	if ($_GET['update']=='true') {
+		$pageMsg = "<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	}
 ?>
    <div class="row">
 		<div class="col-lg-12">
@@ -24,38 +39,42 @@ include 'includes/header.php';
 	 <div class="row">
 		<div class="col-lg-8">
 		<?php
-		if ($pageMsg !="") {
+		if ($pageMsg != "") {
 			echo $pageMsg;
 		}
 		?>
-			<form role="socialmediaForm" method="post" action="">
+			<form name="socialmediaForm" method="post" action="">
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="social_heading" value="<?php echo $row['heading']; ?>"  placeholder="Follow Me">
+					<input class="form-control input-sm" name="social_heading" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me">
 				</div>
 				<div class="form-group">
 					<label>Facebook</label>
-					<input class="form-control input-sm" name="social_facebook" value="<?php echo $row['facebook']; ?>"  placeholder="https://www.facebook.com/username">
+					<input class="form-control input-sm" name="social_facebook" value="<?php echo $rowSocial['facebook']; ?>" placeholder="https://www.facebook.com/username">
 				</div>
 				<div class="form-group">
 					<label>Twitter</label>
-					<input class="form-control input-sm" name="social_twitter" value="<?php echo $row['twitter']; ?>"  placeholder="https://www.twitter.com/username">
+					<input class="form-control input-sm" name="social_twitter" value="<?php echo $rowSocial['twitter']; ?>" placeholder="https://www.twitter.com/username">
 				</div>
 				<div class="form-group">
 					<label>Google+</label>
-					<input class="form-control input-sm" name="social_google" value="<?php echo $row['google']; ?>"  placeholder="https://plus.google.com/8675309/posts">
+					<input class="form-control input-sm" name="social_google" value="<?php echo $rowSocial['google']; ?>" placeholder="https://plus.google.com/8675309/posts">
 				</div>
 				<div class="form-group">
-					<label>GitHub</label>
-					<input class="form-control input-sm" name="social_github" value="<?php echo $row['github']; ?>"  placeholder="https://www.github.com/username/">
+					<label>Pinterest</label>
+					<input class="form-control input-sm" name="social_pinterest" value="<?php echo $rowSocial['pinterest']; ?>" placeholder="https://www.pinterest.com/username/">
 				</div>
 				<div class="form-group">
-					<label>LinkedIn</label>
-					<input class="form-control input-sm" name="social_linkedin" value="<?php echo $row['linkedin']; ?>"  placeholder="https://www.linkedin.com/username/">
+					<label>Instagram</label>
+					<input class="form-control input-sm" name="social_instagram" value="<?php echo $rowSocial['instagram']; ?>" placeholder="https://www.instagram.com/username/">
+				</div>
+				<div class="form-group">
+					<label>Tumblr</label>
+					<input class="form-control input-sm" name="social_tumblr" value="<?php echo $rowSocial['tumblr']; ?>" placeholder="https://username.tumblr.com/">
 				</div>
 				<div class="form-group">
 					<label>YouTube</label>
-					<input class="form-control input-sm" name="social_youtube" value="<?php echo $row['youtube']; ?>"  placeholder="https://www.youtube.com/user/username">
+					<input class="form-control input-sm" name="social_youtube" value="<?php echo $rowSocial['youtube']; ?>" placeholder="https://www.youtube.com/user/username">
 				</div>
 
 				<button type="submit" name="socialmedia_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
