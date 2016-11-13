@@ -18,7 +18,7 @@ $writeline = "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>\n";
 fwrite($sitemapfile, $writeline);
 
 //gets pages from db
-$sqlpages = mysqli_query($db_conn, "SELECT id, datetime FROM pages WHERE active=1 ORDER BY datetime DESC");
+$sqlpages = mysqli_query($db_conn, "SELECT id, datetime, loc_id FROM pages WHERE active='true' ORDER BY datetime DESC");
 while ($rowPages  = mysqli_fetch_array($sqlpages)) {
 	$pageId=$rowPages['id'];
     $locId=$rowPages['loc_id'];
@@ -86,7 +86,7 @@ echo "Robots.txt has been updated: <a target='_blank' href=".str_replace('admin/
 echo "<br/>";
 echo "<img src='images/loading.gif' />";
 //header("Location: setup.php");
-echo "<script>window.location.href='setup.php';</script>";
+echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."';</script>";
 
 include 'includes/footer.php';
 ?>

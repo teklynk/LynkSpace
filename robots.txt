@@ -4,4 +4,7 @@ Disallow: /css/
 Disallow: /db/
 Disallow: /includes/
 Disallow: /mail/
+Disallow: /ajax/
+Disallow: /js/
+Disallow: /screenshots/
 Sitemap: http://localhost/businessCMS/sitemap.xml

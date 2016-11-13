@@ -1,6 +1,51 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=40&loc_id=1</loc>
+		<lastmod>2016-11-13 02:05:02</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=39&loc_id=1</loc>
+		<lastmod>2016-11-13 01:59:19</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=38&loc_id=1</loc>
+		<lastmod>2016-11-13 01:50:37</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=37&loc_id=1</loc>
+		<lastmod>2016-11-12 23:29:10</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=36&loc_id=1</loc>
+		<lastmod>2016-11-10 22:27:49</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=33&loc_id=1</loc>
+		<lastmod>2016-11-08 23:48:29</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=35&loc_id=2</loc>
+		<lastmod>2016-11-08 23:17:58</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=28&loc_id=1</loc>
+		<lastmod>2016-08-15 17:16:49</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://localhost/businessCMS/page.php?page_id=34&loc_id=1</loc>
+		<lastmod>2015-07-25 22:24:41</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>http://localhost/businessCMS/index.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>

@@ -259,9 +259,6 @@ if ($IPrange <> '') {
                     <li>
                         <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder"></i> Uploads</a>
                     </li>
-                    <li>
-                        <a href="editor.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-css3"></i> Styles</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
