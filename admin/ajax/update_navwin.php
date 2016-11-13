@@ -3,13 +3,13 @@
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION["loggedIn"]) AND $_SESSION["session_hash"]==md5($_SESSION["user_name"])) {
+if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash']==md5($_SESSION['user_name'])) {
 
 	include '../../db/config.php';
 
-	if (!empty($_GET) AND $_GET["update"]) {
-		$navWinID = $_GET["id"];
-		$navWinChecked = $_GET["checked"];
+	if (!empty($_GET) AND $_GET['update']) {
+		$navWinID = $_GET['id'];
+		$navWinChecked = $_GET['checked'];
 
 		$navUpdate = "UPDATE navigation SET win='".$navWinChecked."' WHERE id=".$navWinID." ";
 		mysqli_query($db_conn, $navUpdate);

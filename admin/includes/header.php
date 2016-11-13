@@ -7,7 +7,7 @@ session_start();
 
 //overwrite session script name on reload
 //Get the page/file name and set it as a variable. Can be used for Ajax calls or page headers.
-$_SESSION["file_referer"] = basename($_SERVER['PHP_SELF']);
+$_SESSION['file_referer'] = basename($_SERVER['PHP_SELF']);
 
 ?>
 <!DOCTYPE html>
@@ -85,7 +85,7 @@ if ($IPrange <> '') {
 
   <?php
 
-	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading FROM setup WHERE id='".$_SESSION['loc_id']."'");
+	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=".$_SESSION['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
   if (!empty($_GET['loc_id'])){
@@ -93,7 +93,7 @@ if ($IPrange <> '') {
     //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
     $_SESSION['loc_id'] = $_GET['loc_id'];
 
-    $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active=1 AND id='".$_SESSION['loc_id']."'");
+    $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=".$_SESSION['loc_id']." ");
     $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
     $_SESSION['loc_name'] = $rowGetLocation['name'];
@@ -101,7 +101,7 @@ if ($IPrange <> '') {
 
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
-	if (isset($_SESSION["user_id"]) AND isset($_SESSION["user_name"]) AND $rowSetup["tinymce"]==1) {
+	if (isset($_SESSION['user_id']) AND isset($_SESSION['user_name']) AND $rowSetup['tinymce']==1) {
 
         //Initializing variables
         $fileListJson = "";
@@ -124,7 +124,7 @@ if ($IPrange <> '') {
         }
 
         //get and build page list for TinyMCE
-        $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active=1 AND loc_id='".$_GET['loc_id']."' ORDER BY title");
+        $sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
@@ -157,7 +157,7 @@ if ($IPrange <> '') {
 
     <div id="wrapper">
 <?php
-    if (isset($_SESSION["loggedIn"])) {
+    if (isset($_SESSION['loggedIn'])) {
 ?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -175,10 +175,10 @@ if ($IPrange <> '') {
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
 				<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION["user_name"];?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name'];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="../index.php?loc_id=<?php echo $_SESSION["loc_id"];?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
+                            <a href="../index.php?loc_id=<?php echo $_SESSION['loc_id'];?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                         </li>
                         <li class="divider"></li>
                         <li>

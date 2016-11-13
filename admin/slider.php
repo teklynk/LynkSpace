@@ -63,7 +63,6 @@ if ($_GET['preview']>"") {
 
 				echo "<script>window.location.href='slider.php?loc_id=".$_GET['loc_id']."';</script>";
 
-				//$slideMsg="<div class='alert alert-success'>The slide ".$_POST['slide_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 

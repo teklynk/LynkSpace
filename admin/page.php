@@ -65,7 +65,6 @@ if ($_GET['preview']>"") {
 
 				echo "<script>window.location.href='page.php?loc_id=".$_GET['loc_id']."';</script>";
 
-				//$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 
