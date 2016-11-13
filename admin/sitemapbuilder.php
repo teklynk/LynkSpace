@@ -21,11 +21,12 @@ fwrite($sitemapfile, $writeline);
 $sqlpages = mysqli_query($db_conn, "SELECT id, datetime FROM pages WHERE active=1 ORDER BY datetime DESC");
 while ($rowPages  = mysqli_fetch_array($sqlpages)) {
 	$pageId=$rowPages['id'];
+    $locId=$rowPages['loc_id'];
 	$pageDate=$rowPages['datetime'];
 
 	$writeline = "\t<url>\n";
 	fwrite($sitemapfile, $writeline);
-	$writeline = "\t\t<loc>".str_replace('admin/sitemapbuilder.php/','',"http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."/page.php?ref=".$pageId)."</loc>\n";
+	$writeline = "\t\t<loc>".str_replace('admin/sitemapbuilder.php/','',"http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."/page.php?page_id=".$pageId."&loc_id=".$locId)."</loc>\n";
 	fwrite($sitemapfile, $writeline);
 	$writeline = "\t\t<lastmod>".$pageDate."</lastmod>\n";
 	fwrite($sitemapfile, $writeline);

@@ -128,7 +128,7 @@ if ($IPrange <> '') {
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
-            $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?ref=".$getPageId."'},";
+            $linkListJson = $linkListJson . "{title: '".$getPageTitle."', value: 'page.php?page_id=".$getPageId."'},";
         }
 
 	?>

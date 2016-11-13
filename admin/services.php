@@ -35,7 +35,7 @@ if ($_GET["preview"]>"") {
 		echo "<p>".$row['content']."</p>";
 
 		if ($row["link"]>0){
-			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$row['link']."' target='_blank'>Page Link</a></p>";
+			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?page_id=".$row['link']."' target='_blank'>Page Link</a></p>";
 		}
 
 		echo "</div>";

@@ -1,11 +1,11 @@
 <?php
-function getLocation(){
+function getLocation() {
 	global $locationName;
 	global $locationActive;
 	global $locationID;
 	global $db_conn;
 
-	if (ctype_digit($_GET['loc_id'])){
+	if (ctype_digit($_GET['loc_id'])) {
 
 		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=".$_GET['loc_id']." ");
 		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
@@ -21,20 +21,21 @@ function getLocation(){
 	}
 }
 
-function getPage(){
+function getPage() {
 	global $pageImage;
 	global $pageTitle;
 	global $pageContent;
 	global $pageImageAlign;
   	global $pageDisqus;
+	global $pageRefId;
 	global $db_conn;
 
-	$_GET['ref'] = "";
-
-	if (ctype_digit($_GET['ref'])){
-		$pageRefId=$_GET['ref'];
-		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id='$pageRefId' AND active='true' AND loc_id=".$_GET['loc_id']." ");
+	if (ctype_digit($_GET['page_id'])) {
+		$pageRefId = $_GET['page_id'];
+		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=".$pageRefId." AND loc_id=".$_GET['loc_id']." ");
 		$rowPage = mysqli_fetch_array($sqlPage);
+
+
 
 		if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
 
@@ -60,7 +61,7 @@ function getPage(){
 	}
 }
 
-function getAbout(){
+function getAbout() {
 	global $aboutTitle;
 	global $aboutContent;
 	global $aboutImage;
@@ -70,7 +71,7 @@ function getAbout(){
 	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
-	if (!empty($rowAbout['heading'])){
+	if (!empty($rowAbout['heading'])) {
 		$aboutTitle = $rowAbout['heading'];
 	}
 
@@ -85,7 +86,7 @@ function getAbout(){
 	$aboutImageAlign = $rowAbout['image_align'];
 }
 
-function getContactInfo(){
+function getContactInfo() {
 	global $contactHeading;
 	global $contactBlurb;
 	global $contactMap;
@@ -156,7 +157,7 @@ function getContactInfo(){
     }
 }
 
-function getServices(){
+function getServices() {
 	global $sqlServicesHeading;
 	global $rowServicesHeading;
 	global $servicesHeading;
@@ -229,7 +230,7 @@ function getTeam() {
     }
 }
 
-function getNav($navSection,$dropdown,$pull){
+function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
 	global $db_conn;
 	echo "<ul class='nav navbar-nav navbar-$pull'>";
@@ -254,7 +255,7 @@ function getNav($navSection,$dropdown,$pull){
 	$navWin = "";
 	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
-		if ($rowNavLinks[6]=='true'){
+		if ($rowNavLinks[6]=='true') {
 			$navWin = "target='_blank'";
 		}
 
@@ -288,7 +289,7 @@ function getNav($navSection,$dropdown,$pull){
 	echo "</ul>";
 }
 
-function getSetup(){
+function getSetup() {
 	global $setupTitle;
 	global $setupAuthor;
 	global $setupKeywords;
@@ -320,7 +321,7 @@ function getSetup(){
     }
 }
 
-function getSocialMediaIcons($shape){
+function getSocialMediaIcons($shape) {
     //EXAMPLE: getSocialMediaIcons("circle")
     //EXAMPLE: getSocialMediaIcons("square")
 	global $socialMediaIcons;
@@ -334,27 +335,27 @@ function getSocialMediaIcons($shape){
 
 	$socialMediaIcons = "";
 
-	if (!empty($rowSocialMedia['heading'])){
+	if (!empty($rowSocialMedia['heading'])) {
 		$socialMediaHeading = $rowSocialMedia['heading'];
 	}
 
-    if (!empty($rowSocialMedia['facebook'])){
+    if (!empty($rowSocialMedia['facebook'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['google'])){
+    if (!empty($rowSocialMedia['google'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['github'])){
+    if (!empty($rowSocialMedia['github'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['github']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-github fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['twitter'])){
+    if (!empty($rowSocialMedia['twitter'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['linkedin'])){
+    if (!empty($rowSocialMedia['linkedin'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['linkedin']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-linkedin fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
@@ -443,7 +444,7 @@ function getSlider($sliderType) {
                 echo "<h2>".$rowSlider['title']."</h2>";
                 echo "<p>".$rowSlider['content']."</p>";
 
-                if (!empty($rowSlider['link'])){
+                if (!empty($rowSlider['link'])) {
 					if (ctype_digit($rowSlider['link'])) {
 						echo "<a href='page.php?loc_id=".$_GET['loc_id']."&ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 					} else {
@@ -487,9 +488,9 @@ function getSlider($sliderType) {
             echo "<h2>".$rowSlider['title']."</h2>";
             echo "<p>".$rowSlider['content']."</p>";
 
-			if (!empty($rowSlider['link'])){
+			if (!empty($rowSlider['link'])) {
 				if (ctype_digit($rowSlider['link'])) {
-					echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+					echo "<a href='page.php?page_id=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 				} else {
 					echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 				}
@@ -513,7 +514,7 @@ function getSlider($sliderType) {
     }
 }
 
-function getGeneralInfo(){
+function getGeneralInfo() {
 	global $generalInfoContent;
 	global $generalInfoHeading;
 	global $db_conn;
@@ -530,7 +531,7 @@ function getGeneralInfo(){
 	}
 }
 
-function getFeatured(){
+function getFeatured() {
 	global $featuredContent;
 	global $featuredHeading;
 	global $featuredBlurb;
@@ -565,8 +566,7 @@ getSetup();
 
 //Call these functions depending on which page you are visiting
 //Sets the page title
-$_GET['ref'] = "";
-if (is_numeric($_GET['ref'])>""){
+if (is_numeric($_GET['page_id'])>"") {
     getPage();
     $theTitle = $setupTitle." - ".$pageTitle;
 } else if (basename($_SERVER['PHP_SELF'])=="about.php"){

@@ -53,7 +53,7 @@ getServices();
             }
 
             if (!empty($rowServices['link'])){
-                echo "<a href='page.php?ref=".$rowServices['link']."' class='btn btn-primary'>Learn More</a>";
+                echo "<a href='page.php?page_id=".$rowServices['link']."' class='btn btn-primary'>Learn More</a>";
             }
 
             echo "</div>";
