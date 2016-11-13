@@ -63,7 +63,9 @@ if ($_GET['preview']>"") {
 				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST['page_title']."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $pageInsert);
 
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				echo "<script>window.location.href='page.php?loc_id=".$_GET['loc_id']."';</script>";
+
+				//$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 
@@ -78,7 +80,7 @@ if ($_GET['preview']>"") {
 
 		if ($_GET['editpage']) {
 			//active status
-			if ($rowPages['active']=='true') {
+			if ($rowPages['active']=='true' || $rowPages['active']=='on') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -318,7 +320,7 @@ if ($_GET['preview']>"") {
 						$pageContent=$rowPages['content'];
 						$pageActive=$rowPages['active'];
 
-						if ($rowPages['active']=='true'){
+						if ($rowPages['active']=='true' || $rowPages['active']=='on'){
 							$isActive="CHECKED";
 						} else {
 							$isActive="";

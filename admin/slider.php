@@ -60,7 +60,10 @@ if ($_GET['preview']>"") {
 			if (!empty($_POST['slide_title'])) {
 				$slideInsert = "INSERT INTO slider (title, content, link, image, active, loc_id) VALUES ('".$_POST['slide_title']."', '".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $slideInsert);
-				$slideMsg="<div class='alert alert-success'>The slide ".$_POST['slide_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+
+				echo "<script>window.location.href='slider.php?loc_id=".$_GET['loc_id']."';</script>";
+
+				//$slideMsg="<div class='alert alert-success'>The slide ".$_POST['slide_title']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 		}
 
@@ -85,7 +88,7 @@ if ($_GET['preview']>"") {
 
 		if ($_GET['editslide']) {
 			//active status
-			if ($rowSlides['active']=='true') {
+			if ($rowSlides['active']=='true' || $rowSlides['active']=='on') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -298,7 +301,7 @@ if ($_GET['preview']>"") {
 			$slideContent=$rowSlides['content'];
 			$slideActive=$rowSlides['active'];
 
-			if ($rowSlides['active']=='true'){
+			if ($rowSlides['active']=='true' || $rowSlides['active']=='on'){
 				$isActive="CHECKED";
 			} else {
 				$isActive="";

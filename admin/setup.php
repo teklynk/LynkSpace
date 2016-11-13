@@ -3,28 +3,31 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
-$rowSetup = mysqli_fetch_array($sqlSetup);
+	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+	$rowSetup = mysqli_fetch_array($sqlSetup);
 
-    if (!empty($_POST['site_title'])) {
-        $site_keywords = filter_var($_POST['site_keywords'], FILTER_SANITIZE_STRING);
-        $site_author = filter_var($_POST['site_author'], FILTER_SANITIZE_STRING);
-        $site_description = filter_var($_POST['site_description'], FILTER_SANITIZE_STRING);
+	//update table on submit
+	if (!empty($_POST)) {
+		if (!empty($_POST['site_title'])) {
+			$site_keywords = filter_var($_POST['site_keywords'], FILTER_SANITIZE_STRING);
+			$site_author = filter_var($_POST['site_author'], FILTER_SANITIZE_STRING);
+			$site_description = filter_var($_POST['site_description'], FILTER_SANITIZE_STRING);
 
-        //update table on submit
-        if ($rowSetup['loc_id'] == $_GET['loc_id']) {
-            //Do Update
-            $setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
-            mysqli_query($db_conn, $setupUpdate);
-        } else {
-            //Do Insert
-            $setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['config']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
-            mysqli_query($db_conn, $setupInsert);
-        }
+			//update table on submit
+			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
+				//Do Update
+				$setupUpdate = "UPDATE setup SET title='" . $_POST['site_title'] . "', author='" . $site_author . "', keywords='" . mysqli_real_escape_string($db_conn, $site_keywords) . "', description='" . mysqli_real_escape_string($db_conn, $site_description) . "', headercode='" . mysqli_real_escape_string($db_conn, $_POST['site_header']) . "', config='" . $_POST['site_config'] . "', disqus='" . mysqli_real_escape_string($db_conn, $_POST['site_disqus']) . "', googleanalytics='" . $_POST['site_google'] . "', tinymce=" . $_POST['site_tinymce'] . " WHERE loc_id=" . $_GET['loc_id'] . " ";
+				mysqli_query($db_conn, $setupUpdate);
+			} else {
+				//Do Insert
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('" . $_POST['site_title'] . "', '" . $site_author . "', '" . mysqli_real_escape_string($db_conn, $site_description) . "', '" . mysqli_real_escape_string($db_conn, $site_keywords) . "', '" . mysqli_real_escape_string($db_conn, $_POST['site_header']) . "', '" . $_POST['config'] . "', '" . mysqli_real_escape_string($db_conn, $_POST['site_disqus']) . "', '" . $_POST['site_google'] . "', " . $_POST['site_tinymce'] . ", " . $_GET['loc_id'] . ")";
+				mysqli_query($db_conn, $setupInsert);
+			}
 
-        echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
+			echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 
-    }
+		}
+	}
 
     if ($_GET['update']=='true') {
         $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

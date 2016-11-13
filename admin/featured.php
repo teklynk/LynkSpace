@@ -7,26 +7,27 @@ include 'includes/header.php';
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	//update table on submit
-if (!empty($_POST)) {
-	if (!empty($_POST['featured_heading'])) {
+	if (!empty($_POST)) {
+		if (!empty($_POST['featured_heading'])) {
 
-		if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
-			//Do Update
-			$featuredUpdate = "UPDATE featured SET heading='" . $_POST['featured_heading'] . "', introtext='" . $_POST['featured_introtext'] . "', content='" . $_POST['featured_content'] . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-			mysqli_query($db_conn, $featuredUpdate);
-		} else {
-			//Do Insert
-			echo "Insert";
-			$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('" . $_POST['featured_heading'] . "', '" . $_POST['featured_introtext'] . "', '" . $_POST['featured_content'] . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "', " . $_GET['loc_id'] . ")";
-			mysqli_query($db_conn, $featuredInsert);
+			if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
+				//Do Update
+				$featuredUpdate = "UPDATE featured SET heading='" . $_POST['featured_heading'] . "', introtext='" . $_POST['featured_introtext'] . "', content='" . $_POST['featured_content'] . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+				mysqli_query($db_conn, $featuredUpdate);
+			} else {
+				//Do Insert
+				$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, loc_id) VALUES ('" . $_POST['featured_heading'] . "', '" . $_POST['featured_introtext'] . "', '" . $_POST['featured_content'] . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "', " . $_GET['loc_id'] . ")";
+				mysqli_query($db_conn, $featuredInsert);
+			}
+
 		}
 
-		echo "<script>window.location.href='featured.php?loc_id=".$_GET['loc_id']." ';</script>";
-
+		echo "<script>window.location.href='featured.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
 	}
-	$pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 
+	if ($_GET['update']=='true') {
+		$pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	}
 ?>
    <div class="row">
 		<div class="col-lg-12">
