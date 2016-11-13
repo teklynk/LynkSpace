@@ -92,5 +92,4 @@ if(!defined('inc_access')) {
 </nav>
 <?php
 getLocation();
-getPage();
 ?>
