@@ -3,12 +3,6 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-} else {
-	$uploadMsg = "";
-}
-
 //Page preview
 if ($_GET["preview"]>"") {
 
@@ -89,10 +83,6 @@ if ($_GET["preview"]>"") {
 		}
 
 		//alert messages
-		if ($uploadMsg !="") {
-			echo $uploadMsg;
-		}
-
 		if ($serviceMsg !="") {
 			echo $serviceMsg;
 		}
@@ -122,10 +112,6 @@ if ($_GET["preview"]>"") {
 			<input class="form-control input-sm" name="service_title" value="<?php if($_GET["editservice"]){echo $row['title'];} ?>" placeholder="Service Title">
 		</div>
 		<hr/>
-		<div class="form-group">
-            <label>Upload Image</label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-    	</div>
 		<div class="form-group">
 			<i id="service_icon" style="font-size:6.0em;" class="fa fa-fw fa-<?php echo $row["icon"]; ?>"></i>
 		</div>

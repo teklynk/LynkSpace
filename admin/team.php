@@ -3,12 +3,6 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		$uploadMsg = "<div class='alert alert-success'>The file ". basename( $_FILES["fileToUpload"]["name"]) ." has been uploaded.<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-	} else {
-		$uploadMsg = "";
-	}
-
 	//Page preview
 	if ($_GET["preview"]>""){
 		$pagePreviewId=$_GET["preview"];
@@ -75,10 +69,6 @@ include 'includes/header.php';
 		}
 
 		//alert messages
-		if ($uploadMsg !="") {
-			echo $uploadMsg;
-		}
-
 		if ($teamMsg !="") {
 			echo $teamMsg;
 		}
@@ -110,10 +100,6 @@ include 'includes/header.php';
             </select>
         </div>
         <hr/>
-        <div class="form-group">
-            <label>Upload Image</label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-        </div>
         <div class="form-group">
         	<img src="<?php echo $thumbNail;?>" id="team_image_preview" style="max-width:140px; height:auto;"/>
         </div>

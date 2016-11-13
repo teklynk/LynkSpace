@@ -41,7 +41,7 @@ if ($IPrange <> '') {
     <link rel="stylesheet" type="text/css" href="css/sb-admin.css">
 
     <!-- Admin Panel Custom Fonts -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" >
