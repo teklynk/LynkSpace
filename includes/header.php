@@ -82,6 +82,7 @@ if(!defined('inc_access')) {
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <?php
+                //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Top','true','right');
             ?>
         </div>

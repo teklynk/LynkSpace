@@ -252,12 +252,14 @@ function getNav($navSection,$dropdown,$pull) {
 	$sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
 	//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.loc_id, category.nav_loc_id
 	$tempLink = 0;
-	$navWin = "";
+
 	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
 		if ($rowNavLinks[6]=='true') {
 			$navWin = "target='_blank'";
-		}
+		} else {
+            $navWin = "";
+        }
 
 		if ($rowNavLinks[4] == $rowNavLinks[8] AND $rowNavLinks[4] != 0) { //NOTE: 0=None in the category table
 
@@ -539,7 +541,7 @@ function getFeatured() {
 	global $featuredImageAlign;
 	global $db_conn;
 
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=".$_GET['loc_id']."");
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=".$_GET['loc_id']." ");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	if (!empty($rowFeatured['heading'])) {
