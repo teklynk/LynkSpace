@@ -38,26 +38,26 @@ include 'includes/header.php';
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-		<?php
-		if ($pageMsg !="") {
-			echo $pageMsg;
-		}
+			<?php
+			if ($pageMsg !="") {
+				echo $pageMsg;
+			}
 
-		if ($rowFeatured['image']=="") {
-			$thumbNail = "http://placehold.it/140x100&text=No Image";
-		} else {
-			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowFeatured['image'];
-		}
+			if ($rowFeatured['image'] == "") {
+				$thumbNail = "http://placehold.it/140x100&text=No Image";
+			} else {
+				$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowFeatured['image'];
+			}
 
-		//image align status
-		if ($rowFeatured['image_align']=="left") {
-			$selAlignLeft="SELECTED";
-			$selAlignRight="";
-		} else {
-			$selAlignRight="SELECTED";
-			$selAlignLeft="";
-		}
-		?>
+			//image align status
+			if ($rowFeatured['image_align']=="left") {
+				$selAlignLeft="SELECTED";
+				$selAlignRight="";
+			} else {
+				$selAlignRight="SELECTED";
+				$selAlignLeft="";
+			}
+			?>
 		<form name="landingForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
@@ -114,5 +114,5 @@ include 'includes/header.php';
 		</form>
 	</div>
 <?php
-include 'includes/footer.php';
+	include 'includes/footer.php';
 ?>
