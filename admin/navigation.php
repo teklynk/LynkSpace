@@ -107,7 +107,7 @@ include 'includes/header.php';
 
 			$getPageId=$rowGetPages['id'];
 			$getPageTitle=$rowGetPages['title'];
-			$pagesStr =  $pagesStr . "<option value=".$getPageId.">".$getPageTitle."</option>";
+			$pagesStr = $pagesStr . "<option value=".$getPageId.">".$getPageTitle."</option>";
 
 		}
 

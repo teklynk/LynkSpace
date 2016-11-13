@@ -32,7 +32,7 @@ $navSections = array("Top", "Footer");
 $googleAnalytics = '';
 
 //Extra Pages
-$extraPages = "<optgroup label='Other Pages'><option value='about.php'>About</option><option value='contact.php'>Contact</option><option value='services.php'>Services</option><option value='team.php'>Team</option></optgroup>";
+$extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=".$_GET['loc_id']."'>About</option><option value='contact.php?loc_id=".$_GET['loc_id']."'>Contact</option><option value='services.php?loc_id=".$_GET['loc_id']."'>Services</option><option value='team.php?loc_id=".$_GET['loc_id']."'>Team</option></optgroup>";
 
 //Default values
 $pageMsg="";
