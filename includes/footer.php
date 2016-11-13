@@ -25,7 +25,6 @@ if(!defined('inc_access')) {
                 <div class="col-lg-6 text-left">
                     <p>Copyright &copy; <?php echo str_replace(':8080','',$_SERVER['HTTP_HOST']."&nbsp;".date("Y"));?></p>
                 </div>
-				<div class="col-lg-6 text-right"><a href="//sayat.me/teklynk" target="_blank"><img style="max-width:60px;" src="core/teklynk_logo.png" border="0"/></a></div>
             </div>
         </footer>
 

@@ -169,7 +169,7 @@ function getServices() {
 	global $servicesIcon;
 	global $db_conn;
 
-    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup");
+    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowServicesHeading = mysqli_fetch_array($sqlServicesHeading);
 
     $servicesHeading = $rowServicesHeading['servicesheading'];
@@ -178,7 +178,7 @@ function getServices() {
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
 	}
 
-    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' ORDER BY datetime DESC"); //While loop
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount=0;
 
@@ -207,7 +207,7 @@ function getTeam() {
 	global $teamColWidth;
 	global $db_conn;
 
-	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
+	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowTeamHeading = mysqli_fetch_array($sqlTeamHeading);
 
     $teamHeading = $rowTeamHeading['teamheading'];
@@ -216,7 +216,7 @@ function getTeam() {
     	$teamBlurb = $rowTeamHeading['teamcontent'];
 	}
 
-    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' ORDER BY datetime DESC"); //While loop
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
 
     if ($teamNumRows==2) {
@@ -299,9 +299,12 @@ function getSetup() {
 	global $setupHeadercode;
 	global $setupDisqus;
 	global $setupGoogleanalytics;
+    global $setupConfig;
+    global $setupLs2pac;
+    global $setupLs2kids;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup['description'];
@@ -309,6 +312,9 @@ function getSetup() {
     $setupAuthor = $rowSetup['author'];
     $setupTitle = $rowSetup['title'];
     $setupGoogleanalytics = $rowSetup['googleanalytics'];
+    $setupConfig = $rowSetup['config'];
+    $setupLs2pac = $rowSetup['ls2pac'];
+    $setupLs2kids = $rowSetup['ls2kids'];
 
     if (!empty($rowSetup['headercode'])) {
         $setupHeadercode = $rowSetup['headercode']."\n";
@@ -332,7 +338,7 @@ function getSocialMediaIcons($shape) {
 	global $rowSocialMedia;
 	global $db_conn;
 
-	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia");
+	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
 	$socialMediaIcons = "";
@@ -349,16 +355,24 @@ function getSocialMediaIcons($shape) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['github'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['github']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-github fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['pinterest'])) {
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['twitter'])) {
         $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
-    if (!empty($rowSocialMedia['linkedin'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['linkedin']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-linkedin fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['instagram'])) {
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-inverse'></i></span></a></li>";
+    }
+
+    if (!empty($rowSocialMedia['youtube'])) {
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-inverse'></i></span></a></li>";
+    }
+
+    if (!empty($rowSocialMedia['tumblr'])) {
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-inverse'></i></span></a></li>";
     }
 
     //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
@@ -374,7 +388,7 @@ function getCustomers(){
 	global $customerColWidth;
 	global $db_conn;
 
-    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
+    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
 
 	if (!empty($rowCustomerHeading['customersheading'])) {
@@ -385,7 +399,7 @@ function getCustomers(){
     	$customerBlurb= $rowCustomerHeading['customerscontent'];
 	}
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active FROM customers WHERE active='true' ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     if ($customerNumRows==2) {
@@ -521,7 +535,7 @@ function getGeneralInfo() {
 	global $generalInfoHeading;
 	global $db_conn;
 
-	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo");
+	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo WHERE loc_id=".$_GET['loc_id']." ");
 	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 	if (!empty($rowGeneralinfo['content'])) {
