@@ -198,6 +198,12 @@ $(document).ready(function () {
 		}
 	);
 
+	$('.services_status_checkbox').change (
+		function(){
+			$.get('ajax/update_servicesactive.php?update=true', { id: this.id, checked: this.checked });
+		}
+	);
+
 	//Boostrap tooltips function
 	$('[data-toggle="tooltip"]').tooltip();
 

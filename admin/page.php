@@ -8,7 +8,7 @@ if ($_GET['preview']>"") {
 
 	$pagePreviewId=$_GET['preview'];
 
-	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=".$pagePreviewId." AND loc_id='".$_SESSION['loc_id']."' ");
+	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=".$pagePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
 	$rowPagePreview = mysqli_fetch_array($sqlPagePreview);
 
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
@@ -51,7 +51,7 @@ if ($_GET['preview']>"") {
 			}
 
 			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=".$thePageId." AND loc_id=".$_GET['loc_id']." ");
-			$rowPages  = mysqli_fetch_array($sqlPages);
+			$rowPages = mysqli_fetch_array($sqlPages);
 
 		//Create new page
 		} else if ($_GET['newpage']) {
@@ -69,10 +69,6 @@ if ($_GET['preview']>"") {
 		}
 
 		//alert messages
-		if ($uploadMsg !="") {
-			echo $uploadMsg;
-		}
-
 		if ($pageMsg !="") {
 			echo $pageMsg;
 		}
