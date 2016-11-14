@@ -11,13 +11,13 @@ if ($_GET['preview']>"") {
 	$sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=".$slidePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
 	$rowSlidePreview = mysqli_fetch_array($sqlSlidePreview );
 
-		echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
-		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowSlidePreview['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
-		echo "<p>".$rowSlidePreview['content']."</p>";
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+	echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowSlidePreview['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
+	echo "<p>".$rowSlidePreview['content']."</p>";
 
-		if ($rowSlidePreview['link']>0) {
-			echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=".$_SESSION['loc_id']."&page_id=".$rowSlidePreview['link']."' target='_blank'>Page Link</a></p>";
-		}
+	if ($rowSlidePreview['link']>0) {
+		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=".$_SESSION['loc_id']."&page_id=".$rowSlidePreview['link']."' target='_blank'>Page Link</a></p>";
+	}
 }
 ?>
 
@@ -45,6 +45,7 @@ if ($_GET['preview']>"") {
 			if (!empty($_POST['slide_title'])) {
 				$slideUpdate = "UPDATE slider SET title='".$_POST['slide_title']."', content='".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slide_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
+
 				$slideMsg="<div class='alert alert-success'>The slide ".$_POST['slide_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
@@ -67,16 +68,12 @@ if ($_GET['preview']>"") {
 		}
 
 		//alert messages
-		if ($uploadMsg !="") {
-			echo $uploadMsg;
-		}
-
-		if ($slideMsg !="") {
+		if ($slideMsg != "") {
 			echo $slideMsg;
 		}
 
 		//get and built pages list
-		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
+		$sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
 		$pagesStr = "<option value=''>Custom</option>";
 
 		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
@@ -273,11 +270,11 @@ if ($_GET['preview']>"") {
 		<h2></h2>
 		<div class="table-responsive">
     <?php
-		if ($slideMsg !="") {
+		if ($slideMsg != "") {
 			echo $slideMsg;
 		}
 
-		echo "<form role='portfolioForm' method='post' action=''>
+		echo "<form name='sliderForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
 		<input class='form-control input-sm' name='main_heading' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>

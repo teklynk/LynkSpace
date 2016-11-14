@@ -5,7 +5,7 @@ include 'dbconn.php';
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."
-$IPrange = "127.0.0.";
+$IPrange = "";
 
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/".$_GET['loc_id']."/"; //physical path to uploads folder
