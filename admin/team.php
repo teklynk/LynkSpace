@@ -68,7 +68,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['team_title'])) {
-				$teamInsert = "INSERT INTO team (title, content, image, name, active, loc_id) VALUES ('".$_POST['team_name']."', '".$_POST['team_content']."', '".$_POST['team_image']."', '".$_POST['team_name']."', '".$_POST['team_status']."', 'true', ".$_GET['loc_id'].")";
+				$teamInsert = "INSERT INTO team (title, content, image, name, active, loc_id) VALUES ('".$_POST['team_name']."', '".$_POST['team_content']."', '".$_POST['team_image']."', '".$_POST['team_name']."', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $teamInsert);
 
 				echo "<script>window.location.href='team.php?loc_id=".$_GET['loc_id']."';</script>";

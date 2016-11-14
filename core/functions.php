@@ -7,7 +7,7 @@ function getLocation() {
 
 	if (ctype_digit($_GET['loc_id'])) {
 
-		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' OR active='on' AND id=".$_GET['loc_id']." ");
+		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=".$_GET['loc_id']." ");
 		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
 		if ($rowGetLocation['active']=='true' AND $_GET['loc_id']==$rowGetLocation['id']) {
@@ -178,7 +178,7 @@ function getServices() {
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
 	}
 
-    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' OR active='on' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount=0;
 
@@ -216,7 +216,7 @@ function getTeam() {
     	$teamBlurb = $rowTeamHeading['teamcontent'];
 	}
 
-    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' OR active='on' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
 
     if ($teamNumRows==2) {
@@ -399,7 +399,7 @@ function getCustomers(){
         $customerBlurb= $rowCustomerHeading['customerscontent'];
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM customers WHERE active='true' OR active='on' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     if ($customerNumRows==2) {
@@ -428,7 +428,7 @@ function getSlider($sliderType) {
 		$sliderOrderBy = "ORDER BY RAND() LIMIT 1";
 	}
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' OR active='on' AND loc_id=".$_GET['loc_id']." $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=".$_GET['loc_id']." $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount=0;
 
