@@ -204,6 +204,18 @@ $(document).ready(function () {
 		}
 	);
 
+	$('.team_status_checkbox').change (
+		function(){
+			$.get('ajax/update_teamactive.php?update=true', { id: this.id, checked: this.checked });
+		}
+	);
+
+	$('.customer_status_checkbox').change (
+		function(){
+			$.get('ajax/update_customersactive.php?update=true', { id: this.id, checked: this.checked });
+		}
+	);
+
 	//Boostrap tooltips function
 	$('[data-toggle="tooltip"]').tooltip();
 

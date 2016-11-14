@@ -3,30 +3,32 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	//Page preview
-	if ($_GET["preview"]>""){
-		$pagePreviewId=$_GET["preview"];
-		$sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name FROM team WHERE id='$pagePreviewId'");
-		$row  = mysqli_fetch_array($sqlteamPreview);
+//Page preview
+if ($_GET['preview']>"") {
 
-			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
-			echo "<div class='col-lg-12'>";
+	$pagePreviewId=$_GET['preview'];
 
-			if ($row["image"]>""){
-				echo "<p><img src=../uploads/".$row['image']." style='max-width:350px; max-height:150px;' /></p>";
-			}
+	$sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=".$pagePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
+	$rowTeamPreview  = mysqli_fetch_array($sqlteamPreview);
 
-			if ($row["name"]>""){
-				echo "<h4>".$row['name']."</h4>";
-			}
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+	echo "<div class='col-lg-12'>";
 
-			if ($row["title"]>""){
-				echo "<p>".$row['title']."</p>";
-			}
-
-			echo "<p>".$row['content']."</p>";
-			echo "</div>";
+	if ($rowTeamPreview['image']>""){
+		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowTeamPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
 	}
+
+	if ($rowTeamPreview['name']>""){
+		echo "<h4>".$rowTeamPreview['name']."</h4>";
+	}
+
+	if ($rowTeamPreview['title']>""){
+		echo "<p>".$rowTeamPreview['title']."</p>";
+	}
+
+	echo "<p>".$rowTeamPreview['content']."</p>";
+	echo "</div>";
+}
 ?>
 	<div class="row">
 	<div class="col-lg-12">
@@ -39,66 +41,77 @@ include 'includes/header.php';
 	<div class="col-lg-12">
 <?php
 
-	if ($_GET["newteam"] OR $_GET["editteam"]) {
+	if ($_GET['newteam'] OR $_GET['editteam']) {
+
 		$teamMsg="";
 
 		//Update existing team
-		if ($_GET["editteam"]) {
-			$theteamId = $_GET["editteam"];
+		if ($_GET['editteam']) {
+			$theteamId = $_GET['editteam'];
 			$teamLabel = "Edit Team Title";
 
 			//update data on submit
-			if (!empty($_POST["team_title"])) {
-				$teamUpdate = "UPDATE team SET title='".$_POST["team_title"]."', content='".$_POST["team_content"]."', name='".$_POST["team_name"]."', image='".$_POST["team_image"]."', active=".$_POST["team_status"].", datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId'";
+			if (!empty($_POST['team_title'])) {
+				$teamUpdate = "UPDATE team SET title='".$_POST['team_title']."', content='".$_POST['team_content']."', name='".$_POST['team_name']."', image='".$_POST['team_image']."', active='".$_POST['team_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $teamUpdate);
-				$teamMsg="<div class='alert alert-success'>The team member ".$_POST["team_name"]." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+
+				$teamMsg="<div class='alert alert-success'>The team member ".$_POST['team_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId'");
-			$row  = mysqli_fetch_array($sqlteam);
+			$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ");
+			$rowTeam  = mysqli_fetch_array($sqlteam);
 
 		//Create new team
-		} else if ($_GET["newteam"]) {
+		} else if ($_GET['newteam']) {
+
 			$teamLabel = "New Team Title";
+
 			//insert data on submit
-			if (!empty($_POST["team_title"])) {
-				$teamInsert = "INSERT INTO team (title, content, image, name, active) VALUES ('".$_POST["team_name"]."', '".$_POST["team_content"]."', '".$_POST["team_image"]."', '".$_POST["team_name"]."', ".$_POST["team_status"].")";
+			if (!empty($_POST['team_title'])) {
+				$teamInsert = "INSERT INTO team (title, content, image, name, active, loc_id) VALUES ('".$_POST['team_name']."', '".$_POST['team_content']."', '".$_POST['team_image']."', '".$_POST['team_name']."', '".$_POST['team_status']."', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $teamInsert);
-				$teamMsg="<div class='alert alert-success'>The team member ".$_POST["team_name"]." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+
+				echo "<script>window.location.href='team.php?loc_id=".$_GET['loc_id']."';</script>";
+
 			}
 		}
 
 		//alert messages
-		if ($teamMsg !="") {
+		if ($teamMsg != "") {
 			echo $teamMsg;
 		}
 
-		if ($_GET["editteam"]){
+		if ($_GET['editteam']) {
 			//active status
-			if ($row['active']==1) {
-				$selActive1="SELECTED";
-				$selActive0="";
+			if ($rowTeam['active']=='true' || $rowTeam['active']=='on') {
+				$selActive="CHECKED";
 			} else {
-				$selActive0="SELECTED";
-				$selActive1="";
+				$selActive="";
 			}
 		}
 
-		if ($row["image"]=="") {
+		if ($rowTeam['image']=="") {
 			$thumbNail = "http://placehold.it/140x100&text=No Image";
 		} else {
-			$thumbNail = "../uploads/".$row["image"];
+			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowTeam['image'];
 		}
 ?>
 
-	<form role="teamForm" method="post" action="" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Status</label>
-            <select class="form-control input-sm" name="team_status">
-                <option value="1" <?php if($_GET["editteam"]){echo $selActive1;} ?>>Active</option>
-                <option value="0" <?php if($_GET["editteam"]){echo $selActive0;} ?>>Draft</option>
-            </select>
-        </div>
+	<form name="teamForm" method="post" action="">
+
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group" id="teamactive">
+					<label>Active</label>
+					<div class="checkbox">
+						<label>
+							<input class="team_status_checkbox" id="<?php echo $_GET['editteam']?>" name="team_status" type="checkbox" <?php if($_GET['editteam']){echo $selActive;}?> data-toggle="toggle">
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
         <hr/>
         <div class="form-group">
         	<img src="<?php echo $thumbNail;?>" id="team_image_preview" style="max-width:140px; height:auto;"/>
@@ -116,7 +129,7 @@ include 'includes/header.php';
 							if ($file===".DS_Store") continue;
 							if ($file==="index.html") continue;
 
-							if ($file===$row['image']){
+							if ($file===$rowTeam['image']){
 								$imageCheck="SELECTED";
 							} else {
 								$imageCheck="";
@@ -132,18 +145,18 @@ include 'includes/header.php';
 		<hr/>
 		<div class="form-group">
 			<label>Name</label>
-			<input class="form-control input-sm" name="team_name" value="<?php if($_GET["editteam"]){echo $row['name'];} ?>" placeholder="Name">
+			<input class="form-control input-sm" name="team_name" value="<?php if($_GET['editteam']){echo $rowTeam['name'];} ?>" placeholder="Name">
 		</div>
 		<div class="form-group">
 			<label>Title</label>
-			<input class="form-control input-sm" name="team_title" value="<?php if($_GET["editteam"]){echo $row['title'];} ?>" placeholder="Title">
+			<input class="form-control input-sm" name="team_title" value="<?php if($_GET['editteam']){echo $rowTeam['title'];} ?>" placeholder="Title">
 		</div>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control input-sm" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET["editteam"]){echo $row['content'];} ?></textarea>
+			<textarea class="form-control input-sm" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET['editteam']){echo $rowTeam['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET["editteam"]){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
+			<span><?php if($_GET['editteam']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowTeam['datetime']));} ?></span>
 		</div>
 
 		<button type="submit" name="team_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
@@ -156,43 +169,43 @@ include 'includes/header.php';
 		$deleteMsg="";
 		$deleteConfirm="";
 		$teamMsg="";
-		$delteamId = $_GET["deleteteam"];
-		$delteamTitle = $_GET["deletetitle"];
-		$moveteamId = $_GET["moveteam"];
-		$moveteamTitle = $_GET["movetitle"];
+		$delteamId = $_GET['deleteteam'];
+		$delteamTitle = $_GET['deletetitle'];
+		$moveteamId = $_GET['moveteam'];
+		$moveteamTitle = $_GET['movetitle'];
 
 		//delete team
-		if ($_GET["deleteteam"] AND $_GET["deletetitle"] AND !$_GET["confirm"]) {
+		if ($_GET['deleteteam'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET["deleteteam"] AND $_GET["deletetitle"] AND $_GET["confirm"]=="yes") {
+		} elseif ($_GET['deleteteam'] AND $_GET['deletetitle'] AND $_GET['confirm']=="yes") {
 			//delete team after clicking Yes
 			$teamDelete = "DELETE FROM team WHERE id='$delteamId'";
 			mysqli_query($db_conn, $teamDelete);
 
-			$deleteMsg="<div class='alert alert-success'>".$delteamTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-success'>".$delteamTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 		}
 
 	//move team to top of list
-    if (($_GET["moveteam"] AND $_GET["movetitle"])) {
+    if (($_GET['moveteam'] AND $_GET['movetitle'])) {
         $teamDateUpdate = "UPDATE team SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveteamId'";
         mysqli_query($db_conn, $teamDateUpdate);
 
-        $teamMsg="<div class='alert alert-success'>".$moveteamTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+        $teamMsg="<div class='alert alert-success'>".$moveteamTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
     }
 
     //update heading on submit
-    if (($_POST["save_main"])) {
-        $setupUpdate = "UPDATE setup SET teamheading='".$_POST["team_heading"]."', teamcontent='".$_POST["main_content"]."'";
+    if (($_POST['save_main'])) {
+        $setupUpdate = "UPDATE setup SET teamheading='".$_POST['team_heading']."', teamcontent='".$_POST['main_content']."'";
         mysqli_query($db_conn, $setupUpdate);
 
-        $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php'\">×</button></div>";
+        $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
     }
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
+    $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
@@ -225,11 +238,11 @@ include 'includes/header.php';
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-	<button type="button" class="btn btn-default" onclick="window.location='?newteam=true';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Team Member</button>
+	<button type="button" class="btn btn-default" onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Team Member</button>
 		<h2></h2>
 		<div class="table-responsive">
     <?php
-		if ($teamMsg !="") {
+		if ($teamMsg != "") {
 			echo $teamMsg;
 		}
 		?>
@@ -246,34 +259,36 @@ include 'includes/header.php';
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Status</th>
+						<th>Active</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
         		<?php
-					$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active FROM team ORDER BY datetime DESC");
-					while ($row  = mysqli_fetch_array($sqlteam)) {
-						$teamId=$row['id'];
-						$teamTitle=$row['title'];
-						$teamName=$row['name'];
-						$teamTumbnail=$row['image'];
-						$teamContent=$row['content'];
-						$teamActive=$row['active'];
-						if ($row['active']==0){
-							$isActive="<i style='color:red;'>(Draft)</i>";
+					$sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, loc_id FROM team WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
+					while ($rowTeam  = mysqli_fetch_array($sqlTeam)) {
+						$teamId=$rowTeam['id'];
+						$teamTitle=$rowTeam['title'];
+						$teamName=$rowTeam['name'];
+						$teamTumbnail=$rowTeam['image'];
+						$teamContent=$rowTeam['content'];
+						$teamActive=$rowTeam['active'];
+
+						if ($rowTeam['active']=='true' || $rowTeam['active']=='on') {
+							$isActive="CHECKED";
 						} else {
 							$isActive="";
 						}
+
 						echo "<tr>
-						<td><a href='?editteam=$teamId' title='Edit'>".$teamName."</a></td>
+						<td><a href='?loc_id=".$_GET['loc_id']."&editteam=$teamId' title='Edit'>".$teamName."</a></td>
 						<td class='col-xs-1'>
-						<span>".$isActive."</span>
+						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='$teamId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$teamName', '?preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?moveteam=$teamId&movetitle=$teamName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?deleteteam=$teamId&deletetitle=$teamName'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&moveteam=$teamId&movetitle=$teamName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deleteteam=$teamId&deletetitle=$teamName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}
@@ -287,12 +302,11 @@ include 'includes/header.php';
 			</form>
 		</div>
 <?php
-	}
-?>
-		</div>
-	</div>
-	<p></p>
+	} //end of long else
 
-<?php
+	echo "</div>
+	</div>
+	<p></p>";
+
 	include 'includes/footer.php';
 ?>

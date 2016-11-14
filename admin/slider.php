@@ -173,7 +173,6 @@ if ($_GET['preview']>"") {
 					}
 
 					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
-					//$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 					echo $pagesStr;
 				?>
 			</select>
