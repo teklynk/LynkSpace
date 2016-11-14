@@ -14,15 +14,15 @@ if ($_GET['preview']>"") {
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 	echo "<div class='col-lg-12'>";
 
-	if ($rowTeamPreview['image']>""){
+	if ($rowTeamPreview['image']>"") {
 		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowTeamPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
 	}
 
-	if ($rowTeamPreview['name']>""){
+	if ($rowTeamPreview['name']>"") {
 		echo "<h4>".$rowTeamPreview['name']."</h4>";
 	}
 
-	if ($rowTeamPreview['title']>""){
+	if ($rowTeamPreview['title']>"") {
 		echo "<p>".$rowTeamPreview['title']."</p>";
 	}
 

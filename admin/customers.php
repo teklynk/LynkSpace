@@ -265,7 +265,7 @@ include 'includes/header.php';
 						$customerLink=$rowCustomer['link'];
 						$customerActive=$rowCustomer['active'];
 
-						if ($rowCustomer['active']=='true' || $rowCustomer['active']=='on'){
+						if ($rowCustomer['active']=='true' || $rowCustomer['active']=='on') {
 							$isActive="CHECKED";
 						} else {
 							$isActive="";

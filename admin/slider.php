@@ -162,7 +162,7 @@ if ($_GET['preview']>"") {
 						$sliderLinkTitle = $rowSliderLink['title'];
 
 						if (ctype_digit($rowSlides['link'])){
-							if ($sliderLinkId===$rowSlides['link']){
+							if ($sliderLinkId===$rowSlides['link']) {
 								$isSelected="SELECTED";
 							} else {
 								$isSelected="";
@@ -296,7 +296,7 @@ if ($_GET['preview']>"") {
 			$slideContent=$rowSlides['content'];
 			$slideActive=$rowSlides['active'];
 
-			if ($rowSlides['active']=='true' || $rowSlides['active']=='on'){
+			if ($rowSlides['active']=='true' || $rowSlides['active']=='on') {
 				$isActive="CHECKED";
 			} else {
 				$isActive="";

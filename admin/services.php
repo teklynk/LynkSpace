@@ -14,20 +14,20 @@ if ($_GET['preview']>"") {
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
 	echo "<div class='col-lg-12'>";
 
-	if ($rowServicesPreview['icon']>""){
+	if ($rowServicesPreview['icon']>"") {
 		echo "<p style='font-size:6.0em;'><i class='fa fa-fw fa-".$rowServicesPreview['icon']."'></i></p><br/>";
 	}
 
-	if ($rowServicesPreview['image']>""){
+	if ($rowServicesPreview['image']>"") {
 		echo "<p><img src=../uploads/".$rowServicesPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
 	}
 
-	if ($rowServicesPreview['title']>""){
+	if ($rowServicesPreview['title']>"") {
 		echo "<h4>".$rowServicesPreview['title']."</h4>";
 	}
 	echo "<p>".$rowServicesPreview['content']."</p>";
 
-	if ($rowServicesPreview['link']>0){
+	if ($rowServicesPreview['link']>0) {
 		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$rowServicesPreview['link']."&loc_id=".$_SESSION['loc_id']."' target='_blank'>Page Link</a></p>";
 	}
 
@@ -84,7 +84,7 @@ if ($_GET['preview']>"") {
 			echo $serviceMsg;
 		}
 
-		if ($_GET['editservice']){
+		if ($_GET['editservice']) {
 			//active status
 			if ($rowServices['active']=='true' || $rowServices['active']=='on') {
 				$selActive="CHECKED";

@@ -315,7 +315,7 @@ if ($_GET['preview']>"") {
 						$pageContent=$rowPages['content'];
 						$pageActive=$rowPages['active'];
 
-						if ($rowPages['active']=='true' || $rowPages['active']=='on'){
+						if ($rowPages['active']=='true' || $rowPages['active']=='on') {
 							$isActive="CHECKED";
 						} else {
 							$isActive="";
