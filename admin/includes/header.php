@@ -189,7 +189,7 @@ if ($IPrange <> '') {
              </ul>
              <ul class="nav navbar-right top-nav">
                   <li style="margin-top:8px;">
-                    <form name="loc_menu" method="get">
+
                     <select class="selectpicker" data-container="body" data-width="auto" data-size="10" data-live-search="true" name="loc_id" id="loc_id">
                       <?php
                       while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
@@ -204,8 +204,7 @@ if ($IPrange <> '') {
                       }
                       ?>
                     </select>
-                    <input type="submit" name="loc_submit" class="btn btn-default" value="Go">
-                    </form>
+
                    </li>
               </ul>
 

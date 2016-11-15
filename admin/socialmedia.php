@@ -46,7 +46,7 @@ include 'includes/header.php';
 			<form name="socialmediaForm" method="post" action="">
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" type="url" placeholder="Follow Me">
+					<input class="form-control input-sm" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me">
 				</div>
 				<div class="form-group">
 					<label>Facebook</label>

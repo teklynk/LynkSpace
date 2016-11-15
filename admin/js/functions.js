@@ -232,6 +232,14 @@ $(document).ready(function () {
 	    }
 	);
 
+	//Boostrap-select actions
+	$('select.selectpicker').change (
+		function () {
+			var selected = $('.selectpicker option:selected').val();
+			window.location.href = '?loc_id=' + selected;
+		}
+	);
+
 });
 
 //modal preview window
