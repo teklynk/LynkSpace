@@ -58,7 +58,7 @@ $(document).ready(function () {
 
 	$('#exist_cat').change (
 	    function () {
-			if ($('#exist_cat').val()=='' || $('#exist_cat').val()==29) { //NOTE: 29=None in the category table
+			if ($('#exist_cat').val()=='' || $('#exist_cat').val()==0) { //NOTE: 0=None in the category table
 				$('#nav_newcat').val('');
 				$('#del_cat .fa-trash' ).css( 'visibility', 'hidden');
 				$('#rename_cat .fa-save' ).css( 'visibility', 'hidden');

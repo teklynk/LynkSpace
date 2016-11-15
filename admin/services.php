@@ -211,7 +211,7 @@ if ($_GET['preview']>"") {
 			<textarea class="form-control input-sm" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
 		<div class="form-group">
-			<span><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($row['datetime']));} ?></span>
+			<span><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowServices['datetime']));} ?></span>
 		</div>
 		<button type="submit" name="sservices_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
@@ -321,14 +321,14 @@ if ($_GET['preview']>"") {
 				<tbody>
 				<?php
 				$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, link, active, loc_id FROM services WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
-				while ($row  = mysqli_fetch_array($sqlServices)) {
-					$serviceId=$row['id'];
-					$serviceTitle=$row['title'];
-					$serviceTumbnail=$row['icon'];
-					$serviceContent=$row['content'];
-					$serviceActive=$row['active'];
+				while ($rowServices  = mysqli_fetch_array($sqlServices)) {
+					$serviceId=$rowServices['id'];
+					$serviceTitle=$rowServices['title'];
+					$serviceTumbnail=$rowServices['icon'];
+					$serviceContent=$rowServices['content'];
+					$serviceActive=$rowServices['active'];
 
-					if ($row['active']=='true') {
+					if ($rowServices['active']=='true') {
 						$isActive="CHECKED";
 					} else {
 						$isActive="";

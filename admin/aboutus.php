@@ -83,7 +83,7 @@ include 'includes/header.php';
 		                            if ($file===".DS_Store") continue;
 		                            if ($file==="index.html") continue;
 
-		                            if ($file===$row['image']){
+		                            if ($file===$rowAbout['image']){
 		                                $imageCheck="SELECTED";
 		                            } else {
 		                                $imageCheck="";
