@@ -16,7 +16,7 @@ if ($_GET['preview']>"") {
 	echo "<p>".$rowSlidePreview['content']."</p>";
 
 	if ($rowSlidePreview['link']>0) {
-		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=".$_SESSION['loc_id']."&page_id=".$rowSlidePreview['link']."' target='_blank'>Page Link</a></p>";
+		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=".$_SESSION['loc_id']."&page_id=".$rowSlidePreview['link']."'>Page Link</a></p>";
 	}
 }
 ?>
