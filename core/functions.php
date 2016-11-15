@@ -1,4 +1,6 @@
 <?php
+define('inc_access', TRUE);
+
 function getLocation() {
 	global $locationName;
 	global $locationActive;

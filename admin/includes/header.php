@@ -145,7 +145,7 @@ if ($IPrange <> '') {
     		    image_list: [<?php echo rtrim($fileListJson, ","); ?>],
                 link_list: [<?php echo rtrim($linkListJson, ","); ?>],
         		menu: {},
-     			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image table | code'
+     			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image'
     			});
     		});
     	</script>

@@ -3,11 +3,11 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-//Get max location ID number
-$sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
-$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
+	//Get max location ID number
+	$sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
+	$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
 
-$locationNewID = $rowLocationMaxID[0]+1;
+	$locationNewID = $rowLocationMaxID[0]+1;
 
 	//Get location table columns
 	$sqlLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE id=".$_GET['loc_id']." ");

@@ -1,4 +1,6 @@
 <?php
+define('inc_access', TRUE);
+
 //redirect back to contact form or home page
 $redirectPage = "../contact.php?msgsent=thankyou#contactForm";
 //if an error occurs
@@ -12,7 +14,7 @@ $sendTo = $_POST['sendToEmail'];
 
 if (!empty($_POST)) {
 	// Check for empty fields
-	if(empty($_POST['name'])  	||
+	if (empty($_POST['name'])  	||
 	   empty($_POST['email']) 	||
 	   empty($_POST['phone']) 	||
 	   empty($_POST['message'])	||
