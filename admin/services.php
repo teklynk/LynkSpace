@@ -55,6 +55,13 @@ if ($_GET['preview']>"") {
 
 			//update data on submit
 			if (!empty($_POST['service_title'])) {
+
+				if ($_POST['service_status']=='on') {
+					$_POST['service_status']='true';
+				} else {
+					$_POST['service_status']='false';
+				}
+
 				$servicesUpdate = "UPDATE services SET title='".$_POST['service_title']."', content='".$_POST['service_content']."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."',datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
@@ -86,7 +93,7 @@ if ($_GET['preview']>"") {
 
 		if ($_GET['editservice']) {
 			//active status
-			if ($rowServices['active']=='true' || $rowServices['active']=='on') {
+			if ($rowServices['active']=='true') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -227,7 +234,7 @@ if ($_GET['preview']>"") {
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deleteservice'] AND $_GET['deletetitle'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deleteservice'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
 			mysqli_query($db_conn, $servicesDelete);
@@ -321,7 +328,7 @@ if ($_GET['preview']>"") {
 					$serviceContent=$row['content'];
 					$serviceActive=$row['active'];
 
-					if ($row['active']=='true' || $row['active']=='on') {
+					if ($row['active']=='true') {
 						$isActive="CHECKED";
 					} else {
 						$isActive="";

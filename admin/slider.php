@@ -43,6 +43,13 @@ if ($_GET['preview']>"") {
 
 			//update data on submit
 			if (!empty($_POST['slide_title'])) {
+
+				if ($_POST['slider_status']=='on') {
+					$_POST['slider_status']='true';
+				} else {
+					$_POST['slider_status']='false';
+				}
+
 				$slideUpdate = "UPDATE slider SET title='".$_POST['slide_title']."', content='".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
 
@@ -84,7 +91,7 @@ if ($_GET['preview']>"") {
 
 		if ($_GET['editslide']) {
 			//active status
-			if ($rowSlides['active']=='true' || $rowSlides['active']=='on') {
+			if ($rowSlides['active']=='true') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -206,7 +213,7 @@ if ($_GET['preview']>"") {
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delslideTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteslide=".$delslideId."&deletetitle=".$delslideTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deleteslide'] AND $_GET['deletetitle'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deleteslide'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
 			//delete slide after clicking Yes
 			$slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
 			mysqli_query($db_conn, $slideDelete);
@@ -296,7 +303,7 @@ if ($_GET['preview']>"") {
 			$slideContent=$rowSlides['content'];
 			$slideActive=$rowSlides['active'];
 
-			if ($rowSlides['active']=='true' || $rowSlides['active']=='on') {
+			if ($rowSlides['active']=='true') {
 				$isActive="CHECKED";
 			} else {
 				$isActive="";

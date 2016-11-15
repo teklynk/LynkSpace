@@ -17,7 +17,7 @@ fwrite($sitemapfile, $writeline);
 $writeline = "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>\n";
 fwrite($sitemapfile, $writeline);
 
-//gets pages from db
+//get pages from db
 $sqlpages = mysqli_query($db_conn, "SELECT id, datetime, loc_id FROM pages WHERE active='true' ORDER BY datetime DESC");
 while ($rowPages  = mysqli_fetch_array($sqlpages)) {
 	$pageId=$rowPages['id'];

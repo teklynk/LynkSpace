@@ -52,6 +52,13 @@ if ($_GET['preview']>"") {
 
 			//update data on submit
 			if (!empty($_POST['team_title'])) {
+
+				if ($_POST['team_status']=='on') {
+					$_POST['team_status']='true';
+				} else {
+					$_POST['team_status']='false';
+				}
+
 				$teamUpdate = "UPDATE team SET title='".$_POST['team_title']."', content='".$_POST['team_content']."', name='".$_POST['team_name']."', image='".$_POST['team_image']."', active='".$_POST['team_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $teamUpdate);
 
@@ -83,7 +90,7 @@ if ($_GET['preview']>"") {
 
 		if ($_GET['editteam']) {
 			//active status
-			if ($rowTeam['active']=='true' || $rowTeam['active']=='on') {
+			if ($rowTeam['active']=='true') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -180,7 +187,7 @@ if ($_GET['preview']>"") {
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deleteteam'] AND $_GET['deletetitle'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deleteteam'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
 			//delete team after clicking Yes
 			$teamDelete = "DELETE FROM team WHERE id='$delteamId'";
 			mysqli_query($db_conn, $teamDelete);
@@ -274,7 +281,7 @@ if ($_GET['preview']>"") {
 						$teamContent=$rowTeam['content'];
 						$teamActive=$rowTeam['active'];
 
-						if ($rowTeam['active']=='true' || $rowTeam['active']=='on') {
+						if ($rowTeam['active']=='true') {
 							$isActive="CHECKED";
 						} else {
 							$isActive="";

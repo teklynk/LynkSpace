@@ -93,7 +93,7 @@ include 'includes/header.php';
 		<div class="col-lg-12">
 		<?php
 
-		if ($pageMsg !="") {
+		if ($pageMsg != "") {
 			echo $pageMsg;
 		}
 
@@ -133,7 +133,7 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delNavTitle."? <a href='?section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&loc_id=".$_GET['loc_id']."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deletenav'] AND $_GET['deletename'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deletenav'] AND $_GET['deletename'] AND $_GET['confirm']=='yes') {
 
 			//delete nav after clicking Yes
 			$navDelete = "DELETE FROM navigation WHERE id='$delNavId'";
@@ -153,7 +153,7 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete ".$delCatTitle."? <a href='?section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&loc_id=".$_GET['loc_id']."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm']=='yes') {
 
 			$navCatUpdate = "UPDATE navigation SET catid='0' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
 			mysqli_query($db_conn, $navCatUpdate);
@@ -177,7 +177,7 @@ include 'includes/header.php';
 			$renameMsg="<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename ".$renameCatTitle."? <a href='?section=".$getNavSection."&renamecat=".$renameCatId."&newcatname=".$renameCatTitle."&loc_id=".$_GET['loc_id']."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $renameMsg;
 
-		} elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm']=='yes') {
 
 			$navRenameCatUpdate = "UPDATE category SET name='".$renameCatTitle."' WHERE id='$renameCatId'";
 			mysqli_query($db_conn, $navRenameCatUpdate);
@@ -236,7 +236,7 @@ include 'includes/header.php';
 							<th>URL</th>
 							<th>Category</th>
 							<th><i class="fa fa-fw fa-external-link"></i> External</th>
-							<th>Delete</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>

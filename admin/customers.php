@@ -49,6 +49,13 @@ include 'includes/header.php';
 
 			//update data on submit
 			if (!empty($_POST['customer_name'])) {
+
+				if ($_POST['customer_status']=='on') {
+					$_POST['customer_status']='true';
+				} else {
+					$_POST['customer_status']='false';
+				}
+
 				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', image='".$_POST['customer_image']."', link='".$_POST['customer_link']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
@@ -80,7 +87,7 @@ include 'includes/header.php';
 
 		if ($_GET['editcustomer']) {
 			//active status
-			if ($rowCustomer['active']=='true' || $rowCustomer['active']=='on') {
+			if ($rowCustomer['active']=='true') {
 				$selActive="CHECKED";
 			} else {
 				$selActive="";
@@ -172,7 +179,7 @@ include 'includes/header.php';
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delcustomerName."? <a href='?loc_id=".$_GET['loc_id']."&deletecustomer=".$delcustomerId."&deletename=".$delcustomerName."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='customers.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deletecustomer'] AND $_GET['deletename'] AND $_GET['confirm']=="yes") {
+		} elseif ($_GET['deletecustomer'] AND $_GET['deletename'] AND $_GET['confirm']=='yes') {
 			//delete customer after clicking Yes
 			$customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
 			mysqli_query($db_conn, $customerDelete);
@@ -265,7 +272,7 @@ include 'includes/header.php';
 						$customerLink=$rowCustomer['link'];
 						$customerActive=$rowCustomer['active'];
 
-						if ($rowCustomer['active']=='true' || $rowCustomer['active']=='on') {
+						if ($rowCustomer['active']=='true') {
 							$isActive="CHECKED";
 						} else {
 							$isActive="";
