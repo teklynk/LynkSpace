@@ -137,7 +137,7 @@ if ($IPrange <> '') {
     			tinymce.init({
     			selector: 'textarea.tinymce',
 				theme: 'modern',
-    		    plugins: 'link image table code',
+    		    plugins: 'link image',
     		    image_dimensions: false,
     			object_resizing: false,
     		    document_base_url: '<?php echo $image_baseURL; ?>',
