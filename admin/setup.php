@@ -3,6 +3,17 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
+//Get max location ID number
+$sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
+$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
+
+$locationNewID = $rowLocationMaxID[0]+1;
+
+	//Get location table columns
+	$sqlLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE id=".$_GET['loc_id']." ");
+	$rowLocation = mysqli_fetch_array($sqlLocation);
+
+	//Get setup table columns
 	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
@@ -15,16 +26,22 @@ include 'includes/header.php';
 
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
-				//Do Update
+				//Update Setup
 				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
+				//Update Location
+				$locationUpdate = "UPDATE locations SET name='".$_POST['location_name']."' WHERE id=".$_GET['loc_id']." ";
+				mysqli_query($db_conn, $locationUpdate);
 			} else {
-				//Do Insert
-				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['config']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
+				//Insert Setup
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['site_config']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $setupInsert);
+				//Insert Location
+				$locationInsert = "INSERT INTO locations (id, name, active) VALUES (".$_GET['loc_id'].", '".$_POST['location_name']."', 'true')";
+				mysqli_query($db_conn, $locationInsert);
 			}
 
-			echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
+			echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."&update=true';</script>";
 
 		}
 	}
@@ -44,6 +61,14 @@ include 'includes/header.php';
    <div class="row">
 		<div class="col-lg-8">
 		<?php
+		//Check if user_level is Admin user
+		if ($_SESSION['user_level'] == 1) {
+		?>
+			<button type="button" class="btn btn-default" onclick="window.location='?newpage=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Location</button>
+			<h2></h2>
+		<?php
+		}
+
 		if ($pageMsg != "") {
 			echo $pageMsg;
 		}
@@ -83,10 +108,18 @@ include 'includes/header.php';
 					<label>PAC Settings</label>
 				</div>
 				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label>Location Name</label>
+							<input class="form-control input-sm" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>">
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-lg-2">
 						<div class="form-group">
 							<label>PAC Config</label>
-							<input class="form-control input-sm" name="site_config" maxlength="255" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+							<input class="form-control input-sm" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
 						</div>
 					</div>
 				</div>

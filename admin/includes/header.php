@@ -88,7 +88,7 @@ if ($IPrange <> '') {
 	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=".$_SESSION['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
-  if (!empty($_GET['loc_id'])){
+  if (!empty($_GET['loc_id'])) {
 
     //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
     $_SESSION['loc_id'] = $_GET['loc_id'];
@@ -210,7 +210,6 @@ if ($IPrange <> '') {
               </ul>
 
               <?php
-
               if (isset($_SESSION['loc_id'])) {
                 $setLocId = "loc_id=".$_SESSION['loc_id'];
               } else {
