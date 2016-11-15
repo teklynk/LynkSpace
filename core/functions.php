@@ -99,7 +99,10 @@ function getContactInfo() {
 	global $contactHours;
 	global $contactFormSendToEmail;
 	global $contactFormMsg;
+    global $emailValidatePattern;
 	global $db_conn;
+
+    $emailValidatePattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
 
 	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowContact = mysqli_fetch_array($sqlContact);

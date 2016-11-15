@@ -67,13 +67,13 @@ include 'includes/header.php';
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Phone Number:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="304-555-5555" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" pattern="<?php echo $emailValidatePattern ?>" class="form-control" id="email" name="email" placehoder="myemail@email.com" required>
                         </div>
                     </div>
                     <div class="control-group form-group">

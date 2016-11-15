@@ -16,15 +16,15 @@ include 'includes/header.php';
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$setupUpdate = "UPDATE setup SET title='" . $_POST['site_title'] . "', author='" . $site_author . "', keywords='" . mysqli_real_escape_string($db_conn, $site_keywords) . "', description='" . mysqli_real_escape_string($db_conn, $site_description) . "', headercode='" . mysqli_real_escape_string($db_conn, $_POST['site_header']) . "', config='" . $_POST['site_config'] . "', disqus='" . mysqli_real_escape_string($db_conn, $_POST['site_disqus']) . "', googleanalytics='" . $_POST['site_google'] . "', tinymce=" . $_POST['site_tinymce'] . " WHERE loc_id=" . $_GET['loc_id'] . " ";
+				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 			} else {
 				//Do Insert
-				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('" . $_POST['site_title'] . "', '" . $site_author . "', '" . mysqli_real_escape_string($db_conn, $site_description) . "', '" . mysqli_real_escape_string($db_conn, $site_keywords) . "', '" . mysqli_real_escape_string($db_conn, $_POST['site_header']) . "', '" . $_POST['config'] . "', '" . mysqli_real_escape_string($db_conn, $_POST['site_disqus']) . "', '" . $_POST['site_google'] . "', " . $_POST['site_tinymce'] . ", " . $_GET['loc_id'] . ")";
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['config']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $setupInsert);
 			}
 
-			echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
+			echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."&update=true ';</script>";
 
 		}
 	}
@@ -44,17 +44,17 @@ include 'includes/header.php';
    <div class="row">
 		<div class="col-lg-8">
 		<?php
-		if ($pageMsg !="") {
+		if ($pageMsg != "") {
 			echo $pageMsg;
 		}
 
-		if ($rowSetup['ls2pac'] =='true') {
+		if ($rowSetup['ls2pac'] == 'true') {
 			$isActive_ls2pac="CHECKED";
 		} else {
 			$isActive_ls2pac="";
 		}
 
-		if ($rowSetup['ls2kids'] =='true') {
+		if ($rowSetup['ls2kids'] == 'true') {
 			$isActive_ls2kids="CHECKED";
 		} else {
 			$isActive_ls2kids="";
