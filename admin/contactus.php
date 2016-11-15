@@ -47,47 +47,47 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="contact_heading" value="<?php echo $rowContact['heading']; ?>"  placeholder="Contact Me">
+					<input class="form-control input-sm" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>"  placeholder="Contact Me">
 				</div>
                 <div class="form-group">
 					<label>Intro Text</label>
-					<textarea class="form-control input-sm" name="contact_introtext" rows="3" maxlength="255"><?php echo $rowContact['introtext']; ?></textarea>
+					<textarea class="form-control input-sm" name="contact_introtext" rows="3" maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Map Code</label>
-					<textarea class="form-control input-sm" name="contact_mapcode" rows="3" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
+					<textarea class="form-control input-sm" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Street Address</label>
-					<input class="form-control input-sm" name="contact_address" value="<?php echo $rowContact['address']; ?>" placeholder="123 Fake Street">
+					<input class="form-control input-sm" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Fake Street">
 				</div>
 				<div class="form-group">
 					<label>City</label>
-					<input class="form-control input-sm" name="contact_city" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
+					<input class="form-control input-sm" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
 				</div>
 				<div class="form-group">
 					<label>State</label>
-					<input class="form-control input-sm" name="contact_state" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
+					<input class="form-control input-sm" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
 				</div>
 				<div class="form-group">
 					<label>Zipcode</label>
-					<input class="form-control input-sm" name="contact_zipcode" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
+					<input class="form-control input-sm" name="contact_zipcode" maxlength="100" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
 				</div>
 				<div class="form-group">
 					<label>Phone</label>
-					<input class="form-control input-sm" name="contact_phone" value="<?php echo $rowContact['phone']; ?>" placeholder="555-5555">
+					<input class="form-control input-sm" name="contact_phone" maxlength="100" value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
 				</div>
 				<div class="form-group">
 					<label>Hours</label>
-					<textarea class="form-control input-sm" name="contact_hours" rows="3"><?php echo $rowContact['hours']; ?></textarea>
+					<textarea class="form-control input-sm" name="contact_hours" rows="3" maxlength="255"><?php echo $rowContact['hours']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Email</label>
-					<input class="form-control input-sm" name="contact_email" value="<?php echo $rowContact['email']; ?>" placeholder="john.doe@email.com">
+					<input class="form-control input-sm" name="contact_email" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
 				</div>
 				<div class="form-group">
 					<label>Send To Email</label>
-					<input class="form-control input-sm" name="contact_sendtoemail" value="<?php echo $rowContact['sendtoemail']; ?>" placeholder="john.doe@email.com">
+					<input class="form-control input-sm" name="contact_sendtoemail" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
 				</div>
 
 				<button type="submit" name="contact_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>

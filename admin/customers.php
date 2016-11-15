@@ -153,7 +153,7 @@ include 'includes/header.php';
 		</div>
 		<div class="form-group">
 			<label>Link</label>
-			<input class="form-control input-sm" name="customer_link" value="<?php if($_GET['editcustomer']){echo $rowCustomer['link'];} ?>" placeholder="http://www.google.com">
+			<input class="form-control input-sm" name="customer_link" maxlength="255" value="<?php if($_GET['editcustomer']){echo $rowCustomer['link'];} ?>" type="url" placeholder="http://www.google.com">
 		</div>
         <div class="form-group">
 			<span><?php if($_GET['editcustomer']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowCustomer['datetime']));} ?></span>
@@ -248,7 +248,7 @@ include 'includes/header.php';
 			<form name="customerForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="customer_heading" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer">
+                <input class="form-control input-sm" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer">
             </div>
             <div class="form-group">
                 <label>Description</label>

@@ -128,7 +128,7 @@ if ($_GET['preview']>"") {
 
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
-			<input class="form-control input-sm" name="page_title" value="<?php if($_GET['editpage']){echo $rowPages['title'];} ?>" placeholder="Page Title">
+			<input class="form-control input-sm" name="page_title" maxlength="255" value="<?php if($_GET['editpage']){echo $rowPages['title'];} ?>" placeholder="Page Title">
 		</div>
 		<hr/>
         <div class="form-group">

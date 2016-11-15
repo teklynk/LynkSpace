@@ -48,34 +48,36 @@ include 'includes/header.php';
     <style>
         html, body {
             margin-top: 0px !important;
-            /*background: #FCFCFC url('images/sky_texture1973.png') no-repeat center center /cover;*/
             /*background: #0033A0 center center /cover;*/
-            background: linear-gradient(-200deg, #0033a0, #008eaa);
-            background-color: #0033a0;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+            /*background: linear-gradient(-200deg, #0033a0, #008eaa);*/
+            /*background-color: #0033a0;*/
+            /*-webkit-background-size: cover;*/
+            /*-moz-background-size: cover;*/
+            /*-o-background-size: cover;*/
+            /*background-size: cover;*/
+            /*background: linear-gradient(#111,#414141,#414141);*/
+            background-color: #222;
+
         }
 
-        #page-wrapper {
-            background-color: transparent !important;
-        }
+    #page-wrapper {
+        background-color: transparent !important;
+    }
 
-        .navbar-inverse {
-            display: none !important;
-        }
+    .navbar-inverse {
+        display: none !important;
+    }
 
-        #wrapper {
-            padding-left: 0px !important;
-        }
+    #wrapper {
+        padding-left: 0px !important;
+    }
 
-        .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
-    </style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+</style>
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -90,19 +92,15 @@ include 'includes/header.php';
                     <form name="frmUser" class="form-signin" method="post" action="">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text"
-                                       autofocus>
+                                <input class="form-control" maxlength="255" placeholder="Username" name="username" type="text" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password"
-                                       value="">
+                                <input class="form-control" maxlength="255" placeholder="Password" name="password" type="password" value="">
                             </div>
                             <div class="checkbox">
-                                <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot"
-                                              type="checkbox">I'm not a robot</label>
+                                <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox"><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in"
-                                    disabled="disabled" type="submit">Sign in
+                            <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit">Sign in
                             </button>
                         </fieldset>
                     </form>

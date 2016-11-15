@@ -36,7 +36,7 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>User Name</label>
-					<input class="form-control" type="text" name="user_name" value="<?php echo $rowUsers['username']; ?>" placeholder="User name">
+					<input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $rowUsers['username']; ?>" placeholder="User name">
 				</div>
 				<div class="form-group">
 					<label>User Password</label>

@@ -97,21 +97,21 @@ if (!file_exists($filename)) {
 
 <div class="container">
     <div class="row">
-        <form name="frmUser" class="form-signin" method="post" action="">
+        <form name="frmInstall" class="form-signin" method="post" action="">
           <h2 class="form-signin-heading">Database info</h2>
             <label for="dbserver" class="sr-only">DB Server</label>
-            <input class="form-control" type="text" name="dbserver" placeholder="DB Server" required>
+            <input class="form-control" type="text" name="dbserver" maxlength="255" placeholder="DB Server" required>
             <label for="dbusername" class="sr-only">DB Username</label>
-            <input class="form-control" type="text" name="dbusername" placeholder="DB Username" required>
+            <input class="form-control" type="text" name="dbusername" maxlength="255" placeholder="DB Username" required>
             <label for="dbpassword" class="sr-only">DBPassword</label>
-            <input class="form-control" type="text" name="dbpassword" placeholder="DB Password" required>
+            <input class="form-control" type="text" name="dbpassword" maxlength="255" placeholder="DB Password" required>
             <label for="dbname" class="sr-only">DB Name</label>
-            <input class="form-control" type="text" name="dbname" placeholder="DB Name" required>
+            <input class="form-control" type="text" name="dbname" maxlength="255" placeholder="DB Name" required>
 			<h2 class="form-signin-heading">Create an Admin user</h2>
 			<label for="username" class="sr-only">Username</label>
-            <input class="form-control" type="text" name="username" placeholder="Username" required>
+            <input class="form-control" type="text" name="username" maxlength="255" placeholder="Username" required>
             <label for="password" class="sr-only">Password</label>
-            <input class="form-control" type="text" name="password" placeholder="Password" required>
+            <input class="form-control" type="text" name="password" maxlength="255" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" name="install_submit" type="submit">Create</button>
         </form>
     </div>

@@ -86,7 +86,7 @@ include 'includes/header.php';
 					<div class="col-lg-2">
 						<div class="form-group">
 							<label>PAC Config</label>
-							<input class="form-control input-sm" name="site_config" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+							<input class="form-control input-sm" name="site_config" maxlength="255" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
 						</div>
 					</div>
 				</div>

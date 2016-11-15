@@ -121,7 +121,7 @@ if ($_GET['preview']>"") {
 
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
-			<input class="form-control input-sm" name="slide_title" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
+			<input class="form-control input-sm" name="slide_title" maxlength="255" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -283,7 +283,7 @@ if ($_GET['preview']>"") {
 		echo "<form name='sliderForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
-		<input class='form-control input-sm' name='main_heading' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
+		<input class='form-control input-sm' name='main_heading' maxlength='255' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
 		</div>
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>

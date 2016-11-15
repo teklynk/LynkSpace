@@ -46,35 +46,35 @@ include 'includes/header.php';
 			<form name="socialmediaForm" method="post" action="">
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="social_heading" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me">
+					<input class="form-control input-sm" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" type="url" placeholder="Follow Me">
 				</div>
 				<div class="form-group">
 					<label>Facebook</label>
-					<input class="form-control input-sm" name="social_facebook" value="<?php echo $rowSocial['facebook']; ?>" placeholder="https://www.facebook.com/username">
+					<input class="form-control input-sm" name="social_facebook" maxlength="255" value="<?php echo $rowSocial['facebook']; ?>" type="url" placeholder="https://www.facebook.com/username">
 				</div>
 				<div class="form-group">
 					<label>Twitter</label>
-					<input class="form-control input-sm" name="social_twitter" value="<?php echo $rowSocial['twitter']; ?>" placeholder="https://www.twitter.com/username">
+					<input class="form-control input-sm" name="social_twitter" maxlength="255" value="<?php echo $rowSocial['twitter']; ?>" type="url" placeholder="https://www.twitter.com/username">
 				</div>
 				<div class="form-group">
 					<label>Google+</label>
-					<input class="form-control input-sm" name="social_google" value="<?php echo $rowSocial['google']; ?>" placeholder="https://plus.google.com/8675309/posts">
+					<input class="form-control input-sm" name="social_google" maxlength="255" value="<?php echo $rowSocial['google']; ?>" type="url" placeholder="https://plus.google.com/8675309/posts">
 				</div>
 				<div class="form-group">
 					<label>Pinterest</label>
-					<input class="form-control input-sm" name="social_pinterest" value="<?php echo $rowSocial['pinterest']; ?>" placeholder="https://www.pinterest.com/username/">
+					<input class="form-control input-sm" name="social_pinterest" maxlength="255" value="<?php echo $rowSocial['pinterest']; ?>" type="url" placeholder="https://www.pinterest.com/username/">
 				</div>
 				<div class="form-group">
 					<label>Instagram</label>
-					<input class="form-control input-sm" name="social_instagram" value="<?php echo $rowSocial['instagram']; ?>" placeholder="https://www.instagram.com/username/">
+					<input class="form-control input-sm" name="social_instagram" maxlength="255" value="<?php echo $rowSocial['instagram']; ?>" type="url" placeholder="https://www.instagram.com/username/">
 				</div>
 				<div class="form-group">
 					<label>Tumblr</label>
-					<input class="form-control input-sm" name="social_tumblr" value="<?php echo $rowSocial['tumblr']; ?>" placeholder="https://username.tumblr.com/">
+					<input class="form-control input-sm" name="social_tumblr" maxlength="255" value="<?php echo $rowSocial['tumblr']; ?>" type="url" placeholder="https://username.tumblr.com/">
 				</div>
 				<div class="form-group">
 					<label>YouTube</label>
-					<input class="form-control input-sm" name="social_youtube" value="<?php echo $rowSocial['youtube']; ?>" placeholder="https://www.youtube.com/user/username">
+					<input class="form-control input-sm" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" placeholder="https://www.youtube.com/user/username">
 				</div>
 
 				<button type="submit" name="socialmedia_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>

@@ -47,7 +47,7 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="generalinfo_heading" value="<?php echo $rowGeneralinfo['heading']; ?>" placeholder="Heading">
+					<input class="form-control input-sm" name="generalinfo_heading" maxlength="255" value="<?php echo $rowGeneralinfo['heading']; ?>" placeholder="Heading">
 				</div>
 
 				<div class="form-group">
