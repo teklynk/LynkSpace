@@ -38,7 +38,7 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=".$
 $pageMsg="";
 
 //Session timeout
-$sessionTimeout=60; //mins
+$sessionTimeout=15; //mins
 
 //establish db connection
 $db_conn = mysqli_connect($db_servername, $db_username, $db_password);

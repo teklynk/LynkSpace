@@ -8,8 +8,9 @@ include 'includes/header.php';
 		$username=trim($_POST['user_name']);
 		$userpass=trim($_POST['user_password']);
 		$userid=$_POST['user_id'];
-		$usersUpdate = "UPDATE users SET username='$username', password=password('$userpass'), level='1' WHERE id='$userid'";
+
 		//echo $usersUpdate;
+		$usersUpdate = "UPDATE users SET username='".$username."', password=password('".$userpass."'), level='1' WHERE id=".$userid." ";
 		mysqli_query($db_conn, $usersUpdate);
 
 		$pageMsg="<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";

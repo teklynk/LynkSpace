@@ -84,7 +84,6 @@ if ($IPrange <> '') {
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
   <?php
-
 	$sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=".$_SESSION['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
