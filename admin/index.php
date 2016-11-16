@@ -32,12 +32,11 @@ function generateRandomString($length = 10) {
     if (!empty($_POST)) {
         if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
-            $userLogin = mysqli_query($db_conn, "SELECT id, username, password, level, loc_id FROM users WHERE username='".strip_tags($_POST['username'])."' AND password=password('".strip_tags($_POST['password'])."') LIMIT 1");
+            $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='".strip_tags($_POST['username'])."' AND password=password('".strip_tags($_POST['password'])."') AND email='".filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)."' LIMIT 1");
             $rowLogin = mysqli_fetch_array($userLogin);
 
             if (is_array($rowLogin)) {
                 $_SESSION['user_id'] = $rowLogin['id'];
-                $_SESSION['user_name'] = $rowLogin['username'];
                 $_SESSION['user_name'] = $rowLogin['username'];
                 $_SESSION['user_level'] = $rowLogin['level'];
                 $_SESSION['user_loc_id'] = $rowLogin['loc_id'];
@@ -56,18 +55,24 @@ function generateRandomString($length = 10) {
         $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
-    //Password reset message forgotpassword
-    if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'reset') {
-        $message = "<div class='alert alert-danger' role='alert'>Your user password has been reset. Please check your email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    //Password reset messages for forgotpassword
+    if ($_GET['msgsent'] == 'reset') {
+        $message = "<div class='alert alert-danger' role='alert'>Your user password has been reset. A temporary password has been sent to your email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
-    if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
+    if ($_GET['msgsent'] == 'error') {
         $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
+    //If logged in then...
     if (isset($_SESSION['loggedIn'])) {
-        //header("Location: setup.php");
-        echo "<script>window.location.href='setup.php?loc_id=1';</script>";
+
+        if ($_GET['msgsent'] == 'reset') {
+            echo "<script>window.location.href='users.php?updatepassword=true&loc_id=".$_SESSION['user_loc_id']."';</script>";
+        } else {
+            echo "<script>window.location.href='setup.php?loc_id=".$_SESSION['user_loc_id']."';</script>";
+        }
+
     }
 
     ?>
@@ -120,12 +125,15 @@ function generateRandomString($length = 10) {
                 </div>
                 <div class="panel-body">
                     <?php
-                    if (!$_GET['forgotpassword'] == 'true') {
+                    if (!$_GET['forgotpassword']) {
                     ?>
                         <form name="frmUser" class="form-signin" method="post" action="">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" maxlength="255" placeholder="Username" name="username" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="255" placeholder="Email Address" name="email" type="email">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" maxlength="255" placeholder="Password" name="password" type="password" value="">

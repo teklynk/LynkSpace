@@ -5,7 +5,7 @@ if (isset($_POST['user_name'])) {
     include '../../db/config.php';
 
     //redirect back to contact form or home page
-    $redirectPage = "../index.php?forgotpassword=true&msgsent=reset";
+    $redirectPage = "../index.php?msgsent=reset";
     //if an error occurs
     $errorPage = "../index.php?forgotpassword=true&msgsent=error";
 
