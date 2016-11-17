@@ -61,7 +61,7 @@ include 'includes/header.php';
 		<form name="landingForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome">
+				<input class="form-control input-sm" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome" required>
 			</div>
 			<div class="form-group">
 				<label>Intro Title</label>

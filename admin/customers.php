@@ -248,7 +248,7 @@ include 'includes/header.php';
 			<form name="customerForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer">
+                <input class="form-control input-sm" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer" required>
             </div>
             <div class="form-group">
                 <label>Description</label>

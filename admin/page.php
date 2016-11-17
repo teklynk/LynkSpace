@@ -301,7 +301,7 @@ if ($_GET['preview']>"") {
 			<form role="pageForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page">
+                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

@@ -283,7 +283,7 @@ if ($_GET['preview']>"") {
 		echo "<form name='sliderForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
-		<input class='form-control input-sm' name='main_heading' maxlength='255' value='".$rowSetup['sliderheading']."' placeholder='My Slides'>
+		<input class='form-control input-sm' name='main_heading' maxlength='255' value='".$rowSetup['sliderheading']."' placeholder='My Slides' required>
 		</div>
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>

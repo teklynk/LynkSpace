@@ -47,7 +47,7 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>"  placeholder="Contact Me">
+					<input class="form-control input-sm" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>"  placeholder="Contact Me" required>
 				</div>
                 <div class="form-group">
 					<label>Intro Text</label>

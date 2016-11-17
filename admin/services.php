@@ -304,7 +304,7 @@ if ($_GET['preview']>"") {
 		<form name="servicesForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services">
+				<input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
 			</div>
 			<div class="form-group">
 				<label>Description</label>

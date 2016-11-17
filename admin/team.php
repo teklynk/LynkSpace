@@ -256,7 +256,7 @@ if ($_GET['preview']>"") {
 			<form role="teamForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team">
+                <input class="form-control input-sm" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
             </div>
             <div class="form-group">
                 <label>Description</label>
