@@ -2,15 +2,15 @@ mail/sendmail.asp
 
 core/teklynk_logo.psd
 
-sitemap.xml
-
 *dbconn.php
 
-*dbsetup.php
+*config.php
 
 *.old
 
 uploads/*
+
+images/*
 
 *.DS_Store
 

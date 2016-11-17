@@ -82,7 +82,7 @@ include 'includes/header.php';
         }
 
         .login-panel img {
-            margin: 20px auto;
+            margin: 10px auto;
             vertical-align: middle;
         }
 
@@ -120,7 +120,7 @@ include 'includes/header.php';
                     ?>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center"><a href="../index.php"><img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
+                    <div class="text-center"><a href="../index.php"><img src="images/main-logo-1-1.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
                     <section class="login-form">
                         <?php
                         if (!$_GET['forgotpassword']) {
