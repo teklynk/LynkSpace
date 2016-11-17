@@ -3,21 +3,10 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-//Random password generator
-function generateRandomString($length = 10) {
-    global $randomString;
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-
 //clear all session variables
     unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
+    unset($_SESSION['user_email']);
     unset($_SESSION['user_level']);
     unset($_SESSION['user_loc_id']);
     unset($_SESSION['timeout']);
@@ -38,6 +27,7 @@ function generateRandomString($length = 10) {
             if (is_array($rowLogin)) {
                 $_SESSION['user_id'] = $rowLogin['id'];
                 $_SESSION['user_name'] = $rowLogin['username'];
+                $_SESSION['user_email'] = $rowLogin['email'];
                 $_SESSION['user_level'] = $rowLogin['level'];
                 $_SESSION['user_loc_id'] = $rowLogin['loc_id'];
                 $_SESSION['timeout'] = time();
@@ -48,25 +38,30 @@ function generateRandomString($length = 10) {
             } else {
                 $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
             }
+
         }
     }
 
+    //if install.php file exists
     if (file_exists('install.php')) {
         $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
     //Password reset messages for forgotpassword
-    if ($_GET['msgsent'] == 'reset') {
-        $message = "<div class='alert alert-danger' role='alert'>Your user password has been reset. A temporary password has been sent to your email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    if ($_GET['forgotpassword'] AND $_GET['msgsent'] == 'reset') {
+        $message = "<div class='alert alert-danger' role='alert'>Your password is reset.  A temporary password was sent to your email address.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
-    if ($_GET['msgsent'] == 'error') {
+    if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
+        $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    } else if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
         $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
     //If logged in then...
     if (isset($_SESSION['loggedIn'])) {
 
+        // redirect user to user manager page to update password info
         if ($_GET['msgsent'] == 'reset') {
             echo "<script>window.location.href='users.php?updatepassword=true&loc_id=".$_SESSION['user_loc_id']."';</script>";
         } else {

@@ -262,3 +262,13 @@ div.version>small>a {
     min-width: 250px !important;
     min-height: 400px !important;
 }
+
+.top-nav>li>a {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+}
+
+.navbar-brand {
+    padding-top: 16px !important;
+    padding-bottom: 11px !important;
+}

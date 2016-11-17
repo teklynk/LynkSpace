@@ -17,6 +17,8 @@ $_SESSION['file_referer'] = basename($_SERVER['PHP_SELF']);
 <?php
 //DB connection string and Global variables
 include '../db/config.php';
+//Admin panel functions
+include 'core/functions.php';
 
 //IP Range is set in config
 if ($IPrange <> '') {
@@ -174,7 +176,7 @@ if ($IPrange <> '') {
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
 				<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name'];?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 28)?>" />  <?php echo $_SESSION['user_name'];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="../index.php?loc_id=<?php echo $_SESSION['loc_id'];?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
