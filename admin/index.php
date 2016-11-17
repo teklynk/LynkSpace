@@ -27,6 +27,7 @@ include 'includes/header.php';
             if (is_array($rowLogin)) {
                 $_SESSION['user_id'] = $rowLogin['id'];
                 $_SESSION['user_name'] = $rowLogin['username'];
+                $_SESSION['user_email'] = $rowLogin['email'];
                 $_SESSION['user_level'] = $rowLogin['level'];
                 $_SESSION['user_loc_id'] = $rowLogin['loc_id'];
                 $_SESSION['timeout'] = time();
@@ -52,7 +53,7 @@ include 'includes/header.php';
     }
 
     if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
-        $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+        $message = "<div class='alert alert-danger' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     } else if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
         $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
@@ -73,15 +74,7 @@ include 'includes/header.php';
     <style>
         html, body {
             margin-top: 0px !important;
-            /*background: #0033A0 center center /cover;*/
-            /*background: linear-gradient(-200deg, #0033a0, #008eaa);*/
-            /*background-color: #0033a0;*/
-            /*-webkit-background-size: cover;*/
-            /*-moz-background-size: cover;*/
-            /*-o-background-size: cover;*/
-            /*background-size: cover;*/
-            /*background: linear-gradient(#111,#414141,#414141);*/
-            background-color: #222;
+            background: url('images/GHr12sH.jpg') center center /cover;
         }
 
     #page-wrapper {
