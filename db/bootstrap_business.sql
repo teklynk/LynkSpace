@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2016 at 04:10 PM
+-- Generation Time: Nov 17, 2016 at 05:13 PM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -521,7 +521,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `loc_id`) VALUES
 (1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'ryanjones153@gmail.com', 1, 1),
-(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'ryan@email.com', 0, 1);
+(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'ryan@email.com', 0, 2);
 
 --
 -- Indexes for dumped tables
