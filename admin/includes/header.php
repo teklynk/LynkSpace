@@ -188,6 +188,9 @@ if ($IPrange <> '') {
                     </ul>
                 </li>
              </ul>
+             <?php
+             if ($_SESSION['user_level'] == 1) {
+             ?>
              <ul class="nav navbar-right top-nav">
                   <li style="margin-top:8px;">
 
@@ -208,6 +211,7 @@ if ($IPrange <> '') {
 
                    </li>
               </ul>
+              <?php }?>
 
               <?php
               if (isset($_SESSION['loc_id'])) {

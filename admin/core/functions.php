@@ -14,7 +14,7 @@ function generateRandomString($length = 10) {
 
 //Get gravatar image based on email value
 function getGravatar($email, $size) {
-    $default = "https://cdn2.iconfinder.com/data/icons/basic-4/512/user-28.png";
+    $default = "https://cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";
     return "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?d=".urlencode($default)."&s=".$size;
 }
 
