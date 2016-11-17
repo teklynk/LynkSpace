@@ -91,6 +91,11 @@ if ($IPrange <> '') {
 
   if (!empty($_GET['loc_id'])) {
 
+    //if not user level = 1 then keep the user in their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
+    if ($_SESSION['user_level'] != 1 AND $_GET['loc_id'] != $_SESSION['user_loc_id']){
+        echo "<script>window.location.href='?loc_id=".$_SESSION['user_loc_id']."';</script>";
+    }
+
     //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
     $_SESSION['loc_id'] = $_GET['loc_id'];
 
@@ -211,9 +216,9 @@ if ($IPrange <> '') {
 
                    </li>
               </ul>
-              <?php }?>
+              <?php }
 
-              <?php
+
               if (isset($_SESSION['loc_id'])) {
                 $setLocId = "loc_id=".$_SESSION['loc_id'];
               } else {
