@@ -57,7 +57,7 @@ function generateRandomString($length = 10) {
 
     //Password reset messages for forgotpassword
     if ($_GET['msgsent'] == 'reset') {
-        $message = "<div class='alert alert-danger' role='alert'>Your user password has been reset. A temporary password has been sent to your email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+        $message = "<div class='alert alert-success' role='alert'>Your user password has been reset. A temporary password has been sent to your email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
     }
 
     if ($_GET['msgsent'] == 'error') {
