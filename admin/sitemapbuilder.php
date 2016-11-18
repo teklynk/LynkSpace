@@ -5,7 +5,7 @@ include 'includes/header.php';
 
 //create sitemap file
 $sitemapFileLoc = "../sitemap.xml";
-$sitemapfile = fopen($sitemapFileLoc, "w") or die("Unable to open file!");
+$sitemapfile = fopen($sitemapFileLoc, "w") or die("Unable to open sitemap.xml. Check file permissions.");
 $otherPages = array("index.php", "about.php", "team.php", "services.php", "contact.php");
 
 if (!file_exists($sitemapFileLoc)) {
@@ -56,7 +56,7 @@ fclose($sitemapfile);
 
 //create robots.txt
 $robotsFileLoc = "../robots.txt";
-$robotsfile = fopen($robotsFileLoc, "w") or die("Unable to open file!");
+$robotsfile = fopen($robotsFileLoc, "w") or die("Unable to open robots.txt! Check file permissions.");
 
 if (!file_exists($robotsFileLoc)) {
    echo "$robotsFileLoc does not exist";
@@ -85,8 +85,8 @@ echo "<p>Sitemap.xml has been updated: <a target='_blank' href=".str_replace('ad
 echo "Robots.txt has been updated: <a target='_blank' href=".str_replace('admin/sitemapbuilder.php/','',"http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."/robots.txt").">View</a></p>";
 echo "<br/>";
 echo "<img src='images/loading.gif' />";
-//header("Location: setup.php");
-echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."';</script>";
+
+echo "<script>window.location.href='setup.php?loc_id=".$_SESSION['loc_id']."';</script>";
 
 include 'includes/footer.php';
 ?>
