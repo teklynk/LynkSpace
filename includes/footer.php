@@ -40,7 +40,7 @@ if(!defined('inc_access')) {
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript" language="javascript">
     $('.carousel').carousel({
-        interval: 5000 //changes the speed
+        interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
     })
     </script>
 

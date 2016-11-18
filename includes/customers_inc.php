@@ -24,17 +24,15 @@ if(!defined('inc_access')) {
     	echo "<div class='text-center'>";
 
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
+            echo "<div class='col-xs-".$customerColWidth."'>";
 
         	if (!empty($rowCustomers['image'])) {
-				echo "<div class='col-xs-".$customerColWidth."'>";
 				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
-				echo "</div>";
 			} else {
-                echo "<div class='col-xs-".$customerColWidth."'>";
                 echo "<a href='".$rowCustomers['link']."'>".$rowCustomers['name']."</a>";
-                echo "</div>";
             }
 
+            echo "</div>";
 		}
 
 		echo "</div>";

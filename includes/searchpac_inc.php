@@ -3,8 +3,8 @@
 if (!defined('inc_access')) {
    die('Direct access not permitted');
 }
-	getSetup();
-	getLocation();
+	getSetup(); //gets search pac options for the loc_id
+	//getLocation(); //gets location name if needed
 		
 	echo "<div class='row' id='searchpac'>";
 

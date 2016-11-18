@@ -4,7 +4,7 @@ if(!defined('inc_access')) {
 }
 
 	getSetup();
-	getPage();
+	getPage(); //needed to get page_id and check if disqus is active for that page.
 
 	if (!empty($setupDisqus) AND $pageDisqus != 0) {
 		echo "<div class='row'></div>";

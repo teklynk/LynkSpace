@@ -35,21 +35,25 @@ $googleAnalytics = '';
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=".$_GET['loc_id']."'>About</option><option value='contact.php?loc_id=".$_GET['loc_id']."'>Contact</option><option value='services.php?loc_id=".$_GET['loc_id']."'>Services</option><option value='team.php?loc_id=".$_GET['loc_id']."'>Team</option></optgroup>";
 
 //Default values
-$pageMsg="";
+$pageMsg = "";
 
 //Session timeout
-$sessionTimeout=15; //mins
+$sessionTimeout = 15; //mins
+
+//Slide Carousel Speed
+$carouselSpeed = "5000";
+
 
 //establish db connection
 $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
 mysqli_select_db($db_conn, $db_name);
 
-if (mysqli_connect_errno($db_conn)){
-  echo "Failed to connect to MySQL:" . mysqli_connect_error();
+if (mysqli_connect_errno($db_conn)) {
+  echo "Failed to connect to MySQL: ".mysqli_connect_error();
 }
 //db connection is closed in includes/footer.php
 
-//Error handling . Add debug=true to the querystring
+//Error handling Add debug=true to the querystring
 if (isset($_GET["debug"])) {
   ini_set('display_errors', TRUE);
 } else {

@@ -74,7 +74,7 @@ if (isset($_SESSION['loggedIn'])) {
     <style>
         html, body {
             margin-top: 0px !important;
-            background: #BEA69A url('images/GHr12sH.jpg') center center /cover;
+            background: #BEA69A url('images/color-splash-3.jpg') center center /cover;
         }
 
         .login-panel {
@@ -120,7 +120,7 @@ if (isset($_SESSION['loggedIn'])) {
                     ?>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center"><a href="../index.php"><img src="images/RcmcLv4.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
+                    <div class="text-center"><a href="../index.php"><img src="images/logo-1.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
                     <section class="login-form">
                         <?php
                         if (!$_GET['forgotpassword']) {
