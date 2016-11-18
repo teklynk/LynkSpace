@@ -29,7 +29,11 @@ if(!defined('inc_access')) {
 				echo "<div class='col-xs-".$customerColWidth."'>";
 				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
 				echo "</div>";
-			}
+			} else {
+                echo "<div class='col-xs-".$customerColWidth."'>";
+                echo "<a href='".$rowCustomers['link']."'>".$rowCustomers['name']."</a>";
+                echo "</div>";
+            }
 
 		}
 

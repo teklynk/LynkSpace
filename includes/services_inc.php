@@ -24,19 +24,25 @@ getServices();
         }
         
 
-        while ($rowServices = mysqli_fetch_array($sqlServices)){
+        while ($rowServices = mysqli_fetch_array($sqlServices)) {
 
             echo "<div class='col-md-".$servicesColWidth." text-center'>";
             echo "<div class='panel panel-default text-center'>";
-            echo "<div class='panel-heading'>";
-            echo "<span class='fa-stack fa-5x'>";
 
-            if (!empty($rowServices['icon'])){
+            if (!empty($rowServices['icon']) || !empty($rowServices['image'])) {
+                echo "<div class='panel-heading'>";
+                echo "<span class='fa-stack fa-5x'>";
+            } else {
+                echo "<div>";
+                echo "<span>";
+            }
+
+            if (!empty($rowServices['icon'])) {
                 echo "<i class='fa fa-circle fa-stack-2x text-primary'></i>";
                 echo "<i class='fa fa-".$rowServices['icon']." fa-stack-1x fa-inverse' title='".$rowServices['title']."'></i>";
             }
 
-            if (!empty($rowServices['image'])){
+            if (!empty($rowServices['image'])) {
                 echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowServices['image']."' alt='".$rowServices['title']."' title='".$rowServices['title']."'>";
             }
 
@@ -44,15 +50,15 @@ getServices();
             echo "</div>";
             echo "<div class='panel-body'>";
 
-            if (!empty($rowServices['title'])){
+            if (!empty($rowServices['title'])) {
                 echo "<h4>".$rowServices['title']."</h4>";
             }
             
-            if (!empty($rowServices['content'])){
+            if (!empty($rowServices['content'])) {
                 echo "<p>".$rowServices['content']."</p>";
             }
 
-            if (!empty($rowServices['link'])){
+            if (!empty($rowServices['link'])) {
                 echo "<a href='page.php?page_id=".$rowServices['link']."&loc_id=".$_GET['loc_id']."' class='btn btn-primary'>Learn More</a>";
             }
 

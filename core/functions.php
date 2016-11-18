@@ -437,6 +437,11 @@ function getSlider($sliderType) {
     $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount=0;
 
+    //hide carousel arrows if only one image is available
+    if ($sliderNumRows == 1) {
+        echo "<style>.carousel-control {display: none !important;}</style>";
+    }
+
     if ($sliderNumRows > 0) {
 
         if ($sliderType=="slide") {
@@ -532,6 +537,7 @@ function getSlider($sliderType) {
             $sliderContent = $rowSlider['content'];
             $sliderImage = $rowSlider['image'];
         }
+
     }
 }
 
