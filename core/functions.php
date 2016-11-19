@@ -301,37 +301,37 @@ function getSetup() {
 	global $setupAuthor;
 	global $setupKeywords;
 	global $setupDescription;
-	global $setupHeadercode;
-	global $setupDisqus;
-	global $setupGoogleanalytics;
+	//global $setupHeadercode;
+	//global $setupDisqus;
+	//global $setupGoogleanalytics;
     global $setupConfig;
     global $setupLs2pac;
     global $setupLs2kids;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, ls2pac, ls2kids, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup['description'];
     $setupKeywords = $rowSetup['keywords'];
     $setupAuthor = $rowSetup['author'];
     $setupTitle = $rowSetup['title'];
-    $setupGoogleanalytics = $rowSetup['googleanalytics'];
+    //$setupGoogleanalytics = $rowSetup['googleanalytics'];
     $setupConfig = $rowSetup['config'];
     $setupLs2pac = $rowSetup['ls2pac'];
     $setupLs2kids = $rowSetup['ls2kids'];
 
-    if (!empty($rowSetup['headercode'])) {
-        $setupHeadercode = $rowSetup['headercode']."\n";
-    }
+    //if (!empty($rowSetup['headercode'])) {
+    //    $setupHeadercode = $rowSetup['headercode']."\n";
+    //}
 
-    if (!empty($rowSetup['disqus'])) {
-        $setupDisqus = $rowSetup['disqus']."\n";
-    }
+    //if (!empty($rowSetup['disqus'])) {
+    //    $setupDisqus = $rowSetup['disqus']."\n";
+    //}
 
-    if (!empty($rowSetup['googleanalytics'])) {
-        $setupGoogleanalytics = $rowSetup['googleanalytics']."\n";
-    }
+    //if (!empty($rowSetup['googleanalytics'])) {
+    //    $setupGoogleanalytics = $rowSetup['googleanalytics']."\n";
+    //}
 }
 
 function getSocialMediaIcons($shape) {
