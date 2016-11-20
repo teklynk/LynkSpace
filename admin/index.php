@@ -47,15 +47,16 @@ if (file_exists('install.php')) {
     $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
-//Password reset messages for forgotpassword
-if ($_GET['forgotpassword'] AND $_GET['msgsent'] == 'reset') {
-    $message = "<div class='alert alert-danger' role='alert'>Your password is reset.  A temporary password was sent to your email address.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-}
-
+//Reset password page messages
 if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
     $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 } else if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
     $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+}
+
+//Password reset message
+if ($_GET['msgsent'] == 'reset') {
+    $message = "<div class='alert alert-danger' role='alert'>Your password is reset.  A temporary password was sent to your email address.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
 //If logged in then...
