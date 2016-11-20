@@ -115,7 +115,7 @@ if ($_GET['preview']>"") {
 				</div>
 			</div>
 		</div>
-
+		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
 			<input class="form-control input-sm" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">

@@ -39,7 +39,7 @@ include 'includes/header.php';
 <script>
 $(document).ready(function() {
 	$('#dataTable').dataTable({
-		"order": [[ 1, "desc" ]],
+		"order": [[ 0, "desc" ]],
 		"columnDefs": [{
 		"targets": 'no-sort',
 		"orderable": false,
@@ -70,7 +70,7 @@ $(document).ready(function() {
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Images</h2>
+			<hr/>
 			<div>
 				<table class="table table-bordered table-hover table-striped dataTable" id="dataTable">
 					<thead>
