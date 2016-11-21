@@ -23,9 +23,13 @@ if ($_GET['preview']>"") {
 
 	<div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">
-			Image Slider
-		</h1>
+	<?php
+		if ($_GET['newslide'] == 'true') {
+			echo "<h1 class='page-header'>Image Slider (New)</h1>";
+		} else {
+			echo "<h1 class='page-header'>Image Slider</h1>";
+		}
+	?>
 	</div>
 	</div>
 	<div class="row">

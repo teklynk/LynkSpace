@@ -36,9 +36,13 @@ if ($_GET['preview']>"") {
 ?>
 	<div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">
-			Services
-		</h1>
+	<?php
+		if ($_GET['newservice'] == 'true') {
+			echo "<h1 class='page-header'>Services (New)</h1>";
+		} else {
+			echo "<h1 class='page-header'>Services</h1>";
+		}
+	?>
 	</div>
 	</div>
 	<div class="row">
