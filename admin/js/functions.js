@@ -60,10 +60,12 @@ $(document).ready(function () {
 	    function () {
 			if ($('#exist_cat').val()=='' || $('#exist_cat').val()==0) { //NOTE: 0=None in the category table
 				$('#nav_newcat').val('');
+                $('#add_cat .fa-plus' ).css( 'visibility', 'visible');
 				$('#del_cat .fa-trash' ).css( 'visibility', 'hidden');
 				$('#rename_cat .fa-save' ).css( 'visibility', 'hidden');
 			} else {
 				$('#nav_newcat').val($('#exist_cat option:selected').text());
+                $('#add_cat .fa-plus' ).css( 'visibility', 'hidden');
 				$('#del_cat .fa-trash' ).css( 'visibility', 'visible');
 				$('#rename_cat .fa-save' ).css( 'visibility', 'visible');
 			}

@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			//Create new category if newcat is true
 			if (!empty($_POST['nav_newcat']) AND $_POST['exist_cat']=="") {
-				$navNewCat = "INSERT INTO category (name) VALUES ('".$_POST['nav_newcat']."')";
+				$navNewCat = "INSERT INTO category (name, nav_loc_id) VALUES ('".$_POST['nav_newcat']."', ".$_SESSION['loc_id'].")";
 				mysqli_query($db_conn, $navNewCat);
 
 				//get the new cat id
-				$sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY id DESC LIMIT 1");
+				$sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category WHERE nav_loc_id=".$_SESSION['loc_id']." ORDER BY id DESC LIMIT 1");
 				$rowMaxCat = mysqli_fetch_array($sqlNavCatID);
 				$navMaxCatId=$rowMaxCat[0];
 			}
@@ -35,7 +35,7 @@ include 'includes/header.php';
 
 			}
 
-			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, loc_id) VALUES ('".$_POST['nav_newname']."', '".$_POST['nav_newurl']."', 0, $getTheCat, '".$getNavSection."','off', ".$_GET['loc_id'].")";
+			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, loc_id) VALUES ('".$_POST['nav_newname']."', '".$_POST['nav_newurl']."', 0, $getTheCat, '".$getNavSection."','off', ".$_SESSION['loc_id'].")";
 			mysqli_query($db_conn, $navNew);
 
 		}
@@ -185,12 +185,24 @@ include 'includes/header.php';
 			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $renameMsg;
 		}
+
+		// add category
+        $addMsg="";
+
+		if ($_GET['addcatname'] > "") {
+            $navAddCat = "INSERT INTO category (name, nav_loc_id) VALUES ('".$_GET['addcatname']."', ".$_SESSION['loc_id'].")";
+            mysqli_query($db_conn, $navAddCat);
+
+            $addMsg="<div class='alert alert-success fade in' data-alert='alert'>".$_GET['addcatname']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
+            echo $addMsg;
+
+        }
 		?>
 			<form name="navForm" method="post" action="">
 				<fieldset>
 					<div class="form-group">
 						<label for="nav_newname">Link Name</label>
-						<input type="text" class="form-control input-sm" name="nav_newname" id="nav_newname" maxlength="255" value="">
+						<input type="text" class="form-control input-sm" name="nav_newname" id="nav_newname" maxlength="255">
 					</div>
 					<div class="form-group">
 						<label for="nav_newurl">Link URL</label>
@@ -212,7 +224,8 @@ include 'includes/header.php';
 						<label for="nav_newcat">Category</label>
 						<div class="input-group">
 							<input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat" maxlength="255">
-							<span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+                            <span class="input-group-addon" id="add_cat" ><i class='fa fa-fw fa-plus' style="color:#000; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
+                            <span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
 							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
 						</div>
 					</div>
