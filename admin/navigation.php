@@ -113,13 +113,6 @@ include 'includes/header.php';
 
 		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
 
-		//get and built existing category list
-		$sqlNavExistCat= mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
-		//$catExistStr = "<option value=''>Custom</option>";
-		while ($rowNavExistCat  = mysqli_fetch_array($sqlNavExistCat)) {
-			$catExistStr = $catExistStr . "<option value=".$rowNavExistCat['id']." >".$rowNavExistCat['name']."</option>";
-		}
-
 		//delete nav
 		$deleteMsg="";
 		$deleteConfirm="";
@@ -155,7 +148,7 @@ include 'includes/header.php';
 
 		} elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm']=='yes') {
 
-			$navCatUpdate = "UPDATE navigation SET catid='0' WHERE loc_id=".$_GET['loc_id']." catid='$delCatId'";
+			$navCatUpdate = "UPDATE navigation SET catid=0 WHERE loc_id=".$_GET['loc_id']." AND catid='$delCatId'";
 			mysqli_query($db_conn, $navCatUpdate);
 
 			//delete category after clicking Yes
@@ -187,16 +180,18 @@ include 'includes/header.php';
 		}
 
 		// add category
-        $addMsg="";
-
 		if ($_GET['addcatname'] > "") {
             $navAddCat = "INSERT INTO category (name, nav_loc_id) VALUES ('".$_GET['addcatname']."', ".$_SESSION['loc_id'].")";
             mysqli_query($db_conn, $navAddCat);
 
-            $addMsg="<div class='alert alert-success fade in' data-alert='alert'>".$_GET['addcatname']." has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
-            echo $addMsg;
+			echo "<script>window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_SESSION['loc_id']."&addcat=".$_GET['addcatname']."';</script>";
 
         }
+        // add category message
+        if (!empty($_GET['addcat'])) {
+			$addMsg="<div class='alert alert-success fade in' data-alert='alert'>".$_GET['addcat']." category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			echo $addMsg;
+		}
 		?>
 			<form name="navForm" method="post" action="">
 				<fieldset>
@@ -234,8 +229,22 @@ include 'includes/header.php';
 						<label for="exist_cat">Existing Category</label>
 						<select class="form-control input-sm" name="exist_cat" id="exist_cat">
 							<?php
-								echo "<option value=''>Custom</option>";
-								echo $catExistStr;
+							echo "<option value='0'>None</option>";
+							//get and built category list, find selected
+							$sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
+							while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat) AND $rowExistNavCat['id'] != 0) {
+
+								$navExistCatId=$rowExistNavCat['id'];
+								$navExistCatName=$rowExistNavCat['name'];
+
+								if ($navExistCatId==$navCat){
+									$isExistCatSelected="SELECTED";
+								} else {
+									$isExistCatSelected="";
+								}
+								echo "<option value=".$navExistCatId." ".$isExistCatSelected.">".$navExistCatName."</option>";
+
+							}
 							?>
 						</select>
 					</div>
@@ -279,20 +288,20 @@ include 'includes/header.php';
 							<td><input class='form-control input-sm' name='nav_name[]' value='".$navName."' type='text'></td>
 							<td><input class='form-control input-sm' name='nav_url[]' value='".$navURL."' type='text'></td>";
 							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
-
+							echo "<option value='0'>None</option>";
 							//get and built category list, find selected
-							$sqlNavCat= mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
-							while ($rowNavCat  = mysqli_fetch_array($sqlNavCat)) {
+							$sqlNavCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
+							while ($rowNavCat = mysqli_fetch_array($sqlNavCat) AND $rowNavCat['id'] != 0) {
 
 								$navCatId=$rowNavCat['id'];
 								$navCatName=$rowNavCat['name'];
 
 								if ($navCatId==$navCat){
-									$isSelected="SELECTED";
+									$isCatSelected="SELECTED";
 								} else {
-									$isSelected="";
+									$isCatSelected="";
 								}
-								echo "<option value=".$navCatId." ".$isSelected.">".$navCatName."</option>";
+								echo "<option value=".$navCatId." ".$isCatSelected.">".$navCatName."</option>";
 
 							}
 

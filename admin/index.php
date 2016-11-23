@@ -121,7 +121,7 @@ if (isset($_SESSION['loggedIn'])) {
                     ?>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center"><a href="../index.php"><img src="images/logo-1.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
+                    <div class="text-center"><a href="../index.php"><img src="images/cpslogo_v2@2x.png" class="img-responsive img-center" title="Home" alt="Home" /></a></div>
                     <section class="login-form">
                         <?php
                         if (!$_GET['forgotpassword']) {
