@@ -301,9 +301,6 @@ function getSetup() {
 	global $setupAuthor;
 	global $setupKeywords;
 	global $setupDescription;
-	//global $setupHeadercode;
-	//global $setupDisqus;
-	//global $setupGoogleanalytics;
     global $setupConfig;
     global $setupLs2pac;
     global $setupLs2kids;
@@ -316,22 +313,9 @@ function getSetup() {
     $setupKeywords = $rowSetup['keywords'];
     $setupAuthor = $rowSetup['author'];
     $setupTitle = $rowSetup['title'];
-    //$setupGoogleanalytics = $rowSetup['googleanalytics'];
     $setupConfig = $rowSetup['config'];
     $setupLs2pac = $rowSetup['ls2pac'];
     $setupLs2kids = $rowSetup['ls2kids'];
-
-    //if (!empty($rowSetup['headercode'])) {
-    //    $setupHeadercode = $rowSetup['headercode']."\n";
-    //}
-
-    //if (!empty($rowSetup['disqus'])) {
-    //    $setupDisqus = $rowSetup['disqus']."\n";
-    //}
-
-    //if (!empty($rowSetup['googleanalytics'])) {
-    //    $setupGoogleanalytics = $rowSetup['googleanalytics']."\n";
-    //}
 }
 
 function getSocialMediaIcons($shape) {
@@ -383,7 +367,7 @@ function getSocialMediaIcons($shape) {
     //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
 }
 
-function getCustomers(){
+function getCustomers() {
 	global $sqlCustomerHeading;
 	global $rowCustomerHeading;
 	global $sqlCustomers;
@@ -401,7 +385,7 @@ function getCustomers(){
 	}
 
     if (!empty($rowCustomerHeading['customerscontent'])) {
-        $customerBlurb= $rowCustomerHeading['customerscontent'];
+        $customerBlurb = $rowCustomerHeading['customerscontent'];
     }
 
     $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
@@ -415,6 +399,41 @@ function getCustomers(){
     	$customerColWidth=3;
     } else {
     	$customerColWidth=2;
+    }
+}
+
+function getDatabases() {
+    global $sqlDatabasesHeading;
+    global $rowDatabasesHeading;
+    global $sqlDatabases;
+    global $databasesHeading;
+    global $databasesBlurb;
+    global $databasesNumRows;
+    global $databasesColWidth;
+    global $db_conn;
+
+    $sqlDatabasesHeading = mysqli_query($db_conn, "SELECT databasesheading, databasescontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+    $rowDatabasesHeading = mysqli_fetch_array($sqlDatabasesHeading);
+
+    if (!empty($rowDatabasesHeading['databasesheading'])) {
+        $databasesHeading = $rowDatabasesHeading['databasesheading'];
+    }
+
+    if (!empty($rowDatabasesHeading['databasescontent'])) {
+        $databasesBlurb = $rowDatabasesHeading['databasescontent'];
+    }
+
+    $sqlDatabases = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM databases WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $databasesNumRows = mysqli_num_rows($sqlDatabases);
+
+    if ($databasesNumRows==2) {
+        $databasesColWidth=6;
+    } elseif ($databasesNumRows==3) {
+        $databasesColWidth=4;
+    } elseif ($databasesNumRows==4) {
+        $databasesColWidth=3;
+    } else {
+        $databasesColWidth=2;
     }
 }
 
@@ -610,5 +629,10 @@ if (is_numeric($_GET['page_id'])>"") {
     $theTitle = $setupTitle." - ".$teamHeading;
 } else {
     $theTitle = $setupTitle;
+}
+
+//redirect to default location if loc_id not defined
+if (empty($_GET['loc_id'])) {
+    header('Location: ?loc_id=1');
 }
 ?>

@@ -10,6 +10,8 @@ if(!defined('inc_access')) {
     <?php
       include 'db/config.php'; //contains DB connection string and global variables
       include 'core/functions.php'; //contains functions used on every front-end template
+
+      getLocation();
     ?>
     <meta http-equiv="refresh" content="3600;URL='index.php?loc_id=<?php echo $_GET['loc_id'];?>'">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,8 +35,6 @@ if(!defined('inc_access')) {
     <?php
 
     echo $customCss;
-
-    echo $setupHeadercode;
 
     if (!empty($googleAnalytics)) {
     ?>
@@ -90,6 +90,3 @@ if(!defined('inc_access')) {
     </div>
     <!-- /.container -->
 </nav>
-<?php
-getLocation();
-?>
