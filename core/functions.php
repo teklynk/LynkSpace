@@ -402,41 +402,6 @@ function getCustomers() {
     }
 }
 
-function getDatabases() {
-    global $sqlDatabasesHeading;
-    global $rowDatabasesHeading;
-    global $sqlDatabases;
-    global $databasesHeading;
-    global $databasesBlurb;
-    global $databasesNumRows;
-    global $databasesColWidth;
-    global $db_conn;
-
-    $sqlDatabasesHeading = mysqli_query($db_conn, "SELECT databasesheading, databasescontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
-    $rowDatabasesHeading = mysqli_fetch_array($sqlDatabasesHeading);
-
-    if (!empty($rowDatabasesHeading['databasesheading'])) {
-        $databasesHeading = $rowDatabasesHeading['databasesheading'];
-    }
-
-    if (!empty($rowDatabasesHeading['databasescontent'])) {
-        $databasesBlurb = $rowDatabasesHeading['databasescontent'];
-    }
-
-    $sqlDatabases = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM databases WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
-    $databasesNumRows = mysqli_num_rows($sqlDatabases);
-
-    if ($databasesNumRows==2) {
-        $databasesColWidth=6;
-    } elseif ($databasesNumRows==3) {
-        $databasesColWidth=4;
-    } elseif ($databasesNumRows==4) {
-        $databasesColWidth=3;
-    } else {
-        $databasesColWidth=2;
-    }
-}
-
 function getSlider($sliderType) {
     //EXAMPLE: getSlider("slide")
     //EXAMPLE: getSlider("random")

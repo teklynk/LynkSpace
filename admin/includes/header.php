@@ -257,7 +257,7 @@ if ($IPrange <> '') {
                         <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Team</a>
                     </li>
                     <li>
-                        <a href="customers.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Customers</a>
+                        <a href="customers.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Databases</a>
                     </li>
                     <li>
                         <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder"></i> Uploads</a>
