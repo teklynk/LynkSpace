@@ -1,9 +1,7 @@
-<IfModule mod_rewrite.c>
-    Options +FollowSymlinks
-    RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ /$1.php [L,QSA]
-</IfModule>
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^([a-zA-Z0-9]+)$ index.php?loc_id=$1
+RewriteRule ^loc/([a-zA-Z0-9]+)$ index.php?loc_id=$1
+
+RewriteRule ^staff/([a-zA-Z0-9]+)$ team.php?loc_id=$1
