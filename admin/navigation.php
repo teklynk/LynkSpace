@@ -231,18 +231,21 @@ include 'includes/header.php';
 							<?php
 							echo "<option value='0'>None</option>";
 							//get and built category list, find selected
-							$sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
-							while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat) AND $rowExistNavCat['id'] != 0) {
+							$sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_SESSION['loc_id']." ORDER BY name");
+							while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
 
-								$navExistCatId=$rowExistNavCat['id'];
-								$navExistCatName=$rowExistNavCat['name'];
+								if ($rowExistNavCat['id'] != 0) {
+									$navExistCatId = $rowExistNavCat['id'];
+									$navExistCatName = $rowExistNavCat['name'];
 
-								if ($navExistCatId==$navCat){
-									$isExistCatSelected="SELECTED";
-								} else {
-									$isExistCatSelected="";
+									if ($navExistCatId == $navCat) {
+										$isExistCatSelected = "SELECTED";
+									} else {
+										$isExistCatSelected = "";
+									}
+
+									echo "<option value=" . $navExistCatId . " " . $isExistCatSelected . ">" . $navExistCatName . "</option>";
 								}
-								echo "<option value=".$navExistCatId." ".$isExistCatSelected.">".$navExistCatName."</option>";
 
 							}
 							?>
@@ -290,18 +293,20 @@ include 'includes/header.php';
 							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
 							echo "<option value='0'>None</option>";
 							//get and built category list, find selected
-							$sqlNavCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_GET['loc_id']." ORDER BY name");
-							while ($rowNavCat = mysqli_fetch_array($sqlNavCat) AND $rowNavCat['id'] != 0) {
+							$sqlNavCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=".$_SESSION['loc_id']." ORDER BY name");
+							while ($rowNavCat = mysqli_fetch_array($sqlNavCat)) {
+								if ($rowNavCat['id'] != 0) {
+									$navCatId = $rowNavCat['id'];
+									$navCatName = $rowNavCat['name'];
 
-								$navCatId=$rowNavCat['id'];
-								$navCatName=$rowNavCat['name'];
+									if ($navCatId == $navCat) {
+										$isCatSelected = "SELECTED";
+									} else {
+										$isCatSelected = "";
+									}
 
-								if ($navCatId==$navCat){
-									$isCatSelected="SELECTED";
-								} else {
-									$isCatSelected="";
+									echo "<option value=" . $navCatId . " " . $isCatSelected . ">" . $navCatName . "</option>";
 								}
-								echo "<option value=".$navCatId." ".$isCatSelected.">".$navCatName."</option>";
 
 							}
 
