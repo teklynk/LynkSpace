@@ -22,3 +22,5 @@ RewriteRule ^contactus/([0-9]*)$ contact.php?loc_id=$1
 RewriteRule ^page/([0-9]*)/([0-9]*)$ page.php?page_id=$1&loc_id=$2
 
 RewriteRule ^services/([0-9]*)$ services.php?loc_id=$1
+
+RewriteRule ^databases/([0-9]*)$ databases.php?loc_id=$1

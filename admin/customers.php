@@ -31,9 +31,9 @@ include 'includes/header.php';
 	<div class="col-lg-12">
 	<?php
 		if ($_GET['newcustomer'] == 'true') {
-			echo "<h1 class='page-header'>Customers (New)</h1>";
+			echo "<h1 class='page-header'>Databases (New)</h1>";
 		} else {
-			echo "<h1 class='page-header'>Customers</h1>";
+			echo "<h1 class='page-header'>Databases</h1>";
 		}
 	?>
 	</div>
@@ -241,7 +241,7 @@ include 'includes/header.php';
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-	<button type="button" class="btn btn-default" onclick="window.location='?newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Customer</button>
+	<button type="button" class="btn btn-default" onclick="window.location='?newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Database</button>
 		<h2></h2>
 		<div class="table-responsive">
     <?php
@@ -252,11 +252,11 @@ include 'includes/header.php';
 			<form name="customerForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My customer" required>
+                <input class="form-control input-sm" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My Database" required>
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control input-sm" name="main_content" placeholder="About our customers" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
+                <textarea rows="3" class="form-control input-sm" name="main_content" placeholder="About this database" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
             </div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
