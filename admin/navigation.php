@@ -100,7 +100,7 @@ include 'includes/header.php';
 		//get and built pages list
 		$pagesStr="";
 
-		$sqlGetPages= mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
+		$sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
 		//$pagesStr = "<option value=''>Custom</option>";
 
 		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
@@ -268,7 +268,7 @@ include 'includes/header.php';
 					<?php
 						$navCount="";
 
-						$sqlNav= mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=".$_GET['loc_id']." ORDER BY sort");
+						$sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=".$_GET['loc_id']." ORDER BY sort");
 						while ($rowNav  = mysqli_fetch_array($sqlNav)) {
 							$navId=$rowNav['id'];
 							$navName=$rowNav['name'];
