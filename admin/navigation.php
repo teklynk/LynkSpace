@@ -69,7 +69,7 @@ include 'includes/header.php';
 
 		}
 
-		$navMenuStr = $navMenuStr . "<option value=".$navSections[$x]." ".$isSectionSelected.">".$navSections[$x]."</option>";
+		$navMenuStr = $navMenuStr."<option value=".$navSections[$x]." ".$isSectionSelected.">".$navSections[$x]."</option>";
 	}
 ?>
 	<div class="row">
@@ -101,17 +101,16 @@ include 'includes/header.php';
 		$pagesStr="";
 
 		$sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title");
-		//$pagesStr = "<option value=''>Custom</option>";
 
 		while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
 
 			$getPageId=$rowGetPages['id'];
 			$getPageTitle=$rowGetPages['title'];
-			$pagesStr = $pagesStr . "<option value=".$getPageId.">".$getPageTitle."</option>";
+			$pagesStr = $pagesStr."<option value=".$getPageId.">".$getPageTitle."</option>";
 
 		}
 
-		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>" . $extraPages;
+		$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>".$extraPages;
 
 		//delete nav
 		$deleteMsg="";
@@ -244,7 +243,7 @@ include 'includes/header.php';
 										$isExistCatSelected = "";
 									}
 
-									echo "<option value=" . $navExistCatId . " " . $isExistCatSelected . ">" . $navExistCatName . "</option>";
+									echo "<option value=".$navExistCatId." ".$isExistCatSelected.">".$navExistCatName."</option>";
 								}
 
 							}
@@ -305,7 +304,7 @@ include 'includes/header.php';
 										$isCatSelected = "";
 									}
 
-									echo "<option value=" . $navCatId . " " . $isCatSelected . ">" . $navCatName . "</option>";
+									echo "<option value=".$navCatId." ".$isCatSelected.">".$navCatName."</option>";
 								}
 
 							}
