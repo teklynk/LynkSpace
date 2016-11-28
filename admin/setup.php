@@ -14,7 +14,7 @@ include 'includes/header.php';
 	$rowLocation = mysqli_fetch_array($sqlLocation);
 
 	//Get setup table columns
-	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, logo, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
 	//update table on submit
@@ -27,14 +27,14 @@ include 'includes/header.php';
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Update Setup
-				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
+				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', logo='".mysqli_real_escape_string($db_conn, $_POST['site_logo'])."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 				//Update Location
 				$locationUpdate = "UPDATE locations SET name='".$_POST['location_name']."' WHERE id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $locationUpdate);
 			} else {
 				//Insert Setup
-				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['site_config']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['site_config']."', '".$_POST['site_logo']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $setupInsert);
 				//Insert Location
 				$locationInsert = "INSERT INTO locations (id, name, active) VALUES (".$_GET['loc_id'].", '".$_POST['location_name']."', 'true')";
@@ -84,6 +84,12 @@ include 'includes/header.php';
 		} else {
 			$isActive_ls2kids="";
 		}
+
+		if ($rowSetup['logo']=="") {
+			$logo = "http://placehold.it/140x100&text=No Image";
+		} else {
+			$logo = "../uploads/".$_GET['loc_id']."/".$rowSetup['logo'];
+		}
 		?>
 			<form role="setupForm" name="setupForm" method="post" action="">
 
@@ -115,6 +121,39 @@ include 'includes/header.php';
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<img src="<?php echo $logo;?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block;"/>
+				</div>
+				<div class="form-group">
+					<label>Choose a Logo</label>
+					<select class="form-control input-sm" name="site_logo" id="site_logo">
+						<option value="">None</option>
+						<?php
+						if ($handle = opendir($target_dir)) {
+
+							while (false !== ($file = readdir($handle))) {
+								if ('.' === $file) continue;
+								if ('..' === $file) continue;
+								if ($file==="Thumbs.db") continue;
+								if ($file===".DS_Store") continue;
+								if ($file==="index.html") continue;
+
+								if ($file===$rowSetup['logo']){
+									$logoCheck="SELECTED";
+								} else {
+									$logoCheck="";
+								}
+
+								echo "<option value=".$file." $imageCheck>".$file."</option>";
+							}
+
+							closedir($handle);
+						}
+						?>
+					</select>
+				</div>
+
 				<div class="row">
 					<div class="col-lg-2">
 						<div class="form-group">
