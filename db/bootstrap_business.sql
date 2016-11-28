@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2016 at 05:13 PM
+-- Generation Time: Nov 28, 2016 at 11:54 AM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -63,7 +63,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id`, `name`, `nav_loc_id`) VALUES
 (0, 'None', 1),
-(2, 'FAQ', 1);
+(45, 'test 2', 2),
+(46, 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,7 @@ INSERT INTO `customers` (`id`, `image`, `name`, `link`, `active`, `datetime`, `l
 (5, 'webide.png', 'DISA', 'http://www.disa.gov', 'true', '2016-11-15 21:59:45', 1),
 (6, 'webide.png', 'Bill and Melinda Gate Foundation', 'http://www.billgates.gov', 'true', '2016-11-15 21:59:57', 1),
 (7, 'webide.png', 'CFPB', 'http://www.cfpb.gov', 'true', '2016-11-15 21:59:34', 1),
-(8, 'webide.png', 'Cal OES', 'http://www.darpa.gov', 'true', '2016-11-15 22:00:27', 1);
+(8, '', 'Cal OES', 'http://www.darpa.gov', 'true', '2016-11-18 13:50:48', 1);
 
 -- --------------------------------------------------------
 
@@ -209,20 +210,21 @@ CREATE TABLE `navigation` (
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`) VALUES
-(37, 1, 'Contact Us', 'contact.php', 0, 'Footer', 'false', 1),
-(42, 1, 'About Us', 'about.php?loc_id=1', 2, 'Top', 'false', 1),
-(43, 2, 'Careers', 'page.php?page_id=28&loc_id=1', 2, 'Top', 'false', 1),
-(44, 3, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', 1),
-(45, 4, 'Services', 'services.php?loc_id=1', 0, 'Top', 'false', 1),
-(48, 4, 'Positions', 'page.php?page_id=34', 0, 'Footer', 'false', 1),
-(50, 2, 'Services', 'services.php', 0, 'Footer', 'false', 1),
-(51, 3, 'About', 'about.php', 0, 'Footer', 'false', 1),
+(37, 1, 'Contact Us', 'contact.php?loc_id=1', 0, 'Footer', 'false', 1),
+(43, 3, 'Careers', 'page.php?page_id=28&loc_id=1', 0, 'Top', 'false', 1),
+(44, 10, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', 1),
+(45, 5, 'Services', 'services.php?loc_id=1', 0, 'Top', 'false', 1),
+(48, 4, 'Positions', 'page.php?page_id=34&loc_id=1', 0, 'Footer', 'false', 1),
+(50, 2, 'Services', 'services.php?loc_id=1', 0, 'Footer', 'false', 1),
+(51, 3, 'About', 'about.php?loc_id=1', 0, 'Footer', 'false', 1),
 (52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1),
-(53, 5, 'Test', '#', 0, 'Top', 'false', 1),
-(54, 6, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1),
-(55, 7, 'Test location 4', 'page.php?page_id=36&loc_id=1', 0, 'Top', 'true', 1),
-(56, 8, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'true', 1),
-(57, 1, 'Test Link', '#', 0, 'Top', 'off', 2);
+(53, 6, 'Test', '#', 0, 'Top', 'false', 1),
+(54, 7, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1),
+(55, 8, 'Test location 4', 'page.php?page_id=36&loc_id=1', 0, 'Top', 'true', 1),
+(56, 9, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'true', 1),
+(57, 1, 'Test Link', '#', 0, 'Top', 'true', 2),
+(58, 2, 'Test location 2', 'page.php?page_id=35&loc_id=2', 0, 'Top', 'true', 2),
+(59, 4, 'Test Link', '#', 0, 'Top', 'off', 1);
 
 -- --------------------------------------------------------
 
@@ -284,7 +286,7 @@ INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `acti
 (2, 'address-card', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-11-14 22:04:13', 1),
 (3, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', 1),
 (4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:43:58', 1),
-(5, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:19:35', 1);
+(5, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-11-22 19:33:11', 1);
 
 -- --------------------------------------------------------
 
@@ -393,6 +395,7 @@ CREATE TABLE `setup` (
   `description` text NOT NULL,
   `headercode` text NOT NULL,
   `config` text NOT NULL,
+  `logo` text NOT NULL,
   `ls2pac` text NOT NULL,
   `ls2kids` text NOT NULL,
   `author` text NOT NULL,
@@ -403,8 +406,10 @@ CREATE TABLE `setup` (
   `sliderheading` text NOT NULL,
   `teamheading` text NOT NULL,
   `customersheading` text NOT NULL,
+  `databasesheading` text NOT NULL,
   `servicescontent` text NOT NULL,
   `customerscontent` text NOT NULL,
+  `databasescontent` text NOT NULL,
   `teamcontent` text NOT NULL,
   `disqus` text NOT NULL,
   `loc_id` int(11) NOT NULL
@@ -414,9 +419,9 @@ CREATE TABLE `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `ls2pac`, `ls2kids`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`, `disqus`, `loc_id`) VALUES
-(1, 'My Site', '', '', '', '123', 'true', 'true', 'John Doe', '', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Databases', 'Our areas of expertise.', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '', 1),
-(2, 'test two 2222', '', '', '', '555', 'true', 'true', '', '', 1, '', '', '', '', '', '', '', '', '', 2);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `logo`, `ls2pac`, `ls2kids`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `databasesheading`, `servicescontent`, `customerscontent`, `databasescontent`, `teamcontent`, `disqus`, `loc_id`) VALUES
+(1, 'My Site', '', '', '', '123', 'Ubuntu-Mate-Radioactive-no-logo.png', 'true', 'true', 'John Doe', '', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Databases', 'Our areas of expertise.', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '', 1),
+(2, 'test two 2222', '', '', '', '555', '', 'true', 'true', '', '', 1, '', '', '', '', '', '', '', '', '', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -441,10 +446,11 @@ CREATE TABLE `slider` (
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`, `loc_id`) VALUES
 (3, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne', '28', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne.', 'true', '2016-11-15 21:54:19', 1),
-(4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '28', 'Inani singulis efficiantur ut mel, et regione repudiare ius', 'true', '2016-11-15 21:47:03', 1),
-(5, 'insider.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-11-11 03:51:57', 2),
-(6, 'space-desktop-backgrounds.jpg', 'Know your schools, detect threats sooner and respond faster', '', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-11-15 16:23:37', 2),
-(7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Vim ea omnes discere molestie.', '34', 'Vim ea omnes discere molestie. Cu vix facilisis efficiendi, vix ne ipsum inermis. Te cum possit voluptua expetendis. Cibo integre virtute ius ut.', 'true', '2016-11-15 21:46:15', 1);
+(4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '28', 'Inani singulis efficiantur ut mel, et regione repudiare ius', 'true', '2016-11-18 14:57:27', 1),
+(5, 'insider.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-11-22 19:20:38', 2),
+(6, 'space-desktop-backgrounds.jpg', 'Know your schools, detect threats sooner and respond faster', '', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-11-22 19:20:37', 2),
+(7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Vim ea omnes discere molestie.', '34', 'Vim ea omnes discere molestie. Cu vix facilisis efficiendi, vix ne ipsum inermis. Te cum possit voluptua expetendis. Cibo integre virtute ius ut.', 'true', '2016-11-18 14:57:21', 1),
+(8, 'space-desktop-backgrounds.jpg', 'New Slide', '35', 'test slide #1', 'true', '2016-11-22 19:19:48', 2);
 
 -- --------------------------------------------------------
 
@@ -471,7 +477,7 @@ CREATE TABLE `socialmedia` (
 
 INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, `google`, `instagram`, `youtube`, `tumblr`, `loc_id`) VALUES
 (1, 'Follow Us', 'http://www.facebook.com', 'http://www.twitter.com', '', 'http://www.google.com', '', '', '', 1),
-(2, 'Follow Us 2', '', '', '', '', '', '', '', 2);
+(2, 'Follow Us 2', 'http://facebook.com', '', '', '', '', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -495,7 +501,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `datetime`, `loc_id`) VALUES
-(3, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-14 21:59:56', 1),
+(3, '', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-18 13:49:24', 1),
 (4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-11-14 21:59:52', 1),
 (5, 'Ubuntu-Mate-Radioactive-no-logo.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-11-14 21:59:55', 1),
 (7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 1);
@@ -520,8 +526,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'ryanjones153@gmail.com', 1, 1),
-(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'ryan@email.com', 0, 2);
+(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, 1),
+(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -636,7 +642,7 @@ ALTER TABLE `aboutus`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
@@ -666,7 +672,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -691,7 +697,7 @@ ALTER TABLE `setup`
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
