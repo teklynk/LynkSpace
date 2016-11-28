@@ -1,17 +1,49 @@
 
 $(document).ready(function () {
 
+	//Anonymous functions ---------------------------------------
+
+	//Character Counter
+	//get values on load
+    if ($('.count-text').length != 0) {
+        var maxLength = $('.count-text').attr('maxlength');
+        var text_length = $('.count-text').val().length;
+        var text_remaining = maxLength - text_length;
+    }
+
+    $('small.count-message').html(text_remaining + ' remaining');
+
+    //Change vars on keyup
+    $('.count-text').keyup(function () {
+        var text_length = $('.count-text').val().length;
+        var text_remaining = maxLength - text_length;
+
+        $('small.count-message').html(text_remaining + ' remaining');
+    });
+
+	//-----------------------------------------------------------
+
+	//modal preview window
+	function showMyModal(myTitle, myFile) {
+		$('#myModalTitle').html(myTitle);
+		$('#myModalFile').attr('src', myFile);
+		$('#myModal').modal('show');
+		$('#webslideDialog').modal('show');
+		$('#webpageDialog').modal('show');
+		$('#webserviceDialog').modal('show');
+	}
+
 	// get an array with all querystring values
 	// example: var valor = getUrlVars()["valor"];
 	function getUrlVars() {
-			var vars = [], hash;
-			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-			for (var i = 0; i < hashes.length; i++) {
-					hash = hashes[i].split('=');
-					vars.push(hash[0]);
-					vars[hash[0]] = hash[1];
-			}
-			return vars;
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		for (var i = 0; i < hashes.length; i++) {
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+		}
+		return vars;
 	}
 
 	//clear inputs on reset
@@ -254,12 +286,4 @@ $(document).ready(function () {
 
 });
 
-//modal preview window
-function showMyModal(myTitle, myFile) {
-   $('#myModalTitle').html(myTitle);
-   $('#myModalFile').attr('src', myFile);
-   $('#myModal').modal('show');
-   $('#webslideDialog').modal('show');
-   $('#webpageDialog').modal('show');
-   $('#webserviceDialog').modal('show');
-};
+

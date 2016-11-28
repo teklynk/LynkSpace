@@ -189,9 +189,11 @@ if ($_GET['preview']>"") {
 			</select>
 		</div>
 		<hr/>
+
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control input-sm" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET['editslide']){echo $rowSlides['content'];} ?></textarea>
+			<textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET['editslide']){echo $rowSlides['content'];} ?></textarea>
+			<small class="pull-right count-message"></small>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET['editslide']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowSlides['datetime']));} ?></span>

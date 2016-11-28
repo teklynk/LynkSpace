@@ -272,3 +272,8 @@ div.version>small>a {
     padding-top: 16px !important;
     padding-bottom: 11px !important;
 }
+
+.count-message {
+    padding-right: 4px;
+    padding-bottom: 6px;
+}

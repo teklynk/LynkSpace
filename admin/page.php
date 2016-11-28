@@ -187,7 +187,7 @@ if ($_GET['preview']>"") {
 		} else {
 		?>
 
-		<div class="row">
+		<div class="row" style="display:none;">
 			<div class="col-lg-4">
 				<div class="form-group" id="pagedisqus">
 					<label>Allow Comments (Disqus)</label>
