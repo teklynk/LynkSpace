@@ -600,6 +600,13 @@ if (is_numeric($_GET['page_id'])>"") {
 
 //redirect to default location if loc_id not defined
 if (empty($_GET['loc_id'])) {
-    header('Location: ?loc_id=1');
+
+    if (basename($_SERVER['PHP_SELF']) == "") {
+        $pageRedirect = 'index.php?loc_id=1';
+    } else {
+        $pageRedirect = basename($_SERVER['PHP_SELF']).'?loc_id=1';
+    }
+
+    header('Location: '.$pageRedirect);
 }
 ?>
