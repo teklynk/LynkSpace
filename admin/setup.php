@@ -95,19 +95,19 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Site Title</label>
-					<input class="form-control input-sm" name="site_title" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site">
+					<input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site">
 				</div>
 				  <div class="form-group">
 					<label>Author</label>
-					<input class="form-control input-sm" name="site_author" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
+					<input class="form-control input-sm count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
 				</div>
 				<div class="form-group">
 					<label>Keywords</label>
-					<textarea class="form-control input-sm" name="site_keywords" rows="3" maxlength="255"><?php echo $rowSetup['keywords']; ?></textarea>
+					<textarea class="form-control input-sm count-text" name="site_keywords" rows="3" maxlength="255"><?php echo $rowSetup['keywords']; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<textarea class="form-control input-sm" name="site_description" rows="3" maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
+					<textarea class="form-control input-sm count-text" name="site_description" rows="3" maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
 				</div>
 				<hr/>
 				<div class="form-group">
@@ -117,7 +117,7 @@ include 'includes/header.php';
 					<div class="col-lg-12">
 						<div class="form-group">
 							<label>Location Name</label>
-							<input class="form-control input-sm" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>">
+							<input class="form-control input-sm count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>">
 						</div>
 					</div>
 				</div>
@@ -158,7 +158,7 @@ include 'includes/header.php';
 					<div class="col-lg-2">
 						<div class="form-group">
 							<label>PAC Config</label>
-							<input class="form-control input-sm" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+							<input class="form-control input-sm count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
 						</div>
 					</div>
 				</div>

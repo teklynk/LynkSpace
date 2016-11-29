@@ -9,7 +9,7 @@ if (!defined('inc_access')) {
 	echo "<div class='row' id='searchpac'>";
 
 		echo "<div class='col-lg-12'>";
-
+		echo "Search box goes here";
 		echo "</div>";
 
 	echo "</div>";

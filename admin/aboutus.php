@@ -64,7 +64,7 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Heading</label>
-					<input class="form-control input-sm" name="about_heading" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" required>
+					<input class="form-control input-sm count-text" name="about_heading" maxlength="255" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" required>
 				</div>
 				<hr/>
 			    <div class="form-group">

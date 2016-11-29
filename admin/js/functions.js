@@ -1,27 +1,100 @@
 
 $(document).ready(function () {
-
-	//Anonymous functions ---------------------------------------
-
 	//Character Counter
-	//get values on load
-    if ($('.count-text').length != 0) {
-        var maxLength = $('.count-text').attr('maxlength');
-        var text_length = $('.count-text').val().length;
-        var text_remaining = maxLength - text_length;
+	//Taken from https://www.codefromjames.com/scripts/charcount.js
+	var LabelCounter = 0;
+
+    function parseCharCounts() {
+        //Get Everything...
+        var elements = document.getElementsByClassName('count-text');
+        var element = null;
+        var maxlength = 9;
+        var newlabel = null;
+
+        for (var i=0; i < elements.length; i++) {
+            element = elements[i];
+
+            if (element.getAttribute('maxlength') != null && element.getAttribute('limiterid') == null) {
+                maxlength = element.getAttribute('maxlength');
+
+                //Create new label
+                newlabel = document.createElement('small');
+                newlabel.id = 'limitlbl_' + LabelCounter;
+                newlabel.className = 'count-message';
+                newlabel.style.color = '#7b7b7b';
+                newlabel.style.display = 'block'; //Make it block so it sits nicely.
+                newlabel.innerHTML = "Updating...";
+
+                //Attach limiter to our textarea
+                element.setAttribute('limiterid', newlabel.id);
+                element.onkeyup = function(){ displayCharCounts(this); };
+
+                //Append element
+                element.parentNode.insertBefore(newlabel, element);
+
+                //Force the update now!
+                displayCharCounts(element);
+            }
+
+            //Push up the number
+            LabelCounter++;
+        }
     }
 
-    $('small.count-message').html(text_remaining + ' remaining');
+    function displayCharCounts(element) {
+        var limitLabel = document.getElementById(element.getAttribute('limiterid'));
+        var maxlength = element.getAttribute('maxlength');
+        var enforceLength = false;
 
-    //Change vars on keyup
-    $('.count-text').keyup(function () {
-        var text_length = $('.count-text').val().length;
-        var text_remaining = maxLength - text_length;
+        if (element.getAttribute('lengthcut') != null && element.getAttribute('lengthcut').toLowerCase() == 'true') {
+            enforceLength = true;
+        }
 
-        $('small.count-message').html(text_remaining + ' remaining');
-    });
+        var value = element.value.replace(/\u000d\u000a/g,'\u000a').replace(/\u000a/g,'\u000d\u000a');
+        var currentLength = value.length;
+        var remaining = 0;
 
-	//-----------------------------------------------------------
+        if (maxlength == null || limitLabel == null) {
+            return false;
+        }
+
+        remaining = maxlength - currentLength;
+
+        if (remaining >= 0) {
+            limitLabel.style.color = '#7b7b7b';
+            limitLabel.innerHTML = remaining + ' character';
+
+            if (remaining != 1)
+                limitLabel.innerHTML += 's';
+                limitLabel.innerHTML += ' remaining';
+
+
+        } else {
+
+            if (enforceLength == true) {
+                value = value.substring(0, maxlength);
+                element.value = value;
+                element.setSelectionRange(maxlength, maxlength);
+                limitLabel.style.color = '#7b7b7b';
+                limitLabel.innerHTML = '0 characters remaining';
+            } else {
+                //Non-negative
+                remaining = Math.abs(remaining);
+
+                limitLabel.style.color = '#7b7b7b';
+                limitLabel.innerHTML = 'Over by ' + remaining + ' character';
+
+                if (remaining != 1)
+                    limitLabel.innerHTML += 's';
+                    limitLabel.innerHTML += '!';
+
+
+            }
+
+        }
+    }
+    //Return Character Count Function
+	return parseCharCounts();
 
 	//modal preview window
 	function showMyModal(myTitle, myFile) {

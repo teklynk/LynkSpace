@@ -156,11 +156,11 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label>Name</label>
-			<input class="form-control input-sm" name="team_name" maxlength="255" value="<?php if($_GET['editteam']){echo $rowTeam['name'];} ?>" placeholder="Name">
+			<input class="form-control input-sm count-text" name="team_name" maxlength="255" value="<?php if($_GET['editteam']){echo $rowTeam['name'];} ?>" placeholder="Name">
 		</div>
 		<div class="form-group">
 			<label>Title</label>
-			<input class="form-control input-sm" name="team_title" maxlength="255" value="<?php if($_GET['editteam']){echo $rowTeam['title'];} ?>" placeholder="Title">
+			<input class="form-control input-sm count-text" name="team_title" maxlength="255" value="<?php if($_GET['editteam']){echo $rowTeam['title'];} ?>" placeholder="Title">
 		</div>
 		<div class="form-group">
 			<label>Description</label>
@@ -261,7 +261,7 @@ if ($_GET['preview']>"") {
 			<form role="teamForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
+                <input class="form-control input-sm count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
             </div>
             <div class="form-group">
                 <label>Description</label>

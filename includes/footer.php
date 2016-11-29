@@ -23,7 +23,7 @@ if(!defined('inc_access')) {
 
             <div class="row copyright">
                 <div class="col-lg-6 text-left">
-                    <p>Copyright &copy; <?php echo str_replace(':8080','',$_SERVER['HTTP_HOST']."&nbsp;".date("Y"));?></p>
+                    <p>Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></p>
                 </div>
             </div>
         </footer>

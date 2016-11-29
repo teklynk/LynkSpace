@@ -132,7 +132,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $pageLabel; ?></label>
-			<input class="form-control input-sm" name="page_title" maxlength="255" value="<?php if($_GET['editpage']){echo $rowPages['title'];} ?>" placeholder="Page Title">
+			<input class="form-control input-sm count-text" name="page_title" maxlength="255" value="<?php if($_GET['editpage']){echo $rowPages['title'];} ?>" placeholder="Page Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -315,7 +315,7 @@ if ($_GET['preview']>"") {
 			<form role="pageForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
+                <input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
             </div>
 			<hr/>
 			<table class="table table-bordered table-hover table-striped dataTable" id="dataTable">

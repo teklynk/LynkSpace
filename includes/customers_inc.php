@@ -1,4 +1,4 @@
-<!-- Our Customers -->
+<!-- Databases -->
 <?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');

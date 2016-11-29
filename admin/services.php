@@ -122,7 +122,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control input-sm" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">
+			<input class="form-control input-sm count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -309,7 +309,7 @@ if ($_GET['preview']>"") {
 		<form name="servicesForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm" name="main_heading" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
+				<input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
 			</div>
 			<div class="form-group">
 				<label>Description</label>

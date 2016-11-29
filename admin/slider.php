@@ -125,7 +125,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
-			<input class="form-control input-sm" name="slide_title" maxlength="255" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
+			<input class="form-control input-sm count-text" name="slide_title" maxlength="255" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
 		</div>
 		<hr/>
         <div class="form-group">
@@ -193,7 +193,6 @@ if ($_GET['preview']>"") {
 		<div class="form-group">
 			<label>Description</label>
 			<textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if($_GET['editslide']){echo $rowSlides['content'];} ?></textarea>
-			<small class="pull-right count-message"></small>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET['editslide']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowSlides['datetime']));} ?></span>
@@ -289,7 +288,7 @@ if ($_GET['preview']>"") {
 		echo "<form name='sliderForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
-		<input class='form-control input-sm' name='main_heading' maxlength='255' value='".$rowSetup['sliderheading']."' placeholder='My Slides' required>
+		<input class='form-control input-sm count-text' name='main_heading' maxlength='255' value='".$rowSetup['sliderheading']."' placeholder='My Slides' required>
 		</div>
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>

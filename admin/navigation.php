@@ -196,11 +196,11 @@ include 'includes/header.php';
 				<fieldset>
 					<div class="form-group">
 						<label for="nav_newname">Link Name</label>
-						<input type="text" class="form-control input-sm" name="nav_newname" id="nav_newname" maxlength="255">
+						<input type="text" class="form-control input-sm count-text" name="nav_newname" id="nav_newname" maxlength="255">
 					</div>
 					<div class="form-group">
 						<label for="nav_newurl">Link URL</label>
-						<input type="text" class="form-control input-sm" name="nav_newurl" id="nav_newurl" maxlength="255">
+						<input type="text" class="form-control input-sm count-text" name="nav_newurl" id="nav_newurl" maxlength="255">
 					</div>
 					<div class="form-group">
 						<label for="exist_page">Existing Page</label>
@@ -268,7 +268,7 @@ include 'includes/header.php';
 						$navCount="";
 
 						$sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=".$_GET['loc_id']." ORDER BY sort");
-						while ($rowNav  = mysqli_fetch_array($sqlNav)) {
+						while ($rowNav = mysqli_fetch_array($sqlNav)) {
 							$navId=$rowNav['id'];
 							$navName=$rowNav['name'];
 							$navURL=$rowNav['url'];

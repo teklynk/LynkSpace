@@ -61,11 +61,11 @@ include 'includes/header.php';
 		<form name="landingForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome" required>
+				<input class="form-control input-sm count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>"  placeholder="Welcome" required>
 			</div>
 			<div class="form-group">
 				<label>Intro Title</label>
-				<input class="form-control input-sm" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
+				<input class="form-control input-sm count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
 			</div>
 			<hr/>
 	        <div class="form-group">
