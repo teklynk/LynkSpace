@@ -333,7 +333,7 @@ $(document).ready(function () {
 	//Not a Robot
 	$('#not_robot').change (
 	    function () {
-			if ($('#user_name').length && $('#user_email').val().length && $('#user_password').val().length) {
+			if ($('#user_name').val().length && $('#user_email').val().length && $('#user_password').val().length) {
 				if ($('#not_robot').prop('checked')) {
 					$('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
 					$('#sign_in').removeAttr('disabled', 'disabled');
