@@ -93,16 +93,6 @@ $(document).ready(function () {
         }
     }
 
-	//modal preview window
-	function showMyModal(myTitle, myFile) {
-		$('#myModalTitle').html(myTitle);
-		$('#myModalFile').attr('src', myFile);
-		$('#myModal').modal('show');
-		$('#webslideDialog').modal('show');
-		$('#webpageDialog').modal('show');
-		$('#webserviceDialog').modal('show');
-	}
-
 	// get an array with all querystring values
 	// example: var valor = getUrlVars()["valor"];
 	function getUrlVars() {
@@ -359,6 +349,17 @@ $(document).ready(function () {
 	//Boostrap tooltips function
 	$('[data-toggle="tooltip"]').tooltip();
 });
+
+//--Outside Document.Ready function
+//modal preview window
+function showMyModal(myTitle, myFile) {
+	$('#myModalTitle').html(myTitle);
+	$('#myModalFile').attr('src', myFile);
+	$('#myModal').modal('show');
+	$('#webslideDialog').modal('show');
+	$('#webpageDialog').modal('show');
+	$('#webserviceDialog').modal('show');
+}
 
 
 
