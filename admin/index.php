@@ -167,14 +167,14 @@ if (isset($_SESSION['loggedIn'])) {
                                         <label>User Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username" name="user_name" type="text" autofocus required>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autofocus required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" name="user_email" type="email" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
