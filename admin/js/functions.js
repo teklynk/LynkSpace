@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+
 	//Character Counter
 	//Taken from https://www.codefromjames.com/scripts/charcount.js
 	var LabelCounter = 0;
@@ -21,7 +22,7 @@ $(document).ready(function () {
                 newlabel = document.createElement('small');
                 newlabel.id = 'limitlbl_' + LabelCounter;
                 newlabel.className = 'count-message';
-                newlabel.style.color = '#7b7b7b';
+                newlabel.style.color = 'rgb(123, 123, 123)';
                 newlabel.style.display = 'block'; //Make it block so it sits nicely.
                 newlabel.innerHTML = "Updating...";
 
@@ -61,13 +62,12 @@ $(document).ready(function () {
         remaining = maxlength - currentLength;
 
         if (remaining >= 0) {
-            limitLabel.style.color = '#7b7b7b';
+            limitLabel.style.color = 'rgb(123, 123, 123)';
             limitLabel.innerHTML = remaining + ' character';
 
             if (remaining != 1)
                 limitLabel.innerHTML += 's';
                 limitLabel.innerHTML += ' remaining';
-
 
         } else {
 
@@ -75,26 +75,23 @@ $(document).ready(function () {
                 value = value.substring(0, maxlength);
                 element.value = value;
                 element.setSelectionRange(maxlength, maxlength);
-                limitLabel.style.color = '#7b7b7b';
+                limitLabel.style.color = 'rgb(123, 123, 123)';
                 limitLabel.innerHTML = '0 characters remaining';
             } else {
                 //Non-negative
                 remaining = Math.abs(remaining);
 
-                limitLabel.style.color = '#7b7b7b';
+                limitLabel.style.color = 'rgb(123, 123, 123)';
                 limitLabel.innerHTML = 'Over by ' + remaining + ' character';
 
                 if (remaining != 1)
                     limitLabel.innerHTML += 's';
                     limitLabel.innerHTML += '!';
 
-
             }
 
         }
     }
-    //Return Character Count Function
-	return parseCharCounts();
 
 	//modal preview window
 	function showMyModal(myTitle, myFile) {
@@ -333,18 +330,17 @@ $(document).ready(function () {
 		}
 	);
 
-	//Boostrap tooltips function
-	$('[data-toggle="tooltip"]').tooltip();
-
 	//Not a Robot
 	$('#not_robot').change (
 	    function () {
-	    	if ($('#not_robot').prop('checked')) {
-				$('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
-				$('#sign_in').removeAttr('disabled', 'disabled');
-			} else {
-				$('#not_robot').attr('value', '');
-				$('#sign_in').attr('disabled', 'disabled');
+			if ($('#user_name').length && $('#user_email').val().length && $('#user_password').val().length) {
+				if ($('#not_robot').prop('checked')) {
+					$('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
+					$('#sign_in').removeAttr('disabled', 'disabled');
+				} else {
+					$('#not_robot').attr('value', '');
+					$('#sign_in').attr('disabled', 'disabled');
+				}
 			}
 	    }
 	);
@@ -357,6 +353,12 @@ $(document).ready(function () {
 		}
 	);
 
+	//Character Count Function
+	parseCharCounts();
+
+	//Boostrap tooltips function
+	$('[data-toggle="tooltip"]').tooltip();
 });
+
 
 

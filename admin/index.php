@@ -132,21 +132,21 @@ if (isset($_SESSION['loggedIn'])) {
                                         <label>User Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username" name="username" type="text" autofocus required>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autofocus required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" name="email" type="email" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Password" name="password" type="password" value="" required>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
