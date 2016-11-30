@@ -274,6 +274,6 @@ div.version>small>a {
 }
 
 .count-message {
-    padding-right: 4px;
-    padding-bottom: 6px;
+    font-size:  75%;
+    color: rgb(123, 123, 123);
 }
