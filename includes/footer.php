@@ -3,33 +3,35 @@ if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
 ?>
+    <!-- /.container -->
+    </div>
+
         <!-- Footer -->
         <footer>
-            <div class="footer" id='footer'>
-                
-            <?php
-                getNav('Footer','false','left');
-            ?>
+            <div class="container">
+                <div class="row">
 
-            </div>
+                <?php
+                    getNav('Footer','false','left');
+                ?>
 
-            <?php
-            echo "<div class='row' id='socialmedia'>";
-            echo "<div class='col-md-12'>";
-                include 'socialmedia_inc.php';
-            echo "</div>";
-            echo "</div>";
-            ?>
-
-            <div class="row copyright">
-                <div class="col-lg-6 text-left">
-                    <p>Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></p>
                 </div>
+
+                <?php
+                echo "<div class='row' id='socialmedia'>";
+                echo "<div class='col-md-12'>";
+                    include 'socialmedia_inc.php';
+                echo "</div>";
+                echo "</div>";
+                ?>
+
             </div>
         </footer>
-
-    </div>
-    <!-- /.container -->
+        <div id="belowfooter">
+            <div class="container">
+                <p><span id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></span></p>
+            </div>
+        </div>
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -45,7 +47,6 @@ if(!defined('inc_access')) {
     </script>
 
 </body>
-
 </html>
 <?php
     //close all db connections

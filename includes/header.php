@@ -25,13 +25,13 @@ if(!defined('inc_access')) {
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" type="text/css" href="css/cps-style.css">
-
     <!-- Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Custom CSS -->
+    <!-- Default template CSS - Do not remove-->
+    <link rel="stylesheet" type="text/css" href="css/modern-business.css">
+
+    <!-- Custom Override CSS Template - Stored in config.php-->
     <?php
 
     echo $customCss;
@@ -67,23 +67,22 @@ if(!defined('inc_access')) {
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" id='top' role="navigation">
+<nav class="navbar cpsNavBar" id='top' role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button type="button" class="navbar-toggle collapsed navbarButton" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-            <a class="navbar-brand" href="index.php?loc_id=<?php echo $_GET['loc_id'];?>"><?php echo $setupTitle;?></a>
+            <img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /> <span class="navbar-brand hidden-xs navTitle"> <?php echo $setupTitle;?></span>
+            <!-- This section is used if there is a long site name when viewed on mobile the name is shortened -->
+            <a class="navbar-brand visible-xs navTitleSmall" href="index.php?loc_id=<?php echo $_GET['loc_id'];?>"><?php echo $setupTitle;?></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-collapse collapse navTabs" id="navbar" aria-expanded="false">
             <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
-                getNav('Top','true','right');
+                getNav('Top','true','left');
             ?>
         </div>
         <!-- /.navbar-collapse -->
