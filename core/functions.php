@@ -338,31 +338,31 @@ function getSocialMediaIcons($shape) {
 	}
 
     if (!empty($rowSocialMedia['facebook'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['google'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['pinterest'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['twitter'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['instagram'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['youtube'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     if (!empty($rowSocialMedia['tumblr'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-inverse'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
     }
 
     //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
