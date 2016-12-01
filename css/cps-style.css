@@ -1,0 +1,67 @@
+body {
+	font-family: "Century Gothic", Arial, sans-serif;
+}
+p {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+	font-family:"Century Gothic", Sans-serif !important;
+}
+footer {
+	bottom:0;
+	background-color:#001950;
+	color:#fff;
+	padding:70px 50px;
+}
+footer a {
+	text-decoration: none;
+	color:#fff;
+}
+footer a:hover {
+	text-decoration: none;
+	color:#008eaa;
+}
+#belowfooter {
+	background-color: #000D28;
+	padding:20px;
+	color:white;
+}
+#belowfooter a {
+	text-decoration: none;
+	color:white;
+}
+#belowfooter a:hover {
+	text-decoration: none;
+	color:#008eaa;
+}
+.label{
+	font-weight: normal;
+}
+/* Navigation */
+.cpsNavBar {
+	font-family:"Century Gothic", Sans-serif;
+	border-bottom:1px solid #e6e6e6;
+	padding: 10px 0px 10px 15px;
+}
+.navbarButton {
+	font-family:"Century Gothic", Sans-serif;
+	border:0px;
+	margin-top:23px;
+}
+.navTitle {
+	font-family:"Century Gothic", Sans-serif;
+	padding-top:30px;
+	margin-left:10px !important;
+	margin-right:10px !important;
+	color: #0032a0;
+}
+.navTitleSmall {
+	font-family:"Century Gothic", Sans-serif;
+	margin-top:15px;
+	font-size: 14px;
+}
+.navTabs {
+	font-family:"Century Gothic", Sans-serif;
+	padding-top:15px;
+}

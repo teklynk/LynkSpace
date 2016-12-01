@@ -26,7 +26,7 @@ if(!defined('inc_access')) {
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" type="text/css" href="css/modern-business.css">
+    <link rel="stylesheet" type="text/css" href="css/cps-style.css">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
