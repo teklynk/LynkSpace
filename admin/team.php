@@ -294,14 +294,14 @@ if ($_GET['preview']>"") {
 						}
 
 						echo "<tr>
-						<td><a href='?loc_id=".$_GET['loc_id']."&editteam=$teamId' title='Edit'>".$teamName."</a></td>
+						<td><a href='team.php?loc_id=".$_GET['loc_id']."&editteam=$teamId' title='Edit'>".$teamName."</a></td>
 						<td class='col-xs-1'>
 						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='$teamId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$teamName', '?preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&moveteam=$teamId&movetitle=$teamName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deleteteam=$teamId&deletetitle=$teamName'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$teamName', 'team.php?loc_id=".$_GET['loc_id']."&preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&moveteam=$teamId&movetitle=$teamName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&deleteteam=$teamId&deletetitle=$teamName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

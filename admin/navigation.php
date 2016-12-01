@@ -218,9 +218,9 @@ include 'includes/header.php';
 						<label for="nav_newcat">Category</label>
 						<div class="input-group">
 							<input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat" maxlength="255">
-                            <span class="input-group-addon" id="add_cat" ><i class='fa fa-fw fa-plus' style="color:#000; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
-                            <span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
-							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+                            <span class="input-group-addon" id="add_cat" ><i class='fa fa-fw fa-plus' style="color:#000; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
+                            <span class="input-group-addon" id="rename_cat" ><i class='fa fa-fw fa-save' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+							<span class="input-group-addon" id="del_cat" ><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#000; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
 						</div>
 					</div>
 
@@ -311,7 +311,7 @@ include 'includes/header.php';
 
 							echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' ".$isActive."></td>
-							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?section=".$getNavSection."&loc_id=".$_GET['loc_id']."&deletenav=$navId&deletename=".$navName."'\"><i class='fa fa-fw fa-trash'></i></button></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."&deletenav=$navId&deletename=".$navName."'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
 						}
 

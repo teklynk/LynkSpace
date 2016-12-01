@@ -26,7 +26,7 @@ define('inc_access', TRUE);
 	}
 
 	if ($_GET['updatepassword'] == 'true') {
-		$pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."'\"></button></div>";
+		$pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=".$_GET['loc_id']."'\"></button></div>";
 	}
 ?>
    <div class="row">

@@ -64,7 +64,7 @@ include 'includes/header.php';
 		//Check if user_level is Admin user
 		if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
 		?>
-			<button type="button" class="btn btn-default" onclick="window.location='?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Location</button>
+			<button type="button" class="btn btn-default" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Location</button>
 			<h2></h2>
 		<?php
 		}

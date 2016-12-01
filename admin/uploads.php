@@ -16,6 +16,10 @@ include 'includes/header.php';
 
 		//Check if file is a image format
 		if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
+            //rename file if it contains spaces
+            if (strpos(basename( $_FILES["fileToUpload"]["name"]), " ") == true) {
+                rename($target_file, str_replace(" ","-",$target_file));
+            }
 			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"])." has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		} else {
 			//Delete the file if it does meet the fileExt rule
@@ -30,9 +34,9 @@ include 'includes/header.php';
 	//Delete file
 	$deleteMsg = "";
 	if ($_GET["delete"] AND !$_GET["confirm"]) {
-		$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$_GET["delete"]."? <a href='?delete=".$_GET["delete"]."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+		$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$_GET["delete"]."? <a href='uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	} elseif ($_GET["delete"] AND $_GET["confirm"]=='yes') {
-		unlink($target_dir.$_GET["delete"]);
+		unlink($_GET["delete"]);
 		$deleteMsg="<div class='alert alert-success'>".$_GET["delete"]." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 ?>
@@ -101,7 +105,7 @@ $(document).ready(function() {
 								<td><a href='#' onclick=\"showMyModal('$file', '$target_dir$file')\" title='Preview'>".$file."</a></td>
 								<td class='col-xs-3'>".$modDate."</td>
 								<td class='col-xs-1'>
-								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
+								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
 								</td>
 								</tr>";
 							}

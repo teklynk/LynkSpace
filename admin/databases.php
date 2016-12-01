@@ -284,14 +284,14 @@ include 'includes/header.php';
 						}
 
 						echo "<tr>
-						<td><a href='?loc_id=".$_GET['loc_id']."&editcustomer=$customerId' title='Edit'>".$customerName."</a></td>
+						<td><a href='databases.php?loc_id=".$_GET['loc_id']."&editcustomer=$customerId' title='Edit'>".$customerName."</a></td>
 						<td class='col-xs-1'>
 						<input data-toggle='toggle' title='Customer Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', '?preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', 'databases.php?loc_id=".$_GET['loc_id']."&preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

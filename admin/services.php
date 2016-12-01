@@ -341,14 +341,14 @@ if ($_GET['preview']>"") {
 					}
 
 				echo "<tr>
-				<td><a href='?loc_id=".$_GET['loc_id']."&editservice=$serviceId' title='Edit'>".$serviceTitle."</a></td>
+				<td><a href='services.php?loc_id=".$_GET['loc_id']."&editservice=$serviceId' title='Edit'>".$serviceTitle."</a></td>
 				<td class='col-xs-1'>
 				<input data-toggle='toggle' title='Service Active' class='checkbox services_status_checkbox' id='$serviceId' type='checkbox' ".$isActive.">
 				</td>
 				<td class='col-xs-2'>
-				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$serviceTitle', '?preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
-				<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&moveservice=$serviceId&movetitle=$serviceTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=$serviceTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$serviceTitle', 'services.php?loc_id=".$_GET['loc_id']."&preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
+				<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&moveservice=$serviceId&movetitle=$serviceTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=$serviceTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 				</td>
 				</tr>";
 				}

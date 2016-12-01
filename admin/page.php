@@ -230,7 +230,7 @@ if ($_GET['preview']>"") {
 		//delete page
 		if ($_GET['deletepage'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='page.php?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
 		} elseif ($_GET['deletepage'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
@@ -344,13 +344,13 @@ if ($_GET['preview']>"") {
 						}
 
 						echo "<tr>
-						<td><a href='?loc_id=".$_GET['loc_id']."&editpage=$pageId' title='Edit'>".$pageTitle."</a></td>
+						<td><a href='page.php?loc_id=".$_GET['loc_id']."&editpage=$pageId' title='Edit'>".$pageTitle."</a></td>
 						<td class='col-xs-1'>
 						<input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', '?preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='?loc_id=".$_GET['loc_id']."&deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', 'page.php?loc_id=".$_GET['loc_id']."&preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."&deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 
