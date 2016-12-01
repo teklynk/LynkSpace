@@ -239,7 +239,6 @@ function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
 	global $db_conn;
 	echo "<ul class='nav navbar-nav navbar-$pull'>";
-    echo "<li class='active'><a href='index.php'><i class='fa fa-home fa-lg'></i></a></li>";
 	if ($dropdown=="true"){
 		$dropdownToggle = "dropdown-toggle";
 		$dataToggle = "dropdown";
