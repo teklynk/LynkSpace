@@ -1,11 +1,12 @@
-
 *dbconn.php
+
+*config.php
 
 *.old
 
 uploads/*
 
-images/*
+screenshots/*
 
 *.DS_Store
 
