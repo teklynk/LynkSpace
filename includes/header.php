@@ -71,15 +71,13 @@ if(!defined('inc_access')) {
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed navbarButton" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-            <img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /> <span class="navbar-brand hidden-xs navTitle"> <?php echo $setupTitle;?></span>
-            <!-- This section is used if there is a long site name when viewed on mobile the name is shortened -->
-            <a class="navbar-brand visible-xs navTitleSmall" href="index.php?loc_id=<?php echo $_GET['loc_id'];?>"><?php echo $setupTitle;?></a>
+            <a href="index.php"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse navTabs" id="navbar" aria-expanded="false">
+        <div class="navbar-collapse collapse navTabs" id="navbar-collapse-1">
             <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Top','true','left');
