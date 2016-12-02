@@ -6,18 +6,19 @@ if(!defined('inc_access')) {
 	getFeatured();
 		
 	echo "<div class='row' id='featured'>";
-	
+	echo "<div class='col-xs-12 col-sm-8'>";
+
 	if (!empty($featuredHeading)) {
-		echo "<div class='col-lg-12'>";
-		echo "<h3 class='page-header featured'>".$featuredHeading."</h3>";
-		echo "</div>";
+		echo "<h1 class='text-white featured'>".$featuredHeading."</h1>";
+		//echo "</div>";
 	}
 
 	if (!empty($featuredBlurb)) {
-		echo "<div class='col-lg-12'>";
+		//echo "<div class='col-lg-12'>";
 		echo "<p class='text-center'>".$featuredBlurb."</p>";
-		echo "</div>";
 	}
+
+	echo "</div>";
  
 	if (!empty($featuredImage)) {
 
