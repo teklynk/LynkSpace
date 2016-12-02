@@ -18,7 +18,7 @@ $target_dir = $image_dir;
 $target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
 
 //Custom CSS file paths
-$customCss_dir = '../css/custom.css'; //physical path to custom css file
+$customCss_dir = '../css/cps-style.css'; //physical path to custom css file
 $customCss_url = "//".$_SERVER['HTTP_HOST']."/businessCMS/css/cps-style.css"; //web path to custom css file
 
 if ($customCss_url != "") {

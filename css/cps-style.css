@@ -12,18 +12,27 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
 footer {
 	bottom:0;
 	background-color:#001950;
+	/*background:linear-gradient(#111,#414141,#414141);
+	background: -webkit-linear-gradient(#111,#414141,#414141);
+	background: -o-linear-gradient(#111,#414141,#414141);
+	background: -moz-linear-gradient(#111,#414141,#414141);*/
 	color:#fff;
 	padding:70px 50px;
-	margin:20px 0px 0px 0px;
+	margin: 0px;
+	margin-top: 40px;
 }
+
 footer a {
 	text-decoration: none;
 	color:#fff;
 }
+
 footer a:hover {
 	text-decoration: none;
 	color:#008eaa;
 }
+
+
 #belowfooter {
 	background-color: #000D28;
 	padding:20px;
@@ -71,6 +80,49 @@ footer a:hover {
 	padding-top:15px;
 }
 
-.fa-inverse-socialmedia {
-	color: #001950;
+.socialDiv {
+	float: right;
+	padding-top: 0px;
+	position: absolute;
+	right: 20px;
+	margin-top: -25px;
+}
+
+.socialDiv .social-top>.fa-stack-2x {
+	display:none;
+}
+.socialDiv .fa-inverse-socialmedia {
+	color: #0033a0;
+}
+
+.socialDiv .fa-inverse-socialmedia:hover {
+	color: #428bca;
+}
+
+.toggbutton {
+	font-size: .7em;
+	line-height: 1em;
+	display: block;
+	font-weight: bold;
+}
+
+.cps-blue {
+	color: #0033a0;
+}
+
+/** Media Queries **/
+
+
+/* page > xs */
+@media (min-width: 768px)
+{
+	/*.navbar-collapse { padding-left: 180px !important; }   push nav to the right to give logo space */
+	/* body { padding-top:110px;}   drop the body down when the nav bar appears on non xs screens */
+}
+
+/* page = xs */
+@media (max-width: 767px) {
+	.socialDiv { display:none !important; }
+	.navbar-nav>li>a {padding: 10px 20px !important; }
+	.nav>li>a:hover, .nav>li>a:focus { border-bottom: none !important; }
 }

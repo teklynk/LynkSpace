@@ -9,7 +9,7 @@ if(!defined('inc_access')) {
 	
 	if (!empty($featuredHeading)) {
 		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header featured'>".$featuredHeading."</h2>";
+		echo "<h3 class='page-header featured'>".$featuredHeading."</h3>";
 		echo "</div>";
 	}
 

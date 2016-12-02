@@ -13,7 +13,7 @@ getServices();
 		
 		if (!empty($servicesHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
+			echo "<h3 class='page-header services'>".$servicesHeading."</h3>";
 			echo "</div>";
 		}
         

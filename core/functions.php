@@ -319,9 +319,9 @@ function getSetup() {
     $setupLs2kids = $rowSetup['ls2kids'];
 }
 
-function getSocialMediaIcons($shape) {
-    //EXAMPLE: getSocialMediaIcons("circle")
-    //EXAMPLE: getSocialMediaIcons("square")
+function getSocialMediaIcons($shape, $section) {
+    //EXAMPLE: getSocialMediaIcons("circle","top")
+    //EXAMPLE: getSocialMediaIcons("square","footer")
 	global $socialMediaIcons;
 	global $socialMediaHeading;
 	global $sqlSocialMedia;
@@ -338,34 +338,32 @@ function getSocialMediaIcons($shape) {
 	}
 
     if (!empty($rowSocialMedia['facebook'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['google'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['pinterest'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['twitter'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['instagram'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['youtube'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['tumblr'])) {
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-inverse-socialmedia'></i></span></a></li>";
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
-
-    //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
 }
 
 function getCustomers() {

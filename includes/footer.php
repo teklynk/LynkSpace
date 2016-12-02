@@ -17,14 +17,6 @@ if(!defined('inc_access')) {
 
                 </div>
 
-                <?php
-                echo "<div class='row' id='socialmedia'>";
-                echo "<div class='col-md-12'>";
-                    include 'socialmedia_inc.php';
-                echo "</div>";
-                echo "</div>";
-                ?>
-
             </div>
         </footer>
         <div id="belowfooter">
@@ -45,6 +37,9 @@ if(!defined('inc_access')) {
         interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
     })
     </script>
+
+    <!-- Google Translate -->
+    <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>

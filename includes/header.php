@@ -31,9 +31,9 @@ if(!defined('inc_access')) {
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/modern-business.css">
 
-    <!-- Custom Override CSS Template - Stored in config.php-->
+    <!-- CSS Template -->
     <?php
-
+    //Custom Template in config.php
     echo $customCss;
 
     if (!empty($googleAnalytics)) {
@@ -51,6 +51,7 @@ if(!defined('inc_access')) {
             })();
 
         </script>
+
     <?php
     }
     ?>
@@ -71,8 +72,9 @@ if(!defined('inc_access')) {
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                <i class="fa fa-bars" aria-hidden="true"></i>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                <i class="fa fa-bars fa-2x cps-blue"></i>
+                <span class="cps-blue toggbutton">MENU</span>
             </button>
             <a href="index.php"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /></a>
         </div>
@@ -82,6 +84,18 @@ if(!defined('inc_access')) {
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Top','true','left');
             ?>
+            <div id="socialDiv" class="socialDiv pull-right" style="min-width:300px;">
+                <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
+                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
+                <script type="text/javascript">
+                    function googleTranslateElementInit() {
+                        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+                    }
+                </script>
+                <!--End Google Translate Code -->
+                <?php include 'socialmedia_inc.php'; ?>
+            </div>
+            <div style="clear:both;"></div>
         </div>
         <!-- /.navbar-collapse -->
     </div>
