@@ -68,7 +68,7 @@ if(!defined('inc_access')) {
 <body>
 
 <!-- Navigation -->
-<nav class="navbar cpsNavBar" id='top' role="navigation">
+<nav class="navbar navbar-static-top" id='top' role="navigation" style="margin-bottom: 0;">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -76,10 +76,10 @@ if(!defined('inc_access')) {
                 <i class="fa fa-bars fa-2x cps-blue"></i>
                 <span class="cps-blue toggbutton">MENU</span>
             </button>
-            <a href="index.php"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /></a>
+            <a href="index.php" class="navbar-brand"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0" /></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse navTabs" id="navbar-collapse-1">
+        <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
             <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Top','true','left');

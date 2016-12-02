@@ -238,7 +238,7 @@ function getTeam() {
 function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
 	global $db_conn;
-	echo "<ul class='nav navbar-nav navbar-$pull'>";
+	echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
 	if ($dropdown=="true"){
 		$dropdownToggle = "dropdown-toggle";
 		$dataToggle = "dropdown";
@@ -565,7 +565,7 @@ function getFeatured() {
 	}
 
 	if (!empty($rowFeatured['image'])) {
-		$featuredImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowFeatured['image']."' alt='".$rowFeatured['image']."' title='".$rowFeatured['image']."'>";
+		$featuredImage = "<img class='img-landing hidden-xs' src='uploads/".$_GET['loc_id']."/".$rowFeatured['image']."' alt='".$rowFeatured['image']."' title='".$rowFeatured['image']."'>";
 	}
 
 	$featuredImageAlign = $rowFeatured['image_align'];
