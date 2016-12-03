@@ -2,12 +2,16 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
-
+echo "<div class='grad-orange container-fluid'>";
+echo "<div class='container bannerwrapper'>";
+include 'includes/searchpac_inc.php';
+echo "</div>";
+echo "</div>";
 ?>
     <div class="container row_pad" id="contact">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header contact"><?php echo $contactHeading; ?></h2>
+                <h1 class="contact"><?php echo $contactHeading; ?></h1>
             </div>
         </div>
         <div class="row">
@@ -94,5 +98,7 @@ include 'includes/header.php';
 
         </div>
 <?php
+//.container -->
+echo "</div>";
     include 'includes/footer.php';
 ?>

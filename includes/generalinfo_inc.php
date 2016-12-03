@@ -11,7 +11,7 @@ if(!defined('inc_access')) {
 		
 		if (!empty($generalInfoHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h3 class='page-header generalinfo'>".$generalInfoHeading."</h3>";
+			echo "<h1 class='generalinfo'>".$generalInfoHeading."</h1>";
 			echo "</div>";
 		}
 		

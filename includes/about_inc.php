@@ -10,7 +10,7 @@ getAbout();
 	
 	if (!empty($aboutTitle)) {
 		echo "<div class='col-lg-12'>";
-		echo "<h3 class='page-header about'>".$aboutTitle."</h3>";
+		echo "<h1 class='about'>".$aboutTitle."</h1>";
 		echo "</div>";
 	}
 

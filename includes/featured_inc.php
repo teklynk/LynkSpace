@@ -58,6 +58,8 @@ if(!defined('inc_access')) {
 		}
 
 		echo "<div>".$featuredContent."</div>";
+
+        echo "</div>"; //col-xs-12 col-sm-12
 	}
 	
 	echo "</div>"; // .row

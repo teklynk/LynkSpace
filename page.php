@@ -3,13 +3,19 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	echo "<div class='container'>"; //closed in footer
+    echo "<div class='grad-orange container-fluid'>";
+    echo "<div class='container bannerwrapper'>";
+        include 'includes/searchpac_inc.php';
+    echo "</div>";
+    echo "</div>";
+
+	echo "<div class='container'>";
 	echo "<div class='row row_pad' id='page'>";
 
 		getPage();
 
 		echo "<div class='col-lg-12'>";
-	    echo "<h2 class='page-header page'>".$pageTitle."</h2>";
+	    echo "<h1 class='page'>".$pageTitle."</h1>";
 	    echo "</div>";
 
 	    if ($pageImage>"") {
@@ -35,11 +41,14 @@ include 'includes/header.php';
 		    echo $pageContent;
 		    echo "</div>";
 		}
-		
-		//include 'includes/disqus_inc.php';
 
 	echo "</div>";
-	//container is closed in footer
+
+echo "</div>";
+
+echo "<div class='container bannerwrapper'>";
+    include 'includes/customers_inc.php';
+echo "</div>";
 
 include 'includes/footer.php';
 ?>

@@ -23,6 +23,5 @@ define('inc_access', TRUE);
     echo "</div>";
     echo "</div>";
 
-
 	include 'includes/footer.php';
 ?>

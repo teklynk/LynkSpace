@@ -7,22 +7,20 @@ if(!defined('inc_access')) {
 getServices();
 
     if ($servicesNumRows > 0) {
-		
-		
+
         echo "<div class='row' id='services'>";
 		
 		if (!empty($servicesHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h3 class='page-header services'>".$servicesHeading."</h3>";
+			echo "<h1 class='services'>".$servicesHeading."</h1>";
 			echo "</div>";
 		}
         
         if (!empty($servicesBlurb)) {
             echo "<div class='col-lg-12'>";
-            echo "<p class='text-center'>".$servicesBlurb."</p>";
+            echo "<h3>".$servicesBlurb."</h3>";
             echo "</div>";
         }
-        
 
         while ($rowServices = mysqli_fetch_array($sqlServices)) {
 
@@ -48,10 +46,11 @@ getServices();
 
             echo "</span>";
             echo "</div>";
+
             echo "<div class='panel-body'>";
 
             if (!empty($rowServices['title'])) {
-                echo "<h4>".$rowServices['title']."</h4>";
+                echo "<h1>".$rowServices['title']."</h1>";
             }
             
             if (!empty($rowServices['content'])) {
@@ -63,9 +62,11 @@ getServices();
             }
 
             echo "</div>";
+
             echo "</div>";
             echo "</div>";
         }
+        echo "</div>";
         echo "</div>";
     }
 ?>

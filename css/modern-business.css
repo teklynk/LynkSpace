@@ -140,5 +140,6 @@ footer {
 }
 
 .row_pad {
-    margin-top: 20px;
+    margin-top: 0px;
+    padding: 0px 15px 0px 15px;
 }

@@ -3,9 +3,6 @@ if(!defined('inc_access')) {
    die('Direct access not permitted');
 }
 ?>
-    <!-- /.container -->
-    </div>
-
         <!-- Footer -->
         <footer>
             <div class="container">
