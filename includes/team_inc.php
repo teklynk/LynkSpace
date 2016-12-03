@@ -12,13 +12,13 @@ getTeam();
 		
 		if (!empty($teamHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h3 class='page-header team'>".$teamHeading."</h3>";
+			echo "<h1 class='team'>".$teamHeading."</h1>";
 			echo "</div>";
 		}
 
         if (!empty($teamBlurb)) {
             echo "<div class='col-lg-12'>";
-            echo "<p class='text-center'>".$teamBlurb."</p>";
+            echo "<h3>".$teamBlurb."</h3>";
             echo "</div>";
         }
 
