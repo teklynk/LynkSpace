@@ -133,6 +133,22 @@ footer a:hover {
 	/*padding-top:15px;*/
 }
 
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.navbar-Search>li>a {color: #fff;}
+
+.navbar-Search>li>a:focus, .navbar-Search>li>a:hover {background: transparent; color: #008eaa;}
+
+.navbar-Footer>li>a:focus, .navbar-Footer>li>a:hover {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav-Footer>.cat-Footer {font-size: 2.0em;}
+
 .navbar-Top>li {padding-right: 25px }
 
 .navbar-Top>li>a {

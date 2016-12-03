@@ -22,10 +22,12 @@ if (!defined('inc_access')) {
                                 </button>
                             </span>
                         </div>
+                        <div class="input-group col-md-12 text-center">
                         <?php
                         //EXAMPLE: getNav($navSection,$dropdown,$pull)
-                        getNav('Footer','true','left');
+                        getNav('Search','true','left');
                         ?>
+                        </div>
                     </div>
                 </div>
             </div>

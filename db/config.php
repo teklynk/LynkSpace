@@ -26,7 +26,7 @@ if ($customCss_url != "") {
 }
 
 //Navigation options for front-end template
-$navSections = array("Top", "Footer");
+$navSections = array("Top", "Footer" , "Search");
 
 //Google Analytics
 $googleAnalytics = '';
