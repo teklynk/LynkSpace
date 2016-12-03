@@ -1,25 +1,7 @@
-*dbconn.php
-
-*config.php
-
-*.old
-
-uploads/*
-
-screenshots/*
-
 *.DS_Store
 
 .idea
 
-*.iml
-
 .svn
 
 .git
-
-*.asp
-
-*.xml
-
-*.txt

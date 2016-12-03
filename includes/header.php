@@ -31,6 +31,8 @@ if(!defined('inc_access')) {
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/modern-business.css">
 
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+
     <!-- CSS Template -->
     <?php
     //Custom Template in config.php
@@ -55,6 +57,12 @@ if(!defined('inc_access')) {
     <?php
     }
     ?>
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- jQueryUI.js AutoComplete -->
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

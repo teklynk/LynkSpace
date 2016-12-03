@@ -23,6 +23,17 @@ function getLocation() {
 	}
 }
 
+function getLocList() {
+    global $locationListJson;
+    global $db_conn;
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
+    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
+        $locationListJson = $locationListJson . "'".$rowLocationSearch['name']."',";
+        //echo $locationListJson;
+    }
+}
+
 function getPage() {
 	global $pageImage;
 	global $pageTitle;

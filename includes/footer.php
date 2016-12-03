@@ -22,11 +22,10 @@ if(!defined('inc_access')) {
             </div>
         </div>
 
-    <!-- jQuery CDN -->
-    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
     <!-- template js file-->
     <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
     <!-- Script to Activate the Carousel -->
