@@ -2,30 +2,33 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
-echo "<div class='grad-orange container-fluid'>";
-echo "<div class='container bannerwrapper'>";
-    if ($_GET['loc_id'] == 1) {
-        include 'includes/searchlocations_inc.php';
-    } else {
-        include 'includes/searchpac_inc.php';
-    }
-echo "</div>";
-echo "</div>";
+
+    echo "<div class='grad-orange container-fluid'>";
+    echo "<div class='container bannerwrapper'>";
+        if ($_GET['loc_id'] == 1) {
+            include 'includes/searchlocations_inc.php';
+        } else {
+            include 'includes/searchpac_inc.php';
+        }
+    echo "</div>";
+    echo "</div>";
 ?>
-    <div class="container row_pad" id="contact">
-        <div class="row">
+    <div class="container" id="contact">
+
+        <div class="row row_pad">
             <div class="col-lg-12">
                 <h1 class="contact"><?php echo $contactHeading; ?></h1>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row row_pad">
             <div class="col-lg-12">
                 <h3><?php echo $contactBlurb; ?></h3><br/>
             </div>
         </div>
             
         <?php
-        echo "<div class='row'>";
+        echo "<div class='row row_pad'>";
 
         //Embedded Google Map -->
         if (!empty($contactMap)) {
@@ -59,7 +62,7 @@ echo "</div>";
         ?>
 
         <!-- Contact Form -->
-        <div class="row">
+        <div class="row row_pad">
             <div class="col-md-8">
                 <h3>Send us a Message</h3>
                 <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php">
@@ -97,10 +100,9 @@ echo "</div>";
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
-
         </div>
+        <!--.container-->
+    </div>
 <?php
-//.container -->
-echo "</div>";
     include 'includes/footer.php';
 ?>

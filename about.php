@@ -2,6 +2,7 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
+
     echo "<div class='grad-orange container-fluid'>";
     echo "<div class='container bannerwrapper'>";
         if ($_GET['loc_id'] == 1) {
