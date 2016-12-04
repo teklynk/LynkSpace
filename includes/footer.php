@@ -35,6 +35,15 @@ if(!defined('inc_access')) {
     })
     </script>
 
+    <!-- TLC search variables -->
+    <script type="text/javascript" language="javascript">
+        var TLCDomain = "<?php echo $setupPACURL ?>";
+        var TLCConfig = "<?php echo $setupConfig ?>";
+        var TLCBranch = "";
+        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig ?>";
+    </script>
+
     <!-- Google Translate -->
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 

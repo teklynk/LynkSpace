@@ -3,21 +3,12 @@
 if (!defined('inc_access')) {
    die('Direct access not permitted');
 }
-	getSetup(); //gets search pac options for the loc_id
 		
 	echo "<div class='row' id='searchpac'>";
 
 		echo "<div class='col-lg-12'>";
 
 ?>
-
-    <script type="text/javascript">
-        var TLCDomain = "<?php echo $setupPACURL ?>";
-        var TLCConfig = "<?php echo $setupConfig ?>";
-        var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig ?>";
-    </script>
 
     <div class="container">
         <div class="row">
