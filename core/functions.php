@@ -607,7 +607,7 @@ if (is_numeric($_GET['page_id'])>"") {
     $theTitle = $setupTitle;
 }
 
-//redirect to default location if loc_id not defined
+//redirect to default location if loc_id or script name not defined
 if (empty($_GET['loc_id'])) {
 
     if (basename($_SERVER['PHP_SELF']) == "") {

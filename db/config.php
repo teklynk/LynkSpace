@@ -7,6 +7,9 @@ include 'dbconn.php';
 //example: "127.0.0."
 $IPrange = "";
 
+//LS2PAC Server Domain or IP
+$setupPACURL = "https://pac.library.cps.edu";
+
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/".$_GET['loc_id']."/"; //physical path to uploads folder
 $image_url = "//".$_SERVER['HTTP_HOST']."/businessCMS/uploads/".$_GET['loc_id']."/"; //web path to uploads folder

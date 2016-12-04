@@ -3,30 +3,34 @@
 if (!defined('inc_access')) {
    die('Direct access not permitted');
 }
-	getSetup(); //gets search pac options for the loc_id
+    getLocList();
 		
-	echo "<div class='row' id='searchpac'>";
+	echo "<div class='row' id='searchlocations'>";
 
 		echo "<div class='col-lg-12'>";
 
 ?>
-
-    <script type="text/javascript">
-        var TLCDomain = "<?php echo $setupPACURL ?>";
-        var TLCConfig = "<?php echo $setupConfig ?>";
-        var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig ?>";
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+        //jQueryUI AutoComplete
+        $(function() {
+            var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
+            $("#loc_name").autocomplete({
+                source: availableTags
+            });
+        });
+    });
     </script>
 
     <div class="container">
         <div class="row">
-            <h1 class="text-white">Search the Catalog</h1>
-            <form name="pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', false);">
+            <h1 class="text-white">Search Schools</h1>
+            <form name="locSearchForm" action="" method="get">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
 
-                    <input type="text" class="form-control" name="term" placeholder="Search" />
+                    <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" />
+                    <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id'];?>" />
                     <span class="input-group-btn">
                         <button class="btn btn-danger" type="submit">
                             <span class="glyphicon glyphicon-search"></span>
