@@ -21,16 +21,17 @@
 
     <title><?php echo $theTitle;?></title>
 
-    <!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS CDN -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <!-- Custom Fonts -->
+    <!-- Custom Fonts CDN -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- JQueryUI CSS CDN -->
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
 
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/modern-business.css">
-
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
 
     <!-- CSS Template -->
     <?php
@@ -59,10 +60,10 @@
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 
-    <!-- jQueryUI.js AutoComplete -->
+    <!-- jQuery UI AutoComplete CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
-    <!-- LS2PAC search code CDN -->
+    <!-- TLC LS2PAC search script CDN -->
     <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
