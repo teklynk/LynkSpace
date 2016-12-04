@@ -139,7 +139,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidatePattern ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -174,7 +174,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo $emailValidatePattern ?>" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">

@@ -312,7 +312,7 @@ if ($_GET['preview']>"") {
 					echo $pageMsg;
 				}
 			?>
-			<form role="pageForm" method="post" action="">
+			<form name="pageForm" method="post" action="">
             <div class="form-group">
                 <label>Heading</label>
                 <input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>

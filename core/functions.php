@@ -25,12 +25,13 @@ function getLocation() {
 
 function getLocList() {
     global $locationListJson;
+    global $locationIDListJson;
     global $db_conn;
 
     $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
         $locationListJson = $locationListJson . "'".$rowLocationSearch['name']."',";
-        //echo $locationListJson;
+        $locationIDListJson = $locationIDListJson . "'".$rowLocationSearch['id']."',";
     }
 }
 
@@ -616,5 +617,14 @@ if (empty($_GET['loc_id'])) {
     }
 
     header('Location: '.$pageRedirect);
+}
+
+//School search box redirect to loc_id where name = querystring loc_name
+if (!empty($_GET['loc_name'])) {
+
+        $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='".$_GET['loc_name']."' LIMIT 1");
+        $rowLocName = mysqli_fetch_array($sqlLocName);
+
+        header('Location: '.basename($_SERVER['PHP_SELF']).'?loc_id='.$rowLocName['id']);
 }
 ?>

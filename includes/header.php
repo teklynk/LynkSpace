@@ -1,17 +1,16 @@
-<?php
-if(!defined('inc_access')) {
-   die('Direct access not permitted');
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
     <?php
-      include 'db/config.php'; //contains DB connection string and global variables
-      include 'core/functions.php'; //contains functions used on every front-end template
+        if(!defined('inc_access')) {
+            die('Direct access not permitted');
+        }
 
-      getLocation();
+        include 'db/config.php'; //contains DB connection string and global variables
+        include 'core/functions.php'; //contains functions used on every front-end template
+
+        getLocation();
     ?>
     <meta http-equiv="refresh" content="3600;URL='index.php?loc_id=<?php echo $_GET['loc_id'];?>'">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,13 +52,13 @@ if(!defined('inc_access')) {
             })();
 
         </script>
-
     <?php
     }
     ?>
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
     <!-- jQueryUI.js AutoComplete -->
     <script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 

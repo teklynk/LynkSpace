@@ -25,9 +25,9 @@ if(!defined('inc_access')) {
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-
     <!-- template js file-->
     <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
+
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript" language="javascript">
     $('.carousel').carousel({
@@ -37,6 +37,7 @@ if(!defined('inc_access')) {
 
     <!-- Google Translate -->
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!--scroll to top-->
     <a href="#" class="scrollToTop">Scroll To Top</a>
 </body>

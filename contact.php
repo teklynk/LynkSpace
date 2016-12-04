@@ -50,8 +50,6 @@ echo "</div>";
             echo "&nbsp;<abbr title='Hours'>H</abbr>:&nbsp;".$contactHours."</p>";
         }
 
-        //include 'includes/socialmedia_inc.php';
-
         echo "</div>";
         echo "</div>";
         ?>

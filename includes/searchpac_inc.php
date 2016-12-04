@@ -16,7 +16,7 @@ if (!defined('inc_access')) {
         //jQueryUI AutoComplete
         $(function() {
             var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
-            $("#tags").autocomplete({
+            $("#loc_name").autocomplete({
                 source: availableTags
             });
         });
@@ -26,14 +26,18 @@ if (!defined('inc_access')) {
     <div class="container">
         <div class="row">
             <h1 class="text-white">Search Schools</h1>
+            <form name="locSearchForm" action="" method="get">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="form-control" id="tags" placeholder="Search" />
+
+                    <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" />
+                    <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id'];?>" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button">
+                        <button class="btn btn-danger" type="submit">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
+
                 </div>
                 <div class="input-group col-md-12 text-center">
                 <?php
@@ -42,6 +46,7 @@ if (!defined('inc_access')) {
                 ?>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 <?php
