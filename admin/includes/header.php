@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
 <?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');
@@ -9,12 +13,6 @@ session_start();
 //Get the page/file name and set it as a variable. Can be used for Ajax calls or page headers.
 $_SESSION['file_referer'] = basename($_SERVER['PHP_SELF']);
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<?php
 //DB connection string and Global variables
 include '../db/config.php';
 //Admin panel functions
