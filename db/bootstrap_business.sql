@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2016 at 11:54 AM
+-- Generation Time: Dec 05, 2016 at 09:53 AM
 -- Server version: 5.5.52-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -41,9 +41,7 @@ CREATE TABLE `aboutus` (
 
 INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `loc_id`) VALUES
 (1, 'About Us', '<p>Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum. In cotidieque adversarium vis, timeam sanctus alienum ad vim, nonumy vituperatoribus ei sea. No eam essent platonem, illud splendide an mel, ea mentitum officiis scripserit ius. Harum primis per in, duo cu ancillae disputationi, te pri causae tritani torquatos. Liber doming iracundia et his. An eros brute solet mei, abhorreant omittantur per te. Vim an labitur probatus, ea ius fugit omnesque aliquando.</p>\r\n<p>Inani singulis efficiantur ut mel, et regione repudiare ius. Et cibo commodo signiferumque cum. Tibique singulis nam id, aliquid mediocrem definitiones nam ne. Erant incorrupte eu nec, ex modus aperiri forensibus nam, eu ius bonorum adipisci theophrastus. Soleat animal liberavisse id eos, illum intellegam te est. Per velit ludus ne, diceret recusabo voluptaria usu et. Eu mea prodesset scriptorem.</p>', 'Ubuntu-Mate-Radioactive-no-logo.png', 'left', 1),
-(2, 'test 2', '<p>test 2</p>', 'space-desktop-backgrounds.jpg', 'right', 2),
-(3, 'test 3', '<p>test 3 test 3</p>', 'Professional-Services-Banner.jpg', 'right', 3),
-(7, 'test 4', '<p>test 4</p>', 'bmgates-c.gif', 'right', 4);
+(2, 'test 2', '<p>test 2</p>', 'MapBackground2.png', 'right', 2);
 
 -- --------------------------------------------------------
 
@@ -94,7 +92,7 @@ CREATE TABLE `contactus` (
 
 INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `loc_id`) VALUES
 (1, 'Contact Us', 'The White House', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryanjones153@gmail.com', 'ryanjones153@gmail.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5', 1),
-(2, 'Contact 2', '', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryan@email.com', '', '', '', '', '', '', '', 2);
+(2, 'Contact 2', 'Contact Us', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryan@email.com', 'ryan@email.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5 M-F, 9-3 Sat', 2);
 
 -- --------------------------------------------------------
 
@@ -121,7 +119,12 @@ INSERT INTO `customers` (`id`, `image`, `name`, `link`, `active`, `datetime`, `l
 (5, 'webide.png', 'DISA', 'http://www.disa.gov', 'true', '2016-11-15 21:59:45', 1),
 (6, 'webide.png', 'Bill and Melinda Gate Foundation', 'http://www.billgates.gov', 'true', '2016-11-15 21:59:57', 1),
 (7, 'webide.png', 'CFPB', 'http://www.cfpb.gov', 'true', '2016-11-15 21:59:34', 1),
-(8, '', 'Cal OES', 'http://www.darpa.gov', 'true', '2016-11-18 13:50:48', 1);
+(8, 'webide.png', 'Cal OES', 'http://www.darpa.gov', 'true', '2016-11-29 14:49:45', 1),
+(9, 'webide.png', 'Darpa', 'http://www.darpa.gov', 'true', '2016-11-15 22:00:19', 2),
+(10, 'webide.png', 'DISA', 'http://www.disa.gov', 'true', '2016-11-15 21:59:45', 2),
+(11, 'webide.png', 'Bill and Melinda Gate Foundation', 'http://www.billgates.gov', 'true', '2016-11-15 21:59:57', 2),
+(12, 'webide.png', 'CFPB', 'http://www.cfpb.gov', 'true', '2016-11-15 21:59:34', 2),
+(13, 'webide.png', 'Cal OES', 'http://www.darpa.gov', 'true', '2016-11-29 14:49:45', 2);
 
 -- --------------------------------------------------------
 
@@ -144,8 +147,8 @@ CREATE TABLE `featured` (
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `loc_id`) VALUES
-(1, 'Featured', '', '<p>Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum. In cotidieque adversarium vis, timeam sanctus alienum ad vim, nonumy vituperatoribus ei sea. No eam essent platonem, illud splendide an mel, ea mentitum officiis scripserit ius. Harum primis per in, duo cu ancillae disputationi, te pri causae tritani torquatos. Liber doming iracundia et his. An eros brute solet mei, abhorreant omittantur per te. Vim an labitur probatus, ea ius fugit omnesque aliquando.</p>\r\n<p>Inani singulis efficiantur ut mel, et regione repudiare ius. Et cibo commodo signiferumque cum. Tibique singulis nam id, aliquid mediocrem definitiones nam ne. Erant incorrupte eu nec, ex modus aperiri forensibus nam, eu ius bonorum adipisci theophrastus. Soleat animal liberavisse id eos, illum intellegam te est. Per velit ludus ne, diceret recusabo voluptaria usu et. Eu mea prodesset scriptorem.</p>', 'Ubuntu-Mate-Radioactive-no-logo.png', 'right', 1),
-(2, 'featured two', '', '', 'space-desktop-backgrounds.jpg', 'left', 2);
+(1, 'Seeking Online Access to Resources', '', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', 'HSWorkingGroup.png', 'right', 1),
+(2, 'featured two', '', '', 'HSWorkingGroup.png', 'right', 2);
 
 -- --------------------------------------------------------
 
@@ -218,13 +221,11 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 (50, 2, 'Services', 'services.php?loc_id=1', 0, 'Footer', 'false', 1),
 (51, 3, 'About', 'about.php?loc_id=1', 0, 'Footer', 'false', 1),
 (52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1),
-(53, 6, 'Test', '#', 0, 'Top', 'false', 1),
 (54, 7, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1),
-(55, 8, 'Test location 4', 'page.php?page_id=36&loc_id=1', 0, 'Top', 'true', 1),
 (56, 9, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'true', 1),
 (57, 1, 'Test Link', '#', 0, 'Top', 'true', 2),
 (58, 2, 'Test location 2', 'page.php?page_id=35&loc_id=2', 0, 'Top', 'true', 2),
-(59, 4, 'Test Link', '#', 0, 'Top', 'off', 1);
+(59, 0, 'Contact', 'contact.php?loc_id=2', 0, 'Top', 'off', 2);
 
 -- --------------------------------------------------------
 
@@ -286,7 +287,11 @@ INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `acti
 (2, 'address-card', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-11-14 22:04:13', 1),
 (3, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', 1),
 (4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:43:58', 1),
-(5, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-11-22 19:33:11', 1);
+(5, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-11-29 14:49:35', 1),
+(6, 'address-card', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-11-14 22:04:13', 2),
+(7, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', 2),
+(8, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:43:58', 2),
+(9, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-11-29 14:49:35', 2);
 
 -- --------------------------------------------------------
 
@@ -420,7 +425,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `logo`, `ls2pac`, `ls2kids`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `databasesheading`, `servicescontent`, `customerscontent`, `databasescontent`, `teamcontent`, `disqus`, `loc_id`) VALUES
-(1, 'My Site', '', '', '', '123', 'Ubuntu-Mate-Radioactive-no-logo.png', 'true', 'true', 'John Doe', '', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Customers', 'Databases', 'Our areas of expertise.', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '', 1),
+(1, 'My Site', '', '', '', '123', 'webide.png', 'true', 'true', 'John Doe', '', 1, 'Pages', 'Services', 'Image Slider', 'Meet the Team', 'Resources', 'Databases', 'Our areas of expertise.', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum', 'Through its collective experience, the team drives innovation to deliver customers a significant return on investment paired with successful engagements.', '', 1),
 (2, 'test two 2222', '', '', '', '555', '', 'true', 'true', '', '', 1, '', '', '', '', '', '', '', '', '', '', '', 2);
 
 -- --------------------------------------------------------
@@ -446,9 +451,9 @@ CREATE TABLE `slider` (
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`, `loc_id`) VALUES
 (3, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne', '28', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne.', 'true', '2016-11-15 21:54:19', 1),
-(4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '28', 'Inani singulis efficiantur ut mel, et regione repudiare ius', 'true', '2016-11-18 14:57:27', 1),
-(5, 'insider.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-11-22 19:20:38', 2),
-(6, 'space-desktop-backgrounds.jpg', 'Know your schools, detect threats sooner and respond faster', '', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-11-22 19:20:37', 2),
+(4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '28', 'dgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdf', 'true', '2016-11-28 22:10:42', 1),
+(5, 'parallax_6-8_med.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-12-05 14:38:21', 2),
+(6, 'budget2015.jpg', 'Know your schools, detect threats sooner and respond faster', '', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-12-05 14:38:50', 2),
 (7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Vim ea omnes discere molestie.', '34', 'Vim ea omnes discere molestie. Cu vix facilisis efficiendi, vix ne ipsum inermis. Te cum possit voluptua expetendis. Cibo integre virtute ius ut.', 'true', '2016-11-18 14:57:21', 1),
 (8, 'space-desktop-backgrounds.jpg', 'New Slide', '35', 'test slide #1', 'true', '2016-11-22 19:19:48', 2);
 
@@ -476,8 +481,8 @@ CREATE TABLE `socialmedia` (
 --
 
 INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, `google`, `instagram`, `youtube`, `tumblr`, `loc_id`) VALUES
-(1, 'Follow Us', 'http://www.facebook.com', 'http://www.twitter.com', '', 'http://www.google.com', '', '', '', 1),
-(2, 'Follow Us 2', 'http://facebook.com', '', '', '', '', '', '', 2);
+(1, 'Follow Us', 'http://www.facebook.com', 'http://www.twitter.com', '', 'http://www.google.com', 'http://instagram.com', '', '', 1),
+(2, 'Follow Us 2', 'http://facebook.com', '', '', '', '', 'http://www.youtube.com', '', 2);
 
 -- --------------------------------------------------------
 
@@ -501,10 +506,14 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `datetime`, `loc_id`) VALUES
-(3, '', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-18 13:49:24', 1),
+(3, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-29 14:50:11', 1),
 (4, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-11-14 21:59:52', 1),
 (5, 'Ubuntu-Mate-Radioactive-no-logo.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-11-14 21:59:55', 1),
-(7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 1);
+(7, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 1),
+(8, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-29 14:50:11', 2),
+(9, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-11-14 21:59:52', 2),
+(10, 'Ubuntu-Mate-Radioactive-no-logo.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-11-14 21:59:55', 2),
+(11, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 2);
 
 -- --------------------------------------------------------
 
@@ -527,7 +536,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `loc_id`) VALUES
 (1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, 1),
-(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, 2);
+(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, 2),
+(3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -652,7 +662,7 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `featured`
 --
@@ -682,7 +692,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `services_icons`
 --
@@ -707,12 +717,12 @@ ALTER TABLE `socialmedia`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
