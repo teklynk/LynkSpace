@@ -284,6 +284,12 @@ $(document).ready(function () {
 		}
 	);
 
+	$('.searchopt_radio').change (
+		function(){
+			$.get('ajax/update_searchdefault.php?update=true', { value: this.value, checked: this.checked });
+		}
+	);
+
 	$('.page_status_checkbox').change (
 		function(){
 			$.get('ajax/update_pageactive.php?update=true', { id: this.id, checked: this.checked });

@@ -240,7 +240,7 @@ include 'includes/header.php';
 			</fieldset>
 			<hr/>
 			</div>
-			
+
 			<!-- Nav Link Section -->
 			<form name="navForm" method="post" action="">
 				<fieldset>

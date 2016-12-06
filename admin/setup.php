@@ -14,7 +14,7 @@ include 'includes/header.php';
 	$rowLocation = mysqli_fetch_array($sqlLocation);
 
 	//Get setup table columns
-	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, logo, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, searchdefault, logo, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
 	//update table on submit
@@ -83,6 +83,14 @@ include 'includes/header.php';
 			$isActive_ls2kids="CHECKED";
 		} else {
 			$isActive_ls2kids="";
+		}
+
+		if ($rowSetup['searchdefault'] == '1') {
+			$isActive_default1="CHECKED";
+			$isActive_default2="";
+		} elseif ($rowSetup['searchdefault'] == '2') {
+			$isActive_default1="";
+			$isActive_default2="CHECKED";
 		}
 
 		if ($rowSetup['logo']=="") {
@@ -163,7 +171,7 @@ include 'includes/header.php';
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<div class="form-group" id="searchoptions">
 							<label>PAC Search Options</label>
 							<div class="checkbox">
@@ -172,10 +180,23 @@ include 'includes/header.php';
 									LS2PAC
 								</label>
 							</div>
+							<div class="radio">
+								<label>
+									<input class="searchopt_radio" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>
+									Is Default
+								</label>
+							</div>
+							<h1></h1>
 							<div class="checkbox">
 								<label>
 									<input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">
 									LS2Kids
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input class="searchopt_radio" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>
+									Is Default
 								</label>
 							</div>
 						</div>

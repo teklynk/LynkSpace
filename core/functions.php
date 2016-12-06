@@ -316,10 +316,11 @@ function getSetup() {
     global $setupConfig;
     global $setupLs2pac;
     global $setupLs2kids;
+    global $setupSearchDefault;
     global $setupLogo;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup['description'];
@@ -330,6 +331,7 @@ function getSetup() {
     $setupLogo = $rowSetup['logo'];
     $setupLs2pac = $rowSetup['ls2pac'];
     $setupLs2kids = $rowSetup['ls2kids'];
+    $setupSearchDefault = $rowSetup['searchdefault'];
 }
 
 function getSocialMediaIcons($shape, $section) {
