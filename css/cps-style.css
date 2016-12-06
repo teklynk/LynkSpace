@@ -324,6 +324,11 @@ footer a:hover {
 	background-color: #555;
 }
 
+#searchpac .panel {
+	margin-bottom: 0px;
+}
+
+
 /** Media Queries **/
 
 
