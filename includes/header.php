@@ -22,13 +22,13 @@
     <title><?php echo $theTitle;?></title>
 
     <!-- Bootstrap Core CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Custom Fonts CDN -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- JQueryUI CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/modern-business.css">
@@ -57,20 +57,46 @@
     }
     ?>
 
+        
     <!-- jQuery CDN -->
-    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <!-- jQuery UI AutoComplete CDN -->
-    <script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- Google Translate -->
+    <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- TLC LS2PAC search script CDN -->
     <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
 
+    <!-- template js file-->
+    <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script type="text/javascript" language="javascript">
+        $('.carousel').carousel({
+            interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
+        })
+    </script>
+
+    <!-- TLC search variables -->
+    <script type="text/javascript" language="javascript">
+        var TLCDomain = "<?php echo $setupPACURL ?>";
+        var TLCConfig = "<?php echo $setupConfig ?>";
+        var TLCBranch = "";
+        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig ?>";
+    </script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
