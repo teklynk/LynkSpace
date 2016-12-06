@@ -265,6 +265,13 @@ footer a:hover {
 	background-color: #0033a0;
 }
 
+/**Autocomplete UI**/
+.ui-autocomplete {
+	max-height: 200px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
 /** Media Queries **/
 
 

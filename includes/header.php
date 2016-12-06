@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- JQueryUI CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
 
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/modern-business.css">
