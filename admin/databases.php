@@ -63,7 +63,7 @@ include 'includes/header.php';
 				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', image='".$_POST['customer_image']."', link='".$_POST['customer_link']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
-				$customerMsg="<div class='alert alert-success'>The customer ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$customerMsg="<div class='alert alert-success'>The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
