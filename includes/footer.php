@@ -24,6 +24,15 @@ if(!defined('inc_access')) {
 
     <!--scroll to top-->
     <a href="#" class="scrollToTop">Scroll To Top</a>
+
+
+    <!-- Script to Activate the Carousel -->
+    <script type="text/javascript" language="javascript">
+        $('.carousel').carousel({
+            interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
+        })
+    </script>
+
 </body>
 </html>
 <?php

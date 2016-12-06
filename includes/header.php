@@ -57,7 +57,7 @@
     }
     ?>
 
-        
+
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -75,13 +75,6 @@
 
     <!-- template js file-->
     <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script type="text/javascript" language="javascript">
-        $('.carousel').carousel({
-            interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
-        })
-    </script>
 
     <!-- TLC search variables -->
     <script type="text/javascript" language="javascript">
