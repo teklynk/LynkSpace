@@ -50,7 +50,7 @@ if (!defined('inc_access')) {
                         ?>
                         <!-- LS2PACSearch Form -->
                         <div class="tab-pane fade in <?php echo $isDefault1; ?>" id="tab1default">
-                            <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', false);">
+                            <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                 <div id="custom-search-input">
                                     <div class="input-group col-md-12">
                                         <input type="text" class="form-control" name="term" placeholder="LS2PAC" />
@@ -75,7 +75,7 @@ if (!defined('inc_access')) {
                         ?>
                         <!-- LS2Kids Search Form -->
                         <div class="tab-pane fade in <?php echo $isDefault2; ?>" id="tab2default">
-                            <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', false);">
+                            <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                 <div id="custom-search-input">
                                     <div class="input-group col-md-12">
                                         <input type="text" class="form-control" name="term" placeholder="LS2Kids" />
