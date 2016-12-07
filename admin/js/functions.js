@@ -114,14 +114,18 @@ $(document).ready(function () {
 			$('#page_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#featured_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#customer_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
+			$('#service_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#team_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#about_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			$('#slide_image_preview').attr('src', 'http://placehold.it/350x150&text=No Image');
 
 			$('#service_image_select').val('');
 			$('#service_icon_select').val('');
-			$('#service_image_preview').attr('src', '');
 			$('#service_icon').attr('class', '');
+
+			$('#customer_image_select').val('');
+			$('#customer_icon_select').val('');
+			$('#customer_icon').attr('class', '');
 
 			$('#nav_newname').attr('value', '');
 			$('#nav_newurl').attr('value', '');
@@ -231,6 +235,36 @@ $(document).ready(function () {
 	    }
 	);
 
+	$('#customer_icon_select').change (
+		function () {
+			if ($('#customer_icon_select').val()=='') {
+				$('#customer_icon').attr('class', '');
+				$('#customer_image_preview').attr('src', '');
+				$('#customer_image_preview').css('display', 'none');
+			} else {
+				$('#customer_image_select').val(''); //Sets image select value to None
+				$('#customer_icon').attr('class', 'fa fa-fw fa-'+$('#customer_icon_select').val());
+				$('#customer_image_preview').attr('src', '');
+				$('#customer_image_preview').css('display', 'none');
+			}
+		}
+	);
+
+	$('#customer_image_select').change (
+		function () {
+			if ($('#customer_image_select').val()=='') {
+				$('#customer_image_preview').attr('src', '');
+				$('#customer_image_preview').css('display', 'none');
+				$('#customer_icon').attr('class', 'fa fa-fw fa-'+$('#customer_icon_select').val());
+			} else {
+				$('#customer_icon_select').val(''); //Sets icon select value to None
+				$('#customer_image_preview').attr('src', '../uploads/'+getUrlVars()['loc_id']+'/'+$('#customer_image_select').val());
+				$('#customer_image_preview').css('display', 'block');
+				$('#customer_icon').attr('class', '');
+			}
+		}
+	);
+
 	$('#featured_image').change (
 	    function () {
 			if ($('#featured_image').val()=='') {
@@ -247,16 +281,6 @@ $(document).ready(function () {
 				$('#about_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
 			} else {
 				$('#about_image_preview').attr('src', '../uploads/'+getUrlVars()['loc_id']+'/'+$('#about_image').val());
-			}
-	    }
-	);
-
-	$('#customer_image').change (
-	    function () {
-			if ($('#customer_image').val()=='') {
-				$('#customer_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
-			} else {
-				$('#customer_image_preview').attr('src', '../uploads/'+getUrlVars()['loc_id']+'/'+$('#customer_image').val());
 			}
 	    }
 	);

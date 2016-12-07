@@ -388,6 +388,7 @@ function getCustomers() {
 	global $customerHeading;
 	global $customerBlurb;
 	global $customerNumRows;
+    global $customerIcon;
 	global $customerColWidth;
 	global $db_conn;
 
@@ -402,7 +403,7 @@ function getCustomers() {
         $customerBlurb = $rowCustomerHeading['customerscontent'];
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, content, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, icon, name, link, content, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     if ($customerNumRows==2) {

@@ -34,10 +34,13 @@ if(!defined('inc_access')) {
             echo "<span class='media-object pull-left'>";
             echo "<span class='fa-stack fa-2x'>";
 
+            if (!empty($rowCustomers['icon'])) {
+                echo "<i class='fa fa-circle fa-stack-2x'></i>";
+                echo "<i class='fa fa-".$rowCustomers['icon']." fa-stack-1x fa-inverse' title='".$rowCustomers['name']."'></i>";
+            }
+
             if (!empty($rowCustomers['image'])) {
-                echo "<img class='img-responsive customer-img' src='uploads/" . $_GET['loc_id'] . "/" . $rowCustomers['image'] . "' alt='" . $rowCustomers['name'] . "' title='" . $rowCustomers['name'] . "'>";
-            } else {
-                echo "<img class='img-responsive customer-img' src='http://placehold.it/150x150'>";
+                echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowServices['name']."'>";
             }
 
             echo "</span>";

@@ -6,7 +6,7 @@ include 'includes/header.php';
 	//Page preview
 	if ($_GET['preview']>""){
 		$pagePreviewId=$_GET['preview'];
-		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, image, name, link, content FROM customers WHERE id='$pagePreviewId'");
+		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content FROM customers WHERE id='$pagePreviewId'");
 		$rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview);
 
 			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
@@ -53,7 +53,7 @@ include 'includes/header.php';
 		//Update existing customer
 		if ($_GET['editcustomer']) {
 			$thecustomerId = $_GET['editcustomer'];
-			$customerLabel = "Edit Customer Name";
+			$customerLabel = "Edit Database Name";
 
 			//update data on submit
 			if (!empty($_POST['customer_name'])) {
@@ -64,23 +64,23 @@ include 'includes/header.php';
 					$_POST['customer_status']='false';
 				}
 
-				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', image='".$_POST['customer_image']."', link='".$_POST['customer_link']."', content='".$_POST['customer_content']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
+				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".$_POST['customer_link']."', content='".$_POST['customer_content']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
 				$customerMsg="<div class='alert alert-success'>The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
+			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
 			$rowCustomer = mysqli_fetch_array($sqlCustomer);
 
 		//Create new customer
 		} else if ($_GET['newcustomer']) {
 
-			$customerLabel = "New Customer Name";
+			$customerLabel = "New Database Name";
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (image, name, link, content, active, loc_id) VALUES ('".$_POST['customer_image']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -125,12 +125,48 @@ include 'includes/header.php';
 		</div>
 
         <hr/>
-        <div class="form-group">
-        	<img src="<?php echo $thumbNail;?>" id="customer_image_preview" style="max-width:140px; height:auto;"/>
-        </div>
+		<div class="form-group">
+			<label><?php echo $customerLabel;?></label>
+			<input class="form-control input-sm count-text" name="customer_name" maxlength="255" value="<?php if($_GET['editcustomer']){echo $rowCustomer['name'];} ?>" placeholder="Database Name">
+		</div>
+		<hr/>
+		<div class="form-group">
+			<i id="customer_icon" style="font-size:6.0em;" class="fa fa-fw fa-<?php echo $rowCustomer['icon']; ?>"></i>
+		</div>
+		<div class="form-group">
+			<?php
+
+			if ($rowCustomer['image']=="") {
+				$imgSrc = "http://placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+			} else {
+				$imgSrc = "../uploads/".$_GET['loc_id']."/".$rowCustomer['image'];
+			}
+
+			echo "<img src='".$imgSrc."' id='customer_image_preview' style='max-width:140px; height:auto; display:block;'/>";
+			?>
+		</div>
+		<div class="form-group">
+			<label>Choose an icon</label>
+			<select class="form-control input-sm" name="customer_icon_select" id="customer_icon_select">
+				<option value="">None</option>
+				<?php
+
+				$sqlCustomerIcon = mysqli_query($db_conn, "SELECT icon FROM services_icons ORDER BY icon ASC");
+				while ($rowIcon = mysqli_fetch_array($sqlCustomerIcon)) {
+					$icon=$rowIcon['icon'];
+					if ($icon===$rowCustomer['icon']) {
+						$iconCheck="SELECTED";
+					} else {
+						$iconCheck="";
+					}
+					echo "<option value=".$icon." ".$iconCheck.">".$icon."</option>";
+				}
+				?>
+			</select>
+		</div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control input-sm" name="customer_image" id="customer_image">
+			<select class="form-control input-sm" name="customer_image_select" id="customer_image_select">
 				<option value="">None</option>
 				<?php
 					if ($handle = opendir($target_dir)) {
@@ -156,13 +192,10 @@ include 'includes/header.php';
 		</div>
 		<hr/>
 		<div class="form-group">
-			<label>Name</label>
-			<input class="form-control input-sm" name="customer_name" value="<?php if($_GET['editcustomer']){echo $rowCustomer['name'];} ?>" placeholder="Name">
-		</div>
-		<div class="form-group">
 			<label>Link</label>
 			<input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if($_GET['editcustomer']){echo $rowCustomer['link'];} ?>" type="url" placeholder="http://www.google.com">
 		</div>
+		<hr/>
 		<div class="form-group">
 			<label>Description</label>
 			<textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if($_GET['editcustomer']){echo $rowCustomer['content'];} ?></textarea>
