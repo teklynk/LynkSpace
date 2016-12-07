@@ -218,14 +218,6 @@ include 'includes/header.php';
 				<div class="form-group">
 					<label><a href="users.php">Change User Info</a></label>
 				</div>
-				<div class="form-group">
-					<?php
-					if (file_exists('../sitemap.xml')) {
-						echo "<label><a href='sitemapbuilder.php'>Update Sitemap.xml</a></label>";
-						echo "<br/><small>Sitemap Updated: ".date('m-d-Y, H:i:s',filemtime('../sitemap.xml'))."</small>";
-					}
-					?>
-				</div>
 
 				<button type="submit" name="setup_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
