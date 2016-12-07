@@ -24,7 +24,7 @@ if (!defined('inc_access')) {
     <div class="container">
         <div class="row">
 
-            <h1 class="text-white">Search Schools</h1>
+            <h1 class="text-white">Search School Libraries</h1>
 
             <div class="panel with-nav-tabs panel-default">
                     <?php
