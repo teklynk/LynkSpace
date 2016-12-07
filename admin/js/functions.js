@@ -284,6 +284,12 @@ $(document).ready(function () {
 		}
 	);
 
+	$('.searchopt_radio').change (
+		function(){
+			$.get('ajax/update_searchdefault.php?update=true', { value: this.value, checked: this.checked });
+		}
+	);
+
 	$('.page_status_checkbox').change (
 		function(){
 			$.get('ajax/update_pageactive.php?update=true', { id: this.id, checked: this.checked });
@@ -343,6 +349,19 @@ $(document).ready(function () {
 		}
 	);
 
+	//Category expand/collapse
+	$('#addCat_button').click (
+		function () {
+			setTimeout(function(){
+				if ($('#addCatDiv').hasClass('in')) {
+					$('#addCat_button').html("<i class='fa fa-fw fa-times'></i> Close");
+				} else {
+					$('#addCat_button').html("<i class='fa fa-fw fa-paper-plane'></i> Add a Category");
+				}
+			}, 500);
+		}
+	);
+
 	//Character Count Function
 	parseCharCounts();
 
@@ -350,7 +369,7 @@ $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 });
 
-//--Outside Document.Ready function
+//--Outside of Document.Ready function
 //modal preview window
 function showMyModal(myTitle, myFile) {
 	$('#myModalTitle').html(myTitle);

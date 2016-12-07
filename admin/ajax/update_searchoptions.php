@@ -13,7 +13,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash']==md5($_SESSION['u
 
 		if ($searchOptID == 'ls2pac') {
 			$searchOptUpdate = "UPDATE setup SET ls2pac='".$searchOptChecked."' WHERE loc_id=".$_SESSION['loc_id']." ";
-		}elseif ($searchOptID == 'ls2kids') {
+		} elseif ($searchOptID == 'ls2kids') {
 			$searchOptUpdate = "UPDATE setup SET ls2kids='".$searchOptChecked."' WHERE loc_id=".$_SESSION['loc_id']." ";
 		}
 
