@@ -165,7 +165,6 @@ if ($_GET['preview']>"") {
 		<div class="form-group">
 			<label>Description</label>
 			<textarea class="form-control input-sm count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if($_GET['editteam']){echo $rowTeam['content'];} ?></textarea>
-			<small class="pull-right count-message"></small>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET['editteam']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowTeam['datetime']));} ?></span>
@@ -266,7 +265,6 @@ if ($_GET['preview']>"") {
             <div class="form-group">
                 <label>Description</label>
                 <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
-				<small class="pull-right count-message"></small>
 			</div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

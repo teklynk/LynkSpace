@@ -6,7 +6,7 @@ include 'includes/header.php';
 	//Page preview
 	if ($_GET['preview']>""){
 		$pagePreviewId=$_GET['preview'];
-		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, image, name, link FROM customers WHERE id='$pagePreviewId'");
+		$sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, image, name, link, content FROM customers WHERE id='$pagePreviewId'");
 		$rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview);
 
 			echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
@@ -18,6 +18,10 @@ include 'includes/header.php';
 
 			if ($rowCustomerPreview['image']>""){
 				echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowCustomerPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+			}
+
+			if ($rowCustomerPreview['content']>""){
+				echo "<br/><p>".$rowCustomerPreview['content']."</p>";
 			}
 
 			if ($rowCustomerPreview['link']>""){
@@ -60,13 +64,13 @@ include 'includes/header.php';
 					$_POST['customer_status']='false';
 				}
 
-				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', image='".$_POST['customer_image']."', link='".$_POST['customer_link']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
+				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', image='".$_POST['customer_image']."', link='".$_POST['customer_link']."', content='".$_POST['customer_content']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
 				$customerMsg="<div class='alert alert-success'>The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
+			$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
 			$rowCustomer = mysqli_fetch_array($sqlCustomer);
 
 		//Create new customer
@@ -76,7 +80,7 @@ include 'includes/header.php';
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (image, name, link, active, loc_id) VALUES ('".$_POST['customer_image']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', 'true', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (image, name, link, content, active, loc_id) VALUES ('".$_POST['customer_image']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -158,6 +162,10 @@ include 'includes/header.php';
 		<div class="form-group">
 			<label>Link</label>
 			<input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if($_GET['editcustomer']){echo $rowCustomer['link'];} ?>" type="url" placeholder="http://www.google.com">
+		</div>
+		<div class="form-group">
+			<label>Description</label>
+			<textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if($_GET['editcustomer']){echo $rowCustomer['content'];} ?></textarea>
 		</div>
         <div class="form-group">
 			<span><?php if($_GET['editcustomer']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowCustomer['datetime']));} ?></span>
@@ -256,8 +264,7 @@ include 'includes/header.php';
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About this database" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
-				<small class="pull-right count-message"></small>
+                <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our databases" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
 			</div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
@@ -269,11 +276,12 @@ include 'includes/header.php';
 				</thead>
 				<tbody>
         		<?php
-					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, active, loc_id FROM customers WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
+					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, active, loc_id FROM customers WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
 					while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
 						$customerId=$rowCustomer['id'];
 						$customerName=$rowCustomer['name'];
 						$customerTumbnail=$rowCustomer['image'];
+						$customerContent=$rowCustomer['content'];
 						$customerLink=$rowCustomer['link'];
 						$customerActive=$rowCustomer['active'];
 
@@ -299,7 +307,7 @@ include 'includes/header.php';
 				</tbody>
 			</table>
 			<input type="hidden" name="save_main" value="true" />
-            <button type="submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
+            <button type="submit" class="btn btn-default" name="customer_submit"><i class='fa fa-fw fa-save'></i> Submit</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
 			</form>
 		</div>

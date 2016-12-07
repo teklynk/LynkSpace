@@ -41,7 +41,6 @@ if (!empty($_POST)) {
                 $_SESSION['loc_list'] = getLocList();
             }
 
-
         } else {
             $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
         }

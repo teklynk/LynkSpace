@@ -11,6 +11,10 @@ h1,.h1,h2,.h2,h3,.h3 {  font-family: "Century Gothic", "Helvetica Neue", Helveti
 
 h1,.h1 {color: #0033a0;}
 
+h3.sublinktitle {
+	margin: 10px 0px 0px 0px;
+}
+
 .text-white {color:#fff;}
 
 /* cps color palette */
@@ -326,6 +330,12 @@ footer a:hover {
 
 #searchpac .panel, #searchlocations .panel {
 	margin-bottom: 0px;
+}
+
+.database-item {
+	float: right !important;
+	margin-top: 15px !important;
+	margin-bottom: 15px !important;
 }
 
 
