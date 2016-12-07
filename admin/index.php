@@ -15,6 +15,7 @@ unset($_SESSION['file_referer']);
 unset($_SESSION['session_hash']);
 unset($_SESSION['loc_id']);
 unset($_SESSION['loc_name']);
+unset($_SESSION['loc_list']);
 
 $message = "";
 
@@ -34,6 +35,12 @@ if (!empty($_POST)) {
             $_SESSION['loggedIn'] = 1;
             $_SESSION['file_referer'] = 'index.php';
             $_SESSION['session_hash'] = md5($rowLogin['username']);
+
+            //If is Admin
+            if ($rowLogin['level'] == 1) {
+                $_SESSION['loc_list'] = getLocList();
+            }
+
 
         } else {
             $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";

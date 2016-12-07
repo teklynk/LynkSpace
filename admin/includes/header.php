@@ -192,18 +192,9 @@ if ($IPrange <> '') {
              <ul class="nav navbar-right top-nav">
                   <li style="margin-top:8px;">
 
-                    <select class="selectpicker" data-container="body" data-width="auto" data-size="10" data-live-search="true" name="loc_id" id="loc_id">
+                    <select class="selectpicker" data-container="body" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
                       <?php
-                      while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
-
-                        if ($rowLocations['id'] == $_GET['loc_id']) {
-                          $loc_menu_select = "SELECTED";
-                        } else {
-                          $loc_menu_select = "";
-                        }
-
-                        echo "<option data-icon='fa fa-fw fa-building' value=".$rowLocations['id']." $loc_menu_select>".$rowLocations['name']."</option>";
-                      }
+                        echo $_SESSION['loc_list'];
                       ?>
                     </select>
 

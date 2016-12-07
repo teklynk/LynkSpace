@@ -4,4 +4,3 @@ Disallow: /css/
 Disallow: /db/
 Disallow: /includes/
 Disallow: /mail/
-Sitemap: http://localhost/businessCMS/sitemap.xml

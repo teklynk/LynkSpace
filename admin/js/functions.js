@@ -271,6 +271,7 @@ $(document).ready(function () {
 	    }
 	);
 
+
 	//Ajax Calls
 	$('#nav_Table .nav_win_checkbox').change (
 		function(){
@@ -362,14 +363,24 @@ $(document).ready(function () {
 		}
 	);
 
-	//Character Count Function
+	//Returns Character Count Function
 	parseCharCounts();
 
-	//Boostrap tooltips function
+	//Returns Boostrap tooltips function
 	$('[data-toggle="tooltip"]').tooltip();
+
+	//Location Select Drop Down list. Sets selected value based on loc_id=querystring value
+	$(function(){
+		if ($('select[name="loc_id_list"]').length) {
+			var queryStrVal = getUrlVars()['loc_id'];
+			$('select[name="loc_id_list"]').val(queryStrVal);
+		}
+	});
+
 });
 
-//--Outside of Document.Ready function
+//--Outside of Document.Ready functions
+
 //modal preview window
 function showMyModal(myTitle, myFile) {
 	$('#myModalTitle').html(myTitle);
@@ -379,6 +390,3 @@ function showMyModal(myTitle, myFile) {
 	$('#webpageDialog').modal('show');
 	$('#webserviceDialog').modal('show');
 }
-
-
-
