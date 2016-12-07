@@ -55,7 +55,7 @@ if (!defined('inc_access')) {
                                     <div class="input-group col-md-12">
                                         <input type="text" class="form-control" name="term" placeholder="LS2PAC" />
                                         <span class="input-group-btn">
-                                            <button class="btn btn-danger" type="submit">
+                                            <button class="btn btn-danger" type="submit" name="ls2pac_submit">
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
                                         </span>
@@ -80,7 +80,7 @@ if (!defined('inc_access')) {
                                     <div class="input-group col-md-12">
                                         <input type="text" class="form-control" name="term" placeholder="LS2Kids" />
                                         <span class="input-group-btn">
-                                            <button class="btn btn-danger" type="submit">
+                                            <button class="btn btn-danger" type="submit" name="ls2packids_submit">
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
                                         </span>

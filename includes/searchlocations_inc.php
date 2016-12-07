@@ -4,12 +4,11 @@ if (!defined('inc_access')) {
    die('Direct access not permitted');
 }
     getLocList();
-		
-	echo "<div class='row' id='searchlocations'>";
-
-		echo "<div class='col-lg-12'>";
-
+    getSetup(); //from functions.php
 ?>
+<div class="row" id="searchlocations">
+<div class="col-lg-12">
+
     <script type="text/javascript" language="javascript">
     $(document).ready(function(){
         //jQueryUI AutoComplete
@@ -24,34 +23,114 @@ if (!defined('inc_access')) {
 
     <div class="container">
         <div class="row">
-            <h1 class="text-white">Search Schools</h1>
-            <form name="locSearchForm" action="" method="get">
-            <div id="custom-search-input">
-                <div class="input-group col-md-12">
 
-                    <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" />
-                    <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id'];?>" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+            <h1 class="text-white">Search Schools</h1>
+
+            <div class="panel with-nav-tabs panel-default">
+                    <?php
+                        if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
+                    ?>
+                        <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                <?php
+                                echo "<li class='active'><a href='#tab1default' data-toggle='tab'>Schools</a></li>";
+
+                                if ($setupSearchDefault == 1) {
+                                    if ($setupLs2pac == 'true') {
+                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2PAC</a></li>";
+                                    }
+                                    if ($setupLs2kids == 'true') {
+                                        echo "<li><a href='#tab3default' data-toggle='tab'>LS2Kids</a></li>";
+                                    }
+                                } else {
+                                    if ($setupLs2kids == 'true') {
+                                        echo "<li><a href='#tab3default' data-toggle='tab'>LS2Kids</a></li>";
+                                    }
+                                    if ($setupLs2pac == 'true') {
+                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2PAC</a></li>";
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    <?php
+                        }
+                    ?>
+
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <!-- Schools Search Form -->
+                        <div class="tab-pane fade in active" id="tab1default">
+                            <form name="locSearchForm" action="" method="get">
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12">
+
+                                    <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" />
+                                    <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id'];?>" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="submit" name="schoolsearch_submit">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <?php
+                        if ($setupLs2pac == 'true') {
+                        ?>
+                            <!-- LS2PACSearch Form -->
+                            <div class="tab-pane fade in" id="tab2default">
+                                <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
+                                    <div id="custom-search-input">
+                                        <div class="input-group col-md-12">
+                                            <input type="text" class="form-control" name="term" placeholder="LS2PAC" />
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="submit" name="ls2pac_submit">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        <?php
+                        }
+
+                        if ($setupLs2kids == 'true') {
+                        ?>
+                            <!-- LS2Kids Search Form -->
+                            <div class="tab-pane fade in" id="tab3default">
+                                <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
+                                    <div id="custom-search-input">
+                                        <div class="input-group col-md-12">
+                                            <input type="text" class="form-control" name="term" placeholder="LS2Kids" />
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="submit" name="ls2kids_submit">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
 
                 </div>
-                <div class="input-group col-md-12 text-center">
+            </div>
+            <div class="input-group col-md-12 text-center">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Search','true','left');
                 ?>
-                </div>
             </div>
-            </form>
         </div>
     </div>
-<?php
 
-		echo "</div>";
-
-	echo "</div>";
-?>
-<!-- /.row -->
+</div>
+</div>

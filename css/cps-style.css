@@ -324,7 +324,7 @@ footer a:hover {
 	background-color: #555;
 }
 
-#searchpac .panel {
+#searchpac .panel, #searchlocations .panel {
 	margin-bottom: 0px;
 }
 
