@@ -1,4 +1,4 @@
-<!-- Our Customers -->
+<!-- Databases -->
 <?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');
@@ -11,7 +11,7 @@ if(!defined('inc_access')) {
 
 		if (!empty($customerHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h2 class='page-header customers'>".$customerHeading."</h2>";
+			echo "<h1 class='customers'>".$customerHeading."</h1>";
 			echo "</div>";
 		}
 
@@ -24,11 +24,15 @@ if(!defined('inc_access')) {
     	echo "<div class='text-center'>";
 
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
-        	if (!empty($rowCustomers['image'])){
-				echo "<div class='col-xs-".$customerColWidth."'>";
-				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
-				echo "</div>";
-			}
+            echo "<div class='col-xs-".$customerColWidth."'>";
+
+        	if (!empty($rowCustomers['image'])) {
+				echo "<a href='".$rowCustomers['link']."'><img class='img-responsive customer-img' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowCustomers['name']."'></a>";
+			} else {
+                echo "<a href='".$rowCustomers['link']."'>".$rowCustomers['name']."</a>";
+            }
+
+            echo "</div>";
 		}
 
 		echo "</div>";

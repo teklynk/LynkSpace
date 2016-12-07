@@ -250,10 +250,30 @@ ul.alert-dropdown {
 .version {
     padding: 6px 12px;
 }
-.version>small {
-    color:#999;
+div.version>small>a {
+    color:#fff !important;
 }
 
 .td_small {
     width:100px;
+}
+
+.dropdown-menu-lg {
+    min-width: 250px !important;
+    min-height: 400px !important;
+}
+
+.top-nav>li>a {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+}
+
+.navbar-brand {
+    padding-top: 16px !important;
+    padding-bottom: 11px !important;
+}
+
+.count-message {
+    font-size:  75%;
+    color: rgb(123, 123, 123);
 }

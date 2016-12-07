@@ -10,11 +10,12 @@ getAbout();
 	
 	if (!empty($aboutTitle)) {
 		echo "<div class='col-lg-12'>";
-		echo "<h2 class='page-header about'>".$aboutTitle."</h2>";
+		echo "<h1 class='about'>".$aboutTitle."</h1>";
 		echo "</div>";
 	}
 
 	if (!empty($aboutImage)) {
+
 		if ($aboutImageAlign=="right") {
 			echo "<div class='col-md-10'>";
 			echo $aboutContent;
@@ -30,6 +31,7 @@ getAbout();
 			echo $aboutContent;
 			echo "</div>";
 		}
+
 	} else {
 		echo "<div class='col-md-12'>";
 		echo $aboutContent;

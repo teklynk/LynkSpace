@@ -1,31 +1,7 @@
-mail/sendmail.asp
-
-core/teklynk_logo.psd
-
-sitemap.xml
-
-*dbconn.php
-
-*dbsetup.php
-
-*.old
-
-uploads/*
-
 *.DS_Store
 
 .idea
 
-*.iml
-
 .svn
 
 .git
-
-*.sql
-
-*.asp
-
-*.xml
-
-*.txt

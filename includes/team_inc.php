@@ -12,13 +12,13 @@ getTeam();
 		
 		if (!empty($teamHeading)) {
 			echo "<div class='col-lg-12'>";
-			echo "<h2 class='page-header team'>".$teamHeading."</h2>";
+			echo "<h1 class='team'>".$teamHeading."</h1>";
 			echo "</div>";
 		}
 
         if (!empty($teamBlurb)) {
             echo "<div class='col-lg-12'>";
-            echo "<p class='text-center'>".$teamBlurb."</p>";
+            echo "<h3>".$teamBlurb."</h3>";
             echo "</div>";
         }
 
@@ -27,7 +27,7 @@ getTeam();
 			echo "<div class='thumbnail'>";
 
 			if (!empty($rowTeam['image'])){
-				echo "<img class='img-responsive' src='uploads/".$rowTeam['image']."' alt='".$rowTeam['name']."' title='".$rowTeam['name']."'>";
+				echo "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowTeam['image']."' alt='".$rowTeam['name']."' title='".$rowTeam['name']."'>";
 			}
 			
 			echo "<div class='caption'>";

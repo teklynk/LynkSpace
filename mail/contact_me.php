@@ -1,26 +1,35 @@
 <?php
-// check if fields passed are empty
-if(empty($_POST['name'])  		||
-   empty($_POST['phone']) 		||
-   empty($_POST['email']) 		||
-   empty($_POST['message'])	||
-   !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
-   {
-	echo "No arguments Provided!";
-	return false;
-   }
-	
+define('inc_access', TRUE);
+
+//redirect back to contact form or home page
+$redirectPage = "../contact.php?msgsent=thankyou#contactForm";
+//if an error occurs
+$errorPage = "../contact.php?msgsent=error#contactForm";
+
 $name = $_POST['name'];
-$phone = $_POST['phone'];
 $email_address = $_POST['email'];
+$phone = $_POST['phone'];
 $message = $_POST['message'];
-	
-// create email body and send it	
-$to = 'your-email@your-domain.com'; // PUT YOUR EMAIL ADDRESS HERE
-$email_subject = "Modern Business Contact Form:  $name"; // EDIT THE EMAIL SUBJECT LINE HERE
-$email_body = "You have received a new message from your website's contact form.\n\n"."Here are the details:\n\nName: $name\n\nPhone: $phone\n\nEmail: $email_address\n\nMessage:\n$message";
-$headers = "From: noreply@your-domain.com\n";
-$headers .= "Reply-To: $email_address";	
-mail($to,$email_subject,$email_body,$headers);
-return true;			
+$sendTo = $_POST['sendToEmail'];
+
+if (!empty($_POST)) {
+	// Check for empty fields
+	if (empty($_POST['name'])  	||
+	   empty($_POST['email']) 	||
+	   empty($_POST['phone']) 	||
+	   empty($_POST['message'])	||
+	   !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+			echo "<script>window.location.href='$errorPage';</script>";
+			return false;
+	} else {
+		// Create the email and send the message
+		$email_subject = "Website Contact Form:  $name";
+		$email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
+		$headers = "From: $email_address\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
+		$headers .= "Reply-To: $email_address";
+		mail($sendTo,$email_subject,$email_body,$headers);
+		echo "<script>window.location.href='$redirectPage';</script>";
+		return true;
+	}
+}
 ?>

@@ -1,69 +1,107 @@
 <?php
-function getPage(){
-	global $pageImage;
-	global $pageTitle;
-	global $pageContent;
-	global $pageImageAlign;
-  global $pageDisqus;
+define('inc_access', TRUE);
+
+function getLocation() {
+	global $locationName;
+	global $locationActive;
+	global $locationID;
 	global $db_conn;
 
-	if (ctype_digit($_GET["ref"])){
-		$pageRefId=$_GET["ref"];
-		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus FROM pages WHERE id='$pageRefId'");
-		$rowPage = mysqli_fetch_array($sqlPage);
+	if (ctype_digit($_GET['loc_id'])) {
 
-		if ($rowPage['active']=1 AND $pageRefId=$rowPage['id']) {
+		$sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=".$_GET['loc_id']." ");
+		$rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
-			if ($rowPage["image"]>"") {
-				$pageImage = "<img class='img-responsive' src='uploads/".$rowPage["image"]."' alt='".$rowPage["title"]."' title='".$rowPage["title"]."'>";
-			}
-
-			$pageTitle = $rowPage['title'];
-			$pageContent = $rowPage["content"];
-			$pageImageAlign = $rowPage["image_align"];
-            $pageDisqus = $rowPage["disqus"];
-
+		if ($rowGetLocation['active']=='true' AND $_GET['loc_id']==$rowGetLocation['id']) {
+			$locationName = $rowGetLocation['name'];
+			$locationActive = $rowGetLocation['active'];
+			$locationID = $rowGetLocation['id'];
 		} else {
-
-            $pageTitle = "Page not found";
-		    $pageContent = "This page is not available.";
-
+			header('Location: index.php?loc_id=1');
+            echo "<script>window.location.href='index.php?loc_id=1';</script>";
 		}
-
-	} else {
-
-        $pageTitle = "Page not found";
-		$pageContent = "This page is not available.";
 
 	}
 }
 
-function getAbout(){
+function getLocList() {
+    global $locationListJson;
+    global $locationIDListJson;
+    global $db_conn;
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
+    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
+        $locationListJson = $locationListJson . "'".$rowLocationSearch['name']."',";
+        $locationIDListJson = $locationIDListJson . "'".$rowLocationSearch['id']."',";
+    }
+}
+
+function getPage() {
+	global $pageImage;
+	global $pageTitle;
+	global $pageContent;
+	global $pageImageAlign;
+  	global $pageDisqus;
+	global $pageRefId;
+	global $db_conn;
+
+	if (ctype_digit($_GET['page_id'])) {
+		$pageRefId = $_GET['page_id'];
+		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=".$pageRefId." AND loc_id=".$_GET['loc_id']." ");
+		$rowPage = mysqli_fetch_array($sqlPage);
+
+
+
+		if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
+
+			if ($rowPage['image']>"") {
+				$pageImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowPage['image']."' alt='".$rowPage['title']."' title='".$rowPage['title']."'>";
+			}
+
+			$pageTitle = $rowPage['title'];
+			$pageContent = $rowPage['content'];
+			$pageImageAlign = $rowPage['image_align'];
+			$pageDisqus = $rowPage['disqus'];
+
+		} else {
+
+      		$pageTitle = "Page not found";
+		  	$pageContent = "This page is not available.";
+		}
+
+	} else {
+
+    	$pageTitle = "Page not found";
+		$pageContent = "This page is not available.";
+	}
+}
+
+function getAbout() {
 	global $aboutTitle;
 	global $aboutContent;
 	global $aboutImage;
 	global $aboutImageAlign;
 	global $db_conn;
 
-	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align FROM aboutus");
+	$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowAbout = mysqli_fetch_array($sqlAbout);
 
-	if (!empty($rowAbout["heading"])){
-		$aboutTitle = $rowAbout["heading"];
+	if (!empty($rowAbout['heading'])) {
+		$aboutTitle = $rowAbout['heading'];
 	}
 
-	if (!empty($rowAbout["content"])) {
-		$aboutContent = $rowAbout["content"];
+	if (!empty($rowAbout['content'])) {
+		$aboutContent = $rowAbout['content'];
 	}
 
-	if (!empty($rowAbout["image"])) {
-		$aboutImage = "<img class='img-responsive' src='uploads/".$rowAbout["image"]."' alt='".$rowAbout["image"]."' title='".$rowAbout["image"]."'>";
+	if (!empty($rowAbout['image'])) {
+		$aboutImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowAbout['image']."' alt='".$rowAbout['image']."' title='".$rowAbout['image']."'>";
 	}
 
-	$aboutImageAlign = $rowAbout["image_align"];
+	$aboutImageAlign = $rowAbout['image_align'];
 }
 
-function getContactInfo(){
+function getContactInfo() {
 	global $contactHeading;
 	global $contactBlurb;
 	global $contactMap;
@@ -76,14 +114,17 @@ function getContactInfo(){
 	global $contactHours;
 	global $contactFormSendToEmail;
 	global $contactFormMsg;
+    global $emailValidatePattern;
 	global $db_conn;
 
-	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus");
+    $emailValidatePattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
+
+	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowContact = mysqli_fetch_array($sqlContact);
 
-    if ($_GET["msgsent"]=="thankyou") {
+    if ($_GET['msgsent']=="thankyou") {
         $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
-    } elseif ($_GET["msgsent"]=="error") {
+    } elseif ($_GET['msgsent']=="error") {
         $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
     } else {
     	$contactFormMsg = "";
@@ -134,7 +175,7 @@ function getContactInfo(){
     }
 }
 
-function getServices(){
+function getServices() {
 	global $sqlServicesHeading;
 	global $rowServicesHeading;
 	global $servicesHeading;
@@ -146,7 +187,7 @@ function getServices(){
 	global $servicesIcon;
 	global $db_conn;
 
-    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup");
+    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowServicesHeading = mysqli_fetch_array($sqlServicesHeading);
 
     $servicesHeading = $rowServicesHeading['servicesheading'];
@@ -155,7 +196,7 @@ function getServices(){
     	$servicesBlurb = $rowServicesHeading['servicescontent'];
 	}
 
-    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount=0;
 
@@ -170,7 +211,7 @@ function getServices(){
     }
 }
 
-function getTeam(){
+function getTeam() {
 	global $sqlTeamHeading;
 	global $rowTeamHeading;
 	global $sqlTeam;
@@ -184,7 +225,7 @@ function getTeam(){
 	global $teamColWidth;
 	global $db_conn;
 
-	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup");
+	$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowTeamHeading = mysqli_fetch_array($sqlTeamHeading);
 
     $teamHeading = $rowTeamHeading['teamheading'];
@@ -193,7 +234,7 @@ function getTeam(){
     	$teamBlurb = $rowTeamHeading['teamcontent'];
 	}
 
-    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
 
     if ($teamNumRows==2) {
@@ -207,138 +248,138 @@ function getTeam(){
     }
 }
 
-function getNav($navSection,$dropdown,$pull){
+function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
-		global $db_conn;
-    echo "<ul class='nav navbar-nav navbar-$pull'>";
+	global $db_conn;
+	echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
+	if ($dropdown=="true"){
+		$dropdownToggle = "dropdown-toggle";
+		$dataToggle = "dropdown";
+		$dropdown = "dropdown nav-$navSection";
+		$dropdownMenu = "dropdown-menu";
+		$dropdownCaret = "<b class='caret'></b>";
+	} else {
+		$dropdownToggle = "";
+		$dataToggle = "";
+		$dropdown = "nav-$navSection";
+		$dropdownMenu = "cat-links";
+		$dropdownCaret = "";
+	}
 
-		if ($dropdown=="true"){
-			$dropdownToggle = "dropdown-toggle";
-			$dataToggle = "dropdown";
-			$dropdown = "dropdown nav-$navSection";
-			$dropdownMenu = "dropdown-menu";
-			$dropdownCaret = "<b class='caret'></b>";
+	$sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
+	//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.loc_id, category.nav_loc_id
+	$tempLink = 0;
+
+	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
+
+		if ($rowNavLinks[6]=='true') {
+			$navWin = "target='_blank'";
 		} else {
-			$dropdownToggle = "";
-			$dataToggle = "";
-			$dropdown = "nav-$navSection";
-			$dropdownMenu = "cat-links";
-			$dropdownCaret = "";
-		}
+            $navWin = "";
+        }
 
-        $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 ORDER BY sort");
-        //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
-        $tempLink = 0;
-		while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
+		if ($rowNavLinks[4] == $rowNavLinks[8] AND $rowNavLinks[4] != 0) { //NOTE: 0=None in the category table
 
-            if ($rowNavLinks[6]=='true'){
-                $navWin = "target='_blank'";
-            }
+			if ($rowNavLinks[4] != $tempLink) {
+				$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
+				//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.nav_loc_id
 
-            if ($rowNavLinks[4] == $rowNavLinks[7] AND $rowNavLinks[4] != 29) { //NOTE: 29=None in the category table
-
-				if ($rowNavLinks[4] != $tempLink) {
-					$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 ORDER BY sort");
-					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, category.id, category.name
-
-                    echo "<li class='$dropdown'>";
-						echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[8]." $dropdownCaret</a>";
-						echo "<ul class='$dropdownMenu'>";
-						while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)) {
-							echo "<li>";
-							echo "<a href='".$rowNavCatLinks[3]."' $navWin>".$rowNavCatLinks[2]."</a>";
-							echo "</li>";
-						}
-						echo "</ul>";
+				echo "<li class='$dropdown'>";
+				echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[9]." $dropdownCaret</a>";
+				echo "<ul class='$dropdownMenu'>";
+				while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)) {
+					echo "<li>";
+					echo "<a href='".$rowNavCatLinks[3]."' $navWin>".$rowNavCatLinks[2]."</a>";
 					echo "</li>";
 				}
+				echo "</ul>";
+				echo "</li>";
+			}
 
-            } else {
-                echo "<li>";
-                echo "<a href='".$rowNavLinks[3]."' $navWin>".$rowNavLinks[2]."</a>";
-                echo "</li>";
-            }
-
-			$tempLink = $rowNavLinks[4];
-
+		} else {
+			echo "<li>";
+			echo "<a href='".$rowNavLinks[3]."' $navWin>".$rowNavLinks[2]."</a>";
+			echo "</li>";
 		}
-    echo "</ul>";
+
+		$tempLink = $rowNavLinks[4];
+
+	}
+	echo "</ul>";
 }
 
-function getSetup(){
+function getSetup() {
 	global $setupTitle;
 	global $setupAuthor;
 	global $setupKeywords;
 	global $setupDescription;
-	global $setupHeadercode;
-	global $setupDisqus;
-	global $setupGoogleanalytics;
+    global $setupConfig;
+    global $setupLs2pac;
+    global $setupLs2kids;
+    global $setupLogo;
 	global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, headercode, disqus, googleanalytics FROM setup");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowSetup  = mysqli_fetch_array($sqlSetup);
 
-    $setupDescription = $rowSetup["description"];
-    $setupKeywords = $rowSetup["keywords"];
-    $setupAuthor = $rowSetup["author"];
-    $setupTitle = $rowSetup["title"];
-    $setupGoogleanalytics = $rowSetup["googleanalytics"];
-
-    if (!empty($rowSetup["headercode"])) {
-        $setupHeadercode = $rowSetup["headercode"]."\n";
-    }
-
-    if (!empty($rowSetup["disqus"])) {
-        $setupDisqus = $rowSetup["disqus"]."\n";
-    }
-
-    if (!empty($rowSetup["googleanalytics"])) {
-        $setupGoogleanalytics = $rowSetup["googleanalytics"]."\n";
-    }
+    $setupDescription = $rowSetup['description'];
+    $setupKeywords = $rowSetup['keywords'];
+    $setupAuthor = $rowSetup['author'];
+    $setupTitle = $rowSetup['title'];
+    $setupConfig = $rowSetup['config'];
+    $setupLogo = $rowSetup['logo'];
+    $setupLs2pac = $rowSetup['ls2pac'];
+    $setupLs2kids = $rowSetup['ls2kids'];
 }
 
-function getSocialMediaIcons($shape){
-    //EXAMPLE: getSocialMediaIcons("circle")
-    //EXAMPLE: getSocialMediaIcons("square")
+function getSocialMediaIcons($shape, $section) {
+    //EXAMPLE: getSocialMediaIcons("circle","top")
+    //EXAMPLE: getSocialMediaIcons("square","footer")
 	global $socialMediaIcons;
 	global $socialMediaHeading;
 	global $sqlSocialMedia;
 	global $rowSocialMedia;
 	global $db_conn;
 
-	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia");
+	$sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
 	$socialMediaIcons = "";
 
-	if (!empty($rowSocialMedia["heading"])){
-		$socialMediaHeading = $rowSocialMedia["heading"];
+	if (!empty($rowSocialMedia['heading'])) {
+		$socialMediaHeading = $rowSocialMedia['heading'];
 	}
 
-    if (!empty($rowSocialMedia["facebook"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["facebook"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['facebook'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['facebook']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia["google"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["google"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['google'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['google']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia["github"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["github"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-github fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['pinterest'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['pinterest']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia["twitter"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["twitter"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['twitter'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['twitter']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia["linkedin"])){
-        $socialMediaIcons = $socialMediaIcons . "<li><a href=".$rowSocialMedia["linkedin"]." target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-linkedin fa-stack-1x fa-inverse'></i></span></a></li>";
+    if (!empty($rowSocialMedia['instagram'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['instagram']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    //$socialMediaIcons = "<ul class='list-unstyled list-inline list-social-icons'>".$socialMediaIcons."</ul>";
+    if (!empty($rowSocialMedia['youtube'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['youtube']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+    }
+
+    if (!empty($rowSocialMedia['tumblr'])) {
+        $socialMediaIcons = $socialMediaIcons . "<a class='pull-right' href=".$rowSocialMedia['tumblr']." target='_blank'><span class='fa-stack fa-lg social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+    }
 }
 
-function getCustomers(){
+function getCustomers() {
 	global $sqlCustomerHeading;
 	global $rowCustomerHeading;
 	global $sqlCustomers;
@@ -348,7 +389,7 @@ function getCustomers(){
 	global $customerColWidth;
 	global $db_conn;
 
-    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup");
+    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
 
 	if (!empty($rowCustomerHeading['customersheading'])) {
@@ -356,10 +397,10 @@ function getCustomers(){
 	}
 
     if (!empty($rowCustomerHeading['customerscontent'])) {
-    	$customerBlurb= $rowCustomerHeading['customerscontent'];
-	}
+        $customerBlurb = $rowCustomerHeading['customerscontent'];
+    }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active FROM customers WHERE active=1 ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, name, link, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     if ($customerNumRows==2) {
@@ -380,7 +421,7 @@ function getSlider($sliderType) {
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;
-		global $db_conn;
+	global $db_conn;
 
 	if ($sliderType=="slide") {
 		$sliderOrderBy = "ORDER BY datetime DESC";
@@ -388,9 +429,14 @@ function getSlider($sliderType) {
 		$sliderOrderBy = "ORDER BY RAND() LIMIT 1";
 	}
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active FROM slider WHERE active=1 $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=".$_GET['loc_id']." $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount=0;
+
+    //hide carousel arrows if only one image is available
+    if ($sliderNumRows == 1) {
+        echo "<style>.carousel-control {display: none !important;}</style>";
+    }
 
     if ($sliderNumRows > 0) {
 
@@ -409,20 +455,20 @@ function getSlider($sliderType) {
 
                 echo "<div class='item $slideActive'>";
 
-                if (!empty($rowSlider["image"])) {
-                    echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+                if (!empty($rowSlider['image'])) {
+                    echo "<div class='fill' style='background-image:url(uploads/".$_GET['loc_id']."/".$rowSlider['image'].");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
                 }
 
                 echo "<div class='carousel-caption'>";
 
-                echo "<h2>".$rowSlider["title"]."</h2>";
-                echo "<p>".$rowSlider["content"]."</p>";
+                echo "<h2>".$rowSlider['title']."</h2>";
+                echo "<p>".$rowSlider['content']."</p>";
 
-                if (!empty($rowSlider['link'])){
+                if (!empty($rowSlider['link'])) {
 					if (ctype_digit($rowSlider['link'])) {
-						echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+						echo "<a href='page.php?page_id=".$rowSlider['link']."&loc_id=".$_GET['loc_id']."' class='btn btn-primary'>Learn More</a>";
 					} else {
 						echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 					}
@@ -453,20 +499,20 @@ function getSlider($sliderType) {
 
             echo "<div class='item active'>";
 
-        	if (!empty($rowSlider["image"])) {
-                echo "<div class='fill' style='background-image:url(uploads/".$rowSlider['image'].");'></div>";
+        	if (!empty($rowSlider['image'])) {
+                echo "<div class='fill' style='background-image:url(uploads/".$_GET['loc_id']."/".$rowSlider['image'].");'></div>";
             } else {
                 echo "<div class='fill'></div>";
             }
 
             echo "<div class='carousel-caption'>";
 
-            echo "<h2>".$rowSlider["title"]."</h2>";
-            echo "<p>".$rowSlider["content"]."</p>";
+            echo "<h2>".$rowSlider['title']."</h2>";
+            echo "<p>".$rowSlider['content']."</p>";
 
-			if (!empty($rowSlider['link'])){
+			if (!empty($rowSlider['link'])) {
 				if (ctype_digit($rowSlider['link'])) {
-					echo "<a href='page.php?ref=".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
+					echo "<a href='page.php?page_id=".$rowSlider['link']."&loc_id=".$_GET['loc_id']."' class='btn btn-primary'>Learn More</a>";
 				} else {
 					echo "<a href='".$rowSlider['link']."' class='btn btn-primary'>Learn More</a>";
 				}
@@ -483,31 +529,32 @@ function getSlider($sliderType) {
         } else {
             $rowSlider = mysqli_fetch_array($sqlSlider);
             $sliderLink = $rowSlider['link'];
-            $sliderTitle = $rowSlider["title"];
-            $sliderContent = $rowSlider["content"];
-            $sliderImage = $rowSlider["image"];
+            $sliderTitle = $rowSlider['title'];
+            $sliderContent = $rowSlider['content'];
+            $sliderImage = $rowSlider['image'];
         }
+
     }
 }
 
-function getGeneralInfo(){
+function getGeneralInfo() {
 	global $generalInfoContent;
 	global $generalInfoHeading;
 	global $db_conn;
 
-	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo");
+	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo WHERE loc_id=".$_GET['loc_id']." ");
 	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
-	if (!empty($rowGeneralinfo["content"])) {
-		$generalInfoContent = $rowGeneralinfo["content"];
+	if (!empty($rowGeneralinfo['content'])) {
+		$generalInfoContent = $rowGeneralinfo['content'];
 	}
 
-	if (!empty($rowGeneralinfo["heading"])) {
-		$generalInfoHeading = $rowGeneralinfo["heading"];
+	if (!empty($rowGeneralinfo['heading'])) {
+		$generalInfoHeading = $rowGeneralinfo['heading'];
 	}
 }
 
-function getFeatured(){
+function getFeatured() {
 	global $featuredContent;
 	global $featuredHeading;
 	global $featuredBlurb;
@@ -515,26 +562,26 @@ function getFeatured(){
 	global $featuredImageAlign;
 	global $db_conn;
 
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured");
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=".$_GET['loc_id']." ");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
-	if (!empty($rowFeatured["heading"])) {
-        $featuredHeading = $rowFeatured["heading"];
+	if (!empty($rowFeatured['heading'])) {
+        $featuredHeading = $rowFeatured['heading'];
     }
 
-    if (!empty($rowFeatured["introtext"])) {
-		$featuredBlurb = $rowFeatured["introtext"];
+    if (!empty($rowFeatured['introtext'])) {
+		$featuredBlurb = $rowFeatured['introtext'];
 	}
 
-	if (!empty($rowFeatured["content"])) {
-		$featuredContent = $rowFeatured["content"];
+	if (!empty($rowFeatured['content'])) {
+		$featuredContent = $rowFeatured['content'];
 	}
 
-	if (!empty($rowFeatured["image"])) {
-		$featuredImage = "<img class='img-responsive' src='uploads/".$rowFeatured["image"]."' alt='".$rowFeatured["image"]."' title='".$rowFeatured["image"]."'>";
+	if (!empty($rowFeatured['image'])) {
+		$featuredImage = "<img class='img-landing hidden-xs' src='uploads/".$_GET['loc_id']."/".$rowFeatured['image']."' alt='".$rowFeatured['image']."' title='".$rowFeatured['image']."'>";
 	}
 
-	$featuredImageAlign = $rowFeatured["image_align"];
+	$featuredImageAlign = $rowFeatured['image_align'];
 }
 
 //Call - getSetup is used everywhere
@@ -542,7 +589,7 @@ getSetup();
 
 //Call these functions depending on which page you are visiting
 //Sets the page title
-if ($_GET['ref']>""){
+if (is_numeric($_GET['page_id'])>"") {
     getPage();
     $theTitle = $setupTitle." - ".$pageTitle;
 } else if (basename($_SERVER['PHP_SELF'])=="about.php"){
@@ -559,5 +606,28 @@ if ($_GET['ref']>""){
     $theTitle = $setupTitle." - ".$teamHeading;
 } else {
     $theTitle = $setupTitle;
+}
+
+//redirect to default location if loc_id or script name not defined
+if (empty($_GET['loc_id'])) {
+
+    if (basename($_SERVER['PHP_SELF']) == "") {
+        $pageRedirect = 'index.php?loc_id=1';
+    } else {
+        $pageRedirect = basename($_SERVER['PHP_SELF']).'?loc_id=1';
+    }
+
+    header('Location: '.$pageRedirect);
+    echo "<script>window.location.href='".$pageRedirect."';</script>";
+}
+
+//School search box redirect to loc_id where name = querystring loc_name
+if (!empty($_GET['loc_name'])) {
+
+    $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='".$_GET['loc_name']."' LIMIT 1");
+    $rowLocName = mysqli_fetch_array($sqlLocName);
+
+    header('Location: '.basename($_SERVER['PHP_SELF']).'?loc_id='.$rowLocName['id']);
+    echo "<script>window.location.href='".basename($_SERVER['PHP_SELF']).'?loc_id='.$rowLocName['id']."';</script>";
 }
 ?>
