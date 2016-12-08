@@ -196,6 +196,7 @@ footer a:hover {
 	background-color: transparent;
 	border-radius: 16px;
 	border: 1px solid #fff;
+	float: right;
 }
 
 .socialDiv {
