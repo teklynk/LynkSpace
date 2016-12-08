@@ -6,7 +6,7 @@ if(!defined('inc_access')) {
         <!-- Footer -->
         <footer>
             <div class="container">
-                <div class="row">
+                <div class="row row_pad">
 
                 <?php
                     getNav('Footer','false','left');

@@ -111,7 +111,39 @@ footer {
 .nav-Footer>.cat-Footer {color:#fff; cursor: default;}
 .nav-Footer>.cat-Footer:hover {background-color: transparent;}
 .nav-Footer {padding:0px 32px 0px 0px;}
-.nav-Footer>.cat-links {list-style: none; padding-left:14px;}
+.nav-Footer>.cat-links {
+    list-style: none;
+    padding-left:0px;
+    margin-bottom: 12px;
+}
+.navbar-Footer {
+    min-width: 100%;
+}
+.navbar-Footer .cat-links li {
+    padding-bottom: 10px;
+}
+.navbar-Footer>li>a:focus, .navbar-Footer>li>a:hover {
+    text-decoration: none;
+    background-color: transparent;
+}
+.navbar-Footer>.nav-Footer {
+    min-width: 30%;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+.nav-Footer>.cat-Footer {
+    font-size: 2.0em;
+    margin-bottom: 12px;
+    border-bottom: solid 1px;
+    padding: 0px;
+    padding-bottom: 12px;
+}
+.navbar-Footer>li>a {
+    position: relative;
+    display: block;
+    padding: 0px 15px;
+    margin-bottom: 12px;
+}
 .footer>.navbar-nav>li>a:hover {background:none;}
 
 #contact>.row>.page-header .socialmedia {display:none !important; }

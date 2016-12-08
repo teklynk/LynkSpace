@@ -15,9 +15,13 @@ a:hover, a:focus {
 	color: #008eaa;
 }
 
-h1,.h1,h2,.h2,h3,.h3 {  font-family: "Century Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h1,.h1,h2,.h2,h3,.h3 {
+	font-family: "Century Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-h1,.h1 {color: #0033a0;}
+h1,.h1 {
+	color: #0033a0;
+}
 
 h3.sublinktitle {
 	margin: 10px 0px 0px 0px;
@@ -27,17 +31,17 @@ h3.sublinktitle {
 
 /* cps color palette */
 
-.cps-teal   { color:#008eaa; }
-.cps-purple { color:#93328e; }
-.cps-green  { color:#78be20; }
-.cps-orange { color:#ffc72c; }
-.cps-blue   { color:#0033a0; }
+.cps-teal   {color:#008eaa;}
+.cps-purple {color:#93328e;}
+.cps-green  {color:#78be20;}
+.cps-orange {color:#ffc72c;}
+.cps-blue   {color:#0033a0;}
 
-.cps-teal-bkg   { background-color:#008eaa; }
-.cps-purple-bkg { background-color:#93328e; }
-.cps-green-bkg  { background-color:#78be20; }
-.cps-orange-bkg { background-color:#ffc72c; }
-.cps-blue-bkg   { background-color:#0033a0; }
+.cps-teal-bkg   {background-color:#008eaa;}
+.cps-purple-bkg {background-color:#93328e;}
+.cps-green-bkg  {background-color:#78be20;}
+.cps-orange-bkg {background-color:#ffc72c;}
+.cps-blue-bkg   {background-color:#0033a0;}
 
 .scrollToTop{
 	display:none;
@@ -150,18 +154,18 @@ footer a:hover {
     border-color: transparent;
 }
 
-.navbar-Search>li>a {color: #fff;}
-
-.navbar-Search>li>a:focus, .navbar-Search>li>a:hover {background: transparent; color: #008eaa;}
-
-.navbar-Footer>li>a:focus, .navbar-Footer>li>a:hover {
-    text-decoration: none;
-    background-color: transparent;
+.navbar-Search>li>a {
+	color: #fff;
 }
 
-.nav-Footer>.cat-Footer {font-size: 2.0em;}
+.navbar-Search>li>a:focus, .navbar-Search>li>a:hover {
+	background: transparent;
+	color: #008eaa;
+}
 
-.navbar-Top>li {padding-right: 25px }
+.navbar-Top>li {
+	padding-right: 25px;
+}
 
 .navbar-Top>li>a {
 	-webkit-transition: border-bottom  ease-in-out .3s, padding-bottom ease-in-out .3s;
@@ -209,8 +213,14 @@ footer a:hover {
 	color: #428bca;
 }
 
-.navbar-brand-image {width: 144px; height:77px;}
-.navbar-toggle { margin-top: 22px; }
+.navbar-brand-image {
+	width: 144px;
+	height:77px;
+}
+
+.navbar-toggle {
+	margin-top: 22px;
+}
 
 .toggbutton {
 	font-size: .7em;
@@ -345,7 +355,6 @@ header.carousel {
 }
 
 /** Media Queries **/
-
 
 /* page > xs */
 @media (min-width: 768px)

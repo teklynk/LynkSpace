@@ -98,7 +98,7 @@ if (!defined('inc_access')) {
             <div class="input-group col-md-12 text-center">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
-                getNav('Search','true','center');
+                getNav('Search','false','center');
                 ?>
             </div>
         </div>
