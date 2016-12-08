@@ -8,6 +8,6 @@ if(!defined('inc_access')) {
 
 	if (!empty($setupDisqus) AND $pageDisqus != 0) {
 		echo "<div class='row'></div>";
-		echo "<div class='col-lg-12  disqus_box'>".$setupDisqus."</div>";
+		echo "<div class='col-lg-12 col-xs-12  disqus_box'>".$setupDisqus."</div>";
 	}
 ?>

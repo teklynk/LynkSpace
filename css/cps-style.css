@@ -369,16 +369,19 @@ header.carousel {
 
 /* page = xs */
 @media (max-width: 767px) {
-	.socialDiv { display:none !important; }
-	.navbar-Top>li>a {padding: 10px 20px !important; }
-	.nav>li>a:hover, .nav>li>a:focus { border-bottom: none !important; }
+	.socialDiv {display:none !important;}
+	.navbar-Top>li>a {padding: 10px 20px !important;}
+	.nav>li>a:hover, .nav>li>a:focus {border-bottom: none !important;}
+
 	#generalinfo {
 		padding: 0px;
 	}
+
 	#generalinfo div {
 		padding: 0px;
 		margin: 0px;
 	}
+
 	.navbar-Footer>li>a {
 		padding: 0px 10px;
 		margin-bottom: 0px;

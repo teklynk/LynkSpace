@@ -20,7 +20,7 @@ if (!defined('inc_access')) {
 </script>
 
 <div class="row" id="searchlocations">
-<div class="col-lg-12">
+<div class="col-xs-12 col-lg-12">
 
         <div class="row">
 

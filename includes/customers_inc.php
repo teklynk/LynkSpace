@@ -10,13 +10,13 @@ if(!defined('inc_access')) {
 		echo "<div class='row' id='databases'>";
 
 		if (!empty($customerHeading)) {
-			echo "<div class='col-lg-12'>";
+			echo "<div class='col-xs-12 col-lg-12'>";
 			echo "<h1 class='customers'>".$customerHeading."</h1>";
 			echo "</div>";
 		}
 
 	    if (!empty($customerBlurb)) {
-			echo "<div class='col-lg-12'>";
+			echo "<div class='col-xs-12 col-lg-12'>";
 			echo "<p class='text-center'>".$customerBlurb."</p>";
 			echo "</div>";
 		}
@@ -63,7 +63,7 @@ if(!defined('inc_access')) {
             echo "</div>"; //media
 
             if (!empty($rowCustomers['link'])) {
-                echo "</a>";
+                echo "</a>"; //close href
             }
 
             echo "</div>"; //col-

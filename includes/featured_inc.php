@@ -11,7 +11,7 @@ if(!defined('inc_access')) {
 	if (!empty($featuredImage)) {
 
 		if ($featuredImageAlign == "right") {
-			echo "<div class='col-xs-8 col-sm-6'>";
+			echo "<div class='col-xs-12 col-sm-6'>";
 
 			if (!empty($featuredHeading)) {
 				echo "<h1 class='text-white featured'>".$featuredHeading."</h1>";
@@ -25,10 +25,10 @@ if(!defined('inc_access')) {
 
 			echo "</div>"; //col-xs-10 col-sm-8
 
-			echo "<div class='col-xs-4 col-sm-4'>".$featuredImage."</div>";
+			echo "<div class='col-xs-12 col-sm-4 hidden-xs'>".$featuredImage."</div>";
 
 		} else {
-			echo "<div class='col-xs-4 col-sm-4'>".$featuredImage."</div>";
+			echo "<div class='col-xs-12 col-sm-4 hidden-xs'>".$featuredImage."</div>";
 
 			echo "<div class='col-xs-8 col-sm-6'>";
 

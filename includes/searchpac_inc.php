@@ -7,7 +7,7 @@ if (!defined('inc_access')) {
 }
 ?>
 <div class="row" id="searchpac">
-<div class="col-lg-12">
+<div class="col-xs-12 col-lg-12">
 
         <div class="row">
 
