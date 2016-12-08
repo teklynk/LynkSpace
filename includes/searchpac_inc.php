@@ -99,7 +99,7 @@ if (!defined('inc_access')) {
             <div class="input-group col-md-12 text-center">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
-                getNav('Search','true','left');
+                getNav('Search','true','center');
                 ?>
             </div>
         </div>

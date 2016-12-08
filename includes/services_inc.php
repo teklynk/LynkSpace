@@ -24,7 +24,7 @@ getServices();
 
         while ($rowServices = mysqli_fetch_array($sqlServices)) {
 
-            echo "<div class='col-md-".$servicesColWidth." text-center'>";
+            echo "<div class='col-sm-6 col-md-3 col-lg-3 service-item'>";
             echo "<div class='panel panel-default text-center'>";
 
             if (!empty($rowServices['icon']) || !empty($rowServices['image'])) {
@@ -41,7 +41,7 @@ getServices();
             }
 
             if (!empty($rowServices['image'])) {
-                echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowServices['image']."' alt='".$rowServices['title']."' title='".$rowServices['title']."'>";
+                echo "<img class='img-responsive img-square' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowServices['image']."' alt='".$rowServices['title']."' title='".$rowServices['title']."'>";
             }
 
             echo "</span>";

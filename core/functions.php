@@ -50,8 +50,6 @@ function getPage() {
 		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=".$pageRefId." AND loc_id=".$_GET['loc_id']." ");
 		$rowPage = mysqli_fetch_array($sqlPage);
 
-
-
 		if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
 
 			if ($rowPage['image']>"") {

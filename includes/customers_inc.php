@@ -27,7 +27,9 @@ if(!defined('inc_access')) {
 
             echo "<div class='col-sm-6 col-md-3 col-lg-3 database-item'>";
 
-            echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "'>";
+            if (!empty($rowCustomers['link'])) {
+                echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";
+            }
 
             echo "<div class='media'>";
 
@@ -40,20 +42,29 @@ if(!defined('inc_access')) {
             }
 
             if (!empty($rowCustomers['image'])) {
-                echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowServices['name']."'>";
+                echo "<img class='img-responsive img-square' style='padding:8px;' src='uploads/".$_GET['loc_id']."/".$rowCustomers['image']."' alt='".$rowCustomers['name']."' title='".$rowServices['name']."'>";
             }
 
             echo "</span>";
             echo "</span>";
 
             echo "<div class='media-body'>";
-            echo "<h3 class='sublinktitle'>" . $rowCustomers['name'] . "</h3>";
-            echo "<p>" . $rowCustomers['content'] . "</p>";
+
+            if (!empty($rowCustomers['name'])) {
+                echo "<h3 class='sublinktitle'>" . $rowCustomers['name'] . "</h3>";
+            }
+
+            if (!empty($rowCustomers['content'])) {
+                echo "<p>" . $rowCustomers['content'] . "</p>";
+            }
+
             echo "</div>"; //media-body
 
             echo "</div>"; //media
 
-            echo "</a>";
+            if (!empty($rowCustomers['link'])) {
+                echo "</a>";
+            }
 
             echo "</div>"; //col-
         }

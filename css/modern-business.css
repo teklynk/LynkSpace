@@ -144,3 +144,22 @@ footer {
     margin-top: 0px;
     padding: 0px 15px 0px 15px;
 }
+.database-item, .service-item {
+    float: left !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+.database-item:nth-child(5), .service-item:nth-child(6) {
+    clear:both;
+}
+.database-item:nth-child(9), .service-item:nth-child(10) {
+    clear:both;
+}
+.database-item:nth-child(13), .service-item:nth-child(14) {
+    clear:both;
+}
+
+.navbar-center {
+    display:inline-block;
+    float:none;
+}
