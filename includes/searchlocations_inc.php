@@ -6,10 +6,8 @@ if (!defined('inc_access')) {
     getLocList();
     getSetup(); //from functions.php
 ?>
-<div class="row" id="searchlocations">
-<div class="col-lg-12">
-
-    <script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript">
+    //Gets the list of locations
     $(document).ready(function(){
         //jQueryUI AutoComplete
         $(function() {
@@ -19,7 +17,10 @@ if (!defined('inc_access')) {
             });
         });
     });
-    </script>
+</script>
+
+<div class="row" id="searchlocations">
+<div class="col-lg-12">
 
         <div class="row">
 

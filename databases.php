@@ -14,7 +14,7 @@ include 'includes/header.php';
     echo "</div>";
 
     echo "<div class='container'>";
-    echo "<div class='row row_pad' id='databases'>";
+    echo "<div class='row row_pad'>";
     echo "<div class='col-md-12'>";
         include 'includes/customers_inc.php';
     echo "</div>";

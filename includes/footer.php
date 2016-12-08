@@ -13,12 +13,20 @@ if(!defined('inc_access')) {
                 ?>
 
                 </div>
+                <?php
 
+
+                include 'includes/generalinfo_inc.php';
+
+
+                ?>
             </div>
         </footer>
         <div id="belowfooter">
             <div class="container">
-                <p><span id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></span></p>
+                <div class="row row_pad">
+                    <p><span id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></span></p>
+                </div>
             </div>
         </div>
 

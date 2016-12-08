@@ -7,7 +7,7 @@ if(!defined('inc_access')) {
 
     if ($customerNumRows > 0) {
 
-		echo "<div class='row' id='customers'>";
+		echo "<div class='row' id='databases'>";
 
 		if (!empty($customerHeading)) {
 			echo "<div class='col-lg-12'>";
