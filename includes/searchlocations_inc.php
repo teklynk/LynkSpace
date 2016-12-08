@@ -21,7 +21,6 @@ if (!defined('inc_access')) {
     });
     </script>
 
-    <div class="container">
         <div class="row">
 
             <h1 class="text-white">Search School Libraries</h1>
@@ -130,7 +129,6 @@ if (!defined('inc_access')) {
                 ?>
             </div>
         </div>
-    </div>
 
 </div>
 </div>

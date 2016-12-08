@@ -9,7 +9,6 @@ if (!defined('inc_access')) {
 <div class="row" id="searchpac">
 <div class="col-lg-12">
 
-    <div class="container">
         <div class="row">
 
             <h1 class="text-white">Search the Catalog</h1>
@@ -103,7 +102,6 @@ if (!defined('inc_access')) {
                 ?>
             </div>
         </div>
-    </div>
 
 </div>
 </div>
