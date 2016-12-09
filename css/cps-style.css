@@ -1,6 +1,7 @@
 body {
 	font-family: "Century Gothic", Arial, sans-serif;
 	padding-top: 0px;
+	height: 100%;
 }
 p {
 	font-family: "Arial", sans-serif;
@@ -494,9 +495,12 @@ header.carousel {
 	padding: 10px 10px 0px 10px;
 }
 .content {
-	min-height: 350px;
+	/*min-height: 450px;*/
 	padding-top: 12px;
 	padding-bottom: 18px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
 }
 /** Media Queries **/
 /* page > xs */
@@ -526,7 +530,7 @@ header.carousel {
 		padding-left: 0px;
 	}
 	.content {
-		min-height: 50px;
+		/*min-height: 50px;*/
 		padding-top: 4px;
 		padding-bottom: 10px;
 	}
