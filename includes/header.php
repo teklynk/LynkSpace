@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="css/modern-business.css">
+    <link rel="stylesheet" type="text/css" href="css/default-style.css">
 
     <!-- CSS Template -->
     <?php

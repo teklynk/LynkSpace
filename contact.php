@@ -14,7 +14,7 @@ include 'includes/header.php';
     echo "</div>";
 
 ?>
-    <div class="container" id="contact">
+    <div class="container content" id="contact">
 
         <div class="row row_pad">
             <div class="col-lg-12">

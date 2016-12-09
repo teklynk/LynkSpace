@@ -7,25 +7,16 @@ if(!defined('inc_access')) {
         <footer>
             <div class="container">
                 <div class="row row_pad">
-
                 <?php
                     getNav('Footer','false','left');
                 ?>
-
                 </div>
-                <?php
-
-
-                include 'includes/generalinfo_inc.php';
-
-
-                ?>
+                <?php include 'includes/generalinfo_inc.php'; ?>
             </div>
         </footer>
         <div id="belowfooter">
             <div class="container">
-
-                <div class="socialDiv pull-left hidden-lg hidden-xl">
+                <div class="socialDiv pull-left hidden-sm hidden-md hidden-lg hidden-xl">
                     <div class="row">
                         <?php include 'socialmedia_inc.php'; ?>
                     </div>
@@ -37,9 +28,8 @@ if(!defined('inc_access')) {
             </div>
         </div>
 
-    <!--scroll to top-->
+    <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">Scroll To Top</a>
-
 
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript" language="javascript">

@@ -14,7 +14,7 @@ define('inc_access', TRUE);
     echo "</div>";
 
     echo "<div class='container'>";
-    echo "<div class='row row_pad'>";
+    echo "<div class='row row_pad content'>";
     echo "<div class='col-md-12'>";
         include 'includes/team_inc.php';
     echo "</div>";

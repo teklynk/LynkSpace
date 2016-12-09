@@ -14,7 +14,7 @@ include 'includes/header.php';
     echo "</div>";
 
 	echo "<div class='container'>";
-	echo "<div class='row row_pad' id='page'>";
+	echo "<div class='row row_pad content' id='page'>";
 
     echo "<div class='col-lg-12'>";
     echo "<h1 class='page'>".$pageTitle."</h1>";
@@ -47,10 +47,10 @@ include 'includes/header.php';
 	echo "</div>";
     echo "</div>";
 
-    echo "<div class='container bannerwrapper'>";
+/*    echo "<div class='container bannerwrapper'>";
     echo "<hr/>";
         include 'includes/customers_inc.php';
-    echo "</div>";
+    echo "</div>";*/
 
 include 'includes/footer.php';
 ?>

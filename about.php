@@ -15,18 +15,18 @@ include 'includes/header.php';
 
     echo "<div class='container'>";
     echo "<div class='row row_pad'>";
-    echo "<div class='col-md-12'>";
+    echo "<div class='col-md-12 content'>";
         include 'includes/about_inc.php';
     echo "</div>";
     echo "</div>";
     echo "</div>";
 
-    echo "<div class='container bannerwrapper'>";
+/*    echo "<div class='container bannerwrapper'>";
     echo "<div class='row row_pad' id='about'>";
     echo "<hr/>";
         include 'includes/customers_inc.php';
     echo "</div>";
-echo "</div>";
+    echo "</div>";*/
 
 include 'includes/footer.php';
 ?>
