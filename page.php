@@ -51,6 +51,5 @@ include 'includes/header.php';
     echo "<hr/>";
         include 'includes/customers_inc.php';
     echo "</div>";*/
-
 include 'includes/footer.php';
 ?>
