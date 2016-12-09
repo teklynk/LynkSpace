@@ -24,6 +24,13 @@ if(!defined('inc_access')) {
         </footer>
         <div id="belowfooter">
             <div class="container">
+
+                <div class="socialDiv pull-left hidden-lg hidden-xl">
+                    <div class="row">
+                        <?php include 'socialmedia_inc.php'; ?>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
                 <div class="row row_pad">
                     <p><span id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y");?></span></p>
                 </div>

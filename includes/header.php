@@ -114,7 +114,7 @@
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Top','true','left');
             ?>
-            <div id="socialDiv" class="socialDiv pull-right" style="min-width:300px;">
+            <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
                 <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
                 <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
                 <script type="text/javascript">

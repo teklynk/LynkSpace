@@ -1,4 +1,4 @@
-<!-- Team Members -->
+<!-- Team Section -->
 <?php
 if(!defined('inc_access')) {
    die('Direct access not permitted');

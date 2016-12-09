@@ -12,6 +12,7 @@ include 'includes/header.php';
         }
     echo "</div>";
     echo "</div>";
+
 ?>
     <div class="container" id="contact">
 
@@ -65,7 +66,7 @@ include 'includes/header.php';
         <div class="row row_pad">
             <div class="col-md-8">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php">
+                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php?loc_id=<?php echo $_GET['loc_id'];?>">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>

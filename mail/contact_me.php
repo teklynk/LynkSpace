@@ -2,9 +2,9 @@
 define('inc_access', TRUE);
 
 //redirect back to contact form or home page
-$redirectPage = "../contact.php?msgsent=thankyou#contactForm";
+$redirectPage = "../contact.php?loc_id=".$_GET['loc_id']."&msgsent=thankyou#contactForm";
 //if an error occurs
-$errorPage = "../contact.php?msgsent=error#contactForm";
+$errorPage = "../contact.php?loc_id=".$_GET['loc_id']."&msgsent=error#contactForm";
 
 $name = $_POST['name'];
 $email_address = $_POST['email'];

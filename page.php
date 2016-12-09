@@ -16,8 +16,6 @@ include 'includes/header.php';
 	echo "<div class='container'>";
 	echo "<div class='row row_pad' id='page'>";
 
-    getPage();
-
     echo "<div class='col-lg-12'>";
     echo "<h1 class='page'>".$pageTitle."</h1>";
     echo "</div>";

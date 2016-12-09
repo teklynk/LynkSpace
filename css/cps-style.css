@@ -218,6 +218,26 @@ footer a:hover {
 	color: #428bca;
 }
 
+#belowfooter .socialDiv {
+	float: left;
+	padding-top: 0px;
+	position: relative;
+	right: 0px;
+	text-align: left;
+	margin-bottom: 12px;
+	clear: both;
+}
+#belowfooter .socialDiv .social-top>.fa-stack-2x {
+	display:none;
+}
+#belowfooter .socialDiv a.pull-right {
+	float:left !important;
+}
+
+#belowfooter .socialDiv .fa-inverse-socialmedia {
+	color: #fff;
+}
+
 .navbar-brand-image {
 	width: 144px;
 	height:77px;
@@ -370,9 +390,14 @@ header.carousel {
 
 /* page = xs */
 @media (max-width: 767px) {
-	.socialDiv {display:none !important;}
-	.navbar-Top>li>a {padding: 10px 20px !important;}
-	.nav>li>a:hover, .nav>li>a:focus {border-bottom: none !important;}
+	/*	.socialDiv {display:none !important;}*/
+	.navbar-Top > li > a {
+		padding: 10px 20px !important;
+	}
+
+	.nav > li > a:hover, .nav > li > a:focus {
+		border-bottom: none !important;
+	}
 
 	#generalinfo {
 		padding: 0px;
@@ -383,8 +408,15 @@ header.carousel {
 		margin: 0px;
 	}
 
-	.navbar-Footer>li>a {
+	.navbar-Search > li {
+		position: relative;
+		display: inherit;
+		float: left;
+	}
+
+	.navbar-Footer > li > a {
 		padding: 0px 10px;
 		margin-bottom: 0px;
 	}
+
 }
