@@ -44,7 +44,7 @@ $pageMsg = "";
 $sessionTimeout = 15; //mins
 
 //Slide Carousel Speed
-$carouselSpeed = "5000";
+$carouselSpeed = "5000"; //5000 = 5secs
 
 
 //establish db connection

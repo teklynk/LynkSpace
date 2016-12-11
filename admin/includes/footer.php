@@ -11,6 +11,7 @@ if(!defined('inc_access')) {
 		<div class="version text-right"><small><a target="_blank" href="https://github.com/teklynk/businessCMS">Github</a></small></div>
     </div>
     <!-- /#wrapper -->
+
 </body>
 </html>
 <?php
