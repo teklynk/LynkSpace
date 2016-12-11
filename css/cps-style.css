@@ -6,6 +6,7 @@ html {
 body {
     font-family: "Century Gothic", Arial, sans-serif;
     padding-top: 0px;
+    /*margin-bottom: 400px;*/
 }
 p {
     font-family: "Arial", sans-serif;
@@ -14,21 +15,14 @@ p {
 a {
     color: #0033a0;
 }
-a:hover,
-a:focus {
+a:hover, a:focus {
     text-decoration: none;
     color: #008eaa;
 }
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
+h1, .h1, h2, .h2, h3, .h3 {
     font-family: "Century Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-h1,
-.h1 {
+h1, .h1 {
     color: #0033a0;
 }
 h3.sublinktitle {
@@ -37,6 +31,7 @@ h3.sublinktitle {
 .text-white {
     color: #fff;
 }
+
 /* cps color palette */
 
 .cps-teal {
@@ -112,11 +107,20 @@ footer a:hover {
     text-decoration: none;
     color: #008eaa;
 }
+
+/*.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    !* Set the fixed height of the footer here *!
+    height: 400px;
+}*/
+
 #belowfooter {
     background-color: #414141;
     padding: 25px;
     color: #fff;
-    height:80px;
+    height: 80px;
 }
 #belowfooter .row {
     padding: 0px 25px 0px 25px;
@@ -132,6 +136,7 @@ footer a:hover {
 .label {
     font-weight: normal;
 }
+
 /* Navigation */
 
 .navbar-brand {
@@ -141,7 +146,6 @@ footer a:hover {
 .navbar {
     min-height: 100px !important;
     /* opacity: 0.9 !important; */
-
     background-color: #FFF !important;
     border-bottom: #DDD 1px solid !important;
     margin-bottom: 0px;
@@ -172,17 +176,14 @@ footer a:hover {
     font-family: "Century Gothic", Sans-serif;
     /*padding-top:15px;*/
 }
-.nav .open>a,
-.nav .open>a:focus,
-.nav .open>a:hover {
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
     background-color: transparent;
     border-color: transparent;
 }
 .navbar-Search>li>a {
     color: #fff;
 }
-.navbar-Search>li>a:focus,
-.navbar-Search>li>a:hover {
+.navbar-Search>li>a:focus, .navbar-Search>li>a:hover {
     background: transparent;
     color: #008eaa;
 }
@@ -201,8 +202,7 @@ footer a:hover {
     padding: 45px 0px 16px 0px;
     padding-bottom: 6px;
 }
-.navbar-Top>li>a:hover,
-.navbar-Top>li>a:focus {
+.navbar-Top>li>a:hover, .navbar-Top>li>a:focus {
     border-bottom: solid 3px #008eaa;
     color: #008eaa;
     background-color: transparent;
@@ -314,6 +314,7 @@ footer a:hover {
     background: linear-gradient(-200deg, #0033a0, #008eaa);
     background-color: #0033a0;
 }
+
 /**Autocomplete UI**/
 
 .ui-autocomplete {
@@ -321,6 +322,7 @@ footer a:hover {
     overflow: hidden;
     overflow-y: auto;
 }
+
 /*** PANEL DEFAULT ***/
 
 .panel.with-nav-tabs .panel-heading {
@@ -332,71 +334,51 @@ footer a:hover {
 .panel.with-nav-tabs .nav-justified {
     margin-bottom: -1px;
 }
-.with-nav-tabs.panel-default .nav-tabs > li > a,
-.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+.with-nav-tabs.panel-default .nav-tabs>li>a, .with-nav-tabs.panel-default .nav-tabs>li>a:hover, .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
     color: #777;
 }
-.with-nav-tabs.panel-default .nav-tabs > .open > a,
-.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
-.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+.with-nav-tabs.panel-default .nav-tabs>.open>a, .with-nav-tabs.panel-default .nav-tabs>.open>a:hover, .with-nav-tabs.panel-default .nav-tabs>.open>a:focus, .with-nav-tabs.panel-default .nav-tabs>li>a:hover, .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
     color: #777;
     background-color: #ddd;
     border-color: transparent;
 }
-.with-nav-tabs.panel-default .nav-tabs > li.active > a,
-.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+.with-nav-tabs.panel-default .nav-tabs>li.active>a, .with-nav-tabs.panel-default .nav-tabs>li.active>a:hover, .with-nav-tabs.panel-default .nav-tabs>li.active>a:focus {
     color: #555;
     background-color: #fff;
     border-color: #ddd;
     border-bottom-color: transparent;
     border-top: solid 3px #d9534f;
 }
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+.with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu {
     background-color: #f5f5f5;
     border-color: #ddd;
 }
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+.with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a {
     color: #777;
 }
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+.with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a:hover, .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
     background-color: #ddd;
 }
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+.with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a, .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover, .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
     color: #fff;
     background-color: #555;
 }
-#searchpac .panel,
-#searchlocations .panel {
+#searchpac .panel, #searchlocations .panel {
     margin-bottom: 0px;
 }
 header.carousel {
     height: 30%;
 }
-.col-md-12>p>img,
-.col-md-8>p>img,
-.col-md-4>p>img,
-.col-md-4>img,
-.col-md-2>img {
+.col-md-12>p>img, .col-md-8>p>img, .col-md-4>p>img, .col-md-4>img, .col-md-2>img {
     margin: 8px;
 }
-.footer-nav,
-.footer-subnav {
+.footer-nav, .footer-subnav {
     /*display: inline-block;*/
-
     margin: 0px 10px 0px 10px;
     padding: 0px;
 }
-.footer-nav>li,
-.footer-subnav>li {
+.footer-nav>li, .footer-subnav>li {
     /*display:inline-block;*/
-
     list-style-type: none;
 }
 .nav-Footer>.cat-Footer {
@@ -420,8 +402,7 @@ header.carousel {
 .navbar-Footer .cat-links li {
     padding-bottom: 10px;
 }
-.navbar-Footer>li>a:focus,
-.navbar-Footer>li>a:hover {
+.navbar-Footer>li>a:focus, .navbar-Footer>li>a:hover {
     text-decoration: none;
     background-color: transparent;
 }
@@ -446,7 +427,6 @@ header.carousel {
 .footer>.navbar-nav>li>a:hover {
     background: none;
 }
-
 #contact>.row>.page-header .socialmedia {
     display: none !important;
 }
@@ -475,22 +455,18 @@ header.carousel {
     margin-top: 0px;
     padding: 0px 15px 0px 15px;
 }
-.database-item,
-.service-item {
+.database-item, .service-item {
     float: left !important;
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
-.database-item:nth-child(5),
-.service-item:nth-child(6) {
+.database-item:nth-child(5), .service-item:nth-child(6) {
     clear: both;
 }
-.database-item:nth-child(9),
-.service-item:nth-child(10) {
+.database-item:nth-child(9), .service-item:nth-child(10) {
     clear: both;
 }
-.database-item:nth-child(13),
-.service-item:nth-child(14) {
+.database-item:nth-child(13), .service-item:nth-child(14) {
     clear: both;
 }
 .navbar-center {
@@ -507,24 +483,24 @@ header.carousel {
     min-height: 400px;
 }
 
-
 /** Media Queries **/
+
+
 /* page > xs */
 
 @media (min-width: 768px) {
     /*.navbar-collapse { padding-left: 180px !important; }   push nav to the right to give logo space */
     /* body { padding-top:110px;}   drop the body down when the nav bar appears on non xs screens */
 }
+
 /* page = xs */
 
 @media (max-width: 767px) {
     /*	.socialDiv {display:none !important;}*/
-
-    .navbar-Top > li > a {
+    .navbar-Top>li>a {
         padding: 10px 20px !important;
     }
-    .nav > li > a:hover,
-    .nav > li > a:focus {
+    .nav>li>a:hover, .nav>li>a:focus {
         border-bottom: none !important;
     }
     .navbar-Footer>.nav-Footer {
@@ -547,7 +523,7 @@ header.carousel {
         padding: 0px;
         margin: 0px;
     }
-    .navbar-Search > li {
+    .navbar-Search>li {
         position: relative;
         display: inherit;
         float: left;

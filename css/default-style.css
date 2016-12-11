@@ -3,10 +3,11 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+
+
 /* Global Styles */
 
-html,
-body {
+html, body {
     height: 100%;
 }
 body {
@@ -19,14 +20,13 @@ body {
 .img-hover:hover {
     opacity: 0.8;
 }
+
 /* Home Page Carousel */
 
 header.carousel {
     height: 50%;
 }
-header.carousel .item,
-header.carousel .item.active,
-header.carousel .carousel-inner {
+header.carousel .item, header.carousel .item.active, header.carousel .carousel-inner {
     height: 100%;
 }
 header.carousel .fill {
@@ -35,11 +35,13 @@ header.carousel .fill {
     background-position: center;
     background-size: cover;
 }
+
 /* 404 Page Styles */
 
 .error-404 {
     font-size: 100px;
 }
+
 /* Pricing Page Styles */
 
 .price {
@@ -56,11 +58,13 @@ header.carousel .fill {
     display: block;
     font-style: italic;
 }
+
 /* Footer Styles */
 
 footer {
     margin: 50px 0;
 }
+
 /* Responsive Styles */
 
 @media(max-width:991px) {
@@ -76,26 +80,19 @@ footer {
         height: 70%;
     }
 }
+
 /** Custom Styles **/
 
-.col-md-12>p>img,
-.col-md-8>p>img,
-.col-md-4>p>img,
-.col-md-4>img,
-.col-md-2>img {
+.col-md-12>p>img, .col-md-8>p>img, .col-md-4>p>img, .col-md-4>img, .col-md-2>img {
     margin: 8px;
 }
-.footer-nav,
-.footer-subnav {
+.footer-nav, .footer-subnav {
     /*display: inline-block;*/
-
     margin: 0px 10px 0px 10px;
     padding: 0px;
 }
-.footer-nav>li,
-.footer-subnav>li {
+.footer-nav>li, .footer-subnav>li {
     /*display:inline-block;*/
-
     list-style-type: none;
 }
 .nav-Footer>.cat-Footer:hover {
