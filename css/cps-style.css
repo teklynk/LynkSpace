@@ -1,12 +1,12 @@
 html {
-    position: relative;
-    min-height: 100%;
-    top: 0px;
+    height: 100%;
 }
 body {
     font-family: "Century Gothic", Arial, sans-serif;
     padding-top: 0px;
-    /*margin-bottom: 400px;*/
+    min-height: 100%;
+    /*display: flex;
+    flex-direction: column;*/
 }
 p {
     font-family: "Arial", sans-serif;
@@ -87,7 +87,7 @@ h3.sublinktitle {
 }
 footer {
     bottom: 0;
-    /*background-color:#001950;*/
+    background-color: #414141;
     background: linear-gradient(#111, #414141, #414141);
     background: -webkit-linear-gradient(#111, #414141, #414141);
     background: -o-linear-gradient(#111, #414141, #414141);
@@ -95,9 +95,7 @@ footer {
     color: #fff;
     padding: 70px 50px 0px 50px;
     margin: 0px;
-    /*position: absolute;*/
     width: 100%;
-    /*height: 50%;*/
 }
 footer a {
     text-decoration: none;
@@ -108,19 +106,12 @@ footer a:hover {
     color: #008eaa;
 }
 
-/*.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    !* Set the fixed height of the footer here *!
-    height: 400px;
-}*/
-
 #belowfooter {
     background-color: #414141;
-    padding: 25px;
+    padding: 24px;
     color: #fff;
     height: 80px;
+    width: 100%;
 }
 #belowfooter .row {
     padding: 0px 25px 0px 25px;
@@ -481,13 +472,12 @@ header.carousel {
 }
 .content {
     padding-top: 12px;
-    padding-bottom: 18px;
-    height: auto;
-    min-height: 400px;
+    padding-bottom: 24px;
+    min-height: 200px;
+    flex: 1;
 }
 
 /** Media Queries **/
-
 
 /* page > xs */
 
@@ -517,7 +507,7 @@ header.carousel {
     .content {
         min-height: 50px;
         padding-top: 4px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
     }
     #generalinfo {
         padding: 0px;
