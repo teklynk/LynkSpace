@@ -87,6 +87,7 @@ $(document).ready(function() {
         return false;
     });
 
+
     // get an array with all querystring values
     // example: var valor = getUrlVars()["valor"];
     function getUrlVars() {
