@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			if ($rowGeneralinfo['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$generalinfoUpdate = "UPDATE generalinfo SET heading='".$_POST["generalinfo_heading"]."', content='".$_POST["generalinfo_content"]."' WHERE loc_id=".$_GET['loc_id']." ";
+				$generalinfoUpdate = "UPDATE generalinfo SET heading='".$_POST["generalinfo_heading"]."', content='".$_POST["generalinfo_content"]."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $generalinfoUpdate);
 			} else {
 				//Do Insert
-				$generalinfoInsert = "INSERT INTO generalinfo (heading, content, loc_id) VALUES ('".$_POST['generalinfo_heading']."', '".$_POST['generalinfo_content']."', ".$_GET['loc_id'].")";
+				$generalinfoInsert = "INSERT INTO generalinfo (heading, content, datetime, loc_id) VALUES ('".$_POST['generalinfo_heading']."', '".$_POST['generalinfo_content']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $generalinfoInsert);
 			}
 

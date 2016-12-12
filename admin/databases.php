@@ -80,7 +80,7 @@ include 'includes/header.php';
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -243,7 +243,7 @@ include 'includes/header.php';
 
     //update heading on submit
     if (($_POST['save_main'])) {
-        $setupUpdate = "UPDATE setup SET customersheading='".$_POST['customer_heading']."', customerscontent='".$_POST['main_content']."' WHERE loc_id=".$_GET['loc_id']." ";
+        $setupUpdate = "UPDATE setup SET customersheading='".$_POST['customer_heading']."', customerscontent='".$_POST['main_content']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
         mysqli_query($db_conn, $setupUpdate);
 
         $customerMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

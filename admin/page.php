@@ -71,7 +71,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['page_title'])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, loc_id) VALUES ('".$_POST['page_title']."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', ".$_GET['loc_id'].")";
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, datetime, loc_id) VALUES ('".$_POST['page_title']."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $pageInsert);
 
 				echo "<script>window.location.href='page.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -255,7 +255,7 @@ if ($_GET['preview']>"") {
 		//update heading on submit
 		if (!empty($_POST['main_heading'])) {
 
-			$setupUpdate = "UPDATE setup SET pageheading='".$_POST['main_heading']."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET pageheading='".$_POST['main_heading']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

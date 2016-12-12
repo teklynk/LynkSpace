@@ -70,7 +70,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['slide_title'])) {
-				$slideInsert = "INSERT INTO slider (title, content, link, image, active, loc_id) VALUES ('".$_POST['slide_title']."', '".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', ".$_GET['loc_id'].")";
+				$slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('".$_POST['slide_title']."', '".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $slideInsert);
 
 				echo "<script>window.location.href='slider.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -237,7 +237,7 @@ if ($_GET['preview']>"") {
 
 		//update heading on submit
 		if (!empty($_POST['main_heading'])) {
-			$setupUpdate = "UPDATE setup SET sliderheading='".$_POST['main_heading']."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET sliderheading='".$_POST['main_heading']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$slideMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

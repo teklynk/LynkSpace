@@ -79,7 +79,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['team_title'])) {
-				$teamInsert = "INSERT INTO team (title, content, image, name, active, loc_id) VALUES ('".$_POST['team_name']."', '".$_POST['team_content']."', '".$_POST['team_image']."', '".$_POST['team_name']."', 'true', ".$_GET['loc_id'].")";
+				$teamInsert = "INSERT INTO team (title, content, image, name, active, datetime, loc_id) VALUES ('".$_POST['team_name']."', '".$_POST['team_content']."', '".$_POST['team_image']."', '".$_POST['team_name']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $teamInsert);
 
 				echo "<script>window.location.href='team.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -210,7 +210,7 @@ if ($_GET['preview']>"") {
 
     //update heading on submit
     if (($_POST['save_main'])) {
-        $setupUpdate = "UPDATE setup SET teamheading='".$_POST['team_heading']."', teamcontent='".$_POST['main_content']."'";
+        $setupUpdate = "UPDATE setup SET teamheading='".$_POST['team_heading']."', teamcontent='".$_POST['main_content']."', datetime='".date("Y-m-d H:i:s")."' ";
         mysqli_query($db_conn, $setupUpdate);
 
         $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

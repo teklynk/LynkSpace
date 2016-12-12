@@ -27,17 +27,17 @@ include 'includes/header.php';
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Update Setup
-				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', logo='".mysqli_real_escape_string($db_conn, $_POST['site_logo'])."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce']." WHERE loc_id=".$_GET['loc_id']." ";
+				$setupUpdate = "UPDATE setup SET title='".$_POST['site_title']."', author='".$site_author."', keywords='".mysqli_real_escape_string($db_conn, $site_keywords)."', description='".mysqli_real_escape_string($db_conn, $site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".$_POST['site_config']."', logo='".mysqli_real_escape_string($db_conn, $_POST['site_logo'])."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".$_POST['site_google']."', tinymce=".$_POST['site_tinymce'].", datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 				//Update Location
-				$locationUpdate = "UPDATE locations SET name='".$_POST['location_name']."' WHERE id=".$_GET['loc_id']." ";
+				$locationUpdate = "UPDATE locations SET name='".$_POST['location_name']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $locationUpdate);
 			} else {
 				//Insert Setup
-				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['site_config']."', '".$_POST['site_logo']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", ".$_GET['loc_id'].")";
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, datetime, loc_id) VALUES ('".$_POST['site_title']."', '".$site_author."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".$_POST['site_config']."', '".$_POST['site_logo']."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".$_POST['site_google']."', ".$_POST['site_tinymce'].", '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $setupInsert);
 				//Insert Location
-				$locationInsert = "INSERT INTO locations (id, name, active) VALUES (".$_GET['loc_id'].", '".$_POST['location_name']."', 'true')";
+				$locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (".$_GET['loc_id'].", '".$_POST['location_name']."', '".date("Y-m-d H:i:s")."', 'true')";
 				mysqli_query($db_conn, $locationInsert);
 			}
 

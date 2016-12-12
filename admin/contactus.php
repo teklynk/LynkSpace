@@ -11,11 +11,11 @@ include 'includes/header.php';
 
 		if($rowContact['loc_id'] == $_GET['loc_id']){
 			//Do Update
-			$contactUpdate = "UPDATE contactus SET heading='".$_POST['contact_heading']."', introtext='".$_POST['contact_introtext']."', mapcode='".mysqli_real_escape_string($db_conn, $_POST['contact_mapcode'])."', email='".$_POST['contact_email']."', sendtoemail='".$_POST['contact_sendtoemail']."', address='".$_POST['contact_address']."', city='".$_POST['contact_city']."', state='".$_POST['contact_state']."', zipcode='".$_POST['contact_zipcode']."', phone='".$_POST['contact_phone']."', hours='".$_POST['contact_hours']."' WHERE loc_id=".$_GET['loc_id']." ";
+			$contactUpdate = "UPDATE contactus SET heading='".$_POST['contact_heading']."', introtext='".$_POST['contact_introtext']."', mapcode='".mysqli_real_escape_string($db_conn, $_POST['contact_mapcode'])."', email='".$_POST['contact_email']."', sendtoemail='".$_POST['contact_sendtoemail']."', address='".$_POST['contact_address']."', city='".$_POST['contact_city']."', state='".$_POST['contact_state']."', zipcode='".$_POST['contact_zipcode']."', phone='".$_POST['contact_phone']."', hours='".$_POST['contact_hours']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $contactUpdate);
 		} else {
 			//Do Insert
-			$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, loc_id) VALUES ('".$_POST['contact_heading']."', '".$_POST['contact_introtext']."', '".mysqli_real_escape_string($db_conn, $_POST['contact_mapcode'])."', '".$_POST["contact_email"]."', '".$_POST['contact_sendtoemail']."', '".$_POST['contact_address']."', '".$_POST['contact_city']."', '".$_POST['contact_state']."', '".$_POST['contact_zipcode']."', '".$_POST['contact_phone']."', '".$_POST['contact_hours']."', ".$_GET['loc_id'].")";
+			$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('".$_POST['contact_heading']."', '".$_POST['contact_introtext']."', '".mysqli_real_escape_string($db_conn, $_POST['contact_mapcode'])."', '".$_POST["contact_email"]."', '".$_POST['contact_sendtoemail']."', '".$_POST['contact_address']."', '".$_POST['contact_city']."', '".$_POST['contact_state']."', '".$_POST['contact_zipcode']."', '".$_POST['contact_phone']."', '".$_POST['contact_hours']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $contactInsert);
 		}
 
