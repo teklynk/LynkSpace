@@ -38,8 +38,10 @@
     //Custom Template in config.php
     echo $customCss;
 
+    //Google Analytics UID in config.php
     if (!empty($googleAnalytics)) {
     ?>
+        <!-- Google Analytics UID in config.php -->
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
@@ -62,7 +64,7 @@
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <!-- jQuery UI AutoComplete CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -73,7 +75,10 @@
     <!-- TLC LS2PAC search script CDN -->
     <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
 
-    <!-- template js file-->
+    <!-- Core js file-->
+    <script type="text/javascript" language="javascript" src="js/functions.js"></script>
+
+    <!-- Template js file-->
     <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
 
     <!-- TLC search variables -->

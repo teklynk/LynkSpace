@@ -11,7 +11,8 @@ if(!defined('inc_access')) {
 		<div class="version text-right"><small><a target="_blank" href="https://github.com/teklynk/businessCMS">Github</a></small></div>
     </div>
     <!-- /#wrapper -->
-
+<!-- Scroll to Top -->
+<a href="#" class="scrollToTop">Scroll To Top</a>
 </body>
 </html>
 <?php
