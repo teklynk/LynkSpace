@@ -208,6 +208,9 @@ footer a:hover {
     background-color: transparent;
     padding-bottom: 16px;
 }
+#searchlocations .nav-tabs>li, #searchpac .nav-tabs>li {
+    margin-bottom: -2px !important;
+}
 .img-landing {
     padding: 4px;
     background-color: transparent;
