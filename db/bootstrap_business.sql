@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.8
--- https://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2016 at 09:06 AM
--- Server version: 5.5.50-MariaDB
--- PHP Version: 5.4.16
+-- Generation Time: Dec 12, 2016 at 09:34 AM
+-- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,14 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE IF NOT EXISTS `aboutus` (
+CREATE TABLE `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
   `image` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `aboutus`
@@ -49,11 +49,11 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `loc_
 -- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
@@ -71,7 +71,7 @@ INSERT INTO `category` (`id`, `name`, `nav_loc_id`) VALUES
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE IF NOT EXISTS `contactus` (
+CREATE TABLE `contactus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -85,14 +85,14 @@ CREATE TABLE IF NOT EXISTS `contactus` (
   `phone` text NOT NULL,
   `hours` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contactus`
 --
 
 INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `loc_id`) VALUES
-(1, 'Contact Us', 'The White House', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryanjones153@gmail.com', 'ryanjones153@gmail.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5', 1),
+(1, 'Contact Us', 'The White House', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'rjones@tlcdelivers.com', 'rjones@tlcdelivers.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5', 1),
 (2, 'Contact 2', 'Contact Us', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryan@email.com', 'ryan@email.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5 M-F, 9-3 Sat', 2);
 
 -- --------------------------------------------------------
@@ -101,7 +101,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE IF NOT EXISTS `customers` (
+CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `icon` text NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
@@ -136,7 +136,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `acti
 -- Table structure for table `featured`
 --
 
-CREATE TABLE IF NOT EXISTS `featured` (
+CREATE TABLE `featured` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `featured` (
   `image` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `featured`
@@ -160,19 +160,19 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE IF NOT EXISTS `generalinfo` (
+CREATE TABLE `generalinfo` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `generalinfo`
 --
 
 INSERT INTO `generalinfo` (`id`, `heading`, `content`, `loc_id`) VALUES
-(1, 'Resources', '<ul>\r\n<li><a href="#">Instructables.com</a></li>\r\n<li><a href="#">GitHub</a></li>\r\n<li><a href="#" target="_blank">Freelancer</a></li>\r\n</ul>', 1),
+(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 1),
 (2, 'General Info 2', '<p>test</p>', 2);
 
 -- --------------------------------------------------------
@@ -181,11 +181,11 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `loc_id`) VALUES
 -- Table structure for table `locations`
 --
 
-CREATE TABLE IF NOT EXISTS `locations` (
+CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `active` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
@@ -666,7 +666,7 @@ INSERT INTO `locations` (`id`, `name`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE IF NOT EXISTS `navigation` (
+CREATE TABLE `navigation` (
   `id` int(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
@@ -675,20 +675,20 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `section` text NOT NULL,
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`) VALUES
-(37, 1, 'Contact Us', 'contact.php?loc_id=1', 0, 'Footer', 'false', 1),
+(37, 1, 'Contact Us', 'contact.php?loc_id=1', 47, 'Footer', 'false', 1),
 (43, 3, 'Careers', 'page.php?page_id=28&loc_id=1', 0, 'Top', 'false', 1),
 (44, 4, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', 1),
 (45, 2, 'Services', '', 47, 'Top', 'false', 1),
-(48, 4, 'Positions', 'page.php?page_id=34&loc_id=1', 0, 'Footer', 'false', 1),
-(50, 2, 'Services', 'services.php?loc_id=1', 0, 'Footer', 'false', 1),
-(51, 3, 'About', 'about.php?loc_id=1', 0, 'Footer', 'false', 1),
+(48, 3, 'Positions', 'page.php?page_id=34&loc_id=1', 46, 'Footer', 'false', 1),
+(50, 2, 'Services', 'services.php?loc_id=1', 47, 'Footer', 'false', 1),
+(51, 4, 'About', 'about.php?loc_id=1', 46, 'Footer', 'false', 1),
 (52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1),
 (54, 1, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1),
 (56, 5, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'true', 1),
@@ -709,7 +709,7 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE IF NOT EXISTS `pages` (
+CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `image` text NOT NULL,
@@ -719,7 +719,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
@@ -743,7 +743,7 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `dat
 -- Table structure for table `services`
 --
 
-CREATE TABLE IF NOT EXISTS `services` (
+CREATE TABLE `services` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL,
   `image` text NOT NULL,
@@ -753,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services`
@@ -775,10 +775,10 @@ INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `acti
 -- Table structure for table `services_icons`
 --
 
-CREATE TABLE IF NOT EXISTS `services_icons` (
+CREATE TABLE `services_icons` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services_icons`
@@ -869,7 +869,7 @@ INSERT INTO `services_icons` (`id`, `icon`) VALUES
 -- Table structure for table `setup`
 --
 
-CREATE TABLE IF NOT EXISTS `setup` (
+CREATE TABLE `setup` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
@@ -895,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `setup` (
   `teamcontent` text NOT NULL,
   `disqus` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
@@ -1377,7 +1377,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `co
 -- Table structure for table `slider`
 --
 
-CREATE TABLE IF NOT EXISTS `slider` (
+CREATE TABLE `slider` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -1386,7 +1386,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `slider`
@@ -1406,7 +1406,7 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `date
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE IF NOT EXISTS `socialmedia` (
+CREATE TABLE `socialmedia` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
@@ -1417,7 +1417,7 @@ CREATE TABLE IF NOT EXISTS `socialmedia` (
   `youtube` text NOT NULL,
   `tumblr` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `socialmedia`
@@ -1433,7 +1433,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE IF NOT EXISTS `team` (
+CREATE TABLE `team` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -1442,7 +1442,7 @@ CREATE TABLE IF NOT EXISTS `team` (
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `team`
@@ -1464,14 +1464,14 @@ INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `dateti
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -1590,82 +1590,82 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `services_icons`
 --
 ALTER TABLE `services_icons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
