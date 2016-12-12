@@ -453,6 +453,9 @@ header.carousel {
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
+.team-item h3 {
+    text-align: center;
+}
 .database-item:nth-child(5), .service-item:nth-child(6), .team-item:nth-child(6) {
     clear: both;
 }
@@ -462,6 +465,7 @@ header.carousel {
 .database-item:nth-child(13), .service-item:nth-child(14), .team-item:nth-child(14) {
     clear: both;
 }
+
 .navbar-center {
     display: inline-block;
     float: none;
