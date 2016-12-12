@@ -5,8 +5,8 @@ body {
     font-family: "Century Gothic", Arial, sans-serif;
     padding-top: 0px;
     min-height: 100%;
-    /*display: flex;
-    flex-direction: column;*/
+    /*display: flex;*/
+    flex-direction: column;
 }
 p {
     font-family: "Arial", sans-serif;
@@ -96,7 +96,6 @@ footer {
     padding: 70px 50px 0px 50px;
     margin: 0px;
     width: 100%;
-    height: 50%;
 }
 footer a {
     text-decoration: none;
@@ -106,7 +105,6 @@ footer a:hover {
     text-decoration: none;
     color: #008eaa;
 }
-
 #belowfooter {
     background-color: #414141;
     padding: 24px;
@@ -474,7 +472,7 @@ header.carousel {
 .content {
     padding-top: 12px;
     padding-bottom: 24px;
-    min-height: 200px;
+    min-height: 400px;
     flex: 1;
 }
 
