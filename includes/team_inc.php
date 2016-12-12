@@ -23,7 +23,7 @@ getTeam();
         }
 
 	    while ($rowTeam = mysqli_fetch_array($sqlTeam)){
-			echo "<div class='col-md-".$teamColWidth." text-center'>";
+			echo "<div class='col-sm-6 col-md-3 col-lg-3 team-item'>";
 			echo "<div class='thumbnail'>";
 
 			if (!empty($rowTeam['image'])){

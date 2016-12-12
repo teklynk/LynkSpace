@@ -453,13 +453,13 @@ header.carousel {
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
-.database-item:nth-child(5), .service-item:nth-child(6) {
+.database-item:nth-child(5), .service-item:nth-child(6), .team-item:nth-child(6) {
     clear: both;
 }
-.database-item:nth-child(9), .service-item:nth-child(10) {
+.database-item:nth-child(9), .service-item:nth-child(10), .team-item:nth-child(10) {
     clear: both;
 }
-.database-item:nth-child(13), .service-item:nth-child(14) {
+.database-item:nth-child(13), .service-item:nth-child(14), .team-item:nth-child(14) {
     clear: both;
 }
 .navbar-center {
