@@ -47,9 +47,5 @@ include 'includes/header.php';
 	echo "</div>";
     echo "</div>";
 
-/*    echo "<div class='container bannerwrapper'>";
-    echo "<hr/>";
-        include 'includes/customers_inc.php';
-    echo "</div>";*/
 include 'includes/footer.php';
 ?>

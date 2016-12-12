@@ -45,33 +45,33 @@ function getPage() {
 	global $pageRefId;
 	global $db_conn;
 
-	if (ctype_digit($_GET['page_id'])) {
-		$pageRefId = $_GET['page_id'];
-		$sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=".$pageRefId." AND loc_id=".$_GET['loc_id']." ");
-		$rowPage = mysqli_fetch_array($sqlPage);
+    if (ctype_digit($_GET['page_id'])) {
+        $pageRefId = $_GET['page_id'];
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=".$pageRefId." AND loc_id=".$_GET['loc_id']." ");
+        $rowPage = mysqli_fetch_array($sqlPage);
 
-		if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
+        if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
 
-			if ($rowPage['image']>"") {
-				$pageImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowPage['image']."' alt='".$rowPage['title']."' title='".$rowPage['title']."'>";
-			}
+            if ($rowPage['image']>"") {
+                $pageImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowPage['image']."' alt='".$rowPage['title']."' title='".$rowPage['title']."'>";
+            }
 
-			$pageTitle = $rowPage['title'];
-			$pageContent = $rowPage['content'];
-			$pageImageAlign = $rowPage['image_align'];
-			$pageDisqus = $rowPage['disqus'];
+            $pageTitle = $rowPage['title'];
+            $pageContent = $rowPage['content'];
+            $pageImageAlign = $rowPage['image_align'];
+            $pageDisqus = $rowPage['disqus'];
 
-		} else {
+        } else {
 
-      		$pageTitle = "Page not found";
-		  	$pageContent = "This page is not available.";
-		}
+            $pageTitle = "Page not found";
+            $pageContent = "This page is not available.";
+        }
 
-	} else {
+    } else {
 
-    	$pageTitle = "Page not found";
-		$pageContent = "This page is not available.";
-	}
+        $pageTitle = "Page not found";
+        $pageContent = "This page is not available.";
+    }
 }
 
 function getAbout() {
@@ -590,7 +590,7 @@ getSetup();
 
 //Call these functions depending on which page you are visiting
 //Sets the page title
-if (is_numeric($_GET['page_id'])>"") {
+if (basename($_SERVER['PHP_SELF'])=="page.php"){
     getPage();
     $theTitle = $setupTitle." - ".$pageTitle;
 } else if (basename($_SERVER['PHP_SELF'])=="about.php"){
@@ -605,6 +605,9 @@ if (is_numeric($_GET['page_id'])>"") {
 } else if (basename($_SERVER['PHP_SELF'])=="team.php"){
     getTeam();
     $theTitle = $setupTitle." - ".$teamHeading;
+} else if (basename($_SERVER['PHP_SELF'])=="databases.php"){
+    getCustomers();
+    $theTitle = $setupTitle." - ".$customersHeading;
 } else {
     $theTitle = $setupTitle;
 }
