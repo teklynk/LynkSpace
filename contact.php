@@ -102,7 +102,6 @@ include 'includes/header.php';
                 </form>
             </div>
         </div>
-        <!--.container-->
     </div>
 <?php
     include 'includes/footer.php';

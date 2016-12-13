@@ -56,4 +56,3 @@ getTeam();
 		echo "</div>";
 	}
 ?>
-<!-- /.row -->
