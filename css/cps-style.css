@@ -441,8 +441,8 @@ header.carousel {
 }
 .content {
     padding-top: 12px;
-    padding-bottom: 24px;
-    min-height: 280px;
+    padding-bottom: 40px;
+    min-height: 400px;
 }
 .content iframe {
     width: 100%;
@@ -487,5 +487,10 @@ header.carousel {
     #belowfooter {
         height: auto;
         padding: 10px 0px 0px 0px;
+    }
+    #belowfooter .container {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
     }
 }
