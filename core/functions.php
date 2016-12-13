@@ -249,9 +249,9 @@ function getTeam() {
 function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
 	global $db_conn;
-    global $navLinkID;
-    global $navLinkSort;
-    global $navLinkskName;
+    global $navLinksID;
+    global $navLinksSort;
+    global $navLinksName;
     global $navLinksUrl;
     global $navLinksCatId;
     global $navLinksSection;
@@ -290,9 +290,9 @@ function getNav($navSection,$dropdown,$pull) {
 	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
         //Variables for $sqlNavLinks SQL Join
-        $navLinkID = $rowNavLinks[0];
-        $navLinkSort = $rowNavLinks[1];
-        $navLinkskName = $rowNavLinks[2];
+        $navLinksID = $rowNavLinks[0];
+        $navLinksSort = $rowNavLinks[1];
+        $navLinksName = $rowNavLinks[2];
         $navLinksUrl = $rowNavLinks[3];
         $navLinksCatId = $rowNavLinks[4];
         $navLinksSection = $rowNavLinks[5];
@@ -339,7 +339,7 @@ function getNav($navSection,$dropdown,$pull) {
 
 		} else {
 			echo "<li>";
-			echo "<a href='".$navLinksUrl."' $navWin>".$navLinkskName."</a>";
+			echo "<a href='".$navLinksUrl."' $navWin>".$navLinksName."</a>";
 			echo "</li>";
 		}
 
