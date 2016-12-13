@@ -249,6 +249,25 @@ function getTeam() {
 function getNav($navSection,$dropdown,$pull) {
 	//EXAMPLE: getNav('Top','true','right')
 	global $db_conn;
+    global $navLinkID;
+    global $navLinkSort;
+    global $navLinkskName;
+    global $navLinksUrl;
+    global $navLinksCatId;
+    global $navLinksSection;
+    global $navLinksWin;
+    global $navLinksLocId;
+    global $navLinksDateTime;
+    global $navLinks_CatId;
+    global $navLinks_CatName;
+    global $navLinks_CatNavLocId;
+    global $navLinks_CatDateTime;
+    global $navCatLinksID;
+    global $navCatLinksSort;
+    global $navCatLinksName;
+    global $navCatLinksUrl;
+    global $navCatLinksCatID;
+
 	echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
 	if ($dropdown=="true"){
 		$dropdownToggle = "dropdown-toggle";
@@ -265,29 +284,53 @@ function getNav($navSection,$dropdown,$pull) {
 	}
 
 	$sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
-	//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.loc_id, category.nav_loc_id
+	//returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.loc_id, category.nav_loc_id
 	$tempLink = 0;
 
 	while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
-		if ($rowNavLinks[6]=='true') {
+        //Variables for $sqlNavLinks SQL Join
+        $navLinkID = $rowNavLinks[0];
+        $navLinkSort = $rowNavLinks[1];
+        $navLinkskName = $rowNavLinks[2];
+        $navLinksUrl = $rowNavLinks[3];
+        $navLinksCatId = $rowNavLinks[4];
+        $navLinksSection = $rowNavLinks[5];
+        $navLinksWin = $rowNavLinks[6];
+        $navLinksLocId = $rowNavLinks[7];
+        $navLinksDateTime = $rowNavLinks[8];
+        $navLinks_CatId = $rowNavLinks[9];
+        $navLinks_CatName = $rowNavLinks[10];
+        $navLinks_CatNavLocId = $rowNavLinks[11];
+        $navLinks_CatDateTime = $rowNavLinks[12];
+
+        //New Window
+		if ($navLinksWin=='true') {
 			$navWin = "target='_blank'";
 		} else {
             $navWin = "";
         }
 
-		if ($rowNavLinks[4] == $rowNavLinks[8] AND $rowNavLinks[4] != 0) { //NOTE: 0=None in the category table
+		if ($navLinksCatId == $navLinks_CatId AND $navLinksCatId != 0) { //NOTE: 0=None in the category table
 
-			if ($rowNavLinks[4] != $tempLink) {
-				$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$rowNavLinks[4]." AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
-				//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, category.id, category.name, category.nav_loc_id
+			if ($navLinksCatId != $tempLink) {
+				$sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=".$navLinksCatId." AND sort>0 AND loc_id='".$_GET['loc_id']."' ORDER BY sort");
+				//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.nav_loc_id
 
 				echo "<li class='$dropdown'>";
-				echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$rowNavLinks[9]." $dropdownCaret</a>";
+				echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>".$navLinks_CatName." $dropdownCaret</a>";
 				echo "<ul class='$dropdownMenu'>";
 				while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)) {
+
+                    //Variables for $rowNavCatLinks SQL Join
+                    $navCatLinksID = $rowNavCatLinks[0];
+                    $navCatLinksSort = $rowNavCatLinks[1];
+                    $navCatLinksName = $rowNavCatLinks[2];
+                    $navCatLinksUrl = $rowNavCatLinks[3];
+                    $navCatLinksCatID = $rowNavCatLinks[4];
+
 					echo "<li>";
-					echo "<a href='".$rowNavCatLinks[3]."' $navWin>".$rowNavCatLinks[2]."</a>";
+                    echo "<a href='".$navCatLinksUrl."' $navWin>".$navCatLinksName."</a>";
 					echo "</li>";
 				}
 				echo "</ul>";
@@ -296,11 +339,11 @@ function getNav($navSection,$dropdown,$pull) {
 
 		} else {
 			echo "<li>";
-			echo "<a href='".$rowNavLinks[3]."' $navWin>".$rowNavLinks[2]."</a>";
+			echo "<a href='".$navLinksUrl."' $navWin>".$navLinkskName."</a>";
 			echo "</li>";
 		}
 
-		$tempLink = $rowNavLinks[4];
+		$tempLink = $navLinksCatId;
 
 	}
 	echo "</ul>";
