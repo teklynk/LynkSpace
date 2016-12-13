@@ -98,10 +98,6 @@ footer a:hover {
     text-decoration: none;
     color: #008eaa;
 }
-.footer {
-    grid-row-start: 2;
-    grid-row-end: 3;
-}
 #belowfooter {
     background-color: #414141;
     padding: 25px;
