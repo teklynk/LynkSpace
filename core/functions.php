@@ -436,6 +436,7 @@ function getCustomers() {
     $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
 
+
 	if (!empty($rowCustomerHeading['customersheading'])) {
 	    $customerHeading = $rowCustomerHeading['customersheading'];
 	}
@@ -650,7 +651,7 @@ if (basename($_SERVER['PHP_SELF'])=="page.php"){
     $theTitle = $setupTitle." - ".$teamHeading;
 } else if (basename($_SERVER['PHP_SELF'])=="databases.php"){
     getCustomers();
-    $theTitle = $setupTitle." - ".$customersHeading;
+    $theTitle = $setupTitle." - ".$customerHeading;
 } else {
     $theTitle = $setupTitle;
 }
