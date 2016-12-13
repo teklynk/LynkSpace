@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2016 at 04:59 PM
+-- Generation Time: Dec 13, 2016 at 12:01 PM
 -- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -53,21 +53,21 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `date
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `nav_loc_id` int(11) NOT NULL
+  `nav_loc_id` int(11) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `datetime`, `nav_loc_id`) VALUES
-(0, 'None', '0000-00-00 00:00:00', 1),
-(45, 'test 2', '0000-00-00 00:00:00', 2),
-(46, 'test', '0000-00-00 00:00:00', 1),
-(47, 'Services', '0000-00-00 00:00:00', 1),
-(48, 'test 2', '2016-12-12 20:16:13', 1),
-(49, 'test 3', '2016-12-12 20:22:38', 1);
+INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`) VALUES
+(0, 'None', 1, '0000-00-00 00:00:00'),
+(45, 'test 2', 2, '0000-00-00 00:00:00'),
+(46, 'test', 1, '0000-00-00 00:00:00'),
+(47, 'Services', 1, '0000-00-00 00:00:00'),
+(48, 'test 2', 1, '2016-12-12 20:16:13'),
+(49, 'test 3', 1, '2016-12-12 20:22:38');
 
 -- --------------------------------------------------------
 
@@ -682,35 +682,35 @@ CREATE TABLE `navigation` (
   `catid` int(11) NOT NULL DEFAULT '29',
   `section` text NOT NULL,
   `win` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `loc_id` int(11) NOT NULL
+  `loc_id` int(11) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
 --
 
-INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `datetime`, `loc_id`) VALUES
-(37, 1, 'Contact Us', 'contact.php?loc_id=1', 47, 'Footer', 'false', '0000-00-00 00:00:00', 1),
-(43, 3, 'Careers', 'page.php?page_id=28&loc_id=1', 0, 'Top', 'false', '2016-12-12 20:23:25', 1),
-(44, 4, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', '2016-12-12 20:23:25', 1),
-(45, 2, 'Services', '', 47, 'Top', 'false', '2016-12-12 20:23:25', 1),
-(48, 3, 'Positions', 'page.php?page_id=34&loc_id=1', 46, 'Footer', 'false', '0000-00-00 00:00:00', 1),
-(50, 2, 'Services', 'services.php?loc_id=1', 47, 'Footer', 'false', '0000-00-00 00:00:00', 1),
-(51, 4, 'About', 'about.php?loc_id=1', 46, 'Footer', 'false', '0000-00-00 00:00:00', 1),
-(52, 5, 'Instructables', '#', 0, 'Footer', 'true', '0000-00-00 00:00:00', 1),
-(54, 1, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', '2016-12-12 20:23:25', 1),
-(56, 5, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'true', '2016-12-12 20:23:25', 1),
-(57, 1, 'Test Link', '#', 0, 'Top', 'true', '0000-00-00 00:00:00', 2),
-(58, 2, 'Test location 2', 'page.php?page_id=35&loc_id=2', 0, 'Top', 'true', '0000-00-00 00:00:00', 2),
-(59, 0, 'Contact', 'contact.php?loc_id=2', 0, 'Top', 'off', '0000-00-00 00:00:00', 2),
-(60, 1, 'Databases', 'databases.php?loc_id=1', 47, 'Top', 'off', '2016-12-12 20:23:25', 1),
-(61, 1, 'LS2PAC', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', '0000-00-00 00:00:00', 1),
-(62, 2, 'LS2Kids', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', '0000-00-00 00:00:00', 1),
-(63, 3, 'Help', 'http://ls2pachelp.tlcdelivers.com/3_3_0/UserApp/LS2PAC.htm', 0, 'Search', 'true', '0000-00-00 00:00:00', 1),
-(64, 1, 'LS2PAC', '#', 0, 'Search', 'off', '0000-00-00 00:00:00', 2),
-(65, 2, 'LS2Kids', '#', 0, 'Search', 'off', '0000-00-00 00:00:00', 2),
-(66, 3, 'Help', '#', 0, 'Search', 'off', '0000-00-00 00:00:00', 2);
+INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`) VALUES
+(37, 1, 'Contact Us', 'contact.php?loc_id=1', 47, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
+(43, 3, 'Careers', 'page.php?page_id=28&loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
+(44, 4, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
+(45, 2, 'Services', '#', 47, 'Top', 'false', 1, '2016-12-13 15:50:39'),
+(48, 3, 'Positions', 'page.php?page_id=34&loc_id=1', 46, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
+(50, 2, 'Services', 'services.php?loc_id=1', 47, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
+(51, 4, 'About', 'about.php?loc_id=1', 46, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
+(52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1, '0000-00-00 00:00:00'),
+(54, 1, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
+(56, 5, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
+(57, 1, 'Test Link', '#', 0, 'Top', 'true', 2, '0000-00-00 00:00:00'),
+(58, 2, 'Test location 2', 'page.php?page_id=35&loc_id=2', 0, 'Top', 'true', 2, '0000-00-00 00:00:00'),
+(59, 0, 'Contact', 'contact.php?loc_id=2', 0, 'Top', 'off', 2, '0000-00-00 00:00:00'),
+(60, 1, 'Databases', 'databases.php?loc_id=1', 47, 'Top', 'false', 1, '2016-12-13 15:50:39'),
+(61, 1, 'LS2PAC', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
+(62, 2, 'LS2Kids', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
+(63, 3, 'Help', 'http://ls2pachelp.tlcdelivers.com/3_3_0/UserApp/LS2PAC.htm', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
+(64, 1, 'LS2PAC', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00'),
+(65, 2, 'LS2Kids', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00'),
+(66, 3, 'Help', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1466,7 +1466,8 @@ INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `dateti
 (8, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-29 14:50:11', 2),
 (9, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-11-14 21:59:52', 2),
 (10, 'Ubuntu-Mate-Radioactive-no-logo.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-11-14 21:59:55', 2),
-(11, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 2);
+(11, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 2),
+(12, 'blue_milky_way_galaxy-2560x1600.jpg', 'Test', 'test test', 'Test', 'true', '2016-12-12 22:11:33', 1);
 
 -- --------------------------------------------------------
 
@@ -1636,7 +1637,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -1671,7 +1672,7 @@ ALTER TABLE `socialmedia`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users`
 --
