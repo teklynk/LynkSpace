@@ -1,11 +1,14 @@
 html {
-    position: relative;
-    min-height: 100%;
-    top: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 body {
     font-family: "Century Gothic", Arial, sans-serif;
     padding-top: 0px;
+    min-height: 100%;
+/*    display: flex;
+    flex-direction: column;*/
 }
 p {
     font-family: "Arial", sans-serif;
@@ -237,7 +240,6 @@ footer a:hover {
     position: relative;
     right: 0px;
     text-align: left;
-    margin-bottom: 12px;
     clear: both;
 }
 #belowfooter .socialDiv .social-top>.fa-stack-2x {
@@ -314,6 +316,7 @@ footer a:hover {
     background: linear-gradient(-200deg, #0033a0, #008eaa);
     background-color: #0033a0;
 }
+
 /**Autocomplete UI**/
 
 .ui-autocomplete {
@@ -502,9 +505,12 @@ header.carousel {
 }
 .content {
     padding-top: 12px;
-    padding-bottom: 18px;
-    height: auto;
-    min-height: 400px;
+    padding-bottom: 24px;
+    /*min-height: 400px;*/
+    flex: 1;
+}
+.content iframe {
+    width:100%;
 }
 
 
@@ -551,5 +557,9 @@ header.carousel {
         position: relative;
         display: inherit;
         float: left;
+    }
+    #belowfooter {
+        height: auto;
+        padding: 10px 0px 0px 0px;
     }
 }

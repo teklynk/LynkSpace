@@ -53,7 +53,7 @@ function getPage() {
         if ($rowPage['active']=='true' AND $pageRefId==$rowPage['id']) {
 
             if ($rowPage['image']>"") {
-                $pageImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowPage['image']."' alt='".$rowPage['title']."' title='".$rowPage['title']."'>";
+                $pageImage = "<img src='uploads/".$_GET['loc_id']."/".$rowPage['image']."' alt='".$rowPage['title']."' title='".$rowPage['title']."'>";
             }
 
             $pageTitle = $rowPage['title'];
@@ -93,7 +93,7 @@ function getAbout() {
 	}
 
 	if (!empty($rowAbout['image'])) {
-		$aboutImage = "<img class='img-responsive' src='uploads/".$_GET['loc_id']."/".$rowAbout['image']."' alt='".$rowAbout['image']."' title='".$rowAbout['image']."'>";
+		$aboutImage = "<img src='uploads/".$_GET['loc_id']."/".$rowAbout['image']."' alt='".$rowAbout['image']."' title='".$rowAbout['image']."'>";
 	}
 
 	$aboutImageAlign = $rowAbout['image_align'];

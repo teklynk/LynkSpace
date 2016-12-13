@@ -33,7 +33,7 @@ include 'includes/header.php';
 
         //Embedded Google Map -->
         if (!empty($contactMap)) {
-            echo "<div class='col-md-8'>";
+            echo "<div class='col-xs-12 col-md-8'>";
             echo $contactMap;
             echo "</div>";
         }
@@ -64,7 +64,7 @@ include 'includes/header.php';
 
         <!-- Contact Form -->
         <div class="row row_pad">
-            <div class="col-md-8">
+            <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
                 <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php?loc_id=<?php echo $_GET['loc_id'];?>">
                     <div class="control-group form-group">
