@@ -1,6 +1,6 @@
 $(document).ready(function() {
     //Add responsive classes to wysiwyg elements
-    $('.content img').addClass('img-responsive hidden-xs');
+    $('.content img').addClass('img-responsive');
     $('.content iframe').addClass('embed-responsive-item iframe');
 });
 

@@ -6,6 +6,7 @@ if (!defined('inc_access')) {
     getSetup(); //from functions.php
 }
 ?>
+<a name="search" tabindex="-1"></a>
 <div class="row" id="searchpac">
 <div class="col-xs-12 col-lg-12">
 

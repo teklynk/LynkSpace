@@ -107,6 +107,9 @@
 </head>
 
 <body>
+<!-- Skip Nav -->
+<a href="#main-content" class="offscreen">Skip to main content</a>
+<a href="#search" class="offscreen">Skip to search</a>
 
 <!-- Navigation -->
 <nav class="navbar navbar-static-top" id='top' role="navigation" style="margin-bottom: 0;">
@@ -142,3 +145,5 @@
     </div>
     <!-- /.container -->
 </nav>
+
+<a name="main-content" tabindex="-1"></a>

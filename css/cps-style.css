@@ -4,6 +4,8 @@ html {
 body {
     font-family: "Century Gothic", Arial, sans-serif;
     padding-top: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 p {
     font-family: "Arial", sans-serif;
@@ -425,7 +427,7 @@ header.carousel {
     padding: 0px 15px 0px 15px;
 }
 .database-item,.service-item {
-    float: left !important;
+    float: right !important;
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
@@ -447,6 +449,29 @@ header.carousel {
 .content iframe {
     width: 100%;
 }
+/** Skip Nav **/
+a.offscreen {
+    position: absolute;
+    left: -1000px;
+    top: -1000px;
+    width: 1px;
+    height: 1px;
+    text-align: left;
+    overflow: hidden;
+}
+a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
+    position: static;
+    left: 4px;
+    top: 4px;
+    padding: 4px;
+    width: auto;
+    height: auto;
+    text-align: left;
+    overflow: visible;
+    display: inline-block;
+    color: #990000;
+}
+
 /** Media Queries **/
 @media (min-width: 768px) {
 
@@ -466,10 +491,15 @@ header.carousel {
         padding-right: 0px;
         padding-left: 0px;
     }
+    .bannerwrapper {
+        padding: 18px;
+    }
     .content {
         min-height: 50px;
         padding-top: 4px;
-        padding-bottom: 10px;
+        padding-bottom: 30px;
+        padding-left: 6px;
+        padding-right: 6px;
         min-height: 50px;
     }
     #generalinfo {
@@ -479,10 +509,17 @@ header.carousel {
         padding: 0px;
         margin: 0px;
     }
+    .panel-default>.panel-heading {
+        display: none;
+    }
     .navbar-Search > li {
         position: relative;
         display: inherit;
         float: left;
+    }
+    footer {
+        padding: 20px;
+        width: 100%;
     }
     #belowfooter {
         height: auto;
