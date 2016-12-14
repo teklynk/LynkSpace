@@ -24,7 +24,6 @@
     <link rel="apple-touch-icon" href="images/iphone120x120.png" sizes="120x120" />
     <link rel="apple-touch-icon" href="images/iPad152x152.png" sizes="152x152" />
 
-
     <title><?php echo $theTitle;?></title>
 
     <!-- Bootstrap Core CSS CDN -->
@@ -64,7 +63,6 @@
     <?php
     }
     ?>
-
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -107,6 +105,7 @@
 </head>
 
 <body>
+
 <!-- Skip Nav -->
 <a href="#main-content" class="offscreen">Skip to main content</a>
 <a href="#search" class="offscreen">Skip to search</a>

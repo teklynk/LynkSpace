@@ -1,4 +1,5 @@
 <!-- Search Locations Section -->
+<a name="search" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
    die('Direct access not permitted');
@@ -18,7 +19,7 @@ if (!defined('inc_access')) {
         });
     });
 </script>
-<a name="search" tabindex="-1"></a>
+
 <div class="row" id="searchlocations">
 <div class="col-xs-12 col-lg-12">
 
