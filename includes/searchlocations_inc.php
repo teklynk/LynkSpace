@@ -9,7 +9,7 @@ if (!defined('inc_access')) {
 
 if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
 ?>
-?>
+
 <script type="text/javascript" language="javascript">
     //Gets the list of locations
     $(document).ready(function(){
