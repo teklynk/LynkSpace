@@ -6,6 +6,8 @@ if (!defined('inc_access')) {
 
     getSetup(); //from functions.php
 }
+
+if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
 ?>
 
 <div class="row" id="searchpac">
@@ -107,3 +109,6 @@ if (!defined('inc_access')) {
 
 </div>
 </div>
+<?php
+}
+?>

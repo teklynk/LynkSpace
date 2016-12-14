@@ -6,6 +6,9 @@ if (!defined('inc_access')) {
 }
     getLocList();
     getSetup(); //from functions.php
+
+if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
+?>
 ?>
 <script type="text/javascript" language="javascript">
     //Gets the list of locations
@@ -134,3 +137,6 @@ if (!defined('inc_access')) {
 
 </div>
 </div>
+<?php
+}
+?>
