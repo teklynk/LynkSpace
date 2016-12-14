@@ -1,11 +1,14 @@
 html {
-    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 body {
     font-family: "Century Gothic", Arial, sans-serif;
-    padding-top: 0px;
     padding: 0px;
     margin: 0px;
+    position: relative;
+    min-height: 100%;
+    top: 0px;
 }
 p {
     font-family: "Arial", sans-serif;
@@ -89,7 +92,8 @@ footer {
     background: -moz-linear-gradient(#111, #414141, #414141);
     color: #fff;
     padding: 70px 50px 0px 50px;
-    margin: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     width: 100%;
 }
 footer a {
@@ -444,7 +448,8 @@ header.carousel {
 .content {
     padding-top: 12px;
     padding-bottom: 40px;
-    min-height: 400px;
+    height: 100%;
+    min-height: 150px;
 }
 .content iframe {
     width: 100%;
@@ -500,7 +505,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         padding-bottom: 30px;
         padding-left: 6px;
         padding-right: 6px;
-        min-height: 50px;
+        min-height: 120px;
     }
     #generalinfo {
         padding: 0px;

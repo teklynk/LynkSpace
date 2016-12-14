@@ -14,7 +14,7 @@ include 'includes/header.php';
     echo "</div>";
 
 ?>
-    <div class="container content" id="contact">
+    <div class="container row_pad" id="contact">
 
         <div class="row row_pad">
             <div class="col-lg-12">
@@ -98,7 +98,11 @@ include 'includes/header.php';
                     <?php
                         echo $contactFormMsg;
                     ?>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

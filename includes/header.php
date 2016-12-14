@@ -105,7 +105,6 @@
 </head>
 
 <body>
-
 <!-- Skip Nav -->
 <a href="#main-content" class="offscreen">Skip to main content</a>
 <a href="#search" class="offscreen">Skip to search</a>
