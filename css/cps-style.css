@@ -451,8 +451,9 @@ header.carousel {
     height: 100%;
     min-height: 150px;
 }
-.content iframe {
+.container iframe {
     width: 100%;
+    border: none;
 }
 /*** Skip Nav ***/
 a.offscreen {

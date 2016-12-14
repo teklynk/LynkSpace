@@ -14,8 +14,8 @@ include 'includes/header.php';
     echo "</div>";
 
 ?>
-    <div class="container row_pad" id="contact">
-
+    <div class="container" id="contact">
+    <div class="content">
         <div class="row row_pad">
             <div class="col-lg-12">
                 <h1 class="contact"><?php echo $contactHeading; ?></h1>
@@ -106,6 +106,7 @@ include 'includes/header.php';
                 </form>
             </div>
         </div>
+    </div>
     </div>
 <?php
     include 'includes/footer.php';
