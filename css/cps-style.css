@@ -427,7 +427,7 @@ header.carousel {
     padding: 0px 15px 0px 15px;
 }
 .database-item,.service-item {
-    float: right !important;
+    /*float: right !important;*/
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
