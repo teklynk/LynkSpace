@@ -23,5 +23,7 @@ define('inc_access', TRUE);
     echo "</div>";
     echo "</div>";
 
+    //echo "<div class='content'></div>";
+
 	include 'includes/footer.php';
 ?>
