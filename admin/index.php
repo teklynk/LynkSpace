@@ -78,7 +78,7 @@ if (isset($_SESSION['loggedIn'])) {
 }
 
 ?>
-    <style>
+    <style type="text/css">
         html, body {
             margin-top: 0px !important;
             background: #BEA69A url('images/color-splash-3.jpg') center center /cover;

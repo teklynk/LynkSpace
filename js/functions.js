@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     // Sticky Footer initial page load and resize
     $(window).on('load resize', function() {
-        var bodyHeight = $('body').height();
+        var bodyHeight = $(window).height();
         var navbarHeight = $('.navbar-static-top').height();
         var bannerHeight = $('.bannerwrapper').height();
         var footerHeight = $('.footer').height();
