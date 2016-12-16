@@ -103,7 +103,7 @@ include 'includes/header.php';
 
 				<div class="form-group">
 					<label>Site Title</label>
-					<input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site">
+					<input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site" required>
 				</div>
 				  <div class="form-group">
 					<label>Author</label>
@@ -125,7 +125,7 @@ include 'includes/header.php';
 					<div class="col-lg-12">
 						<div class="form-group">
 							<label>Location Name</label>
-							<input class="form-control input-sm count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>">
+							<input class="form-control input-sm count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
 						</div>
 					</div>
 				</div>

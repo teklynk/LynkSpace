@@ -55,6 +55,9 @@ if ($IPrange <> '') {
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+    <!-- jQuery Cookie CDN -->
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <!-- Admin Panel Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -168,7 +171,7 @@ if ($IPrange <> '') {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name']; }?></a>
+                <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent fa-lg"></i></a><a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name']; }?></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -212,43 +215,43 @@ if ($IPrange <> '') {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-gear"></i> Setup</a>
+                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-gear" title="Setup"></i> Setup</a>
                     </li>
                     <li>
-                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-photo"></i> Image Slider</a>
+                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-photo" title="Image Slider" ></i> Image Slider</a>
                     </li>
                     <li>
-                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket"></i> Featured</a>
+                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Featured"></i> Featured</a>
                     </li>
                     <li>
-                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Pages</a>
+                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Pages"></i> Pages</a>
                     </li>
                     <li>
-                        <a href="navigation.php?section=<?php echo $navSections[0] ."&".$setLocId;?>"><i class="fa fa-fw fa-bars"></i> Navigation</a>
+                        <a href="navigation.php?section=<?php echo $navSections[0] ."&".$setLocId;?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                     </li>
                     <li>
-                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text"></i> About Us</a>
+                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="About Us"></i> About Us</a>
                     </li>
                     <li>
-                        <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-building"></i> Contact Us</a>
+                        <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-building" title="Contact Us"></i> Contact Us</a>
                     </li>
                     <li>
-                        <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-facebook-square"></i> Social Media</a>
+                        <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-facebook-square" title="Social Media"></i> Social Media</a>
                     </li>
                     <li>
-                        <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text"></i> General Info</a>
+                        <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="General Info"></i> General Info</a>
                     </li>
                     <li>
-                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Services</a>
+                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Services"></i> Services</a>
                     </li>
                     <li>
-                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Team</a>
+                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Team"></i> Team</a>
                     </li>
                     <li>
-                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list"></i> Databases</a>
+                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Databases"></i> Databases</a>
                     </li>
                     <li>
-                        <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder"></i> Uploads</a>
+                        <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder" title="Uploads"></i> Uploads</a>
                     </li>
                 </ul>
             </div>

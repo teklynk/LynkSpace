@@ -1,4 +1,23 @@
 $(document).ready(function() {
+    //Sibebar Nav Menu Collapse
+    if ($.cookie('sidebar-collapse') == 1) {
+        $('.fa-dedent').addClass('fa-indent');
+        $('.side-nav').addClass('shrink');
+        $('#wrapper').addClass('shrink_wrap');
+    }
+
+    $('#button-menu').click(function() {
+        $('.fa-dedent').toggleClass('fa-indent');
+        $('.side-nav').toggleClass('shrink');
+        $('#wrapper').toggleClass('shrink_wrap');
+
+        if ($('.side-nav').hasClass('shrink')) {
+            $.cookie('sidebar-collapse', 1);
+        } else {
+            $.cookie('sidebar-collapse', null);
+        }
+    });
+
     //Character Counter
     //Taken from https://www.codefromjames.com/scripts/charcount.js
     var LabelCounter = 0;

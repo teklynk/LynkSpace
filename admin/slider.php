@@ -125,7 +125,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $slideLabel; ?></label>
-			<input class="form-control input-sm count-text" name="slide_title" maxlength="255" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title">
+			<input class="form-control input-sm count-text" name="slide_title" maxlength="255" value="<?php if($_GET['editslide']){echo $rowSlides['title'];} ?>" placeholder="Slide Title" required>
 		</div>
 		<hr/>
         <div class="form-group">
