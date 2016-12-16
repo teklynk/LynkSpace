@@ -136,10 +136,16 @@ if ($IPrange <> '') {
 	?>
     	<script type="text/javascript">
             $(document).ready(function () {
-    			tinymce.init({
+                tinymce.init({
     			selector: 'textarea.tinymce',
 				theme: 'modern',
-    		    plugins: 'link image',
+    		    plugins: 'link image paste',
+                paste_data_images: false,
+                paste_as_text: true,
+                paste_auto_cleanup_on_paste : true,
+                paste_remove_styles: true,
+                paste_remove_styles_if_webkit: true,
+                paste_strip_class_attributes: true,
     		    image_dimensions: false,
     			object_resizing: false,
     		    document_base_url: '<?php echo $image_baseURL; ?>',
