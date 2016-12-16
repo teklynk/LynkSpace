@@ -15,6 +15,9 @@ $(document).ready(function() {
             $.cookie('sidebar-collapse', 1);
         } else {
             $.cookie('sidebar-collapse', null);
+            $('.fa-dedent').removeClass('fa-indent');
+            $('.side-nav').removeClass('shrink');
+            $('#wrapper').removeClass('shrink_wrap');
         }
     });
 

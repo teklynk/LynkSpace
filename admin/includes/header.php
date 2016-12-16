@@ -32,6 +32,8 @@ if ($IPrange <> '') {
     <meta name="description" content="Bootstrap admin panel 2/2/2015">
     <meta name="author" content="Ryan Jones">
 
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
     <title>Admin Panel</title>
 
     <!-- Bootstrap Core 3.3.5 CSS CDN -->
