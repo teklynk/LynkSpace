@@ -239,7 +239,7 @@ div.version>small>a {
         display: inline-block;
         cursor: pointer;
         color: #9d9d9d;
-        border-right: 1px solid #000;
+        border-right: 1px solid #101010;
     }
     .side-nav {
         position: fixed;
