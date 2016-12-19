@@ -89,7 +89,7 @@ include 'includes/header.php';
 		                                $imageCheck="";
 		                            }
 
-		                            echo "<option value=".$file." $imageCheck>".$file."</option>";
+		                            echo "<option value='".$file."' $imageCheck>".$file."</option>";
 		                        }
 		                        closedir($handle);
 		                    }

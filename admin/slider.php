@@ -152,7 +152,7 @@ if ($_GET['preview']>"") {
 								$imageCheck="";
 							}
 
-							echo "<option value=".$file." $imageCheck>".$file."</option>";
+							echo "<option value='".$file."' $imageCheck>".$file."</option>";
 						}
 
 						closedir($handle);

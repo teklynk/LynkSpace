@@ -139,8 +139,9 @@ include 'core/functions.php';
             $(document).ready(function () {
                 tinymce.init({
     			selector: 'textarea.tinymce',
+                height: 500,
 				theme: 'modern',
-    		    plugins: 'link image paste lists',
+    		    plugins: 'link image lists paste code',
                 paste_data_images: false,
                 paste_as_text: true,
                 paste_auto_cleanup_on_paste : true,
@@ -153,8 +154,9 @@ include 'core/functions.php';
     		    resize: 'both',
     		    image_list: [<?php echo rtrim($fileListJson, ","); ?>],
                 link_list: [<?php echo rtrim($linkListJson, ","); ?>],
-        		menu: {},
-     			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+                menubar: false,
+                toolbar_items_size: 'small',
+     			toolbar: 'insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
     			});
     		});
     	</script>
@@ -196,7 +198,7 @@ include 'core/functions.php';
                 </li>
              </ul>
              <?php
-             if ($_SESSION['user_level'] == 1) {
+             if (isset($_SESSION['loc_list']) AND $_SESSION['user_level'] == 1) {
              ?>
              <ul class="nav navbar-right top-nav">
                   <li style="margin-top:8px;">
