@@ -15,8 +15,6 @@ $_SESSION['file_referer'] = basename($_SERVER['PHP_SELF']);
 
 //DB connection string and Global variables
 include '../db/config.php';
-//Admin panel functions
-include 'core/functions.php';
 
 //IP Range is set in config
 if ($IPrange <> '') {
@@ -24,6 +22,9 @@ if ($IPrange <> '') {
 		die('Permission denied'); //Do not execute any more code on the page
 	}
 }
+
+//Admin panel functions
+include 'core/functions.php';
 ?>
     <meta http-equiv="refresh" content="<?php echo $sessionTimeout * 60;?>;URL=index.php?logout=true" />
     <meta charset="utf-8">

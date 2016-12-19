@@ -58,7 +58,27 @@ header.carousel .fill {
     display: block;
     font-style: italic;
 }
-
+.scrollToTop {
+    display: none;
+    text-decoration: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border: none;
+    text-indent: -999px;
+    background: url('../images/ui.totop.png') no-repeat left top;
+}
+.scrollToTop:hover {
+    width: 50px;
+    height: 50px;
+    display: block;
+    overflow: hidden;
+    float: left;
+    background: url('../images/ui.totop.png') no-repeat left -51px;
+}
 /* Footer Styles */
 
 footer {
@@ -99,6 +119,9 @@ footer {
 }
 #contact>.row>.page-header .socialmedia {
     display: none !important;
+}
+.databases {
+    border-top: solid 1px #eee;
 }
 .fa-6x {
     font-size: 6.0em;

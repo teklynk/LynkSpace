@@ -47,5 +47,11 @@ include 'includes/header.php';
 	echo "</div>";
     echo "</div>";
 
+    echo "<div class='container-fluid'>";
+    echo "<div class='container bannerwrapper databases'>";
+        include 'includes/customers_inc.php';
+    echo "</div>";
+    echo "</div>";
+
 include 'includes/footer.php';
 ?>
