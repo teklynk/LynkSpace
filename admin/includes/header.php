@@ -140,7 +140,7 @@ include 'core/functions.php';
                 tinymce.init({
     			selector: 'textarea.tinymce',
 				theme: 'modern',
-    		    plugins: 'link image paste',
+    		    plugins: 'link image paste lists',
                 paste_data_images: false,
                 paste_as_text: true,
                 paste_auto_cleanup_on_paste : true,
@@ -154,7 +154,7 @@ include 'core/functions.php';
     		    image_list: [<?php echo rtrim($fileListJson, ","); ?>],
                 link_list: [<?php echo rtrim($linkListJson, ","); ?>],
         		menu: {},
-     			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image'
+     			toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
     			});
     		});
     	</script>

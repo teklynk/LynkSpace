@@ -58,7 +58,7 @@ if ($_GET['preview']>"") {
 				$pageUpdate = "UPDATE pages SET title='".$_POST['page_title']."', content='".$_POST['page_content']."', image='".$_POST['page_image']."', image_align='".$_POST['page_image_align']."', active='".$_POST['page_status']."', disqus='".$_POST['page_disqus']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
 				mysqli_query($db_conn, $pageUpdate);
 
-				$pageMsg="<div class='alert alert-success'>The page ".$_POST['page_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$pageMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The page ".$_POST['page_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=".$thePageId." AND loc_id=".$_GET['loc_id']." ");
@@ -249,7 +249,7 @@ if ($_GET['preview']>"") {
 			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
 			mysqli_query($db_conn, $pagesDateUpdate);
 
-			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top. <button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 		//update heading on submit

@@ -67,7 +67,7 @@ include 'includes/header.php';
 				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".$_POST['customer_link']."', content='".$_POST['customer_content']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
-				$customerMsg="<div class='alert alert-success'>The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$customerMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");

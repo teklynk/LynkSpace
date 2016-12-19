@@ -66,7 +66,7 @@ if ($_GET['preview']>"") {
 				$teamUpdate = "UPDATE team SET title='".$_POST['team_title']."', content='".$_POST['team_content']."', name='".$_POST['team_name']."', image='".$_POST['team_image']."', active='".$_POST['team_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $teamUpdate);
 
-				$teamMsg="<div class='alert alert-success'>The team member ".$_POST['team_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$teamMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The team member ".$_POST['team_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ");

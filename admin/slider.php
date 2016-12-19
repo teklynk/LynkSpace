@@ -57,7 +57,7 @@ if ($_GET['preview']>"") {
 				$slideUpdate = "UPDATE slider SET title='".$_POST['slide_title']."', content='".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
 
-				$slideMsg="<div class='alert alert-success'>The slide ".$_POST['slide_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$slideMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The slide ".$_POST['slide_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ");

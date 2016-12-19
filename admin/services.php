@@ -69,7 +69,7 @@ if ($_GET['preview']>"") {
 				$servicesUpdate = "UPDATE services SET title='".$_POST['service_title']."', content='".$_POST['service_content']."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
-				$serviceMsg="<div class='alert alert-success'>The service ".$_POST['service_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The service ".$_POST['service_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
