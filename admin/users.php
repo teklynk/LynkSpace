@@ -8,14 +8,14 @@ define('inc_access', TRUE);
 
 	//update table on submit
 	if (!empty($_POST)) {
-		$username = trim($_POST['user_name']);
-		$useremail = trim(filter_var($_POST['user_email'], FILTER_SANITIZE_EMAIL));
-		$userpass = trim($_POST['user_password']);
-		$userpassconfirm = trim($_POST['user_password_confirm']);
+		$username = $_POST['user_name'];
+		$useremail = $_POST['user_email'];
+		$userpass = $_POST['user_password'];
+		$userpassconfirm = $_POST['user_password_confirm'];
 		$userid = $_POST['user_id'];
 
 		if ($userpass == $userpassconfirm) {
-			$usersUpdate = "UPDATE users SET username='".htmlspecialchars(strip_tags($username), ENT_QUOTES)."', password=password('".strip_tags($userpass)."'), email='".filter_var($useremail, FILTER_VALIDATE_EMAIL)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$userid." ";
+			$usersUpdate = "UPDATE users SET username='".htmlspecialchars(strip_tags(trim($username)), ENT_QUOTES)."', password=password('".strip_tags(trim($userpass))."'), email='".filter_var(trim($useremail), FILTER_VALIDATE_EMAIL)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$userid." ";
 			mysqli_query($db_conn, $usersUpdate);
 
 			$pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
@@ -23,10 +23,17 @@ define('inc_access', TRUE);
 			$pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
 		}
 
+		if ($_GET['updatepassword'] == 'true') {
+			echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "';</script>";
+		}
 	}
 
 	if ($_GET['updatepassword'] == 'true') {
 		$pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=".$_GET['loc_id']."'\"></button></div>";
+	}
+
+	if ($_GET['passwordupdated'] == 'true') {
+		$pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
 	}
 ?>
    <div class="row">
@@ -43,7 +50,7 @@ define('inc_access', TRUE);
 				echo $pageMsg;
 			}
 			?>
-			<form name="userForm" method="post" action="users.php">
+			<form name="userForm" method="post" action="">
 
 				<div class="form-group">
 					<label>User Name</label>
@@ -74,6 +81,7 @@ define('inc_access', TRUE);
                     </div>
 				</div>
 				<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" />
+				<input type="hidden" name="passwdUpdated" value="<?php echo $pagePasswdUpdate; ?>" />
 
 				<button type="submit" name="user_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i>Reset</button>

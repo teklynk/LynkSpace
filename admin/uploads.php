@@ -2,6 +2,7 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
+$fileToUpload = "";
 
 	//Create location upload folder if it does not exist.
 	if (is_numeric($_GET['loc_id'])) {

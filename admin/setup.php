@@ -2,9 +2,6 @@
 define('inc_access', TRUE);
 
 include 'includes/header.php';
-//index
-$_GET['newlocation'] = "";
-$_GET['update'] = "";
 
 	//Get max location ID number
 	$sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
@@ -30,28 +27,27 @@ $_GET['update'] = "";
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Update Setup
-				$setupUpdate = "UPDATE setup SET title='".htmlspecialchars(strip_tags($_POST['site_title']), ENT_QUOTES)."', author='".htmlspecialchars(strip_tags($site_author), ENT_QUOTES)."', keywords='".htmlspecialchars(strip_tags($site_keywords), ENT_QUOTES)."', description='".htmlspecialchars(strip_tags($site_description), ENT_QUOTES)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', logo='".htmlspecialchars(strip_tags($_POST['site_logo']), ENT_QUOTES)."', disqus='".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', googleanalytics='".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', tinymce=".$_POST['site_tinymce'].", datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$setupUpdate = "UPDATE setup SET title='".htmlspecialchars(strip_tags(trim($_POST['site_title'])), ENT_QUOTES)."', author='".htmlspecialchars(strip_tags($site_author), ENT_QUOTES)."', keywords='".htmlspecialchars(strip_tags(trim($site_keywords)), ENT_QUOTES)."', description='".htmlspecialchars(strip_tags(trim($site_description)), ENT_QUOTES)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', logo='".htmlspecialchars(strip_tags($_POST['site_logo']), ENT_QUOTES)."', disqus='".htmlspecialchars(strip_tags($_POST['site_disqus']), ENT_QUOTES)."', googleanalytics='".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', tinymce='1' datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 				//Update Location
-				$locationUpdate = "UPDATE locations SET name='".htmlspecialchars(strip_tags($_POST['location_name']), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$_GET['loc_id']." ";
+				$locationUpdate = "UPDATE locations SET name='".htmlspecialchars(strip_tags(trim($_POST['location_name'])), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $locationUpdate);
 			} else {
 				//Insert Setup
-				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['site_title']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($site_author), ENT_QUOTES)."', '".mysqli_real_escape_string($db_conn, $site_description)."', '".mysqli_real_escape_string($db_conn, $site_keywords)."', '".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', '".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['site_logo']), ENT_QUOTES)."', '".mysqli_real_escape_string($db_conn, $_POST['site_disqus'])."', '".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', ".$_POST['site_tinymce'].", '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['site_title'])), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($site_author)), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($site_description)), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($site_keywords)), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($_POST['site_header'])), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['site_logo']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['site_disqus']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', '1', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $setupInsert);
 				//Insert Location
-				$locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (".$_GET['loc_id'].", '".htmlspecialchars(strip_tags($_POST['location_name']), ENT_QUOTES)."', '".date("Y-m-d H:i:s")."', 'true')";
+				$locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (".$_GET['loc_id'].", '".htmlspecialchars(strip_tags(trim($_POST['location_name'])), ENT_QUOTES)."', '".date("Y-m-d H:i:s")."', 'true')";
 				mysqli_query($db_conn, $locationInsert);
 			}
 
 			echo "<script>window.location.href='setup.php?loc_id=".$_GET['loc_id']."&update=true';</script>";
-
 		}
 	}
 
-    if ($_GET['update']=='true') {
-        $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
-    }
+	if ($_GET['update']=='true') {
+		$pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+	}
 
 ?>
    <div class="row">
@@ -65,16 +61,17 @@ $_GET['update'] = "";
    <div class="row">
 		<div class="col-lg-8">
 		<?php
+
+		if ($pageMsg != "") {
+			echo $pageMsg;
+		}
+
 		//Check if user_level is Admin user
 		if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
 		?>
 			<button type="button" class="btn btn-default" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Location</button>
 			<h2></h2>
 		<?php
-		}
-
-		if ($pageMsg != "") {
-			echo $pageMsg;
 		}
 
 		if ($rowSetup['ls2pac'] == 'true') {

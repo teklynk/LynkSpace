@@ -54,7 +54,7 @@ if ($_GET['preview']>"") {
 					$_POST['slider_status']='false';
 				}
 
-				$slideUpdate = "UPDATE slider SET title='".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)."', content='".htmlspecialchars(strip_tags($_POST['slide_content']), ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
+				$slideUpdate = "UPDATE slider SET title='".htmlspecialchars(strip_tags(trim($_POST['slide_title'])), ENT_QUOTES)."', content='".htmlspecialchars(strip_tags(trim($_POST['slide_content'])), ENT_QUOTES)."', link='".trim($_POST['slide_link'])."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
 
 				$slideMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The slide ".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -70,7 +70,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['slide_title'])) {
-				$slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['slide_content']), ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['slide_title'])), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($_POST['slide_content'])), ENT_QUOTES)."', '".trim($_POST['slide_link'])."', '".$_POST['slide_image']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $slideInsert);
 
 				echo "<script>window.location.href='slider.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -304,7 +304,6 @@ if ($_GET['preview']>"") {
 		while ($rowSlides = mysqli_fetch_array($sqlslides)) {
 			$slideId=$rowSlides['id'];
 			$slideTitle=$rowSlides['title'];
-			$slideTumbnail=$rowSlides['image'];
 			$slideContent=$rowSlides['content'];
 			$slideActive=$rowSlides['active'];
 

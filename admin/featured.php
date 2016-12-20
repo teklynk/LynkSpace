@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$featuredUpdate = "UPDATE featured SET heading='".htmlspecialchars(strip_tags($_POST['featured_heading']), ENT_QUOTES)."', introtext='".htmlspecialchars(strip_tags($_POST['featured_introtext']), ENT_QUOTES)."', content='".$_POST['featured_content']."', image='".$_POST['featured_image']."', image_align='".$_POST['featured_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$featuredUpdate = "UPDATE featured SET heading='".htmlspecialchars(strip_tags(trim($_POST['featured_heading'])), ENT_QUOTES)."', introtext='".htmlspecialchars(strip_tags(trim($_POST['featured_introtext'])), ENT_QUOTES)."', content='".trim($_POST['featured_content'])."', image='".$_POST['featured_image']."', image_align='".$_POST['featured_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $featuredUpdate);
 			} else {
 				//Do Insert
-				$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['featured_heading']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['featured_introtext']), ENT_QUOTES)."', '".$_POST['featured_content']."', '".$_POST['featured_image']."', '".$_POST['featured_image_align']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['featured_heading']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($_POST['featured_introtext'])), ENT_QUOTES)."', '".trim($_POST['featured_content'])."', '".$_POST['featured_image']."', '".$_POST['featured_image_align']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $featuredInsert);
 			}
 
