@@ -25,6 +25,14 @@ $(document).ready(function() {
         }
     });
 
+    //Boostrap alert fadeout and close function
+    //$('.alert-success').fadeOut(5000);
+    setTimeout(function(){
+        $('.alert-success').fadeTo('slow', 0.1, function(){
+            $('.alert-success').alert('close')
+        });
+    }, 5000);
+
     //Character Counter
     //Taken from https://www.codefromjames.com/scripts/charcount.js
     var LabelCounter = 0;

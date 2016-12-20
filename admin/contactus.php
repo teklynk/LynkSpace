@@ -71,7 +71,7 @@ include 'includes/header.php';
 				</div>
 				<div class="form-group">
 					<label>Zipcode</label>
-					<input class="form-control input-sm count-text" name="contact_zipcode" maxlength="100" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
+					<input class="form-control input-sm count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
 				</div>
 				<div class="form-group">
 					<label>Phone</label>
