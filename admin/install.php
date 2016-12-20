@@ -52,7 +52,7 @@ if (!empty($_POST)) {
         }
     }
 
-    $userInsert = "INSERT INTO users (username, email, password) VALUES ('".$_POST["username"]."','".$_POST["useremail"]."', password('$_POST[password]'))";
+    $userInsert = "INSERT INTO users (username, email, password) VALUES ('".strip_tags($_POST['username'])."','".filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)."', password('".strip_tags($_POST['password'])."'))";
     mysqli_query($db_conn, $userInsert);
 
     $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
@@ -110,7 +110,7 @@ if (!empty($_POST)) {
                 <h2 class="form-signin-heading">Create an Admin user</h2>
                 <label for="username" class="sr-only">Username</label>
                 <input class="form-control" type="text" name="username" maxlength="255" placeholder="Username" required>
-                <label for="useremail" class="sr-only">Username</label>
+                <label for="useremail" class="sr-only">User Email</label>
                 <input class="form-control" type="email" name="useremail" maxlength="255" placeholder="Email" required>
                 <label for="password" class="sr-only">Password</label>
                 <input class="form-control" type="text" name="password" maxlength="255" placeholder="Password" required>

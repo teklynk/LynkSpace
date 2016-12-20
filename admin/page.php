@@ -55,10 +55,10 @@ if ($_GET['preview']>"") {
 					$_POST['page_status']='false';
 				}
 
-				$pageUpdate = "UPDATE pages SET title='".$_POST['page_title']."', content='".$_POST['page_content']."', image='".$_POST['page_image']."', image_align='".$_POST['page_image_align']."', active='".$_POST['page_status']."', disqus='".$_POST['page_disqus']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
+				$pageUpdate = "UPDATE pages SET title='".htmlspecialchars(strip_tags($_POST['page_title']), ENT_QUOTES)."', content='".$_POST['page_content']."', image='".$_POST['page_image']."', image_align='".$_POST['page_image_align']."', active='".$_POST['page_status']."', disqus='".$_POST['page_disqus']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thePageId." ";
 				mysqli_query($db_conn, $pageUpdate);
 
-				$pageMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The page ".$_POST['page_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$pageMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The page ".htmlspecialchars(strip_tags($_POST['page_title']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=".$thePageId." AND loc_id=".$_GET['loc_id']." ");
@@ -71,7 +71,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['page_title'])) {
-				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, datetime, loc_id) VALUES ('".$_POST['page_title']."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['page_title']), ENT_QUOTES)."', '".$_POST['page_content']."', '".$_POST['page_image']."', '".$_POST['page_image_align']."', 'true', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $pageInsert);
 
 				echo "<script>window.location.href='page.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -224,13 +224,11 @@ if ($_GET['preview']>"") {
 		$pageMsg="";
 		$delPageId = $_GET['deletepage'];
 		$delPageTitle = $_GET['deletetitle'];
-		$movePageId = $_GET['movepage'];
-		$movePageTitle = $_GET['movetitle'];
 
 		//delete page
 		if ($_GET['deletepage'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delPageTitle."? <a href='page.php?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".htmlspecialchars($delPageTitle, ENT_QUOTES)."? <a href='page.php?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
 		} elseif ($_GET['deletepage'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
@@ -243,19 +241,10 @@ if ($_GET['preview']>"") {
 			echo $deleteMsg;
 		}
 
-		//move pages to top of list
-		if (($_GET['movepage'] AND $_GET['movetitle'])) {
-
-			$pagesDateUpdate = "UPDATE pages SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$movePageId'";
-			mysqli_query($db_conn, $pagesDateUpdate);
-
-			$pageMsg="<div class='alert alert-success'>".$movePageTitle." has been moved to the top. <button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
-		}
-
 		//update heading on submit
 		if (!empty($_POST['main_heading'])) {
 
-			$setupUpdate = "UPDATE setup SET pageheading='".$_POST['main_heading']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET pageheading='".htmlspecialchars(strip_tags($_POST['main_heading']), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -349,8 +338,8 @@ if ($_GET['preview']>"") {
 						<input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$pageTitle', 'page.php?loc_id=".$_GET['loc_id']."&preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."&deletepage=$pageId&deletetitle=$pageTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($pageTitle, ENT_QUOTES)."', 'page.php?loc_id=".$_GET['loc_id']."&preview=$pageId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."&deletepage=$pageId&deletetitle=".htmlspecialchars($pageTitle, ENT_QUOTES)."'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 

@@ -296,12 +296,6 @@ $(document).ready(function() {
             checked: this.checked
         });
     });
-    $('.page_disqus_checkbox').change(function() {
-        $.get('ajax/update_pagedisqus.php?update=true', {
-            id: this.id,
-            checked: this.checked
-        });
-    });
     $('.slider_status_checkbox').change(function() {
         $.get('ajax/update_slideractive.php?update=true', {
             id: this.id,

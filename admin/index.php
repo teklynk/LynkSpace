@@ -17,8 +17,6 @@ unset($_SESSION['loc_id']);
 unset($_SESSION['loc_name']);
 unset($_SESSION['loc_list']);
 
-$message = "";
-
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
@@ -47,6 +45,8 @@ if (!empty($_POST)) {
 
     }
 }
+//Initialize variable
+$message = "";
 
 //if install.php file exists
 if (file_exists('install.php')) {
@@ -131,7 +131,7 @@ if (isset($_SESSION['loggedIn'])) {
                     <section class="login-form">
                         <?php
                         if (!$_GET['forgotpassword']) {
-                            ?>
+                        ?>
                             <form name="frmUser" role="login" class="form-signin" method="post" action="">
                                 <fieldset>
                                     <div class="form-group">
@@ -164,9 +164,9 @@ if (isset($_SESSION['loggedIn'])) {
                             <div class="panel-heading text-center">
                                 <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i class='fa fa-question-circle-o'></i></small>
                             </div>
-                            <?php
+                        <?php
                         } else {
-                            ?>
+                        ?>
                             <form name="frmForgotPassword" role="login" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
@@ -193,7 +193,7 @@ if (isset($_SESSION['loggedIn'])) {
                             <div class="panel-heading text-center">
                                 <small><i class="fa fa-long-arrow-left"></i> <a href="index.php">Back to Login</a></small>
                             </div>
-                            <?php
+                        <?php
                         }
                         ?>
                     </section>

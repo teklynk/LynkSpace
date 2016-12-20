@@ -54,10 +54,10 @@ if ($_GET['preview']>"") {
 					$_POST['slider_status']='false';
 				}
 
-				$slideUpdate = "UPDATE slider SET title='".$_POST['slide_title']."', content='".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
+				$slideUpdate = "UPDATE slider SET title='".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)."', content='".htmlspecialchars(strip_tags($_POST['slide_content']), ENT_QUOTES)."', link='".$_POST['slide_link']."', image='".$_POST['slide_image']."', active='".$_POST['slider_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $slideUpdate);
 
-				$slideMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The slide ".$_POST['slide_title']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$slideMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The slide ".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=".$_GET['loc_id']." ");
@@ -70,7 +70,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['slide_title'])) {
-				$slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('".$_POST['slide_title']."', '".htmlspecialchars($_POST['slide_content'], ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['slide_title']), ENT_QUOTES)."', '".htmlspecialchars(strip_tags($_POST['slide_content']), ENT_QUOTES)."', '".$_POST['slide_link']."', '".$_POST['slide_image']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $slideInsert);
 
 				echo "<script>window.location.href='slider.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -237,7 +237,7 @@ if ($_GET['preview']>"") {
 
 		//update heading on submit
 		if (!empty($_POST['main_heading'])) {
-			$setupUpdate = "UPDATE setup SET sliderheading='".$_POST['main_heading']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET sliderheading='".htmlspecialchars(strip_tags($_POST['main_heading']), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$slideMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -320,9 +320,9 @@ if ($_GET['preview']>"") {
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' ".$isActive.">
 			</td>
 			<td class='col-xs-2'>
-			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$slideTitle', 'slider.php?loc_id=".$_GET['loc_id']."&preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
-			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&moveslide=$slideId&movetitle=$slideTitle'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&deleteslide=$slideId&deletetitle=$slideTitle'\"><i class='fa fa-fw fa-trash'></i></button>
+			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($slideTitle, ENT_QUOTES)."', 'slider.php?loc_id=".$_GET['loc_id']."&preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
+			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&moveslide=$slideId&movetitle=".htmlspecialchars($slideTitle, ENT_QUOTES)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&deleteslide=$slideId&deletetitle=".htmlspecialchars($slideTitle, ENT_QUOTES)."'\"><i class='fa fa-fw fa-trash'></i></button>
 			</td>
 			</tr>";
 		}

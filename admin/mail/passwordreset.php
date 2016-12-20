@@ -40,7 +40,7 @@ if (isset($_POST['user_name'])) {
         $headers .= "Reply-To: noreply@dev-vm.com";
 
         //Update user password with temp_password where email and username match
-        $contactUpdate = "UPDATE users SET username='".$user_name."', password=password('".$temp_password."') WHERE email='".$email_address."' AND username='".$user_name."' ";
+        $contactUpdate = "UPDATE users SET username='".htmlspecialchars(strip_tags($user_name), ENT_QUOTES)."', password=password('".strip_tags($temp_password)."') WHERE email='".filter_var($email_address, FILTER_VALIDATE_EMAIL)."' AND username='".htmlspecialchars(strip_tags($user_name), ENT_QUOTES)."' ";
         mysqli_query($db_conn, $contactUpdate);
 
         mail($email_address, $email_subject, $email_body, $headers);

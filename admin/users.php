@@ -15,7 +15,7 @@ define('inc_access', TRUE);
 		$userid = $_POST['user_id'];
 
 		if ($userpass == $userpassconfirm) {
-			$usersUpdate = "UPDATE users SET username='".$username."', password=password('".$userpass."'), email='".$useremail."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$userid." ";
+			$usersUpdate = "UPDATE users SET username='".htmlspecialchars(strip_tags($username), ENT_QUOTES)."', password=password('".strip_tags($userpass)."'), email='".filter_var($useremail, FILTER_VALIDATE_EMAIL)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$userid." ";
 			mysqli_query($db_conn, $usersUpdate);
 
 			$pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";

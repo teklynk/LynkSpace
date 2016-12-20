@@ -64,10 +64,10 @@ include 'includes/header.php';
 					$_POST['customer_status']='false';
 				}
 
-				$customerUpdate = "UPDATE customers SET name='".$_POST['customer_name']."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".$_POST['customer_link']."', content='".$_POST['customer_content']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
+				$customerUpdate = "UPDATE customers SET name='".htmlspecialchars(strip_tags($_POST['customer_name']), ENT_QUOTES)."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".$_POST['customer_link']."', content='".htmlspecialchars(strip_tags($_POST['customer_content']), ENT_QUOTES)."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
-				$customerMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> The database ".$_POST['customer_name']." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$customerMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The database ".htmlspecialchars(strip_tags($_POST['customer_name']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
@@ -80,7 +80,7 @@ include 'includes/header.php';
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".$_POST['customer_name']."', '".$_POST['customer_link']."', '".$_POST['customer_content']."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".htmlspecialchars(strip_tags($_POST['customer_name']), ENT_QUOTES)."', '".$_POST['customer_link']."', '".htmlspecialchars(strip_tags($_POST['customer_content']), ENT_QUOTES)."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -100,12 +100,6 @@ include 'includes/header.php';
 			} else {
 				$selActive="";
 			}
-		}
-
-		if ($rowCustomer['image']=="") {
-			$thumbNail = "http://placehold.it/140x100&text=No Image";
-		} else {
-			$thumbNail = "../uploads/".$_GET['loc_id']."/".$rowCustomer['image'];
 		}
 ?>
 
@@ -243,7 +237,7 @@ include 'includes/header.php';
 
     //update heading on submit
     if (($_POST['save_main'])) {
-        $setupUpdate = "UPDATE setup SET customersheading='".$_POST['customer_heading']."', customerscontent='".$_POST['main_content']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+        $setupUpdate = "UPDATE setup SET customersheading='".htmlspecialchars(strip_tags($_POST['customer_heading']), ENT_QUOTES)."', customerscontent='".htmlspecialchars(strip_tags($_POST['main_content']), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
         mysqli_query($db_conn, $setupUpdate);
 
         $customerMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -313,7 +307,6 @@ include 'includes/header.php';
 					while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
 						$customerId=$rowCustomer['id'];
 						$customerName=$rowCustomer['name'];
-						$customerTumbnail=$rowCustomer['image'];
 						$customerContent=$rowCustomer['content'];
 						$customerLink=$rowCustomer['link'];
 						$customerActive=$rowCustomer['active'];
@@ -330,9 +323,9 @@ include 'includes/header.php';
 						<input data-toggle='toggle' title='Customer Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('$customerName', 'databases.php?loc_id=".$_GET['loc_id']."&preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&movecustomer=$customerId&movename=$customerName'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&deletecustomer=$customerId&deletename=$customerName'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($customerName, ENT_QUOTES)."', 'databases.php?loc_id=".$_GET['loc_id']."&preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&movecustomer=$customerId&movename=".htmlspecialchars($customerName, ENT_QUOTES)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."&deletecustomer=$customerId&deletename=".htmlspecialchars($customerName, ENT_QUOTES)."'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}

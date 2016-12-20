@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			if ($rowAbout['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$aboutUpdate = "UPDATE aboutus SET heading='".$_POST['about_heading']."', content='".$_POST['about_content']."', image='".$_POST['about_image']."', image_align='".$_POST['about_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$aboutUpdate = "UPDATE aboutus SET heading='".htmlspecialchars(strip_tags($_POST['about_heading']), ENT_QUOTES)."', content='".$_POST['about_content']."', image='".$_POST['about_image']."', image_align='".$_POST['about_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $aboutUpdate);
 			} else {
 				//Do Insert
-				$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, datetime, loc_id) VALUES ('".$_POST['about_heading']."', '".$_POST['about_content']."', '".$_POST['about_image']."', '".$_POST['about_image_align']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags($_POST['about_heading']), ENT_QUOTES)."', '".$_POST['about_content']."', '".$_POST['about_image']."', '".$_POST['about_image_align']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $aboutInsert);
 			}
 
