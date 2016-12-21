@@ -27,7 +27,7 @@ include 'includes/header.php';
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Update Setup
-				$setupUpdate = "UPDATE setup SET title='".htmlspecialchars(strip_tags(trim($_POST['site_title'])), ENT_QUOTES)."', author='".htmlspecialchars(strip_tags($site_author), ENT_QUOTES)."', keywords='".htmlspecialchars(strip_tags(trim($site_keywords)), ENT_QUOTES)."', description='".htmlspecialchars(strip_tags(trim($site_description)), ENT_QUOTES)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', logo='".$_POST['site_logo']."', disqus='".htmlspecialchars(strip_tags($_POST['site_disqus']), ENT_QUOTES)."', googleanalytics='".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', tinymce='1' datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$setupUpdate = "UPDATE setup SET title='".htmlspecialchars(strip_tags(trim($_POST['site_title'])), ENT_QUOTES)."', author='".htmlspecialchars(strip_tags($site_author), ENT_QUOTES)."', keywords='".htmlspecialchars(strip_tags(trim($site_keywords)), ENT_QUOTES)."', description='".htmlspecialchars(strip_tags(trim($site_description)), ENT_QUOTES)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".htmlspecialchars(strip_tags($_POST['site_config']), ENT_QUOTES)."', logo='".$_POST['site_logo']."', disqus='".htmlspecialchars(strip_tags($_POST['site_disqus']), ENT_QUOTES)."', googleanalytics='".htmlspecialchars(strip_tags($_POST['site_google']), ENT_QUOTES)."', tinymce='1', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 				//Update Location
 				$locationUpdate = "UPDATE locations SET name='".htmlspecialchars(strip_tags(trim($_POST['location_name'])), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$_GET['loc_id']." ";
@@ -100,7 +100,7 @@ include 'includes/header.php';
 			$logo = "../uploads/".$_GET['loc_id']."/".$rowSetup['logo'];
 		}
 		?>
-			<form role="setupForm" name="setupForm" method="post" action="">
+			<form name="setupForm" method="post" action="">
 
 				<div class="form-group">
 					<label>Site Title</label>
