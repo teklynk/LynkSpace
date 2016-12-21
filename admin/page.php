@@ -282,16 +282,17 @@ if ($_GET['preview']>"") {
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script>
-	$(document).ready(function() {
-		$('#dataTable').dataTable({
-			"order": [[ 0, "desc" ]],
-			"columnDefs": [{
-				"targets": 'no-sort',
-				"orderable": false,
-			}]
-		});
-	});
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#dataTable').dataTable({
+        "iDisplayLength": 25,
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [{
+            "targets": 'no-sort',
+            "orderable": false,
+        }]
+    });
+});
 </script>
 		<button type="button" class="btn btn-default" onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Page</button>
 		<h2></h2>

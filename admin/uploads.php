@@ -41,9 +41,10 @@ $fileToUpload = "";
 		$deleteMsg="<div class='alert alert-success'>".$_GET["delete"]." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 ?>
-<script>
+<script type="text/javascript">
 $(document).ready(function() {
 	$('#dataTable').dataTable({
+		"iDisplayLength": 25,
 		"order": [[ 1, "desc" ]],
 		"columnDefs": [{
 		"targets": 'no-sort',
