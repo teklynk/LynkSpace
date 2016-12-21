@@ -65,7 +65,7 @@ if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
                     <div class="tab-content">
                         <!-- Schools Search Form -->
                         <div class="tab-pane fade in active" id="tab1default">
-                            <form name="locSearchForm" action="" method="get">
+                            <form name="locSearchForm" action="index.php" method="get">
                             <div id="custom-search-input">
                                 <div class="input-group col-md-12">
 

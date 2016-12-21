@@ -17,7 +17,7 @@ if(!defined('inc_access')) {
 
 	    if (!empty($customerBlurb)) {
 			echo "<div class='col-xs-12 col-lg-12'>";
-			echo "<p class='text-center'>".$customerBlurb."</p>";
+			echo "<p class='text-left'>".$customerBlurb."</p>";
 			echo "</div>";
 		}
 
