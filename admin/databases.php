@@ -64,6 +64,12 @@ include 'includes/header.php';
 					$_POST['customer_status']='false';
 				}
 
+				if ($_POST['customer_featured']=='on') {
+					$_POST['customer_featured']='true';
+				} else {
+					$_POST['customer_featured']='false';
+				}
+
 				$customerUpdate = "UPDATE customers SET name='".htmlspecialchars(strip_tags(trim($_POST['customer_name'])), ENT_QUOTES)."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".trim($_POST['customer_link'])."', content='".htmlspecialchars(strip_tags(trim($_POST['customer_content'])), ENT_QUOTES)."', featured='".$_POST['customer_featured']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
