@@ -132,7 +132,7 @@ include 'includes/header.php';
 		<div class="row">
 			<div class="col-lg-4">
 				<div class="form-group" id="customerfeatured">
-					<label>Feature</label>
+					<label>Featured</label>
 					<div class="checkbox">
 						<label>
 							<input class="customer_featured_checkbox" id="<?php echo $_GET['editcustomer']?>" name="customer_featured" type="checkbox" <?php if($_GET['editcustomer']){echo $selFeatured;}?> data-toggle="toggle">

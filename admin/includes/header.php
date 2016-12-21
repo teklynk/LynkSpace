@@ -230,7 +230,7 @@ include 'core/functions.php';
                         <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-photo" title="Image Slider" ></i> Image Slider</a>
                     </li>
                     <li>
-                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Featured"></i> Featured</a>
+                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Feature"></i> Feature</a>
                     </li>
                     <li>
                         <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Pages"></i> Pages</a>

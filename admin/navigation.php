@@ -270,7 +270,7 @@ include 'includes/header.php';
 							<th>Name</th>
 							<th>URL</th>
 							<th>Category</th>
-							<th><i class="fa fa-fw fa-external-link"></i> External</th>
+							<th>External Link</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -317,7 +317,6 @@ include 'includes/header.php';
 
 									echo "<option value=".$navCatId." ".$isCatSelected.">".$navCatName."</option>";
 								}
-
 							}
 
 							echo "</select></td>
