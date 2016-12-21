@@ -26,7 +26,7 @@ define('inc_access', TRUE);
     if ($_GET['loc_id'] != 1) {
         echo "<div class='container-fluid'>";
         echo "<div class='container bannerwrapper'>";
-        include 'includes/customers_inc.php';
+        include 'includes/customersfeatured_inc.php';
         echo "</div>";
         echo "</div>";
     }
