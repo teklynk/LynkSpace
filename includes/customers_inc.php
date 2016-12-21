@@ -24,7 +24,7 @@ if(!defined('inc_access')) {
         echo "<div class='row row_pad'>";
 
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
-            if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
+            //if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
                 echo "<div class='col-sm-6 col-md-3 col-lg-3 database-item'>";
 
                 if (!empty($rowCustomers['link'])) {
@@ -67,7 +67,7 @@ if(!defined('inc_access')) {
                 }
 
                 echo "</div>"; //col-
-            }
+            //}
         }
 
         echo "</div>"; //row
