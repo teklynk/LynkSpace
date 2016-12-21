@@ -15,11 +15,11 @@ if(!defined('inc_access')) {
 			echo "</div>";
 		}
 
-	    if (!empty($customerBlurb)) {
+/*	    if (!empty($customerBlurb)) {
 			echo "<div class='col-xs-12 col-lg-12'>";
 			echo "<p class='text-left'>".$customerBlurb."</p>";
 			echo "</div>";
-		}
+		}*/
 
         echo "<div class='row row_pad'>";
 
