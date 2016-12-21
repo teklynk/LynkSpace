@@ -21,5 +21,11 @@ define('inc_access', TRUE);
     echo "</div>";
     echo "</div>";
 
+    echo "<div class='container-fluid'>";
+    echo "<div class='container bannerwrapper databases'>";
+    include 'includes/customersfeatured_inc.php';
+    echo "</div>";
+    echo "</div>";
+
     include 'includes/footer.php';
 ?>

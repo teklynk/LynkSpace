@@ -64,13 +64,13 @@ include 'includes/header.php';
 					$_POST['customer_status']='false';
 				}
 
-				$customerUpdate = "UPDATE customers SET name='".htmlspecialchars(strip_tags(trim($_POST['customer_name'])), ENT_QUOTES)."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".trim($_POST['customer_link'])."', content='".htmlspecialchars(strip_tags(trim($_POST['customer_content'])), ENT_QUOTES)."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
+				$customerUpdate = "UPDATE customers SET name='".htmlspecialchars(strip_tags(trim($_POST['customer_name'])), ENT_QUOTES)."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".trim($_POST['customer_link'])."', content='".htmlspecialchars(strip_tags(trim($_POST['customer_content'])), ENT_QUOTES)."', featured='".$_POST['customer_featured']."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
 				$customerMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The database ".htmlspecialchars(strip_tags($_POST['customer_name']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
+			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, featured, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
 			$rowCustomer = mysqli_fetch_array($sqlCustomer);
 
 		//Create new customer
@@ -80,7 +80,7 @@ include 'includes/header.php';
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".htmlspecialchars(strip_tags(trim($_POST['customer_name'])), ENT_QUOTES)."', '".trim($_POST['customer_link'])."', '".htmlspecialchars(strip_tags($_POST['customer_content']), ENT_QUOTES)."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".htmlspecialchars(strip_tags(trim($_POST['customer_name'])), ENT_QUOTES)."', '".trim($_POST['customer_link'])."', '".htmlspecialchars(strip_tags($_POST['customer_content']), ENT_QUOTES)."', 'false', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -100,6 +100,12 @@ include 'includes/header.php';
 			} else {
 				$selActive="";
 			}
+			//featured status
+			if ($rowCustomer['featured']=='true') {
+				$selFeatured="CHECKED";
+			} else {
+				$selFeatured="";
+			}
 		}
 ?>
 
@@ -112,6 +118,18 @@ include 'includes/header.php';
 					<div class="checkbox">
 						<label>
 							<input class="customer_status_checkbox" id="<?php echo $_GET['editcustomer']?>" name="customer_status" type="checkbox" <?php if($_GET['editcustomer']){echo $selActive;}?> data-toggle="toggle">
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group" id="customerfeatured">
+					<label>Feature</label>
+					<div class="checkbox">
+						<label>
+							<input class="customer_featured_checkbox" id="<?php echo $_GET['editcustomer']?>" name="customer_featured" type="checkbox" <?php if($_GET['editcustomer']){echo $selFeatured;}?> data-toggle="toggle">
 						</label>
 					</div>
 				</div>
@@ -297,19 +315,21 @@ include 'includes/header.php';
 				<thead>
 					<tr>
 						<th>Name</th>
+						<th>Featured</th>
 						<th>Active</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
         		<?php
-					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, active, loc_id FROM customers WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
+					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, featured, active, loc_id FROM customers WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
 					while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
 						$customerId=$rowCustomer['id'];
 						$customerName=$rowCustomer['name'];
 						$customerContent=$rowCustomer['content'];
 						$customerLink=$rowCustomer['link'];
 						$customerActive=$rowCustomer['active'];
+						$customerFeatured=$rowCustomer['featured'];
 
 						if ($rowCustomer['active']=='true') {
 							$isActive="CHECKED";
@@ -317,10 +337,19 @@ include 'includes/header.php';
 							$isActive="";
 						}
 
+						if ($rowCustomer['featured']=='true') {
+							$isFeatured="CHECKED";
+						} else {
+							$isFeatured="";
+						}
+
 						echo "<tr>
 						<td><a href='databases.php?loc_id=".$_GET['loc_id']."&editcustomer=$customerId' title='Edit'>".$customerName."</a></td>
 						<td class='col-xs-1'>
-						<input data-toggle='toggle' title='Customer Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' ".$isActive.">
+						<input data-toggle='toggle' title='Database Featured' class='checkbox customer_featured_checkbox' id='$customerId' type='checkbox' ".$isFeatured.">
+						</td>
+						<td class='col-xs-1'>
+						<input data-toggle='toggle' title='Database Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($customerName, ENT_QUOTES)."', 'databases.php?loc_id=".$_GET['loc_id']."&preview=$customerId')\"><i class='fa fa-fw fa-image'></i></button>

@@ -429,13 +429,13 @@ function getCustomers() {
 	global $customerHeading;
 	global $customerBlurb;
 	global $customerNumRows;
+    global $customerFeatured;
     global $customerIcon;
 	global $customerColWidth;
 	global $db_conn;
 
     $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
-
 
 	if (!empty($rowCustomerHeading['customersheading'])) {
 	    $customerHeading = $rowCustomerHeading['customersheading'];
@@ -445,18 +445,8 @@ function getCustomers() {
         $customerBlurb = $rowCustomerHeading['customerscontent'];
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, icon, name, link, content, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT image, icon, name, link, content, featured, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
-
-    if ($customerNumRows==2) {
-    	$customerColWidth=6;
-    } elseif ($customerNumRows==3) {
-    	$customerColWidth=4;
-    } elseif ($customerNumRows==4) {
-    	$customerColWidth=3;
-    } else {
-    	$customerColWidth=2;
-    }
 }
 
 function getSlider($sliderType) {

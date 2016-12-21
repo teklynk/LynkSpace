@@ -328,6 +328,12 @@ $(document).ready(function() {
             checked: this.checked
         });
     });
+    $('.customer_featured_checkbox').change(function() {
+        $.get('ajax/update_customersfeatured.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
     //Not a Robot
     $('#not_robot').change(function() {
         if ($('#user_name').val().length && $('#user_email').val().length) {
