@@ -296,8 +296,8 @@ include 'includes/header.php';
 							}
 
 							echo "<tr>
-							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value=".$navId." >
-							<input class='form-control input-sm' name='nav_sort[]' value=".$navSort." type='text' maxlength='3' data-toggle='tooltip' title='If you would like to hide the Navigation link, enter a Sort Order of 0.'></td>
+							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value='".$navId."' >
+							<input class='form-control input-sm' name='nav_sort[]' value='".$navSort."' type='text' maxlength='3' data-toggle='tooltip' title='If you would like to hide the Navigation link, enter a Sort Order of 0.'></td>
 							<td><input class='form-control input-sm' name='nav_name[]' value='".$navName."' type='text'></td>
 							<td><input class='form-control input-sm' name='nav_url[]' value='".$navURL."' type='text'></td>";
 							echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";

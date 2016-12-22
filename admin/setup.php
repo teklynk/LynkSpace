@@ -154,7 +154,7 @@ include 'includes/header.php';
 									$logoCheck="";
 								}
 
-								echo "<option value=".$file." $logoCheck>".$file."</option>";
+								echo "<option value='".$file."' $logoCheck>".$file."</option>";
 							}
 
 							closedir($handle);

@@ -180,7 +180,7 @@ if ($_GET['preview']>"") {
 							}
 						}
 
-						$pagesStr = $pagesStr . "<option value=".$sliderLinkId." ".$isSelected.">".$sliderLinkTitle."</option>";
+						$pagesStr = $pagesStr . "<option value='".$sliderLinkId."' ".$isSelected.">".$sliderLinkTitle."</option>";
 					}
 
 					$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";

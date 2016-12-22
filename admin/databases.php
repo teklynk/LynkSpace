@@ -177,7 +177,7 @@ include 'includes/header.php';
 					} else {
 						$iconCheck="";
 					}
-					echo "<option value=".$icon." ".$iconCheck.">".$icon."</option>";
+					echo "<option value='".$icon."' ".$iconCheck.">".$icon."</option>";
 				}
 				?>
 			</select>
@@ -201,7 +201,7 @@ include 'includes/header.php';
 								$imageCheck="";
 							}
 
-							echo "<option value=".$file." $imageCheck>".$file."</option>";
+							echo "<option value='".$file."' $imageCheck>".$file."</option>";
 						}
 						closedir($handle);
 					}

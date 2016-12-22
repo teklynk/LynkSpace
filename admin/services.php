@@ -201,7 +201,7 @@ if ($_GET['preview']>"") {
 						$isSelected="";
 					}
 
-					$pagesStr =  $pagesStr . "<option value=".$serviceLinkId." ".$isSelected.">".$serviceLinkTitle."</option>";
+					$pagesStr =  $pagesStr . "<option value='".$serviceLinkId."' ".$isSelected.">".$serviceLinkTitle."</option>";
 				}
 
 				$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
