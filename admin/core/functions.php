@@ -1,6 +1,6 @@
 <?php
 
-//Random password generator
+//Random password generator for password reset
 function generateRandomString($length = 10) {
     global $randomString;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -21,6 +21,18 @@ function getGravatar($email, $size) {
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr) {
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
+}
+
+//Gets clients real IP address
+function getRealIpAddr() {
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $clientip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $clientip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $clientip;
 }
 
 //Location list for level 1 admins only

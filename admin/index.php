@@ -9,6 +9,7 @@ unset($_SESSION['user_name']);
 unset($_SESSION['user_email']);
 unset($_SESSION['user_level']);
 unset($_SESSION['user_loc_id']);
+unset($_SESSION['user_ip']);
 unset($_SESSION['timeout']);
 unset($_SESSION['loggedIn']);
 unset($_SESSION['file_referer']);
@@ -29,6 +30,7 @@ if (!empty($_POST)) {
             $_SESSION['user_email'] = $rowLogin['email'];
             $_SESSION['user_level'] = $rowLogin['level'];
             $_SESSION['user_loc_id'] = $rowLogin['loc_id'];
+            $_SESSION['user_ip'] = getRealIpAddr();
             $_SESSION['timeout'] = time();
             $_SESSION['loggedIn'] = 1;
             $_SESSION['file_referer'] = 'index.php';
@@ -36,7 +38,18 @@ if (!empty($_POST)) {
 
             //If is Admin
             if ($rowLogin['level'] == 1) {
+                //Loads the getLocList as a session variable
                 $_SESSION['loc_list'] = getLocList();
+            }
+
+            //get the client IP and datetime at each log in. update the database row
+            if ($_SESSION['user_ip'] == '') {
+                $_SESSION['user_ip'] = '0.0.0.0';
+            }
+
+            if (isset($_SESSION['user_ip'])) {
+                $userUpdate = "UPDATE users SET clientip='" . $_SESSION['user_ip'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_SESSION['user_id'] . " ";
+                mysqli_query($db_conn, $userUpdate);
             }
 
         } else {
