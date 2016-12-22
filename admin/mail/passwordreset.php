@@ -14,9 +14,9 @@ if (isset($_POST['user_name'])) {
 
     //*7561F5295A1A35CB8E0A7C46921994D383947FA5 = r00t
 
-    $user_name = safeCleanStr($_POST['user_name']);
-    $email_address = safeCleanStr($_POST['user_email']);
-    $temp_password = safeCleanStr($_POST['temp_password']);
+    $user_name = trim($_POST['user_name']);
+    $email_address = trim($_POST['user_email']);
+    $temp_password = $_POST['temp_password'];
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='".$email_address."' AND username='".$user_name."' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -40,7 +40,7 @@ if (isset($_POST['user_name'])) {
         $headers .= "Reply-To: noreply@dev-vm.com";
 
         //Update user password with temp_password where email and username match
-        $contactUpdate = "UPDATE users SET username='".safeCleanStr($user_name)."', password=password('".safeCleanStr($temp_password)."') WHERE email='".filter_var($email_address, FILTER_VALIDATE_EMAIL)."' AND username='".safeCleanStr($user_name)."' ";
+        $contactUpdate = "UPDATE users SET username='".$user_name."', password=password('".$temp_password."') WHERE email='".filter_var($email_address, FILTER_VALIDATE_EMAIL)."' AND username='".$user_name."' ";
         mysqli_query($db_conn, $contactUpdate);
 
         mail($email_address, $email_subject, $email_body, $headers);
