@@ -224,40 +224,40 @@ include 'core/functions.php';
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-gear" title="Setup"></i> Setup</a>
-                    </li>
-                    <li>
-                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-photo" title="Image Slider" ></i> Image Slider</a>
+                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-cogs" title="Setup"></i> Settings</a>
                     </li>
                     <li>
                         <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Feature"></i> Feature</a>
                     </li>
                     <li>
-                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Pages"></i> Pages</a>
+                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-image-o" title="Image Slider" ></i> Image Slider</a>
                     </li>
                     <li>
                         <a href="navigation.php?section=<?php echo $navSections[0] ."&".$setLocId;?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                     </li>
                     <li>
-                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="About Us"></i> About Us</a>
+                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Pages"></i> Pages</a>
                     </li>
                     <li>
-                        <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-building" title="Contact Us"></i> Contact Us</a>
+                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="About Us"></i> About</a>
                     </li>
                     <li>
-                        <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-facebook-square" title="Social Media"></i> Social Media</a>
+                        <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-map-marker" title="Contact Us"></i> Contact</a>
+                    </li>
+                    <li>
+                        <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-share-square" title="Social Media"></i> Social Media</a>
+                    </li>
+                    <li>
+                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Services"></i> Services</a>
+                    </li>
+                    <li>
+                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Team"></i> Team</a>
+                    </li>
+                    <li>
+                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Databases"></i> Databases</a>
                     </li>
                     <li>
                         <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="General Info"></i> General Info</a>
-                    </li>
-                    <li>
-                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Services"></i> Services</a>
-                    </li>
-                    <li>
-                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Team"></i> Team</a>
-                    </li>
-                    <li>
-                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list" title="Databases"></i> Databases</a>
                     </li>
                     <li>
                         <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder" title="Uploads"></i> Uploads</a>

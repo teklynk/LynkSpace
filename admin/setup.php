@@ -53,7 +53,7 @@ include 'includes/header.php';
    <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				Setup <?php if($_GET['newlocation'] == 'true'){echo "(New)";}?>
+				Settings <?php if($_GET['newlocation'] == 'true'){echo "(New)";}?>
 				<small></small>
 			</h1>
 		</div>
