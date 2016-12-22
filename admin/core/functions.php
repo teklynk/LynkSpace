@@ -18,6 +18,10 @@ function getGravatar($email, $size) {
     return "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?d=".urlencode($default)."&s=".$size;
 }
 
+function safeCleanStr($cleanStr) {
+    return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
+}
+
 //Location list for level 1 admins only
 function getLocList() {
     global $locList;

@@ -12,11 +12,11 @@ include 'includes/header.php';
 
 			if ($rowSocial['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$socialUpdate = "UPDATE socialmedia SET heading='".htmlspecialchars(strip_tags(trim($_POST['social_heading'])), ENT_QUOTES)."', facebook='".trim($_POST['social_facebook'])."', youtube='".trim($_POST['social_youtube'])."', twitter='".trim($_POST['social_twitter'])."', google='".trim($_POST['social_google'])."', pinterest='".trim($_POST['social_pinterest'])."', instagram='".trim($_POST['social_instagram'])."', tumblr='".trim($_POST['social_tumblr'])."' WHERE loc_id=".$_GET['loc_id']." ";
+				$socialUpdate = "UPDATE socialmedia SET heading='".safeCleanStr($_POST['social_heading'])."', facebook='".trim($_POST['social_facebook'])."', youtube='".trim($_POST['social_youtube'])."', twitter='".trim($_POST['social_twitter'])."', google='".trim($_POST['social_google'])."', pinterest='".trim($_POST['social_pinterest'])."', instagram='".trim($_POST['social_instagram'])."', tumblr='".trim($_POST['social_tumblr'])."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $socialUpdate);
 			} else {
 				//Do Insert
-				$socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['social_heading'])), ENT_QUOTES)."', '".trim($_POST['social_facebook'])."', '".trim($_POST['social_youtube'])."', '".trim($_POST['social_twitter'])."', '".trim($_POST['social_google'])."', '".trim($_POST['social_pinterest'])."', '".trim($_POST['social_instagram'])."', '".trim($_POST['social_tumblr'])."', ".$_GET['loc_id'].")";
+				$socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id) VALUES ('".safeCleanStr($_POST['social_heading'])."', '".trim($_POST['social_facebook'])."', '".trim($_POST['social_youtube'])."', '".trim($_POST['social_twitter'])."', '".trim($_POST['social_google'])."', '".trim($_POST['social_pinterest'])."', '".trim($_POST['social_instagram'])."', '".trim($_POST['social_tumblr'])."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $socialInsert);
 			}
 

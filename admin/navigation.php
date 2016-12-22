@@ -12,7 +12,7 @@ include 'includes/header.php';
 
 			//Create new category if newcat is true
 			if (!empty($_POST['nav_newcat']) AND $_POST['exist_cat']=="") {
-				$navNewCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['nav_newcat'])), ENT_QUOTES)."', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
+				$navNewCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('".safeCleanStr($_POST['nav_newcat'])."', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
 				mysqli_query($db_conn, $navNewCat);
 
 				//get the new cat id
@@ -35,7 +35,7 @@ include 'includes/header.php';
 
 			}
 
-			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['nav_newname'])), ENT_QUOTES)."', '".$_POST['nav_newurl']."', 0, $getTheCat, '".$getNavSection."','off', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
+			$navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, datetime, loc_id) VALUES ('".safeCleanStr($_POST['nav_newname'])."', '".$_POST['nav_newurl']."', 0, $getTheCat, '".$getNavSection."','off', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
 			mysqli_query($db_conn, $navNew);
 
 		}
@@ -46,7 +46,7 @@ include 'includes/header.php';
 				$_POST['nav_cat'][$i]=0; //None
 			}
 
-			$navUpdate = "UPDATE navigation SET sort=".$_POST['nav_sort'][$i].", name='".htmlspecialchars(strip_tags(trim($_POST['nav_name'][$i])), ENT_QUOTES)."', url='".trim($_POST['nav_url'][$i])."', catid=".$_POST['nav_cat'][$i].", datetime='".date("Y-m-d H:i:s")."', loc_id=".$_GET['loc_id']." WHERE id=".$_POST['nav_id'][$i]." ";
+			$navUpdate = "UPDATE navigation SET sort=".$_POST['nav_sort'][$i].", name='".safeCleanStr($_POST['nav_name'][$i])."', url='".trim($_POST['nav_url'][$i])."', catid=".$_POST['nav_cat'][$i].", datetime='".date("Y-m-d H:i:s")."', loc_id=".$_GET['loc_id']." WHERE id=".$_POST['nav_id'][$i]." ";
 			mysqli_query($db_conn, $navUpdate);
 		}
 
@@ -171,7 +171,7 @@ include 'includes/header.php';
 
 		} elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm']=='yes') {
 
-			$navRenameCatUpdate = "UPDATE category SET name='".htmlspecialchars(strip_tags(trim($renameCatTitle)), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$renameCatId'";
+			$navRenameCatUpdate = "UPDATE category SET name='".safeCleanStr($renameCatTitle)."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$renameCatId'";
 			mysqli_query($db_conn, $navRenameCatUpdate);
 
 			$renameMsg="<div class='alert alert-success fade in' data-alert='alert'>".$renameCatTitle." has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -180,7 +180,7 @@ include 'includes/header.php';
 
 		// add category
 		if ($_GET['addcatname'] > "") {
-            $navAddCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_GET['addcatname'])), ENT_QUOTES)."', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
+            $navAddCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('".safeCleanStr($_GET['addcatname'])."', '".date("Y-m-d H:i:s")."', ".$_SESSION['loc_id'].")";
             mysqli_query($db_conn, $navAddCat);
 
 			echo "<script>window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_SESSION['loc_id']."&addcat=".$_GET['addcatname']."';</script>";

@@ -66,10 +66,10 @@ if ($_GET['preview']>"") {
 					$_POST['service_status']='false';
 				}
 
-				$servicesUpdate = "UPDATE services SET title='".htmlspecialchars(strip_tags(trim($_POST['service_title'])), ENT_QUOTES)."', content='".htmlspecialchars(strip_tags(trim($_POST['service_content'])), ENT_QUOTES)."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".safeCleanStr($_POST['service_content'])."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
-				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".htmlspecialchars(strip_tags($_POST['service_title']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
@@ -82,7 +82,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['service_title'])), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($_POST['service_content'])), ENT_QUOTES)."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, datetime, loc_id) VALUES ('".safeCleanStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				echo "<script>window.location.href='services.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -257,7 +257,7 @@ if ($_GET['preview']>"") {
 
 		//update heading on submit
 		if (($_POST['save_main'])) {
-			$setupUpdate = "UPDATE setup SET servicesheading='".htmlspecialchars(strip_tags($_POST['main_heading']), ENT_QUOTES)."', servicescontent='".htmlspecialchars(strip_tags($_POST['main_content']), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$serviceMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -344,9 +344,9 @@ if ($_GET['preview']>"") {
 				<input data-toggle='toggle' title='Service Active' class='checkbox services_status_checkbox' id='$serviceId' type='checkbox' ".$isActive.">
 				</td>
 				<td class='col-xs-2'>
-				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($serviceTitle, ENT_QUOTES)."', 'services.php?loc_id=".$_GET['loc_id']."&preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
-				<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&moveservice=$serviceId&movetitle=".htmlspecialchars($serviceTitle, ENT_QUOTES)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=".htmlspecialchars($serviceTitle, ENT_QUOTES)."'\"><i class='fa fa-fw fa-trash'></i></button>
+				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".safeCleanStr($serviceTitle)."', 'services.php?loc_id=".$_GET['loc_id']."&preview=$serviceId')\"><i class='fa fa-fw fa-image'></i></button>
+				<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&moveservice=$serviceId&movetitle=".safeCleanStr($serviceTitle)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=".safeCleanStr($serviceTitle)."'\"><i class='fa fa-fw fa-trash'></i></button>
 				</td>
 				</tr>";
 				}

@@ -63,10 +63,10 @@ if ($_GET['preview']>"") {
 					$_POST['team_status']='false';
 				}
 
-				$teamUpdate = "UPDATE team SET title='".htmlspecialchars(strip_tags(trim($_POST['team_title'])), ENT_QUOTES)."', content='".htmlspecialchars(strip_tags(trim($_POST['team_content'])), ENT_QUOTES)."', name='".htmlspecialchars(strip_tags(trim($_POST['team_name'])), ENT_QUOTES)."', image='".$_POST['team_image']."', active='".$_POST['team_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ";
+				$teamUpdate = "UPDATE team SET title='".safeCleanStr($_POST['team_title'])."', content='".safeCleanStr($_POST['team_content'])."', name='".safeCleanStr($_POST['team_name'])."', image='".$_POST['team_image']."', active='".$_POST['team_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $teamUpdate);
 
-				$teamMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The team member ".htmlspecialchars(strip_tags($_POST['team_name']), ENT_QUOTES)." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+				$teamMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The team member ".safeCleanStr($_POST['team_name'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
 			$sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId' AND loc_id=".$_GET['loc_id']." ");
@@ -79,7 +79,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['team_title'])) {
-				$teamInsert = "INSERT INTO team (title, content, image, name, active, datetime, loc_id) VALUES ('".htmlspecialchars(strip_tags(trim($_POST['team_title'])), ENT_QUOTES)."', '".htmlspecialchars(strip_tags(trim($_POST['team_content'])), ENT_QUOTES)."', '".$_POST['team_image']."', '".htmlspecialchars(strip_tags(trim($_POST['team_name'])), ENT_QUOTES)."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$teamInsert = "INSERT INTO team (title, content, image, name, active, datetime, loc_id) VALUES ('".safeCleanStr($_POST['team_title'])."', '".safeCleanStr($_POST['team_content'])."', '".$_POST['team_image']."', '".safeCleanStr($_POST['team_name'])."', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $teamInsert);
 
 				echo "<script>window.location.href='team.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -188,7 +188,7 @@ if ($_GET['preview']>"") {
 		//delete team
 		if ($_GET['deleteteam'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".htmlspecialchars($delteamTitle, ENT_QUOTES)."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delteamTitle."? <a href='?deleteteam=".$delteamId."&deletetitle=".safeCleanStr($delteamTitle)."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			echo $deleteMsg;
 
 		} elseif ($_GET['deleteteam'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
@@ -210,7 +210,7 @@ if ($_GET['preview']>"") {
 
     //update heading on submit
     if (($_POST['save_main'])) {
-        $setupUpdate = "UPDATE setup SET teamheading='".htmlspecialchars(strip_tags(trim($_POST['team_heading'])), ENT_QUOTES)."', teamcontent='".htmlspecialchars(strip_tags(trim($_POST['main_content'])), ENT_QUOTES)."', datetime='".date("Y-m-d H:i:s")."' ";
+        $setupUpdate = "UPDATE setup SET teamheading='".safeCleanStr($_POST['team_heading'])."', teamcontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' ";
         mysqli_query($db_conn, $setupUpdate);
 
         $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -296,9 +296,9 @@ if ($_GET['preview']>"") {
 						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='$teamId' type='checkbox' ".$isActive.">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".htmlspecialchars($teamName, ENT_QUOTES)."', 'team.php?loc_id=".$_GET['loc_id']."&preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&moveteam=$teamId&movetitle=".htmlspecialchars($teamName, ENT_QUOTES)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&deleteteam=$teamId&deletetitle=".htmlspecialchars($teamName, ENT_QUOTES)."'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".safeCleanStr($teamName)."', 'team.php?loc_id=".$_GET['loc_id']."&preview=$teamId')\"><i class='fa fa-fw fa-image'></i></button>
+						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&moveteam=$teamId&movetitle=".safeCleanStr($teamName)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."&deleteteam=$teamId&deletetitle=".safeCleanStr($teamName)."'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
 					}
