@@ -184,6 +184,9 @@ ul.alert-dropdown {
 div.version>small>a {
     color: #fff !important;
 }
+small {
+    color: rgb(123, 123, 123) !important;
+}
 .td_small {
     width: 100px;
 }

@@ -66,11 +66,13 @@ $(document).ready(function() {
         <?php if ($deleteMsg !="") {echo $deleteMsg ;} ?>
 		<form role="uploadForm" method="post" action="" enctype="multipart/form-data">
 			<div class="form-group">
+
 				<label>Upload Image</label>
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="hidden" name="uploadFile" value="1">
 			</div>
 			<button type="submit" name="upload_submit" class="btn btn-default"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
+			<div><small>(.jpg, .gif, .png)</small></div>
 		</form>
 		</div>
 	</div>

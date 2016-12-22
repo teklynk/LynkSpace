@@ -264,7 +264,7 @@ include 'includes/header.php';
         $setupUpdate = "UPDATE setup SET customersheading='".safeCleanStr($_POST['customer_heading'])."', customerscontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
         mysqli_query($db_conn, $setupUpdate);
 
-        $customerMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+        $customerMsg="<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");

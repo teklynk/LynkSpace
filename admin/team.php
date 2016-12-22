@@ -213,7 +213,7 @@ if ($_GET['preview']>"") {
         $setupUpdate = "UPDATE setup SET teamheading='".safeCleanStr($_POST['team_heading'])."', teamcontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' ";
         mysqli_query($db_conn, $setupUpdate);
 
-        $teamMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+        $teamMsg="<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");

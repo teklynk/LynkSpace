@@ -240,7 +240,7 @@ if ($_GET['preview']>"") {
 			$setupUpdate = "UPDATE setup SET sliderheading='".safeCleanStr($_POST['main_heading'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
-			$slideMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$slideMsg="<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 	$sqlSetup = mysqli_query($db_conn, "SELECT sliderheading FROM setup WHERE loc_id=".$_GET['loc_id']." ");

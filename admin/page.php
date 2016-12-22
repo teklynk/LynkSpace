@@ -247,7 +247,7 @@ if ($_GET['preview']>"") {
 			$setupUpdate = "UPDATE setup SET pageheading='".safeCleanStr($_POST['main_heading'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
-			$pageMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$pageMsg="<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 		$sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=".$_GET['loc_id']." ");

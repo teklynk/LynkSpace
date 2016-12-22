@@ -260,7 +260,7 @@ if ($_GET['preview']>"") {
 			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
-			$serviceMsg="<div class='alert alert-success'>The heading has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$serviceMsg="<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 		$sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=".$_GET['loc_id']." ");
