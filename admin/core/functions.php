@@ -18,6 +18,7 @@ function getGravatar($email, $size) {
     return "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?d=".urlencode($default)."&s=".$size;
 }
 
+//Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr) {
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
 }

@@ -52,20 +52,20 @@ if (!empty($_POST)) {
         }
     }
 
-    $userInsert = "INSERT INTO users (username, email, password) VALUES ('".strip_tags(trim($_POST['username']))."','".filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)."', password('".strip_tags(trim($_POST['password']))."'))";
+    $userInsert = "INSERT INTO users (username, email, password) VALUES ('".safeCleanStr($_POST['username'])."','".filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)."', password('".safeCleanStr($_POST['password'])."'))";
     mysqli_query($db_conn, $userInsert);
 
     $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
     $writeline = "<?php\n";
     fwrite($dbfile, $writeline);
-    $writeline = "\$db_servername = '".trim($_POST['dbserver'])."';\n";
+    $writeline = "\$db_servername = '".safeCleanStr($_POST['dbserver'])."';\n";
     fwrite($dbfile, $writeline);
-    $writeline = "\$db_username = '".trim($_POST['dbusername'])."';\n";
+    $writeline = "\$db_username = '".safeCleanStr($_POST['dbusername'])."';\n";
     fwrite($dbfile, $writeline);
-    $writeline = "\$db_password = '".trim($_POST['dbpassword'])."';\n";
+    $writeline = "\$db_password = '".safeCleanStr($_POST['dbpassword'])."';\n";
     fwrite($dbfile, $writeline);
-    $writeline = "\$db_name = '".trim($_POST['dbname'])."';\n";
+    $writeline = "\$db_name = '".safeCleanStr($_POST['dbname'])."';\n";
     fwrite($dbfile, $writeline);
     $writeline = "?>";
     fwrite($dbfile, $writeline);

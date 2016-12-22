@@ -14,9 +14,9 @@ if (isset($_POST['user_name'])) {
 
     //*7561F5295A1A35CB8E0A7C46921994D383947FA5 = r00t
 
-    $user_name = trim($_POST['user_name']);
-    $email_address = trim($_POST['user_email']);
-    $temp_password = trim($_POST['temp_password']);
+    $user_name = safeCleanStr($_POST['user_name']);
+    $email_address = safeCleanStr($_POST['user_email']);
+    $temp_password = safeCleanStr($_POST['temp_password']);
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='".$email_address."' AND username='".$user_name."' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
