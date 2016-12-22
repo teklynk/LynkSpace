@@ -288,7 +288,7 @@ include 'includes/header.php';
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
       </div>
       <div class="modal-body">
 			<iframe id="myModalFile" src="" frameborder="0"></iframe>

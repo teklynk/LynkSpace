@@ -71,7 +71,7 @@ $(document).ready(function() {
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="hidden" name="uploadFile" value="1">
 			</div>
-			<button type="submit" name="upload_submit" class="btn btn-default"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
+			<button type="submit" name="upload_submit" class="btn btn-primary"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
 			<div><small>(.jpg, .gif, .png)</small></div>
 		</form>
 		</div>
