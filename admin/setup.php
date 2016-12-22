@@ -27,7 +27,7 @@ include 'includes/header.php';
 			//update table on submit
 			if ($rowSetup['loc_id'] == $_GET['loc_id']) {
 				//Update Setup
-				$setupUpdate = "UPDATE setup SET title='".safeCleanStr($_POST['site_title'])."', author='".safeCleanStr($site_author)."', keywords='".safeCleanStr($site_keywords)."', description='".safeCleanStr($site_description)."', headercode='".mysqli_real_escape_string($db_conn, $_POST['site_header'])."', config='".safeCleanStr($_POST['site_config'])."', logo='".$_POST['site_logo']."', disqus='".safeCleanStr($_POST['site_disqus'])."', googleanalytics='".safeCleanStr($_POST['site_google'])."', tinymce='1', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$setupUpdate = "UPDATE setup SET title='".safeCleanStr($_POST['site_title'])."', author='".safeCleanStr($site_author)."', keywords='".safeCleanStr($site_keywords)."', description='".safeCleanStr($site_description)."', headercode='".trim($_POST['site_header'])."', config='".safeCleanStr($_POST['site_config'])."', logo='".$_POST['site_logo']."', disqus='".safeCleanStr($_POST['site_disqus'])."', googleanalytics='".safeCleanStr($_POST['site_google'])."', tinymce='1', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $setupUpdate);
 				//Update Location
 				$locationUpdate = "UPDATE locations SET name='".safeCleanStr($_POST['location_name'])."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$_GET['loc_id']." ";
