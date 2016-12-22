@@ -77,8 +77,8 @@ include 'includes/header.php';
 					<input class="form-control input-sm" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" placeholder="https://www.youtube.com/user/username">
 				</div>
 
-				<button type="submit" name="socialmedia_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+				<button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancel</button>
 
 			</form>
 

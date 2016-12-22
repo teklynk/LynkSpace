@@ -197,8 +197,8 @@ if ($_GET['preview']>"") {
         <div class="form-group">
 			<span><?php if($_GET['editslide']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowSlides['datetime']));} ?></span>
 		</div>
-		<button type="submit" name="slider_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+		<button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 	</form>
 
@@ -271,13 +271,13 @@ if ($_GET['preview']>"") {
 			<iframe id="myModalFile" src="" frameborder="0"></iframe>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-	<button type="button" class="btn btn-default" onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Slide</button>
+	<button type="button" class="btn btn-primary" onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Slide</button>
 		<h2></h2>
 		<div class="table-responsive">
     <?php
@@ -319,17 +319,17 @@ if ($_GET['preview']>"") {
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' ".$isActive.">
 			</td>
 			<td class='col-xs-2'>
-			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-xs btn-default' onclick=\"showMyModal('".safeCleanStr($slideTitle)."', 'slider.php?loc_id=".$_GET['loc_id']."&preview=$slideId')\"><i class='fa fa-fw fa-image'></i></button>
-			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&moveslide=$slideId&movetitle=".safeCleanStr($slideTitle)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
-			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&deleteslide=$slideId&deletetitle=".safeCleanStr($slideTitle)."'\"><i class='fa fa-fw fa-trash'></i></button>
+			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('".safeCleanStr($slideTitle)."', 'slider.php?loc_id=".$_GET['loc_id']."&preview=$slideId')\"><i class='fa fa-fw fa-eye'></i></button>
+			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&moveslide=$slideId&movetitle=".safeCleanStr($slideTitle)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
+			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='slider.php?loc_id=".$_GET['loc_id']."&deleteslide=$slideId&deletetitle=".safeCleanStr($slideTitle)."'\"><i class='fa fa-fw fa-trash'></i></button>
 			</td>
 			</tr>";
 		}
 
 		echo "</tbody>
 		</table>
-		<button type='submit' name='sliderNew_submit' class='btn btn-default'><i class='fa fa-fw fa-save'></i> Submit</button>
-		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-refresh'></i> Reset</button>
+		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save</button>
+		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Cancel</button>
 		</form>
 		</div>";
 

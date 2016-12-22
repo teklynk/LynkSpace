@@ -110,8 +110,8 @@ include 'includes/header.php';
 
 				</div>
 
-				<button type="submit" name="aboutus_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i>Reset</button>
+				<button type="submit" name="aboutus_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 			</form>
 

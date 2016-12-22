@@ -194,8 +194,8 @@ include 'includes/header.php';
 		}
 		?>
 			<!-- Category Section -->
-			<button type="button" class="btn btn-default" data-toggle="collapse" id="addCat_button" data-target="#addCatDiv">
-				<i class='fa fa-fw fa-paper-plane'></i> Add a Category
+			<button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button" data-target="#addCatDiv">
+				<i class='fa fa-fw fa-plus'></i> Add a Category
 			</button>
 			<h2></h2>
 
@@ -321,7 +321,7 @@ include 'includes/header.php';
 
 							echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' ".$isActive."></td>
-							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."&deletenav=$navId&deletename=".safeCleanStr($navName)."'\"><i class='fa fa-fw fa-trash'></i></button></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=".$getNavSection."&loc_id=".$_GET['loc_id']."&deletenav=$navId&deletename=".safeCleanStr($navName)."'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
 						}
 
@@ -330,8 +330,8 @@ include 'includes/header.php';
 					</tbody>
 				</table>
 
-				<button type="submit" name="nav_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i>Reset</button>
+				<button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 			</form>
 
 		</div>

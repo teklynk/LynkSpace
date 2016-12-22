@@ -108,8 +108,8 @@ include 'includes/header.php';
 				<textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
 			</div>
 
-			<button type="submit" name="featured_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+			<button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 		</div>
 		</form>
 	</div>

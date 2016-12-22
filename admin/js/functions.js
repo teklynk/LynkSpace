@@ -357,7 +357,7 @@ $(document).ready(function() {
             if ($('#addCatDiv').hasClass('in')) {
                 $('#addCat_button').html("<i class='fa fa-fw fa-times'></i> Close");
             } else {
-                $('#addCat_button').html("<i class='fa fa-fw fa-paper-plane'></i> Add a Category");
+                $('#addCat_button').html("<i class='fa fa-fw fa-plus'></i> Add a Category");
             }
         }, 500);
     });

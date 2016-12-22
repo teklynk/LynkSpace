@@ -83,8 +83,8 @@ define('inc_access', TRUE);
 				<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" />
 				<input type="hidden" name="passwdUpdated" value="<?php echo $pagePasswdUpdate; ?>" />
 
-				<button type="submit" name="user_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i>Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i>Reset</button>
+				<button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 			</form>
 

@@ -185,7 +185,7 @@ div.version>small>a {
     color: #fff !important;
 }
 small {
-    color: rgb(123, 123, 123) !important;
+    color: #848484 !important;
 }
 .td_small {
     width: 100px;
@@ -223,8 +223,16 @@ small {
     float: left;
     background: url('../images/ui.totop.png') no-repeat left -51px;
 }
-/** Media Queries **/
+.side-nav i {
+    margin-right:4px;
+}
+.side-nav>li>a {
+    width: 165px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
 
+/** Media Queries **/
 @media(min-width:768px) {
     body {
         margin-top: 50px;
@@ -258,11 +266,7 @@ small {
         background-color: #222;
         transition: all 0.3s;
     }
-    .side-nav>li>a {
-        width: 165px;
-    }
-    .side-nav li a:hover,
-    .side-nav li a:focus {
+    .side-nav li a:hover, .side-nav li a:focus {
         outline: none;
         background-color: #000 !important;
     }
@@ -270,14 +274,15 @@ small {
         width: 50px;
     }
     .shrink>li>a {
-        display: inline-block;
+        /*display: inline-block;*/
         overflow: hidden;
         width: 0px;
         height: 0px;
-        padding-left: 15px;
-        padding-right: 32px;
-        padding-bottom: 24px;
-        padding-top: 4px;
+        /*padding-left: 15px;*/
+        padding-right: 32px !important;
+        padding-bottom: 24px !important;
+        padding-top: 8px !important;
+        border-bottom: solid 1px #000;
     }
     .shrink_wrap {
         padding-left: 45px !important;

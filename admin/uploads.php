@@ -71,7 +71,7 @@ $(document).ready(function() {
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="hidden" name="uploadFile" value="1">
 			</div>
-			<button type="submit" name="upload_submit" class="btn btn-default"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
+			<button type="submit" name="upload_submit" class="btn btn-primary"><i class='fa fa-fw fa-upload'></i> Upload Image</button>
 			<div><small>(.jpg, .gif, .png)</small></div>
 		</form>
 		</div>
@@ -109,7 +109,7 @@ $(document).ready(function() {
 								<td><a href='#' onclick=\"showMyModal('$file', '$target_dir$file')\" title='Preview'>".$file."</a></td>
 								<td class='col-xs-3'>".$modDate."</td>
 								<td class='col-xs-1'>
-								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-default' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
+								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&delete=$target_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
 								</td>
 								</tr>";
 							}
@@ -133,7 +133,7 @@ $(document).ready(function() {
 			<img id="myModalFile" src="" class="img-responsive center-block" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

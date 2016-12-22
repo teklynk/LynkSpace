@@ -69,7 +69,7 @@ include 'includes/header.php';
 		//Check if user_level is Admin user
 		if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
 		?>
-			<button type="button" class="btn btn-default" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-paper-plane'></i> Add a New Location</button>
+			<button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
 			<h2></h2>
 		<?php
 		}
@@ -220,8 +220,8 @@ include 'includes/header.php';
 					<label><a href="users.php">Change User Info</a></label>
 				</div>
 
-				<button type="submit" name="setup_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+				<button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 			</form>
 

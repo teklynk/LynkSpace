@@ -90,8 +90,8 @@ include 'includes/header.php';
 					<input class="form-control input-sm count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
 				</div>
 
-				<button type="submit" name="contact_submit" class="btn btn-default"><i class='fa fa-fw fa-save'></i> Submit</button>
-				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+				<button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 			</form>
 
