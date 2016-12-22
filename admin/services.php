@@ -285,13 +285,12 @@ if ($_GET['preview']>"") {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalTitle"></h4>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 			</div>
 			<div class="modal-body">
 				<iframe id="myModalFile" src="" frameborder="0"></iframe>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

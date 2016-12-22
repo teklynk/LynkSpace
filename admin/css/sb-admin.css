@@ -80,6 +80,10 @@ li.message-footer {
 ul.alert-dropdown {
     width: 200px;
 }
+.modal-header {
+    padding: 15px;
+    text-align: right;
+}
 /* Side Navigation */
 
 .side-nav>li>ul {
