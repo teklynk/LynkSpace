@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, loc_id FROM featured WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, datetime, loc_id FROM featured WHERE loc_id=".$_GET['loc_id']." ");
 	$rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 	//update table on submit
@@ -107,6 +107,10 @@ include 'includes/header.php';
 				<label>Text / HTML</label>
 				<textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
 			</div>
+
+            <div class="form-group">
+                <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowAbout['datetime'])); ?></small></span>
+            </div>
 
 			<button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, loc_id FROM contactus WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id FROM contactus WHERE loc_id=".$_GET['loc_id']." ");
 	$rowContact = mysqli_fetch_array($sqlContact);
 
 	//update table on submit
@@ -89,6 +89,10 @@ include 'includes/header.php';
 					<label>Send To Email</label>
 					<input class="form-control input-sm count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
 				</div>
+
+                <div class="form-group">
+                    <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowContact['datetime'])); ?></small></span>
+                </div>
 
 				<button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

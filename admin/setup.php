@@ -14,7 +14,7 @@ include 'includes/header.php';
 	$rowLocation = mysqli_fetch_array($sqlLocation);
 
 	//Get setup table columns
-	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, searchdefault, logo, disqus, googleanalytics, tinymce, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, searchdefault, logo, disqus, googleanalytics, tinymce, datetime, loc_id FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 	$rowSetup = mysqli_fetch_array($sqlSetup);
 
 	//update table on submit
@@ -212,13 +212,11 @@ include 'includes/header.php';
 
 				<input type="hidden" name="site_tinymce" value="1">
 
-				<hr/>
-				<div class="form-group">
-					<label>Other Settings</label>
-				</div>
-				<div class="form-group">
-					<label><a href="users.php">Change User Info</a></label>
-				</div>
+                <hr/>
+
+                <div class="form-group">
+                    <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowSetup['datetime'])); ?></small></span>
+                </div>
 
 				<button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

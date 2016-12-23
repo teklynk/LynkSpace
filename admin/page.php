@@ -210,7 +210,7 @@ if ($_GET['preview']>"") {
 			<textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if($_GET['editpage']){echo $rowPages['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET['editpage']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowPages['datetime']));} ?></span>
+			<span><small><?php if($_GET['editpage']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowPages['datetime']));} ?></small></span>
 		</div>
 		<button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

@@ -219,7 +219,7 @@ include 'includes/header.php';
 			<textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if($_GET['editcustomer']){echo $rowCustomer['content'];} ?></textarea>
 		</div>
         <div class="form-group">
-			<span><?php if($_GET['editcustomer']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowCustomer['datetime']));} ?></span>
+			<span><small><?php if($_GET['editcustomer']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowCustomer['datetime']));} ?></small></span>
 		</div>
 
 		<button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>

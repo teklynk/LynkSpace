@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 	include 'includes/header.php';
 
-	$sqlUsers= mysqli_query($db_conn, "SELECT username, password, email, id FROM users WHERE id=".$_SESSION['user_id']." ");
+	$sqlUsers= mysqli_query($db_conn, "SELECT username, password, email, datetime, id FROM users WHERE id=".$_SESSION['user_id']." ");
 	$rowUsers= mysqli_fetch_array($sqlUsers);
 
 	//update table on submit
@@ -82,6 +82,10 @@ define('inc_access', TRUE);
 				</div>
 				<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" />
 				<input type="hidden" name="passwdUpdated" value="<?php echo $pagePasswdUpdate; ?>" />
+
+                <div class="form-group">
+                    <span><small><?php echo "Last Logged In: ".date('m-d-Y, H:i:s',strtotime($rowUsers['datetime'])); ?></small></span>
+                </div>
 
 				<button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

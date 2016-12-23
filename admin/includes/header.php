@@ -190,6 +190,9 @@ include 'core/functions.php';
                         <li>
                             <a href="../index.php?loc_id=<?php echo $_SESSION['loc_id'];?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                         </li>
+                        <li>
+                            <a href="users.php?loc_id=<?php echo $_SESSION['loc_id'];?>"><i class="fa fa-fw fa-user"></i> My Account</a>
+                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
@@ -224,22 +227,22 @@ include 'core/functions.php';
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-cogs" title="Setup"></i> Settings</a>
+                        <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-cog" title="Setup"></i> Settings</a>
                     </li>
                     <li>
                         <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Feature"></i> Feature</a>
                     </li>
                     <li>
-                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-image-o" title="Image Slider" ></i> Image Slider</a>
+                        <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-picture-o" title="Image Slider" ></i> Image Slider</a>
                     </li>
                     <li>
                         <a href="navigation.php?section=<?php echo $navSections[0] ."&".$setLocId;?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                     </li>
                     <li>
-                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Pages"></i> Pages</a>
+                        <a href="page.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="Pages"></i> Pages</a>
                     </li>
                     <li>
-                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="About Us"></i> About</a>
+                        <a href="aboutus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-building" title="About Us"></i> About</a>
                     </li>
                     <li>
                         <a href="contactus.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-map-marker" title="Contact Us"></i> Contact</a>
@@ -251,16 +254,16 @@ include 'core/functions.php';
                         <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Services"></i> Services</a>
                     </li>
                     <li>
-                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Team"></i> Team</a>
+                        <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-users" title="Team"></i> Team</a>
                     </li>
                     <li>
-                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Databases"></i> Databases</a>
+                        <a href="databases.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>
                     </li>
                     <li>
-                        <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-file-text" title="General Info"></i> General Info</a>
+                        <a href="generalinfo.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-info-circle" title="General Info"></i> General Info</a>
                     </li>
                     <li>
-                        <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-folder" title="Uploads"></i> Uploads</a>
+                        <a href="uploads.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-upload" title="Uploads"></i> Uploads</a>
                     </li>
                 </ul>
             </div>
