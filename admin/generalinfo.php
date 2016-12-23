@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, loc_id FROM generalinfo WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, datetime, loc_id FROM generalinfo WHERE loc_id=".$_GET['loc_id']." ");
 	$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 	//update table on submit
@@ -54,6 +54,10 @@ include 'includes/header.php';
 					<label>Text / HTML</label>
 					<textarea class="form-control input-sm tinymce" name="generalinfo_content" rows="20"><?php echo $rowGeneralinfo['content']; ?></textarea>
 				</div>
+
+                <div class="form-group">
+                    <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowGeneralinfo['datetime'])); ?></small></span>
+                </div>
 
 				<button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
 				<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

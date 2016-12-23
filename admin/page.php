@@ -18,7 +18,7 @@ if ($_GET['preview']>"") {
 	}
 
 	if ($rowPagePreview['image']>"") {
-		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowPagePreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+		echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowPagePreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
 	}
 
 	echo $rowPagePreview['content'];

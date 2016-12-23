@@ -230,7 +230,7 @@ include 'core/functions.php';
                         <a href="setup.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-cog" title="Setup"></i> Settings</a>
                     </li>
                     <li>
-                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-rocket" title="Feature"></i> Feature</a>
+                        <a href="featured.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-magic" title="Feature"></i> Feature</a>
                     </li>
                     <li>
                         <a href="slider.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-picture-o" title="Image Slider" ></i> Image Slider</a>
@@ -251,7 +251,7 @@ include 'core/functions.php';
                         <a href="socialmedia.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-share-square" title="Social Media"></i> Social Media</a>
                     </li>
                     <li>
-                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-th-list" title="Services"></i> Services</a>
+                        <a href="services.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-list-alt" title="Services"></i> Services</a>
                     </li>
                     <li>
                         <a href="team.php?<?php echo $setLocId;?>"><i class="fa fa-fw fa-users" title="Team"></i> Team</a>

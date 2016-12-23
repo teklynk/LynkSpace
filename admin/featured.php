@@ -109,7 +109,7 @@ include 'includes/header.php';
 			</div>
 
             <div class="form-group">
-                <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowAbout['datetime'])); ?></small></span>
+                <span><small><?php echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowFeatured['datetime'])); ?></small></span>
             </div>
 
 			<button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>

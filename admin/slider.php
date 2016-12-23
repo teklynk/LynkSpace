@@ -12,7 +12,7 @@ if ($_GET['preview']>"") {
 	$rowSlidePreview = mysqli_fetch_array($sqlSlidePreview );
 
 	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
-	echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowSlidePreview['image']." style='max-width:350px; max-height:150px;' /></p><br/>";
+	echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowSlidePreview['image']."' style='max-width:350px; max-height:150px;' /></p><br/>";
 	echo "<p>".$rowSlidePreview['content']."</p>";
 
 	if ($rowSlidePreview['link']>0) {

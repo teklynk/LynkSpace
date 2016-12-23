@@ -15,7 +15,7 @@ if ($_GET['preview']>"") {
 	echo "<div class='col-lg-12'>";
 
 	if ($rowTeamPreview['image']>"") {
-		echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowTeamPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+		echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowTeamPreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
 	}
 
 	if ($rowTeamPreview['name']>"") {

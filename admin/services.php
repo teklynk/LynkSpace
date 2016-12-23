@@ -19,7 +19,7 @@ if ($_GET['preview']>"") {
 	}
 
 	if ($rowServicesPreview['image']>"") {
-		echo "<p><img src=../uploads/".$rowServicesPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
+		echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowServicesPreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
 	}
 
 	if ($rowServicesPreview['title']>"") {

@@ -17,8 +17,10 @@ include 'includes/header.php';
 			}
 
 			if ($rowCustomerPreview['image']>""){
-				echo "<p><img src=../uploads/".$_SESSION['loc_id']."/".$rowCustomerPreview['image']." style='max-width:350px; max-height:150px;' /></p>";
-			}
+				echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowCustomerPreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
+			} elseif ($rowCustomerPreview['icon']>"") {
+                echo "<p><i id='customer_icon' style='font-size:6.0em;' class='fa fa-fw fa-".$rowCustomerPreview['icon']."'></i></p>";
+            }
 
 			if ($rowCustomerPreview['content']>""){
 				echo "<br/><p>".$rowCustomerPreview['content']."</p>";
