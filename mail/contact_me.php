@@ -12,7 +12,7 @@ $phone = $_POST['phone'];
 $message = $_POST['message'];
 $sendTo = $_POST['sendToEmail'];
 
-if (!empty($_POST)) {
+if (!empty($_POST) AND $_POST['referer'] == '6cc0d36686e6a433aa76f96773852d35') {
 	// Check for empty fields
 	if (empty($_POST['name'])  	||
 	   empty($_POST['email']) 	||
@@ -27,9 +27,11 @@ if (!empty($_POST)) {
 		$email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
 		$headers = "From: $email_address\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 		$headers .= "Reply-To: $email_address";
-		mail($sendTo,$email_subject,$email_body,$headers);
+        mail($sendTo,$email_subject,$email_body,$headers);
 		echo "<script>window.location.href='$redirectPage';</script>";
 		return true;
 	}
+} else {
+    echo "<script>window.location.href='$errorPage';</script>";
 }
 ?>

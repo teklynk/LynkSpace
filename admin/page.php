@@ -11,7 +11,7 @@ if ($_GET['preview']>"") {
 	$sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=".$pagePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
 	$rowPagePreview = mysqli_fetch_array($sqlPagePreview);
 
-	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
 
 	if ($rowPagePreview['title']>""){
 		echo "<h4>".$rowPagePreview['title']."</h4>";

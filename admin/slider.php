@@ -11,7 +11,7 @@ if ($_GET['preview']>"") {
 	$sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=".$slidePreviewId." AND loc_id=".$_SESSION['loc_id']." ");
 	$rowSlidePreview = mysqli_fetch_array($sqlSlidePreview );
 
-	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;}</style>";
+	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
 	echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowSlidePreview['image']."' style='max-width:350px; max-height:150px;' /></p><br/>";
 	echo "<p>".$rowSlidePreview['content']."</p>";
 

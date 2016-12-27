@@ -93,6 +93,7 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail;?>"/>
+                    <input type="hidden" id="referer" name="referer" value="6cc0d36686e6a433aa76f96773852d35"/>
                     <br>
                     <!-- For success/fail messages -->
                     <?php

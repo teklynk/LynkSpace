@@ -1,16 +1,18 @@
-    <?php
-        if(!defined('inc_access')) {
-            die('Direct access not permitted');
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+    if(!defined('inc_access')) {
+        die('Direct access not permitted');
+    }
 
-        include 'db/config.php'; //contains DB connection string and global variables
-        include 'core/functions.php'; //contains functions used on every front-end template
+    include 'db/config.php'; //contains DB connection string and global variables
+    include 'core/functions.php'; //contains functions used on every front-end template
 
-        getLocation();
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
+    getLocation();
+
+unset($_SESSION['url_referer']);
+?>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="3600;URL=index.php?loc_id=<?php echo $_GET['loc_id'];?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
