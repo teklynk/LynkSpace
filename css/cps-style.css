@@ -408,10 +408,25 @@ header.carousel {
     margin-top: 0px;
     padding: 0px 15px 0px 15px;
 }
-.database-item,.service-item {
-    /*float: right !important;*/
+.database-item, .service-item {
+    float: left !important;
     margin-top: 15px !important;
     margin-bottom: 15px !important;
+}
+.database-item:nth-child(4), .team-item:nth-child(6), .service-item:nth-child(6) {
+    clear:both;
+}
+.database-item:nth-child(7), .team-item:nth-child(10), .service-item:nth-child(10) {
+    clear:both;
+}
+.database-item:nth-child(10), .team-item:nth-child(14), .service-item:nth-child(14) {
+    clear:both;
+}
+.database-item:nth-child(13), .team-item:nth-child(18), .service-item:nth-child(18) {
+    clear:both;
+}
+.database-item:nth-child(16), .team-item:nth-child(22), .service-item:nth-child(22) {
+    clear:both;
 }
 .team-item h3 {
     text-align: center;

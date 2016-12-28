@@ -54,10 +54,10 @@ if(!defined('inc_access')) {
 		}
 
 		if (!empty($featuredBlurb)) {
-			echo "<h3>".$featuredBlurb."</h3><br/><br/>";
+			echo "<h3 class='text-white'>".$featuredBlurb."</h3><br/><br/>";
 		}
 
-		echo "<div>".$featuredContent."</div>";
+		echo "<div class='text-white'>".$featuredContent."</div>";
 
         echo "</div>"; //col-xs-12 col-sm-12
 	}

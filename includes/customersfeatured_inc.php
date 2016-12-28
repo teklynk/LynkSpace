@@ -25,10 +25,10 @@ if(!defined('inc_access')) {
 
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
             if ($rowCustomers['featured'] == 'true') {
-                echo "<div class='col-sm-6 col-md-3 col-lg-3 database-item'>";
+                echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
                 if (!empty($rowCustomers['link'])) {
-                    echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";
+                    echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "'>";
                 }
 
                 echo "<div class='media'>";
