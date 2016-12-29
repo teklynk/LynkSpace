@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2016 at 12:01 PM
+-- Generation Time: Dec 29, 2016 at 01:04 PM
 -- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -41,8 +41,8 @@ CREATE TABLE `aboutus` (
 --
 
 INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `datetime`, `loc_id`) VALUES
-(1, 'About Us', '<p>Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum. In cotidieque adversarium vis, timeam sanctus alienum ad vim, nonumy vituperatoribus ei sea. No eam essent platonem, illud splendide an mel, ea mentitum officiis scripserit ius. Harum primis per in, duo cu ancillae disputationi, te pri causae tritani torquatos. Liber doming iracundia et his. An eros brute solet mei, abhorreant omittantur per te. Vim an labitur probatus, ea ius fugit omnesque aliquando.</p>\r\n<p>Inani singulis efficiantur ut mel, et regione repudiare ius. Et cibo commodo signiferumque cum. Tibique singulis nam id, aliquid mediocrem definitiones nam ne. Erant incorrupte eu nec, ex modus aperiri forensibus nam, eu ius bonorum adipisci theophrastus. Soleat animal liberavisse id eos, illum intellegam te est. Per velit ludus ne, diceret recusabo voluptaria usu et. Eu mea prodesset scriptorem.</p>', 'HSWorkingGroup.png', 'left', '2016-12-12 19:56:34', 1),
-(2, 'test 2', '<p>test 2</p>', 'MapBackground2.png', 'right', '0000-00-00 00:00:00', 2);
+(1, 'About Us', '<p>Lorem ipsum dolor sit amet, bonorum iracundia ex ius, sit modo quodsi cu, vitae omnesque no cum. In cotidieque adversarium vis, timeam sanctus alienum ad vim, nonumy vituperatoribus ei sea. No eam essent platonem, illud splendide an mel, ea mentitum officiis scripserit ius. Harum primis per in, duo cu ancillae disputationi, te pri causae tritani torquatos. Liber doming iracundia et his. An eros brute solet mei, abhorreant omittantur per te. Vim an labitur probatus, ea ius fugit omnesque aliquando.</p>\r\n<p>Inani singulis efficiantur ut mel, et regione repudiare ius. Et cibo commodo signiferumque cum. Tibique singulis nam id, aliquid mediocrem definitiones nam ne. Erant incorrupte eu nec, ex modus aperiri forensibus nam, eu ius bonorum adipisci theophrastus. Soleat animal liberavisse id eos, illum intellegam te est. Per velit ludus ne, diceret recusabo voluptaria usu et. Eu mea prodesset scriptorem.</p>', 'HSWorkingGroup.png', 'left', '2016-12-20 21:09:59', 1),
+(2, 'Mission', '<p>It is the mission of Curie Metropolitan High School to offer a rigorous academic curriculum with an emphasis on technology and the arts. Curie High School promotes future success by establishing a culture of college and career readiness and by encouraging students to enroll in post-secondary institutions. Curie High School is committed to providing authentic learning experiences that will provide a foundation for life-long learning. Students will be prepared to become leaders and engaged citizens in a global society, enabling them to contribute positively and responsibly to their community.</p>', '', 'right', '2016-12-29 15:38:02', 2);
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,8 @@ INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`) VALUES
 (46, 'test', 1, '0000-00-00 00:00:00'),
 (47, 'Services', 1, '0000-00-00 00:00:00'),
 (48, 'test 2', 1, '2016-12-12 20:16:13'),
-(49, 'test 3', 1, '2016-12-12 20:22:38');
+(49, 'test 3', 1, '2016-12-12 20:22:38'),
+(50, 'Information', 1, '2016-12-28 18:35:05');
 
 -- --------------------------------------------------------
 
@@ -97,8 +98,8 @@ CREATE TABLE `contactus` (
 --
 
 INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `datetime`, `loc_id`) VALUES
-(1, 'Contact Us', 'The White House', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'rjones@tlcdelivers.com', 'rjones@tlcdelivers.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5', '0000-00-00 00:00:00', 1),
-(2, 'Contact 2', 'Contact Us', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.1503819264844!2d-77.03871848464966!3d38.897676279570575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7bcdecbb1df%3A0x715969d86d0b76bf!2sThe+White+House!5e0!3m2!1sen!2sus!4v1479220635842" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', 'ryan@email.com', 'ryan@email.com', '1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500', '555-5555', '9-5 M-F, 9-3 Sat', '0000-00-00 00:00:00', 2);
+(1, 'Contact Us', 'Chicago Public Schools', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.491674759722!2d-87.63084358455876!3d41.882281979221865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2cbb3bf3aac1%3A0xf3321c9d81c08854!2s42+W+Madison+St%2C+Chicago%2C+IL+60602!5e0!3m2!1sen!2sus!4v1483022894306" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', '', '', '42 W. Madison St.', 'Chicago', 'IL', '60602', '773-553-1000', '', '2016-12-29 16:44:04', 1),
+(2, 'Contact the Librarian', '', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2974.209822288167!2d-87.72389568456126!3d41.802240179228214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e31969597f317%3A0xac2c7141e727810e!2s4959+S+Archer+Ave%2C+Chicago%2C+IL+60632!5e0!3m2!1sen!2sus!4v1483025122998" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', '', '', '4959 S Archer Ave.', 'Chicago', 'IL', '60632', '773- 535-2134', '7:30 a.m. - 4:30 p.m. Monday thru Friday', '2016-12-29 16:44:21', 2);
 
 -- --------------------------------------------------------
 
@@ -113,6 +114,7 @@ CREATE TABLE `customers` (
   `name` text NOT NULL,
   `link` text NOT NULL,
   `content` text NOT NULL,
+  `featured` text NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
@@ -122,18 +124,40 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `active`, `datetime`, `loc_id`) VALUES
-(4, 'webide.png', '', 'My Database', 'http://www.darpa.gov', 'My Own Icon Image', 'true', '2016-12-07 22:14:22', 1),
-(5, '', 'address-card', 'DISA', 'http://www.disa.gov', 'Registration', 'true', '2016-12-07 22:06:19', 1),
-(6, '', 'area-chart', 'ABC', 'http://www.billgates.gov', 'Really Long Title', 'true', '2016-12-07 22:07:12', 1),
-(7, '', 'birthday-cake', 'CFPB', 'http://www.cfpb.gov', 'Online EBooks', 'true', '2016-12-07 22:05:16', 1),
-(8, '', 'area-chart', 'Cal OES', 'http://www.darpa.gov', 'Online Databases', 'true', '2016-12-07 22:06:39', 1),
-(9, 'webide.png', '', 'Darpa', 'http://www.darpa.gov', '', 'true', '2016-11-15 22:00:19', 2),
-(10, 'webide.png', '', 'DISA', 'http://www.disa.gov', '', 'true', '2016-11-15 21:59:45', 2),
-(11, 'webide.png', '', 'Bill and Melinda Gate Foundation', 'http://www.billgates.gov', '', 'true', '2016-11-15 21:59:57', 2),
-(12, 'webide.png', '', 'CFPB', 'http://www.cfpb.gov', '', 'true', '2016-11-15 21:59:34', 2),
-(13, 'webide.png', '', 'Cal OES', 'http://www.darpa.gov', '', 'true', '2016-11-29 14:49:45', 2),
-(14, '', 'bicycle', 'Ebsco', 'http://ebscohost.com', 'Online Databases', 'true', '2016-12-07 22:13:41', 1);
+INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `featured`, `active`, `datetime`, `loc_id`) VALUES
+(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 'false', 'true', '2016-12-28 17:27:56', 1),
+(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 'false', 'true', '2016-12-28 16:51:05', 1),
+(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 'false', 'true', '2016-12-28 17:27:55', 1),
+(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 'false', 'true', '2016-12-29 14:41:43', 1),
+(8, '', 'laptop', 'Student Resources in Context', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 'false', 'true', '2016-12-28 17:27:57', 1),
+(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 'false', 'true', '2016-12-28 17:27:56', 1),
+(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 'false', 'true', '2016-12-28 16:56:21', 1),
+(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 'false', 'true', '2016-12-29 14:42:00', 1),
+(17, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 'false', 'true', '2016-12-28 16:33:36', 1),
+(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 'false', 'true', '2016-12-28 16:34:15', 1),
+(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 'true', 'true', '2016-12-29 14:44:02', 1),
+(20, '', 'laptop', 'e CUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 'false', 'true', '2016-12-29 14:43:41', 1),
+(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 'false', 'true', '2016-12-28 16:40:59', 1),
+(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 'false', 'true', '2016-12-28 16:42:48', 1),
+(23, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 'false', 'true', '2016-12-28 16:43:42', 1),
+(24, '', 'wpexplorer', 'Explore', 'http://linuxmint-vm/businessCMS/page.php?loc_id=1', '', 'true', 'true', '2016-12-29 14:44:11', 1),
+(25, '', 'database', 'Databases', 'http://linuxmint-vm/businessCMS/databases.php?loc_id=1', '', 'true', 'true', '2016-12-29 14:44:13', 1),
+(27, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 'false', 'true', '2016-12-29 14:40:32', 2),
+(28, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 'false', 'true', '2016-12-28 17:27:55', 2),
+(29, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 'false', 'true', '2016-12-29 14:40:21', 2),
+(30, '', 'laptop', 'Student Resources in Context', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 'false', 'true', '2016-12-29 14:40:37', 2),
+(31, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 'false', 'true', '2016-12-28 17:27:56', 2),
+(32, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 'false', 'true', '2016-12-28 16:56:21', 2),
+(33, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 'false', 'true', '2016-12-28 16:32:41', 2),
+(51, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 'false', 'true', '2016-12-28 16:33:36', 2),
+(52, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 'false', 'true', '2016-12-28 16:34:15', 2),
+(53, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 'true', 'true', '2016-12-29 14:42:48', 2),
+(54, '', 'laptop', 'e CUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 'false', 'true', '2016-12-28 18:19:57', 2),
+(55, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 'false', 'true', '2016-12-28 16:40:59', 2),
+(56, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 'false', 'true', '2016-12-28 16:42:48', 2),
+(57, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 'false', 'true', '2016-12-29 14:40:46', 2),
+(58, '', 'wpexplorer', 'Explore', 'http://linuxmint-vm/businessCMS/page.php?loc_id=1', '', 'true', 'true', '2016-12-29 14:42:56', 2),
+(59, '', 'laptop', 'Databases', 'http://linuxmint-vm/businessCMS/databases.php?loc_id=2', '', 'true', 'true', '2016-12-29 14:42:59', 2);
 
 -- --------------------------------------------------------
 
@@ -157,8 +181,8 @@ CREATE TABLE `featured` (
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `datetime`, `loc_id`) VALUES
-(1, 'Seeking Online Access to Resources', 'test', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', 'HSWorkingGroup.png', 'right', '2016-12-12 20:54:07', 1),
-(2, 'featured two', '', '', 'HSWorkingGroup.png', 'right', '0000-00-00 00:00:00', 2);
+(1, 'CPS Virtual Library', '', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources. &nbsp; &nbsp; &nbsp;&nbsp;</p>', '', 'right', '2016-12-28 17:11:51', 1),
+(2, 'Curie Metro High School', 'Virtual Library', '<p>We Strive for Excellence!</p>', '', 'right', '2016-12-29 16:14:08', 2);
 
 -- --------------------------------------------------------
 
@@ -179,8 +203,8 @@ CREATE TABLE `generalinfo` (
 --
 
 INSERT INTO `generalinfo` (`id`, `heading`, `content`, `datetime`, `loc_id`) VALUES
-(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', '0000-00-00 00:00:00', 1),
-(2, 'General Info 2', '<p>test</p>', '0000-00-00 00:00:00', 2);
+(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', '2016-12-21 17:21:28', 1),
+(2, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', '2016-12-29 15:20:33', 2);
 
 -- --------------------------------------------------------
 
@@ -200,8 +224,8 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
-(1, 'CPS', '0000-00-00 00:00:00', 'true'),
-(2, 'Curie Metro High School', '0000-00-00 00:00:00', 'true'),
+(1, 'CPS', '2016-12-21 14:59:30', 'true'),
+(2, 'Curie Metro High School', '2016-12-29 15:35:06', 'true'),
 (3, 'Northside Prep High School', '0000-00-00 00:00:00', 'true'),
 (4, 'Hyde Park High School', '0000-00-00 00:00:00', 'true'),
 (5, 'Crane Tech Prep', '0000-00-00 00:00:00', 'true'),
@@ -691,26 +715,32 @@ CREATE TABLE `navigation` (
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`) VALUES
-(37, 1, 'Contact Us', 'contact.php?loc_id=1', 47, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
-(43, 3, 'Careers', 'page.php?page_id=28&loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
-(44, 4, 'Meet The Team', 'team.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
-(45, 2, 'Services', '#', 47, 'Top', 'false', 1, '2016-12-13 15:50:39'),
-(48, 3, 'Positions', 'page.php?page_id=34&loc_id=1', 46, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
-(50, 2, 'Services', 'services.php?loc_id=1', 47, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
-(51, 4, 'About', 'about.php?loc_id=1', 46, 'Footer', 'false', 1, '0000-00-00 00:00:00'),
-(52, 5, 'Instructables', '#', 0, 'Footer', 'true', 1, '0000-00-00 00:00:00'),
-(54, 1, 'About', 'about.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
-(56, 5, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'false', 1, '0000-00-00 00:00:00'),
-(57, 1, 'Test Link', '#', 0, 'Top', 'true', 2, '0000-00-00 00:00:00'),
-(58, 2, 'Test location 2', 'page.php?page_id=35&loc_id=2', 0, 'Top', 'true', 2, '0000-00-00 00:00:00'),
-(59, 0, 'Contact', 'contact.php?loc_id=2', 0, 'Top', 'off', 2, '0000-00-00 00:00:00'),
-(60, 1, 'Databases', 'databases.php?loc_id=1', 47, 'Top', 'false', 1, '2016-12-13 15:50:39'),
+(37, 1, 'Contact Us', 'contact.php?loc_id=2', 0, 'Footer', 'false', 2, '2016-12-29 16:12:42'),
+(43, 3, 'Virtual Library High School', 'https://pac.library.cps.edu/?config=11', 0, 'Top', 'true', 1, '2016-12-29 16:43:19'),
+(48, 3, 'Positions', 'page.php?page_id=34&loc_id=2', 0, 'Footer', 'false', 2, '2016-12-29 16:12:42'),
+(50, 2, 'Services', 'services.php?loc_id=2', 0, 'Footer', 'false', 2, '2016-12-29 16:12:42'),
+(51, 4, 'About', 'about.php?loc_id=2', 0, 'Footer', 'false', 2, '2016-12-29 16:12:42'),
+(54, 2, 'Virtual Library Elementary School', 'https://pac.library.cps.edu/?config=12', 0, 'Top', 'true', 1, '2016-12-29 16:43:19'),
+(56, 5, 'Contact', 'contact.php?loc_id=1', 0, 'Top', 'false', 1, '2016-12-29 16:43:19'),
+(57, 3, 'Virtual Library High School', 'https://pac.library.cps.edu/?config=11', 0, 'Top', 'true', 2, '2016-12-29 16:12:53'),
+(58, 4, 'Databases', 'databases.php?loc_id=2', 0, 'Top', 'false', 2, '2016-12-29 16:12:53'),
+(59, 2, 'Virtual Library Elementary School', 'https://pac.library.cps.edu/?config=12', 0, 'Top', 'true', 2, '2016-12-29 16:12:53'),
+(60, 4, 'Databases', 'databases.php?loc_id=1', 0, 'Top', 'false', 1, '2016-12-29 16:43:19'),
 (61, 1, 'LS2PAC', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
 (62, 2, 'LS2Kids', 'https://pac.library.cps.edu/?config=1#section=home', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
 (63, 3, 'Help', 'http://ls2pachelp.tlcdelivers.com/3_3_0/UserApp/LS2PAC.htm', 0, 'Search', 'true', 1, '0000-00-00 00:00:00'),
-(64, 1, 'LS2PAC', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00'),
-(65, 2, 'LS2Kids', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00'),
-(66, 3, 'Help', '#', 0, 'Search', 'off', 2, '0000-00-00 00:00:00');
+(64, 1, 'LS2PAC', 'https://pac.library.cps.edu/?config=1820#section=home', 0, 'Search', 'off', 2, '2016-12-29 15:31:40'),
+(65, 2, 'LS2Kids', 'https://pac.library.cps.edu/?config=1820#section=home', 0, 'Search', 'off', 2, '2016-12-29 15:31:40'),
+(66, 3, 'Help', 'http://ls2pachelp.tlcdelivers.com/3_3_0/UserApp/LS2PAC.htm', 0, 'Search', 'off', 2, '2016-12-29 15:31:40'),
+(67, 5, 'Team', 'team.php?loc_id=2', 0, 'Footer', 'off', 2, '2016-12-29 16:12:42'),
+(68, 5, 'Contact', 'contact.php?loc_id=2', 0, 'Top', 'off', 2, '2016-12-29 16:12:53'),
+(90, 1, 'Contact Us', 'contact.php?loc_id=1', 47, 'Footer', 'false', 1, '2016-12-29 15:13:32'),
+(91, 3, 'Positions', 'page.php?page_id=34&loc_id=1', 50, 'Footer', 'false', 1, '2016-12-29 15:13:32'),
+(92, 2, 'Services', 'services.php?loc_id=1', 47, 'Footer', 'false', 1, '2016-12-29 15:13:32'),
+(93, 4, 'About', 'about.php?loc_id=1', 50, 'Footer', 'false', 1, '2016-12-29 15:13:32'),
+(94, 5, 'Team', 'team.php?loc_id=1', 50, 'Footer', 'off', 1, '2016-12-29 15:18:48'),
+(95, 1, 'Home', 'index.php?loc_id=2', 0, 'Top', 'off', 2, '2016-12-29 16:12:52'),
+(96, 1, 'Home', 'index.php?loc_id=1', 0, 'Top', 'off', 1, '2016-12-29 16:43:19');
 
 -- --------------------------------------------------------
 
@@ -735,16 +765,15 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `datetime`, `image_align`, `loc_id`) VALUES
-(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?ref=34">View Open Positions</a></p>', 'true', 'false', '2016-11-15 21:00:35', 'right', 1),
-(33, 'Trusted by 15 of the 20 Largest Urban Areas to Make Smarter Risk Informed Decisions', 'budget2015.jpg', '<p>From federal, state and local law enforcement agencies to school districts, our products create an informed network of security experts that help ensure the safety of our communities.</p>\r\n<p>The&nbsp;provides a robust suite of applications that connects the front-line elements of the public safety community through data collection, prioritization, presentation and analysis. It is currently one of the most widely deployed solution in the nation&nbsp;and trusted by first responders to provide the right information at the right time, to do the right thing to keep themselves and their citizens safe</p>', 'true', 'false', '2016-12-12 19:32:03', 'right', 1),
-(34, 'Positions', 'Ubuntu-Mate-Radioactive-no-logo.png', '<p>Job posting appear here if available.</p>', 'true', 'false', '2016-11-15 20:21:02', 'right', 1),
-(35, 'Test location 2', 'CPSVisionBanner_TV.jpg', '<p>test</p>', 'true', 'false', '2016-12-12 18:57:44', 'left', 2),
-(36, 'Test location 4', '', '', 'true', 'false', '2016-11-15 21:00:22', 'right', 1),
-(37, 'Test location 5', '', '<p>test</p>', 'true', 'false', '2016-11-15 21:00:10', 'right', 1),
-(38, 'Test location 6666', '', '<p>test test</p>', 'true', 'false', '2016-11-15 20:59:25', 'right', 1),
-(39, 'test ', 'Ubuntu-Mate-Radioactive-no-logo.png', '<p>test</p>', 'true', 'false', '2016-11-15 14:05:23', 'right', 1),
-(40, 'adfasdfasdfasdf', 'Ubuntu-Mate-Radioactive-no-logo.png', '<p>asdfasdf</p>', 'true', 'false', '2016-11-15 14:02:49', 'right', 1),
-(41, 'hjkgjkghjkgjkghjk', 'Ubuntu-Mate-Radioactive-no-logo.png', '<p>hjkghjkgjhkgjkghkjasdfasdfasf</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>asdfasdf</p>\r\n<p>&nbsp;</p>\r\n<p>asdfasdf</p>\r\n<p>adsfadsf</p>', 'true', 'false', '2016-11-15 20:20:33', 'right', 1);
+(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?loc_id=1&amp;page_id=34">View Open Positions</a></p>', 'true', 'false', '2016-12-28 18:37:53', 'right', 1),
+(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', 'false', '2016-12-28 18:37:31', 'right', 1),
+(42, 'Explore', '', '<p>Online Resources Page</p>', 'true', 'true', '2016-12-28 17:25:07', 'right', 1),
+(43, 'Explore', '', '<p>Online Resources Page</p>', 'true', 'true', '2016-12-28 17:25:07', 'right', 2),
+(44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2016-12-29 17:35:04', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2016-12-29 17:32:54', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2016-12-29 17:40:17', 'right', 1),
+(47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'true', '2016-12-29 17:43:45', 'right', 1),
+(48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'true', '2016-12-29 17:51:32', 'right', 1);
 
 -- --------------------------------------------------------
 
@@ -769,10 +798,10 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `active`, `datetime`, `loc_id`) VALUES
-(2, 'address-card', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-11-14 22:04:13', 1),
+(2, 'car', '', 'PUBLIC SAFETY', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-12-28 16:52:02', 1),
 (3, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', 1),
-(4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:43:58', 1),
-(5, '', 'webide.png', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-12-12 20:59:55', 1),
+(4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-12-28 16:51:24', 1),
+(5, 'calendar', '', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-12-21 17:22:33', 1),
 (6, 'address-card', '', 'PUBLIC SAFETY APPLICATIONS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-11-14 22:04:13', 2),
 (7, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', 2),
 (8, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 21:43:58', 2),
@@ -912,8 +941,8 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `databasesheading`, `servicescontent`, `customerscontent`, `databasescontent`, `teamcontent`, `disqus`, `datetime`, `loc_id`) VALUES
-(1, 'CPS', '', '', '', '1', 'webide.png', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', '', '', '0000-00-00 00:00:00', 1),
-(2, 'Curie Metro High School', '', '', '', '1820', '', 'true', 'true', 1, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 2),
+(1, 'CPS', '', '', '', '1', 'CPSVisionBanner_TV.jpg', 'true', 'true', 1, 'Ryan Jones', '', 1, 'Pages', 'Services', 'Slides ', 'Meet the Team', 'Resources', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', '', '', '', '2016-12-28 18:19:59', 1),
+(2, 'Curie Metro High School', '', 'Marie Sklodowska Curie Metropolitan High School is a public 4â€“year magnet high school located in the Archer Heights neighborhood on the southwest side of Chicago, Illinois, United States. Curie is operated by Chicago Public Schools district.', '', '1820', 'header_logo.png', 'true', 'true', 1, '', '', 1, '', '', '', 'Meet the Team', 'Databases', '', '', '', '', '', '', '2016-12-29 15:35:06', 2),
 (3, 'Northside Prep High School', '', '', '', '1740', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 3),
 (4, 'Hyde Park High School', '', '', '', '1390', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 4),
 (5, 'Crane Tech Prep', '', '', '', '1270', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 5),
@@ -1206,10 +1235,10 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `co
 (292, 'Dirksen Elementary School', '', '', '', '2950', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 292),
 (293, 'Chicago High School for Agricultural Sciences', '', '', '', '1790', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 293),
 (294, 'Ariel Elementary Community Academy', '', '', '', '3640', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 294),
-(295, 'Bogan High School, William J', '', '', '', '1230', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 295),
-(296, 'Brighton Park Elementary School', '', '', '', '0', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 139),
-(297, 'Castellanos Elementary School, Rosario', '', '', '', '2510', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 297);
+(295, 'Bogan High School, William J', '', '', '', '1230', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 295);
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `databasesheading`, `servicescontent`, `customerscontent`, `databasescontent`, `teamcontent`, `disqus`, `datetime`, `loc_id`) VALUES
+(296, 'Brighton Park Elementary School', '', '', '', '0', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 139),
+(297, 'Castellanos Elementary School, Rosario', '', '', '', '2510', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 297),
 (298, 'Claremont Academy Elementary School', '', '', '', '7830', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 298),
 (299, 'Cleveland Elementary School, Grover', '', '', '', '2800', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 299),
 (300, 'Corkery Elementary School, Daniel J', '', '', '', '2910', '', '', '', 0, '', '', 1, '', '', '', 'Meet the Team', '', '', '', '', '', '', '', '0000-00-00 00:00:00', 300),
@@ -1403,12 +1432,14 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`, `loc_id`) VALUES
-(3, 'parallax_9-12_med.jpg', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne', '28', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne.', 'true', '2016-12-05 21:58:31', 1),
-(4, 'ChicagoSkylineAerial_tiltshift.jpg', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '28', 'dgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdfgsdfgsdfgsdfgsdfgsdfgsdf\r\ndgadfgsdf', 'true', '2016-12-05 21:58:05', 1),
-(5, 'parallax_6-8_med.jpg', 'Trusted by Mission-Critical Organizations', '', 'Our expertise in large-scale, enterprise networks and advanced threat analytics has led us to develop a full range of industry leading services and innovative products that help secure and maximize mission-critical operations.', 'true', '2016-12-05 14:38:21', 2),
-(6, 'budget2015.jpg', 'Know your schools, detect threats sooner and respond faster', '', ' Threat awareness and incident response by enabling school districts and states to catalog their facilities and school security plans, to create and manage safety assessments and to report incidents and monitor threats in and around their schools through an integrated online system. ', 'true', '2016-12-05 14:38:50', 2),
-(7, 'CPSVisionBanner_TV.jpg', 'Vim ea omnes discere molestie.', '34', 'Vim ea omnes discere molestie. Cu vix facilisis efficiendi, vix ne ipsum inermis. Te cum possit voluptua expetendis. Cibo integre virtute ius ut.', 'true', '2016-12-05 21:58:16', 1),
-(8, 'space-desktop-backgrounds.jpg', 'New Slide', '35', 'test slide #1', 'true', '2016-11-22 19:19:48', 2);
+(3, 'parallax_3-5_med.jpg', 'Grades 3-5', '45', 'Advancing in Elementary School', 'true', '2016-12-29 17:55:15', 1),
+(4, 'parallax_6-8_med.jpg', 'Grades 6-8', '46', '8 ways parents can help with homework', 'true', '2016-12-29 17:55:07', 1),
+(5, '2290_1_624_0_0.jpg', 'Vim ea omnes discere', '', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne.', 'true', '2016-12-28 19:50:20', 2),
+(7, 'CPS_5938.jpg', 'Grades K-2', '48', 'Learn About our K-2 Programs', 'true', '2016-12-29 17:55:18', 1),
+(9, '2290_0_624_0_0.jpg', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '', 'Vim ea omnes discere molestie. Cu vix facilisis efficiendi, vix ne ipsum inermis. Te cum possit voluptua expetendis. Cibo integre virtute ius ut.', 'true', '2016-12-28 19:49:34', 2),
+(10, '2290_14_624_0_24.jpg', 'Inani singulis efficiantur ut mel, et regione repudiare ius', '35', '', 'true', '2016-12-28 19:50:41', 2),
+(11, '2290_7_624_0_95.jpg', 'Tibique singulis nam id, aliquid mediocrem definitiones nam ne', '35', 'Inani singulis efficiantur ut mel, et regione repudiare ius', 'true', '2016-12-28 19:49:02', 2),
+(12, 'parallax_9-12_med.jpg', 'Grades 9-12', '47', 'High School Course Catalog', 'true', '2016-12-29 17:55:02', 1);
 
 -- --------------------------------------------------------
 
@@ -1434,8 +1465,8 @@ CREATE TABLE `socialmedia` (
 --
 
 INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, `google`, `instagram`, `youtube`, `tumblr`, `loc_id`) VALUES
-(1, 'Follow Us', 'http://www.facebook.com', 'http://www.twitter.com', '', 'http://www.google.com', 'http://instagram.com', '', '', 1),
-(2, 'Follow Us 2', 'http://facebook.com', '', '', '', '', 'http://www.youtube.com', '', 2);
+(1, 'Follow Us', 'https://www.facebook.com/chicagopublicschools', 'https://twitter.com/ChiPubSchools', '', '', '', 'http://www.youtube.com/user/ChiPubSchools', '', 1),
+(2, 'Follow Us', 'https://www.facebook.com/curiehs', 'https://twitter.com/@CurieHS', '', '', '', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -1461,13 +1492,12 @@ CREATE TABLE `team` (
 INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `datetime`, `loc_id`) VALUES
 (3, 'space-desktop-backgrounds.jpg', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-12-05 22:01:38', 1),
 (4, 'z7whdbw.jpg', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-12-05 22:00:59', 1),
-(5, 'z7whdbw.jpg', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-12-05 22:01:28', 1),
+(5, 'space-desktop-backgrounds.jpg', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-12-29 15:53:10', 1),
 (7, 'Ubuntu-Mate-Cold-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-12-05 22:01:18', 1),
-(8, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2016-11-29 14:50:11', 2),
+(8, 'CURIE1442203060344.jpg', 'Librarian', 'I am Ms. Adams. I am the librarian in the Media Center. We have lots of great books and about 30 computers with internet, word processing and PowerPoint.', 'Carmen Adams', 'true', '2016-12-29 16:11:58', 2),
 (9, 'Ubuntu-Mate-Radioactive-no-logo.png', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2016-11-14 21:59:52', 2),
 (10, 'Ubuntu-Mate-Radioactive-no-logo.png', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2016-11-14 21:59:55', 2),
-(11, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 2),
-(12, 'blue_milky_way_galaxy-2560x1600.jpg', 'Test', 'test test', 'Test', 'true', '2016-12-12 22:11:33', 1);
+(11, 'Ubuntu-Mate-Radioactive-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2016-11-14 21:59:54', 2);
 
 -- --------------------------------------------------------
 
@@ -1482,6 +1512,7 @@ CREATE TABLE `users` (
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1489,10 +1520,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '0000-00-00 00:00:00', 1),
-(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-12 21:14:39', 2),
-(3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '0000-00-00 00:00:00', 1);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
+(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2016-12-29 13:51:57', '127.0.0.1', 1),
+(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-22 14:51:19', '127.0.0.1', 2),
+(3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '0000-00-00 00:00:00', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -1607,7 +1638,7 @@ ALTER TABLE `aboutus`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
@@ -1617,7 +1648,7 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `featured`
 --
@@ -1637,12 +1668,12 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `services`
 --
@@ -1662,7 +1693,7 @@ ALTER TABLE `setup`
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
