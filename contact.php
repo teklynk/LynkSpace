@@ -3,6 +3,12 @@ define('inc_access', TRUE);
 
 include 'includes/header.php';
 
+    echo "<div class='grad-blue container-fluid featured'>";
+    echo "<div class='container bannerwrapper'>";
+        include 'includes/featured_inc.php';
+    echo "</div>";
+    echo "</div>";
+
     echo "<div class='grad-orange container-fluid search'>";
     echo "<div class='container bannerwrapper'>";
         if ($_GET['loc_id'] == 1) {
@@ -41,21 +47,24 @@ include 'includes/header.php';
         //Contact Details Column -->
         echo "<div class='col-md-4'>";
 
-        echo "<p>".$contactAddress."<br>".$contactCity.", ".$contactState." ".$contactZipcode."<br></p>";
+        if (!empty($contactAddress)) {
+            echo "<p><i class='fa fa-home'></i>";
+            echo "&nbsp;".$contactAddress.",&nbsp;".$contactCity.",&nbsp;".$contactState."&nbsp;".$contactZipcode."</p>";
+        }
         
         if (!empty($contactPhone)) {
             echo "<p><i class='fa fa-phone'></i>";
-            echo "&nbsp;<abbr title='Phone'>P</abbr>:&nbsp;".$contactPhone."</p>";
+            echo "&nbsp;<a>".$contactPhone."</a></p>";
         }
 
         if (!empty($contactEmail)) {
             echo "<p><i class='fa fa-envelope-o'></i>";
-            echo "&nbsp;<abbr title='Email'>E</abbr>:&nbsp;<a href='mailto:".$contactEmail."'>".$contactEmail."</a></p>";
+            echo "&nbsp;<a href='mailto:".$contactEmail."'>".$contactEmail."</a></p>";
         }
 
         if (!empty($contactHours)) {
             echo "<p><i class='fa fa-clock-o'></i>";
-            echo "&nbsp;<abbr title='Hours'>H</abbr>:&nbsp;".$contactHours."</p>";
+            echo "&nbsp;".$contactHours."</p>";
         }
 
         echo "</div>";

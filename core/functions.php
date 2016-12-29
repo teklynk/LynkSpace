@@ -445,7 +445,7 @@ function getCustomers() {
         $customerBlurb = $rowCustomerHeading['customerscontent'];
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT image, icon, name, link, content, featured, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 }
 

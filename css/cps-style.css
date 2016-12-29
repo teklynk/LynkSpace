@@ -318,11 +318,18 @@ footer a:hover {
     color: #fff;
     background-color: #555;
 }
-#searchpac .panel,#searchlocations .panel {
+.featured>.bannerwrapper {
+    /*padding-bottom: 0px;*/
+}
+#searchpac, #searchlocations {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+#searchpac .panel, #searchlocations .panel {
     margin-bottom: 0px;
 }
 header.carousel {
-    height: 30%;
+    height: 50%;
 }
 .col-md-12>p>img,.col-md-8>p>img,.col-md-4>p>img,.col-md-4>img,.col-md-2>img {
     margin: 8px;
@@ -426,6 +433,15 @@ header.carousel {
     clear:both;
 }
 .database-item:nth-child(16), .team-item:nth-child(22), .service-item:nth-child(22) {
+    clear:both;
+}
+.database-item:nth-child(19), .team-item:nth-child(26), .service-item:nth-child(26) {
+    clear:both;
+}
+.database-item:nth-child(22), .team-item:nth-child(30), .service-item:nth-child(30) {
+    clear:both;
+}
+.database-item:nth-child(25), .team-item:nth-child(34), .service-item:nth-child(34) {
     clear:both;
 }
 .team-item h3 {

@@ -1,7 +1,13 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+    include 'includes/header.php';
+
+    echo "<div class='grad-blue container-fluid featured'>";
+    echo "<div class='container bannerwrapper'>";
+        include 'includes/featured_inc.php';
+    echo "</div>";
+    echo "</div>";
 
     echo "<div class='grad-orange container-fluid search'>";
     echo "<div class='container bannerwrapper'>";

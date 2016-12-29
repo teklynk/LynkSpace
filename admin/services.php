@@ -66,7 +66,7 @@ if ($_GET['preview']>"") {
 					$_POST['service_status']='false';
 				}
 
-				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".safeCleanStr($_POST['service_content'])."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".mysqli_real_escape_string($db_conn, trim($_POST['service_content']))."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
 				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -82,7 +82,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, datetime, loc_id) VALUES ('".safeCleanStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, datetime, loc_id) VALUES ('".mysqli_real_escape_string($db_conn, trim($_POST['service_title']))."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				echo "<script>window.location.href='services.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -257,7 +257,7 @@ if ($_GET['preview']>"") {
 
 		//update heading on submit
 		if (($_POST['save_main'])) {
-			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".mysqli_real_escape_string($db_conn, trim($_POST['main_content']))."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$serviceMsg="<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

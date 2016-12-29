@@ -72,14 +72,15 @@ include 'includes/header.php';
 					$_POST['customer_featured']='false';
 				}
 
-				$customerUpdate = "UPDATE customers SET name='".safeCleanStr($_POST['customer_name'])."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".safeCleanStr($_POST['customer_link'])."', content='".safeCleanStr($_POST['customer_content'])."', featured='".safeCleanStr($_POST['customer_featured'])."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ";
+				$customerUpdate = "UPDATE customers SET name='".safeCleanStr($_POST['customer_name'])."', icon='".$_POST['customer_icon_select']."', image='".$_POST['customer_image_select']."', link='".safeCleanStr($_POST['customer_link'])."', content='".mysqli_real_escape_string($db_conn, trim($_POST['customer_content']))."', featured='".safeCleanStr($_POST['customer_featured'])."', active='".$_POST['customer_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id=".$thecustomerId." AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $customerUpdate);
 
 				$customerMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The database ".safeCleanStr($_POST['customer_name'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, featured, active, datetime, loc_id FROM customers WHERE id='$thecustomerId' AND loc_id=".$_GET['loc_id']." ");
+			$sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, featured, active, datetime, loc_id FROM customers WHERE id=".$thecustomerId." AND loc_id=".$_GET['loc_id']." ");
 			$rowCustomer = mysqli_fetch_array($sqlCustomer);
+
 
 		//Create new customer
 		} else if ($_GET['newcustomer']) {
@@ -88,7 +89,7 @@ include 'includes/header.php';
 
 			//insert data on submit
 			if (!empty($_POST['customer_name'])) {
-				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".safeCleanStr($_POST['customer_name'])."', '".safeCleanStr($_POST['customer_link'])."', '".safeCleanStr($_POST['customer_content'])."', 'false', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, datetime, loc_id) VALUES ('".$_POST['customer_icon_select']."', '".$_POST['customer_image_select']."', '".safeCleanStr($_POST['customer_name'])."', '".mysqli_real_escape_string($db_conn, trim($_POST['customer_link']))."', '".safeCleanStr($_POST['customer_content'])."', 'false', 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $customerInsert);
 
 				echo "<script>window.location.href='databases.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -263,7 +264,7 @@ include 'includes/header.php';
 
     //update heading on submit
     if (($_POST['save_main'])) {
-        $setupUpdate = "UPDATE setup SET customersheading='".safeCleanStr($_POST['customer_heading'])."', customerscontent='".safeCleanStr($_POST['main_content'])."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+        $setupUpdate = "UPDATE setup SET customersheading='".safeCleanStr($_POST['customer_heading'])."', customerscontent='".mysqli_real_escape_string($db_conn, trim($_POST['main_content']))."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
         mysqli_query($db_conn, $setupUpdate);
 
         $customerMsg="<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -329,7 +330,7 @@ include 'includes/header.php';
 				</thead>
 				<tbody>
         		<?php
-					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, name, link, content, featured, active, loc_id FROM customers WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
+					$sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
 					while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
 						$customerId=$rowCustomer['id'];
 						$customerName=$rowCustomer['name'];

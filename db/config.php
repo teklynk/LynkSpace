@@ -41,7 +41,7 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=".$
 $pageMsg = "";
 
 //Session timeout
-$sessionTimeout = 15; //mins
+$sessionTimeout = 30; //mins
 
 //Slide Carousel Speed
 $carouselSpeed = "5000"; //5000 = 5secs
@@ -54,6 +54,7 @@ mysqli_select_db($db_conn, $db_name);
 if (mysqli_connect_errno($db_conn)) {
   echo "Failed to connect to MySQL: ".mysqli_connect_error();
 }
+
 //db connection is closed in includes/footer.php
 
 //Error handling Add debug=true to the querystring

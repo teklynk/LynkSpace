@@ -1,5 +1,4 @@
 <?php
-
 //Random password generator for password reset
 function generateRandomString($length = 10) {
     global $randomString;
@@ -21,6 +20,12 @@ function getGravatar($email, $size) {
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr) {
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
+}
+
+//escape Quotes in textareas and string values
+function sqlEscapeStr($cleanStr) {
+    global $db_conn;
+    return mysqli_real_escape_string($db_conn, trim($cleanStr));
 }
 
 //Gets clients real IP address

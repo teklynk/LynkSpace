@@ -14,14 +14,16 @@ if(!defined('inc_access')) {
 			echo "<div class='col-xs-12 col-sm-8'>";
 
 			if (!empty($featuredHeading)) {
-				echo "<h1 class='text-white featured'>".$featuredHeading."</h1>";
+				echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
 			}
 
 			if (!empty($featuredBlurb)) {
-				echo "<h3 class='text-white'>".$featuredBlurb."</h3><br/><br/>";
+				echo "<h3 class='text-white'>" . $featuredBlurb . "</h3>";
 			}
 
-			echo "<div class='text-white'>".$featuredContent."</div>";
+			if (!empty($featuredContent)) {
+				echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
+			}
 
 			echo "</div>"; //col-xs-10 col-sm-8
 
@@ -37,10 +39,12 @@ if(!defined('inc_access')) {
 			}
 
 			if (!empty($featuredBlurb)) {
-				echo "<h3 class='text-white'>".$featuredBlurb."</h3><br/><br/>";
+				echo "<h3 class='text-white'>".$featuredBlurb."</h3>";
 			}
 
-			echo "<div class='text-white'>".$featuredContent."</div>";
+			if (!empty($featuredContent)) {
+				echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
+			}
 
 			echo "</div>"; //col-xs-10 col-sm-8
 		}
@@ -54,10 +58,12 @@ if(!defined('inc_access')) {
 		}
 
 		if (!empty($featuredBlurb)) {
-			echo "<h3 class='text-white'>".$featuredBlurb."</h3><br/><br/>";
+			echo "<h3 class='text-white'>".$featuredBlurb."</h3>";
 		}
 
-		echo "<div class='text-white'>".$featuredContent."</div>";
+		if (!empty($featuredContent)) {
+			echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
+		}
 
         echo "</div>"; //col-xs-12 col-sm-12
 	}

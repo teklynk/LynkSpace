@@ -12,7 +12,7 @@ include 'includes/header.php';
 
 			if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
 				//Do Update
-				$featuredUpdate = "UPDATE featured SET heading='".safeCleanStr($_POST['featured_heading'])."', introtext='".safeCleanStr($_POST['featured_introtext'])."', content='".trim($_POST['featured_content'])."', image='".$_POST['featured_image']."', image_align='".$_POST['featured_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
+				$featuredUpdate = "UPDATE featured SET heading='".safeCleanStr($_POST['featured_heading'])."', introtext='".safeCleanStr($_POST['featured_introtext'])."', content='".mysqli_real_escape_string($db_conn, trim($_POST['featured_content']))."', image='".$_POST['featured_image']."', image_align='".$_POST['featured_image_align']."', datetime='".date("Y-m-d H:i:s")."' WHERE loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $featuredUpdate);
 			} else {
 				//Do Insert
