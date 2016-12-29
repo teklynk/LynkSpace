@@ -17,22 +17,17 @@ $fileToUpload = "";
 
 		//Check if file is a image format
 		if ($fileExt==".png" || $fileExt==".jpg" || $fileExt==".gif") {
-            //rename file if it contains spaces
-            if (strpos(basename( $_FILES["fileToUpload"]["name"]), " ") == true) {
-                rename($target_file, str_replace(" ","-",$target_file));
-            }
-			//rename file if it contains parenthesis
-			if (strpos(basename( $_FILES["fileToUpload"]["name"]), "(") == true) {
-				rename($target_file, str_replace("(","-",$target_file));
-			}
-			if (strpos(basename( $_FILES["fileToUpload"]["name"]), ")") == true) {
-				rename($target_file, str_replace(")","",$target_file));
-			}
-			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"])." has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+            //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
+			$search = array('(',')',' ','\'');
+			$replace = array('-','','-','');
+
+			rename($target_file, str_replace($search,$replace,strtolower($target_file)));
+
+			$uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file ". basename($_FILES["fileToUpload"]["name"])." has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		} else {
 			//Delete the file if it does meet the fileExt rule
 			unlink($target_file);
-			$uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file ". basename( $_FILES["fileToUpload"]["name"])." is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
+			$uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file ". basename($_FILES["fileToUpload"]["name"])." is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
 	} else {
