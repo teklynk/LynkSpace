@@ -13,7 +13,7 @@ $(document).ready(function() {
         var searchpacHeight = $('.searchpac:first').height();
         var databasesHeight = $('.databases:first').height();
         var footerHeight = $('.footer:first').height();
-        var calcContentHeight = bodyHeight - navbarHeight - bannerHeight - searchlocationHeight - searchpacHeight - databasesHeight - footerHeight - 150; //change last value to compensate for padding.
+        var calcContentHeight = bodyHeight - navbarHeight - bannerHeight - searchlocationHeight - searchpacHeight - databasesHeight - footerHeight - 300; //change last value to compensate for padding.
 
         if (calcContentHeight > 0) {
             $('.content:first').css({'min-height': calcContentHeight});
