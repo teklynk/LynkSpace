@@ -25,6 +25,7 @@ $(document).ready(function () {
         }
     });
 
+
     //Boostrap alert fadeout and close function
     //$('.alert-success').fadeOut(5000);
     setTimeout(function () {

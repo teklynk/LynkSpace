@@ -41,7 +41,7 @@
           href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="css/default-style.css">
+    <link rel="stylesheet" type="text/css" href="css/default-style.min.css">
 
     <!-- CSS Template -->
     <?php
@@ -93,10 +93,10 @@
             src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="js/functions.js"></script>
+    <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
 
     <!-- Template js file-->
-    <script type="text/javascript" language="javascript" src="js/cps-scripts.js"></script>
+    <script type="text/javascript" language="javascript" src="js/cps-scripts.min.js"></script>
 
     <!-- TLC search variables -->
     <script type="text/javascript" language="javascript">

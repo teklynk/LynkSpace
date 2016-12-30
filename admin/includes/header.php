@@ -57,7 +57,7 @@
           href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" type="text/css" href="css/sb-admin.css">
+    <link rel="stylesheet" type="text/css" href="css/sb-admin.min.css">
 
     <!-- jQuery CDN -->
     <script type="text/javascript" language="javascript"
@@ -89,7 +89,7 @@
             src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="js/functions.js"></script>
+    <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

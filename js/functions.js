@@ -18,6 +18,7 @@ $(document).ready(function () {
         if (calcContentHeight > 0) {
             $('.content:first').css({'min-height': calcContentHeight});
         }
+
     });
 
 });
