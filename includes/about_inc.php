@@ -6,7 +6,7 @@ if(!defined('inc_access')) {
 
 getAbout();
 
-	echo "<div class='row' id='about'>";
+	echo "<div class='row row_pad'>";
 	
 	if (!empty($aboutTitle)) {
 		echo "<div class='col-lg-12'>";

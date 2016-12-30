@@ -20,7 +20,7 @@ define('inc_access', TRUE);
     echo "</div>";
 
     echo "<div class='container'>";
-    echo "<div class='row row_pad content'>";
+    echo "<div class='row content'>";
     echo "<div class='col-md-12'>";
         include 'includes/about_inc.php';
     echo "</div>";
