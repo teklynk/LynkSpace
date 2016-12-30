@@ -179,6 +179,8 @@ if (isset($_SESSION['loggedIn'])) {
                             </div>
                         <?php
                         } else {
+                            session_start();
+                            $_SESSION['temp_password'] = generateRandomString();
                         ?>
                             <form name="frmForgotPassword" role="login" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
@@ -199,7 +201,6 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <input type="hidden" name="temp_password" value="<?php echo generateRandomString();?>" >
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
                             </form>

@@ -1,6 +1,7 @@
 <?php
+session_start();
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['temp_password'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password'])) {
 
     include '../../db/config.php';
 
@@ -16,13 +17,13 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['temp_password'] && $_
 
     $user_name = trim($_POST['user_name']);
     $email_address = trim($_POST['user_email']);
-    $temp_password = $_POST['temp_password'];
+    $temp_password = $_SESSION['temp_password'];
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
 
     // Check for empty fields
-    if (empty($user_name) || empty($email_address) || !filter_var($email_address, FILTER_VALIDATE_EMAIL) || empty($temp_password)) {
+    if (empty($user_name) || empty($email_address) || !filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
 
         echo "<script>window.location.href='$errorPage';</script>";
         return false;
