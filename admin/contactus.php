@@ -56,7 +56,8 @@ if ($_GET['update'] == 'true') {
                               maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Map Code</label>
+                    <label>Map Embed Code</label>
+                    <small><a href="https://support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;<i class='fa fa-question-circle-o'></i></small>
                     <textarea class="form-control input-sm count-text" name="contact_mapcode" rows="3" maxlength="999"
                               placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
@@ -109,7 +110,7 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                    Save
+                    Save Changes
                 </button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 

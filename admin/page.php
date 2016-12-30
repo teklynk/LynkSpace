@@ -229,7 +229,7 @@ if ($_GET['preview'] > "") {
                                 } ?></small></span>
                     </div>
                     <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                        Save
+                        Save Changes
                     </button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
@@ -374,7 +374,7 @@ if ($_GET['preview'] > "") {
                         </table>
 
                         <button type="submit" name="pageNew_submit" class="btn btn-primary"><i
-                                class='fa fa-fw fa-save'></i> Save
+                                class='fa fa-fw fa-save'></i> Save Changes
                         </button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
                     </form>

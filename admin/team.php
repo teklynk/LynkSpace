@@ -184,7 +184,7 @@ if ($_GET['preview'] > "") {
                             } ?></small></span>
                 </div>
 
-                <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
                 </button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
@@ -331,7 +331,7 @@ if ($_GET['preview'] > "") {
                     <input type="hidden" name="save_main" value="true"/>
 
                     <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                        Save
+                        Save Changes
                     </button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
                 </form>

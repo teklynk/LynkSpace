@@ -217,7 +217,7 @@ if ($_GET['preview']>"") {
 		<div class="form-group">
 			<span><small><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowServices['datetime']));} ?></small></span>
 		</div>
-		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
 	</form>
@@ -353,7 +353,7 @@ if ($_GET['preview']>"") {
 				</tbody>
 			</table>
 			<input type="hidden" name="save_main" value="true" />
-			<button type="submit" name='servicesNew_submit' class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save</button>
+			<button type="submit" name='servicesNew_submit' class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 		</form>
 	</div>

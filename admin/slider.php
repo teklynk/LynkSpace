@@ -208,7 +208,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
                         echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSlides['datetime']));
                     } ?></small></span>
         </div>
-        <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+        <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
         </button>
         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
