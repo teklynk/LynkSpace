@@ -1,6 +1,6 @@
 <?php
-if(!defined('inc_access')) {
-   die('Direct access not permitted');
+if (!defined('inc_access')) {
+    die('Direct access not permitted');
 }
 ?>
 
@@ -8,9 +8,9 @@ if(!defined('inc_access')) {
     <footer class="footer" id="footer">
         <div class="container">
             <div class="row row_pad">
-            <?php
-                getNav('Footer','false','left');
-            ?>
+                <?php
+                getNav('Footer', 'false', 'left');
+                ?>
             </div>
             <?php include 'includes/generalinfo_inc.php'; ?>
         </div>
@@ -23,7 +23,9 @@ if(!defined('inc_access')) {
                 </div>
                 <div style="clear:both;"></div>
                 <div class="row row_pad">
-                    <p><span id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST']."&nbsp;".date("Y"); ?></span></p>
+                    <p><span
+                            id="currentYear">Copyright &copy; <?php echo $_SERVER['HTTP_HOST'] . "&nbsp;" . date("Y"); ?></span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -39,10 +41,10 @@ if(!defined('inc_access')) {
         })
     </script>
 
-</body>
-</html>
+    </body>
+    </html>
 <?php
-    //close all db connections
-    mysqli_close($db_conn);
-    die();
+//close all db connections
+mysqli_close($db_conn);
+die();
 ?>

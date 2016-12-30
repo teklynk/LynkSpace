@@ -3,27 +3,27 @@
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash']==md5($_SESSION['user_name'])) {
+if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
 
-	include '../../db/config.php';
+    include '../../db/config.php';
 
-	if (!empty($_GET) AND $_GET['update']) {
-		$customersFeaturedID = $_GET['id'];
-		$customersFeaturedChecked = $_GET['checked'];
+    if (!empty($_GET) AND $_GET['update']) {
+        $customersFeaturedID = $_GET['id'];
+        $customersFeaturedChecked = $_GET['checked'];
 
-		if ($customersFeaturedID) {
-			$customersFeaturedUpdate = "UPDATE customers SET featured='".$customersFeaturedChecked."' WHERE id=".$customersFeaturedID." ";
-		}
+        if ($customersFeaturedID) {
+            $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "' WHERE id=" . $customersFeaturedID . " ";
+        }
 
-		mysqli_query($db_conn, $customersFeaturedUpdate);
-		mysqli_close($db_conn);
+        mysqli_query($db_conn, $customersFeaturedUpdate);
+        mysqli_close($db_conn);
 
-		die('Customers Featured set');
-	}
+        die('Customers Featured set');
+    }
 
 } else {
 
-	die('Direct access not permitted');
+    die('Direct access not permitted');
 
 }
 ?>

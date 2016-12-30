@@ -1,26 +1,27 @@
+<!-- Contact Section -->
 <?php
 define('inc_access', TRUE);
 
 include 'includes/header.php';
 
-    echo "<div class='grad-blue container-fluid featured'>";
-    echo "<div class='container bannerwrapper'>";
-        include 'includes/featured_inc.php';
-    echo "</div>";
-    echo "</div>";
+echo "<div class='grad-blue container-fluid featured'>";
+echo "<div class='container bannerwrapper'>";
+include 'includes/featured_inc.php';
+echo "</div>";
+echo "</div>";
 
-    echo "<div class='grad-orange container-fluid search'>";
-    echo "<div class='container bannerwrapper'>";
-        if ($_GET['loc_id'] == 1) {
-            include 'includes/searchlocations_inc.php';
-        } else {
-            include 'includes/searchpac_inc.php';
-        }
-    echo "</div>";
-    echo "</div>";
+echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='container bannerwrapper'>";
+if ($_GET['loc_id'] == 1) {
+    include 'includes/searchlocations_inc.php';
+} else {
+    include 'includes/searchpac_inc.php';
+}
+echo "</div>";
+echo "</div>";
 
 ?>
-    <div class="container" id="contact">
+<div class="container" id="contact">
     <div class="content">
         <div class="row row_pad">
             <div class="col-lg-12">
@@ -33,7 +34,7 @@ include 'includes/header.php';
                 <h3><?php echo $contactBlurb; ?></h3><br/>
             </div>
         </div>
-            
+
         <?php
         echo "<div class='row row_pad'>";
 
@@ -49,22 +50,22 @@ include 'includes/header.php';
 
         if (!empty($contactAddress)) {
             echo "<p><i class='fa fa-home'></i>";
-            echo "&nbsp;".$contactAddress.",&nbsp;".$contactCity.",&nbsp;".$contactState."&nbsp;".$contactZipcode."</p>";
+            echo "&nbsp;" . $contactAddress . ",&nbsp;" . $contactCity . ",&nbsp;" . $contactState . "&nbsp;" . $contactZipcode . "</p>";
         }
-        
+
         if (!empty($contactPhone)) {
             echo "<p><i class='fa fa-phone'></i>";
-            echo "&nbsp;<a>".$contactPhone."</a></p>";
+            echo "&nbsp;<a>" . $contactPhone . "</a></p>";
         }
 
         if (!empty($contactEmail)) {
             echo "<p><i class='fa fa-envelope-o'></i>";
-            echo "&nbsp;<a href='mailto:".$contactEmail."'>".$contactEmail."</a></p>";
+            echo "&nbsp;<a href='mailto:" . $contactEmail . "'>" . $contactEmail . "</a></p>";
         }
 
         if (!empty($contactHours)) {
             echo "<p><i class='fa fa-clock-o'></i>";
-            echo "&nbsp;".$contactHours."</p>";
+            echo "&nbsp;" . $contactHours . "</p>";
         }
 
         echo "</div>";
@@ -75,7 +76,8 @@ include 'includes/header.php';
         <div class="row row_pad">
             <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php?loc_id=<?php echo $_GET['loc_id'];?>">
+                <form name="sentMessage" id="contactForm" method="post"
+                      action="mail/contact_me.php?loc_id=<?php echo $_GET['loc_id']; ?>">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>
@@ -86,27 +88,31 @@ include 'includes/header.php';
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Phone Number:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" maxlength="25" placeholder="304-555-5555" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" maxlength="25"
+                                   placeholder="304-555-5555" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" pattern="<?php echo $emailValidatePattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                            <input type="email" pattern="<?php echo $emailValidatePattern ?>" class="form-control"
+                                   id="email" name="email" maxlength="255" placeholder="your@email.com" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Message:</label>
-                            <textarea rows="10" cols="100" class="form-control" id="message" name="message" maxlength="999" style="resize:none" required></textarea>
+                            <textarea rows="10" cols="100" class="form-control" id="message" name="message"
+                                      maxlength="999" style="resize:none" required></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail;?>"/>
+                    <input type="hidden" id="sendToEmail" name="sendToEmail"
+                           value="<?php echo $contactFormSendToEmail; ?>"/>
                     <input type="hidden" id="referer" name="referer" value="6cc0d36686e6a433aa76f96773852d35"/>
                     <br>
                     <!-- For success/fail messages -->
                     <?php
-                        echo $contactFormMsg;
+                    echo $contactFormMsg;
                     ?>
                     <div class="control-group form-group">
                         <div class="controls">
@@ -117,7 +123,7 @@ include 'includes/header.php';
             </div>
         </div>
     </div>
-    </div>
+</div>
 <?php
-    include 'includes/footer.php';
+include 'includes/footer.php';
 ?>

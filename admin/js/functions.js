@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     //Sibebar Nav Menu Collapse
     if ($.cookie('sidebar-collapse') == 1) {
         $('.fa-dedent').addClass('fa-indent');
@@ -9,7 +9,7 @@ $(document).ready(function() {
         $('.fa-dedent').attr('title', 'Collapse Menu');
     }
 
-    $('#button-menu').click(function() {
+    $('#button-menu').click(function () {
         $('.fa-dedent').toggleClass('fa-indent');
         $('.side-nav').toggleClass('shrink');
         $('#wrapper').toggleClass('shrink_wrap');
@@ -27,8 +27,8 @@ $(document).ready(function() {
 
     //Boostrap alert fadeout and close function
     //$('.alert-success').fadeOut(5000);
-    setTimeout(function(){
-        $('.alert-success').fadeTo('slow', 0.1, function(){
+    setTimeout(function () {
+        $('.alert-success').fadeTo('slow', 0.1, function () {
             $('.alert-success').alert('close')
         });
     }, 5000);
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 newlabel.innerHTML = "Updating...";
                 //Attach limiter to our textarea
                 element.setAttribute('limiterid', newlabel.id);
-                element.onkeyup = function() {
+                element.onkeyup = function () {
                     displayCharCounts(this);
                 };
                 //Append element
@@ -105,8 +105,9 @@ $(document).ready(function() {
             }
         }
     }
+
     //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('.scrollToTop').fadeIn();
         } else {
@@ -114,7 +115,7 @@ $(document).ready(function() {
         }
     });
     //Click event to scroll to top
-    $('.scrollToTop').click(function() {
+    $('.scrollToTop').click(function () {
         $('html, body').animate({
             scrollTop: 0
         }, 800);
@@ -135,8 +136,9 @@ $(document).ready(function() {
         }
         return vars;
     }
+
     //clear inputs on reset
-    $(':reset').click(function() {
+    $(':reset').click(function () {
         $('#del_cat .fa-trash').css('visibility', 'hidden');
         $('#rename_cat .fa-save').css('visibility', 'hidden');
         $('#page_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
@@ -158,7 +160,7 @@ $(document).ready(function() {
         $('#exist_cat').attr('value', '');
         $('#nav_newcat').attr('value', '');
     });
-    $('#exist_page').change(function() {
+    $('#exist_page').change(function () {
         if ($('#exist_page').val() == '') {
             $('#nav_newname').val('');
             $('#nav_newurl').attr('value', '');
@@ -172,7 +174,7 @@ $(document).ready(function() {
             }
         }
     });
-    $('#exist_cat').change(function() {
+    $('#exist_cat').change(function () {
         if ($('#exist_cat').val() == '' || $('#exist_cat').val() == 0) { //NOTE: 0=None in the category table
             $('#nav_newcat').val('');
             $('#add_cat .fa-plus').css('visibility', 'visible');
@@ -185,32 +187,32 @@ $(document).ready(function() {
             $('#rename_cat .fa-save').css('visibility', 'visible');
         }
     });
-    $('#nav_menu').change(function() {
+    $('#nav_menu').change(function () {
         var loc_id = getUrlVars()['loc_id'];
         window.location.href = '?section=' + $('#nav_menu').val() + '&loc_id=' + getUrlVars()['loc_id'];
     });
-    $('#site_logo').change(function() {
+    $('#site_logo').change(function () {
         if ($('#site_logo').val() == '') {
             $('#site_logo_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
         } else {
             $('#site_logo_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#site_logo').val());
         }
     });
-    $('#slide_image').change(function() {
+    $('#slide_image').change(function () {
         if ($('#slide_image').val() == '') {
             $('#slide_image_preview').attr('src', 'http://placehold.it/350x150&text=No Image');
         } else {
             $('#slide_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#slide_image').val());
         }
     });
-    $('#page_image').change(function() {
+    $('#page_image').change(function () {
         if ($('#page_image').val() == '') {
             $('#page_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
         } else {
             $('#page_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#page_image').val());
         }
     });
-    $('#service_icon_select').change(function() {
+    $('#service_icon_select').change(function () {
         if ($('#service_icon_select').val() == '') {
             $('#service_icon').attr('class', '');
             $('#service_image_preview').attr('src', '');
@@ -222,7 +224,7 @@ $(document).ready(function() {
             $('#service_image_preview').css('display', 'none');
         }
     });
-    $('#service_image_select').change(function() {
+    $('#service_image_select').change(function () {
         if ($('#service_image_select').val() == '') {
             $('#service_image_preview').attr('src', '');
             $('#service_image_preview').css('display', 'none');
@@ -234,7 +236,7 @@ $(document).ready(function() {
             $('#service_icon').attr('class', '');
         }
     });
-    $('#customer_icon_select').change(function() {
+    $('#customer_icon_select').change(function () {
         if ($('#customer_icon_select').val() == '') {
             $('#customer_icon').attr('class', '');
             $('#customer_image_preview').attr('src', '');
@@ -246,7 +248,7 @@ $(document).ready(function() {
             $('#customer_image_preview').css('display', 'none');
         }
     });
-    $('#customer_image_select').change(function() {
+    $('#customer_image_select').change(function () {
         if ($('#customer_image_select').val() == '') {
             $('#customer_image_preview').attr('src', '');
             $('#customer_image_preview').css('display', 'none');
@@ -258,21 +260,21 @@ $(document).ready(function() {
             $('#customer_icon').attr('class', '');
         }
     });
-    $('#featured_image').change(function() {
+    $('#featured_image').change(function () {
         if ($('#featured_image').val() == '') {
             $('#featured_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
         } else {
             $('#featured_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#featured_image').val());
         }
     });
-    $('#about_image').change(function() {
+    $('#about_image').change(function () {
         if ($('#about_image').val() == '') {
             $('#about_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
         } else {
             $('#about_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#about_image').val());
         }
     });
-    $('#team_image').change(function() {
+    $('#team_image').change(function () {
         if ($('#team_image').val() == '') {
             $('#team_image_preview').attr('src', 'http://placehold.it/140x100&text=No Image');
         } else {
@@ -280,62 +282,62 @@ $(document).ready(function() {
         }
     });
     //Ajax Calls
-    $('#nav_Table .nav_win_checkbox').change(function() {
+    $('#nav_Table .nav_win_checkbox').change(function () {
         $.get('ajax/update_navwin.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.searchopt_checkbox').change(function() {
+    $('.searchopt_checkbox').change(function () {
         $.get('ajax/update_searchoptions.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.searchopt_radio').change(function() {
+    $('.searchopt_radio').change(function () {
         $.get('ajax/update_searchdefault.php?update=true', {
             value: this.value,
             checked: this.checked
         });
     });
-    $('.page_status_checkbox').change(function() {
+    $('.page_status_checkbox').change(function () {
         $.get('ajax/update_pageactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.slider_status_checkbox').change(function() {
+    $('.slider_status_checkbox').change(function () {
         $.get('ajax/update_slideractive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.services_status_checkbox').change(function() {
+    $('.services_status_checkbox').change(function () {
         $.get('ajax/update_servicesactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.team_status_checkbox').change(function() {
+    $('.team_status_checkbox').change(function () {
         $.get('ajax/update_teamactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.customer_status_checkbox').change(function() {
+    $('.customer_status_checkbox').change(function () {
         $.get('ajax/update_customersactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
-    $('.customer_featured_checkbox').change(function() {
+    $('.customer_featured_checkbox').change(function () {
         $.get('ajax/update_customersfeatured.php?update=true', {
             id: this.id,
             checked: this.checked
         });
     });
     //Not a Robot
-    $('#not_robot').change(function() {
+    $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
             if ($('#not_robot').prop('checked')) {
                 $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
@@ -347,13 +349,13 @@ $(document).ready(function() {
         }
     });
     //Boostrap-select actions
-    $('select.selectpicker').change(function() {
+    $('select.selectpicker').change(function () {
         var selected = $('.selectpicker option:selected').val();
         window.location.href = '?loc_id=' + selected;
     });
     //Category expand/collapse
-    $('#addCat_button').click(function() {
-        setTimeout(function() {
+    $('#addCat_button').click(function () {
+        setTimeout(function () {
             if ($('#addCatDiv').hasClass('in')) {
                 $('#addCat_button').html("<i class='fa fa-fw fa-times'></i> Close");
             } else {
@@ -366,7 +368,7 @@ $(document).ready(function() {
     //Returns Boostrap tooltips function
     $('[data-toggle="tooltip"]').tooltip();
     //Location Select Drop Down list. Sets selected value based on loc_id=querystring value
-    $(function() {
+    $(function () {
         if ($('select[name="loc_id_list"]').length) {
             var queryStrVal = getUrlVars()['loc_id'];
             $('select[name="loc_id_list"]').val(queryStrVal);
