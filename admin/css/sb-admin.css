@@ -336,8 +336,8 @@ small {
     .shrink > li > a {
         /*display: inline-block;*/
         overflow: hidden;
-        width: 0px;
-        height: 0px;
+        width: 0;
+        height: 0;
         /*padding-left: 15px;*/
         padding-right: 32px !important;
         padding-bottom: 24px !important;

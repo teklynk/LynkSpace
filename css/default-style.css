@@ -102,8 +102,8 @@ footer {
 
 .footer-nav, .footer-subnav {
     /*display: inline-block;*/
-    margin: 0px 10px 0px 10px;
-    padding: 0px;
+    margin: 0 10px 0 10px;
+    padding: 0;
 }
 
 .footer-nav > li, .footer-subnav > li {
@@ -121,7 +121,7 @@ footer {
 }
 
 .nav-Footer {
-    padding: 0px 32px 0px 0px;
+    padding: 0 32px 0 0;
 }
 
 .nav-Footer > .cat-links {
@@ -142,19 +142,19 @@ footer {
 }
 
 .fa-6x {
-    font-size: 6.0em;
+    font-size: 6em;
 }
 
 .fa-7x {
-    font-size: 7.0em;
+    font-size: 7em;
 }
 
 .fa-8x {
-    font-size: 8.0em;
+    font-size: 8em;
 }
 
 .fa-9x {
-    font-size: 9.0em;
+    font-size: 9em;
 }
 
 .fa-10x {

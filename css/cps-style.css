@@ -459,7 +459,7 @@ header.carousel {
 }
 
 .nav-Footer > .cat-Footer {
-    font-size: 2.0em;
+    font-size: 2em !important;
     margin-bottom: 12px;
     border-bottom: solid 1px;
     padding: 0px;
@@ -482,19 +482,19 @@ header.carousel {
 }
 
 .fa-6x {
-    font-size: 6.0em;
+    font-size: 6em;
 }
 
 .fa-7x {
-    font-size: 7.0em;
+    font-size: 7em;
 }
 
 .fa-8x {
-    font-size: 8.0em;
+    font-size: 8em;
 }
 
 .fa-9x {
-    font-size: 9.0em;
+    font-size: 9em;
 }
 
 .fa-10x {
@@ -510,8 +510,8 @@ header.carousel {
 }
 
 .row_pad {
-    margin-top: 0px;
-    padding: 0px 15px 0px 15px;
+    margin-top: 0;
+    padding: 0 15px 0 15px;
 }
 
 .database-item, .service-item {
@@ -562,7 +562,7 @@ header.carousel {
 }
 
 #generalinfo {
-    padding: 10px 10px 0px 10px;
+    padding: 10px 10px 0 10px;
 }
 
 .content {
@@ -616,13 +616,13 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
 
     .navbar-Footer > .nav-Footer {
-        padding-right: 0px;
-        padding-left: 0px;
+        padding-right: 0;
+        padding-left: 0;
     }
 
     .navbar-Footer > li > a {
-        padding-right: 0px;
-        padding-left: 0px;
+        padding-right: 0;
+        padding-left: 0;
     }
 
     .bannerwrapper {
@@ -639,12 +639,12 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
 
     #generalinfo {
-        padding: 0px;
+        padding: 0;
     }
 
     #generalinfo div {
-        padding: 0px;
-        margin: 0px;
+        padding: 0;
+        margin: 0;
     }
 
     .panel-default > .panel-heading {
@@ -664,12 +664,12 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 
     #belowfooter {
         height: auto;
-        padding: 10px 0px 0px 0px;
+        padding: 10px 0 0 0;
     }
 
     #belowfooter .container {
-        padding: 0px;
-        margin: 0px;
+        padding: 0;
+        margin: 0;
         width: 100%;
     }
 }
