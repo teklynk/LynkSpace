@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('inc_access')) {
+    die('Direct access not permitted');
+}
+
 //Random password generator for password reset
 function generateRandomString($length = 10)
 {

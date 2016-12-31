@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 $getNavSection = $_GET['section'];
 
@@ -353,5 +353,5 @@ for ($x = 0; $x < $navArrlength; $x++) {
 </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

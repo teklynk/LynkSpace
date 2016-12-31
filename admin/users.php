@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, id FROM users WHERE id=" . $_SESSION['user_id'] . " ");
 $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -101,5 +101,5 @@ if ($_GET['passwordupdated'] == 'true') {
 </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

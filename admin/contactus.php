@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowContact = mysqli_fetch_array($sqlContact);
@@ -120,5 +120,5 @@ if ($_GET['update'] == 'true') {
     </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 //Page preview
 if ($_GET['preview'] > "") {
@@ -387,5 +387,5 @@ if ($_GET['preview'] > "") {
     <p></p>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

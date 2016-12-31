@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, datetime, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);
@@ -125,5 +125,5 @@ if ($_GET['update'] == 'true') {
 </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

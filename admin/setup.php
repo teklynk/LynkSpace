@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 //Get max location ID number
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
@@ -243,5 +243,5 @@ if ($_GET['update'] == 'true') {
     </div>
 </div>
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

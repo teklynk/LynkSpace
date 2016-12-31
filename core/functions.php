@@ -1,5 +1,8 @@
 <?php
-define('inc_access', TRUE);
+
+if (!defined('inc_access')) {
+    die('Direct access not permitted');
+}
 
 function getLocation()
 {

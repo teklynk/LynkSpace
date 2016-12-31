@@ -6,12 +6,11 @@
         die('Direct access not permitted');
     }
 
-    include 'db/config.php'; //contains DB connection string and global variables
-    include 'core/functions.php'; //contains functions used on every front-end template
+    include_once ('db/config.php'); //contains DB connection string and global variables
+    include_once ('core/functions.php'); //contains functions used on every front-end template
 
     getLocation();
 
-    unset($_SESSION['url_referer']);
     ?>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="3600;URL=index.php?loc_id=<?php echo $_GET['loc_id']; ?>">

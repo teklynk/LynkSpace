@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
@@ -72,5 +72,5 @@ if ($_GET['update'] == 'true') {
 </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

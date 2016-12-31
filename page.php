@@ -2,7 +2,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 echo "<div class='grad-blue container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
@@ -60,5 +60,5 @@ include 'includes/customersfeatured_inc.php';
 echo "</div>";
 echo "</div>";
 
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

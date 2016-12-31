@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";
@@ -125,5 +125,5 @@ if (!empty($_POST)) {
         </div>
     </div>
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

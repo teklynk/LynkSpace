@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 $fileToUpload = "";
 
 //Create location upload folder if it does not exist.
@@ -152,5 +152,5 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
 </div><!-- /.modal -->
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>

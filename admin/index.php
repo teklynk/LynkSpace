@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include 'includes/header.php';
+include_once ('includes/header.php');
 
 //clear all session variables
 unset($_SESSION['user_id']);
@@ -244,5 +244,5 @@ if (isset($_SESSION['loggedIn'])) {
     </div>
 
 <?php
-include 'includes/footer.php';
+include_once ('includes/footer.php');
 ?>
