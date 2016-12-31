@@ -59,7 +59,7 @@ function getLocList()
     $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
-        $locList = $locList . "<option data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' >" . $rowLocationSearch['name'] . "</option>";
+        $locList .= "<option data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' >" . $rowLocationSearch['name'] . "</option>";
     }
     return $locList;
 }

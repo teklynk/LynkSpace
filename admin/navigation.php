@@ -106,7 +106,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
-            $pagesStr = $pagesStr . "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
+            $pagesStr .= "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
 
         }
 

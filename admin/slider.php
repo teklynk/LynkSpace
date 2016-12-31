@@ -90,7 +90,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
     while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
         $getPageId = $rowGetPages['id'];
         $getPageTitle = $rowGetPages['title'];
-        $pagesStr = $pagesStr . "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
+        $pagesStr .= "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
     }
 
     if ($_GET['editslide']) {
@@ -186,7 +186,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
                         }
                     }
 
-                    $pagesStr = $pagesStr . "<option value='" . $sliderLinkId . "' " . $isSelected . ">" . $sliderLinkTitle . "</option>";
+                    $pagesStr .= "<option value='" . $sliderLinkId . "' " . $isSelected . ">" . $sliderLinkTitle . "</option>";
                 }
 
                 $pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>";

@@ -133,7 +133,7 @@
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
 
-                $fileListJson = $fileListJson . "{title: '" . $imgfile . "', value: '" . $image_url . $imgfile . "'},";
+                $fileListJson .= "{title: '" . $imgfile . "', value: '" . $image_url . $imgfile . "'},";
             }
 
             closedir($handle);
@@ -144,7 +144,7 @@
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
-            $linkListJson = $linkListJson . "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},";
+            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},";
         }
 
         ?>
