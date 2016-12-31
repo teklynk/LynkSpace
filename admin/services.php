@@ -11,7 +11,7 @@ if ($_GET['preview']>"") {
 	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, loc_id FROM services WHERE id='$pagePreviewId' AND loc_id=".$_SESSION['loc_id']." ");
 	$rowServicesPreview  = mysqli_fetch_array($sqlServicesPreview);
 
-	echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+	echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
 	echo "<div class='col-lg-12'>";
 
 	if ($rowServicesPreview['icon']>"") {
@@ -272,7 +272,6 @@ if ($_GET['preview']>"") {
 	#webserviceDialog iframe {
 		width: 100%;
 		height: 600px;
-		frameborder: 0;
 		border: none;
 	}
 	.modal-dialog {

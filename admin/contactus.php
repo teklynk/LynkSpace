@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowContact = mysqli_fetch_array($sqlContact);
@@ -57,7 +57,9 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Map Embed Code</label>
-                    <small><a href="https://support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;<i class='fa fa-question-circle-o'></i></small>
+                    <small><a href="https://support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en"
+                              target="_blank">How to embed a Google Map</a>&nbsp;<i class='fa fa-question-circle-o'></i>
+                    </small>
                     <textarea class="form-control input-sm count-text" name="contact_mapcode" rows="3" maxlength="999"
                               placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
@@ -120,5 +122,5 @@ if ($_GET['update'] == 'true') {
     </div>
 
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

@@ -24,7 +24,7 @@
     }
 
     //Admin panel functions
-    include_once ('core/functions.php');
+    include_once('core/functions.php');
     ?>
     <meta http-equiv="refresh" content="<?php echo $sessionTimeout * 60; ?>;URL=index.php?logout=true"/>
     <meta charset="utf-8">

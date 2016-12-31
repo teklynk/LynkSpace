@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 //Page preview
 if ($_GET['preview'] > "") {
@@ -9,7 +9,7 @@ if ($_GET['preview'] > "") {
     $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content FROM customers WHERE id='$pagePreviewId'");
     $rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview);
 
-    echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+    echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<div class='col-lg-12'>";
 
     if ($rowCustomerPreview['name'] > "") {
@@ -299,7 +299,6 @@ if ($_GET['preview'] > "") {
                 #webpageDialog iframe {
                     width: 100%;
                     height: 600px;
-                    frameborder: 0;
                     border: none;
                 }
 
@@ -412,5 +411,5 @@ if ($_GET['preview'] > "") {
 	</div>
 	<p></p>";
 
-        include_once ('includes/footer.php');
+        include_once('includes/footer.php');
         ?>

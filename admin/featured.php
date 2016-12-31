@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);
@@ -124,5 +124,5 @@ if ($_GET['update'] == 'true') {
         </form>
     </div>
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

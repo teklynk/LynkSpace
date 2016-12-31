@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 //Get max location ID number
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
@@ -234,7 +234,8 @@ if ($_GET['update'] == 'true') {
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
+            <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                Changes
             </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
@@ -243,5 +244,5 @@ if ($_GET['update'] == 'true') {
     </div>
 </div>
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

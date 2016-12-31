@@ -1,15 +1,15 @@
 html {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 body {
     font-family: "Century Gothic", Arial, sans-serif;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     position: relative;
     min-height: 100%;
-    top: 0px;
+    top: 0;
 }
 
 p {
@@ -35,7 +35,7 @@ h1, .h1 {
 }
 
 h3.sublinktitle {
-    margin: 10px 0px 0px 0px;
+    margin: 10px 0 0 0;
 }
 
 .text-white {
@@ -89,9 +89,9 @@ footer {
     background: -o-linear-gradient(#111, #414141, #414141);
     background: -moz-linear-gradient(#111, #414141, #414141);
     color: #fff;
-    padding: 70px 50px 0px 50px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    padding: 70px 50px 0 50px;
+    margin-top: 0;
+    margin-bottom: 0;
     width: 100%;
 }
 
@@ -113,7 +113,7 @@ footer a:hover {
 }
 
 #belowfooter .row {
-    padding: 0px 25px 0px 25px;
+    padding: 0 25px 0 25px;
 }
 
 #belowfooter a {
@@ -139,18 +139,18 @@ footer a:hover {
     min-height: 100px !important;
     background-color: #FFF !important;
     border-bottom: #DDD 1px solid !important;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .cpsNavBar {
     font-family: "Century Gothic", Sans-serif;
     border-bottom: 1px solid #e6e6e6;
-    padding: 10px 0px 10px 15px;
+    padding: 10px 0 10px 15px;
 }
 
 .navbarButton {
     font-family: "Century Gothic", Sans-serif;
-    border: 0px;
+    border: 0;
     margin-top: 23px;
 }
 
@@ -195,12 +195,11 @@ footer a:hover {
     -moz-transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
     -o-transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
     transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
-    border-bottom: 0px;
+    border-bottom: 0;
     line-height: 15px;
     font-size: 1.1em;
     color: #0033a0;
-    padding: 45px 0px 16px 0px;
-    padding-bottom: 6px;
+    padding: 45px 0 6px;
 }
 
 .navbar-Top > li > a:hover, .navbar-Top > li > a:focus {
@@ -220,7 +219,7 @@ footer a:hover {
 
 .socialDiv {
     float: right;
-    padding-top: 0px;
+    padding-top: 0;
     position: absolute;
     right: 20px;
 }
@@ -239,9 +238,9 @@ footer a:hover {
 
 #belowfooter .socialDiv {
     float: left;
-    padding-top: 0px;
+    padding-top: 0;
     position: relative;
-    right: 0px;
+    right: 0;
     text-align: left;
     clear: both;
 }
@@ -391,7 +390,7 @@ footer a:hover {
 }
 
 .featured > .bannerwrapper {
-    /*padding-bottom: 0px;*/
+    /*padding-bottom: 0;*/
 }
 
 #searchpac, #searchlocations {
@@ -400,7 +399,7 @@ footer a:hover {
 }
 
 #searchpac .panel, #searchlocations .panel {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 header.carousel {
@@ -412,8 +411,8 @@ header.carousel {
 }
 
 .footer-nav, .footer-subnav {
-    margin: 0px 10px 0px 10px;
-    padding: 0px;
+    margin: 0 10px 0 10px;
+    padding: 0;
 }
 
 .footer-nav > li, .footer-subnav > li {
@@ -430,12 +429,12 @@ header.carousel {
 }
 
 .nav-Footer {
-    padding: 0px 32px 0px 0px;
+    padding: 0 32px 0 0;
 }
 
 .nav-Footer > .cat-links {
     list-style: none;
-    padding-left: 0px;
+    padding-left: 0;
     margin-bottom: 12px;
 }
 
@@ -462,14 +461,13 @@ header.carousel {
     font-size: 2em !important;
     margin-bottom: 12px;
     border-bottom: solid 1px;
-    padding: 0px;
-    padding-bottom: 12px;
+    padding: 0 0 12px;
 }
 
 .navbar-Footer > li > a {
     position: relative;
     display: block;
-    padding: 0px 15px;
+    padding: 0 15px;
     margin-bottom: 12px;
 }
 
@@ -630,11 +628,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
 
     .content {
-        min-height: 50px;
-        padding-top: 4px;
-        padding-bottom: 30px;
-        padding-left: 6px;
-        padding-right: 6px;
+        padding: 4px 6px 30px;
         min-height: 120px;
     }
 

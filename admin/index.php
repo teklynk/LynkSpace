@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 //clear all session variables
 unset($_SESSION['user_id']);
@@ -93,7 +93,7 @@ if (isset($_SESSION['loggedIn'])) {
 ?>
     <style type="text/css">
         html, body {
-            margin-top: 0px !important;
+            margin-top: 0 !important;
             background: #BEA69A url('images/color-splash-3.jpg') center center /cover;
         }
 
@@ -119,7 +119,7 @@ if (isset($_SESSION['loggedIn'])) {
         }
 
         #wrapper {
-            padding-left: 0px !important;
+            padding-left: 0 !important;
         }
 
         .form-signin {
@@ -244,5 +244,5 @@ if (isset($_SESSION['loggedIn'])) {
     </div>
 
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

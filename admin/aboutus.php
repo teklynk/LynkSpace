@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, datetime, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);
@@ -115,7 +115,8 @@ if ($_GET['update'] == 'true') {
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowAbout['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="aboutus_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
+            <button type="submit" name="aboutus_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                Changes
             </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
@@ -125,5 +126,5 @@ if ($_GET['update'] == 'true') {
 </div>
 
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

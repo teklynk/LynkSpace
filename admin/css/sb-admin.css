@@ -16,8 +16,7 @@ body {
 
 #page-wrapper {
     width: 100%;
-    padding: 0;
-    padding-bottom: 20px;
+    padding: 0 0 20px;
     background-color: #fff;
     min-height: 800px;
 }
@@ -213,7 +212,7 @@ ul.alert-dropdown {
 }
 
 .table-responsive {
-    min-height: 0%;
+    min-height: 0;
     overflow-x: visible;
 }
 

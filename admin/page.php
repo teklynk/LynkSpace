@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 //Page preview
 if ($_GET['preview'] > "") {
@@ -11,7 +11,7 @@ if ($_GET['preview'] > "") {
     $sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
     $rowPagePreview = mysqli_fetch_array($sqlPagePreview);
 
-    echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+    echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
 
     if ($rowPagePreview['title'] > "") {
         echo "<h4>" . $rowPagePreview['title'] . "</h4>";
@@ -277,7 +277,6 @@ if ($_GET['preview'] > "") {
                     #webpageDialog iframe {
                         width: 100%;
                         height: 600px;
-                        frameborder: 0;
                         border: none;
                     }
 
@@ -387,5 +386,5 @@ if ($_GET['preview'] > "") {
     <p></p>
 
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

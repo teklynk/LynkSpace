@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, id FROM users WHERE id=" . $_SESSION['user_id'] . " ");
 $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -91,7 +91,8 @@ if ($_GET['passwordupdated'] == 'true') {
                 <span><small><?php echo "Last Logged In: " . date('m-d-Y, H:i:s', strtotime($rowUsers['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
+            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                Changes
             </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
@@ -101,5 +102,5 @@ if ($_GET['passwordupdated'] == 'true') {
 </div>
 
 <?php
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>

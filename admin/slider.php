@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once ('includes/header.php');
+include_once('includes/header.php');
 
 //slide preview
 if ($_GET['preview'] > "") {
@@ -11,7 +11,7 @@ if ($_GET['preview'] > "") {
     $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
-    echo "<style type='text/css'>html, body {margin-top:0px !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+    echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowSlidePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p><br/>";
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
@@ -264,7 +264,6 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
         #webslideDialog iframe {
             width: 100%;
             height: 600px;
-            frameborder: 0;
             border: none;
         }
 
@@ -355,5 +354,5 @@ echo "</div>
 	</div>
 	<p></p>";
 
-include_once ('includes/footer.php');
+include_once('includes/footer.php');
 ?>
