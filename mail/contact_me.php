@@ -20,6 +20,7 @@ if (!empty($_POST) AND $_POST['referer'] == '6cc0d36686e6a433aa76f96773852d35') 
         empty($_POST['message']) ||
         !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
     ) {
+        header("Location: $errorPage");
         echo "<script>window.location.href='$errorPage';</script>";
         return false;
     } else {
@@ -29,6 +30,7 @@ if (!empty($_POST) AND $_POST['referer'] == '6cc0d36686e6a433aa76f96773852d35') 
         $headers = "From: $email_address\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
         $headers .= "Reply-To: $email_address";
         mail($sendTo, $email_subject, $email_body, $headers);
+        header("Location: $redirectPage");
         echo "<script>window.location.href='$redirectPage';</script>";
         return true;
     }

@@ -21,7 +21,7 @@ function getLocation()
             $locationActive = $rowGetLocation['active'];
             $locationID = $rowGetLocation['id'];
         } else {
-            header('Location: index.php?loc_id=1');
+            header("Location: index.php?loc_id=1");
             echo "<script>window.location.href='index.php?loc_id=1';</script>";
         }
 
@@ -672,7 +672,7 @@ if (empty($_GET['loc_id'])) {
         $pageRedirect = basename($_SERVER['PHP_SELF']) . '?loc_id=1';
     }
 
-    header('Location: ' . $pageRedirect);
+    header("Location: $pageRedirect");
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
 }
 
@@ -682,7 +682,7 @@ if (!empty($_GET['loc_name'])) {
     $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='" . $_GET['loc_name'] . "' LIMIT 1");
     $rowLocName = mysqli_fetch_array($sqlLocName);
 
-    header('Location: ' . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id']);
+    header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "");
     echo "<script>window.location.href='" . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id'] . "';</script>";
 }
 ?>

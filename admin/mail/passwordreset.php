@@ -24,12 +24,12 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
 
     // Check for empty fields
     if (empty($user_name) || empty($email_address) || !filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-
+        header("Location: $errorPage");
         echo "<script>window.location.href='$errorPage';</script>";
         return false;
 
     } else if ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
-
+        header("Location: $errorPageNotFound");
         echo "<script>window.location.href='$errorPageNotFound';</script>";
         return false;
 
@@ -46,6 +46,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
 
         mail($email_address, $email_subject, $email_body, $headers);
 
+        header("Location: $redirectPage");
         echo "<script>window.location.href='$redirectPage';</script>";
         return true;
     }
