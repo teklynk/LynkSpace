@@ -343,7 +343,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
 
     echo "</tbody>
 		</table>
-		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save</button>
+		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Cancel</button>
 		</form>
 		</div>";
