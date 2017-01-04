@@ -25,7 +25,6 @@ $(document).ready(function () {
         }
     });
 
-
     //Boostrap alert fadeout and close function
     //$('.alert-success').fadeOut(5000);
     setTimeout(function () {
@@ -115,6 +114,7 @@ $(document).ready(function () {
             $('.scrollToTop').fadeOut();
         }
     });
+
     //Click event to scroll to top
     $('.scrollToTop').click(function () {
         $('html, body').animate({
@@ -122,7 +122,6 @@ $(document).ready(function () {
         }, 800);
         return false;
     });
-
 
     // get an array with all querystring values
     // example: var valor = getUrlVars()["valor"];
@@ -282,6 +281,7 @@ $(document).ready(function () {
             $('#team_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#team_image').val());
         }
     });
+
     //Ajax Calls
     $('#nav_Table .nav_win_checkbox').change(function () {
         $.get('ajax/update_navwin.php?update=true', {
@@ -337,6 +337,7 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+
     //Not a Robot
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
@@ -349,11 +350,13 @@ $(document).ready(function () {
             }
         }
     });
+
     //Boostrap-select actions
     $('select.selectpicker').change(function () {
         var selected = $('.selectpicker option:selected').val();
         window.location.href = '?loc_id=' + selected;
     });
+
     //Category expand/collapse
     $('#addCat_button').click(function () {
         setTimeout(function () {
@@ -364,8 +367,10 @@ $(document).ready(function () {
             }
         }, 500);
     });
+
     //Returns Character Count Function
     parseCharCounts();
+    
     //Returns Boostrap tooltips function
     $('[data-toggle="tooltip"]').tooltip();
     //Location Select Drop Down list. Sets selected value based on loc_id=querystring value
@@ -376,6 +381,7 @@ $(document).ready(function () {
         }
     });
 });
+
 //--Outside of Document.Ready functions
 //modal preview window
 function showMyModal(myTitle, myFile) {

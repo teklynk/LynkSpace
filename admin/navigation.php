@@ -3,6 +3,12 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
+//Redirect to section=top if section is not in querystring
+if ($_GET['section'] == "" && $_GET['loc_id']) {
+    //header("Location: navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "");
+    echo "<script>window.location.href='navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "';</script>";
+}
+
 $getNavSection = $_GET['section'];
 
 //update table on submit

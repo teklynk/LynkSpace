@@ -263,7 +263,6 @@ small {
     text-indent: -999px;
     background: url('../images/ui.totop.png') no-repeat left top;
 }
-
 .scrollToTop:hover {
     width: 50px;
     height: 50px;
@@ -276,13 +275,11 @@ small {
 .side-nav i {
     margin-right: 4px;
 }
-
 .side-nav > li > a {
     width: 165px;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
 }
-
 
 /** Media Queries **/
 @media (min-width: 768px) {
