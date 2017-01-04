@@ -63,13 +63,13 @@ if ($_GET['preview'] > "") {
                         $_POST['team_status'] = 'false';
                     }
 
-                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['team_content'])) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['team_content'])) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowTeam = mysqli_fetch_array($sqlteam);
 
                 //Create new team
@@ -79,7 +79,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, active, datetime, loc_id) VALUES ('" . mysqli_real_escape_string($db_conn, trim($_POST['team_title'])) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 'true', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, active, author_name, datetime, loc_id) VALUES ('" . mysqli_real_escape_string($db_conn, trim($_POST['team_title'])) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
                     echo "<script>window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -167,7 +167,7 @@ if ($_GET['preview'] > "") {
                     <textarea class="form-control input-sm count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
                 <div class="form-group">
-                    <span><small><?php if ($_GET['editteam']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowTeam['datetime']));} ?></small></span>
+                    <span><small><?php if ($_GET['editteam']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowTeam['datetime'])) . " By: " . $rowTeam['author_name'];} ?></small></span>
                 </div>
 
                 <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -202,7 +202,7 @@ if ($_GET['preview'] > "") {
 
             //move team to top of list
             if (($_GET['moveteam'] AND $_GET['movetitle'])) {
-                $teamDateUpdate = "UPDATE team SET datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveteamId'";
+                $teamDateUpdate = "UPDATE team SET author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveteamId'";
                 mysqli_query($db_conn, $teamDateUpdate);
 
                 $teamMsg = "<div class='alert alert-success'>" . $moveteamTitle . " has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

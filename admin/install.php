@@ -73,6 +73,7 @@ if (!empty($_POST)) {
     fclose($dbfile);
 
     rename("install.php", "install.old"); // rename install page so that it can not be accessed after the initial install
+    header("Location: index.php");
     echo "<script>window.location.href='index.php';</script>"; // redirect to login page
 
 } // the big IF

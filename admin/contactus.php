@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowContact = mysqli_fetch_array($sqlContact);
 
 //update table on submit
@@ -11,15 +11,16 @@ if (!empty($_POST['contact_heading'])) {
 
     if ($rowContact['loc_id'] == $_GET['loc_id']) {
         //Do Update
-        $contactUpdate = "UPDATE contactus SET heading='" . safeCleanStr($_POST['contact_heading']) . "', introtext='" . safeCleanStr($_POST['contact_introtext']) . "', mapcode='" . trim($_POST['contact_mapcode']) . "', email='" . filter_var($_POST['contact_email'], FILTER_VALIDATE_EMAIL) . "', sendtoemail='" . filter_var($_POST['contact_sendtoemail'], FILTER_VALIDATE_EMAIL) . "', address='" . safeCleanStr($_POST['contact_address']) . "', city='" . safeCleanStr($_POST['contact_city']) . "', state='" . safeCleanStr($_POST['contact_state']) . "', zipcode='" . safeCleanStr($_POST['contact_zipcode']) . "', phone='" . safeCleanStr($_POST['contact_phone']) . "', hours='" . safeCleanStr($_POST['contact_hours']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $contactUpdate = "UPDATE contactus SET heading='" . safeCleanStr($_POST['contact_heading']) . "', introtext='" . safeCleanStr($_POST['contact_introtext']) . "', mapcode='" . trim($_POST['contact_mapcode']) . "', email='" . filter_var($_POST['contact_email'], FILTER_VALIDATE_EMAIL) . "', sendtoemail='" . filter_var($_POST['contact_sendtoemail'], FILTER_VALIDATE_EMAIL) . "', address='" . safeCleanStr($_POST['contact_address']) . "', city='" . safeCleanStr($_POST['contact_city']) . "', state='" . safeCleanStr($_POST['contact_state']) . "', zipcode='" . safeCleanStr($_POST['contact_zipcode']) . "', phone='" . safeCleanStr($_POST['contact_phone']) . "', hours='" . safeCleanStr($_POST['contact_hours']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $contactUpdate);
     } else {
         //Do Insert
-        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['contact_heading']) . "', '" . safeCleanStr($_POST['contact_introtext']) . "', '" . trim($_POST['contact_mapcode']) . "', '" . filter_var($_POST["contact_email"], FILTER_VALIDATE_EMAIL) . "', '" . filter_var($_POST['contact_sendtoemail'], FILTER_VALIDATE_EMAIL) . "', '" . safeCleanStr($_POST['contact_address']) . "', '" . safeCleanStr($_POST['contact_city']) . "', '" . safeCleanStr($_POST['contact_state']) . "', '" . safeCleanStr($_POST['contact_zipcode']) . "', '" . safeCleanStr($_POST['contact_phone']) . "', '" . safeCleanStr($_POST['contact_hours']) . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['contact_heading']) . "', '" . safeCleanStr($_POST['contact_introtext']) . "', '" . trim($_POST['contact_mapcode']) . "', '" . filter_var($_POST["contact_email"], FILTER_VALIDATE_EMAIL) . "', '" . filter_var($_POST['contact_sendtoemail'], FILTER_VALIDATE_EMAIL) . "', '" . safeCleanStr($_POST['contact_address']) . "', '" . safeCleanStr($_POST['contact_city']) . "', '" . safeCleanStr($_POST['contact_state']) . "', '" . safeCleanStr($_POST['contact_zipcode']) . "', '" . safeCleanStr($_POST['contact_phone']) . "', '" . safeCleanStr($_POST['contact_hours']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
         mysqli_query($db_conn, $contactInsert);
     }
 
-    echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
+    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 
 }
 
@@ -93,7 +94,7 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])); ?></small></span>
+                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])) . " By: ".$rowContact['author_name']; ?></small></span>
                 </div>
 
                 <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

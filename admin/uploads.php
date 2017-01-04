@@ -72,7 +72,6 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
         } ?>
         <form role="uploadForm" method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
-
                 <label>Upload Image</label>
                 <input type="file" name="fileToUpload" id="fileToUpload">
                 <input type="hidden" name="uploadFile" value="1">

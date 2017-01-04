@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 //update table on submit
@@ -12,11 +12,11 @@ if (!empty($_POST)) {
 
         if ($rowGeneralinfo['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $generalinfoUpdate);
         } else {
             //Do Insert
-            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $generalinfoInsert);
         }
 
@@ -56,11 +56,10 @@ if ($_GET['update'] == 'true') {
             </div>
 
             <div class="form-group">
-                <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowGeneralinfo['datetime'])); ?></small></span>
+                <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowGeneralinfo['datetime'])) . " By: " . $rowGeneralinfo['author_name']; ?></small></span>
             </div>
 
-            <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
-            </button>
+            <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
         </form>

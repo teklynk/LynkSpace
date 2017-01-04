@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
@@ -12,11 +12,11 @@ if (!empty($_POST)) {
 
         if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['featured_content'])) . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['featured_content'])) . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $featuredUpdate);
         } else {
             //Do Insert
-            $featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "',  '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $featuredInsert);
         }
 
@@ -109,7 +109,7 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowFeatured['datetime'])); ?></small></span>
+                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowFeatured['datetime'])) . " By: " . $rowFeatured['author_name']; ?></small></span>
                 </div>
 
                 <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

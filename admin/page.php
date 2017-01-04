@@ -55,13 +55,13 @@ if ($_GET['preview'] > "") {
                             $_POST['page_status'] = 'false';
                         }
 
-                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', disqus='" . $_POST['page_disqus'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
+                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', disqus='" . $_POST['page_disqus'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . safeCleanStr($_POST['page_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, datetime, image_align, disqus, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, author_name, datetime, image_align, disqus, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowPages = mysqli_fetch_array($sqlPages);
 
                     //Create new page
@@ -71,7 +71,7 @@ if ($_GET['preview'] > "") {
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['page_content'])) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['page_content'])) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -214,10 +214,9 @@ if ($_GET['preview'] > "") {
                         <textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
                     </div>
                     <div class="form-group">
-                        <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime']));} ?></small></span>
+                        <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
                     </div>
-                    <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
-                    </button>
+                    <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
                 </form>
@@ -276,9 +275,7 @@ if ($_GET['preview'] > "") {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i
-                                        class="fa fa-times"></i> Close
-                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                             </div>
                             <div class="modal-body">
                                 <iframe id="myModalFile" src="" frameborder="0"></iframe>
@@ -300,10 +297,7 @@ if ($_GET['preview'] > "") {
                         });
                     });
                 </script>
-                <button type="button" class="btn btn-primary"
-                        onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-                        class='fa fa-fw fa-plus'></i> Add a New Page
-                </button>
+                <button type="button" class="btn btn-primary" onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Page</button>
                 <h2></h2>
                 <div class="table-responsive">
                     <?php
@@ -314,8 +308,7 @@ if ($_GET['preview'] > "") {
                     <form name="pageForm" method="post" action="">
                         <div class="form-group">
                             <label>Heading</label>
-                            <input class="form-control input-sm count-text" name="main_heading" maxlength="255"
-                                   value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
+                            <input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
                         </div>
                         <hr/>
                         <table class="table table-bordered table-hover table-striped dataTable" id="dataTable">
@@ -359,9 +352,7 @@ if ($_GET['preview'] > "") {
                             </tbody>
                         </table>
 
-                        <button type="submit" name="pageNew_submit" class="btn btn-primary"><i
-                                class='fa fa-fw fa-save'></i> Save Changes
-                        </button>
+                        <button type="submit" name="pageNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
                     </form>
                 </div>

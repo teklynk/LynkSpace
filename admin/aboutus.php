@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, datetime, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, author_name, datetime, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
@@ -12,16 +12,17 @@ if (!empty($_POST)) {
 
         if ($rowAbout['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $aboutUpdate);
         } else {
             //Do Insert
-            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $aboutInsert);
         }
 
     }
 
+    header("Location: aboutus.php?loc_id=" . $_GET['loc_id'] . "&update=true");
     echo "<script>window.location.href='aboutus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -110,7 +111,7 @@ if ($_GET['update'] == 'true') {
             </div>
 
             <div class="form-group">
-                <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowAbout['datetime'])); ?></small></span>
+                <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowAbout['datetime'])) . " By: ". $rowAbout['author_name'] ?></small></span>
             </div>
 
             <button type="submit" name="aboutus_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

@@ -54,13 +54,13 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
                 $_POST['slider_status'] = 'false';
             }
 
-            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', link='" . trim($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', active='" . $_POST['slider_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
+            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', link='" . trim($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', active='" . $_POST['slider_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
 
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . safeCleanStr($_POST['slide_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
-        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, author_name, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowSlides = mysqli_fetch_array($sqlSlides);
 
         //Create new slide
@@ -70,7 +70,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, active, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', 'true', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -195,7 +195,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
             <textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
         </div>
         <div class="form-group">
-            <span><small><?php if ($_GET['editslide']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSlides['datetime']));} ?></small></span>
+            <span><small><?php if ($_GET['editslide']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSlides['datetime'])) . " By: " . $rowSlides['author_name'];} ?></small></span>
         </div>
         <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>

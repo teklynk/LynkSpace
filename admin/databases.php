@@ -72,13 +72,13 @@ if ($_GET['preview'] > "") {
                         $_POST['customer_featured'] = 'false';
                     }
 
-                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['customer_content'])) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['customer_content'])) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, featured, active, datetime, loc_id FROM customers WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, content, featured, active, author_name, datetime, loc_id FROM customers WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowCustomer = mysqli_fetch_array($sqlCustomer);
 
 
@@ -89,7 +89,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, datetime, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['customer_link'])) . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, author_name, datetime, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['customer_link'])) . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     echo "<script>window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -222,7 +222,7 @@ if ($_GET['preview'] > "") {
                     <textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
                 <div class="form-group">
-                    <span><small><?php if ($_GET['editcustomer']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowCustomer['datetime']));} ?></small></span>
+                    <span><small><?php if ($_GET['editcustomer']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowCustomer['datetime'])). " By: " . $rowCustomer['author_name'];} ?></small></span>
                 </div>
 
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -256,7 +256,7 @@ if ($_GET['preview'] > "") {
 
             //move customer to top of list
             if (($_GET['movecustomer'] AND $_GET['movename'])) {
-                $customerDateUpdate = "UPDATE customers SET datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$movecustomerId'";
+                $customerDateUpdate = "UPDATE customers SET author_name='" . $_SESSION['author_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$movecustomerId'";
                 mysqli_query($db_conn, $customerDateUpdate);
 
                 $customerMsg = "<div class='alert alert-success'>" . $movecustomerName . " has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -304,10 +304,7 @@ if ($_GET['preview'] > "") {
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
-            <button type="button" class="btn btn-primary"
-                    onclick="window.location='?newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-                    class='fa fa-fw fa-plus'></i> Add a New Database
-            </button>
+            <button type="button" class="btn btn-primary" onclick="window.location='?newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Database</button>
             <h2></h2>
             <div class="table-responsive">
                 <?php
@@ -318,14 +315,11 @@ if ($_GET['preview'] > "") {
                 <form name="customerForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control input-sm count-text" name="customer_heading" maxlength="255"
-                               value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My Database" required>
+                        <input class="form-control input-sm count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSetup['customersheading']; ?>" placeholder="My Database" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control input-sm count-text" name="main_content"
-                                  placeholder="About our databases"
-                                  maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
+                        <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our databases" maxlength="255"><?php echo $rowSetup['customerscontent']; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -338,7 +332,7 @@ if ($_GET['preview'] > "") {
                         </thead>
                         <tbody>
                         <?php
-                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, author_name, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
                             $customerName = $rowCustomer['name'];
@@ -378,9 +372,7 @@ if ($_GET['preview'] > "") {
                         </tbody>
                     </table>
                     <input type="hidden" name="save_main" value="true"/>
-                    <button type="submit" class="btn btn-primary" name="customer_submit"><i
-                            class='fa fa-fw fa-save'></i> Save Changes
-                    </button>
+                    <button type="submit" class="btn btn-primary" name="customer_submit"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
                 </form>
             </div>

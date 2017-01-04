@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 
         //Create new category if newcat is true
         if (!empty($_POST['nav_newcat']) AND $_POST['exist_cat'] == "") {
-            $navNewCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_POST['nav_newcat']) . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+            $navNewCat = "INSERT INTO category (name, author_name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_POST['nav_newcat']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
             mysqli_query($db_conn, $navNewCat);
 
             //get the new cat id
@@ -35,7 +35,7 @@ if (!empty($_POST)) {
 
         }
 
-        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['nav_newname']) . "', '" . $_POST['nav_newurl'] . "', 0, $getTheCat, '" . $getNavSection . "','off', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['nav_newname']) . "', '" . $_POST['nav_newurl'] . "', 0, $getTheCat, '" . $getNavSection . "','off', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
         mysqli_query($db_conn, $navNew);
 
     }
@@ -46,7 +46,7 @@ if (!empty($_POST)) {
             $_POST['nav_cat'][$i] = 0; //None
         }
 
-        $navUpdate = "UPDATE navigation SET sort=" . $_POST['nav_sort'][$i] . ", name='" . safeCleanStr($_POST['nav_name'][$i]) . "', url='" . trim($_POST['nav_url'][$i]) . "', catid=" . $_POST['nav_cat'][$i] . ", datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['nav_id'][$i] . " ";
+        $navUpdate = "UPDATE navigation SET sort=" . $_POST['nav_sort'][$i] . ", name='" . safeCleanStr($_POST['nav_name'][$i]) . "', url='" . trim($_POST['nav_url'][$i]) . "', catid=" . $_POST['nav_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['nav_id'][$i] . " ";
         mysqli_query($db_conn, $navUpdate);
     }
 
@@ -147,7 +147,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
         } elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm'] == 'yes') {
 
-            $navCatUpdate = "UPDATE navigation SET catid=0 WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
+            $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
             mysqli_query($db_conn, $navCatUpdate);
 
             //delete category after clicking Yes
@@ -171,7 +171,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
         } elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm'] == 'yes') {
 
-            $navRenameCatUpdate = "UPDATE category SET name='" . safeCleanStr($renameCatTitle) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
+            $navRenameCatUpdate = "UPDATE category SET name='" . safeCleanStr($renameCatTitle) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
             mysqli_query($db_conn, $navRenameCatUpdate);
 
             $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($renameCatTitle) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -180,7 +180,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
         // add category
         if ($_GET['addcatname'] > "") {
-            $navAddCat = "INSERT INTO category (name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+            $navAddCat = "INSERT INTO category (name, author_name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
             mysqli_query($db_conn, $navAddCat);
 
             echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";

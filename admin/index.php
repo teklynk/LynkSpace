@@ -83,8 +83,10 @@ if (isset($_SESSION['loggedIn'])) {
 
     // redirect user to user manager page to update password info
     if ($_GET['msgsent'] == 'reset') {
+        header("Location: users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "");
         echo "<script>window.location.href='users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
     } else {
+        header("Location: users.php?loc_id=" . $_SESSION['user_loc_id'] . "");
         echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
     }
 
@@ -202,8 +204,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password
-                                    </button>
+                                    <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">

@@ -66,13 +66,13 @@ if ($_GET['preview']>"") {
 					$_POST['service_status']='false';
 				}
 
-				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".mysqli_real_escape_string($db_conn, trim($_POST['service_content']))."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".mysqli_real_escape_string($db_conn, trim($_POST['service_content']))."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', author_name='".$_SESSION['user_name']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
 				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 			}
 
-			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
+			$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
 			$rowServices = mysqli_fetch_array($sqlServices);
 
 		//Create new service
@@ -82,7 +82,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, datetime, loc_id) VALUES ('".mysqli_real_escape_string($db_conn, trim($_POST['service_title']))."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, datetime, loc_id) VALUES ('".mysqli_real_escape_string($db_conn, trim($_POST['service_title']))."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".$_SESSION['user_name']."', '".date("Y-m-d H:i:s")."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				echo "<script>window.location.href='services.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -215,7 +215,7 @@ if ($_GET['preview']>"") {
 			<textarea class="form-control input-sm count-text" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
 		<div class="form-group">
-			<span><small><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowServices['datetime']));} ?></small></span>
+			<span><small><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowServices['datetime'])) . " By: " . $rowServices['author_name'];} ?></small></span>
 		</div>
 		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
@@ -249,7 +249,7 @@ if ($_GET['preview']>"") {
 
 		//move services to top of list
 		if (($_GET['moveservice'] AND $_GET['movetitle'])) {
-			$servicesDateUpdate = "UPDATE services SET datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
+			$servicesDateUpdate = "UPDATE services SET author_name='".$_SESSION['user_name']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
 			mysqli_query($db_conn, $servicesDateUpdate);
 
 			$serviceMsg="<div class='alert alert-success'>".$moveserviceTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
