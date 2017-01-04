@@ -126,10 +126,7 @@ if ($_GET['preview'] > "") {
                             <label>Active</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="customer_status_checkbox" id="<?php echo $_GET['editcustomer'] ?>"
-                                           name="customer_status" type="checkbox" <?php if ($_GET['editcustomer']) {
-                                        echo $selActive;
-                                    } ?> data-toggle="toggle">
+                                    <input class="customer_status_checkbox" id="<?php echo $_GET['editcustomer'] ?>" name="customer_status" type="checkbox" <?php if ($_GET['editcustomer']) {echo $selActive;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -141,10 +138,7 @@ if ($_GET['preview'] > "") {
                             <label>Featured</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="customer_featured_checkbox" id="<?php echo $_GET['editcustomer'] ?>"
-                                           name="customer_featured" type="checkbox" <?php if ($_GET['editcustomer']) {
-                                        echo $selFeatured;
-                                    } ?> data-toggle="toggle">
+                                    <input class="customer_featured_checkbox" id="<?php echo $_GET['editcustomer'] ?>" name="customer_featured" type="checkbox" <?php if ($_GET['editcustomer']) {echo $selFeatured;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -154,15 +148,11 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label><?php echo $customerLabel; ?></label>
-                    <input class="form-control input-sm count-text" name="customer_name" maxlength="255"
-                           value="<?php if ($_GET['editcustomer']) {
-                               echo $rowCustomer['name'];
-                           } ?>" placeholder="Database Name">
+                    <input class="form-control input-sm count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" placeholder="Database Name">
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <i id="customer_icon" style="font-size:6.0em;"
-                       class="fa fa-fw fa-<?php echo $rowCustomer['icon']; ?>"></i>
+                    <i id="customer_icon" style="font-size:6.0em;" class="fa fa-fw fa-<?php echo $rowCustomer['icon']; ?>"></i>
                 </div>
                 <div class="form-group">
                     <?php
@@ -224,28 +214,18 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Link</label>
-                    <input class="form-control input-sm count-text" name="customer_link" maxlength="255"
-                           value="<?php if ($_GET['editcustomer']) {
-                               echo $rowCustomer['link'];
-                           } ?>" type="url" placeholder="http://www.google.com">
+                    <input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="url" placeholder="http://www.google.com">
                 </div>
                 <hr/>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control input-sm count-text" rows="3" name="customer_content"
-                              placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {
-                            echo $rowCustomer['content'];
-                        } ?></textarea>
+                    <textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
                 <div class="form-group">
-                    <span><small><?php if ($_GET['editcustomer']) {
-                                echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowCustomer['datetime']));
-                            } ?></small></span>
+                    <span><small><?php if ($_GET['editcustomer']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowCustomer['datetime']));} ?></small></span>
                 </div>
 
-                <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                    Save Changes
-                </button>
+                <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
             </form>

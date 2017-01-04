@@ -194,8 +194,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
         }
         ?>
         <!-- Category Section -->
-        <button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button"
-                data-target="#addCatDiv">
+        <button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button" data-target="#addCatDiv">
             <i class='fa fa-fw fa-plus'></i> Add a Category
         </button>
         <h2></h2>
@@ -206,21 +205,10 @@ for ($x = 0; $x < $navArrlength; $x++) {
                 <div class="form-group">
                     <label for="nav_newcat">Category</label>
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat"
-                               maxlength="255" data-toggle="tooltip"
-                               title="If you would like to add a new Category, you must do that before creating the link(s) to display under the Category.">
-                        <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus'
-                                                                        style="color:#337ab7; cursor:pointer;"
-                                                                        data-toggle="tooltip" title="Add"
-                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
-                        <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save'
-                                                                           style="visibility:hidden; color:#337ab7; cursor:pointer;"
-                                                                           data-toggle="tooltip" title="Rename"
-                                                                           onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
-                        <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash'
-                                                                        style="visibility:hidden; color:#c9302c; cursor:pointer;"
-                                                                        data-toggle="tooltip" title="Delete"
-                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+                        <input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="If you would like to add a new Category, you must do that before creating the link(s) to display under the Category.">
+                        <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
+                        <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+                        <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -258,13 +246,11 @@ for ($x = 0; $x < $navArrlength; $x++) {
             <fieldset>
                 <div class="form-group">
                     <label for="nav_newname">Link Name</label>
-                    <input type="text" class="form-control input-sm count-text" name="nav_newname" id="nav_newname"
-                           maxlength="255">
+                    <input type="text" class="form-control input-sm count-text" name="nav_newname" id="nav_newname" maxlength="255">
                 </div>
                 <div class="form-group">
                     <label for="nav_newurl">Link URL</label>
-                    <input type="text" class="form-control input-sm count-text" name="nav_newurl" id="nav_newurl"
-                           maxlength="255">
+                    <input type="text" class="form-control input-sm count-text" name="nav_newurl" id="nav_newurl" maxlength="255">
                 </div>
                 <div class="form-group">
                     <label for="exist_page">Existing Page</label>
@@ -344,9 +330,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
                 </tbody>
             </table>
 
-            <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
-                Changes
-            </button>
+            <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
         </form>
 

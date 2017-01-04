@@ -123,10 +123,7 @@ if ($_GET['preview'] > "") {
                                 <label>Active</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input class="page_status_checkbox" id="<?php echo $_GET['editpage'] ?>"
-                                               name="page_status" type="checkbox" <?php if ($_GET['editpage']) {
-                                            echo $selActive;
-                                        } ?> data-toggle="toggle">
+                                        <input class="page_status_checkbox" id="<?php echo $_GET['editpage'] ?>" name="page_status" type="checkbox" <?php if ($_GET['editpage']) {echo $selActive;} ?> data-toggle="toggle">
                                     </label>
                                 </div>
                             </div>
@@ -135,15 +132,11 @@ if ($_GET['preview'] > "") {
                     <hr/>
                     <div class="form-group">
                         <label><?php echo $pageLabel; ?></label>
-                        <input class="form-control input-sm count-text" name="page_title" maxlength="255"
-                               value="<?php if ($_GET['editpage']) {
-                                   echo $rowPages['title'];
-                               } ?>" placeholder="Page Title">
+                        <input class="form-control input-sm count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title">
                     </div>
                     <hr/>
                     <div class="form-group">
-                        <img src="<?php echo $image; ?>" id="page_image_preview"
-                             style="max-width:140px; height:auto; display:block;"/>
+                        <img src="<?php echo $image; ?>" id="page_image_preview" style="max-width:140px; height:auto; display:block;"/>
                     </div>
                     <div class="form-group">
                         <label>Use an Existing Image</label>
@@ -218,18 +211,12 @@ if ($_GET['preview'] > "") {
 
                     <div class="form-group">
                         <label>Text / HTML</label>
-                        <textarea class="form-control input-sm tinymce" rows="20" name="page_content"
-                                  id="page_content"><?php if ($_GET['editpage']) {
-                                echo $rowPages['content'];
-                            } ?></textarea>
+                        <textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
                     </div>
                     <div class="form-group">
-                        <span><small><?php if ($_GET['editpage']) {
-                                    echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime']));
-                                } ?></small></span>
+                        <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime']));} ?></small></span>
                     </div>
-                    <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                        Save Changes
+                    <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
                     </button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 

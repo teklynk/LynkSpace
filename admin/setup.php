@@ -53,9 +53,7 @@ if ($_GET['update'] == 'true') {
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Settings <?php if ($_GET['newlocation'] == 'true') {
-                echo "(New)";
-            } ?>
+            Settings <?php if ($_GET['newlocation'] == 'true') {echo "(New)";} ?>
             <small></small>
         </h1>
     </div>
@@ -71,10 +69,7 @@ if ($_GET['update'] == 'true') {
         //Check if user_level is Admin user
         if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
             ?>
-            <button type="button" class="btn btn-primary"
-                    onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i
-                    class='fa fa-fw fa-plus'></i> Add a New Location
-            </button>
+            <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
             <h2></h2>
             <?php
         }
@@ -109,23 +104,19 @@ if ($_GET['update'] == 'true') {
 
             <div class="form-group">
                 <label>Site Title</label>
-                <input class="form-control input-sm count-text" name="site_title" maxlength="255"
-                       value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site" required>
+                <input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site" required>
             </div>
             <div class="form-group">
                 <label>Author</label>
-                <input class="form-control input-sm count-text" name="site_author" maxlength="255"
-                       value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
+                <input class="form-control input-sm count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
             </div>
             <div class="form-group">
                 <label>Keywords</label>
-                <textarea class="form-control input-sm count-text" name="site_keywords" rows="3"
-                          maxlength="255"><?php echo $rowSetup['keywords']; ?></textarea>
+                <textarea class="form-control input-sm count-text" name="site_keywords" rows="3" maxlength="255"><?php echo $rowSetup['keywords']; ?></textarea>
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea class="form-control input-sm count-text" name="site_description" rows="3"
-                          maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
+                <textarea class="form-control input-sm count-text" name="site_description" rows="3" maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
             </div>
             <hr/>
             <div class="form-group">
@@ -135,15 +126,13 @@ if ($_GET['update'] == 'true') {
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label>Location Name</label>
-                        <input class="form-control input-sm count-text" name="location_name" maxlength="255"
-                               value="<?php echo $rowLocation['name']; ?>" required>
+                        <input class="form-control input-sm count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <img src="<?php echo $logo; ?>" id="site_logo_preview"
-                     style="max-width:140px; height:auto; display:block;"/>
+                <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block;"/>
             </div>
             <div class="form-group">
                 <label>Choose a Logo</label>
@@ -178,8 +167,7 @@ if ($_GET['update'] == 'true') {
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>PAC Config</label>
-                        <input class="form-control input-sm count-text" name="site_config" maxlength="10"
-                               value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+                        <input class="form-control input-sm count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
                     </div>
                 </div>
             </div>
@@ -189,31 +177,23 @@ if ($_GET['update'] == 'true') {
                         <label>PAC Search Options</label>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2pac"
-                                       type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">
-                                LS2PAC
+                                <input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2PAC
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio"
-                                       value="1" <?php echo $isActive_default1; ?>>
-                                Is Default
+                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Is Default
                             </label>
                         </div>
                         <h1></h1>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2kids"
-                                       type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">
-                                LS2Kids
+                                <input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2Kids
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio"
-                                       value="2" <?php echo $isActive_default2; ?>>
-                                Is Default
+                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Is Default
                             </label>
                         </div>
                     </div>
@@ -234,8 +214,7 @@ if ($_GET['update'] == 'true') {
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
-                Changes
+            <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
             </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 

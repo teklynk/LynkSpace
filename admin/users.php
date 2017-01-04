@@ -56,32 +56,28 @@ if ($_GET['passwordupdated'] == 'true') {
                 <label>User Name</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input class="form-control" type="text" name="user_name" maxlength="255"
-                           value="<?php echo $rowUsers['username']; ?>" placeholder="User name" required>
+                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $rowUsers['username']; ?>" placeholder="User name" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>User Email</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                    <input class="form-control" type="email" name="user_email" maxlength="255"
-                           value="<?php echo $rowUsers['email']; ?>" placeholder="Email Address" required>
+                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $rowUsers['email']; ?>" placeholder="Email Address" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>User Password</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" value="" placeholder="Password"
-                           required>
+                    <input class="form-control" type="password" name="user_password" value="" placeholder="Password" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Password Confirm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" value=""
-                           placeholder="Password Confirm" required>
+                    <input class="form-control" type="password" name="user_password_confirm" value="" placeholder="Password Confirm" required>
                 </div>
             </div>
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>
@@ -91,9 +87,7 @@ if ($_GET['passwordupdated'] == 'true') {
                 <span><small><?php echo "Last Logged In: " . date('m-d-Y, H:i:s', strtotime($rowUsers['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
-                Changes
-            </button>
+            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
         </form>

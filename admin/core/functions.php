@@ -5,8 +5,7 @@ if (!defined('inc_access')) {
 }
 
 //Random password generator for password reset
-function generateRandomString($length = 10)
-{
+function generateRandomString($length = 10){
     global $randomString;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -18,28 +17,24 @@ function generateRandomString($length = 10)
 }
 
 //Get gravatar image based on users email value
-function getGravatar($email, $size)
-{
+function getGravatar($email, $size){
     $default = "https://cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";
     return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
 }
 
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
-function safeCleanStr($cleanStr)
-{
+function safeCleanStr($cleanStr){
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
 }
 
 //escape Quotes in textareas and string values
-function sqlEscapeStr($cleanStr)
-{
+function sqlEscapeStr($cleanStr){
     global $db_conn;
     return mysqli_real_escape_string($db_conn, trim($cleanStr));
 }
 
 //Gets clients real IP address
-function getRealIpAddr()
-{
+function getRealIpAddr(){
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $clientip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -51,15 +46,19 @@ function getRealIpAddr()
 }
 
 //Location list for level 1 admins only
-function getLocList()
-{
+function getLocList(){
     global $locList;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' ORDER BY name ASC");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
-        $locList .= "<option data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' >" . $rowLocationSearch['name'] . "</option>";
+        if ($rowLocationSearch['id'] == 1) {
+            $isDefault = " (Default)";
+        } else {
+            $isDefault = "";
+        }
+        $locList .= "<option data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' >" . $rowLocationSearch['name'] . $isDefault ."</option>";
     }
     return $locList;
 }

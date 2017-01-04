@@ -103,14 +103,11 @@ if (!empty($_POST)) {
             <form name="frmInstall" class="form-signin" method="post" action="">
                 <h2 class="form-signin-heading">Database info</h2>
                 <label for="dbserver" class="sr-only">DB Server</label>
-                <input class="form-control" type="text" name="dbserver" maxlength="255" placeholder="DB Server"
-                       required>
+                <input class="form-control" type="text" name="dbserver" maxlength="255" placeholder="DB Server" required>
                 <label for="dbusername" class="sr-only">DB Username</label>
-                <input class="form-control" type="text" name="dbusername" maxlength="255" placeholder="DB Username"
-                       required>
+                <input class="form-control" type="text" name="dbusername" maxlength="255" placeholder="DB Username" required>
                 <label for="dbpassword" class="sr-only">DBPassword</label>
-                <input class="form-control" type="text" name="dbpassword" maxlength="255" placeholder="DB Password"
-                       required>
+                <input class="form-control" type="text" name="dbpassword" maxlength="255" placeholder="DB Password" required>
                 <label for="dbname" class="sr-only">DB Name</label>
                 <input class="form-control" type="text" name="dbname" maxlength="255" placeholder="DB Name" required>
                 <h2 class="form-signin-heading">Create an Admin user</h2>

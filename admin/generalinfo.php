@@ -47,22 +47,19 @@ if ($_GET['update'] == 'true') {
 
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control input-sm count-text" name="generalinfo_heading" maxlength="255"
-                       value="<?php echo $rowGeneralinfo['heading']; ?>" placeholder="Heading" required>
+                <input class="form-control input-sm count-text" name="generalinfo_heading" maxlength="255" value="<?php echo $rowGeneralinfo['heading']; ?>" placeholder="Heading" required>
             </div>
 
             <div class="form-group">
                 <label>Text / HTML</label>
-                <textarea class="form-control input-sm tinymce" name="generalinfo_content"
-                          rows="20"><?php echo $rowGeneralinfo['content']; ?></textarea>
+                <textarea class="form-control input-sm tinymce" name="generalinfo_content" rows="20"><?php echo $rowGeneralinfo['content']; ?></textarea>
             </div>
 
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowGeneralinfo['datetime'])); ?></small></span>
             </div>
 
-            <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                Save Changes
+            <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
             </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 

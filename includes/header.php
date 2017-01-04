@@ -28,16 +28,13 @@
     <title><?php echo $theTitle; ?></title>
 
     <!-- Bootstrap Core CSS CDN -->
-    <link rel="stylesheet" type="text/css"
-          href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Custom Fonts CDN -->
-    <link rel="stylesheet" type="text/css"
-          href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- JQueryUI CSS CDN -->
-    <link rel="stylesheet" type="text/css"
-          href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="css/default-style.min.css">
@@ -72,24 +69,20 @@
     ?>
 
     <!-- jQuery CDN -->
-    <script type="text/javascript" language="javascript"
-            src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <!-- jQuery UI AutoComplete CDN -->
-    <script type="text/javascript" language="javascript"
-            src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" language="javascript"
-            src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- Google Translate -->
     <script type="text/javascript" language="javascript"
             src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- TLC LS2PAC search script CDN -->
-    <script type="text/javascript" language="javascript"
-            src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
@@ -126,13 +119,11 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
                 <i class="fa fa-bars fa-2x cps-blue"></i>
                 <span class="cps-blue toggbutton">MENU</span>
             </button>
-            <a href="index.php" class="navbar-brand"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144"
-                                                          alt="" title="" border="0"/></a>
+            <a href="index.php" class="navbar-brand"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
@@ -142,8 +133,7 @@
             ?>
             <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
                 <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;"
-                     id="google_translate_element"></div>
+                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
                 <script type="text/javascript">
                     function googleTranslateElementInit() {
                         new google.translate.TranslateElement({

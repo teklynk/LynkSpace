@@ -61,18 +61,15 @@ if ($_GET['update'] == 'true') {
             <form name="landingForm" method="post" action="">
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control input-sm count-text" name="featured_heading" maxlength="255"
-                           value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" required>
+                    <input class="form-control input-sm count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" required>
                 </div>
                 <div class="form-group">
                     <label>Intro Title</label>
-                    <input class="form-control input-sm count-text" name="featured_introtext" maxlength="255"
-                           value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
+                    <input class="form-control input-sm count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <img src="<?php echo $thumbNail; ?>" id="featured_image_preview"
-                         style="max-width:140px; height:auto;"/>
+                    <img src="<?php echo $thumbNail; ?>" id="featured_image_preview" style="max-width:140px; height:auto;"/>
                 </div>
                 <div class="form-group">
                     <label>Use an Existing Image</label>
@@ -108,17 +105,14 @@ if ($_GET['update'] == 'true') {
                 <hr/>
                 <div class="form-group">
                     <label>Text / HTML</label>
-                    <textarea class="form-control input-sm tinymce" name="featured_content"
-                              rows="20"><?php echo $rowFeatured['content']; ?></textarea>
+                    <textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
                 </div>
 
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowFeatured['datetime'])); ?></small></span>
                 </div>
 
-                <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                    Save Changes
-                </button>
+                <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
         </div>
         </form>

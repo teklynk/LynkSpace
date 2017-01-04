@@ -137,8 +137,7 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close
-                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                 <h4 class="modal-title" id="myModalTitle" style="text-align: left;"></h4>
             </div>
             <div class="modal-body">

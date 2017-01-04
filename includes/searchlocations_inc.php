@@ -68,17 +68,13 @@ if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
                                 <form name="locSearchForm" action="index.php" method="get">
                                     <div id="custom-search-input">
                                         <div class="input-group col-md-12">
-
-                                            <input type="text" class="form-control" id="loc_name" name="loc_name"
-                                                   placeholder="School Name"/>
-                                            <input type="hidden" id="loc_id" name="loc_id"
-                                                   value="<?php echo $_GET['loc_id']; ?>"/>
+                                            <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name"/>
+                                            <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id']; ?>"/>
                                             <span class="input-group-btn">
-                                        <button class="btn btn-danger" type="submit" name="schoolsearch_submit">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-
+                                                <button class="btn btn-danger" type="submit" name="schoolsearch_submit">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
                                         </div>
                                     </div>
                                 </form>
@@ -88,17 +84,15 @@ if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
                                 ?>
                                 <!-- LS2PACSearch Form -->
                                 <div class="tab-pane fade in" id="tab2default">
-                                    <form name="ls2pacForm" method="post"
-                                          onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
+                                    <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term"
-                                                       placeholder="LS2PAC"/>
+                                                <input type="text" class="form-control" name="term" placeholder="LS2PAC"/>
                                                 <span class="input-group-btn">
-                                            <button class="btn btn-danger" type="submit" name="ls2pac_submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
+                                                    <button class="btn btn-danger" type="submit" name="ls2pac_submit">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
                                             </div>
                                         </div>
                                     </form>
@@ -110,17 +104,15 @@ if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
                                 ?>
                                 <!-- LS2Kids Search Form -->
                                 <div class="tab-pane fade in" id="tab3default">
-                                    <form name="ls2kidspacForm" method="post"
-                                          onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
+                                    <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term"
-                                                       placeholder="LS2Kids"/>
+                                                <input type="text" class="form-control" name="term" placeholder="LS2Kids"/>
                                                 <span class="input-group-btn">
-                                            <button class="btn btn-danger" type="submit" name="ls2kids_submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
+                                                    <button class="btn btn-danger" type="submit" name="ls2kids_submit">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
                                             </div>
                                         </div>
                                     </form>

@@ -116,10 +116,7 @@ if ($_GET['preview'] > "") {
                             <label>Active</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="team_status_checkbox" id="<?php echo $_GET['editteam'] ?>"
-                                           name="team_status" type="checkbox" <?php if ($_GET['editteam']) {
-                                        echo $selActive;
-                                    } ?> data-toggle="toggle">
+                                    <input class="team_status_checkbox" id="<?php echo $_GET['editteam'] ?>" name="team_status" type="checkbox" <?php if ($_GET['editteam']) {echo $selActive;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -159,34 +156,21 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control input-sm count-text" name="team_name" maxlength="255"
-                           value="<?php if ($_GET['editteam']) {
-                               echo $rowTeam['name'];
-                           } ?>" placeholder="Name">
+                    <input class="form-control input-sm count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name">
                 </div>
                 <div class="form-group">
                     <label>Title</label>
-                    <input class="form-control input-sm count-text" name="team_title" maxlength="255"
-                           value="<?php if ($_GET['editteam']) {
-                               echo $rowTeam['title'];
-                           } ?>" placeholder="Title">
+                    <input class="form-control input-sm count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control input-sm count-text" rows="3" name="team_content" placeholder="Text"
-                              maxlength="255"><?php if ($_GET['editteam']) {
-                            echo $rowTeam['content'];
-                        } ?></textarea>
+                    <textarea class="form-control input-sm count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
                 <div class="form-group">
-                    <span><small><?php if ($_GET['editteam']) {
-                                echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowTeam['datetime']));
-                            } ?></small></span>
+                    <span><small><?php if ($_GET['editteam']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowTeam['datetime']));} ?></small></span>
                 </div>
 
-                <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
-                    Changes
-                </button>
+                <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
             </form>
@@ -253,9 +237,7 @@ if ($_GET['preview'] > "") {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i
-                                    class="fa fa-times"></i> Close
-                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         </div>
                         <div class="modal-body">
                             <iframe id="myModalFile" src="" frameborder="0"></iframe>
@@ -266,10 +248,7 @@ if ($_GET['preview'] > "") {
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
-            <button type="button" class="btn btn-primary"
-                    onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-                    class='fa fa-fw fa-plus'></i> Add a New Team Member
-            </button>
+            <button type="button" class="btn btn-primary" onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Team Member</button>
             <h2></h2>
             <div class="table-responsive">
                 <?php
@@ -280,14 +259,11 @@ if ($_GET['preview'] > "") {
                 <form role="teamForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control input-sm count-text" name="team_heading" maxlength="255"
-                               value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
+                        <input class="form-control input-sm count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control input-sm count-text" name="main_content"
-                                  placeholder="About our team"
-                                  maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
+                        <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -330,9 +306,7 @@ if ($_GET['preview'] > "") {
                     </table>
                     <input type="hidden" name="save_main" value="true"/>
 
-                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
-                        Save Changes
-                    </button>
+                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
                 </form>
             </div>

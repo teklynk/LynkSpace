@@ -116,10 +116,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
                     <label>Active</label>
                     <div class="checkbox">
                         <label>
-                            <input class="slider_status_checkbox" id="<?php echo $_GET['editslide'] ?>"
-                                   name="slider_status" type="checkbox" <?php if ($_GET['editslide']) {
-                                echo $selActive;
-                            } ?> data-toggle="toggle">
+                            <input class="slider_status_checkbox" id="<?php echo $_GET['editslide'] ?>" name="slider_status" type="checkbox" <?php if ($_GET['editslide']) {echo $selActive;} ?> data-toggle="toggle">
                         </label>
                     </div>
                 </div>
@@ -128,10 +125,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
         <hr/>
         <div class="form-group">
             <label><?php echo $slideLabel; ?></label>
-            <input class="form-control input-sm count-text" name="slide_title" maxlength="255"
-                   value="<?php if ($_GET['editslide']) {
-                       echo $rowSlides['title'];
-                   } ?>" placeholder="Slide Title" required>
+            <input class="form-control input-sm count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" required>
         </div>
         <hr/>
         <div class="form-group">
@@ -198,18 +192,12 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
 
         <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text"
-                      maxlength="255"><?php if ($_GET['editslide']) {
-                    echo $rowSlides['content'];
-                } ?></textarea>
+            <textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
         </div>
         <div class="form-group">
-            <span><small><?php if ($_GET['editslide']) {
-                        echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSlides['datetime']));
-                    } ?></small></span>
+            <span><small><?php if ($_GET['editslide']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSlides['datetime']));} ?></small></span>
         </div>
-        <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
-        </button>
+        <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
     </form>
@@ -277,8 +265,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close
-                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                 </div>
                 <div class="modal-body">
                     <iframe id="myModalFile" src="" frameborder="0"></iframe>
@@ -289,10 +276,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <button type="button" class="btn btn-primary"
-            onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-            class='fa fa-fw fa-plus'></i> Add a New Slide
-    </button>
+    <button type="button" class="btn btn-primary" onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Slide</button>
     <h2></h2>
     <div class="table-responsive">
     <?php
