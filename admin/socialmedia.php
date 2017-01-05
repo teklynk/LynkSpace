@@ -3,20 +3,26 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSocial = mysqli_fetch_array($sqlSocial);
 
 //update table on submit
 if (!empty($_POST)) {
     if (!empty($_POST['social_heading'])) {
 
+        if ($_POST['social_defaults'] == 'on') {
+            $_POST['social_defaults'] = 'true';
+        } else {
+            $_POST['social_defaults'] = 'false';
+        }
+
         if ($rowSocial['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $socialUpdate = "UPDATE socialmedia SET heading='" . safeCleanStr($_POST['social_heading']) . "', facebook='" . trim($_POST['social_facebook']) . "', youtube='" . trim($_POST['social_youtube']) . "', twitter='" . trim($_POST['social_twitter']) . "', google='" . trim($_POST['social_google']) . "', pinterest='" . trim($_POST['social_pinterest']) . "', instagram='" . trim($_POST['social_instagram']) . "', tumblr='" . trim($_POST['social_tumblr']) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $socialUpdate = "UPDATE socialmedia SET heading='" . safeCleanStr($_POST['social_heading']) . "', facebook='" . trim($_POST['social_facebook']) . "', youtube='" . trim($_POST['social_youtube']) . "', twitter='" . trim($_POST['social_twitter']) . "', google='" . trim($_POST['social_google']) . "', pinterest='" . trim($_POST['social_pinterest']) . "', instagram='" . trim($_POST['social_instagram']) . "', tumblr='" . trim($_POST['social_tumblr']) . "', user_defaults='" . safeCleanStr($_POST['social_defaults']) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $socialUpdate);
         } else {
             //Do Insert
-            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, loc_id) VALUES ('" . safeCleanStr($_POST['social_heading']) . "', '" . trim($_POST['social_facebook']) . "', '" . trim($_POST['social_youtube']) . "', '" . trim($_POST['social_twitter']) . "', '" . trim($_POST['social_google']) . "', '" . trim($_POST['social_pinterest']) . "', '" . trim($_POST['social_instagram']) . "', '" . trim($_POST['social_tumblr']) . "', " . $_GET['loc_id'] . ")";
+            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . safeCleanStr($_POST['social_heading']) . "', '" . trim($_POST['social_facebook']) . "', '" . trim($_POST['social_youtube']) . "', '" . trim($_POST['social_twitter']) . "', '" . trim($_POST['social_google']) . "', '" . trim($_POST['social_pinterest']) . "', '" . trim($_POST['social_instagram']) . "', '" . trim($_POST['social_tumblr']) . "', '" . safeCleanStr($_POST['social_defaults']) . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $socialInsert);
         }
 
@@ -43,8 +49,34 @@ if ($_GET['update'] == 'true') {
         if ($pageMsg != "") {
             echo $pageMsg;
         }
+        //use default view
+        if ($rowSocial['use_defaults'] == 'true') {
+            $selDefaults = "CHECKED";
+        } else {
+            $selDefaults = "";
+        }
         ?>
         <form name="socialmediaForm" method="post" action="">
+            <?php
+            if ($_GET['loc_id'] != 1) {
+                ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="socialdefaults">
+                            <label>Use Defaults</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="social_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="social_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr/>
+                <?php
+            }
+            ?>
             <div class="form-group">
                 <label>Heading</label>
                 <input class="form-control input-sm" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" required>

@@ -264,13 +264,20 @@ if ($_GET['preview'] > "") {
 
             //update heading on submit
             if (($_POST['save_main'])) {
-                $setupUpdate = "UPDATE setup SET customersheading='" . safeCleanStr($_POST['customer_heading']) . "', customerscontent='" . mysqli_real_escape_string($db_conn, trim($_POST['main_content'])) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+
+                if ($_POST['databases_defaults'] == 'on') {
+                    $_POST['databases_defaults'] = 'true';
+                } else {
+                    $_POST['databases_defaults'] = 'false';
+                }
+
+                $setupUpdate = "UPDATE setup SET customersheading='" . safeCleanStr($_POST['customer_heading']) . "', customerscontent='" . mysqli_real_escape_string($db_conn, trim($_POST['main_content'])) . "', databases_use_defaults='" . safeCleanStr($_POST['databases_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+            $sqlSetup = mysqli_query($db_conn, "SELECT customersheading, customerscontent, databases_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
             $rowSetup = mysqli_fetch_array($sqlSetup);
             ?>
             <!--modal preview window-->
@@ -303,6 +310,34 @@ if ($_GET['preview'] > "") {
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+
+            <?php
+            //use default view
+            if ($rowSetup['databases_use_defaults'] == 'true') {
+                $selDefaults = "CHECKED";
+            } else {
+                $selDefaults = "";
+            }
+
+            if ($_GET['loc_id'] != 1) {
+                ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="databasesdefaults">
+                            <label>Use Defaults</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="databases_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="databases_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr/>
+                <?php
+            }
+            ?>
 
             <button type="button" class="btn btn-primary" onclick="window.location='?newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Database</button>
             <h2></h2>

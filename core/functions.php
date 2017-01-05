@@ -89,7 +89,7 @@ function getAbout(){
     $rowAbout = mysqli_fetch_array($sqlAbout);
     $imagePath = $_GET['loc_id'];
 
-    if ($rowAbout['use_defaults'] == 1 || $rowAbout['use_defaults'] == ""){
+    if ($rowAbout['use_defaults'] == "true" || $rowAbout['use_defaults'] == "" || $rowAbout['use_defaults'] == NULL) {
         $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=1");
         $rowAbout = mysqli_fetch_array($sqlAbout);
 
@@ -125,12 +125,18 @@ function getContactInfo(){
     global $contactFormSendToEmail;
     global $contactFormMsg;
     global $emailValidatePattern;
+
     global $db_conn;
 
     $emailValidatePattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
 
-    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowContact = mysqli_fetch_array($sqlContact);
+
+    if ($rowContact['use_defaults'] == "true" || $rowContact['use_defaults'] == "" || $rowContact['use_defaults'] == NULL) {
+        $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=1 ");
+        $rowContact = mysqli_fetch_array($sqlContact);
+    }
 
     if ($_GET['msgsent'] == "thankyou"){
         $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
@@ -400,6 +406,11 @@ function getSocialMediaIcons($shape, $section){
     $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
+    if ($rowSocialMedia['use_defaults'] == "true" || $rowSocialMedia['use_defaults'] == "" || $rowSocialMedia['use_defaults'] == NULL) {
+        $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=1 ");
+        $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
+    }
+
     $socialMediaIcons = "";
 
     if (!empty($rowSocialMedia['heading'])){
@@ -462,6 +473,7 @@ function getCustomers(){
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 }
 
+
 function getSlider($sliderType){
     //EXAMPLE: getSlider("slide")
     //EXAMPLE: getSlider("random")
@@ -469,6 +481,7 @@ function getSlider($sliderType){
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;
+    global $imagePath;
     global $db_conn;
 
     if ($sliderType == "slide"){
@@ -477,9 +490,21 @@ function getSlider($sliderType){
         $sliderOrderBy = "ORDER BY RAND() LIMIT 1";
     }
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
-    $sliderNumRows = mysqli_num_rows($sqlSlider);
     $sliderCount = 0;
+    $imagePath = $_GET['loc_id'];
+
+    $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
+
+    if ($rowSliderSetup['slider_use_defaults'] == "true" || $rowSliderSetup['slider_use_defaults'] == "" || $rowSliderSetup['slider_use_defaults'] == NULL) {
+        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
+        $sliderNumRows = mysqli_num_rows($sqlSlider);
+
+        $imagePath = 1;
+    } else {
+        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+        $sliderNumRows = mysqli_num_rows($sqlSlider);
+    }
 
     //hide carousel arrows if only one image is available
     if ($sliderNumRows == 1){
@@ -504,7 +529,7 @@ function getSlider($sliderType){
                 echo "<div class='item $slideActive'>";
 
                 if (!empty($rowSlider['image'])){
-                    echo "<div class='fill' style='background-image:url(uploads/" . $_GET['loc_id'] . "/" . $rowSlider['image'] . ");'></div>";
+                    echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
                 }
@@ -548,7 +573,7 @@ function getSlider($sliderType){
             echo "<div class='item active'>";
 
             if (!empty($rowSlider['image'])){
-                echo "<div class='fill' style='background-image:url(uploads/" . $_GET['loc_id'] . "/" . $rowSlider['image'] . ");'></div>";
+                echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
             } else {
                 echo "<div class='fill'></div>";
             }
@@ -590,8 +615,13 @@ function getGeneralInfo(){
     global $generalInfoHeading;
     global $db_conn;
 
-    $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
+
+    if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == NULL){
+        $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=1 ");
+        $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
+    }
 
     if (!empty($rowGeneralinfo['content'])){
         $generalInfoContent = $rowGeneralinfo['content'];
@@ -608,10 +638,20 @@ function getFeatured(){
     global $featuredBlurb;
     global $featuredImage;
     global $featuredImageAlign;
+    global $imagePath;
     global $db_conn;
 
-    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, use_defaults FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowFeatured = mysqli_fetch_array($sqlFeatured);
+    $imagePath = $_GET['loc_id'];
+
+    if ($rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == NULL){
+        $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=1 ");
+        $rowFeatured = mysqli_fetch_array($sqlFeatured);
+
+        $imagePath = 1;
+    }
+
 
     if (!empty($rowFeatured['heading'])){
         $featuredHeading = $rowFeatured['heading'];
@@ -626,7 +666,7 @@ function getFeatured(){
     }
 
     if (!empty($rowFeatured['image'])){
-        $featuredImage = "<img class='img-landing hidden-xs' src='uploads/" . $_GET['loc_id'] . "/" . $rowFeatured['image'] . "' alt='" . $rowFeatured['image'] . "' title='" . $rowFeatured['image'] . "'>";
+        $featuredImage = "<img class='img-landing hidden-xs' src='uploads/" . $imagePath . "/" . $rowFeatured['image'] . "' alt='" . $rowFeatured['image'] . "' title='" . $rowFeatured['image'] . "'>";
     }
 
     $featuredImageAlign = $rowFeatured['image_align'];

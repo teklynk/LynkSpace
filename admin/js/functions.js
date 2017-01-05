@@ -337,6 +337,48 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+    $('.aboutus_defaults_checkbox').change(function () {
+        $.get('ajax/update_aboutusdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.featured_defaults_checkbox').change(function () {
+        $.get('ajax/update_featureddefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.generalinfo_defaults_checkbox').change(function () {
+        $.get('ajax/update_generalinfodefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.contact_defaults_checkbox').change(function () {
+        $.get('ajax/update_contactdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.social_defaults_checkbox').change(function () {
+        $.get('ajax/update_socialmediadefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.slider_defaults_checkbox').change(function () {
+        $.get('ajax/update_sliderdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.databases_defaults_checkbox').change(function () {
+        $.get('ajax/update_databasesdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
 
     //Not a Robot
     $('#not_robot').change(function () {

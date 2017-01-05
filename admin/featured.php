@@ -3,20 +3,26 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
 if (!empty($_POST)) {
     if (!empty($_POST['featured_heading'])) {
 
+        if ($_POST['featured_defaults'] == 'on') {
+            $_POST['featured_defaults'] = 'true';
+        } else {
+            $_POST['featured_defaults'] = 'false';
+        }
+
         if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['featured_content'])) . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['featured_content'])) . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "', use_defaults='" . safeCleanStr($_POST['featured_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $featuredUpdate);
         } else {
             //Do Insert
-            $featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "',  '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "',  'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $featuredInsert);
         }
 
@@ -57,8 +63,34 @@ if ($_GET['update'] == 'true') {
                 $selAlignRight = "SELECTED";
                 $selAlignLeft = "";
             }
+            //use default view
+            if ($rowFeatured['use_defaults'] == 'true') {
+                $selDefaults = "CHECKED";
+            } else {
+                $selDefaults = "";
+            }
             ?>
             <form name="landingForm" method="post" action="">
+                <?php
+                if ($_GET['loc_id'] != 1) {
+                    ?>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group" id="featureddefaults">
+                                <label>Use Defaults</label>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="featured_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="featured_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <?php
+                }
+                ?>
                 <div class="form-group">
                     <label>Heading</label>
                     <input class="form-control input-sm count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" required>

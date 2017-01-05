@@ -3,20 +3,26 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 //update table on submit
 if (!empty($_POST)) {
     if (!empty($_POST['generalinfo_heading'])) {
 
+        if ($_POST['generalinfo_defaults'] == 'on') {
+            $_POST['generalinfo_defaults'] = 'true';
+        } else {
+            $_POST['generalinfo_defaults'] = 'false';
+        }
+
         if ($rowGeneralinfo['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', use_defaults='" . safeCleanStr($_POST['generalinfo_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $generalinfoUpdate);
         } else {
             //Do Insert
-            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', 'true', ''" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $generalinfoInsert);
         }
 
@@ -42,8 +48,34 @@ if ($_GET['update'] == 'true') {
         if ($pageMsg != "") {
             echo $pageMsg;
         }
+        //use default view
+        if ($rowGeneralinfo['use_defaults'] == 'true') {
+            $selDefaults = "CHECKED";
+        } else {
+            $selDefaults = "";
+        }
         ?>
         <form name="generalinfoForm" method="post" action="">
+            <?php
+            if ($_GET['loc_id'] != 1) {
+                ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="generalinfodefaults">
+                            <label>Use Defaults</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="generalinfo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="generalinfo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr/>
+                <?php
+            }
+            ?>
 
             <div class="form-group">
                 <label>Heading</label>

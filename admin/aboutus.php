@@ -3,20 +3,26 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, author_name, datetime, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
 if (!empty($_POST)) {
     if (!empty($_POST['about_heading'])) {
 
+        if ($_POST['aboutus_defaults'] == 'on') {
+            $_POST['aboutus_defaults'] = 'true';
+        } else {
+            $_POST['aboutus_defaults'] = 'false';
+        }
+
         if ($rowAbout['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $aboutUpdate);
         } else {
             //Do Insert
-            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $aboutInsert);
         }
 
@@ -39,6 +45,7 @@ if ($_GET['update'] == 'true') {
 </div>
 <div class="row">
     <div class="col-lg-12">
+
         <?php
 
         if ($pageMsg != "") {
@@ -59,10 +66,35 @@ if ($_GET['update'] == 'true') {
             $selAlignRight = "SELECTED";
             $selAlignLeft = "";
         }
+        //use default view
+        if ($rowAbout['use_defaults'] == 'true') {
+            $selDefaults = "CHECKED";
+        } else {
+            $selDefaults = "";
+        }
 
         ?>
         <form name="aboutForm" method="post" action="">
+            <?php
+                if ($_GET['loc_id'] != 1) {
+            ?>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group" id="aboutusdefaults">
+                        <label>Use Defaults</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="aboutus_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="aboutus_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <hr/>
+            <?php
+                }
+            ?>
             <div class="form-group">
                 <label>Heading</label>
                 <input class="form-control input-sm count-text" name="about_heading" maxlength="255" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" required>
