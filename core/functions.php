@@ -82,10 +82,19 @@ function getAbout(){
     global $aboutContent;
     global $aboutImage;
     global $aboutImageAlign;
+    global $imagePath;
     global $db_conn;
 
-    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowAbout = mysqli_fetch_array($sqlAbout);
+    $imagePath = $_GET['loc_id'];
+
+    if ($rowAbout['use_defaults'] == 1 || $rowAbout['use_defaults'] == ""){
+        $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=1");
+        $rowAbout = mysqli_fetch_array($sqlAbout);
+
+        $imagePath = 1;
+    }
 
     if (!empty($rowAbout['heading'])){
         $aboutTitle = $rowAbout['heading'];
@@ -96,7 +105,7 @@ function getAbout(){
     }
 
     if (!empty($rowAbout['image'])){
-        $aboutImage = "<img src='uploads/" . $_GET['loc_id'] . "/" . $rowAbout['image'] . "' alt='" . $rowAbout['image'] . "' title='" . $rowAbout['image'] . "'>";
+        $aboutImage = "<img src='uploads/" . $imagePath . "/" . $rowAbout['image'] . "' alt='" . $rowAbout['image'] . "' title='" . $rowAbout['image'] . "'>";
     }
 
     $aboutImageAlign = $rowAbout['image_align'];
