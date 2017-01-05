@@ -123,7 +123,7 @@
                 <i class="fa fa-bars fa-2x cps-blue"></i>
                 <span class="cps-blue toggbutton">MENU</span>
             </button>
-            <a href="index.php" class="navbar-brand"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0"/></a>
+            <a href="http://www.cps.edu" class="navbar-brand" target="_blank"><img class="pull-left" src="images/cpslogo_v2@2x.png" width="144" alt="" title="" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
