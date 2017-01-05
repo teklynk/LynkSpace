@@ -86,7 +86,7 @@ if (isset($_SESSION['loggedIn'])) {
         header("Location: users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "");
         echo "<script>window.location.href='users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
     } else {
-        header("Location: users.php?loc_id=" . $_SESSION['user_loc_id'] . "");
+        header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "");
         echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
     }
 
