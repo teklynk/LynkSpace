@@ -391,6 +391,12 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+    $('.team_defaults_checkbox').change(function () {
+        $.get('ajax/update_teamdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
 
     //Not a Robot
     $('#not_robot').change(function () {

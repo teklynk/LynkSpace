@@ -1,5 +1,5 @@
 <?php
-//updates the generalinfo default. Called from js/functions.js via jquery/ajax.
+//updates the services default. Called from js/functions.js via jquery/ajax.
 session_start();
 
 //check if user is logged in and that the requesting page is valid.

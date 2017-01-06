@@ -237,10 +237,19 @@ function getTeam(){
     global $teamName;
     global $teamContent;
     global $teamNumRows;
-    global $teamColWidth;
     global $db_conn;
 
-    $sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlTeamSetup = mysqli_query($db_conn, "SELECT team_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowTeamSetup = mysqli_fetch_array($sqlTeamSetup);
+
+    //toggle default location value
+    if ($rowTeamSetup['team_use_defaults'] == 'true' || $rowTeamSetup['team_use_defaults'] == "" || $rowTeamSetup['team_use_defaults'] == NULL) {
+        $teamDefaultLoc = 1;
+    } else {
+        $teamDefaultLoc = $_GET['loc_id'];
+    }
+
+    $sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=" . $teamDefaultLoc . " ");
     $rowTeamHeading = mysqli_fetch_array($sqlTeamHeading);
 
     $teamHeading = $rowTeamHeading['teamheading'];
@@ -249,18 +258,8 @@ function getTeam(){
         $teamBlurb = $rowTeamHeading['teamcontent'];
     }
 
-    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=" . $teamDefaultLoc . " ORDER BY datetime DESC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
-
-    if ($teamNumRows == 2){
-        $teamColWidth = 6;
-    } elseif ($teamNumRows == 3){
-        $teamColWidth = 4;
-    } elseif ($teamNumRows == 4){
-        $teamColWidth = 3;
-    } else {
-        $teamColWidth = 2;
-    }
 }
 
 function getNav($navSection, $dropdown, $pull){

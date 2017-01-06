@@ -248,6 +248,34 @@ if ($_GET['preview'] > "") {
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
+            <?php
+            //use default view
+            if ($rowSetup['team_use_defaults'] == 'true') {
+                $selDefaults = "CHECKED";
+            } else {
+                $selDefaults = "";
+            }
+
+            if ($_GET['loc_id'] != 1) {
+                ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="teamdefaults">
+                            <label>Use Defaults</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="team_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="team_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr/>
+                <?php
+            }
+            ?>
+
             <button type="button" class="btn btn-primary" onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Team Member</button>
             <h2></h2>
             <div class="table-responsive">
