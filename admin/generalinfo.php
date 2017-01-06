@@ -18,11 +18,11 @@ if (!empty($_POST)) {
 
         if ($rowGeneralinfo['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', use_defaults='" . safeCleanStr($_POST['generalinfo_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $generalinfoUpdate = "UPDATE generalinfo SET heading='" . safeCleanStr($_POST["generalinfo_heading"]) . "', content='" . sqlEscapeStr($_POST['generalinfo_content']) . "', use_defaults='" . safeCleanStr($_POST['generalinfo_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $generalinfoUpdate);
         } else {
             //Do Insert
-            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['generalinfo_content'])) . "', 'true', ''" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . sqlEscapeStr($_POST['generalinfo_content']) . "', 'true', ''" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $generalinfoInsert);
         }
 
@@ -56,6 +56,7 @@ if ($_GET['update'] == 'true') {
         }
         ?>
         <form name="generalinfoForm" method="post" action="">
+
             <?php
             if ($_GET['loc_id'] != 1) {
                 ?>

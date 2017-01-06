@@ -71,7 +71,7 @@ if ($_GET['preview'] > "") {
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['page_content'])) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";

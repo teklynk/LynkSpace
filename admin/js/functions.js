@@ -379,6 +379,12 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+    $('.navigation_defaults_checkbox').change(function () {
+        $.get('ajax/update_navigationdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
 
     //Not a Robot
     $('#not_robot').change(function () {

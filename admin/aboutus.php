@@ -18,11 +18,11 @@ if (!empty($_POST)) {
 
         if ($rowAbout['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . sqlEscapeStr($_POST['about_content']) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $aboutUpdate);
         } else {
             //Do Insert
-            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['about_content'])) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . sqlEscapeStr($_POST['about_content']) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $aboutInsert);
         }
 

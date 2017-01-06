@@ -301,7 +301,18 @@ function getNav($navSection, $dropdown, $pull){
         $dropdownCaret = "";
     }
 
-    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id='" . $_GET['loc_id'] . "' ORDER BY sort");
+    //check if using default location
+    $sqlNavDefaults = mysqli_query($db_conn, "SELECT navigation_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowNavDefaults = mysqli_fetch_array($sqlNavDefaults);
+
+    //toggle default location value
+    if ($rowNavDefaults['navigation_use_defaults'] == 'true' || $rowNavDefaults['navigation_use_defaults'] == "" || $rowNavDefaults['navigation_use_defaults'] == NULL) {
+        $navDefaultLoc = 1;
+    } else {
+        $navDefaultLoc = $_GET['loc_id'];
+    }
+
+    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id=" . $navDefaultLoc . " ORDER BY sort");
     //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.loc_id, category.nav_loc_id
     $tempLink = 0;
 
@@ -332,7 +343,7 @@ function getNav($navSection, $dropdown, $pull){
         if ($navLinksCatId == $navLinks_CatId AND $navLinksCatId != 0){ //NOTE: 0=None in the category table
 
             if ($navLinksCatId != $tempLink){
-                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $_GET['loc_id'] . "' ORDER BY sort");
+                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.nav_loc_id
 
                 echo "<li class='$dropdown'>";
@@ -406,6 +417,7 @@ function getSocialMediaIcons($shape, $section){
     $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
+    //use default location
     if ($rowSocialMedia['use_defaults'] == "true" || $rowSocialMedia['use_defaults'] == "" || $rowSocialMedia['use_defaults'] == NULL) {
         $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=1 ");
         $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
@@ -458,8 +470,18 @@ function getCustomers(){
     global $customerColWidth;
     global $db_conn;
 
+    //get the default value from setup table
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
+
     $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
+
+    //use default location
+    if ($rowCustomerSetup['databases_use_defaults'] == 'true' || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL) {
+        $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=1");
+        $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
+    }
 
     if (!empty($rowCustomerHeading['customersheading'])){
         $customerHeading = $rowCustomerHeading['customersheading'];
@@ -471,6 +493,12 @@ function getCustomers(){
 
     $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
+
+    //use default location
+    if ($rowCustomerSetup['databases_use_defaults'] == "true" || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL)  {
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=1 ORDER BY datetime DESC"); //While loop
+        $customerNumRows = mysqli_num_rows($sqlCustomers);
+    }
 }
 
 
@@ -493,17 +521,19 @@ function getSlider($sliderType){
     $sliderCount = 0;
     $imagePath = $_GET['loc_id'];
 
+    //get the default value from setup table
     $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+    $sliderNumRows = mysqli_num_rows($sqlSlider);
+
+    //use default location
     if ($rowSliderSetup['slider_use_defaults'] == "true" || $rowSliderSetup['slider_use_defaults'] == "" || $rowSliderSetup['slider_use_defaults'] == NULL) {
         $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
         $sliderNumRows = mysqli_num_rows($sqlSlider);
 
         $imagePath = 1;
-    } else {
-        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
-        $sliderNumRows = mysqli_num_rows($sqlSlider);
     }
 
     //hide carousel arrows if only one image is available
@@ -618,6 +648,7 @@ function getGeneralInfo(){
     $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
+    //use default location
     if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == NULL){
         $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=1 ");
         $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);

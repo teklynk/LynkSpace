@@ -72,7 +72,7 @@ if ($_GET['preview'] > "") {
                         $_POST['customer_featured'] = 'false';
                     }
 
-                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . mysqli_real_escape_string($db_conn, trim($_POST['customer_content'])) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -89,7 +89,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, author_name, datetime, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . mysqli_real_escape_string($db_conn, trim($_POST['customer_link'])) . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, content, featured, active, author_name, datetime, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . sqlEscapeStr($_POST['customer_link']) . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     echo "<script>window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -271,7 +271,7 @@ if ($_GET['preview'] > "") {
                     $_POST['databases_defaults'] = 'false';
                 }
 
-                $setupUpdate = "UPDATE setup SET customersheading='" . safeCleanStr($_POST['customer_heading']) . "', customerscontent='" . mysqli_real_escape_string($db_conn, trim($_POST['main_content'])) . "', databases_use_defaults='" . safeCleanStr($_POST['databases_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                $setupUpdate = "UPDATE setup SET customersheading='" . safeCleanStr($_POST['customer_heading']) . "', customerscontent='" . sqlEscapeStr($_POST['main_content']) . "', databases_use_defaults='" . safeCleanStr($_POST['databases_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

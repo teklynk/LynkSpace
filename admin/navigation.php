@@ -3,16 +3,16 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
-//Redirect to section=top if section is not in querystring
-if ($_GET['section'] == "" && $_GET['loc_id']) {
-    //header("Location: navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "");
-    echo "<script>window.location.href='navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "';</script>";
-}
-
 $getNavSection = $_GET['section'];
 
 //update table on submit
 if (!empty($_POST)) {
+
+    if ($_POST['navigation_defaults'] == 'on') {
+        $_POST['navigation_defaults'] = 'true';
+    } else {
+        $_POST['navigation_defaults'] = 'false';
+    }
 
     if (!empty($_POST['nav_newname'])) {
 
@@ -56,6 +56,9 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $navUpdate);
     }
 
+    $navUpdateSetup = "UPDATE setup SET navigation_use_defaults='" . safeCleanStr($_POST['navigation_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    mysqli_query($db_conn, $navUpdateSetup);
+
     $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
@@ -75,8 +78,20 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
     }
 
-    $navMenuStr = $navMenuStr . "<option value=" . $navSections[$x] . " " . $isSectionSelected . ">" . $navSections[$x] . "</option>";
+    $navMenuStr .= "<option value=" . $navSections[$x] . " " . $isSectionSelected . ">" . $navSections[$x] . "</option>";
+
+    $navSectionFirstItem = $navSections[0];
 }
+
+//Redirect to section=top if section is not in querystring
+if ($_GET['section'] == "" && $_GET['loc_id']) {
+    //header("Location: navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "");
+    echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
+}
+
+//check if using default location
+$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$rowSetup = mysqli_fetch_array($sqlSetup);
 ?>
 <div class="row">
     <div class="col-lg-10">
@@ -198,7 +213,34 @@ for ($x = 0; $x < $navArrlength; $x++) {
             $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $_GET['addcat'] . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             echo $addMsg;
         }
+
+        //use default view
+        if ($rowSetup['navigation_use_defaults'] == 'true') {
+            $selDefaults = "CHECKED";
+        } else {
+            $selDefaults = "";
+        }
+
+        if ($_GET['loc_id'] != 1) {
+            ?>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group" id="navigationdefaults">
+                        <label>Use Defaults</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="navigation_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+            <?php
+        }
         ?>
+
         <!-- Category Section -->
         <button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button" data-target="#addCatDiv">
             <i class='fa fa-fw fa-plus'></i> Add a Category
