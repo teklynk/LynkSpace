@@ -197,13 +197,22 @@ function getServices(){
     global $servicesHeading;
     global $sqlServices;
     global $servicesNumRows;
-    global $servicesColWidth;
     global $servicesBlurb;
     global $servicesCount;
     global $servicesIcon;
     global $db_conn;
 
-    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlServicesSetup = mysqli_query($db_conn, "SELECT services_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowServicesSetup = mysqli_fetch_array($sqlServicesSetup);
+
+    //toggle default location value
+    if ($rowServicesSetup['services_use_defaults'] == 'true' || $rowServicesSetup['services_use_defaults'] == "" || $rowServicesSetup['services_use_defaults'] == NULL) {
+        $servicesDefaultLoc = 1;
+    } else {
+        $servicesDefaultLoc = $_GET['loc_id'];
+    }
+
+    $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=" . $servicesDefaultLoc . " ");
     $rowServicesHeading = mysqli_fetch_array($sqlServicesHeading);
 
     $servicesHeading = $rowServicesHeading['servicesheading'];
@@ -212,19 +221,9 @@ function getServices(){
         $servicesBlurb = $rowServicesHeading['servicescontent'];
     }
 
-    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=" . $servicesDefaultLoc . " ORDER BY datetime DESC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount = 0;
-
-    if ($servicesNumRows == 2){
-        $servicesColWidth = 6;
-    } elseif ($servicesNumRows == 3){
-        $servicesColWidth = 4;
-    } elseif ($servicesNumRows == 4){
-        $servicesColWidth = 3;
-    } else {
-        $servicesColWidth = 2;
-    }
 }
 
 function getTeam(){

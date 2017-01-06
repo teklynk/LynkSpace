@@ -147,27 +147,27 @@ if (isset($_SESSION['loggedIn'])) {
                         <?php
                         if (!$_GET['forgotpassword']) {
                             ?>
-                            <form name="frmUser" role="login" class="form-signin" method="post" action="">
+                            <form name="frmSignin" class="form-signin" method="post" action="">
                                 <fieldset>
                                     <div class="form-group">
                                         <label>User Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autofocus required>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidatePattern ?>" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidatePattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" required>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
@@ -185,20 +185,20 @@ if (isset($_SESSION['loggedIn'])) {
                             session_start();
                             $_SESSION['temp_password'] = generateRandomString();
                             ?>
-                            <form name="frmForgotPassword" role="login" class="form-signin" method="post" action="mail/passwordreset.php">
+                            <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
                                         <label>User Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autofocus required>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo $emailValidatePattern ?>" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo $emailValidatePattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
