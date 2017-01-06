@@ -56,7 +56,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $navUpdate);
     }
 
-    $navUpdateSetup = "UPDATE setup SET navigation_use_defaults='" . safeCleanStr($_POST['navigation_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    $navUpdateSetup = "UPDATE setup SET navigation_use_defaults_1='" . safeCleanStr($_POST['navigation_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $navUpdateSetup);
 
     $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -90,7 +90,7 @@ if ($_GET['section'] == "" && $_GET['loc_id']) {
 }
 
 //check if using default location
-$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 ?>
 <div class="row">
@@ -214,11 +214,32 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
             echo $addMsg;
         }
 
-        //use default view
-        if ($rowSetup['navigation_use_defaults'] == 'true') {
-            $selDefaults = "CHECKED";
-        } else {
-            $selDefaults = "";
+        //set Default toggle depending on which navigation you are on
+        if ($_GET['section'] == $navSections[0]) {
+            $navSubSection = "1";
+            //use default view
+            if ($rowSetup['navigation_use_defaults_1'] == 'true') {
+                $selDefaults = "CHECKED";
+            } else {
+                $selDefaults = "";
+            }
+        } elseif ($_GET['section'] == $navSections[1]){
+            $navSubSection = "2";
+            //use default view
+            if ($rowSetup['navigation_use_defaults_2'] == 'true') {
+                $selDefaults = "CHECKED";
+                $navSubSection = "2";
+            } else {
+                $selDefaults = "";
+            }
+        } elseif ($_GET['section'] == $navSections[2]){
+            $navSubSection = "3";
+            //use default view
+            if ($rowSetup['navigation_use_defaults_3'] == 'true') {
+                $selDefaults = "CHECKED";
+            } else {
+                $selDefaults = "";
+            }
         }
 
         if ($_GET['loc_id'] != 1) {
@@ -229,7 +250,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
                         <label>Use Defaults</label>
                         <div class="checkbox">
                             <label>
-                                <input class="navigation_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                <input class="navigation_defaults_checkbox_<?php echo $navSubSection ?>" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults_<?php echo $navSubSection ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                             </label>
                         </div>
                     </div>

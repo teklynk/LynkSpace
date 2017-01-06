@@ -379,8 +379,20 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
-    $('.navigation_defaults_checkbox').change(function () {
-        $.get('ajax/update_navigationdefaults.php?update=true', {
+    $('.navigation_defaults_checkbox_1').change(function () {
+        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=1', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.navigation_defaults_checkbox_2').change(function () {
+        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=2', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
+    $('.navigation_defaults_checkbox_3').change(function () {
+        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=3', {
             id: this.id,
             checked: this.checked
         });

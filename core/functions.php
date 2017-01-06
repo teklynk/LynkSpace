@@ -283,6 +283,7 @@ function getNav($navSection, $dropdown, $pull){
     global $navCatLinksName;
     global $navCatLinksUrl;
     global $navCatLinksCatID;
+    global $navSections;
 
     echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
     if ($dropdown == "true"){
@@ -299,12 +300,29 @@ function getNav($navSection, $dropdown, $pull){
         $dropdownCaret = "";
     }
 
+    //loop through the array of navSections - config.php
+    $navSectionIndex1 = "";
+    $navSectionIndex2 = "";
+    $navSectionIndex3 = "";
+
+    $navArrlength = count($navSections); //from config.php
+
+    for ($x = 0; $x < $navArrlength; $x++) {
+        $navSectionIndex1 = $navSections[0];
+        $navSectionIndex2 = $navSections[1];
+        $navSectionIndex3 = $navSections[2];
+    }
+
     //check if using default location
-    $sqlNavDefaults = mysqli_query($db_conn, "SELECT navigation_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlNavDefaults = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowNavDefaults = mysqli_fetch_array($sqlNavDefaults);
 
-    //toggle default location value
-    if ($rowNavDefaults['navigation_use_defaults'] == 'true' || $rowNavDefaults['navigation_use_defaults'] == "" || $rowNavDefaults['navigation_use_defaults'] == NULL) {
+    //toggle default location value if conditions are true
+    if ($navSection == $navSectionIndex1 AND $rowNavDefaults['navigation_use_defaults_1'] == 'true') {
+        $navDefaultLoc = 1;
+    } elseif ($navSection == $navSectionIndex2 AND $rowNavDefaults['navigation_use_defaults_2'] == 'true') {
+        $navDefaultLoc = 1;
+    } elseif ($navSection == $navSectionIndex3 AND $rowNavDefaults['navigation_use_defaults_3'] == 'true') {
         $navDefaultLoc = 1;
     } else {
         $navDefaultLoc = $_GET['loc_id'];

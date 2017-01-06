@@ -8,10 +8,11 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
     include_once('../../db/config.php');
 
     if (!empty($_GET) AND $_GET['update']) {
+        $navSubSection = $_GET['sub_section'];
         $navigationDefaultsID = $_GET['id'];
         $navigationDefaultsChecked = $_GET['checked'];
 
-        $navigationDefaultsUpdate = "UPDATE setup SET navigation_use_defaults='" . $navigationDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $navigationDefaultsID . " ";
+        $navigationDefaultsUpdate = "UPDATE setup SET navigation_use_defaults_$navSubSection='" . $navigationDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $navigationDefaultsID . " ";
         mysqli_query($db_conn, $navigationDefaultsUpdate);
 
         mysqli_close($db_conn);
