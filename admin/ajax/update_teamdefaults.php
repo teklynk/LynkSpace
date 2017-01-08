@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
 
         mysqli_close($db_conn);
 
-        die('Team Defaults set');
+        die('Team Defaults ' . $teamDefaultsID . ' set ' . $teamDefaultsChecked);
     }
 
 } else {

@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
 
         mysqli_close($db_conn);
 
-        die('Database Defaults set');
+        die('Database Defaults ' . $databasesDefaultsID . ' set ' . $databasesDefaultsChecked);
     }
 
 } else {

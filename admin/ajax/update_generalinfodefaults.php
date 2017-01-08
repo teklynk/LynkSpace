@@ -26,7 +26,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
 
         mysqli_close($db_conn);
 
-        die('Gernalinfo Defaults set');
+        die('Gernalinfo Defaults ' . $generalinfoDefaultsID . ' set ' . $generalinfoDefaultsChecked);
     }
 
 } else {

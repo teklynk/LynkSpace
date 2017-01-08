@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
         mysqli_query($db_conn, $teamActiveUpdate);
         mysqli_close($db_conn);
 
-        die('Team Active set');
+        die('Team Active ' . $teamActiveID . ' set ' . $teamActiveChecked);
     }
 
 } else {

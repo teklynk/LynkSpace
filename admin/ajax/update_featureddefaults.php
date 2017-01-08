@@ -26,7 +26,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
 
         mysqli_close($db_conn);
 
-        die('Featured Defaults set');
+        die('Featured Defaults ' . $featuredDefaultsID . ' set ' . $featuredDefaultsChecked);
     }
 
 } else {

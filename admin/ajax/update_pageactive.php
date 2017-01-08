@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
         mysqli_query($db_conn, $pageActiveUpdate);
         mysqli_close($db_conn);
 
-        die('Page Active set');
+        die('Page Active ' . $pageActiveID . ' set ' . $pageActiveChecked);
     }
 
 } else {

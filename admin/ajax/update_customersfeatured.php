@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
         mysqli_query($db_conn, $customersFeaturedUpdate);
         mysqli_close($db_conn);
 
-        die('Customers Featured set');
+        die('Customers Featured ' . $customersFeaturedID . ' set ' . $customersFeaturedChecked);
     }
 
 } else {

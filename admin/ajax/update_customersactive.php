@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
         mysqli_query($db_conn, $customersActiveUpdate);
         mysqli_close($db_conn);
 
-        die('Customers Active set');
+        die('Customers Active ' . $customersActiveID . ' set ' . $customersActiveChecked);
     }
 
 } else {

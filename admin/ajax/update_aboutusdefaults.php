@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
             mysqli_query($db_conn, $aboutusDefaultsInsert);
         }
 
-        die('Aboutus Defaults set');
+        die('Aboutus Defaults ' . $aboutusDefaultsID . ' set ' . $aboutusDefaultsChecked);
     }
 
 } else {

@@ -26,7 +26,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
 
         mysqli_close($db_conn);
 
-        die('Socialmedia Defaults set');
+        die('Socialmedia Defaults ' . $socialmediaDefaultsID . ' set ' . $socialmediaDefaultsChecked);
     }
 
 } else {
