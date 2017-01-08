@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'generalinfo.php';
+
 include_once('includes/header.php');
 
 $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");

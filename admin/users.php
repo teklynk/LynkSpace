@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'users.php';
+
 include_once('includes/header.php');
 
 $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, id FROM users WHERE id=" . $_SESSION['user_id'] . " ");

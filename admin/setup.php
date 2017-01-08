@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'setup.php';
+
 include_once('includes/header.php');
 
 //Get max location ID number - for creating a new location

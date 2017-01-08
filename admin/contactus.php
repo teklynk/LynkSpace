@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'contactus.php';
+
 include_once('includes/header.php');
 
 $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");

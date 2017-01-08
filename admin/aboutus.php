@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'aboutus.php';
+
 include_once('includes/header.php');
 
 $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");

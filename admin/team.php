@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+$_SESSION['file_referer'] = 'team.php';
+
 include_once('includes/header.php');
 
 //Page preview

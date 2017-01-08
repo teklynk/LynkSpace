@@ -12,11 +12,12 @@ unset($_SESSION['user_loc_id']);
 unset($_SESSION['user_ip']);
 unset($_SESSION['timeout']);
 unset($_SESSION['loggedIn']);
-unset($_SESSION['file_referer']);
 unset($_SESSION['session_hash']);
 unset($_SESSION['loc_id']);
 unset($_SESSION['loc_name']);
 unset($_SESSION['loc_list']);
+
+$_SESSION['file_referer'] = 'index.php';
 
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
@@ -33,7 +34,6 @@ if (!empty($_POST)) {
             $_SESSION['user_ip'] = getRealIpAddr();
             $_SESSION['timeout'] = time();
             $_SESSION['loggedIn'] = 1;
-            $_SESSION['file_referer'] = 'index.php';
             $_SESSION['session_hash'] = md5($rowLogin['username']);
 
             //If is Admin
@@ -171,10 +171,9 @@ if (isset($_SESSION['loggedIn'])) {
                                         </div>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit">Sign in
-                                    </button>
+                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit">Sign in</button>
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">
@@ -182,6 +181,7 @@ if (isset($_SESSION['loggedIn'])) {
                             </div>
                             <?php
                         } else {
+                            //create a random password and set it as a session variable
                             session_start();
                             $_SESSION['temp_password'] = generateRandomString();
                             ?>

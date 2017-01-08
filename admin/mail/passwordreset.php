@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password'])) {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) AND $_SESSION['file_referer'] == 'index.php') {
 
     include_once('../../db/config.php');
 

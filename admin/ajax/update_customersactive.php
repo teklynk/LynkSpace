@@ -1,9 +1,9 @@
 <?php
-//updates the customers active on customers.php. Called from js/functions.js via jquery/ajax.
+//updates the databases active on databases.php. Called from js/functions.js via jquery/ajax.
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION['user_name']) AND $_SESSION['file_referer'] == 'databases.php') {
 
     include_once('../../db/config.php');
 

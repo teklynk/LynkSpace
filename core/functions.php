@@ -549,7 +549,7 @@ function getSlider($sliderType){
         $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
         $sliderNumRows = mysqli_num_rows($sqlSlider);
 
-        $imagePath = 1;
+        $imagePath = 1; //the default location
     }
 
     //hide carousel arrows if only one image is available
@@ -698,7 +698,6 @@ function getFeatured(){
 
         $imagePath = 1;
     }
-
 
     if (!empty($rowFeatured['heading'])){
         $featuredHeading = $rowFeatured['heading'];
