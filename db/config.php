@@ -15,25 +15,20 @@ $setupPACURL = "https://pac.library.cps.edu";
 
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/"; //physical path to uploads folder
-$image_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/uploads/" . $_GET['loc_id'] . "/"; //web url path to uploads folder
-$image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
-
-$target_dir = $image_dir;
+$image_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/uploads/" . $_GET['loc_id'] . "/"; //absolute web url path to uploads folder for tinyMCE
+$image_baseURL = "uploads/" . $_GET['loc_id'] . "/"; //relative web url path to uploads folder for tinyMCE
 
 //Upload function
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
 
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
 
-//Google Analytics
-$googleAnalytics = '';
+//Google Analytics UUID Key ex: UA-8675309-1
+$googleAnalytics = "";
 
 //Extra Pages
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";
-
-//Default values
-$pageMsg = "";
 
 //Session timeout
 $sessionTimeout = 30; //mins
@@ -51,7 +46,7 @@ if (mysqli_connect_errno($db_conn)) {
 
 //db connection is closed in includes/footer.php
 
-//Error handling Add debug=true to the querystring
+//Display Errors, Add debug=true to the querystring
 if (isset($_GET["debug"])) {
     ini_set('display_errors', TRUE);
 } else {

@@ -110,7 +110,7 @@ if ($_GET['update'] == 'true') {
                 <select class="form-control input-sm" name="about_image" id="about_image">
                     <option value="">None</option>
                     <?php
-                    if ($handle = opendir($target_dir)) {
+                    if ($handle = opendir($image_dir)) {
                         while (false !== ($file = readdir($handle))) {
                             if ('.' === $file) continue;
                             if ('..' === $file) continue;
