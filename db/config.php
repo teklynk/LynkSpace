@@ -7,26 +7,21 @@ include_once 'dbconn.php';
 //example: "127.0.0."
 $IPrange = "";
 
+//Homepage URL
+$homePageURL = "http://www.cps.edu";
+
 //LS2PAC Server Domain or IP
 $setupPACURL = "https://pac.library.cps.edu";
 
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/"; //physical path to uploads folder
-$image_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/uploads/" . $_GET['loc_id'] . "/"; //web path to uploads folder
+$image_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/uploads/" . $_GET['loc_id'] . "/"; //web url path to uploads folder
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
 
 $target_dir = $image_dir;
 
 //Upload function
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
-//Custom CSS file paths
-$customCss_dir = '../css/cps-style.min.css'; //physical path to custom css file
-$customCss_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/css/cps-style.min.css"; //web path to custom css file
-
-if ($customCss_url != "") {
-    $customCss = "<link rel='stylesheet' type='text/css' href='" . $customCss_url . "' >";
-}
 
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
@@ -45,7 +40,6 @@ $sessionTimeout = 30; //mins
 
 //Slide Carousel Speed
 $carouselSpeed = "5000"; //5000 = 5secs
-
 
 //establish db connection
 $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
