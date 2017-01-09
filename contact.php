@@ -6,7 +6,7 @@ include_once('includes/header.php');
 
 echo "<div class='grad-blue container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
-include 'includes/featured_inc.php';
+    include 'includes/featured_inc.php';
 echo "</div>";
 echo "</div>";
 

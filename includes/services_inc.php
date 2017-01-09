@@ -1,4 +1,5 @@
 <!-- Services Section -->
+<a name="services" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');

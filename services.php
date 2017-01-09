@@ -5,7 +5,7 @@ include_once('includes/header.php');
 
 echo "<div class='grad-blue container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
-include 'includes/featured_inc.php';
+    include 'includes/featured_inc.php';
 echo "</div>";
 echo "</div>";
 
@@ -22,14 +22,14 @@ echo "</div>";
 echo "<div class='container'>";
 echo "<div class='row row_pad content'>";
 echo "<div class='col-md-12'>";
-include 'includes/services_inc.php';
+    include 'includes/services_inc.php';
 echo "</div>";
 echo "</div>";
 echo "</div>";
 
 echo "<div class='container-fluid'>";
 echo "<div class='container bannerwrapper databases'>";
-include 'includes/customersfeatured_inc.php';
+    include 'includes/customersfeatured_inc.php';
 echo "</div>";
 echo "</div>";
 

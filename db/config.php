@@ -1,7 +1,7 @@
 <?php
 //This is the main Config/Setup file for the admin panel and Global variables used throughout the site. Change values as needed.
 
-include 'dbconn.php';
+include_once 'dbconn.php';
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."
