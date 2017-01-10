@@ -409,6 +409,12 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+    $('.location_status_checkbox').change(function () {
+        $.get('ajax/update_setupactive.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
 
     //Not a Robot
     $('#not_robot').change(function () {

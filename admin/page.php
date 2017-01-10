@@ -195,11 +195,7 @@ if ($_GET['preview'] > "") {
                                     <label>Allow Comments (Disqus)</label>
                                     <div class="checkbox">
                                         <label>
-                                            <input class="checkbox page_disqus_checkbox"
-                                                   id="<?php echo $_GET['editpage'] ?>" name="page_disqus"
-                                                   type="checkbox" <?php if ($_GET['editpage']) {
-                                                echo $selDisqus;
-                                            } ?> data-toggle="toggle">
+                                            <input class="checkbox page_disqus_checkbox" id="<?php echo $_GET['editpage'] ?>" name="page_disqus" type="checkbox" <?php if ($_GET['editpage']) {echo $selDisqus;} ?> data-toggle="toggle">
                                         </label>
                                     </div>
                                 </div>

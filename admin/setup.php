@@ -26,13 +26,19 @@ if (!empty($_POST)) {
         $site_author = $_POST['site_author'];
         $site_description = $_POST['site_description'];
 
+        if ($_POST['location_status'] == 'on') {
+            $_POST['location_status'] = 'true';
+        } else {
+            $_POST['location_status'] = 'false';
+        }
+
         //update table on submit
         if ($rowSetup['loc_id'] == $_GET['loc_id']) {
             //Update Setup
             $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', headercode='" . trim($_POST['site_header']) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', disqus='" . safeCleanStr($_POST['site_disqus']) . "', googleanalytics='" . safeCleanStr($_POST['site_google']) . "', tinymce='1', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $setupUpdate);
             //Update Location
-            $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
+            $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', active='" . safeCleanStr($_POST['location_status']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $locationUpdate);
         } else {
             //Insert Setup
@@ -69,12 +75,10 @@ if ($_GET['update'] == 'true') {
             echo $pageMsg;
         }
 
-        //Check if user_level is Admin user
-        if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
-            ?>
-            <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
-            <h2></h2>
-            <?php
+        if ($rowLocation['active'] == 'true') {
+            $isActive_location = "CHECKED";
+        } else {
+            $isActive_location = "";
         }
 
         if ($rowSetup['ls2pac'] == 'true') {
@@ -103,7 +107,32 @@ if ($_GET['update'] == 'true') {
             $logo = "../uploads/" . $_GET['loc_id'] . "/" . $rowSetup['logo'];
         }
         ?>
+
         <form name="setupForm" method="post" action="">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group" id="locationactive">
+                        <label>Active</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+
+            <?php
+            //Check if user_level is Admin user
+            if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
+            ?>
+            <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
+            <h2></h2>
+            <?php
+            }
+            ?>
 
             <div class="form-group">
                 <label>Site Title</label>
