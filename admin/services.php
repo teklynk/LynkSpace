@@ -78,7 +78,7 @@ if ($_GET['preview']>"") {
 			$rowServices = mysqli_fetch_array($sqlServices);
 
 		//Create new service
-		} else if ($_GET['newservice']) {
+		} elseif ($_GET['newservice']) {
 
 			$serviceLabel = "New Service Title";
 

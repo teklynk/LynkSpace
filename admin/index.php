@@ -69,7 +69,7 @@ if (file_exists('install.php')) {
 //Reset password page messages
 if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
     $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-} else if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
+} elseif ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
     $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
@@ -184,6 +184,8 @@ if (isset($_SESSION['loggedIn'])) {
                             //create a random password and set it as a session variable
                             session_start();
                             $_SESSION['temp_password'] = generateRandomString();
+                            //Creates a unique refering value/token - exposed in post
+                            $_SESSION['unique_referer'] = generateRandomString();
                             ?>
                             <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
@@ -204,6 +206,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
                                     </div>
+                                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
                             </form>

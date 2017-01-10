@@ -66,7 +66,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
         $rowSlides = mysqli_fetch_array($sqlSlides);
 
         //Create new slide
-    } else if ($_GET['newslide']) {
+    } elseif ($_GET['newslide']) {
 
         $slideLabel = "New Slide Title";
 

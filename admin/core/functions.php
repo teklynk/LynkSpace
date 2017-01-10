@@ -67,7 +67,7 @@ function getLocList(){
 if ($_SESSION['user_level'] != 1 AND $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
-} else if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == "") {
+} elseif ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == "") {
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
 }

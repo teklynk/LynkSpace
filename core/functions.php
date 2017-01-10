@@ -530,7 +530,7 @@ function getSlider($sliderType){
 
     if ($sliderType == "slide"){
         $sliderOrderBy = "ORDER BY datetime DESC";
-    } else if ($sliderType == "random" OR $sliderType == ""){
+    } elseif ($sliderType == "random" OR $sliderType == ""){
         $sliderOrderBy = "ORDER BY RAND() LIMIT 1";
     }
 
@@ -610,7 +610,7 @@ function getSlider($sliderType){
 
             echo "</header>";
 
-        } else if ($sliderType == "random"){
+        } elseif ($sliderType == "random"){
             $rowSlider = mysqli_fetch_array($sqlSlider);
             echo "<header id='myCarousel' class='carousel slide'>";
 
@@ -717,6 +717,17 @@ function getFeatured(){
 
     $featuredImageAlign = $rowFeatured['image_align'];
 }
+//Random password generator for password reset
+function generateRandomString($length = 10){
+    global $randomString;
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
 //Call - getSetup is used everywhere
 getSetup();
@@ -726,19 +737,19 @@ getSetup();
 if (basename($_SERVER['PHP_SELF']) == "page.php"){
     getPage();
     $theTitle = $setupTitle . " - " . $pageTitle;
-} else if (basename($_SERVER['PHP_SELF']) == "about.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "about.php"){
     getAbout();
     $theTitle = $setupTitle . " - " . $aboutTitle;
-} else if (basename($_SERVER['PHP_SELF']) == "contact.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "contact.php"){
     getContactInfo();
     $theTitle = $setupTitle . " - " . $contactHeading;
-} else if (basename($_SERVER['PHP_SELF']) == "services.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "services.php"){
     getServices();
     $theTitle = $setupTitle . " - " . $servicesHeading;
-} else if (basename($_SERVER['PHP_SELF']) == "team.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "team.php"){
     getTeam();
     $theTitle = $setupTitle . " - " . $teamHeading;
-} else if (basename($_SERVER['PHP_SELF']) == "databases.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "databases.php"){
     getCustomers();
     $theTitle = $setupTitle . " - " . $customerHeading;
 } else {

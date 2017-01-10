@@ -75,7 +75,7 @@ if ($_GET['preview'] > "") {
                 $rowTeam = mysqli_fetch_array($sqlteam);
 
                 //Create new team
-            } else if ($_GET['newteam']) {
+            } elseif ($_GET['newteam']) {
 
                 $teamLabel = "New Team Title";
 

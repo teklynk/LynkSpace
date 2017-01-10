@@ -1,6 +1,8 @@
 <?php
 define('inc_access', TRUE);
 
+session_start();
+
 //redirect back to contact form or home page
 $redirectPage = "../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";
 //if an error occurs
@@ -12,7 +14,7 @@ $phone = $_POST['phone'];
 $message = $_POST['message'];
 $sendTo = $_POST['sendToEmail'];
 
-if (!empty($_POST) AND $_POST['referer'] == '6cc0d36686e6a433aa76f96773852d35') {
+if (!empty($_POST) AND $_POST['referer'] == $_SESSION['unique_referer']) {
     // Check for empty fields
     if (empty($_POST['name']) ||
         empty($_POST['email']) ||
@@ -35,6 +37,6 @@ if (!empty($_POST) AND $_POST['referer'] == '6cc0d36686e6a433aa76f96773852d35') 
         return true;
     }
 } else {
-    echo "<script>window.location.href='$errorPage';</script>";
+    die('Direct access not permitted');
 }
 ?>

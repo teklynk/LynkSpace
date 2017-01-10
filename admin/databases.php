@@ -85,7 +85,7 @@ if ($_GET['preview'] > "") {
 
 
                 //Create new customer
-            } else if ($_GET['newcustomer']) {
+            } elseif ($_GET['newcustomer']) {
 
                 $customerLabel = "New Database Name";
 

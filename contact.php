@@ -2,7 +2,12 @@
 <?php
 define('inc_access', TRUE);
 
+session_start();
+
 include_once('includes/header.php');
+
+//Creates a unique refering value/token - exposed in post
+$_SESSION['unique_referer'] = generateRandomString();
 
 echo "<div class='grad-blue container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
@@ -103,7 +108,7 @@ echo "</div>";
                         </div>
                     </div>
                     <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail; ?>"/>
-                    <input type="hidden" id="referer" name="referer" value="6cc0d36686e6a433aa76f96773852d35"/>
+                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
                     <br>
                     <!-- For success/fail messages -->
                     <?php

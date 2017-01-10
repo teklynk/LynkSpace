@@ -67,7 +67,7 @@ if ($_GET['preview'] > "") {
                     $rowPages = mysqli_fetch_array($sqlPages);
 
                     //Create new page
-                } else if ($_GET['newpage']) {
+                } elseif ($_GET['newpage']) {
 
                     $pageLabel = "New Page Title";
 

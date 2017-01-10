@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) AND $_SESSION['file_referer'] == 'index.php') {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) AND $_SESSION['file_referer'] == 'index.php' AND $_POST['referer'] == $_SESSION['unique_referer']) {
 
     include_once('../../db/config.php');
 
@@ -28,7 +28,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
         echo "<script>window.location.href='$errorPage';</script>";
         return false;
 
-    } else if ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
+    } elseif ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
         header("Location: $errorPageNotFound");
         echo "<script>window.location.href='$errorPageNotFound';</script>";
         return false;
