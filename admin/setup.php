@@ -110,6 +110,9 @@ if ($_GET['update'] == 'true') {
 
         <form name="setupForm" method="post" action="">
 
+            <?php
+            if ($_GET['loc_id'] != 1) {
+            ?>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group" id="locationactive">
@@ -123,6 +126,7 @@ if ($_GET['update'] == 'true') {
                 </div>
             </div>
             <hr/>
+            <?php }?>
 
             <?php
             //Check if user_level is Admin user
