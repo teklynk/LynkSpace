@@ -415,6 +415,12 @@ $(document).ready(function () {
             checked: this.checked
         });
     });
+    $('.copy_files_to_locs').click(function () {
+        $.get('ajax/update_images.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+    });
 
     //Not a Robot
     $('#not_robot').change(function () {

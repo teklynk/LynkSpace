@@ -29,6 +29,9 @@ if ($customerNumRows > 0) {
             echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
             if (!empty($rowCustomers['link'])) {
+                //Check if the link contains any shortCode
+                $rowCustomers['link'] = getShortCode($rowCustomers['link']);
+
                 echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "'>";
             }
 

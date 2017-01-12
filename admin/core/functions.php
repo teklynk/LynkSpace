@@ -63,6 +63,22 @@ function getLocList(){
     return $locList;
 }
 
+//Copy folder contents to another
+function recurse_copy($src, $dst) {
+    $dir = opendir($src);
+    @mkdir($dst, 0755, true);
+    while (false !== ( $file = readdir($dir)) ) {
+        if (($file != '.') && ($file != '..')) {
+            if (is_dir($src . '/' . $file)) {
+                recurse_copy($src . '/' . $file, $dst . '/' . $file);
+            } else {
+                copy($src . '/' . $file, $dst . '/' . $file);
+            }
+        }
+    }
+    closedir($dir);
+}
+
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 AND $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");

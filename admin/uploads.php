@@ -8,7 +8,7 @@ include_once('includes/header.php');
 //Create location upload folder if it does not exist.
 if (is_numeric($_GET['loc_id'])) {
     if (!file_exists($image_dir)) {
-        mkdir($image_dir, 0755);
+        @mkdir($image_dir, 0755);
     }
 }
 
@@ -77,15 +77,13 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <input type="hidden" name="uploadFile" value="1">
                 </div>
-                <button type="submit" name="upload_submit" class="btn btn-primary"><i class='fa fa-fw fa-upload'></i> Upload
+                <button type="submit" name="upload_submit" data-toggle="tooltip" class="btn btn-primary" data-original-title=".jpg, .gif, .png" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>
-                <div>
-                    <small>(.jpg, .gif, .png)</small>
-                </div>
             </form>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-12">
             <hr/>
@@ -132,6 +130,25 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
             </div>
         </div>
     </div>
+
+<?php
+//Check if user_level is Admin user
+if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
+    ?>
+    <hr/>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group" id="copyfiles">
+                <button data-toggle="tooltip" class="copy_files_to_locs btn btn-primary" id="<?php echo $_GET['loc_id'] ?>" name="copy_files_to_locs" data-original-title="Use Carefully!" data-placement="right">
+                    <i class='fa fa-fw fa-copy'></i> Copy Files To ALL Locations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+?>
     <!-- /.row -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">

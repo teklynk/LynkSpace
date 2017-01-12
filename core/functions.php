@@ -332,7 +332,7 @@ function getNav($navSection, $dropdown, $pull){
     //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.loc_id, category.nav_loc_id
     $tempLink = 0;
 
-    while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)){
+    while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
 
         //Variables for $sqlNavLinks SQL Join
         $navLinksID = $rowNavLinks[0];
@@ -348,6 +348,8 @@ function getNav($navSection, $dropdown, $pull){
         $navLinks_CatName = $rowNavLinks[10];
         $navLinks_CatNavLocId = $rowNavLinks[11];
         $navLinks_CatDateTime = $rowNavLinks[12];
+
+        $navLinksUrl = getShortCode($navLinksUrl);
 
         //New Window
         if ($navLinksWin == 'true'){
@@ -717,6 +719,10 @@ function getFeatured(){
 
     $featuredImageAlign = $rowFeatured['image_align'];
 }
+
+//Call - getSetup is used everywhere
+getSetup();
+
 //Random password generator for password reset
 function generateRandomString($length = 10){
     global $randomString;
@@ -729,8 +735,21 @@ function generateRandomString($length = 10){
     return $randomString;
 }
 
-//Call - getSetup is used everywhere
-getSetup();
+//Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database
+function getShortCode($urlStr){
+    global $setupConfig;
+    global $setupPACURL;
+
+    if (strpos($urlStr, '[loc_id]')) {
+        $urlStr = str_replace('[loc_id]', $_GET['loc_id'], $urlStr);
+    } elseif (strpos($urlStr, '[config]')) {
+        $urlStr = str_replace('[config]', $setupConfig, $urlStr);
+    } elseif (strpos($urlStr, '[pac_url]')) {
+        $urlStr = str_replace('[pac_url]', $setupPACURL, $urlStr);
+    }
+
+    return $urlStr;
+}
 
 //Call these functions depending on which page you are visiting
 //Sets the page title

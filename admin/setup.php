@@ -126,9 +126,9 @@ if ($_GET['update'] == 'true') {
                 </div>
             </div>
             <hr/>
-            <?php }?>
-
             <?php
+            }
+
             //Check if user_level is Admin user
             if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
             ?>
