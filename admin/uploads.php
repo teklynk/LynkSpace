@@ -135,6 +135,7 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
 //Check if user_level is Admin user
 if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
     ?>
+
     <hr/>
     <div class="row">
         <div class="col-lg-4">

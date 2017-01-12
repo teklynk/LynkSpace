@@ -418,7 +418,13 @@ $(document).ready(function () {
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?update=true', {
             id: this.id,
-            checked: this.checked
+            checked: this.checked,
+            success: function(html) {
+                $('.copy_files_to_locs').attr('disabled', true);
+                setTimeout(function() {
+                    $('.copy_files_to_locs').attr('disabled', false);
+                }, 5000);
+            }
         });
     });
 
