@@ -8,3 +8,5 @@ vendor/
 composer.json
 codeception.yml
 composer.lock
+/uploads/
+/.gitignore
