@@ -288,142 +288,230 @@ $(document).ready(function () {
             id: this.id,
             checked: this.checked
         });
+        $('#nav_Table .nav_win_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('#nav_Table .nav_win_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.searchopt_checkbox').change(function () {
         $.get('ajax/update_searchoptions.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.searchopt_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.searchopt_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.searchopt_radio').change(function () {
         $.get('ajax/update_searchdefault.php?update=true', {
             value: this.value,
             checked: this.checked
         });
+        $('.searchopt_radio').attr('disabled', true);
+        setTimeout(function() {
+            $('.searchopt_radio').attr('disabled', false);
+        }, 1000);
     });
     $('.page_status_checkbox').change(function () {
         $.get('ajax/update_pageactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.page_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.page_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.slider_status_checkbox').change(function () {
         $.get('ajax/update_slideractive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.slider_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.slider_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.services_status_checkbox').change(function () {
         $.get('ajax/update_servicesactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.services_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.services_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.team_status_checkbox').change(function () {
         $.get('ajax/update_teamactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.team_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.team_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.customer_status_checkbox').change(function () {
         $.get('ajax/update_customersactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.customer_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.customer_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.customer_featured_checkbox').change(function () {
         $.get('ajax/update_customersfeatured.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.customer_featured_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.customer_featured_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.aboutus_defaults_checkbox').change(function () {
         $.get('ajax/update_aboutusdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.aboutus_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.aboutus_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.featured_defaults_checkbox').change(function () {
         $.get('ajax/update_featureddefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.featured_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.featured_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.generalinfo_defaults_checkbox').change(function () {
         $.get('ajax/update_generalinfodefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.generalinfo_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.generalinfo_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.contact_defaults_checkbox').change(function () {
         $.get('ajax/update_contactdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.contact_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.contact_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.social_defaults_checkbox').change(function () {
         $.get('ajax/update_socialmediadefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.social_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.social_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.slider_defaults_checkbox').change(function () {
         $.get('ajax/update_sliderdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.slider_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.slider_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.databases_defaults_checkbox').change(function () {
         $.get('ajax/update_databasesdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.databases_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.databases_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.navigation_defaults_checkbox_1').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=1', {
             id: this.id,
             checked: this.checked
         });
+        $('.navigation_defaults_checkbox_1').attr('disabled', true);
+        setTimeout(function() {
+            $('.navigation_defaults_checkbox_1').attr('disabled', false);
+        }, 1000);
     });
     $('.navigation_defaults_checkbox_2').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=2', {
             id: this.id,
             checked: this.checked
         });
+        $('.navigation_defaults_checkbox_2').attr('disabled', true);
+        setTimeout(function() {
+            $('.navigation_defaults_checkbox_2').attr('disabled', false);
+        }, 1000);
     });
     $('.navigation_defaults_checkbox_3').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=3', {
             id: this.id,
             checked: this.checked
         });
+        $('.navigation_defaults_checkbox_3').attr('disabled', true);
+        setTimeout(function() {
+            $('.navigation_defaults_checkbox_3').attr('disabled', false);
+        }, 1000);
     });
     $('.services_defaults_checkbox').change(function () {
         $.get('ajax/update_servicesdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.services_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.services_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.team_defaults_checkbox').change(function () {
         $.get('ajax/update_teamdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.team_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.team_defaults_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.location_status_checkbox').change(function () {
         $.get('ajax/update_setupactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+        $('.location_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.location_status_checkbox').attr('disabled', false);
+        }, 1000);
     });
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?update=true', {
             id: this.id,
             checked: this.checked,
-            success: function(html) {
+            success: function () {
                 $('.copy_files_to_locs').attr('disabled', true);
                 setTimeout(function() {
                     $('.copy_files_to_locs').attr('disabled', false);
-                }, 5000);
+                }, 4000);
             }
         });
     });
