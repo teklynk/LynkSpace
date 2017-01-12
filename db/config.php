@@ -1,5 +1,6 @@
 <?php
 //This is the main Config/Setup file for the admin panel and Global variables used throughout the site. Change values as needed.
+//Create a virtual host alias for the directory that the project files are in.
 
 include_once 'dbconn.php';
 
@@ -15,7 +16,9 @@ $setupPACURL = "https://pac.library.cps.edu";
 
 //Edit values for your web site. leave as is in most cases.
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/"; //physical path to uploads folder
-$image_url = "//" . $_SERVER['HTTP_HOST'] . "/businessCMS/uploads/" . $_GET['loc_id'] . "/"; //absolute web url path to uploads folder for tinyMCE
+
+$image_url = "//" . $_SERVER['HTTP_HOST'] . "/uploads/" . $_GET['loc_id'] . "/"; //absolute web url path to uploads folder for tinyMCE
+
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/"; //relative web url path to uploads folder for tinyMCE
 
 //Upload function
