@@ -189,7 +189,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
 
         //Rename category and set nav categories to new name
         if ($_GET['renamecat'] AND $_GET['newcatname'] AND !$_GET['confirm']) {
-            $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr($renameCatTitle) . "? <a href='?section=" . $getNavSection . "&renamecat=" . $renameCatId . "&newcatname=" . renameCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr($renameCatTitle) . "? <a href='?section=" . $getNavSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             echo $renameMsg;
 
         } elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm'] == 'yes') {

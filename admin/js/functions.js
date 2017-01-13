@@ -159,6 +159,7 @@ $(document).ready(function () {
         $('#exist_page').attr('value', '');
         $('#exist_cat').attr('value', '');
         $('#nav_newcat').attr('value', '');
+        $('#cust_newcat').attr('value', '');
     });
     $('#exist_page').change(function () {
         if ($('#exist_page').val() == '') {
@@ -177,11 +178,13 @@ $(document).ready(function () {
     $('#exist_cat').change(function () {
         if ($('#exist_cat').val() == '' || $('#exist_cat').val() == 0) { //NOTE: 0=None in the category table
             $('#nav_newcat').val('');
+            $('#cust_newcat').val('');
             $('#add_cat .fa-plus').css('visibility', 'visible');
             $('#del_cat .fa-trash').css('visibility', 'hidden');
             $('#rename_cat .fa-save').css('visibility', 'hidden');
         } else {
             $('#nav_newcat').val($('#exist_cat option:selected').text());
+            $('#cust_newcat').val($('#exist_cat option:selected').text());
             $('#add_cat .fa-plus').css('visibility', 'hidden');
             $('#del_cat .fa-trash').css('visibility', 'visible');
             $('#rename_cat .fa-save').css('visibility', 'visible');
