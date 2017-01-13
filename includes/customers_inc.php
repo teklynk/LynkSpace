@@ -10,7 +10,13 @@ if ($customerNumRows > 0) {
 
     echo "<div class='row' id='databases'>";
 
-    if (!empty($customerHeading)) {
+    echo $customerPageNotFound;
+
+    if (!empty($customerCatName)) {
+        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
+        echo "</div>";
+    } elseif (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
         echo "<h1 class='customers'>" . $customerHeading . "</h1>";
         echo "</div>";

@@ -485,7 +485,9 @@ function getCustomers(){
     global $customerNumRows;
     global $customerFeatured;
     global $customerIcon;
-    global $customerColWidth;
+    global $customerCatId;
+    global $customerCatName;
+    global $customerPageNotFound;
     global $db_conn;
 
     //get the default value from setup table
@@ -509,12 +511,34 @@ function getCustomers(){
         $customerBlurb = $rowCustomerHeading['customerscontent'];
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
+    //Get Category
+    //If cat_id=int then display a page of databases for only that category
+    if (!empty($_GET['cat_id'])) {
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $_GET['loc_id'] . ")");
+        $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
+        $customerCatId = $rowCatCustomers[0];
+        $customerCatName = $rowCatCustomers[1];
+
+        if ($rowCatCustomers[0] != $_GET['cat_id']) {
+            $customerPageNotFound = "Page Not Found";
+        } else {
+            $customerPageNotFound = "";
+        }
+
+        $customerCatWhere = "catid=" . $_GET['cat_id'] . " AND ";
+
+    } else {
+
+        $customerCatWhere = "";
+
+    }
+
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND  " . $customerCatWhere . " loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     //use default location
     if ($rowCustomerSetup['databases_use_defaults'] == "true" || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL)  {
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=1 ORDER BY datetime DESC"); //While loop
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerCatWhere . " loc_id=1 ORDER BY datetime DESC"); //While loop
         $customerNumRows = mysqli_num_rows($sqlCustomers);
     }
 }

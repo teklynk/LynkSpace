@@ -301,6 +301,17 @@ if ($_GET['preview'] > "") {
                 $setupUpdate = "UPDATE setup SET customersheading='" . safeCleanStr($_POST['customer_heading']) . "', customerscontent='" . sqlEscapeStr($_POST['main_content']) . "', databases_use_defaults='" . safeCleanStr($_POST['databases_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
+                for ($i = 0; $i < $_POST['cust_count']; $i++) {
+
+                    if ($_POST['cust_cat'][$i] == "") {
+                        $_POST['cust_cat'][$i] = 0; //None
+                    }
+
+                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
+                    mysqli_query($db_conn, $custCatUpdate);
+
+                }
+
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
@@ -502,6 +513,7 @@ if ($_GET['preview'] > "") {
                         </thead>
                         <tbody>
                         <?php
+                        $custCount = "";
                         $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, featured, author_name, datetime, active, loc_id FROM customers WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
@@ -511,6 +523,7 @@ if ($_GET['preview'] > "") {
                             $customerLink = $rowCustomer['link'];
                             $customerActive = $rowCustomer['active'];
                             $customerFeatured = $rowCustomer['featured'];
+                            $custCount++;
 
                             if ($rowCustomer['active'] == 'true') {
                                 $isActive = "CHECKED";
@@ -525,9 +538,10 @@ if ($_GET['preview'] > "") {
                             }
 
                             echo "<tr>
-						<td><a href='databases.php?loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a></td>
+						<td><input type='hidden' name='cust_id[]' value='" . $customerId . "' >
+						<a href='databases.php?loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a></td>
 						<td>";
-                            echo "<select class='form-control input-sm' name='nav_cat[]'>'";
+                            echo "<select class='form-control input-sm' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
                             $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
@@ -563,6 +577,7 @@ if ($_GET['preview'] > "") {
                         ?>
                         </tbody>
                     </table>
+                    <input type='hidden' name='cust_count' value="<?php echo $custCount; ?>" >
                     <input type="hidden" name="save_main" value="true"/>
                     <button type="submit" class="btn btn-primary" name="customer_submit"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                     <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
