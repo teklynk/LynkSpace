@@ -224,20 +224,20 @@ if ($_GET['preview'] > "") {
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
-                        $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
-                        while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
+                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
 
-                            if ($rowExistNavCat['id'] != 0) {
-                                $navExistCatId = $rowExistNavCat['id'];
-                                $navExistCatName = $rowExistNavCat['name'];
+                            if ($rowExistCustCat['id'] != 0) {
+                                $custExistCatId = $rowExistCustCat['id'];
+                                $custExistCatName = $rowExistCustCat['name'];
 
-                                if ($navExistCatId == $rowCustomer['catid']) {
+                                if ($custExistCatId == $rowCustomer['catid']) {
                                     $isExistCatSelected = "SELECTED";
                                 } else {
                                     $isExistCatSelected = "";
                                 }
 
-                                echo "<option value=" . $navExistCatId . " " . $isExistCatSelected . ">" . $navExistCatName . "</option>";
+                                echo "<option value=" . $custExistCatId . " " . $isExistCatSelected . ">" . $custExistCatName . "</option>";
                             }
 
                         }
@@ -322,7 +322,7 @@ if ($_GET['preview'] > "") {
             $delCatId = $_GET['deletecat'];
             $delCatTitle = $_GET['deletecatname'];
 
-            //Delete category and set nav categories to zero
+            //Delete category and set categories to zero
             if ($_GET['deletecat'] AND $_GET['deletecatname'] AND !$_GET['confirm']) {
 
                 $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr($delCatTitle) . "? <a href='?deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -347,7 +347,7 @@ if ($_GET['preview'] > "") {
             $renameCatId = $_GET['renamecat'];
             $renameCatTitle = $_GET['newcatname'];
 
-            //Rename category and set nav categories to new name
+            //Rename category and set categories to new name
             if ($_GET['renamecat'] AND $_GET['newcatname'] AND !$_GET['confirm']) {
                 $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr($renameCatTitle) . "? <a href='?renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
@@ -357,7 +357,7 @@ if ($_GET['preview'] > "") {
                 $custRenameCatUpdate = "UPDATE category_customers SET name='" . safeCleanStr($renameCatTitle) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $custRenameCatUpdate);
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($renameCatTitle) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($renameCatTitle) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
             }
 
@@ -446,7 +446,7 @@ if ($_GET['preview'] > "") {
 
                 <fieldset class="well">
                     <div class="form-group">
-                        <label for="nav_newcat">Category</label>
+                        <label for="cust_newcat">Category</label>
                         <div class="input-group">
                             <input type="text" class="form-control input-sm" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="If you would like to add a new Category, you must do that before creating the databases(s) to display under the Category.">
                             <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#cust_newcat').val();"></i></span>
@@ -459,6 +459,7 @@ if ($_GET['preview'] > "") {
                         <select class="form-control input-sm" name="exist_cat" id="exist_cat">
                             <?php
                             echo "<option value='0'>None</option>";
+                            //Cat list for adding a new category
                             //get and build category list, find selected
                             $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                             while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
@@ -467,7 +468,7 @@ if ($_GET['preview'] > "") {
                                     $custExistCatId = $rowExistCustCat['id'];
                                     $custExistCatName = $rowExistCustCat['name'];
 
-                                    if ($custExistCatId == $navCat) {
+                                    if ($custExistCatId == $custCat) {
                                         $isExistCatSelected = "SELECTED";
                                     } else {
                                         $isExistCatSelected = "";
@@ -556,7 +557,7 @@ if ($_GET['preview'] > "") {
                                         $isCatSelected = "";
                                     }
 
-                                    echo "<option value=" . $custCatId . " " . $isCatSelected . ">" . $custCatName . "</option>";
+                                    echo "<option value=" . $custCatId . " " . $isCatSelected . ">" . $custCatName . " (".$custCatId.")</option>";
                                 }
                             }
                             echo "</select>";
