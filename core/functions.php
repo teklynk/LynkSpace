@@ -519,12 +519,6 @@ function getCustomers(){
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
 
-        if ($rowCatCustomers[0] != $_GET['cat_id']) {
-            $customerPageNotFound = "Page Not Found";
-        } else {
-            $customerPageNotFound = "";
-        }
-
         $customerCatWhere = "catid=" . $_GET['cat_id'] . " AND ";
 
     } else {

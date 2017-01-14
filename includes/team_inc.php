@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getTeam();
+//getTeam();
 
 if ($teamNumRows > 0) {
 

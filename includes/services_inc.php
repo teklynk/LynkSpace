@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getServices();
+//getServices();
 
 if ($servicesNumRows > 0) {
 

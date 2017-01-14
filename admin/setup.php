@@ -32,13 +32,18 @@ if (!empty($_POST)) {
             $_POST['location_status'] = 'false';
         }
 
+        //Always set default location to active/true
+        if ($_GET['loc_id'] == 1) {
+            $_POST['location_status'] = 'true';
+        }
+
         //update table on submit
         if ($rowSetup['loc_id'] == $_GET['loc_id']) {
             //Update Setup
             $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', headercode='" . trim($_POST['site_header']) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', disqus='" . safeCleanStr($_POST['site_disqus']) . "', googleanalytics='" . safeCleanStr($_POST['site_google']) . "', tinymce='1', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $setupUpdate);
             //Update Location
-            $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', active='" . safeCleanStr($_POST['location_status']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
+            $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $locationUpdate);
         } else {
             //Insert Setup
