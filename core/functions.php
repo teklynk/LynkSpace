@@ -487,7 +487,6 @@ function getCustomers(){
     global $customerIcon;
     global $customerCatId;
     global $customerCatName;
-    global $customerPageNotFound;
     global $db_conn;
 
     //get the default value from setup table

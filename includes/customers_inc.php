@@ -10,8 +10,6 @@ if ($customerNumRows > 0) {
 
     echo "<div class='row' id='databases'>";
 
-    echo $customerPageNotFound;
-
     if (!empty($customerCatName)) {
         echo "<div class='col-xs-12 col-lg-12'>";
         echo "<h1 class='customers'>" . $customerCatName . "</h1>";
@@ -31,6 +29,7 @@ if ($customerNumRows > 0) {
     echo "<div class='row row_pad'>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
+
         if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
             echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
