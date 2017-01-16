@@ -517,14 +517,9 @@ function getCustomers(){
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
-
         $customerCatWhere = "catid=" . $_GET['cat_id'] . " AND ";
-
     } else {
-
         $customerCatWhere = "";
-        //TODO: display links for each category.
-
     }
 
     $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND  " . $customerCatWhere . " loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop

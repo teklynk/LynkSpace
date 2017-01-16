@@ -549,13 +549,6 @@ header.carousel {
     clear: both;
 }
 
-.catname2, .catname3, .catname4, .catname5, .catname6 {
-    display:none;
-}
-.catname2:nth-child(4n+1), .catname3:nth-child(4n+1), .catname4:nth-child(4n+1), .catname5:nth-child(4n+1), .catname6:nth-child(4n+1) {
-    display:block;
-}
-
 .team-item h3 {
     text-align: center;
 }

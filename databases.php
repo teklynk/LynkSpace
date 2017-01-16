@@ -22,7 +22,11 @@ echo "</div>";
 echo "<div class='container'>";
 echo "<div class='row row_pad content'>";
 echo "<div class='col-md-12'>";
-    include 'includes/customers_inc.php';
+    if (!empty($_GET['cat_id'])) {
+        include 'includes/customers_catid_inc.php';
+    } else {
+        include 'includes/customers_inc.php';
+    }
 echo "</div>";
 echo "</div>";
 echo "</div>";
