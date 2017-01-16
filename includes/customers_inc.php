@@ -36,14 +36,17 @@ if ($customerNumRows > 0) {
             $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
             $customerCatId = $rowCatCustomers[0];
             $customerCatName = $rowCatCustomers[1];
+            $customerCatCount = $rowCatCustomers[2];
 
-            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
+            echo $customerCatCount;
 
             if ($customerCatId != 0) {
-                echo "<div class='col-xs-12 col-lg-12 catname'>";
+                echo "<div class='col-xs-12 col-lg-12 catname".$customerCatId."'>";
                 echo "<h1 class='customers'>" . $customerCatName . "</h1>";
                 echo "</div>";
             }
+
+            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
             if (!empty($rowCustomers['link'])) {
                 echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";
