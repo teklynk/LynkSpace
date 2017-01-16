@@ -8,7 +8,7 @@ include_once('includes/header.php');
 //Page preview
 if ($_GET['preview'] > "") {
     $pagePreviewId = $_GET['preview'];
-    $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, ontent FROM customers WHERE id='$pagePreviewId'");
+    $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, content FROM customers WHERE id='$pagePreviewId'");
     $rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";

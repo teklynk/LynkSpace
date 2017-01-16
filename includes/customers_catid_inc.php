@@ -26,12 +26,17 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
+    $customersItemCount = 0;
+
     echo "<div class='row row_pad'>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 
         if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
-            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item database-item'>";
+
+            $customersItemCount++;
+
+            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
             if (!empty($rowCustomers['link'])) {
                 echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";
@@ -72,7 +77,13 @@ if ($customerNumRows > 0) {
                 echo "</a>"; //close href
             }
 
-            echo "</div>"; //col-
+            echo "</div>"; //database-item
+
+            //Start a new row of items after 3 and reset the counter
+            if ($customersItemCount == 3) {
+                $customersItemCount = 0; //reset counter
+                echo "<div style='clear:both;'></div>";
+            }
         }
     }
 

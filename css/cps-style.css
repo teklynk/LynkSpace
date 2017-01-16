@@ -517,35 +517,35 @@ header.carousel {
     margin-bottom: 15px !important;
 }
 
-.database-item:nth-child(4), .team-item:nth-child(6), .service-item:nth-child(6) {
+.team-item:nth-child(6), .service-item:nth-child(6) {
     clear: both;
 }
 
-.database-item:nth-child(7), .team-item:nth-child(10), .service-item:nth-child(10) {
+.team-item:nth-child(10), .service-item:nth-child(10) {
     clear: both;
 }
 
-.database-item:nth-child(10), .team-item:nth-child(14), .service-item:nth-child(14) {
+.team-item:nth-child(14), .service-item:nth-child(14) {
     clear: both;
 }
 
-.database-item:nth-child(13), .team-item:nth-child(18), .service-item:nth-child(18) {
+.team-item:nth-child(18), .service-item:nth-child(18) {
     clear: both;
 }
 
-.database-item:nth-child(16), .team-item:nth-child(22), .service-item:nth-child(22) {
+.team-item:nth-child(22), .service-item:nth-child(22) {
     clear: both;
 }
 
-.database-item:nth-child(19), .team-item:nth-child(26), .service-item:nth-child(26) {
+.team-item:nth-child(26), .service-item:nth-child(26) {
     clear: both;
 }
 
-.database-item:nth-child(22), .team-item:nth-child(30), .service-item:nth-child(30) {
+.team-item:nth-child(30), .service-item:nth-child(30) {
     clear: both;
 }
 
-.database-item:nth-child(25), .team-item:nth-child(34), .service-item:nth-child(34) {
+.team-item:nth-child(34), .service-item:nth-child(34) {
     clear: both;
 }
 
