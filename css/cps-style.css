@@ -549,6 +549,10 @@ header.carousel {
     clear: both;
 }
 
+.database-item:nth-child(0) > .catname{
+    color:red;
+}
+
 .team-item h3 {
     text-align: center;
 }

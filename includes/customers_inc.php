@@ -31,7 +31,19 @@ if ($customerNumRows > 0) {
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 
         if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
+            //Gets catname for each link
+            $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $rowCustomers['catid'] . " AND loc_id=" . $_GET['loc_id'] . ") ");
+            $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
+            $customerCatId = $rowCatCustomers[0];
+            $customerCatName = $rowCatCustomers[1];
+
             echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
+
+            if ($customerCatId != 0) {
+                echo "<div class='col-xs-12 col-lg-12 catname'>";
+                echo "<h1 class='customers'>" . $customerCatName . "</h1>";
+                echo "</div>";
+            }
 
             if (!empty($rowCustomers['link'])) {
                 echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";

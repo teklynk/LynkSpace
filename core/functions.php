@@ -496,7 +496,7 @@ function getCustomers(){
     $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
 
-    //use default location
+    //use default location data from setup
     if ($rowCustomerSetup['databases_use_defaults'] == 'true' || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL) {
         $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=1");
         $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
@@ -523,6 +523,7 @@ function getCustomers(){
     } else {
 
         $customerCatWhere = "";
+        //TODO: display links for each category.
 
     }
 

@@ -1,4 +1,3 @@
-/node_modules/
 tests/
 vendor/
 *.DS_Store
