@@ -58,13 +58,11 @@ if (!empty($_POST)) {
 
     }
 }
-//Initialize variable
-$message = "";
 
 //if install.php file exists
-if (file_exists('install.php')) {
-    $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-}
+//if (file_exists('install.php')) {
+//    $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+//}
 
 //Reset password page messages
 if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
