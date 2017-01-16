@@ -36,7 +36,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     } else {
         // Create the email and send the message
         $email_subject = "Website User Account Form:  $user_name";
-        $email_body = "Your password has been reset.\n\n" . "Here are the details:\n\nUser Name: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\n";
+        $email_body = "Your password has been reset.\n\n" . "Here are the details:\n\nUsername: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\n";
         $headers = "From: noreply@dev-vm.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
         $headers .= "Reply-To: noreply@dev-vm.com";
 

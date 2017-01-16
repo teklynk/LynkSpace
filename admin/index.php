@@ -148,7 +148,7 @@ if (isset($_SESSION['loggedIn'])) {
                             <form name="frmSignin" class="form-signin" method="post" action="">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label>User Name</label>
+                                        <label>Username</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
@@ -188,7 +188,7 @@ if (isset($_SESSION['loggedIn'])) {
                             <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label>User Name</label>
+                                        <label>Username</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autocomplete="off" autofocus required>

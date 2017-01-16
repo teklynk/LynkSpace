@@ -55,10 +55,10 @@ if ($_GET['passwordupdated'] == 'true') {
         <form name="userForm" method="post" action="">
 
             <div class="form-group">
-                <label>User Name</label>
+                <label>Username</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $rowUsers['username']; ?>" placeholder="User name" required>
+                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $rowUsers['username']; ?>" placeholder="Username" required>
                 </div>
             </div>
             <div class="form-group">
