@@ -78,10 +78,10 @@ echo "</div>";
         ?>
 
         <!-- Contact Form -->
-        <div class="row row_pad">
+        <!-- <div class="row row_pad contactform">
             <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php?loc_id=<?php echo $_GET['loc_id']; ?>">
+                <form name="sentMessage" id="contactForm" method="post" action="mail/contact_me.php?loc_id=<?php //echo $_GET['loc_id']; ?>">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>
@@ -98,7 +98,7 @@ echo "</div>";
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" pattern="<?php echo $emailValidatePattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                            <input type="email" pattern="<?php //echo $emailValidatePattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
@@ -107,20 +107,21 @@ echo "</div>";
                             <textarea rows="10" cols="100" class="form-control" id="message" name="message" maxlength="999" style="resize:none" required></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail; ?>"/>
-                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
-                    <br>
+                    <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php //echo $contactFormSendToEmail; ?>"/>
+                    <input type="hidden" id="referer" name="referer" value="<?php //echo $_SESSION['unique_referer']; ?>"/>
+                    <br>-->
                     <!-- For success/fail messages -->
                     <?php
-                    echo $contactFormMsg;
+                    //echo $contactFormMsg;
                     ?>
-                    <div class="control-group form-group">
-                        <div class="controls">
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </div>
-                    </div>
-                </form>
+        <!--<div class="control-group form-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Send Message</button>
             </div>
+        </div>
+    </form>
+</div>-->
+
         </div>
     </div>
 </div>

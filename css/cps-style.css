@@ -478,6 +478,10 @@ header.carousel {
     display: none !important;
 }
 
+.contactform {
+    display: none !important;
+}
+
 .fa-6x {
     font-size: 6em;
 }
