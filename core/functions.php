@@ -344,11 +344,12 @@ function getNav($navSection, $dropdown, $pull){
         $navLinksWin = $rowNavLinks[6];
         $navLinksLocId = $rowNavLinks[7];
         $navLinksDateTime = $rowNavLinks[8];
-        $navLinks_CatId = $rowNavLinks[9];
-        $navLinks_CatName = $rowNavLinks[10];
-        $navLinks_CatNavLocId = $rowNavLinks[11];
-        $navLinks_CatDateTime = $rowNavLinks[12];
+        $navLinks_Author = $rowNavLinks[9];
+        $navLinks_CatId = $rowNavLinks[10];
+        $navLinks_CatName = $rowNavLinks[11];
+        $navLinks_CatNavLocId = $rowNavLinks[12];
 
+        //Check if link contains shortcode
         $navLinksUrl = getShortCode($navLinksUrl);
 
         //New Window
@@ -358,9 +359,11 @@ function getNav($navSection, $dropdown, $pull){
             $navWin = "";
         }
 
+        //Create category - drop down menus
         if ($navLinksCatId == $navLinks_CatId AND $navLinksCatId != 0){ //NOTE: 0=None in the category table
 
             if ($navLinksCatId != $tempLink){
+
                 $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.nav_loc_id
 
@@ -487,6 +490,7 @@ function getCustomers(){
     global $customerIcon;
     global $customerCatId;
     global $customerCatName;
+    global $customerDefaultLoc;
     global $db_conn;
 
     //get the default value from setup table
@@ -500,6 +504,9 @@ function getCustomers(){
     if ($rowCustomerSetup['databases_use_defaults'] == 'true' || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL) {
         $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=1");
         $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
+        $customerDefaultLoc = 1; //overwrite loc_id with default
+    } else {
+        $customerDefaultLoc = $_GET['loc_id'];
     }
 
     if (!empty($rowCustomerHeading['customersheading'])){
@@ -513,7 +520,7 @@ function getCustomers(){
     //Get Category
     //If cat_id=int then display a page of databases for only that category
     if (!empty($_GET['cat_id'])) {
-        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $_GET['loc_id'] . ")");
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $customerDefaultLoc . ")");
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
@@ -522,7 +529,7 @@ function getCustomers(){
         $customerCatWhere = "";
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND  " . $customerCatWhere . " loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND  " . $customerCatWhere . " loc_id=" . $customerDefaultLoc . " ORDER BY datetime DESC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
     //use default location

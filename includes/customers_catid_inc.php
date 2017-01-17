@@ -32,7 +32,7 @@ if ($customerNumRows > 0) {
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 
-        if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == '') {
+        if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == "" OR $rowCustomers['featured'] == NULL) {
 
             $customersItemCount++;
 
