@@ -108,6 +108,29 @@
 </head>
 
 <body>
+
+<!--[if lte IE 9]>
+<div id="ie7alertdiv">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger fade in" role="alert" >
+                    <button id="btnIE7alertclose" type="button" class="close">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4>
+                        Did you know that your Internet Explorer is out of date?</h4>
+                    <p>
+                        To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below. Not using IE9? Refresh your browser and this message will go away!</p>
+                    <p>
+                        <a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<![endif]-->
+
 <!-- Skip Nav -->
 <a href="#main-content" class="offscreen">Skip to main content</a>
 <a href="#search" class="offscreen">Skip to search</a>
