@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="3600;URL=index.php?loc_id=<?php echo $_GET['loc_id']; ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2.0,user-scalable=yes">
     <meta name="description" content="<?php echo $setupDescription; ?>">
     <meta name="keywords" content="<?php echo $setupKeywords; ?>">
     <meta name="author" content="<?php echo $setupAuthor; ?>">

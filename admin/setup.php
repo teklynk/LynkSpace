@@ -160,9 +160,7 @@ if ($_GET['update'] == 'true') {
                 <textarea class="form-control input-sm count-text" name="site_description" rows="3" maxlength="255"><?php echo $rowSetup['description']; ?></textarea>
             </div>
             <hr/>
-            <div class="form-group">
-                <label>PAC Settings</label>
-            </div>
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">

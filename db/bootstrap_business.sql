@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 16, 2017 at 04:13 PM
--- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.20
+-- Generation Time: Jan 17, 2017 at 11:02 AM
+-- Server version: 5.5.50-MariaDB
+-- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE `aboutus` (
+CREATE TABLE IF NOT EXISTS `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -36,14 +36,14 @@ CREATE TABLE `aboutus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `aboutus`
 --
 
 INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 1),
+(1, 'About Us', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'HSWorkingGroup.png', 'left', 'false', '2017-01-17 14:46:35', 'admin', 1),
 (2, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 2),
 (3, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 3),
 (4, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 4),
@@ -517,20 +517,25 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`, `author_name`) VALUES
-(0, 'None', 1, '0000-00-00 00:00:00', '');
+(0, 'None', 1, '0000-00-00 00:00:00', ''),
+(1, 'Home', 1, '2017-01-16 23:07:56', 'admin'),
+(2, 'Chicago Public Schools', 1, '2017-01-17 14:49:48', 'admin'),
+(3, 'Connect', 1, '2017-01-17 14:50:04', 'admin'),
+(4, 'Quick Links', 1, '2017-01-17 14:50:18', 'admin'),
+(5, 'SOAR', 1, '2017-01-17 14:52:05', 'admin');
 
 -- --------------------------------------------------------
 
@@ -538,13 +543,13 @@ INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`, `author_name`) V
 -- Table structure for table `category_customers`
 --
 
-CREATE TABLE `category_customers` (
+CREATE TABLE IF NOT EXISTS `category_customers` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_customers`
@@ -562,7 +567,7 @@ INSERT INTO `category_customers` (`id`, `name`, `cust_loc_id`, `datetime`, `auth
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE `contactus` (
+CREATE TABLE IF NOT EXISTS `contactus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -579,7 +584,7 @@ CREATE TABLE `contactus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contactus`
@@ -1061,7 +1066,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `icon` text NOT NULL,
@@ -1074,31 +1079,31 @@ CREATE TABLE `customers` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `featured`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 3, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 3, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 3, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(8, '', 'laptop', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 4, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 4, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 4, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(17, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(20, '', 'laptop', 'e CUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(23, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 2, 'false', 'true', '2017-01-16 21:00:00', 'admin', 1),
-(24, '', 'wpexplorer', 'Explore', 'http://cpswebapp.local.com/databases.php?loc_id=[loc_id]&amp;cat_id=3', '', 0, 'true', 'true', '2017-01-16 21:02:47', '', 1),
-(25, '', 'database', 'Databases', 'http://cpswebapp.local.com/databases.php?loc_id=[loc_id]&amp;cat_id=2', '', 0, 'true', 'true', '2017-01-16 21:02:51', '', 1),
-(26, '', 'anchor', 'Other', 'http://cpswebapp.local.com/databases.php?loc_id=[loc_id]&amp;cat_id=4', '', 0, 'true', 'true', '2017-01-16 21:12:42', 'admin', 1);
+(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 3, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 3, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 3, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(8, '', 'laptop', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 4, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 4, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 4, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(17, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(20, '', 'laptop', 'e CUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(23, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 2, 'false', 'true', '2017-01-16 21:42:13', 'admin', 1),
+(24, '', 'wpexplorer', 'Explore', 'http://cpswebapp.tlcdelivers.com/databases.php?loc_id=[loc_id]&amp;cat_id=3', '', 0, 'true', 'true', '2017-01-16 21:45:21', '', 1),
+(25, '', 'paper-plane-o', 'Resources', 'http://cpswebapp.tlcdelivers.com/databases.php?loc_id=[loc_id]&amp;cat_id=2', '', 0, 'true', 'true', '2017-01-17 14:19:49', 'admin', 1),
+(26, '', 'anchor', 'Other', 'http://cpswebapp.tlcdelivers.com/databases.php?loc_id=[loc_id]&amp;cat_id=4', '', 0, 'true', 'true', '2017-01-16 21:45:16', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1106,7 +1111,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 -- Table structure for table `featured`
 --
 
-CREATE TABLE `featured` (
+CREATE TABLE IF NOT EXISTS `featured` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -1117,14 +1122,14 @@ CREATE TABLE `featured` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `featured`
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'SOAR - Seeking Online Access to Resources', 'Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources. &nbsp; &nbsp; &nbsp;&nbsp;</p>', '', '', 'false', '2017-01-11 13:53:35', 'admin_script', 1),
+(1, 'SOAR - Seeking Online Access to Resources', 'Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources. &nbsp; &nbsp; &nbsp;&nbsp;</p>', 'spotlight_logo_default.jpg', 'right', 'false', '2017-01-17 14:41:19', 'admin', 1),
 (2, 'Curie Metro High School', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 2),
 (3, 'Northside Prep High School', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 3),
 (4, 'Hyde Park High School', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 4),
@@ -1530,9 +1535,9 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (404, 'Burley Elementary School, Augustus H', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 374),
 (405, 'Marine Leadership Academy', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 405),
 (406, 'Lyon Elementary School, Mary', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 406),
-(407, 'Carnegie Elementary School, Andrew', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 407),
-(408, 'Healy Elementary School, Robert', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 408);
+(407, 'Carnegie Elementary School, Andrew', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 407);
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(408, 'Healy Elementary School, Robert', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 408),
 (409, 'Black Magnet Elementary School, Robert A', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 193),
 (410, 'Rogers Elementary School , Philip', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 410),
 (411, 'Montefiore Special Elementary School, Moses', 'Virtual Library', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 411),
@@ -1599,7 +1604,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE `generalinfo` (
+CREATE TABLE IF NOT EXISTS `generalinfo` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -1607,7 +1612,7 @@ CREATE TABLE `generalinfo` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `generalinfo`
@@ -2088,12 +2093,12 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 -- Table structure for table `locations`
 --
 
-CREATE TABLE `locations` (
+CREATE TABLE IF NOT EXISTS `locations` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
@@ -2101,7 +2106,7 @@ CREATE TABLE `locations` (
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (1, 'CPS', '0000-00-00 00:00:00', 'true'),
-(2, 'Curie Metro High School', '0000-00-00 00:00:00', 'true'),
+(2, 'Curie Metro High School', '2017-01-16 22:44:24', 'true'),
 (3, 'Northside Prep High School', '0000-00-00 00:00:00', 'true'),
 (4, 'Hyde Park High School', '0000-00-00 00:00:00', 'true'),
 (5, 'Crane Tech Prep', '0000-00-00 00:00:00', 'true'),
@@ -2574,7 +2579,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE `navigation` (
+CREATE TABLE IF NOT EXISTS `navigation` (
   `id` int(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
@@ -2585,26 +2590,37 @@ CREATE TABLE `navigation` (
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`, `author_name`) VALUES
-(43, 3, 'Virtual Library High School', 'https://pac.library.cps.edu/?config=11', 0, 'Top', 'true', 1, '2017-01-13 20:59:28', 'admin'),
-(54, 2, 'Virtual Library Elementary School', 'https://pac.library.cps.edu/?config=12', 0, 'Top', 'true', 1, '2017-01-13 20:59:28', 'admin'),
-(56, 5, 'Contact', 'contact.php?loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-13 20:59:28', 'admin'),
-(60, 4, 'Databases', 'databases.php?loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-13 20:59:28', 'admin'),
+(43, 4, 'Virtual Library HS', 'https://pac.library.cps.edu/?config=11', 0, 'Top', 'true', 1, '2017-01-16 23:10:41', 'admin'),
+(54, 3, 'Virtual Library ES', 'https://pac.library.cps.edu/?config=12', 0, 'Top', 'true', 1, '2017-01-16 23:10:41', 'admin'),
+(60, 5, 'Databases', 'databases.php?loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-16 23:10:41', 'admin'),
 (61, 1, 'Search District Catalog', 'https://pac.library.cps.edu/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-09 19:17:27', 'admin'),
 (62, 2, 'Search District Kid&#039;s Catalog', 'https://pac.library.cps.edu/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-09 19:17:28', 'admin'),
-(90, 1, 'Contact Us', 'contact.php?loc_id=[loc_id]', 0, 'Footer', 'false', 1, '2017-01-11 17:58:33', 'admin'),
-(91, 3, 'Positions', 'page.php?page_id=34&loc_id=[loc_id]', 0, 'Footer', 'false', 1, '2017-01-11 17:58:37', 'admin'),
-(92, 2, 'Services', 'services.php?loc_id=[loc_id]', 0, 'Footer', 'false', 1, '2017-01-11 17:58:41', 'admin'),
-(93, 4, 'About', 'about.php?loc_id=[loc_id]', 0, 'Footer', 'false', 1, '2017-01-11 17:58:44', 'admin'),
-(94, 5, 'Team', 'team.php?loc_id=[loc_id]', 0, 'Footer', 'off', 1, '2017-01-11 17:58:47', 'admin'),
-(96, 1, 'SOAR Home', 'index.php?loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-13 20:59:28', 'admin'),
-(112, 4, 'My Account', 'https://pac.library.cps.edu/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-09 19:17:28', 'admin');
+(96, 1, 'SOAR Home', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-01-16 23:10:41', 'admin'),
+(112, 4, 'My Account', 'https://pac.library.cps.edu/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-09 19:17:28', 'admin'),
+(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-01-16 23:10:41', 'admin'),
+(115, 2, 'Library Home', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-01-16 23:10:41', 'admin'),
+(116, 11, 'Students', 'http://www.cps.edu/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(117, 6, 'Schools', 'http://www.cps.edu/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(118, 7, 'About', 'http://www.cps.edu/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(119, 8, 'Calendar', 'http://www.cps.edu/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(120, 9, 'Staff', 'http://www.cps.edu/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(121, 10, 'Topics', 'http://www.cps.edu/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(122, 12, 'Contact Us', 'http://www.cps.edu/About_CPS/Departments/Pages/Departments.aspx', 4, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(123, 13, 'Careers', 'http://www.cps.edu/careers', 4, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(124, 14, 'CPS Stats and Facts', 'http://www.cps.edu/stats', 4, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(125, 15, 'News and Press Releases', 'http://www.cps.edu/news', 4, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(126, 16, 'What&#039;s New on CPS.EDU?', 'http://www.cps.edu/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(127, 2, 'Virtual Library Elementary Schools', 'https://pac.library.cps.edu/?config=12', 5, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(128, 3, 'Virtual Library High Schools', 'https://pac.library.cps.edu/?config=11', 5, 'Footer', 'true', 1, '2017-01-17 15:19:02', 'admin'),
+(129, 4, 'Databases', 'databases.php?loc_id=1', 5, 'Footer', 'false', 1, '2017-01-17 15:19:39', 'admin');
 
 -- --------------------------------------------------------
 
@@ -2612,7 +2628,7 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
+CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `image` text NOT NULL,
@@ -2623,7 +2639,7 @@ CREATE TABLE `pages` (
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
@@ -2634,8 +2650,8 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `dat
 (34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
 (42, 'Explore', '', '<p>Online Resources Page</p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child''s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child''s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child''s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child''s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher''s expectations. At the beginning of the year, you may want to ask your child''s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
 (47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1),
 (48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-10 21:31:24', 'admin_script', 'right', 1);
 
@@ -2645,7 +2661,7 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `dat
 -- Table structure for table `services`
 --
 
-CREATE TABLE `services` (
+CREATE TABLE IF NOT EXISTS `services` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL,
   `image` text NOT NULL,
@@ -2656,7 +2672,7 @@ CREATE TABLE `services` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services`
@@ -2666,7 +2682,7 @@ INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `acti
 (2, 'car', '', 'PUBLIC SAFETY', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2016-12-28 16:52:02', '', 1),
 (3, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-11-15 20:32:50', '', 1),
 (4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2016-12-28 16:51:24', '', 1),
-(5, 'calendar', '', 'INSIDER THREAT DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 36, 'true', '2016-12-21 17:22:33', '', 1);
+(5, 'calendar', '', 'INSIDER DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 45, 'true', '2017-01-17 14:47:54', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -2674,10 +2690,10 @@ INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `acti
 -- Table structure for table `services_icons`
 --
 
-CREATE TABLE `services_icons` (
+CREATE TABLE IF NOT EXISTS `services_icons` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services_icons`
@@ -3285,7 +3301,7 @@ INSERT INTO `services_icons` (`id`, `icon`) VALUES
 -- Table structure for table `setup`
 --
 
-CREATE TABLE `setup` (
+CREATE TABLE IF NOT EXISTS `setup` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
@@ -3318,18 +3334,18 @@ CREATE TABLE `setup` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `googleanalytics`, `tinymce`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading`, `servicescontent`, `customerscontent`, `teamcontent`, `disqus`, `slider_use_defaults`, `databases_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public School Libraries', '', '', '', '1', 'cpslogo@2x.png', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', '', '', 'true', 'false', 'false', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 1),
-(2, 'Curie Metro High School', '', '', '', '1820', '', 'true', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 2),
+(1, 'Chicago Public School Libraries', '', '', '', '1', 'cpslogo@2x.png', 'false', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', '', '', 'true', 'false', 'false', 'true', 'true', 'true', 'true', '2017-01-17 15:19:02', 'admin_script', 1),
+(2, 'Curie Metro High School', '', '', '', '1820', '', 'true', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 22:48:47', 'admin', 2),
 (3, 'Northside Prep High School', '', '', '', '1740', '', 'true', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 3),
 (4, 'Hyde Park High School', '', '', '', '1390', '', 'true', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 4),
-(5, 'Crane Tech Prep', '', '', '', '1270', '', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 5),
+(5, 'Crane Tech Prep', '', '', '', '1270', '', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 22:55:21', 'admin', 5),
 (6, 'DuSable Campus', '', '', '', '1280', '', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 6),
 (7, 'Amundsen High School', '', '', '', '1210', '', 'true', 'false', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 7),
 (8, 'Professional Library', '', '', '', '390', '', 'true', 'true', 1, '', '', 1, 'Pages', 'Services', 'Slides', 'Meet the Team', 'Databases', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-16 21:11:07', 'admin_script', 8),
@@ -3801,7 +3817,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `headercode`, `co
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
+CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -3811,7 +3827,7 @@ CREATE TABLE `slider` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `slider`
@@ -3829,7 +3845,7 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `date
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE `socialmedia` (
+CREATE TABLE IF NOT EXISTS `socialmedia` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
@@ -3841,7 +3857,7 @@ CREATE TABLE `socialmedia` (
   `tumblr` text NOT NULL,
   `use_defaults` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `socialmedia`
@@ -4322,7 +4338,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
+CREATE TABLE IF NOT EXISTS `team` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -4332,7 +4348,7 @@ CREATE TABLE `team` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `team`
@@ -4350,7 +4366,7 @@ INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `dateti
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
@@ -4359,18 +4375,18 @@ CREATE TABLE `users` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-16 20:00:29', '127.0.0.1', 1),
+(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-17 13:53:21', '192.168.2.105', 1),
 (2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-22 14:51:19', '127.0.0.1', 2),
 (3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '2017-01-04 16:15:34', '192.168.2.46', 1),
-(4, 'eczaja', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'eczaja@tlcdelivers.com', 1, '2017-01-10 18:00:04', '127.0.0.1', 1),
-(5, 'kbageant', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kbageant@tlcdelivers.com', 1, '2017-01-16 14:05:54', '0.0.0.0', 1);
+(4, 'eczaja', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'eczaja@tlcdelivers.com', 1, '2017-01-17 15:42:48', '192.168.3.26', 1),
+(5, 'kbageant', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kbageant@tlcdelivers.com', 1, '2017-01-17 15:51:21', '192.168.2.15', 1);
 
 --
 -- Indexes for dumped tables
@@ -4486,87 +4502,87 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `category_customers`
 --
 ALTER TABLE `category_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `services_icons`
 --
 ALTER TABLE `services_icons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
 --
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=468;
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
