@@ -6,3 +6,4 @@ composer.json
 codeception.yml
 composer.lock
 /uploads/
+/node_modules/
