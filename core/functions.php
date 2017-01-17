@@ -378,12 +378,21 @@ function getNav($navSection, $dropdown, $pull){
                     $navCatLinksName = $rowNavCatLinks[2];
                     $navCatLinksUrl = $rowNavCatLinks[3];
                     $navCatLinksCatID = $rowNavCatLinks[4];
+                    $navCatLinksCatSection = $rowNavCatLinks[5];
+                    $navCatLinksWin = $rowNavCatLinks[6];
 
                     //Check if cat link contains shortcode
                     $navCatLinksUrl = getShortCode($navCatLinksUrl);
 
+                    //New Window
+                    if ($navCatLinksWin == 'true'){
+                        $navCatWin = "target='_blank'";
+                    } else {
+                        $navCatWin = "";
+                    }
+
                     echo "<li>";
-                    echo "<a href='" . $navCatLinksUrl . "' $navWin>" . $navCatLinksName . "</a>";
+                    echo "<a href='" . $navCatLinksUrl . "' $navCatWin>" . $navCatLinksName . "</a>";
                     echo "</li>";
                 }
                 echo "</ul>";
