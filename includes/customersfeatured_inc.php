@@ -4,7 +4,8 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-getCustomers();
+
+getCustomers('featured');
 
 if ($customerNumRows > 0) {
 
@@ -16,11 +17,11 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
-    /*	    if (!empty($customerBlurb)) {
-                echo "<div class='col-xs-12 col-lg-12'>";
-                echo "<p class='text-left'>".$customerBlurb."</p>";
-                echo "</div>";
-            }*/
+    if (!empty($customerBlurb)) {
+        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<p class='text-left'>".$customerBlurb."</p>";
+        echo "</div>";
+    }
 
     echo "<div class='row row_pad'>";
 

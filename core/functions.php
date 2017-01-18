@@ -491,9 +491,7 @@ function getSocialMediaIcons($shape, $section){
     }
 }
 
-function getCustomers(){
-    global $sqlCustomerHeading;
-    global $rowCustomerHeading;
+function getCustomers($custType){
     global $sqlCustomers;
     global $customerHeading;
     global $customerBlurb;
@@ -502,37 +500,65 @@ function getCustomers(){
     global $customerIcon;
     global $customerCatId;
     global $customerCatName;
-    global $customerDefaultLoc;
+    global $customerSection;
+    global $custDefaultLoc;
+    global $custSections;
     global $db_conn;
 
-    //get the default value from setup table
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    //loop through the array of custSections - config.php
+    $custSectionIndex1 = "";
+    $custSectionIndex2 = "";
+    $custSectionIndex3 = "";
+
+    $custArrlength = count($custSections); //from config.php
+
+    for ($x = 0; $x < $custArrlength; $x++) {
+        $custSectionIndex1 = $custSections[0];
+        $custSectionIndex2 = $custSections[1];
+        $custSectionIndex3 = $custSections[2];
+    }
+
+    if (!empty($_GET['section'])) {
+        $customerSection = $_GET['section'];
+    } else {
+        $customerSection = $custSections[0];
+    }
+
+    //get the default values from setup table where get loc_id
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
-    $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-    $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
-
-    //use default location data from setup
-    if ($rowCustomerSetup['databases_use_defaults'] == 'true' || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL) {
-        $sqlCustomerHeading = mysqli_query($db_conn, "SELECT customersheading, customerscontent FROM setup WHERE loc_id=1");
-        $rowCustomerHeading = mysqli_fetch_array($sqlCustomerHeading);
-        $customerDefaultLoc = 1; //overwrite loc_id with default
+    //toggle default location value if conditions are true
+    if ($customerSection == $custSectionIndex1 AND $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
+        $custDefaultLoc = 1;
+    } elseif ($customerSection == $custSectionIndex2 AND $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
+        $custDefaultLoc = 1;
+    } elseif ($customerSection == $custSectionIndex3 AND $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
+        $custDefaultLoc = 1;
     } else {
-        $customerDefaultLoc = $_GET['loc_id'];
+        $custDefaultLoc = $_GET['loc_id'];
     }
 
-    if (!empty($rowCustomerHeading['customersheading'])){
-        $customerHeading = $rowCustomerHeading['customersheading'];
-    }
+    //sets to use defaults if conditions are true where loc_id = $custDefaultLoc
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, customersheading_1, customersheading_2, customersheading_3, customerscontent_1, customerscontent_2, customerscontent_3 FROM setup WHERE loc_id=" . $custDefaultLoc . " ");
+    $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
-    if (!empty($rowCustomerHeading['customerscontent'])){
-        $customerBlurb = $rowCustomerHeading['customerscontent'];
+    //toggle default location value if conditions are true
+    if ($customerSection == $custSectionIndex1 AND $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
+        $customerHeading = $rowCustomerSetup['customersheading_1'];
+        $customerBlurb = $rowCustomerSetup['customerscontent_1'];
+    } elseif ($customerSection == $custSectionIndex2 AND $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
+        $customerHeading = $rowCustomerSetup['customersheading_2'];
+        $customerBlurb = $rowCustomerSetup['customerscontent_2'];
+    } elseif ($customerSection == $custSectionIndex3 AND $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
+        $customerHeading = $rowCustomerSetup['customersheading_3'];
+        $customerBlurb = $rowCustomerSetup['customerscontent_3'];
     }
 
     //Get Category
     //If cat_id=int then display a page of databases for only that category
     if (!empty($_GET['cat_id'])) {
-        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $customerDefaultLoc . ")");
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ")");
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
@@ -541,16 +567,16 @@ function getCustomers(){
         $customerCatWhere = "";
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND  " . $customerCatWhere . " loc_id=" . $customerDefaultLoc . " ORDER BY datetime DESC"); //While loop
+    if ($custType=='featured'){
+        $custOrderBy = 'datetime';
+    } else {
+        $custOrderBy = 'name';
+    }
+
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='".$customerSection."' AND  " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY " . $custOrderBy . " ASC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
-    //use default location
-    if ($rowCustomerSetup['databases_use_defaults'] == "true" || $rowCustomerSetup['databases_use_defaults'] == "" || $rowCustomerSetup['databases_use_defaults'] == NULL)  {
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerCatWhere . " loc_id=1 ORDER BY datetime DESC"); //While loop
-        $customerNumRows = mysqli_num_rows($sqlCustomers);
-    }
 }
-
 
 function getSlider($sliderType){
     //EXAMPLE: getSlider("slide")

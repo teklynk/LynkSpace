@@ -85,6 +85,34 @@ if ($_GET['section'] == "" && $_GET['loc_id']) {
 //check if using default location
 $sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
+
+//set Default toggle depending on which navigation you are on
+if ($_GET['section'] == $navSections[0]) {
+    $navSubSection = "1";
+    //use default view
+    if ($rowSetup['navigation_use_defaults_1'] == 'true') {
+        $selDefaults = "CHECKED";
+    } else {
+        $selDefaults = "";
+    }
+} elseif ($_GET['section'] == $navSections[1]){
+    $navSubSection = "2";
+    //use default view
+    if ($rowSetup['navigation_use_defaults_2'] == 'true') {
+        $selDefaults = "CHECKED";
+        $navSubSection = "2";
+    } else {
+        $selDefaults = "";
+    }
+} elseif ($_GET['section'] == $navSections[2]){
+    $navSubSection = "3";
+    //use default view
+    if ($rowSetup['navigation_use_defaults_3'] == 'true') {
+        $selDefaults = "CHECKED";
+    } else {
+        $selDefaults = "";
+    }
+}
 ?>
 <div class="row">
     <div class="col-lg-10">
@@ -204,34 +232,6 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
         if (!empty($_GET['addcat'])) {
             $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $_GET['addcat'] . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             echo $addMsg;
-        }
-
-        //set Default toggle depending on which navigation you are on
-        if ($_GET['section'] == $navSections[0]) {
-            $navSubSection = "1";
-            //use default view
-            if ($rowSetup['navigation_use_defaults_1'] == 'true') {
-                $selDefaults = "CHECKED";
-            } else {
-                $selDefaults = "";
-            }
-        } elseif ($_GET['section'] == $navSections[1]){
-            $navSubSection = "2";
-            //use default view
-            if ($rowSetup['navigation_use_defaults_2'] == 'true') {
-                $selDefaults = "CHECKED";
-                $navSubSection = "2";
-            } else {
-                $selDefaults = "";
-            }
-        } elseif ($_GET['section'] == $navSections[2]){
-            $navSubSection = "3";
-            //use default view
-            if ($rowSetup['navigation_use_defaults_3'] == 'true') {
-                $selDefaults = "CHECKED";
-            } else {
-                $selDefaults = "";
-            }
         }
 
         if ($_GET['loc_id'] != 1) {

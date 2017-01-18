@@ -89,7 +89,7 @@
     <noscript><p>Javascript is not enabled in your browser.</p></noscript>
 
     <?php
-    $sqlSetup = mysqli_query($db_conn, "SELECT tinymce, pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . " ");
     $rowSetup = mysqli_fetch_array($sqlSetup);
 
     if (!empty($_GET['loc_id'])) {
@@ -105,7 +105,7 @@
 
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
-    if (isset($_SESSION['user_id']) AND isset($_SESSION['user_name']) AND $rowSetup['tinymce'] == 1) {
+    if (isset($_SESSION['user_id']) AND isset($_SESSION['user_name'])) {
 
         //Initializing variables
         $fileListJson = "";

@@ -4,7 +4,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-//getCustomers();
+
 
 if ($customerNumRows > 0) {
 
@@ -32,26 +32,30 @@ if ($customerNumRows > 0) {
     $customersItemCount = 0;
 
     //Gets catname
-    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE cust_loc_id=" . $customerDefaultLoc . " ORDER BY name ASC");
+    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY name ASC");
     while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers)) {
 
         $customerCatId = $rowCatCustomers['id'];
         $customerCatName = $rowCatCustomers['name'];
 
         if ($customerCatId != 0) {
+            //prints the cat title/name
             $customersCatCount++;
-            echo "<div class='col-xs-12 col-lg-12 catnameid-".$customerCatId." catname-".strtolower($customerCatName)."'>";
-            echo "<a href='databases.php?loc_id=".$_GET['loc_id']."&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
+            echo "<div class='col-xs-12 col-lg-12 catnameid-".$customerCatId." '>";
+            echo "<a href='databases.php?loc_id=".$_GET['loc_id']."&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
             echo "</div>";
+            echo "<div style='clear:both;'></div>";
         }
 
         //Gets links for each cat
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND catid=".$customerCatId." AND loc_id=".$customerDefaultLoc." ORDER BY datetime DESC"); //While loop
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND catid=".$customerCatId." AND loc_id=".$custDefaultLoc." ORDER BY name ASC"); //While loop
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 
             if ($rowCustomers['featured'] == 'false' OR $rowCustomers['featured'] == "" OR $rowCustomers['featured'] == NULL) {
 
-                $customersItemCount++;
+                //$customersItemCount++;
+
+                //echo "<div>".count($rowCustomers['name'])."</div>";
 
                 echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item catid-" . $customerCatId . "'>";
 
@@ -97,10 +101,10 @@ if ($customerNumRows > 0) {
                 echo "</div>"; //database-item
 
                 //Start a new row of items after 3 and reset the counter
-                if ($customersItemCount == 3) {
-                    $customersItemCount = 0; //reset counter
-                    echo "<div style='clear:both;'></div>";
-                }
+                //if (count($rowCustomers['name']) == 3) {
+                 //   echo "<div style='clear:both; margin-bottom:12px; border-top:solid 1px #ccc;'>".$customersItemCount."</div>";
+                 //   $customersItemCount = 0; //reset counter
+                //}
             }
 
         }

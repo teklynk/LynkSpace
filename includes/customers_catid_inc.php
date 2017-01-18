@@ -20,12 +20,6 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
-    if (!empty($customerBlurb)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left'>" . $customerBlurb . "</p>";
-        echo "</div>";
-    }
-
     $customersItemCount = 0;
 
     echo "<div class='row row_pad'>";
@@ -79,10 +73,13 @@ if ($customerNumRows > 0) {
 
             echo "</div>"; //database-item
 
+
+            echo $customersItemCount;
+
             //Start a new row of items after 3 and reset the counter
             if ($customersItemCount == 3) {
                 $customersItemCount = 0; //reset counter
-                echo "<div style='clear:both;'></div>";
+                echo "<div style='clear:both; margin-bottom:12px;'></div>";
             }
         }
     }

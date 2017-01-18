@@ -16,7 +16,7 @@ $sqlLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WH
 $rowLocation = mysqli_fetch_array($sqlLocation);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, headercode, config, ls2pac, ls2kids, searchdefault, logo, disqus, googleanalytics, tinymce, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit
@@ -40,14 +40,14 @@ if (!empty($_POST)) {
         //update table on submit
         if ($rowSetup['loc_id'] == $_GET['loc_id']) {
             //Update Setup
-            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', headercode='" . trim($_POST['site_header']) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', disqus='" . safeCleanStr($_POST['site_disqus']) . "', googleanalytics='" . safeCleanStr($_POST['site_google']) . "', tinymce='1', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $setupUpdate);
             //Update Location
             $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $locationUpdate);
         } else {
             //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, author, description, keywords, headercode, config, logo, disqus, googleanalytics, tinymce, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_author) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($_POST['site_header']) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', '" . safeCleanStr($_POST['site_disqus']) . "', '" . safeCleanStr($_POST['site_google']) . "', '1', author_name='" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $setupInsert = "INSERT INTO setup (title, author, description, keywords, config, logo, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_author) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', '" . safeCleanStr($_POST['site_google']) . "', author_name='" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $setupInsert);
             //Insert Location
             $locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
@@ -238,14 +238,6 @@ if ($_GET['update'] == 'true') {
                     </div>
                 </div>
             </div>
-
-            <input type="hidden" name="site_header" value="">
-
-            <input type="hidden" name="site_disqus" value="">
-
-            <input type="hidden" name="site_google" value="">
-
-            <input type="hidden" name="site_tinymce" value="1">
 
             <hr/>
 

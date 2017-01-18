@@ -57,13 +57,13 @@ if ($_GET['preview'] > "") {
                             $_POST['page_status'] = 'false';
                         }
 
-                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', disqus='" . $_POST['page_disqus'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
+                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . safeCleanStr($_POST['page_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, author_name, datetime, image_align, disqus, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, author_name, datetime, image_align, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowPages = mysqli_fetch_array($sqlPages);
 
                     //Create new page
@@ -73,7 +73,7 @@ if ($_GET['preview'] > "") {
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, disqus, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -94,12 +94,6 @@ if ($_GET['preview'] > "") {
                         $selActive = "";
                     }
 
-                    //comments status
-                    if ($rowPages['disqus'] == 'true') {
-                        $selDisqus = "CHECKED";
-                    } else {
-                        $selDisqus = "";
-                    }
                 }
 
                 if ($rowPages['image'] == "") {
@@ -178,33 +172,8 @@ if ($_GET['preview'] > "") {
                     <hr/>
 
                     <?php
-                    $sqlSetup = mysqli_query($db_conn, "SELECT disqus, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
                     $rowSetup = mysqli_fetch_array($sqlSetup);
-
-                    // Hide Disqus option if disqus is not enabled on Setup page.
-                    if (empty($rowSetup['disqus'])) {
-
-                        echo "<input type='hidden' name='page_disqus' value='false'>";
-
-                    } else {
-                        ?>
-
-                        <div class="row" style="display:none;">
-                            <div class="col-lg-4">
-                                <div class="form-group" id="pagedisqus">
-                                    <label>Allow Comments (Disqus)</label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input class="checkbox page_disqus_checkbox" id="<?php echo $_GET['editpage'] ?>" name="page_disqus" type="checkbox" <?php if ($_GET['editpage']) {echo $selDisqus;} ?> data-toggle="toggle">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr/>
-                        <?php
-                    }
                     ?>
 
                     <div class="form-group">

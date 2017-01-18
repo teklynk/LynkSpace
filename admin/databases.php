@@ -98,16 +98,16 @@ if ($_GET['section'] == $custSections[0]) {
     <div class="col-lg-10">
         <?php
         if ($_GET['newcustomer'] == 'true') {
-            echo "<h1 class='page-header'>".$_GET['section']." (New)</h1>";
+            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New)</h1>";
         } else {
-            echo "<h1 class='page-header'>".$_GET['section']."</h1>";
+            echo "<h1 class='page-header'>Databases (".$_GET['section'].")</h1>";
         }
         ?>
     </div>
     <div class="col-lg-2">
         <div class="form-group">
             <label for="nav_menu">Database Sections</label>
-            <select class="form-control input-sm" name="nav_menu" id="nav_menu" autofocus="autofocus">
+            <select class="form-control" name="nav_menu" id="nav_menu" autofocus="autofocus">
                 <?php echo $custMenuStr; ?>
             </select>
         </div>
@@ -147,7 +147,7 @@ if ($_GET['section'] == $custSections[0]) {
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, datetime, loc_id FROM customers WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowCustomer = mysqli_fetch_array($sqlCustomer);
 
 
@@ -283,7 +283,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label>Link</label>
-                    <input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="url" placeholder="http://www.google.com">
+                    <input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="text" placeholder="http://www.google.com">
                 </div>
                 <div class="form-group">
                     <label for="exist_cat">Category</label>
@@ -291,7 +291,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
-                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='".$getCustSection."' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                         while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
 
                             if ($rowExistCustCat['id'] != 0) {
@@ -388,7 +388,7 @@ if ($_GET['section'] == $custSections[0]) {
 
             } elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm'] == 'yes') {
 
-                $custCatUpdate = "UPDATE category_customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
+                $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
                 mysqli_query($db_conn, $custCatUpdate);
 
                 //delete category after clicking Yes
@@ -421,7 +421,7 @@ if ($_GET['section'] == $custSections[0]) {
 
             // add category
             if ($_GET['addcatname'] > "") {
-                $custAddCat = "INSERT INTO category_customers (name, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+                $custAddCat = "INSERT INTO category_customers (name, section, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
                 mysqli_query($db_conn, $custAddCat);
 
                 echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
@@ -512,7 +512,7 @@ if ($_GET['section'] == $custSections[0]) {
                             echo "<option value='0'>None</option>";
                             //Cat list for adding a new category
                             //get and build category list, find selected
-                            $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                            $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                             while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
 
                                 if ($rowExistCustCat['id'] != 0) {
@@ -567,7 +567,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <tbody>
                         <?php
                         $custCount = "";
-                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, datetime, active, loc_id FROM customers WHERE section='$getCustSection' AND active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
                             $customerName = $rowCustomer['name'];
@@ -597,7 +597,7 @@ if ($_GET['section'] == $custSections[0]) {
                             echo "<select class='form-control input-sm' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
-                            $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, cust_loc_id FROM category_customers WHERE cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                            $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                             while ($rowCustCat = mysqli_fetch_array($sqlCustCat)) {
                                 if ($rowCustCat['id'] != 0) {
                                     $custCatId = $rowCustCat['id'];
@@ -621,7 +621,7 @@ if ($_GET['section'] == $custSections[0]) {
 						<input data-toggle='toggle' title='Database Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' " . $isActive . ">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($customerName) . "', 'databases.php?loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($customerName) . "', 'databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
 						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&movecustomer=$customerId&movename=" . safeCleanStr($customerName) . "'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=$customerId&deletename=" . safeCleanStr($customerName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
