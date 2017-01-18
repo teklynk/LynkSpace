@@ -10,12 +10,6 @@ $getNavSection = $_GET['section'];
 //update table on submit
 if (!empty($_POST)) {
 
-    if ($_POST['navigation_defaults'] == 'on') {
-        $_POST['navigation_defaults'] = 'true';
-    } else {
-        $_POST['navigation_defaults'] = 'false';
-    }
-
     if (!empty($_POST['nav_newname'])) {
 
         //Create new category if newcat is true
@@ -58,9 +52,6 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $navUpdate);
     }
 
-    $navUpdateSetup = "UPDATE setup SET navigation_use_defaults_1='" . safeCleanStr($_POST['navigation_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-    mysqli_query($db_conn, $navUpdateSetup);
-
     $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
@@ -87,7 +78,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
 //Redirect to section=top if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
-    //header("Location: navigation.php?section=Top&loc_id=" . $_GET['loc_id'] . "");
+    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "");
     echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
@@ -101,11 +92,10 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
             Navigation (<?php echo $_GET['section']; ?>)
         </h1>
     </div>
-
     <div class="col-lg-2">
         <div class="form-group">
             <label for="nav_menu">Navigation Sections</label>
-            <select class="form-control input-sm" name="nav_menu" id="nav_menu" autofocus="autofocus">
+            <select class="form-control" name="nav_menu" id="nav_menu" autofocus="autofocus">
                 <?php echo $navMenuStr; ?>
             </select>
         </div>
@@ -349,7 +339,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
                 <?php
                 $navCount = "";
 
-                $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort");
+                $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort");
                 while ($rowNav = mysqli_fetch_array($sqlNav)) {
                     $navId = $rowNav['id'];
                     $navName = $rowNav['name'];

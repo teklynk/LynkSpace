@@ -8,15 +8,16 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
     include_once('../../db/config.php');
 
     if (!empty($_GET) AND $_GET['update']) {
+        $databasesSubSection = $_GET['sub_section'];
         $databasesDefaultsID = $_GET['id'];
         $databasesDefaultsChecked = $_GET['checked'];
 
-        $databasesDefaultsUpdate = "UPDATE setup SET databases_use_defaults='" . $databasesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $databasesDefaultsID . " ";
+        $databasesDefaultsUpdate = "UPDATE setup SET databases_use_defaults_$databasesSubSection='" . $databasesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $databasesDefaultsID . " ";
         mysqli_query($db_conn, $databasesDefaultsUpdate);
 
         mysqli_close($db_conn);
 
-        die('Database Defaults ' . $databasesDefaultsID . ' set ' . $databasesDefaultsChecked);
+        die('Database Defaults ' . $databasesDefaultsID . ' - ' . $databasesSubSection .  ' set ' . $databasesDefaultsChecked);
     }
 
 } else {

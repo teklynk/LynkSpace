@@ -27,6 +27,9 @@ $target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
 
+//Database Sections
+$custSections = array("Databases", "Links", "Other");
+
 //Google Analytics UUID Key ex: UA-8675309-1
 $googleAnalytics = "";
 

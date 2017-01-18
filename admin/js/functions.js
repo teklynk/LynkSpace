@@ -436,14 +436,34 @@ $(document).ready(function () {
             $('.slider_defaults_checkbox').attr('disabled', false);
         }, 1000);
     });
-    $('.databases_defaults_checkbox').change(function () {
-        $.get('ajax/update_databasesdefaults.php?update=true', {
+    $('.databases_defaults_checkbox_1').change(function () {
+        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=1', {
             id: this.id,
             checked: this.checked
         });
-        $('.databases_defaults_checkbox').attr('disabled', true);
+        $('.databases_defaults_checkbox_1').attr('disabled', true);
         setTimeout(function() {
-            $('.databases_defaults_checkbox').attr('disabled', false);
+            $('.databases_defaults_checkbox_1').attr('disabled', false);
+        }, 1000);
+    });
+    $('.databases_defaults_checkbox_2').change(function () {
+        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=2', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.databases_defaults_checkbox_2').attr('disabled', true);
+        setTimeout(function() {
+            $('.databases_defaults_checkbox_2').attr('disabled', false);
+        }, 1000);
+    });
+    $('.databases_defaults_checkbox_3').change(function () {
+        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=3', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.databases_defaults_checkbox_3').attr('disabled', true);
+        setTimeout(function() {
+            $('.databases_defaults_checkbox_3').attr('disabled', false);
         }, 1000);
     });
     $('.navigation_defaults_checkbox_1').change(function () {

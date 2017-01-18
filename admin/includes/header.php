@@ -259,7 +259,7 @@
                     <a href="team.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-users" title="Team"></i> Team</a>
                 </li>
                 <li>
-                    <a href="databases.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>
+                    <a href="databases.php?section=<?php echo $custSections[0] . "&" . $setLocId; ?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>
                 </li>
                 <li>
                     <a href="generalinfo.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-info-circle" title="General Info"></i> General Info</a>
