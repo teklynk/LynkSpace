@@ -145,7 +145,7 @@ if ($_GET['update'] == 'true') {
 
             <div class="form-group">
                 <label>Site Title</label>
-                <input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Portfolio Site" required>
+                <input class="form-control input-sm count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" required>
             </div>
             <div class="form-group">
                 <label>Author</label>

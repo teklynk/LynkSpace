@@ -95,7 +95,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Street Address</label>
-                    <input class="form-control input-sm count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Fake Street">
+                    <input class="form-control input-sm count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
                 </div>
                 <div class="form-group">
                     <label>City</label>
@@ -106,7 +106,7 @@ if ($_GET['update'] == 'true') {
                     <input class="form-control input-sm count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
                 </div>
                 <div class="form-group">
-                    <label>Zipcode</label>
+                    <label>ZIP Code</label>
                     <input class="form-control input-sm count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
@@ -115,7 +115,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Hours</label>
-                    <textarea class="form-control input-sm count-text" name="contact_hours" rows="3" maxlength="255"><?php echo $rowContact['hours']; ?></textarea>
+                    <textarea class="form-control input-sm count-text" name="contact_hours" rows="3" maxlength="255" placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Email</label>

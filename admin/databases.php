@@ -141,7 +141,7 @@ if ($_GET['section'] == $custSections[0]) {
                         $_POST['customer_featured'] = 'false';
                     }
 
-                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -158,7 +158,7 @@ if ($_GET['section'] == $custSections[0]) {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, author_name, datetime, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . $_POST['customer_name'] . "', '" . sqlEscapeStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . $_POST['customer_name'] . "', '" . sqlEscapeStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -217,7 +217,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label><?php echo $customerLabel; ?></label>
-                    <input class="form-control input-sm count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" placeholder="Database Name">
+                    <input class="form-control input-sm count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name">
                 </div>
                 <hr/>
                 <div class="form-group">
@@ -348,7 +348,7 @@ if ($_GET['section'] == $custSections[0]) {
                 echo $deleteMsg;
             }
 
-            //move customer to top of list
+            //move customer to top of list - datatime stamp determines position
             if (($_GET['movecustomer'] AND $_GET['movename'])) {
                 $customerDateUpdate = "UPDATE customers SET author_name='" . $_SESSION['author_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$movecustomerId'";
                 mysqli_query($db_conn, $customerDateUpdate);
@@ -368,7 +368,7 @@ if ($_GET['section'] == $custSections[0]) {
                         $_POST['cust_cat'][$i] = 0; //None
                     }
 
-                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
+                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
                     mysqli_query($db_conn, $custCatUpdate);
 
                 }
@@ -499,7 +499,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <div class="form-group">
                         <label for="cust_newcat">Category</label>
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="If you would like to add a new Category, you must do that before creating the databases(s) to display under the Category.">
+                            <input type="text" class="form-control input-sm" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
                             <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>

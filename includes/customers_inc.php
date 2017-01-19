@@ -98,7 +98,7 @@ if ($customerNumRows > 0) {
             echo "</div>"; //database-item
 
             //Start a new row if item count is divisible by 3
-            if (($customersItemCount % 3) == 0) {
+            if (($customersItemCount % 3) === 0) {
                 echo "<div class='database-break'></div>";
             }
 
