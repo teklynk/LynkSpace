@@ -489,7 +489,7 @@ if ($_GET['section'] == $custSections[0]) {
             ?>
             <!-- Category Section -->
             <button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button" data-target="#addCatDiv">
-                <i class='fa fa-fw fa-plus'></i> Add a Category
+                <i class='fa fa-fw fa-plus'></i> Add / Edit a Category
             </button>
             <h2></h2>
 
