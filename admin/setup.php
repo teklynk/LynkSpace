@@ -242,6 +242,15 @@ if ($_GET['update'] == 'true') {
             <hr/>
 
             <div class="form-group">
+                <?php
+                if (file_exists('../sitemap.xml')) {
+                    echo "<label><a href='sitemapbuilder.php'>Update Sitemap.xml</a></label>";
+                    echo "<br/><small>Sitemap Updated: ".date('m-d-Y, H:i:s',filemtime('../sitemap.xml'))."</small>";
+                }
+                ?>
+            </div>
+
+            <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
             </div>
 
