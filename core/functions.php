@@ -568,12 +568,12 @@ function getCustomers($custType){
     }
 
     if ($custType=='featured'){
-        $custOrderBy = 'datetime';
+        $custOrderBy = 'datetime DESC';
     } else {
-        $custOrderBy = 'name';
+        $custOrderBy = 'name ASC';
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='".$customerSection."' AND  " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY " . $custOrderBy . " ASC"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='".$customerSection."' AND  " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY " . $custOrderBy . " "); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
 }

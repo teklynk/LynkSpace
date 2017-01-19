@@ -515,13 +515,22 @@ header.carousel {
     margin-top: 0;
     padding: 0 15px 0 15px;
 }
-
+.cat-title:not(:first-child) {
+    margin-top: 30px !important;
+}
+.cat-title {
+    margin-bottom: 4px !important;
+    border-bottom: solid 1px #eee !important;
+}
 .database-item, .service-item {
     float: left !important;
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
 
+div.database-break {
+    clear:both;
+}
 .team-item:nth-child(6), .service-item:nth-child(6) {
     clear: both;
 }

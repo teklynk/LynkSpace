@@ -11,14 +11,15 @@ if ($customerNumRows > 0) {
     echo "<div class='row' id='databases'>";
 
     if (!empty($customerCatName)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<div class='col-xs-12 col-lg-12 cat-title'>";
         echo "<h1 class='customers'>" . $customerCatName . "</h1>";
         echo "</div>";
     } elseif (!empty($customerHeading)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<div class='col-xs-12 col-lg-12 cat-title''>";
         echo "<h1 class='customers'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
+    echo "<div style='clear:both;'></div>";
 
     $customersItemCount = 0;
 
@@ -73,13 +74,9 @@ if ($customerNumRows > 0) {
 
             echo "</div>"; //database-item
 
-
-            echo $customersItemCount;
-
-            //Start a new row of items after 3 and reset the counter
-            if ($customersItemCount == 3) {
-                $customersItemCount = 0; //reset counter
-                echo "<div style='clear:both; margin-bottom:12px;'></div>";
+            //Start a new row if item count is divisible by 3
+            if (($customersItemCount % 3) == 0) {
+                echo "<div class='database-break'></div>";
             }
         }
     }
