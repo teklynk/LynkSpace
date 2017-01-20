@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2017 at 04:12 PM
+-- Generation Time: Jan 20, 2017 at 11:41 AM
 -- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -44,7 +44,7 @@ CREATE TABLE `aboutus` (
 
 INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (1, 'About Us', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'HSWorkingGroup.png', 'left', 'false', '2017-01-19 17:14:34', 'admin', 1),
-(2, 'About Us', '', '', '', 'true', '2017-01-19 17:14:34', 'admin', 2),
+(2, 'About Us', '', '', '', 'true', '2017-01-20 14:26:42', 'admin', 2),
 (3, 'About Us', '', '', '', 'true', '2017-01-19 17:14:34', 'admin', 3),
 (4, 'About Us', '', '', '', 'true', '2017-01-19 17:14:34', 'admin', 4),
 (5, 'About Us', '', '', '', 'true', '2017-01-19 17:14:34', 'admin', 5),
@@ -2745,9 +2745,6 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
-(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?loc_id=1&amp;page_id=34">View Open Positions</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(42, 'Explore', '', '<p>Online Resources Page</p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
@@ -2772,16 +2769,6 @@ CREATE TABLE `services` (
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(2, 'car', '', 'PUBLIC SAFETY', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 28, 'true', '2017-01-19 17:18:25', 'admin', 1),
-(3, 'id-badge', '', 'SITUATIONAL AWARENESS', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2017-01-19 17:18:25', 'admin', 1),
-(4, 'bicycle', '', 'INNOVATION CONSULTING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 33, 'true', '2017-01-19 17:18:25', 'admin', 1),
-(5, 'calendar', '', 'INSIDER DETECTION', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 45, 'true', '2017-01-19 17:18:25', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -4451,16 +4438,6 @@ CREATE TABLE `team` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `team`
---
-
-INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(3, 'space-desktop-backgrounds.jpg', 'Chief Financial Officer', 'More than 30 years of experience in large and small aerospace and defense companies, most recently as the Chief Financial Officer of Applied Signal Technology.', 'Cindy Dole', 'true', '2017-01-19 17:19:34', 'admin', 1),
-(4, 'z7whdbw.jpg', 'Chief Operations Officer', 'President and CEO since in 1995. Provides executive oversight and leadership of day-to-day company operations, integration of shared company resources.', 'John Doe', 'true', '2017-01-19 17:19:34', 'admin', 1),
-(5, 'space-desktop-backgrounds.jpg', 'CTO', 'Mr. Anderson has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Anderson', 'true', '2017-01-19 17:19:34', 'admin', 1),
-(7, 'Ubuntu-Mate-Cold-no-logo.png', 'President', 'Mr. Smith has more than 20 years of experience in information technology strategy, program management, strategic planning and process improvement.', 'Mr. Smith', 'true', '2017-01-19 17:19:34', 'admin', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -4483,7 +4460,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-19 20:56:48', '127.0.0.1', 1),
+(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-20 14:41:05', '127.0.0.1', 1),
 (2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-22 14:51:19', '127.0.0.1', 2),
 (3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '2017-01-04 16:15:34', '192.168.2.46', 1),
 (4, 'eczaja', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'eczaja@tlcdelivers.com', 1, '2017-01-17 15:42:48', '192.168.3.26', 1),
