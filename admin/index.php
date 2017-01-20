@@ -180,7 +180,7 @@ if (isset($_SESSION['loggedIn'])) {
                             <?php
                         } else {
                             //create a random password and set it as a session variable
-                            session_start();
+                            //session_start();
                             $_SESSION['temp_password'] = generateRandomString();
                             //Creates a unique refering value/token - exposed in post
                             $_SESSION['unique_referer'] = generateRandomString();
