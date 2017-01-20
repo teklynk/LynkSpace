@@ -216,9 +216,7 @@ if ($_GET['preview']>"") {
 			<label>Description</label>
 			<textarea class="form-control input-sm count-text" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
-		<div class="form-group">
-			<span><small><?php if($_GET['editservice']){echo "Updated: ".date('m-d-Y, H:i:s',strtotime($rowServices['datetime'])) . " By: " . $rowServices['author_name'];} ?></small></span>
-		</div>
+
 		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
