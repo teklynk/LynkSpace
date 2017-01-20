@@ -2,8 +2,6 @@
 <?php
 define('inc_access', TRUE);
 
-session_start();
-
 include_once('includes/header.php');
 
 //Creates a unique refering value/token - exposed in post

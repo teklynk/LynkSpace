@@ -3,6 +3,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.php');
 
+$_SESSION['file_referer'] = 'index.php';
+
 //clear all session variables
 unset($_SESSION['user_id']);
 unset($_SESSION['user_name']);
@@ -16,8 +18,6 @@ unset($_SESSION['session_hash']);
 unset($_SESSION['loc_id']);
 unset($_SESSION['loc_name']);
 unset($_SESSION['loc_list']);
-
-$_SESSION['file_referer'] = 'index.php';
 
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {

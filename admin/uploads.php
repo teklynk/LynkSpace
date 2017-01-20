@@ -1,9 +1,9 @@
 <?php
 define('inc_access', TRUE);
 
-$_SESSION['file_referer'] = 'uploads.php';
-
 include_once('includes/header.php');
+
+$_SESSION['file_referer'] = 'uploads.php';
 
 //Create location upload folder if it does not exist.
 if (is_numeric($_GET['loc_id'])) {
@@ -132,7 +132,7 @@ if ($_GET["delete"] AND !$_GET["confirm"]) {
     </div>
 
 <?php
-//Check if user_level is Admin user
+//Check if user_level is Admin user and default location
 if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
     ?>
 
@@ -143,6 +143,8 @@ if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
                 <button data-toggle="tooltip" class="copy_files_to_locs btn btn-primary" id="<?php echo $_GET['loc_id'] ?>" name="copy_files_to_locs" data-original-title="Use Carefully!" data-placement="right">
                     <i class='fa fa-fw fa-copy'></i> Copy Files To ALL Locations
                 </button>
+                <br/>
+                <small class="copy_files_to_locs_msg status_msg"></small>
             </div>
         </div>
     </div>

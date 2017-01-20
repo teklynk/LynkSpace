@@ -1,9 +1,9 @@
 <?php
 define('inc_access', TRUE);
 
-$_SESSION['file_referer'] = 'setup.php';
-
 include_once('includes/header.php');
+
+$_SESSION['file_referer'] = 'setup.php';
 
 //Get max location ID number - for creating a new location
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
@@ -216,40 +216,56 @@ if ($_GET['update'] == 'true') {
                         <label>PAC Search Options</label>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2PAC
+                                <input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Is Default
+                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Use as Default
                             </label>
                         </div>
                         <h1></h1>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2Kids
+                                <input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Is Default
+                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Use as Default
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <hr/>
-
-            <div class="form-group">
-                <?php
-                if (file_exists('../sitemap.xml')) {
-                    echo "<label><a href='sitemapbuilder.php'>Update Sitemap.xml</a></label>";
-                    echo "<br/><small>Sitemap Updated: ".date('m-d-Y, H:i:s',filemtime('../sitemap.xml'))."</small>";
-                }
+            <?php
+            //Check if user_level is Admin user and default location
+            if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
                 ?>
-            </div>
-
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Admin Settings</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="sitemap_builder">
+                            <button data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder" >
+                                <i class='fa fa-fw fa-refresh'></i> Update Sitemap.xml
+                            </button>
+                            <br/>
+                            <small class="sitemap_builder_msg status_msg"></small>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+            <hr/>
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
             </div>

@@ -1,9 +1,9 @@
 <?php
 define('inc_access', TRUE);
 
-$_SESSION['file_referer'] = 'install.php';
-
 include_once('includes/header.php');
+
+$_SESSION['file_referer'] = 'install.php';
 
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";

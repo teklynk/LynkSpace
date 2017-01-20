@@ -1,9 +1,9 @@
 <?php
 define('inc_access', TRUE);
 
-$_SESSION['file_referer'] = 'page.php';
-
 include_once('includes/header.php');
+
+$_SESSION['file_referer'] = 'page.php';
 
 //Page preview
 if ($_GET['preview'] > "") {

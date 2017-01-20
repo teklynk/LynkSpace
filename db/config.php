@@ -47,15 +47,8 @@ $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
 mysqli_select_db($db_conn, $db_name);
 
 if (mysqli_connect_errno($db_conn)) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error($db_conn);
+    die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
 }
 
 //db connection is closed in includes/footer.php
-
-//Display Errors, Add debug=true to the querystring
-if (isset($_GET["debug"])) {
-    ini_set('display_errors', TRUE);
-} else {
-    ini_set('display_errors', FALSE);
-}
 ?>

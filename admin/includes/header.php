@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +9,6 @@
     if (!defined('inc_access')) {
         die('Direct access not permitted');
     }
-
-    session_start();
 
     //overwrite session script name on reload
     //Get the page/file name and set it as a variable. Can be used for Ajax calls or page headers.

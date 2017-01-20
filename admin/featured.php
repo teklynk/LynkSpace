@@ -1,9 +1,9 @@
 <?php
 define('inc_access', TRUE);
 
-$_SESSION['file_referer'] = 'featured.php';
-
 include_once('includes/header.php');
+
+$_SESSION['file_referer'] = 'featured.php';
 
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);

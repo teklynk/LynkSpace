@@ -6,4 +6,4 @@ Disallow: /includes/
 Disallow: /mail/
 Disallow: /core/
 Disallow: /js/
-Sitemap: http://cpswebapp.local.com/sitemap.xml
+Sitemap: http://cpswebapp.local.com//sitemap.xml
