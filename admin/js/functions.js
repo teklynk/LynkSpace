@@ -536,7 +536,7 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $('.copy_files_to_locs').attr('disabled', false);
                     $('.copy_files_to_locs_msg').html('Successfully Copied Files');
-                }, 4000);
+                }, 3000);
             }
         });
     });
@@ -550,7 +550,7 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $('.sitemap_builder').attr('disabled', false);
                     $('.sitemap_builder_msg').html('Successfully Updated <a href="../sitemap.xml" target="_blank">Sitemap.xml</a>');
-                }, 4000);
+                }, 3000);
             }
         });
     });

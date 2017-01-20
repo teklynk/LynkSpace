@@ -217,6 +217,9 @@ ul.alert-dropdown {
 }
 
 /* Custom Styles */
+.modal {
+    z-index: 9999 !important;
+}
 
 .version {
     display: none;
