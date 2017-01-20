@@ -244,7 +244,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
             $_POST['slider_defaults'] = 'false';
         }
 
-        $setupUpdate = "UPDATE setup SET sliderheading='" . safeCleanStr($_POST['main_heading']) . "', slider_use_defaults='" . safeCleanStr($_POST['slider_defaults']) . "'WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $setupUpdate = "UPDATE setup SET sliderheading='" . safeCleanStr($_POST['main_heading']) . "', slider_use_defaults='" . safeCleanStr($_POST['slider_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $setupUpdate);
 
         $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

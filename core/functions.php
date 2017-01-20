@@ -491,7 +491,7 @@ function getSocialMediaIcons($shape, $section){
     }
 }
 
-function getCustomers(){
+function getCustomers($custType){
     global $sqlCustomers;
     global $customerHeading;
     global $customerBlurb;
@@ -567,7 +567,13 @@ function getCustomers(){
         $customerCatWhere = "";
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='".$customerSection."' AND  " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY datetime DESC "); //While loop
+    if ($custType == "featured") {
+        $customerSectionWhere = "";
+    } else {
+        $customerSectionWhere = "section='" . $customerSection . "' AND ";
+    }
+
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerSectionWhere . " " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY datetime DESC "); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
 }

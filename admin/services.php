@@ -264,7 +264,7 @@ if ($_GET['preview']>"") {
 				$_POST['services_defaults'] = 'false';
 			}
 
-			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".sqlEscapeStr($_POST['main_content'])."', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$_GET['loc_id']." ";
+			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".sqlEscapeStr($_POST['main_content'])."', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
 
 			$serviceMsg="<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

@@ -209,7 +209,7 @@ if ($_GET['preview'] > "") {
 
             //update heading on submit
             if (($_POST['save_main'])) {
-                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
                 $teamMsg = "<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
