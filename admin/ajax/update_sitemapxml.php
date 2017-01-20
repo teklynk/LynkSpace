@@ -117,7 +117,7 @@ if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION[
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /js/\n";
         fwrite($robotsfile, $writeline);
-        $writeline = "Sitemap: " . str_replace('admin/ajax/update_sitemapxml.php', '', "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "/sitemap.xml");
+        $writeline = "Sitemap: " . str_replace('admin/ajax/update_sitemapxml.php', '', "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "sitemap.xml");
         fwrite($robotsfile, $writeline);
 
         fclose($robotsfile);

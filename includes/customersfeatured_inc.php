@@ -7,6 +7,8 @@ if (!defined('inc_access')) {
 
 getCustomers('featured');
 
+$customersItemCount = 0;
+
 if ($customerNumRows > 0) {
 
     echo "<div class='row' id='databases'>";
@@ -28,6 +30,8 @@ if ($customerNumRows > 0) {
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
         if ($rowCustomers['featured'] == 'true') {
             echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
+
+            $customersItemCount++;
 
             if (!empty($rowCustomers['link'])) {
                 //Check if the link contains any shortCode
@@ -72,6 +76,11 @@ if ($customerNumRows > 0) {
             }
 
             echo "</div>"; //col-
+        }
+
+        //Start a new row if item count is divisible by 3
+        if (($customersItemCount % 3) === 0) {
+            echo "<div class='database-break'></div>";
         }
     }
 

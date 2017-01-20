@@ -150,7 +150,6 @@ if ($_GET['section'] == $custSections[0]) {
                 $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowCustomer = mysqli_fetch_array($sqlCustomer);
 
-
                 //Create new customer
             } elseif ($_GET['newcustomer']) {
 
@@ -359,7 +358,7 @@ if ($_GET['section'] == $custSections[0]) {
             //update heading on submit
             if (($_POST['save_main'])) {
 
-                $setupUpdate = "UPDATE setup SET customersheading_$custSubSection='" . safeCleanStr($_POST['customer_heading_'.$custSubSection]) . "', customerscontent_$custSubSection='" . sqlEscapeStr($_POST['main_content_'.$custSubSection]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                $setupUpdate = "UPDATE setup SET customersheading_$custSubSection='" . safeCleanStr($_POST['customer_heading_'.$custSubSection]) . "', customerscontent_$custSubSection='" . sqlEscapeStr($_POST['main_content_'.$custSubSection]) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
                 for ($i = 0; $i < $_POST['cust_count']; $i++) {

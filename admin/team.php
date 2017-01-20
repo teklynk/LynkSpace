@@ -65,7 +65,7 @@ if ($_GET['preview'] > "") {
                         $_POST['team_status'] = 'false';
                     }
 
-                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -81,7 +81,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, active, author_name, datetime, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
                     echo "<script>window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -212,7 +212,7 @@ if ($_GET['preview'] > "") {
 
             //update heading on submit
             if (($_POST['save_main'])) {
-                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
                 $teamMsg = "<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
