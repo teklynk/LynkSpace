@@ -291,21 +291,65 @@ $(document).ready(function () {
             id: this.id,
             checked: this.checked
         });
+
         $('#nav_Table .nav_win_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('#nav_Table .nav_win_checkbox').attr('disabled', false);
         }, 1000);
     });
+
+    //Disable radio buttons if one checkbox is active
+    if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {
+        $('.ls2pac_default').attr('disabled', false);
+        $('.ls2kids_default').attr('disabled', false);
+    } else {
+        $('.ls2pac_default').attr('disabled', true);
+        $('.ls2kids_default').attr('disabled', true);
+    }
+    //Ajax calls for PAC setting checkboxes and radios
     $('.searchopt_checkbox').change(function () {
         $.get('ajax/update_searchoptions.php?update=true', {
             id: this.id,
             checked: this.checked
         });
+
         $('.searchopt_checkbox').attr('disabled', true);
+
         setTimeout(function() {
             $('.searchopt_checkbox').attr('disabled', false);
         }, 1000);
+
+        $('.searchopt_radio').attr('disabled', true);
+
+        //Swap Default radios if only one option is checked
+        if ($('.ls2pac_active').prop('checked') == true && $('.ls2kids_active').prop('checked') == false) {
+            $('.ls2pac_default').attr('disabled', true);
+            $('.ls2kids_default').attr('disabled', true);
+            $('.ls2pac_default').prop('checked', true);
+            $('.ls2kids_default').prop('checked', false);
+            $.get('ajax/update_searchdefault.php?update=true', {
+                value: 1,
+                checked: this.checked
+            });
+        }else if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == false) {
+            $('.ls2pac_default').attr('disabled', true);
+            $('.ls2kids_default').attr('disabled', true);
+            $('.ls2pac_default').prop('checked', false);
+            $('.ls2kids_default').prop('checked', true);
+            $.get('ajax/update_searchdefault.php?update=true', {
+                value: 2,
+                checked: this.checked
+            });
+        }else if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {
+            $('.ls2pac_default').attr('disabled', false);
+            $('.ls2kids_default').attr('disabled', false);
+            $.get('ajax/update_searchdefault.php?update=true', {
+                value: 0,
+                checked: this.checked
+            });
+        }
     });
+
     $('.searchopt_radio').change(function () {
         $.get('ajax/update_searchdefault.php?update=true', {
             value: this.value,
@@ -554,7 +598,6 @@ $(document).ready(function () {
             }
         });
     });
-
     //Not a Robot
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {

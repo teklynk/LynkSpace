@@ -113,7 +113,7 @@ if ($_GET['update'] == 'true') {
         }
         ?>
 
-        <form name="setupForm" method="post" action="">
+        <form name="setupForm" id="setupForm" method="post" action="">
 
             <?php
             if ($_GET['loc_id'] != 1) {
@@ -216,23 +216,23 @@ if ($_GET['update'] == 'true') {
                         <label>PAC Search Options</label>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
+                                <input class="searchopt_checkbox ls2pac_active" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Use as Default
+                                <input class="searchopt_radio ls2pac_default" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Use as Default
                             </label>
                         </div>
                         <h1></h1>
                         <div class="checkbox">
                             <label>
-                                <input class="searchopt_checkbox" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
+                                <input class="searchopt_checkbox ls2kids_active" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input class="searchopt_radio" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Use as Default
+                                <input class="searchopt_radio ls2kids_default" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Use as Default
                             </label>
                         </div>
                     </div>
