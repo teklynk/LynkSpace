@@ -26,6 +26,21 @@
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
+		<loc>http://cpswebapp.local.com/page.php?page_id=42&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 12:18:11</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/page.php?page_id=34&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 12:18:11</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/page.php?page_id=28&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 12:18:11</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=17&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
