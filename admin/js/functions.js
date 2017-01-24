@@ -317,7 +317,7 @@ $(document).ready(function () {
 
         setTimeout(function() {
             $('.searchopt_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
 
         $('.searchopt_radio').attr('disabled', true);
 
@@ -343,6 +343,9 @@ $(document).ready(function () {
         }else if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {
             $('.ls2pac_default').attr('disabled', false);
             $('.ls2kids_default').attr('disabled', false);
+        }else if ($('.ls2kids_active').prop('checked') == false && $('.ls2pac_active').prop('checked') == false) {
+            $('.ls2pac_default').prop('checked', false);
+            $('.ls2kids_default').prop('checked', false);
             $.get('ajax/update_searchdefault.php?update=true', {
                 value: 0,
                 checked: this.checked
@@ -358,7 +361,7 @@ $(document).ready(function () {
         $('.searchopt_radio').attr('disabled', true);
         setTimeout(function() {
             $('.searchopt_radio').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.page_status_checkbox').change(function () {
         $.get('ajax/update_pageactive.php?update=true', {
