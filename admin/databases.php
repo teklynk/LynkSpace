@@ -57,7 +57,7 @@ for ($x = 0; $x < $custArrlength; $x++) {
     $custSectionFirstItem = $custSections[0];
 }
 
-//Redirect to section=databases if section is not in querystring
+//Redirect to section=1 if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
     header("Location: databases.php?section=" . $custSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "");
     echo "<script>window.location.href='databases.php?section=" . $custSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -371,6 +371,9 @@ if ($_GET['section'] == $custSections[0]) {
 
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
+
+            $sqlSetup = mysqli_query($db_conn, "SELECT customersheading_$custSubSection, customerscontent_$custSubSection, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+            $rowSetup  = mysqli_fetch_array($sqlSetup);
 
             //delete category
             $delCatId = $_GET['deletecat'];
