@@ -51,7 +51,7 @@ if ($customerNumRows > 0) {
             }
 
             if (!empty($rowCustomers['image'])) {
-                echo "<img class='img-responsive img-square' style='padding:8px;' src='uploads/" . $_GET['loc_id'] . "/" . $rowCustomers['image'] . "' alt='" . $rowCustomers['name'] . "' title='" . $rowServices['name'] . "'>";
+                echo "<img class='img-responsive img-circle' style='padding:8px;' src='uploads/" . $_GET['loc_id'] . "/" . $rowCustomers['image'] . "' alt='" . $rowCustomers['name'] . "' title='" . $rowServices['name'] . "'>";
             }
 
             echo "</span>";
