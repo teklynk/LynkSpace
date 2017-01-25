@@ -89,9 +89,6 @@ session_start();
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
 
-    <!-- Template js file-->
-    <script type="text/javascript" language="javascript" src="js/cps-scripts.min.js"></script>
-
     <!-- TLC search variables -->
     <script type="text/javascript" language="javascript">
         var TLCDomain = "<?php echo $setupPACURL ?>";

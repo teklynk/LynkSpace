@@ -20,6 +20,24 @@ $(document).ready(function () {
         }
     });
 
+    //Scroll to top button
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+    //Click event to scroll to top
+    $('.scrollToTop').click(function () {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 500);
+
+        return false;
+    });
+
 });
 
 //Page Load/Performance Checker
