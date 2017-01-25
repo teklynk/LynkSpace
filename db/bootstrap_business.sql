@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2017 at 04:36 PM
--- Server version: 5.5.53-MariaDB-1ubuntu0.14.04.1
+-- Generation Time: Jan 25, 2017 at 10:16 AM
+-- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -1099,14 +1099,14 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', '', 1),
-(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', '', 1),
-(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', '', 1),
-(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', '', 1),
-(8, '', 'laptop', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', '', 1),
-(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', '2017-01-19 18:33:54', '', 1),
-(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', '2017-01-19 18:32:51', '', 1),
-(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', '2017-01-19 18:32:46', '', 1),
+(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', 'admin', 1),
+(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 'admin', 1),
+(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', 'admin', 1),
+(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', 'admin', 1),
+(8, '', 'laptop', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', 'admin', 1),
+(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', '2017-01-19 18:33:54', 'admin', 1),
+(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', '2017-01-19 18:32:51', 'admin', 1),
+(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', '2017-01-19 18:32:46', 'admin', 1),
 (17, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
@@ -1115,8 +1115,8 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (23, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', '2017-01-20 20:12:46', 'admin', 1),
-(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', '2017-01-20 20:12:56', '', 1),
-(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', '2017-01-20 20:12:41', '', 1),
+(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', '2017-01-20 20:12:56', 'admin', 1),
+(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', '2017-01-20 20:12:41', 'admin', 1),
 (32, '', 'link', 'San Francisco Symphony', 'http://www.sfskids.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (33, '', 'link', 'Chicago Public Library A-Z Resources for Kids!', 'http://www.chipublib.org/kids-subject/kids-dbs-a-to-z/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (34, '', 'link', 'Daily Infographic', 'http://dailyinfographic.com/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
@@ -1718,7 +1718,7 @@ CREATE TABLE `generalinfo` (
 --
 
 INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'true', '2017-01-19 17:16:42', 'admin', 1),
+(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'false', '2017-01-25 15:10:51', 'admin', 1),
 (2, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 2),
 (3, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 3),
 (4, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 4),
@@ -2204,8 +2204,8 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
-(1, 'CPS', '2017-01-20 16:45:38', 'true'),
-(2, 'Curie Metro High School', '2017-01-19 17:17:23', 'true'),
+(1, 'CPS', '2017-01-25 15:12:27', 'true'),
+(2, 'Curie Metro High School', '2017-01-24 18:34:28', 'true'),
 (3, 'Northside Prep High School', '2017-01-19 17:17:23', 'true'),
 (4, 'Hyde Park High School', '2017-01-19 17:17:23', 'true'),
 (5, 'Crane Tech Prep', '2017-01-19 17:17:23', 'true'),
@@ -2703,23 +2703,25 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 (62, 2, 'Search District Kid&#039;s Catalog', 'https://pac.library.cps.edu/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-19 17:20:07', 'admin'),
 (96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-01-19 17:20:07', 'admin'),
 (112, 4, 'My Account', 'https://pac.library.cps.edu/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
+(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
 (114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-01-19 17:20:07', 'admin'),
 (115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-01-19 17:20:07', 'admin'),
-(116, 11, 'Students', 'http://www.cps.edu/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(117, 6, 'Schools', 'http://www.cps.edu/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(118, 7, 'About', 'http://www.cps.edu/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(119, 8, 'Calendar', 'http://www.cps.edu/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(120, 9, 'Staff', 'http://www.cps.edu/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(121, 10, 'Topics', 'http://www.cps.edu/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(122, 12, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(123, 13, 'Careers', 'http://www.cps.edu/careers', 4, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(124, 14, 'CPS Stats and Facts', 'http://www.cps.edu/stats', 4, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(125, 15, 'News and Press Releases', 'http://www.cps.edu/news', 4, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(126, 16, 'What&#039;s New on CPS.EDU?', 'http://www.cps.edu/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(127, 2, 'Virtual Library Elementary Schools', 'https://pac.library.cps.edu/?config=12', 5, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(128, 3, 'Virtual Library High Schools', 'https://pac.library.cps.edu/?config=11', 5, 'Footer', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=1', 5, 'Footer', 'false', 1, '2017-01-19 17:20:07', 'admin');
+(116, 12, 'Students', 'http://www.cps.edu/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(117, 7, 'Schools', 'http://www.cps.edu/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(118, 8, 'About', 'http://www.cps.edu/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(119, 9, 'Calendar', 'http://www.cps.edu/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(120, 10, 'Staff', 'http://www.cps.edu/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(121, 11, 'Topics', 'http://www.cps.edu/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(123, 14, 'Careers', 'http://www.cps.edu/careers', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(124, 15, 'CPS Stats and Facts', 'http://www.cps.edu/stats', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(125, 16, 'News and Press Releases', 'http://www.cps.edu/news', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(126, 17, 'What&#039;s New on CPS.EDU?', 'http://www.cps.edu/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(127, 2, 'Virtual Library Elementary Schools', 'https://pac.library.cps.edu/?config=12', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(128, 3, 'Virtual Library High Schools', 'https://pac.library.cps.edu/?config=11', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
+(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=1', 5, 'Footer', 'false', 1, '2017-01-24 14:54:02', 'admin'),
+(130, 6, 'Recommended Websites', 'databases.php?section=2&loc_id=1', 5, 'Footer', 'off', 1, '2017-01-24 14:54:02', 'admin'),
+(131, 5, 'Other Resources', 'databases.php?loc_id=1&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-01-24 14:54:02', 'admin');
 
 -- --------------------------------------------------------
 
@@ -2772,13 +2774,6 @@ CREATE TABLE `services` (
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(6, 'align-justify', '', 'test', '', 44, 'true', '2017-01-20 20:23:41', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -3439,8 +3434,8 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public School Libraries', '', '', '1', 'cpslogo@2x.png', 'false', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-20 20:21:34', 'admin', 1),
-(2, 'Curie Metro High School', '', '', '1820', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 17:18:58', 'admin', 2),
+(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-25 15:12:27', 'admin', 1),
+(2, 'Curie Metro High School', '', '', '1820', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-24 18:34:28', 'admin', 2),
 (3, 'Northside Prep High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 3),
 (4, 'Hyde Park High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 4),
 (5, 'Crane Tech Prep', '', '', '1270', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 5),
@@ -4470,7 +4465,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-20 19:49:08', '127.0.0.1', 1),
+(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-25 15:09:58', '127.0.0.1', 1),
 (2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-22 14:51:19', '127.0.0.1', 2),
 (3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '2017-01-04 16:15:34', '192.168.2.46', 1),
 (4, 'eczaja', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'eczaja@tlcdelivers.com', 1, '2017-01-20 18:55:14', '192.168.3.26', 1),
@@ -4630,7 +4625,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -4665,7 +4660,7 @@ ALTER TABLE `socialmedia`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
