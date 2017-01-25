@@ -47,7 +47,7 @@ if ($_GET['preview'] > "") {
     <div class="col-lg-12">
         <?php
 
-        if ($_GET['newteam'] OR $_GET['editteam']) {
+        if ($_GET['newteam'] || $_GET['editteam']) {
 
             $teamMsg = "";
 
@@ -185,12 +185,12 @@ if ($_GET['preview'] > "") {
             $moveteamTitle = $_GET['movetitle'];
 
             //delete team
-            if ($_GET['deleteteam'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
+            if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
                 $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delteamTitle . "? <a href='?deleteteam=" . $delteamId . "&deletetitle=" . safeCleanStr($delteamTitle) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
-            } elseif ($_GET['deleteteam'] AND $_GET['deletetitle'] AND $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
                 $teamDelete = "DELETE FROM team WHERE id='$delteamId'";
                 mysqli_query($db_conn, $teamDelete);
@@ -200,7 +200,7 @@ if ($_GET['preview'] > "") {
             }
 
             //move team to top of list
-            if (($_GET['moveteam'] AND $_GET['movetitle'])) {
+            if (($_GET['moveteam'] && $_GET['movetitle'])) {
                 $teamDateUpdate = "UPDATE team SET author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveteamId'";
                 mysqli_query($db_conn, $teamDateUpdate);
 

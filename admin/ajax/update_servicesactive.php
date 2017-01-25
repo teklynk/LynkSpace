@@ -3,11 +3,11 @@
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION['user_name']) AND $_SESSION['file_referer'] == 'services.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'services.php') {
 
     include_once('../../db/config.php');
 
-    if (!empty($_GET) AND $_GET['update']) {
+    if (!empty($_GET) && $_GET['update']) {
         $servicesActiveID = $_GET['id'];
         $servicesActiveChecked = $_GET['checked'];
 

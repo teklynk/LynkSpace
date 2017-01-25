@@ -51,7 +51,7 @@ if ($_GET['preview']>"") {
 	<div class="col-lg-12">
 <?php
 
-	if ($_GET['newservice'] OR $_GET['editservice']) {
+	if ($_GET['newservice'] || $_GET['editservice']) {
 		$serviceMsg="";
 
 		//Update existing service
@@ -233,12 +233,12 @@ if ($_GET['preview']>"") {
 		$moveserviceTitle = $_GET['movetitle'];
 
 		//delete service
-		if ($_GET['deleteservice'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
+		if ($_GET['deleteservice'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
 
-		} elseif ($_GET['deleteservice'] AND $_GET['deletetitle'] AND $_GET['confirm']=='yes') {
+		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
 			mysqli_query($db_conn, $servicesDelete);
@@ -248,7 +248,7 @@ if ($_GET['preview']>"") {
 		}
 
 		//move services to top of list
-		if (($_GET['moveservice'] AND $_GET['movetitle'])) {
+		if (($_GET['moveservice'] && $_GET['movetitle'])) {
 			$servicesDateUpdate = "UPDATE services SET author_name='".$_SESSION['user_name']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
 			mysqli_query($db_conn, $servicesDateUpdate);
 

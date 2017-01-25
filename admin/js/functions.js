@@ -26,12 +26,11 @@ $(document).ready(function () {
     });
 
     //Boostrap alert fadeout and close function
-    //$('.alert-success').fadeOut(5000);
     setTimeout(function () {
         $('.alert-success').fadeTo('slow', 0.1, function () {
             $('.alert-success').alert('close')
         });
-    }, 5000);
+    }, 3000);
 
     //Character Counter
     //Taken from https://www.codefromjames.com/scripts/charcount.js
@@ -295,7 +294,7 @@ $(document).ready(function () {
         $('#nav_Table .nav_win_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('#nav_Table .nav_win_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
 
     //Disable radio buttons if one checkbox is active
@@ -371,7 +370,7 @@ $(document).ready(function () {
         $('.page_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.page_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.slider_status_checkbox').change(function () {
         $.get('ajax/update_slideractive.php?update=true', {
@@ -381,7 +380,7 @@ $(document).ready(function () {
         $('.slider_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.slider_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.services_status_checkbox').change(function () {
         $.get('ajax/update_servicesactive.php?update=true', {
@@ -391,7 +390,7 @@ $(document).ready(function () {
         $('.services_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.services_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.team_status_checkbox').change(function () {
         $.get('ajax/update_teamactive.php?update=true', {
@@ -401,7 +400,7 @@ $(document).ready(function () {
         $('.team_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.team_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.customer_status_checkbox').change(function () {
         $.get('ajax/update_customersactive.php?update=true', {
@@ -411,7 +410,7 @@ $(document).ready(function () {
         $('.customer_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.customer_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.customer_featured_checkbox').change(function () {
         $.get('ajax/update_customersfeatured.php?update=true', {
@@ -421,7 +420,7 @@ $(document).ready(function () {
         $('.customer_featured_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.customer_featured_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.aboutus_defaults_checkbox').change(function () {
         $.get('ajax/update_aboutusdefaults.php?update=true', {
@@ -431,7 +430,7 @@ $(document).ready(function () {
         $('.aboutus_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.aboutus_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.featured_defaults_checkbox').change(function () {
         $.get('ajax/update_featureddefaults.php?update=true', {
@@ -441,7 +440,7 @@ $(document).ready(function () {
         $('.featured_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.featured_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.generalinfo_defaults_checkbox').change(function () {
         $.get('ajax/update_generalinfodefaults.php?update=true', {
@@ -451,7 +450,7 @@ $(document).ready(function () {
         $('.generalinfo_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.generalinfo_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.contact_defaults_checkbox').change(function () {
         $.get('ajax/update_contactdefaults.php?update=true', {
@@ -461,7 +460,7 @@ $(document).ready(function () {
         $('.contact_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.contact_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.social_defaults_checkbox').change(function () {
         $.get('ajax/update_socialmediadefaults.php?update=true', {
@@ -471,7 +470,7 @@ $(document).ready(function () {
         $('.social_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.social_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.slider_defaults_checkbox').change(function () {
         $.get('ajax/update_sliderdefaults.php?update=true', {
@@ -481,7 +480,7 @@ $(document).ready(function () {
         $('.slider_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.slider_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.databases_defaults_checkbox_1').change(function () {
         $.get('ajax/update_databasesdefaults.php?update=true&sub_section=1', {
@@ -491,7 +490,7 @@ $(document).ready(function () {
         $('.databases_defaults_checkbox_1').attr('disabled', true);
         setTimeout(function() {
             $('.databases_defaults_checkbox_1').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.databases_defaults_checkbox_2').change(function () {
         $.get('ajax/update_databasesdefaults.php?update=true&sub_section=2', {
@@ -501,7 +500,7 @@ $(document).ready(function () {
         $('.databases_defaults_checkbox_2').attr('disabled', true);
         setTimeout(function() {
             $('.databases_defaults_checkbox_2').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.databases_defaults_checkbox_3').change(function () {
         $.get('ajax/update_databasesdefaults.php?update=true&sub_section=3', {
@@ -511,7 +510,7 @@ $(document).ready(function () {
         $('.databases_defaults_checkbox_3').attr('disabled', true);
         setTimeout(function() {
             $('.databases_defaults_checkbox_3').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.navigation_defaults_checkbox_1').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=1', {
@@ -521,7 +520,7 @@ $(document).ready(function () {
         $('.navigation_defaults_checkbox_1').attr('disabled', true);
         setTimeout(function() {
             $('.navigation_defaults_checkbox_1').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.navigation_defaults_checkbox_2').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=2', {
@@ -531,7 +530,7 @@ $(document).ready(function () {
         $('.navigation_defaults_checkbox_2').attr('disabled', true);
         setTimeout(function() {
             $('.navigation_defaults_checkbox_2').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.navigation_defaults_checkbox_3').change(function () {
         $.get('ajax/update_navigationdefaults.php?update=true&sub_section=3', {
@@ -541,7 +540,7 @@ $(document).ready(function () {
         $('.navigation_defaults_checkbox_3').attr('disabled', true);
         setTimeout(function() {
             $('.navigation_defaults_checkbox_3').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.services_defaults_checkbox').change(function () {
         $.get('ajax/update_servicesdefaults.php?update=true', {
@@ -551,7 +550,7 @@ $(document).ready(function () {
         $('.services_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.services_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.team_defaults_checkbox').change(function () {
         $.get('ajax/update_teamdefaults.php?update=true', {
@@ -561,7 +560,7 @@ $(document).ready(function () {
         $('.team_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.team_defaults_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.location_status_checkbox').change(function () {
         $.get('ajax/update_setupactive.php?update=true', {
@@ -571,7 +570,7 @@ $(document).ready(function () {
         $('.location_status_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.location_status_checkbox').attr('disabled', false);
-        }, 1000);
+        }, 500);
     });
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?update=true', {

@@ -41,7 +41,7 @@ if ($_GET['preview'] > "") {
         <div class="col-lg-12">
             <?php
 
-            if ($_GET['newpage'] OR $_GET['editpage']) {
+            if ($_GET['newpage'] || $_GET['editpage']) {
 
                 // Update existing page
                 if ($_GET['editpage']) {
@@ -197,12 +197,12 @@ if ($_GET['preview'] > "") {
             $delPageTitle = $_GET['deletetitle'];
 
             //delete page
-            if ($_GET['deletepage'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
+            if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
                 $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
-            } elseif ($_GET['deletepage'] AND $_GET['deletetitle'] AND $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
 
                 //delete page after clicking Yes
                 $pageDelete = "DELETE FROM pages WHERE id='$delPageId'";

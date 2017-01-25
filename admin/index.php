@@ -65,9 +65,9 @@ if (!empty($_POST)) {
 //}
 
 //Reset password page messages
-if ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'notfound') {
+if ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound') {
     $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-} elseif ($_GET['forgotpassword'] == 'true' AND $_GET['msgsent'] == 'error') {
+} elseif ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'error') {
     $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 

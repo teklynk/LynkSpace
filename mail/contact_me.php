@@ -14,7 +14,7 @@ $phone = $_POST['phone'];
 $message = $_POST['message'];
 $sendTo = $_POST['sendToEmail'];
 
-if (!empty($_POST) AND $_POST['referer'] == $_SESSION['unique_referer']) {
+if (!empty($_POST) && $_POST['referer'] == $_SESSION['unique_referer']) {
     // Check for empty fields
     if (empty($_POST['name']) ||
         empty($_POST['email']) ||

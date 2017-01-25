@@ -7,7 +7,7 @@ if (!defined('inc_access')) {
 getLocList();
 getSetup(); //from functions.php
 
-//if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
+//if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
     ?>
 
     <script type="text/javascript" language="javascript">
@@ -32,7 +32,7 @@ getSetup(); //from functions.php
 
                 <div class="panel with-nav-tabs panel-default">
                     <?php
-                    if ($setupLs2pac == 'true' OR $setupLs2kids == 'true') {
+                    if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                         ?>
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">

@@ -7,12 +7,12 @@ session_start();
 //This will add files and not delete existing.
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) AND $_SESSION['session_hash'] == md5($_SESSION['user_name']) AND $_SESSION['file_referer'] == 'uploads.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'uploads.php') {
 
     include_once('../../db/config.php');
     include_once('../core/functions.php');
 
-    if (!empty($_GET) AND $_GET['update']) {
+    if (!empty($_GET) && $_GET['update']) {
         $uploadsID = $_GET['id'];
         $srcPath = str_replace('admin/ajax', 'uploads/'.$uploadsID, __DIR__);
 

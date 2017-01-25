@@ -38,7 +38,7 @@ if ($_GET['preview'] > "") {
     <div class="col-lg-12">
 <?php
 
-if ($_GET['newslide'] OR $_GET['editslide']) {
+if ($_GET['newslide'] || $_GET['editslide']) {
 
     $slideMsg = "";
 
@@ -213,12 +213,12 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
     $moveslideTitle = $_GET['movetitle'];
 
     //delete slide
-    if ($_GET['deleteslide'] AND $_GET['deletetitle'] AND !$_GET['confirm']) {
+    if ($_GET['deleteslide'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
         $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delslideTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&deletetitle=" . $delslideTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         echo $deleteMsg;
 
-    } elseif ($_GET['deleteslide'] AND $_GET['deletetitle'] AND $_GET['confirm'] == 'yes') {
+    } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
         $slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
         mysqli_query($db_conn, $slideDelete);
@@ -228,7 +228,7 @@ if ($_GET['newslide'] OR $_GET['editslide']) {
     }
 
     //move slide to top of list
-    if (($_GET['moveslide'] AND $_GET['movetitle'])) {
+    if (($_GET['moveslide'] && $_GET['movetitle'])) {
         $slidesDateUpdate = "UPDATE slider SET author_name='".$_SESSION['user_name']."', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveslideId'";
         mysqli_query($db_conn, $slidesDateUpdate);
 

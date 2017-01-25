@@ -15,7 +15,7 @@ function getLocation(){
         $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $_GET['loc_id'] . " ");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
-        if ($rowGetLocation['active'] == 'true' AND $_GET['loc_id'] == $rowGetLocation['id']){
+        if ($rowGetLocation['active'] == 'true' && $_GET['loc_id'] == $rowGetLocation['id']){
             $locationName = $rowGetLocation['name'];
             $locationActive = $rowGetLocation['active'];
             $locationID = $rowGetLocation['id'];
@@ -53,7 +53,7 @@ function getPage(){
         $sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
         $rowPage = mysqli_fetch_array($sqlPage);
 
-        if ($rowPage['active'] == 'true' AND $pageRefId == $rowPage['id']){
+        if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']){
 
             if ($rowPage['image'] > ""){
                 $pageImage = "<img src='uploads/" . $_GET['loc_id'] . "/" . $rowPage['image'] . "' alt='" . $rowPage['title'] . "' title='" . $rowPage['title'] . "'>";
@@ -318,11 +318,11 @@ function getNav($navSection, $dropdown, $pull){
     $rowNavDefaults = mysqli_fetch_array($sqlNavDefaults);
 
     //toggle default location value if conditions are true
-    if ($navSection == $navSectionIndex1 AND $rowNavDefaults['navigation_use_defaults_1'] == 'true') {
+    if ($navSection == $navSectionIndex1 && $rowNavDefaults['navigation_use_defaults_1'] == 'true') {
         $navDefaultLoc = 1;
-    } elseif ($navSection == $navSectionIndex2 AND $rowNavDefaults['navigation_use_defaults_2'] == 'true') {
+    } elseif ($navSection == $navSectionIndex2 && $rowNavDefaults['navigation_use_defaults_2'] == 'true') {
         $navDefaultLoc = 1;
-    } elseif ($navSection == $navSectionIndex3 AND $rowNavDefaults['navigation_use_defaults_3'] == 'true') {
+    } elseif ($navSection == $navSectionIndex3 && $rowNavDefaults['navigation_use_defaults_3'] == 'true') {
         $navDefaultLoc = 1;
     } else {
         $navDefaultLoc = $_GET['loc_id'];
@@ -360,7 +360,7 @@ function getNav($navSection, $dropdown, $pull){
         }
 
         //Create category - drop down menus
-        if ($navLinksCatId == $navLinks_CatId AND $navLinksCatId != 0){ //NOTE: 0=None in the category table
+        if ($navLinksCatId == $navLinks_CatId && $navLinksCatId != 0){ //NOTE: 0=None in the category table
 
             if ($navLinksCatId != $tempLink){
 
@@ -529,11 +529,11 @@ function getCustomers($custType){
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
-    if ($customerSection == $custSectionIndex1 AND $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
+    if ($customerSection == $custSectionIndex1 && $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
         $custDefaultLoc = 1;
-    } elseif ($customerSection == $custSectionIndex2 AND $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
+    } elseif ($customerSection == $custSectionIndex2 && $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
         $custDefaultLoc = 1;
-    } elseif ($customerSection == $custSectionIndex3 AND $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
+    } elseif ($customerSection == $custSectionIndex3 && $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
         $custDefaultLoc = 1;
     } else {
         $custDefaultLoc = $_GET['loc_id'];
@@ -544,13 +544,13 @@ function getCustomers($custType){
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
-    if ($customerSection == $custSectionIndex1 AND $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
+    if ($customerSection == $custSectionIndex1 && $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
         $customerHeading = $rowCustomerSetup['customersheading_1'];
         $customerBlurb = $rowCustomerSetup['customerscontent_1'];
-    } elseif ($customerSection == $custSectionIndex2 AND $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
+    } elseif ($customerSection == $custSectionIndex2 && $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
         $customerHeading = $rowCustomerSetup['customersheading_2'];
         $customerBlurb = $rowCustomerSetup['customerscontent_2'];
-    } elseif ($customerSection == $custSectionIndex3 AND $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
+    } elseif ($customerSection == $custSectionIndex3 && $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
         $customerHeading = $rowCustomerSetup['customersheading_3'];
         $customerBlurb = $rowCustomerSetup['customerscontent_3'];
     }
@@ -590,7 +590,7 @@ function getSlider($sliderType){
 
     if ($sliderType == "slide"){
         $sliderOrderBy = "ORDER BY datetime DESC";
-    } elseif ($sliderType == "random" OR $sliderType == ""){
+    } elseif ($sliderType == "random" || $sliderType == ""){
         $sliderOrderBy = "ORDER BY RAND() LIMIT 1";
     }
 

@@ -117,7 +117,7 @@ if ($_GET['section'] == $custSections[0]) {
     <div class="col-lg-12">
         <?php
 
-        if ($_GET['newcustomer'] OR $_GET['editcustomer']) {
+        if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
             $customerMsg = "";
 
@@ -331,11 +331,11 @@ if ($_GET['section'] == $custSections[0]) {
             $movecustomerName = $_GET['movename'];
 
             //delete customer
-            if ($_GET['deletecustomer'] AND $_GET['deletename'] AND !$_GET['confirm']) {
+            if ($_GET['deletecustomer'] && $_GET['deletename'] && !$_GET['confirm']) {
                 $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delcustomerName . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=" . $delcustomerId . "&deletename=" . $delcustomerName . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
-            } elseif ($_GET['deletecustomer'] AND $_GET['deletename'] AND $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
                 //delete customer after clicking Yes
                 $customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
                 mysqli_query($db_conn, $customerDelete);
@@ -345,7 +345,7 @@ if ($_GET['section'] == $custSections[0]) {
             }
 
             //move customer to top of list - datatime stamp determines position
-            if (($_GET['movecustomer'] AND $_GET['movename'])) {
+            if (($_GET['movecustomer'] && $_GET['movename'])) {
                 $customerDateUpdate = "UPDATE customers SET author_name='" . $_SESSION['author_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$movecustomerId'";
                 mysqli_query($db_conn, $customerDateUpdate);
 
@@ -380,12 +380,12 @@ if ($_GET['section'] == $custSections[0]) {
             $delCatTitle = $_GET['deletecatname'];
 
             //Delete category and set categories to zero
-            if ($_GET['deletecat'] AND $_GET['deletecatname'] AND !$_GET['confirm']) {
+            if ($_GET['deletecat'] && $_GET['deletecatname'] && !$_GET['confirm']) {
 
                 $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getCustSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
-            } elseif ($_GET['deletecat'] AND $_GET['deletecatname'] AND $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
                 $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
                 mysqli_query($db_conn, $custCatUpdate);
@@ -405,11 +405,11 @@ if ($_GET['section'] == $custSections[0]) {
             $renameCatTitle = $_GET['newcatname'];
 
             //Rename category and set categories to new name
-            if ($_GET['renamecat'] AND $_GET['newcatname'] AND !$_GET['confirm']) {
+            if ($_GET['renamecat'] && $_GET['newcatname'] && !$_GET['confirm']) {
                 $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr($renameCatTitle) . "? <a href='?section=" . $getCustSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
 
-            } elseif ($_GET['renamecat'] AND $_GET['newcatname'] AND $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['renamecat'] && $_GET['newcatname'] && $_GET['confirm'] == 'yes') {
 
                 $custRenameCatUpdate = "UPDATE category_customers SET name='" . safeCleanStr($renameCatTitle) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $custRenameCatUpdate);

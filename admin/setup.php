@@ -135,7 +135,7 @@ if ($_GET['update'] == 'true') {
             }
 
             //Check if user_level is Admin user
-            if ($_SESSION['user_level'] == 1 AND !$_GET['newlocation'] == 'true') {
+            if ($_SESSION['user_level'] == 1 && !$_GET['newlocation'] == 'true') {
             ?>
             <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
             <h2></h2>
@@ -241,7 +241,7 @@ if ($_GET['update'] == 'true') {
 
             <?php
             //Check if user_level is Admin user and default location
-            if ($_SESSION['user_level'] == 1 AND $_GET['loc_id'] == 1) {
+            if ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == 1) {
                 ?>
                 <hr/>
                 <div class="row">

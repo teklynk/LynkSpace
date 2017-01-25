@@ -106,7 +106,7 @@ session_start();
 
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
-    if (isset($_SESSION['user_id']) AND isset($_SESSION['user_name'])) {
+    if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
 
         //Initializing variables
         $fileListJson = "";
@@ -204,7 +204,7 @@ session_start();
             </li>
         </ul>
         <?php
-        if (isset($_SESSION['loc_list']) AND $_SESSION['user_level'] == 1) {
+        if (isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
             ?>
             <ul class="nav navbar-right top-nav">
                 <li style="margin-top:8px;">
