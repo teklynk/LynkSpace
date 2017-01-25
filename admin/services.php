@@ -107,7 +107,7 @@ if ($_GET['preview']>"") {
 		}
 ?>
 
-	<form name="serviceForm" method="post" action="">
+	<form name="serviceForm" class="dirtyForm" method="post" action="">
 
 		<div class="row">
 			<div class="col-lg-4">
@@ -338,7 +338,7 @@ if ($_GET['preview']>"") {
 			echo $serviceMsg;
 		}
 		?>
-		<form name="servicesForm" method="post" action="">
+		<form name="servicesForm" class="dirtyForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
 				<input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>

@@ -110,7 +110,7 @@ if ($_GET['preview'] > "") {
             }
             ?>
 
-            <form name="teamForm" method="post" action="">
+            <form name="teamForm" class="dirtyForm" method="post" action="">
 
                 <div class="row">
                     <div class="col-lg-4">
@@ -283,7 +283,7 @@ if ($_GET['preview'] > "") {
                     echo $teamMsg;
                 }
                 ?>
-                <form role="teamForm" method="post" action="">
+                <form role="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
                         <input class="form-control input-sm count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>

@@ -52,7 +52,7 @@ if ($_GET['passwordupdated'] == 'true') {
             echo $pageMsg;
         }
         ?>
-        <form name="userForm" method="post" action="">
+        <form name="userForm" class="dirtyForm" method="post" action="">
 
             <div class="form-group">
                 <label>Username</label>

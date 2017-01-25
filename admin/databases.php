@@ -186,7 +186,7 @@ if ($_GET['section'] == $custSections[0]) {
             }
             ?>
 
-            <form name="customerForm" method="post" action="">
+            <form name="customerForm" class="dirtyForm" method="post" action="">
 
                 <div class="row">
                     <div class="col-lg-4">
@@ -544,7 +544,7 @@ if ($_GET['section'] == $custSections[0]) {
                 }
 
                 ?>
-                <form name="customerForm" method="post" action="">
+                <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
                         <input class="form-control input-sm count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" required>

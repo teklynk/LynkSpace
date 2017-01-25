@@ -111,7 +111,7 @@ if ($_GET['preview'] > "") {
                     $selAlignLeft = "";
                 }
                 ?>
-                <form name="pageForm" method="post" action="">
+                <form name="pageForm" class="dirtyForm" method="post" action="">
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -272,7 +272,7 @@ if ($_GET['preview'] > "") {
                         echo $pageMsg;
                     }
                     ?>
-                    <form name="pageForm" method="post" action="">
+                    <form name="pageForm" class="dirtyForm" method="post" action="">
                         <div class="form-group">
                             <label>Heading</label>
                             <input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>

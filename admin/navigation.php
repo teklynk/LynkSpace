@@ -303,7 +303,7 @@ if ($_GET['section'] == $navSections[0]) {
         </div>
 
         <!-- Nav Link Section -->
-        <form name="navForm" method="post" action="">
+        <form name="navForm" class="dirtyForm" method="post" action="">
             <fieldset>
                 <div class="form-group">
                     <label for="nav_newname">Link Name</label>

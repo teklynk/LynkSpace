@@ -76,7 +76,7 @@ if ($_GET['update'] == 'true') {
         }
 
         ?>
-        <form name="aboutForm" method="post" action="">
+        <form name="aboutForm" class="dirtyForm" method="post" action="">
             <?php
                 if ($_GET['loc_id'] != 1) {
             ?>

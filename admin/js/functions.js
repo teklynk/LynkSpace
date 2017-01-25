@@ -635,12 +635,24 @@ $(document).ready(function () {
     
     //Returns Boostrap tooltips function
     $('[data-toggle="tooltip"]').tooltip();
+
     //Location Select Drop Down list. Sets selected value based on loc_id=querystring value
     $(function () {
         if ($('select[name="loc_id_list"]').length) {
             var queryStrVal = getUrlVars()['loc_id'];
             $('select[name="loc_id_list"]').val(queryStrVal);
         }
+    });
+
+    //Dirty Form Check - Confirmation Message
+    $(function() {
+        $('.dirtyForm').areYouSure(
+            {
+                //custom message may not show in all browsers
+                message: 'It looks like you have been editing something. '
+                + 'If you leave before saving, your changes will be lost.'
+            }
+        );
     });
 });
 

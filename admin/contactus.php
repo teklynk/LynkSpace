@@ -58,7 +58,7 @@ if ($_GET['update'] == 'true') {
                 $selDefaults = "";
             }
             ?>
-            <form name="contactForm" method="post" action="">
+            <form name="contactForm" class="dirtyForm" method="post" action="">
                 <?php
                 if ($_GET['loc_id'] != 1) {
                     ?>

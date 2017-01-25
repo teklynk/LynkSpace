@@ -113,7 +113,7 @@ if ($_GET['update'] == 'true') {
         }
         ?>
 
-        <form name="setupForm" id="setupForm" method="post" action="">
+        <form name="setupForm" id="setupForm" class="dirtyForm" method="post" action="">
 
             <?php
             if ($_GET['loc_id'] != 1) {

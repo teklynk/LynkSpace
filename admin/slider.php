@@ -110,7 +110,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowSlides['image'];
     }
     ?>
-    <form name="slideForm" method="post" action="">
+    <form name="slideForm" class="dirtyForm" method="post" action="">
 
         <div class="row">
             <div class="col-lg-4">
@@ -319,7 +319,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         echo $slideMsg;
     }
 
-    echo "<form name='sliderForm' method='post' action=''>
+    echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
 		<input class='form-control input-sm count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' required>

@@ -58,7 +58,7 @@ if ($_GET['update'] == 'true') {
             $selDefaults = "";
         }
         ?>
-        <form name="socialmediaForm" method="post" action="">
+        <form name="socialmediaForm" class="dirtyForm" method="post" action="">
             <?php
             if ($_GET['loc_id'] != 1) {
                 ?>

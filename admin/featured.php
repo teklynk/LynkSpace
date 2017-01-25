@@ -72,7 +72,7 @@ if ($_GET['update'] == 'true') {
                 $selDefaults = "";
             }
             ?>
-            <form name="landingForm" method="post" action="">
+            <form name="landingForm" class="dirtyForm" method="post" action="">
                 <?php
                 if ($_GET['loc_id'] != 1) {
                     ?>
