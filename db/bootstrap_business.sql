@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2017 at 10:16 AM
+-- Generation Time: Jan 26, 2017 at 09:15 AM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -603,7 +603,7 @@ CREATE TABLE `contactus` (
 --
 
 INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Contact Us', 'Chicago Public Schools', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.491674759722!2d-87.63084358455876!3d41.882281979221865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2cbb3bf3aac1%3A0xf3321c9d81c08854!2s42+W+Madison+St%2C+Chicago%2C+IL+60602!5e0!3m2!1sen!2sus!4v1483022894306" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', '', '', '42 W. Madison St.', 'Chicago', 'IL', '60602', '773-553-1000', '', 'true', '2017-01-19 17:15:53', 'admin', 1),
+(1, 'Contact Us', 'Chicago Public Schools', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.491674759722!2d-87.63084358455876!3d41.882281979221865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2cbb3bf3aac1%3A0xf3321c9d81c08854!2s42+W+Madison+St%2C+Chicago%2C+IL+60602!5e0!3m2!1sen!2sus!4v1483022894306" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>', '', '', '42 W. Madison St.', 'Chicago', 'IL', '60602', '773-553-1000', '', 'false', '2017-01-25 22:04:12', 'admin', 1),
 (2, 'Contact Us', '', '', '', '', '', 'Chicago', 'IL', '', '', '', 'true', '2017-01-19 17:15:53', 'admin', 2),
 (3, 'Contact Us', '', '', '', '', '', 'Chicago', 'IL', '', '', '', 'true', '2017-01-19 17:15:53', 'admin', 3),
 (4, 'Contact Us', '', '', '', '', '', 'Chicago', 'IL', '', '', '', 'true', '2017-01-19 17:15:53', 'admin', 4),
@@ -1139,7 +1139,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (51, '', 'link', 'Next Generation Science Standards', 'http://www.nextgenscience.org/next-generation-science-standards', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (52, '', 'link', 'NDSL Science Literacy Maps', 'http://strandmaps.dls.ucar.edu/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (53, '', 'link', 'ColorÃ­n Colorado!', 'http://www.colorincolorado.org/', '', 11, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(54, '', 'link', 'EL Achieve', 'http://www.elachieve.org/', '', 11, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(54, '', 'link', 'EL Achieve', 'http://www.elachieve.org/', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (55, '', 'link', 'Into the Book', 'http://reading.ecb.org/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (56, '', 'link', 'English Learner Resource Web Hotlist', 'http://www.kn.att.com/wired/fil/pages/listeslresoma.html', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
@@ -1202,7 +1202,10 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (114, '', 'link', 'Bug Guide', 'http://bugguide.net/node/view/15740', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (115, '', 'link', 'I Was Wondering', 'http://iwaswondering.org/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1);
+(117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', '2017-01-26 14:07:02', 'admin', 1),
+(119, '', 'link', 'International Children\'s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', '2017-01-26 14:10:25', 'admin', 1),
+(120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', '2017-01-26 14:11:56', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1718,7 +1721,7 @@ CREATE TABLE `generalinfo` (
 --
 
 INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'false', '2017-01-25 15:10:51', 'admin', 1),
+(1, 'Information', '<p>Chicago Public Schools is the third largest school district in the United States with more than 600 schools providing education to approximately 400,000 children. Our vision is that every student in every neighborhood will be engaged in a rigorous, well-rounded instructional program and will graduate prepared for success in college, career and life.</p>', 'false', '2017-01-25 21:46:27', 'admin', 1),
 (2, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 2),
 (3, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 3),
 (4, 'Information', '', 'true', '2017-01-19 17:16:42', 'admin', 4),
@@ -2204,7 +2207,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
-(1, 'CPS', '2017-01-25 15:12:27', 'true'),
+(1, 'CPS', '2017-01-25 21:47:26', 'true'),
 (2, 'Curie Metro High School', '2017-01-24 18:34:28', 'true'),
 (3, 'Northside Prep High School', '2017-01-19 17:17:23', 'true'),
 (4, 'Hyde Park High School', '2017-01-19 17:17:23', 'true'),
@@ -3434,7 +3437,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-25 15:12:27', 'admin', 1),
+(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-26 14:08:16', 'admin', 1),
 (2, 'Curie Metro High School', '', '', '1820', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-24 18:34:28', 'admin', 2),
 (3, 'Northside Prep High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 3),
 (4, 'Hyde Park High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 4),
@@ -4465,11 +4468,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 1, '2017-01-25 15:09:58', '127.0.0.1', 1),
-(2, 'rjones', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'rjones@tlcdelivers.com', 0, '2016-12-22 14:51:19', '127.0.0.1', 2),
-(3, 'kgray', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kgray@tlcdelivers.com', 1, '2017-01-04 16:15:34', '192.168.2.46', 1),
-(4, 'eczaja', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'eczaja@tlcdelivers.com', 1, '2017-01-20 18:55:14', '192.168.3.26', 1),
-(5, 'kbageant', '*7561F5295A1A35CB8E0A7C46921994D383947FA5', 'kbageant@tlcdelivers.com', 1, '2017-01-20 15:04:56', '192.168.2.15', 1);
+(1, 'admin', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 1, '2017-01-26 14:05:31', '127.0.0.1', 1),
+(2, 'rjones', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 0, '2017-01-25 16:02:56', '127.0.0.1', 2),
+(3, 'kgray', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'kgray@tlcdelivers.com', 1, '2017-01-25 16:02:59', '192.168.2.46', 1),
+(4, 'eczaja', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'eczaja@tlcdelivers.com', 1, '2017-01-25 16:03:02', '192.168.3.26', 1),
+(5, 'kbageant', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'kbageant@tlcdelivers.com', 1, '2017-01-25 16:03:06', '192.168.2.15', 1);
 
 --
 -- Indexes for dumped tables
@@ -4605,7 +4608,7 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 --
 -- AUTO_INCREMENT for table `featured`
 --
@@ -4635,7 +4638,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `services_icons`
 --
