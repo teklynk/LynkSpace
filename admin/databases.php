@@ -566,7 +566,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <tbody>
                         <?php
                         $custCount = "";
-                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, datetime DESC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
                             $customerName = $rowCustomer['name'];
