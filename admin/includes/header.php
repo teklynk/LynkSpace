@@ -280,11 +280,9 @@ session_start();
 
 if (!$_SESSION['loggedIn']) {
     if (basename($_SERVER['PHP_SELF']) != 'index.php') {
-        //if (basename($_SERVER['PHP_SELF']) != 'install.php') {
-            echo "Not signed in!";
-            header("Location: index.php?logout=true");
-            echo "<script>window.location.href='index.php?logout=true';</script>";
-        //}
+        echo "Not signed in!";
+        header("Location: index.php?logout=true");
+        echo "<script>window.location.href='index.php?logout=true';</script>";
     }
 }
 
