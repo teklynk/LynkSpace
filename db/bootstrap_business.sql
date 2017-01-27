@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2017 at 09:15 AM
+-- Generation Time: Jan 27, 2017 at 11:36 AM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -1099,21 +1099,21 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, '', 'child', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', 'admin', 1),
-(5, '', 'book', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica&#039;s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 'admin', 1),
-(6, '', 'book', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', 'admin', 1),
-(7, '', 'wpexplorer', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', 'admin', 1),
-(8, '', 'laptop', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', 'admin', 1),
-(14, '', 'connectdevelop', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', '2017-01-19 18:33:54', 'admin', 1),
-(15, '', 'book', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', '2017-01-19 18:32:51', 'admin', 1),
-(16, '', 'book', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', '2017-01-19 18:32:46', 'admin', 1),
-(17, '', 'video-camera', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
+(4, 'gale_icon_1.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', 'admin', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica\'s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 'admin', 1),
+(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', 'admin', 1),
+(7, 'worldcat_icon_1.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', 'admin', 1),
+(8, 'gale_icon_1.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', 'admin', 1),
+(14, 'gale_icon_1.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', '2017-01-19 18:33:54', 'admin', 1),
+(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', '2017-01-19 18:32:51', 'admin', 1),
+(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', '2017-01-19 18:32:46', 'admin', 1),
+(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (20, '', 'laptop', 'e CUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
-(23, '', 'connectdevelop', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
+(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 'admin', 1),
 (24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', '2017-01-20 20:12:46', 'admin', 1),
 (25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', '2017-01-20 20:12:56', 'admin', 1),
 (26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', '2017-01-20 20:12:41', 'admin', 1),
@@ -1128,7 +1128,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (40, '', 'link', 'National Endowment for Financial Education', 'http://www.hsfpp.org/about-the-program.aspx', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (41, '', 'link', 'Talk with our Kids about Money', 'http://usa.talkwithourkidsaboutmoney.com/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (42, '', 'link', 'Federal Reserve Education', 'https://www.federalreserveeducation.org/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', '2017-01-26 14:29:15', '', 1),
 (44, '', 'link', 'Facing History and Ourselves', 'https://www.facinghistory.org/', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (45, '', 'link', 'Stanford History Education Group', 'http://sheg.stanford.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (46, '', 'link', 'Teaching History.org', 'http://teachinghistory.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
@@ -4468,7 +4468,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 1, '2017-01-26 14:05:31', '127.0.0.1', 1),
+(1, 'admin', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 1, '2017-01-27 14:42:37', '127.0.0.1', 1),
 (2, 'rjones', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 0, '2017-01-25 16:02:56', '127.0.0.1', 2),
 (3, 'kgray', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'kgray@tlcdelivers.com', 1, '2017-01-25 16:02:59', '192.168.2.46', 1),
 (4, 'eczaja', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'eczaja@tlcdelivers.com', 1, '2017-01-25 16:03:02', '192.168.3.26', 1),
