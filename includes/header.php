@@ -9,8 +9,8 @@ session_start();
         die('Direct access not permitted');
     }
 
-    include_once('db/config.php'); //contains DB connection string and global variables
-    include_once('core/functions.php'); //contains functions used on every front-end template
+    require_once('db/config.php'); //contains DB connection string and global variables
+    require_once('core/functions.php'); //contains functions used on every front-end template
 
     getLocation();
 
