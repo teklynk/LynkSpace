@@ -81,49 +81,49 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control input-sm count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" required>
+                    <input class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" required>
                 </div>
                 <div class="form-group">
                     <label>Intro Text</label>
-                    <textarea class="form-control input-sm count-text" name="contact_introtext" rows="3" maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
+                    <textarea class="form-control count-text" name="contact_introtext" rows="3" maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Map Embed Code</label>
                     <small><a href="https://support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;<i class='fa fa-question-circle-o'></i>
                     </small>
-                    <textarea class="form-control input-sm count-text" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
+                    <textarea class="form-control count-text" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Street Address</label>
-                    <input class="form-control input-sm count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
+                    <input class="form-control count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
                 </div>
                 <div class="form-group">
                     <label>City</label>
-                    <input class="form-control input-sm count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
+                    <input class="form-control count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
                 </div>
                 <div class="form-group">
                     <label>State</label>
-                    <input class="form-control input-sm count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
+                    <input class="form-control count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
                 </div>
                 <div class="form-group">
                     <label>ZIP Code</label>
-                    <input class="form-control input-sm count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
+                    <input class="form-control count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
-                    <input class="form-control input-sm count-text" name="contact_phone" maxlength="100" value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
+                    <input class="form-control count-text" name="contact_phone" maxlength="100" value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
                 </div>
                 <div class="form-group">
                     <label>Hours</label>
-                    <textarea class="form-control input-sm count-text" name="contact_hours" rows="3" maxlength="255" placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
+                    <textarea class="form-control count-text" name="contact_hours" rows="3" maxlength="255" placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control input-sm count-text" name="contact_email" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_email" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
                 <div class="form-group">
                     <label>Send To Email</label>
-                    <input class="form-control input-sm count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
 
                 <div class="form-group">

@@ -216,7 +216,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label><?php echo $customerLabel; ?></label>
-                    <input class="form-control input-sm count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name">
+                    <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name">
                 </div>
                 <hr/>
                 <div class="form-group">
@@ -236,7 +236,7 @@ if ($_GET['section'] == $custSections[0]) {
                 </div>
                 <div class="form-group">
                     <label>Choose an icon</label>
-                    <select class="form-control input-sm" name="customer_icon_select" id="customer_icon_select">
+                    <select class="form-control" name="customer_icon_select" id="customer_icon_select">
                         <option value="">None</option>
                         <?php
 
@@ -255,7 +255,7 @@ if ($_GET['section'] == $custSections[0]) {
                 </div>
                 <div class="form-group">
                     <label>Use an Existing Image</label>
-                    <select class="form-control input-sm" name="customer_image_select" id="customer_image_select">
+                    <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
                         if ($handle = opendir($image_dir)) {
@@ -282,11 +282,11 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label>Link</label>
-                    <input class="form-control input-sm count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="text" placeholder="http://www.google.com">
+                    <input class="form-control count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="text" placeholder="http://www.google.com">
                 </div>
                 <div class="form-group">
                     <label for="exist_cat">Category</label>
-                    <select class="form-control input-sm" name="customer_exist_cat" id="customer_exist_cat">
+                    <select class="form-control" name="customer_exist_cat" id="customer_exist_cat">
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
@@ -312,7 +312,7 @@ if ($_GET['section'] == $custSections[0]) {
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control input-sm count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
+                    <textarea class="form-control count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
 
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -498,7 +498,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <div class="form-group">
                         <label for="cust_newcat">Category</label>
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
+                            <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
                             <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
@@ -506,7 +506,7 @@ if ($_GET['section'] == $custSections[0]) {
                     </div>
                     <div class="form-group">
                         <label for="exist_cat">Existing Category</label>
-                        <select class="form-control input-sm" name="exist_cat" id="exist_cat">
+                        <select class="form-control" name="exist_cat" id="exist_cat">
                             <?php
                             echo "<option value='0'>None</option>";
                             //Cat list for adding a new category
@@ -547,11 +547,11 @@ if ($_GET['section'] == $custSections[0]) {
                 <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control input-sm count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" required>
+                        <input class="form-control count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control input-sm count-text" name="main_content_<?php echo $custSubSection; ?>" placeholder="About our databases" maxlength="255"><?php echo $rowSetup['customerscontent_'.$custSubSection]; ?></textarea>
+                        <textarea rows="3" class="form-control count-text" name="main_content_<?php echo $custSubSection; ?>" placeholder="About our databases" maxlength="255"><?php echo $rowSetup['customerscontent_'.$custSubSection]; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -593,7 +593,7 @@ if ($_GET['section'] == $custSections[0]) {
 						<td><input type='hidden' name='cust_id[]' value='" . $customerId . "' >
 						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a></td>
 						<td>";
-                            echo "<select class='form-control input-sm' name='cust_cat[]'>'";
+                            echo "<select class='form-control' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
                             $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");

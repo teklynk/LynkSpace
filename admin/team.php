@@ -131,7 +131,7 @@ if ($_GET['preview'] > "") {
                 </div>
                 <div class="form-group">
                     <label>Use an Existing Image</label>
-                    <select class="form-control input-sm" name="team_image" id="team_image">
+                    <select class="form-control" name="team_image" id="team_image">
                         <option value="">None</option>
                         <?php
                         if ($handle = opendir($image_dir)) {
@@ -158,15 +158,15 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control input-sm count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name">
+                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name">
                 </div>
                 <div class="form-group">
                     <label>Title</label>
-                    <input class="form-control input-sm count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
+                    <input class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control input-sm count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
+                    <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
 
                 <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -286,11 +286,11 @@ if ($_GET['preview'] > "") {
                 <form role="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control input-sm count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
+                        <input class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
+                        <textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>

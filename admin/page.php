@@ -128,7 +128,7 @@ if ($_GET['preview'] > "") {
                     <hr/>
                     <div class="form-group">
                         <label><?php echo $pageLabel; ?></label>
-                        <input class="form-control input-sm count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title">
+                        <input class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title">
                     </div>
                     <hr/>
                     <div class="form-group">
@@ -136,7 +136,7 @@ if ($_GET['preview'] > "") {
                     </div>
                     <div class="form-group">
                         <label>Use an Existing Image</label>
-                        <select class="form-control input-sm" name="page_image" id="page_image">
+                        <select class="form-control" name="page_image" id="page_image">
                             <option value="">None</option>
                             <?php
                             if ($handle = opendir($image_dir)) {
@@ -164,7 +164,7 @@ if ($_GET['preview'] > "") {
                     </div>
                     <div class="form-group">
                         <label>Image Alignment</label>
-                        <select class="form-control input-sm" name="page_image_align">
+                        <select class="form-control" name="page_image_align">
                             <option value="left" <?php echo $selAlignLeft; ?>>Left</option>
                             <option value="right" <?php echo $selAlignRight; ?>>Right</option>
                         </select>
@@ -178,7 +178,7 @@ if ($_GET['preview'] > "") {
 
                     <div class="form-group">
                         <label>Text / HTML</label>
-                        <textarea class="form-control input-sm tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
+                        <textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
                     </div>
                     <div class="form-group">
                         <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
@@ -275,7 +275,7 @@ if ($_GET['preview'] > "") {
                     <form name="pageForm" class="dirtyForm" method="post" action="">
                         <div class="form-group">
                             <label>Heading</label>
-                            <input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
+                            <input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" required>
                         </div>
                         <hr/>
                         <table class="table table-bordered table-hover table-striped dataTable" id="dataTable">

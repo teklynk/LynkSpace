@@ -124,7 +124,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control input-sm count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">
+			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -144,7 +144,7 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<label>Choose an icon</label>
-			<select class="form-control input-sm" name="service_icon_select" id="service_icon_select">
+			<select class="form-control" name="service_icon_select" id="service_icon_select">
 				<option value="">None</option>
 				<?php
 
@@ -163,7 +163,7 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<label>Use an Existing Image</label>
-			<select class="form-control input-sm" name="service_image_select" id="service_image_select">
+			<select class="form-control" name="service_image_select" id="service_image_select">
 				<option value="">None</option>
 				<?php
 				if ($handle = opendir($image_dir)) {
@@ -188,7 +188,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label>Choose a link</label>
-			<select class="form-control input-sm" name="service_link">
+			<select class="form-control" name="service_link">
 				<option value="0">None</option>
 				<?php
 				$pagesStr="";
@@ -214,7 +214,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control input-sm count-text" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
+			<textarea class="form-control count-text" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
 
 		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -341,11 +341,11 @@ if ($_GET['preview']>"") {
 		<form name="servicesForm" class="dirtyForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control input-sm count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
+				<input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
 			</div>
 			<div class="form-group">
 				<label>Description</label>
-				<textarea rows="3" class="form-control input-sm count-text" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
+				<textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
 			</div>
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

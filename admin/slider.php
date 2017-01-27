@@ -127,7 +127,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <hr/>
         <div class="form-group">
             <label><?php echo $slideLabel; ?></label>
-            <input class="form-control input-sm count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" required>
+            <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" required>
         </div>
         <hr/>
         <div class="form-group">
@@ -136,7 +136,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         <div class="form-group">
             <label>Use an Existing Image</label>
-            <select class="form-control input-sm" name="slide_image" id="slide_image">
+            <select class="form-control" name="slide_image" id="slide_image">
                 <option value="">None</option>
                 <?php
                 if ($handle = opendir($image_dir)) {
@@ -165,7 +165,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <hr/>
         <div class="form-group">
             <label>Choose a link</label>
-            <select class="form-control input-sm" name="slide_link" id="slide_link">
+            <select class="form-control" name="slide_link" id="slide_link">
                 <option value="">None</option>
                 <?php
                 $pagesStr = "";
@@ -194,7 +194,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control input-sm count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
+            <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
         </div>
 
         <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -322,7 +322,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
-		<input class='form-control input-sm count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' required>
+		<input class='form-control count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' required>
 		</div>
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>

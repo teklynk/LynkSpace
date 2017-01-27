@@ -266,7 +266,7 @@ if ($_GET['section'] == $navSections[0]) {
                 <div class="form-group">
                     <label for="nav_newcat">Category</label>
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
+                        <input type="text" class="form-control" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
                         <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
                         <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
                         <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
@@ -274,7 +274,7 @@ if ($_GET['section'] == $navSections[0]) {
                 </div>
                 <div class="form-group">
                     <label for="exist_cat">Existing Category</label>
-                    <select class="form-control input-sm" name="exist_cat" id="exist_cat">
+                    <select class="form-control" name="exist_cat" id="exist_cat">
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
@@ -307,15 +307,15 @@ if ($_GET['section'] == $navSections[0]) {
             <fieldset>
                 <div class="form-group">
                     <label for="nav_newname">Link Name</label>
-                    <input type="text" class="form-control input-sm count-text" name="nav_newname" id="nav_newname" maxlength="255">
+                    <input type="text" class="form-control count-text" name="nav_newname" id="nav_newname" maxlength="255">
                 </div>
                 <div class="form-group">
                     <label for="nav_newurl">Link URL</label>
-                    <input type="text" class="form-control input-sm count-text" name="nav_newurl" id="nav_newurl" maxlength="255">
+                    <input type="text" class="form-control count-text" name="nav_newurl" id="nav_newurl" maxlength="255">
                 </div>
                 <div class="form-group">
                     <label for="exist_page">Existing Page</label>
-                    <select class="form-control input-sm" name="exist_page" id="exist_page">
+                    <select class="form-control" name="exist_page" id="exist_page">
                         <?php
                         echo "<option value=''>Custom</option>";
                         echo $pagesStr;
@@ -358,10 +358,10 @@ if ($_GET['section'] == $navSections[0]) {
 
                     echo "<tr>
 							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value='" . $navId . "' >
-							<input class='form-control input-sm' name='nav_sort[]' value='" . $navSort . "' type='text' maxlength='3' data-toggle='tooltip' title='If you would like to hide the Navigation link, enter a Sort Order of 0.'></td>
-							<td><input class='form-control input-sm' name='nav_name[]' value='" . $navName . "' type='text'></td>
-							<td><input class='form-control input-sm' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
-                    echo "<td><select class='form-control input-sm' name='nav_cat[]'>'";
+							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='text' maxlength='3' data-toggle='tooltip' title='If you would like to hide the Navigation link, enter a Sort Order of 0.'></td>
+							<td><input class='form-control' name='nav_name[]' value='" . $navName . "' type='text'></td>
+							<td><input class='form-control' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
+                    echo "<td><select class='form-control' name='nav_cat[]'>'";
                     echo "<option value='0'>None</option>";
                     //get and build category list, find selected
                     $sqlNavCat = mysqli_query($db_conn, "SELECT id, name, nav_loc_id FROM category WHERE nav_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");

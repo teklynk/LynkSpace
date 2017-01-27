@@ -95,11 +95,11 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control input-sm count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" required>
+                    <input class="form-control count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" required>
                 </div>
                 <div class="form-group">
                     <label>Intro Title</label>
-                    <input class="form-control input-sm count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
+                    <input class="form-control count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
                 </div>
                 <hr/>
                 <div class="form-group">
@@ -107,7 +107,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Use an Existing Image</label>
-                    <select class="form-control input-sm" name="featured_image" id="featured_image">
+                    <select class="form-control" name="featured_image" id="featured_image">
                         <option value="">None</option>
                         <?php
                         if ($handle = opendir($image_dir)) {
@@ -131,7 +131,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Image Alignment</label>
-                    <select class="form-control input-sm" name="featured_image_align">
+                    <select class="form-control" name="featured_image_align">
                         <option value="left" <?php echo $selAlignLeft; ?>>Left</option>
                         <option value="right" <?php echo $selAlignRight; ?>>Right</option>
                     </select>
@@ -139,7 +139,7 @@ if ($_GET['update'] == 'true') {
                 <hr/>
                 <div class="form-group">
                     <label>Text / HTML</label>
-                    <textarea class="form-control input-sm tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
+                    <textarea class="form-control tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
                 </div>
 
                 <div class="form-group">
