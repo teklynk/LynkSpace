@@ -207,7 +207,7 @@ session_start();
             </li>
         </ul>
         <?php
-        if (isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
+        if (isset($_SESSION['loc_list']) && $multiBranch == 'true' && $_SESSION['user_level'] == 1) {
             ?>
             <ul class="nav navbar-right top-nav">
                 <li style="margin-top:8px;">

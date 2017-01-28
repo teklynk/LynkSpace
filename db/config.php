@@ -2,11 +2,14 @@
 //This is the main Config/Setup file for the admin panel and Global variables used throughout the site. Change values as needed.
 //Create a virtual host alias for the directory that the project files are in.
 
-include_once 'dbconn.php';
+require_once('dbconn.php');
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."
 $IPrange = "";
+
+//Multi-Branch - more than one location
+$multiBranch = "true";
 
 //Homepage URL
 $homePageURL = "http://www.cps.edu";

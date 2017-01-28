@@ -844,6 +844,10 @@ if (empty($_GET['loc_id'])){
 
     header("Location: $pageRedirect");
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
+
+} elseif ($multiBranch == "false" && $_GET['loc_id'] != 1){
+    header("Location: index.php?loc_id=1");
+    echo "<script>window.location.href='index.php?loc_id=1';</script>";
 }
 
 //School search box redirect to loc_id where name = querystring loc_name

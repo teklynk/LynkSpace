@@ -86,6 +86,9 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
+} elseif ($multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
+    header("Location: ?loc_id=1");
+    echo "<script>window.location.href='?loc_id=1';</script>";
 }
 
 //html5 pattern property for input type=email

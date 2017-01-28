@@ -133,7 +133,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
 <?php
 //Check if user_level is Admin user and default location
-if ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == 1) {
+if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1) {
     ?>
 
     <hr/>
