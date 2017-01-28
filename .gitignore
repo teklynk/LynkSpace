@@ -7,5 +7,3 @@ codeception.yml
 composer.lock
 /uploads/
 /node_modules/
-!/uploads/
-!/node_modules/
