@@ -39,7 +39,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
         $headers .= "Reply-To: noreply@dev-vm.com";
 
         //Update user password with temp_password where email and username match
-        $contactUpdate = "UPDATE users SET username='" . $user_name . "', password=SHA1('" . $temp_password . "') WHERE email='" . filter_var($email_address, FILTER_VALIDATE_EMAIL) . "' AND username='" . $user_name . "' ";
+        $contactUpdate = "UPDATE users SET username='" . $user_name . "', password=SHA1('" . $hashSalt . $temp_password . "') WHERE email='" . filter_var($email_address, FILTER_VALIDATE_EMAIL) . "' AND username='" . $user_name . "' ";
         mysqli_query($db_conn, $contactUpdate);
 
         mail($email_address, $email_subject, $email_body, $headers);

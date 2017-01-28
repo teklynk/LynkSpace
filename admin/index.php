@@ -22,7 +22,7 @@ unset($_SESSION['loc_list']);
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
-        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . safeCleanStr($_POST['username']) . "' AND password=SHA1('" . safeCleanStr($_POST['password']) . "') AND email='" . filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) . "' LIMIT 1");
+        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . safeCleanStr($_POST['username']) . "' AND password=SHA1('" . $hashSalt . safeCleanStr($_POST['password']) . "') AND email='" . filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) . "' LIMIT 1");
         $rowLogin = mysqli_fetch_array($userLogin);
 
         if (is_array($rowLogin)) {
@@ -43,7 +43,7 @@ if (!empty($_POST)) {
             }
 
             //get the client IP and datetime at each log in. update the database row
-            if ($_SESSION['user_ip'] == '') {
+            if ($_SESSION['user_ip'] == '' || $_SESSION['user_ip'] == NULL) {
                 $_SESSION['user_ip'] = '0.0.0.0';
             }
 
@@ -58,11 +58,6 @@ if (!empty($_POST)) {
 
     }
 }
-
-//if install.php file exists
-//if (file_exists('install.php')) {
-//    $message = "<div class='alert alert-danger' role='alert'>Please remove install.php from the admin folder.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
-//}
 
 //Reset password page messages
 if ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound') {
@@ -180,8 +175,8 @@ if (isset($_SESSION['loggedIn'])) {
                             <?php
                         } else {
                             //create a random password and set it as a session variable
-                            //session_start();
                             $_SESSION['temp_password'] = generateRandomString();
+
                             //Creates a unique refering value/token - exposed in post
                             $_SESSION['unique_referer'] = generateRandomString();
                             ?>

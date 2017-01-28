@@ -17,7 +17,7 @@ if (!empty($_POST)) {
     $userid = $_POST['user_id'];
 
     if ($userpass == $userpassconfirm) {
-        $usersUpdate = "UPDATE users SET username='" . safeCleanStr($username) . "', password=SHA1('" . safeCleanStr($userpass) . "'), email='" . filter_var(trim($useremail), FILTER_VALIDATE_EMAIL) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $userid . " ";
+        $usersUpdate = "UPDATE users SET username='" . safeCleanStr($username) . "', password=SHA1('" . $hashSalt . safeCleanStr($userpass) . "'), email='" . filter_var(trim($useremail), FILTER_VALIDATE_EMAIL) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $userid . " ";
         mysqli_query($db_conn, $usersUpdate);
 
         $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
