@@ -45,8 +45,8 @@ $sessionTimeout = 30; //mins
 //Slide Carousel Speed
 $carouselSpeed = "5000"; //5000 = 5secs
 
-//Hash Salt
-$hashSalt = "814ff90c56a74b5e2bb48cd240331867a95357e1";
+//Blowfish Salt
+$blowfishSalt = "Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8";
 
 //establish db connection
 $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
