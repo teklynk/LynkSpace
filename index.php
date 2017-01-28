@@ -15,7 +15,8 @@ include 'includes/slider_inc.php';
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
-if ($_GET['loc_id'] == 1) {
+
+if ($_GET['loc_id'] == 1 && $multiBranch == "true") {
     include 'includes/searchlocations_inc.php';
 } else {
     include 'includes/searchpac_inc.php';
