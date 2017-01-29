@@ -4,8 +4,6 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-//getAbout();
-
 echo "<div class='row row_pad'>";
 
 if (!empty($aboutTitle)) {

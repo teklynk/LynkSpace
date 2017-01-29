@@ -437,7 +437,6 @@ function getSetup(){
     $setupSearchDefault = $rowSetup['searchdefault'];
 }
 
-
 function getSocialMediaIcons($shape, $section){
     //EXAMPLE: getSocialMediaIcons("circle","top")
     //EXAMPLE: getSocialMediaIcons("square","footer")
@@ -790,6 +789,7 @@ function generateRandomString($length = 10){
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
+
     return $randomString;
 }
 

@@ -5,8 +5,6 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-//getServices();
-
 if ($servicesNumRows > 0) {
 
     echo "<div class='row' id='services'>";

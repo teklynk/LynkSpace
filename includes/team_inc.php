@@ -5,8 +5,6 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-//getTeam();
-
 if ($teamNumRows > 0) {
 
     echo "<div class='row' id='team'>";

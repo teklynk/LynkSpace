@@ -4,7 +4,6 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-//getCustomers();
 
 if ($customerNumRows > 0) {
 

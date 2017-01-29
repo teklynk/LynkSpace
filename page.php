@@ -12,11 +12,13 @@ echo "</div>";
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
+
 if ($_GET['loc_id'] == 1) {
     include 'includes/searchlocations_inc.php';
 } else {
     include 'includes/searchpac_inc.php';
 }
+
 echo "</div>";
 echo "</div>";
 

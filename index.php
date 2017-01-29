@@ -9,9 +9,7 @@ echo "<div class='container bannerwrapper'>";
 echo "</div>";
 echo "</div>";
 
-
 include 'includes/slider_inc.php';
-
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";

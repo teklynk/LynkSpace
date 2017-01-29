@@ -80,8 +80,7 @@ session_start();
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- Google Translate -->
-    <script type="text/javascript" language="javascript"
-            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- TLC LS2PAC search script CDN -->
     <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
@@ -119,7 +118,8 @@ session_start();
                     <button id="btnIE7alertclose" type="button" class="close">
                         <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <h4>
-                        Did you know that your Internet Explorer is out of date?</h4>
+                        Did you know that your Internet Explorer is out of date?
+                    </h4>
                     <p>
                         To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
                     <p>

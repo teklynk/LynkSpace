@@ -4,6 +4,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
+
 getFeatured();
 
 echo "<div class='row' id='featured'>";

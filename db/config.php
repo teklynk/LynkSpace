@@ -9,6 +9,7 @@ require_once('dbconn.php');
 $IPrange = "";
 
 //Multi-Branch - more than one location
+//true or false
 $multiBranch = "true";
 
 //Homepage URL
@@ -18,11 +19,14 @@ $homePageURL = "http://www.cps.edu";
 $setupPACURL = "https://pac.library.cps.edu";
 
 //Edit values for your web site. leave as is in most cases.
-$image_dir = "../uploads/" . $_GET['loc_id'] . "/"; //physical path to uploads folder
+//physical path to uploads folder
+$image_dir = "../uploads/" . $_GET['loc_id'] . "/";
 
-$image_url = "//" . $_SERVER['HTTP_HOST'] . "/uploads/" . $_GET['loc_id'] . "/"; //absolute web url path to uploads folder for tinyMCE
+//absolute web url path to uploads folder for tinyMCE
+$image_url = "//" . $_SERVER['HTTP_HOST'] . "/uploads/" . $_GET['loc_id'] . "/";
 
-$image_baseURL = "uploads/" . $_GET['loc_id'] . "/"; //relative web url path to uploads folder for tinyMCE
+//relative web url path to uploads folder for tinyMCE
+$image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
 
 //Upload function
 $target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -40,10 +44,12 @@ $googleAnalytics = "";
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";
 
 //Session timeout
-$sessionTimeout = 30; //mins
+//mins
+$sessionTimeout = 30;
 
 //Slide Carousel Speed
-$carouselSpeed = "5000"; //5000 = 5secs
+//5000 = 5secs
+$carouselSpeed = "5000";
 
 //Blowfish Salt
 $blowfishSalt = "Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8";
