@@ -1,6 +1,10 @@
 .svn
 .idea
+*.sql
 /db/bootstrap_business.sql
 /db/config.php
 /db/dbconn.php
 /node_modules/
+/uploads/
+.gitignore
+
