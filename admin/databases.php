@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.php');
+include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'databases.php';
 
@@ -642,5 +642,5 @@ if ($_GET['section'] == $custSections[0]) {
 	</div>
 	<p></p>";
 
-        include_once('includes/footer.php');
+        include_once('includes/footer.inc.php');
         ?>

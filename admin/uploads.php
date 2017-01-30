@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.php');
+include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'uploads.php';
 
@@ -171,5 +171,5 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] ==
     </div><!-- /.modal -->
 
 <?php
-include_once('includes/footer.php');
+include_once('includes/footer.inc.php');
 ?>

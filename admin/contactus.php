@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.php');
+include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'contactus.php';
 
@@ -139,5 +139,5 @@ if ($_GET['update'] == 'true') {
     </div>
 
 <?php
-include_once('includes/footer.php');
+include_once('includes/footer.inc.php');
 ?>

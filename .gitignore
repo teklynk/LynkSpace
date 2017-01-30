@@ -7,3 +7,7 @@ codeception.yml
 composer.lock
 /uploads/
 /node_modules/
+/.gitignore
+/db/config.php
+/db/bootstrap_business.sql
+/db/dbconn.php

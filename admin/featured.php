@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.php');
+include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'featured.php';
 
@@ -152,5 +152,5 @@ if ($_GET['update'] == 'true') {
         </form>
     </div>
 <?php
-include_once('includes/footer.php');
+include_once('includes/footer.inc.php');
 ?>

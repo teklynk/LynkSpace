@@ -32,7 +32,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "page.php?page_id=" . $pageId . "&loc_id=" . $locId)) . "</loc>\n";
+            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "page.php?page_id=" . $pageId . "&loc_id=" . $locId)) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<lastmod>" . $pageDate . "</lastmod>\n";
             fwrite($sitemapfile, $writeline);
@@ -51,7 +51,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "databases.php?section=" . $custSection . "&cat_id=" . $custCatId . "&loc_id=" . $custLocId)) . "</loc>\n";
+            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "databases.php?section=" . $custSection . "&cat_id=" . $custCatId . "&loc_id=" . $custLocId)) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -67,7 +67,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "index.php?loc_id=" . $locId)) . "</loc>\n";
+            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "index.php?loc_id=" . $locId)) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -80,7 +80,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         for ($x = 0; $x < $pagesArrlength; $x++) {
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . $otherPages[$x])) . "</loc>\n";
+            $writeline = "\t\t<loc>" . str_replace('admin/ajax/update_sitemapxml.php', '', htmlspecialchars("http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . $otherPages[$x])) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -117,7 +117,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /js/\n";
         fwrite($robotsfile, $writeline);
-        $writeline = "Sitemap: " . str_replace('admin/ajax/update_sitemapxml.php', '', "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "sitemap.xml");
+        $writeline = "Sitemap: " . str_replace('admin/ajax/update_sitemapxml.php', '', "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "sitemap.xml");
         fwrite($robotsfile, $writeline);
 
         fclose($robotsfile);

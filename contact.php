@@ -2,14 +2,14 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.php');
+include_once('includes/header.inc.php');
 
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referer'] = generateRandomString();
 
 echo "<div class='grad-blue container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
-    include 'includes/featured_inc.php';
+    include 'includes/featured.inc.php';
 echo "</div>";
 echo "</div>";
 
@@ -17,9 +17,9 @@ echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1) {
-    include 'includes/searchlocations_inc.php';
+    include 'includes/searchlocations.inc.php';
 } else {
-    include 'includes/searchpac_inc.php';
+    include 'includes/searchpac.inc.php';
 }
 
 echo "</div>";
@@ -81,5 +81,5 @@ echo "</div>";
     </div>
 </div>
 <?php
-include_once('includes/footer.php');
+include_once('includes/footer.inc.php');
 ?>

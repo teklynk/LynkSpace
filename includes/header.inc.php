@@ -167,7 +167,7 @@ session_start();
                     }
                 </script>
                 <!--End Google Translate Code -->
-                <?php include 'socialmedia_inc.php'; ?>
+                <?php include 'socialmedia.inc.php'; ?>
             </div>
             <div style="clear:both;"></div>
         </div>

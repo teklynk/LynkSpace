@@ -23,7 +23,7 @@ $setupPACURL = "https://pac.library.cps.edu";
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/";
 
 //absolute web url path to uploads folder for tinyMCE
-$image_url = "//" . $_SERVER['HTTP_HOST'] . "/uploads/" . $_GET['loc_id'] . "/";
+$image_url = "//" . $_SERVER['SERVER_NAME'] . "/uploads/" . $_GET['loc_id'] . "/";
 
 //relative web url path to uploads folder for tinyMCE
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
@@ -52,6 +52,7 @@ $sessionTimeout = 30;
 $carouselSpeed = "5000";
 
 //Blowfish Salt
+//go to: https://www.question-defense.com/tools/phpmyadmin-blowfish-secret-generator
 $blowfishSalt = "Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8";
 
 //establish db connection
@@ -62,5 +63,5 @@ if (mysqli_connect_errno($db_conn)) {
     die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
 }
 
-//db connection is closed in includes/footer.php
+//db connection is closed in includes/footer.inc.php
 ?>
