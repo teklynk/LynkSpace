@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2017 at 11:36 AM
+-- Generation Time: Jan 30, 2017 at 08:59 AM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -4468,11 +4468,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 1, '2017-01-27 14:42:37', '127.0.0.1', 1),
-(2, 'rjones', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'rjones@tlcdelivers.com', 0, '2017-01-25 16:02:56', '127.0.0.1', 2),
-(3, 'kgray', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'kgray@tlcdelivers.com', 1, '2017-01-25 16:02:59', '192.168.2.46', 1),
-(4, 'eczaja', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'eczaja@tlcdelivers.com', 1, '2017-01-25 16:03:02', '192.168.3.26', 1),
-(5, 'kbageant', 'e760de9dd4bdf3916a1fc04294f9b70efb11a1b8', 'kbageant@tlcdelivers.com', 1, '2017-01-25 16:03:06', '192.168.2.15', 1);
+(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-01-28 21:23:39', '127.0.0.1', 1),
+(2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-28 21:24:07', '127.0.0.1', 2),
+(3, 'kgray', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'kgray@tlcdelivers.com', 1, '2017-01-28 21:24:12', '192.168.2.46', 1),
+(4, 'eczaja', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'eczaja@tlcdelivers.com', 1, '2017-01-28 21:24:15', '192.168.3.26', 1),
+(5, 'kbageant', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'kbageant@tlcdelivers.com', 1, '2017-01-28 21:24:19', '192.168.2.15', 1);
 
 --
 -- Indexes for dumped tables
