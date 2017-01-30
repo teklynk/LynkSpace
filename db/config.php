@@ -13,10 +13,10 @@ $IPrange = "";
 $multiBranch = "true";
 
 //Homepage URL
-$homePageURL = "http://www.cps.edu";
+$homePageURL = "www.cps.edu";
 
 //LS2PAC Server Domain or IP
-$setupPACURL = "https://pac.library.cps.edu";
+$setupPACURL = "pac.library.cps.edu";
 
 //Edit values for your web site. leave as is in most cases.
 //physical path to uploads folder

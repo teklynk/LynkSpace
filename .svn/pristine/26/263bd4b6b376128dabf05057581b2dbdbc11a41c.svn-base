@@ -1,0 +1,21 @@
+0000000000000000000000000000000000000000 39350408a701297a31450d43ad3844b494fb4d14 teklynk <ryanjones153@gmail.com> 1483539548 -0500	clone: from https://github.com/teklynk/businessCMS.git
+39350408a701297a31450d43ad3844b494fb4d14 9ddb168ac5096e7626f0d9746da3847cfad5c46b teklynk <ryanjones153@gmail.com> 1483539578 -0500	checkout: moving from master to School_template
+9ddb168ac5096e7626f0d9746da3847cfad5c46b 282653b0ad4a252cefa30c69648e336512a202b4 teklynk <ryanjones153@gmail.com> 1483539972 -0500	commit: db dump updated
+282653b0ad4a252cefa30c69648e336512a202b4 dce0ba08cd7100d8d6fe896f1952a4924ef8698a teklynk <ryanjones153@gmail.com> 1483559633 -0500	commit: added author_name to log user updates
+dce0ba08cd7100d8d6fe896f1952a4924ef8698a c9130e624ad57f3a72e889fc7c80f34e4fa81aab teklynk <ryanjones153@gmail.com> 1483566797 -0500	commit: navigation redirect if section=nothing
+c9130e624ad57f3a72e889fc7c80f34e4fa81aab 93549516a5ac804b21bf13d07a529db3afaabb2c teklynk <ryanjones153@gmail.com> 1483625118 -0500	commit: fixed redirect issue after login
+93549516a5ac804b21bf13d07a529db3afaabb2c 362da683e027e5dacbddab747698d1d76ec3dcd6 teklynk <ryanjones153@gmail.com> 1483625650 -0500	commit: removed un-used function
+362da683e027e5dacbddab747698d1d76ec3dcd6 3b12cdde52fbcfb7915a54a29a609cc35c1f6ced teklynk <ryanjones153@gmail.com> 1483627638 -0500	commit: changed logo url
+3b12cdde52fbcfb7915a54a29a609cc35c1f6ced 1c1ed72beef7c3297e4adc98a0721bec05a44884 teklynk <ryanjones153@gmail.com> 1483630539 -0500	commit: school search box stays on page if no other search options are checked
+1c1ed72beef7c3297e4adc98a0721bec05a44884 5ad3d5be6f42025ac574e45c85b7c494c1fdbffd teklynk <ryanjones153@gmail.com> 1483655341 -0500	commit: added use_default to all sections. something boke.
+5ad3d5be6f42025ac574e45c85b7c494c1fdbffd ef20ae82aa0c6762f49554e25faaae5c8ef37695 teklynk <ryanjones153@gmail.com> 1483655457 -0500	commit: sql dump with use_defaults
+ef20ae82aa0c6762f49554e25faaae5c8ef37695 66c66a01fd4226bac9c3daec7de14720953a05f3 teklynk <ryanjones153@gmail.com> 1483710702 -0500	pull: Fast-forward
+66c66a01fd4226bac9c3daec7de14720953a05f3 6dd5121bd55f587e824858a7fd478a6e24d31ac3 teklynk <ryanjones153@gmail.com> 1483720437 -0500	commit: Services use_defaults working, code cleanup
+6dd5121bd55f587e824858a7fd478a6e24d31ac3 c8f6e77fe0202dd8679ef263927b0eb68f316050 teklynk <ryanjones153@gmail.com> 1483722090 -0500	commit: team use_default working
+c8f6e77fe0202dd8679ef263927b0eb68f316050 f2f0c24927cbfe81d43963b4114a39ef97cdcb22 teklynk <ryanjones153@gmail.com> 1483722563 -0500	commit: sql dum with team services use_defaults
+f2f0c24927cbfe81d43963b4114a39ef97cdcb22 a17cbd4caefb20bbe1758dabca674c0bc15ac1e2 teklynk <ryanjones153@gmail.com> 1483738939 -0500	commit: use_defaults nav section works with sub-sections top,footer,search
+a17cbd4caefb20bbe1758dabca674c0bc15ac1e2 3a2b0f566d916359fe83294e10ba095491924a06 teklynk <ryanjones153@gmail.com> 1483739075 -0500	commit: sql dump with use_nav_default_1
+3a2b0f566d916359fe83294e10ba095491924a06 3fb990fb002da7d100c5ccd022f76708fecf79bf teklynk <ryanjones153@gmail.com> 1483971371 -0500	pull: Fast-forward
+3fb990fb002da7d100c5ccd022f76708fecf79bf 274c6dac06ccf526926e173969fc59d1c6edb9f4 teklynk <ryanjones153@gmail.com> 1483975485 -0500	commit: removed css variable from config
+274c6dac06ccf526926e173969fc59d1c6edb9f4 cefa2f008df49fd1cec74e1b48fed53fcc8088f6 teklynk <ryanjones153@gmail.com> 1483981755 -0500	commit: removed un-used variable in config, changed variable usage in other files
+cefa2f008df49fd1cec74e1b48fed53fcc8088f6 b6077189c5a96d0addb92a21b7bcc31432c4e28b teklynk <ryanjones153@gmail.com> 1484057127 -0500	pull: Fast-forward

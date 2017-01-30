@@ -1,0 +1,24 @@
+removed un-used variable in config, changed variable usage in other files
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch School_template
+# Your branch is up-to-date with 'origin/School_template'.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   admin/aboutus.php
+#	modified:   admin/databases.php
+#	modified:   admin/featured.php
+#	modified:   admin/page.php
+#	modified:   admin/services.php
+#	modified:   admin/setup.php
+#	modified:   admin/slider.php
+#	modified:   admin/team.php
+#	modified:   admin/uploads.php
+#	modified:   db/bootstrap_business.sql
+#	modified:   db/config.php
+#	modified:   uploads/1/galaxy_nebula_blurring_stars_65152_1920x1080.jpg
+#	deleted:    uploads/1/spaces-desktop-backgrounds-2.jpg
+#	new file:   uploads/1/studio.png
+#	modified:   uploads/100/spaces-desktop-backgrounds-2.jpg
+#

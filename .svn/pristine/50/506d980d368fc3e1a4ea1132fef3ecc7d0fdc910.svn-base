@@ -1,0 +1,10 @@
+/node_modules/
+tests/
+vendor/
+*.DS_Store
+.idea
+.svn
+.git
+composer.json
+codeception.yml
+composer.lock
