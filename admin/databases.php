@@ -31,7 +31,7 @@ if ($_GET['preview'] > "") {
     }
 
     if ($rowCustomerPreview['link'] > "") {
-        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>Customer Link</a></p>";
+        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>Link</a></p>";
     }
 
     echo "</div>";
