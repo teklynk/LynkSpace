@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 31, 2017 at 02:55 PM
+-- Generation Time: Jan 31, 2017 at 05:17 PM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -2207,7 +2207,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
-(1, 'CPS', '2017-01-31 19:04:57', 'true'),
+(1, 'CPS', '2017-01-31 20:55:29', 'true'),
 (2, 'Curie Metro High School', '2017-01-24 18:34:28', 'true'),
 (3, 'Northside Prep High School', '2017-01-19 17:17:23', 'true'),
 (4, 'Hyde Park High School', '2017-01-19 17:17:23', 'true'),
@@ -3436,7 +3436,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-27 21:50:39', 'admin', 1),
+(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-31 20:55:29', 'admin', 1),
 (2, 'Curie Metro High School', '', '', '1820', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-24 18:34:28', 'admin', 2),
 (3, 'Northside Prep High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 3),
 (4, 'Hyde Park High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 4),
@@ -4462,7 +4462,13 @@ CREATE TABLE `users` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `users`
+--
 
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
+(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-01-31 21:31:51', '127.0.0.1', 1),
+(2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-31 18:43:41', '127.0.0.1', 2);
 
 --
 -- Indexes for dumped tables
@@ -4630,7 +4636,7 @@ ALTER TABLE `generalinfo`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=469;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
@@ -4655,7 +4661,7 @@ ALTER TABLE `services_icons`
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
 --
 -- AUTO_INCREMENT for table `slider`
 --
