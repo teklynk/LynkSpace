@@ -47,7 +47,7 @@ if (!empty($_POST)) {
             mysqli_query($db_conn, $locationUpdate);
         } else {
             //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, author, description, keywords, config, logo, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_author) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', '" . safeCleanStr($_POST['site_google']) . "', author_name='" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $setupInsert = "INSERT INTO setup (title, author, description, keywords, config, logo, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_author) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', author_name='" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $setupInsert);
             //Insert Location
             $locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
@@ -59,8 +59,22 @@ if (!empty($_POST)) {
     }
 }
 
+$pageMsg = '';
+
 if ($_GET['update'] == 'true') {
     $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+} elseif ($_GET['deleteloc'] == 'true') {
+    $pageMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete this location? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+}
+//delete a location and all references to it in the db. this will do a cascading delete where loc_id = id
+if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
+    if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes') {
+        $locDelete = "DELETE FROM locations WHERE id = " . $_GET['loc_id'] . " ";
+        mysqli_query($db_conn, $locDelete);
+
+        header("Location: setup.php?loc_id=1");
+        echo "<script>window.location.href='setup.php?loc_id=1';</script>";
+    }
 }
 
 ?>
@@ -135,7 +149,7 @@ if ($_GET['update'] == 'true') {
             }
 
             //Check if user_level is Admin user
-            if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 && !$_GET['newlocation'] == 'true') {
+            if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 && $_GET['newlocation'] != 'true') {
             ?>
             <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
             <h2></h2>
@@ -241,7 +255,7 @@ if ($_GET['update'] == 'true') {
 
             <?php
             //Check if user_level is Admin user and default location
-            if ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == 1 && !$_GET['newlocation'] == 'true') {
+            if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
                 ?>
                 <hr/>
                 <div class="row">
@@ -254,7 +268,7 @@ if ($_GET['update'] == 'true') {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="sitemap_builder">
-                            <button data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder" >
+                            <button type="button" data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder" >
                                 <i class='fa fa-fw fa-refresh'></i> Update Sitemap.xml
                             </button>
                             <br/>
@@ -262,6 +276,17 @@ if ($_GET['update'] == 'true') {
                         </div>
                     </div>
                 </div>
+                <?php if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {?>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group" id="delete_location">
+                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                    <i class='fa fa-fw fa-trash'></i> Delete this location
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php }?>
                 <?php
             }
             ?>
