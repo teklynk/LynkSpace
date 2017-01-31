@@ -50,7 +50,7 @@ function getPage(){
 
     if (ctype_digit($_GET['page_id'])){
         $pageRefId = $_GET['page_id'];
-        $sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, disqus, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
         $rowPage = mysqli_fetch_array($sqlPage);
 
         if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']){
@@ -62,7 +62,6 @@ function getPage(){
             $pageTitle = $rowPage['title'];
             $pageContent = $rowPage['content'];
             $pageImageAlign = $rowPage['image_align'];
-            $pageDisqus = $rowPage['disqus'];
 
         } else {
 
