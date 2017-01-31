@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 30, 2017 at 08:59 AM
+-- Generation Time: Jan 31, 2017 at 02:55 PM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -1231,7 +1231,7 @@ CREATE TABLE `featured` (
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'SOAR - Seeking Online Access to Resources', 'Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources. &nbsp; &nbsp; &nbsp;&nbsp;</p>', '', 'left', 'false', '2017-01-20 14:34:43', 'kbageant', 1),
+(1, 'SOAR - Seeking Online Access to Resources', 'Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', '', 'left', 'false', '2017-01-31 14:42:30', 'admin', 1),
 (2, 'Curie Metro High School', 'Virtual Library', '', '', '', 'false', '2017-01-19 17:16:26', 'admin', 2),
 (3, 'Northside Prep High School', 'Virtual Library', '', '', '', 'false', '2017-01-19 17:16:26', 'admin', 3),
 (4, 'Hyde Park High School', 'Virtual Library', '', '', '', 'false', '2017-01-19 17:16:26', 'admin', 4),
@@ -2207,7 +2207,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
-(1, 'CPS', '2017-01-25 21:47:26', 'true'),
+(1, 'CPS', '2017-01-31 19:04:57', 'true'),
 (2, 'Curie Metro High School', '2017-01-24 18:34:28', 'true'),
 (3, 'Northside Prep High School', '2017-01-19 17:17:23', 'true'),
 (4, 'Hyde Park High School', '2017-01-19 17:17:23', 'true'),
@@ -2699,32 +2699,32 @@ CREATE TABLE `navigation` (
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`, `author_name`) VALUES
-(43, 4, 'Virtual Library HS', 'https://pac.library.cps.edu/?config=11', 0, 'Top', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(54, 3, 'Virtual Library ES', 'https://pac.library.cps.edu/?config=12', 0, 'Top', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(60, 5, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-19 17:20:07', 'admin'),
-(61, 1, 'Search District Catalog', 'https://pac.library.cps.edu/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(62, 2, 'Search District Kid&#039;s Catalog', 'https://pac.library.cps.edu/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-01-19 17:20:07', 'admin'),
-(112, 4, 'My Account', 'https://pac.library.cps.edu/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-01-19 17:20:07', 'admin'),
-(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-01-19 17:20:07', 'admin'),
-(116, 12, 'Students', 'http://www.cps.edu/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(117, 7, 'Schools', 'http://www.cps.edu/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(118, 8, 'About', 'http://www.cps.edu/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(119, 9, 'Calendar', 'http://www.cps.edu/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(120, 10, 'Staff', 'http://www.cps.edu/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(121, 11, 'Topics', 'http://www.cps.edu/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(123, 14, 'Careers', 'http://www.cps.edu/careers', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(124, 15, 'CPS Stats and Facts', 'http://www.cps.edu/stats', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(125, 16, 'News and Press Releases', 'http://www.cps.edu/news', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(126, 17, 'What&#039;s New on CPS.EDU?', 'http://www.cps.edu/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(127, 2, 'Virtual Library Elementary Schools', 'https://pac.library.cps.edu/?config=12', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(128, 3, 'Virtual Library High Schools', 'https://pac.library.cps.edu/?config=11', 5, 'Footer', 'true', 1, '2017-01-24 14:54:02', 'admin'),
-(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=1', 5, 'Footer', 'false', 1, '2017-01-24 14:54:02', 'admin'),
-(130, 6, 'Recommended Websites', 'databases.php?section=2&loc_id=1', 5, 'Footer', 'off', 1, '2017-01-24 14:54:02', 'admin'),
-(131, 5, 'Other Resources', 'databases.php?loc_id=1&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-01-24 14:54:02', 'admin');
+(43, 4, 'Virtual Library HS', 'https://[pac_url]/?config=11', 0, 'Top', 'true', 1, '2017-01-30 21:20:51', 'eczaja'),
+(54, 3, 'Virtual Library ES', 'https://[pac_url]/?config=12', 0, 'Top', 'true', 1, '2017-01-30 21:20:51', 'eczaja'),
+(60, 5, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-01-30 21:20:51', 'eczaja'),
+(61, 1, 'Search District Catalog', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
+(62, 2, 'Search District Kid&#039;s Catalog', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
+(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-01-30 21:20:51', 'eczaja'),
+(112, 4, 'My Account', 'https://[pac_url]/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
+(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-01-30 21:20:51', 'eczaja'),
+(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-01-30 21:20:51', 'eczaja'),
+(116, 12, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(117, 7, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(118, 8, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(119, 9, 'Calendar', 'http://[homepage_url]/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(120, 10, 'Staff', 'http://[homepage_url]/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(121, 11, 'Topics', 'http://[homepage_url]/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(123, 14, 'Careers', 'http://[homepage_url]/careers', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(124, 15, 'CPS Stats and Facts', 'http://[homepage_url]/stats', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(125, 16, 'News and Press Releases', 'http://[homepage_url]/news', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(126, 17, 'What&#039;s New on CPS.EDU?', 'http://[homepage_url]/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(127, 2, 'Virtual Library Elementary Schools', 'https://[pac_url]/?config=12', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(128, 3, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-01-30 20:15:58', 'admin'),
+(130, 6, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-01-30 20:15:58', 'admin'),
+(131, 5, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-01-30 20:15:58', 'admin');
 
 -- --------------------------------------------------------
 
@@ -2738,7 +2738,6 @@ CREATE TABLE `pages` (
   `image` text NOT NULL,
   `content` text NOT NULL,
   `active` text NOT NULL,
-  `disqus` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
@@ -2749,15 +2748,15 @@ CREATE TABLE `pages` (
 -- Dumping data for table `pages`
 --
 
-INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `disqus`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
-(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?loc_id=1&amp;page_id=34">View Open Positions</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(42, 'Explore', '', '<p>Online Resources Page</p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', 'false', '2017-01-19 17:18:11', 'admin', 'right', 1);
+INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
+(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?loc_id=1&amp;page_id=34">View Open Positions</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(42, 'Explore', '', '<p>Online Resources Page</p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1);
 
 -- --------------------------------------------------------
 
@@ -3437,7 +3436,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-26 14:08:16', 'admin', 1),
+(1, 'Chicago Public School Libraries', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the login information with your CPS login. (en EspaÃ±ol). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-27 21:50:39', 'admin', 1),
 (2, 'Curie Metro High School', '', '', '1820', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-24 18:34:28', 'admin', 2),
 (3, 'Northside Prep High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 3),
 (4, 'Hyde Park High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-01-19 18:11:36', 'admin', 4),
@@ -3960,7 +3959,7 @@ CREATE TABLE `socialmedia` (
 --
 
 INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, `google`, `instagram`, `youtube`, `tumblr`, `use_defaults`, `loc_id`) VALUES
-(1, 'Follow Us', 'https://www.facebook.com/chicagopublicschools', 'https://twitter.com/ChiPubSchools', '', '', '', 'http://www.youtube.com/user/ChiPubSchools', '', 'true', 1),
+(1, 'Follow Us', 'https://www.facebook.com/chicagopublicschools', 'https://twitter.com/ChiPubSchools', '', '', '', 'http://www.youtube.com/user/ChiPubSchools', '', 'false', 1),
 (2, 'Follow Us', '', '', '', '', '', '', '', 'true', 2),
 (3, 'Follow Us', '', '', '', '', '', '', '', 'true', 3),
 (4, 'Follow Us', '', '', '', '', '', '', '', 'true', 4),
@@ -4463,16 +4462,7 @@ CREATE TABLE `users` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `users`
---
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-01-28 21:23:39', '127.0.0.1', 1),
-(2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-28 21:24:07', '127.0.0.1', 2),
-(3, 'kgray', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'kgray@tlcdelivers.com', 1, '2017-01-28 21:24:12', '192.168.2.46', 1),
-(4, 'eczaja', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'eczaja@tlcdelivers.com', 1, '2017-01-28 21:24:15', '192.168.3.26', 1),
-(5, 'kbageant', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'kbageant@tlcdelivers.com', 1, '2017-01-28 21:24:19', '192.168.2.15', 1);
 
 --
 -- Indexes for dumped tables
@@ -4482,43 +4472,51 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`,
 -- Indexes for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aboutus_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_loc_id_fk` (`nav_loc_id`);
 
 --
 -- Indexes for table `category_customers`
 --
 ALTER TABLE `category_customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_customers_loc_id_fk` (`cust_loc_id`);
 
 --
 -- Indexes for table `contactus`
 --
 ALTER TABLE `contactus`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contactus_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customers_loc_id_fk` (`loc_id`),
+  ADD KEY `customers_cat_id_fk` (`catid`);
 
 --
 -- Indexes for table `featured`
 --
 ALTER TABLE `featured`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `featured_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `generalinfo_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `locations`
@@ -4530,19 +4528,23 @@ ALTER TABLE `locations`
 -- Indexes for table `navigation`
 --
 ALTER TABLE `navigation`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `navigation_loc_id_fk` (`loc_id`),
+  ADD KEY `navigation_cat_id_fk` (`catid`);
 
 --
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pages_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `services_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `services_icons`
@@ -4554,31 +4556,36 @@ ALTER TABLE `services_icons`
 -- Indexes for table `setup`
 --
 ALTER TABLE `setup`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `setup_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `slider`
 --
 ALTER TABLE `slider`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `slider_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `socialmedia_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `team_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_loc_id_fk` (`loc_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -4593,7 +4600,7 @@ ALTER TABLE `aboutus`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `category_customers`
 --
@@ -4628,7 +4635,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -4668,7 +4675,101 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `aboutus`
+--
+ALTER TABLE `aboutus`
+  ADD CONSTRAINT `aboutus_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `category`
+--
+ALTER TABLE `category`
+  ADD CONSTRAINT `category_loc_id_fk` FOREIGN KEY (`nav_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `category_customers`
+--
+ALTER TABLE `category_customers`
+  ADD CONSTRAINT `category_customers_loc_id_fk` FOREIGN KEY (`cust_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `contactus`
+--
+ALTER TABLE `contactus`
+  ADD CONSTRAINT `contactus_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customers`
+--
+ALTER TABLE `customers`
+  ADD CONSTRAINT `customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `featured`
+--
+ALTER TABLE `featured`
+  ADD CONSTRAINT `featured_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `generalinfo`
+--
+ALTER TABLE `generalinfo`
+  ADD CONSTRAINT `generalinfo_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `navigation`
+--
+ALTER TABLE `navigation`
+  ADD CONSTRAINT `navigation_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pages`
+--
+ALTER TABLE `pages`
+  ADD CONSTRAINT `pages_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `setup`
+--
+ALTER TABLE `setup`
+  ADD CONSTRAINT `setup_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `slider`
+--
+ALTER TABLE `slider`
+  ADD CONSTRAINT `slider_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `socialmedia`
+--
+ALTER TABLE `socialmedia`
+  ADD CONSTRAINT `socialmedia_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `team`
+--
+ALTER TABLE `team`
+  ADD CONSTRAINT `team_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
