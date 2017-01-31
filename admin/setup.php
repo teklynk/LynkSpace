@@ -64,7 +64,7 @@ $pageMsg = '';
 if ($_GET['update'] == 'true') {
     $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 } elseif ($_GET['deleteloc'] == 'true') {
-    $pageMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete this location? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $pageMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete this location? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link' onclick=\"confirm('Waring: This will action can not be reversed!')\">Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 //delete a location and all references to it in the db. this will do a cascading delete where loc_id = id
 if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
