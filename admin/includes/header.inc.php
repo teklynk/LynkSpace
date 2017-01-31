@@ -146,7 +146,7 @@ session_start();
                     selector: 'textarea.tinymce',
                     height: 500,
                     theme: 'modern',
-                    plugins: 'link image lists paste code',
+                    plugins: 'save link image lists paste code',
                     paste_data_images: false,
                     paste_as_text: true,
                     paste_auto_cleanup_on_paste: true,
@@ -161,7 +161,7 @@ session_start();
                     link_list: [<?php echo rtrim($linkListJson, ","); ?>],
                     menubar: false,
                     toolbar_items_size: 'small',
-                    toolbar: 'insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
+                    toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
                 });
             });
         </script>
