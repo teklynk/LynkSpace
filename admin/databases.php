@@ -216,7 +216,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label><?php echo $customerLabel; ?></label>
-                    <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name">
+                    <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" required>
                 </div>
                 <hr/>
                 <div class="form-group">

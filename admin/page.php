@@ -73,7 +73,7 @@ if ($_GET['preview'] > "") {
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -128,7 +128,7 @@ if ($_GET['preview'] > "") {
                     <hr/>
                     <div class="form-group">
                         <label><?php echo $pageLabel; ?></label>
-                        <input class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title">
+                        <input class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" required>
                     </div>
                     <hr/>
                     <div class="form-group">

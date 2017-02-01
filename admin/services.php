@@ -124,7 +124,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title">
+			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" required>
 		</div>
 		<hr/>
 		<div class="form-group">

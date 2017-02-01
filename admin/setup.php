@@ -39,19 +39,19 @@ if (!empty($_POST)) {
 
         //update table on submit
         if ($rowSetup['loc_id'] == $_GET['loc_id']) {
-            //Update Setup
-            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-            mysqli_query($db_conn, $setupUpdate);
             //Update Location
             $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $locationUpdate);
+            //Update Setup
+            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            mysqli_query($db_conn, $setupUpdate);
         } else {
-            //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, author, description, keywords, config, logo, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_author) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', author_name='" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $setupInsert);
             //Insert Location
             $locationInsert = "INSERT INTO locations (id, name, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
             mysqli_query($db_conn, $locationInsert);
+            //Insert Setup
+            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, customersheading_1, customersheading_2, customersheading_3, servicescontent, customerscontent_1, customerscontent_2, customerscontent_3, teamcontent, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Service', 'Slider', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $setupInsert);
         }
 
         header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");

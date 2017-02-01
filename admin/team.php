@@ -158,7 +158,7 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name">
+                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" required>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
