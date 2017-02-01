@@ -27,7 +27,7 @@ session_start();
     //Admin panel functions
     require_once('core/functions.php');
     ?>
-    <meta http-equiv="refresh" content="<?php echo $sessionTimeout * 60; ?>;URL=index.php?logout=true"/>
+    <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>;URL=index.php?logout=true"/>
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -44,8 +44,8 @@ $googleAnalytics = "";
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";
 
 //Session timeout
-//mins
-$sessionTimeout = 30;
+//3600 = 60mins
+$sessionTimeout = 3600;
 
 //Slide Carousel Speed
 //5000 = 5secs
