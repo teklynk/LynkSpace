@@ -264,7 +264,7 @@ if ($_GET['section'] == $navSections[0]) {
 
             <fieldset class="well">
                 <div class="form-group">
-                    <label for="nav_newcat">Category</label>
+                    <label for="nav_newcat">Add a Category</label>
                     <div class="input-group">
                         <input type="text" class="form-control" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
                         <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
@@ -273,7 +273,7 @@ if ($_GET['section'] == $navSections[0]) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exist_cat">Existing Category</label>
+                    <label for="exist_cat">Edit an Existing Category</label>
                     <select class="form-control" name="exist_cat" id="exist_cat">
                         <?php
                         echo "<option value='0'>None</option>";

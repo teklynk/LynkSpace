@@ -496,7 +496,7 @@ if ($_GET['section'] == $custSections[0]) {
 
                 <fieldset class="well">
                     <div class="form-group">
-                        <label for="cust_newcat">Category</label>
+                        <label for="cust_newcat">Add a Category</label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
                             <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#cust_newcat').val();"></i></span>
@@ -505,7 +505,7 @@ if ($_GET['section'] == $custSections[0]) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exist_cat">Existing Category</label>
+                        <label for="exist_cat">Edit an Existing Category</label>
                         <select class="form-control" name="exist_cat" id="exist_cat">
                             <?php
                             echo "<option value='0'>None</option>";
