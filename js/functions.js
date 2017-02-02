@@ -36,6 +36,7 @@ $(document).ready(function () {
     });
 
 });
+
 //Page Load/Performance Checker
 window.onload = function () {
     //var loadTime = ((window.performance.timing.domComplete- window.performance.timing.navigationStart)/1000)+" sec.";

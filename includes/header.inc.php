@@ -82,18 +82,19 @@ session_start();
     <!-- Google Translate -->
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- TLC LS2PAC search script CDN -->
-    <script type="text/javascript" language="javascript" src="http://www.youseemore.com/Libraries/v7.0.0/SearchScript.min.js"></script>
+    <!-- TLC LS2 search script -->
+    <script type="text/javascript" language="javascript" src="js/searchscript.min.js"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
 
     <!-- TLC search variables -->
+    <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "<?php echo $setupPACURL ?>";
+        var TLCDomain = "https://<?php echo $setupPACURL ?>";
         var TLCConfig = "<?php echo $setupConfig ?>";
         var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
+        var TLCClassicDomain = "https://<?php echo $setupPACURL ?>";
         var TLCClassicConfig = "<?php echo $setupConfig ?>";
     </script>
 
