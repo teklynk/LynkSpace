@@ -1,9 +1,7 @@
 $(document).ready(function () {
-
     //Add responsive classes to wysiwyg elements
     $('.content img, #featured img').addClass('img-responsive');
     $('.content iframe, #featured iframe').addClass('embed-responsive-item iframe');
-
     // Sticky Footer initial page load and resize
     $(window).on('load resize', function () {
         var bodyHeight = $(window).height();
@@ -19,8 +17,6 @@ $(document).ready(function () {
             $('.content:first').css({'min-height': calcContentHeight});
         }
     });
-
-
     //Scroll to top button
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {
@@ -40,7 +36,6 @@ $(document).ready(function () {
     });
 
 });
-
 //Page Load/Performance Checker
 window.onload = function () {
     //var loadTime = ((window.performance.timing.domComplete- window.performance.timing.navigationStart)/1000)+" sec.";
