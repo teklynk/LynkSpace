@@ -452,6 +452,7 @@ $(document).ready(function () {
             $('.generalinfo_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
+
     $('.contact_defaults_checkbox').change(function () {
         $.get('ajax/update_contactdefaults.php?update=true', {
             id: this.id,

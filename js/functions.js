@@ -20,6 +20,7 @@ $(document).ready(function () {
         }
     });
 
+
     //Scroll to top button
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {
