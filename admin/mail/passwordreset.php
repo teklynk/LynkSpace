@@ -1,9 +1,11 @@
 <?php
 session_start();
+define('inc_access', TRUE);
 
 if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
 
     include_once('../../db/config.php');
+    include_once('../core/functions.php');
 
     $redirectPage = "../index.php?msgsent=reset";
 
@@ -12,6 +14,9 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
 
     //if an error occurs
     $errorPage = "../index.php?forgotpassword=true&msgsent=error";
+
+    $server_domain = $_SERVER['SERVER_NAME'];
+    $user_ip = getRealIpAddr();
 
     $user_name = trim($_POST['user_name']);
     $email_address = trim($_POST['user_email']);
@@ -33,10 +38,13 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
 
     } else {
         // Create the email and send the message
-        $email_subject = "Website User Account Form:  $user_name";
-        $email_body = "Your password has been reset.\n\n" . "Here are the details:\n\nUsername: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\n";
-        $headers = "From: noreply@dev-vm.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-        $headers .= "Reply-To: noreply@dev-vm.com";
+        $email_subject = "$server_domain - User Account Information Change:  $user_name";
+        $email_body = "This email confirms that your password has been changed. To log on the site, use the following credentials.\n\n";
+        $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
+        $email_body .= "If you have any questions or encounter any problems logging in, please contact the web site administrator.\n\n";
+        // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
+        $headers = "From: noreply@$server_domain\n";
+        $headers .= "Reply-To: noreply@$server_domain";
 
         //Update user password with temp_password where email and username match
         $contactUpdate = "UPDATE users SET username='" . $user_name . "', password=SHA1('" . $blowfishSalt . $temp_password . "') WHERE email='" . filter_var($email_address, FILTER_VALIDATE_EMAIL) . "' AND username='" . $user_name . "' ";

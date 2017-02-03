@@ -7,13 +7,13 @@ include_once('includes/header.inc.php');
 $dbFileLoc = "../db/dbconn.php";
 
 // Name of the Source sql dump file
-$filename = '../db/bootstrap_business.sql';
+$dbFilename = '../db/bootstrap_business.sql';
 
 if (!file_exists($dbFileLoc)) {
     echo "$dbFileLoc does not exist";
 }
-if (!file_exists($filename)) {
-    echo "$filename does not exist";
+if (!file_exists($dbFilename)) {
+    echo "$dbFilename does not exist";
 }
 
 if (!empty($_POST)) {
@@ -33,7 +33,7 @@ if (!empty($_POST)) {
     // Temporary variable, used to store current query
     $templine = '';
     // Read in entire file
-    $lines = file($filename);
+    $lines = file($dbFilename);
 
     // Loop through each line
     foreach ($lines as $line) {
@@ -51,6 +51,8 @@ if (!empty($_POST)) {
             $templine = '';
         }
     }
+
+    mysqli_query($db_conn,'TRUNCATE TABLE users');
 
     $userInsert = "INSERT INTO users (username, email, password, level, loc_id) VALUES ('" . safeCleanStr($_POST['username']) . "','" . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "', SHA1('" . $blowfishSalt . safeCleanStr($_POST['password']) . "'), 1, 1)";
     mysqli_query($db_conn, $userInsert);
