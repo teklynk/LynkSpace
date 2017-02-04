@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     //Add responsive classes to wysiwyg elements
     $('.content img, #featured img').addClass('img-responsive');
     $('.content iframe, #featured iframe').addClass('embed-responsive-item iframe');
