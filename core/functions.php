@@ -44,7 +44,6 @@ function getPage(){
     global $pageTitle;
     global $pageContent;
     global $pageImageAlign;
-    global $pageDisqus;
     global $pageRefId;
     global $db_conn;
 

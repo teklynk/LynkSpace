@@ -14,8 +14,13 @@ getSetup(); //from functions.php
             //jQueryUI AutoComplete
             $(function () {
                 var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
-                $("#loc_name").autocomplete({
-                    source: availableTags
+                $('#loc_name').autocomplete({
+                    source: availableTags,
+                    minLength: 2,
+                    select: function(event, ui) {
+                        $('#loc_name').val(ui.item.value);
+                        $('form[name="locSearchForm"]').submit();
+                    }
                 });
             });
         });

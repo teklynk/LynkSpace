@@ -138,7 +138,7 @@ session_start();
 <a href="#search" class="offscreen">Skip to search</a>
 
 <!-- Navigation -->
-<nav class="navbar navbar-static-top" id='top' role="navigation" style="margin-bottom: 0;">
+<nav class="navbar navbar-static-top" id="top" role="navigation" style="margin-bottom: 0;">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
