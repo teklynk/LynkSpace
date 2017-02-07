@@ -12,7 +12,6 @@ html, body {
 
 body {
     padding-top: 50px;
-    /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 .img-portfolio {
@@ -38,12 +37,6 @@ header.carousel .fill {
     height: 100%;
     background-position: center;
     background-size: cover;
-}
-
-/* 404 Page Styles */
-
-.error-404 {
-    font-size: 100px;
 }
 
 /* Pricing Page Styles */
@@ -147,6 +140,7 @@ footer {
 .fa-7x {
     font-size: 7em;
 }
+
 
 .fa-8x {
     font-size: 8em;

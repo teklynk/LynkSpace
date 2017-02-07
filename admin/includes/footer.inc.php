@@ -9,7 +9,7 @@ if (!defined('inc_access')) {
 </div>
 <!-- /#page-wrapper -->
 <div class="version text-right">
-    <small><a target="_blank" href="https://github.com/teklynk/businessCMS">Github</a></small>
+    <small></small>
 </div>
 </div>
 <!-- /#wrapper -->

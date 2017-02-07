@@ -4,12 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 /* Global Styles */
-
 body {
     margin-top: 100px;
     background-color: #fff;
 }
-
 #wrapper {
     padding-left: 0;
 }
@@ -287,6 +285,7 @@ small {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
 }
+
 
 /** Media Queries **/
 @media (min-width: 768px) {

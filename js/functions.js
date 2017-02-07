@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
     //Add responsive classes to wysiwyg elements
     $('.content img, #featured img').addClass('img-responsive');
     $('.content iframe, #featured iframe').addClass('embed-responsive-item iframe');
@@ -19,7 +19,6 @@ $(document).ready(function () {
             $('.content:first').css({'min-height': calcContentHeight});
         }
     });
-
     //Scroll to top button
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {

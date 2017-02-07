@@ -305,6 +305,7 @@ $(document).ready(function () {
         $('.ls2pac_default').attr('disabled', true);
         $('.ls2kids_default').attr('disabled', true);
     }
+
     //Ajax calls for PAC setting checkboxes and radios
     $('.searchopt_checkbox').change(function () {
         $.get('ajax/update_searchoptions.php?update=true', {
@@ -600,6 +601,7 @@ $(document).ready(function () {
             }
         });
     });
+
     //Not a Robot
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
