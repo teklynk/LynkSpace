@@ -79,6 +79,24 @@ function recurse_copy($src, $dst) {
     closedir($dir);
 }
 
+//Remove Directory
+function rrmdir($dir) {
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir"){
+                    rrmdir($dir."/".$object);
+                }else{
+                    unlink($dir."/".$object);
+                }
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
+}
+
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");

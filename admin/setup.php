@@ -73,10 +73,9 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
         $locDelete = "DELETE FROM locations WHERE id = " . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $locDelete);
 
-        //Delete the uploads folder if it exists
-        if (!file_exists($image_dir)) {
-            array_map('unlink', glob('$image_dir*.*'));
-            rmdir($image_dir);
+        //Delete the uploads folder if it exists, uses rrmdir() from functions.php
+        if (file_exists($image_dir)) {
+            rrmdir($image_dir);
         }
 
         header("Location: setup.php?loc_id=1");
