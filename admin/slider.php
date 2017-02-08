@@ -10,7 +10,7 @@ if ($_GET['preview'] > "") {
 
     $slidePreviewId = $_GET['preview'];
 
-    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, other_link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -19,6 +19,8 @@ if ($_GET['preview'] > "") {
 
     if ($rowSlidePreview['link'] > 0) {
         echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=" . $_SESSION['loc_id'] . "&page_id=" . $rowSlidePreview['link'] . "'>Page Link</a></p>";
+    } elseif ($rowSlidePreview['other_link'] <> '') {
+        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowSlidePreview['other_link'] . "'>Page Link</a></p>";
     }
 }
 ?>
@@ -83,16 +85,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     //alert messages
     if ($slideMsg != "") {
         echo $slideMsg;
-    }
-
-    //get and built pages list
-    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title");
-    $pagesStr = "<option value=''>Custom</option>";
-
-    while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
-        $getPageId = $rowGetPages['id'];
-        $getPageTitle = $rowGetPages['title'];
-        $pagesStr .= "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
     }
 
     if ($_GET['editslide']) {
@@ -163,9 +155,15 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </select>
         </div>
         <hr/>
+
         <div class="form-group">
-            <label>Choose a link</label>
-            <select class="form-control" name="slide_link" id="slide_link">
+            <label>Link URL</label>
+            <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
+        </div>
+
+        <div class="form-group">
+            <label>Existing Page</label>
+            <select class="form-control" name="slide_exist_page" id="slide_exist_page">
                 <option value="">None</option>
                 <?php
                 $pagesStr = "";
@@ -174,15 +172,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     $sliderLinkId = $rowSliderLink['id'];
                     $sliderLinkTitle = $rowSliderLink['title'];
 
-                    if (ctype_digit($rowSlides['link'])) {
-                        if ($sliderLinkId === $rowSlides['link']) {
-                            $isSelected = "SELECTED";
-                        } else {
-                            $isSelected = "";
-                        }
-                    }
-
-                    $pagesStr .= "<option value='" . $sliderLinkId . "' " . $isSelected . ">" . $sliderLinkTitle . "</option>";
+                    $pagesStr .= "<option value='page.php?page_id=" . $sliderLinkId . "&loc_id=".$_GET['loc_id']." '>" . $sliderLinkTitle . "</option>";
                 }
 
                 $pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>";

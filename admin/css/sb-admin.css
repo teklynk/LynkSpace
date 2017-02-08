@@ -11,14 +11,12 @@ body {
 #wrapper {
     padding-left: 0;
 }
-
 #page-wrapper {
     width: 100%;
     padding: 0 0 20px;
     background-color: #fff;
     min-height: 800px;
 }
-
 .huge {
     font-size: 50px;
     line-height: normal;

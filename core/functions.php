@@ -642,13 +642,11 @@ function getSlider($sliderType){
                 echo "<h2>" . $rowSlider['title'] . "</h2>";
                 echo "<p>" . $rowSlider['content'] . "</p>";
 
-                if (!empty($rowSlider['link'])){
-                    if (ctype_digit($rowSlider['link'])){
-                        echo "<a href='page.php?page_id=" . $rowSlider['link'] . "&loc_id=" . $rowSlider['loc_id'] . "' class='btn btn-primary'>Learn More</a>";
-                    } else {
-                        echo "<a href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
-                    }
+
+                if ($rowSlider['link']){
+                    echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
                 }
+
 
                 echo "</div>"; //.carousel-caption
 
@@ -686,12 +684,8 @@ function getSlider($sliderType){
             echo "<h2>" . $rowSlider['title'] . "</h2>";
             echo "<p>" . $rowSlider['content'] . "</p>";
 
-            if (!empty($rowSlider['link'])){
-                if (ctype_digit($rowSlider['link'])){
-                    echo "<a href='page.php?page_id=" . $rowSlider['link'] . "&loc_id=" . $rowSlider['loc_id'] . "' class='btn btn-primary'>Learn More</a>";
-                } else {
-                    echo "<a href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
-                }
+            if ($rowSlider['link']){
+                echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
             }
 
             echo "</div>"; //.carousel-caption

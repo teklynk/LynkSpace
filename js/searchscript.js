@@ -76,7 +76,6 @@ function getSearchString(e, t, n, r, i, s, o) {
     }
     return false
 }
-
 function getScoutLink(e, t, n, r, i) {
     var s;
     try {
@@ -102,7 +101,6 @@ function getScoutLink(e, t, n, r, i) {
     }
     return false
 }
-
 function inputValidator(e, t, n, r) {
     if (e === undefined) {
         throw new Error("Version number undefined in calling function.")

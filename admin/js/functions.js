@@ -167,10 +167,18 @@ $(document).ready(function () {
         } else {
             $('#nav_newname').val($('#exist_page option:selected').text());
             if (isNaN($('#exist_page').val())) {
-                //alert('is text');
                 $('#nav_newurl').attr('value', $('#exist_page').val());
             } else {
                 $('#nav_newurl').attr('value', 'page.php?page_id=' + $('#exist_page').val() + '&loc_id=' + getUrlVars()['loc_id']);
+            }
+        }
+    });
+    $('#slide_exist_page').change(function () {
+        if ($('#slide_exist_page').val() == '') {
+            $('#slide_link').attr('value', '');
+        } else {
+            if ($('#slide_exist_page').val()) {
+                $('#slide_link').attr('value', $('#slide_exist_page').val());
             }
         }
     });

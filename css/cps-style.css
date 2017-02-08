@@ -498,15 +498,11 @@ header.carousel {
 .fa-9x {
     font-size: 9em;
 }
-
 .fa-10x {
     font-size: 10em;
 }
 .img-circle {
     padding:3px !important;
-}
-.disqus_box {
-    margin-top: 30px;
 }
 
 .copyright {
