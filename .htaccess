@@ -12,31 +12,3 @@ php_value docref_ext 0
 php_value error_log /var/log/php_errors.log
 php_value error_reporting -1
 php_value log_errors_max_len 0
-
-# Rewrite Rules
-Options +FollowSymLinks
-RewriteEngine On
-
-RewriteRule ^([0-9]*)$ index.php?loc_id=$1
-RewriteRule ^index/([0-9]*)$ index.php?loc_id=$1
-RewriteRule ^loc/([0-9]*)$ index.php?loc_id=$1
-
-RewriteRule ^team/([0-9]*)$ team.php?loc_id=$1
-RewriteRule ^staff/([0-9]*)$ team.php?loc_id=$1
-RewriteRule ^members/([0-9]*)$ team.php?loc_id=$1
-
-RewriteRule ^databases/([0-9]*)$ databases.php?loc_id=$1
-RewriteRule ^vendors/([0-9]*)$ databases.php?loc_id=$1
-RewriteRule ^resources/([0-9]*)$ databases.php?loc_id=$1
-
-RewriteRule ^about/([0-9]*)$ about.php?loc_id=$1
-RewriteRule ^aboutus/([0-9]*)$ about.php?loc_id=$1
-
-RewriteRule ^contact/([0-9]*)$ contact.php?loc_id=$1
-RewriteRule ^contactus/([0-9]*)$ contact.php?loc_id=$1
-
-RewriteRule ^page/([0-9]*)/([0-9]*)$ page.php?page_id=$1&loc_id=$2
-
-RewriteRule ^services/([0-9]*)$ services.php?loc_id=$1
-
-RewriteRule ^databases/([0-9]*)$ databases.php?loc_id=$1

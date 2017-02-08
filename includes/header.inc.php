@@ -41,10 +41,10 @@ session_start();
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="css/default-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/css/default-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="css/cps-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/css/cps-style.min.css">
     <?php
     //Google Analytics UID in config.php
     if (!empty($googleAnalytics)) {
@@ -83,10 +83,10 @@ session_start();
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="js/searchscript.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/js/searchscript.min.js"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/js/functions.min.js"></script>
 
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
