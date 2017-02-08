@@ -10,17 +10,15 @@ if ($_GET['preview'] > "") {
 
     $slidePreviewId = $_GET['preview'];
 
-    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, other_link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowSlidePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p><br/>";
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
-    if ($rowSlidePreview['link'] > 0) {
-        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?loc_id=" . $_SESSION['loc_id'] . "&page_id=" . $rowSlidePreview['link'] . "'>Page Link</a></p>";
-    } elseif ($rowSlidePreview['other_link'] <> '') {
-        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowSlidePreview['other_link'] . "'>Page Link</a></p>";
+    if ($rowSlidePreview['link']) {
+        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowSlidePreview['link'] . "'>Page Link</a></p>";
     }
 }
 ?>
