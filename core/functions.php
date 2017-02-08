@@ -811,7 +811,7 @@ function getShortCode($urlStr){
 }
 
 //Call these functions depending on which page you are visiting
-//Sets the page title
+//Sets the page title and calls the main function for each page.
 if (basename($_SERVER['PHP_SELF']) == "page.php"){
     getPage();
     $theTitle = $setupTitle . " - " . $pageTitle;
@@ -828,7 +828,7 @@ if (basename($_SERVER['PHP_SELF']) == "page.php"){
     getTeam();
     $theTitle = $setupTitle . " - " . $teamHeading;
 } elseif (basename($_SERVER['PHP_SELF']) == "databases.php"){
-    getCustomers();
+    getCustomers(NULL);
     $theTitle = $setupTitle . " - " . $customerHeading;
 } else {
     $theTitle = $setupTitle;
