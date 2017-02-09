@@ -97,7 +97,7 @@ if ($_GET['preview'] > "") {
                 }
 
                 if ($rowPages['image'] == "") {
-                    $image = "http://placehold.it/140x100&text=No Image";
+                    $image = "//placehold.it/140x100&text=No Image";
                 } else {
                     $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowPages['image'];
                 }

@@ -226,7 +226,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <?php
 
                     if ($rowCustomer['image'] == "") {
-                        $imgSrc = "http://placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+                        $imgSrc = "//placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
                     } else {
                         $imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowCustomer['image'];
                     }

@@ -55,7 +55,7 @@ if ($_GET['update'] == 'true') {
         }
 
         if ($rowAbout['image'] == "") {
-            $thumbNail = "http://placehold.it/140x100&text=No Image";
+            $thumbNail = "//placehold.it/140x100&text=No Image";
         } else {
             $thumbNail = "../uploads/" . $_GET['loc_id'] . "/" . $rowAbout['image'];
         }

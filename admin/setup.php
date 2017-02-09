@@ -127,7 +127,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
         }
 
         if ($rowSetup['logo'] == "") {
-            $logo = "http://placehold.it/140x100&text=No Image";
+            $logo = "//placehold.it/140x100&text=No Image";
         } else {
             $logo = "../uploads/" . $_GET['loc_id'] . "/" . $rowSetup['logo'];
         }

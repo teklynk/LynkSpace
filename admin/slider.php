@@ -95,7 +95,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     if ($rowSlides['image'] == "") {
-        $image = "http://placehold.it/350x150&text=No Image";
+        $image = "//placehold.it/350x150&text=No Image";
     } else {
         $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowSlides['image'];
     }

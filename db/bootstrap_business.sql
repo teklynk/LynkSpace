@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2017 at 10:21 AM
--- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-1+deb.sury.org~trusty+1
+-- Generation Time: Feb 09, 2017 at 09:08 AM
+-- Server version: 5.5.50-MariaDB
+-- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE `aboutus` (
+CREATE TABLE IF NOT EXISTS `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `aboutus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `aboutus`
@@ -55,14 +55,11 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (10, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 10),
 (11, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 11),
 (12, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 12),
-(13, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 13),
 (14, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 14),
 (15, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 15),
-(16, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 16),
 (17, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 17),
 (18, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 18),
 (19, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 19),
-(20, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 20),
 (21, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 21),
 (22, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 22),
 (23, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 23),
@@ -102,7 +99,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (57, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 57),
 (58, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 58),
 (59, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 59),
-(60, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 60),
 (61, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 61),
 (62, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 62),
 (63, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 63),
@@ -145,7 +141,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (100, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 100),
 (101, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 101),
 (102, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 102),
-(103, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 103),
 (104, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 104),
 (105, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 105),
 (106, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 106),
@@ -155,10 +150,7 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (110, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 110),
 (111, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 111),
 (112, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 112),
-(113, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 113),
-(114, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 114),
 (115, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 115),
-(116, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 116),
 (117, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 117),
 (118, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 118),
 (119, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 119),
@@ -184,11 +176,8 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (139, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 139),
 (140, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 140),
 (141, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 141),
-(142, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 142),
-(143, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 143),
 (144, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 144),
 (145, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 145),
-(146, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 146),
 (147, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 147),
 (148, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 148),
 (149, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 149),
@@ -203,7 +192,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (158, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 158),
 (159, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 159),
 (160, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 160),
-(161, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 161),
 (162, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 163),
 (163, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 164),
 (164, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 165),
@@ -220,7 +208,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (175, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 176),
 (176, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 177),
 (177, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 178),
-(178, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 179),
 (179, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 180),
 (180, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 181),
 (181, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 182),
@@ -265,9 +252,7 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (220, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 221),
 (221, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 222),
 (222, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 223),
-(223, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 224),
 (224, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 225),
-(225, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 226),
 (226, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 227),
 (227, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 228),
 (228, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 229),
@@ -287,9 +272,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (242, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 243),
 (243, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 244),
 (244, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 245),
-(245, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 246),
-(246, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 247),
-(247, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 248),
 (248, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 249),
 (249, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 250),
 (250, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 251),
@@ -313,14 +295,11 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (268, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 269),
 (269, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 270),
 (270, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 271),
-(271, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 272),
 (272, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 273),
 (273, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 274),
 (274, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 275),
-(275, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 276),
 (276, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 277),
 (277, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 278),
-(278, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 279),
 (279, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 280),
 (280, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 281),
 (281, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 282),
@@ -340,7 +319,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (295, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 296),
 (296, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 297),
 (297, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 298),
-(298, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 299),
 (299, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 300),
 (300, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 301),
 (301, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 302),
@@ -355,9 +333,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (310, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 311),
 (311, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 312),
 (312, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 313),
-(313, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 314),
-(314, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 315),
-(315, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 316),
 (316, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 317),
 (317, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 318),
 (318, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 319),
@@ -369,7 +344,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (324, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 325),
 (325, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 326),
 (326, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 327),
-(327, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 328),
 (328, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 329),
 (329, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 330),
 (330, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 331),
@@ -408,17 +382,13 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (363, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 364),
 (364, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 365),
 (365, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 366),
-(366, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 367),
 (367, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 368),
-(368, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 369),
 (369, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 370),
 (370, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 371),
 (371, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 372),
 (372, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 373),
 (373, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 374),
 (374, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 375),
-(375, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 376),
-(376, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 377),
 (377, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 378),
 (378, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 379),
 (379, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 380),
@@ -444,7 +414,6 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (399, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 400),
 (400, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 401),
 (401, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 402),
-(402, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (403, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 404),
 (404, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 405),
 (405, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 406),
@@ -454,19 +423,14 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 (409, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 410),
 (410, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 411),
 (411, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 412),
-(412, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (413, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 414),
-(414, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 415),
 (415, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 416),
 (416, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 417),
 (417, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 418),
 (418, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 419),
 (419, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 420),
 (420, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 421),
-(421, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 422),
-(422, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 423),
 (423, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 424),
-(424, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 425),
 (425, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 426),
 (426, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 427),
 (427, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 428),
@@ -616,13 +580,13 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
@@ -642,14 +606,14 @@ INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`, `author_name`) V
 -- Table structure for table `category_customers`
 --
 
-CREATE TABLE `category_customers` (
+CREATE TABLE IF NOT EXISTS `category_customers` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `section` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_customers`
@@ -678,7 +642,7 @@ INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datet
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE `contactus` (
+CREATE TABLE IF NOT EXISTS `contactus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -695,7 +659,7 @@ CREATE TABLE `contactus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contactus`
@@ -714,14 +678,11 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (10, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 10),
 (11, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 11),
 (12, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 12),
-(13, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 13),
 (14, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 14),
 (15, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 15),
-(16, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 16),
 (17, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 17),
 (18, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 18),
 (19, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 19),
-(20, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 20),
 (21, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 21),
 (22, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 22),
 (23, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 23),
@@ -761,7 +722,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (57, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 57),
 (58, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 58),
 (59, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 59),
-(60, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 60),
 (61, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 61),
 (62, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 62),
 (63, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 63),
@@ -804,7 +764,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (100, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 100),
 (101, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 101),
 (102, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 102),
-(103, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 103),
 (104, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 104),
 (105, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 105),
 (106, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 106),
@@ -814,10 +773,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (110, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 110),
 (111, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 111),
 (112, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 112),
-(113, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 113),
-(114, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 114),
 (115, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 115),
-(116, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 116),
 (117, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 117),
 (118, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 118),
 (119, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 119),
@@ -843,11 +799,8 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (139, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 139),
 (140, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 140),
 (141, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 141),
-(142, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 142),
-(143, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 143),
 (144, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 144),
 (145, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 145),
-(146, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 146),
 (147, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 147),
 (148, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 148),
 (149, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 149),
@@ -862,7 +815,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (158, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 158),
 (159, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 159),
 (160, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 160),
-(161, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 161),
 (162, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 163),
 (163, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 164),
 (164, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 165),
@@ -879,7 +831,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (175, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 176),
 (176, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 177),
 (177, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 178),
-(178, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 179),
 (179, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 180),
 (180, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 181),
 (181, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 182),
@@ -924,9 +875,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (220, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 221),
 (221, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 222),
 (222, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 223),
-(223, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 224),
 (224, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 225),
-(225, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 226),
 (226, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 227),
 (227, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 228),
 (228, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 229),
@@ -946,9 +895,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (242, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 243),
 (243, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 244),
 (244, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 245),
-(245, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 246),
-(246, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 247),
-(247, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 248),
 (248, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 249),
 (249, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 250),
 (250, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 251),
@@ -972,14 +918,11 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (268, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 269),
 (269, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 270),
 (270, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 271),
-(271, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 272),
 (272, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 273),
 (273, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 274),
 (274, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 275),
-(275, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 276),
 (276, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 277),
 (277, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 278),
-(278, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 279),
 (279, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 280),
 (280, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 281),
 (281, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 282),
@@ -999,7 +942,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (295, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 296),
 (296, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 297),
 (297, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 298),
-(298, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 299),
 (299, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 300),
 (300, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 301),
 (301, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 302),
@@ -1014,9 +956,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (310, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 311),
 (311, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 312),
 (312, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 313),
-(313, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 314),
-(314, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 315),
-(315, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 316),
 (316, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 317),
 (317, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 318),
 (318, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 319),
@@ -1028,7 +967,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (324, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 325),
 (325, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 326),
 (326, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 327),
-(327, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 328),
 (328, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 329),
 (329, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 330),
 (330, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 331),
@@ -1067,17 +1005,13 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (363, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 364),
 (364, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 365),
 (365, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 366),
-(366, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 367),
 (367, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 368),
-(368, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 369),
 (369, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 370),
 (370, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 371),
 (371, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 372),
 (372, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 373),
 (373, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 374),
 (374, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 375),
-(375, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 376),
-(376, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 377),
 (377, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 378),
 (378, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 379),
 (379, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 380),
@@ -1103,7 +1037,6 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (399, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 400),
 (400, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 401),
 (401, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 402),
-(402, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (403, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 404),
 (404, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 405),
 (405, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 406),
@@ -1113,19 +1046,14 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (409, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 410),
 (410, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 411),
 (411, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 412),
-(412, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (413, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 414),
-(414, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 415),
 (415, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 416),
 (416, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 417),
 (417, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 418),
 (418, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 419),
 (419, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 420),
 (420, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 421),
-(421, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 422),
-(422, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 423),
 (423, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 424),
-(424, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 425),
 (425, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 426),
 (426, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 427),
 (427, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 428),
@@ -1147,8 +1075,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (443, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 444),
 (444, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 445),
 (445, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 446),
-(446, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 447);
-INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(446, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 447),
 (447, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 448),
 (448, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 449),
 (449, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 450),
@@ -1184,7 +1111,8 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 (479, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 480),
 (480, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 481),
 (481, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 482),
-(482, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 483),
+(482, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 483);
+INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `sendtoemail`, `address`, `city`, `state`, `zipcode`, `phone`, `hours`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (483, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 484),
 (484, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 485),
 (485, 'Contact Us', '', '', '', '', '', '', '', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 486),
@@ -1276,7 +1204,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `icon` text NOT NULL,
@@ -1290,7 +1218,7 @@ CREATE TABLE `customers` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
@@ -1298,7 +1226,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
 (4, 'gale_icon_1.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', 'jhorning', 1),
-(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica\'s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 'jhorning', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 'jhorning', 1),
 (6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', 'jhorning', 1),
 (7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', 'jhorning', 1),
 (8, 'gale_icon_1.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', 'jhorning', 1),
@@ -1343,16 +1271,16 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (58, '', 'link', 'Bureau of Labor Statistics', 'http://www.bls.gov/ooh/', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (59, '', 'link', 'World-of-Work Map', 'http://www.act.org/world/explore_world.html', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(60, '', 'link', 'What\'s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(60, '', 'link', 'What''s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (61, '', 'link', 'African American Heritage Teaching Resources', 'http://www.smithsonianeducation.org/educators/resource_library/african_american_resources.html', '', 6, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (62, '', 'link', 'DuSable Museum of African American History', 'http://www.dusablemuseum.org/', '', 6, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(63, '', 'link', 'The Art Institute of Chicago\'s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(63, '', 'link', 'The Art Institute of Chicago''s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (64, '', 'link', 'National Gallery of Art for kids', 'http://www.nga.gov/content/ngaweb/education/kids.html', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (65, '', 'link', 'Haring Kids', 'http://www.haringkids.com/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (66, '', 'link', 'National Core Arts Standards', 'http://bit.ly/curiouscorner', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (67, '', 'link', 'Museum of Modern Art - Destination Modern Art!', 'http://www.moma.org/interactives/destination/#', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (68, '', 'link', 'CPS Department of Arts Education', 'http://www.cpsarts.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(69, '', 'link', 'Smithsonian Latino Center\'s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(69, '', 'link', 'Smithsonian Latino Center''s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (70, '', 'link', 'Lincoln Center Institute', 'http://lcinstitute.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (71, '', 'link', 'PBS Kids', 'http://pbskids.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (72, '', 'link', 'Center for History and New Media', 'http://chnm.gmu.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
@@ -1373,11 +1301,11 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (87, '', 'link', 'WWW-VL The History Index', 'http://vlib.iue.it/history/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (88, '', 'link', 'Spartacus: History', 'http://spartacus-educational.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (89, '', 'link', 'Ask ERIC Virtual Library', 'http://eric.ed.gov/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(90, '', 'link', 'Scholars\' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(90, '', 'link', 'Scholars'' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (91, '', 'link', 'Thinkfinity', 'http://thinkfinity.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (92, '', 'link', 'Education Index', 'http://www.educationindex.com/history/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (93, '', 'link', 'World History: HyperHistory', 'http://www.hyperhistory.com/online_n2/History_n2/a.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
-(94, '', 'link', 'Kathy Schrock\'s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
+(94, '', 'link', 'Kathy Schrock''s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (95, '', 'link', 'SchoolHistory.co.uk', 'http://www.schoolhistory.co.uk/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (96, '', 'link', 'The History News Network', 'http://historynewsnetwork.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (97, '', 'link', 'eHistory.com', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
@@ -1402,7 +1330,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 'admin', 1),
 (118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', '2017-01-26 14:07:02', 'admin', 1),
-(119, '', 'link', 'International Children\'s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', '2017-01-26 14:10:25', 'admin', 1),
+(119, '', 'link', 'International Children''s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', '2017-01-26 14:10:25', 'admin', 1),
 (120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', '2017-01-26 14:11:56', 'admin', 1);
 
 -- --------------------------------------------------------
@@ -1411,7 +1339,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 -- Table structure for table `featured`
 --
 
-CREATE TABLE `featured` (
+CREATE TABLE IF NOT EXISTS `featured` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -1422,7 +1350,7 @@ CREATE TABLE `featured` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `featured`
@@ -1441,14 +1369,11 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (10, 'LaSalle II Magnet', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 10),
 (11, 'Thurgood Marshall Middle School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 11),
 (12, 'Thomas J Higgins Elementary Community Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 12),
-(13, 'Davis Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 13),
 (14, 'James Weldon Johnson Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 14),
 (15, 'Frederick A Douglass Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 15),
-(16, 'Eli Whitney Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 16),
 (17, 'John Whistler Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 17),
 (18, 'Mark Twain Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 18),
 (19, 'Frazier Prospective IB Magnet ES', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 19),
-(20, 'Frank W Reilly Elementary School - Annex Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 20),
 (21, 'John T Pirie Fine Arts & Academic Center Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 21),
 (22, 'John Palmer Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 22),
 (23, 'William J Onahan Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 23),
@@ -1488,7 +1413,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (57, 'Alessandro Volta Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 57),
 (58, 'Mancel Talcott Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 58),
 (59, 'Herbert Spencer Elementary Math & Science Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 59),
-(60, 'John M Smyth Elementary School - MYP', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 60),
 (61, 'John D Shoop Math-Science Technical Academy Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 61),
 (62, 'Arnold Mireles Elementary Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 62),
 (63, 'Peter A Reinberg Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 63),
@@ -1531,7 +1455,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (100, 'James Ward Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 100),
 (101, 'James Wadsworth Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 101),
 (102, 'Talman Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 102),
-(103, 'National Teachers Elementary Academy - Learning Lab', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 103),
 (104, 'A.N. Pritzker School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 104),
 (105, 'Suder Montessori Magnet Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 105),
 (106, 'Franz Peter Schubert Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 106),
@@ -1541,10 +1464,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (110, 'William B Ogden Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 110),
 (111, 'Alfred Nobel Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 111),
 (112, 'Inter-American Elementary Magnet School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 112),
-(113, 'Hanson Park Elementary School - Branch Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 113),
-(114, 'Hanson Park Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 114),
 (115, 'Mary McLeod Bethune Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 115),
-(116, 'Eli Whitney Elementary School - Annex Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 116),
 (117, 'George B McClellan Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 117),
 (118, 'Joseph Lovett Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 118),
 (119, 'Eli Whitney Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 119),
@@ -1570,11 +1490,8 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (139, 'George Washington High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 139),
 (140, 'Benito Juarez Community Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 140),
 (141, 'Kenwood Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 141),
-(142, 'Frank W Reilly Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 142),
-(143, 'Frank W Reilly Elementary School - Branch Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 143),
 (144, 'Friedrich W Von Steuben Metropolitan Science HS', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 144),
 (145, 'Morgan Park High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 145),
-(146, 'American Indian Education Center', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 146),
 (147, 'Thomas Kelly High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 147),
 (148, 'Skinner North Classical Elementary', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 148),
 (149, 'John A Walsh Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 149),
@@ -1589,7 +1506,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (158, 'Manuel Perez Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 158),
 (159, 'Helen Peirce International Studies Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 159),
 (160, 'William P Nixon Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 160),
-(161, 'William P Nixon Elementary School - Annex Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 161),
 (162, 'Hannah G Solomon Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 163),
 (163, 'Ogden International High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 164),
 (164, 'Mark Sheridan Elementary Math & Science Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 165),
@@ -1606,7 +1522,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (175, 'Edward Coles Elementary Language Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 176),
 (176, 'Agustin Lara Elementary Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 177),
 (177, 'John H Kinzie Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 178),
-(178, 'William P Nixon Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 179),
 (179, 'Henry H Nash Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 180),
 (180, 'Kelvyn Park High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 181),
 (181, 'DeWitt Clinton Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 182),
@@ -1651,9 +1566,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (220, 'Stephen K Hayt Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 221),
 (221, 'Ellen H Richards Career Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 222),
 (222, 'Belmont-Cragin Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 223),
-(223, 'John H Hamline Elementary School - Branch Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 224),
 (224, 'Galileo Math & Science Scholastic Academy Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 225),
-(225, 'Alexander Graham Elementary School - Branch Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 226),
 (226, 'John H Hamline Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 227),
 (227, 'Alexander Graham Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 228),
 (228, 'Harriet Beecher Stowe Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 229),
@@ -1673,9 +1586,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (242, 'John J Pershing Elementary Humanities Magnet', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 243),
 (243, 'Florence Nightingale Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 244),
 (244, 'James E McDade Elementary Classical School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 245),
-(245, 'Harriet Beecher Stowe Elementary School - Library 3', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 246),
-(246, 'Harriet Beecher Stowe Elementary School - Library 2', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 247),
-(247, 'Harriet Beecher Stowe Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 248),
 (248, 'John Spry Elementary Community School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 249),
 (249, 'Norman A Bridge Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 250),
 (250, 'Washington D Smyser Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 251),
@@ -1699,14 +1609,11 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (268, 'Edward F Dunne Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 269),
 (269, 'Carl von Linne Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 270),
 (270, 'George Armstrong International Studies Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 271),
-(271, 'Edward F Dunne Elementary School - Primary Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 272),
 (272, 'Minnie Mars Jamieson Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 273),
 (273, 'Jacqueline B Vaughn Occupational High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 274),
 (274, 'Eric Solorio Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 275),
-(275, 'Edward F Dunne Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 276),
 (276, 'Walter S Christopher Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 277),
 (277, 'Richard J Daley Elementary Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 278),
-(278, 'John H Hamline Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 279),
 (279, 'Federico Garcia Lorca Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 280),
 (280, 'George Washington Carver Military Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 281),
 (281, 'Charles R Henderson Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 282),
@@ -1726,7 +1633,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (295, 'William Howard Taft High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 296),
 (296, 'Mariano Azuela Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 297),
 (297, 'Senn Campus', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 298),
-(298, 'Alexander Graham Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 299),
 (299, 'Hanson Park Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 300),
 (300, 'Joseph Brennemann Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 301),
 (301, 'Micheal M Byrne Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 302),
@@ -1741,9 +1647,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (310, 'Grover Cleveland Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 311),
 (311, 'Castellanos Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 312),
 (312, 'Durkin Park Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 313),
-(313, 'Black Magnet Elementary School, Robert A - Annex Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 314),
-(314, 'Black Magnet Elementary School, Robert A - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 315),
-(315, 'CPS', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 316),
 (316, 'Professional Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 317),
 (317, 'Hope College Preparatory High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 318),
 (318, 'Chicago High School for Agricultural Sciences', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 319),
@@ -1755,7 +1658,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (324, 'John Barry Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 325),
 (325, 'Hiram H Belding Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 326),
 (326, 'Lyman A Budlong Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 327),
-(327, 'ovtest', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 328),
 (328, 'Intrinsic Charter High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 329),
 (329, 'Chicago High School for the Arts', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 330),
 (330, 'William E B Dubois Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 331),
@@ -1794,17 +1696,13 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (363, 'Louisa May Alcott Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 364),
 (364, 'Charles P Steinmetz College Preparatory HS', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 365),
 (365, 'Gage Park High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 366),
-(366, 'North Lawndale College Prep Charter - Collins', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 367),
 (367, 'North Lawndale College Prep Charter', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 368),
-(368, 'North Lawndale College Prep Charter - ChristianaÂ ', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 369),
 (369, 'William Jones College Preparatory High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 370),
 (370, 'William C Reavis Math & Science Specialty ES', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 371),
 (371, 'William Penn Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 372),
 (372, 'Ronald E McNair Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 373),
 (373, 'William F Finkl Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 374),
 (374, 'Rachel Carson Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 375),
-(375, 'Healy Elementary School, Robert - Annex Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 376),
-(376, 'Robert Healy Elementary School - Main Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 377),
 (377, 'Robert Healy Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 378),
 (378, 'John Charles Haines Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 379),
 (379, 'Philip Rogers Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 380),
@@ -1830,7 +1728,6 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (399, 'Northwest Middle School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 400),
 (400, 'Carter G Woodson South Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 401),
 (401, 'Wolfgang A Mozart Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 402),
-(402, 'Walt Disney Magnet Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 403),
 (403, 'Myra Bradwell Communications Arts & Sciences Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 404),
 (404, 'Back of the Yards High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 405),
 (405, 'Sarah E. Goode STEM Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 406),
@@ -1840,19 +1737,14 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (409, 'Grant Campus', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 410),
 (410, 'Alexander Graham Bell Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 411),
 (411, 'Charles Allen Prosser Career Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 412),
-(412, 'Walt Disney Magnet Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 403),
 (413, 'Amelia Earhart Options for Knowledge ES', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 414),
-(414, 'John M Smyth Elementary School - PYP', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 415),
 (415, 'John M Smyth Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 416),
 (416, 'Richard J Oglesby Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 417),
 (417, 'Josiah Pickard Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 418),
 (418, 'Ole A Thorp Elementary Scholastic Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 419),
 (419, 'Albert G Lane Technical High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 420),
 (420, 'Gurdon S Hubbard High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 421),
-(421, 'Test 3', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 422),
-(422, 'Overdrive Test 2', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 423),
 (423, 'National Teachers Elementary Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 424),
-(424, 'National Teachers Elementary Academy - Young Readers Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 425),
 (425, 'Air Force Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 426),
 (426, 'Peace & Education Coalition HS', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 427),
 (427, 'VOISE Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 428),
@@ -1867,8 +1759,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (436, 'Collins Academy High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 437),
 (437, 'Catalyst - Circle Rock', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 438),
 (438, 'Disney II Magnet High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 439),
-(439, 'Great Lakes Academy Charter School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 440);
-INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(439, 'Great Lakes Academy Charter School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 440),
 (440, 'Ira F Aldridge Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 441),
 (441, 'Phillip D Armour Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 442),
 (442, 'Arthur R Ashe Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 443),
@@ -1906,7 +1797,8 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (474, 'Thomas A Edison Regional Gifted Center ES', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 475),
 (475, 'Edison Park Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 476),
 (476, 'Leif Ericson Elementary Scholastic Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 477),
-(477, 'Medgar Evers Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 478),
+(477, 'Medgar Evers Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 478);
+INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (478, 'Fairfield Elementary Academy', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 479),
 (479, 'Fernwood Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 480),
 (480, 'Foster Park Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 481),
@@ -2003,7 +1895,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE `generalinfo` (
+CREATE TABLE IF NOT EXISTS `generalinfo` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -2011,7 +1903,7 @@ CREATE TABLE `generalinfo` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `generalinfo`
@@ -2030,14 +1922,11 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (10, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 10),
 (11, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 11),
 (12, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 12),
-(13, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 13),
 (14, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 14),
 (15, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 15),
-(16, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 16),
 (17, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 17),
 (18, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 18),
 (19, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 19),
-(20, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 20),
 (21, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 21),
 (22, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 22),
 (23, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 23),
@@ -2077,7 +1966,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (57, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 57),
 (58, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 58),
 (59, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 59),
-(60, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 60),
 (61, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 61),
 (62, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 62),
 (63, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 63),
@@ -2120,7 +2008,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (100, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 100),
 (101, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 101),
 (102, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 102),
-(103, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 103),
 (104, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 104),
 (105, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 105),
 (106, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 106),
@@ -2130,10 +2017,7 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (110, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 110),
 (111, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 111),
 (112, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 112),
-(113, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 113),
-(114, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 114),
 (115, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 115),
-(116, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 116),
 (117, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 117),
 (118, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 118),
 (119, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 119),
@@ -2159,11 +2043,8 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (139, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 139),
 (140, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 140),
 (141, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 141),
-(142, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 142),
-(143, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 143),
 (144, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 144),
 (145, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 145),
-(146, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 146),
 (147, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 147),
 (148, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 148),
 (149, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 149),
@@ -2178,7 +2059,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (158, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 158),
 (159, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 159),
 (160, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 160),
-(161, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 161),
 (162, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 163),
 (163, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 164),
 (164, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 165),
@@ -2195,7 +2075,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (175, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 176),
 (176, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 177),
 (177, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 178),
-(178, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 179),
 (179, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 180),
 (180, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 181),
 (181, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 182),
@@ -2240,9 +2119,7 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (220, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 221),
 (221, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 222),
 (222, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 223),
-(223, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 224),
 (224, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 225),
-(225, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 226),
 (226, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 227),
 (227, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 228),
 (228, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 229),
@@ -2262,9 +2139,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (242, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 243),
 (243, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 244),
 (244, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 245),
-(245, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 246),
-(246, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 247),
-(247, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 248),
 (248, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 249),
 (249, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 250),
 (250, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 251),
@@ -2288,14 +2162,11 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (268, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 269),
 (269, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 270),
 (270, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 271),
-(271, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 272),
 (272, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 273),
 (273, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 274),
 (274, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 275),
-(275, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 276),
 (276, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 277),
 (277, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 278),
-(278, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 279),
 (279, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 280),
 (280, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 281),
 (281, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 282),
@@ -2315,7 +2186,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (295, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 296),
 (296, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 297),
 (297, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 298),
-(298, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 299),
 (299, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 300),
 (300, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 301),
 (301, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 302),
@@ -2330,9 +2200,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (310, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 311),
 (311, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 312),
 (312, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 313),
-(313, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 314),
-(314, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 315),
-(315, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 316),
 (316, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 317),
 (317, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 318),
 (318, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 319),
@@ -2344,7 +2211,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (324, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 325),
 (325, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 326),
 (326, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 327),
-(327, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 328),
 (328, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 329),
 (329, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 330),
 (330, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 331),
@@ -2383,17 +2249,13 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (363, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 364),
 (364, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 365),
 (365, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 366),
-(366, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 367),
 (367, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 368),
-(368, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 369),
 (369, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 370),
 (370, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 371),
 (371, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 372),
 (372, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 373),
 (373, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 374),
 (374, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 375),
-(375, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 376),
-(376, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 377),
 (377, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 378),
 (378, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 379),
 (379, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 380),
@@ -2419,7 +2281,6 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (399, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 400),
 (400, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 401),
 (401, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 402),
-(402, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (403, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 404),
 (404, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 405),
 (405, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 406),
@@ -2429,19 +2290,14 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 (409, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 410),
 (410, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 411),
 (411, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 412),
-(412, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 403),
 (413, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 414),
-(414, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 415),
 (415, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 416),
 (416, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 417),
 (417, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 418),
 (418, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 419),
 (419, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 420),
 (420, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 421),
-(421, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 422),
-(422, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 423),
 (423, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 424),
-(424, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 425),
 (425, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 426),
 (426, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 427),
 (427, 'Information', '', 'true', '0000-00-00 00:00:00', 'admin_script', 428),
@@ -2591,12 +2447,12 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 -- Table structure for table `locations`
 --
 
-CREATE TABLE `locations` (
+CREATE TABLE IF NOT EXISTS `locations` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=569 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
@@ -2615,14 +2471,11 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (10, 'LaSalle II Magnet', '0000-00-00 00:00:00', 'true'),
 (11, 'Thurgood Marshall Middle School', '0000-00-00 00:00:00', 'true'),
 (12, 'Thomas J Higgins Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
-(13, 'Davis Academy', '0000-00-00 00:00:00', 'true'),
 (14, 'James Weldon Johnson Elementary School', '0000-00-00 00:00:00', 'true'),
 (15, 'Frederick A Douglass Academy High School', '0000-00-00 00:00:00', 'true'),
-(16, 'Eli Whitney Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (17, 'John Whistler Elementary School', '0000-00-00 00:00:00', 'true'),
 (18, 'Mark Twain Elementary School', '0000-00-00 00:00:00', 'true'),
-(19, 'Frazier Prospective IB Magnet ES', '0000-00-00 00:00:00', 'true'),
-(20, 'Frank W Reilly Elementary School - Annex Library', '0000-00-00 00:00:00', 'true'),
+(19, 'Frazier Prospective IB Magnet Elementary School', '2017-02-08 18:16:58', 'true'),
 (21, 'John T Pirie Fine Arts & Academic Center Elementary School', '0000-00-00 00:00:00', 'true'),
 (22, 'John Palmer Elementary School', '0000-00-00 00:00:00', 'true'),
 (23, 'William J Onahan Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2662,7 +2515,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (57, 'Alessandro Volta Elementary School', '0000-00-00 00:00:00', 'true'),
 (58, 'Mancel Talcott Elementary School', '0000-00-00 00:00:00', 'true'),
 (59, 'Herbert Spencer Elementary Math & Science Academy', '0000-00-00 00:00:00', 'true'),
-(60, 'John M Smyth Elementary School - MYP', '0000-00-00 00:00:00', 'true'),
 (61, 'John D Shoop Math-Science Technical Academy Elementary School', '0000-00-00 00:00:00', 'true'),
 (62, 'Arnold Mireles Elementary Academy', '0000-00-00 00:00:00', 'true'),
 (63, 'Peter A Reinberg Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2692,7 +2544,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (87, 'Ninos Heroes Elementary Academic Center', '0000-00-00 00:00:00', 'true'),
 (88, 'Frank W Gunsaulus Elementary Scholastic Academy', '0000-00-00 00:00:00', 'true'),
 (89, 'Nathanael Greene Elementary School', '0000-00-00 00:00:00', 'true'),
-(90, 'Joseph E Gary Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
+(90, 'Joseph E Gary Elementary School', '2017-02-08 18:00:16', 'true'),
 (91, 'Stephen F Gale Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
 (92, 'Gerald Delgado Kanoon Elementary Magnet School', '0000-00-00 00:00:00', 'true'),
 (93, 'Richard Edwards Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2705,7 +2557,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (100, 'James Ward Elementary School', '0000-00-00 00:00:00', 'true'),
 (101, 'James Wadsworth Elementary School', '0000-00-00 00:00:00', 'true'),
 (102, 'Talman Elementary School', '0000-00-00 00:00:00', 'true'),
-(103, 'National Teachers Elementary Academy - Learning Lab', '0000-00-00 00:00:00', 'true'),
 (104, 'A.N. Pritzker School', '0000-00-00 00:00:00', 'true'),
 (105, 'Suder Montessori Magnet Elementary School', '0000-00-00 00:00:00', 'true'),
 (106, 'Franz Peter Schubert Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2715,10 +2566,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (110, 'William B Ogden Elementary School', '0000-00-00 00:00:00', 'true'),
 (111, 'Alfred Nobel Elementary School', '0000-00-00 00:00:00', 'true'),
 (112, 'Inter-American Elementary Magnet School', '0000-00-00 00:00:00', 'true'),
-(113, 'Hanson Park Elementary School - Branch Library', '0000-00-00 00:00:00', 'true'),
-(114, 'Hanson Park Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (115, 'Mary McLeod Bethune Elementary School', '0000-00-00 00:00:00', 'true'),
-(116, 'Eli Whitney Elementary School - Annex Library', '0000-00-00 00:00:00', 'true'),
 (117, 'George B McClellan Elementary School', '0000-00-00 00:00:00', 'true'),
 (118, 'Joseph Lovett Elementary School', '0000-00-00 00:00:00', 'true'),
 (119, 'Eli Whitney Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2744,17 +2592,14 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (139, 'George Washington High School', '0000-00-00 00:00:00', 'true'),
 (140, 'Benito Juarez Community Academy High School', '0000-00-00 00:00:00', 'true'),
 (141, 'Kenwood Academy High School', '0000-00-00 00:00:00', 'true'),
-(142, 'Frank W Reilly Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
-(143, 'Frank W Reilly Elementary School - Branch Library', '0000-00-00 00:00:00', 'true'),
-(144, 'Friedrich W Von Steuben Metropolitan Science HS', '0000-00-00 00:00:00', 'true'),
+(144, 'Friedrich W Von Steuben Metropolitan Science High School', '2017-02-08 18:21:37', 'true'),
 (145, 'Morgan Park High School', '0000-00-00 00:00:00', 'true'),
-(146, 'American Indian Education Center', '0000-00-00 00:00:00', 'true'),
 (147, 'Thomas Kelly High School', '0000-00-00 00:00:00', 'true'),
 (148, 'Skinner North Classical Elementary', '0000-00-00 00:00:00', 'true'),
 (149, 'John A Walsh Elementary School', '0000-00-00 00:00:00', 'true'),
 (150, 'William K New Sullivan Elementary School', '0000-00-00 00:00:00', 'true'),
 (151, 'Walter Payton College Preparatory High School', '0000-00-00 00:00:00', 'true'),
-(152, 'Crane Medical Preparatory HS', '0000-00-00 00:00:00', 'true'),
+(152, 'Crane Medical Preparatory High School', '2017-02-08 18:20:22', 'true'),
 (153, 'Roald Amundsen High School', '0000-00-00 00:00:00', 'true'),
 (154, 'Robert A Black Magnet Elementary School', '0000-00-00 00:00:00', 'true'),
 (155, 'Daniel S Wentworth Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2763,7 +2608,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (158, 'Manuel Perez Elementary School', '0000-00-00 00:00:00', 'true'),
 (159, 'Helen Peirce International Studies Elementary School', '0000-00-00 00:00:00', 'true'),
 (160, 'William P Nixon Elementary School', '0000-00-00 00:00:00', 'true'),
-(161, 'William P Nixon Elementary School - Annex Library', '0000-00-00 00:00:00', 'true'),
 (163, 'Hannah G Solomon Elementary School', '0000-00-00 00:00:00', 'true'),
 (164, 'Ogden International High School', '0000-00-00 00:00:00', 'true'),
 (165, 'Mark Sheridan Elementary Math & Science Academy', '0000-00-00 00:00:00', 'true'),
@@ -2780,7 +2624,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (176, 'Edward Coles Elementary Language Academy', '0000-00-00 00:00:00', 'true'),
 (177, 'Agustin Lara Elementary Academy', '0000-00-00 00:00:00', 'true'),
 (178, 'John H Kinzie Elementary School', '0000-00-00 00:00:00', 'true'),
-(179, 'William P Nixon Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (180, 'Henry H Nash Elementary School', '0000-00-00 00:00:00', 'true'),
 (181, 'Kelvyn Park High School', '0000-00-00 00:00:00', 'true'),
 (182, 'DeWitt Clinton Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2825,9 +2668,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (221, 'Stephen K Hayt Elementary School', '0000-00-00 00:00:00', 'true'),
 (222, 'Ellen H Richards Career Academy High School', '0000-00-00 00:00:00', 'true'),
 (223, 'Belmont-Cragin Elementary School', '0000-00-00 00:00:00', 'true'),
-(224, 'John H Hamline Elementary School - Branch Library', '0000-00-00 00:00:00', 'true'),
 (225, 'Galileo Math & Science Scholastic Academy Elementary School', '0000-00-00 00:00:00', 'true'),
-(226, 'Alexander Graham Elementary School - Branch Library', '0000-00-00 00:00:00', 'true'),
 (227, 'John H Hamline Elementary School', '0000-00-00 00:00:00', 'true'),
 (228, 'Alexander Graham Elementary School', '0000-00-00 00:00:00', 'true'),
 (229, 'Harriet Beecher Stowe Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2841,15 +2682,12 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (237, 'John H Vanderpoel Elementary Magnet School', '0000-00-00 00:00:00', 'true'),
 (238, 'Claremont Academy Elementary School', '0000-00-00 00:00:00', 'true'),
 (239, 'Edward White Elementary Career Academy', '0000-00-00 00:00:00', 'true'),
-(240, 'Dr. Martin L. King Jr Academy of Social Justice', '0000-00-00 00:00:00', 'true'),
+(240, 'Dr. Martin L. King Jr. Academy of Social Justice', '2017-02-08 18:26:05', 'true'),
 (241, 'Richard Henry Lee Elementary School', '0000-00-00 00:00:00', 'true'),
 (242, 'Tarkington School of Excellence Elementary School', '0000-00-00 00:00:00', 'true'),
 (243, 'John J Pershing Elementary Humanities Magnet', '0000-00-00 00:00:00', 'true'),
 (244, 'Florence Nightingale Elementary School', '0000-00-00 00:00:00', 'true'),
 (245, 'James E McDade Elementary Classical School', '0000-00-00 00:00:00', 'true'),
-(246, 'Harriet Beecher Stowe Elementary School - Library 3', '0000-00-00 00:00:00', 'true'),
-(247, 'Harriet Beecher Stowe Elementary School - Library 2', '0000-00-00 00:00:00', 'true'),
-(248, 'Harriet Beecher Stowe Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (249, 'John Spry Elementary Community School', '0000-00-00 00:00:00', 'true'),
 (250, 'Norman A Bridge Elementary School', '0000-00-00 00:00:00', 'true'),
 (251, 'Washington D Smyser Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2873,14 +2711,11 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (269, 'Edward F Dunne Elementary School', '0000-00-00 00:00:00', 'true'),
 (270, 'Carl von Linne Elementary School', '0000-00-00 00:00:00', 'true'),
 (271, 'George Armstrong International Studies Elementary School', '0000-00-00 00:00:00', 'true'),
-(272, 'Edward F Dunne Elementary School - Primary Library', '0000-00-00 00:00:00', 'true'),
 (273, 'Minnie Mars Jamieson Elementary School', '0000-00-00 00:00:00', 'true'),
 (274, 'Jacqueline B Vaughn Occupational High School', '0000-00-00 00:00:00', 'true'),
 (275, 'Eric Solorio Academy High School', '0000-00-00 00:00:00', 'true'),
-(276, 'Edward F Dunne Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (277, 'Walter S Christopher Elementary School', '0000-00-00 00:00:00', 'true'),
 (278, 'Richard J Daley Elementary Academy', '0000-00-00 00:00:00', 'true'),
-(279, 'John H Hamline Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (280, 'Federico Garcia Lorca Elementary School', '0000-00-00 00:00:00', 'true'),
 (281, 'George Washington Carver Military Academy High School', '0000-00-00 00:00:00', 'true'),
 (282, 'Charles R Henderson Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2900,7 +2735,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (296, 'William Howard Taft High School', '0000-00-00 00:00:00', 'true'),
 (297, 'Mariano Azuela Elementary School', '0000-00-00 00:00:00', 'true'),
 (298, 'Senn Campus', '0000-00-00 00:00:00', 'true'),
-(299, 'Alexander Graham Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (300, 'Hanson Park Elementary School', '0000-00-00 00:00:00', 'true'),
 (301, 'Joseph Brennemann Elementary School', '0000-00-00 00:00:00', 'true'),
 (302, 'Micheal M Byrne Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2910,14 +2744,11 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (306, 'Nancy B Jefferson Alternative High School', '0000-00-00 00:00:00', 'true'),
 (307, 'Christian Ebinger Elementary School', '0000-00-00 00:00:00', 'true'),
 (308, 'Gwendolyn Brooks College Preparatory Academy High School', '0000-00-00 00:00:00', 'true'),
-(309, 'Dever Elementary School', '0000-00-00 00:00:00', 'true'),
+(309, 'William E Dever Elementary School', '2017-02-08 20:48:40', 'true'),
 (310, 'Manley Career Academy High School', '0000-00-00 00:00:00', 'true'),
 (311, 'Grover Cleveland Elementary School', '0000-00-00 00:00:00', 'true'),
 (312, 'Castellanos Elementary School', '0000-00-00 00:00:00', 'true'),
 (313, 'Durkin Park Elementary School', '0000-00-00 00:00:00', 'true'),
-(314, 'Black Magnet Elementary School, Robert A - Annex Library', '0000-00-00 00:00:00', 'true'),
-(315, 'Black Magnet Elementary School, Robert A - Main Library', '0000-00-00 00:00:00', 'true'),
-(316, 'CPS', '0000-00-00 00:00:00', 'true'),
 (317, 'Professional Library', '0000-00-00 00:00:00', 'true'),
 (318, 'Hope College Preparatory High School', '0000-00-00 00:00:00', 'true'),
 (319, 'Chicago High School for Agricultural Sciences', '0000-00-00 00:00:00', 'true'),
@@ -2929,7 +2760,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (325, 'John Barry Elementary School', '0000-00-00 00:00:00', 'true'),
 (326, 'Hiram H Belding Elementary School', '0000-00-00 00:00:00', 'true'),
 (327, 'Lyman A Budlong Elementary School', '0000-00-00 00:00:00', 'true'),
-(328, 'ovtest', '0000-00-00 00:00:00', 'true'),
 (329, 'Intrinsic Charter High School', '0000-00-00 00:00:00', 'true'),
 (330, 'Chicago High School for the Arts', '0000-00-00 00:00:00', 'true'),
 (331, 'William E B Dubois Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2940,7 +2770,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (336, 'John T McCutcheon Elementary School', '0000-00-00 00:00:00', 'true'),
 (337, 'Johnnie Colemon Elementary Academy', '0000-00-00 00:00:00', 'true'),
 (338, 'Douglas Taylor Elementary SchoolÂ ', '0000-00-00 00:00:00', 'true'),
-(339, 'Charles Sumner Math & Science Community Acad ES', '0000-00-00 00:00:00', 'true'),
+(339, 'Charles Sumner Math &amp; Science Community Academy Elementary School', '2017-02-08 18:15:54', 'true'),
 (340, 'Mount Vernon Elementary SchoolÂ ', '0000-00-00 00:00:00', 'true'),
 (341, 'James Monroe Elementary SchoolÂ ', '0000-00-00 00:00:00', 'true'),
 (342, 'Ida B Wells Preparatory Elementary Academy', '0000-00-00 00:00:00', 'true'),
@@ -2954,7 +2784,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (350, 'Walter Q Gresham Elementary School', '0000-00-00 00:00:00', 'true'),
 (351, 'ASPIRA Charter - Haugan Campus', '0000-00-00 00:00:00', 'true'),
 (352, 'Robert Fulton Elementary School', '0000-00-00 00:00:00', 'true'),
-(353, 'Joseph Kellman Corporate Community ES', '0000-00-00 00:00:00', 'true'),
+(353, 'Joseph Kellman Corporate Community Elementary School', '2017-02-08 18:17:19', 'true'),
 (354, 'John Fiske Elementary School', '0000-00-00 00:00:00', 'true'),
 (355, 'Edward K Ellington Elementary School', '0000-00-00 00:00:00', 'true'),
 (356, 'Turner-Drew Elementary Language Academy', '0000-00-00 00:00:00', 'true'),
@@ -2966,19 +2796,15 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (362, 'Ellen H Richards Career Academy High School', '0000-00-00 00:00:00', 'true'),
 (363, 'George Westinghouse High School', '0000-00-00 00:00:00', 'true'),
 (364, 'Louisa May Alcott Elementary School', '0000-00-00 00:00:00', 'true'),
-(365, 'Charles P Steinmetz College Preparatory HS', '0000-00-00 00:00:00', 'true'),
+(365, 'Charles P Steinmetz College Preparatory High School', '2017-02-08 18:14:20', 'true'),
 (366, 'Gage Park High School', '0000-00-00 00:00:00', 'true'),
-(367, 'North Lawndale College Prep Charter - Collins', '0000-00-00 00:00:00', 'true'),
 (368, 'North Lawndale College Prep Charter', '0000-00-00 00:00:00', 'true'),
-(369, 'North Lawndale College Prep Charter - ChristianaÂ ', '0000-00-00 00:00:00', 'true'),
 (370, 'William Jones College Preparatory High School', '0000-00-00 00:00:00', 'true'),
-(371, 'William C Reavis Math & Science Specialty ES', '0000-00-00 00:00:00', 'true'),
+(371, 'William C Reavis Math &amp; Science Specialty Elementary School', '2017-02-08 18:19:06', 'true'),
 (372, 'William Penn Elementary School', '0000-00-00 00:00:00', 'true'),
 (373, 'Ronald E McNair Elementary School', '0000-00-00 00:00:00', 'true'),
 (374, 'William F Finkl Elementary School', '0000-00-00 00:00:00', 'true'),
 (375, 'Rachel Carson Elementary School', '0000-00-00 00:00:00', 'true'),
-(376, 'Healy Elementary School, Robert - Annex Library', '0000-00-00 00:00:00', 'true'),
-(377, 'Robert Healy Elementary School - Main Library', '0000-00-00 00:00:00', 'true'),
 (378, 'Robert Healy Elementary School', '0000-00-00 00:00:00', 'true'),
 (379, 'John Charles Haines Elementary School', '0000-00-00 00:00:00', 'true'),
 (380, 'Philip Rogers Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -2990,7 +2816,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (386, 'Asa Philip Randolph Elementary School', '0000-00-00 00:00:00', 'true'),
 (387, 'Edward N Hurley Elementary School', '0000-00-00 00:00:00', 'true'),
 (388, 'James Shields Middle School', '0000-00-00 00:00:00', 'true'),
-(389, 'Dr  Martin Luther King Jr College Prep HS', '0000-00-00 00:00:00', 'true'),
+(389, 'Dr. Martin Luther King Jr. College Prep High School', '2017-02-08 18:21:11', 'true'),
 (390, 'Learn South', '0000-00-00 00:00:00', 'true'),
 (391, 'Wildwood Elementary School', '0000-00-00 00:00:00', 'true'),
 (392, 'Pilsen Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
@@ -3004,7 +2830,6 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (400, 'Northwest Middle School', '0000-00-00 00:00:00', 'true'),
 (401, 'Carter G Woodson South Elementary School', '0000-00-00 00:00:00', 'true'),
 (402, 'Wolfgang A Mozart Elementary School', '0000-00-00 00:00:00', 'true'),
-(403, 'Walt Disney Magnet Elementary School', '0000-00-00 00:00:00', 'true'),
 (404, 'Myra Bradwell Communications Arts & Sciences Elementary School', '0000-00-00 00:00:00', 'true'),
 (405, 'Back of the Yards High School', '0000-00-00 00:00:00', 'true'),
 (406, 'Sarah E. Goode STEM Academy', '0000-00-00 00:00:00', 'true'),
@@ -3015,26 +2840,22 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (411, 'Alexander Graham Bell Elementary School', '0000-00-00 00:00:00', 'true'),
 (412, 'Charles Allen Prosser Career Academy High School', '0000-00-00 00:00:00', 'true'),
 (413, 'Walt Disney Magnet Elementary School', '0000-00-00 00:00:00', 'true'),
-(414, 'Amelia Earhart Options for Knowledge ES', '0000-00-00 00:00:00', 'true'),
-(415, 'John M Smyth Elementary School - PYP', '0000-00-00 00:00:00', 'true'),
+(414, 'Amelia Earhart Options for Knowledge Elementary School', '2017-02-08 15:55:30', 'true'),
 (416, 'John M Smyth Elementary School', '0000-00-00 00:00:00', 'true'),
 (417, 'Richard J Oglesby Elementary School', '0000-00-00 00:00:00', 'true'),
 (418, 'Josiah Pickard Elementary School', '0000-00-00 00:00:00', 'true'),
 (419, 'Ole A Thorp Elementary Scholastic Academy', '0000-00-00 00:00:00', 'true'),
 (420, 'Albert G Lane Technical High School', '0000-00-00 00:00:00', 'true'),
 (421, 'Gurdon S Hubbard High School', '0000-00-00 00:00:00', 'true'),
-(422, 'Test 3', '0000-00-00 00:00:00', 'true'),
-(423, 'Overdrive Test 2', '0000-00-00 00:00:00', 'true'),
 (424, 'National Teachers Elementary Academy', '0000-00-00 00:00:00', 'true'),
-(425, 'National Teachers Elementary Academy - Young Readers Library', '0000-00-00 00:00:00', 'true'),
 (426, 'Air Force Academy High School', '0000-00-00 00:00:00', 'true'),
-(427, 'Peace & Education Coalition HS', '0000-00-00 00:00:00', 'true'),
-(428, 'VOISE Academy High School', '0000-00-00 00:00:00', 'true'),
+(427, 'Peace &amp; Education Coalition High School', '2017-02-08 18:21:52', 'true'),
+(428, 'Austin College and Career Academy', '2017-02-08 15:58:52', 'true'),
 (429, 'William Rainey Harper High School', '0000-00-00 00:00:00', 'true'),
 (430, 'Northside Learning Center High School', '0000-00-00 00:00:00', 'true'),
 (431, 'Southside Occupational Academy High School', '0000-00-00 00:00:00', 'true'),
-(432, 'Simpson Academy HS for Young Women', '0000-00-00 00:00:00', 'true'),
-(433, 'DeVry University Advantage Academy HS', '0000-00-00 00:00:00', 'true'),
+(432, 'Simpson Academy High School for Young Women', '2017-02-08 18:22:14', 'true'),
+(433, 'DeVry University Advantage Academy High School', '2017-02-08 18:20:39', 'true'),
 (434, 'Bowen High School', '0000-00-00 00:00:00', 'true'),
 (435, 'TEAM Englewood Community Academy High School', '0000-00-00 00:00:00', 'true'),
 (436, 'Francisco I Madero Middle School', '0000-00-00 00:00:00', 'true'),
@@ -3047,23 +2868,23 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (443, 'Arthur R Ashe Elementary School', '0000-00-00 00:00:00', 'true'),
 (444, 'John J Audubon Elementary School', '0000-00-00 00:00:00', 'true'),
 (445, 'Avalon Park Elementary School', '0000-00-00 00:00:00', 'true'),
-(446, 'Alice L Barnard Computer Math & Science Ctr ES', '0000-00-00 00:00:00', 'true'),
+(446, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', '2017-02-08 15:54:11', 'true'),
 (447, 'Clara Barton Elementary School', '0000-00-00 00:00:00', 'true'),
 (448, 'Perkins Bass Elementary School', '0000-00-00 00:00:00', 'true'),
 (449, 'Ludwig Van Beethoven Elementary School', '0000-00-00 00:00:00', 'true'),
 (450, 'Blair Early Childhood Center', '0000-00-00 00:00:00', 'true'),
 (451, 'Carrie Jacobs Bond Elementary School', '0000-00-00 00:00:00', 'true'),
-(452, 'Edward A Bouchet Math & Science Academy ES', '0000-00-00 00:00:00', 'true'),
+(452, 'Edward A Bouchet Math &amp; Science Academy Elementary School', '2017-02-08 15:50:17', 'true'),
 (453, 'Charles S Brownell Elementary School', '0000-00-00 00:00:00', 'true'),
 (454, 'Edmond Burke Elementary School', '0000-00-00 00:00:00', 'true'),
 (455, 'Burnham Elementary Inclusive Academy', '0000-00-00 00:00:00', 'true'),
-(456, 'Charles P Caldwell Academy of Math & Science ES', '0000-00-00 00:00:00', 'true'),
+(456, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', '2017-02-08 18:13:52', 'true'),
 (457, 'Carroll-Rosenwald Specialty Elementary School', '0000-00-00 00:00:00', 'true'),
 (458, 'Willa Cather Elementary School', '0000-00-00 00:00:00', 'true'),
 (459, 'Frederic Chopin Elementary School', '0000-00-00 00:00:00', 'true'),
 (460, 'George Rogers Clark Elementary School', '0000-00-00 00:00:00', 'true'),
 (461, 'Mary E Courtenay Elementary Language Arts Center', '0000-00-00 00:00:00', 'true'),
-(462, 'Crown Community Academy of Fine Arts Center ES', '0000-00-00 00:00:00', 'true'),
+(462, 'Crown Community Academy of Fine Arts Center Elementary School', '2017-02-08 18:16:29', 'true'),
 (463, 'Countee Cullen Elementary School', '0000-00-00 00:00:00', 'true'),
 (464, 'Charles R Darwin Elementary School', '0000-00-00 00:00:00', 'true'),
 (465, 'Sir Miles Davis Magnet Elementary Academy', '0000-00-00 00:00:00', 'true'),
@@ -3076,7 +2897,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (472, 'John C Dore Elementary School', '0000-00-00 00:00:00', 'true'),
 (473, 'John B Drake Elementary School', '0000-00-00 00:00:00', 'true'),
 (474, 'Charles W Earle Elementary School', '0000-00-00 00:00:00', 'true'),
-(475, 'Thomas A Edison Regional Gifted Center ES', '0000-00-00 00:00:00', 'true'),
+(475, 'Thomas A Edison Regional Gifted Center Elementary School', '2017-02-08 18:18:49', 'true'),
 (476, 'Edison Park Elementary School', '0000-00-00 00:00:00', 'true'),
 (477, 'Leif Ericson Elementary Scholastic Academy', '0000-00-00 00:00:00', 'true'),
 (478, 'Medgar Evers Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -3086,7 +2907,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (482, 'Wendell E Green Elementary School', '0000-00-00 00:00:00', 'true'),
 (483, 'Robert L Grimes Elementary School', '0000-00-00 00:00:00', 'true'),
 (484, 'Virgil Grissom Elementary School', '0000-00-00 00:00:00', 'true'),
-(485, 'Lionel Hampton Fine & Performing Arts ES', '0000-00-00 00:00:00', 'true'),
+(485, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', '2017-02-08 18:17:34', 'true'),
 (486, 'John Hay Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
 (487, 'Helen M Hefferan Elementary School', '0000-00-00 00:00:00', 'true'),
 (488, 'Thomas A Hendricks Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
@@ -3104,7 +2925,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (500, 'Rudyard Kipling Elementary School', '0000-00-00 00:00:00', 'true'),
 (501, 'Lawndale Elementary Community Academy', '0000-00-00 00:00:00', 'true'),
 (502, 'Arthur A Libby Elementary School', '0000-00-00 00:00:00', 'true'),
-(503, 'Rodolfo Lozano Bilingual & International Ctr ES', '0000-00-00 00:00:00', 'true'),
+(503, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', '2017-02-08 18:15:07', 'true'),
 (504, 'James Madison Elementary School', '0000-00-00 00:00:00', 'true'),
 (505, 'Horace Mann Elementary School', '0000-00-00 00:00:00', 'true'),
 (506, 'Roswell B Mason Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -3125,7 +2946,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 (522, 'Paul Revere Elementary School', '0000-00-00 00:00:00', 'true'),
 (523, 'Jackie Robinson Elementary School', '0000-00-00 00:00:00', 'true'),
 (524, 'Martha Ruggles Elementary School', '0000-00-00 00:00:00', 'true'),
-(525, 'William H Ryder Math & Science Specialty ES', '0000-00-00 00:00:00', 'true'),
+(525, 'William H Ryder Math &amp; Science Specialty Elementary School', '2017-02-08 18:19:32', 'true'),
 (526, 'Rueben Salazar Elementary Bilingual Center', '0000-00-00 00:00:00', 'true'),
 (527, 'Sauganash Elementary School', '0000-00-00 00:00:00', 'true'),
 (528, 'Jesse Sherwood Elementary School', '0000-00-00 00:00:00', 'true'),
@@ -3176,7 +2997,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE `navigation` (
+CREATE TABLE IF NOT EXISTS `navigation` (
   `id` int(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
@@ -3187,7 +3008,7 @@ CREATE TABLE `navigation` (
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
@@ -3227,7 +3048,7 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
+CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `image` text NOT NULL,
@@ -3237,19 +3058,16 @@ CREATE TABLE `pages` (
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
-(28, 'Join Our Team', '', '<p>Our work is driven&nbsp;by challenges that impact communities across our country and around the world. That is a&nbsp;nice way of saying that we are solving some of the toughest issues facing the public sector.&nbsp;How are we doing it? Through&nbsp;<strong style="box-sizing: border-box;">building the best team in the&nbsp;industry</strong>.</p>\r\n<p>Our team consists of developers, architects, data analysts, requirements gatherers, project managers, support engineers and much more.</p>\r\n<p><a href="page.php?loc_id=1&amp;page_id=34">View Open Positions</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(34, 'Positions', '', '<p>Job posting appear here if available.</p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(42, 'Explore', '', '<p>Online Resources Page</p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child''s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child''s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child''s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child''s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher''s expectations. At the beginning of the year, you may want to ask your child''s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1);
 
@@ -3259,13 +3077,13 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `a
 -- Table structure for table `services`
 --
 
-CREATE TABLE `services` (
+CREATE TABLE IF NOT EXISTS `services` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
-  `link` int(11) NOT NULL,
+  `link` text NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
@@ -3278,10 +3096,10 @@ CREATE TABLE `services` (
 -- Table structure for table `services_icons`
 --
 
-CREATE TABLE `services_icons` (
+CREATE TABLE IF NOT EXISTS `services_icons` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services_icons`
@@ -3889,7 +3707,7 @@ INSERT INTO `services_icons` (`id`, `icon`) VALUES
 -- Table structure for table `setup`
 --
 
-CREATE TABLE `setup` (
+CREATE TABLE IF NOT EXISTS `setup` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
@@ -3924,14 +3742,14 @@ CREATE TABLE `setup` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:15:54', 'admin_script', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 20:28:03', 'admin_script', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 4),
@@ -3943,14 +3761,11 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (10, 'LaSalle II Magnet', '', '', '8040', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 10),
 (11, 'Thurgood Marshall Middle School', '', '', '7520', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 11),
 (12, 'Thomas J Higgins Elementary Community Academy', '', '', '7210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 12),
-(13, 'Davis Academy', '', '', '7180', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 13),
 (14, 'James Weldon Johnson Elementary School', '', '', '6940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 14),
 (15, 'Frederick A Douglass Academy High School', '', '', '6630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 15),
-(16, 'Eli Whitney Elementary School - Main Library', '', '', '6440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 16),
 (17, 'John Whistler Elementary School', '', '', '6420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 17),
 (18, 'Mark Twain Elementary School', '', '', '6240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 18),
-(19, 'Frazier Prospective IB Magnet ES', '', '', '5850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 19),
-(20, 'Frank W Reilly Elementary School - Annex Library', '', '', '5590', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 20),
+(19, 'Frazier Prospective IB Magnet Elementary School', '', '', '5850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:16:58', 'jhorning', 19),
 (21, 'John T Pirie Fine Arts & Academic Center Elementary School', '', '', '5440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 21),
 (22, 'John Palmer Elementary School', '', '', '5260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 22),
 (23, 'William J Onahan Elementary School', '', '', '5190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 23),
@@ -3990,7 +3805,6 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (57, 'Alessandro Volta Elementary School', '', '', '6270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 57),
 (58, 'Mancel Talcott Elementary School', '', '', '6140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 58),
 (59, 'Herbert Spencer Elementary Math & Science Academy', '', '', '6000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 59),
-(60, 'John M Smyth Elementary School - MYP', '', '', '5970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 60),
 (61, 'John D Shoop Math-Science Technical Academy Elementary School', '', '', '5930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 61),
 (62, 'Arnold Mireles Elementary Academy', '', '', '5880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 62),
 (63, 'Peter A Reinberg Elementary School', '', '', '5600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 63),
@@ -4020,7 +3834,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (87, 'Ninos Heroes Elementary Academic Center', '', '', '3720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 87),
 (88, 'Frank W Gunsaulus Elementary Scholastic Academy', '', '', '3690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 88),
 (89, 'Nathanael Greene Elementary School', '', '', '3650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 89),
-(90, 'Joseph E Gary Elementary School - Main Library', '', '', '3520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 90),
+(90, 'Joseph E Gary Elementary School', '', '', '3520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:00:16', 'jhorning', 90),
 (91, 'Stephen F Gale Elementary Community Academy', '', '', '3480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 91),
 (92, 'Gerald Delgado Kanoon Elementary Magnet School', '', '', '3370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 92),
 (93, 'Richard Edwards Elementary School', '', '', '3200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 93),
@@ -4033,7 +3847,6 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (100, 'James Ward Elementary School', '', '', '6330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 100),
 (101, 'James Wadsworth Elementary School', '', '', '6300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 101),
 (102, 'Talman Elementary School', '', '', '6680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 102),
-(103, 'National Teachers Elementary Academy - Learning Lab', '', '', '6480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 103),
 (104, 'A.N. Pritzker School', '', '', '6460', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 104),
 (105, 'Suder Montessori Magnet Elementary School', '', '', '6340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 105),
 (106, 'Franz Peter Schubert Elementary School', '', '', '5800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 106),
@@ -4043,10 +3856,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (110, 'William B Ogden Elementary School', '', '', '5150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 110),
 (111, 'Alfred Nobel Elementary School', '', '', '5110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 111),
 (112, 'Inter-American Elementary Magnet School', '', '', '4890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 112),
-(113, 'Hanson Park Elementary School - Branch Library', '', '', '4771', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 113),
-(114, 'Hanson Park Elementary School - Main Library', '', '', '4770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 114),
 (115, 'Mary McLeod Bethune Elementary School', '', '', '8020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 115),
-(116, 'Eli Whitney Elementary School - Annex Library', '', '', '6441', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 116),
 (117, 'George B McClellan Elementary School', '', '', '4710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 117),
 (118, 'Joseph Lovett Elementary School', '', '', '4530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 118),
 (119, 'Eli Whitney Elementary School', '', '', '6440ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 119),
@@ -4072,17 +3882,14 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (139, 'George Washington High School', '', '', '1630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 139),
 (140, 'Benito Juarez Community Academy High School', '', '', '1890', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 140),
 (141, 'Kenwood Academy High School', '', '', '1710', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 141),
-(142, 'Frank W Reilly Elementary School - Main Library', '', '', '5592', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 142),
-(143, 'Frank W Reilly Elementary School - Branch Library', '', '', '5591', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 143),
-(144, 'Friedrich W Von Steuben Metropolitan Science HS', '', '', '1610', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 144),
+(144, 'Friedrich W Von Steuben Metropolitan Science High School', '', '', '1610', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:37', 'jhorning', 144),
 (145, 'Morgan Park High School', '', '', '1490', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 145),
-(146, 'American Indian Education Center', '', '', '460', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 146),
 (147, 'Thomas Kelly High School', '', '', '1400', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 147),
 (148, 'Skinner North Classical Elementary', '', '', '8024', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 148),
 (149, 'John A Walsh Elementary School', '', '', '6320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 149),
 (150, 'William K New Sullivan Elementary School', '', '', '6100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 150),
 (151, 'Walter Payton College Preparatory High School', '', '', '1090', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 151),
-(152, 'Crane Medical Preparatory HS', '', '', '1270', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 152),
+(152, 'Crane Medical Preparatory High School', '', '', '1270', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:20:22', 'jhorning', 152),
 (153, 'Roald Amundsen High School', '', '', '1210', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 153),
 (154, 'Robert A Black Magnet Elementary School', '', '', '7860ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 154),
 (155, 'Daniel S Wentworth Elementary School', '', '', '6390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 155),
@@ -4091,14 +3898,12 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (158, 'Manuel Perez Elementary School', '', '', '2930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 158),
 (159, 'Helen Peirce International Studies Elementary School', '', '', '5360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 159),
 (160, 'William P Nixon Elementary School', '', '', '5100ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 160),
-(161, 'William P Nixon Elementary School - Annex Library', '', '', '5101', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 161),
 (162, 'Hannah G Solomon Elementary School', '', '', '5980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 163),
 (163, 'Ogden International High School', '', '', '8083', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 164),
 (164, 'Mark Sheridan Elementary Math & Science Academy', '', '', '4920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 165),
 (165, 'Maria Saucedo Elementary Scholastic Academy', '', '', '4250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 166),
 (166, 'New Field Elementary School', '', '', '7060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 167),
-(167, 'John Marshall Metropolitan High School', '', '', '1470', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 168);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(167, 'John Marshall Metropolitan High School', '', '', '1470', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 168),
 (168, 'Theodore Roosevelt High School', '', '', '1520', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 169),
 (169, 'North River Elementary School', '', '', '7890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 170),
 (170, 'Thomas Drummond Elementary School', '', '', '3120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 171),
@@ -4109,9 +3914,9 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (175, 'Edward Coles Elementary Language Academy', '', '', '2830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 176),
 (176, 'Agustin Lara Elementary Academy', '', '', '3980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 177),
 (177, 'John H Kinzie Elementary School', '', '', '4330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 178),
-(178, 'William P Nixon Elementary School - Main Library', '', '', '5100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 179),
 (179, 'Henry H Nash Elementary School', '', '', '5050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 180),
-(180, 'Kelvyn Park High School', '', '', '1410', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 181),
+(180, 'Kelvyn Park High School', '', '', '1410', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 181);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (181, 'DeWitt Clinton Elementary School', '', '', '2810', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 182),
 (182, 'Henry Clay Elementary School', '', '', '2790', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 183),
 (183, 'William G Hibbard Elementary School', '', '', '4000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 184),
@@ -4154,9 +3959,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (220, 'Stephen K Hayt Elementary School', '', '', '3850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 221),
 (221, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 222),
 (222, 'Belmont-Cragin Elementary School', '', '', '3390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 223),
-(223, 'John H Hamline Elementary School - Branch Library', '', '', '3741', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 224),
 (224, 'Galileo Math & Science Scholastic Academy Elementary School', '', '', '4160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 225),
-(225, 'Alexander Graham Elementary School - Branch Library', '', '', '3601', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 226),
 (226, 'John H Hamline Elementary School', '', '', '3740ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 227),
 (227, 'Alexander Graham Elementary School', '', '', '3600ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 228),
 (228, 'Harriet Beecher Stowe Elementary School', '', '', '6080ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 229),
@@ -4170,15 +3973,12 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (236, 'John H Vanderpoel Elementary Magnet School', '', '', '6250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 237),
 (237, 'Claremont Academy Elementary School', '', '', '7830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 238),
 (238, 'Edward White Elementary Career Academy', '', '', '7440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 239),
-(239, 'Dr. Martin L. King Jr Academy of Social Justice', '', '', '7250', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 240),
+(239, 'Dr. Martin L. King Jr. Academy of Social Justice', '', '', '7250', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:26:05', 'jhorning', 240),
 (240, 'Richard Henry Lee Elementary School', '', '', '7170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 241),
 (241, 'Tarkington School of Excellence Elementary School', '', '', '7160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 242),
 (242, 'John J Pershing Elementary Humanities Magnet', '', '', '5400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 243),
 (243, 'Florence Nightingale Elementary School', '', '', '5090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 244),
 (244, 'James E McDade Elementary Classical School', '', '', '4750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 245),
-(245, 'Harriet Beecher Stowe Elementary School - Library 3', '', '', '6082', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 246),
-(246, 'Harriet Beecher Stowe Elementary School - Library 2', '', '', '6081', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 247),
-(247, 'Harriet Beecher Stowe Elementary School - Main Library', '', '', '6080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 248),
 (248, 'John Spry Elementary Community School', '', '', '6010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 249),
 (249, 'Norman A Bridge Elementary School', '', '', '2380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 250),
 (250, 'Washington D Smyser Elementary School', '', '', '5960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 251),
@@ -4202,14 +4002,11 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (268, 'Edward F Dunne Elementary School', '', '', '6050ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 269),
 (269, 'Carl von Linne Elementary School', '', '', '4490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 270),
 (270, 'George Armstrong International Studies Elementary School', '', '', '2080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 271),
-(271, 'Edward F Dunne Elementary School - Primary Library', '', '', '6051', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 272),
 (272, 'Minnie Mars Jamieson Elementary School', '', '', '4180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 273),
 (273, 'Jacqueline B Vaughn Occupational High School', '', '', '1920', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 274),
 (274, 'Eric Solorio Academy High School', '', '', '8550', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 275),
-(275, 'Edward F Dunne Elementary School - Main Library', '', '', '6050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 276),
 (276, 'Walter S Christopher Elementary School', '', '', '2780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 277),
 (277, 'Richard J Daley Elementary Academy', '', '', '6560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 278),
-(278, 'John H Hamline Elementary School - Main Library', '', '', '3740', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 279),
 (279, 'Federico Garcia Lorca Elementary School', '', '', '8330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 280),
 (280, 'George Washington Carver Military Academy High School', '', '', '1850', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 281),
 (281, 'Charles R Henderson Elementary School', '', '', '3920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 282),
@@ -4229,7 +4026,6 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (295, 'William Howard Taft High School', '', '', '1580', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 296),
 (296, 'Mariano Azuela Elementary School', '', '', '8660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 297),
 (297, 'Senn Campus', '', '', '1540', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 298),
-(298, 'Alexander Graham Elementary School - Main Library', '', '', '3600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 299),
 (299, 'Hanson Park Elementary School', '', '', '4770ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 300),
 (300, 'Joseph Brennemann Elementary School', '', '', '6600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 301),
 (301, 'Micheal M Byrne Elementary School', '', '', '2570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 302),
@@ -4239,14 +4035,11 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (305, 'Nancy B Jefferson Alternative High School', '', '', '2120', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 306),
 (306, 'Christian Ebinger Elementary School', '', '', '3150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 307),
 (307, 'Gwendolyn Brooks College Preparatory Academy High School', '', '', '1500', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 308),
-(308, 'Dever Elementary School', '', '', '3020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 309),
+(308, 'William E Dever Elementary School', '', '', '3020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 20:48:40', 'jhorning', 309),
 (309, 'Manley Career Academy High School', '', '', '1460', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 310),
 (310, 'Grover Cleveland Elementary School', '', '', '2800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 311),
 (311, 'Castellanos Elementary School', '', '', '2510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 312),
 (312, 'Durkin Park Elementary School', '', '', '7870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 313),
-(313, 'Black Magnet Elementary School, Robert A - Annex Library', '', '', '7861', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 314),
-(314, 'Black Magnet Elementary School, Robert A - Main Library', '', '', '7860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 315),
-(315, 'CPS', '', '', '1', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 316),
 (316, 'Professional Library', '', '', '390', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 317),
 (317, 'Hope College Preparatory High School', '', '', '1940', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 318),
 (318, 'Chicago High School for Agricultural Sciences', '', '', '1790', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 319),
@@ -4258,7 +4051,6 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (324, 'John Barry Elementary School', '', '', '2160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 325),
 (325, 'Hiram H Belding Elementary School', '', '', '2260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 326),
 (326, 'Lyman A Budlong Elementary School', '', '', '2440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 327),
-(327, 'ovtest', '', '', 'ovtest', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 328),
 (328, 'Intrinsic Charter High School', '', '', '9619', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 329),
 (329, 'Chicago High School for the Arts', '', '', '8047', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 330),
 (330, 'William E B Dubois Elementary School', '', '', '8010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 331),
@@ -4266,11 +4058,10 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (332, 'Laura S Ward Elementary School', '', '', '5470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 333),
 (333, 'Chicago Intl Charter - Northtown', '', '', '7740', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 334),
 (334, 'George Leland Elementary School', '', '', '7320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 335),
-(335, 'John T McCutcheon Elementary School', '', '', '6910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 336);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(335, 'John T McCutcheon Elementary School', '', '', '6910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 336),
 (336, 'Johnnie Colemon Elementary Academy', '', '', '6170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 337),
 (337, 'Douglas Taylor Elementary SchoolÂ ', '', '', '6150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 338),
-(338, 'Charles Sumner Math & Science Community Acad ES', '', '', '6110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 339),
+(338, 'Charles Sumner Math &amp; Science Community Academy Elementary School', '', '', '6110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:15:54', 'jhorning', 339),
 (339, 'Mount Vernon Elementary SchoolÂ ', '', '', '4980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 340),
 (340, 'James Monroe Elementary SchoolÂ ', '', '', '4850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 341),
 (341, 'Ida B Wells Preparatory Elementary Academy', '', '', '5250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 342),
@@ -4284,7 +4075,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (349, 'Walter Q Gresham Elementary School', '', '', '3670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 350),
 (350, 'ASPIRA Charter - Haugan Campus', '', '', '3500', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 351),
 (351, 'Robert Fulton Elementary School', '', '', '3450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 352),
-(352, 'Joseph Kellman Corporate Community ES', '', '', '3410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 353),
+(352, 'Joseph Kellman Corporate Community Elementary School', '', '', '3410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:17:19', 'jhorning', 353),
 (353, 'John Fiske Elementary School', '', '', '3360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 354),
 (354, 'Edward K Ellington Elementary School', '', '', '3220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 355),
 (355, 'Turner-Drew Elementary Language Academy', '', '', '3110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 356),
@@ -4293,22 +4084,19 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (358, 'Anna R. Langford Community Academy', '', '', '2900', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 359),
 (359, 'Burnside Elementary Scholastic Academy', '', '', '2520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 360),
 (360, 'Jane Addams Elementary SchoolÂ ', '', '', '2020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 361),
-(361, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 222),
+(361, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 222);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (362, 'George Westinghouse High School', '', '', '1160', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 363),
 (363, 'Louisa May Alcott Elementary School', '', '', '2040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 364),
-(364, 'Charles P Steinmetz College Preparatory HS', '', '', '1560', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 365),
+(364, 'Charles P Steinmetz College Preparatory High School', '', '', '1560', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:14:20', 'jhorning', 365),
 (365, 'Gage Park High School', '', '', '1340', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 366),
-(366, 'North Lawndale College Prep Charter - Collins', '', '', '1106', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 367),
 (367, 'North Lawndale College Prep Charter', '', '', '1105ALL', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 368),
-(368, 'North Lawndale College Prep Charter - ChristianaÂ ', '', '', '1105', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 369),
 (369, 'William Jones College Preparatory High School', '', '', '1060', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 370),
-(370, 'William C Reavis Math & Science Specialty ES', '', '', '5580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 371),
+(370, 'William C Reavis Math &amp; Science Specialty Elementary School', '', '', '5580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:19:06', 'jhorning', 371),
 (371, 'William Penn Elementary School', '', '', '5370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 372),
 (372, 'Ronald E McNair Elementary School', '', '', '7040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 373),
 (373, 'William F Finkl Elementary School', '', '', '3760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 374),
 (374, 'Rachel Carson Elementary School', '', '', '2660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 375),
-(375, 'Healy Elementary School, Robert - Annex Library', '', '', '3881', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 376),
-(376, 'Robert Healy Elementary School - Main Library', '', '', '3880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 377),
 (377, 'Robert Healy Elementary School', '', '', '3880ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 378),
 (378, 'John Charles Haines Elementary School', '', '', '3700', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 379),
 (379, 'Philip Rogers Elementary School', '', '', '5630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 380),
@@ -4320,7 +4108,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (385, 'Asa Philip Randolph Elementary School', '', '', '3550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 386),
 (386, 'Edward N Hurley Elementary School', '', '', '4120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 387),
 (387, 'James Shields Middle School', '', '', '9597', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 388),
-(388, 'Dr  Martin Luther King Jr College Prep HS', '', '', '1760', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 389),
+(388, 'Dr. Martin Luther King Jr. College Prep High School', '', '', '1760', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:11', 'jhorning', 389),
 (389, 'Learn South', '', '', '8029', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 390),
 (390, 'Wildwood Elementary School', '', '', '6470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 391),
 (391, 'Pilsen Elementary Community Academy', '', '', '4210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 392),
@@ -4334,7 +4122,6 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (399, 'Northwest Middle School', '', '', '4600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 400),
 (400, 'Carter G Woodson South Elementary School', '', '', '7820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 401),
 (401, 'Wolfgang A Mozart Elementary School', '', '', '5000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 402),
-(402, 'Walt Disney Magnet Elementary School', '', '', '8000_test', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 403),
 (403, 'Myra Bradwell Communications Arts & Sciences Elementary School', '', '', '2340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 404),
 (404, 'Back of the Yards High School', '', '', '9623', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 405),
 (405, 'Sarah E. Goode STEM Academy', '', '', '9598', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 406),
@@ -4344,27 +4131,22 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (409, 'Grant Campus', '', '', '7310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 410),
 (410, 'Alexander Graham Bell Elementary School', '', '', '2270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 411),
 (411, 'Charles Allen Prosser Career Academy High School', '', '', '1070', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 412),
-(412, 'Walt Disney Magnet Elementary School', '', '', '8000_test', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 403),
-(413, 'Amelia Earhart Options for Knowledge ES', '', '', '7450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 414),
-(414, 'John M Smyth Elementary School - PYP', '', '', '5971', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 415),
+(413, 'Amelia Earhart Options for Knowledge Elementary School', '', '', '7450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:55:30', 'jhorning', 414),
 (415, 'John M Smyth Elementary School', '', '', '5970ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 416),
 (416, 'Richard J Oglesby Elementary School', '', '', '5170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 417),
 (417, 'Josiah Pickard Elementary School', '', '', '5430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 418),
 (418, 'Ole A Thorp Elementary Scholastic Academy', '', '', '6190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 419),
 (419, 'Albert G Lane Technical High School', '', '', '1440', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 420),
 (420, 'Gurdon S Hubbard High School', '', '', '1670', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 421),
-(421, 'Test 3', '', '', 'ovtest3', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 422),
-(422, 'Overdrive Test 2', '', '', 'ovtest2', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 423),
 (423, 'National Teachers Elementary Academy', '', '', '6480ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 424),
-(424, 'National Teachers Elementary Academy - Young Readers Library', '', '', '6481', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 425),
 (425, 'Air Force Academy High School', '', '', '1055', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 426),
-(426, 'Peace & Education Coalition HS', '', '', '1123', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 427),
-(427, 'VOISE Academy High School', '', '', '1145', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 428),
+(426, 'Peace &amp; Education Coalition High School', '', '', '1123', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:52', 'jhorning', 427),
+(427, 'Austin College and Career Academy', '', '', '1145', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:58:52', 'jhorning', 428),
 (428, 'William Rainey Harper High School', '', '', '1360', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 429),
 (429, 'Northside Learning Center High School', '', '', '1690', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 430),
 (430, 'Southside Occupational Academy High School', '', '', '1700', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 431),
-(431, 'Simpson Academy HS for Young Women', '', '', '1750', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 432),
-(432, 'DeVry University Advantage Academy HS', '', '', '6990', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 433),
+(431, 'Simpson Academy High School for Young Women', '', '', '1750', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:22:14', 'jhorning', 432),
+(432, 'DeVry University Advantage Academy High School', '', '', '6990', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:20:39', 'jhorning', 433),
 (433, 'Bowen High School', '', '', '7540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 194),
 (434, 'TEAM Englewood Community Academy High School', '', '', '8080', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 435),
 (435, 'Francisco I Madero Middle School', '', '', '6310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 436),
@@ -4377,23 +4159,23 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (442, 'Arthur R Ashe Elementary School', '', '', '6900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 443),
 (443, 'John J Audubon Elementary School', '', '', '2110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 444),
 (444, 'Avalon Park Elementary School', '', '', '2130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 445),
-(445, 'Alice L Barnard Computer Math & Science Ctr ES', '', '', '2150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 446),
+(445, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', '', '', '2150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:54:11', 'jhorning', 446),
 (446, 'Clara Barton Elementary School', '', '', '2170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 447),
 (447, 'Perkins Bass Elementary School', '', '', '2180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 448),
 (448, 'Ludwig Van Beethoven Elementary School', '', '', '6540', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 449),
 (449, 'Blair Early Childhood Center', '', '', '4990', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 450),
 (450, 'Carrie Jacobs Bond Elementary School', '', '', '6550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 451),
-(451, 'Edward A Bouchet Math & Science Academy ES', '', '', '2430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 452),
+(451, 'Edward A Bouchet Math &amp; Science Academy Elementary School', '', '', '2430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:50:17', 'jhorning', 452),
 (452, 'Charles S Brownell Elementary School', '', '', '2410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 453),
 (453, 'Edmond Burke Elementary School', '', '', '2460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 454),
 (454, 'Burnham Elementary Inclusive Academy', '', '', '2480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 455),
-(455, 'Charles P Caldwell Academy of Math & Science ES', '', '', '2580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 456),
+(455, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', '', '', '2580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:13:52', 'jhorning', 456),
 (456, 'Carroll-Rosenwald Specialty Elementary School', '', '', '2650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 457),
 (457, 'Willa Cather Elementary School', '', '', '6730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 458),
 (458, 'Frederic Chopin Elementary School', '', '', '2770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 459),
 (459, 'George Rogers Clark Elementary School', '', '', '2230', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 460),
 (460, 'Mary E Courtenay Elementary Language Arts Center', '', '', '7910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 461),
-(461, 'Crown Community Academy of Fine Arts Center ES', '', '', '2940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 462),
+(461, 'Crown Community Academy of Fine Arts Center Elementary School', '', '', '2940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:16:29', 'jhorning', 462),
 (462, 'Countee Cullen Elementary School', '', '', '4100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 463),
 (463, 'Charles R Darwin Elementary School', '', '', '2960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 464),
 (464, 'Sir Miles Davis Magnet Elementary Academy', '', '', '7000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 465),
@@ -4406,7 +4188,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (471, 'John C Dore Elementary School', '', '', '3080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 472),
 (472, 'John B Drake Elementary School', '', '', '3100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 473),
 (473, 'Charles W Earle Elementary School', '', '', '3130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 474),
-(474, 'Thomas A Edison Regional Gifted Center ES', '', '', '2220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 475),
+(474, 'Thomas A Edison Regional Gifted Center Elementary School', '', '', '2220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:18:49', 'jhorning', 475),
 (475, 'Edison Park Elementary School', '', '', '2085', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 476),
 (476, 'Leif Ericson Elementary Scholastic Academy', '', '', '3240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 477),
 (477, 'Medgar Evers Elementary School', '', '', '7990', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 478),
@@ -4416,7 +4198,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (481, 'Wendell E Green Elementary School', '', '', '4410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 482),
 (482, 'Robert L Grimes Elementary School', '', '', '3680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 483),
 (483, 'Virgil Grissom Elementary School', '', '', '3580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 484),
-(484, 'Lionel Hampton Fine & Performing Arts ES', '', '', '2350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 485),
+(484, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', '', '', '2350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:17:34', 'jhorning', 485),
 (485, 'John Hay Elementary Community Academy', '', '', '3840', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 486),
 (486, 'Helen M Hefferan Elementary School', '', '', '3910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 487),
 (487, 'Thomas A Hendricks Elementary Community Academy', '', '', '3930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 488),
@@ -4434,10 +4216,9 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (499, 'Rudyard Kipling Elementary School', '', '', '4350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 500),
 (500, 'Lawndale Elementary Community Academy', '', '', '4430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 501),
 (501, 'Arthur A Libby Elementary School', '', '', '4470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 502),
-(502, 'Rodolfo Lozano Bilingual & International Ctr ES', '', '', '4380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 503),
+(502, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', '', '', '4380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:15:07', 'jhorning', 503),
 (503, 'James Madison Elementary School', '', '', '4570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 504),
-(504, 'Horace Mann Elementary School', '', '', '4610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 505);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(504, 'Horace Mann Elementary School', '', '', '4610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 505),
 (505, 'Roswell B Mason Elementary School', '', '', '4650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 506),
 (506, 'Benjamin E Mays Elementary Academy', '', '', '7150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 507),
 (507, 'Mary E McDowell Elementary School', '', '', '7390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 508),
@@ -4456,7 +4237,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (520, 'Paul Revere Elementary School', '', '', '5610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 522),
 (521, 'Jackie Robinson Elementary School', '', '', '6780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 523),
 (522, 'Martha Ruggles Elementary School', '', '', '5660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 524),
-(523, 'William H Ryder Math & Science Specialty ES', '', '', '5670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 525),
+(523, 'William H Ryder Math &amp; Science Specialty Elementary School', '', '', '5670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:19:32', 'jhorning', 525),
 (524, 'Rueben Salazar Elementary Bilingual Center', '', '', '6720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 526),
 (525, 'Sauganash Elementary School', '', '', '5690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 527),
 (526, 'Jesse Sherwood Elementary School', '', '', '5900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 528),
@@ -4472,7 +4253,8 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (536, 'Joseph Warren Elementary School', '', '', '6350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 538),
 (537, 'Harold Washington Elementary School', '', '', '5380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 539),
 (538, 'Thomas J Waters Elementary School', '', '', '6370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 540),
-(539, 'Daniel Webster Elementary School', '', '', '6380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 541),
+(539, 'Daniel Webster Elementary School', '', '', '6380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 541);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
 (540, 'Ella Flagg Young Elementary School', '', '', '6520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 542),
 (541, 'Southeast Area Elementary School', '', '', '9681', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 543),
 (542, 'Walter Henri Dyett High School for the Arts', '', '', '9682', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 544),
@@ -4507,7 +4289,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
+CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -4517,17 +4299,17 @@ CREATE TABLE `slider` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(3, 'parallax_3-5_med.jpg', 'Grades 3-5', '45', 'Advancing in Elementary School', 'true', '2017-01-20 20:47:01', 'admin', 1),
-(4, 'parallax_6-8_med.jpg', 'Grades 6-8', '46', '8 ways parents can help with homework', 'true', '2017-01-20 20:47:03', 'admin', 1),
-(7, 'CPS_5938.jpg', 'Grades K-2', '48', 'Learn About our K-2 Programs', 'true', '2017-01-20 20:46:59', 'admin', 1),
-(12, 'parallax_9-12_med.jpg', 'Grades 9-12', '47', 'High School Course Catalog', 'true', '2017-02-06 15:02:32', 'jhorning', 1);
+(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'true', '2017-01-20 20:47:01', 'admin', 1),
+(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'true', '2017-01-20 20:47:03', 'admin', 1),
+(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 'true', '2017-01-20 20:46:59', 'admin', 1),
+(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'true', '2017-02-06 15:02:32', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -4535,7 +4317,7 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `date
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE `socialmedia` (
+CREATE TABLE IF NOT EXISTS `socialmedia` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
@@ -4547,7 +4329,7 @@ CREATE TABLE `socialmedia` (
   `tumblr` text NOT NULL,
   `use_defaults` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `socialmedia`
@@ -4566,14 +4348,11 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (10, 'Follow Us', '', '', '', '', '', '', '', 'true', 10),
 (11, 'Follow Us', '', '', '', '', '', '', '', 'true', 11),
 (12, 'Follow Us', '', '', '', '', '', '', '', 'true', 12),
-(13, 'Follow Us', '', '', '', '', '', '', '', 'true', 13),
 (14, 'Follow Us', '', '', '', '', '', '', '', 'true', 14),
 (15, 'Follow Us', '', '', '', '', '', '', '', 'true', 15),
-(16, 'Follow Us', '', '', '', '', '', '', '', 'true', 16),
 (17, 'Follow Us', '', '', '', '', '', '', '', 'true', 17),
 (18, 'Follow Us', '', '', '', '', '', '', '', 'true', 18),
 (19, 'Follow Us', '', '', '', '', '', '', '', 'true', 19),
-(20, 'Follow Us', '', '', '', '', '', '', '', 'true', 20),
 (21, 'Follow Us', '', '', '', '', '', '', '', 'true', 21),
 (22, 'Follow Us', '', '', '', '', '', '', '', 'true', 22),
 (23, 'Follow Us', '', '', '', '', '', '', '', 'true', 23),
@@ -4613,7 +4392,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (57, 'Follow Us', '', '', '', '', '', '', '', 'true', 57),
 (58, 'Follow Us', '', '', '', '', '', '', '', 'true', 58),
 (59, 'Follow Us', '', '', '', '', '', '', '', 'true', 59),
-(60, 'Follow Us', '', '', '', '', '', '', '', 'true', 60),
 (61, 'Follow Us', '', '', '', '', '', '', '', 'true', 61),
 (62, 'Follow Us', '', '', '', '', '', '', '', 'true', 62),
 (63, 'Follow Us', '', '', '', '', '', '', '', 'true', 63),
@@ -4656,7 +4434,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (100, 'Follow Us', '', '', '', '', '', '', '', 'true', 100),
 (101, 'Follow Us', '', '', '', '', '', '', '', 'true', 101),
 (102, 'Follow Us', '', '', '', '', '', '', '', 'true', 102),
-(103, 'Follow Us', '', '', '', '', '', '', '', 'true', 103),
 (104, 'Follow Us', '', '', '', '', '', '', '', 'true', 104),
 (105, 'Follow Us', '', '', '', '', '', '', '', 'true', 105),
 (106, 'Follow Us', '', '', '', '', '', '', '', 'true', 106),
@@ -4666,10 +4443,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (110, 'Follow Us', '', '', '', '', '', '', '', 'true', 110),
 (111, 'Follow Us', '', '', '', '', '', '', '', 'true', 111),
 (112, 'Follow Us', '', '', '', '', '', '', '', 'true', 112),
-(113, 'Follow Us', '', '', '', '', '', '', '', 'true', 113),
-(114, 'Follow Us', '', '', '', '', '', '', '', 'true', 114),
 (115, 'Follow Us', '', '', '', '', '', '', '', 'true', 115),
-(116, 'Follow Us', '', '', '', '', '', '', '', 'true', 116),
 (117, 'Follow Us', '', '', '', '', '', '', '', 'true', 117),
 (118, 'Follow Us', '', '', '', '', '', '', '', 'true', 118),
 (119, 'Follow Us', '', '', '', '', '', '', '', 'true', 119),
@@ -4695,11 +4469,8 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (139, 'Follow Us', '', '', '', '', '', '', '', 'true', 139),
 (140, 'Follow Us', '', '', '', '', '', '', '', 'true', 140),
 (141, 'Follow Us', '', '', '', '', '', '', '', 'true', 141),
-(142, 'Follow Us', '', '', '', '', '', '', '', 'true', 142),
-(143, 'Follow Us', '', '', '', '', '', '', '', 'true', 143),
 (144, 'Follow Us', '', '', '', '', '', '', '', 'true', 144),
 (145, 'Follow Us', '', '', '', '', '', '', '', 'true', 145),
-(146, 'Follow Us', '', '', '', '', '', '', '', 'true', 146),
 (147, 'Follow Us', '', '', '', '', '', '', '', 'true', 147),
 (148, 'Follow Us', '', '', '', '', '', '', '', 'true', 148),
 (149, 'Follow Us', '', '', '', '', '', '', '', 'true', 149),
@@ -4714,7 +4485,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (158, 'Follow Us', '', '', '', '', '', '', '', 'true', 158),
 (159, 'Follow Us', '', '', '', '', '', '', '', 'true', 159),
 (160, 'Follow Us', '', '', '', '', '', '', '', 'true', 160),
-(161, 'Follow Us', '', '', '', '', '', '', '', 'true', 161),
 (162, 'Follow Us', '', '', '', '', '', '', '', 'true', 163),
 (163, 'Follow Us', '', '', '', '', '', '', '', 'true', 164),
 (164, 'Follow Us', '', '', '', '', '', '', '', 'true', 165),
@@ -4731,7 +4501,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (175, 'Follow Us', '', '', '', '', '', '', '', 'true', 176),
 (176, 'Follow Us', '', '', '', '', '', '', '', 'true', 177),
 (177, 'Follow Us', '', '', '', '', '', '', '', 'true', 178),
-(178, 'Follow Us', '', '', '', '', '', '', '', 'true', 179),
 (179, 'Follow Us', '', '', '', '', '', '', '', 'true', 180),
 (180, 'Follow Us', '', '', '', '', '', '', '', 'true', 181),
 (181, 'Follow Us', '', '', '', '', '', '', '', 'true', 182),
@@ -4776,9 +4545,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (220, 'Follow Us', '', '', '', '', '', '', '', 'true', 221),
 (221, 'Follow Us', '', '', '', '', '', '', '', 'true', 222),
 (222, 'Follow Us', '', '', '', '', '', '', '', 'true', 223),
-(223, 'Follow Us', '', '', '', '', '', '', '', 'true', 224),
 (224, 'Follow Us', '', '', '', '', '', '', '', 'true', 225),
-(225, 'Follow Us', '', '', '', '', '', '', '', 'true', 226),
 (226, 'Follow Us', '', '', '', '', '', '', '', 'true', 227),
 (227, 'Follow Us', '', '', '', '', '', '', '', 'true', 228),
 (228, 'Follow Us', '', '', '', '', '', '', '', 'true', 229),
@@ -4798,9 +4565,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (242, 'Follow Us', '', '', '', '', '', '', '', 'true', 243),
 (243, 'Follow Us', '', '', '', '', '', '', '', 'true', 244),
 (244, 'Follow Us', '', '', '', '', '', '', '', 'true', 245),
-(245, 'Follow Us', '', '', '', '', '', '', '', 'true', 246),
-(246, 'Follow Us', '', '', '', '', '', '', '', 'true', 247),
-(247, 'Follow Us', '', '', '', '', '', '', '', 'true', 248),
 (248, 'Follow Us', '', '', '', '', '', '', '', 'true', 249),
 (249, 'Follow Us', '', '', '', '', '', '', '', 'true', 250),
 (250, 'Follow Us', '', '', '', '', '', '', '', 'true', 251),
@@ -4824,14 +4588,11 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (268, 'Follow Us', '', '', '', '', '', '', '', 'true', 269),
 (269, 'Follow Us', '', '', '', '', '', '', '', 'true', 270),
 (270, 'Follow Us', '', '', '', '', '', '', '', 'true', 271),
-(271, 'Follow Us', '', '', '', '', '', '', '', 'true', 272),
 (272, 'Follow Us', '', '', '', '', '', '', '', 'true', 273),
 (273, 'Follow Us', '', '', '', '', '', '', '', 'true', 274),
 (274, 'Follow Us', '', '', '', '', '', '', '', 'true', 275),
-(275, 'Follow Us', '', '', '', '', '', '', '', 'true', 276),
 (276, 'Follow Us', '', '', '', '', '', '', '', 'true', 277),
 (277, 'Follow Us', '', '', '', '', '', '', '', 'true', 278),
-(278, 'Follow Us', '', '', '', '', '', '', '', 'true', 279),
 (279, 'Follow Us', '', '', '', '', '', '', '', 'true', 280),
 (280, 'Follow Us', '', '', '', '', '', '', '', 'true', 281),
 (281, 'Follow Us', '', '', '', '', '', '', '', 'true', 282),
@@ -4851,7 +4612,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (295, 'Follow Us', '', '', '', '', '', '', '', 'true', 296),
 (296, 'Follow Us', '', '', '', '', '', '', '', 'true', 297),
 (297, 'Follow Us', '', '', '', '', '', '', '', 'true', 298),
-(298, 'Follow Us', '', '', '', '', '', '', '', 'true', 299),
 (299, 'Follow Us', '', '', '', '', '', '', '', 'true', 300),
 (300, 'Follow Us', '', '', '', '', '', '', '', 'true', 301),
 (301, 'Follow Us', '', '', '', '', '', '', '', 'true', 302),
@@ -4866,9 +4626,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (310, 'Follow Us', '', '', '', '', '', '', '', 'true', 311),
 (311, 'Follow Us', '', '', '', '', '', '', '', 'true', 312),
 (312, 'Follow Us', '', '', '', '', '', '', '', 'true', 313),
-(313, 'Follow Us', '', '', '', '', '', '', '', 'true', 314),
-(314, 'Follow Us', '', '', '', '', '', '', '', 'true', 315),
-(315, 'Follow Us', '', '', '', '', '', '', '', 'true', 316),
 (316, 'Follow Us', '', '', '', '', '', '', '', 'true', 317),
 (317, 'Follow Us', '', '', '', '', '', '', '', 'true', 318),
 (318, 'Follow Us', '', '', '', '', '', '', '', 'true', 319),
@@ -4880,7 +4637,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (324, 'Follow Us', '', '', '', '', '', '', '', 'true', 325),
 (325, 'Follow Us', '', '', '', '', '', '', '', 'true', 326),
 (326, 'Follow Us', '', '', '', '', '', '', '', 'true', 327),
-(327, 'Follow Us', '', '', '', '', '', '', '', 'true', 328),
 (328, 'Follow Us', '', '', '', '', '', '', '', 'true', 329),
 (329, 'Follow Us', '', '', '', '', '', '', '', 'true', 330),
 (330, 'Follow Us', '', '', '', '', '', '', '', 'true', 331),
@@ -4919,17 +4675,13 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (363, 'Follow Us', '', '', '', '', '', '', '', 'true', 364),
 (364, 'Follow Us', '', '', '', '', '', '', '', 'true', 365),
 (365, 'Follow Us', '', '', '', '', '', '', '', 'true', 366),
-(366, 'Follow Us', '', '', '', '', '', '', '', 'true', 367),
 (367, 'Follow Us', '', '', '', '', '', '', '', 'true', 368),
-(368, 'Follow Us', '', '', '', '', '', '', '', 'true', 369),
 (369, 'Follow Us', '', '', '', '', '', '', '', 'true', 370),
 (370, 'Follow Us', '', '', '', '', '', '', '', 'true', 371),
 (371, 'Follow Us', '', '', '', '', '', '', '', 'true', 372),
 (372, 'Follow Us', '', '', '', '', '', '', '', 'true', 373),
 (373, 'Follow Us', '', '', '', '', '', '', '', 'true', 374),
 (374, 'Follow Us', '', '', '', '', '', '', '', 'true', 375),
-(375, 'Follow Us', '', '', '', '', '', '', '', 'true', 376),
-(376, 'Follow Us', '', '', '', '', '', '', '', 'true', 377),
 (377, 'Follow Us', '', '', '', '', '', '', '', 'true', 378),
 (378, 'Follow Us', '', '', '', '', '', '', '', 'true', 379),
 (379, 'Follow Us', '', '', '', '', '', '', '', 'true', 380),
@@ -4955,7 +4707,6 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (399, 'Follow Us', '', '', '', '', '', '', '', 'true', 400),
 (400, 'Follow Us', '', '', '', '', '', '', '', 'true', 401),
 (401, 'Follow Us', '', '', '', '', '', '', '', 'true', 402),
-(402, 'Follow Us', '', '', '', '', '', '', '', 'true', 403),
 (403, 'Follow Us', '', '', '', '', '', '', '', 'true', 404),
 (404, 'Follow Us', '', '', '', '', '', '', '', 'true', 405),
 (405, 'Follow Us', '', '', '', '', '', '', '', 'true', 406),
@@ -4965,19 +4716,14 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 (409, 'Follow Us', '', '', '', '', '', '', '', 'true', 410),
 (410, 'Follow Us', '', '', '', '', '', '', '', 'true', 411),
 (411, 'Follow Us', '', '', '', '', '', '', '', 'true', 412),
-(412, 'Follow Us', '', '', '', '', '', '', '', 'true', 403),
 (413, 'Follow Us', '', '', '', '', '', '', '', 'true', 414),
-(414, 'Follow Us', '', '', '', '', '', '', '', 'true', 415),
 (415, 'Follow Us', '', '', '', '', '', '', '', 'true', 416),
 (416, 'Follow Us', '', '', '', '', '', '', '', 'true', 417),
 (417, 'Follow Us', '', '', '', '', '', '', '', 'true', 418),
 (418, 'Follow Us', '', '', '', '', '', '', '', 'true', 419),
 (419, 'Follow Us', '', '', '', '', '', '', '', 'true', 420),
 (420, 'Follow Us', '', '', '', '', '', '', '', 'true', 421),
-(421, 'Follow Us', '', '', '', '', '', '', '', 'true', 422),
-(422, 'Follow Us', '', '', '', '', '', '', '', 'true', 423),
 (423, 'Follow Us', '', '', '', '', '', '', '', 'true', 424),
-(424, 'Follow Us', '', '', '', '', '', '', '', 'true', 425),
 (425, 'Follow Us', '', '', '', '', '', '', '', 'true', 426),
 (426, 'Follow Us', '', '', '', '', '', '', '', 'true', 427),
 (427, 'Follow Us', '', '', '', '', '', '', '', 'true', 428),
@@ -5127,7 +4873,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
+CREATE TABLE IF NOT EXISTS `team` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -5145,7 +4891,7 @@ CREATE TABLE `team` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
@@ -5154,14 +4900,14 @@ CREATE TABLE `users` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-08 15:12:50', '127.0.0.1', 1),
+(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-09 14:04:35', '127.0.0.1', 1),
 (2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-31 18:43:41', '127.0.0.1', 2);
 
 --
@@ -5293,52 +5039,52 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `category_customers`
 --
 ALTER TABLE `category_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=121;
 --
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=569;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=569;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `services`
 --
@@ -5348,22 +5094,22 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `services_icons`
 --
 ALTER TABLE `services_icons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
 --
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -5373,7 +5119,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --

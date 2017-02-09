@@ -134,7 +134,7 @@ if ($_GET['preview']>"") {
 			<?php
 
 			if ($rowServices['image']=="") {
-				$imgSrc = "http://placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+				$imgSrc = "//placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
 			} else {
 				$imgSrc = "../uploads/".$_GET['loc_id']."/".$rowServices['image'];
 			}
