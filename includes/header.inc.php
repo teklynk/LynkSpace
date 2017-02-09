@@ -91,10 +91,10 @@ session_start();
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "https://<?php echo $setupPACURL ?>";
+        var TLCDomain = "//<?php echo $setupPACURL ?>";
         var TLCConfig = "<?php echo $setupConfig ?>";
         var TLCBranch = "";
-        var TLCClassicDomain = "https://<?php echo $setupPACURL ?>";
+        var TLCClassicDomain = "//<?php echo $setupPACURL ?>";
         var TLCClassicConfig = "<?php echo $setupConfig ?>";
     </script>
 
