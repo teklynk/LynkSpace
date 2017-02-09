@@ -57,7 +57,7 @@ if ($servicesNumRows > 0) {
         }
 
         if (!empty($rowServices['link'])) {
-            echo "<a href='page.php?page_id=" . $rowServices['link'] . "&loc_id=" . $_GET['loc_id'] . "' class='btn btn-primary'>Learn More</a>";
+            echo "<a href='" . $rowServices['link'] . "' class='btn btn-primary'>Learn More</a>";
         }
 
         echo "</div>";

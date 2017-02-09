@@ -182,6 +182,15 @@ $(document).ready(function () {
             }
         }
     });
+    $('#service_exist_page').change(function () {
+        if ($('#service_exist_page').val() == '') {
+            $('#service_link').attr('value', '');
+        } else {
+            if ($('#service_exist_page').val()) {
+                $('#service_link').attr('value', $('#service_exist_page').val());
+            }
+        }
+    });
     $('#exist_cat').change(function () {
         if ($('#exist_cat').val() == '' || $('#exist_cat').val() == 0) { //NOTE: 0=None in the category table
             $('#nav_newcat').val('');

@@ -29,8 +29,8 @@ if ($_GET['preview']>"") {
 	}
 	echo "<p>".$rowServicesPreview['content']."</p>";
 
-	if ($rowServicesPreview['link']>0) {
-		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='../page.php?ref=".$rowServicesPreview['link']."&loc_id=".$_SESSION['loc_id']."' target='_blank'>Page Link</a></p>";
+	if ($rowServicesPreview['link']) {
+		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='".$rowServicesPreview['link']."' target='_blank'>Page Link</a></p>";
 	}
 
 	echo "</div>";
@@ -68,7 +68,7 @@ if ($_GET['preview']>"") {
 					$_POST['service_status']='false';
 				}
 
-				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link=".$_POST['service_link'].", icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
 				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -84,7 +84,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', ".$_POST['service_link'].", 'true', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', 'true', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				echo "<script>window.location.href='services.php?loc_id=".$_GET['loc_id']."';</script>";
@@ -186,10 +186,16 @@ if ($_GET['preview']>"") {
 			</select>
 		</div>
 		<hr/>
+
 		<div class="form-group">
-			<label>Choose a link</label>
-			<select class="form-control" name="service_link">
-				<option value="0">None</option>
+            <label>Link URL</label>
+            <input class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
+        </div>
+
+		<div class="form-group">
+			<label>Existing Page</label>
+			<select class="form-control" name="service_exist_page" id="service_exist_page">
+				<option value="">None</option>
 				<?php
 				$pagesStr="";
 				$sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title ASC");
@@ -197,13 +203,7 @@ if ($_GET['preview']>"") {
 					$serviceLinkId=$rowServicesLink['id'];
 					$serviceLinkTitle=$rowServicesLink['title'];
 
-					if ($serviceLinkId===$rowServices['link']) {
-						$isSelected="SELECTED";
-					} else {
-						$isSelected="";
-					}
-
-					$pagesStr .= "<option value='".$serviceLinkId."' ".$isSelected.">".$serviceLinkTitle."</option>";
+					$pagesStr .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=".$_GET['loc_id']." '>" . $serviceLinkTitle . "</option>";
 				}
 
 				$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
