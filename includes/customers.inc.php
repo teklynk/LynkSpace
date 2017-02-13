@@ -48,7 +48,7 @@ if ($customerNumRows > 0) {
         $customersItemCount = 0;
 
         //Gets links for each cat
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND featured='false' AND catid=".$customerCatId." AND loc_id=".$custDefaultLoc." ORDER BY datetime DESC "); //While loop
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND featured='false' AND catid=".$customerCatId." AND loc_id=".$custDefaultLoc." ORDER BY catid, sort, name ASC"); //While loop
         $itemCount = mysqli_num_rows($sqlCustomers);
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 

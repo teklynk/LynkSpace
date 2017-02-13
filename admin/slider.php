@@ -62,7 +62,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . safeCleanStr($_POST['slide_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
-        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, author_name, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, active, sort, author_name, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowSlides = mysqli_fetch_array($sqlSlides);
 
         //Create new slide
@@ -72,7 +72,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -197,8 +197,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     $slideMsg = "";
     $delslideId = $_GET['deleteslide'];
     $delslideTitle = $_GET['deletetitle'];
-    $moveslideId = $_GET['moveslide'];
-    $moveslideTitle = $_GET['movetitle'];
 
     //delete slide
     if ($_GET['deleteslide'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -215,16 +213,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         echo $deleteMsg;
     }
 
-    //move slide to top of list
-    if (($_GET['moveslide'] && $_GET['movetitle'])) {
-        $slidesDateUpdate = "UPDATE slider SET author_name='".$_SESSION['user_name']."', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveslideId'";
-        mysqli_query($db_conn, $slidesDateUpdate);
-
-        $slideMsg = "<div class='alert alert-success'>" . $moveslideTitle . " has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    }
-
     //update heading on submit
-    if (!empty($_POST['main_heading'])) {
+    if (($_POST['save_main'])) {
 
         if ($_POST['slider_defaults'] == 'on') {
             $_POST['slider_defaults'] = 'true';
@@ -234,6 +224,13 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         $setupUpdate = "UPDATE setup SET sliderheading='" . safeCleanStr($_POST['main_heading']) . "', slider_use_defaults='" . safeCleanStr($_POST['slider_defaults']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $setupUpdate);
+
+        for ($i = 0; $i < $_POST['slide_count']; $i++) {
+
+            $slideUpdate = "UPDATE slider SET sort=" . safeCleanStr($_POST['slide_sort'][$i]) . " WHERE id=" . $_POST['slide_id'][$i] . " ";
+            mysqli_query($db_conn, $slideUpdate);
+
+        }
 
         $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
     }
@@ -315,19 +312,22 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>
 		<tr>
+		<th>Sort</th>
 		<th>Slide Title</th>
 		<th>Active</th>
 		<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody>";
-
-    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+    $slideCount = "";
+    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC");
     while ($rowSlides = mysqli_fetch_array($sqlslides)) {
         $slideId = $rowSlides['id'];
         $slideTitle = $rowSlides['title'];
         $slideContent = $rowSlides['content'];
+        $slideSort = $rowSlides['sort'];
         $slideActive = $rowSlides['active'];
+        $slideCount++;
 
         if ($rowSlides['active'] == 'true') {
             $isActive = "CHECKED";
@@ -336,13 +336,18 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
 
         echo "<tr>
-			<td><a href='slider.php?loc_id=" . $_GET['loc_id'] . "&editslide=$slideId' title='Edit'>" . $slideTitle . "</a></td>
+            <td class='col-xs-1'>
+            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3'>
+            </td>
+			<td>
+			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
+			<a href='slider.php?loc_id=" . $_GET['loc_id'] . "&editslide=$slideId' title='Edit'>" . $slideTitle . "</a>
+			</td>
 			<td class='col-xs-1'>
-			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='$slideId' type='checkbox' " . $isActive . ">
+			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='" . $slideId . "' type='checkbox' " . $isActive . ">
 			</td>
 			<td class='col-xs-2'>
 			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($slideTitle) . "', 'slider.php?loc_id=" . $_GET['loc_id'] . "&preview=$slideId')\"><i class='fa fa-fw fa-eye'></i></button>
-			<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "&moveslide=$slideId&movetitle=" . safeCleanStr($slideTitle) . "'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=$slideId&deletetitle=" . safeCleanStr($slideTitle) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 			</td>
 			</tr>";
@@ -350,6 +355,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     echo "</tbody>
 		</table>
+		<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
+		<input type='hidden' name='save_main' value='true'/>
 		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Cancel</button>
 		</form>

@@ -229,8 +229,6 @@ if ($_GET['preview']>"") {
 		$serviceMsg="";
 		$delserviceId = $_GET['deleteservice'];
 		$delserviceTitle = $_GET['deletetitle'];
-		$moveserviceId = $_GET['moveservice'];
-		$moveserviceTitle = $_GET['movetitle'];
 
 		//delete service
 		if ($_GET['deleteservice'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -247,14 +245,6 @@ if ($_GET['preview']>"") {
 			echo $deleteMsg;
 		}
 
-		//move services to top of list
-		if (($_GET['moveservice'] && $_GET['movetitle'])) {
-			$servicesDateUpdate = "UPDATE services SET author_name='".$_SESSION['user_name']."', datetime='".date("Y-m-d H:i:s")."' WHERE id='$moveserviceId'";
-			mysqli_query($db_conn, $servicesDateUpdate);
-
-			$serviceMsg="<div class='alert alert-success'>".$moveserviceTitle." has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
-		}
-
 		//update heading on submit
 		if (($_POST['save_main'])) {
 
@@ -266,6 +256,13 @@ if ($_GET['preview']>"") {
 
 			$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".sqlEscapeStr($_POST['main_content'])."', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $setupUpdate);
+
+			for ($i = 0; $i < $_POST['service_count']; $i++) {
+
+				$servicesUpdate = "UPDATE services SET sort=" . safeCleanStr($_POST['service_sort'][$i]) . " WHERE id=" . $_POST['service_id'][$i] . " ";
+				mysqli_query($db_conn, $servicesUpdate);
+
+			}
 
 			$serviceMsg="<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
@@ -350,6 +347,7 @@ if ($_GET['preview']>"") {
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
 				<tr>
+					<th>Sort</th>
 					<th>Service Title</th>
 					<th>Active</th>
 					<th>Actions</th>
@@ -357,13 +355,16 @@ if ($_GET['preview']>"") {
 				</thead>
 				<tbody>
 				<?php
-				$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, link, active, loc_id FROM services WHERE loc_id=".$_GET['loc_id']." ORDER BY datetime DESC");
+				$serviceCount = "";
+				$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, link, sort, active, loc_id FROM services WHERE loc_id=".$_GET['loc_id']." ORDER BY sort ASC");
 				while ($rowServices  = mysqli_fetch_array($sqlServices)) {
 					$serviceId=$rowServices['id'];
 					$serviceTitle=$rowServices['title'];
 					$serviceTumbnail=$rowServices['icon'];
 					$serviceContent=$rowServices['content'];
 					$serviceActive=$rowServices['active'];
+					$serviceSort=$rowServices['sort'];
+					$serviceCount++;
 
 					if ($rowServices['active']=='true') {
 						$isActive="CHECKED";
@@ -372,13 +373,18 @@ if ($_GET['preview']>"") {
 					}
 
 				echo "<tr>
-				<td><a href='services.php?loc_id=".$_GET['loc_id']."&editservice=$serviceId' title='Edit'>".$serviceTitle."</a></td>
 				<td class='col-xs-1'>
-				<input data-toggle='toggle' title='Service Active' class='checkbox services_status_checkbox' id='$serviceId' type='checkbox' ".$isActive.">
+				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='text' maxlength='3'>
+				</td>
+				<td>
+				<input type='hidden' name='service_id[]' value='" . $serviceId . "' >
+				<a href='services.php?loc_id=".$_GET['loc_id']."&editservice=$serviceId' title='Edit'>".$serviceTitle."</a>
+				</td>
+				<td class='col-xs-1'>
+				<input data-toggle='toggle' title='Service Active' class='checkbox services_status_checkbox' id='" . $serviceId . "' type='checkbox' ".$isActive.">
 				</td>
 				<td class='col-xs-2'>
 				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('".safeCleanStr($serviceTitle)."', 'services.php?loc_id=".$_GET['loc_id']."&preview=$serviceId')\"><i class='fa fa-fw fa-eye'></i></button>
-				<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&moveservice=$serviceId&movetitle=".safeCleanStr($serviceTitle)."'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=".safeCleanStr($serviceTitle)."'\"><i class='fa fa-fw fa-trash'></i></button>
 				</td>
 				</tr>";
@@ -386,9 +392,10 @@ if ($_GET['preview']>"") {
 				?>
 				</tbody>
 			</table>
-			<input type="hidden" name="save_main" value="true" />
-			<button type="submit" name='servicesNew_submit' class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+			<input type="hidden" name="service_count" value="<?php echo $serviceCount; ?>"/>
+			<input type="hidden" name="save_main" value="true"/>
+			<button type="submit" name="servicesNew_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
+			<button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancel</button>
 		</form>
 	</div>
 

@@ -147,7 +147,7 @@ if ($_GET['section'] == $custSections[0]) {
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowCustomer = mysqli_fetch_array($sqlCustomer);
 
                 //Create new customer
@@ -157,7 +157,7 @@ if ($_GET['section'] == $custSections[0]) {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . $_POST['customer_name'] . "', '" . sqlEscapeStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . $_POST['customer_name'] . "', '" . sqlEscapeStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -327,8 +327,6 @@ if ($_GET['section'] == $custSections[0]) {
             $customerMsg = "";
             $delcustomerId = $_GET['deletecustomer'];
             $delcustomerName = $_GET['deletename'];
-            $movecustomerId = $_GET['movecustomer'];
-            $movecustomerName = $_GET['movename'];
 
             //delete customer
             if ($_GET['deletecustomer'] && $_GET['deletename'] && !$_GET['confirm']) {
@@ -344,14 +342,6 @@ if ($_GET['section'] == $custSections[0]) {
                 echo $deleteMsg;
             }
 
-            //move customer to top of list - datatime stamp determines position
-            if (($_GET['movecustomer'] && $_GET['movename'])) {
-                $customerDateUpdate = "UPDATE customers SET author_name='" . $_SESSION['author_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$movecustomerId'";
-                mysqli_query($db_conn, $customerDateUpdate);
-
-                $customerMsg = "<div class='alert alert-success'>" . $movecustomerName . " has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-            }
-
             //update heading on submit
             if (($_POST['save_main'])) {
 
@@ -364,7 +354,7 @@ if ($_GET['section'] == $custSections[0]) {
                         $_POST['cust_cat'][$i] = 0; //None
                     }
 
-                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
+                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", sort=" . safeCleanStr($_POST['cust_sort'][$i]) . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
                     mysqli_query($db_conn, $custCatUpdate);
 
                 }
@@ -556,6 +546,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
+                            <th>Sort</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th>Featured</th>
@@ -566,7 +557,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <tbody>
                         <?php
                         $custCount = "";
-                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, datetime DESC");
+                        $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
                             $customerName = $rowCustomer['name'];
@@ -575,6 +566,7 @@ if ($_GET['section'] == $custSections[0]) {
                             $customerLink = $rowCustomer['link'];
                             $customerActive = $rowCustomer['active'];
                             $customerFeatured = $rowCustomer['featured'];
+                            $customerSort = $rowCustomer['sort'];
                             $custCount++;
 
                             if ($rowCustomer['active'] == 'true') {
@@ -590,7 +582,11 @@ if ($_GET['section'] == $custSections[0]) {
                             }
 
                             echo "<tr>
-						<td><input type='hidden' name='cust_id[]' value='" . $customerId . "' >
+                        <td class='col-xs-1'>
+                        <input class='form-control' name='cust_sort[]' value='" . $customerSort . "' type='text' maxlength='3'>
+                        </td>
+						<td>
+						<input type='hidden' name='cust_id[]' value='" . $customerId . "' >
 						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a></td>
 						<td>";
                             echo "<select class='form-control' name='cust_cat[]'>'";
@@ -614,14 +610,13 @@ if ($_GET['section'] == $custSections[0]) {
                             echo "</select>";
 						echo "</td>
 						<td class='col-xs-1'>
-						<input data-toggle='toggle' title='Database Featured' class='checkbox customer_featured_checkbox' id='$customerId' type='checkbox' " . $isFeatured . ">
+						<input data-toggle='toggle' title='Database Featured' class='checkbox customer_featured_checkbox' id='" . $customerId . "' type='checkbox' " . $isFeatured . ">
 						</td>
 						<td class='col-xs-1'>
-						<input data-toggle='toggle' title='Database Active' class='checkbox customer_status_checkbox' id='$customerId' type='checkbox' " . $isActive . ">
+						<input data-toggle='toggle' title='Database Active' class='checkbox customer_status_checkbox' id='" . $customerId . "' type='checkbox' " . $isActive . ">
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($customerName) . "', 'databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&movecustomer=$customerId&movename=" . safeCleanStr($customerName) . "'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=$customerId&deletename=" . safeCleanStr($customerName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
@@ -629,10 +624,10 @@ if ($_GET['section'] == $custSections[0]) {
                         ?>
                         </tbody>
                     </table>
-                    <input type='hidden' name='cust_count' value="<?php echo $custCount; ?>" >
+                    <input type="hidden" name="cust_count" value="<?php echo $custCount; ?>" />
                     <input type="hidden" name="save_main" value="true"/>
-                    <button type="submit" class="btn btn-primary" name="customer_submit"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="customer_submit"><i class="fa fa-fw fa-save"></i> Save Changes</button>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancel</button>
                 </form>
             </div>
             <?php

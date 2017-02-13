@@ -81,7 +81,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
                     echo "<script>window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -181,8 +181,6 @@ if ($_GET['preview'] > "") {
             $teamMsg = "";
             $delteamId = $_GET['deleteteam'];
             $delteamTitle = $_GET['deletetitle'];
-            $moveteamId = $_GET['moveteam'];
-            $moveteamTitle = $_GET['movetitle'];
 
             //delete team
             if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -199,18 +197,17 @@ if ($_GET['preview'] > "") {
                 echo $deleteMsg;
             }
 
-            //move team to top of list
-            if (($_GET['moveteam'] && $_GET['movetitle'])) {
-                $teamDateUpdate = "UPDATE team SET author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$moveteamId'";
-                mysqli_query($db_conn, $teamDateUpdate);
-
-                $teamMsg = "<div class='alert alert-success'>" . $moveteamTitle . " has been moved to the top.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-            }
-
             //update heading on submit
             if (($_POST['save_main'])) {
                 $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
+
+                for ($i = 0; $i < $_POST['team_count']; $i++) {
+
+                    $teamUpdate = "UPDATE team SET sort=" . safeCleanStr($_POST['team_sort'][$i]) . " WHERE id=" . $_POST['team_id'][$i] . " ";
+                    mysqli_query($db_conn, $teamUpdate);
+
+                }
 
                 $teamMsg = "<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
@@ -295,6 +292,7 @@ if ($_GET['preview'] > "") {
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
+                            <th>Sort</th>
                             <th>Name</th>
                             <th>Active</th>
                             <th>Actions</th>
@@ -302,13 +300,16 @@ if ($_GET['preview'] > "") {
                         </thead>
                         <tbody>
                         <?php
-                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+                        $teamCount = "";
+                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC");
                         while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
                             $teamId = $rowTeam['id'];
                             $teamTitle = $rowTeam['title'];
                             $teamName = $rowTeam['name'];
                             $teamContent = $rowTeam['content'];
                             $teamActive = $rowTeam['active'];
+                            $teamSort = $rowTeam['sort'];
+                            $teamCount++;
 
                             if ($rowTeam['active'] == 'true') {
                                 $isActive = "CHECKED";
@@ -317,13 +318,16 @@ if ($_GET['preview'] > "") {
                             }
 
                             echo "<tr>
-						<td><a href='team.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a></td>
+                        <td class='col-xs-1'>
+                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3'>
+                        </td>
+                        <td>
+                        <input type='hidden' name='team_id[]' value='" . $teamId . "' >
 						<td class='col-xs-1'>
-						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='$teamId' type='checkbox' " . $isActive . ">
+						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='" . $teamId . "' type='checkbox' " . $isActive . ">
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($teamName) . "', 'team.php?loc_id=" . $_GET['loc_id'] . "&preview=$teamId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Move' class='btn btn-default' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "&moveteam=$teamId&movetitle=" . safeCleanStr($teamName) . "'\"><i class='fa fa-fw fa-arrow-up'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=$teamId&deletetitle=" . safeCleanStr($teamName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";

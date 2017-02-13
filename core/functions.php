@@ -495,6 +495,7 @@ function getCustomers($custType){
     global $customerNumRows;
     global $customerFeatured;
     global $customerIcon;
+    global $customerSort;
     global $customerCatId;
     global $customerCatName;
     global $customerSection;
@@ -570,7 +571,7 @@ function getCustomers($custType){
         $customerSectionWhere = "section='" . $customerSection . "' AND ";
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerSectionWhere . " " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY datetime DESC "); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerSectionWhere . " " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY catid, sort, name ASC"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
 }
