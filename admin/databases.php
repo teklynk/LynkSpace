@@ -31,7 +31,7 @@ if ($_GET['preview'] > "") {
     }
 
     if ($rowCustomerPreview['link'] > "") {
-        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>Link</a></p>";
+        echo "<br/><p><b>Page Link:</b> " . $rowCustomerPreview['link'] . "</p>";
     }
 
     echo "</div>";
@@ -98,7 +98,7 @@ if ($_GET['section'] == $custSections[0]) {
     <div class="col-lg-10">
         <?php
         if ($_GET['newcustomer'] == 'true') {
-            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New)</h1>";
+            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
         } else {
             echo "<h1 class='page-header'>Databases (".$_GET['section'].")</h1>";
         }
@@ -240,7 +240,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <option value="">None</option>
                         <?php
 
-                        $sqlCustomerIcon = mysqli_query($db_conn, "SELECT icon FROM services_icons ORDER BY icon ASC");
+                        $sqlCustomerIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
                         while ($rowIcon = mysqli_fetch_array($sqlCustomerIcon)) {
                             $icon = $rowIcon['icon'];
                             if ($icon === $rowCustomer['icon']) {
@@ -541,7 +541,7 @@ if ($_GET['section'] == $custSections[0]) {
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control count-text" name="main_content_<?php echo $custSubSection; ?>" placeholder="About our databases" maxlength="255"><?php echo $rowSetup['customerscontent_'.$custSubSection]; ?></textarea>
+                        <textarea rows="3" class="form-control count-text" name="main_content_<?php echo $custSubSection; ?>" placeholder="About our databases" maxlength="999"><?php echo $rowSetup['customerscontent_'.$custSubSection]; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>

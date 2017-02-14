@@ -97,6 +97,13 @@ function rrmdir($dir) {
     }
 }
 
+//Variable to hide elements from non-admin users
+if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 ){
+    $adminOnlyShow = "";
+} else {
+    $adminOnlyShow = "style='display:none;'";
+}
+
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");

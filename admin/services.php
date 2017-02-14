@@ -40,7 +40,7 @@ if ($_GET['preview']>"") {
 	<div class="col-lg-12">
 	<?php
 		if ($_GET['newservice'] == 'true') {
-			echo "<h1 class='page-header'>Services (New)</h1>";
+			echo "<h1 class='page-header'>Services (New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
 		} else {
 			echo "<h1 class='page-header'>Services</h1>";
 		}
@@ -148,7 +148,7 @@ if ($_GET['preview']>"") {
 				<option value="">None</option>
 				<?php
 
-				$sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM services_icons ORDER BY icon ASC");
+				$sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
 				while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
 					$icon=$rowIcon['icon'];
 					if ($icon===$rowServices['icon']) {
@@ -214,7 +214,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea class="form-control count-text" rows="3" name="service_content" placeholder="Text" maxlength="255"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
+			<textarea class="form-control count-text" rows="3" name="service_content" placeholder="Text" maxlength="999"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
 
 		<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

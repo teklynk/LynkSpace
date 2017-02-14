@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2017 at 03:23 AM
--- Server version: 5.5.52
--- PHP Version: 5.5.38
+-- Generation Time: Feb 14, 2017 at 09:31 AM
+-- Server version: 5.5.50-MariaDB
+-- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE `aboutus` (
+CREATE TABLE IF NOT EXISTS `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `aboutus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `aboutus`
@@ -580,13 +580,13 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
@@ -606,14 +606,14 @@ INSERT INTO `category` (`id`, `name`, `nav_loc_id`, `datetime`, `author_name`) V
 -- Table structure for table `category_customers`
 --
 
-CREATE TABLE `category_customers` (
+CREATE TABLE IF NOT EXISTS `category_customers` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `section` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_customers`
@@ -642,7 +642,7 @@ INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datet
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE `contactus` (
+CREATE TABLE IF NOT EXISTS `contactus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -659,7 +659,7 @@ CREATE TABLE `contactus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contactus`
@@ -1204,7 +1204,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `icon` text NOT NULL,
@@ -1215,124 +1215,125 @@ CREATE TABLE `customers` (
   `section` text NOT NULL,
   `featured` text NOT NULL,
   `active` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sort` int(11) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `datetime`, `sort`, `author_name`, `loc_id`) VALUES
-(4, 'gale_icon_1.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', '2017-01-19 18:33:43', 0, 'admin', 1),
-(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica\'s Spanish language version.', 2, '1', 'false', 'true', '2017-01-19 18:33:23', 0, 'admin', 1),
-(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', '2017-01-19 18:33:30', 0, 'admin', 1),
-(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', '2017-01-19 18:33:05', 0, 'admin', 1),
-(8, 'gale_icon_1.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', '2017-01-20 20:10:11', 0, 'admin', 1),
-(14, 'gale_icon_1.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', '2017-01-19 18:33:54', 0, 'admin', 1),
-(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', '2017-01-19 18:32:51', 0, 'admin', 1),
-(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', '2017-01-19 18:32:46', 0, 'admin', 1),
-(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', '2017-01-19 18:31:49', 0, 'admin', 1),
-(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', '2017-01-20 20:12:46', 0, 'admin', 1),
-(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', '2017-01-20 20:12:56', 0, 'admin', 1),
-(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', '2017-01-20 20:12:41', 0, 'admin', 1),
-(32, '', 'link', 'San Francisco Symphony', 'http://www.sfskids.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(33, '', 'link', 'Chicago Public Library A-Z Resources for Kids!', 'http://www.chipublib.org/kids-subject/kids-dbs-a-to-z/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(34, '', 'link', 'Daily Infographic', 'http://dailyinfographic.com/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(35, '', 'link', 'DÃ­a! Diversity in Action - Diversidad en Accion!', 'http://dia.ala.org/content/free-program-downloads', '', 11, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(36, '', 'link', 'Teaching Tolerance Classroom Resources', 'http://www.tolerance.org/classroom-resources', '', 8, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(37, '', 'link', 'Practical Money Skills', 'http://www.practicalmoneyskills.com/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(38, '', 'link', 'EconEdLink', 'http://www.econedlink.org/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(39, '', 'link', 'Money As You Grow', 'http://moneyasyougrow.org/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(40, '', 'link', 'National Endowment for Financial Education', 'http://www.hsfpp.org/about-the-program.aspx', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(41, '', 'link', 'Talk with our Kids about Money', 'http://usa.talkwithourkidsaboutmoney.com/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(42, '', 'link', 'Federal Reserve Education', 'https://www.federalreserveeducation.org/', '', 10, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', '2017-01-26 14:29:15', 0, '', 1),
-(44, '', 'link', 'Facing History and Ourselves', 'https://www.facinghistory.org/', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(45, '', 'link', 'Stanford History Education Group', 'http://sheg.stanford.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(46, '', 'link', 'Teaching History.org', 'http://teachinghistory.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(47, '', 'link', 'Achieve', 'http://achieve.org/', '', 13, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(48, '', 'link', 'Fisher and Frey: Literacy for Life', 'http://fisherandfrey.com/', '', 13, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(49, '', 'link', 'Inside Mathematics', 'http://www.insidemathematics.org/', '', 14, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(50, '', 'link', 'Mathematics Assessment Project', 'http://map.mathshell.org/materials/index.php', '', 14, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(51, '', 'link', 'Next Generation Science Standards', 'http://www.nextgenscience.org/next-generation-science-standards', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(52, '', 'link', 'NDSL Science Literacy Maps', 'http://strandmaps.dls.ucar.edu/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(53, '', 'link', 'ColorÃ­n Colorado!', 'http://www.colorincolorado.org/', '', 11, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(54, '', 'link', 'EL Achieve', 'http://www.elachieve.org/', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(55, '', 'link', 'Into the Book', 'http://reading.ecb.org/', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(56, '', 'link', 'English Learner Resource Web Hotlist', 'http://www.kn.att.com/wired/fil/pages/listeslresoma.html', '', 15, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(58, '', 'link', 'Bureau of Labor Statistics', 'http://www.bls.gov/ooh/', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(59, '', 'link', 'World-of-Work Map', 'http://www.act.org/world/explore_world.html', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(60, '', 'link', 'What\'s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(61, '', 'link', 'African American Heritage Teaching Resources', 'http://www.smithsonianeducation.org/educators/resource_library/african_american_resources.html', '', 6, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(62, '', 'link', 'DuSable Museum of African American History', 'http://www.dusablemuseum.org/', '', 6, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(63, '', 'link', 'The Art Institute of Chicago\'s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(64, '', 'link', 'National Gallery of Art for kids', 'http://www.nga.gov/content/ngaweb/education/kids.html', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(65, '', 'link', 'Haring Kids', 'http://www.haringkids.com/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(66, '', 'link', 'National Core Arts Standards', 'http://bit.ly/curiouscorner', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(67, '', 'link', 'Museum of Modern Art - Destination Modern Art!', 'http://www.moma.org/interactives/destination/#', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(68, '', 'link', 'CPS Department of Arts Education', 'http://www.cpsarts.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(69, '', 'link', 'Smithsonian Latino Center\'s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(70, '', 'link', 'Lincoln Center Institute', 'http://lcinstitute.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(71, '', 'link', 'PBS Kids', 'http://pbskids.org/', '', 7, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(72, '', 'link', 'Center for History and New Media', 'http://chnm.gmu.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(73, '', 'link', 'National Council for the Social Studies', 'http://www.socialstudies.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(74, '', 'link', 'Gilder Lehrman', 'https://www.gilderlehrman.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(75, '', 'link', 'Our Shared Past in the Mediterranean:', 'http://mediterraneansharedpast.org/home', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(76, '', 'link', 'PBS Online', 'http://www.pbslearningmedia.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(77, '', 'link', 'SCORE', 'http://score.rims.k12.ca.us/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(78, '', 'link', 'Digital History', 'http://www.digitalhistory.uh.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(79, '', 'link', 'BBC: History', 'http://www.bbc.co.uk/history', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(80, '', 'link', 'History Teacher', 'http://www.historyteacher.net/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(81, '', 'link', 'History Channel', 'http://www.history.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(82, '', 'link', 'The History Place', 'http://www.historyplace.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(83, '', 'link', 'Academic Info: History', 'http://www.academicinfo.net/histaameta.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(84, '', 'link', 'Smithsonian Education', 'http://www.smithsonianeducation.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(85, '', 'link', 'Voice of the Shuttle: History Page', 'http://vos.ucsb.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(86, '', 'link', 'History Net', 'http://www.historynet.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(87, '', 'link', 'WWW-VL The History Index', 'http://vlib.iue.it/history/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(88, '', 'link', 'Spartacus: History', 'http://spartacus-educational.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(89, '', 'link', 'Ask ERIC Virtual Library', 'http://eric.ed.gov/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(90, '', 'link', 'Scholars\' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(91, '', 'link', 'Thinkfinity', 'http://thinkfinity.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(92, '', 'link', 'Education Index', 'http://www.educationindex.com/history/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(93, '', 'link', 'World History: HyperHistory', 'http://www.hyperhistory.com/online_n2/History_n2/a.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(94, '', 'link', 'Kathy Schrock\'s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(95, '', 'link', 'SchoolHistory.co.uk', 'http://www.schoolhistory.co.uk/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(96, '', 'link', 'The History News Network', 'http://historynewsnetwork.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(97, '', 'link', 'eHistory.com', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(98, '', 'link', 'History Buff', 'http://www.historybuff.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(99, '', 'link', 'McRel', 'http://www2.mcrel.org/lesson-plans/history/index.asp', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(100, '', 'link', 'Footnotes in History', 'http://www.buckyogi.com/footnotes/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(101, '', 'link', 'studentfriends.com', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(102, '', 'link', 'Conversations With History', 'http://conversations.berkeley.edu/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(103, '', 'link', 'Understanding the World Today', 'http://gsociology.icaap.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(104, '', 'link', 'TeacherServe (National Humanities Center)', 'http://nationalhumanitiescenter.org/tserve/tserve.htm', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(105, '', 'link', 'History Central.com', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(106, '', 'link', 'History in Focus: What is History?', 'http://www.history.ac.uk/ihr/Focus/Whatishistory/index.html', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(107, '', 'link', 'Economics Resources for K-12 Teachers', 'http://ecedweb.unomaha.edu/K-12/home.cfm', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(108, '', 'link', 'National History Day', 'http://www.nationalhistoryday.org/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(109, '', 'link', 'Social Studies Central', 'http://socialstudiescentral.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(110, '', 'link', 'On This Day', 'http://www.on-this-day.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(111, '', 'link', 'This Day in Alternate History', 'http://www.othertimelines.com/', '', 17, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(112, '', 'link', 'Infoplease Almanac', 'http://www.infoplease.com', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(113, '', 'link', 'Ask a Biologist', 'http://askabiologist.asu.edu/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(114, '', 'link', 'Bug Guide', 'http://bugguide.net/node/view/15740', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(115, '', 'link', 'I Was Wondering', 'http://iwaswondering.org/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', '2017-01-19 17:16:10', 0, 'admin', 1),
-(118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', '2017-01-26 14:07:02', 0, 'admin', 1),
-(119, '', 'link', 'International Children\'s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', '2017-01-26 14:10:25', 0, 'admin', 1),
-(120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', '2017-01-26 14:11:56', 0, 'admin', 1);
+INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
+(4, 'gale_icon_1.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:43', 'admin', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:23', 'admin', 1),
+(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:30', 'admin', 1),
+(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:05', 'admin', 1),
+(8, 'gale_icon_1.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 0, '2017-01-20 20:10:11', 'admin', 1),
+(14, 'gale_icon_1.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:54', 'admin', 1),
+(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 0, '2017-01-19 18:32:51', 'admin', 1),
+(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 0, '2017-01-19 18:32:46', 'admin', 1),
+(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', 2, '2017-01-20 20:12:46', 'admin', 1),
+(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', 1, '2017-01-20 20:12:56', 'admin', 1),
+(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', 3, '2017-01-20 20:12:41', 'admin', 1),
+(32, '', 'link', 'San Francisco Symphony', 'http://www.sfskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(33, '', 'link', 'Chicago Public Library A-Z Resources for Kids!', 'http://www.chipublib.org/kids-subject/kids-dbs-a-to-z/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(34, '', 'link', 'Daily Infographic', 'http://dailyinfographic.com/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(35, '', 'link', 'DÃ­a! Diversity in Action - Diversidad en Accion!', 'http://dia.ala.org/content/free-program-downloads', '', 11, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(36, '', 'link', 'Teaching Tolerance Classroom Resources', 'http://www.tolerance.org/classroom-resources', '', 8, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(37, '', 'link', 'Practical Money Skills', 'http://www.practicalmoneyskills.com/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(38, '', 'link', 'EconEdLink', 'http://www.econedlink.org/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(39, '', 'link', 'Money As You Grow', 'http://moneyasyougrow.org/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(40, '', 'link', 'National Endowment for Financial Education', 'http://www.hsfpp.org/about-the-program.aspx', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(41, '', 'link', 'Talk with our Kids about Money', 'http://usa.talkwithourkidsaboutmoney.com/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(42, '', 'link', 'Federal Reserve Education', 'https://www.federalreserveeducation.org/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:29:15', '', 1),
+(44, '', 'link', 'Facing History and Ourselves', 'https://www.facinghistory.org/', '', 15, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(45, '', 'link', 'Stanford History Education Group', 'http://sheg.stanford.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(46, '', 'link', 'Teaching History.org', 'http://teachinghistory.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(47, '', 'link', 'Achieve', 'http://achieve.org/', '', 13, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(48, '', 'link', 'Fisher and Frey: Literacy for Life', 'http://fisherandfrey.com/', '', 13, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(49, '', 'link', 'Inside Mathematics', 'http://www.insidemathematics.org/', '', 14, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(50, '', 'link', 'Mathematics Assessment Project', 'http://map.mathshell.org/materials/index.php', '', 14, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(51, '', 'link', 'Next Generation Science Standards', 'http://www.nextgenscience.org/next-generation-science-standards', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(52, '', 'link', 'NDSL Science Literacy Maps', 'http://strandmaps.dls.ucar.edu/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(53, '', 'link', 'ColorÃ­n Colorado!', 'http://www.colorincolorado.org/', '', 11, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(54, '', 'link', 'EL Achieve', 'http://www.elachieve.org/', '', 15, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(55, '', 'link', 'Into the Book', 'http://reading.ecb.org/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(56, '', 'link', 'English Learner Resource Web Hotlist', 'http://www.kn.att.com/wired/fil/pages/listeslresoma.html', '', 15, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(58, '', 'link', 'Bureau of Labor Statistics', 'http://www.bls.gov/ooh/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(59, '', 'link', 'World-of-Work Map', 'http://www.act.org/world/explore_world.html', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(60, '', 'link', 'What''s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(61, '', 'link', 'African American Heritage Teaching Resources', 'http://www.smithsonianeducation.org/educators/resource_library/african_american_resources.html', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(62, '', 'link', 'DuSable Museum of African American History', 'http://www.dusablemuseum.org/', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(63, '', 'link', 'The Art Institute of Chicago''s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(64, '', 'link', 'National Gallery of Art for kids', 'http://www.nga.gov/content/ngaweb/education/kids.html', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(65, '', 'link', 'Haring Kids', 'http://www.haringkids.com/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(66, '', 'link', 'National Core Arts Standards', 'http://bit.ly/curiouscorner', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(67, '', 'link', 'Museum of Modern Art - Destination Modern Art!', 'http://www.moma.org/interactives/destination/#', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(68, '', 'link', 'CPS Department of Arts Education', 'http://www.cpsarts.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(69, '', 'link', 'Smithsonian Latino Center''s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(70, '', 'link', 'Lincoln Center Institute', 'http://lcinstitute.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(71, '', 'link', 'PBS Kids', 'http://pbskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(72, '', 'link', 'Center for History and New Media', 'http://chnm.gmu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(73, '', 'link', 'National Council for the Social Studies', 'http://www.socialstudies.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(74, '', 'link', 'Gilder Lehrman', 'https://www.gilderlehrman.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(75, '', 'link', 'Our Shared Past in the Mediterranean:', 'http://mediterraneansharedpast.org/home', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(76, '', 'link', 'PBS Online', 'http://www.pbslearningmedia.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(77, '', 'link', 'SCORE', 'http://score.rims.k12.ca.us/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(78, '', 'link', 'Digital History', 'http://www.digitalhistory.uh.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(79, '', 'link', 'BBC: History', 'http://www.bbc.co.uk/history', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(80, '', 'link', 'History Teacher', 'http://www.historyteacher.net/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(81, '', 'link', 'History Channel', 'http://www.history.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(82, '', 'link', 'The History Place', 'http://www.historyplace.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(83, '', 'link', 'Academic Info: History', 'http://www.academicinfo.net/histaameta.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(84, '', 'link', 'Smithsonian Education', 'http://www.smithsonianeducation.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(85, '', 'link', 'Voice of the Shuttle: History Page', 'http://vos.ucsb.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(86, '', 'link', 'History Net', 'http://www.historynet.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(87, '', 'link', 'WWW-VL The History Index', 'http://vlib.iue.it/history/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(88, '', 'link', 'Spartacus: History', 'http://spartacus-educational.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(89, '', 'link', 'Ask ERIC Virtual Library', 'http://eric.ed.gov/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(90, '', 'link', 'Scholars'' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(91, '', 'link', 'Thinkfinity', 'http://thinkfinity.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(92, '', 'link', 'Education Index', 'http://www.educationindex.com/history/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(93, '', 'link', 'World History: HyperHistory', 'http://www.hyperhistory.com/online_n2/History_n2/a.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(94, '', 'link', 'Kathy Schrock''s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(95, '', 'link', 'SchoolHistory.co.uk', 'http://www.schoolhistory.co.uk/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(96, '', 'link', 'The History News Network', 'http://historynewsnetwork.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(97, '', 'link', 'eHistory.com', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(98, '', 'link', 'History Buff', 'http://www.historybuff.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(99, '', 'link', 'McRel', 'http://www2.mcrel.org/lesson-plans/history/index.asp', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(100, '', 'link', 'Footnotes in History', 'http://www.buckyogi.com/footnotes/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(101, '', 'link', 'studentfriends.com', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(102, '', 'link', 'Conversations With History', 'http://conversations.berkeley.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(103, '', 'link', 'Understanding the World Today', 'http://gsociology.icaap.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(104, '', 'link', 'TeacherServe (National Humanities Center)', 'http://nationalhumanitiescenter.org/tserve/tserve.htm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(105, '', 'link', 'History Central.com', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(106, '', 'link', 'History in Focus: What is History?', 'http://www.history.ac.uk/ihr/Focus/Whatishistory/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(107, '', 'link', 'Economics Resources for K-12 Teachers', 'http://ecedweb.unomaha.edu/K-12/home.cfm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(108, '', 'link', 'National History Day', 'http://www.nationalhistoryday.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(109, '', 'link', 'Social Studies Central', 'http://socialstudiescentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(110, '', 'link', 'On This Day', 'http://www.on-this-day.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:58', '', 1),
+(111, '', 'link', 'This Day in Alternate History', 'http://www.othertimelines.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:35', '', 1),
+(112, '', 'link', 'Infoplease Almanac', 'http://www.infoplease.com', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(113, '', 'link', 'Ask a Biologist', 'http://askabiologist.asu.edu/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(114, '', 'link', 'Bug Guide', 'http://bugguide.net/node/view/15740', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(115, '', 'link', 'I Was Wondering', 'http://iwaswondering.org/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:07:02', 'admin', 1),
+(119, '', 'link', 'International Children''s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
+(120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:11:56', 'admin', 1),
+(121, '', 'link', 'Commission on Presidential Debates', 'http://debates.org/index.php?page=debate-history', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:11:34', 'jhorning', 1);
 
 -- --------------------------------------------------------
 
@@ -1340,7 +1341,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 -- Table structure for table `featured`
 --
 
-CREATE TABLE `featured` (
+CREATE TABLE IF NOT EXISTS `featured` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -1351,7 +1352,7 @@ CREATE TABLE `featured` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `featured`
@@ -1896,7 +1897,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE `generalinfo` (
+CREATE TABLE IF NOT EXISTS `generalinfo` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -1904,7 +1905,7 @@ CREATE TABLE `generalinfo` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `generalinfo`
@@ -2448,12 +2449,12 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 -- Table structure for table `locations`
 --
 
-CREATE TABLE `locations` (
+CREATE TABLE IF NOT EXISTS `locations` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=569 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
@@ -2998,7 +2999,7 @@ INSERT INTO `locations` (`id`, `name`, `datetime`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE `navigation` (
+CREATE TABLE IF NOT EXISTS `navigation` (
   `id` int(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
@@ -3009,7 +3010,7 @@ CREATE TABLE `navigation` (
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
@@ -3049,7 +3050,7 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
+CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `image` text NOT NULL,
@@ -3059,7 +3060,7 @@ CREATE TABLE `pages` (
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
@@ -3067,8 +3068,8 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child''s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child''s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child''s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child''s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher''s expectations. At the beginning of the year, you may want to ask your child''s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1);
 
@@ -3078,15 +3079,15 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `a
 -- Table structure for table `services`
 --
 
-CREATE TABLE `services` (
+CREATE TABLE IF NOT EXISTS `services` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
   `link` text NOT NULL,
-  `sort` int(11) NOT NULL,
   `active` text NOT NULL,
+  `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
@@ -3098,10 +3099,10 @@ CREATE TABLE `services` (
 -- Table structure for table `services_icons`
 --
 
-CREATE TABLE `services_icons` (
+CREATE TABLE IF NOT EXISTS `services_icons` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `services_icons`
@@ -3709,7 +3710,7 @@ INSERT INTO `services_icons` (`id`, `icon`) VALUES
 -- Table structure for table `setup`
 --
 
-CREATE TABLE `setup` (
+CREATE TABLE IF NOT EXISTS `setup` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
@@ -3744,14 +3745,14 @@ CREATE TABLE `setup` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'true', '2017-02-14 07:17:16', 'admin', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-14 14:26:14', 'admin', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 4),
@@ -4291,28 +4292,28 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
+CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
   `link` text NOT NULL,
   `content` text NOT NULL,
-  `sort` int(11) NOT NULL,
   `active` text NOT NULL,
+  `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `slider`
 --
 
-INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `sort`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 2, 'true', '2017-01-20 20:47:01', 'admin', 1),
-(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 3, 'true', '2017-01-20 20:47:03', 'admin', 1),
-(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 1, 'true', '2017-01-20 20:46:59', 'admin', 1),
-(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 4, 'true', '2017-02-06 15:02:32', 'admin', 1);
+INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
+(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'true', 0, '2017-01-20 20:47:01', 'admin', 1),
+(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'true', 0, '2017-01-20 20:47:03', 'admin', 1),
+(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 'true', 0, '2017-01-20 20:46:59', 'admin', 1),
+(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'true', 0, '2017-02-06 15:02:32', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -4320,7 +4321,7 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `sort`, `active
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE `socialmedia` (
+CREATE TABLE IF NOT EXISTS `socialmedia` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
@@ -4332,7 +4333,7 @@ CREATE TABLE `socialmedia` (
   `tumblr` text NOT NULL,
   `use_defaults` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `socialmedia`
@@ -4876,7 +4877,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
+CREATE TABLE IF NOT EXISTS `team` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -4895,7 +4896,7 @@ CREATE TABLE `team` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
@@ -4904,7 +4905,7 @@ CREATE TABLE `users` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -5043,52 +5044,52 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `category_customers`
 --
 ALTER TABLE `category_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=569;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=569;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `services`
 --
@@ -5098,22 +5099,22 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `services_icons`
 --
 ALTER TABLE `services_icons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
 --
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -5123,7 +5124,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --

@@ -37,6 +37,9 @@ $navSections = array("Top", "Footer", "Search");
 //Database Sections
 $custSections = array("1", "2", "3");
 
+//Location Types
+$locTypes = array("Default", "HS", "MS", "ES", "Other");
+
 //Google Analytics UUID Key ex: UA-8675309-1
 $googleAnalytics = "";
 

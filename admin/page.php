@@ -30,7 +30,7 @@ if ($_GET['preview'] > "") {
         <div class="col-lg-12">
             <?php
             if ($_GET['newpage'] == 'true') {
-                echo "<h1 class='page-header'>Pages (New)</h1>";
+                echo "<h1 class='page-header'>Pages (New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
             } else {
                 echo "<h1 class='page-header'>Pages</h1>";
             }

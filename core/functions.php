@@ -326,8 +326,8 @@ function getNav($navSection, $dropdown, $pull){
         $navDefaultLoc = $_GET['loc_id'];
     }
 
-    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND sort>0 AND loc_id=" . $navDefaultLoc . " ORDER BY sort");
-    //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.loc_id, category.nav_loc_id
+    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND sort>0 AND loc_id=" . $navDefaultLoc . " ORDER BY sort");
+    //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.loc_id, category_navigation.nav_loc_id
     $tempLink = 0;
 
     while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
@@ -362,8 +362,8 @@ function getNav($navSection, $dropdown, $pull){
 
             if ($navLinksCatId != $tempLink){
 
-                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category ON navigation.catid=category.id WHERE section='$navSection' AND category.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
-                //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category.id, category.name, category.nav_loc_id
+                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
+                //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.nav_loc_id
 
                 echo "<li class='$dropdown'>";
                 echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>";
@@ -583,6 +583,7 @@ function getSlider($sliderType){
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;
+    global $sliderLocType;
     global $imagePath;
     global $db_conn;
 
@@ -595,16 +596,30 @@ function getSlider($sliderType){
     $sliderCount = 0;
     $imagePath = $_GET['loc_id'];
 
+    //get location type from locations table
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+    $rowLocations = mysqli_fetch_array($sqlLocations);
+
+    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL){
+        $sliderLocType = $locTypes[0];
+        $locTypeWhere = "loc_type >= '' AND";
+    } else {
+        $sliderLocType = $rowLocations['type'];
+        $locTypeWhere = "loc_type = '".$sliderLocType."' AND";
+    }
+
+    echo $locTypeWhere;
+
     //get the default value from setup table
     $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, sort, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
 
     //use default location
     if ($rowSliderSetup['slider_use_defaults'] == "true" || $rowSliderSetup['slider_use_defaults'] == "" || $rowSliderSetup['slider_use_defaults'] == NULL) {
-        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, sort, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
+        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=1 $sliderOrderBy");
         $sliderNumRows = mysqli_num_rows($sqlSlider);
 
         $imagePath = 1; //the default location
@@ -647,7 +662,6 @@ function getSlider($sliderType){
                 if ($rowSlider['link']){
                     echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
                 }
-
 
                 echo "</div>"; //.carousel-caption
 
@@ -703,6 +717,7 @@ function getSlider($sliderType){
             $sliderTitle = $rowSlider['title'];
             $sliderContent = $rowSlider['content'];
             $sliderImage = $rowSlider['image'];
+            $sliderLocType = $rowSlider['loc_type'];
         }
 
     }

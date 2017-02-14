@@ -36,7 +36,7 @@ if ($_GET['preview'] > "") {
     <div class="col-lg-12">
         <?php
         if ($_GET['newteam'] == 'true') {
-            echo "<h1 class='page-header'>Team (New)</h1>";
+            echo "<h1 class='page-header'>Team (New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
         } else {
             echo "<h1 class='page-header'>Team</h1>";
         }
@@ -166,7 +166,7 @@ if ($_GET['preview'] > "") {
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="255"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
+                    <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="999"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
 
                 <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
