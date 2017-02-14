@@ -219,7 +219,7 @@ function getServices(){
         $servicesBlurb = $rowServicesHeading['servicescontent'];
     }
 
-    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, active FROM services WHERE active='true' AND loc_id=" . $servicesDefaultLoc . " ORDER BY datetime DESC"); //While loop
+    $sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, sort, active FROM services WHERE active='true' AND loc_id=" . $servicesDefaultLoc . " ORDER BY sort, title ASC"); //While loop
     $servicesNumRows = mysqli_num_rows($sqlServices);
     $servicesCount = 0;
 }
@@ -256,7 +256,7 @@ function getTeam(){
         $teamBlurb = $rowTeamHeading['teamcontent'];
     }
 
-    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, active FROM team WHERE active='true' AND loc_id=" . $teamDefaultLoc . " ORDER BY datetime DESC"); //While loop
+    $sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, sort, active FROM team WHERE active='true' AND loc_id=" . $teamDefaultLoc . " ORDER BY sort, title ASC"); //While loop
     $teamNumRows = mysqli_num_rows($sqlTeam);
 }
 
@@ -587,7 +587,7 @@ function getSlider($sliderType){
     global $db_conn;
 
     if ($sliderType == "slide"){
-        $sliderOrderBy = "ORDER BY datetime DESC";
+        $sliderOrderBy = "ORDER BY sort, title ASC";
     } elseif ($sliderType == "random" || $sliderType == ""){
         $sliderOrderBy = "ORDER BY RAND() LIMIT 1";
     }
@@ -599,12 +599,12 @@ function getSlider($sliderType){
     $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, sort, active, loc_id FROM slider WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
 
     //use default location
     if ($rowSliderSetup['slider_use_defaults'] == "true" || $rowSliderSetup['slider_use_defaults'] == "" || $rowSliderSetup['slider_use_defaults'] == NULL) {
-        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
+        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, sort, active, loc_id FROM slider WHERE active='true' AND loc_id=1 $sliderOrderBy");
         $sliderNumRows = mysqli_num_rows($sqlSlider);
 
         $imagePath = 1; //the default location

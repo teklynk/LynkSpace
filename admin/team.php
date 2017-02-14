@@ -71,7 +71,7 @@ if ($_GET['preview'] > "") {
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowTeam = mysqli_fetch_array($sqlteam);
 
                 //Create new team
@@ -199,6 +199,7 @@ if ($_GET['preview'] > "") {
 
             //update heading on submit
             if (($_POST['save_main'])) {
+
                 $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
 
@@ -301,7 +302,7 @@ if ($_GET['preview'] > "") {
                         <tbody>
                         <?php
                         $teamCount = "";
-                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC");
+                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC");
                         while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
                             $teamId = $rowTeam['id'];
                             $teamTitle = $rowTeam['title'];
@@ -322,7 +323,9 @@ if ($_GET['preview'] > "") {
                         <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3'>
                         </td>
                         <td>
+                        <a href='team.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a>
                         <input type='hidden' name='team_id[]' value='" . $teamId . "' >
+                        </td>
 						<td class='col-xs-1'>
 						<input data-toggle='toggle' title='Team Active' class='checkbox team_status_checkbox' id='" . $teamId . "' type='checkbox' " . $isActive . ">
 						</td>
@@ -336,9 +339,9 @@ if ($_GET['preview'] > "") {
                         </tbody>
                     </table>
                     <input type="hidden" name="save_main" value="true"/>
-
-                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                    <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>
+                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancel</button>
                 </form>
             </div>
             <?php

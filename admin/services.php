@@ -30,7 +30,7 @@ if ($_GET['preview']>"") {
 	echo "<p>".$rowServicesPreview['content']."</p>";
 
 	if ($rowServicesPreview['link']) {
-		echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='".$rowServicesPreview['link']."' target='_blank'>Page Link</a></p>";
+		echo "<br/><p><b>Page Link:</b> " . $rowServicesPreview['link'] . "</p>";
 	}
 
 	echo "</div>";

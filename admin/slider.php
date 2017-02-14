@@ -18,7 +18,7 @@ if ($_GET['preview'] > "") {
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
     if ($rowSlidePreview['link']) {
-        echo "<br/><p><i class='fa fa-fw fa-external-link'></i> <a href='" . $rowSlidePreview['link'] . "'>Page Link</a></p>";
+        echo "<br/><p><b>Page Link:</b> " . $rowSlidePreview['link'] . "</p>";
     }
 }
 ?>
