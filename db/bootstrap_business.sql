@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2017 at 05:45 PM
--- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-1+deb.sury.org~trusty+1
+-- Generation Time: Feb 14, 2017 at 03:23 AM
+-- Server version: 5.5.52
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -3092,14 +3092,6 @@ CREATE TABLE `services` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`id`, `icon`, `image`, `title`, `content`, `link`, `sort`, `active`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'angle-up', '', 'test new', 'asdfasdf', 'http://google.com', 2, 'true', '2017-02-13 22:14:10', 'admin', 1),
-(2, '', 'googlecalendarevents.png', 'test 2', 'asdfasdf', '', 1, 'true', '2017-02-13 22:29:43', 'admin', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -3759,7 +3751,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'true', '2017-02-13 22:30:05', 'admin', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'true', '2017-02-14 07:17:16', 'admin', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 4),
@@ -4897,13 +4889,6 @@ CREATE TABLE `team` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `team`
---
-
-INSERT INTO `team` (`id`, `image`, `title`, `content`, `name`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, 'BritannicaSpanishRef_Icon_150x150.gif', 'test', 'test', 'test', 'true', 0, '2017-02-13 22:40:27', 'admin', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -4926,7 +4911,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-13 19:28:07', '127.0.0.1', 1),
+(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-14 06:23:55', '127.0.0.1', 1),
 (2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-31 18:43:41', '127.0.0.1', 2);
 
 --
@@ -5108,7 +5093,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `services_icons`
 --
@@ -5133,7 +5118,7 @@ ALTER TABLE `socialmedia`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
