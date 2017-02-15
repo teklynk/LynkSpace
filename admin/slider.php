@@ -72,7 +72,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '".$locTypes[0]."', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '".safeCleanStr($_POST['location_type'])."', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             header("slider.php?loc_id=" . $_GET['loc_id'] . "");
@@ -100,6 +100,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     } else {
         $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowSlides['image'];
     }
+
     ?>
     <form name="slideForm" class="dirtyForm" method="post" action="">
 
@@ -180,6 +181,33 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 ?>
             </select>
         </div>
+
+        <?php
+        // if is admin then show the table header
+        if ($adminIsCheck == "true") {
+            echo "<div class='form-group'>";
+            echo "<label>Location Type</label>";
+            //loop through the array of location Types
+            $locMenuStr = "";
+            $locArrlength = count($locTypes);
+
+            for ($x = 0; $x < $locArrlength; $x++) {
+                if ($locTypes[$x] == $rowSlides['loc_type']) {
+                    $isSectionSelected = "SELECTED";
+                } else {
+                    $isSectionSelected = "";
+                }
+                $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
+            }
+
+            echo "<select class='form-control' name='location_type'>";
+            echo $locMenuStr;
+            echo "</select>";
+            echo "</div>";
+        } else {
+            echo "<input type='hidden' name='location_type' value='".$rowLocations['type']."'/>";
+        }
+        ?>
 
         <hr/>
 
@@ -320,7 +348,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<tr>
 		<th>Sort</th>
 		<th>Slide Title</th>";
-        // if is admin the show the table header
+        // if is admin then show the table header
 		if ($adminIsCheck == "true") {
             echo "<th>Location Type</th>";
         }
@@ -349,19 +377,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //loop through the array of location Types
         $locMenuStr = "";
         $locArrlength = count($locTypes);
-
         for ($x = 0; $x < $locArrlength; $x++) {
-
             if ($locTypes[$x] == $slideLocType) {
-
                 $isSectionSelected = "SELECTED";
-
             } else {
-
                 $isSectionSelected = "";
-
             }
-
             $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
         }
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2017 at 06:09 PM
--- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-1+deb.sury.org~trusty+1
+-- Generation Time: Feb 15, 2017 at 09:47 AM
+-- Server version: 5.5.50-MariaDB
+-- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE `aboutus` (
+CREATE TABLE IF NOT EXISTS `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `aboutus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `aboutus`
@@ -580,14 +580,14 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 -- Table structure for table `category_customers`
 --
 
-CREATE TABLE `category_customers` (
+CREATE TABLE IF NOT EXISTS `category_customers` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `section` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_customers`
@@ -595,7 +595,7 @@ CREATE TABLE `category_customers` (
 
 INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datetime`, `author_name`) VALUES
 (0, 'None', '1', 1, '2017-01-19 17:15:38', 'admin'),
-(2, 'Databases', '1', 1, '2017-02-14 16:44:23', 'admin'),
+(2, 'Databases', '1', 1, '2017-01-19 17:15:38', 'admin'),
 (4, 'Other Resources', '1', 1, '2017-01-19 17:15:38', 'admin'),
 (6, 'African-American Resources', '2', 1, '2017-01-19 17:15:38', 'admin'),
 (7, 'Arts', '2', 1, '2017-01-19 17:15:38', 'admin'),
@@ -616,13 +616,13 @@ INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datet
 -- Table structure for table `category_navigation`
 --
 
-CREATE TABLE `category_navigation` (
+CREATE TABLE IF NOT EXISTS `category_navigation` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_navigation`
@@ -642,7 +642,7 @@ INSERT INTO `category_navigation` (`id`, `name`, `nav_loc_id`, `datetime`, `auth
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE `contactus` (
+CREATE TABLE IF NOT EXISTS `contactus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -659,7 +659,7 @@ CREATE TABLE `contactus` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contactus`
@@ -1204,7 +1204,7 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `icon` text NOT NULL,
@@ -1219,21 +1219,21 @@ CREATE TABLE `customers` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, 'gale_icon_1.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:43', 'admin', 1),
-(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en Espanol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica\'s Spanish language version.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:23', 'admin', 1),
-(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:30', 'admin', 1),
-(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:05', 'admin', 1),
-(8, 'gale_icon_1.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 0, '2017-01-20 20:10:11', 'admin', 1),
-(14, 'gale_icon_1.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 0, '2017-01-19 18:33:54', 'admin', 1),
-(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 0, '2017-01-19 18:32:51', 'admin', 1),
-(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 0, '2017-01-19 18:32:46', 'admin', 1),
+(4, 'cps_itke_icon.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 3, '2017-01-19 18:33:43', 'jhorning', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en EspaÃ±ol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', 5, '2017-01-19 18:33:23', 'admin', 1),
+(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 4, '2017-01-19 18:33:30', 'admin', 1),
+(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 8, '2017-01-19 18:33:05', 'admin', 1),
+(8, 'cps_sric_icon.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 1, '2017-01-20 20:10:11', 'jhorning', 1),
+(14, 'cps_ric_icon.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 2, '2017-01-19 18:33:54', 'jhorning', 1),
+(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 6, '2017-01-19 18:32:51', 'admin', 1),
+(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 7, '2017-01-19 18:32:46', 'admin', 1),
 (17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
 (18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
 (19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
@@ -1272,16 +1272,16 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (58, '', 'link', 'Bureau of Labor Statistics', 'http://www.bls.gov/ooh/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (59, '', 'link', 'World-of-Work Map', 'http://www.act.org/world/explore_world.html', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(60, '', 'link', 'What\'s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(60, '', 'link', 'What''s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (61, '', 'link', 'African American Heritage Teaching Resources', 'http://www.smithsonianeducation.org/educators/resource_library/african_american_resources.html', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (62, '', 'link', 'DuSable Museum of African American History', 'http://www.dusablemuseum.org/', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(63, '', 'link', 'The Art Institute of Chicago\'s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(63, '', 'link', 'The Art Institute of Chicago''s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (64, '', 'link', 'National Gallery of Art for kids', 'http://www.nga.gov/content/ngaweb/education/kids.html', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (65, '', 'link', 'Haring Kids', 'http://www.haringkids.com/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (66, '', 'link', 'National Core Arts Standards', 'http://bit.ly/curiouscorner', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (67, '', 'link', 'Museum of Modern Art - Destination Modern Art!', 'http://www.moma.org/interactives/destination/#', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (68, '', 'link', 'CPS Department of Arts Education', 'http://www.cpsarts.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(69, '', 'link', 'Smithsonian Latino Center\'s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(69, '', 'link', 'Smithsonian Latino Center''s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (70, '', 'link', 'Lincoln Center Institute', 'http://lcinstitute.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (71, '', 'link', 'PBS Kids', 'http://pbskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (72, '', 'link', 'Center for History and New Media', 'http://chnm.gmu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1302,22 +1302,22 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (87, '', 'link', 'WWW-VL The History Index', 'http://vlib.iue.it/history/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (88, '', 'link', 'Spartacus: History', 'http://spartacus-educational.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (89, '', 'link', 'Ask ERIC Virtual Library', 'http://eric.ed.gov/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(90, '', 'link', 'Scholars\' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(90, '', 'link', 'Scholars'' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (91, '', 'link', 'Thinkfinity', 'http://thinkfinity.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (92, '', 'link', 'Education Index', 'http://www.educationindex.com/history/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (93, '', 'link', 'World History: HyperHistory', 'http://www.hyperhistory.com/online_n2/History_n2/a.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(94, '', 'link', 'Kathy Schrock\'s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(94, '', 'link', 'Kathy Schrock''s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (95, '', 'link', 'SchoolHistory.co.uk', 'http://www.schoolhistory.co.uk/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (96, '', 'link', 'The History News Network', 'http://historynewsnetwork.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(97, '', 'link', 'eHistory.com', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(97, '', 'link', 'eHistory', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
 (98, '', 'link', 'History Buff', 'http://www.historybuff.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (99, '', 'link', 'McRel', 'http://www2.mcrel.org/lesson-plans/history/index.asp', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (100, '', 'link', 'Footnotes in History', 'http://www.buckyogi.com/footnotes/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(101, '', 'link', 'studentfriends.com', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(101, '', 'link', 'Student&#039;s Friend World History &amp; Geography', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
 (102, '', 'link', 'Conversations With History', 'http://conversations.berkeley.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (103, '', 'link', 'Understanding the World Today', 'http://gsociology.icaap.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (104, '', 'link', 'TeacherServe (National Humanities Center)', 'http://nationalhumanitiescenter.org/tserve/tserve.htm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(105, '', 'link', 'History Central.com', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(105, '', 'link', 'History Central', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
 (106, '', 'link', 'History in Focus: What is History?', 'http://www.history.ac.uk/ihr/Focus/Whatishistory/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (107, '', 'link', 'Economics Resources for K-12 Teachers', 'http://ecedweb.unomaha.edu/K-12/home.cfm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (108, '', 'link', 'National History Day', 'http://www.nationalhistoryday.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1331,7 +1331,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:07:02', 'admin', 1),
-(119, '', 'link', 'International Children\'s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
+(119, '', 'link', 'International Children''s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
 (120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:11:56', 'admin', 1),
 (121, '', 'link', 'Commission on Presidential Debates', 'http://debates.org/index.php?page=debate-history', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:11:34', 'jhorning', 1);
 
@@ -1341,7 +1341,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 -- Table structure for table `featured`
 --
 
-CREATE TABLE `featured` (
+CREATE TABLE IF NOT EXISTS `featured` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
@@ -1352,7 +1352,7 @@ CREATE TABLE `featured` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `featured`
@@ -1897,7 +1897,7 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE `generalinfo` (
+CREATE TABLE IF NOT EXISTS `generalinfo` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
@@ -1905,7 +1905,7 @@ CREATE TABLE `generalinfo` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `generalinfo`
@@ -2449,10 +2449,10 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 -- Table structure for table `icons_list`
 --
 
-CREATE TABLE `icons_list` (
+CREATE TABLE IF NOT EXISTS `icons_list` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `icons_list`
@@ -3060,550 +3060,550 @@ INSERT INTO `icons_list` (`id`, `icon`) VALUES
 -- Table structure for table `locations`
 --
 
-CREATE TABLE `locations` (
+CREATE TABLE IF NOT EXISTS `locations` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `type` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=569 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
 --
 
 INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
-(1, 'Chicago Public Schools', 'Default', '2017-02-14 23:02:53', 'true'),
-(2, 'Jane A Neil Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(3, 'William P Gray Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(4, 'Edwin G Foreman High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(5, 'Evergreen Academy Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(6, 'Paul Laurence Dunbar Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(7, 'Louis Nettelhorst Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(8, 'Andrew Jackson Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(9, 'Oscar DePriest Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(10, 'LaSalle II Magnet', 'Other', '2017-02-14 22:47:25', 'true'),
-(11, 'Thurgood Marshall Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(12, 'Thomas J Higgins Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(14, 'James Weldon Johnson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(15, 'Frederick A Douglass Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(17, 'John Whistler Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(18, 'Mark Twain Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(19, 'Frazier Prospective IB Magnet Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(21, 'John T Pirie Fine Arts & Academic Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(22, 'John Palmer Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(23, 'William J Onahan Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(24, 'Norwood Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(25, 'Josephine C Locke Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(26, 'Henry R Clissold Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(27, 'Franklin Elementary Fine Arts Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(28, 'Jordan Elementary Community School', 'Other', '2017-02-14 22:47:25', 'true'),
-(29, 'William C Goudy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(30, 'Augustus H Burley Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(31, 'Milton Brunson Math & Science Specialty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(32, 'Peter Cooper Elementary Dual Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(33, 'South Shore Fine Arts Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(34, 'Lake View High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(35, 'John F Kennedy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(36, 'Dr. Jorge Prieto Math and Science', 'Other', '2017-02-14 22:47:25', 'true'),
-(37, 'Emil G Hirsch Metropolitan High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(38, 'John M Harlan Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(39, 'Langston Hughes Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(40, 'John Foster Dulles Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(41, 'Irene C Hernandez Middle School for the Advancement of Science', 'MS', '2017-02-14 22:46:29', 'true'),
-(42, 'Skinner West Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(43, 'Roberto Clemente Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(44, 'Orozco Fine Arts & Sciences Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(45, 'Brighton Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(46, 'Oliver S Westcott Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(47, 'Lenart Elementary Regional Gifted Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(48, 'Ashburn Community Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(49, 'Adam Clayton Powell Paideia Community Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(50, 'Dvorak Technology Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(51, 'Michele Clark Academic Prep Magnet High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(52, 'Albany Park Campus', 'Other', '2017-02-14 22:47:25', 'true'),
-(53, 'Richard Yates Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(54, 'George B Swift Elementary Specialty School', 'Other', '2017-02-14 22:47:25', 'true'),
-(55, 'Helga A Haugan Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(56, 'Al Raby High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(57, 'Alessandro Volta Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(58, 'Mancel Talcott Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(59, 'Herbert Spencer Elementary Math & Science Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(61, 'John D Shoop Math-Science Technical Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(62, 'Arnold Mireles Elementary Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(63, 'Peter A Reinberg Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(64, 'Casimir Pulaski Elementary Fine Arts Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(65, 'William H Seward Communication Arts Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(66, 'Jonathon Y Scammon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(67, 'Sidney Sawyer Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(68, 'Paul Robeson High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(69, 'Christian Fenger Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(70, 'Mary Gage Peterson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(71, 'Louis Pasteur Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(72, 'Emmett Louis Till Math and Science Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(73, 'Oscar F Mayer Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(74, 'James Russell Lowell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(75, 'Francis W Parker Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(76, 'William Bishop Owen Scholastic Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(77, 'West Park Elementary Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(78, 'Philip Murray Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(79, 'Annie Keller Elementary Gifted Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(80, 'Daniel C Beard Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(81, 'Donald Morrill Math & Science Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(82, 'Bernhard Moos Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(83, 'Henry D Lloyd Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(84, 'Leslie Lewis Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(85, 'Joshua D Kershaw Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(86, 'Rufus M Hitch Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(87, 'Ninos Heroes Elementary Academic Center', 'ES', '2017-02-14 22:46:10', 'true'),
-(88, 'Frank W Gunsaulus Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(89, 'Nathanael Greene Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(90, 'Joseph E Gary Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(91, 'Stephen F Gale Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(92, 'Gerald Delgado Kanoon Elementary Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(93, 'Richard Edwards Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(94, 'John F Eberhart Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(95, 'Christopher Columbus Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(96, 'Logandale Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(97, 'Wilma Rudolph Elementary Learning Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(98, 'Henry O Tanner Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(99, 'Robert Lindblom Math & Science Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(100, 'James Ward Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(101, 'James Wadsworth Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(102, 'Talman Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(104, 'A.N. Pritzker School', 'Other', '2017-02-14 22:47:25', 'true'),
-(105, 'Suder Montessori Magnet Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(106, 'Franz Peter Schubert Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(107, 'Cesar E Chavez Multicultural Academic Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(108, 'Irma C Ruiz Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(109, 'James B McPherson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(110, 'William B Ogden Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(111, 'Alfred Nobel Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(112, 'Inter-American Elementary Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(115, 'Mary McLeod Bethune Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(117, 'George B McClellan Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(118, 'Joseph Lovett Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(119, 'Eli Whitney Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(120, 'Frank W Reilly Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(121, 'LaSalle Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(122, 'South Loop Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(123, 'Laughlin Falconer Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(124, 'Patrick Henry Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(125, 'James Hedges Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(126, 'Hawthorne Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(127, 'Bret Harte Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(128, 'Sharon Christa McAuliffe Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(129, 'Alexander Hamilton Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(130, 'Nathan Hale Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(131, 'Ariel Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(132, 'Daniel J Corkery Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(133, 'Salmon P Chase Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(134, 'Esmond Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(135, 'Ralph H Metcalfe Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(136, 'Jacob Beidler Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(137, 'Jonathan  Burr Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(138, 'Frank I Bennett Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(139, 'George Washington High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(140, 'Benito Juarez Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(141, 'Kenwood Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(144, 'Friedrich W Von Steuben Metropolitan Science High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(145, 'Morgan Park High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(147, 'Thomas Kelly High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(148, 'Skinner North Classical Elementary', 'Other', '2017-02-14 22:47:25', 'true'),
-(149, 'John A Walsh Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(150, 'William K New Sullivan Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(151, 'Walter Payton College Preparatory High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(152, 'Crane Medical Preparatory High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(153, 'Roald Amundsen High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(154, 'Robert A Black Magnet Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(155, 'Daniel S Wentworth Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(156, 'Roger C Sullivan High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(157, 'Albert R Sabin Elementary Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(158, 'Manuel Perez Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(159, 'Helen Peirce International Studies Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(160, 'William P Nixon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(163, 'Hannah G Solomon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(164, 'Ogden International High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(165, 'Mark Sheridan Elementary Math & Science Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(166, 'Maria Saucedo Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(167, 'New Field Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(168, 'John Marshall Metropolitan High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(169, 'Theodore Roosevelt High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(170, 'North River Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(171, 'Thomas Drummond Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(172, 'Mount Greenwood Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(173, 'Stephen T Mather High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(174, 'Little Village Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(175, 'Mildred I Lavizzo Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(176, 'Edward Coles Elementary Language Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(177, 'Agustin Lara Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(178, 'John H Kinzie Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(180, 'Henry H Nash Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(181, 'Kelvyn Park High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(182, 'DeWitt Clinton Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(183, 'Henry Clay Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(184, 'William G Hibbard Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(185, 'Johann W von Goethe Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(186, 'Frank L Gillespie Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(187, 'Marcus Moziah Garvey Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(188, 'Frederick Funston Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(189, 'Edward Everett Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(190, 'Everett McKinley Dirksen Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(191, 'Charles Kozminski Elementary Community Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(192, 'John W Cook Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(193, 'Chicago Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(194, 'Bowen High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(195, 'Orville T Bright Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(196, 'Adlai E Stevenson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(197, 'STEM Magnet Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(198, 'Whitney M Young Magnet High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(199, 'William H Prescott Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(200, 'Portage Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(201, 'Paul Cuffe Math-Science Technology Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(202, 'John B Murphy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(203, 'Genevieve Melody Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(204, 'Theodore Herzl Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(205, 'Little Village High School Campus', 'HS', '2017-02-14 22:45:40', 'true'),
-(206, 'David G Farragut Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(207, 'Edgebrook Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(208, 'Lazaro Cardenas Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(209, 'Columbia Explorers Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(210, 'Horace Greeley Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(211, 'Percy L Julian High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(212, 'George F Cassell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(213, 'Charles G Hammond Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(214, 'Chicago Vocational Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(215, 'Arthur E. Canty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(216, 'Louis A Agassiz Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(217, 'Alcott High School for the Humanities', 'ES', '2017-02-14 22:46:10', 'true'),
-(218, 'South Shore International College Prep High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(219, 'Ronald Brown Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(220, 'Francis M McKay Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(221, 'Stephen K Hayt Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(222, 'Ellen H Richards Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(223, 'Belmont-Cragin Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(225, 'Galileo Math & Science Scholastic Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(227, 'John H Hamline Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(228, 'Alexander Graham Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(229, 'Harriet Beecher Stowe Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(230, 'Chicago Quest North', 'ES', '2017-02-14 22:46:10', 'true'),
-(231, 'John W Garvy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(232, 'Wendell Phillips Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(233, 'Namaste Charter Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(234, 'Daniel R Cameron Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(235, 'Morton School of Excellence', 'Other', '2017-02-14 22:47:25', 'true'),
-(236, 'Socorro Sandoval Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(237, 'John H Vanderpoel Elementary Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(238, 'Claremont Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(239, 'Edward White Elementary Career Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(240, 'Dr. Martin L. King Jr. Academy of Social Justice', 'Other', '2017-02-14 22:47:25', 'true'),
-(241, 'Richard Henry Lee Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(242, 'Tarkington School of Excellence Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(243, 'John J Pershing Elementary Humanities Magnet', 'ES', '2017-02-14 22:46:10', 'true'),
-(244, 'Florence Nightingale Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(245, 'James E McDade Elementary Classical School', 'ES', '2017-02-14 22:46:10', 'true'),
-(249, 'John Spry Elementary Community School', 'Other', '2017-02-14 22:47:25', 'true'),
-(250, 'Norman A Bridge Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(251, 'Washington D Smyser Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(252, 'Harriet Sayre Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(253, 'William H Ray Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(254, 'John Milton Gregory Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(255, 'Garfield Park Preparatory Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(256, 'Alex Haley Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(257, 'Ray Graham Training Center High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(258, 'John L Marsh Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(259, 'Fort Dearborn Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(260, 'Marquette School of Excellence', 'Other', '2017-02-14 22:47:25', 'true'),
-(261, 'Calmeca Academy of Fine Arts and Dual Language', 'Other', '2017-02-14 22:47:25', 'true'),
-(262, 'George H Corliss High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(263, 'Jean Baptiste Beaubien Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(264, 'West Ridge Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(265, 'James B Farnsworth Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(266, 'George Washington Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(267, 'George Manierre Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(268, 'Uplift Community High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(269, 'Edward F Dunne Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(270, 'Carl von Linne Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(271, 'George Armstrong International Studies Elementary School', 'MS', '2017-02-14 22:46:29', 'true'),
-(273, 'Minnie Mars Jamieson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(274, 'Jacqueline B Vaughn Occupational High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(275, 'Eric Solorio Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(277, 'Walter S Christopher Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(278, 'Richard J Daley Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(280, 'Federico Garcia Lorca Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(281, 'George Washington Carver Military Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(282, 'Charles R Henderson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(283, 'James G Blaine Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(284, 'Orr Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(285, 'Chicago Military Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(286, 'Woodlawn Community Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(287, 'Chicago Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(288, 'Wells Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(289, 'Eliza Chappell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(290, 'Marvin Camras, Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(291, 'Emiliano Zapata Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(292, 'Lincoln Park High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(293, 'Edward Tilden Career Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(294, 'Eugene Field Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(295, 'George Washington Carver Primary School', 'Other', '2017-02-14 22:47:25', 'true'),
-(296, 'William Howard Taft High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(297, 'Mariano Azuela Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(298, 'Senn Campus', 'Other', '2017-02-14 22:47:25', 'true'),
-(300, 'Hanson Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(301, 'Joseph Brennemann Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(302, 'Micheal M Byrne Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(303, 'Daniel Boone Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(304, 'John Hancock College Preparatory High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(305, 'Carl Schurz High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(306, 'Nancy B Jefferson Alternative High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(307, 'Christian Ebinger Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(308, 'Gwendolyn Brooks College Preparatory Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(309, 'William E Dever Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(310, 'Manley Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(311, 'Grover Cleveland Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(312, 'Castellanos Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(313, 'Durkin Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(317, 'Professional Library', 'ES', '2017-02-14 22:46:10', 'true'),
-(318, 'Hope College Preparatory High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(319, 'Chicago High School for Agricultural Sciences', 'ES', '2017-02-14 22:46:10', 'true'),
-(320, 'William J Bogan High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(321, 'Hyde Park Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(322, 'Northside College Preparatory High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(323, 'Marie Sklodowska Curie Metropolitan High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(324, 'DuSable Campus', 'Other', '2017-02-14 22:47:25', 'true'),
-(325, 'John Barry Elementary School', 'ES', '2017-02-14 21:17:26', 'true'),
-(326, 'Hiram H Belding Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(327, 'Lyman A Budlong Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(329, 'Intrinsic Charter High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(330, 'Chicago High School for the Arts', 'HS', '2017-02-14 22:45:40', 'true'),
-(331, 'William E B Dubois Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(332, 'James Shields Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(333, 'Laura S Ward Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(334, 'Chicago Intl Charter - Northtown', 'Other', '2017-02-14 22:47:25', 'true'),
-(335, 'George Leland Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(336, 'John T McCutcheon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(337, 'Johnnie Colemon Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(338, 'Douglas Taylor Elementary SchoolÂ ', 'ES', '2017-02-14 22:46:10', 'true'),
-(339, 'Charles Sumner Math &amp; Science Community Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(340, 'Mount Vernon Elementary SchoolÂ ', 'ES', '2017-02-14 22:46:10', 'true'),
-(341, 'James Monroe Elementary SchoolÂ ', 'ES', '2017-02-14 22:46:10', 'true'),
-(342, 'Ida B Wells Preparatory Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(343, 'Neal F Simeon Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(344, 'Ellen Mitchell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(345, 'Cyrus H McCormick Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(346, 'Michael Faraday Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(347, 'Kate S Kellogg Elementary SchoolÂ ', 'ES', '2017-02-14 22:46:10', 'true'),
-(348, 'Phoebe Apperson Hearst Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(349, 'John Harvard Elementary School of Excellence', 'ES', '2017-02-14 22:46:10', 'true'),
-(350, 'Walter Q Gresham Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(351, 'ASPIRA Charter - Haugan Campus', 'Other', '2017-02-14 22:47:25', 'true'),
-(352, 'Robert Fulton Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(353, 'Joseph Kellman Corporate Community Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(354, 'John Fiske Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(355, 'Edward K Ellington Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(356, 'Turner-Drew Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(357, 'Arthur Dixon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(358, 'Nathan S Davis Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(359, 'Anna R. Langford Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(360, 'Burnside Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(361, 'Jane Addams Elementary SchoolÂ ', 'MS', '2017-02-14 22:46:29', 'true'),
-(362, 'Ellen H Richards Career Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(363, 'George Westinghouse High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(364, 'Louisa May Alcott Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(365, 'Charles P Steinmetz College Preparatory High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(366, 'Gage Park High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(368, 'North Lawndale College Prep Charter', 'Other', '2017-02-14 22:47:25', 'true'),
-(370, 'William Jones College Preparatory High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(371, 'William C Reavis Math &amp; Science Specialty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(372, 'William Penn Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(373, 'Ronald E McNair Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(374, 'William F Finkl Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(375, 'Rachel Carson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(378, 'Robert Healy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(379, 'John Charles Haines Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(380, 'Philip Rogers Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(381, 'Andrew Carnegie Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(382, 'Mary Lyon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(383, 'Marine Leadership Academy at Ames', 'ES', '2017-02-14 22:46:10', 'true'),
-(384, 'Holden Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(385, 'Luther Burbank Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(386, 'Asa Philip Randolph Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(387, 'Edward N Hurley Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(388, 'James Shields Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(389, 'Dr. Martin Luther King Jr. College Prep High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(390, 'Learn South', 'Other', '2017-02-14 22:47:25', 'true'),
-(391, 'Wildwood Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(392, 'Pilsen Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(393, 'North-Grand High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(394, 'Abraham Lincoln Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(395, 'Edward Beasley Elementary Magnet Academic Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(396, 'Newton Bateman Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(397, 'Instituto Health Sciences Career Academy High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(398, 'Enrico Tonti Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(399, 'Stone Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(400, 'Northwest Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(401, 'Carter G Woodson South Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(402, 'Wolfgang A Mozart Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(404, 'Myra Bradwell Communications Arts & Sciences Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(405, 'Back of the Yards High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(406, 'Sarah E. Goode STEM Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(407, 'John C Coonley Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(408, 'John Greenleaf Whittier Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(409, 'John C Burroughs Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(410, 'Grant Campus', 'Other', '2017-02-14 22:47:25', 'true'),
-(411, 'Alexander Graham Bell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(412, 'Charles Allen Prosser Career Academy High School', 'ES', '2017-02-14 22:46:10', 'true'),
-(413, 'Walt Disney Magnet Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(414, 'Amelia Earhart Options for Knowledge Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(416, 'John M Smyth Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(417, 'Richard J Oglesby Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(418, 'Josiah Pickard Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(419, 'Ole A Thorp Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(420, 'Albert G Lane Technical High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(421, 'Gurdon S Hubbard High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(424, 'National Teachers Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(426, 'Air Force Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(427, 'Peace &amp; Education Coalition High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(428, 'Austin College and Career Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(429, 'William Rainey Harper High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(430, 'Northside Learning Center High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(431, 'Southside Occupational Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(432, 'Simpson Academy High School for Young Women', 'HS', '2017-02-14 22:45:40', 'true'),
-(433, 'DeVry University Advantage Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(434, 'Bowen High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(435, 'TEAM Englewood Community Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(436, 'Francisco I Madero Middle School', 'MS', '2017-02-14 22:46:29', 'true'),
-(437, 'Collins Academy High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(438, 'Catalyst - Circle Rock', 'Other', '2017-02-14 22:47:25', 'true'),
-(439, 'Disney II Magnet High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(440, 'Great Lakes Academy Charter School', 'ES', '2017-02-14 22:46:10', 'true'),
-(441, 'Ira F Aldridge Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(442, 'Phillip D Armour Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(443, 'Arthur R Ashe Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(444, 'John J Audubon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(445, 'Avalon Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(446, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(447, 'Clara Barton Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(448, 'Perkins Bass Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(449, 'Ludwig Van Beethoven Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(450, 'Blair Early Childhood Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(451, 'Carrie Jacobs Bond Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(452, 'Edward A Bouchet Math &amp; Science Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(453, 'Charles S Brownell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(454, 'Edmond Burke Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(455, 'Burnham Elementary Inclusive Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(456, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(457, 'Carroll-Rosenwald Specialty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(458, 'Willa Cather Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(459, 'Frederic Chopin Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(460, 'George Rogers Clark Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(461, 'Mary E Courtenay Elementary Language Arts Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(462, 'Crown Community Academy of Fine Arts Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(463, 'Countee Cullen Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(464, 'Charles R Darwin Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(465, 'Sir Miles Davis Magnet Elementary Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(466, 'Charles Gates Dawes Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(467, 'Jose De Diego Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(468, 'Stephen Decatur Classical Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(469, 'Robert Nathaniel Dett Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(470, 'Disney II Magnet School', 'Other', '2017-02-14 22:47:25', 'true'),
-(471, 'James R Doolittle Jr Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(472, 'John C Dore Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(473, 'John B Drake Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(474, 'Charles W Earle Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(475, 'Thomas A Edison Regional Gifted Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(476, 'Edison Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(477, 'Leif Ericson Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(478, 'Medgar Evers Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(479, 'Fairfield Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(480, 'Fernwood Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(481, 'Foster Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(482, 'Wendell E Green Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(483, 'Robert L Grimes Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(484, 'Virgil Grissom Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(485, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(486, 'John Hay Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(487, 'Helen M Hefferan Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(488, 'Thomas A Hendricks Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(489, 'Oliver Wendell Holmes Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(490, 'Thomas Hoyne Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(491, 'Charles Evans Hughes Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(492, 'Washington Irving Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(493, 'Mahalia Jackson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(494, 'Friedrich L. Jahn Elementary of the Fine Arts', 'Other', '2017-02-14 22:47:25', 'true'),
-(495, 'Edward Jenner Elementary Academy of the Arts', 'Other', '2017-02-14 22:47:25', 'true'),
-(496, 'Jensen Elementary Scholastic Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(497, 'Scott Joplin Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(498, 'Joseph Jungman Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(499, 'Joyce Kilmer Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(500, 'Rudyard Kipling Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(501, 'Lawndale Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(502, 'Arthur A Libby Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(503, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(504, 'James Madison Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(505, 'Horace Mann Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(506, 'Roswell B Mason Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(507, 'Benjamin E Mays Elementary Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(508, 'Mary E McDowell Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(509, 'Irvin C Mollison Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(510, 'Lillian R. Nicholson STEM Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(511, 'Oriole Park Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(512, 'Josefa Ortiz De Dominguez Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(514, 'Jesse Owens Elementary Community Academy', 'ES', '2017-02-14 22:46:10', 'true'),
-(515, 'Park Manor Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(516, 'Parkside Elementary Community Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(517, 'Ferdinand Peck Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(518, 'Ambrose Plamondon Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(519, 'Edgar Allan Poe Elementary Classical School', 'Other', '2017-02-14 22:47:25', 'true'),
-(520, 'Ernst Prussing Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(521, 'George M Pullman Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(522, 'Paul Revere Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(523, 'Jackie Robinson Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(524, 'Martha Ruggles Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(525, 'William H Ryder Math &amp; Science Specialty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(526, 'Rueben Salazar Elementary Bilingual Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(527, 'Sauganash Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(528, 'Jesse Sherwood Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(529, 'Beulah Shoesmith Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(530, 'Wendell Smith Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(531, 'Frederick Stock Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(532, 'Elizabeth H Sutherland Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(533, 'Telpochcalli Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(534, 'Velma F Thomas Early Childhood Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(535, 'James N Thorp Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(536, 'Barbara Vick Early Childhood & Family Center', 'Other', '2017-02-14 22:47:25', 'true'),
-(537, 'Charles H Wacker Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(538, 'Joseph Warren Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(539, 'Harold Washington Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(540, 'Thomas J Waters Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(541, 'Daniel Webster Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(542, 'Ella Flagg Young Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(543, 'Southeast Area Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(544, 'Walter Henri Dyett High School for the Arts', 'HS', '2017-02-14 22:45:40', 'true'),
-(545, 'James Otis Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(546, 'William H Brown Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(547, 'William W Carter Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(548, 'Pablo Casals Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(549, 'Thomas Chalmers Specialty Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(550, 'George W Curtis Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(551, 'Charles S Deneen Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(552, 'Dewey Elementary Academy of Fine Arts', 'Other', '2017-02-14 22:47:25', 'true'),
-(553, 'Melville W Fuller Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(554, 'Julia Ward Howe Elementary School of Excellence', 'ES', '2017-02-14 22:46:10', 'true'),
-(555, 'Brian Piccolo Elementary Specialty School', 'Other', '2017-02-14 22:47:25', 'true'),
-(556, 'Ravenswood Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(557, 'William T Sherman Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(558, 'Amos Alonzo Stagg Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(559, 'Matthew Gallistel Elementary Language Academy', 'Other', '2017-02-14 22:47:25', 'true'),
-(560, 'Lorenz Brentano Math & Science Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(561, 'Theophilus Schmid Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(562, 'George W Tilton Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(563, 'Walter L Newberry Math & Science Academy Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(564, 'CPS Virtual Library', 'Other', '2017-02-14 22:47:25', 'true'),
-(565, 'CPS Virtual Library - High School', 'HS', '2017-02-14 22:45:40', 'true'),
-(566, 'CPS Virtual Library - Elementary School', 'ES', '2017-02-14 22:46:10', 'true'),
-(567, 'Professional Virtual Library', 'ES', '2017-02-14 22:46:10', 'true'),
-(568, 'Robert J. Richardson Middle School', 'MS', '2017-02-14 22:46:29', 'true');
+(1, 'Chicago Public Schools', 'Default', '2017-02-15 14:33:54', 'true'),
+(2, 'Jane A Neil Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(3, 'William P Gray Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(4, 'Edwin G Foreman High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(5, 'Evergreen Academy Middle School', 'MS', '2017-02-15 14:31:46', 'true'),
+(6, 'Paul Laurence Dunbar Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(7, 'Louis Nettelhorst Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(8, 'Andrew Jackson Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(9, 'Oscar DePriest Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(10, 'LaSalle II Magnet', 'Other', '2017-02-15 14:33:32', 'true'),
+(11, 'Thurgood Marshall Middle School', 'MS', '2017-02-15 14:31:46', 'true'),
+(12, 'Thomas J Higgins Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(14, 'James Weldon Johnson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(15, 'Frederick A Douglass Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(17, 'John Whistler Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(18, 'Mark Twain Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(19, 'Frazier Prospective IB Magnet Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(21, 'John T Pirie Fine Arts & Academic Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(22, 'John Palmer Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(23, 'William J Onahan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(24, 'Norwood Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(25, 'Josephine C Locke Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(26, 'Henry R Clissold Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(27, 'Franklin Elementary Fine Arts Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(28, 'Jordan Elementary Community School', 'ES', '2017-02-15 14:32:14', 'true'),
+(29, 'William C Goudy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(30, 'Augustus H Burley Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(31, 'Milton Brunson Math & Science Specialty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(32, 'Peter Cooper Elementary Dual Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(33, 'South Shore Fine Arts Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(34, 'Lake View High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(35, 'John F Kennedy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(36, 'Dr. Jorge Prieto Math and Science', 'Other', '2017-02-15 14:33:32', 'true'),
+(37, 'Emil G Hirsch Metropolitan High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(38, 'John M Harlan Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(39, 'Langston Hughes Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(40, 'John Foster Dulles Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(41, 'Irene C Hernandez Middle School for the Advancement of Science', 'MS', '2017-02-15 14:31:46', 'true'),
+(42, 'Skinner West Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(43, 'Roberto Clemente Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(44, 'Orozco Fine Arts & Sciences Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(45, 'Brighton Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(46, 'Oliver S Westcott Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(47, 'Lenart Elementary Regional Gifted Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(48, 'Ashburn Community Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(49, 'Adam Clayton Powell Paideia Community Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(50, 'Dvorak Technology Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(51, 'Michele Clark Academic Prep Magnet High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(52, 'Albany Park Campus', 'Other', '2017-02-15 14:33:32', 'true'),
+(53, 'Richard Yates Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(54, 'George B Swift Elementary Specialty School', 'ES', '2017-02-15 14:32:14', 'true'),
+(55, 'Helga A Haugan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(56, 'Al Raby High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(57, 'Alessandro Volta Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(58, 'Mancel Talcott Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(59, 'Herbert Spencer Elementary Math & Science Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(61, 'John D Shoop Math-Science Technical Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(62, 'Arnold Mireles Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(63, 'Peter A Reinberg Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(64, 'Casimir Pulaski Elementary Fine Arts Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(65, 'William H Seward Communication Arts Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(66, 'Jonathon Y Scammon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(67, 'Sidney Sawyer Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(68, 'Paul Robeson High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(69, 'Christian Fenger Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(70, 'Mary Gage Peterson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(71, 'Louis Pasteur Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(72, 'Emmett Louis Till Math and Science Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(73, 'Oscar F Mayer Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(74, 'James Russell Lowell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(75, 'Francis W Parker Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(76, 'William Bishop Owen Scholastic Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(77, 'West Park Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(78, 'Philip Murray Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(79, 'Annie Keller Elementary Gifted Magnet School', 'ES', '2017-02-15 14:32:14', 'true'),
+(80, 'Daniel C Beard Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(81, 'Donald Morrill Math & Science Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(82, 'Bernhard Moos Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(83, 'Henry D Lloyd Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(84, 'Leslie Lewis Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(85, 'Joshua D Kershaw Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(86, 'Rufus M Hitch Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(87, 'Ninos Heroes Elementary Academic Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(88, 'Frank W Gunsaulus Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(89, 'Nathanael Greene Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(90, 'Joseph E Gary Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(91, 'Stephen F Gale Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(92, 'Gerald Delgado Kanoon Elementary Magnet School', 'ES', '2017-02-15 14:32:14', 'true'),
+(93, 'Richard Edwards Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(94, 'John F Eberhart Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(95, 'Christopher Columbus Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(96, 'Logandale Middle School', 'MS', '2017-02-15 14:31:46', 'true'),
+(97, 'Wilma Rudolph Elementary Learning Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(98, 'Henry O Tanner Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(99, 'Robert Lindblom Math & Science Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(100, 'James Ward Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(101, 'James Wadsworth Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(102, 'Talman Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(104, 'A.N. Pritzker School', 'Other', '2017-02-15 14:33:32', 'true'),
+(105, 'Suder Montessori Magnet Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(106, 'Franz Peter Schubert Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(107, 'Cesar E Chavez Multicultural Academic Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(108, 'Irma C Ruiz Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(109, 'James B McPherson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(110, 'William B Ogden Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(111, 'Alfred Nobel Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(112, 'Inter-American Elementary Magnet School', 'ES', '2017-02-15 14:32:14', 'true'),
+(115, 'Mary McLeod Bethune Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(117, 'George B McClellan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(118, 'Joseph Lovett Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(119, 'Eli Whitney Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(120, 'Frank W Reilly Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(121, 'LaSalle Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(122, 'South Loop Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(123, 'Laughlin Falconer Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(124, 'Patrick Henry Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(125, 'James Hedges Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(126, 'Hawthorne Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(127, 'Bret Harte Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(128, 'Sharon Christa McAuliffe Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(129, 'Alexander Hamilton Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(130, 'Nathan Hale Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(131, 'Ariel Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(132, 'Daniel J Corkery Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(133, 'Salmon P Chase Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(134, 'Esmond Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(135, 'Ralph H Metcalfe Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(136, 'Jacob Beidler Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(137, 'Jonathan  Burr Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(138, 'Frank I Bennett Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(139, 'George Washington High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(140, 'Benito Juarez Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(141, 'Kenwood Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(144, 'Friedrich W Von Steuben Metropolitan Science High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(145, 'Morgan Park High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(147, 'Thomas Kelly High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(148, 'Skinner North Classical Elementary', 'ES', '2017-02-15 14:32:14', 'true'),
+(149, 'John A Walsh Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(150, 'William K New Sullivan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(151, 'Walter Payton College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(152, 'Crane Medical Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(153, 'Roald Amundsen High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(154, 'Robert A Black Magnet Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(155, 'Daniel S Wentworth Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(156, 'Roger C Sullivan High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(157, 'Albert R Sabin Elementary Magnet School', 'ES', '2017-02-15 14:32:14', 'true'),
+(158, 'Manuel Perez Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(159, 'Helen Peirce International Studies Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(160, 'William P Nixon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(163, 'Hannah G Solomon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(164, 'Ogden International High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(165, 'Mark Sheridan Elementary Math & Science Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(166, 'Maria Saucedo Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(167, 'New Field Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(168, 'John Marshall Metropolitan High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(169, 'Theodore Roosevelt High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(170, 'North River Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(171, 'Thomas Drummond Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(172, 'Mount Greenwood Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(173, 'Stephen T Mather High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(174, 'Little Village Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(175, 'Mildred I Lavizzo Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(176, 'Edward Coles Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(177, 'Agustin Lara Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(178, 'John H Kinzie Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(180, 'Henry H Nash Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(181, 'Kelvyn Park High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(182, 'DeWitt Clinton Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(183, 'Henry Clay Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(184, 'William G Hibbard Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(185, 'Johann W von Goethe Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(186, 'Frank L Gillespie Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(187, 'Marcus Moziah Garvey Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(188, 'Frederick Funston Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(189, 'Edward Everett Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(190, 'Everett McKinley Dirksen Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(191, 'Charles Kozminski Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(192, 'John W Cook Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(193, 'Chicago Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(194, 'Bowen High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(195, 'Orville T Bright Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(196, 'Adlai E Stevenson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(197, 'STEM Magnet Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(198, 'Whitney M Young Magnet High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(199, 'William H Prescott Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(200, 'Portage Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(201, 'Paul Cuffe Math-Science Technology Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(202, 'John B Murphy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(203, 'Genevieve Melody Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(204, 'Theodore Herzl Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(205, 'Little Village High School Campus', 'HS', '2017-02-15 14:32:32', 'true'),
+(206, 'David G Farragut Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(207, 'Edgebrook Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(208, 'Lazaro Cardenas Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(209, 'Columbia Explorers Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(210, 'Horace Greeley Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(211, 'Percy L Julian High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(212, 'George F Cassell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(213, 'Charles G Hammond Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(214, 'Chicago Vocational Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(215, 'Arthur E. Canty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(216, 'Louis A Agassiz Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(217, 'Alcott High School for the Humanities', 'HS', '2017-02-15 14:32:32', 'true'),
+(218, 'South Shore International College Prep High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(219, 'Ronald Brown Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(220, 'Francis M McKay Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(221, 'Stephen K Hayt Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(222, 'Ellen H Richards Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(223, 'Belmont-Cragin Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(225, 'Galileo Math & Science Scholastic Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(227, 'John H Hamline Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(228, 'Alexander Graham Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(229, 'Harriet Beecher Stowe Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(230, 'Chicago Quest North', 'ES', '2017-02-15 14:32:14', 'true'),
+(231, 'John W Garvy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(232, 'Wendell Phillips Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(233, 'Namaste Charter Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(234, 'Daniel R Cameron Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(235, 'Morton School of Excellence', 'Other', '2017-02-15 14:33:32', 'true'),
+(236, 'Socorro Sandoval Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(237, 'John H Vanderpoel Elementary Magnet School', 'ES', '2017-02-15 14:32:14', 'true'),
+(238, 'Claremont Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(239, 'Edward White Elementary Career Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(240, 'Dr. Martin L. King Jr. Academy of Social Justice', 'Other', '2017-02-15 14:33:32', 'true'),
+(241, 'Richard Henry Lee Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(242, 'Tarkington School of Excellence Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(243, 'John J Pershing Elementary Humanities Magnet', 'ES', '2017-02-15 14:32:14', 'true'),
+(244, 'Florence Nightingale Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(245, 'James E McDade Elementary Classical School', 'ES', '2017-02-15 14:32:14', 'true'),
+(249, 'John Spry Elementary Community School', 'ES', '2017-02-15 14:32:14', 'true'),
+(250, 'Norman A Bridge Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(251, 'Washington D Smyser Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(252, 'Harriet Sayre Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(253, 'William H Ray Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(254, 'John Milton Gregory Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(255, 'Garfield Park Preparatory Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(256, 'Alex Haley Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(257, 'Ray Graham Training Center High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(258, 'John L Marsh Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(259, 'Fort Dearborn Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(260, 'Marquette School of Excellence', 'Other', '2017-02-15 14:33:32', 'true'),
+(261, 'Calmeca Academy of Fine Arts and Dual Language', 'Other', '2017-02-15 14:33:32', 'true'),
+(262, 'George H Corliss High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(263, 'Jean Baptiste Beaubien Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(264, 'West Ridge Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(265, 'James B Farnsworth Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(266, 'George Washington Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(267, 'George Manierre Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(268, 'Uplift Community High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(269, 'Edward F Dunne Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(270, 'Carl von Linne Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(271, 'George Armstrong International Studies Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(273, 'Minnie Mars Jamieson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(274, 'Jacqueline B Vaughn Occupational High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(275, 'Eric Solorio Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(277, 'Walter S Christopher Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(278, 'Richard J Daley Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(280, 'Federico Garcia Lorca Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(281, 'George Washington Carver Military Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(282, 'Charles R Henderson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(283, 'James G Blaine Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(284, 'Orr Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(285, 'Chicago Military Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(286, 'Woodlawn Community Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(287, 'Chicago Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(288, 'Wells Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(289, 'Eliza Chappell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(290, 'Marvin Camras, Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(291, 'Emiliano Zapata Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(292, 'Lincoln Park High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(293, 'Edward Tilden Career Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(294, 'Eugene Field Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(295, 'George Washington Carver Primary School', 'Other', '2017-02-15 14:33:32', 'true'),
+(296, 'William Howard Taft High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(297, 'Mariano Azuela Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(298, 'Senn Campus', 'Other', '2017-02-15 14:33:32', 'true'),
+(300, 'Hanson Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(301, 'Joseph Brennemann Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(302, 'Micheal M Byrne Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(303, 'Daniel Boone Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(304, 'John Hancock College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(305, 'Carl Schurz High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(306, 'Nancy B Jefferson Alternative High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(307, 'Christian Ebinger Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(308, 'Gwendolyn Brooks College Preparatory Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(309, 'William E Dever Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(310, 'Manley Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(311, 'Grover Cleveland Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(312, 'Castellanos Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(313, 'Durkin Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(317, 'Professional Library', 'Other', '2017-02-15 14:33:00', 'true'),
+(318, 'Hope College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(319, 'Chicago High School for Agricultural Sciences', 'HS', '2017-02-15 14:32:32', 'true'),
+(320, 'William J Bogan High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(321, 'Hyde Park Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(322, 'Northside College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(323, 'Marie Sklodowska Curie Metropolitan High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(324, 'DuSable Campus', 'Other', '2017-02-15 14:33:32', 'true'),
+(325, 'John Barry Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(326, 'Hiram H Belding Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(327, 'Lyman A Budlong Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(329, 'Intrinsic Charter High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(330, 'Chicago High School for the Arts', 'HS', '2017-02-15 14:32:32', 'true'),
+(331, 'William E B Dubois Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(332, 'James Shields Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(333, 'Laura S Ward Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(334, 'Chicago Intl Charter - Northtown', 'Other', '2017-02-15 14:33:32', 'true'),
+(335, 'George Leland Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(336, 'John T McCutcheon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(337, 'Johnnie Colemon Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(338, 'Douglas Taylor Elementary SchoolÂ ', 'ES', '2017-02-15 14:32:14', 'true'),
+(339, 'Charles Sumner Math &amp; Science Community Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(340, 'Mount Vernon Elementary SchoolÂ ', 'ES', '2017-02-15 14:32:14', 'true'),
+(341, 'James Monroe Elementary SchoolÂ ', 'ES', '2017-02-15 14:32:14', 'true'),
+(342, 'Ida B Wells Preparatory Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(343, 'Neal F Simeon Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(344, 'Ellen Mitchell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(345, 'Cyrus H McCormick Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(346, 'Michael Faraday Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(347, 'Kate S Kellogg Elementary SchoolÂ ', 'ES', '2017-02-15 14:32:14', 'true'),
+(348, 'Phoebe Apperson Hearst Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(349, 'John Harvard Elementary School of Excellence', 'ES', '2017-02-15 14:32:14', 'true'),
+(350, 'Walter Q Gresham Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(351, 'ASPIRA Charter - Haugan Campus', 'Other', '2017-02-15 14:33:32', 'true'),
+(352, 'Robert Fulton Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(353, 'Joseph Kellman Corporate Community Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(354, 'John Fiske Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(355, 'Edward K Ellington Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(356, 'Turner-Drew Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(357, 'Arthur Dixon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(358, 'Nathan S Davis Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(359, 'Anna R. Langford Community Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(360, 'Burnside Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(361, 'Jane Addams Elementary SchoolÂ ', 'ES', '2017-02-15 14:32:14', 'true'),
+(362, 'Ellen H Richards Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(363, 'George Westinghouse High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(364, 'Louisa May Alcott Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(365, 'Charles P Steinmetz College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(366, 'Gage Park High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(368, 'North Lawndale College Prep Charter', 'Other', '2017-02-15 14:33:32', 'true'),
+(370, 'William Jones College Preparatory High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(371, 'William C Reavis Math &amp; Science Specialty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(372, 'William Penn Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(373, 'Ronald E McNair Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(374, 'William F Finkl Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(375, 'Rachel Carson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(378, 'Robert Healy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(379, 'John Charles Haines Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(380, 'Philip Rogers Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(381, 'Andrew Carnegie Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(382, 'Mary Lyon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(383, 'Marine Leadership Academy at Ames', 'ES', '2017-02-15 14:32:14', 'true'),
+(384, 'Holden Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(385, 'Luther Burbank Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(386, 'Asa Philip Randolph Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(387, 'Edward N Hurley Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(388, 'James Shields Middle School', 'ES', '2017-02-15 14:32:14', 'true'),
+(389, 'Dr. Martin Luther King Jr. College Prep High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(390, 'Learn South', 'Other', '2017-02-15 14:33:32', 'true'),
+(391, 'Wildwood Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(392, 'Pilsen Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(393, 'North-Grand High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(394, 'Abraham Lincoln Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(395, 'Edward Beasley Elementary Magnet Academic Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(396, 'Newton Bateman Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(397, 'Instituto Health Sciences Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(398, 'Enrico Tonti Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(399, 'Stone Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(400, 'Northwest Middle School', 'ES', '2017-02-15 14:32:14', 'true'),
+(401, 'Carter G Woodson South Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(402, 'Wolfgang A Mozart Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(404, 'Myra Bradwell Communications Arts & Sciences Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(405, 'Back of the Yards High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(406, 'Sarah E. Goode STEM Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(407, 'John C Coonley Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(408, 'John Greenleaf Whittier Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(409, 'John C Burroughs Elementary School', 'HS', '2017-02-15 14:32:32', 'true'),
+(410, 'Grant Campus', 'Other', '2017-02-15 14:33:32', 'true'),
+(411, 'Alexander Graham Bell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(412, 'Charles Allen Prosser Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(413, 'Walt Disney Magnet Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(414, 'Amelia Earhart Options for Knowledge Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(416, 'John M Smyth Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(417, 'Richard J Oglesby Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(418, 'Josiah Pickard Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(419, 'Ole A Thorp Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(420, 'Albert G Lane Technical High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(421, 'Gurdon S Hubbard High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(424, 'National Teachers Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(426, 'Air Force Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(427, 'Peace &amp; Education Coalition High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(428, 'Austin College and Career Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(429, 'William Rainey Harper High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(430, 'Northside Learning Center High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(431, 'Southside Occupational Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(432, 'Simpson Academy High School for Young Women', 'HS', '2017-02-15 14:32:32', 'true'),
+(433, 'DeVry University Advantage Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(434, 'Bowen High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(435, 'TEAM Englewood Community Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(436, 'Francisco I Madero Middle School', 'MS', '2017-02-15 14:31:46', 'true'),
+(437, 'Collins Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(438, 'Catalyst - Circle Rock', 'Other', '2017-02-15 14:33:32', 'true'),
+(439, 'Disney II Magnet High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(440, 'Great Lakes Academy Charter School', 'ES', '2017-02-15 14:32:14', 'true'),
+(441, 'Ira F Aldridge Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(442, 'Phillip D Armour Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(443, 'Arthur R Ashe Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(444, 'John J Audubon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(445, 'Avalon Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(446, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(447, 'Clara Barton Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(448, 'Perkins Bass Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(449, 'Ludwig Van Beethoven Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(450, 'Blair Early Childhood Center', 'Other', '2017-02-15 14:33:32', 'true'),
+(451, 'Carrie Jacobs Bond Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(452, 'Edward A Bouchet Math &amp; Science Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(453, 'Charles S Brownell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(454, 'Edmond Burke Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(455, 'Burnham Elementary Inclusive Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(456, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(457, 'Carroll-Rosenwald Specialty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(458, 'Willa Cather Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(459, 'Frederic Chopin Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(460, 'George Rogers Clark Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(461, 'Mary E Courtenay Elementary Language Arts Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(462, 'Crown Community Academy of Fine Arts Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(463, 'Countee Cullen Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(464, 'Charles R Darwin Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(465, 'Sir Miles Davis Magnet Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(466, 'Charles Gates Dawes Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(467, 'Jose De Diego Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(468, 'Stephen Decatur Classical Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(469, 'Robert Nathaniel Dett Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(470, 'Disney II Magnet School', 'Other', '2017-02-15 14:33:32', 'true'),
+(471, 'James R Doolittle Jr Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(472, 'John C Dore Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(473, 'John B Drake Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(474, 'Charles W Earle Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(475, 'Thomas A Edison Regional Gifted Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(476, 'Edison Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(477, 'Leif Ericson Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(478, 'Medgar Evers Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(479, 'Fairfield Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(480, 'Fernwood Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(481, 'Foster Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(482, 'Wendell E Green Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(483, 'Robert L Grimes Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(484, 'Virgil Grissom Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(485, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(486, 'John Hay Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(487, 'Helen M Hefferan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(488, 'Thomas A Hendricks Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(489, 'Oliver Wendell Holmes Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(490, 'Thomas Hoyne Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(491, 'Charles Evans Hughes Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(492, 'Washington Irving Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(493, 'Mahalia Jackson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(494, 'Friedrich L. Jahn Elementary of the Fine Arts', 'ES', '2017-02-15 14:32:14', 'true'),
+(495, 'Edward Jenner Elementary Academy of the Arts', 'ES', '2017-02-15 14:32:14', 'true'),
+(496, 'Jensen Elementary Scholastic Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(497, 'Scott Joplin Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(498, 'Joseph Jungman Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(499, 'Joyce Kilmer Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(500, 'Rudyard Kipling Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(501, 'Lawndale Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(502, 'Arthur A Libby Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(503, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(504, 'James Madison Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(505, 'Horace Mann Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(506, 'Roswell B Mason Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(507, 'Benjamin E Mays Elementary Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(508, 'Mary E McDowell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(509, 'Irvin C Mollison Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(510, 'Lillian R. Nicholson STEM Academy', 'Other', '2017-02-15 14:33:32', 'true'),
+(511, 'Oriole Park Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(512, 'Josefa Ortiz De Dominguez Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(514, 'Jesse Owens Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(515, 'Park Manor Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(516, 'Parkside Elementary Community Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(517, 'Ferdinand Peck Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(518, 'Ambrose Plamondon Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(519, 'Edgar Allan Poe Elementary Classical School', 'ES', '2017-02-15 14:32:14', 'true'),
+(520, 'Ernst Prussing Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(521, 'George M Pullman Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(522, 'Paul Revere Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(523, 'Jackie Robinson Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(524, 'Martha Ruggles Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(525, 'William H Ryder Math &amp; Science Specialty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(526, 'Rueben Salazar Elementary Bilingual Center', 'ES', '2017-02-15 14:32:14', 'true'),
+(527, 'Sauganash Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(528, 'Jesse Sherwood Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(529, 'Beulah Shoesmith Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(530, 'Wendell Smith Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(531, 'Frederick Stock Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(532, 'Elizabeth H Sutherland Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(533, 'Telpochcalli Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(534, 'Velma F Thomas Early Childhood Center', 'Other', '2017-02-15 14:33:32', 'true'),
+(535, 'James N Thorp Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(536, 'Barbara Vick Early Childhood & Family Center', 'Other', '2017-02-15 14:33:32', 'true'),
+(537, 'Charles H Wacker Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(538, 'Joseph Warren Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(539, 'Harold Washington Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(540, 'Thomas J Waters Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(541, 'Daniel Webster Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(542, 'Ella Flagg Young Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(543, 'Southeast Area Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(544, 'Walter Henri Dyett High School for the Arts', 'HS', '2017-02-15 14:32:32', 'true'),
+(545, 'James Otis Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(546, 'William H Brown Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(547, 'William W Carter Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(548, 'Pablo Casals Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(549, 'Thomas Chalmers Specialty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(550, 'George W Curtis Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(551, 'Charles S Deneen Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(552, 'Dewey Elementary Academy of Fine Arts', 'ES', '2017-02-15 14:32:14', 'true'),
+(553, 'Melville W Fuller Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(554, 'Julia Ward Howe Elementary School of Excellence', 'ES', '2017-02-15 14:32:14', 'true'),
+(555, 'Brian Piccolo Elementary Specialty School', 'ES', '2017-02-15 14:32:14', 'true'),
+(556, 'Ravenswood Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(557, 'William T Sherman Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(558, 'Amos Alonzo Stagg Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(559, 'Matthew Gallistel Elementary Language Academy', 'ES', '2017-02-15 14:32:14', 'true'),
+(560, 'Lorenz Brentano Math & Science Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(561, 'Theophilus Schmid Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(562, 'George W Tilton Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(563, 'Walter L Newberry Math & Science Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(564, 'CPS Virtual Library', 'Other', '2017-02-15 14:33:32', 'true'),
+(565, 'CPS Virtual Library - High School', 'HS', '2017-02-15 14:32:32', 'true'),
+(566, 'CPS Virtual Library - Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
+(567, 'Professional Virtual Library', 'Other', '2017-02-15 14:33:00', 'true'),
+(568, 'Robert J. Richardson Middle School', 'MS', '2017-02-15 14:31:46', 'true');
 
 -- --------------------------------------------------------
 
@@ -3611,7 +3611,7 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE `navigation` (
+CREATE TABLE IF NOT EXISTS `navigation` (
   `id` int(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
@@ -3622,7 +3622,7 @@ CREATE TABLE `navigation` (
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
@@ -3636,25 +3636,25 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 (62, 2, 'Search District Kid&#039;s Catalog', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
 (96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-02-06 16:18:47', 'admin'),
 (112, 4, 'My Account', 'https://[pac_url]/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
-(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
+(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
 (114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-02-06 16:18:47', 'admin'),
 (115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-02-06 16:18:47', 'admin'),
-(116, 12, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(117, 7, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(118, 8, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(119, 9, 'Calendar', 'http://[homepage_url]/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(120, 10, 'Staff', 'http://[homepage_url]/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(121, 11, 'Topics', 'http://[homepage_url]/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(123, 14, 'Careers', 'http://[homepage_url]/careers', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(124, 15, 'CPS Stats and Facts', 'http://[homepage_url]/stats', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(125, 16, 'News and Press Releases', 'http://[homepage_url]/news', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(126, 17, 'What&#039;s New on CPS.EDU?', 'http://[homepage_url]/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(127, 2, 'Virtual Library Elementary Schools', 'https://[pac_url]/?config=12', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(128, 3, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-01-30 20:15:58', 'admin'),
-(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-01-30 20:15:58', 'admin'),
-(130, 6, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-01-30 20:15:58', 'admin'),
-(131, 5, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-01-30 20:15:58', 'admin');
+(116, 12, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(117, 7, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(118, 8, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(119, 9, 'Calendar', 'http://[homepage_url]/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(120, 10, 'Staff', 'http://[homepage_url]/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(121, 11, 'Topics', 'http://[homepage_url]/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(123, 14, 'Careers', 'http://[homepage_url]/careers', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(124, 15, 'CPS Stats and Facts', 'http://[homepage_url]/stats', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(125, 16, 'News and Press Releases', 'http://[homepage_url]/news', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(126, 17, 'What&#039;s New on CPS.EDU?', 'http://[homepage_url]/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(127, 2, 'Virtual Library Elementary Schools', 'https://[pac_url]/?config=12', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(128, 3, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
+(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-02-14 15:49:53', 'admin'),
+(130, 5, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin'),
+(131, 6, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin');
 
 -- --------------------------------------------------------
 
@@ -3662,7 +3662,7 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
+CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `image` text NOT NULL,
@@ -3672,7 +3672,7 @@ CREATE TABLE `pages` (
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
@@ -3680,8 +3680,8 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child''s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child''s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child''s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child''s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher''s expectations. At the beginning of the year, you may want to ask your child''s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1);
 
@@ -3691,7 +3691,7 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `a
 -- Table structure for table `services`
 --
 
-CREATE TABLE `services` (
+CREATE TABLE IF NOT EXISTS `services` (
   `id` int(11) NOT NULL,
   `icon` text NOT NULL,
   `image` text NOT NULL,
@@ -3711,7 +3711,7 @@ CREATE TABLE `services` (
 -- Table structure for table `setup`
 --
 
-CREATE TABLE `setup` (
+CREATE TABLE IF NOT EXISTS `setup` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
@@ -3746,14 +3746,14 @@ CREATE TABLE `setup` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setup`
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact library@cps.edu for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-14 23:07:48', 'admin', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-15 14:34:58', 'admin', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 4),
@@ -3967,7 +3967,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (226, 'John H Hamline Elementary School', '', '', '3740ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 227),
 (227, 'Alexander Graham Elementary School', '', '', '3600ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 228),
 (228, 'Harriet Beecher Stowe Elementary School', '', '', '6080ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 229),
-(229, 'Chicago Quest North', '', '', '8672', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-14 19:22:51', 'admin', 230),
+(229, 'Chicago Quest North', '', '', '8672', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 230),
 (230, 'John W Garvy Elementary School', '', '', '3510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 231),
 (231, 'Wendell Phillips Academy High School', '', '', '1510', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 232),
 (232, 'Namaste Charter Elementary School', '', '', '7920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 233),
@@ -4052,7 +4052,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (321, 'Northside College Preparatory High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 322),
 (322, 'Marie Sklodowska Curie Metropolitan High School', '', '', '1820', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 323),
 (323, 'DuSable Campus', '', '', '1280', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 324),
-(324, 'John Barry Elementary School', '', '', '2160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-14 21:17:26', 'admin', 325),
+(324, 'John Barry Elementary School', '', '', '2160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 325),
 (325, 'Hiram H Belding Elementary School', '', '', '2260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 326),
 (326, 'Lyman A Budlong Elementary School', '', '', '2440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 327),
 (328, 'Intrinsic Charter High School', '', '', '9619', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 329),
@@ -4293,7 +4293,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
+CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -4305,17 +4305,17 @@ CREATE TABLE `slider` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `loc_type`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
-(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'ES', 'true', 2, '2017-01-20 20:47:01', 'admin', 1),
-(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'MS', 'true', 3, '2017-01-20 20:47:03', 'admin', 1),
-(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 'ES', 'true', 1, '2017-01-20 20:46:59', 'admin', 1),
-(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'HS', 'true', 4, '2017-02-06 15:02:32', 'admin', 1);
+(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'All', 'true', 2, '2017-01-20 20:47:01', 'admin', 1),
+(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'All', 'true', 3, '2017-01-20 20:47:03', 'admin', 1),
+(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 'All', 'true', 1, '2017-01-20 20:46:59', 'admin', 1),
+(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'All', 'true', 4, '2017-02-06 15:02:32', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -4323,7 +4323,7 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `loc_type`, `ac
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE `socialmedia` (
+CREATE TABLE IF NOT EXISTS `socialmedia` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
@@ -4335,7 +4335,7 @@ CREATE TABLE `socialmedia` (
   `tumblr` text NOT NULL,
   `use_defaults` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `socialmedia`
@@ -4879,7 +4879,7 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
+CREATE TABLE IF NOT EXISTS `team` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -4898,7 +4898,7 @@ CREATE TABLE `team` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
@@ -4907,15 +4907,15 @@ CREATE TABLE `users` (
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-14 16:12:50', '127.0.0.1', 1),
-(2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-01-31 18:43:41', '127.0.0.1', 2);
+(1, 'admin', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 1, '2017-02-15 14:34:47', '192.168.2.105', 1),
+(2, 'rjones', 'fc07782e722b05b0a720c83d6befd38d9aa7a443', 'rjones@tlcdelivers.com', 0, '2017-02-03 23:00:51', '192.168.2.105', 2);
 
 --
 -- Indexes for dumped tables
@@ -5046,57 +5046,57 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aboutus`
 --
 ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `category_customers`
 --
 ALTER TABLE `category_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `category_navigation`
 --
 ALTER TABLE `category_navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `generalinfo`
 --
 ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `icons_list`
 --
 ALTER TABLE `icons_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=569;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=569;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `services`
 --
@@ -5106,17 +5106,17 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
 ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=567;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -5126,7 +5126,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
