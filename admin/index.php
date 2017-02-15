@@ -109,7 +109,7 @@ if (isset($_SESSION['loggedIn'])) {
             background-color: transparent !important;
         }
 
-        .navbar-inverse {
+        .navbar-inverse, .scrollToTop {
             display: none !important;
         }
 
