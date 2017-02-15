@@ -239,6 +239,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSetup = mysqli_fetch_array($sqlSetup);
+
+    //get location type from locations table
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+    $rowLocations = mysqli_fetch_array($sqlLocations);
     ?>
     <!--modal preview window-->
 
@@ -366,11 +370,15 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
 			<a href='slider.php?loc_id=" . $_GET['loc_id'] . "&editslide=$slideId' title='Edit'>" . $slideTitle . "</a>
 			</td>";
-        echo "<td $adminOnlyShow>
-                <select class='form-control' name='location_type[]'>";
-                echo $locMenuStr;
-        echo "</select>
-            </td>";
+        echo "<td $adminOnlyShow>";
+        if ($adminIsCheck == "true") {
+            echo "<select class='form-control' name='location_type[]'>";
+            echo $locMenuStr;
+            echo "</select>";
+        } else {
+            echo "<input type='hidden' name='location_type[]' value='".$rowLocations['type']."' >";
+        }
+        echo "</td>";
         echo "<td class='col-xs-1'>
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='" . $slideId . "' type='checkbox' " . $isActive . ">
 			</td>

@@ -585,6 +585,7 @@ function getSlider($sliderType){
     global $sliderImage;
     global $sliderLocType;
     global $imagePath;
+    global $locTypes;
     global $db_conn;
 
     if ($sliderType == "slide"){
@@ -600,15 +601,13 @@ function getSlider($sliderType){
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
 
-    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL){
-        $sliderLocType = $locTypes[0];
-        $locTypeWhere = "loc_type >= '' AND";
+    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
+        $sliderLocType = $rowLocations['type'];
+        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'ALL') AND";
     } else {
         $sliderLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type = '".$sliderLocType."' AND";
+        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'ALL') AND";
     }
-
-    echo $locTypeWhere;
 
     //get the default value from setup table
     $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
