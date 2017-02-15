@@ -601,6 +601,7 @@ function getSlider($sliderType){
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
 
+    //
     if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
         $sliderLocType = $rowLocations['type'];
         $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'ALL') AND";

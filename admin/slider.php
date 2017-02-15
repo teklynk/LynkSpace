@@ -259,7 +259,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
     </style>
 
-
     <div class="modal fade" id="webslideDialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -320,9 +319,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<thead>
 		<tr>
 		<th>Sort</th>
-		<th>Slide Title</th>
-		<th $adminOnlyShow>Location Type</th>
-		<th>Active</th>
+		<th>Slide Title</th>";
+        // if is admin the show the table header
+		if ($adminIsCheck == "true") {
+            echo "<th>Location Type</th>";
+        }
+		echo "<th>Active</th>
 		<th>Actions</th>
 		</tr>
 		</thead>
@@ -371,15 +373,17 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
 			<a href='slider.php?loc_id=" . $_GET['loc_id'] . "&editslide=$slideId' title='Edit'>" . $slideTitle . "</a>
 			</td>";
-        echo "<td $adminOnlyShow>";
+
+        //If admin, show location type drop down list else show a hidden input with the locations type value
         if ($adminIsCheck == "true") {
+            echo "<td>";
             echo "<select class='form-control' name='location_type[]'>";
             echo $locMenuStr;
             echo "</select>";
+            echo "</td>";
         } else {
             echo "<input type='hidden' name='location_type[]' value='".$rowLocations['type']."' >";
         }
-        echo "</td>";
         echo "<td class='col-xs-1'>
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='" . $slideId . "' type='checkbox' " . $isActive . ">
 			</td>
