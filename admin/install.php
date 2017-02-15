@@ -99,9 +99,6 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
     fclose($dbfile);
 
-    // Rename install page so that it can not be accessed after the initial install
-    rename("install.php", "~install.old");
-
     // Create the email and send the message
     $email_subject = "$server_domain - User Account has been added:  $user_name";
     $email_body = "To log on the site, use the following credentials.\n\n";
@@ -113,13 +110,16 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     // Send the email
     mail(filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL), $email_subject, $email_body, $headers);
 
+    // Rename install page so that it can not be accessed after the initial install
+    rename("install.php", "~install.old");
+
     // Redirect to admin login page
     header("Location: index.php");
     echo "<script>window.location.href='index.php';</script>"; // redirect to login page
 
 } // end of the big IF
 
-//The Installer Form
+// The Installer Form
 ?>
 
     <style>
