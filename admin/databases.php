@@ -343,7 +343,7 @@ if ($_GET['section'] == $custSections[0]) {
             }
 
             //update heading on submit
-            if (($_POST['save_main'])) {
+            if ($_POST['save_main']) {
 
                 $setupUpdate = "UPDATE setup SET customersheading_$custSubSection='" . safeCleanStr($_POST['customer_heading_'.$custSubSection]) . "', customerscontent_$custSubSection='" . sqlEscapeStr($_POST['main_content_'.$custSubSection]) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);

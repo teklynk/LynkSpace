@@ -1,0 +1,193 @@
+<?php
+define('inc_access', TRUE);
+
+include_once('includes/header.inc.php');
+
+$_SESSION['file_referer'] = 'usermanager.php';
+
+// Only allow Admin users access to this page
+if ($_SESSION['user_level'] != 1) {
+    header('Location: index.php?logout=true');
+    echo "<script>window.location.href='index.php?logout=true';</script>";
+}
+
+$usersCount=0;
+$pageMsg = "";
+$deleteMsg = "";
+
+//Get user info
+$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email");
+
+//Get Location ID and Name
+$sqlUsersLoc = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name");
+
+//build locations drop down list
+while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
+    $locUsersId = $rowUsersLoc['id'];
+    $locUsersName = $rowUsersLoc['name'];
+
+    $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . "</option>";
+}
+
+//Add User
+//insert data on submit
+if ($_POST['save_main']) {
+    if ($_POST['user_password'] == $_POST['user_password_confirm']) {
+        $usersInsert = "INSERT INTO users (username, email, password, level, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . filter_var(trim($_POST['user_email']), FILTER_VALIDATE_EMAIL) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", " . safeCleanStr($_POST['user_location']) . ")";
+        mysqli_query($db_conn, $usersInsert);
+
+        $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+    } else {
+        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+    }
+}
+
+//delete user
+$deluserId = $_GET['deleteuser'];
+$deluserTitle = $_GET['deletetitle'];
+
+if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+
+    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
+} elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+    //delete user after clicking Yes
+    $userDelete = "DELETE FROM users WHERE id='$deluserId'";
+    mysqli_query($db_conn, $userDelete);
+
+    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+}
+?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Users Manager
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <?php
+        if ($pageMsg != "") {
+            echo $pageMsg;
+        }
+        if ($deleteMsg != "") {
+            echo $deleteMsg;
+        }
+        ?>
+        <form name="userForm" class="dirtyForm" method="post" action="">
+            <div class="form-group">
+                <label>Username</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input class="form-control" type="text" name="user_name" maxlength="255" placeholder="Username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>User Email</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>User Password</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <input class="form-control" type="password" name="user_password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password Confirm</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>User Location</label>
+                <select class="form-control" name="user_location" required>
+                    <option>Choose a location</option>
+                    <?php echo $locUsersMenuStr;?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>User Level</label>
+                <select class="form-control" name="user_level" required>
+                    <option>Choose a user level</option>
+                    <option value="0">User</option>
+                    <option value="1">Admin</option>
+                </select>
+            </div>
+            <input type="hidden" name="save_main" value="true"/>
+            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Add User</button>
+        </form>
+    </div>
+</div>
+
+<hr/>
+<!--Users table-->
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Level</th>
+                    <th>Location</th>
+                    <th>Last Login</th>
+                    <th>Client IP</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
+                    $usersID = $rowUsers['id'];
+                    $usersName = $rowUsers['username'];
+                    $usersEmail = $rowUsers['email'];
+                    $usersClientIP = $rowUsers['clientip'];
+                    $usersLevel = $rowUsers['level'];
+                    $usersDateTime = $rowUsers['datetime'];
+                    $usersLocID = $rowUsers['loc_id'];
+                    $usersCount++;
+
+                    if ($usersLevel == 1) {
+                        $usersLevel = 'Admin';
+                    } else {
+                        $usersLevel = 'User';
+                    }
+
+                    //get location name for each user
+                    $sqlUsersLocName = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE id=".$usersLocID." ");
+                    $rowLocName = mysqli_fetch_array($sqlUsersLocName);
+
+                    $locationName = $rowLocName['name'];
+
+                    echo "<tr>
+                            <td>$usersCount</td>
+                            <td>$usersName</td>
+                            <td>$usersEmail</td>
+                            <td>$usersLevel</td>
+                            <td>$locationName</td>
+                            <td>$usersDateTime</td>
+                            <td>$usersClientIP</td>
+                            <td>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr($usersName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                            </td>
+                        </tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php
+include_once('includes/footer.inc.php');
+?>

@@ -9,7 +9,7 @@ $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, 
 $rowUsers = mysqli_fetch_array($sqlUsers);
 
 //update table on submit
-if (!empty($_POST)) {
+if (!empty($_POST) && $_POST['passwdUpdated']) {
     $username = $_POST['user_name'];
     $useremail = $_POST['user_email'];
     $userpass = $_POST['user_password'];
@@ -41,7 +41,7 @@ if ($_GET['passwordupdated'] == 'true') {
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            User Manager
+            My Account
         </h1>
     </div>
 </div>

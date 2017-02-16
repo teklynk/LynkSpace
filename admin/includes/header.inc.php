@@ -294,6 +294,13 @@ session_start();
                 <li>
                     <a href="uploads.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-upload" title="Uploads"></i> Uploads</a>
                 </li>
+                <?php
+                if ($_SESSION['user_level'] == 1) {
+                    echo "<li>";
+                    echo "<a href='usermanager.php?".$setLocId."'><i class='fa fa-fw fa-users' title='User Manager'></i> User Manager</a>";
+                    echo "</li>";
+                }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
