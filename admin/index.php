@@ -85,6 +85,12 @@ if (isset($_SESSION['loggedIn'])) {
 
 }
 
+// get default location logo
+$userSetup = mysqli_query($db_conn, "SELECT logo, loc_id FROM setup WHERE loc_id = 1 LIMIT 1");
+$rowSetup = mysqli_fetch_array($userSetup);
+
+$userLogo = $rowSetup['logo'];
+
 ?>
     <style type="text/css">
         html, body {
@@ -135,7 +141,15 @@ if (isset($_SESSION['loggedIn'])) {
                     ?>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center"><a href="../index.php"><img src="images/cpslogo_v2@2x.png" class="img-responsive img-center" title="Home" alt="Home"/></a></div>
+                    <div class="text-center">
+                        <?php
+                        if (!empty($userLogo)) {
+                            echo "<a href='../index.php'><img src='../uploads/1/".$userLogo."' class='img-responsive img-center' title='Home' alt='Home'/></a>";
+                        } else {
+                            echo "<p></p>";
+                        }
+                        ?>
+                    </div>
                     <section class="login-form">
                         <?php
                         if (!$_GET['forgotpassword']) {
@@ -159,14 +173,14 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="form-group">
                                         <label>User Password</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit">Sign in</button>
+                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Sign in</button>
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">

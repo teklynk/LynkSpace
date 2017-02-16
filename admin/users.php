@@ -71,14 +71,14 @@ if ($_GET['passwordupdated'] == 'true') {
             <div class="form-group">
                 <label>User Password</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <input class="form-control" type="password" name="user_password" value="" placeholder="Password" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Password Confirm</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <input class="form-control" type="password" name="user_password_confirm" value="" placeholder="Password Confirm" required>
                 </div>
             </div>

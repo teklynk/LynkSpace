@@ -7,10 +7,10 @@ include_once('includes/header.inc.php');
 $dbFileLoc = "../db/dbconn.php";
 
 // Name of the Source sql dump file
-$dbFilename = '../db/bootstrap_business.sql';
+$dbFilename = "../db/bootstrap_business.sql";
 
 // Database Name for web app
-$dbName = 'tlc_website';
+$dbName = "tlc_website";
 
 // Check if sql file exists
 if (!file_exists($dbFileLoc)) {
@@ -121,50 +121,74 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
 // The Installer Form
 ?>
-
-    <style>
+    <style type="text/css">
         html, body {
-            margin-top: 0px !important;
-            background-color: #fff !important;
+            margin-top: 0 !important;
+            background: #BEA69A url('images/color-splash-3.jpg') center center /cover;
         }
-        label {
-            margin-top:6px;
-            margin-bottom:0px;
+
+        .login-panel {
+            margin-top: 60px;
         }
+
+        .login-panel img {
+            margin: 20px auto;
+            vertical-align: middle;
+        }
+
+        .login-panel .img-center {
+            display: inline;
+        }
+
+        #page-wrapper {
+            background-color: transparent !important;
+        }
+
         .navbar-inverse, .scrollToTop {
             display: none !important;
         }
+
         #wrapper {
-            padding-left: 0px !important;
+            padding-left: 0 !important;
         }
+
         .form-signin {
-            max-width: 350px;
+            max-width: 330px;
             padding: 15px;
             margin: 0 auto;
         }
     </style>
 
-    <div class="container">
-        <div class="row">
-            <form name="frmInstall" class="form-signin" method="post" action="">
-                <h2 class="form-signin-heading">Database Connection</h2>
-                <label for="dbserver">DB Server</label>
-                <input class="form-control" type="text" name="dbserver" maxlength="255" required>
-                <label for="dbusername">DB Username</label>
-                <input class="form-control" type="text" name="dbusername" maxlength="255" required>
-                <label for="dbpassword">DB Password</label>
-                <input class="form-control" type="text" name="dbpassword" maxlength="255" required>
-                <h2 class="form-signin-heading">Create an Admin user</h2>
-                <label for="username">Username</label>
-                <input class="form-control" type="text" name="username" maxlength="255" required>
-                <label for="useremail">User Email</label>
-                <input class="form-control" type="email" name="useremail" maxlength="255" required>
-                <label for="password">Password</label>
-                <input class="form-control" type="text" name="password" maxlength="255" required>
-                <br />
-                <input type="hidden" name="db_install" value="true">
-                <button class="btn btn-lg btn-primary btn-block" name="install_submit" type="submit">Install</button>
-            </form>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-body">
+                    <section class="install-form">
+                        <form name="frmInstall" class="form-signin" method="post" action="">
+                            <h2 class="form-signin-heading">Database Connection</h2>
+                            <label for="dbserver">DB Server</label>
+                            <input class="form-control" type="text" name="dbserver" maxlength="255" required>
+                            <label for="dbusername">DB Username</label>
+                            <input class="form-control" type="text" name="dbusername" maxlength="255" required>
+                            <label for="dbpassword">DB Password</label>
+                            <input class="form-control" type="text" name="dbpassword" maxlength="255" required>
+                            <h2 class="form-signin-heading">Create an Admin user</h2>
+                            <label for="username">Username</label>
+                            <input class="form-control" type="text" name="username" maxlength="255" required>
+                            <label for="useremail">User Email</label>
+                            <input class="form-control" type="email" name="useremail" maxlength="255" required>
+                            <label for="password">Password</label>
+                            <input class="form-control" type="text" name="password" maxlength="255" required>
+                            <br />
+                            <div class="alert alert-info">
+                                A database named <strong>"<?php echo $dbName; ?>"</strong> will be created for you.
+                            </div>
+                            <input type="hidden" name="db_install" value="true">
+                            <button class="btn btn-lg btn-primary btn-block" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 

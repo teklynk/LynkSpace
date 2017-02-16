@@ -208,7 +208,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent fa-lg"></i></a><a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name'];} ?></a>
+            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a><a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name'];} ?></a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -283,7 +283,7 @@ session_start();
                     <a href="services.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-list-alt" title="Services"></i> Services</a>
                 </li>
                 <li>
-                    <a href="team.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-users" title="Team"></i> Team</a>
+                    <a href="team.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-address-card" title="Team"></i> Team</a>
                 </li>
                 <li>
                     <a href="databases.php?section=<?php echo $custSections[0] . "&" . $setLocId; ?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>

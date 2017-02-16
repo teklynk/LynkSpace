@@ -62,7 +62,7 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Users Manager
+            User Manager
         </h1>
     </div>
 </div>
@@ -94,34 +94,41 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
             <div class="form-group">
                 <label>User Password</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <input class="form-control" type="password" name="user_password" placeholder="Password" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Password Confirm</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>User Location</label>
-                <select class="form-control" name="user_location" required>
-                    <option>Choose a location</option>
-                    <?php echo $locUsersMenuStr;?>
-                </select>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
+                    <select class="form-control" name="user_location" required>
+                        <option>Choose a location</option>
+                        <?php echo $locUsersMenuStr;?>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>User Level</label>
-                <select class="form-control" name="user_level" required>
-                    <option>Choose a user level</option>
-                    <option value="0">User</option>
-                    <option value="1">Admin</option>
-                </select>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                    <select class="form-control" name="user_level" required>
+                        <option>Choose a user level</option>
+                        <option value="0">User</option>
+                        <option value="1">Admin</option>
+                    </select>
+                </div>
             </div>
+
             <input type="hidden" name="save_main" value="true"/>
-            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Add User</button>
+            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add User</button>
         </form>
     </div>
 </div>
