@@ -176,9 +176,9 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                             <label for="username">Username</label>
                             <input class="form-control" type="text" name="username" maxlength="255" required>
                             <label for="useremail">User Email</label>
-                            <input class="form-control" type="email" name="useremail" maxlength="255" required>
+                            <input class="form-control" type="email" name="useremail" maxlength="255" pattern="<?php echo $emailValidatePattern ?>" required>
                             <label for="password">Password</label>
-                            <input class="form-control" type="text" name="password" maxlength="255" required>
+                            <input class="form-control" type="text" name="password" maxlength="255" pattern=".{8,}" title="8 characters minimum" required>
                             <br />
                             <div class="alert alert-info">
                                 A database named <strong>"<?php echo $dbName; ?>"</strong> will be created for you.

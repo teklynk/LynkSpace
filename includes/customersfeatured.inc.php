@@ -76,11 +76,11 @@ if ($customerNumRows > 0) {
             }
 
             echo "</div>"; //col-
-        }
 
-        //Start a new row if item count is divisible by 3
-        if (($customersItemCount % 3) === 0) {
-            echo "<div class='database-break'></div>";
+            //Start a new row if item count is divisible by 3
+            if (($customersItemCount % 3) === 0) {
+                echo "<div class='database-break'></div>";
+            }
         }
     }
 
