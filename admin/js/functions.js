@@ -658,6 +658,16 @@ $(document).ready(function () {
         }, 500);
     });
 
+    $('#addUser_button').click(function () {
+        setTimeout(function () {
+            if ($('#addUserDiv').hasClass('in')) {
+                $('#addUser_button').html("<i class='fa fa-fw fa-times'></i> Close");
+            } else {
+                $('#addUser_button').html("<i class='fa fa-fw fa-plus'></i> Add a User");
+            }
+        }, 500);
+    });
+
     //Returns Character Count Function
     parseCharCounts();
     

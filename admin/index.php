@@ -174,7 +174,7 @@ $userLogo = $rowSetup['logo'];
                                         <label>User Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" required>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern=".{8,}" title="8 characters minimum" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
@@ -211,7 +211,7 @@ $userLogo = $rowSetup['logo'];
                                         </div>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
                                     <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>

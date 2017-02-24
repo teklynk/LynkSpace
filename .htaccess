@@ -12,3 +12,10 @@ php_value docref_ext 0
 php_value error_log /home/rjones/htdocs/php_errors.log
 php_value error_reporting -1
 php_value log_errors_max_len 0
+
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

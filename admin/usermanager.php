@@ -66,16 +66,24 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         </h1>
     </div>
 </div>
+<?php
+if ($pageMsg != "") {
+    echo $pageMsg;
+}
+if ($deleteMsg != "") {
+    echo $deleteMsg;
+}
+?>
+<!-- Add user form-->
+<button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
+    <i class='fa fa-fw fa-plus'></i> Add a User
+</button>
+<h2></h2>
+
+<div id="addUserDiv" class="accordion-body collapse panel-body">
+<fieldset class="well">
 <div class="row">
     <div class="col-lg-8">
-        <?php
-        if ($pageMsg != "") {
-            echo $pageMsg;
-        }
-        if ($deleteMsg != "") {
-            echo $deleteMsg;
-        }
-        ?>
         <form name="userForm" class="dirtyForm" method="post" action="">
             <div class="form-group">
                 <label>Username</label>
@@ -95,14 +103,14 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
                 <label>User Password</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" placeholder="Password" required>
+                    <input class="form-control" type="password" name="user_password" placeholder="Password" pattern=".{8,}" title="8 characters minimum" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Password Confirm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" required>
+                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" required>
                 </div>
             </div>
             <div class="form-group">
@@ -132,8 +140,9 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         </form>
     </div>
 </div>
+</fieldset>
+</div>
 
-<hr/>
 <!--Users table-->
 <div class="row">
     <div class="col-lg-12">
