@@ -785,6 +785,65 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
+function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
+    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30, 2, 6, 12);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
+    $xmldata = curl_exec($ch); // execute curl request
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //catch and print error message
+    if ($http_status==500 || $http_status==503) {
+        echo "HTTP status ".$http_status.". Error loading URL";
+    }
+    curl_close($ch);
+
+    $xml = simplexml_load_string($xmldata);
+
+    $itemcount = 0;
+
+    foreach ($xml->channel->item as $item) {
+        $itemcount ++;
+        //get title node for each book. clean title string
+        $xmltitle = (string)$item->title;
+        $xmltitle = trim(str_replace("'", "&apos;", $xmltitle));
+        //get url for each book. clean link string
+        $xmllink = (string)$item->link;
+        $xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
+        //get image url from img tag in the description node
+        $xmlgetimage = preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$item->description, $xmltheimage);
+        //set the image url. clean the image url string
+        $xmlimage = $xmltheimage[1];
+        $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
+        //set the first item to active
+        if ($itemcount == 1) {
+            $xmlItemActive = "item active";
+        } else {
+            $xmlItemActive = "item";
+        }
+
+        //Gets the image dimensions from the xmltheimage url. requires http: or https: to work properly
+        $xmlimagesize = getimagesize($xmltheimage[1]);
+        $xmlimagewidth = $xmlimagesize[0];
+        $xmlimageheight = $xmlimagesize[1];
+        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs'><span class='glyphicon glyphicon-refresh spinning'></span>";
+            //Check if has book jacket based on the image size (1x1)
+            if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive'></a>";
+            } else {
+                //TLC dummy book jacket img src=http://ls2pachelp.tlcdelivers.com/bookjacket-md.png
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket' src='//placehold.it/140x200?text=%20' class='img-responsive'></a>";
+            }
+        echo "</div></div>";
+        //stop parsing xml once it reaches the max count
+        if ($itemcount == $maxcnt) {
+            break;
+        }
+
+    }
+}
+
 //Call - getSetup is used everywhere
 getSetup();
 

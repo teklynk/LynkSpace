@@ -36,6 +36,25 @@ $(document).ready(function () {
 
         return false;
     });
+    //Hot Titles carousel
+    //$('.carousel-inner img').addClass('img-responsive');
+    $('.carousel[data-type="multi"] .item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i=0;i<4;i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+
+            next.children(':first-child').clone().appendTo($(this));
+        }
+        $('#hottitlesCarousel.carousel').carousel('pause');
+    });
 
 });
 //Page Load/Performance Checker
