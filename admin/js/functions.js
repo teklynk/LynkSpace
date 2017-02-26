@@ -309,7 +309,6 @@ $(document).ready(function () {
             $('#team_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#team_image').val());
         }
     });
-
     //Ajax Calls
     $('#nav_Table .nav_win_checkbox').change(function () {
         $.get('ajax/update_navwin.php?update=true', {

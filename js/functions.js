@@ -36,6 +36,21 @@ $(document).ready(function () {
 
         return false;
     });
+    $('#myIframe').load(function(){
+        Array.prototype.forEach.call(window.parent.document.querySelectorAll("link[rel=stylesheet]"), function(link) {
+            var newLink = document.createElement("link");
+            newLink.rel  = link.rel;
+            newLink.href = link.href;
+            document.head.appendChild(newLink);
+        });
+    });
+
+    //show animated loader until iframe loads
+    $('iframe').load(function(){
+        $('.loader').remove();
+        $('.iframe').css('display', 'block');
+    }).show();
+
     //Hot Titles carousel
     //$('.carousel-inner img').addClass('img-responsive');
     $('.carousel[data-type="multi"] .item').each(function(){
@@ -57,6 +72,7 @@ $(document).ready(function () {
     });
 
 });
+
 //Page Load/Performance Checker
 window.onload = function () {
     //var loadTime = ((window.performance.timing.domComplete- window.performance.timing.navigationStart)/1000)+" sec.";

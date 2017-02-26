@@ -30,9 +30,10 @@ if ($_GET['loc_id']) {
     echo "</div>";
 }
 if ($_GET['loc_id']) {
-    echo "<div class='grad-gray container-fluid hottitles'>";
+    echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
-    include 'includes/hottitles.inc.php';
+    echo "<div class='loader'></div>";
+    echo "<div class='iframe animate-bottom'><iframe class='hottitles-iframe' src='includes/hottitles.inc.php'></iframe></div>";
     echo "</div>";
     echo "</div>";
 }

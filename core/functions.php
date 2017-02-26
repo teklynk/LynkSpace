@@ -827,13 +827,13 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
-        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs'><span class='glyphicon glyphicon-refresh spinning'></span>";
+        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs'>";
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
                 echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive'></a>";
             } else {
                 //TLC dummy book jacket img src=http://ls2pachelp.tlcdelivers.com/bookjacket-md.png
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket' src='//placehold.it/140x200?text=%20' class='img-responsive'></a>";
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive' src='../images/bookjacket-md.png'></a>";
             }
         echo "</div></div>";
         //stop parsing xml once it reaches the max count
