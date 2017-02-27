@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2017 at 09:47 AM
+-- Generation Time: Feb 17, 2017 at 01:42 PM
 -- Server version: 5.5.50-MariaDB
 -- PHP Version: 5.4.16
 
@@ -622,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `category_navigation` (
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_navigation`
@@ -634,7 +634,8 @@ INSERT INTO `category_navigation` (`id`, `name`, `nav_loc_id`, `datetime`, `auth
 (2, 'Chicago Public Schools', 1, '2017-01-19 17:14:50', 'admin'),
 (3, 'Connect', 1, '2017-01-19 17:14:50', 'admin'),
 (4, 'Quick Links', 1, '2017-01-19 17:14:50', 'admin'),
-(5, 'SOAR', 1, '2017-01-19 17:14:50', 'admin');
+(5, 'SOAR', 1, '2017-01-19 17:14:50', 'admin'),
+(7, 'CPS Virtual Library', 1, '2017-02-15 15:20:58', 'jhorning');
 
 -- --------------------------------------------------------
 
@@ -1359,7 +1360,7 @@ CREATE TABLE IF NOT EXISTS `featured` (
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', 'Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', '', '', 'false', '2017-02-08 14:49:15', 'admin_script', 1),
+(1, 'Chicago Public Schools', 'CPS Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', '', 'right', 'false', '2017-02-15 15:40:36', 'jhorning', 1),
 (2, 'Jane A Neil Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 4),
@@ -3622,23 +3623,23 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`, `author_name`) VALUES
-(43, 4, 'Virtual Library HS', 'https://[pac_url]/?config=11', 0, 'Top', 'true', 1, '2017-02-06 16:18:47', 'admin'),
-(54, 3, 'Virtual Library ES', 'https://[pac_url]/?config=12', 0, 'Top', 'true', 1, '2017-02-06 16:18:47', 'admin'),
-(60, 5, 'Databases', 'databases.php?section=1&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-02-06 16:18:47', 'admin'),
-(61, 1, 'Search District Catalog', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
-(62, 2, 'Search District Kid&#039;s Catalog', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
-(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-02-06 16:18:47', 'admin'),
-(112, 4, 'My Account', 'https://[pac_url]/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-01-30 20:01:01', 'admin'),
+(43, 4, 'High School', 'https://[pac_url]/?config=11', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
+(54, 3, 'Elementary', 'https://[pac_url]/?config=12', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
+(60, 7, 'Databases', 'databases.php?section=1&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-02-15 15:39:37', 'jhorning'),
+(61, 1, 'Search All Schools', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
+(62, 2, 'Search All Schools Kid&#039;s Catalog', 'https://[pac_url]/kids?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
+(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-02-15 15:39:37', 'jhorning'),
+(112, 4, 'My Account', 'https://[pac_url]/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
 (113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 0, 'Top', 'true', 1, '2017-02-06 16:18:47', 'admin'),
-(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-02-06 16:18:47', 'admin'),
+(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
+(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-02-15 15:39:37', 'jhorning'),
 (116, 12, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
 (117, 7, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
 (118, 8, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
@@ -3654,7 +3655,8 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 (128, 3, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
 (129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-02-14 15:49:53', 'admin'),
 (130, 5, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin'),
-(131, 6, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin');
+(131, 6, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin'),
+(133, 5, 'Professional', 'https://[pac_url]/?config=14', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning');
 
 -- --------------------------------------------------------
 
@@ -4314,7 +4316,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `loc_type`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
 (3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'All', 'true', 2, '2017-01-20 20:47:01', 'admin', 1),
 (4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'All', 'true', 3, '2017-01-20 20:47:03', 'admin', 1),
-(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&loc_id=1', 'Learn About our K-2 Programs', 'All', 'true', 1, '2017-01-20 20:46:59', 'admin', 1),
+(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&amp;loc_id=1', '', 'All', 'true', 1, '2017-01-20 20:46:59', 'jhorning', 1),
 (12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'All', 'true', 4, '2017-02-06 15:02:32', 'admin', 1);
 
 -- --------------------------------------------------------
@@ -5056,7 +5058,7 @@ ALTER TABLE `category_customers`
 -- AUTO_INCREMENT for table `category_navigation`
 --
 ALTER TABLE `category_navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
@@ -5091,7 +5093,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `navigation`
 --
 ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=134;
 --
 -- AUTO_INCREMENT for table `pages`
 --

@@ -39,6 +39,11 @@ if (!defined('inc_access')) {
         $('.carousel').carousel({
             interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
         })
+        //remove loader once the iframe has finished loading
+        $('iframe.hottitles-iframe').load(function() {
+            $('.hotContainer.loader').removeClass('loader');
+            $('.iframe.hidden').removeClass('hidden');
+        });
     </script>
 
     </body>

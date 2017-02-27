@@ -36,20 +36,12 @@ $(document).ready(function () {
 
         return false;
     });
-    $('#myIframe').load(function(){
-        Array.prototype.forEach.call(window.parent.document.querySelectorAll("link[rel=stylesheet]"), function(link) {
-            var newLink = document.createElement("link");
-            newLink.rel  = link.rel;
-            newLink.href = link.href;
-            document.head.appendChild(newLink);
-        });
-    });
 
     //show animated loader until iframe loads
-    $('iframe').load(function(){
-        $('.loader').remove();
-        $('.iframe').css('display', 'block');
-    }).show();
+    //$('iframe').load(function(){
+    //    $('div.hotContainer').removeClass('loader');
+    //    $('.iframe').css('display', 'block');
+    //}).show();
 
     //Hot Titles carousel
     //$('.carousel-inner img').addClass('img-responsive');
@@ -68,10 +60,16 @@ $(document).ready(function () {
 
             next.children(':first-child').clone().appendTo($(this));
         }
-        $('#hottitlesCarousel.carousel').carousel('pause');
+        $('.hottitlesCarousel.carousel').carousel('pause');
     });
 
 });
+
+function toggleSrc(loc, count) {
+    $('iframe.hottitles-iframe').attr('src', loc, count);
+    $('.hotContainer').addClass('loader');
+    $('.iframe').addClass('hidden');
+}
 
 //Page Load/Performance Checker
 window.onload = function () {

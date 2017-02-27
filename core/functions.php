@@ -843,6 +843,31 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
 
     }
 }
+function getHottitles(){
+    global $hottitlesTile;
+    global $hottitlesUrl;
+    global $hotCount;
+    global $db_conn;
+
+    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort");
+    //$rowHottitles  = mysqli_fetch_array($sqlHottitles);
+    $hotCount = 0;
+    while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
+        $hottitlesSort = $rowHottitles['sort'];
+        $hottitlesTile = trim($rowHottitles['title']);
+        $hottitlesUrl = trim($rowHottitles['url']);
+        $hotCount ++;
+
+        //Set active tab on initial page load
+        if ($hottitlesSort == 1) {
+            $hotActive = 'active';
+        } else {
+            $hotActive = '';
+        }
+
+        echo "<li class='hottab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+    }
+}
 
 //Call - getSetup is used everywhere
 getSetup();

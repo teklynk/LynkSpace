@@ -185,16 +185,17 @@ footer {
     border: none;
     padding: 0;
     margin: 0;
-    display: none;
+/*    display: none;*/
 }
 .loader {
     border: none;
-    padding: 12px;
+    padding: 0;
     margin: 0;
     width: 100%;
-    height: 200px;
+    height: 244px;
+    z-index: 9999;
     background-image: url('../images/loader.svg');
-    background-size: 20%;
+    background-size: 12%;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -212,9 +213,19 @@ footer {
     100% { transform: rotate(360deg); }
 }*/
 .hottitles-iframe {
-    height: 200px;
+    height: 208px;
     width: 100%;
 }
+.hot-nav.nav-pills, .hot-nav.nav-tabs  {
+    margin-bottom:10px;
+}
+.hot-tab a {
+    color:#fff;
+}
+.item .hot-item {
+    padding: 8px;
+}
+
 .slide {
     display: block;
     width:100%;
@@ -225,9 +236,9 @@ footer {
     margin-left:15px;
     background-image:none;
 }
-.carousel-inner img {
+.carousel-inner .item img {
     z-index: 999;
-    /*box-shadow: rgba(109, 109, 103, 0.5) 0px 3px 6px;*/
+    box-shadow: rgba(109, 109, 103, 0.5) 0px 3px 6px;
     border: none;
 }
 .carousel-inner .dummy-jacket {

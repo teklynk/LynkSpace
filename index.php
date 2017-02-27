@@ -32,8 +32,23 @@ if ($_GET['loc_id']) {
 if ($_GET['loc_id']) {
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
-    echo "<div class='loader'></div>";
-    echo "<div class='iframe animate-bottom'><iframe class='hottitles-iframe' src='includes/hottitles.inc.php'></iframe></div>";
+
+    echo "<div class='panel with-nav-tabs panel-default'>";
+
+    echo "<div class='panel-heading'>";
+    echo "<ul class='nav nav-tabs'>";
+    getHottitles(); //gets the tabs
+    echo "</ul>";
+    echo "</div>";
+
+    echo "<div class='hotContainer loader panel-body'>";
+    echo "<div class='iframe hidden tab-content'>";
+    echo "<iframe class='hottitles-iframe' seamless src='includes/hottitles.inc.php?loc_id=".$_GET['loc_id']."&rssurl=".$hottitlesUrl."'></iframe>";
+    echo "</div>";
+    echo "</div>";
+
+    echo "</div>";
+
     echo "</div>";
     echo "</div>";
 }
