@@ -46,14 +46,15 @@ session_start();
     <!-- CSS Template -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/css/cps-style.min.css">
     <?php
-    //Google Analytics UID in config.php
-    if (!empty($googleAnalytics)) {
+    //Google Analytics UID
+    //Can also use $setupLocAnalytics for location specific analytics UA
+    if (!empty($setupDefaultAnalytics)) {
         ?>
-        <!-- Google Analytics UID in config.php -->
+        <!-- Google Analytics UID -->
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo $googleAnalytics;?>']);
+            _gaq.push(['_setAccount', '<?php echo $setupDefaultAnalytics;?>']);
             _gaq.push(['_trackPageview']);
 
             (function () {

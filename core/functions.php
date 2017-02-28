@@ -419,9 +419,11 @@ function getSetup(){
     global $setupLs2kids;
     global $setupSearchDefault;
     global $setupLogo;
+    global $setupDefaultAnalytics;
+    global $setupLocAnalytics;
     global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, analytics, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSetup = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup['description'];
@@ -433,6 +435,12 @@ function getSetup(){
     $setupLs2pac = $rowSetup['ls2pac'];
     $setupLs2kids = $rowSetup['ls2kids'];
     $setupSearchDefault = $rowSetup['searchdefault'];
+    $setupLocAnalytics = $rowSetup['analytics'];
+
+    $sqlSetupMainAnalytics = mysqli_query($db_conn, "SELECT analytics FROM setup WHERE loc_id=1");
+    $rowSetupMainAnalytics = mysqli_fetch_array($sqlSetupMainAnalytics);
+
+    $setupDefaultAnalytics = $rowSetupMainAnalytics['analytics'];
 }
 
 function getSocialMediaIcons($shape, $section){
@@ -817,6 +825,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
         $xmlimage = $xmltheimage[1];
         $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
         $xmlimage = trim(str_replace('SM', 'MD', $xmlimage));
+
         //set the first item to active
         if ($itemcount == 1) {
             $xmlItemActive = "item active";
@@ -844,17 +853,16 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
 
     }
 }
-function getHottitles(){
+function getHottitlesTabs(){
     global $hottitlesTile;
     global $hottitlesUrl;
     global $hotCount;
     global $db_conn;
 
-    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " AND active='true' ORDER BY sort");
-    //$rowHottitles  = mysqli_fetch_array($sqlHottitles);
+    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " AND active='true' ORDER BY sort ASC");
     $hotCount = 0;
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
-        $hottitlesSort = $rowHottitles['sort'];
+        $hottitlesSort = trim($rowHottitles['sort']);
         $hottitlesTile = trim($rowHottitles['title']);
         $hottitlesUrl = trim($rowHottitles['url']);
         $hotCount ++;
@@ -866,7 +874,9 @@ function getHottitles(){
             $hotActive = '';
         }
 
-        echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+        if ($hotCount > 0) {
+            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+        }
     }
 }
 
@@ -879,6 +889,7 @@ function generateRandomString($length = 10){
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
+
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }

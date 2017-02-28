@@ -9,7 +9,7 @@ $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, 
 $rowUsers = mysqli_fetch_array($sqlUsers);
 
 //update table on submit
-if (!empty($_POST) && $_POST['passwdUpdated']) {
+if (!empty($_POST)) {
     $username = $_POST['user_name'];
     $useremail = $_POST['user_email'];
     $userpass = $_POST['user_password'];
@@ -17,7 +17,7 @@ if (!empty($_POST) && $_POST['passwdUpdated']) {
     $userid = $_POST['user_id'];
 
     if ($userpass == $userpassconfirm) {
-        $usersUpdate = "UPDATE users SET username='" . safeCleanStr($username) . "', password=SHA1('" . $blowfishSalt . safeCleanStr($userpass) . "'), email='" . filter_var(trim($useremail), FILTER_VALIDATE_EMAIL) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $userid . " ";
+        $usersUpdate = "UPDATE users SET username='" . safeCleanStr($username) . "', password=SHA1('" . $blowfishSalt . safeCleanStr($userpass) . "'), email='" . filter_var(trim($useremail), FILTER_VALIDATE_EMAIL) . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='".getRealIpAddr()."' WHERE id=" . $userid . " ";
         mysqli_query($db_conn, $usersUpdate);
 
         $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";

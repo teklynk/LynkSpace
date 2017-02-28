@@ -30,6 +30,7 @@ if ($_GET['loc_id']) {
     echo "</div>";
 }
 if ($_GET['loc_id']) {
+    echo $hottitlesTile;
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
@@ -37,7 +38,7 @@ if ($_GET['loc_id']) {
 
     echo "<div class='panel-heading'>";
     echo "<ul class='nav nav-tabs'>";
-    getHottitles(); //gets the tabs
+    getHottitlesTabs(); //gets the tabs
     echo "</ul>";
     echo "</div>";
 
