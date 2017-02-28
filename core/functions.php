@@ -816,6 +816,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
         //set the image url. clean the image url string
         $xmlimage = $xmltheimage[1];
         $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
+        $xmlimage = trim(str_replace('SM', 'MD', $xmlimage));
         //set the first item to active
         if ($itemcount == 1) {
             $xmlItemActive = "item active";
@@ -827,7 +828,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
-        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs'>";
+        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs hot-item'>";
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
                 echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive'></a>";
@@ -849,7 +850,7 @@ function getHottitles(){
     global $hotCount;
     global $db_conn;
 
-    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort");
+    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " AND active='true' ORDER BY sort");
     //$rowHottitles  = mysqli_fetch_array($sqlHottitles);
     $hotCount = 0;
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
@@ -865,7 +866,7 @@ function getHottitles(){
             $hotActive = '';
         }
 
-        echo "<li class='hottab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+        echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
     }
 }
 
