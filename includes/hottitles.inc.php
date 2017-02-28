@@ -26,7 +26,7 @@ $rssUrl = $_GET['rssurl'];
         <div class="carousel-inner">
             <?php
             //example: getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs);
-            getHottitlesCarousel($rssUrl, 20, 2, 6, 12);
+            getHottitlesCarousel($rssUrl, 50, 2, 6, 12);
             ?>
         </div>
         <a class="left carousel-control" href="#hottitlesCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left icon-prev"></i></a>
