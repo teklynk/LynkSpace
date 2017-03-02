@@ -9,7 +9,9 @@ echo "<div class='container bannerwrapper'>";
 echo "</div>";
 echo "</div>";
 
+echo "<header id='myCarousel' class='carousel slide'>";
 include 'includes/slider.inc.php';
+echo "</header>";
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
@@ -30,7 +32,6 @@ if ($_GET['loc_id']) {
     echo "</div>";
 }
 if ($_GET['loc_id']) {
-    echo $hottitlesTile;
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
@@ -44,7 +45,7 @@ if ($_GET['loc_id']) {
 
     echo "<div class='hotContainer loader panel-body'>";
     echo "<div class='iframe hidden tab-content'>";
-    echo "<iframe class='hottitles-iframe' seamless src='themes/default/includes/hottitles.inc.php?loc_id=".$_GET['loc_id']."&rssurl=".$hottitlesUrl."'></iframe>";
+    echo "<iframe class='hottitles-iframe embed-responsive-item' seamless src='themes/default/includes/hottitles.inc.php?loc_id=".$_GET['loc_id']."&rssurl=".$hottitlesUrl."'></iframe>";
     echo "</div>";
     echo "</div>";
 

@@ -10,7 +10,7 @@ $rssUrl = $_GET['rssurl'];
     <!-- Bootstrap Core CSS CDN -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Default template CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/default-style.min.css">
     <!-- theme template CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/cps-style.min.css">
     <!-- jQuery CDN -->
@@ -18,7 +18,7 @@ $rssUrl = $_GET['rssurl'];
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/js/functions.min.js"></script>
     <style>
         html, head, body {padding:0; margin:0; border: none; background: transparent; overflow: hidden;}
     </style>

@@ -641,7 +641,7 @@ function getSlider($sliderType){
     if ($sliderNumRows > 0){
 
         if ($sliderType == "slide"){
-            echo "<header id='myCarousel' class='carousel slide'>";
+
             //Wrapper for slides
             echo "<div class='carousel-inner'>";
             while ($rowSlider = mysqli_fetch_array($sqlSlider)){
@@ -656,9 +656,9 @@ function getSlider($sliderType){
                 echo "<div class='item $slideActive'>";
 
                 if (!empty($rowSlider['image'])){
-                    echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
+                    echo "<div class='fill img-responsive img-full' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
                 } else {
-                    echo "<div class='fill'></div>";
+                    echo "<div class='fill img-responsive img-full'></div>";
                 }
 
                 echo "<div class='carousel-caption'>";
@@ -686,7 +686,7 @@ function getSlider($sliderType){
             echo "<span class='icon-next'></span>";
             echo "</a>";
 
-            echo "</header>";
+
 
         } elseif ($sliderType == "random"){
             $rowSlider = mysqli_fetch_array($sqlSlider);

@@ -38,7 +38,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
     <!-- Default template CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/default-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/cps-style.min.css">
@@ -84,10 +84,10 @@ session_start();
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/js/searchscript.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/searchscript.min.js"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/functions.min.js"></script>
 
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
