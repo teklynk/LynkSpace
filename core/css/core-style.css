@@ -201,7 +201,7 @@ div.database-break {
     background-repeat: no-repeat;
 }
 /* Hot titles carousel*/
-.container iframe {
+.hotContainer iframe {
     width: 100%;
     border: none;
 }
@@ -254,6 +254,13 @@ div.database-break {
     width: 125px;
     padding: 4px;
 }
+/** Calendar Iframe **/
+.calContainer iframe, .calContainer.loader {
+    width: 100%;
+    border: 0;
+    height: 800px;
+}
+
 @media (max-width: 767px) {
     .hottitlesCarousel .carousel-inner .active.left {left: -100%;}
     .hottitlesCarousel .carousel-inner .next {left: 100%;}

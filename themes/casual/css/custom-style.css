@@ -57,3 +57,44 @@ header.carousel, div.carousel {
 #searchlocations .panel-body, #searchpac .panel-body {
     background: #337ab7;
 }
+/** Google Calendar Styles **/
+.rb-n {
+    background: #337ab7 !important;
+    border-radius: 0px;
+    font-size: 10pt;
+}
+.view-cap, .view-container-border {
+    background-color: #eee !important;
+}
+.mv-daynames-table {
+    background: #ccc;
+    color: #333;
+}
+.st-dtitle {
+    background: #eee;
+    color: #666;
+}
+.bubble {
+
+}
+.bubble-sprite {
+
+}
+.st-bg {
+
+}
+.st-bg-today {
+
+}
+.st-dtitle {
+
+}
+.view-cap, .view-container-border {
+
+}
+.mv-daynames-table {
+
+}
+.mv-event-container {
+
+}
