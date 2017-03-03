@@ -7,79 +7,95 @@ include_once('includes/header.inc.php');
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referer'] = generateRandomString();
 
-echo "<div class='grad-blue container-fluid featured'>";
-echo "<div class='container bannerwrapper'>";
-    include 'includes/featured.inc.php';
-echo "</div>";
-echo "</div>";
-
-echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-if ($_GET['loc_id'] == 1) {
-    include 'includes/searchlocations.inc.php';
-} else {
-    include 'includes/searchpac.inc.php';
-}
-
-echo "</div>";
-echo "</div>";
-
 ?>
-<div class="container" id="contact">
-    <div class="content">
-        <div class="row row_pad">
-            <div class="col-lg-12">
-                <h1 class="contact"><?php echo $contactHeading; ?></h1>
-            </div>
-        </div>
-
-        <div class="row row_pad">
-            <div class="col-lg-12">
-                <h3><?php echo $contactBlurb; ?></h3><br/>
-            </div>
-        </div>
-
-        <?php
-        echo "<div class='row row_pad'>";
-
-        //Embedded Google Map -->
-        if (!empty($contactMap)) {
-            echo "<div class='col-xs-12 col-md-8'>";
-            echo $contactMap;
-            echo "</div>";
-        }
-
-        //Contact Details Column -->
-        echo "<div class='col-md-4'>";
-
-        if (!empty($contactAddress)) {
-            echo "<p><i class='fa fa-home'></i>";
-            echo "&nbsp;" . $contactAddress . ",&nbsp;" . $contactCity . ",&nbsp;" . $contactState . "&nbsp;" . $contactZipcode . "</p>";
-        }
-
-        if (!empty($contactPhone)) {
-            echo "<p><i class='fa fa-phone'></i>";
-            echo "&nbsp;<a>" . $contactPhone . "</a></p>";
-        }
-
-        if (!empty($contactEmail)) {
-            echo "<p><i class='fa fa-envelope-o'></i>";
-            echo "&nbsp;<a href='mailto:" . $contactEmail . "'>" . $contactEmail . "</a></p>";
-        }
-
-        if (!empty($contactHours)) {
-            echo "<p><i class='fa fa-clock-o'></i>";
-            echo "&nbsp;" . $contactHours . "</p>";
-        }
-
-        echo "</div>"; //row
-        echo "</div>"; //col-md-4
-        ?>
-
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <?php
+            if ($_GET['loc_id'] == 1 && $multiBranch == "true") {
+                include 'includes/searchlocations.inc.php';
+            } else {
+                include 'includes/searchpac.inc.php';
+            }
+            ?>
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong><?php echo $contactHeading; ?></strong>
+            </h2>
+            <hr>
+        </div>
+        <div class="col-md-8">
+            <?php echo $contactMap; ?>
+        </div>
+        <div class="col-md-4">
+            <p>Phone:
+                <strong><?php echo $contactPhone; ?></strong>
+            </p>
+            <?php if (!empty($contactEmail)) { ?>
+            <p>Email:
+                <strong><a href="mailto:<?php echo $contactEmail; ?>"><?php echo $contactEmail; ?></a></strong>
+            </p>
+            <?php }?>
+            <p>Address:
+                <strong><?php echo $contactAddress; ?>
+                    <br><?php echo $contactCity; ?>, <?php echo $contactState; ?> <?php echo $contactZipcode; ?></strong>
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+<!--            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Contact Us</strong>
+            </h2>
+            <hr>-->
+            <p><?php echo $contactBlurb; ?></p>
+            <form name="sentMessage" id="contactForm" method="post" action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label>Name</label>
+                        <input type="text" class="form-control" id="name" name="name" maxlength="255" required>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Email Address</label>
+                        <input type="email" pattern="<?php echo $emailValidatePattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" maxlength="25" placeholder="555-5555" required>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-12">
+                        <label>Message</label>
+                        <textarea class="form-control" rows="6" id="message" name="message" maxlength="999" style="resize:none" required></textarea>
+                    </div>
+                    <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail; ?>"/>
+                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
+                    <br>
+                    <!-- For success/fail messages -->
+                    <?php
+                    echo $contactFormMsg;
+                    ?>
+                    <div class="form-group col-lg-12">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
 include_once('includes/footer.inc.php');
 ?>

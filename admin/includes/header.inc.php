@@ -124,11 +124,13 @@ session_start();
                 if ($imgfile === "Thumbs.db") continue;
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
-
-                $fileListJson .= "{title: '" . $imgfile . "', value: '" . $image_url . $imgfile . "'},";
+                $allimgfiles[] = strtolower($imgfile);
             }
-
             closedir($handle);
+        }
+        sort($allimgfiles);
+        foreach($allimgfiles as $imgfile) {
+            $fileListJson .= "{title: '" . $imgfile . "', value: '" . $image_url . $imgfile . "'},";
         }
 
         //get and build page list for TinyMCE

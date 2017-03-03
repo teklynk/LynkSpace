@@ -506,6 +506,7 @@ function getCustomers($custType){
     global $customerSort;
     global $customerCatId;
     global $customerCatName;
+    global $customerCatSort;
     global $customerSection;
     global $custDefaultLoc;
     global $custSections;
@@ -564,10 +565,11 @@ function getCustomers($custType){
     //Get Category
     //If cat_id=int then display a page of databases for only that category
     if (!empty($_GET['cat_id'])) {
-        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ")");
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ")");
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
+        $customerCatSort = $rowCatCustomers[2];
         $customerCatWhere = "catid=" . $_GET['cat_id'] . " AND ";
     } else {
         $customerCatWhere = "";
@@ -690,7 +692,6 @@ function getSlider($sliderType){
 
         } elseif ($sliderType == "random"){
             $rowSlider = mysqli_fetch_array($sqlSlider);
-            echo "<header id='myCarousel' class='carousel slide'>";
 
             echo "<div class='carousel-inner'>";
 
@@ -716,8 +717,6 @@ function getSlider($sliderType){
             echo "</div>"; //.item
 
             echo "</div>"; //.carousel-inner
-
-            echo "</header>";
 
         } else {
             $rowSlider = mysqli_fetch_array($sqlSlider);

@@ -114,7 +114,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                             $modDate = date('m-d-Y, H:i:s', filemtime($image_dir . $file));
 
                             echo "<tr data-index='" . $count . "'>
-								<td><a href='#' onclick=\"showMyModal('$file', '$image_dir$file')\" title='Preview'>" . $file . "</a></td>
+								<td><a href='#' onclick=\"showMyModal('$file', '$image_dir$file')\" title='Preview'>" . strtolower($file) . "</a></td>
 								<td class='col-xs-3'>" . $modDate . "</td>
 								<td class='col-xs-1'>
 								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=$image_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>

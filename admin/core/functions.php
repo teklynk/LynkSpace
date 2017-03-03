@@ -16,6 +16,24 @@ function generateRandomString($length = 10){
     return $randomString;
 }
 
+function getImageDropdownList($image_dir) {
+    if ($handle = opendir($image_dir)) {
+        while (false !== ($file = readdir($handle))) {
+            if ('.' === $file) continue;
+            if ('..' === $file) continue;
+            if ($file==="Thumbs.db") continue;
+            if ($file===".DS_Store") continue;
+            if ($file==="index.html") continue;
+            $allfiles[] = strtolower($file);
+        }
+        closedir($handle);
+    }
+    sort($allfiles);
+    foreach($allfiles as $file) {
+        echo "<option value='".$file."' >".$file."</option>";
+    }
+}
+
 //Get gravatar image based on users email value
 function getGravatar($email, $size){
     $default = "https://cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";

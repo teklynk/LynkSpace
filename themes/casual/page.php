@@ -4,35 +4,35 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<div class='grad-blue container-fluid featured'>";
-echo "<div class='container bannerwrapper'>";
-    include 'includes/featured.inc.php';
-echo "</div>";
-echo "</div>";
+?>
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <?php
+            if ($_GET['loc_id'] == 1 && $multiBranch == "true") {
+                include 'includes/searchlocations.inc.php';
+            } else {
+                include 'includes/searchpac.inc.php';
+            }
+            ?>
+        </div>
+    </div>
+</div>
+<?php
 
-echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-if ($_GET['loc_id'] == 1) {
-    include 'includes/searchlocations.inc.php';
-} else {
-    include 'includes/searchpac.inc.php';
-}
-
-echo "</div>";
-echo "</div>";
-
-echo "<div class='container'>";
-echo "<div class='row row_pad content' id='page'>";
+echo "<div class='row'>";
+echo "<div class='box' id='page'>";
 
 echo "<div class='col-lg-12'>";
-echo "<h1 class='page'>" . $pageTitle . "</h1>";
+echo "<hr>";
+echo "<h2 class='intro-text text-center'><strong>" . $pageTitle . "</strong></h2>";
+echo "<hr>";
 echo "</div>";
 
 if ($pageImage > "") {
 
     if ($pageImageAlign == "right") {
-        echo "<div class='col-xs-12 col-md-10'>";
+        echo "<div class='col-xs-12 col-md-10 col-sm-4'>";
         echo $pageContent;
         echo "</div>";
         echo "<div class='hidden-xs col-md-2'>";
@@ -42,23 +42,17 @@ if ($pageImage > "") {
         echo "<div class='hidden-xs col-md-2'>";
         echo $pageImage;
         echo "</div>";
-        echo "<div class='col-xs-12 col-md-10'>";
+        echo "<div class='col-xs-12 col-md-10 col-sm-4'>";
         echo $pageContent;
         echo "</div>";
     }
 
 } else {
-    echo "<div class='col-xs-12 col-lg-12'>";
+    echo "<div class='col-xs-12 col-md-10 col-sm-12'>";
     echo $pageContent;
     echo "</div>";
 }
 
-echo "</div>";
-echo "</div>";
-
-echo "<div class='container-fluid'>";
-echo "<div class='container bannerwrapper databases'>";
-    include 'includes/customersfeatured.inc.php';
 echo "</div>";
 echo "</div>";
 

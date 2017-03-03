@@ -229,26 +229,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 <select class="form-control" name="site_logo" id="site_logo">
                     <option value="">None</option>
                     <?php
-                    if ($handle = opendir($image_dir)) {
-
-                        while (false !== ($file = readdir($handle))) {
-                            if ('.' === $file) continue;
-                            if ('..' === $file) continue;
-                            if ($file === "Thumbs.db") continue;
-                            if ($file === ".DS_Store") continue;
-                            if ($file === "index.html") continue;
-
-                            if ($file === $rowSetup['logo']) {
-                                $logoCheck = "SELECTED";
-                            } else {
-                                $logoCheck = "";
-                            }
-
-                            echo "<option value='" . $file . "' $logoCheck>" . $file . "</option>";
-                        }
-
-                        closedir($handle);
-                    }
+                    getImageDropdownList($image_dir);
                     ?>
                 </select>
             </div>

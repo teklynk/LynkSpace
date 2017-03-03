@@ -16,12 +16,14 @@ if (!empty($featuredImage)) {
         echo "<div class='col-xs-12 col-sm-8'>";
 
         if (!empty($featuredHeading)) {
-            echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+            echo "<h2 class='brand-before text-white featured text-center'><small>" . $featuredHeading . "</small></h2>";
         }
 
         if (!empty($featuredBlurb)) {
-            echo "<h3 class='text-white'>" . $featuredBlurb . "</h3>";
+            echo "<h1 class='brand-name text-white text-center'>" . $featuredBlurb . "</h1>";
         }
+
+        echo "<hr class='tagline-divider'><br>";
 
         if (!empty($featuredContent)) {
             echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
@@ -37,12 +39,14 @@ if (!empty($featuredImage)) {
         echo "<div class='col-xs-8 col-sm-8'>";
 
         if (!empty($featuredHeading)) {
-            echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+            echo "<h2 class='brand-before text-white featured text-center'><small>" . $featuredHeading . "</small></h2>";
         }
 
         if (!empty($featuredBlurb)) {
-            echo "<h3 class='text-white'>" . $featuredBlurb . "</h3>";
+            echo "<h1 class='brand-name text-white text-center'>" . $featuredBlurb . "</h1>";
         }
+
+        echo "<hr class='tagline-divider'><br>";
 
         if (!empty($featuredContent)) {
             echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
@@ -56,12 +60,14 @@ if (!empty($featuredImage)) {
     echo "<div class='col-xs-12 col-sm-12'>";
 
     if (!empty($featuredHeading)) {
-        echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+        echo "<h2 class='brand-before text-white featured text-center'><small>" . $featuredHeading . "</small></h2>";
     }
 
     if (!empty($featuredBlurb)) {
-        echo "<h3 class='text-white'>" . $featuredBlurb . "</h3>";
+        echo "<h1 class='brand-name text-white text-center'>" . $featuredBlurb . "</h1>";
     }
+
+    echo "<hr class='tagline-divider'><br>";
 
     if (!empty($featuredContent)) {
         echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";

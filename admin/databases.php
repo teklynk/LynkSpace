@@ -258,24 +258,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
-                        if ($handle = opendir($image_dir)) {
-                            while (false !== ($file = readdir($handle))) {
-                                if ('.' === $file) continue;
-                                if ('..' === $file) continue;
-                                if ($file === "Thumbs.db") continue;
-                                if ($file === ".DS_Store") continue;
-                                if ($file === "index.html") continue;
-
-                                if ($file === $rowCustomer['image']) {
-                                    $imageCheck = "SELECTED";
-                                } else {
-                                    $imageCheck = "";
-                                }
-
-                                echo "<option value='" . $file . "' $imageCheck>" . $file . "</option>";
-                            }
-                            closedir($handle);
-                        }
+                        getImageDropdownList($image_dir);
                         ?>
                     </select>
                 </div>
@@ -290,7 +273,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
-                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='".$getCustSection."' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='".$getCustSection."' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                         while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
 
                             if ($rowExistCustCat['id'] != 0) {
@@ -410,7 +393,7 @@ if ($_GET['section'] == $custSections[0]) {
 
             // add category
             if ($_GET['addcatname'] > "") {
-                $custAddCat = "INSERT INTO category_customers (name, section, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+                $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
                 mysqli_query($db_conn, $custAddCat);
 
                 echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
@@ -488,10 +471,15 @@ if ($_GET['section'] == $custSections[0]) {
                     <div class="form-group">
                         <label for="cust_newcat">Add a Category</label>
                         <div class="input-group">
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control" name="cust_newcasortt" id="cust_newcasortt" maxlength="3">
+                            </div>
+                            <div class="col-lg-10">
                             <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
-                            <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#cust_newcat').val();"></i></span>
+                            <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatsort='+$('#cust_newcatsort').val()+'&addcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val();"></i></span>
                             <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -501,7 +489,7 @@ if ($_GET['section'] == $custSections[0]) {
                             echo "<option value='0'>None</option>";
                             //Cat list for adding a new category
                             //get and build category list, find selected
-                            $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                            $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id, sort FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                             while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
 
                                 if ($rowExistCustCat['id'] != 0) {
@@ -592,7 +580,7 @@ if ($_GET['section'] == $custSections[0]) {
                             echo "<select class='form-control' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
-                            $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                            $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
                             while ($rowCustCat = mysqli_fetch_array($sqlCustCat)) {
                                 if ($rowCustCat['id'] != 0) {
                                     $custCatId = $rowCustCat['id'];

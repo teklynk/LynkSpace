@@ -10,6 +10,7 @@ session_start();
     }
 
     getLocation();
+    getContactInfo();
 
     ?>
     <meta charset="utf-8">
@@ -41,10 +42,10 @@ session_start();
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/business-casual.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption; ?>/css/business-casual.min.css">
 
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/custom-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption; ?>/css/custom-style.min.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -59,7 +60,7 @@ session_start();
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo $setupDefaultAnalytics;?>']);
+            _gaq.push(['_setAccount', '<?php echo $setupDefaultAnalytics; ?>']);
             _gaq.push(['_trackPageview']);
 
             (function () {
@@ -88,20 +89,20 @@ session_start();
     <!-- Google Translate -->
     <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/searchscript.min.js"></script>
-
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/functions.min.js"></script>
+
+    <!-- TLC LS2 search script -->
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/searchscript.min.js"></script>
 
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "//<?php echo $setupPACURL ?>";
-        var TLCConfig = "<?php echo $setupConfig ?>";
+        var TLCDomain = "//<?php echo $setupPACURL; ?>";
+        var TLCConfig = "<?php echo $setupConfig; ?>";
         var TLCBranch = "";
-        var TLCClassicDomain = "//<?php echo $setupPACURL ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig ?>";
+        var TLCClassicDomain = "//<?php echo $setupPACURL; ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -156,9 +157,8 @@ session_start();
     <?php include 'socialmedia.inc.php'; ?>
 </div>
 <div style="clear:both;"></div>
-
-<div class="brand">Business Casual</div>
-<div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
+<div class="brand"><?php echo $locationName; ?></div>
+<div class="address-bar"><?php echo $contactAddress; ?> | <?php echo $contactCity; ?>, <?php echo $contactState; ?> <?php echo $contactZipcode; ?> | <?php echo $contactPhone; ?></div>
 
 <!-- Navigation -->
 <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">

@@ -133,6 +133,9 @@ footer {
 .databases {
     border-top: solid 1px #eee;
 }
+div.database-break {
+    clear:both;
+}
 .fa-6x {
     font-size: 6em;
 }
@@ -198,6 +201,10 @@ footer {
     background-repeat: no-repeat;
 }
 /* Hot titles carousel*/
+.container iframe {
+    width: 100%;
+    border: none;
+}
 .hotContainer.panel-body {
     padding: 15px 0px 15px 0px;
 }

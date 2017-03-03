@@ -110,22 +110,7 @@ if ($_GET['update'] == 'true') {
                     <select class="form-control" name="featured_image" id="featured_image">
                         <option value="">None</option>
                         <?php
-                        if ($handle = opendir($image_dir)) {
-                            while (false !== ($file = readdir($handle))) {
-                                if ('.' === $file) continue;
-                                if ('..' === $file) continue;
-                                if ($file === "Thumbs.db") continue;
-                                if ($file === ".DS_Store") continue;
-                                if ($file === "index.html") continue;
-                                if ($file === $rowFeatured['image']) {
-                                    $imageCheck = "SELECTED";
-                                } else {
-                                    $imageCheck = "";
-                                }
-                                echo "<option value='" . $file . "' $imageCheck>" . $file . "</option>";
-                            }
-                            closedir($handle);
-                        }
+                        getImageDropdownList($image_dir);
                         ?>
                     </select>
                 </div>
