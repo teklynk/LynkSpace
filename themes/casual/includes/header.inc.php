@@ -139,8 +139,15 @@ session_start();
     </div>
 </div>
 <![endif]-->
-
-<div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
+<?php
+if (!empty($setupLogo)) {
+    $showBanner = "style='background-image: url(../uploads/$_GET[loc_id]/$setupLogo)'";
+} else {
+    $showBanner = "";
+}
+?>
+<div class="banner-header" <?php echo $showBanner; ?>>
+<div class="socialDiv pull-right hidden-xs">
     <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
     <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
     <script type="text/javascript">
@@ -157,9 +164,9 @@ session_start();
     <?php include 'socialmedia.inc.php'; ?>
 </div>
 <div style="clear:both;"></div>
-<div class="brand"><?php echo $locationName; ?></div>
-<div class="address-bar"><?php echo $contactAddress; ?> | <?php echo $contactCity; ?>, <?php echo $contactState; ?> <?php echo $contactZipcode; ?> | <?php echo $contactPhone; ?></div>
-
+    <div class="brand banner-heading"><?php echo $locationName; ?></div>
+    <div class="address-bar banner-address"><?php echo $contactAddress; ?> | <?php echo $contactCity; ?>, <?php echo $contactState; ?> <?php echo $contactZipcode; ?> | <?php echo $contactPhone; ?></div>
+</div>
 <!-- Navigation -->
 <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">
     <div class="container">

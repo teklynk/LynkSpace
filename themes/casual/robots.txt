@@ -1,9 +1,0 @@
-User-agent: *
-Disallow: /admin/
-Disallow: /css/
-Disallow: /db/
-Disallow: /includes/
-Disallow: /mail/
-Disallow: /core/
-Disallow: /js/
-Sitemap: http://cpswebapp.local.com/sitemap.xml

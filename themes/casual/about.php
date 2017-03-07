@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 ?>
-    <div class="row">
+    <div class="row row_pad">
         <div class="box">
             <div class="col-lg-12">
                 <?php

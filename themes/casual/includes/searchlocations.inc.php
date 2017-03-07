@@ -71,7 +71,7 @@ getSetup(); //from functions.php
                                 <form name="locSearchForm" action="index.php" method="get">
                                     <div id="custom-search-input">
                                         <div class="input-group col-md-12">
-                                            <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name"/>
+                                            <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" autofocus/>
                                             <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id']; ?>"/>
                                             <span class="input-group-btn">
                                                 <button class="btn btn-primary" type="submit" name="schoolsearch_submit">
@@ -90,7 +90,7 @@ getSetup(); //from functions.php
                                     <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
+                                                <input type="text" class="form-control" name="term" placeholder="LS2 PAC" autofocus/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="submit" name="ls2pac_submit">
                                                         <span class="glyphicon glyphicon-search"></span>
@@ -110,7 +110,7 @@ getSetup(); //from functions.php
                                     <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
+                                                <input type="text" class="form-control" name="term" placeholder="LS2 Kids" autofocus/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="submit" name="ls2kids_submit">
                                                         <span class="glyphicon glyphicon-search"></span>

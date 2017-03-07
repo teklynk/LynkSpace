@@ -11,7 +11,7 @@ include_once('includes/header.inc.php');
                 </header>
                 <div style="clear:both;"></div>
 
-                <div class="row">
+                <div class="row row_pad">
                     <div class="box">
                         <div class="col-lg-12">
                             <?php

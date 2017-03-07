@@ -4,7 +4,7 @@
 
 require_once('dbconn.php');
 
-$themeOption = "casual";
+$themeOption = "default";
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."

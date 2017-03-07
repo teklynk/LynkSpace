@@ -31,7 +31,7 @@ if ($_GET['loc_id']) {
     echo "</div>";
     echo "</div>";
 }
-if ($_GET['loc_id']) {
+/*if ($_GET['loc_id']) {
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
@@ -53,7 +53,7 @@ if ($_GET['loc_id']) {
 
     echo "</div>";
     echo "</div>";
-}
+}*/
 
 include_once('includes/footer.inc.php');
 ?>
