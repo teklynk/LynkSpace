@@ -10,10 +10,6 @@ session_start();
         die('Direct access not permitted');
     }
 
-    //overwrite session script name on reload
-    //Get the page/file name and set it as a variable. Can be used for Ajax calls or page headers.
-    $_SESSION['file_referer'] = basename($_SERVER['PHP_SELF']);
-
     //DB connection string and Global variables
     require_once '../db/config.php';
 
@@ -115,7 +111,7 @@ session_start();
         $fileListJson = "";
         $linkListJson = "";
 
-        //Build list of images in uploads folder for tinymce editor
+        //Build list of images in uploads folder for tinymce editor.php
         if ($handle = opendir($image_dir)) {
 
             while (false !== ($imgfile = readdir($handle))) {
@@ -165,6 +161,7 @@ session_start();
                     toolbar_items_size: 'small',
                     toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
                 });
+
             });
         </script>
         <?php

@@ -258,7 +258,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
-                        getImageDropdownList($image_dir);
+                        getImageDropdownList($image_dir, $rowCustomer['image']);
                         ?>
                     </select>
                 </div>
@@ -394,7 +394,7 @@ if ($_GET['section'] == $custSections[0]) {
 
             // add category
             if ($_GET['addcatname'] > "") {
-                $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+                $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
                 mysqli_query($db_conn, $custAddCat);
 
                 echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
@@ -482,7 +482,7 @@ if ($_GET['section'] == $custSections[0]) {
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
                                     <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatsort='+$('#cust_newcatsort').val()+'&addcatname='+$('#cust_newcat').val();"></i></span>
-                                    <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Rename" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val()+'&newcatsort='+$('#cust_newcatsort').val();"></i></span>
+                                    <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val()+'&newcatsort='+$('#cust_newcatsort').val();"></i></span>
                                     <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
                                 </div>
                             </div>

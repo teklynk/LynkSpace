@@ -229,7 +229,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 <select class="form-control" name="site_logo" id="site_logo">
                     <option value="">None</option>
                     <?php
-                    getImageDropdownList($image_dir);
+                    getImageDropdownList($image_dir, $rowSetup['logo']);
                     ?>
                 </select>
             </div>
@@ -289,7 +289,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Web Site Analytics</label>
-                            <input class="form-control count-text" name="site_analytics" maxlength="25" value="<?php echo $rowSetup['analytics']; ?>" placeholder="UA-123123">
+                            <input class="form-control count-text" name="site_analytics" maxlength="25" value="<?php echo $rowSetup['analytics']; ?>" placeholder="UA-123123" data-toggle="tooltip" data-original-title="Google Analytics UID" data-placement="top">
                         </div>
                     </div>
                 </div>
@@ -297,11 +297,21 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="sitemap_builder">
-                            <button type="button" data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder" >
+                            <button type="button" data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder" data-toggle="tooltip" data-original-title="Generate Search Engine Sitemap" data-placement="top" >
                                 <i class='fa fa-fw fa-refresh'></i> Update Sitemap.xml
                             </button>
                             <br/>
                             <small class="sitemap_builder_msg status_msg"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="file_editor">
+                            <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" data-toggle="tooltip" data-original-title="Edit theme styles" data-placement="top" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                <i class='fa fa-fw fa-edit'></i> File Editor
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -311,7 +321,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group" id="delete_location">
-                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
                                     <i class='fa fa-fw fa-trash'></i> Delete this location
                                 </button>
                             </div>

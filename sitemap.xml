@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 	<url>
+		<loc>http://cpswebapp.local.com/page.php?page_id=49&amp;loc_id=1</loc>
+		<lastmod>2017-03-13 10:38:11</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=48&amp;loc_id=1</loc>
 		<lastmod>2017-01-19 12:18:11</lastmod>
 		<changefreq>monthly</changefreq>

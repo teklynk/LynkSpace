@@ -110,7 +110,7 @@ if ($_GET['update'] == 'true') {
                     <select class="form-control" name="featured_image" id="featured_image">
                         <option value="">None</option>
                         <?php
-                        getImageDropdownList($image_dir);
+                        getImageDropdownList($image_dir, $rowFeatured['image']);
                         ?>
                     </select>
                 </div>

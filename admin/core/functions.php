@@ -16,7 +16,7 @@ function generateRandomString($length = 10){
     return $randomString;
 }
 
-function getImageDropdownList($image_dir) {
+function getImageDropdownList($image_dir, $image_selected) {
     if ($handle = opendir($image_dir)) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
@@ -29,8 +29,14 @@ function getImageDropdownList($image_dir) {
         closedir($handle);
     }
     sort($allfiles);
+
     foreach($allfiles as $file) {
-        echo "<option value='".$file."' >".$file."</option>";
+        if ($file === $image_selected) {
+            $imageCheck = "SELECTED";
+        } else {
+            $imageCheck = "";
+        }
+        echo "<option value='".$file."' $imageCheck>".$file."</option>";
     }
 }
 
