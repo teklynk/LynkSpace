@@ -607,11 +607,13 @@ $(document).ready(function () {
             checked: this.checked,
             success: function () {
                 $('.copy_files_to_locs').attr('disabled', true);
+                $('.copy_files_to_locs>i').addClass('fa-spin');
                 $('.copy_files_to_locs_msg').html('');
                 setTimeout(function() {
                     $('.copy_files_to_locs').attr('disabled', false);
+                    $('.copy_files_to_locs>i').removeClass('fa-spin');
                     $('.copy_files_to_locs_msg').html('Successfully Copied Files');
-                }, 3000);
+                }, 10000);
             }
         });
     });
@@ -621,11 +623,13 @@ $(document).ready(function () {
             checked: this.checked,
             success: function () {
                 $('.sitemap_builder').attr('disabled', true);
+                $('.sitemap_builder>i').addClass('fa-spin');
                 $('.sitemap_builder_msg').html('');
                 setTimeout(function() {
                     $('.sitemap_builder').attr('disabled', false);
+                    $('.sitemap_builder>i').removeClass('fa-spin');
                     $('.sitemap_builder_msg').html('Successfully Updated <a href="../sitemap.xml" target="_blank">Sitemap.xml</a>');
-                }, 3000);
+                }, 10000);
             }
         });
     });

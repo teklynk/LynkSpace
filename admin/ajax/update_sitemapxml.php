@@ -105,11 +105,15 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /admin/\n";
         fwrite($robotsfile, $writeline);
+        $writeline = "Disallow: /ajax/\n";
+        fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /css/\n";
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /db/\n";
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /includes/\n";
+        fwrite($robotsfile, $writeline);
+        $writeline = "Disallow: /themes/\n";
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /mail/\n";
         fwrite($robotsfile, $writeline);

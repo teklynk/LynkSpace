@@ -8,9 +8,6 @@ if (!defined('inc_access')) {
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-<div class="version text-right">
-    <small></small>
-</div>
 </div>
 <!-- /#wrapper -->
 <!-- Scroll to Top -->

@@ -11,7 +11,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     $pageMsg="";
 
     //array of allowed files that can be edited
-    $editFileListArr = array("../db/config.php","../themes/".$themeOption."/css/custom-style.css");
+    $editFileListArr = array("../themes/".$themeOption."/css/custom-style.css");
 
     $editFileListArrlength = count($editFileListArr);
     $editFileListStr = "";
@@ -31,7 +31,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         $editFileListStr .= "<option value=" . $editFileListArr[$x] . " " . $isSectionSelected . ">" . $editFileListArr[$x] . "</option>";
 
-        $editFileListArrFirstItem = $editFileListArr[1];
+        $editFileListArrFirstItem = $editFileListArr[0];
     }
 
     //Redirect to section=firstarrayitem if section is not in querystring
