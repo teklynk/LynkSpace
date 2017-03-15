@@ -1,4 +1,4 @@
-# PHP error handling for development servers
+# PHP overrides
 php_flag display_startup_errors off
 php_flag display_errors off
 php_flag html_errors off
@@ -7,15 +7,21 @@ php_flag ignore_repeated_errors off
 php_flag ignore_repeated_source off
 php_flag report_memleaks on
 php_flag track_errors on
+php_flag file_uploads 1
+php_flag session.auto_start 0
+php_flag session.bug_compat_warn 0
+php_value upload_max_filesize 2M
+php_value post_max_size 2M
 php_value docref_root 0
 php_value docref_ext 0
-php_value error_log /home/rjones/htdocs/php_errors.log
 php_value error_reporting -1
 php_value log_errors_max_len 0
 
 Options +FollowSymLinks
 RewriteEngine On
 
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
