@@ -4,21 +4,35 @@
 
 require_once('dbconn.php');
 
-$themeOption = "casual";
+//establish db connection
+$db_conn = mysqli_connect($db_servername, $db_username, $db_password);
+mysqli_select_db($db_conn, $db_name);
+
+if (mysqli_connect_errno($db_conn)) {
+    die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
+}
+
+$sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, homepageurl, setuppacurl, session_timeout, carousel_speed, blowfish_salt, analytics FROM config WHERE id=1 ");
+$rowConfig = mysqli_fetch_array($sqlConfig);
+
+$themeOption = $rowConfig['theme'];
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."
-$IPrange = "";
+$IPrange = $rowConfig['iprange'];
 
 //Multi-Branch - more than one location
 //true or false
-$multiBranch = "true";
+$multiBranch = $rowConfig['multibranch'];
 
 //Homepage URL
-$homePageURL = "www.cps.edu";
+$homePageURL = $rowConfig['homepageurl'];
 
 //LS2PAC Server Domain or IP
-$setupPACURL = "pac.library.cps.edu";
+$setupPACURL = $rowConfig['setuppacurl'];
+
+//Web Site Analytics
+$site_analytics = $rowConfig['analytics'];
 
 //Edit values for your web site. leave as is in most cases.
 //physical path to uploads folder
@@ -43,27 +57,19 @@ $custSections = array("1", "2", "3");
 $locTypes = array("Default", "All", "HS", "MS", "ES", "Other");
 
 //Extra Pages
-$extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";
+$extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='calendar.php?loc_id=" . $_GET['loc_id'] . "'>Calendar</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";
 
 //Session timeout
 //3600 = 60mins
-$sessionTimeout = 3600;
+$sessionTimeout = $rowConfig['session_timeout'];
 
 //Slide Carousel Speed
 //5000 = 5secs
-$carouselSpeed = "5000";
+$carouselSpeed = $rowConfig['carousel_speed'];
 
 //Blowfish Salt
 //go to: https://www.question-defense.com/tools/phpmyadmin-blowfish-secret-generator
 $blowfishSalt = "Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8";
-
-//establish db connection
-$db_conn = mysqli_connect($db_servername, $db_username, $db_password);
-mysqli_select_db($db_conn, $db_name);
-
-if (mysqli_connect_errno($db_conn)) {
-    die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
-}
 
 //db connection is closed in includes/footer.inc.php
 ?>

@@ -48,13 +48,13 @@ session_start();
     <?php
     //Google Analytics UID
     //Can also use $setupLocAnalytics for location specific analytics UA
-    if (!empty($setupDefaultAnalytics)) {
+    if (!empty($site_analytics)) {
         ?>
         <!-- Google Analytics UID -->
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo $setupDefaultAnalytics;?>']);
+            _gaq.push(['_setAccount', '<?php echo $site_analytics;?>']);
             _gaq.push(['_trackPageview']);
 
             (function () {

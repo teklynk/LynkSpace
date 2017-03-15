@@ -15,6 +15,19 @@ $usersCount=0;
 $pageMsg = "";
 $deleteMsg = "";
 
+//Add User
+//insert data on submit
+if (!empty($_POST)) {
+    if ($_POST['user_password'] == $_POST['user_password_confirm']) {
+        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . filter_var(trim($_POST['user_email']), FILTER_VALIDATE_EMAIL) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
+        mysqli_query($db_conn, $usersInsert);
+
+        $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+    } else {
+        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+    }
+}
+
 //Get user info
 $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email");
 
@@ -29,18 +42,7 @@ while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
     $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . "</option>";
 }
 
-//Add User
-//insert data on submit
-if (!empty($_POST)) {
-    if ($_POST['user_password'] == $_POST['user_password_confirm']) {
-        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . filter_var(trim($_POST['user_email']), FILTER_VALIDATE_EMAIL) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
-        mysqli_query($db_conn, $usersInsert);
 
-        $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
-    } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
-    }
-}
 
 //delete user
 $deluserId = $_GET['deleteuser'];

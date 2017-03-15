@@ -13,15 +13,15 @@ session_start();
     //DB connection string and Global variables
     require_once '../db/config.php';
 
+    //Admin panel functions
+    require_once('core/functions.php');
+
     //IP Range is set in config
     if ($IPrange <> '') {
         if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange)) {
             die('Permission denied'); //Do not execute any more code on the page
         }
     }
-
-    //Admin panel functions
-    require_once('core/functions.php');
     ?>
     <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>;URL=index.php?logout=true"/>
     <meta charset="utf-8">

@@ -49,7 +49,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     $handle = fopen($fileToEdit_dir, 'r');
     $fileData = fread($handle,filesize($fileToEdit_dir));
 
-    if (!empty($_POST)) {
+    if ($_POST['save_main']) {
         //check if file is in the array
         if (in_array($fileToEdit_dir, $editFileListArr, true)) {
             if (file_exists($fileToEdit_dir)) {
@@ -81,7 +81,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     echo $pageMsg;
                 }
                 ?>
-                <form name="editForm" method="post">
+                <form name="editForm" class="dirtyForm" method="post" action="">
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -108,8 +108,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         ?>
                     </span>
                     </div>
-                    <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Submit</button>
-                    <button type="reset" class="btn btn-primary"><i class='fa fa-fw fa-refresh'></i> Reset</button>
+                    <input type="hidden" name="save_main" value="true"/>
+                    <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
 
                 </form>
 
