@@ -15,18 +15,28 @@ if (is_numeric($_GET['loc_id'])) {
 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
     $fileExt = substr(basename($_FILES["fileToUpload"]["name"]), -4);
+    $fileSize = filesize($target_file);
 
     //Check if file is a image format
-    if ($fileExt == ".png" || $fileExt == ".jpg" || $fileExt == ".gif") {
-        //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
-        $search = array('(', ')', ' ', '\'');
-        $replace = array('-', '', '-', '');
+    if ($fileExt == ".png" || $fileExt == ".jpg" || $fileExt == ".gif" ) {
+        //Check if file is less than 2mb
+        if ($fileSize < 2048000) {
 
-        rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+            //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
+            $search = array('(', ')', ' ', '\'');
+            $replace = array('-', '', '-', '');
 
-        $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+
+            $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        } else {
+            //Delete the file if it is to large
+            unlink($target_file);
+            $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
+        }
     } else {
-        //Delete the file if it does meet the fileExt rule
+        //Delete the file if it is not an image
         unlink($target_file);
         $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
     }
@@ -77,7 +87,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <input type="hidden" name="uploadFile" value="1">
                 </div>
-                <button type="submit" name="upload_submit" data-toggle="tooltip" class="btn btn-primary" data-original-title=".jpg, .gif, .png" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+                <button type="submit" name="upload_submit" data-toggle="tooltip" class="btn btn-primary" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>
             </form>
