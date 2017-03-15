@@ -1,8 +1,10 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /ajax/
 Disallow: /css/
 Disallow: /db/
 Disallow: /includes/
+Disallow: /themes/
 Disallow: /mail/
 Disallow: /core/
 Disallow: /js/

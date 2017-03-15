@@ -6,11 +6,14 @@ include_once('includes/header.inc.php');
 // Name of the dbconn file
 $dbFileLoc = "../db/dbconn.php";
 
+// Name of the config file
+$dbConfigLoc = "../db/config.php";
+
 // Name of the Source sql dump file
 $dbFilename = "../db/bootstrap_business.sql";
 
-// Database Name for web app
-$dbName = "tlc_website";
+// Generate a random Blowfish Salt key using the random string function
+$blowfishHash = blowfishSaltRandomString(generateRandomString());
 
 // Check if sql file exists
 if (!file_exists($dbFileLoc)) {
@@ -35,13 +38,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     // MySQL password
     $mysql_password = $_POST["dbpassword"];
     // Database name
-    $mysql_database = $dbName;
+    $mysql_database = $_POST["dbname"];
 
     // establish db connection
     $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
 
     // Create database
-    $sqlCreate = "CREATE DATABASE ".$dbName."";
+    $sqlCreate = "CREATE DATABASE ".$mysql_database."";
     if (mysqli_query($db_conn, $sqlCreate)) {
         echo "Database created successfully";
     } else {
@@ -75,13 +78,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         }
     }
 
-    //Empty the users table
-    mysqli_query($db_conn,'TRUNCATE TABLE users');
+    //Wait before proceeding to the next step
+    sleep(2);
 
-    // Insert admin user into users table
-    $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "', SHA1('" . $blowfishSalt . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '".$user_ip."')";
-    mysqli_query($db_conn, $userInsert);
-
+    //Write to dbconn file
     $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
     $writeline = "<?php\n";
@@ -92,23 +92,52 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     fwrite($dbfile, $writeline);
     $writeline = "\$db_password = '" . safeCleanStr($_POST['dbpassword']) . "';\n";
     fwrite($dbfile, $writeline);
-    $writeline = "\$db_name = '" . safeCleanStr($dbName) . "';\n";
+    $writeline = "\$db_name = '" . safeCleanStr($_POST['dbname']) . "';\n";
     fwrite($dbfile, $writeline);
     $writeline = "?>";
     fwrite($dbfile, $writeline);
 
     fclose($dbfile);
 
+    //Wait before proceeding to the next step
+    sleep(2);
+
+    //Write to config file (appends to existing config file)
+    $dbconfig = fopen($dbConfigLoc, "a") or die("Unable to open file!");
+
+    $writeline = "\n\$blowfishSalt = '" . $blowfishHash . "';\n";
+    fwrite($dbconfig, $writeline);
+    fwrite($dbfile, $writeline);
+    $writeline = "?>";
+
+    fclose($dbconfig);
+
+    //Wait before proceeding to the next step
+    sleep(2);
+
+    //Empty the users table
+    mysqli_query($db_conn,'TRUNCATE TABLE users');
+
+    // Insert admin user into users table
+    $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '".$user_ip."')";
+    mysqli_query($db_conn, $userInsert);
+
+    //Wait before proceeding to the next step
+    sleep(2);
+
     // Create the email and send the message
     $email_subject = "$server_domain - User Account has been added:  $user_name";
     $email_body = "To log on the site, use the following credentials.\n\n";
-    $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
+    $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nDatabase Name: " . safeCleanStr($_POST['dbname']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
     $email_body .= "If you have any questions or encounter any problems logging in, please contact the web site administrator.\n\n";
     $headers = "From: noreply@$server_domain\n";
     $headers .= "Reply-To: noreply@$server_domain";
 
     // Send the email
     mail(filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL), $email_subject, $email_body, $headers);
+
+    //Wait before proceeding to the next step
+    sleep(2);
 
     // Rename install page so that it can not be accessed after the initial install
     rename("install.php", "~install.old");
@@ -124,7 +153,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     <style type="text/css">
         html, body {
             margin-top: 0 !important;
-            background: #BEA69A url('images/color-splash-3.jpg') center center /cover;
+            background: #222 url('images/color-splash-3.jpg') center center /cover;
         }
 
         .login-panel {
@@ -160,31 +189,46 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     </style>
 
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-lg-8 col-md-offset-2">
             <div class="login-panel panel panel-default">
                 <div class="panel-body">
                     <section class="install-form">
                         <form name="frmInstall" class="form-signin" method="post" action="">
-                            <h2 class="form-signin-heading">Database Connection</h2>
-                            <label for="dbserver">DB Server</label>
-                            <input class="form-control" type="text" name="dbserver" maxlength="255" required>
-                            <label for="dbusername">DB Username</label>
-                            <input class="form-control" type="text" name="dbusername" maxlength="255" required>
-                            <label for="dbpassword">DB Password</label>
-                            <input class="form-control" type="text" name="dbpassword" maxlength="255" required>
-                            <h2 class="form-signin-heading">Create an Admin user</h2>
-                            <label for="username">Username</label>
-                            <input class="form-control" type="text" name="username" maxlength="255" required>
-                            <label for="useremail">User Email</label>
-                            <input class="form-control" type="email" name="useremail" maxlength="255" pattern="<?php echo $emailValidatePattern ?>" required>
-                            <label for="password">Password</label>
-                            <input class="form-control" type="text" name="password" maxlength="255" pattern=".{8,}" title="8 characters minimum" required>
-                            <br />
-                            <div class="alert alert-info">
-                                A database named <strong>"<?php echo $dbName; ?>"</strong> will be created for you.
-                            </div>
-                            <input type="hidden" name="db_install" value="true">
-                            <button class="btn btn-lg btn-primary btn-block" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
+                            <fieldset>
+                                <h2 class="form-signin-heading">Database Connection</h2>
+                                <div class="form-group">
+                                    <label>DB Server</label>
+                                    <input class="form-control" type="text" name="dbserver" maxlength="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbusername">DB Username</label>
+                                    <input class="form-control" type="text" name="dbusername" maxlength="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbpassword">DB Password</label>
+                                    <input class="form-control" type="text" name="dbpassword" maxlength="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbname">DB Name</label>
+                                    <input class="form-control" type="text" name="dbname" maxlength="100" required>
+                                </div>
+                                <h2 class="form-signin-heading">Create an Admin user</h2>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input class="form-control" type="text" name="username" maxlength="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="useremail">User Email</label>
+                                    <input class="form-control" type="email" name="useremail" maxlength="100" pattern="<?php echo $emailValidatePattern ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input class="form-control" type="text" name="password" maxlength="100" pattern=".{8,}" data-toggle="tooltip" data-original-title="8 characters minimum" data-placement="right" required>
+                                </div>
+
+                                <input type="hidden" name="db_install" value="true">
+                                <button class="run_installer btn btn-lg btn-primary btn-block" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
+                            </fieldset>
                         </form>
                     </section>
                 </div>

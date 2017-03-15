@@ -4,16 +4,19 @@
 
 require_once('dbconn.php');
 
+if (basename($_SERVER['PHP_SELF']) != 'install.php') {
+
 //establish db connection
-$db_conn = mysqli_connect($db_servername, $db_username, $db_password);
-mysqli_select_db($db_conn, $db_name);
+    $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
+    mysqli_select_db($db_conn, $db_name);
 
-if (mysqli_connect_errno($db_conn)) {
-    die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
+    if (mysqli_connect_errno($db_conn)) {
+        die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
+    }
+
+    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
+    $rowConfig = mysqli_fetch_array($sqlConfig);
 }
-
-$sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, homepageurl, setuppacurl, session_timeout, carousel_speed, blowfish_salt, analytics FROM config WHERE id=1 ");
-$rowConfig = mysqli_fetch_array($sqlConfig);
 
 $themeOption = $rowConfig['theme'];
 
@@ -67,9 +70,6 @@ $sessionTimeout = $rowConfig['session_timeout'];
 //5000 = 5secs
 $carouselSpeed = $rowConfig['carousel_speed'];
 
-//Blowfish Salt
-//go to: https://www.question-defense.com/tools/phpmyadmin-blowfish-secret-generator
-$blowfishSalt = "Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8";
+//Blowfish Salt goes here after the installer runs.
+$blowfishSalt = 'Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8';
 
-//db connection is closed in includes/footer.inc.php
-?>

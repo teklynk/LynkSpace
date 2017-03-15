@@ -1,5 +1,5 @@
 <?php
-
+//Front-end functions
 if (!defined('inc_access')){
     die('Direct access not permitted');
 }
@@ -888,6 +888,7 @@ function generateRandomString($length = 10){
 
     return $randomString;
 }
+
 
 //Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database
 function getShortCode($urlStr){

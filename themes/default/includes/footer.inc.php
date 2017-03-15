@@ -37,7 +37,7 @@ if (!defined('inc_access')) {
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript" language="javascript">
         $('.carousel').carousel({
-            interval: <?php echo $carouselSpeed; ?> //change the speed in config.php
+            interval: <?php echo $carouselSpeed; ?> //change the speed in config
         })
         //remove loader once the iframe has finished loading
         $('iframe.hottitles-iframe').load(function() {

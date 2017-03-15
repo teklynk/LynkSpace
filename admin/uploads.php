@@ -87,7 +87,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <input type="hidden" name="uploadFile" value="1">
                 </div>
-                <button type="submit" name="upload_submit" data-toggle="tooltip" class="btn btn-primary" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+                <button type="submit" name="upload_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>
             </form>

@@ -147,6 +147,7 @@ $(document).ready(function () {
         $('#team_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#about_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#slide_image_preview').attr('src', '//placehold.it/350x150&text=No Image');
+        $('#theme_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#service_image_select').val('');
         $('#service_icon_select').val('');
         $('#service_icon').attr('class', '');
@@ -241,6 +242,15 @@ $(document).ready(function () {
             $('#page_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         } else {
             $('#page_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#page_image').val());
+        }
+    });
+    $('#site_theme').change(function () {
+        if ($('#site_theme').val() == '') {
+            $('#theme_image_preview').attr('src', '//placehold.it/350x150&text=No Image');
+            $('#theme_href_preview').attr('href', '#');
+        } else {
+            $('#theme_image_preview').attr('src', '../themes/'+$('#site_theme').val()+'/screenshot.png');
+            $('#theme_href_preview').attr('href', '../themes/'+$('#site_theme').val()+'/screenshot.png');
         }
     });
     $('#service_icon_select').change(function () {
@@ -634,15 +644,24 @@ $(document).ready(function () {
         });
     });
 
+    //Installer button
+    $('.run_installer').click(function () {
+        setTimeout(function() {
+            $('.run_installer').attr('disabled', true);
+            $('.run_installer>i').removeClass('fa-cloud-upload');
+            $('.run_installer>i').addClass('fa-refresh fa-spin');
+        }, 500);
+    });
+
     //Not a Robot
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
             if ($('#not_robot').prop('checked')) {
                 $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
-                $('#sign_in').removeAttr('disabled', 'disabled');
+                $('#sign_in').attr('disabled', false);
             } else {
                 $('#not_robot').attr('value', '');
-                $('#sign_in').attr('disabled', 'disabled');
+                $('#sign_in').attr('disabled', true);
             }
         }
     });

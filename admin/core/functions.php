@@ -1,5 +1,5 @@
 <?php
-
+//Back-end Admin Panel functions
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
@@ -14,6 +14,11 @@ function generateRandomString($length = 10){
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+//Random Blowfish Salt
+function blowfishSaltRandomString($hashThisString){
+    return password_hash($hashThisString, PASSWORD_DEFAULT);
 }
 
 function getImageDropdownList($image_dir, $image_selected) {

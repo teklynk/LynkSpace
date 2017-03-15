@@ -8,38 +8,6 @@ $_SESSION['file_referer'] = 'hottitles.php';
 $pageMsg = "";
 $deleteMsg = "";
 
-//Get user info
-$sqlUsers = mysqli_query($db_conn, "SELECT id, title, url, active, datetime, loc_id FROM hottitles ORDER BY title, sort ASC");
-
-
-//Add User
-//insert data on submit
-if (!empty($_POST)) {
-    if ($_POST['user_password'] == $_POST['user_password_confirm']) {
-        $usersInsert = "INSERT INTO hottitles (title, url, active, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . filter_var(trim($_POST['user_email']), FILTER_VALIDATE_EMAIL) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
-        mysqli_query($db_conn, $usersInsert);
-
-        $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
-    } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
-    }
-}
-
-//delete user
-$deluserId = $_GET['deleteuser'];
-$deluserTitle = $_GET['deletetitle'];
-
-if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
-} elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
-    //delete user after clicking Yes
-    $userDelete = "DELETE FROM users WHERE id='$deluserId'";
-    mysqli_query($db_conn, $userDelete);
-
-    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
 
 <div class="row">
@@ -144,43 +112,6 @@ if ($deleteMsg != "") {
                 </tr>
                 </thead>
                 <tbody>
-                <?php
-                while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
-                    $usersID = $rowUsers['id'];
-                    $usersName = $rowUsers['username'];
-                    $usersEmail = $rowUsers['email'];
-                    $usersClientIP = $rowUsers['clientip'];
-                    $usersLevel = $rowUsers['level'];
-                    $usersDateTime = $rowUsers['datetime'];
-                    $usersLocID = $rowUsers['loc_id'];
-                    $usersCount++;
-
-                    if ($usersLevel == 1) {
-                        $usersLevel = 'Admin';
-                    } else {
-                        $usersLevel = 'User';
-                    }
-
-                    //get location name for each user
-                    $sqlUsersLocName = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE id=".$usersLocID." ");
-                    $rowLocName = mysqli_fetch_array($sqlUsersLocName);
-
-                    $locationName = $rowLocName['name'];
-
-                    echo "<tr>
-                            <td>$usersCount</td>
-                            <td>$usersName</td>
-                            <td>$usersEmail</td>
-                            <td>$usersLevel</td>
-                            <td>$locationName</td>
-                            <td>$usersDateTime</td>
-                            <td>$usersClientIP</td>
-                            <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr($usersName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
-                            </td>
-                        </tr>";
-                }
-                ?>
                 </tbody>
             </table>
         </div>
