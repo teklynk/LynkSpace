@@ -3,10 +3,14 @@ define('inc_access', TRUE);
 
 session_start();
 
+if ($_SESSION['file_referer'] != 'contact.php'){
+    die('Direct access not permitted');
+}
+
 //redirect back to contact form or home page
-$redirectPage = "../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";
+$redirectPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";
 //if an error occurs
-$errorPage = "../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=error#contactForm";
+$errorPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=error#contactForm";
 
 $name = $_POST['name'];
 $email_address = $_POST['email'];

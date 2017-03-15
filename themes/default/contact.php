@@ -4,6 +4,9 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+//needed for mailprocessor.php
+$_SESSION['file_referer'] = 'contact.php';
+
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referer'] = generateRandomString();
 

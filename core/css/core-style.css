@@ -69,7 +69,7 @@ header.carousel .fill {
     height: 50px;
     border: none;
     text-indent: -999px;
-    background: url('../../themes/default/images/ui.totop.png') no-repeat left top;
+    background: url('../images/ui.totop.png') no-repeat left top;
 }
 
 .scrollToTop:hover {
@@ -78,7 +78,7 @@ header.carousel .fill {
     display: block;
     overflow: hidden;
     float: left;
-    background: url('../../themes/default/images/ui.totop.png') no-repeat left -51px;
+    background: url('../images/ui.totop.png') no-repeat left -51px;
 }
 
 /* Footer Styles */
@@ -195,7 +195,7 @@ div.database-break {
     width: 100%;
     height: 250px;
     z-index: 9999;
-    background-image: url('../../themes/default/images/loader.svg');
+    background-image: url('../images/loader.svg');
     background-size: 10%;
     background-position: center;
     background-repeat: no-repeat;

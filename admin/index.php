@@ -95,7 +95,7 @@ $userLogo = $rowSetup['logo'];
     <style type="text/css">
         html, body {
             margin-top: 0 !important;
-            background: #BEA69A url('images/color-splash-3.jpg') center center /cover;
+            background: #222 url('images/color-splash-3.jpg') center center /cover;
         }
 
         .login-panel {
