@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2017 at 11:04 AM
+-- Generation Time: Mar 15, 2017 at 12:04 AM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-5+deb.sury.org~trusty+2
+-- PHP Version: 5.6.30-7+deb.sury.org~trusty+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `businessCMS`
@@ -26,8 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `aboutus`
 --
 
-CREATE TABLE `aboutus` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `aboutus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heading` text NOT NULL,
   `content` text NOT NULL,
   `image` text NOT NULL,
@@ -35,8 +35,10 @@ CREATE TABLE `aboutus` (
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `aboutus_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=567 ;
 
 --
 -- Dumping data for table `aboutus`
@@ -580,35 +582,40 @@ INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_
 -- Table structure for table `category_customers`
 --
 
-CREATE TABLE `category_customers` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `category_customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `section` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
+  `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `author_name` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_customers_loc_id_fk` (`cust_loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `category_customers`
 --
 
-INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datetime`, `author_name`) VALUES
-(0, 'None', '1', 1, '2017-01-19 17:15:38', 'admin'),
-(2, 'Databases', '1', 1, '2017-01-19 17:15:38', 'admin'),
-(4, 'Other Resources', '1', 1, '2017-01-19 17:15:38', 'admin'),
-(6, 'African-American Resources', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(7, 'Arts', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(8, 'Civic Engagement', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(9, 'College and Careers', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(10, 'Financial Literacy', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(11, 'Latino Resources', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(12, 'Library / Information Literacy', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(13, 'Literacy / Literature', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(14, 'Mathematics', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(15, 'Multi-Cultural Resources', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(16, 'Science', '2', 1, '2017-01-19 17:15:38', 'admin'),
-(17, 'Social Science', '2', 1, '2017-01-19 17:15:38', 'admin');
+INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `sort`, `datetime`, `author_name`) VALUES
+(0, 'None', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(2, 'Databases', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(4, 'Other Resources', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(6, 'African-American Resources', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(7, 'Arts', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(8, 'Civic Engagement', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(9, 'College and Careers', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(10, 'Financial Literacy', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(11, 'Latino Resources', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(12, 'Library / Information Literacy', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(13, 'Literacy / Literature', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(14, 'Mathematics', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(15, 'Multi-Cultural Resources', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(16, 'Science', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
+(17, 'Social Science', '2', 1, 0, '2017-03-06 21:39:56', 'admin'),
+(18, 'SOAR Links', '3', 1, 1, '2017-03-06 21:41:14', 'jhorning'),
+(19, 'Other Links', '3', 1, 2, '2017-03-06 21:41:18', 'jhorning');
 
 -- --------------------------------------------------------
 
@@ -616,26 +623,57 @@ INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `datet
 -- Table structure for table `category_navigation`
 --
 
-CREATE TABLE `category_navigation` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `category_navigation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
+  `nav_section` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `author_name` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_loc_id_fk` (`nav_loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `category_navigation`
 --
 
-INSERT INTO `category_navigation` (`id`, `name`, `nav_loc_id`, `datetime`, `author_name`) VALUES
-(0, 'None', 1, '2017-01-19 17:14:50', 'admin'),
-(1, 'Home', 1, '2017-01-19 17:14:50', 'admin'),
-(2, 'Chicago Public Schools', 1, '2017-01-19 17:14:50', 'admin'),
-(3, 'Connect', 1, '2017-01-19 17:14:50', 'admin'),
-(4, 'Quick Links', 1, '2017-01-19 17:14:50', 'admin'),
-(5, 'SOAR', 1, '2017-01-19 17:14:50', 'admin'),
-(7, 'CPS Virtual Library', 1, '2017-02-15 15:20:58', 'jhorning');
+INSERT INTO `category_navigation` (`id`, `name`, `nav_section`, `nav_loc_id`, `datetime`, `author_name`) VALUES
+(0, 'None', '', 1, '2017-01-19 17:14:50', 'admin'),
+(1, 'Home', 'Top', 1, '2017-03-09 18:11:39', 'admin'),
+(2, 'Chicago Public Schools', 'Footer', 1, '2017-03-09 18:11:49', 'admin'),
+(3, 'Connect', 'Footer', 1, '2017-03-09 18:11:52', 'admin'),
+(4, 'Quick Links', 'Footer', 1, '2017-03-09 18:11:55', 'admin'),
+(5, 'SOAR', 'Footer', 1, '2017-03-09 18:11:58', 'admin'),
+(7, 'CPS Virtual Library', 'Top', 1, '2017-03-09 18:11:43', 'jhorning');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE IF NOT EXISTS `config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `theme` text NOT NULL,
+  `iprange` text NOT NULL,
+  `multibranch` text NOT NULL,
+  `homepageurl` text NOT NULL,
+  `setuppacurl` text NOT NULL,
+  `session_timeout` int(11) NOT NULL,
+  `carousel_speed` text NOT NULL,
+  `analytics` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `author_name` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`id`, `theme`, `iprange`, `multibranch`, `homepageurl`, `setuppacurl`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
+(1, 'default', '', 'true', 'www.cps.edu', 'pac.library.cps.edu', 36000, '5000', '', '2017-03-15 04:02:53', 'admin');
 
 -- --------------------------------------------------------
 
@@ -643,8 +681,8 @@ INSERT INTO `category_navigation` (`id`, `name`, `nav_loc_id`, `datetime`, `auth
 -- Table structure for table `contactus`
 --
 
-CREATE TABLE `contactus` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contactus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
   `mapcode` text NOT NULL,
@@ -659,8 +697,10 @@ CREATE TABLE `contactus` (
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contactus_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=567 ;
 
 --
 -- Dumping data for table `contactus`
@@ -1205,8 +1245,8 @@ INSERT INTO `contactus` (`id`, `heading`, `introtext`, `mapcode`, `email`, `send
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` text NOT NULL,
   `icon` text NOT NULL,
   `name` text NOT NULL,
@@ -1219,8 +1259,10 @@ CREATE TABLE `customers` (
   `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customers_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=128 ;
 
 --
 -- Dumping data for table `customers`
@@ -1228,23 +1270,23 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
 (4, 'cps_itke_icon.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 3, '2017-01-19 18:33:43', 'jhorning', 1),
-(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en EspaÃ±ol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica\'s Spanish language version.', 2, '1', 'false', 'true', 5, '2017-01-19 18:33:23', 'admin', 1),
-(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 4, '2017-01-19 18:33:30', 'admin', 1),
-(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 8, '2017-01-19 18:33:05', 'admin', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en EspaÃ±ol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', 5, '2017-01-19 18:33:23', 'jhorning', 1),
+(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 4, '2017-01-19 18:33:30', 'jhorning', 1),
+(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 8, '2017-01-19 18:33:05', 'jhorning', 1),
 (8, 'cps_sric_icon.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 1, '2017-01-20 20:10:11', 'jhorning', 1),
 (14, 'cps_ric_icon.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 2, '2017-01-19 18:33:54', 'jhorning', 1),
-(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 6, '2017-01-19 18:32:51', 'admin', 1),
-(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 7, '2017-01-19 18:32:46', 'admin', 1),
-(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(22, '', 'simplybuilt', 'The History Makers', 'http://thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
-(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', 2, '2017-01-20 20:12:46', 'admin', 1),
-(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', 1, '2017-01-20 20:12:56', 'admin', 1),
-(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', 3, '2017-01-20 20:12:41', 'admin', 1),
+(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 6, '2017-01-19 18:32:51', 'jhorning', 1),
+(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 7, '2017-01-19 18:32:46', 'jhorning', 1),
+(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(22, '', 'simplybuilt', 'The History Makers', 'http://www.thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
+(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', 2, '2017-01-20 20:12:46', 'jhorning', 1),
+(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', 1, '2017-01-20 20:12:56', 'jhorning', 1),
+(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', 3, '2017-01-20 20:12:41', 'jhorning', 1),
 (32, '', 'link', 'San Francisco Symphony', 'http://www.sfskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (33, '', 'link', 'Chicago Public Library A-Z Resources for Kids!', 'http://www.chipublib.org/kids-subject/kids-dbs-a-to-z/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (34, '', 'link', 'Daily Infographic', 'http://dailyinfographic.com/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1256,7 +1298,7 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (40, '', 'link', 'National Endowment for Financial Education', 'http://www.hsfpp.org/about-the-program.aspx', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (41, '', 'link', 'Talk with our Kids about Money', 'http://usa.talkwithourkidsaboutmoney.com/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (42, '', 'link', 'Federal Reserve Education', 'https://www.federalreserveeducation.org/', '', 10, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:29:15', '', 1),
+(43, '', 'link', 'CIMBY Calumet Is My Back Yard', 'http://www.fieldmuseum.org/at-the-field/programs/calumet-my-back-yard-cimby', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:29:15', 'admin', 1),
 (44, '', 'link', 'Facing History and Ourselves', 'https://www.facinghistory.org/', '', 15, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (45, '', 'link', 'Stanford History Education Group', 'http://sheg.stanford.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (46, '', 'link', 'Teaching History.org', 'http://teachinghistory.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1273,16 +1315,16 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (57, '', 'link', 'iCivics Budget Blast', 'http://cdn.icivics.org/sites/default/files/uploads/Budget%20Blast.pdf', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (58, '', 'link', 'Bureau of Labor Statistics', 'http://www.bls.gov/ooh/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (59, '', 'link', 'World-of-Work Map', 'http://www.act.org/world/explore_world.html', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(60, '', 'link', 'What\'s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(60, '', 'link', 'What''s Next Illinois?', 'https://www.whatsnextillinois.org/', '', 9, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (61, '', 'link', 'African American Heritage Teaching Resources', 'http://www.smithsonianeducation.org/educators/resource_library/african_american_resources.html', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (62, '', 'link', 'DuSable Museum of African American History', 'http://www.dusablemuseum.org/', '', 6, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(63, '', 'link', 'The Art Institute of Chicago\'s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(63, '', 'link', 'The Art Institute of Chicago''s Curious Corner', 'http://www.artic.edu/aic/education/CC/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (64, '', 'link', 'National Gallery of Art for kids', 'http://www.nga.gov/content/ngaweb/education/kids.html', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (65, '', 'link', 'Haring Kids', 'http://www.haringkids.com/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (66, '', 'link', 'National Core Arts Standards', 'http://bit.ly/curiouscorner', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (67, '', 'link', 'Museum of Modern Art - Destination Modern Art!', 'http://www.moma.org/interactives/destination/#', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (68, '', 'link', 'CPS Department of Arts Education', 'http://www.cpsarts.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(69, '', 'link', 'Smithsonian Latino Center\'s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(69, '', 'link', 'Smithsonian Latino Center''s Kids Corner', 'http://latino.si.edu/KidsCorner/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (70, '', 'link', 'Lincoln Center Institute', 'http://lcinstitute.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (71, '', 'link', 'PBS Kids', 'http://pbskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (72, '', 'link', 'Center for History and New Media', 'http://chnm.gmu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1303,28 +1345,28 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (87, '', 'link', 'WWW-VL The History Index', 'http://vlib.iue.it/history/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (88, '', 'link', 'Spartacus: History', 'http://spartacus-educational.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (89, '', 'link', 'Ask ERIC Virtual Library', 'http://eric.ed.gov/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(90, '', 'link', 'Scholars\' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(90, '', 'link', 'Scholars'' Guide to WWW', 'http://tigger.uic.edu/~rjensen/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (91, '', 'link', 'Thinkfinity', 'http://thinkfinity.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (92, '', 'link', 'Education Index', 'http://www.educationindex.com/history/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (93, '', 'link', 'World History: HyperHistory', 'http://www.hyperhistory.com/online_n2/History_n2/a.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(94, '', 'link', 'Kathy Schrock\'s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
+(94, '', 'link', 'Kathy Schrock''s Guide for Educators', 'http://www.discoveryeducation.com/teachers/index.cfm?campaign=flyout_teachers', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (95, '', 'link', 'SchoolHistory.co.uk', 'http://www.schoolhistory.co.uk/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (96, '', 'link', 'The History News Network', 'http://historynewsnetwork.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(97, '', 'link', 'eHistory', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
+(97, '', 'link', 'eHistory', 'http://ehistory.osu.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (98, '', 'link', 'History Buff', 'http://www.historybuff.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (99, '', 'link', 'McRel', 'http://www2.mcrel.org/lesson-plans/history/index.asp', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (100, '', 'link', 'Footnotes in History', 'http://www.buckyogi.com/footnotes/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(101, '', 'link', 'Student&#039;s Friend World History &amp; Geography', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
+(101, '', 'link', 'Student&#039;s Friend World History &amp; Geography', 'http://www.studentsfriend.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (102, '', 'link', 'Conversations With History', 'http://conversations.berkeley.edu/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (103, '', 'link', 'Understanding the World Today', 'http://gsociology.icaap.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (104, '', 'link', 'TeacherServe (National Humanities Center)', 'http://nationalhumanitiescenter.org/tserve/tserve.htm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(105, '', 'link', 'History Central', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'jhorning', 1),
+(105, '', 'link', 'History Central', 'http://www.historycentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (106, '', 'link', 'History in Focus: What is History?', 'http://www.history.ac.uk/ihr/Focus/Whatishistory/index.html', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (107, '', 'link', 'Economics Resources for K-12 Teachers', 'http://ecedweb.unomaha.edu/K-12/home.cfm', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (108, '', 'link', 'National History Day', 'http://www.nationalhistoryday.org/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (109, '', 'link', 'Social Studies Central', 'http://socialstudiescentral.com/', '', 17, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
-(110, '', 'link', 'On This Day', 'http://www.on-this-day.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:58', '', 1),
-(111, '', 'link', 'This Day in Alternate History', 'http://www.othertimelines.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:35', '', 1),
+(110, '', 'link', 'On This Day', 'http://www.on-this-day.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:58', 'admin', 1),
+(111, '', 'link', 'This Day in Alternate History', 'http://www.othertimelines.com/', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:15:35', 'admin', 1),
 (112, '', 'link', 'Infoplease Almanac', 'http://www.infoplease.com', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (113, '', 'link', 'Ask a Biologist', 'http://askabiologist.asu.edu/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (114, '', 'link', 'Bug Guide', 'http://bugguide.net/node/view/15740', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1332,9 +1374,15 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (116, '', 'link', 'San Diego Zoo Kids', 'http://kids.sandiegozoo.org/', '', 16, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (117, '', 'link', 'Code Monster', 'http://www.crunchzilla.com/code-monster', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (118, '', 'link', 'The Complete Guide to Service Learning', 'http://bit.ly/guidetoservicelearning', '', 8, '2', 'false', 'true', 0, '2017-01-26 14:07:02', 'admin', 1),
-(119, '', 'link', 'International Children\'s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
+(119, '', 'link', 'International Children''s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
 (120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:11:56', 'admin', 1),
-(121, '', 'link', 'Commission on Presidential Debates', 'http://debates.org/index.php?page=debate-history', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:11:34', 'jhorning', 1);
+(121, '', 'link', 'Commission on Presidential Debates', 'http://debates.org/index.php?page=debate-history', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:11:34', 'admin', 1),
+(122, '', 'link', 'LS2 Staff', 'https://circ.library.cps.edu', '', 18, '3', 'false', 'true', 1, '2017-02-27 21:14:32', 'jhorning', 1),
+(123, '', 'link', 'LS2 Reports', 'https://reports.library.cps.edu', '', 18, '3', 'false', 'true', 2, '2017-02-27 21:15:00', 'jhorning', 1),
+(124, '', 'link', 'Real Time Inventory', 'https://library.cps.edu/rti/', '', 18, '3', 'false', 'true', 3, '2017-02-27 21:15:32', 'jhorning', 1),
+(125, '', 'users', 'SOAR Wiki', 'http://cpssoar.wikispaces.com', '', 18, '3', 'false', 'true', 4, '2017-02-27 21:16:49', 'jhorning', 1),
+(126, '', 'link', 'CPS Libraries Wiki', 'http://cpslibraries.wikispaces.com/', '', 19, '3', 'false', 'true', 5, '2017-02-27 21:19:55', 'jhorning', 1),
+(127, '', 'laptop', 'Tech Training', 'https://sites.google.com/site/cpsmobilary/', '', 19, '3', 'false', 'true', 6, '2017-02-27 21:20:53', 'jhorning', 1);
 
 -- --------------------------------------------------------
 
@@ -1342,8 +1390,8 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 -- Table structure for table `featured`
 --
 
-CREATE TABLE `featured` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `featured` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
   `content` text NOT NULL,
@@ -1352,15 +1400,17 @@ CREATE TABLE `featured` (
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `featured_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=572 ;
 
 --
 -- Dumping data for table `featured`
 --
 
 INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', 'CPS Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System...Bringing together print and electronic materials for students and teachers who are Seeking Online Access to Resources.</p>', '', 'right', 'false', '2017-02-15 15:40:36', 'jhorning', 1),
+(1, 'Chicago Public Schools', 'CPS Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'false', '2017-03-15 03:55:45', 'admin', 1),
 (2, 'Jane A Neil Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 4),
@@ -1890,7 +1940,12 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 (563, 'CPS Virtual Library - High School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 565),
 (564, 'CPS Virtual Library - Elementary School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 566),
 (565, 'Professional Virtual Library', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 567),
-(566, 'Robert J. Richardson Middle School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 568);
+(566, 'Robert J. Richardson Middle School', '', '', '', '', 'false', '0000-00-00 00:00:00', 'admin_script', 568),
+(567, 'Chicago Public Schools', 'CPS Virtual Library 123', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'true', '2017-03-15 03:57:53', 'admin', 1),
+(568, 'Chicago Public Schools', 'CPS Virtual Library 123', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'true', '2017-03-15 03:58:12', 'admin', 1),
+(569, 'Chicago Public Schools', 'CPS Virtual Library 123', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'true', '2017-03-15 03:59:56', 'admin', 1),
+(570, 'Chicago Public Schools 123', 'CPS Virtual Library', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'true', '2017-03-15 04:00:02', 'admin', 1),
+(571, 'Chicago Public Schools', 'CPS Virtual Library 123', '<p>Welcome to the Chicago Public Schools Integrated Library System..bringing together print and electronic materials for students, teachers and families who are seeking online access to resources.</p>', '', 'right', 'true', '2017-03-15 04:00:39', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1898,15 +1953,17 @@ INSERT INTO `featured` (`id`, `heading`, `introtext`, `content`, `image`, `image
 -- Table structure for table `generalinfo`
 --
 
-CREATE TABLE `generalinfo` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `generalinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heading` text NOT NULL,
   `content` text NOT NULL,
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `generalinfo_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=567 ;
 
 --
 -- Dumping data for table `generalinfo`
@@ -2450,15 +2507,17 @@ INSERT INTO `generalinfo` (`id`, `heading`, `content`, `use_defaults`, `datetime
 -- Table structure for table `hottitles`
 --
 
-CREATE TABLE `hottitles` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `hottitles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   `url` text NOT NULL,
   `sort` int(11) NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `hottitles_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `hottitles`
@@ -2478,10 +2537,11 @@ INSERT INTO `hottitles` (`id`, `title`, `url`, `sort`, `active`, `datetime`, `lo
 -- Table structure for table `icons_list`
 --
 
-CREATE TABLE `icons_list` (
-  `id` int(11) NOT NULL,
-  `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `icons_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `icon` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=595 ;
 
 --
 -- Dumping data for table `icons_list`
@@ -3089,20 +3149,21 @@ INSERT INTO `icons_list` (`id`, `icon`) VALUES
 -- Table structure for table `locations`
 --
 
-CREATE TABLE `locations` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `locations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `type` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=569 ;
 
 --
 -- Dumping data for table `locations`
 --
 
 INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
-(1, 'Chicago Public Schools', 'Default', '2017-02-28 15:06:26', 'true'),
+(1, 'Chicago Public Schools', 'Default', '2017-03-15 04:02:28', 'true'),
 (2, 'Jane A Neil Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (3, 'William P Gray Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (4, 'Edwin G Foreman High School', 'HS', '2017-02-15 14:32:32', 'true'),
@@ -3150,7 +3211,7 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 (49, 'Adam Clayton Powell Paideia Community Academy Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (50, 'Dvorak Technology Academy', 'Other', '2017-02-15 14:33:32', 'true'),
 (51, 'Michele Clark Academic Prep Magnet High School', 'HS', '2017-02-15 14:32:32', 'true'),
-(52, 'Albany Park Campus', 'Other', '2017-02-28 15:15:51', 'true'),
+(52, 'Albany Park Campus', 'Other', '2017-02-15 14:33:32', 'true'),
 (53, 'Richard Yates Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (54, 'George B Swift Elementary Specialty School', 'ES', '2017-02-15 14:32:14', 'true'),
 (55, 'Helga A Haugan Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
@@ -3301,7 +3362,7 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 (211, 'Percy L Julian High School', 'HS', '2017-02-15 14:32:32', 'true'),
 (212, 'George F Cassell Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (213, 'Charles G Hammond Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
-(214, 'Chicago Vocational Career Academy High School', 'HS', '2017-02-28 15:41:07', 'true'),
+(214, 'Chicago Vocational Career Academy High School', 'HS', '2017-02-15 14:32:32', 'true'),
 (215, 'Arthur E. Canty Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (216, 'Louis A Agassiz Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (217, 'Alcott High School for the Humanities', 'HS', '2017-02-15 14:32:32', 'true'),
@@ -3640,8 +3701,8 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE `navigation` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `navigation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
   `url` text NOT NULL,
@@ -3650,41 +3711,44 @@ CREATE TABLE `navigation` (
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `author_name` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `navigation_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=136 ;
 
 --
 -- Dumping data for table `navigation`
 --
 
 INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`, `loc_id`, `datetime`, `author_name`) VALUES
-(43, 4, 'High School', 'https://[pac_url]/?config=11', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
-(54, 3, 'Elementary', 'https://[pac_url]/?config=12', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
-(60, 7, 'Databases', 'databases.php?section=1&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-02-15 15:39:37', 'jhorning'),
+(43, 4, 'High School', 'https://[pac_url]/?config=11', 7, 'Top', 'true', 1, '2017-02-27 19:42:58', 'jhorning'),
+(54, 3, 'Elementary', 'https://[pac_url]/?config=12', 7, 'Top', 'true', 1, '2017-02-27 19:42:58', 'jhorning'),
+(60, 7, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 0, 'Top', 'false', 1, '2017-02-27 19:42:58', 'jhorning'),
 (61, 1, 'Search All Schools', 'https://[pac_url]/?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
 (62, 2, 'Search All Schools Kid&#039;s Catalog', 'https://[pac_url]/kids?config=ysm#section=home', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
-(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-02-15 15:39:37', 'jhorning'),
+(96, 1, 'District Catalog', 'index.php?loc_id=1', 1, 'Top', 'false', 1, '2017-02-27 19:42:58', 'jhorning'),
 (112, 4, 'My Account', 'https://[pac_url]/?config=ysm#section=myaccount', 0, 'Search', 'true', 1, '2017-02-15 15:59:19', 'admin'),
-(113, 1, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning'),
-(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-02-15 15:39:37', 'jhorning'),
-(116, 12, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(117, 7, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(118, 8, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(119, 9, 'Calendar', 'http://[homepage_url]/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(120, 10, 'Staff', 'http://[homepage_url]/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(121, 11, 'Topics', 'http://[homepage_url]/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(122, 13, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(123, 14, 'Careers', 'http://[homepage_url]/careers', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(124, 15, 'CPS Stats and Facts', 'http://[homepage_url]/stats', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(125, 16, 'News and Press Releases', 'http://[homepage_url]/news', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(126, 17, 'What&#039;s New on CPS.EDU?', 'http://[homepage_url]/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(127, 2, 'Virtual Library Elementary Schools', 'https://[pac_url]/?config=12', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(128, 3, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-02-14 15:49:53', 'admin'),
-(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-02-14 15:49:53', 'admin'),
-(130, 5, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin'),
-(131, 6, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-02-14 15:49:53', 'admin'),
-(133, 5, 'Professional', 'https://[pac_url]/?config=14', 7, 'Top', 'true', 1, '2017-02-15 15:39:37', 'jhorning');
+(113, 3, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 5, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(114, 6, 'Suggestion Box', 'https://docs.google.com/a/tlcdelivers.com/forms/d/e/1FAIpQLSe_yUN7nnBpCznaD4YL4oNWVnuhzVL3GPKx7G9MaCeIZh1qGQ/viewform', 7, 'Top', 'true', 1, '2017-02-27 19:42:58', 'jhorning'),
+(115, 2, 'School Catalog', 'index.php?loc_id=[loc_id]', 1, 'Top', 'off', 1, '2017-02-27 19:42:58', 'jhorning'),
+(116, 14, 'Students', 'http://[homepage_url]/Pages/Students.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(117, 9, 'Schools', 'http://[homepage_url]/Pages/AboutOurSchools.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(118, 10, 'About', 'http://[homepage_url]/Pages/AboutCPS.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(119, 11, 'Calendar', 'http://[homepage_url]/Pages/DistrictCalendar.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(120, 12, 'Staff', 'http://[homepage_url]/Pages/Staff.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(121, 13, 'Topics', 'http://[homepage_url]/Pages/Topics.aspx', 2, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(122, 15, 'Contact Us', 'mailto:library@cps.edu', 4, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(123, 16, 'Careers', 'http://[homepage_url]/careers', 4, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(124, 17, 'CPS Stats and Facts', 'http://[homepage_url]/stats', 4, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(125, 18, 'News and Press Releases', 'http://[homepage_url]/news', 4, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(126, 19, 'What&#039;s New on CPS.EDU?', 'http://[homepage_url]/Pages/whatsnew.aspx', 4, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(127, 1, 'Virtual Library Elementary Schools', 'https://[pac_url]/?config=12', 5, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(128, 2, 'Virtual Library High Schools', 'https://[pac_url]/?config=11', 5, 'Footer', 'true', 1, '2017-03-02 14:54:22', 'jhorning'),
+(129, 4, 'Databases', 'databases.php?section=1&cat_id=2&loc_id=[loc_id]', 5, 'Footer', 'false', 1, '2017-03-02 14:54:22', 'jhorning'),
+(130, 5, 'Recommended Websites', 'databases.php?section=2&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-03-02 14:54:22', 'jhorning'),
+(131, 6, 'Other Resources', 'databases.php?loc_id=[loc_id]&section=1&cat_id=4', 5, 'Footer', 'off', 1, '2017-03-02 14:54:22', 'jhorning'),
+(133, 5, 'Professional', 'https://[pac_url]/?config=14', 7, 'Top', 'true', 1, '2017-02-27 19:42:58', 'jhorning'),
+(134, 8, 'Librarian Links', 'databases.php?section=3&loc_id=[loc_id]', 5, 'Footer', 'off', 1, '2017-03-02 14:54:22', 'jhorning');
 
 -- --------------------------------------------------------
 
@@ -3692,8 +3756,8 @@ INSERT INTO `navigation` (`id`, `sort`, `name`, `url`, `catid`, `section`, `win`
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   `image` text NOT NULL,
   `content` text NOT NULL,
@@ -3701,8 +3765,10 @@ CREATE TABLE `pages` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `image_align` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pages_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `pages`
@@ -3710,10 +3776,11 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `author_name`, `image_align`, `loc_id`) VALUES
 (44, 'Birth to Pre-K', '', '<p>The pre-K experience is critical, as it helps 3 and 4-year-old children develop the academic and life skills that will carry them into adulthood. Pre-K provides children with essential opportunities to learn and practice the social-emotional, problem-solving, and academic skills that they will use throughout their lives.</p>\r\n<p><strong>Our high-quality Early Childhood Programs&hellip;</strong></p>\r\n<ul>\r\n<li>Boost academic skills</li>\r\n<li>Fuel intellectual curiosity</li>\r\n<li>Foster independence</li>\r\n<li>Instill a love of lifelong learning</li>\r\n</ul>\r\n<p>Through common goals and high expectations, Chicago Public Schools is dedicated to building a strong foundation and igniting a lifelong passion for learning for children and their families.</p>\r\n<p><a href="http://www.cps.edu/schools/earlychildhood/Pages/EarlyChildhood.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child\'s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child\'s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
-(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child\'s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child\'s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher\'s expectations. At the beginning of the year, you may want to ask your child\'s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(45, 'Getting to the Next Grade', '', '<p>The Chicago Public Schools elementary and high school promotion policy documents include a variety of measures to ensure that all students are prepared for the grade to which they are promoted.</p>\r\n<p><strong>Elementary School Promotion Policy</strong><br />The School/Parent Guide to the Elementary Promotion Policy is an at-a-glance summary of the Elementary Promotion Policy for the 2015-2016 school year. The guide assists schools and parents in determining the promotion status of students in benchmark grades 3, 6, and 8 and the requirements associated with each promotion status.</p>\r\n<p>CPS urges parents to closely monitor their child''s academic progress to ensure he or she stays on track throughout the school year. Parents can assist their child in meeting the promotion criteria by reviewing homework assignments with him or her, requesting to see quizzes and tests, and maintaining communication with their child''s school and teacher with regards to his or her academic progress.</p>\r\n<p>Students who do not satisfy the promotion criteria above will be required to attend and satisfactorily complete Summer School in order to attain promotion to the next grade.</p>\r\n<p><a href="http://www.cps.edu/Pages/Gettingtothenextgrade.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-02-06 15:24:13', 'admin', 'right', 1),
+(46, '8 Ways Parents Can Help With Homework', '', '<p>Although it may be hard to believe, you can actually help your child enjoy doing homework. When you provide the necessary support and encouragement, most children will rise to the occasion and do their best on their assignments.</p>\r\n<p>Here are 8 ways that you can help your child with homework:</p>\r\n<ol>\r\n<li><strong>Offer encouragement.</strong> Give your child praise for efforts and for completing assignments.</li>\r\n<li><strong>Be available.</strong> Encourage your child to do the work independently, but be available for assistance.</li>\r\n<li><strong>Maintain a schedule.</strong> Establish a set time to do homework each day. You may want to use a calendar to keep track of assignments and due dates.</li>\r\n<li><strong>Designate space.</strong> Provide a space for homework, stocked with necessary supplies, such as pencils, pens, paper, dictionaries, a computer, and other reference materials.</li>\r\n<li><strong>Provide discipline.</strong> Help your child focus on homework by removing distractions, such as television, radio, telephone, and interruptions from siblings and friends.</li>\r\n<li><strong>Be a role model.</strong> Consider doing some of your work, such as paying bills or writing letters, during your child''s homework time.</li>\r\n<li><strong>Be supportive.</strong> Talk to your child about difficulties with homework. Be willing to talk to your child''s teacher to resolve problems in a positive manner.</li>\r\n<li><strong>Stay involved.</strong> Familiarize yourself with the CPS Homework Policy. Make sure that you and your child understand the teacher''s expectations. At the beginning of the year, you may want to ask your child''s teacher:</li>\r\n</ol>\r\n<ul>\r\n<li>What kinds of assignments will you give?</li>\r\n<li>How often do you give homework?</li>\r\n<li>How much time are the students expected to spend on them?</li>\r\n<li>What type of involvement do you expect from parents?</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Pages/8waysparentscanhelpwithhomework.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
 (47, 'Education Policy and Procedures', '', '<p>The Department of Education Policy and Procedures promotes equity, fair standards, and the academic success of all students. The department is responsible for developing and implementing research-based education policies and procedures.</p>\r\n<p><strong>Resources</strong></p>\r\n<ul>\r\n<li>Adult Transgender Guidelines</li>\r\n<li>Board Policy Handbook</li>\r\n<li>Elementary/High School Promotion Policy</li>\r\n<li>Enrollment and Procedures</li>\r\n<li>Getting to the Next Grade</li>\r\n<li>High School Graduation Requirements</li>\r\n<li>Home Schooling</li>\r\n<li>Operation Recognition</li>\r\n<li>Student Code of Conduct</li>\r\n<li>Transgender and Gender Nonconforming Students</li>\r\n</ul>\r\n<p>To learn more about the Department of Education Policy and Procedures, contact Executive Director, Tony Howard, 773-553-2131.</p>\r\n<p><a href="http://www.cps.edu/Pages/EducationPolicyProcedures.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
-(48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1);
+(48, 'Full Day Kindergarten', '', '<p><strong>Why is full day kindergarten so important?</strong><br />Research proves that full day kindergarten gives students a strong foundation they build on for the rest of their lives.</p>\r\n<ul>\r\n<li>Have improved social emotional and physical health</li>\r\n<li>Are more prepared for first grade</li>\r\n<li>Spend more time developing reading, writing, speaking, listening and math skills</li>\r\n<li>Exhibit higher levels of independence and reflectiveness</li>\r\n<li>Demonstrate more advanced language proficiencies</li>\r\n</ul>\r\n<p><a href="http://www.cps.edu/Schools/EarlyChildhood/Pages/GradesK-2.aspx" target="_blank" rel="noopener noreferrer">Read More</a></p>', 'true', '2017-01-19 17:18:11', 'admin', 'right', 1),
+(50, 'Librarian Links', '1078px-librarian_barnstar_hires.png', '<p><strong>SOAR Links</strong></p>\r\n<p><a title="Circulation module" href="https://circ.library.cps.edu" target="_blank" rel="noopener noreferrer">LS2 Staff</a></p>\r\n<p><a title="Reporting module" href="https://reports.library.cps.edu" target="_blank" rel="noopener noreferrer">LS2 Reports</a></p>\r\n<p><a title="Inventory module" href="https://library.cps.edu/rti/" target="_blank" rel="noopener noreferrer">Real Time Inventory</a></p>\r\n<p><a title="SOAR wiki" href="http://cpssoar.wikispaces.com/" target="_blank" rel="noopener noreferrer">SOAR Wiki</a></p>\r\n<p>&nbsp;</p>\r\n<p><strong>Other&nbsp;Links</strong></p>\r\n<p><a title="Librarian wiki" href="http://cpslibraries.wikispaces.com/" target="_blank" rel="noopener noreferrer">CPS Libraries Wiki</a></p>\r\n<p><a title="Tech training" href="https://sites.google.com/site/cpsmobilary/home" target="_blank" rel="noopener noreferrer">Tech Training</a>&nbsp;</p>', 'true', '2017-02-27 20:53:00', 'jhorning', 'left', 1);
 
 -- --------------------------------------------------------
 
@@ -3721,8 +3788,8 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `a
 -- Table structure for table `services`
 --
 
-CREATE TABLE `services` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `icon` text NOT NULL,
   `image` text NOT NULL,
   `title` text NOT NULL,
@@ -3732,8 +3799,10 @@ CREATE TABLE `services` (
   `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `services_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3741,8 +3810,8 @@ CREATE TABLE `services` (
 -- Table structure for table `setup`
 --
 
-CREATE TABLE `setup` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `setup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   `keywords` text NOT NULL,
   `description` text NOT NULL,
@@ -3773,550 +3842,551 @@ CREATE TABLE `setup` (
   `navigation_use_defaults_3` text NOT NULL,
   `services_use_defaults` text NOT NULL,
   `team_use_defaults` text NOT NULL,
-  `analytics` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `setup_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=567 ;
 
 --
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `analytics`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', '', '', 'Download the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'UA-123123', '2017-02-28 15:06:26', 'admin', 1),
-(2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 2),
-(3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 3),
-(4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 4),
-(5, 'Evergreen Academy Middle School', '', '', '7490', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 5),
-(6, 'Paul Laurence Dunbar Career Academy High School', '', '', '1030', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 6),
-(7, 'Louis Nettelhorst Elementary School', '', '', '5070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 7),
-(8, 'Andrew Jackson Elementary Language Academy', '', '', '4690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 8),
-(9, 'Oscar DePriest Elementary School', '', '', '8050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 9),
-(10, 'LaSalle II Magnet', '', '', '8040', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 10),
-(11, 'Thurgood Marshall Middle School', '', '', '7520', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 11),
-(12, 'Thomas J Higgins Elementary Community Academy', '', '', '7210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 12),
-(14, 'James Weldon Johnson Elementary School', '', '', '6940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 14),
-(15, 'Frederick A Douglass Academy High School', '', '', '6630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 15),
-(17, 'John Whistler Elementary School', '', '', '6420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 17),
-(18, 'Mark Twain Elementary School', '', '', '6240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 18),
-(19, 'Frazier Prospective IB Magnet Elementary School', '', '', '5850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:16:58', 'jhorning', 19),
-(21, 'John T Pirie Fine Arts & Academic Center Elementary School', '', '', '5440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 21),
-(22, 'John Palmer Elementary School', '', '', '5260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 22),
-(23, 'William J Onahan Elementary School', '', '', '5190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 23),
-(24, 'Norwood Park Elementary School', '', '', '5120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 24),
-(25, 'Josephine C Locke Elementary School', '', '', '4510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 25),
-(26, 'Henry R Clissold Elementary School', '', '', '2820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 26),
-(27, 'Franklin Elementary Fine Arts Center', '', '', '3420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 27),
-(28, 'Jordan Elementary Community School', '', '', '2870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 28),
-(29, 'William C Goudy Elementary School', '', '', '3590', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 29),
-(30, 'Augustus H Burley Elementary School', '', '', '2470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 30),
-(31, 'Milton Brunson Math & Science Specialty Elementary School', '', '', '2550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 31),
-(32, 'Peter Cooper Elementary Dual Language Academy', '', '', '2890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 32),
-(33, 'South Shore Fine Arts Academy', '', '', '2015', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 33),
-(34, 'Lake View High School', '', '', '1430', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 34),
-(35, 'John F Kennedy High School', '', '', '1420', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 35),
-(36, 'Dr. Jorge Prieto Math and Science', '', '', '8023', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 36),
-(37, 'Emil G Hirsch Metropolitan High School', '', '', '1380', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 37),
-(38, 'John M Harlan Community Academy High School', '', '', '1350', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 38),
-(39, 'Langston Hughes Elementary School', '', '', '8060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 39),
-(40, 'John Foster Dulles Elementary School', '', '', '6860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 40),
-(41, 'Irene C Hernandez Middle School for the Advancement of Science', '', '', '8021', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 41),
-(42, 'Skinner West Elementary School', '', '', '5940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 42),
-(43, 'Roberto Clemente Community Academy High School', '', '', '1840', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 43),
-(44, 'Orozco Fine Arts & Sciences Elementary School', '', '', '7610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 44),
-(45, 'Brighton Park Elementary School', '', '', '7470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 45),
-(46, 'Oliver S Westcott Elementary School', '', '', '7260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 46),
-(47, 'Lenart Elementary Regional Gifted Center', '', '', '7240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 47),
-(48, 'Ashburn Community Elementary School', '', '', '7100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 48),
-(49, 'Adam Clayton Powell Paideia Community Academy Elementary School', '', '', '7010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 49),
-(50, 'Dvorak Technology Academy', '', '', '6760', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 50),
-(51, 'Michele Clark Academic Prep Magnet High School', '', '', '6620', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 51),
-(52, 'Albany Park Campus', '', '', '6290', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-28 15:15:51', 'rjones', 52),
-(53, 'Richard Yates Elementary School', '', '', '6510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 53),
-(54, 'George B Swift Elementary Specialty School', '', '', '6130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 54),
-(55, 'Helga A Haugan Elementary School', '', '', '3810', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 55),
-(56, 'Al Raby High School', '', '', '7690', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 56),
-(57, 'Alessandro Volta Elementary School', '', '', '6270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 57),
-(58, 'Mancel Talcott Elementary School', '', '', '6140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 58),
-(59, 'Herbert Spencer Elementary Math & Science Academy', '', '', '6000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 59),
-(61, 'John D Shoop Math-Science Technical Academy Elementary School', '', '', '5930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 61),
-(62, 'Arnold Mireles Elementary Academy', '', '', '5880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 62),
-(63, 'Peter A Reinberg Elementary School', '', '', '5600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 63),
-(64, 'Casimir Pulaski Elementary Fine Arts Academy', '', '', '5520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 64),
-(65, 'William H Seward Communication Arts Academy Elementary School', '', '', '5820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 65),
-(66, 'Jonathon Y Scammon Elementary School', '', '', '5730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 66),
-(67, 'Sidney Sawyer Elementary School', '', '', '5710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 67),
-(68, 'Paul Robeson High School', '', '', '1320', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 68),
-(69, 'Christian Fenger Academy High School', '', '', '1310', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 69),
-(70, 'Mary Gage Peterson Elementary School', '', '', '5410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 70),
-(71, 'Louis Pasteur Elementary School', '', '', '5310', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 71),
-(72, 'Emmett Louis Till Math and Science Academy', '', '', '4740', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 72),
-(73, 'Oscar F Mayer Elementary School', '', '', '4680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 73),
-(74, 'James Russell Lowell Elementary School', '', '', '4540', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 74),
-(75, 'Francis W Parker Elementary Community Academy', '', '', '5270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 75),
-(76, 'William Bishop Owen Scholastic Academy Elementary School', '', '', '5240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 76),
-(77, 'West Park Elementary Academy', '', '', '5140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 77),
-(78, 'Philip Murray Elementary Language Academy', '', '', '5030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 78),
-(79, 'Annie Keller Elementary Gifted Magnet School', '', '', '4960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 79),
-(80, 'Daniel C Beard Elementary School', '', '', '4950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 80),
-(81, 'Donald Morrill Math & Science Elementary School', '', '', '4880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 81),
-(82, 'Bernhard Moos Elementary School', '', '', '4870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 82),
-(83, 'Henry D Lloyd Elementary School', '', '', '4500', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 83),
-(84, 'Leslie Lewis Elementary School', '', '', '4450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 84),
-(85, 'Joshua D Kershaw Elementary School', '', '', '4270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 85),
-(86, 'Rufus M Hitch Elementary School', '', '', '4010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 86),
-(87, 'Ninos Heroes Elementary Academic Center', '', '', '3720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 87),
-(88, 'Frank W Gunsaulus Elementary Scholastic Academy', '', '', '3690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 88),
-(89, 'Nathanael Greene Elementary School', '', '', '3650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 89),
-(90, 'Joseph E Gary Elementary School', '', '', '3520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:00:16', 'jhorning', 90),
-(91, 'Stephen F Gale Elementary Community Academy', '', '', '3480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 91),
-(92, 'Gerald Delgado Kanoon Elementary Magnet School', '', '', '3370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 92),
-(93, 'Richard Edwards Elementary School', '', '', '3200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 93),
-(94, 'John F Eberhart Elementary School', '', '', '3140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 94),
-(95, 'Christopher Columbus Elementary School', '', '', '2850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 95),
-(96, 'Logandale Middle School', '', '', '7560', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 96),
-(97, 'Wilma Rudolph Elementary Learning Center', '', '', '7350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 97),
-(98, 'Henry O Tanner Elementary School', '', '', '6970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 98),
-(99, 'Robert Lindblom Math & Science Academy High School', '', '', '7110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 99),
-(100, 'James Ward Elementary School', '', '', '6330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 100),
-(101, 'James Wadsworth Elementary School', '', '', '6300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 101),
-(102, 'Talman Elementary School', '', '', '6680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 102),
-(104, 'A.N. Pritzker School', '', '', '6460', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 104),
-(105, 'Suder Montessori Magnet Elementary School', '', '', '6340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 105),
-(106, 'Franz Peter Schubert Elementary School', '', '', '5800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 106),
-(107, 'Cesar E Chavez Multicultural Academic Center Elementary School', '', '', '5640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 107),
-(108, 'Irma C Ruiz Elementary School', '', '', '5390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 108),
-(109, 'James B McPherson Elementary School', '', '', '4800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 109),
-(110, 'William B Ogden Elementary School', '', '', '5150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 110),
-(111, 'Alfred Nobel Elementary School', '', '', '5110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 111),
-(112, 'Inter-American Elementary Magnet School', '', '', '4890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 112),
-(115, 'Mary McLeod Bethune Elementary School', '', '', '8020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 115),
-(117, 'George B McClellan Elementary School', '', '', '4710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 117),
-(118, 'Joseph Lovett Elementary School', '', '', '4530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 118),
-(119, 'Eli Whitney Elementary School', '', '', '6440ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 119),
-(120, 'Frank W Reilly Elementary School', '', '', '5590ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 120),
-(121, 'LaSalle Elementary Language Academy', '', '', '4420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 121),
-(122, 'South Loop Elementary School', '', '', '3960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 122),
-(123, 'Laughlin Falconer Elementary School', '', '', '3270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 123),
-(124, 'Patrick Henry Elementary School', '', '', '3940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 124),
-(125, 'James Hedges Elementary School', '', '', '3900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 125),
-(126, 'Hawthorne Elementary Scholastic Academy', '', '', '3830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 126),
-(127, 'Bret Harte Elementary School', '', '', '3780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 127),
-(128, 'Sharon Christa McAuliffe Elementary School', '', '', '3770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 128),
-(129, 'Alexander Hamilton Elementary School', '', '', '3730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 129),
-(130, 'Nathan Hale Elementary School', '', '', '3710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 130),
-(131, 'Ariel Elementary Community Academy', '', '', '3640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 131),
-(132, 'Daniel J Corkery Elementary School', '', '', '2910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 132),
-(133, 'Salmon P Chase Elementary School', '', '', '2760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 133),
-(134, 'Esmond Elementary School', '', '', '3250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 134),
-(135, 'Ralph H Metcalfe Elementary Community Academy', '', '', '3190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 135),
-(136, 'Jacob Beidler Elementary School', '', '', '2250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 136),
-(137, 'Jonathan  Burr Elementary School', '', '', '2530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 137),
-(138, 'Frank I Bennett Elementary School', '', '', '2280', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 138),
-(139, 'George Washington High School', '', '', '1630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 139),
-(140, 'Benito Juarez Community Academy High School', '', '', '1890', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 140),
-(141, 'Kenwood Academy High School', '', '', '1710', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 141),
-(144, 'Friedrich W Von Steuben Metropolitan Science High School', '', '', '1610', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:21:37', 'jhorning', 144),
-(145, 'Morgan Park High School', '', '', '1490', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 145),
-(147, 'Thomas Kelly High School', '', '', '1400', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 147),
-(148, 'Skinner North Classical Elementary', '', '', '8024', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 148),
-(149, 'John A Walsh Elementary School', '', '', '6320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 149),
-(150, 'William K New Sullivan Elementary School', '', '', '6100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 150),
-(151, 'Walter Payton College Preparatory High School', '', '', '1090', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 151),
-(152, 'Crane Medical Preparatory High School', '', '', '1270', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:20:22', 'jhorning', 152),
-(153, 'Roald Amundsen High School', '', '', '1210', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 153),
-(154, 'Robert A Black Magnet Elementary School', '', '', '7860ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 154),
-(155, 'Daniel S Wentworth Elementary School', '', '', '6390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 155),
-(156, 'Roger C Sullivan High School', '', '', '1570', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 156),
-(157, 'Albert R Sabin Elementary Magnet School', '', '', '7790', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 157),
-(158, 'Manuel Perez Elementary School', '', '', '2930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 158),
-(159, 'Helen Peirce International Studies Elementary School', '', '', '5360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 159),
-(160, 'William P Nixon Elementary School', '', '', '5100ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 160),
-(162, 'Hannah G Solomon Elementary School', '', '', '5980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 163),
-(163, 'Ogden International High School', '', '', '8083', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 164),
-(164, 'Mark Sheridan Elementary Math & Science Academy', '', '', '4920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 165),
-(165, 'Maria Saucedo Elementary Scholastic Academy', '', '', '4250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 166),
-(166, 'New Field Elementary School', '', '', '7060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 167),
-(167, 'John Marshall Metropolitan High School', '', '', '1470', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 168),
-(168, 'Theodore Roosevelt High School', '', '', '1520', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 169),
-(169, 'North River Elementary School', '', '', '7890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 170),
-(170, 'Thomas Drummond Elementary School', '', '', '3120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 171),
-(171, 'Mount Greenwood Elementary School', '', '', '4940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 172),
-(172, 'Stephen T Mather High School', '', '', '1480', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 173),
-(173, 'Little Village Elementary School', '', '', '2590', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 174),
-(174, 'Mildred I Lavizzo Elementary School', '', '', '6260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 175),
-(175, 'Edward Coles Elementary Language Academy', '', '', '2830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 176),
-(176, 'Agustin Lara Elementary Academy', '', '', '3980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 177),
-(177, 'John H Kinzie Elementary School', '', '', '4330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 178);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `analytics`, `datetime`, `author_name`, `loc_id`) VALUES
-(179, 'Henry H Nash Elementary School', '', '', '5050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 180),
-(180, 'Kelvyn Park High School', '', '', '1410', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 181),
-(181, 'DeWitt Clinton Elementary School', '', '', '2810', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 182),
-(182, 'Henry Clay Elementary School', '', '', '2790', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 183),
-(183, 'William G Hibbard Elementary School', '', '', '4000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 184),
-(184, 'Johann W von Goethe Elementary School', '', '', '3560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 185),
-(185, 'Frank L Gillespie Elementary School', '', '', '3530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 186),
-(186, 'Marcus Moziah Garvey Elementary School', '', '', '5420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 187),
-(187, 'Frederick Funston Elementary School', '', '', '3460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 188),
-(188, 'Edward Everett Elementary School', '', '', '3260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 189),
-(189, 'Everett McKinley Dirksen Elementary School', '', '', '2950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 190),
-(190, 'Charles Kozminski Elementary Community Academy', '', '', '4390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 191),
-(191, 'John W Cook Elementary School', '', '', '2860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 192),
-(192, 'Chicago Academy Elementary School', '', '', '6670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 193),
-(193, 'Bowen High School', '', '', '7540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 194),
-(194, 'Orville T Bright Elementary School', '', '', '2390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 195),
-(195, 'Adlai E Stevenson Elementary School', '', '', '6030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 196),
-(196, 'STEM Magnet Academy', '', '', '8678', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:15', 'admin_script', 197),
-(197, 'Whitney M Young Magnet High School', '', '', '1810', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 198),
-(198, 'William H Prescott Elementary School', '', '', '5500', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 199),
-(199, 'Portage Park Elementary School', '', '', '5490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 200),
-(200, 'Paul Cuffe Math-Science Technology Academy Elementary School', '', '', '4090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 201),
-(201, 'John B Murphy Elementary School', '', '', '5020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 202),
-(202, 'Genevieve Melody Elementary School', '', '', '7190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 203),
-(203, 'Theodore Herzl Elementary School', '', '', '3970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 204),
-(204, 'Little Village High School Campus', '', '', '1130', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 205),
-(205, 'David G Farragut Career Academy High School', '', '', '1300', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 206),
-(206, 'Edgebrook Elementary School', '', '', '3170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 207),
-(207, 'Lazaro Cardenas Elementary School', '', '', '4320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 208),
-(208, 'Columbia Explorers Elementary Academy', '', '', '5860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 209),
-(209, 'Horace Greeley Elementary School', '', '', '2730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 210),
-(210, 'Percy L Julian High School', '', '', '1870', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 211),
-(211, 'George F Cassell Elementary School', '', '', '2720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 212),
-(212, 'Charles G Hammond Elementary School', '', '', '3750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 213),
-(213, 'Chicago Vocational Career Academy High School', '', '', '1010', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-28 15:41:08', 'admin', 214),
-(214, 'Arthur E. Canty Elementary School', '', '', '2620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 215),
-(215, 'Louis A Agassiz Elementary School', '', '', '2030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 216),
-(216, 'Alcott High School for the Humanities', '', '', '8035', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 217),
-(217, 'South Shore International College Prep High School', '', '', '8676', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 218),
-(218, 'Ronald Brown Elementary Community Academy', '', '', '5040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 219),
-(219, 'Francis M McKay Elementary School', '', '', '4760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 220),
-(220, 'Stephen K Hayt Elementary School', '', '', '3850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 221),
-(221, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 222),
-(222, 'Belmont-Cragin Elementary School', '', '', '3390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 223),
-(224, 'Galileo Math & Science Scholastic Academy Elementary School', '', '', '4160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 225),
-(226, 'John H Hamline Elementary School', '', '', '3740ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 227),
-(227, 'Alexander Graham Elementary School', '', '', '3600ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 228),
-(228, 'Harriet Beecher Stowe Elementary School', '', '', '6080ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 229),
-(229, 'Chicago Quest North', '', '', '8672', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 230),
-(230, 'John W Garvy Elementary School', '', '', '3510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 231),
-(231, 'Wendell Phillips Academy High School', '', '', '1510', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 232),
-(232, 'Namaste Charter Elementary School', '', '', '7920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 233),
-(233, 'Daniel R Cameron Elementary School', '', '', '2610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 234),
-(234, 'Morton School of Excellence', '', '', '6800', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 235),
-(235, 'Socorro Sandoval Elementary School', '', '', '6430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 236),
-(236, 'John H Vanderpoel Elementary Magnet School', '', '', '6250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 237),
-(237, 'Claremont Academy Elementary School', '', '', '7830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 238),
-(238, 'Edward White Elementary Career Academy', '', '', '7440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 239),
-(239, 'Dr. Martin L. King Jr. Academy of Social Justice', '', '', '7250', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:26:05', 'jhorning', 240),
-(240, 'Richard Henry Lee Elementary School', '', '', '7170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 241),
-(241, 'Tarkington School of Excellence Elementary School', '', '', '7160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 242),
-(242, 'John J Pershing Elementary Humanities Magnet', '', '', '5400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 243),
-(243, 'Florence Nightingale Elementary School', '', '', '5090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 244),
-(244, 'James E McDade Elementary Classical School', '', '', '4750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 245),
-(248, 'John Spry Elementary Community School', '', '', '6010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 249),
-(249, 'Norman A Bridge Elementary School', '', '', '2380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 250),
-(250, 'Washington D Smyser Elementary School', '', '', '5960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 251),
-(251, 'Harriet Sayre Elementary Language Academy', '', '', '5720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 252),
-(252, 'William H Ray Elementary School', '', '', '5560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 253),
-(253, 'John Milton Gregory Elementary School', '', '', '3660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 254),
-(254, 'Garfield Park Preparatory Academy Elementary School', '', '', '8064', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 255),
-(255, 'Alex Haley Elementary Academy', '', '', '2360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 256),
-(256, 'Ray Graham Training Center High School', '', '', '1950', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 257),
-(257, 'John L Marsh Elementary School', '', '', '4630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 258),
-(258, 'Fort Dearborn Elementary School', '', '', '3400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 259),
-(259, 'Marquette School of Excellence', '', '', '4620', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 260),
-(260, 'Calmeca Academy of Fine Arts and Dual Language', '', '', '7880', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 261),
-(261, 'George H Corliss High School', '', '', '1860', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 262),
-(262, 'Jean Baptiste Beaubien Elementary School', '', '', '2240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 263),
-(263, 'West Ridge Elementary School', '', '', '8440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 264),
-(264, 'James B Farnsworth Elementary School', '', '', '3280', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 265),
-(265, 'George Washington Elementary School', '', '', '6360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 266),
-(266, 'George Manierre Elementary School', '', '', '4580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 267),
-(267, 'Uplift Community High School', '', '', '2210', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 268),
-(268, 'Edward F Dunne Elementary School', '', '', '6050ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 269),
-(269, 'Carl von Linne Elementary School', '', '', '4490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 270),
-(270, 'George Armstrong International Studies Elementary School', '', '', '2080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 271),
-(272, 'Minnie Mars Jamieson Elementary School', '', '', '4180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 273),
-(273, 'Jacqueline B Vaughn Occupational High School', '', '', '1920', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 274),
-(274, 'Eric Solorio Academy High School', '', '', '8550', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 275),
-(276, 'Walter S Christopher Elementary School', '', '', '2780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 277),
-(277, 'Richard J Daley Elementary Academy', '', '', '6560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 278),
-(279, 'Federico Garcia Lorca Elementary School', '', '', '8330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 280),
-(280, 'George Washington Carver Military Academy High School', '', '', '1850', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 281),
-(281, 'Charles R Henderson Elementary School', '', '', '3920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 282),
-(282, 'James G Blaine Elementary School', '', '', '2300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 283),
-(283, 'Orr Academy High School', '', '', '1830', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 284),
-(284, 'Chicago Military Academy High School', '', '', '1800', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 285),
-(285, 'Woodlawn Community Elementary School', '', '', '3860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 286),
-(286, 'Chicago Academy High School', '', '', '7770', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 287),
-(287, 'Wells Community Academy High School', '', '', '1640', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 288),
-(288, 'Eliza Chappell Elementary School', '', '', '2750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 289),
-(289, 'Marvin Camras, Elementary School', '', '', '8600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 290),
-(290, 'Emiliano Zapata Elementary Academy', '', '', '3820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 291),
-(291, 'Lincoln Park High School', '', '', '1620', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 292),
-(292, 'Edward Tilden Career Community Academy High School', '', '', '1590', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 293),
-(293, 'Eugene Field Elementary School', '', '', '3350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 294),
-(294, 'George Washington Carver Primary School', '', '', '2690', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 295),
-(295, 'William Howard Taft High School', '', '', '1580', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 296),
-(296, 'Mariano Azuela Elementary School', '', '', '8660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 297),
-(297, 'Senn Campus', '', '', '1540', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 298),
-(299, 'Hanson Park Elementary School', '', '', '4770ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 300),
-(300, 'Joseph Brennemann Elementary School', '', '', '6600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 301),
-(301, 'Micheal M Byrne Elementary School', '', '', '2570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 302),
-(302, 'Daniel Boone Elementary School', '', '', '2320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 303),
-(303, 'John Hancock College Preparatory High School', '', '', '1200', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 304),
-(304, 'Carl Schurz High School', '', '', '1530', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 305),
-(305, 'Nancy B Jefferson Alternative High School', '', '', '2120', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 306),
-(306, 'Christian Ebinger Elementary School', '', '', '3150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 307),
-(307, 'Gwendolyn Brooks College Preparatory Academy High School', '', '', '1500', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 308),
-(308, 'William E Dever Elementary School', '', '', '3020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 20:48:40', 'jhorning', 309),
-(309, 'Manley Career Academy High School', '', '', '1460', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 310),
-(310, 'Grover Cleveland Elementary School', '', '', '2800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 311),
-(311, 'Castellanos Elementary School', '', '', '2510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 312),
-(312, 'Durkin Park Elementary School', '', '', '7870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 313),
-(316, 'Professional Library', '', '', '390', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 317),
-(317, 'Hope College Preparatory High School', '', '', '1940', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 318),
-(318, 'Chicago High School for Agricultural Sciences', '', '', '1790', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 319),
-(319, 'William J Bogan High School', '', '', '1230', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 320),
-(320, 'Hyde Park Academy High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 321),
-(321, 'Northside College Preparatory High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 322),
-(322, 'Marie Sklodowska Curie Metropolitan High School', '', '', '1820', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 323),
-(323, 'DuSable Campus', '', '', '1280', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 324),
-(324, 'John Barry Elementary School', '', '', '2160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 325),
-(325, 'Hiram H Belding Elementary School', '', '', '2260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 326),
-(326, 'Lyman A Budlong Elementary School', '', '', '2440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 327),
-(328, 'Intrinsic Charter High School', '', '', '9619', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 329),
-(329, 'Chicago High School for the Arts', '', '', '8047', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 330),
-(330, 'William E B Dubois Elementary School', '', '', '8010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 331),
-(331, 'James Shields Elementary School', '', '', '5910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 332),
-(332, 'Laura S Ward Elementary School', '', '', '5470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 333),
-(333, 'Chicago Intl Charter - Northtown', '', '', '7740', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 334),
-(334, 'George Leland Elementary School', '', '', '7320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 335),
-(335, 'John T McCutcheon Elementary School', '', '', '6910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 336),
-(336, 'Johnnie Colemon Elementary Academy', '', '', '6170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 337),
-(337, 'Douglas Taylor Elementary SchoolÂ ', '', '', '6150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 338),
-(338, 'Charles Sumner Math &amp; Science Community Academy Elementary School', '', '', '6110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:15:54', 'jhorning', 339),
-(339, 'Mount Vernon Elementary SchoolÂ ', '', '', '4980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 340),
-(340, 'James Monroe Elementary SchoolÂ ', '', '', '4850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 341),
-(341, 'Ida B Wells Preparatory Elementary Academy', '', '', '5250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 342),
-(342, 'Neal F Simeon Career Academy High School', '', '', '1150', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 343),
-(343, 'Ellen Mitchell Elementary School', '', '', '4840', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 344),
-(344, 'Cyrus H McCormick Elementary School', '', '', '4720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 345),
-(345, 'Michael Faraday Elementary School', '', '', '4640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 346),
-(346, 'Kate S Kellogg Elementary SchoolÂ ', '', '', '4240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 347),
-(347, 'Phoebe Apperson Hearst Elementary School', '', '', '3890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 348),
-(348, 'John Harvard Elementary School of Excellence', '', '', '3800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 349),
-(349, 'Walter Q Gresham Elementary School', '', '', '3670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 350),
-(350, 'ASPIRA Charter - Haugan Campus', '', '', '3500', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 351),
-(351, 'Robert Fulton Elementary School', '', '', '3450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 352),
-(352, 'Joseph Kellman Corporate Community Elementary School', '', '', '3410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:17:19', 'jhorning', 353),
-(353, 'John Fiske Elementary School', '', '', '3360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 354),
-(354, 'Edward K Ellington Elementary School', '', '', '3220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 355),
-(355, 'Turner-Drew Elementary Language Academy', '', '', '3110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 356),
-(356, 'Arthur Dixon Elementary School', '', '', '3040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 357),
-(357, 'Nathan S Davis Elementary School', '', '', '2970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 358);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `analytics`, `datetime`, `author_name`, `loc_id`) VALUES
-(358, 'Anna R. Langford Community Academy', '', '', '2900', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 359),
-(359, 'Burnside Elementary Scholastic Academy', '', '', '2520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 360),
-(360, 'Jane Addams Elementary SchoolÂ ', '', '', '2020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 361),
-(361, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 222),
-(362, 'George Westinghouse High School', '', '', '1160', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 363),
-(363, 'Louisa May Alcott Elementary School', '', '', '2040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 364),
-(364, 'Charles P Steinmetz College Preparatory High School', '', '', '1560', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:14:20', 'jhorning', 365),
-(365, 'Gage Park High School', '', '', '1340', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 366),
-(367, 'North Lawndale College Prep Charter', '', '', '1105ALL', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 368),
-(369, 'William Jones College Preparatory High School', '', '', '1060', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 370),
-(370, 'William C Reavis Math &amp; Science Specialty Elementary School', '', '', '5580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:19:06', 'jhorning', 371),
-(371, 'William Penn Elementary School', '', '', '5370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 372),
-(372, 'Ronald E McNair Elementary School', '', '', '7040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 373),
-(373, 'William F Finkl Elementary School', '', '', '3760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 374),
-(374, 'Rachel Carson Elementary School', '', '', '2660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 375),
-(377, 'Robert Healy Elementary School', '', '', '3880ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 378),
-(378, 'John Charles Haines Elementary School', '', '', '3700', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 379),
-(379, 'Philip Rogers Elementary School', '', '', '5630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 380),
-(380, 'Andrew Carnegie Elementary School', '', '', '2630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 381),
-(381, 'Mary Lyon Elementary School', '', '', '4560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 382),
-(382, 'Marine Leadership Academy at Ames', '', '', '2090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 383),
-(383, 'Holden Elementary School', '', '', '4020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 384),
-(384, 'Luther Burbank Elementary School', '', '', '2450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 385),
-(385, 'Asa Philip Randolph Elementary School', '', '', '3550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 386),
-(386, 'Edward N Hurley Elementary School', '', '', '4120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 387),
-(387, 'James Shields Middle School', '', '', '9597', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 388),
-(388, 'Dr. Martin Luther King Jr. College Prep High School', '', '', '1760', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:21:11', 'jhorning', 389),
-(389, 'Learn South', '', '', '8029', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 390),
-(390, 'Wildwood Elementary School', '', '', '6470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 391),
-(391, 'Pilsen Elementary Community Academy', '', '', '4210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 392),
-(392, 'North-Grand High School', '', '', '1140', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 393),
-(393, 'Abraham Lincoln Elementary School', '', '', '4480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 394),
-(394, 'Edward Beasley Elementary Magnet Academic Center', '', '', '6660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 395),
-(395, 'Newton Bateman Elementary School', '', '', '2190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 396),
-(396, 'Instituto Health Sciences Career Academy High School', '', '', '8026', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 397),
-(397, 'Enrico Tonti Elementary School', '', '', '6220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 398),
-(398, 'Stone Elementary Scholastic Academy', '', '', '6070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 399),
-(399, 'Northwest Middle School', '', '', '4600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 400),
-(400, 'Carter G Woodson South Elementary School', '', '', '7820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 401),
-(401, 'Wolfgang A Mozart Elementary School', '', '', '5000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 402),
-(403, 'Myra Bradwell Communications Arts & Sciences Elementary School', '', '', '2340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 404),
-(404, 'Back of the Yards High School', '', '', '9623', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 405),
-(405, 'Sarah E. Goode STEM Academy', '', '', '9598', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 406),
-(406, 'John C Coonley Elementary School', '', '', '2880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 407),
-(407, 'John Greenleaf Whittier Elementary School', '', '', '6450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 408),
-(408, 'John C Burroughs Elementary School', '', '', '2540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 409),
-(409, 'Grant Campus', '', '', '7310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 410),
-(410, 'Alexander Graham Bell Elementary School', '', '', '2270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 411),
-(411, 'Charles Allen Prosser Career Academy High School', '', '', '1070', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 412),
-(413, 'Amelia Earhart Options for Knowledge Elementary School', '', '', '7450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:55:30', 'jhorning', 414),
-(415, 'John M Smyth Elementary School', '', '', '5970ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 416),
-(416, 'Richard J Oglesby Elementary School', '', '', '5170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 417),
-(417, 'Josiah Pickard Elementary School', '', '', '5430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 418),
-(418, 'Ole A Thorp Elementary Scholastic Academy', '', '', '6190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 419),
-(419, 'Albert G Lane Technical High School', '', '', '1440', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 420),
-(420, 'Gurdon S Hubbard High School', '', '', '1670', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 421),
-(423, 'National Teachers Elementary Academy', '', '', '6480ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 424),
-(425, 'Air Force Academy High School', '', '', '1055', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 426),
-(426, 'Peace &amp; Education Coalition High School', '', '', '1123', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:21:52', 'jhorning', 427),
-(427, 'Austin College and Career Academy', '', '', '1145', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:58:52', 'jhorning', 428),
-(428, 'William Rainey Harper High School', '', '', '1360', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 429),
-(429, 'Northside Learning Center High School', '', '', '1690', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 430),
-(430, 'Southside Occupational Academy High School', '', '', '1700', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 431),
-(431, 'Simpson Academy High School for Young Women', '', '', '1750', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:22:14', 'jhorning', 432),
-(432, 'DeVry University Advantage Academy High School', '', '', '6990', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:20:39', 'jhorning', 433),
-(433, 'Bowen High School', '', '', '7540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 194),
-(434, 'TEAM Englewood Community Academy High School', '', '', '8080', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 435),
-(435, 'Francisco I Madero Middle School', '', '', '6310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 436),
-(436, 'Collins Academy High School', '', '', '1045', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 437),
-(437, 'Catalyst - Circle Rock', '', '', '4371', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 438),
-(438, 'Disney II Magnet High School', '', '', '9626', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 439),
-(439, 'Great Lakes Academy Charter School', '', '', '9643', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 440),
-(440, 'Ira F Aldridge Elementary School', '', '', '2710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 441),
-(441, 'Phillip D Armour Elementary School', '', '', '2070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 442),
-(442, 'Arthur R Ashe Elementary School', '', '', '6900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 443),
-(443, 'John J Audubon Elementary School', '', '', '2110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 444),
-(444, 'Avalon Park Elementary School', '', '', '2130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 445),
-(445, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', '', '', '2150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:54:11', 'jhorning', 446),
-(446, 'Clara Barton Elementary School', '', '', '2170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 447),
-(447, 'Perkins Bass Elementary School', '', '', '2180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 448),
-(448, 'Ludwig Van Beethoven Elementary School', '', '', '6540', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 449),
-(449, 'Blair Early Childhood Center', '', '', '4990', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:16', 'admin_script', 450),
-(450, 'Carrie Jacobs Bond Elementary School', '', '', '6550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 451),
-(451, 'Edward A Bouchet Math &amp; Science Academy Elementary School', '', '', '2430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:50:17', 'jhorning', 452),
-(452, 'Charles S Brownell Elementary School', '', '', '2410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 453),
-(453, 'Edmond Burke Elementary School', '', '', '2460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 454),
-(454, 'Burnham Elementary Inclusive Academy', '', '', '2480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 455),
-(455, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', '', '', '2580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:13:52', 'jhorning', 456),
-(456, 'Carroll-Rosenwald Specialty Elementary School', '', '', '2650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 457),
-(457, 'Willa Cather Elementary School', '', '', '6730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 458),
-(458, 'Frederic Chopin Elementary School', '', '', '2770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 459),
-(459, 'George Rogers Clark Elementary School', '', '', '2230', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 460),
-(460, 'Mary E Courtenay Elementary Language Arts Center', '', '', '7910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 461),
-(461, 'Crown Community Academy of Fine Arts Center Elementary School', '', '', '2940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:16:29', 'jhorning', 462),
-(462, 'Countee Cullen Elementary School', '', '', '4100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 463),
-(463, 'Charles R Darwin Elementary School', '', '', '2960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 464),
-(464, 'Sir Miles Davis Magnet Elementary Academy', '', '', '7000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 465),
-(465, 'Charles Gates Dawes Elementary School', '', '', '2980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 466),
-(466, 'Jose De Diego Elementary Community Academy', '', '', '7420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 467),
-(467, 'Stephen Decatur Classical Elementary School', '', '', '2990', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 468),
-(468, 'Robert Nathaniel Dett Elementary School', '', '', '6740', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 469),
-(469, 'Disney II Magnet School', '', '', '8045', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 470),
-(470, 'James R Doolittle Jr Elementary School', '', '', '3070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 471),
-(471, 'John C Dore Elementary School', '', '', '3080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 472),
-(472, 'John B Drake Elementary School', '', '', '3100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 473),
-(473, 'Charles W Earle Elementary School', '', '', '3130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 474),
-(474, 'Thomas A Edison Regional Gifted Center Elementary School', '', '', '2220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:18:49', 'jhorning', 475),
-(475, 'Edison Park Elementary School', '', '', '2085', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 476),
-(476, 'Leif Ericson Elementary Scholastic Academy', '', '', '3240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 477),
-(477, 'Medgar Evers Elementary School', '', '', '7990', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 478),
-(478, 'Fairfield Elementary Academy', '', '', '4660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 479),
-(479, 'Fernwood Elementary School', '', '', '3330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 480),
-(480, 'Foster Park Elementary School', '', '', '3430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 481),
-(481, 'Wendell E Green Elementary School', '', '', '4410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 482),
-(482, 'Robert L Grimes Elementary School', '', '', '3680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 483),
-(483, 'Virgil Grissom Elementary School', '', '', '3580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 484),
-(484, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', '', '', '2350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:17:34', 'jhorning', 485),
-(485, 'John Hay Elementary Community Academy', '', '', '3840', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 486),
-(486, 'Helen M Hefferan Elementary School', '', '', '3910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 487),
-(487, 'Thomas A Hendricks Elementary Community Academy', '', '', '3930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 488),
-(488, 'Oliver Wendell Holmes Elementary School', '', '', '4030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 489),
-(489, 'Thomas Hoyne Elementary School', '', '', '4080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 490),
-(490, 'Charles Evans Hughes Elementary School', '', '', '4110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 491),
-(491, 'Washington Irving Elementary School', '', '', '5350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 492),
-(492, 'Mahalia Jackson Elementary School', '', '', '8090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 493),
-(493, 'Friedrich L. Jahn Elementary of the Fine Arts', '', '', '4170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 494),
-(494, 'Edward Jenner Elementary Academy of the Arts', '', '', '4200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 495),
-(495, 'Jensen Elementary Scholastic Academy', '', '', '6920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 496),
-(496, 'Scott Joplin Elementary School', '', '', '2330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 497),
-(497, 'Joseph Jungman Elementary School', '', '', '4230', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 498),
-(498, 'Joyce Kilmer Elementary School', '', '', '4300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 499),
-(499, 'Rudyard Kipling Elementary School', '', '', '4350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 500),
-(500, 'Lawndale Elementary Community Academy', '', '', '4430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 501),
-(501, 'Arthur A Libby Elementary School', '', '', '4470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 502),
-(502, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', '', '', '4380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:15:07', 'jhorning', 503),
-(503, 'James Madison Elementary School', '', '', '4570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 504),
-(504, 'Horace Mann Elementary School', '', '', '4610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 505),
-(505, 'Roswell B Mason Elementary School', '', '', '4650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 506),
-(506, 'Benjamin E Mays Elementary Academy', '', '', '7150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 507),
-(507, 'Mary E McDowell Elementary School', '', '', '7390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 508),
-(508, 'Irvin C Mollison Elementary School', '', '', '6950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 509),
-(509, 'Lillian R. Nicholson STEM Academy', '', '', '2200', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 510),
-(510, 'Oriole Park Elementary School', '', '', '5200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 511),
-(511, 'Josefa Ortiz De Dominguez Elementary School', '', '', '3630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 512),
-(512, 'Jesse Owens Elementary Community Academy', '', '', '3570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 514),
-(513, 'Park Manor Elementary School', '', '', '5290', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 515),
-(514, 'Parkside Elementary Community Academy', '', '', '5300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 516),
-(515, 'Ferdinand Peck Elementary School', '', '', '5340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 517),
-(516, 'Ambrose Plamondon Elementary School', '', '', '5450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 518),
-(517, 'Edgar Allan Poe Elementary Classical School', '', '', '5460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 519),
-(518, 'Ernst Prussing Elementary School', '', '', '5510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 520),
-(519, 'George M Pullman Elementary School', '', '', '5530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 521),
-(520, 'Paul Revere Elementary School', '', '', '5610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 522),
-(521, 'Jackie Robinson Elementary School', '', '', '6780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 523),
-(522, 'Martha Ruggles Elementary School', '', '', '5660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 524),
-(523, 'William H Ryder Math &amp; Science Specialty Elementary School', '', '', '5670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 18:19:32', 'jhorning', 525),
-(524, 'Rueben Salazar Elementary Bilingual Center', '', '', '6720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 526),
-(525, 'Sauganash Elementary School', '', '', '5690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 527),
-(526, 'Jesse Sherwood Elementary School', '', '', '5900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 528),
-(527, 'Beulah Shoesmith Elementary School', '', '', '5920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 529),
-(528, 'Wendell Smith Elementary School', '', '', '3870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 530),
-(529, 'Frederick Stock Elementary School', '', '', '5770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 531),
-(530, 'Elizabeth H Sutherland Elementary School', '', '', '6120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 532),
-(531, 'Telpochcalli Elementary School', '', '', '3380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 533),
-(532, 'Velma F Thomas Early Childhood Center', '', '', '6710', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 534),
-(533, 'James N Thorp Elementary School', '', '', '6180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 535);
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `analytics`, `datetime`, `author_name`, `loc_id`) VALUES
-(534, 'Barbara Vick Early Childhood & Family Center', '', '', '2920', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 536),
-(535, 'Charles H Wacker Elementary School', '', '', '8030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 537),
-(536, 'Joseph Warren Elementary School', '', '', '6350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 538),
-(537, 'Harold Washington Elementary School', '', '', '5380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 539),
-(538, 'Thomas J Waters Elementary School', '', '', '6370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 540),
-(539, 'Daniel Webster Elementary School', '', '', '6380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 541),
-(540, 'Ella Flagg Young Elementary School', '', '', '6520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 542),
-(541, 'Southeast Area Elementary School', '', '', '9681', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 543),
-(542, 'Walter Henri Dyett High School for the Arts', '', '', '9682', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 544),
-(543, 'James Otis Elementary School', '', '', '5220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 545),
-(544, 'William H Brown Elementary School', '', '', '2400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 546),
-(545, 'William W Carter Elementary School', '', '', '2670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 547),
-(546, 'Pablo Casals Elementary School', '', '', '4290', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 548),
-(547, 'Thomas Chalmers Specialty Elementary School', '', '', '2740', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 549),
-(548, 'George W Curtis Elementary School', '', '', '3160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 550),
-(549, 'Charles S Deneen Elementary School', '', '', '3010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 551),
-(550, 'Dewey Elementary Academy of Fine Arts', '', '', '3030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 552),
-(551, 'Melville W Fuller Elementary School', '', '', '3440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 553),
-(552, 'Julia Ward Howe Elementary School of Excellence', '', '', '4060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 554),
-(553, 'Brian Piccolo Elementary Specialty School', '', '', '5210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 555),
-(554, 'Ravenswood Elementary School', '', '', '5550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 556),
-(555, 'William T Sherman Elementary School', '', '', '5890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 557),
-(556, 'Amos Alonzo Stagg Elementary School', '', '', '7760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 558),
-(557, 'Matthew Gallistel Elementary Language Academy', '', '', '3490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 559),
-(558, 'Lorenz Brentano Math & Science Academy Elementary School', '', '', '2370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 560),
-(559, 'Theophilus Schmid Elementary School', '', '', '5950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 561),
-(560, 'George W Tilton Elementary School', '', '', '6210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 562),
-(561, 'Walter L Newberry Math & Science Academy Elementary School', '', '', '5080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 563),
-(562, 'CPS Virtual Library', '', '', '10', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 564),
-(563, 'CPS Virtual Library - High School', '', '', '11', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:02', 'admin_script', 565),
-(564, 'CPS Virtual Library - Elementary School', '', '', '12', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:02:08', 'admin_script', 566),
-(565, 'Professional Virtual Library', '', '', '14', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 15:11:13', 'admin_script', 567),
-(566, 'Robert J. Richardson Middle School', '', '', '9685', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-02-08 14:34:17', 'admin_script', 568);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', 'Recommended Websites', 'Librarian Links', '', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-03-15 04:02:28', 'admin', 1),
+(2, 'Jane A Neil Elementary School', '', '', '5060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 2),
+(3, 'William P Gray Elementary School', '', '', '3620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 3),
+(4, 'Edwin G Foreman High School', '', '', '1330', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 4),
+(5, 'Evergreen Academy Middle School', '', '', '7490', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 5),
+(6, 'Paul Laurence Dunbar Career Academy High School', '', '', '1030', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 6),
+(7, 'Louis Nettelhorst Elementary School', '', '', '5070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 7),
+(8, 'Andrew Jackson Elementary Language Academy', '', '', '4690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 8),
+(9, 'Oscar DePriest Elementary School', '', '', '8050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 9),
+(10, 'LaSalle II Magnet', '', '', '8040', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 10),
+(11, 'Thurgood Marshall Middle School', '', '', '7520', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 11),
+(12, 'Thomas J Higgins Elementary Community Academy', '', '', '7210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 12),
+(14, 'James Weldon Johnson Elementary School', '', '', '6940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 14),
+(15, 'Frederick A Douglass Academy High School', '', '', '6630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 15),
+(17, 'John Whistler Elementary School', '', '', '6420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 17),
+(18, 'Mark Twain Elementary School', '', '', '6240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 18),
+(19, 'Frazier Prospective IB Magnet Elementary School', '', '', '5850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:16:58', 'jhorning', 19),
+(21, 'John T Pirie Fine Arts & Academic Center Elementary School', '', '', '5440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 21),
+(22, 'John Palmer Elementary School', '', '', '5260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 22),
+(23, 'William J Onahan Elementary School', '', '', '5190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 23),
+(24, 'Norwood Park Elementary School', '', '', '5120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 24),
+(25, 'Josephine C Locke Elementary School', '', '', '4510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 25),
+(26, 'Henry R Clissold Elementary School', '', '', '2820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 26),
+(27, 'Franklin Elementary Fine Arts Center', '', '', '3420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 27),
+(28, 'Jordan Elementary Community School', '', '', '2870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 28),
+(29, 'William C Goudy Elementary School', '', '', '3590', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 29),
+(30, 'Augustus H Burley Elementary School', '', '', '2470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 30),
+(31, 'Milton Brunson Math & Science Specialty Elementary School', '', '', '2550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 31),
+(32, 'Peter Cooper Elementary Dual Language Academy', '', '', '2890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 32),
+(33, 'South Shore Fine Arts Academy', '', '', '2015', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 33),
+(34, 'Lake View High School', '', '', '1430', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 34),
+(35, 'John F Kennedy High School', '', '', '1420', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 35),
+(36, 'Dr. Jorge Prieto Math and Science', '', '', '8023', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 36),
+(37, 'Emil G Hirsch Metropolitan High School', '', '', '1380', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 37),
+(38, 'John M Harlan Community Academy High School', '', '', '1350', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 38),
+(39, 'Langston Hughes Elementary School', '', '', '8060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 39),
+(40, 'John Foster Dulles Elementary School', '', '', '6860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 40),
+(41, 'Irene C Hernandez Middle School for the Advancement of Science', '', '', '8021', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 41),
+(42, 'Skinner West Elementary School', '', '', '5940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 42),
+(43, 'Roberto Clemente Community Academy High School', '', '', '1840', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 43),
+(44, 'Orozco Fine Arts & Sciences Elementary School', '', '', '7610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 44),
+(45, 'Brighton Park Elementary School', '', '', '7470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 45),
+(46, 'Oliver S Westcott Elementary School', '', '', '7260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 46),
+(47, 'Lenart Elementary Regional Gifted Center', '', '', '7240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 47),
+(48, 'Ashburn Community Elementary School', '', '', '7100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 48),
+(49, 'Adam Clayton Powell Paideia Community Academy Elementary School', '', '', '7010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 49),
+(50, 'Dvorak Technology Academy', '', '', '6760', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 50),
+(51, 'Michele Clark Academic Prep Magnet High School', '', '', '6620', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 51),
+(52, 'Albany Park Campus', '', '', '6290', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 52),
+(53, 'Richard Yates Elementary School', '', '', '6510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 53),
+(54, 'George B Swift Elementary Specialty School', '', '', '6130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 54),
+(55, 'Helga A Haugan Elementary School', '', '', '3810', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 55),
+(56, 'Al Raby High School', '', '', '7690', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 56),
+(57, 'Alessandro Volta Elementary School', '', '', '6270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 57),
+(58, 'Mancel Talcott Elementary School', '', '', '6140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 58),
+(59, 'Herbert Spencer Elementary Math & Science Academy', '', '', '6000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 59),
+(61, 'John D Shoop Math-Science Technical Academy Elementary School', '', '', '5930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 61),
+(62, 'Arnold Mireles Elementary Academy', '', '', '5880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 62),
+(63, 'Peter A Reinberg Elementary School', '', '', '5600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 63),
+(64, 'Casimir Pulaski Elementary Fine Arts Academy', '', '', '5520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 64),
+(65, 'William H Seward Communication Arts Academy Elementary School', '', '', '5820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 65),
+(66, 'Jonathon Y Scammon Elementary School', '', '', '5730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 66),
+(67, 'Sidney Sawyer Elementary School', '', '', '5710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 67),
+(68, 'Paul Robeson High School', '', '', '1320', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 68),
+(69, 'Christian Fenger Academy High School', '', '', '1310', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 69),
+(70, 'Mary Gage Peterson Elementary School', '', '', '5410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 70),
+(71, 'Louis Pasteur Elementary School', '', '', '5310', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 71),
+(72, 'Emmett Louis Till Math and Science Academy', '', '', '4740', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 72),
+(73, 'Oscar F Mayer Elementary School', '', '', '4680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 73),
+(74, 'James Russell Lowell Elementary School', '', '', '4540', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 74),
+(75, 'Francis W Parker Elementary Community Academy', '', '', '5270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 75),
+(76, 'William Bishop Owen Scholastic Academy Elementary School', '', '', '5240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 76),
+(77, 'West Park Elementary Academy', '', '', '5140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 77),
+(78, 'Philip Murray Elementary Language Academy', '', '', '5030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 78),
+(79, 'Annie Keller Elementary Gifted Magnet School', '', '', '4960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 79),
+(80, 'Daniel C Beard Elementary School', '', '', '4950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 80),
+(81, 'Donald Morrill Math & Science Elementary School', '', '', '4880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 81),
+(82, 'Bernhard Moos Elementary School', '', '', '4870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 82),
+(83, 'Henry D Lloyd Elementary School', '', '', '4500', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 83),
+(84, 'Leslie Lewis Elementary School', '', '', '4450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 84),
+(85, 'Joshua D Kershaw Elementary School', '', '', '4270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 85),
+(86, 'Rufus M Hitch Elementary School', '', '', '4010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 86),
+(87, 'Ninos Heroes Elementary Academic Center', '', '', '3720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 87),
+(88, 'Frank W Gunsaulus Elementary Scholastic Academy', '', '', '3690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 88),
+(89, 'Nathanael Greene Elementary School', '', '', '3650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 89),
+(90, 'Joseph E Gary Elementary School', '', '', '3520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:00:16', 'jhorning', 90),
+(91, 'Stephen F Gale Elementary Community Academy', '', '', '3480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 91),
+(92, 'Gerald Delgado Kanoon Elementary Magnet School', '', '', '3370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 92),
+(93, 'Richard Edwards Elementary School', '', '', '3200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 93),
+(94, 'John F Eberhart Elementary School', '', '', '3140', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 94),
+(95, 'Christopher Columbus Elementary School', '', '', '2850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 95),
+(96, 'Logandale Middle School', '', '', '7560', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 96),
+(97, 'Wilma Rudolph Elementary Learning Center', '', '', '7350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 97),
+(98, 'Henry O Tanner Elementary School', '', '', '6970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 98),
+(99, 'Robert Lindblom Math & Science Academy High School', '', '', '7110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 99),
+(100, 'James Ward Elementary School', '', '', '6330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 100),
+(101, 'James Wadsworth Elementary School', '', '', '6300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 101),
+(102, 'Talman Elementary School', '', '', '6680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 102),
+(104, 'A.N. Pritzker School', '', '', '6460', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 104),
+(105, 'Suder Montessori Magnet Elementary School', '', '', '6340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 105),
+(106, 'Franz Peter Schubert Elementary School', '', '', '5800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 106),
+(107, 'Cesar E Chavez Multicultural Academic Center Elementary School', '', '', '5640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 107),
+(108, 'Irma C Ruiz Elementary School', '', '', '5390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 108),
+(109, 'James B McPherson Elementary School', '', '', '4800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 109),
+(110, 'William B Ogden Elementary School', '', '', '5150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 110),
+(111, 'Alfred Nobel Elementary School', '', '', '5110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 111),
+(112, 'Inter-American Elementary Magnet School', '', '', '4890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 112),
+(115, 'Mary McLeod Bethune Elementary School', '', '', '8020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 115),
+(117, 'George B McClellan Elementary School', '', '', '4710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 117),
+(118, 'Joseph Lovett Elementary School', '', '', '4530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 118),
+(119, 'Eli Whitney Elementary School', '', '', '6440ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 119),
+(120, 'Frank W Reilly Elementary School', '', '', '5590ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 120),
+(121, 'LaSalle Elementary Language Academy', '', '', '4420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 121),
+(122, 'South Loop Elementary School', '', '', '3960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 122),
+(123, 'Laughlin Falconer Elementary School', '', '', '3270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 123),
+(124, 'Patrick Henry Elementary School', '', '', '3940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 124),
+(125, 'James Hedges Elementary School', '', '', '3900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 125),
+(126, 'Hawthorne Elementary Scholastic Academy', '', '', '3830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 126),
+(127, 'Bret Harte Elementary School', '', '', '3780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 127),
+(128, 'Sharon Christa McAuliffe Elementary School', '', '', '3770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 128),
+(129, 'Alexander Hamilton Elementary School', '', '', '3730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 129),
+(130, 'Nathan Hale Elementary School', '', '', '3710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 130),
+(131, 'Ariel Elementary Community Academy', '', '', '3640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 131),
+(132, 'Daniel J Corkery Elementary School', '', '', '2910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 132),
+(133, 'Salmon P Chase Elementary School', '', '', '2760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 133),
+(134, 'Esmond Elementary School', '', '', '3250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 134),
+(135, 'Ralph H Metcalfe Elementary Community Academy', '', '', '3190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 135),
+(136, 'Jacob Beidler Elementary School', '', '', '2250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 136),
+(137, 'Jonathan  Burr Elementary School', '', '', '2530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 137),
+(138, 'Frank I Bennett Elementary School', '', '', '2280', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 138),
+(139, 'George Washington High School', '', '', '1630', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 139),
+(140, 'Benito Juarez Community Academy High School', '', '', '1890', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 140),
+(141, 'Kenwood Academy High School', '', '', '1710', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 141),
+(144, 'Friedrich W Von Steuben Metropolitan Science High School', '', '', '1610', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:37', 'jhorning', 144),
+(145, 'Morgan Park High School', '', '', '1490', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 145),
+(147, 'Thomas Kelly High School', '', '', '1400', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 147),
+(148, 'Skinner North Classical Elementary', '', '', '8024', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 148),
+(149, 'John A Walsh Elementary School', '', '', '6320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 149),
+(150, 'William K New Sullivan Elementary School', '', '', '6100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 150),
+(151, 'Walter Payton College Preparatory High School', '', '', '1090', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 151),
+(152, 'Crane Medical Preparatory High School', '', '', '1270', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:20:22', 'jhorning', 152),
+(153, 'Roald Amundsen High School', '', '', '1210', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 153),
+(154, 'Robert A Black Magnet Elementary School', '', '', '7860ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 154),
+(155, 'Daniel S Wentworth Elementary School', '', '', '6390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 155),
+(156, 'Roger C Sullivan High School', '', '', '1570', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 156),
+(157, 'Albert R Sabin Elementary Magnet School', '', '', '7790', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 157),
+(158, 'Manuel Perez Elementary School', '', '', '2930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 158),
+(159, 'Helen Peirce International Studies Elementary School', '', '', '5360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 159),
+(160, 'William P Nixon Elementary School', '', '', '5100ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 160),
+(162, 'Hannah G Solomon Elementary School', '', '', '5980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 163),
+(163, 'Ogden International High School', '', '', '8083', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 164),
+(164, 'Mark Sheridan Elementary Math & Science Academy', '', '', '4920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 165),
+(165, 'Maria Saucedo Elementary Scholastic Academy', '', '', '4250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 166),
+(166, 'New Field Elementary School', '', '', '7060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 167),
+(167, 'John Marshall Metropolitan High School', '', '', '1470', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 168),
+(168, 'Theodore Roosevelt High School', '', '', '1520', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 169),
+(169, 'North River Elementary School', '', '', '7890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 170),
+(170, 'Thomas Drummond Elementary School', '', '', '3120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 171),
+(171, 'Mount Greenwood Elementary School', '', '', '4940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 172),
+(172, 'Stephen T Mather High School', '', '', '1480', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 173),
+(173, 'Little Village Elementary School', '', '', '2590', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 174),
+(174, 'Mildred I Lavizzo Elementary School', '', '', '6260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 175),
+(175, 'Edward Coles Elementary Language Academy', '', '', '2830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 176),
+(176, 'Agustin Lara Elementary Academy', '', '', '3980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 177),
+(177, 'John H Kinzie Elementary School', '', '', '4330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 178),
+(179, 'Henry H Nash Elementary School', '', '', '5050', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 180),
+(180, 'Kelvyn Park High School', '', '', '1410', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 181);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(181, 'DeWitt Clinton Elementary School', '', '', '2810', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 182),
+(182, 'Henry Clay Elementary School', '', '', '2790', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 183),
+(183, 'William G Hibbard Elementary School', '', '', '4000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 184),
+(184, 'Johann W von Goethe Elementary School', '', '', '3560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 185),
+(185, 'Frank L Gillespie Elementary School', '', '', '3530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 186),
+(186, 'Marcus Moziah Garvey Elementary School', '', '', '5420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 187),
+(187, 'Frederick Funston Elementary School', '', '', '3460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 188),
+(188, 'Edward Everett Elementary School', '', '', '3260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 189),
+(189, 'Everett McKinley Dirksen Elementary School', '', '', '2950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 190),
+(190, 'Charles Kozminski Elementary Community Academy', '', '', '4390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 191),
+(191, 'John W Cook Elementary School', '', '', '2860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 192),
+(192, 'Chicago Academy Elementary School', '', '', '6670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 193),
+(193, 'Bowen High School', '', '', '7540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 194),
+(194, 'Orville T Bright Elementary School', '', '', '2390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 195),
+(195, 'Adlai E Stevenson Elementary School', '', '', '6030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 196),
+(196, 'STEM Magnet Academy', '', '', '8678', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:15', 'admin_script', 197),
+(197, 'Whitney M Young Magnet High School', '', '', '1810', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 198),
+(198, 'William H Prescott Elementary School', '', '', '5500', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 199),
+(199, 'Portage Park Elementary School', '', '', '5490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 200),
+(200, 'Paul Cuffe Math-Science Technology Academy Elementary School', '', '', '4090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 201),
+(201, 'John B Murphy Elementary School', '', '', '5020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 202),
+(202, 'Genevieve Melody Elementary School', '', '', '7190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 203),
+(203, 'Theodore Herzl Elementary School', '', '', '3970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 204),
+(204, 'Little Village High School Campus', '', '', '1130', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 205),
+(205, 'David G Farragut Career Academy High School', '', '', '1300', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 206),
+(206, 'Edgebrook Elementary School', '', '', '3170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 207),
+(207, 'Lazaro Cardenas Elementary School', '', '', '4320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 208),
+(208, 'Columbia Explorers Elementary Academy', '', '', '5860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 209),
+(209, 'Horace Greeley Elementary School', '', '', '2730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 210),
+(210, 'Percy L Julian High School', '', '', '1870', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 211),
+(211, 'George F Cassell Elementary School', '', '', '2720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 212),
+(212, 'Charles G Hammond Elementary School', '', '', '3750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 213),
+(213, 'Chicago Vocational Career Academy High School', '', '', '1010', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 214),
+(214, 'Arthur E. Canty Elementary School', '', '', '2620', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 215),
+(215, 'Louis A Agassiz Elementary School', '', '', '2030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 216),
+(216, 'Alcott High School for the Humanities', '', '', '8035', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 217),
+(217, 'South Shore International College Prep High School', '', '', '8676', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 218),
+(218, 'Ronald Brown Elementary Community Academy', '', '', '5040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 219),
+(219, 'Francis M McKay Elementary School', '', '', '4760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 220),
+(220, 'Stephen K Hayt Elementary School', '', '', '3850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 221),
+(221, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 222),
+(222, 'Belmont-Cragin Elementary School', '', '', '3390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 223),
+(224, 'Galileo Math & Science Scholastic Academy Elementary School', '', '', '4160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 225),
+(226, 'John H Hamline Elementary School', '', '', '3740ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 227),
+(227, 'Alexander Graham Elementary School', '', '', '3600ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 228),
+(228, 'Harriet Beecher Stowe Elementary School', '', '', '6080ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 229),
+(229, 'Chicago Quest North', '', '', '8672', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 230),
+(230, 'John W Garvy Elementary School', '', '', '3510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 231),
+(231, 'Wendell Phillips Academy High School', '', '', '1510', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 232),
+(232, 'Namaste Charter Elementary School', '', '', '7920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 233),
+(233, 'Daniel R Cameron Elementary School', '', '', '2610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 234),
+(234, 'Morton School of Excellence', '', '', '6800', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 235),
+(235, 'Socorro Sandoval Elementary School', '', '', '6430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 236),
+(236, 'John H Vanderpoel Elementary Magnet School', '', '', '6250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 237),
+(237, 'Claremont Academy Elementary School', '', '', '7830', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 238),
+(238, 'Edward White Elementary Career Academy', '', '', '7440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 239),
+(239, 'Dr. Martin L. King Jr. Academy of Social Justice', '', '', '7250', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:26:05', 'jhorning', 240),
+(240, 'Richard Henry Lee Elementary School', '', '', '7170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 241),
+(241, 'Tarkington School of Excellence Elementary School', '', '', '7160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 242),
+(242, 'John J Pershing Elementary Humanities Magnet', '', '', '5400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 243),
+(243, 'Florence Nightingale Elementary School', '', '', '5090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 244),
+(244, 'James E McDade Elementary Classical School', '', '', '4750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 245),
+(248, 'John Spry Elementary Community School', '', '', '6010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 249),
+(249, 'Norman A Bridge Elementary School', '', '', '2380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 250),
+(250, 'Washington D Smyser Elementary School', '', '', '5960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 251),
+(251, 'Harriet Sayre Elementary Language Academy', '', '', '5720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 252),
+(252, 'William H Ray Elementary School', '', '', '5560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 253),
+(253, 'John Milton Gregory Elementary School', '', '', '3660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 254),
+(254, 'Garfield Park Preparatory Academy Elementary School', '', '', '8064', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 255),
+(255, 'Alex Haley Elementary Academy', '', '', '2360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 256),
+(256, 'Ray Graham Training Center High School', '', '', '1950', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 257),
+(257, 'John L Marsh Elementary School', '', '', '4630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 258),
+(258, 'Fort Dearborn Elementary School', '', '', '3400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 259),
+(259, 'Marquette School of Excellence', '', '', '4620', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 260),
+(260, 'Calmeca Academy of Fine Arts and Dual Language', '', '', '7880', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 261),
+(261, 'George H Corliss High School', '', '', '1860', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 262),
+(262, 'Jean Baptiste Beaubien Elementary School', '', '', '2240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 263),
+(263, 'West Ridge Elementary School', '', '', '8440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 264),
+(264, 'James B Farnsworth Elementary School', '', '', '3280', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 265),
+(265, 'George Washington Elementary School', '', '', '6360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 266),
+(266, 'George Manierre Elementary School', '', '', '4580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 267),
+(267, 'Uplift Community High School', '', '', '2210', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 268),
+(268, 'Edward F Dunne Elementary School', '', '', '6050ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 269),
+(269, 'Carl von Linne Elementary School', '', '', '4490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 270),
+(270, 'George Armstrong International Studies Elementary School', '', '', '2080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 271),
+(272, 'Minnie Mars Jamieson Elementary School', '', '', '4180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 273),
+(273, 'Jacqueline B Vaughn Occupational High School', '', '', '1920', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 274),
+(274, 'Eric Solorio Academy High School', '', '', '8550', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 275),
+(276, 'Walter S Christopher Elementary School', '', '', '2780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 277),
+(277, 'Richard J Daley Elementary Academy', '', '', '6560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 278),
+(279, 'Federico Garcia Lorca Elementary School', '', '', '8330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 280),
+(280, 'George Washington Carver Military Academy High School', '', '', '1850', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 281),
+(281, 'Charles R Henderson Elementary School', '', '', '3920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 282),
+(282, 'James G Blaine Elementary School', '', '', '2300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 283),
+(283, 'Orr Academy High School', '', '', '1830', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 284),
+(284, 'Chicago Military Academy High School', '', '', '1800', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 285),
+(285, 'Woodlawn Community Elementary School', '', '', '3860', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 286),
+(286, 'Chicago Academy High School', '', '', '7770', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 287),
+(287, 'Wells Community Academy High School', '', '', '1640', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 288),
+(288, 'Eliza Chappell Elementary School', '', '', '2750', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 289),
+(289, 'Marvin Camras, Elementary School', '', '', '8600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 290),
+(290, 'Emiliano Zapata Elementary Academy', '', '', '3820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 291),
+(291, 'Lincoln Park High School', '', '', '1620', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 292),
+(292, 'Edward Tilden Career Community Academy High School', '', '', '1590', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 293),
+(293, 'Eugene Field Elementary School', '', '', '3350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 294),
+(294, 'George Washington Carver Primary School', '', '', '2690', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 295),
+(295, 'William Howard Taft High School', '', '', '1580', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 296),
+(296, 'Mariano Azuela Elementary School', '', '', '8660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 297),
+(297, 'Senn Campus', '', '', '1540', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 298),
+(299, 'Hanson Park Elementary School', '', '', '4770ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 300),
+(300, 'Joseph Brennemann Elementary School', '', '', '6600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 301),
+(301, 'Micheal M Byrne Elementary School', '', '', '2570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 302),
+(302, 'Daniel Boone Elementary School', '', '', '2320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 303),
+(303, 'John Hancock College Preparatory High School', '', '', '1200', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 304),
+(304, 'Carl Schurz High School', '', '', '1530', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 305),
+(305, 'Nancy B Jefferson Alternative High School', '', '', '2120', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 306),
+(306, 'Christian Ebinger Elementary School', '', '', '3150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 307),
+(307, 'Gwendolyn Brooks College Preparatory Academy High School', '', '', '1500', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 308),
+(308, 'William E Dever Elementary School', '', '', '3020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 20:48:40', 'jhorning', 309),
+(309, 'Manley Career Academy High School', '', '', '1460', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 310),
+(310, 'Grover Cleveland Elementary School', '', '', '2800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 311),
+(311, 'Castellanos Elementary School', '', '', '2510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 312),
+(312, 'Durkin Park Elementary School', '', '', '7870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 313),
+(316, 'Professional Library', '', '', '390', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 317),
+(317, 'Hope College Preparatory High School', '', '', '1940', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 318),
+(318, 'Chicago High School for Agricultural Sciences', '', '', '1790', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 319),
+(319, 'William J Bogan High School', '', '', '1230', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 320),
+(320, 'Hyde Park Academy High School', '', '', '1390', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 321),
+(321, 'Northside College Preparatory High School', '', '', '1740', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 322),
+(322, 'Marie Sklodowska Curie Metropolitan High School', '', '', '1820', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 323),
+(323, 'DuSable Campus', '', '', '1280', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 324),
+(324, 'John Barry Elementary School', '', '', '2160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 325),
+(325, 'Hiram H Belding Elementary School', '', '', '2260', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 326),
+(326, 'Lyman A Budlong Elementary School', '', '', '2440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 327),
+(328, 'Intrinsic Charter High School', '', '', '9619', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 329),
+(329, 'Chicago High School for the Arts', '', '', '8047', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 330),
+(330, 'William E B Dubois Elementary School', '', '', '8010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 331),
+(331, 'James Shields Elementary School', '', '', '5910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 332),
+(332, 'Laura S Ward Elementary School', '', '', '5470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 333),
+(333, 'Chicago Intl Charter - Northtown', '', '', '7740', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 334),
+(334, 'George Leland Elementary School', '', '', '7320', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 335),
+(335, 'John T McCutcheon Elementary School', '', '', '6910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 336),
+(336, 'Johnnie Colemon Elementary Academy', '', '', '6170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 337),
+(337, 'Douglas Taylor Elementary SchoolÂ ', '', '', '6150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 338),
+(338, 'Charles Sumner Math &amp; Science Community Academy Elementary School', '', '', '6110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:15:54', 'jhorning', 339),
+(339, 'Mount Vernon Elementary SchoolÂ ', '', '', '4980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 340),
+(340, 'James Monroe Elementary SchoolÂ ', '', '', '4850', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 341),
+(341, 'Ida B Wells Preparatory Elementary Academy', '', '', '5250', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 342),
+(342, 'Neal F Simeon Career Academy High School', '', '', '1150', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 343),
+(343, 'Ellen Mitchell Elementary School', '', '', '4840', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 344),
+(344, 'Cyrus H McCormick Elementary School', '', '', '4720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 345),
+(345, 'Michael Faraday Elementary School', '', '', '4640', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 346),
+(346, 'Kate S Kellogg Elementary SchoolÂ ', '', '', '4240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 347),
+(347, 'Phoebe Apperson Hearst Elementary School', '', '', '3890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 348),
+(348, 'John Harvard Elementary School of Excellence', '', '', '3800', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 349),
+(349, 'Walter Q Gresham Elementary School', '', '', '3670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 350),
+(350, 'ASPIRA Charter - Haugan Campus', '', '', '3500', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 351),
+(351, 'Robert Fulton Elementary School', '', '', '3450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 352),
+(352, 'Joseph Kellman Corporate Community Elementary School', '', '', '3410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:17:19', 'jhorning', 353),
+(353, 'John Fiske Elementary School', '', '', '3360', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 354),
+(354, 'Edward K Ellington Elementary School', '', '', '3220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 355),
+(355, 'Turner-Drew Elementary Language Academy', '', '', '3110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 356),
+(356, 'Arthur Dixon Elementary School', '', '', '3040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 357),
+(357, 'Nathan S Davis Elementary School', '', '', '2970', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 358),
+(358, 'Anna R. Langford Community Academy', '', '', '2900', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 359),
+(359, 'Burnside Elementary Scholastic Academy', '', '', '2520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 360),
+(360, 'Jane Addams Elementary SchoolÂ ', '', '', '2020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 361),
+(361, 'Ellen H Richards Career Academy High School', '', '', '1110', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 222);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(362, 'George Westinghouse High School', '', '', '1160', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 363),
+(363, 'Louisa May Alcott Elementary School', '', '', '2040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 364),
+(364, 'Charles P Steinmetz College Preparatory High School', '', '', '1560', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:14:20', 'jhorning', 365),
+(365, 'Gage Park High School', '', '', '1340', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 366),
+(367, 'North Lawndale College Prep Charter', '', '', '1105ALL', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 368),
+(369, 'William Jones College Preparatory High School', '', '', '1060', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 370),
+(370, 'William C Reavis Math &amp; Science Specialty Elementary School', '', '', '5580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:19:06', 'jhorning', 371),
+(371, 'William Penn Elementary School', '', '', '5370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 372),
+(372, 'Ronald E McNair Elementary School', '', '', '7040', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 373),
+(373, 'William F Finkl Elementary School', '', '', '3760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 374),
+(374, 'Rachel Carson Elementary School', '', '', '2660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 375),
+(377, 'Robert Healy Elementary School', '', '', '3880ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 378),
+(378, 'John Charles Haines Elementary School', '', '', '3700', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 379),
+(379, 'Philip Rogers Elementary School', '', '', '5630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 380),
+(380, 'Andrew Carnegie Elementary School', '', '', '2630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 381),
+(381, 'Mary Lyon Elementary School', '', '', '4560', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 382),
+(382, 'Marine Leadership Academy at Ames', '', '', '2090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 383),
+(383, 'Holden Elementary School', '', '', '4020', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 384),
+(384, 'Luther Burbank Elementary School', '', '', '2450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 385),
+(385, 'Asa Philip Randolph Elementary School', '', '', '3550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 386),
+(386, 'Edward N Hurley Elementary School', '', '', '4120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 387),
+(387, 'James Shields Middle School', '', '', '9597', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 388),
+(388, 'Dr. Martin Luther King Jr. College Prep High School', '', '', '1760', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:11', 'jhorning', 389),
+(389, 'Learn South', '', '', '8029', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 390),
+(390, 'Wildwood Elementary School', '', '', '6470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 391),
+(391, 'Pilsen Elementary Community Academy', '', '', '4210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 392),
+(392, 'North-Grand High School', '', '', '1140', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 393),
+(393, 'Abraham Lincoln Elementary School', '', '', '4480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 394),
+(394, 'Edward Beasley Elementary Magnet Academic Center', '', '', '6660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 395),
+(395, 'Newton Bateman Elementary School', '', '', '2190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 396),
+(396, 'Instituto Health Sciences Career Academy High School', '', '', '8026', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 397),
+(397, 'Enrico Tonti Elementary School', '', '', '6220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 398),
+(398, 'Stone Elementary Scholastic Academy', '', '', '6070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 399),
+(399, 'Northwest Middle School', '', '', '4600', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 400),
+(400, 'Carter G Woodson South Elementary School', '', '', '7820', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 401),
+(401, 'Wolfgang A Mozart Elementary School', '', '', '5000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 402),
+(403, 'Myra Bradwell Communications Arts & Sciences Elementary School', '', '', '2340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 404),
+(404, 'Back of the Yards High School', '', '', '9623', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 405),
+(405, 'Sarah E. Goode STEM Academy', '', '', '9598', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 406),
+(406, 'John C Coonley Elementary School', '', '', '2880', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 407),
+(407, 'John Greenleaf Whittier Elementary School', '', '', '6450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 408),
+(408, 'John C Burroughs Elementary School', '', '', '2540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 409),
+(409, 'Grant Campus', '', '', '7310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 410),
+(410, 'Alexander Graham Bell Elementary School', '', '', '2270', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 411),
+(411, 'Charles Allen Prosser Career Academy High School', '', '', '1070', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 412),
+(413, 'Amelia Earhart Options for Knowledge Elementary School', '', '', '7450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:55:30', 'jhorning', 414),
+(415, 'John M Smyth Elementary School', '', '', '5970ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 416),
+(416, 'Richard J Oglesby Elementary School', '', '', '5170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 417),
+(417, 'Josiah Pickard Elementary School', '', '', '5430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 418),
+(418, 'Ole A Thorp Elementary Scholastic Academy', '', '', '6190', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 419),
+(419, 'Albert G Lane Technical High School', '', '', '1440', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 420),
+(420, 'Gurdon S Hubbard High School', '', '', '1670', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 421),
+(423, 'National Teachers Elementary Academy', '', '', '6480ALL', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 424),
+(425, 'Air Force Academy High School', '', '', '1055', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 426),
+(426, 'Peace &amp; Education Coalition High School', '', '', '1123', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:21:52', 'jhorning', 427),
+(427, 'Austin College and Career Academy', '', '', '1145', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:58:52', 'jhorning', 428),
+(428, 'William Rainey Harper High School', '', '', '1360', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 429),
+(429, 'Northside Learning Center High School', '', '', '1690', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 430),
+(430, 'Southside Occupational Academy High School', '', '', '1700', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 431),
+(431, 'Simpson Academy High School for Young Women', '', '', '1750', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:22:14', 'jhorning', 432),
+(432, 'DeVry University Advantage Academy High School', '', '', '6990', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:20:39', 'jhorning', 433),
+(433, 'Bowen High School', '', '', '7540', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 194),
+(434, 'TEAM Englewood Community Academy High School', '', '', '8080', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 435),
+(435, 'Francisco I Madero Middle School', '', '', '6310', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 436),
+(436, 'Collins Academy High School', '', '', '1045', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 437),
+(437, 'Catalyst - Circle Rock', '', '', '4371', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 438),
+(438, 'Disney II Magnet High School', '', '', '9626', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 439),
+(439, 'Great Lakes Academy Charter School', '', '', '9643', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 440),
+(440, 'Ira F Aldridge Elementary School', '', '', '2710', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 441),
+(441, 'Phillip D Armour Elementary School', '', '', '2070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 442),
+(442, 'Arthur R Ashe Elementary School', '', '', '6900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 443),
+(443, 'John J Audubon Elementary School', '', '', '2110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 444),
+(444, 'Avalon Park Elementary School', '', '', '2130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 445),
+(445, 'Alice L Barnard Computer Math &amp; Science Center Elementary School', '', '', '2150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:54:11', 'jhorning', 446),
+(446, 'Clara Barton Elementary School', '', '', '2170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 447),
+(447, 'Perkins Bass Elementary School', '', '', '2180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 448),
+(448, 'Ludwig Van Beethoven Elementary School', '', '', '6540', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 449),
+(449, 'Blair Early Childhood Center', '', '', '4990', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:16', 'admin_script', 450),
+(450, 'Carrie Jacobs Bond Elementary School', '', '', '6550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 451),
+(451, 'Edward A Bouchet Math &amp; Science Academy Elementary School', '', '', '2430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:50:17', 'jhorning', 452),
+(452, 'Charles S Brownell Elementary School', '', '', '2410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 453),
+(453, 'Edmond Burke Elementary School', '', '', '2460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 454),
+(454, 'Burnham Elementary Inclusive Academy', '', '', '2480', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 455),
+(455, 'Charles P Caldwell Academy of Math &amp; Science Elementary School', '', '', '2580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:13:52', 'jhorning', 456),
+(456, 'Carroll-Rosenwald Specialty Elementary School', '', '', '2650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 457),
+(457, 'Willa Cather Elementary School', '', '', '6730', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 458),
+(458, 'Frederic Chopin Elementary School', '', '', '2770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 459),
+(459, 'George Rogers Clark Elementary School', '', '', '2230', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 460),
+(460, 'Mary E Courtenay Elementary Language Arts Center', '', '', '7910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 461),
+(461, 'Crown Community Academy of Fine Arts Center Elementary School', '', '', '2940', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:16:29', 'jhorning', 462),
+(462, 'Countee Cullen Elementary School', '', '', '4100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 463),
+(463, 'Charles R Darwin Elementary School', '', '', '2960', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 464),
+(464, 'Sir Miles Davis Magnet Elementary Academy', '', '', '7000', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 465),
+(465, 'Charles Gates Dawes Elementary School', '', '', '2980', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 466),
+(466, 'Jose De Diego Elementary Community Academy', '', '', '7420', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 467),
+(467, 'Stephen Decatur Classical Elementary School', '', '', '2990', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 468),
+(468, 'Robert Nathaniel Dett Elementary School', '', '', '6740', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 469),
+(469, 'Disney II Magnet School', '', '', '8045', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 470),
+(470, 'James R Doolittle Jr Elementary School', '', '', '3070', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 471),
+(471, 'John C Dore Elementary School', '', '', '3080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 472),
+(472, 'John B Drake Elementary School', '', '', '3100', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 473),
+(473, 'Charles W Earle Elementary School', '', '', '3130', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 474),
+(474, 'Thomas A Edison Regional Gifted Center Elementary School', '', '', '2220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:18:49', 'jhorning', 475),
+(475, 'Edison Park Elementary School', '', '', '2085', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 476),
+(476, 'Leif Ericson Elementary Scholastic Academy', '', '', '3240', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 477),
+(477, 'Medgar Evers Elementary School', '', '', '7990', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 478),
+(478, 'Fairfield Elementary Academy', '', '', '4660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 479),
+(479, 'Fernwood Elementary School', '', '', '3330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 480),
+(480, 'Foster Park Elementary School', '', '', '3430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 481),
+(481, 'Wendell E Green Elementary School', '', '', '4410', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 482),
+(482, 'Robert L Grimes Elementary School', '', '', '3680', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 483),
+(483, 'Virgil Grissom Elementary School', '', '', '3580', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 484),
+(484, 'Lionel Hampton Fine &amp; Performing Arts Elementary School', '', '', '2350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:17:34', 'jhorning', 485),
+(485, 'John Hay Elementary Community Academy', '', '', '3840', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 486),
+(486, 'Helen M Hefferan Elementary School', '', '', '3910', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 487),
+(487, 'Thomas A Hendricks Elementary Community Academy', '', '', '3930', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 488),
+(488, 'Oliver Wendell Holmes Elementary School', '', '', '4030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 489),
+(489, 'Thomas Hoyne Elementary School', '', '', '4080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 490),
+(490, 'Charles Evans Hughes Elementary School', '', '', '4110', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 491),
+(491, 'Washington Irving Elementary School', '', '', '5350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 492),
+(492, 'Mahalia Jackson Elementary School', '', '', '8090', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 493),
+(493, 'Friedrich L. Jahn Elementary of the Fine Arts', '', '', '4170', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 494),
+(494, 'Edward Jenner Elementary Academy of the Arts', '', '', '4200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 495),
+(495, 'Jensen Elementary Scholastic Academy', '', '', '6920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 496),
+(496, 'Scott Joplin Elementary School', '', '', '2330', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 497),
+(497, 'Joseph Jungman Elementary School', '', '', '4230', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 498),
+(498, 'Joyce Kilmer Elementary School', '', '', '4300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 499),
+(499, 'Rudyard Kipling Elementary School', '', '', '4350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 500),
+(500, 'Lawndale Elementary Community Academy', '', '', '4430', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 501),
+(501, 'Arthur A Libby Elementary School', '', '', '4470', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 502),
+(502, 'Rodolfo Lozano Bilingual &amp; International Center Elementary School', '', '', '4380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:15:07', 'jhorning', 503),
+(503, 'James Madison Elementary School', '', '', '4570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 504),
+(504, 'Horace Mann Elementary School', '', '', '4610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 505),
+(505, 'Roswell B Mason Elementary School', '', '', '4650', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 506),
+(506, 'Benjamin E Mays Elementary Academy', '', '', '7150', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 507),
+(507, 'Mary E McDowell Elementary School', '', '', '7390', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 508),
+(508, 'Irvin C Mollison Elementary School', '', '', '6950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 509),
+(509, 'Lillian R. Nicholson STEM Academy', '', '', '2200', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 510),
+(510, 'Oriole Park Elementary School', '', '', '5200', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 511),
+(511, 'Josefa Ortiz De Dominguez Elementary School', '', '', '3630', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 512),
+(512, 'Jesse Owens Elementary Community Academy', '', '', '3570', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 514),
+(513, 'Park Manor Elementary School', '', '', '5290', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 515),
+(514, 'Parkside Elementary Community Academy', '', '', '5300', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 516),
+(515, 'Ferdinand Peck Elementary School', '', '', '5340', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 517),
+(516, 'Ambrose Plamondon Elementary School', '', '', '5450', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 518),
+(517, 'Edgar Allan Poe Elementary Classical School', '', '', '5460', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 519),
+(518, 'Ernst Prussing Elementary School', '', '', '5510', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 520),
+(519, 'George M Pullman Elementary School', '', '', '5530', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 521),
+(520, 'Paul Revere Elementary School', '', '', '5610', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 522),
+(521, 'Jackie Robinson Elementary School', '', '', '6780', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 523),
+(522, 'Martha Ruggles Elementary School', '', '', '5660', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 524),
+(523, 'William H Ryder Math &amp; Science Specialty Elementary School', '', '', '5670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 18:19:32', 'jhorning', 525),
+(524, 'Rueben Salazar Elementary Bilingual Center', '', '', '6720', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 526),
+(525, 'Sauganash Elementary School', '', '', '5690', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 527),
+(526, 'Jesse Sherwood Elementary School', '', '', '5900', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 528),
+(527, 'Beulah Shoesmith Elementary School', '', '', '5920', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 529),
+(528, 'Wendell Smith Elementary School', '', '', '3870', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 530),
+(529, 'Frederick Stock Elementary School', '', '', '5770', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 531),
+(530, 'Elizabeth H Sutherland Elementary School', '', '', '6120', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 532),
+(531, 'Telpochcalli Elementary School', '', '', '3380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 533),
+(532, 'Velma F Thomas Early Childhood Center', '', '', '6710', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 534),
+(533, 'James N Thorp Elementary School', '', '', '6180', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 535),
+(534, 'Barbara Vick Early Childhood & Family Center', '', '', '2920', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 536),
+(535, 'Charles H Wacker Elementary School', '', '', '8030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 537),
+(536, 'Joseph Warren Elementary School', '', '', '6350', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 538),
+(537, 'Harold Washington Elementary School', '', '', '5380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 539),
+(538, 'Thomas J Waters Elementary School', '', '', '6370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 540),
+(539, 'Daniel Webster Elementary School', '', '', '6380', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 541);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(540, 'Ella Flagg Young Elementary School', '', '', '6520', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 542),
+(541, 'Southeast Area Elementary School', '', '', '9681', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 543),
+(542, 'Walter Henri Dyett High School for the Arts', '', '', '9682', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 544),
+(543, 'James Otis Elementary School', '', '', '5220', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 545),
+(544, 'William H Brown Elementary School', '', '', '2400', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 546),
+(545, 'William W Carter Elementary School', '', '', '2670', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 547),
+(546, 'Pablo Casals Elementary School', '', '', '4290', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 548),
+(547, 'Thomas Chalmers Specialty Elementary School', '', '', '2740', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 549),
+(548, 'George W Curtis Elementary School', '', '', '3160', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 550),
+(549, 'Charles S Deneen Elementary School', '', '', '3010', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 551),
+(550, 'Dewey Elementary Academy of Fine Arts', '', '', '3030', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 552),
+(551, 'Melville W Fuller Elementary School', '', '', '3440', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 553),
+(552, 'Julia Ward Howe Elementary School of Excellence', '', '', '4060', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 554),
+(553, 'Brian Piccolo Elementary Specialty School', '', '', '5210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 555),
+(554, 'Ravenswood Elementary School', '', '', '5550', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 556),
+(555, 'William T Sherman Elementary School', '', '', '5890', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 557),
+(556, 'Amos Alonzo Stagg Elementary School', '', '', '7760', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 558),
+(557, 'Matthew Gallistel Elementary Language Academy', '', '', '3490', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 559),
+(558, 'Lorenz Brentano Math & Science Academy Elementary School', '', '', '2370', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 560),
+(559, 'Theophilus Schmid Elementary School', '', '', '5950', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 561),
+(560, 'George W Tilton Elementary School', '', '', '6210', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 562),
+(561, 'Walter L Newberry Math & Science Academy Elementary School', '', '', '5080', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 563),
+(562, 'CPS Virtual Library', '', '', '10', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 564),
+(563, 'CPS Virtual Library - High School', '', '', '11', '', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:02', 'admin_script', 565),
+(564, 'CPS Virtual Library - Elementary School', '', '', '12', '', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:02:08', 'admin_script', 566),
+(565, 'Professional Virtual Library', '', '', '14', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 15:11:13', 'admin_script', 567),
+(566, 'Robert J. Richardson Middle School', '', '', '9685', '', 'true', 'true', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-02-08 14:34:17', 'admin_script', 568);
 
 -- --------------------------------------------------------
 
@@ -4324,8 +4394,8 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `slider` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` text NOT NULL,
   `title` text NOT NULL,
   `link` text NOT NULL,
@@ -4335,18 +4405,22 @@ CREATE TABLE `slider` (
   `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `slider_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `loc_type`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
-(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&loc_id=1', 'Advancing in Elementary School', 'All', 'true', 2, '2017-01-20 20:47:01', 'admin', 1),
-(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'All', 'true', 3, '2017-01-20 20:47:03', 'admin', 1),
-(7, 'CPS_5938.jpg', 'Grades K-2', 'page.php?page_id=48&amp;loc_id=1', '', 'All', 'true', 1, '2017-01-20 20:46:59', 'jhorning', 1),
-(12, 'parallax_9-12_med.jpg', 'Grades 9-12', 'http://cps.edu/Pages/InstructionalSupports.aspx', 'High School Course Catalog', 'All', 'true', 4, '2017-02-06 15:02:32', 'admin', 1);
+(3, 'parallax_3-5_med.jpg', 'Grades 3-5', 'page.php?page_id=45&amp;loc_id=1', 'Advancing in Elementary School', 'Default', 'true', 2, '2017-01-20 20:47:01', 'jhorning', 1),
+(4, 'parallax_6-8_med.jpg', 'Grades 6-8', 'page.php?page_id=46&loc_id=1', '8 ways parents can help with homework', 'Default', 'true', 3, '2017-01-20 20:47:03', 'admin', 1),
+(7, 'img_2176.jpg', 'CPS Elementary Battle of the Books', 'http://cpslibraries.wikispaces.com/ElementaryBattleoftheBooks', 'Battle of the Books helped me gain back the fun of reading! - Christian Aâ€‹.', 'Default', 'true', 1, '2017-01-20 20:46:59', 'jhorning', 1),
+(12, 'parallax_9-12_med.jpg', 'Grades 9-12', '', '', 'Default', 'true', 4, '2017-02-06 15:02:32', 'jhorning', 1),
+(13, 'reading-list-slider.jpg', 'Looking for a good book?', 'http://www.cps.edu/Pages/TL_Libraries.aspx', 'Check out the CPS Reading Lists', 'Default', 'true', 0, '2017-03-02 17:13:57', 'jhorning', 1),
+(15, '005831_cplearlylearningstem_1300x550.jpg', 'CPL', '', '', 'Default', 'true', 0, '2017-03-07 19:56:01', 'jhorning', 1);
 
 -- --------------------------------------------------------
 
@@ -4354,8 +4428,8 @@ INSERT INTO `slider` (`id`, `image`, `title`, `link`, `content`, `loc_type`, `ac
 -- Table structure for table `socialmedia`
 --
 
-CREATE TABLE `socialmedia` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `socialmedia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `heading` text NOT NULL,
   `facebook` text NOT NULL,
   `twitter` text NOT NULL,
@@ -4365,8 +4439,10 @@ CREATE TABLE `socialmedia` (
   `youtube` text NOT NULL,
   `tumblr` text NOT NULL,
   `use_defaults` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `socialmedia_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=567 ;
 
 --
 -- Dumping data for table `socialmedia`
@@ -4910,8 +4986,8 @@ INSERT INTO `socialmedia` (`id`, `heading`, `facebook`, `twitter`, `pinterest`, 
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `team` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` text NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
@@ -4920,8 +4996,10 @@ CREATE TABLE `team` (
   `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `team_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4929,244 +5007,25 @@ CREATE TABLE `team` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `users_loc_id_fk` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `users`
 --
 
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `aboutus`
---
-ALTER TABLE `aboutus`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aboutus_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `category_customers`
---
-ALTER TABLE `category_customers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_customers_loc_id_fk` (`cust_loc_id`);
-
---
--- Indexes for table `category_navigation`
---
-ALTER TABLE `category_navigation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_loc_id_fk` (`nav_loc_id`);
-
---
--- Indexes for table `contactus`
---
-ALTER TABLE `contactus`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `contactus_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customers_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `featured`
---
-ALTER TABLE `featured`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `featured_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `generalinfo`
---
-ALTER TABLE `generalinfo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `generalinfo_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `hottitles`
---
-ALTER TABLE `hottitles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `hottitles_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `icons_list`
---
-ALTER TABLE `icons_list`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `locations`
---
-ALTER TABLE `locations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `navigation`
---
-ALTER TABLE `navigation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `navigation_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pages_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `services`
---
-ALTER TABLE `services`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `services_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `setup`
---
-ALTER TABLE `setup`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `setup_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `slider`
---
-ALTER TABLE `slider`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `slider_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `socialmedia`
---
-ALTER TABLE `socialmedia`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `socialmedia_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `team`
---
-ALTER TABLE `team`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `team_loc_id_fk` (`loc_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `users_loc_id_fk` (`loc_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `aboutus`
---
-ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `category_customers`
---
-ALTER TABLE `category_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `category_navigation`
---
-ALTER TABLE `category_navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `contactus`
---
-ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
---
--- AUTO_INCREMENT for table `featured`
---
-ALTER TABLE `featured`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `generalinfo`
---
-ALTER TABLE `generalinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `hottitles`
---
-ALTER TABLE `hottitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `icons_list`
---
-ALTER TABLE `icons_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
---
--- AUTO_INCREMENT for table `locations`
---
-ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=569;
---
--- AUTO_INCREMENT for table `navigation`
---
-ALTER TABLE `navigation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
---
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
---
--- AUTO_INCREMENT for table `services`
---
-ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `setup`
---
-ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `slider`
---
-ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `socialmedia`
---
-ALTER TABLE `socialmedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
---
--- AUTO_INCREMENT for table `team`
---
-ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
