@@ -54,7 +54,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         if (in_array($fileToEdit_dir, $editFileListArr, true)) {
             if (file_exists($fileToEdit_dir)) {
                 //open file for Writing
-                $handle = fopen($fileToEdit_dir, 'w') or die('Cannot write to file: ' . $fileToEdit_dir);
+                $handle = fopen($fileToEdit_dir, 'w') or die('Cannot write to file: ' . $fileToEdit_dir . '. Check file permissions.');
                 $fileData = filter_var($_POST["edit_file"], FILTER_SANITIZE_STRING);
                 fwrite($handle, $fileData);
 

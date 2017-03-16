@@ -284,6 +284,37 @@ small {
     padding-bottom: 10px !important;
 }
 
+.highlight {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}
+
+span.rollover {
+    opacity: 1;
+    -o-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -webkit-transition: -webkit-transform 1s;
+    background:url('../images/mag.png') center center no-repeat #000;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+}
+
+span.rollover:hover {
+    opacity: .5;
+    -o-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -webkit-transition: -webkit-transform 1s;
+    -webkit-box-shadow: 0px 0px 4px #000;
+    -moz-box-shadow: 0px 0px 4px #000;
+    box-shadow: 0px 0px 4px #000;
+}
 
 /** Media Queries **/
 @media (min-width: 768px) {
