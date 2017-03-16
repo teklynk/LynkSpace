@@ -5,7 +5,7 @@ define('inc_access', TRUE);
 include_once('includes/header.inc.php');
 
 //check if user is logged in and is admin and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'setup.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true' && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'setup.php') {
 
     $fileToEdit_dir = $_GET['section'];
     $pageMsg="";
@@ -100,13 +100,13 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         <textarea id="editor" class="form-control" name="edit_file" rows="30"><?php echo $fileData; ?></textarea>
                     </div>
                     <div class="form-group">
-                    <span>
+                    <span><small>
                         <?php
                         if (file_exists($fileToEdit_dir)) {
                             echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
                         }
                         ?>
-                    </span>
+                    </small></span>
                     </div>
                     <input type="hidden" name="save_main" value="true"/>
                     <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
