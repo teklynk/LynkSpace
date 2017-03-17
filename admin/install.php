@@ -153,7 +153,9 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     <style type="text/css">
         html, body {
             margin-top: 0 !important;
-            background: #222 url('images/color-splash-3.jpg') center center /cover;
+            /*background: #222 url('images/color-splash-4.jpg') center center;*/
+            background: #fcfcfc;
+            background-size: cover;
         }
 
         .login-panel {
