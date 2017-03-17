@@ -288,9 +288,12 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group" id="site_options">
-                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="site_options" data-toggle="tooltip" data-original-title="Edit global site options" data-placement="top" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                     <i class='fa fa-fw fa-edit'></i> Site Options
                                 </button>
+                                <small>
+                                    &nbsp;&nbsp;Edit global site options.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
+                                </small>
                             </div>
                         </div>
                     </div>

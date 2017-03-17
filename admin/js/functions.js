@@ -246,10 +246,10 @@ $(document).ready(function () {
     });
     $('#site_theme').change(function () {
         if ($('#site_theme').val() == '') {
-            $('#theme_image_preview').attr('src', '//placehold.it/350x150&text=No Image');
+            $('#theme_image_preview').attr('src', '//placehold.it/240x280&text=No Image');
             $('#theme_href_preview').attr('href', '#');
         } else {
-            $('#theme_image_preview').attr('src', '../themes/'+$('#site_theme').val()+'/screenshot.png');
+            $('#theme_image_preview').attr('src', '../themes/'+$('#site_theme').val()+'/screenshot_thumb.png');
             $('#theme_href_preview').attr('href', '../themes/'+$('#site_theme').val()+'/screenshot.png');
         }
     });

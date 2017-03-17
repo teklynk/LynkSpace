@@ -189,7 +189,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     </style>
 
     <div class="row">
-        <div class="col-lg-8 col-md-offset-2">
+        <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-body">
                     <section class="install-form">

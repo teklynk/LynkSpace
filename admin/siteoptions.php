@@ -70,10 +70,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             }
             ?>
             <form name="siteoptionsform" class="dirtyForm" method="post" action="">
-                <div class="form-group" style="width:200px; height:200px; display:block;">
-                    <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank" id="theme_href_preview" title="Click to enlarge">
-                        <span class="rollover" ></span>
-                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" id="theme_image_preview" style="width:200px; height:200px; display:block;"/>
+                <div class="form-group">
+                    <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank" id="theme_href_preview">
+                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
                     </a>
                 </div>
                 <div class="form-group">

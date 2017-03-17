@@ -16,9 +16,9 @@ session_start();
     //Admin panel functions
     require_once('core/functions.php');
 
-    //IP Range is set in config
-    if ($IPrange <> '') {
-        if (!strstr($_SERVER['REMOTE_ADDR'], $IPrange)) {
+    //IP Range is set in config and contains numbers
+    if (!empty($IPrange)) {
+        if (!strstr(getRealIpAddr(), $IPrange)) {
             die('Permission denied'); //Do not execute any more code on the page
         }
     }
