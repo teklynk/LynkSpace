@@ -61,6 +61,6 @@ include_once('includes/header.inc.php');
         </div>
     </div>
 
-    <?php
-    include_once('includes/footer.inc.php');
-    ?>
+<?php
+include_once('includes/footer.inc.php');
+?>

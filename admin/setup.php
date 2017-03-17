@@ -309,9 +309,13 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                         </div>
                     <?php
                     }
+                    ?>
+
+                </div><!-- well -->
+
+                <?php
                 }
                 ?>
-            </div><!-- well -->
             <hr/>
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
