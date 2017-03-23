@@ -168,7 +168,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
 
             <div class="form-group">
                 <label>Site Title</label>
-                <input class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" required>
+                <input class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
             </div>
             <div class="form-group">
                 <label>Author</label>
@@ -286,7 +286,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="form-group" id="site_options">
                                 <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                     <i class='fa fa-fw fa-edit'></i> Site Options
@@ -302,7 +302,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
                     ?>
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group" id="delete_location">
                                     <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
                                         <i class='fa fa-fw fa-trash'></i> Delete this location

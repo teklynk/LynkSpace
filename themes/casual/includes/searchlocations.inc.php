@@ -1,5 +1,4 @@
 <!-- Search Locations Section -->
-<a name="search" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');
@@ -71,7 +70,7 @@ getSetup(); //from functions.php
                                 <form name="locSearchForm" action="index.php" method="get">
                                     <div id="custom-search-input">
                                         <div class="input-group col-md-12">
-                                            <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name" autofocus/>
+                                            <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name"/>
                                             <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id']; ?>"/>
                                             <span class="input-group-btn">
                                                 <button class="btn btn-primary" type="submit" name="schoolsearch_submit">

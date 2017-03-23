@@ -141,7 +141,7 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" required>
+                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
@@ -267,7 +267,7 @@ if ($_GET['preview'] > "") {
                 <form role="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" required>
+                        <input class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>

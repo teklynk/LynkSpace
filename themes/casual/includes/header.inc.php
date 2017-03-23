@@ -179,7 +179,7 @@ if (!empty($setupLogo)) {
                 <span class="icon-bar"></span>
             </button>
             <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-            <a href="http://<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><?php echo $locationName; ?></a>
+            <a href="//<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><?php echo $locationName; ?></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -192,7 +192,5 @@ if (!empty($setupLogo)) {
     </div>
     <!-- /.container -->
 </nav>
-
-<a name="main-content" tabindex="-1"></a>
 
 <div class="container">

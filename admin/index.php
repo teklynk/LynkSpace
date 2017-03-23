@@ -95,8 +95,8 @@ $userLogo = $rowSetup['logo'];
     <style type="text/css">
         html, body {
             margin-top: 0 !important;
-            /*background: #222 url('images/color-splash-4.jpg') center center;*/
-            background: #fcfcfc;
+            background: #fcfcfc url('images/color-splash-3.jpg') center center;
+            /*background: #fcfcfc;*/
             background-size: cover;
         }
 
@@ -196,8 +196,14 @@ $userLogo = $rowSetup['logo'];
                             //Creates a unique refering value/token - exposed in post
                             $_SESSION['unique_referer'] = generateRandomString();
                             ?>
+
                             <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3 class="text-center">Request a new password</h3>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label>Username</label>
                                         <div class="input-group">

@@ -81,7 +81,7 @@ if ($_GET['update'] == 'true') {
             ?>
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" required>
+                <input class="form-control" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" autofocus required>
             </div>
             <div class="form-group">
                 <label>Facebook</label>

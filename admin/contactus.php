@@ -81,7 +81,7 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" required>
+                    <input class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Intro Text</label>

@@ -1,5 +1,4 @@
 <!-- General Info Section -->
-<a name="generalinfo" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');

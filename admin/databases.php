@@ -31,7 +31,7 @@ if ($_GET['preview'] > "") {
     }
 
     if ($rowCustomerPreview['link'] > "") {
-        echo "<br/><p><b>Page Link:</b> " . $rowCustomerPreview['link'] . "</p>";
+        echo "<br/><p><b>Page Link:</b> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>" . $rowCustomerPreview['link'] . "</a></p>";
     }
 
     echo "</div>";
@@ -107,7 +107,7 @@ if ($_GET['section'] == $custSections[0]) {
     <div class="col-lg-2">
         <div class="form-group">
             <label for="nav_menu">Database Sections</label>
-            <select class="form-control" name="nav_menu" id="nav_menu" autofocus="autofocus">
+            <select class="form-control" name="nav_menu" id="nav_menu">
                 <?php echo $custMenuStr; ?>
             </select>
         </div>
@@ -216,7 +216,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <hr/>
                 <div class="form-group">
                     <label><?php echo $customerLabel; ?></label>
-                    <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" required>
+                    <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" autofocus required>
                 </div>
                 <hr/>
                 <div class="form-group">
@@ -533,7 +533,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" required>
+                        <input class="form-control count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>

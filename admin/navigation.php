@@ -123,7 +123,7 @@ if ($_GET['section'] == $navSections[0]) {
         <div class="col-lg-2">
             <div class="form-group">
                 <label for="nav_menu">Navigation Sections</label>
-                <select class="form-control" name="nav_menu" id="nav_menu" autofocus="autofocus">
+                <select class="form-control" name="nav_menu" id="nav_menu">
                     <?php echo $navMenuStr; ?>
                 </select>
             </div>
@@ -301,7 +301,7 @@ if ($_GET['section'] == $navSections[0]) {
                 <fieldset>
                     <div class="form-group">
                         <label for="nav_newname">Link Name</label>
-                        <input type="text" class="form-control count-text" name="nav_newname" id="nav_newname" maxlength="255">
+                        <input type="text" class="form-control count-text" name="nav_newname" id="nav_newname" maxlength="255" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="nav_newurl">Link URL</label>

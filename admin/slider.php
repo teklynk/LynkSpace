@@ -14,11 +14,12 @@ if ($_GET['preview'] > "") {
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+    echo "<h4>" . $rowSlidePreview['title'] . "</h4>";
     echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowSlidePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p><br/>";
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
     if ($rowSlidePreview['link']) {
-        echo "<br/><p><b>Page Link:</b> " . $rowSlidePreview['link'] . "</p>";
+        echo "<br/><p><b>Page Link:</b> <a href='" . $rowSlidePreview['link'] . "' target='_blank'>" . $rowSlidePreview['link'] . "</a></p>";
     }
 }
 ?>
@@ -119,7 +120,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <hr/>
         <div class="form-group">
             <label><?php echo $slideLabel; ?></label>
-            <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" required>
+            <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
         </div>
         <hr/>
         <div class="form-group">
@@ -322,7 +323,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
 		<div class='form-group'>
 		<label>Heading</label>
-		<input class='form-control count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' required>
+		<input class='form-control count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' autofocus required>
 		</div>
 		<table class='table table-bordered table-hover table-striped'>
 		<thead>

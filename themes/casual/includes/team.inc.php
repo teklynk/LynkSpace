@@ -1,5 +1,4 @@
 <!-- Team Section -->
-<a name="team" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');

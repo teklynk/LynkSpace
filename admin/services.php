@@ -30,7 +30,7 @@ if ($_GET['preview']>"") {
 	echo "<p>".$rowServicesPreview['content']."</p>";
 
 	if ($rowServicesPreview['link']) {
-		echo "<br/><p><b>Page Link:</b> " . $rowServicesPreview['link'] . "</p>";
+		echo "<br/><p><b>Page Link:</b> <a href='" . $rowServicesPreview['link'] . "' target='_blank'>" . $rowServicesPreview['link'] . "</a></p>";
 	}
 
 	echo "</div>";
@@ -124,7 +124,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" required>
+			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" autofocus required>
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -323,7 +323,7 @@ if ($_GET['preview']>"") {
 		<form name="servicesForm" class="dirtyForm" method="post" action="">
 			<div class="form-group">
 				<label>Heading</label>
-				<input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" required>
+				<input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['servicesheading']; ?>" placeholder="My Services" autofocus required>
 			</div>
 			<div class="form-group">
 				<label>Description</label>

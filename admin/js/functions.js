@@ -644,24 +644,26 @@ $(document).ready(function () {
         });
     });
 
-    //Installer button
-    $('.run_installer').click(function () {
+    //Run Installer Button
+    $('#run_installer').click(function () {
         setTimeout(function() {
-            $('.run_installer').attr('disabled', true);
-            $('.run_installer>i').removeClass('fa-cloud-upload');
-            $('.run_installer>i').addClass('fa-refresh fa-spin');
+            $('#run_installer').attr('disabled', true);
+            $('#run_installer>i').removeClass('fa-cloud-upload');
+            $('#run_installer>i').addClass('fa-refresh fa-spin');
         }, 500);
     });
 
-    //Not a Robot
+    //Not a Robot Function
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
             if ($('#not_robot').prop('checked')) {
                 $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
                 $('#sign_in').attr('disabled', false);
+                $('#run_installer').attr('disabled', false);
             } else {
                 $('#not_robot').attr('value', '');
                 $('#sign_in').attr('disabled', true);
+                $('#run_installer').attr('disabled', true);
             }
         }
     });
