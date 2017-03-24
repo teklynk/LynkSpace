@@ -4,9 +4,6 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-//Page Content container start -->
-echo "<div class='container'>";
-
 
 //needed for mailprocessor.php
 $_SESSION['file_referer'] = 'contact.php';
@@ -42,7 +39,7 @@ echo "</div>";
 
         <div class="row">
             <div class="col-lg-12">
-                <h3><?php echo $contactBlurb; ?></h3><br/>
+                <h2><?php echo $contactBlurb; ?></h2><br/>
             </div>
         </div>
 

@@ -7,25 +7,25 @@ if (!defined('inc_access')) {
 
 if ($customerNumRows > 0) {
 
-    echo "<div class='row' id='databases'>";
+    echo "<div class='row'>";
+    echo "<div class='container'>";
 
     if (!empty($customerCatName)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
+        echo "<div class='col-lg-12'>";
+        echo "<h2 class='page-header customers'>" . $customerCatName . "</h2>";
         echo "</div>";
     } elseif (!empty($customerHeading)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<div class='col-lg-12'>";
+        echo "<h2 class='page-header customers'>" . $customerHeading . "</h2>";
         echo "</div>";
     }
 
     if (!empty($customerBlurb)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<div class='col-lg-12'>";
         echo "<p class='text-left'>" . $customerBlurb . "</p>";
         echo "</div>";
     }
-
-    echo "<div class='row row_pad'>";
+    echo "<div style='clear:both;'></div>";
 
     $customersCatCount = 0;
 
@@ -39,8 +39,8 @@ if ($customerNumRows > 0) {
         if ($customerCatId != 0) {
             //prints the cat title/name
             $customersCatCount++;
-            echo "<div class='col-xs-12 col-lg-12 cat-title catnameid-" . $customerCatId . " '>";
-            echo "<a href='databases.php?loc_id=".$_GET['loc_id']."&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
+            echo "<div class='col-lg-12 catnameid-" . $customerCatId . " '>";
+            echo "<a href='databases.php?loc_id=".$_GET['loc_id']."&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h2 class='page-header customers'>" . $customerCatName . "</h2></a>";
             echo "</div>";
             echo "<div style='clear:both;'></div>";
         }
@@ -106,12 +106,12 @@ if ($customerNumRows > 0) {
     }
 
     echo "</div>"; //row
+    echo "</div>"; //container
 
-    echo "</div>"; //row_pad
 
 } else {
 
-    echo "<div class='col-lg-12'><h1 class='page'>Page not found</h1></div>";
+    echo "<div class='col-lg-12'><h2 class='page'>Page not found</h2></div>";
     echo "<div class='col-xs-12 col-lg-12'>This page is not available.</div>";
 
 }

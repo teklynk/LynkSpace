@@ -83,11 +83,12 @@ header.carousel .fill {
 /* Footer Styles */
 
 footer {
-    margin: 50px 0;
+    margin: 0;
 }
 
 .footer {
-    margin-top: 50px;
+    margin-top: 60px;
+    padding-top: 0px;
     background: #f5f5f5;
 }
 .cat-title {
@@ -95,6 +96,9 @@ footer {
 }
 .databases {
     border-top: none;
+}
+.databases .container {
+    padding:0px;
 }
 
 .col-md-12>p>img, .col-md-8>p>img, .col-md-4>p>img, .col-md-4>img,.col-md-2>img  {

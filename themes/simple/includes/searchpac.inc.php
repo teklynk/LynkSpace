@@ -98,7 +98,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                     </div>
 
                 </div>
-                <div class="input-group col-md-12 text-center center-block">
+                <div class="input-group col-lg-12 text-center center-block">
                     <?php
                     //EXAMPLE: getNav($navSection,$dropdown,$pull)
                     getNav('Search', 'false', 'center');

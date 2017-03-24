@@ -7,7 +7,7 @@ if (!defined('inc_access')) {
     <!-- Footer -->
     <div class="container-fluid footer">
         <div class="container">
-            <footer class="footer" id="footer">
+            <footer>
                 <?php
                 include 'generalinfo.inc.php';
 

@@ -11,7 +11,7 @@ $customersItemCount = 0;
 if ($customerNumRows > 0) {
 
     if (!empty($customerHeading)) {
-        echo "<div class='col-lg-12 cat-title'>";
+        echo "<div class='col-lg-12'>";
         echo "<h2 class='page-header customers'>" . $customerHeading . "</h2>";
         echo "</div>";
     }
