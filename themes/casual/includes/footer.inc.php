@@ -14,7 +14,7 @@ if (!defined('inc_access')) {
                 getNav('Footer', 'false', 'left');
                 ?>
             </div>
-            <?php include 'includes/generalinfo.inc.php'; ?>
+            <?php include 'generalinfo.inc.php'; ?>
         </div>
         <div id="belowfooter">
             <div class="container">

@@ -36,7 +36,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/cps-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/business-simple.min.css">
 
     <!-- Custom over-write  -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/custom-style.css">
@@ -130,39 +130,23 @@ session_start();
 <![endif]-->
 
 <!-- Navigation -->
-<nav class="navbar navbar-static-top" id="top" role="navigation" style="margin-bottom: 0;">
+<nav class="navbar navbar-inverse navbar-fixed-top" id='top' role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                <i class="fa fa-bars fa-2x cps-blue"></i>
-                <span class="cps-blue toggbutton">MENU</span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a href="http://<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" width="144" alt="" title="" border="0"/></a>
+            <a class="navbar-brand" href="index.php"><?php echo $setupTitle;?></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav('Top', 'true', 'left');
+            getNav('Top','true','right');
             ?>
-            <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
-                <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
-                <script type="text/javascript">
-                    function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false
-                        }, 'google_translate_element');
-                    }
-                </script>
-                <!--End Google Translate Code -->
-                <?php include 'socialmedia.inc.php'; ?>
-            </div>
-            <div style="clear:both;"></div>
         </div>
         <!-- /.navbar-collapse -->
     </div>

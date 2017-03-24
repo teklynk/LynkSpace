@@ -27,11 +27,9 @@ getSetup(); //from functions.php
     </script>
 
     <div class="row" id="searchlocations">
-        <div class="col-xs-12 col-lg-12">
+        <div class="col-lg-12">
 
-            <div class="row">
-
-                <h1 class="text-white">Search School Libraries</h1>
+                <h2 class="page-header">Search School Libraries</h2>
 
                 <div class="panel with-nav-tabs panel-default">
                     <?php
@@ -74,7 +72,7 @@ getSetup(); //from functions.php
                                             <input type="text" class="form-control" id="loc_name" name="loc_name" placeholder="School Name"/>
                                             <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id']; ?>"/>
                                             <span class="input-group-btn">
-                                                <button class="btn btn-danger" type="submit" name="schoolsearch_submit">
+                                                <button class="btn btn-default" type="submit" name="schoolsearch_submit">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                             </span>
@@ -92,7 +90,7 @@ getSetup(); //from functions.php
                                             <div class="input-group col-md-12">
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-danger" type="submit" name="ls2pac_submit">
+                                                    <button class="btn btn-default" type="submit" name="ls2pac_submit">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </span>
@@ -112,7 +110,7 @@ getSetup(); //from functions.php
                                             <div class="input-group col-md-12">
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-danger" type="submit" name="ls2kids_submit">
+                                                    <button class="btn btn-default" type="submit" name="ls2kids_submit">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </span>
@@ -123,9 +121,7 @@ getSetup(); //from functions.php
                                 <?php
                             }
                             ?>
-
                         </div>
-
                     </div>
                 </div>
                 <div class="input-group col-md-12 text-center center-block">
@@ -134,7 +130,5 @@ getSetup(); //from functions.php
                     getNav('Search', 'false', 'center');
                     ?>
                 </div>
-            </div>
-
         </div>
     </div>

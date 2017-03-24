@@ -53,7 +53,7 @@ getSetup(); //from functions.php
                                         echo "<li><a href='#tab3default' data-toggle='tab'>LS2 Kids</a></li>";
                                     }
                                     if ($setupLs2pac == 'true') {
-                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2PAC</a></li>";
+                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2 PAC</a></li>";
                                     }
                                 }
                                 ?>

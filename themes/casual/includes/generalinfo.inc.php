@@ -11,7 +11,7 @@ if (!empty($generalInfoContent)) {
 
     if (!empty($generalInfoHeading)) {
         echo "<div class='row>";
-        echo "<h3 class='generalinfo'>" . $generalInfoHeading . "</h3>";
+        echo "<h2 class='generalinfo'>" . $generalInfoHeading . "</h2>";
         echo "</div>";
     }
 

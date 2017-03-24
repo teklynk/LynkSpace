@@ -5,35 +5,34 @@ if (!defined('inc_access')) {
 ?>
 
     <!-- Footer -->
-    <footer class="footer" id="footer">
+    <div class="container-fluid footer">
         <div class="container">
-            <div class="row row_pad">
+            <footer class="footer" id="footer">
                 <?php
+                include 'generalinfo.inc.php';
+
+                echo "<div style='clear:both;'></div>";
+
                 getNav('Footer', 'false', 'left');
                 ?>
-            </div>
-            <?php include 'generalinfo.inc.php'; ?>
-        </div>
-        <div id="belowfooter">
-            <div class="container">
-                <div class="socialDiv pull-left hidden-sm hidden-md hidden-lg hidden-xl">
-                    <div class="row">
+                <div class="row" id="socialmedia">
+                    <div class="col-md-12">
                         <?php include 'socialmedia.inc.php'; ?>
                     </div>
                 </div>
                 <div style="clear:both;"></div>
-                <div class="row row_pad">
-                    <p>
-                        <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-                    </p>
+                <div class="row copyright">
+                    <div class="col-lg-6 text-left">
+                        <p>
+                            Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </footer>
         </div>
-    </footer>
-
+    </div>
     <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">Scroll To Top</a>
-
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript" language="javascript">
         $('.carousel').carousel({

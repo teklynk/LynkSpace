@@ -55,14 +55,9 @@ $_SESSION['unique_referer'] = generateRandomString();
     </div>
 </div>
 
-<div class="row">
+<div class="row contactform">
     <div class="box">
         <div class="col-lg-12">
-<!--            <hr>
-            <h2 class="intro-text text-center">
-                <strong>Contact Us</strong>
-            </h2>
-            <hr>-->
             <p><?php echo $contactBlurb; ?></p>
             <form name="sentMessage" id="contactForm" method="post" action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">
                 <div class="row">
