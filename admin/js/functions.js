@@ -725,10 +725,12 @@ $(document).ready(function () {
 //modal preview window
 function showMyModal(myTitle, myFile) {
     $('#myModalTitle').html(myTitle);
+    $('.modal-title').html(myTitle);
     $('#myModalFile').attr('src', myFile);
     $('#myModal').modal('show');
     $('#webslideDialog').modal('show');
     $('#webpageDialog').modal('show');
+    $('#databasesDialog').modal('show');
     $('#webserviceDialog').modal('show');
 }
 //Page Load/Performance Checker

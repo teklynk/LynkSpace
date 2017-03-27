@@ -53,6 +53,11 @@ if ($_GET['passwordupdated'] == 'true') {
         }
         ?>
         <form name="userForm" class="dirtyForm" method="post" action="">
+            <div class="form-group">
+                <div class="input-group">
+                    <img class='img-circle img-responsive' src="<?php echo getGravatar($rowUsers['email'], 60); ?>"/>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label>Username</label>

@@ -87,7 +87,6 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
 ?>
 <div class="row">
     <div class="col-lg-12">
-
        <?php if ($_GET['newlocation'] == 'true') {
            echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
@@ -147,33 +146,110 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
         ?>
 
         <form name="setupForm" id="setupForm" class="dirtyForm" method="post" action="">
+            <!-- Admin Options Panel/Well-->
             <?php
-            //Check if user_level is Admin user
-            if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
+            //Admin Options and Settings
+            //Check if user_level is Admin user and default location
+            if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
             ?>
-            <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
-            <h2></h2>
-            <?php
-            }
+                <div class="well">
 
-            if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
-            ?>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group" id="locationactive">
-                        <label>Active</label>
-                        <div class="checkbox">
-                            <label>
-                                <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
-                            </label>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Admin Options</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <?php
+                    if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
+                    ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group" id="site_options">
+                                <button type="button" class="delete_location btn btn-primary" name="site_options"
+                                        onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                    <i class='fa fa-fw fa-edit'></i> Site Options
+                                </button>
+                                <small>
+                                    &nbsp;&nbsp;Edit global web site settings, themes, styles.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                        <hr/>
+                    <?php
+                    }
+                    ?>
+
+                    <?php
+                    //Check if user_level is Admin user
+                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
+                    ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group" id="new_location">
+                                <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
+                                <small>
+                                    &nbsp;&nbsp;Add a new branch / location to the web site.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
+
+                    <?php
+                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                    ?>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group" id="delete_location">
+                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                    <i class='fa fa-fw fa-trash'></i> Delete this Location
+                                </button>
+                                <small>
+                                    &nbsp;&nbsp;Permanently delete this location.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <?php
+                    }
+                    ?>
+
+                    <?php
+                    //Check if user_level is Admin user and is Multibranch
+                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                    ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group" id="location_active">
+                                <label>Active</label>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
+                                    </label>
+                                    <small>
+                                        &nbsp;&nbsp;Make this location active.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
+
+                </div><!-- well -->
             <?php
             }
             ?>
-            <hr/>
+
             <div class="form-group">
                 <label>Site Title</label>
                 <input class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
@@ -278,55 +354,6 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 </div>
             </div>
 
-            <?php
-            //Admin Options and Settings
-            //Check if user_level is Admin user and default location
-            if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
-                ?>
-                <hr/>
-                <div class="well">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Admin Options</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group" id="site_options">
-                                <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
-                                    <i class='fa fa-fw fa-edit'></i> Site Options
-                                </button>
-                                <small>
-                                    &nbsp;&nbsp;Edit global site options.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php
-                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
-                    ?>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group" id="delete_location">
-                                    <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
-                                        <i class='fa fa-fw fa-trash'></i> Delete this location
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
-
-                </div><!-- well -->
-
-                <?php
-                }
-                ?>
             <hr/>
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>

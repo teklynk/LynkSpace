@@ -156,7 +156,7 @@ if ($deleteMsg != "") {
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>&nbsp;</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Level</th>
@@ -191,7 +191,7 @@ if ($deleteMsg != "") {
                     $locationName = $rowLocName['name'];
 
                     echo "<tr>
-                            <td>$usersCount</td>
+                            <td><img class='img-circle img-responsive' src=". getGravatar($usersEmail, 28) ."/></td>
                             <td>$usersName</td>
                             <td>$usersEmail</td>
                             <td>$usersLevel</td>

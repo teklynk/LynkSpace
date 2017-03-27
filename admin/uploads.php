@@ -171,15 +171,15 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] ==
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    <h4 class="modal-title" id="myModalTitle" style="text-align: left;"></h4>
+                    <a type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                    <h4 class="modal-title">&nbsp;</h4>
                 </div>
                 <div class="modal-body">
                     <img id="myModalFile" src="" class="img-responsive center-block"/>
                 </div>
-                <div class="modal-footer">
-
-                </div>
+                <div class="modal-footer">&nbsp;</div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

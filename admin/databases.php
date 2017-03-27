@@ -95,28 +95,40 @@ if ($_GET['section'] == $custSections[0]) {
 }
 ?>
 <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <?php
         if ($_GET['newcustomer'] == 'true') {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li>New Database</li>
-            <li class='active'>Section ".$_GET['section']."</li>
+            <li class='active'>Section: ".$_GET['section']."</li>
             </ol>";
-            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
         } else {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
-            <li class='active'>Section ".$_GET['section']."</li>
+            <li class='active'>Section: ".$_GET['section']."</li>
             </ol>";
-            echo "<h1 class='page-header'>Databases (".$_GET['section'].")</h1>";
         }
         ?>
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-10">
+        <div class="form-group">
+            <?php
+            if ($_GET['newcustomer'] == 'true') {
+                echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+            } else {
+                echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
+            }
+            ?>
+        </div>
+    </div>
     <div class="col-lg-2">
         <div class="form-group">
+            <br/>
             <label for="nav_menu">Database Sections</label>
             <select class="form-control" name="nav_menu" id="nav_menu">
                 <?php echo $custMenuStr; ?>
@@ -436,15 +448,15 @@ if ($_GET['section'] == $custSections[0]) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i
-                                    class="fa fa-times"></i> Close
-                            </button>
+                            <a type="button" class="close" data-dismiss="modal">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <h4 class="modal-title">&nbsp;</h4>
                         </div>
                         <div class="modal-body">
                             <iframe id="myModalFile" src="" frameborder="0"></iframe>
                         </div>
-                        <div class="modal-footer">
-                        </div>
+                        <div class="modal-footer">&nbsp;</div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->

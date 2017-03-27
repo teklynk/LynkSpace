@@ -115,18 +115,23 @@ if ($_GET['section'] == $navSections[0]) {
 }
 ?>
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <ol class="breadcrumb">
                 <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
                 <li><a href="navigation.php?loc=<?php echo $_GET['loc_id'] ?>">Navigation</a></li>
-                <li class="active"><?php echo $_GET['section']; ?></li>
+                <li class="active">Section: <?php echo $_GET['section']; ?></li>
             </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
             <h1 class="page-header">
                 Navigation (<?php echo $_GET['section']; ?>)
             </h1>
         </div>
         <div class="col-lg-2">
             <div class="form-group">
+                <br/>
                 <label for="nav_menu">Navigation Sections</label>
                 <select class="form-control" name="nav_menu" id="nav_menu">
                     <?php echo $navMenuStr; ?>

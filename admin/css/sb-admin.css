@@ -92,7 +92,13 @@ ul.alert-dropdown {
 
 .modal-header {
     padding: 15px;
-    text-align: right;
+}
+.modal-title {
+    text-align: left;
+}
+
+.page-header {
+    margin: 20px 0 20px;
 }
 
 /* Side Navigation */
@@ -274,7 +280,24 @@ small {
     float: left;
     background: url('../images/ui.totop.png') no-repeat left -51px;
 }
+.breadcrumb {
+    font-size: .9em;
+    border-radius: 0;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ccc;
+}
 
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 0px;
+    margin-top: -8px;
+    margin-left: -24px;
+    margin-right: -24px;
+    list-style: none;
+}
+dl, ol, ul {
+    margin-top: 0;
+}
 .side-nav i {
     margin-right: 4px;
 }
