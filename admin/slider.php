@@ -28,8 +28,17 @@ if ($_GET['preview'] > "") {
         <div class="col-lg-12">
             <?php
             if ($_GET['newslide'] == 'true') {
-                echo "<h1 class='page-header'>Image Slider (New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
+                echo "<ol class='breadcrumb'>
+                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='slider.php?loc=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li class='active'>New Slide</li>
+                </ol>";
+                echo "<h1 class='page-header'>Image Slider (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
             } else {
+                echo "<ol class='breadcrumb'>
+                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li class='active'>Image Slider</li>
+                </ol>";
                 echo "<h1 class='page-header'>Image Slider</h1>";
             }
             ?>
@@ -199,7 +208,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         </div>
 
         <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
     </form>
 
@@ -402,7 +411,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
 		<input type='hidden' name='save_main' value='true'/>
 		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>
-		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Cancel</button>
+		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Reset</button>
 		</form>
 		</div>";
 

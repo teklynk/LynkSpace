@@ -90,7 +90,7 @@ if ($_GET['passwordupdated'] == 'true') {
             </div>
 
             <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-            <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+            <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
         </form>
 

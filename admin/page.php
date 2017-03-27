@@ -30,8 +30,17 @@ if ($_GET['preview'] > "") {
         <div class="col-lg-12">
             <?php
             if ($_GET['newpage'] == 'true') {
-                echo "<h1 class='page-header'>Pages (New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
+                echo "<ol class='breadcrumb'>
+                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='page.php?loc=" . $_GET['loc_id'] . "'>Pages</a></li>
+                <li class='active'>New Page</li>
+                </ol>";
+                echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
             } else {
+                echo "<ol class='breadcrumb'>
+                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li class='active'>Pages</li>
+                </ol>";
                 echo "<h1 class='page-header'>Pages</h1>";
             }
             ?>
@@ -165,7 +174,7 @@ if ($_GET['preview'] > "") {
                         <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
                     </div>
                     <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
                 </form>
 
@@ -301,7 +310,7 @@ if ($_GET['preview'] > "") {
                         </table>
 
                         <button type="submit" name="pageNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
                     </form>
                 </div>
                 <?php

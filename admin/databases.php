@@ -98,8 +98,19 @@ if ($_GET['section'] == $custSections[0]) {
     <div class="col-lg-10">
         <?php
         if ($_GET['newcustomer'] == 'true') {
-            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='reset' class='btn btn-default' onclick='javascript: window.history.go(-1)'><i class='fa fa-fw fa-reply'></i> Cancel</button></h1>";
+            echo "<ol class='breadcrumb'>
+            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li>New Database</li>
+            <li class='active'>Section ".$_GET['section']."</li>
+            </ol>";
+            echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
         } else {
+            echo "<ol class='breadcrumb'>
+            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li class='active'>Section ".$_GET['section']."</li>
+            </ol>";
             echo "<h1 class='page-header'>Databases (".$_GET['section'].")</h1>";
         }
         ?>
@@ -299,7 +310,7 @@ if ($_GET['section'] == $custSections[0]) {
                 </div>
 
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
             </form>
 
@@ -624,7 +635,7 @@ if ($_GET['section'] == $custSections[0]) {
                     <input type="hidden" name="cust_count" value="<?php echo $custCount; ?>" />
                     <input type="hidden" name="save_main" value="true"/>
                     <button type="submit" class="btn btn-primary" name="customer_submit"><i class="fa fa-fw fa-save"></i> Save Changes</button>
-                    <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancel</button>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
                 </form>
             </div>
             <?php

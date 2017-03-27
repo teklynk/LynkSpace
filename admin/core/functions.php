@@ -79,7 +79,7 @@ function getLocList(){
     global $locList;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' ORDER BY name ASC");
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations ORDER BY name ASC");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
         if ($rowLocationSearch['id'] == 1) {

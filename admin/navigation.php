@@ -116,6 +116,11 @@ if ($_GET['section'] == $navSections[0]) {
 ?>
     <div class="row">
         <div class="col-lg-10">
+            <ol class="breadcrumb">
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="navigation.php?loc=<?php echo $_GET['loc_id'] ?>">Navigation</a></li>
+                <li class="active"><?php echo $_GET['section']; ?></li>
+            </ol>
             <h1 class="page-header">
                 Navigation (<?php echo $_GET['section']; ?>)
             </h1>
@@ -386,7 +391,7 @@ if ($_GET['section'] == $navSections[0]) {
                 </table>
 
                 <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
             </form>
 
         </div>

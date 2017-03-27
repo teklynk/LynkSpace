@@ -58,6 +58,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
     <div class="row">
         <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Settings</a></li>
+                <li class="active">Site Options</li>
+            </ol>
             <h1 class="page-header">
                 Site Options
             </h1>
@@ -149,7 +154,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
                 </div>
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="siteoptionsform_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Cancel</button>
+                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
             </form>
 
