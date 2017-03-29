@@ -784,34 +784,42 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
-function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
-    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30, 2, 6, 12);
+function getHottitlesCarousel($xmlurl, $maxcnt) {
+    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30);
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
     //catch and print error message
     if ($http_status==500 || $http_status==503) {
         echo "HTTP status ".$http_status.". Error loading URL";
+        curl_close($ch);
+        die();
     }
-    curl_close($ch);
 
-    $xml = simplexml_load_string($xmldata);
+    $xmlfeed = simplexml_load_string($xmldata);
+
+    curl_close($ch);
 
     $itemcount = 0;
 
-    foreach ($xml->channel->item as $item) {
+    foreach ($xmlfeed->channel->item as $xmlitem) {
         $itemcount ++;
+
         //get title node for each book. clean title string
-        $xmltitle = (string)$item->title;
+        $xmltitle = (string)$xmlitem->title;
         $xmltitle = trim(str_replace("'", "&apos;", $xmltitle));
+
         //get url for each book. clean link string
-        $xmllink = (string)$item->link;
+        $xmllink = (string)$xmlitem->link;
         $xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
+
         //get image url from img tag in the description node
-        $xmlgetimage = preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$item->description, $xmltheimage);
+        preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
+
         //set the image url. clean the image url string
         $xmlimage = $xmltheimage[1];
         $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
@@ -828,15 +836,19 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
-        echo "<div class='$xmlItemActive'><div class='col-md-$colmd col-sm-$colsm col-xs-$colxs hot-item'>";
+
+        echo "<div class='$xmlItemActive'><div class='col-md-3'>";
+
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive'></a>";
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive center-block'></a>";
             } else {
-                //TLC dummy book jacket img src=http://ls2pachelp.tlcdelivers.com/bookjacket-md.png
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive' src='../images/bookjacket-md.png'></a>";
+                //TLC dummy book jacket img
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
             }
+
         echo "</div></div>";
+
         //stop parsing xml once it reaches the max count
         if ($itemcount == $maxcnt) {
             break;
@@ -844,9 +856,11 @@ function getHottitlesCarousel($xmlurl, $maxcnt, $colmd, $colsm, $colxs) {
 
     }
 }
+
 function getHottitlesTabs(){
     global $hottitlesTile;
     global $hottitlesUrl;
+    global $hottitlesLoadFirstUrl;
     global $hotCount;
     global $db_conn;
 
@@ -861,12 +875,13 @@ function getHottitlesTabs(){
         //Set active tab on initial page load
         if ($hottitlesSort == 1) {
             $hotActive = 'active';
+            $hottitlesLoadFirstUrl = $hottitlesUrl;
         } else {
             $hotActive = '';
         }
 
         if ($hotCount > 0) {
-            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('includes/hottitles.inc.php?loc_id=$_GET[loc_id]&rssurl=$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
         }
     }
 }

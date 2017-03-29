@@ -44,31 +44,44 @@ $(document).ready(function () {
     //}).show();
 
     //Hot Titles carousel
-    //$('.carousel-inner img').addClass('img-responsive');
-    $('.carousel[data-type="multi"] .item').each(function(){
+    $('#myCarousel').carousel({
+        interval: 10000
+    })
+    $('.fdi-Carousel .item').each(function () {
         var next = $(this).next();
         if (!next.length) {
             next = $(this).siblings(':first');
         }
         next.children(':first-child').clone().appendTo($(this));
 
-        for (var i=0;i<4;i++) {
-            next=next.next();
-            if (!next.length) {
-                next = $(this).siblings(':first');
-            }
-
-            next.children(':first-child').clone().appendTo($(this));
+        var next2 = next.next();
+        if (!next2.length) {
+            next2 = $(this).siblings(':first');
         }
-        //$('.hottitlesCarousel.carousel').carousel('pause');
+        next2.children(':first-child').clone().appendTo($(this));
+
+        var next3 = next2.next();
+        if(!next3.length){
+            next3 = $(this).siblings(':first');
+        }
+        next3.children(':first-child').clone().appendTo($(this));
     });
 
 });
 
 function toggleSrc(loc, count) {
-    $('iframe.hottitles-iframe').attr('src', loc, count);
-    $('.hotContainer').addClass('loader');
-    $('.iframe').addClass('hidden');
+    $('#hottitlesCarousel').addClass('loader');
+    $('#hottitlesCarousel .carousel-inner').addClass('hidden');
+    $('#hottitlesCarousel .carousel-control').addClass('hidden');
+    
+    $.ajax({
+        url: '../core/ajax/request_hottitles.php?loc_id=1&rssurl='+loc,
+        success: function(result){
+        $('#hottitlesCarousel').removeClass('loader');
+        $('#hottitlesCarousel .carousel-control').removeClass('hidden');
+        $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
+        $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
+    }});
 }
 
 //Page Load/Performance Checker
