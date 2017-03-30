@@ -37,17 +37,8 @@ $(document).ready(function () {
         return false;
     });
 
-    //show animated loader until iframe loads
-    //$('iframe').load(function(){
-    //    $('div.hotContainer').removeClass('loader');
-    //    $('.iframe').css('display', 'block');
-    //}).show();
-
     //Hot Titles carousel
-    $('#myCarousel').carousel({
-        interval: 10000
-    })
-    $('.fdi-Carousel .item').each(function () {
+    $('#hottitlesCarousel .carousel-inner .item').each(function () {
         var next = $(this).next();
         if (!next.length) {
             next = $(this).siblings(':first');
@@ -73,6 +64,8 @@ function toggleSrc(loc, count) {
     $('#hottitlesCarousel').addClass('loader');
     $('#hottitlesCarousel .carousel-inner').addClass('hidden');
     $('#hottitlesCarousel .carousel-control').addClass('hidden');
+
+    //$('#hottitlesTabs').addClass('hidden');
     
     $.ajax({
         url: '../core/ajax/request_hottitles.php?loc_id=1&rssurl='+loc,
@@ -81,6 +74,7 @@ function toggleSrc(loc, count) {
         $('#hottitlesCarousel .carousel-control').removeClass('hidden');
         $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
         $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
+        //$('#hottitlesTabs').removeClass('hidden');
     }});
 }
 

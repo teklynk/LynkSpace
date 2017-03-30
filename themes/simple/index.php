@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<header id='myCarousel' class='carousel slide'>";
+echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed'>";
     include 'includes/slider.inc.php';
 echo "</header>";
 

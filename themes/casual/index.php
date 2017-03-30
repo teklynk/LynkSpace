@@ -13,7 +13,7 @@ include_once('includes/header.inc.php');
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <header id='myCarousel' class='carousel slide'>
+                <header id="sliderCarousel" class="carousel slide" data-ride="carousel" data-interval="<?php echo $carouselSpeed; ?>">
                     <?php include 'includes/slider.inc.php'; ?>
                 </header>
                 <div style="clear:both;"></div>

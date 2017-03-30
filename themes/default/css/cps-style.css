@@ -331,6 +331,16 @@ footer a:hover {
     background: linear-gradient(-200deg, #0033a0, #008eaa);
     background-color: #0033a0;
 }
+#sliderCarousel .carousel-control {background:none;}
+#sliderCarousel .carousel-control {visibility: hidden;}
+#sliderCarousel:hover .carousel-control {visibility: visible;}
+
+#sliderCarousel .carousel-control span {
+    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    margin-top: -40px;
+    font-style: normal;
+    font-size: 4em;
+}
 
 /*** Autocomplete UI ***/
 .ui-autocomplete {

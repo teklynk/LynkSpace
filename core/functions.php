@@ -673,10 +673,10 @@ function getSlider($sliderType){
             echo "</div>"; //.carousel-inner
 
             //Controls
-            echo "<a class='left carousel-control' href='#myCarousel' data-slide='prev'>";
+            echo "<a class='left carousel-control' href='#sliderCarousel' data-slide='prev'>";
             echo "<span class='icon-prev'></span>";
             echo "</a>";
-            echo "<a class='right carousel-control' href='#myCarousel' data-slide='next'>";
+            echo "<a class='right carousel-control' href='#sliderCarousel' data-slide='next'>";
             echo "<span class='icon-next'></span>";
             echo "</a>";
 
@@ -815,7 +815,12 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
 
         //get url for each book. clean link string
         $xmllink = (string)$xmlitem->link;
+        //Remove http(s) and just use //
         $xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
+
+        //Get the ResourceID from the xmllink
+        parse_str($xmllink, $xmllinkArray);
+        $xmlResourceId = $xmllinkArray['resourceId'];
 
         //get image url from img tag in the description node
         preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
@@ -841,10 +846,10 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
 
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><img src='".$xmlimage."' class='img-responsive center-block'></a>";
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><img src='".$xmlimage."' class='img-responsive center-block'></a>";
             } else {
                 //TLC dummy book jacket img
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' rel='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
             }
 
         echo "</div></div>";
