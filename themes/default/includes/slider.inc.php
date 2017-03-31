@@ -5,4 +5,5 @@ if (!defined('inc_access')) {
 }
 
 getSlider("slide");
+
 ?>

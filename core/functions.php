@@ -670,17 +670,15 @@ function getSlider($sliderType){
                 echo "</div>"; //.item
             }
 
-            echo "</div>"; //.carousel-inner
-
             //Controls
             echo "<a class='left carousel-control' href='#sliderCarousel' data-slide='prev'>";
-            echo "<span class='icon-prev'></span>";
+            echo "<i class='icon-prev'></i>";
             echo "</a>";
             echo "<a class='right carousel-control' href='#sliderCarousel' data-slide='next'>";
-            echo "<span class='icon-next'></span>";
+            echo "<i class='icon-next'></i>";
             echo "</a>";
 
-
+            echo "</div>"; //.carousel-inner
 
         } elseif ($sliderType == "random"){
             $rowSlider = mysqli_fetch_array($sqlSlider);

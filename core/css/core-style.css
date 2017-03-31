@@ -23,9 +23,14 @@ body {
 }
 
 /* Home Page Carousel */
-
+.slider.container-fluid, .slider.container-fluid .container {
+    padding:0px;
+}
+header.carousel .carousel-control {
+    width: 10%;
+}
 header.carousel {
-    height: 50%;
+    height: 400px;
 }
 
 header.carousel .item, header.carousel .item.active, header.carousel .carousel-inner {
@@ -177,9 +182,21 @@ div.database-break {
     .img-portfolio {
         margin-bottom: 15px;
     }
-
-    header.carousel .carousel {
-        height: 70%;
+    header.carousel {
+        height: 400px;
+    }
+    .hottitles.container-fluid, .hottitles.container-fluid .container {
+        padding:0px;
+    }
+    .hottitles .panel, .hottitles .well {
+        padding:0px;
+        margin-bottom: 0px;
+        border: 0px;
+        border-radius: 0px;
+    }
+    .hottitles .hottitles-title {
+        padding-left: 32px;
+        padding-top: 12px;
     }
 }
 iframe {

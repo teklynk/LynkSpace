@@ -9,9 +9,13 @@ echo "<div class='container bannerwrapper'>";
 echo "</div>";
 echo "</div>";
 
+echo "<div class='grad-blue container-fluid slider'>";
+echo "<div class='container'>";
 echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed'>";
-include 'includes/slider.inc.php';
+    include 'includes/slider.inc.php';
 echo "</header>";
+echo "</div>";
+echo "</div>";
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";

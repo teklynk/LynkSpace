@@ -335,7 +335,7 @@ footer a:hover {
 #sliderCarousel .carousel-control {visibility: hidden;}
 #sliderCarousel:hover .carousel-control {visibility: visible;}
 
-#sliderCarousel .carousel-control span {
+#sliderCarousel .carousel-control i {
     font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
     margin-top: -40px;
     font-style: normal;
@@ -412,7 +412,7 @@ footer a:hover {
 }
 
 header.carousel {
-    height: 40%;
+    height: 400px;
 }
 
 .col-md-12 > p > img, .col-md-8 > p > img, .col-md-4 > p > img, .col-md-4 > img, .col-md-2 > img {

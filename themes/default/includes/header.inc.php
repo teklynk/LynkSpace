@@ -32,7 +32,7 @@ session_start();
     <!-- JQueryUI CSS CDN -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
 
-    <!-- Default template CSS - Do not remove-->
+    <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-hottitles.min.css">
 
@@ -41,9 +41,9 @@ session_start();
 
     <!-- Custom over-write  -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/custom-style.css">
+
     <?php
     //Google Analytics UID
-    //Can also use $setupLocAnalytics for location specific analytics UA
     if (!empty($site_analytics)) {
         ?>
         <!-- Google Analytics UID -->
