@@ -805,6 +805,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
     $itemcount = 0;
 
     foreach ($xmlfeed->channel->item as $xmlitem) {
+
         $itemcount ++;
 
         //get title node for each book. clean title string
@@ -840,7 +841,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
 
-        echo "<div class='$xmlItemActive'><div class='col-md-3'>";
+        echo "<div class='".$xmlItemActive."'><div class='items'>";
 
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
@@ -857,7 +858,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
             break;
         }
 
-    }
+    } //for loop
 }
 
 function getHottitlesTabs(){
@@ -887,6 +888,15 @@ function getHottitlesTabs(){
             echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
         }
     }
+}
+
+function get_content($URL){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $URL);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
 }
 
 //Call - getSetup is used everywhere

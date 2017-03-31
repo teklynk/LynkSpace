@@ -61,7 +61,8 @@ if ($_GET['loc_id']) {
     //Main Carousel
     echo "<div class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed' id='hottitlesCarousel'>";
 
-    echo "<div class='carousel-inner'></div>";
+    echo "<div class='carousel-inner'>";
+    echo "</div>"; //appends hot titles carousel to this div
 
     echo "<a class='left carousel-control' href='#hottitlesCarousel' data-slide='prev'><i class='icon-prev'></i></a>";
     echo "<a class='right carousel-control' href='#hottitlesCarousel' data-slide='next'><i class='icon-next'></i></a>";
