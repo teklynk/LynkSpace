@@ -103,6 +103,11 @@
     #hottitlesCarousel .carousel-inner .items {
         width: 33%;
     }
+    #hottitlesCarousel .dummy-title {
+        padding-left: 30%;
+        width: 70%;
+        font-size: .8em;
+    }
 }
 @media (max-width: 767px) {
     #hottitlesCarousel .carousel-control {

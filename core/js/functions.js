@@ -36,44 +36,11 @@ $(document).ready(function () {
 
         return false;
     });
-    //Hot Titles carousel
-    $('#hottitlesCarousel .carousel-inner .item').each(function () {
-        var next = $(this).next();
-        if (!next.length) {
-            next = $(this).siblings(':first');
-        }
-        next.children(':first-child').clone().appendTo($(this));
-
-        var next2 = next.next();
-        if (!next2.length) {
-            next2 = $(this).siblings(':first');
-        }
-        next2.children(':first-child').clone().appendTo($(this));
-
-        var next3 = next2.next();
-        if(!next3.length){
-            next3 = $(this).siblings(':first');
-        }
-        next3.children(':first-child').clone().appendTo($(this));
-
-        var next4 = next3.next();
-        if(!next4.length){
-            next4 = $(this).siblings(':first');
-        }
-        next4.children(':first-child').clone().appendTo($(this));
-
-        var next5 = next4.next();
-        if(!next5.length){
-            next5 = $(this).siblings(':first');
-        }
-        next5.children(':first-child').clone().appendTo($(this));
-
-        var next6 = next5.next();
-        if(!next6.length){
-            next6 = $(this).siblings(':first');
-        }
-        next6.children(':first-child').clone().appendTo($(this));
-
+    $('.owl-carousel').owlCarousel({
+        items:6,
+        lazyLoad:true,
+        loop:true,
+        margin:10
     });
 
 });

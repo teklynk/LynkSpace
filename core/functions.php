@@ -804,6 +804,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
 
     $itemcount = 0;
 
+    echo "<div class='owl-carousel owl-theme'>";
     foreach ($xmlfeed->channel->item as $xmlitem) {
 
         $itemcount ++;
@@ -836,12 +837,12 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
             $xmlItemActive = "item";
         }
 
-        //Gets the image dimensions from the xmltheimage url. requires http: or https: to work properly
+        //Gets the image dimensions from the xmltheimage url.
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
 
-        echo "<div class='".$xmlItemActive."'><div class='items'>";
+        echo "<div class='item'>";
 
             //Check if has book jacket based on the image size (1x1)
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
@@ -851,7 +852,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
                 echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
             }
 
-        echo "</div></div>";
+        echo "</div>";
 
         //stop parsing xml once it reaches the max count
         if ($itemcount == $maxcnt) {
@@ -859,6 +860,7 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
         }
 
     } //for loop
+    echo "</div>";
 }
 
 function getHottitlesTabs(){
