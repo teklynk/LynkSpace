@@ -6,7 +6,7 @@ if (!empty($_GET['rssurl'])) {
 
     require_once('../functions.php');
 
-    $hottitles_CSS = file_get_contents('../css/core-hottitles.min.css');
+    //$hottitles_CSS = file_get_contents('../css/core-hottitles.min.css');
     $core_JS = file_get_contents('../js/functions.min.js');
 
     echo "<style type='text/css'>";

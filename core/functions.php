@@ -830,13 +830,6 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
         $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
         $xmlimage = trim(str_replace('SM', 'MD', $xmlimage));
 
-        //set the first item to active
-        if ($itemcount == 1) {
-            $xmlItemActive = "item active";
-        } else {
-            $xmlItemActive = "item";
-        }
-
         //Gets the image dimensions from the xmltheimage url.
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];

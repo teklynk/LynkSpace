@@ -64,8 +64,8 @@ if ($_GET['loc_id']) {
     echo "<div class='carousel-inner'>";
     echo "</div>"; //appends hot titles carousel to this div
 
-    echo "<a class='left carousel-control' href='#hottitlesCarousel' data-slide='prev'><i class='icon-prev'></i></a>";
-    echo "<a class='right carousel-control' href='#hottitlesCarousel' data-slide='next'><i class='icon-next'></i></a>";
+    //echo "<div class='owl-nav disabled'><div class='owl-prev'>prev</div><div class='owl-next'>next</div></div>";
+    //echo "<div class='owl-dots'><div class='owl-dot active'><span></span></div><div class='owl-dot'><span></span></div><div class='owl-dot'><span></span></div></div>";
 
     echo "</div>"; //.carousel
 
