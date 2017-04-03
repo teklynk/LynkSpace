@@ -42,10 +42,13 @@ if ($_GET['loc_id']) {
 
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
+
     echo "<div class='col-xs-12 col-lg-12 hottitles-title'>";
     echo "<h1 class='text-white'>New Titles</h1>";
     echo "</div>";
+
     echo "<div style='clear:both;'></div>";
+
     echo "<div class='well'>";
 
     //Carousel Tabs
@@ -59,17 +62,14 @@ if ($_GET['loc_id']) {
 
 
     //Main Carousel
-    echo "<div class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed' id='hottitlesCarousel'>";
+    echo "<div class='carousel slide' id='hottitlesCarousel'>";
 
-    echo "<div class='carousel-inner'>";
-    echo "</div>"; //appends hot titles carousel to this div
-
-    //echo "<div class='owl-nav disabled'><div class='owl-prev'>prev</div><div class='owl-next'>next</div></div>";
-    //echo "<div class='owl-dots'><div class='owl-dot active'><span></span></div><div class='owl-dot'><span></span></div><div class='owl-dot'><span></span></div></div>";
+    echo "<div class='carousel-inner'></div>"; //appends hot titles carousel to this div
 
     echo "</div>"; //.carousel
 
     echo "</div>"; //.well
+
     echo "</div>"; //.container
     echo "</div>"; //.grad-blue
 }

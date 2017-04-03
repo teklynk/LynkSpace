@@ -4,22 +4,50 @@ define('inc_access', TRUE);
 
 if (!empty($_GET['rssurl'])) {
 
+    require_once('../../db/config.php');
     require_once('../functions.php');
 
-    //$hottitles_CSS = file_get_contents('../css/core-hottitles.min.css');
-    $core_JS = file_get_contents('../js/functions.min.js');
+    ?>
 
-    echo "<style type='text/css'>";
-    //echo $hottitles_CSS;
-    echo "</style>";
+    <script type="text/javascript">
+        //Hot titles carousel
+        $('.owl-carousel').owlCarousel({
+            center: true,
+            loop: true,
+            margin: 10,
+            nav: true,
+            autoWidth: true,
+            //autoHeight: true,
+            //adds bootstrap nav buttons
+            navText: [
+                '<span class="left carousel-control" data-slide="prev"><i class="icon-prev"></i></span>',
+                '<span class="right carousel-control" data-slide="next"><i class="icon-next"></i></span>'
+            ],
+            autoplay: true,
+            autoplayTimeout: <?php echo $carouselSpeed; ?>,
+            autoplayHoverPause: true,
+            items: 6,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+    </script>
 
-    echo "<script type='text/javascript'>";
-    echo $core_JS;
-    echo "</script>";
+
+
+    <?php
 
     $rssUrl = $_GET['rssurl'];
-    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30);
-    getHottitlesCarousel($rssUrl, 40);
+    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
+    getHottitlesCarousel($rssUrl, 'MD', true, 50);
 
 } else {
 

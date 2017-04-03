@@ -782,7 +782,7 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
-function getHottitlesCarousel($xmlurl, $maxcnt) {
+function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30);
 
     $ch = curl_init();
@@ -828,7 +828,18 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
         //set the image url. clean the image url string
         $xmlimage = $xmltheimage[1];
         $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
-        $xmlimage = trim(str_replace('SM', 'MD', $xmlimage));
+        if ($jacketSize == 'SM') {
+            $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
+            $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
+        } elseif ($jacketSize == 'MD') {
+            $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-MD', $xmlimage));
+            $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-MD', $xmlimage));
+        } elseif ($jacketSize == 'LG') {
+            $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-LG', $xmlimage));
+            $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
+        }
+
+        //print_r($xmlimage);
 
         //Gets the image dimensions from the xmltheimage url.
         $xmlimagesize = getimagesize($xmltheimage[1]);
@@ -841,9 +852,12 @@ function getHottitlesCarousel($xmlurl, $maxcnt) {
             if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
                 echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><img src='".$xmlimage."' class='img-responsive center-block'></a>";
             } else {
-                //TLC dummy book jacket img
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><span class='dummy-title'>".$xmltitle."</span><img class='dummy-jacket img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                if ($dummyJackets == true) {
+                    //TLC dummy book jacket img
+                    echo "<a href='" . $xmllink . "' title='" . $xmltitle . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . $xmltitle . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                }
             }
+
 
         echo "</div>";
 

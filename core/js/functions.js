@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    
     //Add responsive classes to wysiwyg elements
     $('.content img, #featured img').addClass('img-responsive');
     $('.content iframe, #featured iframe').addClass('embed-responsive-item iframe');
@@ -19,6 +18,7 @@ $(document).ready(function () {
             $('.content:first').css({'min-height': calcContentHeight});
         }
     });
+
     //Scroll to top button
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {
@@ -36,45 +36,13 @@ $(document).ready(function () {
 
         return false;
     });
-
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        autoplay:true,
-        autoplayTimeout:5000,
-        autoplayHoverPause:true,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1,
-                nav:true
-            },
-            600:{
-                items:3,
-                nav:false
-            },
-            1000:{
-                items:5,
-                nav:true,
-                loop:false
-            }
-        }
-    });
-    $('.play').on('click',function(){
-        owl.trigger('play.owl.autoplay',[5000])
-    })
-    $('.stop').on('click',function(){
-        owl.trigger('stop.owl.autoplay')
-    })
-
 });
 
+//Hot titles container and spinner loader
 function toggleSrc(loc, count) {
     $('#hottitlesCarousel').addClass('loader');
     $('#hottitlesCarousel .carousel-inner').addClass('hidden');
     $('#hottitlesCarousel .carousel-control').addClass('hidden');
-
-    //$('#hottitlesTabs').addClass('hidden');
 
     $.ajax({
         url: '../core/ajax/request_hottitles.php?loc_id=1&rssurl='+loc,
@@ -83,7 +51,6 @@ function toggleSrc(loc, count) {
             $('#hottitlesCarousel .carousel-control').removeClass('hidden');
             $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
             $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
-            //$('#hottitlesTabs').removeClass('hidden');
         }});
 }
 
