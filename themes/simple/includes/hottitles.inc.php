@@ -32,8 +32,8 @@ $rssUrl = $_GET['rssurl'];
             getHottitlesCarousel($rssUrl, 50, 2, 6, 12);
             ?>
         </div>
-        <a class="left carousel-control" href="#hottitlesCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left icon-prev"></i></a>
-        <a class="right carousel-control" href="#hottitlesCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right icon-next"></i></a>
+        <a class="left carousel-control" href="#hottitlesCarousel" data-slide="prev"><i class="fa-chevron-left icon-prev"></i></a>
+        <a class="right carousel-control" href="#hottitlesCarousel" data-slide="next"><i class="fa-chevron-right icon-next"></i></a>
     </div>
 
 </body>

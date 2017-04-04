@@ -12,12 +12,12 @@ if (!empty($_GET['rssurl'])) {
     <script type="text/javascript">
         //Hot titles carousel
         $('.owl-carousel').owlCarousel({
-            center: true,
+            //center: true,
             loop: true,
             margin: 10,
             nav: true,
+            dots: false,
             autoWidth: true,
-            //autoHeight: true,
             //adds bootstrap nav buttons
             navText: [
                 '<span class="left carousel-control" data-slide="prev"><i class="icon-prev"></i></span>',
@@ -26,7 +26,7 @@ if (!empty($_GET['rssurl'])) {
             autoplay: true,
             autoplayTimeout: <?php echo $carouselSpeed; ?>,
             autoplayHoverPause: true,
-            items: 6,
+            items: 8,
             responsive:{
                 0:{
                     items:1
@@ -40,8 +40,6 @@ if (!empty($_GET['rssurl'])) {
             }
         });
     </script>
-
-
 
     <?php
 

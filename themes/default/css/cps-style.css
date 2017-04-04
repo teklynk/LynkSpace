@@ -331,8 +331,7 @@ footer a:hover {
     background: linear-gradient(-200deg, #0033a0, #008eaa);
     background-color: #0033a0;
 }
-#sliderCarousel .carousel-control {background:none;}
-#sliderCarousel .carousel-control {visibility: hidden;}
+#sliderCarousel .carousel-control {background:none; visibility: hidden; width: 5%;}
 #sliderCarousel:hover .carousel-control {visibility: visible;}
 
 #sliderCarousel .carousel-control i {
@@ -340,6 +339,18 @@ footer a:hover {
     margin-top: -40px;
     font-style: normal;
     font-size: 4em;
+}
+
+#hottitlesCarousel .carousel-control {background:none; visibility: hidden; width: 5%;}
+#hottitlesCarousel:hover .carousel-control {visibility: visible;}
+
+#hottitlesCarousel .carousel-control i {
+    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    margin-top: -40px;
+    font-style: normal;
+    font-size: 4em;
+    color:#0033a0;
+    opacity:1.0;
 }
 
 /*** Autocomplete UI ***/
@@ -684,4 +695,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         margin: 0;
         width: 100%;
     }
+
+    #sliderCarousel .carousel-control {visibility: visible;}
+    #hottitlesCarousel .carousel-control {visibility: visible;}
 }

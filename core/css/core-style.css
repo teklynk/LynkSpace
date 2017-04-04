@@ -121,7 +121,7 @@ iframe {
     background-color: #0033a0;
 }
 #hottitlesCarousel .carousel-inner {
-    height: 250px;
+    height: 200px;
 }
 #hottitlesCarousel .owl-carousel .owl-dots{
     display:none;
@@ -130,7 +130,7 @@ iframe {
 #hottitlesCarousel.loader {
     display: block;
     width: 100%;
-    height: 250px;
+    height: 200px;
 }
 #hottitlesCarousel .dummy-jacket {
     height:200px;

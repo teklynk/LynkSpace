@@ -35,8 +35,8 @@ if (!defined('inc_access')) {
     <a href="#" class="scrollToTop">Scroll To Top</a>
 
     <!-- Script to Activate the Carousel -->
-    <script type="text/javascript" language="javascript">
-        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', 1);
+    <script type="text/javascript">
+        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', 1, 1);
     </script>
 
     </body>

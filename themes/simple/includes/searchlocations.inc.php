@@ -73,7 +73,7 @@ getSetup(); //from functions.php
                                             <input type="hidden" id="loc_id" name="loc_id" value="<?php echo $_GET['loc_id']; ?>"/>
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="submit" name="schoolsearch_submit">
-                                                    <span class="glyphicon glyphicon-search"></span>
+                                                    <span class="fa fa-search"></span>
                                                 </button>
                                             </span>
                                         </div>
@@ -91,7 +91,7 @@ getSetup(); //from functions.php
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="submit" name="ls2pac_submit">
-                                                        <span class="glyphicon glyphicon-search"></span>
+                                                        <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>
@@ -111,7 +111,7 @@ getSetup(); //from functions.php
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="submit" name="ls2kids_submit">
-                                                        <span class="glyphicon glyphicon-search"></span>
+                                                        <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>

@@ -60,7 +60,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="submit" name="ls2pac_submit">
-                                                        <span class="glyphicon glyphicon-search"></span>
+                                                        <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>
@@ -85,7 +85,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                                 <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="submit" name="ls2packids_submit">
-                                                        <span class="glyphicon glyphicon-search"></span>
+                                                        <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>

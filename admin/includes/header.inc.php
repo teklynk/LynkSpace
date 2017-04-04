@@ -33,38 +33,20 @@ session_start();
 
     <title>Admin Panel</title>
 
-    <!-- Bootstrap Core 3.3.5 CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Core CSS Libraries -->
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/admin.min.css">
 
-    <!-- Admin Panel Custom Fonts CDN -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Admin Panel Fonts CDN -->
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/font-awesome.min.css">
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
 
-    <!--Bootstrap-Selects -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
-
-    <!--Bootstrap Toggle-->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
-
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
 
-    <!-- jQuery CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    <!-- jQuery Cookie CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-    <!-- Admin Panel Bootstrap Core JavaScript -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <!--Bootstrap-Selects-JS-->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.js"></script>
-
-    <!--Bootstrap-Toggle-JS-->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- Core JS Libraries -->
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
     <!-- TinyMCE CDN -->
     <script type="text/javascript" language="javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -72,9 +54,6 @@ session_start();
     <!-- DataTables JavaScript CDN -->
     <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.7/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
-    <!-- Dirty Form Confirm Message -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js"></script>
 
     <!-- Custom Functions -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/functions.min.js"></script>
