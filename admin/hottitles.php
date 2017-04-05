@@ -13,7 +13,7 @@ $deleteMsg = "";
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            User Manager
+            Hot Titles
         </h1>
     </div>
 </div>
@@ -27,7 +27,7 @@ if ($deleteMsg != "") {
 ?>
 <!-- Add user form-->
 <button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
-    <i class='fa fa-fw fa-plus'></i> Add a User
+    <i class='fa fa-fw fa-plus'></i> Add a List
 </button>
 <h2></h2>
 
@@ -37,57 +37,22 @@ if ($deleteMsg != "") {
     <div class="col-lg-8">
         <form name="userForm" class="dirtyForm" method="post" action="">
             <div class="form-group">
-                <label>Username</label>
+                <label>Title</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input class="form-control" type="text" name="user_name" maxlength="255" placeholder="Username" required>
+                    <span class="input-group-addon"><i class="fa fa-book" aria-hidden="true"></i></span>
+                    <input class="form-control" type="text" name="hottitles_title" maxlength="255" placeholder="Title" required>
                 </div>
             </div>
             <div class="form-group">
-                <label>User Email</label>
+                <label>Saved Search RSS URL</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                    <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Password</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" placeholder="Password" pattern=".{8,}" title="8 characters minimum" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Password Confirm</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Location</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                    <select class="form-control" name="user_location" required>
-                        <option>Choose a location</option>
-                        <?php echo $locUsersMenuStr;?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Level</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
-                    <select class="form-control" name="user_level" required>
-                        <option>Choose a user level</option>
-                        <option value="0">User</option>
-                        <option value="1">Admin</option>
-                    </select>
+                    <span class="input-group-addon"><i class="fa fa-rss" aria-hidden="true"></i></span>
+                    <input class="form-control" type="text" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                 </div>
             </div>
 
             <input type="hidden" name="save_main" value="true"/>
-            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add User</button>
+            <button type="submit" name="hottitles_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add List</button>
         </form>
     </div>
 </div>
@@ -101,13 +66,9 @@ if ($deleteMsg != "") {
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Level</th>
-                    <th>Location</th>
-                    <th>Last Login</th>
-                    <th>Client IP</th>
+                    <th>Sort</th>
+                    <th>Title</th>
+                    <th>URL</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
