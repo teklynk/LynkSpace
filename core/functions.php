@@ -782,11 +782,30 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
-function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
-    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 30);
-
+function getData($getUrl) {
     $ch = curl_init();
+    $timeout = 10;
+    curl_setopt($ch, CURLOPT_URL, $getUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //catch and print error message
+    if ($http_status==500 || $http_status==503) {
+        echo "HTTP status ".$http_status.". Error loading URL";
+        curl_close($ch);
+        die();
+    }
+    curl_close($ch);
+
+    return $data;
+}
+//getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
+function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
+    $ch = curl_init();
+    $timeout = 10;
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -839,8 +858,6 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
             $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
         }
 
-        //print_r($xmlimage);
-
         //Gets the image dimensions from the xmltheimage url.
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
@@ -858,7 +875,6 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 }
             }
 
-
         echo "</div>";
 
         //stop parsing xml once it reaches the max count
@@ -874,18 +890,45 @@ function getHottitlesTabs(){
     global $hottitlesTile;
     global $hottitlesUrl;
     global $hottitlesLoadFirstUrl;
+    global $hottitlesLocID;
     global $hotCount;
+    global $locTypes;
     global $db_conn;
 
-    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, sort FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " AND active='true' ORDER BY sort ASC");
+    //get location type from locations table
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+    $rowLocations = mysqli_fetch_array($sqlLocations);
+
+    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
+        $hottitlesLocType = $rowLocations['type'];
+        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'ALL') AND";
+    } else {
+        $hottitlesLocType = $rowLocations['type'];
+        $locTypeWhere = "loc_type IN ('".$hottitlesLocType."', 'ALL') AND";
+    }
+
+    //get the default value from setup table
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitles_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
+
+    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, loc_type, sort, active, loc_id FROM hottitles WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC");
+    $hottitlesLocID = $_GET['loc_id'];
+
+    //use default location
+    if ($rowHottitlesSetup['hottitles_use_defaults'] == "true" || $rowHottitlesSetup['hottitles_use_defaults'] == "" || $rowHottitlesSetup['hottitles_use_defaults'] == NULL) {
+        $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, loc_type, sort, active, loc_id FROM hottitles WHERE active='true' AND $locTypeWhere loc_id=1 ORDER BY sort ASC");
+        $hottitlesLocID = 1;
+    }
+
     $hotCount = 0;
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
         $hottitlesSort = trim($rowHottitles['sort']);
         $hottitlesTile = trim($rowHottitles['title']);
         $hottitlesUrl = trim($rowHottitles['url']);
+        $hottitlesLocType = trim($rowHottitles['loc_type']);
         $hotCount ++;
 
-        //Set active tab on initial page load
+        //Set active tab on initial page load where sort=1
         if ($hottitlesSort == 1) {
             $hotActive = 'active';
             $hottitlesLoadFirstUrl = $hottitlesUrl;
@@ -894,15 +937,17 @@ function getHottitlesTabs(){
         }
 
         if ($hotCount > 0) {
-            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', $hotCount);\">$hottitlesTile</a></li>";
+            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', 1);\">$hottitlesTile</a></li>";
         }
     }
 }
 
-function get_content($URL){
+function getUrlContents($URL){
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $timeout = 10;
     curl_setopt($ch, CURLOPT_URL, $URL);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;

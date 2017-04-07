@@ -264,6 +264,9 @@ session_start();
                     <a href="team.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-address-card" title="Team"></i> Team</a>
                 </li>
                 <li>
+                    <a href="hottitles.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-fire" title="Hot Titles"></i> Hot Titles</a>
+                </li>
+                <li>
                     <a href="databases.php?section=<?php echo $custSections[0] . "&" . $setLocId; ?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>
                 </li>
                 <li>

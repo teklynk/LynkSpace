@@ -451,6 +451,16 @@ $(document).ready(function () {
             $('.customer_status_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('.hottitles_status_checkbox').change(function () {
+        $.get('ajax/update_hottitlesactive.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.hottitles_status_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.hottitles_status_checkbox').attr('disabled', false);
+        }, 500);
+    });
     $('.customer_featured_checkbox').change(function () {
         $.get('ajax/update_customersfeatured.php?update=true', {
             id: this.id,
@@ -459,6 +469,16 @@ $(document).ready(function () {
         $('.customer_featured_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.customer_featured_checkbox').attr('disabled', false);
+        }, 500);
+    });
+    $('.hottitles_defaults_checkbox').change(function () {
+        $.get('ajax/update_hottitlesdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.hottitles_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.hottitles_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
     $('.aboutus_defaults_checkbox').change(function () {
@@ -681,6 +701,16 @@ $(document).ready(function () {
                 $('#addCat_button').html("<i class='fa fa-fw fa-times'></i> Close");
             } else {
                 $('#addCat_button').html("<i class='fa fa-fw fa-plus'></i> Add / Edit a Category");
+            }
+        }, 500);
+    });
+
+    $('#addHottitles_button').click(function () {
+        setTimeout(function () {
+            if ($('#addHottitlesDiv').hasClass('in')) {
+                $('#addHottitles_button').html("<i class='fa fa-fw fa-times'></i> Close");
+            } else {
+                $('#addHottitles_button').html("<i class='fa fa-fw fa-plus'></i> Add a List");
             }
         }, 500);
     });

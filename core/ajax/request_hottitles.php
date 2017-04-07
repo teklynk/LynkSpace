@@ -12,7 +12,7 @@ if (!empty($_GET['rssurl'])) {
     <script type="text/javascript">
         //Hot titles carousel
         $('.owl-carousel').owlCarousel({
-            //center: true,
+            center: true,
             loop: true,
             margin: 10,
             nav: true,
@@ -49,7 +49,7 @@ if (!empty($_GET['rssurl'])) {
 
 } else {
 
-    die('Direct access not permitted');
+    die('URL not found');
 
 }
 ?>

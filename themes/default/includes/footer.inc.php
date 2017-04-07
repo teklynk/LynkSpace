@@ -36,7 +36,7 @@ if (!defined('inc_access')) {
 
     <!-- Script to Activate the Carousel -->
     <script type="text/javascript">
-        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', 1, 1);
+        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', <?php echo $hottitlesLocID; ?>);
     </script>
 
     </body>

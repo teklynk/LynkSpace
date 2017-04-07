@@ -164,6 +164,12 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             background-size: cover;
         }
 
+        h2, .h2 {
+            font-size: 30px;
+            border-bottom: solid 1px #ccc;
+            padding-bottom: 4px;
+        }
+
         .login-panel {
             margin-top: 60px;
         }
@@ -205,19 +211,19 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                             <fieldset>
                                 <h2 class="form-signin-heading">Database Connection</h2>
                                 <div class="form-group">
-                                    <label>DB Server</label>
+                                    <label>Database Server</label>
                                     <input class="form-control" type="text" name="dbserver" maxlength="100" autofocus autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="dbusername">DB Username</label>
+                                    <label for="dbusername">Database Username</label>
                                     <input class="form-control" type="text" name="dbusername" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="dbpassword">DB Password</label>
+                                    <label for="dbpassword">Database Password</label>
                                     <input class="form-control" type="text" name="dbpassword" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="dbname">DB Name</label>
+                                    <label for="dbname">Database Name</label>
                                     <input class="form-control" type="text" name="dbname" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <h2 class="form-signin-heading">Create an Admin user</h2>
