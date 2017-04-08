@@ -69,7 +69,7 @@ if (($_POST['save_main'])) {
 if (($_POST['add_hottitles'])) {
 
     //Insert Hot Titles
-    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (0, '" . safeCleanStr($_POST['hottitles_title']) . "', '" . safeCleanStr($_POST['hottitles_url']) . "', '', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
+    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . safeCleanStr($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
     mysqli_query($db_conn, $hottitlesInsert);
 
     header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
@@ -112,25 +112,54 @@ if ($_GET['loc_id'] != 1) {
 <h2></h2>
 
 <div id="addHottitlesDiv" class="accordion-body collapse panel-body">
-<fieldset class="well">
-<div class="row">
-    <div class="col-lg-8">
-        <form name="addhottitlesForm" class="dirtyForm" method="post" action="">
-            <div class="form-group">
-                <label>Title</label>
-                <input class="form-control" type="text" name="hottitles_title" maxlength="255" placeholder="Title" required>
+    <fieldset class="well">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="addhottitlesForm" class="dirtyForm" method="post" action="">
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label for="hottitles_sort">Sort Order</label>
+                            <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="form-group">
+                            <label for="hottitles_title">Title</label>
+                            <input class="form-control" type="text" name="hottitles_title" maxlength="255" placeholder="Title" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="hottitles_url">Saved Search RSS URL</label>
+                            <input class="form-control" type="text" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <?php
+                        //loop through the array of location Types
+                        $locMenuStr = "";
+                        $locArrlength = count($locTypes);
+                        for ($x = 0; $x < $locArrlength; $x++) {
+                            $locMenuStr .= "<option value=" . $locTypes[$x] . ">" . $locTypes[$x] . "</option>";
+                        }
+                        ?>
+                        <div class="form-group">
+                            <label for="location_type">Location Type</label>
+                            <select class='form-control' name='location_type' id='location_type'>
+                                <?php echo $locMenuStr; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="hidden" name="add_hottitles" value="true"/>
+                            <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add List</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label>Saved Search RSS URL</label>
-                <input class="form-control" type="text" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
-            </div>
-
-            <input type="hidden" name="add_hottitles" value="true"/>
-            <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add List</button>
-        </form>
-    </div>
-</div>
-</fieldset>
+        </div>
+    </fieldset>
 </div>
 
 <!--Users table-->

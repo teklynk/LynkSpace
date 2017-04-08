@@ -492,53 +492,56 @@ if ($_GET['section'] == $custSections[0]) {
             <div id="addCatDiv" class="accordion-body collapse panel-body">
 
                 <fieldset class="well">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <label for="cust_newcatsort">Sort Order</label>
-                                <div class="input-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label for="cust_newcatsort">Sort Order</label>
                                     <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3">
                                 </div>
                             </div>
-                            <div class="col-lg-10">
-                                <label for="cust_newcat">Category</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
-                                    <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatsort='+$('#cust_newcatsort').val()+'&addcatname='+$('#cust_newcat').val();"></i></span>
-                                    <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val()+'&newcatsort='+$('#cust_newcatsort').val();"></i></span>
-                                    <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
+                            <div class="col-lg-11">
+                                <div class="form-group">
+                                    <label for="cust_newcat">Category</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
+                                        <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatsort='+$('#cust_newcatsort').val()+'&addcatname='+$('#cust_newcat').val();"></i></span>
+                                        <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val()+'&newcatsort='+$('#cust_newcatsort').val();"></i></span>
+                                        <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="exist_cat">Edit an Existing Category</label>
+                                    <select class="form-control" name="exist_cat" id="exist_cat">
+                                        <?php
+                                        echo "<option data-sort='0' value='0'>None</option>";
+                                        //Cat list for adding a new category
+                                        //get and build category list, find selected
+                                        $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id, sort FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY sort, name");
+                                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
+
+                                            if ($rowExistCustCat['id'] != 0) {
+                                                $custExistCatId = $rowExistCustCat['id'];
+                                                $custExistCatName = $rowExistCustCat['name'];
+                                                $custExistCatSort = $rowExistCustCat['sort'];
+
+                                                if ($custExistCatId == $custCat) {
+                                                    $isExistCatSelected = "SELECTED";
+                                                } else {
+                                                    $isExistCatSelected = "";
+                                                }
+
+                                                echo "<option data-sort=" . $custExistCatSort . " value=" . $custExistCatId . " " . $isExistCatSelected . ">" . $custExistCatName . "</option>";
+                                            }
+
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="exist_cat">Edit an Existing Category</label>
-                        <select class="form-control" name="exist_cat" id="exist_cat">
-                            <?php
-                            echo "<option data-sort='0' value='0'>None</option>";
-                            //Cat list for adding a new category
-                            //get and build category list, find selected
-                            $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id, sort FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY sort, name");
-                            while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
-
-                                if ($rowExistCustCat['id'] != 0) {
-                                    $custExistCatId = $rowExistCustCat['id'];
-                                    $custExistCatName = $rowExistCustCat['name'];
-                                    $custExistCatSort = $rowExistCustCat['sort'];
-
-                                    if ($custExistCatId == $custCat) {
-                                        $isExistCatSelected = "SELECTED";
-                                    } else {
-                                        $isExistCatSelected = "";
-                                    }
-
-                                    echo "<option data-sort=" . $custExistCatSort . " value=" . $custExistCatId . " " . $isExistCatSelected . ">" . $custExistCatName . "</option>";
-                                }
-
-                            }
-                            ?>
-                        </select>
                     </div>
                 </fieldset>
                 <hr/>

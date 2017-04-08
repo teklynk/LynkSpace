@@ -251,7 +251,7 @@ if ($_GET['section'] == $navSections[0]) {
                         <div class="form-group" id="navigationdefaults">
                             <label>Use Defaults</label>
                             <div class="checkbox">
-                                <label>
+                                <label for="navigation_defaults_<?php echo $navSubSection ?>">
                                     <input class="navigation_defaults_checkbox_<?php echo $navSubSection ?>" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults_<?php echo $navSubSection ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                                 </label>
                             </div>
@@ -273,34 +273,42 @@ if ($_GET['section'] == $navSections[0]) {
             <div id="addCatDiv" class="accordion-body collapse panel-body">
 
                 <fieldset class="well">
-                    <div class="form-group">
-                        <label for="nav_newcat">Category</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
-                            <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
-                            <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
-                            <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="nav_newcat">Category</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
+                                        <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
+                                        <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+                                        <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="exist_cat">Edit an Existing Category</label>
+                                    <select class="form-control" name="exist_cat" id="exist_cat">
+                                        <?php
+                                        echo "<option value='0'>None</option>";
+                                        //get and build category list, find selected
+                                        $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY name");
+                                        while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
+
+                                            if ($rowExistNavCat['id'] != 0) {
+                                                $navExistCatId = $rowExistNavCat['id'];
+                                                $navExistCatName = $rowExistNavCat['name'];
+
+                                                echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
+                                            }
+
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exist_cat">Edit an Existing Category</label>
-                        <select class="form-control" name="exist_cat" id="exist_cat">
-                            <?php
-                            echo "<option value='0'>None</option>";
-                            //get and build category list, find selected
-                            $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY name");
-                            while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
-
-                                if ($rowExistNavCat['id'] != 0) {
-                                    $navExistCatId = $rowExistNavCat['id'];
-                                    $navExistCatName = $rowExistNavCat['name'];
-
-                                    echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
-                                }
-
-                            }
-                            ?>
-                        </select>
                     </div>
                 </fieldset>
                 <hr/>

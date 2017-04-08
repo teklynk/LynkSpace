@@ -42,8 +42,6 @@ while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
     $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . "</option>";
 }
 
-
-
 //delete user
 $deluserId = $_GET['deleteuser'];
 $deluserTitle = $_GET['deletetitle'];
@@ -87,66 +85,81 @@ if ($deleteMsg != "") {
 <h2></h2>
 
 <div id="addUserDiv" class="accordion-body collapse panel-body">
-<fieldset class="well">
-<div class="row">
-    <div class="col-lg-8">
-        <form name="userForm" class="dirtyForm" method="post" action="">
-            <div class="form-group">
-                <label>Username</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input class="form-control" type="text" name="user_name" maxlength="255" placeholder="Username" autofocus autocomplete="off" required>
-                </div>
+    <fieldset class="well">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="userForm" class="dirtyForm" method="post" action="">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_name">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input class="form-control" type="text" name="user_name" maxlength="255" placeholder="Username" autofocus autocomplete="off" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_email">User Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" pattern="<?php echo $emailValidatePattern; ?>" autocomplete="off" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_password">User Password</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <input class="form-control" type="password" name="user_password" placeholder="Password" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_password_confirm">Password Confirm</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_location">User Location</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
+                                <select class="form-control" name="user_location" required>
+                                    <option>Choose a location</option>
+                                    <?php echo $locUsersMenuStr;?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="user_level">User Level</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                                <select class="form-control" name="user_level" required>
+                                    <option>Choose a user level</option>
+                                    <option value="0">User</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="hidden" name="save_main" value="true"/>
+                            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add User</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label>User Email</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                    <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" pattern="<?php echo $emailValidatePattern; ?>" autocomplete="off" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Password</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" placeholder="Password" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Password Confirm</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Location</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                    <select class="form-control" name="user_location" required>
-                        <option>Choose a location</option>
-                        <?php echo $locUsersMenuStr;?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>User Level</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
-                    <select class="form-control" name="user_level" required>
-                        <option>Choose a user level</option>
-                        <option value="0">User</option>
-                        <option value="1">Admin</option>
-                    </select>
-                </div>
-            </div>
-
-            <input type="hidden" name="save_main" value="true"/>
-            <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add User</button>
-        </form>
-    </div>
-</div>
-</fieldset>
+        </div>
+    </fieldset>
 </div>
 
 <!--Users table-->
@@ -191,7 +204,7 @@ if ($deleteMsg != "") {
                     $locationName = $rowLocName['name'];
 
                     echo "<tr>
-                            <td><img class='img-circle img-responsive' src=". getGravatar($usersEmail, 28) ."/></td>
+                            <td><div class='text-center'><img class='img-circle' src=". getGravatar($usersEmail, 28) ."/></div></td>
                             <td>$usersName</td>
                             <td>$usersEmail</td>
                             <td>$usersLevel</td>
