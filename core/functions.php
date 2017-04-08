@@ -939,9 +939,8 @@ function getUrlContents($getUrl) {
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     $data = curl_exec($ch);
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    //catch and print error message
-    if ($http_status==500 || $http_status==503 || $http_status==0 || $http_status==NULL) {
-        echo "HTTP status ".$http_status.". Error loading URL";
+    if ($http_status != 200) {
+        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
         curl_close($ch);
         die();
     }
