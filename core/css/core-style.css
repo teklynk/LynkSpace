@@ -245,6 +245,10 @@ div.database-break {
 .row_pad {
     margin-top: 15px;
 }
+.disable-anchor {
+    pointer-events: none !important;
+    cursor: default;
+}
 
 /* Responsive Styles */
 

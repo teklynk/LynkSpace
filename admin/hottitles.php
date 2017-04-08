@@ -8,6 +8,10 @@ $_SESSION['file_referer'] = 'hottitles.php';
 $pageMsg = "";
 $deleteMsg = "";
 
+//get location type from locations table
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$rowLocations = mysqli_fetch_array($sqlLocations);
+
 ?>
 
 <div class="row">
@@ -142,13 +146,20 @@ if ($_GET['loc_id'] != 1) {
                         for ($x = 0; $x < $locArrlength; $x++) {
                             $locMenuStr .= "<option value=" . $locTypes[$x] . ">" . $locTypes[$x] . "</option>";
                         }
+
+                        if ($adminIsCheck == "true") {
+                            ?>
+                            <div class="form-group">
+                                <label for="location_type">Location Type</label>
+                                <select class='form-control' name='location_type' id='location_type'>
+                                    <?php echo $locMenuStr; ?>
+                                </select>
+                            </div>
+                            <?php
+                        } else {
+                            echo "<input type='hidden' name='location_type' value='".$rowLocations['type']."'/>";
+                        }
                         ?>
-                        <div class="form-group">
-                            <label for="location_type">Location Type</label>
-                            <select class='form-control' name='location_type' id='location_type'>
-                                <?php echo $locMenuStr; ?>
-                            </select>
-                        </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">

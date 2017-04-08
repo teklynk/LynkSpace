@@ -629,7 +629,7 @@ function getSlider($sliderType){
 
     //hide carousel arrows if only one image is available
     if ($sliderNumRows == 1){
-        echo "<style>.carousel-control {display: none !important;}</style>";
+        echo "<style>#sliderCarousel .carousel-control {display: none !important;}</style>";
     }
 
     if ($sliderNumRows > 0){
@@ -782,26 +782,14 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
-function getData($getUrl) {
-    $ch = curl_init();
-    $timeout = 10;
-    curl_setopt($ch, CURLOPT_URL, $getUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-    $data = curl_exec($ch);
-    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    //catch and print error message
-    if ($http_status==500 || $http_status==503) {
-        echo "HTTP status ".$http_status.". Error loading URL";
-        curl_close($ch);
-        die();
-    }
-    curl_close($ch);
-
-    return $data;
-}
 //getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
+    //Checks url string to verify that it is a valid LS2PAC RSS url
+    if (strpos($xmlurl, 'list') === false) {
+        echo "Not a valid URL. Error loading URL.";
+        die();
+    }
+
     $ch = curl_init();
     $timeout = 10;
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -810,14 +798,14 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+    $xmlfeed = simplexml_load_string($xmldata);
+
     //catch and print error message
-    if ($http_status==500 || $http_status==503) {
-        echo "HTTP status ".$http_status.". Error loading URL";
+    if ($http_status != 200) {
+        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
         curl_close($ch);
         die();
     }
-
-    $xmlfeed = simplexml_load_string($xmldata);
 
     curl_close($ch);
 
@@ -922,14 +910,15 @@ function getHottitlesTabs(){
 
     $hotCount = 0;
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
+
         $hottitlesSort = trim($rowHottitles['sort']);
         $hottitlesTile = trim($rowHottitles['title']);
         $hottitlesUrl = trim($rowHottitles['url']);
         $hottitlesLocType = trim($rowHottitles['loc_type']);
         $hotCount ++;
 
-        //Set active tab on initial page load where sort=1
-        if ($hottitlesSort == 1) {
+        //Set active tab on initial page load where count=1
+        if ($hotCount == 1) {
             $hotActive = 'active';
             $hottitlesLoadFirstUrl = $hottitlesUrl;
         } else {
@@ -937,19 +926,27 @@ function getHottitlesTabs(){
         }
 
         if ($hotCount > 0) {
-            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', 1);\">$hottitlesTile</a></li>";
+            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hotCount');\">$hottitlesTile</a></li>";
         }
     }
 }
 
-function getUrlContents($URL){
+function getUrlContents($getUrl) {
     $ch = curl_init();
     $timeout = 10;
-    curl_setopt($ch, CURLOPT_URL, $URL);
+    curl_setopt($ch, CURLOPT_URL, $getUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     $data = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //catch and print error message
+    if ($http_status==500 || $http_status==503 || $http_status==0 || $http_status==NULL) {
+        echo "HTTP status ".$http_status.". Error loading URL";
+        curl_close($ch);
+        die();
+    }
     curl_close($ch);
+
     return $data;
 }
 
