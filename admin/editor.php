@@ -55,10 +55,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             if (file_exists($fileToEdit_dir)) {
                 //open file for Writing
                 $handle = fopen($fileToEdit_dir, 'w') or die('Cannot write to file: ' . $fileToEdit_dir . '. Check file permissions.');
-                $fileData = filter_var($_POST["edit_file"], FILTER_SANITIZE_STRING);
+                $fileData = sanitizeStr($_POST['edit_file']);
                 fwrite($handle, $fileData);
 
-                $pageMsg = "<div class='alert alert-success'>" . $fileToEdit_dir . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php'\">×</button></div>";
+                $pageMsg = "<div class='alert alert-success'>" . $fileToEdit_dir . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
                 closedir($handle);
             }

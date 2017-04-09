@@ -39,9 +39,6 @@ session_start();
     <!-- Admin Panel Fonts CDN -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/font-awesome.min.css">
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
-
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
 
@@ -49,11 +46,7 @@ session_start();
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
     <!-- TinyMCE CDN -->
-    <script type="text/javascript" language="javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
-    <!-- DataTables JavaScript CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/tinymce/tinymce.min.js"></script>
 
     <!-- Custom Functions -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/functions.min.js"></script>

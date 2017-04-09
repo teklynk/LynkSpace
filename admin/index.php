@@ -22,7 +22,7 @@ unset($_SESSION['loc_list']);
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
-        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . safeCleanStr($_POST['username']) . "' AND password=SHA1('" . $blowfishSalt . safeCleanStr($_POST['password']) . "') AND email='" . filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) . "' LIMIT 1");
+        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . safeCleanStr($_POST['username']) . "' AND password=SHA1('" . $blowfishSalt . safeCleanStr($_POST['password']) . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1");
         $rowLogin = mysqli_fetch_array($userLogin);
 
         if (is_array($rowLogin)) {

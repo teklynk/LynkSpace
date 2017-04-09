@@ -19,7 +19,7 @@ $deleteMsg = "";
 //insert data on submit
 if (!empty($_POST)) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
-        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . filter_var(trim($_POST['user_email']), FILTER_VALIDATE_EMAIL) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
+        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
         mysqli_query($db_conn, $usersInsert);
 
         $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";

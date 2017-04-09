@@ -121,7 +121,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         mysqli_query($db_conn, 'TRUNCATE TABLE users');
 
         // Insert admin user into users table
-        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
+        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
 
         //Wait before proceeding to the next step
@@ -130,13 +130,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Create the email and send the message
         $email_subject = "$server_domain - User Account has been added:  $user_name";
         $email_body = "To log on the site, use the following credentials.\n\n";
-        $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nDatabase Name: " . safeCleanStr($_POST['dbname']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
+        $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . validateEmail($_POST['useremail']) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nDatabase Name: " . safeCleanStr($_POST['dbname']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
         $email_body .= "If you have any questions or encounter any problems logging in, please contact the web site administrator.\n\n";
         $headers = "From: noreply@$server_domain\n";
         $headers .= "Reply-To: noreply@$server_domain";
 
         // Send the email
-        mail(filter_var(trim($_POST['useremail']), FILTER_VALIDATE_EMAIL), $email_subject, $email_body, $headers);
+        mail(validateEmail($_POST['useremail']), $email_subject, $email_body, $headers);
 
         //Wait before proceeding to the next step
         sleep(2);

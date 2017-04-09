@@ -34,7 +34,6 @@ if ($deleteMsg != "") {
     echo $deleteMsg;
 }
 
-
 $deleteMsg = "";
 $deleteConfirm = "";
 $delhottitlesId = $_GET['deletehottitles'];
@@ -135,7 +134,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="text" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
+                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
                     </div>
                     <div class="col-lg-12">

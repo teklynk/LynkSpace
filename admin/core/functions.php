@@ -47,19 +47,34 @@ function getImageDropdownList($image_dir, $image_selected) {
 
 //Get gravatar image based on users email value
 function getGravatar($email, $size){
-    $default = "https://cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";
-    return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
+    $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";
+    return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
 }
 
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
-function safeCleanStr($cleanStr){
+function safeCleanStr($cleanStr) {
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
 }
 
 //escape Quotes in textareas and string values
-function sqlEscapeStr($cleanStr){
+function sqlEscapeStr($cleanStr) {
     global $db_conn;
     return mysqli_real_escape_string($db_conn, trim($cleanStr));
+}
+
+//sanitize string
+function sanitizeStr($cleanStr) {
+    return filter_var(trim($cleanStr), FILTER_SANITIZE_STRING);
+}
+
+//validate url
+function validateUrl($cleanStr) {
+    return filter_var(trim($cleanStr), FILTER_VALIDATE_URL);
+}
+
+//validate email
+function validateEmail($cleanStr) {
+    return filter_var(trim($cleanStr), FILTER_VALIDATE_EMAIL);
 }
 
 //Gets clients real IP address
@@ -75,7 +90,7 @@ function getRealIpAddr(){
 }
 
 //Location list for level 1 admins only
-function getLocList(){
+function getLocList() {
     global $locList;
     global $db_conn;
 
