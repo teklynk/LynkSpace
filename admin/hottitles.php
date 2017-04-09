@@ -13,9 +13,12 @@ $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=
 $rowLocations = mysqli_fetch_array($sqlLocations);
 
 ?>
-
 <div class="row">
     <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+            <li class="active">Hot Titles</li>
+        </ol>
         <h1 class="page-header">
             Hot Titles
         </h1>
