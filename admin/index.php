@@ -3,21 +3,10 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'index.php';
-
 //clear all session variables
-unset($_SESSION['user_id']);
-unset($_SESSION['user_name']);
-unset($_SESSION['user_email']);
-unset($_SESSION['user_level']);
-unset($_SESSION['user_loc_id']);
-unset($_SESSION['user_ip']);
-unset($_SESSION['timeout']);
-unset($_SESSION['loggedIn']);
-unset($_SESSION['session_hash']);
-unset($_SESSION['loc_id']);
-unset($_SESSION['loc_name']);
-unset($_SESSION['loc_list']);
+session_unset();
+
+$_SESSION['file_referer'] = 'index.php';
 
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {

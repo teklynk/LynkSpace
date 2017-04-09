@@ -36,7 +36,7 @@ session_start();
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/admin.min.css">
 
-    <!-- Admin Panel Fonts CDN -->
+    <!-- Admin Panel Fonts -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/font-awesome.min.css">
 
     <!-- Admin Panel CSS -->
@@ -45,7 +45,7 @@ session_start();
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
-    <!-- TinyMCE CDN -->
+    <!-- TinyMCE -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/tinymce/tinymce.min.js"></script>
 
     <!-- Custom Functions -->
