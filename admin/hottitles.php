@@ -239,7 +239,7 @@ if ($_GET['loc_id'] != 1) {
                                 <input class='form-control' name='hottitles_title[]' value='" . $hottitlesTitle . "' type='text' maxlength='255'>
                             </td>";
 
-                            echo "<td><input class='form-control' type='text' name='hottitles_url[]' value='".$hottitlesUrl."' maxlength='255'></td>";
+                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' maxlength='255'></td>";
 
                             //If admin, show location type drop down list else show a hidden input with the locations type value
                             if ($adminIsCheck == "true") {

@@ -896,7 +896,7 @@ function getHottitlesTabs(){
     }
 
     //get the default value from setup table
-    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitles_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
 
     $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, loc_type, sort, active, loc_id FROM hottitles WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC");
@@ -929,6 +929,16 @@ function getHottitlesTabs(){
             echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hotCount');\">$hottitlesTile</a></li>";
         }
     }
+}
+
+function getHottitlesHeading() {
+    global $hottitlesHeading;
+    global $db_conn;
+    //get the heading value from setup table
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
+    $hottitlesHeading = $rowHottitlesSetup['hottitlesheading'];
+    return $hottitlesHeading;
 }
 
 function getUrlContents($getUrl) {

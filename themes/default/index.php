@@ -44,7 +44,7 @@ if ($_GET['loc_id']) {
     echo "<div class='container bannerwrapper'>";
 
     echo "<div class='col-xs-12 col-lg-12 hottitles-title'>";
-    echo "<h1 class='text-white'>New Titles</h1>";
+    echo "<h1 class='text-white'>" . getHottitlesHeading() . "</h1>";
     echo "</div>";
 
     echo "<div style='clear:both;'></div>";
