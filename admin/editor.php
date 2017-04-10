@@ -72,8 +72,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Home</a></li>
-                    <li><a href="editor.php?loc=<?php echo $_GET['loc_id']; ?>">File Editor</a></li>
-                    <li class="active">Section: <?php echo $_GET['section']; ?></li>
+                    <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Settings</a></li>
+                    <li><a href="siteoptions.php?loc=<?php echo $_GET['loc_id']; ?>">Site Options</a></li>
+                    <li class="active">File Editor</li>
                 </ol>
                 <h1 class="page-header">
                     File Editor
