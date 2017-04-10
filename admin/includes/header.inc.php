@@ -116,6 +116,7 @@ session_start();
                     selector: 'textarea.tinymce',
                     height: 500,
                     theme: 'modern',
+                    skin: 'lightgray',
                     plugins: 'save link image lists paste code',
                     paste_data_images: false,
                     paste_as_text: true,
