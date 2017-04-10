@@ -118,17 +118,18 @@ if ($_GET['loc_id'] != 1) {
 <h2></h2>
 
 <div id="addHottitlesDiv" class="accordion-body collapse panel-body">
-    <fieldset class="well">
-        <div class="row">
-            <div class="col-lg-12">
+
+    <div class="row">
+        <div class="col-lg-8">
+            <fieldset class="well">
                 <form name="addhottitlesForm" class="dirtyForm" method="post" action="">
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label for="hottitles_sort">Sort Order</label>
                             <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort" maxlength="3">
                         </div>
                     </div>
-                    <div class="col-lg-11">
+                    <div class="col-lg-10">
                         <div class="form-group">
                             <label for="hottitles_title">Title</label>
                             <input class="form-control" type="text" name="hottitles_title" maxlength="255" placeholder="Title" required>
@@ -170,14 +171,15 @@ if ($_GET['loc_id'] != 1) {
                         </div>
                     </div>
                 </form>
-            </div>
+            </fieldset>
+            <hr/>
         </div>
-    </fieldset>
+    </div>
 </div>
 
 <!--Users table-->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
         <div>
             <form name="hottitlesForm" class="dirtyForm" method="post" action="">
                 <div class="form-group">

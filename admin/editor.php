@@ -80,7 +80,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
                 </h1>
             </div>
 
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <?php
                 if ($pageMsg !="") {
                     echo $pageMsg;
@@ -102,7 +102,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
                     <div class="form-group">
                         <label><?php echo $fileToEdit_dir; ?></label>
-                        <textarea id="edit_file" class="form-control" name="edit_file" rows="30"><?php echo $fileData; ?></textarea>
+                        <textarea id="edit_file" class="form-control" name="edit_file" rows="60"><?php echo $fileData; ?></textarea>
                     </div>
                     <div class="form-group">
                     <span><small>
@@ -122,17 +122,27 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             </div>
         </div><!--close main container-->
     <script>
-        var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
-            lineNumbers: true,
-            mode: 'text/css',
-            indentWithTabs: true
+        $(document).ready(function(){
+            var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
+                lineNumbers: true,
+                mode: 'text/css',
+                autofocus: true,
+                matchBrackets: true,
+                styleActiveLine: true,
+                indentWithTabs: true
+            });
+            setTimeout(function() {
+                editor.refresh();
+            }, 500);
         });
     </script>
     <style>
         .CodeMirror {
+            position: relative;
             border: 1px solid #eee;
-            height: 800px;
-            width: 75%;
+            border-radius: 5px;
+            height: auto;
+            width: 100%;
         }
     </style>
 <?php

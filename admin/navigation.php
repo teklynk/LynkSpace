@@ -124,24 +124,28 @@ if ($_GET['section'] == $navSections[0]) {
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-10">
-            <h1 class="page-header">
-                Navigation (<?php echo $_GET['section']; ?>)
-            </h1>
-        </div>
-        <div class="col-lg-2">
-            <div class="form-group">
-                <br/>
-                <label for="nav_menu">Navigation Sections</label>
-                <select class="form-control" name="nav_menu" id="nav_menu">
-                    <?php echo $navMenuStr; ?>
-                </select>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-10">
+                    <h1 class="page-header">
+                        Navigation (<?php echo $_GET['section']; ?>)
+                    </h1>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <br/>
+                        <label for="nav_menu">Navigation Sections</label>
+                        <select class="form-control" name="nav_menu" id="nav_menu">
+                            <?php echo $navMenuStr; ?>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8">
             <?php
 
             if ($pageMsg != "") {
@@ -271,10 +275,9 @@ if ($_GET['section'] == $navSections[0]) {
             <h2></h2>
 
             <div id="addCatDiv" class="accordion-body collapse panel-body">
-
-                <fieldset class="well">
-                    <div class="row">
-                        <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <fieldset class="well">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="nav_newcat">Category</label>
@@ -308,10 +311,10 @@ if ($_GET['section'] == $navSections[0]) {
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
+                        <hr/>
                     </div>
-                </fieldset>
-                <hr/>
+                </div>
             </div>
 
             <!-- Nav Link Section -->

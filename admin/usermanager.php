@@ -85,9 +85,9 @@ if ($deleteMsg != "") {
 <h2></h2>
 
 <div id="addUserDiv" class="accordion-body collapse panel-body">
-    <fieldset class="well">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-8">
+            <fieldset class="well">
                 <form name="userForm" class="dirtyForm" method="post" action="">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -157,14 +157,15 @@ if ($deleteMsg != "") {
                         </div>
                     </div>
                 </form>
-            </div>
+            </fieldset>
+            <hr/>
         </div>
-    </fieldset>
+    </div>
 </div>
 
 <!--Users table-->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
         <div>
             <table class="table table-bordered table-hover table-striped">
                 <thead>

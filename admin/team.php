@@ -53,7 +53,7 @@ if ($_GET['preview'] > "") {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
         <?php
 
         if ($_GET['newteam'] || $_GET['editteam']) {

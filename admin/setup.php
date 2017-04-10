@@ -152,8 +152,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
             //Check if user_level is Admin user and default location
             if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
             ?>
-                <div class="well">
-
+                <fieldset class="well">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -178,7 +177,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                             </div>
                         </div>
                     </div>
-                        <hr/>
+                    <hr/>
                     <?php
                     }
                     ?>
@@ -245,7 +244,8 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     }
                     ?>
 
-                </div><!-- well -->
+                </fieldset><!-- well -->
+                <hr/>
             <?php
             }
             ?>
@@ -307,6 +307,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
             <div class="form-group">
                 <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block;"/>
             </div>
+
             <div class="form-group">
                 <label>Choose a Logo</label>
                 <select class="form-control" name="site_logo" id="site_logo">
@@ -325,6 +326,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group" id="searchoptions">

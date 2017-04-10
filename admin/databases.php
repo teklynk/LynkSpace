@@ -115,29 +115,33 @@ if ($_GET['section'] == $custSections[0]) {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-10">
-        <div class="form-group">
-            <?php
-            if ($_GET['newcustomer'] == 'true') {
-                echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
-            } else {
-                echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
-            }
-            ?>
-        </div>
-    </div>
-    <div class="col-lg-2">
-        <div class="form-group">
-            <br/>
-            <label for="nav_menu">Database Sections</label>
-            <select class="form-control" name="nav_menu" id="nav_menu">
-                <?php echo $custMenuStr; ?>
-            </select>
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="form-group">
+                    <?php
+                    if ($_GET['newcustomer'] == 'true') {
+                        echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                    } else {
+                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <br/>
+                    <label for="nav_menu">Database Sections</label>
+                    <select class="form-control" name="nav_menu" id="nav_menu">
+                        <?php echo $custMenuStr; ?>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
         <?php
 
         if ($_GET['newcustomer'] || $_GET['editcustomer']) {
@@ -282,6 +286,7 @@ if ($_GET['section'] == $custSections[0]) {
                         <option value="">None</option>
                         <?php
                         getImageDropdownList($image_dir, $rowCustomer['image']);
+                        ?>
                         ?>
                     </select>
                 </div>
@@ -490,17 +495,16 @@ if ($_GET['section'] == $custSections[0]) {
             <h2></h2>
 
             <div id="addCatDiv" class="accordion-body collapse panel-body">
-
-                <fieldset class="well">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="col-lg-1">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <fieldset class="well">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="cust_newcatsort">Sort Order</label>
                                     <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3">
                                 </div>
                             </div>
-                            <div class="col-lg-11">
+                            <div class="col-lg-10">
                                 <div class="form-group">
                                     <label for="cust_newcat">Category</label>
                                     <div class="input-group">
@@ -541,11 +545,10 @@ if ($_GET['section'] == $custSections[0]) {
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
+                        <hr/>
                     </div>
-                </fieldset>
-                <hr/>
-
+                </div>
             </div>
             <button type="button" class="btn btn-primary" onclick="window.location='?section=<?php echo $getCustSection; ?>&newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Database</button>
             <h2></h2>
