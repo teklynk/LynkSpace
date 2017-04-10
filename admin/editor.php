@@ -102,7 +102,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
                     <div class="form-group">
                         <label><?php echo $fileToEdit_dir; ?></label>
-                        <textarea id="editor" class="form-control" name="edit_file" rows="30"><?php echo $fileData; ?></textarea>
+                        <textarea id="edit_file" class="form-control" name="edit_file" rows="30"><?php echo $fileData; ?></textarea>
                     </div>
                     <div class="form-group">
                     <span><small>
@@ -121,6 +121,20 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
             </div>
         </div><!--close main container-->
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
+            lineNumbers: true,
+            mode: 'text/css',
+            indentWithTabs: true
+        });
+    </script>
+    <style>
+        .CodeMirror {
+            border: 1px solid #eee;
+            height: 800px;
+            width: 75%;
+        }
+    </style>
 <?php
 } else {
     die('Direct access not permitted');

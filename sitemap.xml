@@ -99,6 +99,10 @@
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
+		<loc>http://cpswebapp.local.com/index.php?loc_id=569</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>http://cpswebapp.local.com/index.php?loc_id=568</loc>
 		<changefreq>monthly</changefreq>
 	</url>

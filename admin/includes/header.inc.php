@@ -42,18 +42,30 @@ session_start();
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
 
+
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
     <!-- TinyMCE -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/tinymce/tinymce.min.js"></script>
 
+    <?php
+    if (basename($_SERVER['SCRIPT_NAME']) == 'editor.php') {
+    ?>
+        <!-- CodeMirror -->
+        <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/codemirror/lib/codemirror.min.css">
+        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/codemirror/lib/codemirror.min.js"></script>
+        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/codemirror/mode/css/css.min.js"></script>
+    <?php
+    }
+    ?>
+
     <!-- Custom Functions -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/functions.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!--[if lte IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -111,13 +123,14 @@ session_start();
 
         ?>
         <script type="text/javascript">
-            $(document).ready(function () {
+            $(document).ready(function() {
+
                 tinymce.init({
                     selector: 'textarea.tinymce',
                     height: 500,
                     theme: 'modern',
-                    skin: 'lightgray',
                     plugins: 'save link image lists paste code',
+                    convert_urls: false,
                     paste_data_images: false,
                     paste_as_text: true,
                     paste_auto_cleanup_on_paste: true,
@@ -134,7 +147,6 @@ session_start();
                     toolbar_items_size: 'small',
                     toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
                 });
-
             });
         </script>
         <?php
@@ -142,7 +154,6 @@ session_start();
     ?>
 </head>
 <body>
-
 <!--[if lte IE 9]>
 <div id="ie7alertdiv">
     <div class="container">
