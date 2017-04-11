@@ -124,7 +124,7 @@ if ($_GET['section'] == $navSections[0]) {
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-10">
                     <h1 class="page-header">
@@ -145,7 +145,7 @@ if ($_GET['section'] == $navSections[0]) {
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <?php
 
             if ($pageMsg != "") {
@@ -276,7 +276,7 @@ if ($_GET['section'] == $navSections[0]) {
 
             <div id="addCatDiv" class="accordion-body collapse panel-body">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <fieldset class="well">
                             <div class="col-lg-12">
                                 <div class="form-group">

@@ -64,7 +64,7 @@ if (($_POST['save_main'])) {
     mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $_POST['hottitles_count']; $i++) {
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . safeCleanStr($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . validateUrl($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
 
@@ -75,7 +75,7 @@ if (($_POST['save_main'])) {
 if (($_POST['add_hottitles'])) {
 
     //Insert Hot Titles
-    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . safeCleanStr($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
+    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
     mysqli_query($db_conn, $hottitlesInsert);
 
     header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
@@ -179,7 +179,7 @@ if ($_GET['loc_id'] != 1) {
 
 <!--Users table-->
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div>
             <form name="hottitlesForm" class="dirtyForm" method="post" action="">
                 <div class="form-group">

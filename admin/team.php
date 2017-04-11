@@ -53,7 +53,7 @@ if ($_GET['preview'] > "") {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <?php
 
         if ($_GET['newteam'] || $_GET['editteam']) {
@@ -118,7 +118,7 @@ if ($_GET['preview'] > "") {
                 $thumbNail = "../uploads/" . $_GET['loc_id'] . "/" . $rowTeam['image'];
             }
             ?>
-
+            <div class="col-lg-8">
             <form name="teamForm" class="dirtyForm" method="post" action="">
 
                 <div class="row">
@@ -165,7 +165,7 @@ if ($_GET['preview'] > "") {
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
             </form>
-
+            </div>
             <?php
         } else {
             $deleteMsg = "";

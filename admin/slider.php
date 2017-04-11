@@ -45,7 +45,7 @@ if ($_GET['preview'] > "") {
         </div>
     </div>
     <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
 <?php
 
 if ($_GET['newslide'] || $_GET['editslide']) {
@@ -112,6 +112,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     ?>
+    <div class="col-lg-8">
     <form name="slideForm" class="dirtyForm" method="post" action="">
 
         <div class="row">
@@ -211,6 +212,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
     </form>
+    </div>
 
     <?php
 } else {

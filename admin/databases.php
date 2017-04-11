@@ -115,7 +115,7 @@ if ($_GET['section'] == $custSections[0]) {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-10">
                 <div class="form-group">
@@ -141,7 +141,7 @@ if ($_GET['section'] == $custSections[0]) {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <?php
 
         if ($_GET['newcustomer'] || $_GET['editcustomer']) {
@@ -212,7 +212,7 @@ if ($_GET['section'] == $custSections[0]) {
                 }
             }
             ?>
-
+            <div class="col-lg-8">
             <form name="customerForm" class="dirtyForm" method="post" action="">
 
                 <div class="row">
@@ -330,6 +330,7 @@ if ($_GET['section'] == $custSections[0]) {
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
             </form>
+            </div>
 
             <?php
         } else {
@@ -496,7 +497,7 @@ if ($_GET['section'] == $custSections[0]) {
 
             <div id="addCatDiv" class="accordion-body collapse panel-body">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <fieldset class="well">
                             <div class="col-lg-2">
                                 <div class="form-group">

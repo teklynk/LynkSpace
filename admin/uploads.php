@@ -99,7 +99,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <hr/>
             <div>
                 <table class="table table-bordered table-hover table-striped dataTable" id="dataTable">
