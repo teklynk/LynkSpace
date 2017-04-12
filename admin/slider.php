@@ -66,13 +66,13 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 $_POST['slider_status'] = 'false';
             }
 
-            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', active='" . $_POST['slider_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
+            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', active='" . $_POST['slider_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
 
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . safeCleanStr($_POST['slide_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
-        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowSlides = mysqli_fetch_array($sqlSlides);
 
         //Create new slide
@@ -82,7 +82,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . trim($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '".safeCleanStr($_POST['location_type'])."', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . safeCleanStr($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '" . safeCleanStr($_POST['start_date']) . "', '" . safeCleanStr($_POST['end_date']) . "', '".safeCleanStr($_POST['location_type'])."', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             header("slider.php?loc_id=" . $_GET['loc_id'] . "");
@@ -201,6 +201,44 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
         ?>
 
+        <?php
+        if ($rowSlides['startdate'] == '0000-00-00'){
+            $startDate = "";
+        } else {
+            $startDate = $rowSlides['startdate'];
+        }
+        if ($rowSlides['enddate'] == '0000-00-00') {
+            $endDate = "";
+        } else {
+            $endDate = $rowSlides['enddate'];
+        }
+
+        ?>
+
+        <!-- date time picker -->
+        <div class="col-md-6" style="padding-left:0px;">
+            <div class="form-group">
+                <label>Start Date</label>
+                <div class="input-group date">
+                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding-right:0px;">
+            <div class="form-group">
+                <label>End Date</label>
+                <div class="input-group date">
+                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <hr/>
 
         <div class="form-group">
@@ -251,7 +289,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         for ($i = 0; $i < $_POST['slide_count']; $i++) {
 
-            $slideUpdate = "UPDATE slider SET sort=" . safeCleanStr($_POST['slide_sort'][$i]) . ", loc_type='".safeCleanStr($_POST['location_type'][$i])."' WHERE id=" . $_POST['slide_id'][$i] . " ";
+            $slideUpdate = "UPDATE slider SET sort=" . safeCleanStr($_POST['slide_sort'][$i]) . ", startdate='" . safeCleanStr($_POST['slide_startdate'][$i]) . "', enddate='" . safeCleanStr($_POST['slide_enddate'][$i]) . "', loc_type='".safeCleanStr($_POST['location_type'][$i])."' WHERE id=" . $_POST['slide_id'][$i] . " ";
             mysqli_query($db_conn, $slideUpdate);
 
         }
@@ -347,19 +385,23 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		if ($adminIsCheck == "true") {
             echo "<th>Location Type</th>";
         }
-		echo "<th>Active</th>
+		echo "<th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
 		<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody>";
     $slideCount = "";
-    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC");
+    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC");
     while ($rowSlides = mysqli_fetch_array($sqlslides)) {
         $slideId = $rowSlides['id'];
         $slideTitle = $rowSlides['title'];
         $slideLocType = $rowSlides['loc_type'];
         $slideContent = $rowSlides['content'];
         $slideSort = $rowSlides['sort'];
+        $slideStartDate = $rowSlides['startdate'];
+        $slideEndDate = $rowSlides['enddate'];
         $slideActive = $rowSlides['active'];
         $slideCount++;
 
@@ -401,6 +443,16 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             echo "<input type='hidden' name='location_type[]' value='".$rowLocations['type']."' >";
         }
         echo "<td class='col-xs-1'>
+            <div class='date'>
+            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."'>
+            </div>
+            </td>";
+        echo "<td class='col-xs-1'>
+            <div class='date'>
+            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."'>
+            </div>
+            </td>";
+        echo "<td class='col-xs-1'>
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='" . $slideId . "' type='checkbox' " . $isActive . ">
 			</td>
 			<td class='col-xs-2'>
@@ -424,6 +476,16 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 echo "</div>
 	</div>
 	<p></p>";
-
+?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                todayHighlight: true,
+                autoclose: true
+            });
+        });
+    </script>
+<?php
 include_once('includes/footer.inc.php');
 ?>

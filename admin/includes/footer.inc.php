@@ -15,7 +15,7 @@ if (!defined('inc_access')) {
 </body>
 </html>
 <?php
-//close all db connections
+//close all config connections
 mysqli_close($db_conn);
 die();
 ?>

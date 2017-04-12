@@ -91,7 +91,9 @@ if ($_GET['preview'] > "") {
                 }
 
                 //alert messages
-                if ($pageMsg != "") {
+                if ($errorMsg !="") {
+                    echo $errorMsg;
+                } else {
                     echo $pageMsg;
                 }
 
@@ -262,7 +264,9 @@ if ($_GET['preview'] > "") {
                 <h2></h2>
                 <div class="table-responsive">
                     <?php
-                    if ($pageMsg != "") {
+                    if ($errorMsg !="") {
+                        echo $errorMsg;
+                    } else {
                         echo $pageMsg;
                     }
                     ?>

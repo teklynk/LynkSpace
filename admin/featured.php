@@ -51,7 +51,9 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-8">
             <?php
-            if ($pageMsg != "") {
+            if ($errorMsg !="") {
+                echo $errorMsg;
+            } else {
                 echo $pageMsg;
             }
 

@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 
         }
 
-        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['nav_newname']) . "', '" . $_POST['nav_newurl'] . "', 0, $getTheCat, '" . $getNavSection . "','off', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, win, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['nav_newname']) . "', '" . safeCleanStr($_POST['nav_newurl']) . "', 0, $getTheCat, '" . $getNavSection . "','off', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
         mysqli_query($db_conn, $navNew);
 
     }
@@ -48,7 +48,7 @@ if (!empty($_POST)) {
             $_POST['nav_cat'][$i] = 0; //None
         }
 
-        $navUpdate = "UPDATE navigation SET sort=" . $_POST['nav_sort'][$i] . ", name='" . safeCleanStr($_POST['nav_name'][$i]) . "', url='" . trim($_POST['nav_url'][$i]) . "', catid=" . $_POST['nav_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['nav_id'][$i] . " ";
+        $navUpdate = "UPDATE navigation SET sort=" . $_POST['nav_sort'][$i] . ", name='" . safeCleanStr($_POST['nav_name'][$i]) . "', url='" . safeCleanStr($_POST['nav_url'][$i]) . "', catid=" . $_POST['nav_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['nav_id'][$i] . " ";
         mysqli_query($db_conn, $navUpdate);
     }
 
@@ -148,7 +148,9 @@ if ($_GET['section'] == $navSections[0]) {
         <div class="col-lg-12">
             <?php
 
-            if ($pageMsg != "") {
+            if ($errorMsg !="") {
+                echo $errorMsg;
+            } else {
                 echo $pageMsg;
             }
 

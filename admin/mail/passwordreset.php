@@ -4,12 +4,12 @@ define('inc_access', TRUE);
 
 if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
 
-    include_once('../../db/config.php');
+    include_once('../../config/config.php');
     include_once('../core/functions.php');
 
     $redirectPage = "../index.php?msgsent=reset";
 
-    //if an error user and email combo not found in db occurs
+    //if an error user and email combo not found in config occurs
     $errorPageNotFound = "../index.php?forgotpassword=true&msgsent=notfound";
 
     //if an error occurs

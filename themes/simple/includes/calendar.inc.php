@@ -1,7 +1,7 @@
 <!-- Calendar iframe -->
 <?php
 define('inc_access', TRUE);
-include_once '../../../db/config.php';
+include_once '../../../config/config.php';
 include_once '../../../core/functions.php';
 ?>
 <!DOCTYPE html>

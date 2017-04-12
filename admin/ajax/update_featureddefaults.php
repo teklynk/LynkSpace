@@ -5,7 +5,7 @@ session_start();
 //check if user is logged in and that the requesting page is valid.
 if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'featured.php') {
 
-    include_once('../../db/config.php');
+    include_once('../../config/config.php');
 
     if (!empty($_GET) && $_GET['update']) {
         $featuredDefaultsID = $_GET['id'];

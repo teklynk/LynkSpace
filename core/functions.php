@@ -122,11 +122,11 @@ function getContactInfo(){
     global $contactHours;
     global $contactFormSendToEmail;
     global $contactFormMsg;
-    global $emailValidatePattern;
+    global $emailValidationPattern;
 
     global $db_conn;
 
-    $emailValidatePattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
+    $emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
 
     $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowContact = mysqli_fetch_array($sqlContact);
@@ -616,12 +616,12 @@ function getSlider($sliderType){
     $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, startdate, enddate, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
 
     //use default location
     if ($rowSliderSetup['slider_use_defaults'] == "true" || $rowSliderSetup['slider_use_defaults'] == "" || $rowSliderSetup['slider_use_defaults'] == NULL) {
-        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=1 $sliderOrderBy");
+        $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, startdate, enddate, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=1 $sliderOrderBy");
         $sliderNumRows = mysqli_num_rows($sqlSlider);
 
         $imagePath = 1; //the default location
@@ -639,36 +639,43 @@ function getSlider($sliderType){
             //Wrapper for slides
             echo "<div class='carousel-inner'>";
             while ($rowSlider = mysqli_fetch_array($sqlSlider)){
-                $sliderCount++;
 
-                if ($sliderCount == 1){
-                    $slideActive = "active";
-                } else {
-                    $slideActive = "";
-                }
+                //check if slide is with in date range
+                if (strtotime(date('Y-m-d')) >= strtotime($rowSlider['startdate']) && strtotime(date('Y-m-d')) <= strtotime($rowSlider['enddate'])) {
 
-                echo "<div class='item $slideActive'>";
+                    $sliderCount++;
 
-                if (!empty($rowSlider['image'])){
-                    echo "<div class='fill img-responsive img-full' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
-                } else {
-                    echo "<div class='fill img-responsive img-full'></div>";
-                }
+                    if ($sliderCount == 1) {
+                        $slideActive = "active";
+                    } else {
+                        $slideActive = "";
+                    }
 
-                echo "<div class='carousel-caption'>";
+                    echo "<div class='item $slideActive'>";
 
-                echo "<h2>" . $rowSlider['title'] . "</h2>";
-                echo "<p>" . $rowSlider['content'] . "</p>";
+                    if (!empty($rowSlider['image'])) {
+                        echo "<div class='fill img-responsive img-full' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
+                    } else {
+                        echo "<div class='fill img-responsive img-full'></div>";
+                    }
+
+                    echo "<div class='carousel-caption'>";
+
+                    echo "<h2>" . $rowSlider['title'] . "</h2>";
+                    echo "<p>" . $rowSlider['content'] . "</p>";
 
 
-                if ($rowSlider['link']){
-                    echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
-                }
+                    if ($rowSlider['link']) {
+                        echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
+                    }
 
-                echo "</div>"; //.carousel-caption
+                    echo "</div>"; //.carousel-caption
 
-                echo "</div>"; //.item
-            }
+                    echo "</div>"; //.item
+
+                } //end of startdate check
+
+            }//end of while loop
 
             //Controls
             echo "<a class='left carousel-control' href='#sliderCarousel' data-slide='prev'>";
@@ -682,32 +689,34 @@ function getSlider($sliderType){
 
         } elseif ($sliderType == "random"){
             $rowSlider = mysqli_fetch_array($sqlSlider);
+            //check if slide is with in date range
+            if (strtotime(date('Y-m-d')) >= strtotime($rowSlider['startdate']) && strtotime(date('Y-m-d')) <= strtotime($rowSlider['enddate'])) {
 
-            echo "<div class='carousel-inner'>";
+                echo "<div class='carousel-inner'>";
 
-            echo "<div class='item active'>";
+                echo "<div class='item active'>";
 
-            if (!empty($rowSlider['image'])){
-                echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
-            } else {
-                echo "<div class='fill'></div>";
+                if (!empty($rowSlider['image'])) {
+                    echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
+                } else {
+                    echo "<div class='fill'></div>";
+                }
+
+                echo "<div class='carousel-caption'>";
+
+                echo "<h2>" . $rowSlider['title'] . "</h2>";
+                echo "<p>" . $rowSlider['content'] . "</p>";
+
+                if ($rowSlider['link']) {
+                    echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
+                }
+
+                echo "</div>"; //.carousel-caption
+
+                echo "</div>"; //.item
+
+                echo "</div>"; //.carousel-inner
             }
-
-            echo "<div class='carousel-caption'>";
-
-            echo "<h2>" . $rowSlider['title'] . "</h2>";
-            echo "<p>" . $rowSlider['content'] . "</p>";
-
-            if ($rowSlider['link']){
-                echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
-            }
-
-            echo "</div>"; //.carousel-caption
-
-            echo "</div>"; //.item
-
-            echo "</div>"; //.carousel-inner
-
         } else {
             $rowSlider = mysqli_fetch_array($sqlSlider);
             $sliderLink = $rowSlider['link'];
@@ -983,6 +992,9 @@ function getShortCode($urlStr){
     global $setupPACURL;
     global $homePageURL;
 
+    //add a space to the front of var so that str_replace will see it. strange, right?
+    $urlStr = ' ' . $urlStr;
+
     if (strpos($urlStr, '[pac_url]') == true) {
         $urlStr = str_replace('[pac_url]', $setupPACURL, $urlStr);
     } elseif (strpos($urlStr, '[homepage_url]') == true) {
@@ -993,7 +1005,7 @@ function getShortCode($urlStr){
         $urlStr = str_replace('[loc_id]', $_GET['loc_id'], $urlStr);
     }
 
-    return $urlStr;
+    return trim($urlStr);
 }
 
 //Call these functions depending on which page you are visiting

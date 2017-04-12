@@ -54,7 +54,9 @@ if ($_GET['update'] == 'true') {
 
         <?php
 
-        if ($pageMsg != "") {
+        if ($errorMsg !="") {
+            echo $errorMsg;
+        } else {
             echo $pageMsg;
         }
 

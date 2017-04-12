@@ -4,13 +4,16 @@ define('inc_access', TRUE);
 include_once('includes/header.inc.php');
 
 // Name of the dbconn file
-$dbFileLoc = "../db/dbconn.php";
+$dbFileLoc = "../config/dbconn.php";
 
 // Name of the config file
-$dbConfigLoc = "../db/config.php";
+$dbConfigLoc = "../config/config.php";
+
+// Name of the blowfish file
+$dbBlowfishLoc = "../config/blowfishsalt.php";
 
 // Name of the Source sql dump file
-$dbFilename = "../db/bootstrap_business.sql";
+$dbFilename = "../config/bootstrap_business.sql";
 
 // Generate a random Blowfish Salt key using the random string function
 $blowfishHash = blowfishSaltRandomString(generateRandomString());
@@ -42,7 +45,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Database name
         $mysql_database = $_POST["dbname"];
 
-        // establish db connection
+        // establish config connection
         $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
 
         // Create database
@@ -104,15 +107,16 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         //Wait before proceeding to the next step
         sleep(2);
 
-        //Write to config file (appends to existing config file)
-        $dbconfig = fopen($dbConfigLoc, "a") or die("Unable to open file!");
-
+        //Write to blowfish file
+        $dbBlowfish = fopen($dbBlowfishLoc, "a") or die("Unable to open file!");
+        $writeline = "<?php";
+        fwrite($dbBlowfish, $writeline);
         $writeline = "\n\$blowfishSalt = '" . $blowfishHash . "';\n";
-        fwrite($dbconfig, $writeline);
+        fwrite($dbBlowfish, $writeline);
         $writeline = "?>";
-        fwrite($dbconfig, $writeline);
+        fwrite($dbBlowfish, $writeline);
 
-        fclose($dbconfig);
+        fclose($dbBlowfish);
 
         //Wait before proceeding to the next step
         sleep(2);
@@ -233,7 +237,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 </div>
                                 <div class="form-group">
                                     <label for="useremail">User Email</label>
-                                    <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo $emailValidatePattern; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo $emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>

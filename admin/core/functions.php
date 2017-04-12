@@ -7,13 +7,25 @@ if (!defined('inc_access')) {
 //Random password generator for password reset
 function generateRandomString($length = 10){
     global $randomString;
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
+    $specialCharacters = '!@#$%';
+    $specialCharactersLength = strlen($specialCharacters);
+    $numberCharacters = '0123456789';
+    $numberCharactersLength = strlen($numberCharacters);
     $randomString = '';
+    $randomSpecialCharString = '';
+    $numberCharactersString = '';
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-    return $randomString;
+    for ($i = 0; $i < 1; $i++) {
+        $randomSpecialCharString .= $specialCharacters[rand(0, $specialCharactersLength - 1)];
+    }
+    for ($i = 0; $i < 1; $i++) {
+        $numberCharactersString .= $numberCharacters[rand(0, $numberCharactersLength - 1)];
+    }
+    return $randomString . $randomSpecialCharString . $numberCharactersString;
 }
 
 //Random Blowfish Salt
@@ -26,7 +38,7 @@ function getImageDropdownList($image_dir, $image_selected) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
             if ('..' === $file) continue;
-            if ($file==="Thumbs.db") continue;
+            if ($file==="Thumbs.config") continue;
             if ($file===".DS_Store") continue;
             if ($file==="index.html") continue;
             $allfiles[] = strtolower($file);
@@ -69,12 +81,24 @@ function sanitizeStr($cleanStr) {
 
 //validate url
 function validateUrl($cleanStr) {
-    return filter_var(trim($cleanStr), FILTER_VALIDATE_URL);
+    global $errorMsg;
+    if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
+        return filter_var(trim($cleanStr), FILTER_VALIDATE_URL);
+    } else {
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." is not a valid URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        return false;
+    }
 }
 
 //validate email
 function validateEmail($cleanStr) {
-    return filter_var(trim($cleanStr), FILTER_VALIDATE_EMAIL);
+    global $errorMsg;
+    if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
+        return filter_var(trim($cleanStr), FILTER_VALIDATE_EMAIL);
+    } else {
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." is not a valid Email<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        return false;
+    }
 }
 
 //Gets clients real IP address
@@ -163,6 +187,10 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 }
 
 //html5 pattern property for input type=email
-$emailValidatePattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
-
+$emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
+//html5 date validation - Full Date Validation (YYYY-MM-DD)
+$dateValidationPattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
+//html5 password validation pattern
+$passwordValidationPattern = "(?=^.{6,15}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$";
+$passwordValidationTitle = "1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters";
 ?>

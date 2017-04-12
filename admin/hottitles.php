@@ -28,7 +28,13 @@ $rowLocations = mysqli_fetch_array($sqlLocations);
 
 if ($_GET['update'] == 'true'){
     $pageMsg = "<div class='alert alert-success'>The hot titles has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    echo $pageMsg;
+
+    if ($errorMsg !="") {
+        echo $errorMsg;
+    } else {
+        echo $pageMsg;
+    }
+
 } else {
     $pageMsg = '';
 }
@@ -42,7 +48,7 @@ $deleteConfirm = "";
 $delhottitlesId = $_GET['deletehottitles'];
 $delhottitlesTitle = $_GET['deletetitle'];
 
-//delete slide
+//delete hottitle
 if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
     $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delhottitlesTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -64,22 +70,37 @@ if (($_POST['save_main'])) {
     mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $_POST['hottitles_count']; $i++) {
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . validateUrl($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
-        mysqli_query($db_conn, $hottitlesUpdate);
+        //check if url is a LS2PAC RSS URL
+        if (strpos($_POST['hottitles_url'][$i], 'list') === false) {
+            $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $_POST['hottitles_url'][$i] . " is not a valid LS2PAC RSS URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+            echo $errorMsg;
+        } else {
+            $errorMsg = "";
+            $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . validateUrl($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
+            mysqli_query($db_conn, $hottitlesUpdate);
+        }
     }
-
-    header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
-    echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    if ($errorMsg == "") {
+        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+        echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    }
 }
 
 if (($_POST['add_hottitles'])) {
-
-    //Insert Hot Titles
-    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
-    mysqli_query($db_conn, $hottitlesInsert);
-
-    header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
-    echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    //check if url is a LS2PAC RSS URL
+    if (strpos($_POST['hottitles_url'], 'list') === false){
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$_POST['hottitles_url']." is not a valid LS2PAC RSS URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        echo $errorMsg;
+    } else {
+        $errorMsg = "";
+        //Insert Hot Titles
+        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
+        mysqli_query($db_conn, $hottitlesInsert);
+    }
+    if ($errorMsg == "") {
+        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+        echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    }
 }
 
 $sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");

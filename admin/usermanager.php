@@ -71,7 +71,9 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
     </div>
 </div>
 <?php
-if ($pageMsg != "") {
+if ($errorMsg !="") {
+    echo $errorMsg;
+} else {
     echo $pageMsg;
 }
 if ($deleteMsg != "") {
@@ -103,7 +105,7 @@ if ($deleteMsg != "") {
                             <label for="user_email">User Email</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" pattern="<?php echo $emailValidatePattern; ?>" autocomplete="off" required>
+                                <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" pattern="<?php echo $emailValidationPattern; ?>" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
@@ -112,7 +114,7 @@ if ($deleteMsg != "") {
                             <label for="user_password">User Password</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <input class="form-control" type="password" name="user_password" placeholder="Password" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                                <input class="form-control" type="password" name="user_password" placeholder="Password" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
@@ -121,7 +123,7 @@ if ($deleteMsg != "") {
                             <label for="user_password_confirm">Password Confirm</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                                <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                             </div>
                         </div>
                     </div>

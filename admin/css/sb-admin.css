@@ -296,6 +296,9 @@ small {
     margin-right: -24px;
     list-style: none;
 }
+.datepicker {
+    padding: 6px 12px;
+}
 dl, ol, ul {
     margin-top: 0;
 }

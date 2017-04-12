@@ -48,7 +48,9 @@ if ($_GET['passwordupdated'] == 'true') {
 <div class="row">
     <div class="col-lg-8">
         <?php
-        if ($pageMsg != "") {
+        if ($errorMsg !="") {
+            echo $errorMsg;
+        } else {
             echo $pageMsg;
         }
         ?>
@@ -70,21 +72,21 @@ if ($_GET['passwordupdated'] == 'true') {
                 <label>User Email</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $rowUsers['email']; ?>" placeholder="Email Address" pattern="<?php echo $emailValidatePattern; ?>" autocomplete="off" required>
+                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $rowUsers['email']; ?>" placeholder="Email Address" pattern="<?php echo $emailValidationPattern; ?>" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>User Password</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" value="" placeholder="Password" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password" value="" placeholder="Password" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Password Confirm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" value="" placeholder="Password Confirm" pattern=".{8,}" title="8 characters minimum" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password_confirm" value="" placeholder="Password Confirm" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>

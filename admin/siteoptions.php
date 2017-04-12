@@ -10,7 +10,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
     if ($_POST['save_main']) {
         //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . safeCleanStr($_POST['site_pacurl']) . "', homepageurl='" . safeCleanStr($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', multibranch='" . safeCleanStr($_POST['site_multibranch']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
+        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', multibranch='" . safeCleanStr($_POST['site_multibranch']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);
 
         //echo "<script>window.location.href='siteoptions.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
@@ -70,7 +70,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
         <div class="col-lg-8">
             <?php
-            if ($pageMsg !="") {
+            if ($errorMsg !="") {
+                echo $errorMsg;
+            } else {
                 echo $pageMsg;
             }
             ?>
@@ -111,11 +113,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
                 </div>
                 <div class="form-group">
                     <label>Home Page URL</label>
-                    <input class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="www.myhomepage.com">
+                    <input class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
                 </div>
                 <div class="form-group">
                     <label>PAC URL</label>
-                    <input class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="www.librarypac.com">
+                    <input class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
                 </div>
                 <div class="form-group">
                     <label>Carousel Speed</label>

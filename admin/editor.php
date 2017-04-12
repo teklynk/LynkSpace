@@ -83,7 +83,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
             <div class="col-lg-8">
                 <?php
-                if ($pageMsg !="") {
+                if ($errorMsg !="") {
+                    echo $errorMsg;
+                } else {
                     echo $pageMsg;
                 }
                 ?>

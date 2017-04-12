@@ -93,10 +93,10 @@ session_start();
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "//<?php echo $setupPACURL; ?>";
+        var TLCDomain = "<?php echo $setupPACURL; ?>";
         var TLCConfig = "<?php echo $setupConfig; ?>";
         var TLCBranch = "";
-        var TLCClassicDomain = "//<?php echo $setupPACURL; ?>";
+        var TLCClassicDomain = "<?php echo $setupPACURL; ?>";
         var TLCClassicConfig = "<?php echo $setupConfig; ?>";
     </script>
 
@@ -174,7 +174,7 @@ if (!empty($setupLogo)) {
                 <span class="icon-bar"></span>
             </button>
             <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-            <a href="//<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><?php echo $locationName; ?></a>
+            <a href="<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><?php echo $locationName; ?></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

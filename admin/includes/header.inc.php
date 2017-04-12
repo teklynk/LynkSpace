@@ -11,7 +11,7 @@ session_start();
     }
 
     //DB connection string and Global variables
-    require_once '../db/config.php';
+    require_once '../config/config.php';
 
     //Admin panel functions
     require_once('core/functions.php');
@@ -41,7 +41,6 @@ session_start();
 
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
-
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
@@ -101,7 +100,7 @@ session_start();
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
                 if ('..' === $imgfile) continue;
-                if ($imgfile === "Thumbs.db") continue;
+                if ($imgfile === "Thumbs.config") continue;
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
                 $allimgfiles[] = strtolower($imgfile);
@@ -124,7 +123,6 @@ session_start();
         ?>
         <script type="text/javascript">
             $(document).ready(function() {
-
                 tinymce.init({
                     selector: 'textarea.tinymce',
                     height: 500,
@@ -196,7 +194,7 @@ session_start();
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 28) ?>"/> <?php echo $_SESSION['user_name']; ?>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 28); ?>"/> <?php echo $_SESSION['user_name']; ?>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>

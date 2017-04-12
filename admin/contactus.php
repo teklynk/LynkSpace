@@ -52,7 +52,9 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-8">
             <?php
-            if ($pageMsg != "") {
+            if ($errorMsg !="") {
+                echo $errorMsg;
+            } else {
                 echo $pageMsg;
             }
             //use default view
@@ -122,11 +124,11 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control count-text" name="contact_email" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_email" pattern="<?php echo $emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
                 <div class="form-group">
                     <label>Send To Email</label>
-                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidatePattern ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
 
                 <div class="form-group">

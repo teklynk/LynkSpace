@@ -158,14 +158,14 @@ $userLogo = $rowSetup['logo'];
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidatePattern ?>" autocomplete="off" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidationPattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>User Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern=".{8,}" title="8 characters minimum" required>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">
@@ -204,7 +204,7 @@ $userLogo = $rowSetup['logo'];
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo $emailValidatePattern ?>" autocomplete="off" required>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo $emailValidationPattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="checkbox">

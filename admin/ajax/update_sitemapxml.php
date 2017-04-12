@@ -5,7 +5,7 @@ session_start();
 //check if user is logged in and that the requesting page is valid.
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'setup.php') {
 
-    include_once('../../db/config.php');
+    include_once('../../config/config.php');
 
     if (!empty($_GET) && $_GET['update']) {
 
@@ -23,7 +23,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         $writeline = "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>\n";
         fwrite($sitemapfile, $writeline);
 
-        //get pages from db
+        //get pages from config
         $sqlpages = mysqli_query($db_conn, "SELECT id, datetime, loc_id FROM pages WHERE active='true' ORDER BY id DESC");
         while ($rowPages = mysqli_fetch_array($sqlpages)) {
             $pageId = $rowPages['id'];
@@ -42,7 +42,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             fwrite($sitemapfile, $writeline);
         }
 
-        //get databases from db
+        //get databases from config
         $sqlCustomers = mysqli_query($db_conn, "SELECT id, section, cust_loc_id FROM category_customers ORDER BY id DESC");
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
             $custCatId = $rowCustomers['id'];
@@ -59,7 +59,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             fwrite($sitemapfile, $writeline);
         }
 
-        //get locations from db
+        //get locations from config
         $sqlLocations = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY id DESC");
         while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
             $locId = $rowLocations['id'];
@@ -109,7 +109,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /css/\n";
         fwrite($robotsfile, $writeline);
-        $writeline = "Disallow: /db/\n";
+        $writeline = "Disallow: /config/\n";
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /includes/\n";
         fwrite($robotsfile, $writeline);

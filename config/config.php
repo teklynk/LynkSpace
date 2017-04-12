@@ -6,7 +6,7 @@ require_once('dbconn.php');
 
 if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 
-//establish db connection
+//Establish config connection
     $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
     mysqli_select_db($db_conn, $db_name);
 
@@ -16,6 +16,12 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 
     $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
     $rowConfig = mysqli_fetch_array($sqlConfig);
+}
+//Get server/host protocol
+if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
+    $serverProtocol = 'https://';
+} else {
+    $serverProtocol = 'http://';
 }
 
 $themeOption = $rowConfig['theme'];
@@ -41,10 +47,10 @@ $site_analytics = $rowConfig['analytics'];
 //physical path to uploads folder
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/";
 
-//absolute web url path to uploads folder for tinyMCE
-$image_url = "//" . $_SERVER['SERVER_NAME'] . "/uploads/" . $_GET['loc_id'] . "/";
+//Absolute web url path to uploads folder for tinyMCE
+$image_url = $serverProtocol . $_SERVER['SERVER_NAME'] . "/uploads/" . $_GET['loc_id'] . "/";
 
-//relative web url path to uploads folder for tinyMCE
+//Relative web url path to uploads folder for tinyMCE
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
 
 //Upload function
@@ -71,5 +77,5 @@ $sessionTimeout = $rowConfig['session_timeout'];
 $carouselSpeed = $rowConfig['carousel_speed'];
 
 //Blowfish Salt goes here after the installer runs.
-$blowfishSalt = 'Kz=MGGX|z9IXnO(2o8Dvsp5CxEU$5u1hdts2cdt@(PVy8';
+require_once('blowfishsalt.php');
 
