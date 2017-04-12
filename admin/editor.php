@@ -5,7 +5,7 @@ define('inc_access', TRUE);
 include_once('includes/header.inc.php');
 
 //check if user is logged in and is admin and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true' && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'setup.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true' && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
 
     $fileToEdit_dir = $_GET['section'];
     $pageMsg="";
@@ -89,7 +89,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
                     echo $pageMsg;
                 }
                 ?>
-                <form name="editForm" class="dirtyForm" method="post" action="">
+                <form name="editForm" class="dirtyForm" method="post">
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -124,30 +124,32 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
             </div>
         </div><!--close main container-->
-    <script>
-        $(document).ready(function(){
-            var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
-                lineNumbers: true,
-                mode: 'text/css',
-                autofocus: true,
-                matchBrackets: true,
-                styleActiveLine: true,
-                indentWithTabs: true
-            });
-            setTimeout(function() {
-                editor.refresh();
-            }, 500);
+
+<!--CodeMirror JS & CSS -->
+<script>
+    $(document).ready(function(){
+        var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
+            lineNumbers: true,
+            mode: 'text/css',
+            autofocus: true,
+            matchBrackets: true,
+            styleActiveLine: true,
+            indentWithTabs: true
         });
-    </script>
-    <style>
-        .CodeMirror {
-            position: relative;
-            border: 1px solid #eee;
-            border-radius: 5px;
-            height: auto;
-            width: 100%;
-        }
-    </style>
+        setTimeout(function() {
+            editor.refresh();
+        }, 300);
+    });
+</script>
+<style>
+    .CodeMirror {
+        position: relative;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        height: auto;
+        width: 100%;
+    }
+</style>
 <?php
 } else {
     die('Direct access not permitted');

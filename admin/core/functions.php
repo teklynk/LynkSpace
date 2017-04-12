@@ -68,18 +68,18 @@ function safeCleanStr($cleanStr) {
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
 }
 
-//escape Quotes in textareas and string values
+//escape Quotes in textareas and string values - Escape special characters in a string
 function sqlEscapeStr($cleanStr) {
     global $db_conn;
     return mysqli_real_escape_string($db_conn, trim($cleanStr));
 }
 
-//sanitize string
+//sanitize string - Remove all HTML tags from a string:
 function sanitizeStr($cleanStr) {
     return filter_var(trim($cleanStr), FILTER_SANITIZE_STRING);
 }
 
-//validate url
+//validate url - Check if the variable $cleanStr is a valid URL
 function validateUrl($cleanStr) {
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
@@ -90,7 +90,7 @@ function validateUrl($cleanStr) {
     }
 }
 
-//validate email
+//validate email - Check if the variable $email is a valid email address
 function validateEmail($cleanStr) {
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {

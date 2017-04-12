@@ -5,8 +5,8 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'usermanager.php';
 
-// Only allow Admin users access to this page
-if ($_SESSION['user_level'] != 1) {
+// Only allow Admin users have access to this page
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
@@ -29,17 +29,28 @@ if (!empty($_POST)) {
 }
 
 //Get user info
-$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email");
+$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email, level, datetime ASC");
+$rowcount = mysqli_num_rows($sqlUsers);
+
+//Get number of Admin users
+$sqlAdminUsers = mysqli_query($db_conn, "SELECT id, level FROM users WHERE level = 1");
+$adminCount = mysqli_num_rows($sqlAdminUsers);
 
 //Get Location ID and Name
-$sqlUsersLoc = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name");
+$sqlUsersLoc = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name ASC");
 
 //build locations drop down list
 while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
     $locUsersId = $rowUsersLoc['id'];
     $locUsersName = $rowUsersLoc['name'];
 
-    $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . "</option>";
+    if ($locUsersId == 1) {
+        $isDefault = " (Default)";
+    } else {
+        $isDefault = "";
+    }
+
+    $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . $isDefault . "</option>";
 }
 
 //delete user
@@ -194,6 +205,14 @@ if ($deleteMsg != "") {
                     $usersLocID = $rowUsers['loc_id'];
                     $usersCount++;
 
+                    //Prevent someone from accidentally deleting all of the Admin users.
+                    if ($adminCount == 1 && $usersLevel == 1) {
+                        $disable = 'disabled';
+                        $usersID = '';
+                    } else {
+                        $disable = '';
+                    }
+
                     if ($usersLevel == 1) {
                         $usersLevel = 'Admin';
                     } else {
@@ -215,7 +234,7 @@ if ($deleteMsg != "") {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr($usersName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr($usersName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                 }
