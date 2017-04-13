@@ -106,7 +106,7 @@ if (($_POST['add_hottitles'])) {
 $sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
-//use default view
+//use default location
 if ($rowSetup['hottitles_use_defaults'] == 'true') {
     $selDefaults = "CHECKED";
 } else {

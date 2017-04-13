@@ -23,7 +23,7 @@ session_start();
         }
     }
     ?>
-    <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>;URL=index.php?logout=true"/>
+    <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>; URL=index.php?logout=true"/>
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,7 +69,7 @@ session_start();
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <noscript><p>Javascript is not enabled in your browser.</p></noscript>
+    <noscript>Javascript is not enabled in your browser.</noscript>
 
     <?php
     $sqlSetup = mysqli_query($db_conn, "SELECT pageheading, servicesheading, sliderheading, teamheading, customersheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . " ");
@@ -94,13 +94,13 @@ session_start();
         $fileListJson = "";
         $linkListJson = "";
 
-        //Build list of images in uploads folder for tinymce editor.php
+        //Build list of images in uploads folder for tinymce
         if ($handle = opendir($image_dir)) {
 
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
                 if ('..' === $imgfile) continue;
-                if ($imgfile === "Thumbs.config") continue;
+                if ($imgfile === "Thumbs.db") continue;
                 if ($imgfile === ".DS_Store") continue;
                 if ($imgfile === "index.html") continue;
                 $allimgfiles[] = strtolower($imgfile);
@@ -153,22 +153,13 @@ session_start();
 </head>
 <body>
 <!--[if lte IE 9]>
-<div id="ie7alertdiv">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="alert alert-danger fade in" role="alert" >
-                    <button id="btnIE7alertclose" type="button" class="close">
-                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4>
-                        Did you know that your Internet Explorer is out of date?
-                    </h4>
-                    <p>
-                        To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
-                    <p>
-                        <a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a>
-                    </p>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger fade in" role="alert" >
+                <h4>Did you know that your Internet Explorer is out of date?</h4>
+                <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
+                <p><a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>
             </div>
         </div>
     </div>

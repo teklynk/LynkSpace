@@ -971,7 +971,7 @@ function getUrlContents($getUrl) {
 //Call - getSetup is used everywhere
 getSetup();
 
-//Random password generator for password reset
+//Random string generator
 function generateRandomString($length = 10){
     global $randomString;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -984,7 +984,6 @@ function generateRandomString($length = 10){
 
     return $randomString;
 }
-
 
 //Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database
 function getShortCode($urlStr){

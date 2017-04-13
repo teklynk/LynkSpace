@@ -13,10 +13,10 @@ $dbConfigLoc = "../config/config.php";
 $dbBlowfishLoc = "../config/blowfishsalt.php";
 
 // Name of the Source sql dump file
-$dbFilename = "../config/bootstrap_business.sql";
+$dbFilename = "../config/businessCMS.sql";
 
 // Generate a random Blowfish Salt key using the random string function
-$blowfishHash = blowfishSaltRandomString(generateRandomString());
+$blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 
 // Check if sql file exists
 if (!file_exists($dbFileLoc)) {
@@ -241,7 +241,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="text" name="password" maxlength="100" pattern=".{8,}" data-toggle="tooltip" data-original-title="8 characters minimum" data-placement="right" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo $passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo $passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
                                 </div>
                                 <div class="checkbox">
                                     <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>

@@ -120,7 +120,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                             if ('.' === $file) continue;
                             if ('..' === $file) continue;
                             //exclude these files
-                            if ($file === "Thumbs.config") continue;
+                            if ($file === "Thumbs.db") continue;
                             if ($file === ".DS_Store") continue;
                             if ($file === "index.html") continue;
 

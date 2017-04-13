@@ -179,7 +179,6 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                             </div>
                         </div>
                     </div>
-                    <hr/>
                     <?php
                     }
                     ?>
@@ -188,6 +187,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     //Check if user_level is Admin user
                     if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
                     ?>
+                    <hr/>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group" id="new_location">

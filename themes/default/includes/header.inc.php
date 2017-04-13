@@ -13,7 +13,7 @@ session_start();
 
     ?>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="3600;URL=index.php?loc_id=<?php echo $_GET['loc_id']; ?>">
+    <meta http-equiv="refresh" content="3600; URL=index.php?loc_id=<?php echo $_GET['loc_id']; ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2.0,user-scalable=yes">
@@ -87,7 +87,7 @@ session_start();
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <noscript><p>Javascript is not enabled in your browser.</p></noscript>
+    <noscript>Javascript is not enabled in your browser.</noscript>
 </head>
 
 <body>
@@ -97,7 +97,6 @@ session_start();
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-danger fade in" role="alert" >
-                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4>Did you know that your Internet Explorer is out of date?</h4>
                 <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
                 <p><a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>

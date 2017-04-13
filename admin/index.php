@@ -171,7 +171,7 @@ $userLogo = $rowSetup['logo'];
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Sign in</button>
+                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in</button>
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">
@@ -180,7 +180,7 @@ $userLogo = $rowSetup['logo'];
                             <?php
                         } else {
                             //create a random password and set it as a session variable
-                            $_SESSION['temp_password'] = generateRandomString();
+                            $_SESSION['temp_password'] = generateRandomPasswordString();
 
                             //Creates a unique refering value/token - exposed in post
                             $_SESSION['unique_referer'] = generateRandomString();

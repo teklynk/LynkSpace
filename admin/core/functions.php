@@ -4,8 +4,8 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-//Random password generator for password reset
-function generateRandomString($length = 10){
+//Random password generator for password reset - generates characters, symbol and number
+function generateRandomPasswordString($length = 10){
     global $randomString;
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -28,6 +28,20 @@ function generateRandomString($length = 10){
     return $randomString . $randomSpecialCharString . $numberCharactersString;
 }
 
+//Random string generator - used to create a unique md5 referrer
+function generateRandomString($length = 10){
+    global $randomString;
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    return md5($randomString);
+}
+
 //Random Blowfish Salt
 function blowfishSaltRandomString($hashThisString){
     return password_hash($hashThisString, PASSWORD_DEFAULT);
@@ -38,7 +52,7 @@ function getImageDropdownList($image_dir, $image_selected) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
             if ('..' === $file) continue;
-            if ($file==="Thumbs.config") continue;
+            if ($file==="Thumbs.db") continue;
             if ($file===".DS_Store") continue;
             if ($file==="index.html") continue;
             $allfiles[] = strtolower($file);
@@ -187,7 +201,7 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 }
 
 //html5 pattern property for input type=email
-$emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
+$emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}";
 //html5 date validation - Full Date Validation (YYYY-MM-DD)
 $dateValidationPattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
 //html5 password validation pattern

@@ -4,8 +4,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-//check if user is logged in and is admin and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true' && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+//check if user is logged in and is admin.
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
 
     $fileToEdit_dir = $_GET['section'];
     $pageMsg="";
@@ -145,14 +145,17 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
     .CodeMirror {
         position: relative;
         border: 1px solid #eee;
-        border-radius: 5px;
-        height: auto;
+        overflow: hidden;
+        background: #fff;
+        height: 500px;
         width: 100%;
     }
 </style>
 <?php
 } else {
-    die('Direct access not permitted');
+    //send user to log in page if not logged in
+    header('Location: index.php?logout=true');
+    echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 include_once('includes/footer.inc.php');
 ?>

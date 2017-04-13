@@ -125,7 +125,7 @@ if ($deleteMsg != "") {
                             <label for="user_password">User Password</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <input class="form-control" type="password" name="user_password" placeholder="Password" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
+                                <input class="form-control" type="password" name="user_password" placeholder="Password" pattern="<?php echo $passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ if ($deleteMsg != "") {
                             <label for="user_password_confirm">Password Confirm</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
+                                <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern="<?php echo $passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo $passwordValidationTitle; ?>" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
