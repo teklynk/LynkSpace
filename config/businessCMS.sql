@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 12, 2017 at 05:16 PM
+-- Generation Time: Apr 14, 2017 at 03:03 PM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-9+deb.sury.org~trusty+1
+-- PHP Version: 5.6.30-10+deb.sury.org~trusty+2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -655,7 +655,6 @@ CREATE TABLE `config` (
   `multibranch` text NOT NULL,
   `homepageurl` text NOT NULL,
   `setuppacurl` text NOT NULL,
-  `searchform` text NOT NULL,
   `session_timeout` int(11) NOT NULL,
   `carousel_speed` text NOT NULL,
   `analytics` text NOT NULL,
@@ -667,8 +666,8 @@ CREATE TABLE `config` (
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `homepageurl`, `setuppacurl`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '920253', 'default', '', 'true', 'http://www.cps.edu/Pages/home.aspx', 'https://pac.library.cps.edu', '<form action="http://ls4int.tlcdelivers.com:8080">\r\n  <label>Search the Catalog</label>\r\n  <input type="text" name="term">\r\n  <input type="hidden" name="section" value="search">\r\n  <input type="hidden" name="config" value="Gray">\r\n  <input type="submit" value="Search">\r\n</form>', 3600, '5000', '8673456', '2017-04-12 20:15:03', 'admin');
+INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `homepageurl`, `setuppacurl`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
+(1, '920253', 'default', '', 'true', 'http://www.cps.edu/Pages/home.aspx', 'https://pac.library.cps.edu', 3600, '5000', '8673456', '2017-04-14 13:24:03', 'admin');
 
 -- --------------------------------------------------------
 
@@ -3145,7 +3144,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
-(1, 'Chicago Public Schools', 'Default', '2017-03-15 04:02:28', 'true'),
+(1, 'Chicago Public Schools', 'Default', '2017-04-13 21:03:04', 'true'),
 (2, 'Jane A Neil Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (3, 'William P Gray Elementary School', 'ES', '2017-02-15 14:32:14', 'true'),
 (4, 'Edwin G Foreman High School', 'HS', '2017-02-15 14:32:32', 'true'),
@@ -3831,7 +3830,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', '', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-04-12 20:34:28', 'admin', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', '', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 14:59:07', 'admin', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-24 13:51:18', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-24 13:51:18', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-24 13:51:18', 'admin_script', 4),
@@ -4997,7 +4996,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '372ce0e10d4633a5f48b06720526c6d01311826c', 'rjones@tlcdelivers.com', 1, '2017-04-12 18:12:57', '127.0.0.1', 1);
+(1, 'admin', '372ce0e10d4633a5f48b06720526c6d01311826c', 'rjones@tlcdelivers.com', 1, '2017-04-14 17:20:09', '127.0.0.1', 1);
 
 --
 -- Indexes for dumped tables
@@ -5181,7 +5180,7 @@ ALTER TABLE `generalinfo`
 -- AUTO_INCREMENT for table `hottitles`
 --
 ALTER TABLE `hottitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `icons_list`
 --
@@ -5216,7 +5215,7 @@ ALTER TABLE `setup`
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `socialmedia`
 --
@@ -5231,7 +5230,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

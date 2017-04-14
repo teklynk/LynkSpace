@@ -21,7 +21,6 @@ if (!empty($_POST)) {
             $_SESSION['user_level'] = $rowLogin['level'];
             $_SESSION['user_loc_id'] = $rowLogin['loc_id'];
             $_SESSION['user_ip'] = getRealIpAddr();
-            $_SESSION['timeout'] = time();
             $_SESSION['loggedIn'] = 1;
             $_SESSION['session_hash'] = md5($rowLogin['username']);
 

@@ -13,7 +13,7 @@ $dbConfigLoc = "../config/config.php";
 $dbBlowfishLoc = "../config/blowfishsalt.php";
 
 // Name of the Source sql dump file
-$dbFilename = "../config/businessCMS.sql";
+$dbFilename = "../config/new_website.sql";
 
 // Generate a random Blowfish Salt key using the random string function
 $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
@@ -61,6 +61,8 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Temporary variable, used to store current query
         $templine = '';
 
+        // Import sql dump file into the database.
+
         // Read in entire file
         $lines = file($dbFilename);
 
@@ -83,10 +85,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             }
         }
 
-        //Wait before proceeding to the next step
+        // Wait before proceeding to the next step
         sleep(2);
 
-        //Write to dbconn file
+        // Write to dbconn file
         $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
 
         $writeline = "<?php\n";
@@ -104,10 +106,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
         fclose($dbfile);
 
-        //Wait before proceeding to the next step
-        sleep(2);
-
-        //Write to blowfish file
+        // Write to blowfish file
         $dbBlowfish = fopen($dbBlowfishLoc, "a") or die("Unable to open file!");
         $writeline = "<?php";
         fwrite($dbBlowfish, $writeline);
@@ -118,18 +117,15 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
         fclose($dbBlowfish);
 
-        //Wait before proceeding to the next step
-        sleep(2);
-
-        //Empty the users table
+        // Empty the users table
         mysqli_query($db_conn, 'TRUNCATE TABLE users');
+
+        // Wait before proceeding to the next step
+        sleep(2);
 
         // Insert admin user into users table
         $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
-
-        //Wait before proceeding to the next step
-        sleep(2);
 
         // Create the email and send the message
         $email_subject = "$server_domain - User Account has been added:  $user_name";
@@ -142,14 +138,11 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Send the email
         mail(validateEmail($_POST['useremail']), $email_subject, $email_body, $headers);
 
-        //Wait before proceeding to the next step
+        // Wait before proceeding to the next step
         sleep(2);
 
         // Rename install page so that it can not be accessed after the initial install
         rename("install.php", "~install.old");
-
-        //Wait before proceeding to the next step
-        sleep(2);
 
         // Redirect to admin login page
         header("Location: index.php");

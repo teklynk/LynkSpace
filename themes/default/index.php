@@ -29,6 +29,14 @@ if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
 echo "</div>";
 echo "</div>";
 
+/*echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='container bannerwrapper'>";
+
+    include 'includes/searchsite.inc.php';
+
+echo "</div>";
+echo "</div>";*/
+
 if ($_GET['loc_id']) {
     echo "<div class='container-fluid'>";
     echo "<div class='container bannerwrapper'>";

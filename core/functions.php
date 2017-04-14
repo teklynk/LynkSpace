@@ -29,13 +29,22 @@ function getLocation(){
 
 function getLocList(){
     global $locationListJson;
-    global $locationIDListJson;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true'");
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT name, active FROM locations WHERE active='true'");
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)){
         $locationListJson .= "'" . $rowLocationSearch['name'] . "',";
-        $locationIDListJson .= "'" . $rowLocationSearch['id'] . "',";
+    }
+}
+
+function getPageList(){
+    global $pageListJson;
+    global $pageTagsJson;
+    global $db_conn;
+
+    $sqlGetPageList = mysqli_query($db_conn, "SELECT title, active FROM pages WHERE active='true'");
+    while ($rowPageList = mysqli_fetch_array($sqlGetPageList)){
+        $pageListJson .= "'" . $rowPageList['title'] . "',";
     }
 }
 
@@ -283,7 +292,7 @@ function getNav($navSection, $dropdown, $pull){
     global $navCatLinksCatID;
     global $navSections;
 
-    echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
+    echo "\n<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>\n";
     if ($dropdown == "true"){
         $dropdownToggle = "dropdown-toggle";
         $dataToggle = "dropdown";
@@ -365,9 +374,9 @@ function getNav($navSection, $dropdown, $pull){
                 $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.nav_loc_id
 
-                echo "<li class='$dropdown'>";
-                echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>";
-                echo "<ul class='$dropdownMenu'>";
+                echo "<li class='$dropdown'>\n";
+                echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>\n";
+                echo "<ul class='$dropdownMenu'>\n";
                 while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)){
 
                     //Variables for $rowNavCatLinks SQL Join
@@ -391,22 +400,22 @@ function getNav($navSection, $dropdown, $pull){
 
                     echo "<li>";
                     echo "<a href='" . $navCatLinksUrl . "' $navCatWin>" . $navCatLinksName . "</a>";
-                    echo "</li>";
+                    echo "</li>\n";
                 }
-                echo "</ul>";
-                echo "</li>";
+                echo "</ul>\n";
+                echo "</li>\n";
             }
 
         } else {
             echo "<li>";
             echo "<a href='" . $navLinksUrl . "' $navWin>" . $navLinksName . "</a>";
-            echo "</li>";
+            echo "</li>\n";
         }
 
         $tempLink = $navLinksCatId;
 
     }
-    echo "</ul>";
+    echo "</ul>\n";
 }
 
 function getSetup(){
@@ -1048,7 +1057,7 @@ if (empty($_GET['loc_id'])){
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
 }
 
-//School search box redirect to loc_id where name = querystring loc_name
+//School search box redirect to loc_id where loc_name = querystring
 if (!empty($_GET['loc_name'])){
 
     $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='" . $_GET['loc_name'] . "' LIMIT 1");
@@ -1056,5 +1065,15 @@ if (!empty($_GET['loc_name'])){
 
     header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "");
     echo "<script>window.location.href='" . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id'] . "';</script>";
+}
+
+//Web site search box redirect to page id where site_search = querystring
+if (!empty($_GET['site_search'])){
+
+    $sqlPageName = mysqli_query($db_conn, "SELECT title, id, loc_id, active FROM pages WHERE active='true' AND title='" . $_GET['site_search'] . "' LIMIT 1");
+    $rowPageName = mysqli_fetch_array($sqlPageName);
+
+    header("Location: page.php?page_id=" . $rowPageName['id'] . "&loc_id=" . $rowPageName['loc_id'] . "");
+    echo "<script>window.location.href='page.php?page_id=" . $rowPageName['id'] . "&loc_id=" . $rowPageName['loc_id'] . "';</script>";
 }
 ?>

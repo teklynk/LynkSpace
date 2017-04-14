@@ -501,6 +501,16 @@ $(document).ready(function () {
             $('.featured_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('.multibranch_checkbox').change(function () {
+        $.get('ajax/update_multibranch.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.multibranch_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.multibranch_checkbox').attr('disabled', false);
+        }, 500);
+    });
     $('.generalinfo_defaults_checkbox').change(function () {
         $.get('ajax/update_generalinfodefaults.php?update=true', {
             id: this.id,
@@ -649,8 +659,6 @@ $(document).ready(function () {
     });
     $('.sitemap_builder').click(function () {
         $.get('ajax/update_sitemapxml.php?update=true', {
-            id: this.id,
-            checked: this.checked,
             success: function () {
                 $('.sitemap_builder').attr('disabled', true);
                 $('.sitemap_builder>i').addClass('fa-spin');

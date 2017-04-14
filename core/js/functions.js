@@ -53,7 +53,7 @@ function toggleSrc(rss, loc_id) {
                 type: 'GET',
                 async: true,
                 cache: true,
-                timeout: 30000,
+                timeout: 10000, //10 seconds
                 success: function(result){
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
                     $('#hottitlesCarousel').removeClass('loader');

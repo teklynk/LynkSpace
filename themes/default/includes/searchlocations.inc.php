@@ -16,7 +16,7 @@ getSetup(); //from functions.php
                 var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
                 $('#loc_name').autocomplete({
                     source: availableTags,
-                    minLength: 2,
+                    minLength: 3,
                     select: function(event, ui) {
                         $('#loc_name').val(ui.item.value);
                         $('form[name="locSearchForm"]').submit();
