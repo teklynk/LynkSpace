@@ -54,6 +54,34 @@ header.carousel .fill {
 #searchlocations .panel-body, #searchpac .panel-body {
     background-color: #337AB7;
 }
+#searchlocations .panel-heading, #searchpac .panel-heading {
+    padding-bottom: 0px;
+}
+#searchlocations .nav-tabs>li.active>a, #searchpac .nav-tabs>li.active>a {
+    color: #fff;
+    background-color: #337ab7;
+}
+#searchlocations .nav-tabs, #searchpac .nav-tabs {
+    border-bottom: 0;
+}
+#hottitlesTabs .panel {
+    border: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+#hottitlesTabs .center-tabs {
+    display: block;
+}
+#hottitlesTabs .center-tabs>li.active>a {
+    color: #fff;
+    background-color: #337ab7;
+}
+#hottitlesTabs .center-tabs>li>a {
+    cursor: pointer;
+}
+#hottitlesTabs .center-tabs>li.active>a {
+    cursor: default;
+}
 
 /* 404 Page Styles */
 
@@ -155,18 +183,20 @@ footer {
 /* Responsive Styles */
 
 @media(max-width:991px) {
-    .customer-img,
-    .img-related {
+    .customer-img, .img-related {
         margin-bottom: 30px;
     }
+
 }
 
 @media(max-width:767px) {
-    .img-portfolio {
-        margin-bottom: 15px;
-    }
-
     header.carousel .carousel {
         height: 70%;
+    }
+    .col-lg-12 {
+        padding: 0;
+    }
+    .panel-heading {
+        padding: 2px;
     }
 }

@@ -12,7 +12,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
 
     if ($_POST['save_main']) {
         //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', multibranch='" . safeCleanStr($_POST['site_multibranch']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
+        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);
 
         $pageMsg = "<div class='alert alert-success'>Site options have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='siteoptions.php'\">×</button></div>";
@@ -59,7 +59,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             } else {
                 echo $pageMsg;
             }
-            //use default view
+            //multibranch active
             if ($rowConfig['multibranch'] == 'true') {
                 $selActive = "CHECKED";
             } else {

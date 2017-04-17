@@ -3,13 +3,13 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<div class='container-fluid featured'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/featured.inc.php';
 echo "</div>";
 echo "</div>";
 
-echo "<div class='container-fluid search'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
 if ($_GET['loc_id'] == 1) {
     include 'includes/searchlocations.inc.php';
@@ -19,7 +19,7 @@ if ($_GET['loc_id'] == 1) {
 echo "</div>";
 echo "</div>";
 
-echo "<div class='container-fluid databases'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
 if (!empty($_GET['cat_id'])) {
     include 'includes/customers_catid.inc.php';

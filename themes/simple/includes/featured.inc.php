@@ -9,7 +9,6 @@ getFeatured();
 
 echo "<div class='row' id='featured'>";
 
-
 if (!empty($featuredImage)) {
 
     if ($featuredImageAlign == "right") {

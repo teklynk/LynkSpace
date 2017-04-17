@@ -11,13 +11,13 @@ $_SESSION['file_referer'] = 'contact.php';
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referer'] = generateRandomString();
 
-echo "<div class='container-fluid featured'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/featured.inc.php';
 echo "</div>";
 echo "</div>";
 
-echo "<div class='container-fluid search'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
 
 if ($_GET['loc_id'] == 1) {

@@ -29,7 +29,7 @@ if (!empty($_POST)) {
 }
 
 //Get user info
-$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email, level, datetime ASC");
+$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE level > 0 ORDER BY username, email, level, datetime ASC");
 $rowcount = mysqli_num_rows($sqlUsers);
 
 //Get number of Admin users

@@ -105,8 +105,8 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                 //EXAMPLE: getNav($navSection,$dropdown,$pull)
                 getNav('Search', 'false', 'center');
                 ?>
+                </div>
             </div>
-        </div>
 
     </div>
     </div>

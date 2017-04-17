@@ -8,7 +8,6 @@ if (!defined('inc_access')) {
 if ($customerNumRows > 0) {
 
     echo "<div class='row'>";
-    echo "<div class='container'>";
 
     if (!empty($customerCatName)) {
         echo "<div class='col-lg-12'>";
@@ -105,7 +104,6 @@ if ($customerNumRows > 0) {
         }
     }
 
-    echo "</div>"; //row
     echo "</div>"; //container
 
 

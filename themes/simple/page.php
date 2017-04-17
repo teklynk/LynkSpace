@@ -4,13 +4,13 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<div class='container-fluid featured'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/featured.inc.php';
 echo "</div>";
 echo "</div>";
 
-echo "<div class='container-fluid search'>";
+echo "<div class='container-fluid'>";
 echo "<div class='container'>";
 
 if ($_GET['loc_id'] == 1) {

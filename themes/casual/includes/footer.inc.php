@@ -9,13 +9,14 @@ if (!defined('inc_access')) {
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
-            <div class="row row_pad">
+            <div class="row">
                 <?php
                 getNav('Footer', 'false', 'left');
                 ?>
             </div>
-            <?php include 'generalinfo.inc.php'; ?>
         </div>
+        <?php include 'generalinfo.inc.php'; ?>
+
         <div id="belowfooter">
             <div class="container">
                 <div class="socialDiv pull-left hidden-sm hidden-md hidden-lg hidden-xl">
@@ -24,10 +25,14 @@ if (!defined('inc_access')) {
                     </div>
                 </div>
                 <div style="clear:both;"></div>
-                <div class="col-lg-12 text-center">
-                    <p>
-                        <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-                    </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <p>
+                                <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,11 +41,12 @@ if (!defined('inc_access')) {
     <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">Scroll To Top</a>
 
-
+<?php if (basename($_SERVER['PHP_SELF']) == 'index.php') { ?>
     <!-- Script to Activate the Carousel -->
-    <script type="text/javascript" language="javascript">
-;
+    <script type="text/javascript">
+        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', <?php echo $hottitlesLocID; ?>, 1);
     </script>
+<?php } ?>
 
     </body>
     </html>

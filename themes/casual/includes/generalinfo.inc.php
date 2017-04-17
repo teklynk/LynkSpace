@@ -10,14 +10,20 @@ if (!empty($generalInfoContent)) {
     echo "<div class='container' id='generalinfo'>";
 
     if (!empty($generalInfoHeading)) {
-        echo "<div class='row>";
+        echo "<div class='row'>";
+        echo "<div class='col-lg-12'>";
         echo "<h2 class='generalinfo'>" . $generalInfoHeading . "</h2>";
+        echo "</div>";
         echo "</div>";
     }
 
-    echo "<div class='col-lg-12 text-center'>";
-    echo $generalInfoContent;
-    echo "</div>";
+    if (!empty($generalInfoContent)) {
+        echo "<div class='row'>";
+        echo "<div class='col-lg-12'>";
+        echo $generalInfoContent;
+        echo "</div>";
+        echo "</div>";
+    }
 
     echo "</div>"; //container
 }

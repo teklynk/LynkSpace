@@ -116,10 +116,7 @@ iframe {
 #hottitlesTabs .nav-pills>li a {
     cursor: pointer;
 }
-#hottitlesTabs .nav-pills>li.active>a {
-    color: #fff;
-    background-color: #0033a0;
-}
+
 #hottitlesCarousel .carousel-inner {
     height: 200px;
 }

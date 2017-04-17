@@ -81,10 +81,8 @@ hr {
 
 .box {
     margin-bottom: 20px;
-    /*padding: 30px 15px;*/
-    padding: 30px 14px 14px 14px;
+    padding: 14px 14px 14px 14px;
     background: #fff;
-    background: rgba(255,255,255,0.9);
 }
 
 .intro-text {
@@ -109,40 +107,40 @@ footer {
     margin: 0;
     padding-top: 20px;
     background: #fff;
-    background: rgba(255,255,255,0.9);
 }
 
 footer p {
     margin: 0;
-    padding: 50px 0;
+    padding: 0;
+}
+footer .nav-Footer {
+    padding: 0 25px 0 0;
+}
+footer #generalinfo {
+    margin-top: 20px;
+    padding: 0;
+}
+footer #generalinfo p {
+    margin: 0px;
+    padding: 0;
 }
 .row_pad {
     margin-top: 0;
     padding: 0 15px 0 15px;
 }
 .hottitlesCarousel .carousel-control.left, .hottitlesCarousel .carousel-control.right {
-    height: 220px;
+    height: 225px;
 }
-.hottitles .nav-tabs {
-    border-bottom: none;
-}
-.hottitles .nav-tabs a {
-    color: #fff;
-    cursor: pointer;
-}
-.hottitles .panel-heading {
-    padding: 10px 0px 0px 0px;
-    border-bottom: none;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.panel-default>.panel-heading {
+.hottitlesCarousel .panel-default>.panel-heading {
     color: #333;
-    /*background-color: #ffffff;*/
     background-color: #337ab7;
     border-color: #ddd;
 }
+
+#hottitlesTabs li.hot-tab a {
+    padding: 10px 15px;
+}
+
 ul.navbar-Search li a {
     border-right: none;
     display: block;
@@ -150,10 +148,7 @@ ul.navbar-Search li a {
 .socialDiv .fa-inverse-socialmedia {
     color: #fff;
 }
-.nav-tabs>li>a, .nav-tabs>li>a:hover {
-    background: none;
-    border: none;
-}
+
 @media screen and (min-width:768px) {
     .banner-header {
         -webkit-background-size: contain;
@@ -203,6 +198,11 @@ ul.navbar-Search li a {
         letter-spacing: 3px;
         color: #fff;
     }
+
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+        background-color: #eee;
+    }
+
     .navbar-nav>li>.dropdown-menu {
         margin-top: -2px;
     }
@@ -223,7 +223,6 @@ ul.navbar-Search li a {
     .navbar-default {
         border: none;
         background: #fff;
-        background: rgba(255,255,255,0.9);
     }
 
     .nav>li>a {
@@ -274,41 +273,69 @@ ul.navbar-Search li a {
         background: transparent;
     }
 
-    header.carousel, div.carousel {
+    #sliderCarousel header.carousel {
         height: 400px;
     }
-    .carousel-caption p {
+    #sliderCarousel .carousel-caption p {
         color: #fff;
     }
 
     .socialDiv .fa-inverse-socialmedia {
         color: #fff;
     }
-    #searchlocations .panel-body {
+    #searchlocations .nav-tabs>li, #searchpac .nav-tabs>li {
+        margin-bottom: 0px;
+    }
+    #searchlocations .nav-tabs li a,  #searchpac .nav-tabs li a {
+        padding: 10px 15px;
+    }
+    #searchlocations .panel-heading .nav-tabs, #searchpac .panel-heading .nav-tabs {
+        padding: 0px;
+    }
+    #searchlocations .panel-default, #searchpac .panel-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #fff;
+    }
+    #searchlocations .panel-default>.panel-heading, #searchpac .panel-default>.panel-heading  {
+        color: #333;
+        background-color: transparent;
+        border-color: #fff;
+    }
+    #searchlocations .panel-body, #searchpac .panel-body {
         background: #337ab7;
         border-radius: 4px;
     }
     #searchlocations .panel-heading, #searchpac .panel-heading  {
-        padding: 10px 0px 0px 0px;
+        padding: 0px;
         border-bottom: none;
         padding-left: 10px;
         padding-right: 10px;
     }
     #searchlocations .panel-heading .nav-tabs, #searchpac .panel-heading .nav-tabs  {
-        padding: 10px 0px 0px 0px;
+        padding: 0px;
         border-bottom: none;
         padding-left: 10px;
         padding-right: 10px;
 
     }
     #searchlocations .nav-tabs li.active a, #searchpac .nav-tabs li.active a {
-        color: #555;
+        color: #fff;
+        background-color: #337ab7;
         cursor: pointer;
+    }
+    #searchlocations .nav>li.active>a:hover, #searchpac .nav>li.active>a:hover {
+        text-decoration: none;
+        background-color: #337ab7;
     }
     #searchlocations .nav-tabs li a, #searchpac .nav-tabs li a {
-        color: #fff;
+        color: #337ab7;
         cursor: pointer;
     }
+    #searchlocations .nav>li>a:hover, #searchpac .nav>li>a:hover {
+        text-decoration: none;
+    }
+
     #searchlocations .btn-primary, #searchpac .btn-primary {
         color: #fff;
         background-color: #3c763d;
@@ -318,24 +345,6 @@ ul.navbar-Search li a {
         color: #fff;
         background-color: #4f9a51;
         border-color: #346735;
-    }
-
-    /** Google Calendar Styles **/
-    .rb-n {
-        background: #337ab7 !important;
-        border-radius: 0px;
-        font-size: 10pt;
-    }
-    .view-cap, .view-container-border {
-        background-color: #eee !important;
-    }
-    .mv-daynames-table {
-        background: #999;
-        color: #333;
-    }
-    .st-dtitle {
-        background: #eee;
-        color: #666;
     }
 }
 

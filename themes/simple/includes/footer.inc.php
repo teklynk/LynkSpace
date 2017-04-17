@@ -33,10 +33,13 @@ if (!defined('inc_access')) {
     </div>
     <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">Scroll To Top</a>
-    <!-- Script to Activate the Carousel -->
-    <script type="text/javascript" language="javascript">
 
+<?php if (basename($_SERVER['PHP_SELF']) == 'index.php') { ?>
+    <!-- Script to Activate the Carousel -->
+    <script type="text/javascript">
+        toggleSrc('<?php echo $hottitlesLoadFirstUrl; ?>', <?php echo $hottitlesLocID; ?>, 1);
     </script>
+<?php } ?>
 
     </body>
     </html>

@@ -9,7 +9,8 @@ getCustomers('featured');
 $customersItemCount = 0;
 
 if ($customerNumRows > 0) {
-    echo "<div class='col-lg-12'>";
+    echo "<div class='row' id='databases'>";
+
     if (!empty($customerHeading)) {
         echo "<div class='col-lg-12'>";
         echo "<h2 class='page-header customers'>" . $customerHeading . "</h2>";
@@ -78,7 +79,9 @@ if ($customerNumRows > 0) {
                 echo "<div class='database-break'></div>";
             }
         }
-    }
-    echo "</div>"; //col-
+    } //end of while loop
+
+    echo "</div>"; //row-
 }
+
 ?>

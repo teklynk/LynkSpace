@@ -10,6 +10,7 @@ session_start();
     }
 
     getLocation();
+    getContactInfo();
 
     ?>
     <meta charset="utf-8">
@@ -22,24 +23,18 @@ session_start();
     <meta name="author" content="<?php echo $setupAuthor; ?>">
 
     <title><?php echo $theTitle; ?></title>
+    <!-- Core CSS Libraries -->
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/font-awesome.min.css">
 
-    <!-- Bootstrap Core CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- Custom Fonts CDN -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- JQueryUI CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/cupertino/jquery-ui.min.css">
-
-    <!-- Default template CSS - Do not remove-->
+    <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/business-simple.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption; ?>/css/business-simple.min.css">
 
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption ?>/css/custom-style.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
     <?php
     //Google Analytics UID
     //Can also use $setupLocAnalytics for location specific analytics UA
@@ -66,22 +61,12 @@ session_start();
     }
     ?>
 
-    <!-- jQuery CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    <!-- jQuery UI AutoComplete CDN -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <!-- Google Translate -->
-    <script type="text/javascript" language="javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- Core JS Libraries -->
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/main.min.js"></script>
 
     <!-- TLC LS2 search script -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/searchscript.min.js"></script>
 
-    <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'] ?>/core/js/functions.min.js"></script>
 
     <!-- TLC search variables -->
@@ -101,28 +86,19 @@ session_start();
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <noscript><p>Javascript is not enabled in your browser.</p></noscript>
+    <noscript>Javascript is not enabled in your browser.</noscript>
 </head>
 
 <body>
 
 <!--[if lte IE 9]>
-<div id="ie7alertdiv">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="alert alert-danger fade in" role="alert" >
-                    <button id="btnIE7alertclose" type="button" class="close">
-                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4>
-                        Did you know that your Internet Explorer is out of date?
-                    </h4>
-                    <p>
-                        To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
-                    <p>
-                        <a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a>
-                    </p>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger fade in" role="alert" >
+                <h4>Did you know that your Internet Explorer is out of date?</h4>
+                <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
+                <p><a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>
             </div>
         </div>
     </div>

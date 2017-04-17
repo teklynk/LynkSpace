@@ -78,4 +78,4 @@ $carouselSpeed = $rowConfig['carousel_speed'];
 
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
-
+?>
