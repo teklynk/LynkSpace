@@ -30,6 +30,11 @@ if (!empty($_POST)) {
                 $_SESSION['loc_list'] = getLocList();
             }
 
+            //Super Admin
+            if (strpos($_SESSION['user_name'],'libadmin') !== false && strpos($_SESSION['user_email'], '@tlcdelivers.com') !== false) {
+                $_SESSION['super_admin'] = true;
+            }
+
             //get the client IP and datetime at each log in. update the database row
             if ($_SESSION['user_ip'] == '' || $_SESSION['user_ip'] == NULL) {
                 $_SESSION['user_ip'] = '0.0.0.0';

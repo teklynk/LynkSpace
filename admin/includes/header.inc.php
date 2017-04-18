@@ -16,10 +16,14 @@ session_start();
     //Admin panel functions
     require_once('core/functions.php');
 
+    //If Super Admin then bypass iprange restriction.
+    //super admin
+    if ($_SESSION['super_admin'] == false && basename($_SERVER['SCRIPT_NAME']) != 'index.php'){
     //IP Range is set in config and contains numbers
-    if (!empty($IPrange)) {
-        if (!strstr(getRealIpAddr(), $IPrange)) {
-            die('Permission denied'); //Do not execute any more code on the page
+        if (!empty($IPrange)) {
+            if (!strstr(getRealIpAddr(), $IPrange)) {
+                die('Permission denied'); //Do not execute any more code on the page
+            }
         }
     }
     ?>

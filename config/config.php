@@ -14,7 +14,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
         die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
     }
 
-    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
+    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 }
 //Get server/host protocol
@@ -63,7 +63,9 @@ $navSections = array("Top", "Footer", "Search");
 $custSections = array("1", "2", "3");
 
 //Location Types
-$locTypes = array("Default", "All", "HS", "MS", "ES", "Other");
+$defaultLocTypes = array("Default", "All");
+$explodedLocTypes = explode(',', $rowConfig['loc_types']);
+$locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
 
 //Extra Pages
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='calendar.php?loc_id=" . $_GET['loc_id'] . "'>Calendar</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";

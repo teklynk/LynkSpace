@@ -136,6 +136,20 @@ $(document).ready(function () {
         return vars;
     }
 
+    //Disable inputs if the Use Defaults checkbox is active
+    $('.defaults-toggle').change(function () {
+        if ($('.defaults-toggle').prop('checked') == true) {
+            $('form :input, form :button, form, button, select, textarea').attr('disabled', true);
+        } else {
+            $('form :input, form :button, form, button, select, textarea').attr('disabled', false);
+        }
+        //prevents Use Default button from disabling these elements
+        $('.defaults-toggle').attr('disabled', false);
+        $('#loc_id_list').attr('disabled', false);
+        $('#nav_menu').attr('disabled', false);
+        $('[data-id="loc_id_list"]').attr('disabled', false);
+    }).change();
+
     //clear inputs on reset
     $(':reset').click(function () {
         $('#del_cat .fa-trash').css('visibility', 'hidden');
@@ -758,6 +772,8 @@ $(document).ready(function () {
         );
     });
 });
+
+
 
 //--Outside of Document.Ready functions
 //modal preview window

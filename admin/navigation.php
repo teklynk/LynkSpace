@@ -258,7 +258,7 @@ if ($_GET['section'] == $navSections[0]) {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label for="navigation_defaults_<?php echo $navSubSection ?>">
-                                    <input class="navigation_defaults_checkbox_<?php echo $navSubSection ?>" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults_<?php echo $navSubSection ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="navigation_defaults_<?php echo $navSubSection ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>

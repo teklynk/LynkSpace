@@ -81,6 +81,7 @@ CREATE TABLE `config` (
   `theme` text NOT NULL,
   `iprange` text NOT NULL,
   `multibranch` text NOT NULL,
+  `loc_types` text NOT NULL,
   `homepageurl` text NOT NULL,
   `setuppacurl` text NOT NULL,
   `searchform` text NOT NULL,
@@ -95,8 +96,8 @@ CREATE TABLE `config` (
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `homepageurl`, `setuppacurl`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '', 'default', '', 'false', '', '', '', 3600, '5000', '', '2017-04-14 18:31:52', '');
+INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
+(1, '', 'default', '', 'false', '1,2,3', '', '', '', 3600, '5000', '', '2017-04-14 18:31:52', '');
 
 -- --------------------------------------------------------
 

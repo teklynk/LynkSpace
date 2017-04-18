@@ -351,7 +351,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     <label>Use Defaults</label>
                     <div class="checkbox">
                         <label>
-                            <input class="slider_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                            <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                         </label>
                     </div>
                 </div>

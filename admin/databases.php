@@ -477,7 +477,7 @@ if ($_GET['section'] == $custSections[0]) {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="databases_defaults_checkbox_<?php echo $custSubSection; ?>"  id="<?php echo $_GET['loc_id'] ?>" name="databases_defaults_<?php echo $custSubSection; ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="databases_defaults_checkbox_<?php echo $custSubSection; ?> defaults-toggle"  id="<?php echo $_GET['loc_id'] ?>" name="databases_defaults_<?php echo $custSubSection; ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>

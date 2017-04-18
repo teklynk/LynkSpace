@@ -74,7 +74,7 @@ if ($_GET['update'] == 'true') {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="generalinfo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="generalinfo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="generalinfo_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="generalinfo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>

@@ -28,12 +28,16 @@ if (!empty($_POST)) {
     }
 }
 
-//Get user info
-$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE level > 0 ORDER BY username, email, level, datetime ASC");
+//Get user info, exclude super admin user
+$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE username != 'libadmin' ORDER BY username, email, level, datetime ASC");
 $rowcount = mysqli_num_rows($sqlUsers);
 
-//Get number of Admin users
-$sqlAdminUsers = mysqli_query($db_conn, "SELECT id, level FROM users WHERE level = 1");
+if ($_SESSION['super_admin'] == true) {
+    $sqlAdminUsers = mysqli_query($db_conn, "SELECT id, username, level FROM users WHERE level = 1");
+} else {
+    //Get number of Admin users, exclude super admin user
+    $sqlAdminUsers = mysqli_query($db_conn, "SELECT id, username, level FROM users WHERE level = 1 AND username != 'libadmin'");
+}
 $adminCount = mysqli_num_rows($sqlAdminUsers);
 
 //Get Location ID and Name
