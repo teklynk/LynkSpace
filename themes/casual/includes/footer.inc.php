@@ -11,7 +11,7 @@ if (!defined('inc_access')) {
         <div class="container">
             <div class="row">
                 <?php
-                getNav('Footer', 'false', 'left');
+                getNav('Footer', 'false', 'left', 'false');
                 ?>
             </div>
         </div>

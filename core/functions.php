@@ -269,8 +269,8 @@ function getTeam(){
     $teamNumRows = mysqli_num_rows($sqlTeam);
 }
 
-function getNav($navSection, $dropdown, $pull){
-    //EXAMPLE: getNav('Top','true','right')
+function getNav($navSection, $dropdown, $pull, $sitesearchlink){
+    //EXAMPLE: getNav('Top','true','right','true')
     global $db_conn;
     global $navLinksID;
     global $navLinksSort;
@@ -292,7 +292,7 @@ function getNav($navSection, $dropdown, $pull){
     global $navCatLinksCatID;
     global $navSections;
 
-    echo "\n<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>\n";
+    echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
     if ($dropdown == "true"){
         $dropdownToggle = "dropdown-toggle";
         $dataToggle = "dropdown";
@@ -374,9 +374,9 @@ function getNav($navSection, $dropdown, $pull){
                 $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.nav_loc_id
 
-                echo "<li class='$dropdown'>\n";
-                echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>\n";
-                echo "<ul class='$dropdownMenu'>\n";
+                echo "<li class='$dropdown'>";
+                echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>";
+                echo "<ul class='$dropdownMenu'>";
                 while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)){
 
                     //Variables for $rowNavCatLinks SQL Join
@@ -400,22 +400,32 @@ function getNav($navSection, $dropdown, $pull){
 
                     echo "<li>";
                     echo "<a href='" . $navCatLinksUrl . "' $navCatWin>" . $navCatLinksName . "</a>";
-                    echo "</li>\n";
+                    echo "</li>";
                 }
-                echo "</ul>\n";
-                echo "</li>\n";
+                echo "</ul>";
+                echo "</li>";
             }
 
         } else {
             echo "<li>";
             echo "<a href='" . $navLinksUrl . "' $navWin>" . $navLinksName . "</a>";
-            echo "</li>\n";
+            echo "</li>";
         }
 
         $tempLink = $navLinksCatId;
 
     }
-    echo "</ul>\n";
+
+    if ($sitesearchlink == 'true') {
+        //Site search colapse link
+        echo "<li class='hidden-xs' id='sitesearchlink'>";
+        echo "<a class='navSearch collapsed' data-toggle='collapse' data-target='.sitesearch-collapse' href='#' aria-label='Search'>";
+        echo "<i class='fa fa-search fa-lg' aria-hidden='true'></i>";
+        echo "</a>";
+        echo "</li>";
+    }
+
+    echo "</ul>";
 }
 
 function getSetup(){
@@ -969,7 +979,7 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
     $siteSearchTerm = "%".trim($searchTerm)."%";
     $siteSearchCount = 0;
 
-    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, loc_id FROM pages WHERE active='true' AND title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC ");
+    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC ");
 
     while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch)) {
         $siteSearchCount ++;
@@ -977,11 +987,14 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
         $siteSearchLodId = $rowSiteSearch['loc_id'];
         $siteSearchTitle = $rowSiteSearch['title'];
         $siteSearchContent = $rowSiteSearch['content'];
+        $siteSearchActive = $rowSiteSearch['active'];
 
-        echo "<h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3><hr/>" . PHP_EOL;
+        if ($siteSearchActive == 'true') {
+            echo "<h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3><hr/>" . PHP_EOL;
 
-        if ($showPageContent == true) {
-            echo "<p>".$siteSearchContent."</p><br/>" . PHP_EOL;
+            if ($showPageContent == true) {
+                echo "<p class='post-content'>" . $siteSearchContent . "</p><br/>" . PHP_EOL;
+            }
         }
     }
 }

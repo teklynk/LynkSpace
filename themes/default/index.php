@@ -19,14 +19,6 @@ if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
 echo "</div>";
 echo "</div>";
 
-/*echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-    include 'includes/searchsite.inc.php';
-
-echo "</div>";
-echo "</div>";*/
-
 include 'includes/customersfeatured.inc.php';
 
 //Hot Titles Carousel

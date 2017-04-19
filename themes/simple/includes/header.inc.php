@@ -121,7 +121,7 @@ session_start();
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <?php
-            getNav('Top','true','right');
+            getNav('Top','true','right', 'true');
             ?>
         </div>
         <!-- /.navbar-collapse -->

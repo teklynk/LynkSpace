@@ -13,7 +13,7 @@ if (!defined('inc_access')) {
 
                 echo "<div style='clear:both;'></div>";
 
-                getNav('Footer', 'false', 'left');
+                getNav('Footer', 'false', 'left', 'false');
                 ?>
                 <div class="row" id="socialmedia">
                     <div class="col-md-12">

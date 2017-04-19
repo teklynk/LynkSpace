@@ -9,7 +9,7 @@ if (!defined('inc_access')) {
         <div class="container">
             <div class="row row_pad">
                 <?php
-                getNav('Footer', 'false', 'left');
+                getNav('Footer', 'false', 'left', 'false');
                 ?>
             </div>
             <?php include 'generalinfo.inc.php'; ?>

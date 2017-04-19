@@ -1,11 +1,11 @@
 .contactform {
     display: none !important;
 }
-#sliderCarousel.carousel {
+#sliderCarousel .carousel {
     height: 400px;
 }
 
-#sliderCarousel.carousel .fill {
+#sliderCarousel .carousel .fill {
     width: 100%;
     height: 100%;
     background-position: center center;

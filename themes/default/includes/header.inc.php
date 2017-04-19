@@ -120,8 +120,8 @@ session_start();
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
             <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav('Top', 'true', 'left');
+            //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+            getNav('Top', 'true', 'left', 'true');
             ?>
             <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
                 <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
@@ -140,6 +140,9 @@ session_start();
                 <?php include 'socialmedia.inc.php'; ?>
             </div>
             <div style="clear:both;"></div>
+            <div id="sitesearch-collapse-wrapper" class="sitesearch-collapse collapse">
+                <?php include 'searchsite.inc.php'; ?>
+            </div>
         </div>
         <!-- /.navbar-collapse -->
     </div>

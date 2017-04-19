@@ -284,6 +284,9 @@ footer a:hover {
     margin-top: 0;
     margin-bottom: 20px;
 }
+.sitesearchheading {
+    display:none;
+}
 
 .grad-violet {
     background: -webkit-linear-gradient(-200deg, #601179, #93328E);
@@ -323,6 +326,14 @@ footer a:hover {
     background: -moz-linear-gradient(-200deg, #93328e, #ffc72c);
     background: linear-gradient(-200deg, #93328e, #ffc72c);
     background-color: #ffc72c;
+}
+
+.grad-neworange {
+    background: -webkit-linear-gradient(-200deg, #EE7624, #f4ac7b);
+    background: -o-linear-gradient(-200deg, #EE7624, #f4ac7b);
+    background: -moz-linear-gradient(-200deg, #EE7624, #f4ac7b);
+    background: linear-gradient(-200deg, #EE7624, #f4ac7b);
+    background-color: #EE7624;
 }
 
 .carousel-gradient {

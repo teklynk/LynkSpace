@@ -154,8 +154,8 @@ if (!empty($setupLogo)) {
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav('Top', 'true', 'center');
+            //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+            getNav('Top', 'true', 'center', 'false');
             ?>
         </div>
         <!-- /.navbar-collapse -->

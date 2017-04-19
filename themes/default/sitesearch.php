@@ -3,17 +3,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='container-fluid sitesearch'>";
 echo "<div class='container bannerwrapper'>";
-
-    include 'includes/searchsite.inc.php';
-
-echo "</div>";
-echo "</div>";
-
-echo "<div class='container'>";
-echo "<div class='row row_pad content'>";
-echo "<div class='col-md-12'>";
 
 if (!empty($_POST['sitesearchterm'])) {
 
@@ -25,7 +16,6 @@ if (!empty($_POST['sitesearchterm'])) {
     }
 }
 
-echo "</div>";
 echo "</div>";
 echo "</div>";
 
