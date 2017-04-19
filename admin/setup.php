@@ -298,13 +298,20 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
             }
             ?>
-            <div class="form-group">
-                <label for="location_type">Location Type</label>
-                <select class="form-control" name="location_type" id="location_type">
-                    <option value="">None</option>
-                    <?php echo $locMenuStr; ?>
-                </select>
-            </div>
+            <?php
+            if ($multiBranch == 'true') {
+                ?>
+                <div class="form-group">
+                    <label for="location_type">Location Type</label>
+                    <select class="form-control" name="location_type" id="location_type">
+                        <?php echo $locMenuStr; ?>
+                    </select>
+                </div>
+                <?php
+            } else {
+                echo "<input type='hidden' name='location_type' id='location_type' value='Default'/>";
+            }
+            ?>
 
             <div class="form-group">
                 <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block;"/>

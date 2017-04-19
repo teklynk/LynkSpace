@@ -142,18 +142,26 @@ if ($deleteMsg != "") {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="user_location">User Location</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                                <select class="form-control" name="user_location" required>
-                                    <option>Choose a location</option>
-                                    <?php echo $locUsersMenuStr;?>
-                                </select>
+                    <?php
+                    if ($multiBranch == 'true') {
+                        ?>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="user_location">User Location</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
+                                    <select class="form-control" name="user_location" required>
+                                        <option>Choose a location</option>
+                                        <?php echo $locUsersMenuStr; ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <?php
+                    } else {
+                        echo "<input type='hidden' name='user_location' id='user_location' value='Default'/>";
+                    }
+                    ?>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="user_level">User Level</label>

@@ -615,10 +615,10 @@ function getSlider($sliderType){
 
     if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
         $sliderLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'ALL') AND";
+        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND";
     } else {
         $sliderLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'ALL') AND";
+        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'All') AND";
     }
 
     //get the default value from setup table
@@ -907,10 +907,10 @@ function getHottitlesTabs(){
 
     if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
         $hottitlesLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'ALL') AND";
+        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND";
     } else {
         $hottitlesLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$hottitlesLocType."', 'ALL') AND";
+        $locTypeWhere = "loc_type IN ('".$hottitlesLocType."', 'All') AND";
     }
 
     //get the default value from setup table
