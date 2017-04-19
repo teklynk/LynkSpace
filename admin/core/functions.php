@@ -205,6 +205,6 @@ $emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0
 //html5 date validation - Full Date Validation (YYYY-MM-DD)
 $dateValidationPattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
 //html5 password validation pattern
-$passwordValidationPattern = "(?=^.{6,15}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$";
-$passwordValidationTitle = "1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be between 6-15 characters";
+$passwordValidationPattern = "(?=(?:[^a-zA-Z]*[a-zA-Z]){4})(?=(?:\D*\d){1}).*";
+$passwordValidationTitle = "1 or more digits and a min. of 4 letters are required";
 ?>
