@@ -5,13 +5,17 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
+getServices();
+
 if ($servicesNumRows > 0) {
+    echo "<div class='container-fluid services'>";
+    echo "<div class='container bannerwrapper'>";
 
     echo "<div class='row' id='services'>";
 
     if (!empty($servicesHeading)) {
         echo "<div class='col-lg-12'>";
-        echo "<h1 class='services'>" . $servicesHeading . "</h1>";
+        echo "<h1 class='servicesheading'>" . $servicesHeading . "</h1>";
         echo "</div>";
     }
 
@@ -65,6 +69,10 @@ if ($servicesNumRows > 0) {
         echo "</div>";
         echo "</div>";
     }
+
+    echo "</div>";
+    echo "</div>";
+
     echo "</div>";
     echo "</div>";
 }

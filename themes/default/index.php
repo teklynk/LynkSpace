@@ -3,19 +3,9 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-echo "<div class='grad-blue container-fluid featured'>";
-echo "<div class='container bannerwrapper'>";
-    include 'includes/featured.inc.php';
-echo "</div>";
-echo "</div>";
+include 'includes/featured.inc.php';
 
-echo "<div class='grad-blue container-fluid slider'>";
-echo "<div class='container'>";
-echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed'>";
-    include 'includes/slider.inc.php';
-echo "</header>";
-echo "</div>";
-echo "</div>";
+include 'includes/slider.inc.php';
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
@@ -37,22 +27,16 @@ echo "<div class='container bannerwrapper'>";
 echo "</div>";
 echo "</div>";*/
 
-if ($_GET['loc_id']) {
-    echo "<div class='container-fluid'>";
-    echo "<div class='container bannerwrapper'>";
-        include 'includes/customersfeatured.inc.php';
-    echo "</div>";
-    echo "</div>";
-}
+include 'includes/customersfeatured.inc.php';
 
 //Hot Titles Carousel
-if ($_GET['loc_id']) {
-
+getHottitlesTabs();
+if ($hottitlesCount > 0) {
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
     echo "<div class='col-xs-12 col-lg-12 hottitles-title'>";
-    echo "<h1 class='text-white'>" . getHottitlesHeading() . "</h1>";
+    echo "<h1 class='text-white'>" . $hottitlesHeading . "</h1>";
     echo "</div>";
 
     echo "<div style='clear:both;'></div>";
@@ -63,7 +47,7 @@ if ($_GET['loc_id']) {
     echo "<div id='hottitlesTabs'>";
     echo "<div class='panel text-center'>";
     echo "<ul class='nav nav-pills center-tabs'>";
-        getHottitlesTabs(); //gets the hot title tabs
+    echo $hottitlesTabs; //gets the hot title tabs
     echo "</ul>";
     echo "</div>"; //.panel
     echo "</div>"; //.container
@@ -81,6 +65,10 @@ if ($_GET['loc_id']) {
     echo "</div>"; //.container
     echo "</div>"; //.grad-blue
 }
+
+include 'includes/team.inc.php';
+
+include 'includes/services.inc.php';
 
 include_once('includes/footer.inc.php');
 ?>

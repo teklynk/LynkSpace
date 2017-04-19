@@ -7,6 +7,9 @@ if (!defined('inc_access')) {
 
 if ($customerNumRows > 0) {
 
+    echo "<div class='container-fluid cat_databases'>";
+    echo "<div class='container bannerwrapper'>";
+
     echo "<div class='row' id='databases'>";
 
     if (!empty($customerCatName)) {
@@ -15,7 +18,7 @@ if ($customerNumRows > 0) {
         echo "</div>";
     } elseif (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12 cat-title''>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<h1 class='customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
     echo "<div style='clear:both;'></div>";
@@ -83,5 +86,8 @@ if ($customerNumRows > 0) {
     echo "</div>"; //row
 
     echo "</div>"; //#customers
+
+    echo "</div>";
+    echo "</div>";
 }
 ?>

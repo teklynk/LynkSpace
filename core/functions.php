@@ -800,8 +800,9 @@ function getFeatured(){
     $featuredImageAlign = $rowFeatured['image_align'];
 }
 
-//getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
+    //getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
+
     //Checks url string to verify that it is a valid LS2PAC RSS url
     if (strpos($xmlurl, 'list') === false) {
         echo "Not a valid URL. Error loading URL.";
@@ -897,9 +898,16 @@ function getHottitlesTabs(){
     global $hottitlesUrl;
     global $hottitlesLoadFirstUrl;
     global $hottitlesLocID;
-    global $hotCount;
+    global $hottitlesTabs;
+    global $hottitlesCount;
+    global $hottitlesHeading;
     global $locTypes;
     global $db_conn;
+
+    //get the heading value from setup table
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
+    $hottitlesHeading = $rowHottitlesSetup['hottitlesheading'];
 
     //get location type from locations table
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
@@ -926,37 +934,56 @@ function getHottitlesTabs(){
         $hottitlesLocID = 1;
     }
 
-    $hotCount = 0;
+    $hottitlesCount = 0;
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
 
         $hottitlesSort = trim($rowHottitles['sort']);
         $hottitlesTile = trim($rowHottitles['title']);
         $hottitlesUrl = trim($rowHottitles['url']);
         $hottitlesLocType = trim($rowHottitles['loc_type']);
-        $hotCount ++;
+        $hottitlesCount ++;
 
         //Set active tab on initial page load where count=1
-        if ($hotCount == 1) {
+        if ($hottitlesCount == 1) {
             $hotActive = 'active';
             $hottitlesLoadFirstUrl = $hottitlesUrl;
         } else {
             $hotActive = '';
         }
 
-        if ($hotCount > 0) {
-            echo "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hotCount');\">$hottitlesTile</a></li>";
+        if ($hottitlesCount > 0) {
+            $hottitlesTabs .=  "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hottitlesCount');\">$hottitlesTile</a></li>";
         }
     }
 }
 
-function getHottitlesHeading() {
-    global $hottitlesHeading;
+function getSiteSearchResults($searchTerm, $showPageContent) {
+    //getSiteSearchResults('how do i check out a book', true)
     global $db_conn;
-    //get the heading value from setup table
-    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-    $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
-    $hottitlesHeading = $rowHottitlesSetup['hottitlesheading'];
-    return $hottitlesHeading;
+    global $siteSearchId;
+    global $siteSearchLodId;
+    global $siteSearchTitle;
+    global $siteSearchContent;
+    global $siteSearchCount;
+
+    $siteSearchTerm = "%".trim($searchTerm)."%";
+    $siteSearchCount = 0;
+
+    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, loc_id FROM pages WHERE active='true' AND title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC ");
+
+    while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch)) {
+        $siteSearchCount ++;
+        $siteSearchId = $rowSiteSearch['id'];
+        $siteSearchLodId = $rowSiteSearch['loc_id'];
+        $siteSearchTitle = $rowSiteSearch['title'];
+        $siteSearchContent = $rowSiteSearch['content'];
+
+        echo "<h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3><hr/>" . PHP_EOL;
+
+        if ($showPageContent == true) {
+            echo "<p>".$siteSearchContent."</p><br/>" . PHP_EOL;
+        }
+    }
 }
 
 function getUrlContents($getUrl) {
@@ -1040,6 +1067,7 @@ if (basename($_SERVER['PHP_SELF']) == "page.php"){
     $theTitle = $setupTitle;
 }
 
+$hotTitleCount = $hotCount;
 //redirect to default location if loc_id or script name not defined
 if (empty($_GET['loc_id'])){
 

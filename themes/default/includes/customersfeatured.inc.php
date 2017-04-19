@@ -10,8 +10,10 @@ getCustomers('featured');
 $customersItemCount = 0;
 
 if ($customerNumRows > 0) {
+    echo "<div class='container-fluid featureddatabases'>";
+    echo "<div class='container bannerwrapper'>";
 
-    echo "<div class='row' id='databases'>";
+    echo "<div class='row' id='featureddatabases'>";
 
     if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
@@ -87,5 +89,8 @@ if ($customerNumRows > 0) {
     echo "</div>"; //row
 
     echo "</div>"; //#customers
+
+    echo "</div>";
+    echo "</div>";
 }
 ?>

@@ -175,7 +175,7 @@ session_start();
     if (isset($_SESSION['loggedIn'])) {
     ?>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="admin-topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -221,18 +221,19 @@ session_start();
             </ul>
         <?php }
 
-
         if (isset($_SESSION['loc_id'])) {
             $setLocId = "loc_id=" . $_SESSION['loc_id'];
         } else {
             $setLocId = "";
         }
+
+
         ?>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="admin-sidenav">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="setup.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-cog" title="Setup"></i> Settings</a>
+                    <a href="setup.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-cog" title="Settings"></i> Settings</a>
                 </li>
                 <li>
                     <a href="featured.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-magic" title="Feature"></i> Feature</a>

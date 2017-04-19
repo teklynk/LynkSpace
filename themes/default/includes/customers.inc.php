@@ -7,6 +7,9 @@ if (!defined('inc_access')) {
 
 if ($customerNumRows > 0) {
 
+    echo "<div class='container-fluid databases'>";
+    echo "<div class='container bannerwrapper'>";
+
     echo "<div class='row' id='databases'>";
 
     if (!empty($customerCatName)) {
@@ -15,7 +18,7 @@ if ($customerNumRows > 0) {
         echo "</div>";
     } elseif (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<h1 class='customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
 
@@ -109,10 +112,17 @@ if ($customerNumRows > 0) {
 
     echo "</div>"; //row_pad
 
+    echo "</div>";
+    echo "</div>";
+
 } else {
+    echo "<div class='container-fluid databases'>";
+    echo "<div class='container bannerwrapper'>";
 
     echo "<div class='col-lg-12'><h1 class='page'>Page not found</h1></div>";
     echo "<div class='col-xs-12 col-lg-12'>This page is not available.</div>";
 
+    echo "</div>";
+    echo "</div>";
 }
 ?>

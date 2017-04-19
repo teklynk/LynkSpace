@@ -6,6 +6,8 @@ if (!defined('inc_access')) {
 }
 
 getFeatured();
+echo "<div class='grad-blue container-fluid featured'>";
+echo "<div class='container bannerwrapper'>";
 
 echo "<div class='row' id='featured'>";
 
@@ -16,7 +18,7 @@ if (!empty($featuredImage)) {
         echo "<div class='col-xs-12 col-sm-8'>";
 
         if (!empty($featuredHeading)) {
-            echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+            echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
         }
 
         if (!empty($featuredBlurb)) {
@@ -37,7 +39,7 @@ if (!empty($featuredImage)) {
         echo "<div class='col-xs-8 col-sm-8'>";
 
         if (!empty($featuredHeading)) {
-            echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+            echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
         }
 
         if (!empty($featuredBlurb)) {
@@ -56,7 +58,7 @@ if (!empty($featuredImage)) {
     echo "<div class='col-xs-12 col-sm-12'>";
 
     if (!empty($featuredHeading)) {
-        echo "<h1 class='text-white featured'>" . $featuredHeading . "</h1>";
+        echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
     }
 
     if (!empty($featuredBlurb)) {
@@ -71,4 +73,7 @@ if (!empty($featuredImage)) {
 }
 
 echo "</div>"; // .row
+
+echo "</div>";
+echo "</div>";
 ?>

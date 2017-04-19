@@ -9,7 +9,7 @@ echo "</header>";
 
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
-include 'includes/featured.inc.php';
+    include 'includes/featured.inc.php';
 echo "</div>";
 echo "</div>";
 
@@ -24,18 +24,23 @@ echo "</div>";
 echo "</div>";
 
 ?>
+
+<?php
+getHottitlesTabs();
+
+if ($hottitlesCount > 0) {
+    ?>
     <div class="container-fluid hottitlesCarousel">
         <div class="container">
             <div class="row">
 
                 <div class="col-lg-12">
-                    <h2 class="page-header"><?php echo getHottitlesHeading(); ?></h2>
-
+                    <h2 class="page-header"><?php echo $hottitlesHeading; ?></h2>
 
                     <div id="hottitlesTabs">
                         <div class="panel text-center">
                             <ul class="nav nav-tabs center-tabs">
-                                <?php getHottitlesTabs(); ?>
+                                <?php echo $hottitlesTabs; ?>
                             </ul>
                         </div>
                     </div>
@@ -48,29 +53,32 @@ echo "</div>";
             </div>
         </div>
     </div>
+    <?php
+}
+?>
+
 <?php
-
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
-include 'includes/customersfeatured.inc.php';
-echo "</div>";
-echo "</div>";
-
-echo "<div class='container-fluid'>";
-echo "<div class='container'>";
-include 'includes/about.inc.php';
+    include 'includes/customersfeatured.inc.php';
 echo "</div>";
 echo "</div>";
 
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
-include 'includes/services.inc.php';
+    include 'includes/about.inc.php';
 echo "</div>";
 echo "</div>";
 
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
-include 'includes/team.inc.php';
+    include 'includes/services.inc.php';
+echo "</div>";
+echo "</div>";
+
+echo "<div class='container-fluid'>";
+echo "<div class='container'>";
+    include 'includes/team.inc.php';
 echo "</div>";
 echo "</div>";
 

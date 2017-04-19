@@ -5,13 +5,17 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
+getTeam();
+
 if ($teamNumRows > 0) {
+    echo "<div class='container-fluid team'>";
+    echo "<div class='container bannerwrapper'>";
 
     echo "<div class='row' id='team'>";
 
     if (!empty($teamHeading)) {
-        echo "<div class='col-lg-12'>";
-        echo "<h1 class='team'>" . $teamHeading . "</h1>";
+        echo "<div class='col-xs-12 col-sm-12'>";
+        echo "<h1 class='teamheading'>" . $teamHeading . "</h1>";
         echo "</div>";
     }
 
@@ -52,6 +56,9 @@ if ($teamNumRows > 0) {
         echo "</div>";
     }
 
+    echo "</div>";
+
+    echo "</div>";
     echo "</div>";
 }
 ?>

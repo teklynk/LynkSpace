@@ -10,16 +10,12 @@ $_SESSION['file_referer'] = 'contact.php';
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referer'] = generateRandomString();
 
-echo "<div class='grad-blue container-fluid featured'>";
-echo "<div class='container bannerwrapper'>";
-    include 'includes/featured.inc.php';
-echo "</div>";
-echo "</div>";
+include 'includes/featured.inc.php';
 
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
-if ($_GET['loc_id'] == 1) {
+if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
     include 'includes/searchlocations.inc.php';
 } else {
     include 'includes/searchpac.inc.php';

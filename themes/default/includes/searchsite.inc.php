@@ -4,29 +4,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-
-getPageList(); //from functions.php
-
 ?>
-
-<script type="text/javascript" language="javascript">
-    //Gets the list of pages
-    $(document).ready(function () {
-        //jQueryUI AutoComplete
-        $(function () {
-            var availableSearchTitles = [<?php echo rtrim($pageListJson . $pageTagsJson, ",");?>];
-            //var availableSearchTags = [<?php echo rtrim($pageTagsJson, ",");?>];
-            $('#site_search').autocomplete({
-                source: availableSearchTitles,
-                minLength: 3,
-                select: function(event, ui) {
-                    $('#site_search').val(ui.item.value);
-                    $('form[name="siteSearchForm"]').submit();
-                }
-            });
-        });
-    });
-</script>
 
 <div class="row" id="searchsite">
     <div class="col-xs-12 col-lg-12">
@@ -35,10 +13,10 @@ getPageList(); //from functions.php
             <div class="panel panel-default">
                 <div class="panel-body">
                     <!-- Site Search Form -->
-                    <form name="siteSearchForm" method="get">
+                    <form name="siteSearchForm" method="post" action="sitesearch.php?loc_id=<?php echo $_GET['loc_id']; ?>">
                         <div id="custom-search-input">
                             <div class="input-group col-md-12">
-                                <input type="text" class="form-control" id="site_search" name="site_search" placeholder="Search the web site"/>
+                                <input type="text" class="form-control" id="sitesearchterm" name="sitesearchterm" placeholder="Search the web site"/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger" type="submit" name="sitesearch_submit">
                                         <span class="fa fa-search"></span>

@@ -3,8 +3,10 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
+echo "<div class='container-fluid about'>";
+echo "<div class='container bannerwrapper'>";
 
-echo "<div class='row row_pad'>";
+echo "<div class='row'>";
 
 if (!empty($aboutTitle)) {
     echo "<div class='col-lg-12'>";
@@ -36,6 +38,9 @@ if (!empty($aboutImage)) {
     echo "</div>";
 }
 
+echo "</div>";
+
+echo "</div>";
 echo "</div>";
 
 ?>

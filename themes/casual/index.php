@@ -39,11 +39,16 @@ include_once('includes/header.inc.php');
     </div>
 </div>
 
+<?php
+getHottitlesTabs();
+
+if ($hottitlesCount > 0) {
+?>
 <div class="row hottitlesCarousel">
     <div class="box">
 
         <div class="col-lg-12">
-            <h1><?php echo getHottitlesHeading() ?></h1>
+            <h1><?php echo $hottitlesHeading; ?></h1>
         </div>
 
         <div class="col-lg-12">
@@ -51,7 +56,7 @@ include_once('includes/header.inc.php');
             <div id="hottitlesTabs">
                 <div class="panel text-center">
                     <ul class="nav nav-pills center-tabs">
-                        <?php getHottitlesTabs(); ?>
+                        <?php echo $hottitlesTabs; ?>
                     </ul>
                 </div> 
             </div>
@@ -64,11 +69,14 @@ include_once('includes/header.inc.php');
         
     </div>
 </div>
+<?php
+}
+?>
 
 <div class="row">
     <div class="box">
         <div class="col-lg-12">
-                <?php include 'includes/customersfeatured.inc.php'; ?>
+            <?php include 'includes/customersfeatured.inc.php'; ?>
         </div>
     </div>
 </div>
