@@ -926,7 +926,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 } else {
                     if ($dummyJackets == true) {
                         //TLC dummy book jacket img
-                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-".strtolower($jacketSize).".png'></a>";
                     }
                 }
 
@@ -1029,7 +1029,7 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
         $siteSearchActive = $rowSiteSearch['active'];
 
         if ($siteSearchActive == 'true') {
-            echo "<h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3><hr/>" . PHP_EOL;
+            echo "<hr/><h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3>" . PHP_EOL;
 
             if ($showPageContent == 'true') {
                 echo "<p class='post-content'>" . $siteSearchContent . "</p><br/>" . PHP_EOL;

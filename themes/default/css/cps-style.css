@@ -351,7 +351,9 @@ footer a:hover {
     overflow-y: auto;
     overflow-x: hidden;
 }
+#sitesearch {
 
+}
 /*** PANEL DEFAULT ***/
 .panel.with-nav-tabs .panel-heading {
     padding: 5px 5px 0 5px;

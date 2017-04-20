@@ -8,12 +8,12 @@ echo "<div class='container bannerwrapper'>";
 
 if (!empty($_POST['sitesearchterm'])) {
 
-    echo "<h1 class='page'>Results for:" . $_POST['sitesearchterm'] . "</h1>";
+    echo "<div class='sitesearchresultsmsg'><h1>Search results for: \"" . $_POST['sitesearchterm'] . "\"</h1></div>";
 
     getSiteSearchResults($_POST['sitesearchterm'], 'false');
 
     if ($siteSearchCount == 0){
-        echo "<div class='col-lg-12'><h1 class='page'>No results found.</h1></div>";
+        echo "<div class='col-lg-12'><h1>No results found.</h1></div>";
         echo "<div class='col-xs-12 col-lg-12'>Try a different search term.</div>";
     }
 }
