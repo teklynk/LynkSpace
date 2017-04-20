@@ -15,9 +15,25 @@ $usersCount=0;
 $pageMsg = "";
 $deleteMsg = "";
 
+//delete user
+$deluserId = $_GET['deleteuser'];
+$deluserTitle = $_GET['deletetitle'];
+
+if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+
+    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
+} elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+    //delete user after clicking Yes
+    $userDelete = "DELETE FROM users WHERE id='$deluserId'";
+    mysqli_query($db_conn, $userDelete);
+
+    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+}
+
 //Add User
 //insert data on submit
-if (!empty($_POST)) {
+if (($_POST['save_main'])) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
         $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
         mysqli_query($db_conn, $usersInsert);
@@ -57,21 +73,6 @@ while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
     $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . $isDefault . "</option>";
 }
 
-//delete user
-$deluserId = $_GET['deleteuser'];
-$deluserTitle = $_GET['deletetitle'];
-
-if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
-} elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
-    //delete user after clicking Yes
-    $userDelete = "DELETE FROM users WHERE id='$deluserId'";
-    mysqli_query($db_conn, $userDelete);
-
-    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
 
 <div class="row">

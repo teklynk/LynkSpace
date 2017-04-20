@@ -811,7 +811,7 @@ function getFeatured(){
 }
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
-    //getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
+    //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
 
     //Checks url string to verify that it is a valid LS2PAC RSS url
     if (strpos($xmlurl, 'list') === false) {
@@ -852,7 +852,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
         //get url for each book. clean link string
         $xmllink = (string)$xmlitem->link;
         //Remove http(s) and just use //
-        $xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
+        //$xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
 
         //Get the ResourceID from the xmllink
         parse_str($xmllink, $xmllinkArray);
@@ -863,7 +863,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
         //set the image url. clean the image url string
         $xmlimage = $xmltheimage[1];
-        $xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
+        //$xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
         if ($jacketSize == 'SM') {
             $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
             $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
@@ -875,7 +875,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
             $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
         }
 
-        //Gets the image dimensions from the xmltheimage url.
+        //Gets the image dimensions from the xmltheimage url as an array.
         $xmlimagesize = getimagesize($xmltheimage[1]);
         $xmlimagewidth = $xmlimagesize[0];
         $xmlimageheight = $xmlimagesize[1];
@@ -899,7 +899,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
             break;
         }
 
-    } //for loop
+    } //end for loop
     echo "</div>";
 }
 
@@ -976,7 +976,7 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
     global $siteSearchContent;
     global $siteSearchCount;
 
-    $siteSearchTerm = "%".trim($searchTerm)."%";
+    $siteSearchTerm = "%".mysqli_real_escape_string($db_conn, strip_tags($searchTerm))."%";
     $siteSearchCount = 0;
 
     $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC ");
@@ -992,7 +992,7 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
         if ($siteSearchActive == 'true') {
             echo "<h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3><hr/>" . PHP_EOL;
 
-            if ($showPageContent == true) {
+            if ($showPageContent == 'true') {
                 echo "<p class='post-content'>" . $siteSearchContent . "</p><br/>" . PHP_EOL;
             }
         }

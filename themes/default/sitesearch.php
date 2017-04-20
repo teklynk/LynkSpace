@@ -8,7 +8,7 @@ echo "<div class='container bannerwrapper'>";
 
 if (!empty($_POST['sitesearchterm'])) {
 
-    getSiteSearchResults($_POST['sitesearchterm'], true);
+    getSiteSearchResults($_POST['sitesearchterm'], 'true');
 
     if ($siteSearchCount == 0){
         echo "<div class='col-lg-12'><h1 class='page'>No results found.</h1></div>";

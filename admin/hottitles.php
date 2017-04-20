@@ -43,8 +43,6 @@ if ($deleteMsg != "") {
     echo $deleteMsg;
 }
 
-$deleteMsg = "";
-$deleteConfirm = "";
 $delhottitlesId = $_GET['deletehottitles'];
 $delhottitlesTitle = $_GET['deletetitle'];
 

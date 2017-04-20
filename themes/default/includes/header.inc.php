@@ -121,7 +121,7 @@ session_start();
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
             <?php
             //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-            getNav('Top', 'true', 'left', 'true');
+            getNav('Top', 'true', 'left', 'false');
             ?>
             <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
                 <!--Google Translate code taken from: https://translate.google.com/manager/website/-->

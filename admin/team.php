@@ -42,6 +42,13 @@ if ($_GET['preview'] > "") {
             <li class='active'>New Team Member</li>
             </ol>";
             echo "<h1 class='page-header'>Team (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+        } elseif ($_GET['editteam']) {
+            echo "<ol class='breadcrumb'>
+            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='team.php?loc=" . $_GET['loc_id'] . "'>Team</a></li>
+            <li class='active'>Edit Team</li>
+            </ol>";
+            echo "<h1 class='page-header'>Team (Edit) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
         } else {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>

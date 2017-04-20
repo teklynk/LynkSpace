@@ -104,6 +104,13 @@ if ($_GET['section'] == $custSections[0]) {
             <li>New Database</li>
             <li class='active'>Section: ".$_GET['section']."</li>
             </ol>";
+        } elseif ($_GET['editcustomer']) {
+            echo "<ol class='breadcrumb'>
+            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li class='active'>Edit Database</li>
+            <li class='active'>Section: ".$_GET['section']."</li>
+            </ol>";
         } else {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
@@ -121,7 +128,9 @@ if ($_GET['section'] == $custSections[0]) {
                 <div class="form-group">
                     <?php
                     if ($_GET['newcustomer'] == 'true') {
-                        echo "<h1 class='page-header'>Databases (".$_GET['section']." - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                    } elseif ($_GET['editcustomer']) {
+                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
                     } else {
                         echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
                     }
