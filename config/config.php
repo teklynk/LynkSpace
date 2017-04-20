@@ -14,7 +14,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
         die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
     }
 
-    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
+    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 }
 //Get server/host protocol
@@ -42,6 +42,9 @@ $setupPACURL = $rowConfig['setuppacurl'];
 
 //Web Site Analytics
 $site_analytics = $rowConfig['analytics'];
+
+//TLC Customer ID
+$customerId = $rowConfig['customer_id'];
 
 //Edit values for your web site. leave as is in most cases.
 //physical path to uploads folder

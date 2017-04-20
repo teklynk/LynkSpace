@@ -812,12 +812,8 @@ function getFeatured(){
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
-
-    //Checks url string to verify that it is a valid LS2PAC RSS url
-    if (strpos($xmlurl, 'list') === false) {
-        echo "Not a valid URL. Error loading URL.";
-        die();
-    }
+    global $customerId;
+    global $setupPACURL;
 
     $ch = curl_init();
     $timeout = 10;
@@ -841,65 +837,108 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     $itemcount = 0;
 
     echo "<div class='owl-carousel owl-theme'>";
-    foreach ($xmlfeed->channel->item as $xmlitem) {
+        if (strstr($xmlurl, 'econtent')) {
+            //Content server XML Lists
+            foreach ($xmlfeed->Book as $xmlitem) {
 
-        $itemcount ++;
+                $itemcount++;
 
-        //get title node for each book. clean title string
-        $xmltitle = (string)$xmlitem->title;
-        $xmltitle = trim(str_replace("'", "&apos;", $xmltitle));
+                //get title node for each book. clean title string
+                $xmltitle = (string)$xmlitem->Title;
 
-        //get url for each book. clean link string
-        $xmllink = (string)$xmlitem->link;
-        //Remove http(s) and just use //
-        //$xmllink = trim(str_replace(array('http:', 'https:'), '', $xmllink));
+                //get ISBN node for each book
+                $xmlisbn = (string)$xmlitem->ISBN;
 
-        //Get the ResourceID from the xmllink
-        parse_str($xmllink, $xmllinkArray);
-        $xmlResourceId = $xmllinkArray['resourceId'];
+                //https://ls2content.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
+                $xmlimage = "https://ls2content.tlcdelivers.com/tlccontent?customerid=$customerId&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
 
-        //get image url from img tag in the description node
-        preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
+                //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
+                $xmllink = "$setupPACURL/?config=ysm#section=search&term=$xmltitle";
 
-        //set the image url. clean the image url string
-        $xmlimage = $xmltheimage[1];
-        //$xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
-        if ($jacketSize == 'SM') {
-            $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
-            $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
-        } elseif ($jacketSize == 'MD') {
-            $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-MD', $xmlimage));
-            $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-MD', $xmlimage));
-        } elseif ($jacketSize == 'LG') {
-            $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-LG', $xmlimage));
-            $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
-        }
+                //Gets the image dimensions from the xmltheimage url as an array.
+                $xmlimagesize = getimagesize($xmlimage);
+                $xmlimagewidth = $xmlimagesize[0];
+                $xmlimageheight = $xmlimagesize[1];
 
-        //Gets the image dimensions from the xmltheimage url as an array.
-        $xmlimagesize = getimagesize($xmltheimage[1]);
-        $xmlimagewidth = $xmlimagesize[0];
-        $xmlimageheight = $xmlimagesize[1];
+                echo "<div class='item'>";
 
-        echo "<div class='item'>";
+                //Check if has book jacket based on the image size (1x1)
+                if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
+                } else {
+                    if ($dummyJackets == true) {
+                        //TLC dummy book jacket img
+                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                    }
+                }
 
-            //Check if has book jacket based on the image size (1x1)
-            if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
-                echo "<a href='".$xmllink."' title='".$xmltitle."' target='_blank' data-resource-id='".$xmlResourceId."' data-item-count='".$itemcount."'><img src='".$xmlimage."' class='img-responsive center-block'></a>";
-            } else {
-                if ($dummyJackets == true) {
-                    //TLC dummy book jacket img
-                    echo "<a href='" . $xmllink . "' title='" . $xmltitle . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . $xmltitle . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                echo "</div>";
+
+                //stop parsing xml once it reaches the max count
+                if ($itemcount == $maxcnt) {
+                    break;
                 }
             }
+        } elseif (strstr($xmlurl, 'list')) {
+            //LS2PAC Saved Search XML Lists
+            foreach ($xmlfeed->channel->item as $xmlitem) {
 
-        echo "</div>";
+                $itemcount++;
 
-        //stop parsing xml once it reaches the max count
-        if ($itemcount == $maxcnt) {
-            break;
+                //get title node for each book. clean title string
+                $xmltitle = (string)$xmlitem->title;
+
+                //get url for each book. clean link string
+                $xmllink = (string)$xmlitem->link;
+
+                //Get the ResourceID from the xmllink
+                parse_str($xmllink, $xmllinkArray);
+                $xmlResourceId = $xmllinkArray['resourceId'];
+
+                //get image url from img tag in the description node
+                preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
+
+                //set the image url. clean the image url string
+                $xmlimage = $xmltheimage[1];
+                //Remove http(s) and just use //
+                //$xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
+                if ($jacketSize == 'SM') {
+                    $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
+                    $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
+                } elseif ($jacketSize == 'MD') {
+                    $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-MD', $xmlimage));
+                    $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-MD', $xmlimage));
+                } elseif ($jacketSize == 'LG') {
+                    $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-LG', $xmlimage));
+                    $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
+                }
+
+                //Gets the image dimensions from the xmltheimage url as an array.
+                $xmlimagesize = getimagesize($xmltheimage[1]);
+                $xmlimagewidth = $xmlimagesize[0];
+                $xmlimageheight = $xmlimagesize[1];
+
+                echo "<div class='item'>";
+
+                //Check if has book jacket based on the image size (1x1)
+                if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
+                } else {
+                    if ($dummyJackets == true) {
+                        //TLC dummy book jacket img
+                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                    }
+                }
+
+                echo "</div>";
+
+                //stop parsing xml once it reaches the max count
+                if ($itemcount == $maxcnt) {
+                    break;
+                }
+
+            } //end for loop
         }
-
-    } //end for loop
     echo "</div>";
 }
 

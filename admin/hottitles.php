@@ -68,15 +68,9 @@ if (($_POST['save_main'])) {
     mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $_POST['hottitles_count']; $i++) {
-        //check if url is a LS2PAC RSS URL
-        if (strpos($_POST['hottitles_url'][$i], 'list') === false) {
-            $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $_POST['hottitles_url'][$i] . " is not a valid LS2PAC RSS URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-            echo $errorMsg;
-        } else {
-            $errorMsg = "";
-            $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . validateUrl($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
-            mysqli_query($db_conn, $hottitlesUpdate);
-        }
+        $errorMsg = "";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . safeCleanStr($_POST['hottitles_sort'][$i]) . ", title='" . safeCleanStr($_POST['hottitles_title'][$i]) . "', url='" . validateUrl($_POST['hottitles_url'][$i]) . "', loc_type='" . safeCleanStr($_POST['location_type'][$i]) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_POST['hottitles_id'][$i] . " ";
+        mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
@@ -85,16 +79,10 @@ if (($_POST['save_main'])) {
 }
 
 if (($_POST['add_hottitles'])) {
-    //check if url is a LS2PAC RSS URL
-    if (strpos($_POST['hottitles_url'], 'list') === false){
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$_POST['hottitles_url']." is not a valid LS2PAC RSS URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-        echo $errorMsg;
-    } else {
-        $errorMsg = "";
-        //Insert Hot Titles
-        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
-        mysqli_query($db_conn, $hottitlesInsert);
-    }
+    $errorMsg = "";
+    //Insert Hot Titles
+    $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
+    mysqli_query($db_conn, $hottitlesInsert);
     if ($errorMsg == "") {
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
@@ -157,7 +145,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
+                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" pattern="^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -263,7 +251,7 @@ if ($_GET['loc_id'] != 1) {
                                 <input class='form-control' name='hottitles_title[]' value='" . $hottitlesTitle . "' type='text' maxlength='255'>
                             </td>";
 
-                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' maxlength='255'></td>";
+                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' pattern='^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?' maxlength='255'></td>";
 
                             //If admin, show location type drop down list else show a hidden input with the locations type value
                             if ($adminIsCheck == "true") {

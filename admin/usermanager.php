@@ -48,14 +48,6 @@ if (($_POST['save_main'])) {
 $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE username != 'libadmin' ORDER BY username, email, level, datetime ASC");
 $rowcount = mysqli_num_rows($sqlUsers);
 
-if ($_SESSION['super_admin'] == true) {
-    $sqlAdminUsers = mysqli_query($db_conn, "SELECT id, username, level FROM users WHERE level = 1");
-} else {
-    //Get number of Admin users, exclude super admin user
-    $sqlAdminUsers = mysqli_query($db_conn, "SELECT id, username, level FROM users WHERE level = 1 AND username != 'libadmin'");
-}
-$adminCount = mysqli_num_rows($sqlAdminUsers);
-
 //Get Location ID and Name
 $sqlUsersLoc = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name ASC");
 
@@ -218,8 +210,8 @@ if ($deleteMsg != "") {
                     $usersLocID = $rowUsers['loc_id'];
                     $usersCount++;
 
-                    //Prevent someone from accidentally deleting all of the Admin users.
-                    if ($adminCount == 1 && $usersLevel == 1) {
+                    //Prevent someone from accidentally deleting self.
+                    if ($_SESSION['user_id'] == $usersID) {
                         $disable = 'disabled';
                         $usersID = '';
                     } else {

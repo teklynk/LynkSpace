@@ -8,6 +8,8 @@ echo "<div class='container bannerwrapper'>";
 
 if (!empty($_POST['sitesearchterm'])) {
 
+    echo "<h1 class='page'>Results for:" . $_POST['sitesearchterm'] . "</h1>";
+
     getSiteSearchResults($_POST['sitesearchterm'], 'false');
 
     if ($siteSearchCount == 0){
