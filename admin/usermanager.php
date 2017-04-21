@@ -184,8 +184,8 @@ if ($deleteMsg != "") {
 <!--Users table-->
 <div class="row">
     <div class="col-lg-12">
-        <div>
-            <table class="table table-bordered table-hover table-striped">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead>
                 <tr>
                     <th>&nbsp;</th>

@@ -341,6 +341,7 @@ if ($_GET['section'] == $navSections[0]) {
                     </div>
                 </fieldset>
                 <hr/>
+                <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" id="nav_Table">
                     <thead>
                     <tr>
@@ -407,6 +408,7 @@ if ($_GET['section'] == $navSections[0]) {
                     ?>
                     </tbody>
                 </table>
+                </div>
 
                 <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

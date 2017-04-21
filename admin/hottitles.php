@@ -193,6 +193,7 @@ if ($_GET['loc_id'] != 1) {
                     <label>Heading</label>
                     <input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus required>
                 </div>
+                <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                     <tr>
@@ -275,6 +276,7 @@ if ($_GET['loc_id'] != 1) {
                     } ?>
                     </tbody>
                 </table>
+                </div>
                 <input type="hidden" name="hottitles_count" value="<?php echo $hottitlesCount; ?>"/>
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="hottitlesMain_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
