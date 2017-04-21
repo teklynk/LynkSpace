@@ -22,7 +22,7 @@
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=45&amp;loc_id=1</loc>
-		<lastmod>2017-04-12 16:18:24</lastmod>
+		<lastmod>2017-04-19 17:50:57</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
@@ -96,6 +96,10 @@
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=0&amp;loc_id=1</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/index.php?loc_id=569</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>

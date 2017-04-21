@@ -274,17 +274,6 @@ session_start();
                 <li>
                     <a href="uploads.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-upload" title="Uploads"></i> Uploads</a>
                 </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse" aria-expanded="false" style="height: 0px;">
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                    </ul>
-                </li>
                 <?php
                 if ($_SESSION['user_level'] == 1) {
                     echo "<li>";

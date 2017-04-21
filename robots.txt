@@ -8,4 +8,4 @@ Disallow: /themes/
 Disallow: /mail/
 Disallow: /core/
 Disallow: /js/
-Sitemap: http://linuxmint-vm/sitemap.xml
+Sitemap: http://cpswebapp.local.com/sitemap.xml

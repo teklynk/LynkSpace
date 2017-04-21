@@ -824,15 +824,8 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    // Check if any error occurred
-    if (curl_errno($ch) > 0) {
-        echo "Error loading URL. " .curl_error($ch);
-        curl_close($ch);
-        die();
-    }
-
     //catch and print error message
-    if ($http_status != 200) {
+    if ($http_status != 200 || curl_errno($ch) > 0) {
         echo "HTTP status: ".$http_status.". Error loading URL. " .curl_error($ch);
         curl_close($ch);
         die();
@@ -844,21 +837,29 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
     $itemcount = 0;
 
+    //Use the ls2content round-robin load balancer
+    $loadBalancerArr = array(NULL, 2, 3, 4);
+    $loadBalancer = $loadBalancerArr[array_rand($loadBalancerArr)];
+
     echo "<div class='owl-carousel owl-theme'>";
-        if (strstr($xmlurl, 'econtent')) {
+        if (strstr($xmlurl, '/econtent/')) {
             //Content server XML Lists
+
+            //Gets the RSS Feed title
+            $xmlrssname = "NY Times Best Sellers";
+
             foreach ($xmlfeed->Book as $xmlitem) {
 
                 $itemcount++;
 
-                //get title node for each book. clean title string
+                //get title node for each book
                 $xmltitle = (string)$xmlitem->Title;
 
                 //get ISBN node for each book
                 $xmlisbn = (string)$xmlitem->ISBN;
 
                 //https://ls2content.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
-                $xmlimage = "https://ls2content.tlcdelivers.com/tlccontent?customerid=$customerId&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
+                $xmlimage = "https://ls2content$loadBalancer.tlcdelivers.com/tlccontent?customerid=$customerId&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
 
                 //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
                 $xmllink = "$setupPACURL/?config=ysm#section=search&term=$xmltitle";
@@ -887,16 +888,21 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                     break;
                 }
             }
-        } elseif (strstr($xmlurl, 'list')) {
+        } elseif (strstr($xmlurl, '/list/')) {
             //LS2PAC Saved Search XML Lists
+
+            //Gets the RSS Feed title
+            $xmlrssname = $xmlfeed->channel->title;
+            $xmlrssname = trim(str_replace('LS2 PAC:', '', $xmlrssname));
+
             foreach ($xmlfeed->channel->item as $xmlitem) {
 
                 $itemcount++;
 
-                //get title node for each book. clean title string
+                //get title node for each book
                 $xmltitle = (string)$xmlitem->title;
 
-                //get url for each book. clean link string
+                //get url for each book
                 $xmllink = (string)$xmlitem->link;
 
                 //Get the ResourceID from the xmllink
@@ -908,8 +914,13 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
                 //set the image url. clean the image url string
                 $xmlimage = $xmltheimage[1];
-                //Remove http(s) and just use //
-                //$xmlimage = trim(str_replace(array('http:', 'https:'), '', $xmlimage));
+
+                //Replace http with https
+                $xmlimage = trim(str_replace('http:', 'https:', $xmlimage));
+
+                //Use the ls2content round-robin load balancer
+                $xmlimage = trim(str_replace("ls2content", "ls2content".$loadBalancer."", $xmlimage));
+
                 if ($jacketSize == 'SM') {
                     $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
                     $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));

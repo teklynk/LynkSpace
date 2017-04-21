@@ -51,8 +51,6 @@ function toggleSrc(rss, loc_id) {
             $.ajax({
                 url: '../core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
                 type: 'GET',
-                async: true,
-                cache: true,
                 timeout: 10000, //10 seconds
                 success: function(result){
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
@@ -60,6 +58,13 @@ function toggleSrc(rss, loc_id) {
                     $('#hottitlesCarousel .carousel-control').removeClass('hidden');
                     $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
                     $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
+                },
+                error: function() {
+                    $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
+                    $('#hottitlesCarousel').removeClass('loader');
+                    $('#hottitlesCarousel .carousel-control').removeClass('hidden');
+                    $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
+                    $('#hottitlesCarousel .carousel-inner').html('Error loading URL.');
                 }
             })
         }, 500);

@@ -11,11 +11,16 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         //create sitemap file
         $sitemapFileLoc = "../../sitemap.xml";
+
+        if (!is_writable($sitemapFileLoc)) {
+            die("Unable to write to sitemap.xml. Check file permissions." . PHP_EOL);
+        }
+
         $sitemapfile = fopen($sitemapFileLoc, "w") or die("Unable to open sitemap.xml. Check file permissions.");
         $otherPages = array("index.php", "about.php", "team.php", "services.php", "contact.php", "databases.php");
 
         if (!file_exists($sitemapFileLoc)) {
-            die("$sitemapFileLoc does not exist");
+            die("$sitemapFileLoc does not exist" . PHP_EOL);
         }
 
         $writeline = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -95,10 +100,15 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         //create robots.txt
         $robotsFileLoc = "../../robots.txt";
+
+        if (!is_writable($robotsFileLoc)) {
+            die("Unable to write to robots.txt. Check file permissions." . PHP_EOL);
+        }
+
         $robotsfile = fopen($robotsFileLoc, "w") or die("Unable to open robots.txt! Check file permissions.");
 
         if (!file_exists($robotsFileLoc)) {
-            die("$robotsFileLoc does not exist");
+            die("$robotsFileLoc does not exist" . PHP_EOL);
         }
 
         $writeline = "User-agent: *\n";
@@ -126,6 +136,8 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         fclose($robotsfile);
     }
+
+    die('Created Sitemap.xml and Robots.txt' . PHP_EOL);
 
 } else {
 

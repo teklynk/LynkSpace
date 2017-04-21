@@ -13,16 +13,18 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     require_once('../core/functions.php');
 
     if (!empty($_GET) && $_GET['update']) {
-        $uploadsID = $_GET['id'];
-        $srcPath = str_replace('admin/ajax', 'uploads/'.$uploadsID, __DIR__);
 
         $sqlLocations = mysqli_query($db_conn, "SELECT id, active FROM locations WHERE active='true' ");
         while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
+
             $destPath = str_replace('admin/ajax', 'uploads/' . $rowLocations['id'], __DIR__);
 
             if ($rowLocations['id'] != 1) {
                 recurse_copy($srcPath, $destPath);
+
+                print_r($destPath . PHP_EOL);
             }
+
         }
 
         die('Images Copied to ALL locations');

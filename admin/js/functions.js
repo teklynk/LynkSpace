@@ -656,9 +656,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.copy_files_to_locs').click(function () {
-        $.get('ajax/update_images.php?update=true', {
-            id: this.id,
-            checked: this.checked,
+        $.get('ajax/update_images.php?loc_id=1&update=true', {
             success: function () {
                 $('.copy_files_to_locs').attr('disabled', true);
                 $('.copy_files_to_locs>i').addClass('fa-spin');
@@ -666,7 +664,7 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $('.copy_files_to_locs').attr('disabled', false);
                     $('.copy_files_to_locs>i').removeClass('fa-spin');
-                    $('.copy_files_to_locs_msg').html('Successfully Copied Files');
+                    $('.copy_files_to_locs_msg').html('Process may still be running in the background');
                 }, 10000);
             }
         });
@@ -680,12 +678,11 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $('.sitemap_builder').attr('disabled', false);
                     $('.sitemap_builder>i').removeClass('fa-spin');
-                    $('.sitemap_builder_msg').html('Successfully Updated <a href="../sitemap.xml" target="_blank">Sitemap.xml</a>');
+                    $('.sitemap_builder_msg').html('View the <a href="../sitemap.xml" target="_blank">Sitemap.xml</a>');
                 }, 10000);
             }
         });
     });
-
     //Run Installer Button
     $('#run_installer').click(function () {
         setTimeout(function() {
@@ -763,8 +760,7 @@ $(document).ready(function () {
 
     //Dirty Form Check - Confirmation Message
     $(function() {
-        $('.dirtyForm').areYouSure(
-            {
+        $('.dirtyForm').areYouSure({
                 //custom message may not show in all browsers
                 message: 'It looks like you have been editing something. '
                 + 'If you leave before saving, your changes will be lost.'
