@@ -142,7 +142,16 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
                         &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
                     </small>
                     <br/>
-                    <small class="sitemap_builder_msg status_msg"></small>
+                    <small class="sitemap_builder_msg status_msg">
+                    <?php
+                    if (!is_writable('../sitemap.xml')) {
+                        echo "Unable to write to sitemap.xml. Check file permissions.";
+                    }
+                    if (!is_writable('../robots.txt')) {
+                        echo "Unable to write to robots.txt. Check file permissions.";
+                    }
+                    ?>
+                    </small>
                 </div>
                 <hr/>
                 <div class="form-group">

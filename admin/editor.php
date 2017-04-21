@@ -42,7 +42,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     //do not open file if it is not in the array of allowed files
     if (!in_array($fileToEdit_dir, $editFileListArr, true)) {
-        die('Cannot access: ' . $fileToEdit_dir);
+        die('Unable to find: ' . $fileToEdit_dir);
+    }
+    //check if file is writable
+    if (!is_writable($fileToEdit_dir)) {
+        die('Unable write to file: ' . $fileToEdit_dir . '. Check file permissions.');
     }
 
     //open file for Reading
@@ -63,7 +67,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 closedir($handle);
             }
         } else {
-            die('Cannot write to: ' . $fileToEdit_dir);
+            die('Unable write to: ' . $fileToEdit_dir);
         }
     }
     ?>
@@ -87,6 +91,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     echo $errorMsg;
                 } else {
                     echo $pageMsg;
+                }
+                if (!is_writable($fileToEdit_dir)) {
+                    echo "<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check folder permissions.</div>";
                 }
                 ?>
                 <form name="editForm" class="dirtyForm" method="post">
