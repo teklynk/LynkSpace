@@ -59,6 +59,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlo
             } else {
                 echo $pageMsg;
             }
+            if (!is_writable('../sitemap.xml')) {
+                echo "<div class='alert alert-danger'>Unable to write to sitemap.xml. Check file permissions.</div>";
+            }
+            if (!is_writable('../robots.txt')) {
+                echo "<div class='alert alert-danger'>Unable to write to robots.txt. Check file permissions.</div>";
+            }
             //multibranch active
             if ($rowConfig['multibranch'] == 'true') {
                 $selActive = "CHECKED";
