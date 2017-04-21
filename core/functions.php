@@ -817,22 +817,30 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
     $ch = curl_init();
     $timeout = 10;
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    $xmlfeed = simplexml_load_string($xmldata);
+    // Check if any error occurred
+    if (curl_errno($ch) > 0) {
+        echo "Error loading URL. " .curl_error($ch);
+        curl_close($ch);
+        die();
+    }
 
     //catch and print error message
     if ($http_status != 200) {
-        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
+        echo "HTTP status: ".$http_status.". Error loading URL. " .curl_error($ch);
         curl_close($ch);
         die();
     }
 
     curl_close($ch);
+
+    $xmlfeed = simplexml_load_string($xmldata);
 
     $itemcount = 0;
 
