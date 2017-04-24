@@ -7,6 +7,7 @@ $_SESSION['file_referer'] = 'usermanager.php';
 
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
+
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }

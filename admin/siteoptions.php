@@ -7,7 +7,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referer'] = 'siteoptions.php';
 
 //check if user is logged in and is admin and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true' && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
     $pageMsg = "";
 
     if ($_POST['save_main']) {

@@ -90,7 +90,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             }
             ?>
 
-            <form role="uploadForm" method="post" action="" enctype="multipart/form-data">
+            <form name="uploadForm" method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Upload Image</label>
                     <input type="file" name="fileToUpload" id="fileToUpload">

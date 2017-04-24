@@ -46,7 +46,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     }
     //check if file is writable
     if (!is_writable($fileToEdit_dir)) {
-        die('Unable write to file: ' . $fileToEdit_dir . '. Check file permissions.');
+        die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
     }
 
     //open file for Reading
@@ -67,7 +67,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 closedir($handle);
             }
         } else {
-            die('Unable write to: ' . $fileToEdit_dir);
+            die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
         }
     }
     ?>
@@ -93,7 +93,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     echo $pageMsg;
                 }
                 if (!is_writable($fileToEdit_dir)) {
-                    echo "<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check folder permissions.</div>";
+                    die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
                 }
                 ?>
                 <form name="editForm" class="dirtyForm" method="post">
@@ -160,7 +160,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 </style>
 <?php
 } else {
-    //send user to log in page if not logged in
+    //send user to log in page if not logged in as Admin
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }

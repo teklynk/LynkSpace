@@ -239,7 +239,7 @@ if ($_GET['section'] == $navSections[0]) {
             if ($_GET['addcatname'] > "") {
                 $navAddCat = "INSERT INTO category_navigation (name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . safeCleanStr($_GET['section']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
                 mysqli_query($db_conn, $navAddCat);
-
+                header("Location: navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "");
                 echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
 
             }

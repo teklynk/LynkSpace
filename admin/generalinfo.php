@@ -30,7 +30,8 @@ if (!empty($_POST)) {
 
     }
 
-    echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
+    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
 if ($_GET['update'] == 'true') {

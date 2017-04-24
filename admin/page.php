@@ -92,8 +92,8 @@ if ($_GET['preview'] > "") {
                         $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
+                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
-
                     }
                 }
 

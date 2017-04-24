@@ -29,7 +29,7 @@ if (!empty($_POST)) {
         }
 
     }
-
+    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true");
     echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 }
 
