@@ -4,8 +4,12 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-//check if user is logged in and is admin.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+// Only allow Admin users have access to this page
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
+
+    header('Location: index.php?logout=true');
+    echo "<script>window.location.href='index.php?logout=true';</script>";
+}
 
     $fileToEdit_dir = $_GET['section'];
     $pageMsg="";
@@ -159,10 +163,6 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     }
 </style>
 <?php
-} else {
-    //send user to log in page if not logged in as Admin
-    header('Location: index.php?logout=true');
-    echo "<script>window.location.href='index.php?logout=true';</script>";
-}
+
 include_once('includes/footer.inc.php');
 ?>

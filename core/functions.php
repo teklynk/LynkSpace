@@ -419,7 +419,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
     if ($sitesearchlink == 'true') {
         //Site search colapse link
         echo "<li class='hidden-xs' id='sitesearchlink'>";
-        echo "<a class='navSearch collapsed' data-toggle='collapse' data-target='.sitesearch-collapse' href='#' aria-label='Search'>";
+        echo "<a class='navSearch' data-toggle='collapse' data-target='.sitesearch-collapse' href='#'>";
         echo "<i class='fa fa-search fa-lg' aria-hidden='true'></i>";
         echo "</a>";
         echo "</li>";

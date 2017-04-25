@@ -179,25 +179,29 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group" id="site_options">
-                                <button type="button" class="delete_location btn btn-primary" name="site_options"
-                                        onclick="window.location='import.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
-                                    <i class='fa fa-fw fa-upload'></i> Import Data
-                                </button>
-                                <small>
-                                    &nbsp;&nbsp;Edit global web site settings, themes, styles.&nbsp;<i class="fa fa-question-circle-o"></i>
-                                </small>
+                    <?php
+                        //only show this button to super-admin
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['super_admin'] == true) {
+                            ?>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group" id="site_options">
+                                        <button type="button" class="delete_location btn btn-primary" name="site_options"
+                                                onclick="window.location='import.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                            <i class='fa fa-fw fa-upload'></i> Import Data
+                                        </button>
+                                        <small>
+                                            &nbsp;&nbsp;Edit global web site settings, themes, styles.&nbsp;<i
+                                                class="fa fa-question-circle-o"></i>
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <?php
+                            <?php
+                        }
                     }
-                    ?>
 
-                    <?php
                     //Check if user_level is Admin user
                     if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
                     ?>
@@ -214,9 +218,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     </div>
                     <?php
                     }
-                    ?>
 
-                    <?php
                     if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
                     ?>
                     <hr/>
@@ -235,9 +237,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <hr/>
                     <?php
                     }
-                    ?>
 
-                    <?php
                     //Check if user_level is Admin user and is Multibranch
                     if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
                     ?>
@@ -311,8 +311,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
 
                 $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
             }
-            ?>
-            <?php
+
             if ($multiBranch == 'true') {
                 ?>
                 <div class="form-group">

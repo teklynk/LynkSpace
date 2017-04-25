@@ -68,7 +68,11 @@ $custSections = array("1", "2", "3");
 //Location Types
 $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);
-$locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
+if ($multiBranch == 'true'){
+    $locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
+} else {
+    $locTypes = 'Default';
+}
 
 //Extra Pages
 $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" . $_GET['loc_id'] . "'>About</option><option value='calendar.php?loc_id=" . $_GET['loc_id'] . "'>Calendar</option><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='team.php?loc_id=" . $_GET['loc_id'] . "'>Team</option></optgroup>";

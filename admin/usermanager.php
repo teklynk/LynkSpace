@@ -12,9 +12,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-$usersCount=0;
+
 $pageMsg = "";
 $deleteMsg = "";
+$usersCount=0;
 
 //delete user
 $deluserId = $_GET['deleteuser'];
@@ -34,12 +35,12 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 //Add User
 //insert data on submit
-if (($_POST['save_main'])) {
+if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
-        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '".getRealIpAddr()."', " . safeCleanStr($_POST['user_location']) . ")";
+        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . safeCleanStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . SHA1($blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
         mysqli_query($db_conn, $usersInsert);
 
-        $pageMsg = "<div class='alert alert-success'>The user has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-success'>The user " . safeCleanStr($_POST['user_name']) . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
     } else {
         $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
     }
@@ -153,7 +154,8 @@ if ($deleteMsg != "") {
                         </div>
                         <?php
                     } else {
-                        echo "<input type='hidden' name='user_location' id='user_location' value='Default'/>";
+                        //Set user_location = 1 if not a multibranch
+                        echo "<input type='hidden' name='user_location' id='user_location' value='1'/>";
                     }
                     ?>
                     <div class="col-lg-12">
@@ -171,7 +173,7 @@ if ($deleteMsg != "") {
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="hidden" name="save_main" value="true"/>
+                            <input type="hidden" name="save_main" value="true">
                             <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add User</button>
                         </div>
                     </div>

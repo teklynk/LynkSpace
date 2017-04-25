@@ -107,10 +107,16 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Location Types</label>
-                    <input class="form-control count-text" name="site_loc_types" maxlength="255" value="<?php echo $rowConfig['loc_types']; ?>" placeholder="1,2,3,4,5">
-                </div>
+                <?php
+                if ($rowConfig['multibranch'] == 'true') {
+                    echo "<div class='form-group'>";
+                    echo "<label>Location Types</label>";
+                    echo "<input class='form-control count-text' name='site_loc_types' maxlength='255' value='". $rowConfig['loc_types'] ."' placeholder='1,2,3,4,5'>";
+                    echo "</div>";
+                } else {
+                    echo "<input type='hidden' name='site_loc_types' value='Default'>";
+                }
+                ?>
                 <div class="form-group">
                     <label>Home Page URL</label>
                     <input class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
