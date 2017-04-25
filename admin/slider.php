@@ -488,6 +488,8 @@ echo "</div>
         $(document).ready(function() {
             $('.datepicker').datepicker({
                 format: "yyyy-mm-dd",
+                startView: "month",
+                startDate: Date(),
                 todayHighlight: true,
                 autoclose: true
             });

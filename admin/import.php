@@ -95,19 +95,6 @@ if (!empty($_POST)) {
                 <input type="hidden" name="importPagesCSV" value="1">
             </div>
 
-            <?php
-            $pageUrl = file_get_contents('https://teklynk.com/');
-
-            preg_match('/<title>([^<]+)<\/title>/i', $pageUrl, $matches);
-            $title = $matches[1];
-            echo strip_tags($title);
-
-            preg_match('~<body[^>]*>(.*?)</body>~si', $pageUrl, $matches2);
-            $tagContents = $matches2[1];
-            echo strip_tags($tagContents);
-
-            ?>
-
             <hr/>
 
             <button type="submit" name="importForm_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".csv - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Import CSV(s)</button>
