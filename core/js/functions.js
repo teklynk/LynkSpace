@@ -8,11 +8,12 @@ $(document).ready(function () {
         var bodyHeight = $(window).height();
         var navbarHeight = $('.navbar-static-top:first').height();
         var bannerHeight = $('.bannerwrapper:first').height();
+        var sitesearchHeight = $('.sitesearch:first').height();
         var searchlocationHeight = $('.searchlocations:first').height();
         var searchpacHeight = $('.searchpac:first').height();
         var databasesHeight = $('.databases:first').height();
         var footerHeight = $('.footer:first').height();
-        var calcContentHeight = bodyHeight - navbarHeight - bannerHeight - searchlocationHeight - searchpacHeight - databasesHeight - footerHeight - 300; //change last value to compensate for padding.
+        var calcContentHeight = bodyHeight - navbarHeight - bannerHeight - searchlocationHeight - sitesearchHeight - searchpacHeight - databasesHeight - footerHeight - 300; //change last value to compensate for padding.
 
         if (calcContentHeight > 0) {
             $('.content:first').css({'min-height': calcContentHeight});

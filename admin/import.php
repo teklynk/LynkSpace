@@ -6,7 +6,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referer'] = 'import.php';
 
 // Only allow super-admin users access to this page
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1 && $_SESSION['super_admin'] == false) {
+if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSION['user_level'] != 1) {
 
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
@@ -209,7 +209,7 @@ if ($_GET['update'] == 'true') {
                 <input type="hidden" name="importPagesCSV">
 
                 <div class="checkbox">
-                    <label><input type="checkbox" name="empty_pagesTables"><small>Truncate "pages" Table</small></label>
+                    <label><input type="checkbox" name="empty_pagesTables"><small>Truncate "pages" Table?</small></label>
                 </div>
             </div>
 

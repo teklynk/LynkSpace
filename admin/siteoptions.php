@@ -6,7 +6,7 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'siteoptions.php';
 
-//check if user is logged in and is admin and that the requesting page is valid.
+//check if user is logged in and is admin
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
     $pageMsg = "";
 
@@ -180,7 +180,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 <?php
 
 } else {
-    die('Direct access not permitted');
+    //redirect user if not admin
+    header('Location: index.php?logout=true');
+    echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 include_once('includes/footer.inc.php');
 ?>

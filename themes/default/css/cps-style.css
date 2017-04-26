@@ -419,7 +419,9 @@ footer a:hover {
 #sliderCarousel.carousel {
     height: 400px;
 }
-
+.sitesearch {
+    min-height: 400px;
+}
 .col-md-12 > p > img, .col-md-8 > p > img, .col-md-4 > p > img, .col-md-4 > img, .col-md-2 > img {
     margin: 8px;
 }

@@ -247,12 +247,12 @@ small {
 
 .top-nav > li > a {
     padding-top: 11px !important;
-    padding-bottom: 11px !important;
+    padding-bottom: 7px !important;
 }
 
 .navbar-brand {
     padding-top: 16px !important;
-    padding-bottom: 11px !important;
+    padding-bottom: 7px !important;
 }
 
 .scrollToTop {

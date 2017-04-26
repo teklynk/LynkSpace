@@ -78,12 +78,6 @@ if (isset($_SESSION['loggedIn'])) {
 
 }
 
-// get default location logo
-$userSetup = mysqli_query($db_conn, "SELECT logo, loc_id FROM setup WHERE loc_id = 1 LIMIT 1");
-$rowSetup = mysqli_fetch_array($userSetup);
-
-$userLogo = $rowSetup['logo'];
-
 ?>
     <style type="text/css">
         html, body {
@@ -137,13 +131,7 @@ $userLogo = $rowSetup['logo'];
                 </div>
                 <div class="panel-body">
                     <div class="text-center">
-                        <?php
-                        if (!empty($userLogo)) {
-                            echo "<a href='../index.php'><img src='../uploads/1/".$userLogo."' class='img-responsive img-center' title='Home' alt='Home'/></a>";
-                        } else {
-                            echo "<p></p>";
-                        }
-                        ?>
+                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YSM" alt="YSM"/>
                     </div>
                     <section class="login-form">
                         <?php
