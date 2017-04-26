@@ -152,7 +152,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
             <?php
             //Admin Options and Settings
             //Check if user_level is Admin user and default location
-            if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
+            if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
             ?>
                 <fieldset class="well">
                     <div class="row">
@@ -164,7 +164,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     </div>
 
                     <?php
-                    if ($_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
                     ?>
                     <div class="row">
                         <div class="col-lg-12">
@@ -192,7 +192,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                             <i class='fa fa-fw fa-upload'></i> Import Data
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Edit global web site settings, themes, styles.&nbsp;<i
+                                            &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i
                                                 class="fa fa-question-circle-o"></i>
                                         </small>
                                     </div>
@@ -203,7 +203,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     }
 
                     //Check if user_level is Admin user
-                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
                     ?>
                     <hr/>
                     <div class="row">
@@ -219,7 +219,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <?php
                     }
 
-                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
                     ?>
                     <hr/>
                     <div class="row">
@@ -239,7 +239,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     }
 
                     //Check if user_level is Admin user and is Multibranch
-                    if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
                     ?>
                     <div class="row">
                         <div class="col-lg-12">

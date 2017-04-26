@@ -15,9 +15,6 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1 && $_SESSION['s
 //update table on submit
 if ($_POST['save_main']) {
 
-    //var_dump($_POST);
-   // die();
-
     if ($_FILES['csvLocationsImport']['size'] > 0) {
 
         //example csv headers
@@ -27,59 +24,50 @@ if ($_POST['save_main']) {
         $skip_row_number = array('1');
 
         //get the csv file
-        $lacotionsFile = $_FILES['csvLocationsImport']['tmp_name'];
-        $handle = fopen($lacotionsFile, 'r');
+        $locationsFile = $_FILES['csvLocationsImport']['tmp_name'];
+        $handle = fopen($locationsFile, 'r');
 
         //Turn off foreign key constraints
         mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=0');
 
-        if ($_POST['empty_locTables'] == 'on') {
+        if (!empty($_POST['empty_locTables'])) {
             //Truncate tables
             mysqli_query($db_conn, 'TRUNCATE TABLE locations');
             mysqli_query($db_conn, 'TRUNCATE TABLE setup');
             mysqli_query($db_conn, 'TRUNCATE TABLE contactus');
+        } else {
+            $locationSelect = mysqli_query($db_conn, "SELECT MAX(id) FROM locations LIMIT 1");
+            $locationCount = mysqli_fetch_array($locationSelect);
         }
 
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            if ($data[0]) {
+        while (($locData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($locData[0]) {
 
                 $rowCount ++;
+                $locationCount ++;
 
                 //skip first row of csv
                 if (in_array($rowCount, $skip_row_number)) {
                     continue;
                 }
 
-                $locIdCount = $rowCount - 1;
+                if (!empty($_POST['empty_locTables'])) {
+                    $locIdCount = $rowCount - 1;
+                } else {
+                    $locIdCount = $locationCount[0] + $rowCount - 1;
+                }
 
                 //Insert into locations table
-                $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $locIdCount . ", '" . safeCleanStr(addslashes($data[0])) . "', '" . safeCleanStr(addslashes($data[1])) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
+                $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $locIdCount . ", '" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[1])) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
                 mysqli_query($db_conn, $locationInsert);
 
-                if (!$locationInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
-                }
-
                 //Insert into setup table
-                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, customersheading_1, customersheading_2, customersheading_3, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($data[0])) . "', '" . safeCleanStr(addslashes($data[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
+                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, customersheading_1, customersheading_2, customersheading_3, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $setupInsert);
 
-                if (!$setupInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
-                }
-
-                $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($data[8])) . "', '" . safeCleanStr(addslashes($data[8])) . "', '" . safeCleanStr(addslashes($data[3])) . "', '" . safeCleanStr(addslashes($data[4])) . "', '" . safeCleanStr(addslashes($data[5])) . "', '" . safeCleanStr(addslashes($data[6])) . "', '" . safeCleanStr(addslashes($data[7])) . "', '" . safeCleanStr(addslashes($data[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
+                $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[3])) . "', '" . safeCleanStr(addslashes($locData[4])) . "', '" . safeCleanStr(addslashes($locData[5])) . "', '" . safeCleanStr(addslashes($locData[6])) . "', '" . safeCleanStr(addslashes($locData[7])) . "', '" . safeCleanStr(addslashes($locData[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $contactInsert);
 
-                if (!$contactInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
-                }
             }
         }
 
@@ -91,25 +79,30 @@ if ($_POST['save_main']) {
     if ($_FILES['csvPagesImport']['size'] > 0) {
 
         //example csv headers
-        //title,content
+        //title,content,url
 
+        $pageGetUrl = '';
+        $pageContent = '';
         $rowCount = 0;
         $skip_row_number = array('1');
 
         //get the csv file
-        $lacotionsFile = $_FILES['csvPagesImport']['tmp_name'];
-        $handle = fopen($lacotionsFile, 'r');
+        $pagesFile = $_FILES['csvPagesImport']['tmp_name'];
+        $handle = fopen($pagesFile, 'r');
 
         //Turn off foreign key constraints
         mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=0');
 
-        if ($_POST['empty_pagesTables'] == 'on') {
+        if (!empty($_POST['empty_pagesTables'])) {
             //Truncate table
             mysqli_query($db_conn, 'TRUNCATE TABLE pages');
+        } else {
+            $pagesSelect = mysqli_query($db_conn, "SELECT MAX(id) FROM pages LIMIT 1");
+            $pagesCount = mysqli_fetch_array($pagesSelect);
         }
 
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            if ($data[0]) {
+        while (($pageData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($pageData[0]) {
 
                 $rowCount ++;
 
@@ -118,36 +111,40 @@ if ($_POST['save_main']) {
                     continue;
                 }
 
-                $locIdCount = $rowCount - 1;
-
-                //Insert into locations table
-                $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $locIdCount . ", '" . safeCleanStr(addslashes($data[0])) . "', '" . safeCleanStr(addslashes($data[1])) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
-                mysqli_query($db_conn, $locationInsert);
-
-                if (!$locationInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
+                if (!empty($_POST['empty_pagesTables'])) {
+                    $locIdCount = $rowCount - 1;
+                } else {
+                    $locIdCount = $locationCount[0] + $rowCount - 1;
                 }
 
-                //Insert into setup table
-                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, customersheading_1, customersheading_2, customersheading_3, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($data[0])) . "', '" . safeCleanStr(addslashes($data[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
-                mysqli_query($db_conn, $setupInsert);
+                //If a page URL exists in the csv
+                if (!empty($pageData[2])) {
+                    $html = file_get_contents($pageData[2]);
+                    $dom = new domDocument;
+                    // load the html into the object
+                    $dom->loadHTML($html);
+                    $dom->preserveWhiteSpace = false;
 
-                if (!$setupInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
+                    //YSM 6.x containers
+                    if ($dom->getElementById('maincontent')) {
+                        $extracted_contents = $dom->getElementById('maincontent');
+                    } elseif ($dom->getElementById('maincontentwithnav')) {
+                        $extracted_contents = $dom->getElementById('maincontentwithnav');
+                    } else {
+                        $extracted_contents = $dom->getElementsByTagName('body');
+                    }
+
+                    $pageContent = $dom->saveHTML($extracted_contents);
+                    $pageContent = sanitizeStr($pageContent);
+                    $pageContent = strip_tags($pageContent);
+                } else {
+                    $pageContent = $pageData[1];
                 }
 
-                $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($data[8])) . "', '" . safeCleanStr(addslashes($data[8])) . "', '" . safeCleanStr(addslashes($data[3])) . "', '" . safeCleanStr(addslashes($data[4])) . "', '" . safeCleanStr(addslashes($data[5])) . "', '" . safeCleanStr(addslashes($data[6])) . "', '" . safeCleanStr(addslashes($data[7])) . "', '" . safeCleanStr(addslashes($data[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
-                mysqli_query($db_conn, $contactInsert);
+                //Insert into pages table
+                $pagesInsert = "INSERT INTO pages (title, content, active, loc_id) VALUES ('" . safeCleanStr(addslashes($pageData[0])) . "', '" . safeCleanStr(addslashes($pageContent)) . "', 'true', 1)";
+                mysqli_query($db_conn, $pagesInsert);
 
-                if (!$contactInsert){
-                    echo "<div class='import_error_msg alert-danger'>";
-                    echo mysqli_error($db_conn) . PHP_EOL;
-                    echo "</div>";
-                }
             }
         }
 
@@ -155,9 +152,11 @@ if ($_POST['save_main']) {
         mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=1');
     }
 
-    if ($_GET['update'] == 'true') {
-        $pageMsg = "<div class='alert alert-success'>The data has been imported.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='import.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    }
+    header("Location: import.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    echo "<script>window.location.href='import.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+}
+if ($_GET['update'] == 'true') {
+    $pageMsg = "<div class='alert alert-success'>The data has been imported.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='import.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 ?>
 <div class="row">
@@ -182,17 +181,10 @@ if ($_POST['save_main']) {
         }
         ?>
 
-        <div class="instructions">
-            <p>
-            Import data into the CSV template and upload.
-            </p>
-            <hr/>
-        </div>
-
         <form name="importForm" class="dirtyForm" method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <p>
-                    <a href="import/templates/locations.csv" download="locations.csv"><p>Download the CSV Template</p></a>
+                    <i class="fa fa-download"></i> <a href="import/templates/locations.csv" download="locations.csv">Download the CSV Template</a>
                 </p>
             </div>
             <div class="form-group">
@@ -208,7 +200,7 @@ if ($_POST['save_main']) {
             <hr/>
             <div class="form-group">
                 <p>
-                    <a href="import/templates/pages.csv" download="pages.csv"><p>Download the CSV Template?</p></a>
+                    <i class="fa fa-download"></i> <a href="import/templates/pages.csv" download="pages.csv">Download the CSV Template</a>
                 </p>
             </div>
             <div class="form-group">
@@ -217,7 +209,7 @@ if ($_POST['save_main']) {
                 <input type="hidden" name="importPagesCSV">
 
                 <div class="checkbox">
-                    <label><input type="checkbox" name="empty_pagesTables" value="0"><small>Truncate "pages" Table</small></label>
+                    <label><input type="checkbox" name="empty_pagesTables"><small>Truncate "pages" Table</small></label>
                 </div>
             </div>
 
