@@ -677,7 +677,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 
 @media (max-width: 1276px) {
     #sliderCarousel.carousel {
-        height: 235px;
+        height: 330px;
     }
     #sliderCarousel.carousel .fill {
         background-size: contain;
@@ -685,13 +685,32 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 }
 @media (max-width: 1023px) {
     #sliderCarousel.carousel {
-        height: 200px;
+        height: 325px;
+    }
+    #sliderCarousel.carousel .fill {
+        background-size: contain;
+    }
+}
+@media (max-width: 990px) {
+    #sliderCarousel.carousel {
+        height: 250px;
+    }
+    #sliderCarousel.carousel .fill {
+        background-size: contain;
+    }
+}
+@media (max-width: 800px) {
+    #sliderCarousel.carousel {
+        height: 250px;
     }
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
 }
 @media (max-width: 760px) {
+    #sliderCarousel.carousel {
+        height: 250px;
+    }
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
@@ -760,11 +779,21 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         width: 100%;
     }
 
-
     #sliderCarousel .carousel-control {visibility: visible;}
     #hottitlesCarousel .carousel-control {visibility: visible;}
 }
+@media (max-width: 700px) {
+    #sliderCarousel.carousel {
+        height: 215px;
+    }
+    #sliderCarousel.carousel .fill {
+        background-size: contain;
+    }
+}
 @media (max-width: 596px) {
+    #sliderCarousel.carousel {
+        height: 170px;
+    }
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
@@ -772,12 +801,12 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         bottom:10%;
     }
     #sliderCarousel .carousel-control {
-        background:none;
-        visibility: hidden;
+        background: none;
+        visibility: visible;
         width: 5%;
     }
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
-        visibility: hidden;
+        visibility: visible;
         width: 5%;
     }
 }
@@ -805,11 +834,11 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
     #sliderCarousel .carousel-control, #sliderCarousel:hover .carousel-control {
         background:none;
-        visibility: hidden;
+        visibility: visible;
         width: 5%;
     }
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
-        visibility: hidden;
+        visibility: visible;
         width: 5%;
     }
 }

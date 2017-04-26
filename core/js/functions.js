@@ -52,7 +52,7 @@ function toggleSrc(rss, loc_id) {
             $.ajax({
                 url: '../core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
                 type: 'GET',
-                timeout: 10000, //10 seconds
+                timeout: 20000, //20 seconds
                 success: function(result){
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
                     $('#hottitlesCarousel').removeClass('loader');

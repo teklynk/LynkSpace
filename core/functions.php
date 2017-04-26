@@ -816,7 +816,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     global $setupPACURL;
 
     $ch = curl_init();
-    $timeout = 10;
+    $timeout = 20;
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
