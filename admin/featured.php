@@ -109,7 +109,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <img src="<?php echo $thumbNail; ?>" id="featured_image_preview" style="max-width:140px; height:auto;"/>
+                    <img src="<?php echo $thumbNail; ?>" id="featured_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
                 </div>
                 <div class="form-group">
                     <label>Use an Existing Image</label>

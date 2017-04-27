@@ -115,7 +115,7 @@ session_start();
                 <i class="fa fa-bars fa-2x cps-blue"></i>
                 <span class="cps-blue toggbutton">MENU</span>
             </button>
-            <a href="<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" width="144" alt="" title="" border="0"/></a>
+            <a href="<?php echo $homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" height="88" alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">

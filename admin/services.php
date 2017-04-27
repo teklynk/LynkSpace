@@ -155,7 +155,7 @@ if ($_GET['preview']>"") {
 				$imgSrc = "../uploads/".$_GET['loc_id']."/".$rowServices['image'];
 			}
 
-			echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block;'/>";
+			echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block; background-color: #ccc;'/>";
 			?>
 		</div>
 		<div class="form-group">

@@ -117,6 +117,10 @@ if (isset($_SESSION['loggedIn'])) {
             padding: 15px;
             margin: 0 auto;
         }
+        footer {
+            display: block !important;
+            visibility: visible !important;
+        }
     </style>
 
     <div class="row">
@@ -130,8 +134,8 @@ if (isset($_SESSION['loggedIn'])) {
                     ?>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center">
-                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YSM" alt="YSM"/>
+                    <div class="text-center login-logo">
+                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YouSeeMore" alt="YouSeeMore"/>
                     </div>
                     <section class="login-form">
                         <?php

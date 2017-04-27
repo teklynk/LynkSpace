@@ -8,6 +8,20 @@ if (!defined('inc_access')) {
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+<footer>
+    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php include_once('../version.txt'); ?></span>
+    <div class="pull-right">
+        <ul class="nav-footer">
+            <li>
+                <a href="#" target="_blank">Privacy</a>
+            </li>
+            <li>
+                <a href="#" target="_blank">Feedback</a>
+            </li>
+        </ul>
+        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="http://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
+    </div>
+</footer>
 </div>
 <!-- /#wrapper -->
 <!-- Scroll to Top -->

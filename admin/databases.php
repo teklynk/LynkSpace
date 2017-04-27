@@ -139,11 +139,12 @@ if ($_GET['section'] == $custSections[0]) {
             </div>
             <div class="col-lg-2">
                 <div class="form-group">
-                    <br/>
-                    <label for="nav_menu">Database Sections</label>
-                    <select class="form-control" name="nav_menu" id="nav_menu">
+                    <div class="nav-section">
+                        <label for="nav_menu">Database Sections</label>
+                        <select class="form-control" name="nav_menu" id="nav_menu">
                         <?php echo $custMenuStr; ?>
-                    </select>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

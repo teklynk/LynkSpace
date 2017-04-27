@@ -75,7 +75,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             <form name="siteoptionsform" class="dirtyForm" method="post">
                 <div class="form-group">
                     <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank" id="theme_href_preview">
-                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
+                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px; background-color: #ccc;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
                     </a>
                 </div>
                 <div class="form-group">
@@ -157,10 +157,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <small class="sitemap_builder_msg status_msg">
                     <?php
                     if (!is_writable('../sitemap.xml')) {
-                        echo "Unable to write to sitemap.xml. Check file permissions.";
+                        echo "<p class='text-danger'>Unable to write to sitemap.xml. Check file permissions.</p><br/>";
                     }
                     if (!is_writable('../robots.txt')) {
-                        echo "Unable to write to robots.txt. Check file permissions.";
+                        echo "<p class='text-danger'>Unable to write to robots.txt. Check file permissions.</p><br/>";
                     }
                     ?>
                     </small>

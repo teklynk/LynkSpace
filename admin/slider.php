@@ -141,7 +141,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         </div>
         <hr/>
         <div class="form-group">
-            <img src="<?php echo $image; ?>" id="slide_image_preview" style="max-width:350px; max-height:150px;"/>
+            <img src="<?php echo $image; ?>" id="slide_image_preview" style="max-width:350px; max-height:150px; background-color: #ccc;"/>
         </div>
 
         <div class="form-group">

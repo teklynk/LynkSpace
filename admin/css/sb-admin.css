@@ -85,7 +85,31 @@ li.message-footer {
 ul.alert-dropdown {
     width: 200px;
 }
-
+footer {
+    display:none;
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #999;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+footer ul.nav-footer {
+    list-style: none;
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+footer ul.nav-footer li {
+    display: inline;
+    margin-right: 1em;
+}
+.pull-right {
+    float: right!important;
+}
 .modal-header {
     padding: 15px;
 }
@@ -113,7 +137,15 @@ ul.alert-dropdown {
 .side-nav > li > ul > li > a:hover {
     color: #fff;
 }
-
+.nav-section {
+    background: #f7f7f7;
+    border-top: none;
+    border-bottom: solid 1px #cccccc;
+    border-right: solid 1px #cccccc;
+    border-left: solid 1px #cccccc;
+    border-radius: 0px 0px 4px 4px;
+    padding: 12px;
+}
 /* Flot Chart Containers */
 
 .flot-chart {
@@ -390,6 +422,15 @@ dl, ol, ul {
 
     #button-menu {
         display: none;
+    }
+    .nav-section {
+        background: #f7f7f7;
+        border-top: solid 1px #cccccc;
+        border-bottom: solid 1px #cccccc;
+        border-right: solid 1px #cccccc;
+        border-left: solid 1px #cccccc;
+        border-radius: 4px 4px 4px 4px;
+        padding: 12px;
     }
 }
 /*Change this depending on the number of items in left nav bar*/

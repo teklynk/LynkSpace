@@ -133,11 +133,12 @@ if ($_GET['section'] == $navSections[0]) {
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
-                        <br/>
-                        <label for="nav_menu">Navigation Sections</label>
-                        <select class="form-control" name="nav_menu" id="nav_menu">
-                            <?php echo $navMenuStr; ?>
-                        </select>
+                        <div class="nav-section">
+                            <label for="nav_menu">Navigation Sections</label>
+                            <select class="form-control" name="nav_menu" id="nav_menu">
+                                <?php echo $navMenuStr; ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

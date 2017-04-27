@@ -151,7 +151,7 @@ if ($_GET['preview'] > "") {
                     </div>
                     <hr/>
                     <div class="form-group">
-                        <img src="<?php echo $image; ?>" id="page_image_preview" style="max-width:140px; height:auto; display:block;"/>
+                        <img src="<?php echo $image; ?>" id="page_image_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
                     </div>
                     <div class="form-group">
                         <label>Use an Existing Image</label>
