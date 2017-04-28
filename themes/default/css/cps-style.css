@@ -526,6 +526,7 @@ footer a:hover {
 }
 .cat-title {
     margin-bottom: 4px !important;
+    margin-top: 12px;
     border-bottom: solid 1px #eee !important;
 }
 .database-item, .service-item {

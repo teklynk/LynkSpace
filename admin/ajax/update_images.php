@@ -14,7 +14,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     if (!empty($_GET) && $_GET['update']) {
 
-        $sqlLocations = mysqli_query($db_conn, "SELECT id, active FROM locations WHERE active='true' ");
+        //Copy images from default location
+        $srcPath = str_replace('admin/ajax', 'uploads/1', __DIR__);
+
+        $sqlLocations = mysqli_query($db_conn, "SELECT id, active FROM locations WHERE active='true' AND id != 1");
         while ($rowLocations = mysqli_fetch_array($sqlLocations)) {
 
             $destPath = str_replace('admin/ajax', 'uploads/' . $rowLocations['id'], __DIR__);

@@ -9,7 +9,7 @@ if (!defined('inc_access')) {
 </div>
 <!-- /#page-wrapper -->
 <footer>
-    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php include_once('../version.txt'); ?></span>
+    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo $ysmVersion; ?></span>
     <div class="pull-right">
         <ul class="nav-footer">
             <li>

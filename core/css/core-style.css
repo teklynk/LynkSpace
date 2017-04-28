@@ -36,6 +36,30 @@ header.carousel .fill {
     background-position: center;
     background-size: cover;
 }
+#ysm_brand_footer {
+    clear: both;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    color: #999;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+#ysm_brand_footer ul.nav-footer {
+    list-style: none;
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+#ysm_brand_footer ul.nav-footer li {
+    display: inline;
+    margin-right: 1em;
+}
+#ysm_brand_footer .pull-right {
+    float: right !important;
+}
 
 /* Pricing Page Styles */
 

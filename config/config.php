@@ -87,4 +87,9 @@ $carouselSpeed = $rowConfig['carousel_speed'];
 
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
+
+//Version Number
+$versionFile = __DIR__ . 'version.txt';
+$versionFile = str_replace('config', '', $versionFile);
+$ysmVersion = file_get_contents($versionFile);
 ?>

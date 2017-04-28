@@ -235,7 +235,7 @@ if ($_GET['preview']>"") {
 		//delete service
 		if ($_GET['deleteservice'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
+			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".safeCleanStr(addslashes($delserviceTitle))."&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
 			echo $deleteMsg;
 
 		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
@@ -389,7 +389,7 @@ if ($_GET['preview']>"") {
 				</td>
 				<td class='col-xs-2'>
 				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('".safeCleanStr($serviceTitle)."', 'services.php?loc_id=".$_GET['loc_id']."&preview=$serviceId')\"><i class='fa fa-fw fa-eye'></i></button>
-				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=".safeCleanStr($serviceTitle)."'\"><i class='fa fa-fw fa-trash'></i></button>
+				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."&deleteservice=$serviceId&deletetitle=".safeCleanStr(addslashes($serviceTitle))."'\"><i class='fa fa-fw fa-trash'></i></button>
 				</td>
 				</tr>";
 				}

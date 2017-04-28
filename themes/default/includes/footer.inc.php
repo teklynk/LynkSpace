@@ -31,6 +31,21 @@ if (!defined('inc_access')) {
         </div>
     </footer>
 
+    <div id="ysm_brand_footer">
+        <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo $ysmVersion; ?></span>
+        <div class="pull-right">
+            <ul class="nav-footer">
+                <li>
+                    <a href="#" target="_blank">Privacy</a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">Feedback</a>
+                </li>
+            </ul>
+            <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="http://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
+        </div>
+    </div>
+
     <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">Scroll To Top</a>
 

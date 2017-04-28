@@ -180,7 +180,7 @@ if ($_GET['section'] == $navSections[0]) {
             //Delete nav link
             if ($_GET['deletenav'] && $_GET['deletename'] && !$_GET['confirm']) {
 
-                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr($delNavTitle) . "? <a href='?section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . $delNavTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr(addslashes($delNavTitle)) . "? <a href='?section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . safeCleanStr(addslashes($delNavTitle)) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
@@ -200,7 +200,7 @@ if ($_GET['section'] == $navSections[0]) {
             //Delete category and set nav categories to zero
             if ($_GET['deletecat'] && $_GET['deletecatname'] && !$_GET['confirm']) {
 
-                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete the category " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
@@ -224,15 +224,15 @@ if ($_GET['section'] == $navSections[0]) {
 
             //Rename category and set nav categories to new name
             if ($_GET['renamecat'] && $_GET['newcatname'] && !$_GET['confirm']) {
-                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr($renameCatTitle) . "? <a href='?section=" . $getNavSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr(addslashes($renameCatTitle)) . "? <a href='?section=" . $getNavSection . "&renamecat=" . $renameCatId . "&newcatname=" . safeCleanStr(addslashes($renameCatTitle)) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
 
             } elseif ($_GET['renamecat'] && $_GET['newcatname'] && $_GET['confirm'] == 'yes') {
 
-                $navRenameCatUpdate = "UPDATE category_navigation SET name='" . safeCleanStr($renameCatTitle) . "', nav_section='" . safeCleanStr($_GET['section']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
+                $navRenameCatUpdate = "UPDATE category_navigation SET name='" . safeCleanStr(addslashes($renameCatTitle)) . "', nav_section='" . safeCleanStr($_GET['section']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $navRenameCatUpdate);
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($renameCatTitle) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr(addslashes($renameCatTitle)) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
             }
 
@@ -358,7 +358,7 @@ if ($_GET['section'] == $navSections[0]) {
                     <?php
                     $navCount = "";
 
-                    $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort");
+                    $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid");
                     while ($rowNav = mysqli_fetch_array($sqlNav)) {
                         $navId = $rowNav['id'];
                         $navName = $rowNav['name'];
@@ -401,7 +401,7 @@ if ($_GET['section'] == $navSections[0]) {
 
                         echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' " . $isActive . "></td>
-							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "&deletenav=$navId&deletename=" . safeCleanStr($navName) . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "&deletenav=$navId&deletename=" . safeCleanStr(addslashes($navName)) . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
                     }
 

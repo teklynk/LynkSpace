@@ -685,7 +685,7 @@ function getSlider($sliderType){
 
 
                     if ($rowSlider['link']) {
-                        echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary'>Learn More</a>";
+                        echo "<a target='_blank' href='" . $rowSlider['link'] . "' class='btn btn-primary slider-link'>Learn More</a>";
                     }
 
                     echo "</div>"; //.carousel-caption

@@ -185,7 +185,7 @@ if ($_GET['preview'] > "") {
             //delete team
             if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delteamTitle . "? <a href='?deleteteam=" . $delteamId . "&deletetitle=" . safeCleanStr($delteamTitle) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delteamTitle . "? <a href='?deleteteam=" . $delteamId . "&deletetitle=" . safeCleanStr(addslashes($delteamTitle)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
@@ -333,7 +333,7 @@ if ($_GET['preview'] > "") {
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($teamName) . "', 'team.php?loc_id=" . $_GET['loc_id'] . "&preview=$teamId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=$teamId&deletetitle=" . safeCleanStr($teamName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=$teamId&deletetitle=" . safeCleanStr(addslashes($teamName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
                         }

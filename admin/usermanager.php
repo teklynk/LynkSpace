@@ -23,7 +23,7 @@ $deluserTitle = $_GET['deletetitle'];
 
 if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . safeCleanStr(addslashes($deluserTitle)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
@@ -242,7 +242,7 @@ if ($deleteMsg != "") {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr($usersName) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr(addslashes($usersName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                 }

@@ -53,6 +53,18 @@ if (!empty($_POST)) {
             //Insert Setup
             $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, customersheading_1, customersheading_2, customersheading_3, servicescontent, customerscontent_1, customerscontent_2, customerscontent_3, teamcontent, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Service', 'Slider', 'Meet the Team', 'New Items', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $setupInsert);
+            //Insert Contact defaults
+            $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $contactInsert);
+            //Insert About defaults
+            $aboutInsert = "INSERT INTO aboutus (heading, use_defaults, author_name, datetime, loc_id) VALUES ('About Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $aboutInsert);
+            //Insert Featured defaults
+            $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $featuredInsert);
+            //Do Insert
+            $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $socialInsert);
         }
 
         header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
