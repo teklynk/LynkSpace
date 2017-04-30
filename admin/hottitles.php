@@ -133,7 +133,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="hottitles_sort">Sort Order</label>
-                            <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort" maxlength="3">
+                            <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort" maxlength="3" required>
                         </div>
                     </div>
                     <div class="col-lg-10">
@@ -145,7 +145,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" pattern="^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
+                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" pattern="<?php echo $urlValidationPattern; ?>" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -191,7 +191,7 @@ if ($_GET['loc_id'] != 1) {
             <form name="hottitlesForm" class="dirtyForm" method="post" action="">
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus required>
+                    <input type="text" class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus required>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped">
@@ -244,7 +244,7 @@ if ($_GET['loc_id'] != 1) {
 
                         echo "<tr>
                             <td class='col-xs-1'>
-                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='text' maxlength='3'>
+                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='text' maxlength='3' required>
                             </td>
                             
                             <td>
@@ -252,7 +252,7 @@ if ($_GET['loc_id'] != 1) {
                                 <input class='form-control' name='hottitles_title[]' value='" . $hottitlesTitle . "' type='text' maxlength='255'>
                             </td>";
 
-                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' pattern='^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?' maxlength='255'></td>";
+                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' pattern='".$urlValidationPattern."' maxlength='255' required></td>";
 
                             //If admin, show location type drop down list else show a hidden input with the locations type value
                             if ($adminIsCheck == "true") {

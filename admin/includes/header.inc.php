@@ -35,7 +35,7 @@ session_start();
 
     <link rel="shortcut icon" href="images/favicon.ico"/>
 
-    <title>Admin Panel</title>
+    <title>YouSeeMore - Admin Panel</title>
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/admin.min.css">
@@ -184,7 +184,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a><a class="navbar-brand">Admin Panel <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name'];} ?></a>
+            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a><a class="navbar-brand">YouSeeMore <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name'];} ?></a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -226,7 +226,6 @@ session_start();
         } else {
             $setLocId = "";
         }
-
 
         ?>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->

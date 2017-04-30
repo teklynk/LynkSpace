@@ -204,6 +204,8 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 $emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}";
 //html5 date validation - Full Date Validation (YYYY-MM-DD)
 $dateValidationPattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
+//html5 URL validation pattern
+$urlValidationPattern = "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?";
 //html5 password validation pattern
 $passwordValidationPattern = "(?=(?:[^a-zA-Z]*[a-zA-Z]){4})(?=(?:\D*\d){1}).*";
 $passwordValidationTitle = "1 or more digits and a min. of 4 letters are required";

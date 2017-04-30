@@ -140,7 +140,7 @@ if ($_GET['preview']>"") {
 		<hr/>
 		<div class="form-group">
 			<label><?php echo $serviceLabel; ?></label>
-			<input class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" autofocus required>
+			<input type="text" class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" autofocus required>
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -190,7 +190,7 @@ if ($_GET['preview']>"") {
 
 		<div class="form-group">
             <label>Link URL</label>
-            <input class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
+            <input type="text" class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
         </div>
 
 		<div class="form-group">
@@ -378,7 +378,7 @@ if ($_GET['preview']>"") {
 
 				echo "<tr>
 				<td class='col-xs-1'>
-				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='text' maxlength='3'>
+				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='text' maxlength='3' required>
 				</td>
 				<td>
 				<input type='hidden' name='service_id[]' value='" . $serviceId . "' >

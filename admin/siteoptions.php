@@ -36,7 +36,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             $isThemeSelected = "";
         }
 
-        $themesStr .= "<option value=" . $themes . " " . $isThemeSelected . ">" . $themes . "</option>";
+        $themesStr .= "<option value=" . $themes . " " . $isThemeSelected . ">" . ucwords($themes) . "</option>";
     }
 ?>
 
@@ -97,7 +97,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <hr/>
                 <div class="form-group">
                     <label>Customer ID</label>
-                    <input class="form-control count-text" name="site_customer_id" maxlength="10" value="<?php echo $rowConfig['customer_id']; ?>" placeholder="8675309">
+                    <input type="text" class="form-control count-text" name="site_customer_id" maxlength="10" value="<?php echo $rowConfig['customer_id']; ?>" placeholder="8675309">
                 </div>
                 <div class="form-group" id="multibranchactive">
                     <label>Multibranch</label>
@@ -111,7 +111,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 if ($rowConfig['multibranch'] == 'true') {
                     echo "<div class='form-group'>";
                     echo "<label>Location Types</label>";
-                    echo "<input class='form-control count-text' name='site_loc_types' maxlength='255' value='". $rowConfig['loc_types'] ."' placeholder='1,2,3,4,5'>";
+                    echo "<input type='text' class='form-control count-text' name='site_loc_types' maxlength='255' value='". $rowConfig['loc_types'] ."' placeholder='1,2,3,4,5'>";
                     echo "</div>";
                 } else {
                     echo "<input type='hidden' name='site_loc_types' value='Default'>";
@@ -119,19 +119,19 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 ?>
                 <div class="form-group">
                     <label>Home Page URL</label>
-                    <input class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
+                    <input type="url" pattern="<?php echo $urlValidationPattern; ?>" class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
                 </div>
                 <div class="form-group">
                     <label>PAC URL</label>
-                    <input class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
+                    <input type="url" pattern="<?php echo $urlValidationPattern; ?>" class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
                 </div>
                 <div class="form-group">
                     <label>Carousel Speed</label>
-                    <input class="form-control count-text" name="site_carousel_speed" maxlength="10" value="<?php echo $rowConfig['carousel_speed']; ?>" placeholder="5000">
+                    <input type="text" class="form-control count-text" name="site_carousel_speed" maxlength="10" value="<?php echo $rowConfig['carousel_speed']; ?>" placeholder="5000">
                 </div>
                 <div class="form-group">
                     <label>Admin Session Log Out Time Limit</label>
-                    <input class="form-control count-text" name="site_session_timeout" maxlength="10" value="<?php echo $rowConfig['session_timeout']; ?>" placeholder="3600">
+                    <input type="text" class="form-control count-text" name="site_session_timeout" maxlength="10" value="<?php echo $rowConfig['session_timeout']; ?>" placeholder="3600">
                 </div>
                 <hr/>
                 <div class="form-group">
@@ -139,12 +139,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <small>
                         &nbsp;&nbsp;Restrict access to an external or internal IP address.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?>&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
                     </small>
-                    <input class="form-control count-text" name="site_iprange" maxlength="20" value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0." data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top">
+                    <input type="text" class="form-control count-text" name="site_iprange" maxlength="20" value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0." data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top">
                 </div>
                 <hr/>
                 <div class="form-group">
                     <label>Web Site Analytics</label>
-                    <input class="form-control count-text" name="site_analytics" maxlength="20" value="<?php echo $rowConfig['analytics']; ?>" placeholder="UA-XXXXXX-Y">
+                    <input type="text" class="form-control count-text" name="site_analytics" maxlength="20" value="<?php echo $rowConfig['analytics']; ?>" placeholder="UA-XXXXXX-Y">
                 </div>
                 <div class="form-group" id="sitemap_builder">
                     <button type="button" data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder">

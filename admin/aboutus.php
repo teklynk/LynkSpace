@@ -105,7 +105,7 @@ if ($_GET['update'] == 'true') {
             ?>
             <div class="form-group">
                 <label>Heading</label>
-                <input class="form-control count-text" name="about_heading" maxlength="255" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" autofocus required>
+                <input type="text" class="form-control count-text" name="about_heading" maxlength="255" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" autofocus required>
             </div>
             <hr/>
             <div class="form-group">

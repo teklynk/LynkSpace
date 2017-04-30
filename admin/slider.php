@@ -432,7 +432,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         echo "<tr>
             <td class='col-xs-1'>
-            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3'>
+            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3' required>
             </td>
 			<td>
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
@@ -451,12 +451,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."'>
+            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."'>
+            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>

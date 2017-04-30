@@ -147,7 +147,7 @@ if ($_GET['preview'] > "") {
                     <hr/>
                     <div class="form-group">
                         <label><?php echo $pageLabel; ?></label>
-                        <input class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
+                        <input type="text" class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
                     </div>
                     <hr/>
                     <div class="form-group">
@@ -280,7 +280,7 @@ if ($_GET['preview'] > "") {
                     <form name="pageForm" class="dirtyForm" method="post" action="">
                         <div class="form-group">
                             <label>Heading</label>
-                            <input class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" autofocus required>
+                            <input type="text" class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" autofocus required>
                         </div>
                         <hr/>
                         <table class="table table-bordered table-hover table-striped dataTable" id="dataTable">

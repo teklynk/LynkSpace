@@ -1078,7 +1078,7 @@ function getUrlContents($getUrl) {
 //Call - getSetup is used everywhere
 getSetup();
 
-//Random string generator
+//Random string generator - used to create a unique md5 referrer
 function generateRandomString($length = 10){
     global $randomString;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -1089,7 +1089,7 @@ function generateRandomString($length = 10){
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
 
-    return $randomString;
+    return md5($randomString);
 }
 
 //Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database

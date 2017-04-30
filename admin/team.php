@@ -158,11 +158,11 @@ if ($_GET['preview'] > "") {
                 <hr/>
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" autofocus required>
+                    <input type="text" class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
-                    <input class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
+                    <input type="text" class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
@@ -286,7 +286,7 @@ if ($_GET['preview'] > "") {
                 <form role="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>
+                        <input type="text" class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
@@ -322,7 +322,7 @@ if ($_GET['preview'] > "") {
 
                             echo "<tr>
                         <td class='col-xs-1'>
-                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3'>
+                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3' required>
                         </td>
                         <td>
                         <a href='team.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a>

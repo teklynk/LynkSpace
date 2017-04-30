@@ -181,8 +181,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group" id="site_options">
-                                <button type="button" class="delete_location btn btn-primary" name="site_options"
-                                        onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                     <i class='fa fa-fw fa-edit'></i> Site Options
                                 </button>
                                 <small>
@@ -199,13 +198,11 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group" id="site_options">
-                                        <button type="button" class="delete_location btn btn-primary" name="site_options"
-                                                onclick="window.location='import.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                        <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='import.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                             <i class='fa fa-fw fa-upload'></i> Import CSV
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i
-                                                class="fa fa-question-circle-o"></i>
+                                            &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i class="fa fa-question-circle-o"></i>
                                         </small>
                                     </div>
                                 </div>
@@ -237,7 +234,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group" id="delete_location">
-                                <button type="button" data-toggle="tooltip" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                <button type="button" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
                                     <i class='fa fa-fw fa-trash'></i> Delete this Location
                                 </button>
                                 <small>
@@ -280,15 +277,15 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
 
             <div class="form-group">
                 <label>Site Title</label>
-                <input class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
+                <input type="text" class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
             </div>
             <div class="form-group">
                 <label>Author</label>
-                <input class="form-control count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
+                <input type="text" class="form-control count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
             </div>
             <div class="form-group">
                 <label>Keywords</label>
-                <textarea class="form-control count-text" name="site_keywords" rows="3" maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
+                <textarea type="text" class="form-control count-text" name="site_keywords" rows="3" maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
             </div>
             <div class="form-group">
                 <label>Description</label>
@@ -300,7 +297,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label>Location Name</label>
-                        <input class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
+                        <input type="text" class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
                     </div>
                 </div>
             </div>
@@ -356,7 +353,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>PAC Config</label>
-                        <input class="form-control count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+                        <input type="text" class="form-control count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
                     </div>
                 </div>
             </div>

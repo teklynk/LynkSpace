@@ -43,13 +43,9 @@ $custArrlength = count($custSections);
 for ($x = 0; $x < $custArrlength; $x++) {
 
     if ($custSections[$x] == $_GET['section']) {
-
         $isSectionSelected = "SELECTED";
-
     } else {
-
         $isSectionSelected = "";
-
     }
 
     $custMenuStr .= "<option value=" . $custSections[$x] . " " . $isSectionSelected . ">" . $custSections[$x] . "</option>";
@@ -446,8 +442,8 @@ if ($_GET['section'] == $custSections[0]) {
                 echo $addMsg;
             }
             ?>
-            <!--modal preview window-->
 
+            <!--modal preview window-->
             <style>
                 #webpageDialog iframe {
                     width: 100%;
@@ -512,7 +508,7 @@ if ($_GET['section'] == $custSections[0]) {
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="cust_newcatsort">Sort Order</label>
-                                    <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3">
+                                    <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3" required>
                                 </div>
                             </div>
                             <div class="col-lg-10">
@@ -568,7 +564,6 @@ if ($_GET['section'] == $custSections[0]) {
                 if ($customerMsg != "") {
                     echo $customerMsg;
                 }
-
                 ?>
                 <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
@@ -619,7 +614,7 @@ if ($_GET['section'] == $custSections[0]) {
 
                             echo "<tr>
                         <td class='col-xs-1'>
-                        <input class='form-control' name='cust_sort[]' value='" . $customerSort . "' type='text' maxlength='3'>
+                        <input class='form-control' name='cust_sort[]' value='" . $customerSort . "' type='text' maxlength='3' required>
                         </td>
 						<td>
 						<input type='hidden' name='cust_id[]' value='" . $customerId . "' >

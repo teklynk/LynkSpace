@@ -87,7 +87,7 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group">
                     <label>Heading</label>
-                    <input class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
+                    <input type="text" class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Intro Text</label>
@@ -100,19 +100,19 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Street Address</label>
-                    <input class="form-control count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
+                    <input type="text" class="form-control count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
                 </div>
                 <div class="form-group">
                     <label>City</label>
-                    <input class="form-control count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
+                    <input type="text" class="form-control count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
                 </div>
                 <div class="form-group">
                     <label>State</label>
-                    <input class="form-control count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
+                    <input type="text" class="form-control count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
                 </div>
                 <div class="form-group">
                     <label>ZIP Code</label>
-                    <input class="form-control count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
+                    <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
