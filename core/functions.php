@@ -843,7 +843,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
     echo "<div class='owl-carousel owl-theme'>";
         if (strstr($xmlurl, '/econtent/')) {
-            //Content server XML Lists
+            //Content server XML Lists - NYTimes
 
             //Gets the RSS Feed title
             $xmlrssname = "NY Times Best Sellers";
@@ -858,7 +858,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 //get ISBN node for each book
                 $xmlisbn = (string)$xmlitem->ISBN;
 
-                //https://ls2content.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
+                //https://ls2content2.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
                 $xmlimage = "https://ls2content$loadBalancer.tlcdelivers.com/tlccontent?customerid=$customerId&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
 
                 //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
@@ -1034,7 +1034,7 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
     global $siteSearchContent;
     global $siteSearchCount;
 
-    $siteSearchTerm = "%".mysqli_real_escape_string($db_conn, strip_tags($searchTerm))."%";
+    $siteSearchTerm = "%".mysqli_real_escape_string($db_conn, strip_tags(trim($searchTerm)))."%";
     $siteSearchCount = 0;
 
     $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC ");
@@ -1164,15 +1164,5 @@ if (!empty($_GET['loc_name'])){
 
     header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "");
     echo "<script>window.location.href='" . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id'] . "';</script>";
-}
-
-//Web site search box redirect to page id where site_search = querystring
-if (!empty($_GET['site_search'])){
-
-    $sqlPageName = mysqli_query($db_conn, "SELECT title, id, loc_id, active FROM pages WHERE active='true' AND title='" . $_GET['site_search'] . "' LIMIT 1");
-    $rowPageName = mysqli_fetch_array($sqlPageName);
-
-    header("Location: page.php?page_id=" . $rowPageName['id'] . "&loc_id=" . $rowPageName['loc_id'] . "");
-    echo "<script>window.location.href='page.php?page_id=" . $rowPageName['id'] . "&loc_id=" . $rowPageName['loc_id'] . "';</script>";
 }
 ?>

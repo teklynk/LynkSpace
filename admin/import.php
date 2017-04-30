@@ -137,7 +137,7 @@ if ($_POST['save_main']) {
                     $dom->loadHTML($html);
                     $dom->preserveWhiteSpace = false;
 
-                    //YSM 6.x containers
+                    //YSM 6.x html containers
                     if ($dom->getElementById('maincontent')) {
                         $extracted_contents = $dom->getElementById('maincontent');
                     } elseif ($dom->getElementById('maincontentwithnav')) {
