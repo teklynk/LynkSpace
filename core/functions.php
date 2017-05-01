@@ -848,6 +848,8 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
             //Gets the RSS Feed title
             $xmlrssname = "NY Times Best Sellers";
 
+            $jacketSize = strtoupper($jacketSize);
+
             foreach ($xmlfeed->Book as $xmlitem) {
 
                 $itemcount++;
@@ -1003,6 +1005,7 @@ function getHottitlesTabs(){
     }
 
     $hottitlesCount = 0;
+
     while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
 
         $hottitlesSort = trim($rowHottitles['sort']);
