@@ -811,22 +811,22 @@ function getFeatured(){
 }
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
-    //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', true, 30);
+    //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
     global $customerId;
     global $setupPACURL;
 
     $ch = curl_init();
     $timeout = 20;
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
     $xmldata = curl_exec($ch); // execute curl request
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     //catch and print error message
     if ($http_status != 200 || curl_errno($ch) > 0) {
-        echo "HTTP status: ".$http_status.". Error loading URL. " .curl_error($ch);
+        echo "HTTP status: ".$http_status.". Error loading URL. " .curl_error($ch) . PHP_EOL;
+        echo "Could not read " . $xmlurl . PHP_EOL;
         curl_close($ch);
         die();
     }
@@ -877,7 +877,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
                     echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
                 } else {
-                    if ($dummyJackets == true) {
+                    if ($dummyJackets == 'true') {
                         //TLC dummy book jacket img
                         echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
                     }
