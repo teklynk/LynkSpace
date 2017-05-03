@@ -491,7 +491,8 @@ echo "</div>
                 startView: "month",
                 startDate: Date(),
                 todayHighlight: true,
-                autoclose: true
+                autoclose: true,
+                forceParse: false
             });
         });
     </script>

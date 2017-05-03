@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
 
         mysqli_close($db_conn);
 
-        die('Services Defaults ' . $hottitlesDefaultsID . ' set ' . $hottitlesDefaultsChecked);
+        die('Hot Titles Defaults ' . $hottitlesDefaultsID . ' set ' . $hottitlesDefaultsChecked);
     }
 
 } else {
