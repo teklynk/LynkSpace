@@ -815,25 +815,58 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     global $customerId;
     global $setupPACURL;
 
-    $ch = curl_init();
-    $timeout = 20;
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-    curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
-    $xmldata = curl_exec($ch); // execute curl request
-    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $jacketSize = strtoupper($jacketSize);
 
-    //catch and print error message
-    if ($http_status != 200 || curl_errno($ch) > 0) {
-        echo "HTTP status: ".$http_status.". Error loading URL. " .curl_error($ch) . PHP_EOL;
-        echo "Could not read " . $xmlurl . PHP_EOL;
+    $checkUrl = 'https://ls2content.tlcdelivers.com/tlccontent?customerid='.$customerId.'&appid=ls2pac&requesttype=BOOKJACKET-SM&isbn=123456789';
+
+    //Check if customerid is set up on the content server
+    if (!empty($customerId)) {
+
+        $ch = curl_init($checkUrl);
+        curl_setopt($ch,  CURLOPT_RETURNTRANSFER, TRUE);
+        $response = curl_exec($ch);
+        //Check for 404 (file not found) OR 403 (access denied)
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($http_status != 200 || curl_errno($ch) > 0) {
+            echo "HTTP status: " . $http_status . ". Error loading URL. " . curl_errno($ch) . "." . PHP_EOL;
+            echo "Not a valid Customer ID " . $customerId . "." . PHP_EOL;
+            curl_close($ch);
+            die();
+        }
+
         curl_close($ch);
-        die();
+
+    } else {
+
+        die('URL not found or parameters are not correct.');
     }
 
-    curl_close($ch);
+    if (!empty($xmlurl)) {
+        $ch = curl_init();
+        $timeout = 20;
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_URL, $xmlurl);    // get the url contents
+        $xmldata = curl_exec($ch); // execute curl request
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    $xmlfeed = simplexml_load_string($xmldata);
+        //catch and print error message
+        if ($http_status != 200 || curl_errno($ch) > 0) {
+            echo "HTTP status: " . $http_status . ". Error loading URL. " . curl_errno($ch) . PHP_EOL;
+            echo "Could not read " . $xmlurl . "." . PHP_EOL;
+            curl_close($ch);
+            die();
+        }
+
+        curl_close($ch);
+
+        $xmlfeed = simplexml_load_string($xmldata);
+
+    } else {
+
+        die('URL not found or parameters are not correct.');
+    }
 
     $itemcount = 0;
 
@@ -841,14 +874,14 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     $loadBalancerArr = array(NULL, 2, 3, 4);
     $loadBalancer = $loadBalancerArr[array_rand($loadBalancerArr)];
 
+    //Set a maximum maxcnt
+    if ($maxcnt >= 50) {
+        $maxcnt = 50;
+    }
+
     echo "<div class='owl-carousel owl-theme'>";
         if (strstr($xmlurl, '/econtent/')) {
             //Content server XML Lists - NYTimes
-
-            //Gets the RSS Feed title
-            $xmlrssname = "NY Times Best Sellers";
-
-            $jacketSize = strtoupper($jacketSize);
 
             foreach ($xmlfeed->Book as $xmlitem) {
 
@@ -879,7 +912,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 } else {
                     if ($dummyJackets == 'true') {
                         //TLC dummy book jacket img
-                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-md.png'></a>";
+                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-".strtolower($jacketSize).".png'></a>";
                     }
                 }
 
@@ -892,10 +925,6 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
             }
         } elseif (strstr($xmlurl, '/list/')) {
             //LS2PAC Saved Search XML Lists
-
-            //Gets the RSS Feed title
-            $xmlrssname = $xmlfeed->channel->title;
-            $xmlrssname = trim(str_replace('LS2 PAC:', '', $xmlrssname));
 
             foreach ($xmlfeed->channel->item as $xmlitem) {
 

@@ -45,8 +45,8 @@ if ($hottitlesCount > 0) {
                         </div>
                     </div>
 
-                    <div class="carousel slide" id="hottitlesCarousel">
-                        <div class="carousel-inner"></div>
+                    <div class="carousel slide loader-size-MD" id="hottitlesCarousel">
+                        <div class="carousel-inner MD"></div>
                     </div>
 
                 </div>

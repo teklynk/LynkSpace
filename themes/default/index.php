@@ -46,9 +46,9 @@ if ($hottitlesCount > 0) {
 
 
     //Main Carousel
-    echo "<div class='carousel slide' id='hottitlesCarousel'>";
+    echo "<div class='carousel slide loader-size-MD' id='hottitlesCarousel'>";
 
-    echo "<div class='carousel-inner'></div>"; //appends hot titles carousel to this div
+    echo "<div class='carousel-inner MD'></div>"; //appends hot titles carousel to this div
 
     echo "</div>"; //.carousel
 
