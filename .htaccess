@@ -3,8 +3,8 @@ php_flag display_startup_errors off
 php_flag display_errors off
 php_flag html_errors off
 php_flag log_errors on
-php_flag ignore_repeated_errors off
-php_flag ignore_repeated_source off
+php_flag ignore_repeated_errors on
+php_flag ignore_repeated_source on
 php_flag report_memleaks on
 php_flag track_errors on
 php_flag file_uploads 1
@@ -23,10 +23,6 @@ php_value log_errors_max_len 0
 Options +FollowSymLinks
 
 RewriteEngine On
-
-#Redirect http to https
-#RewriteCond %{HTTPS} !on
-#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
