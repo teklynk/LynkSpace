@@ -39,7 +39,6 @@ function getLocList(){
 
 function getPageList(){
     global $pageListJson;
-    global $pageTagsJson;
     global $db_conn;
 
     $sqlGetPageList = mysqli_query($db_conn, "SELECT title, active FROM pages WHERE active='true'");

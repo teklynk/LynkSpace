@@ -18,8 +18,11 @@ if (!defined('inc_access')) {
             <li>
                 <a href="#" target="_blank">Feedback</a>
             </li>
+            <li>
+                <a href="#" target="_blank">Help</a>
+            </li>
         </ul>
-        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="http://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
+        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="https://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
     </div>
 </footer>
 </div>
