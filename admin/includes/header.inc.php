@@ -26,6 +26,7 @@ session_start();
             }
         }
     }
+
     ?>
     <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>; URL=index.php?logout=true"/>
     <meta charset="utf-8">
@@ -231,51 +232,53 @@ session_start();
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="admin-sidenav">
             <ul class="nav navbar-nav side-nav">
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'setup.php'){echo "class='active'";}?>>
                     <a href="setup.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-cog" title="Settings"></i> Settings</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'featured.php'){echo "class='active'";}?>>
                     <a href="featured.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-magic" title="Feature"></i> Feature</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'slider.php'){echo "class='active'";}?>>
                     <a href="slider.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-picture-o" title="Image Slider"></i> Image Slider</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'navigation.php'){echo "class='active'";}?>>
                     <a href="navigation.php?section=<?php echo $navSections[0] . "&" . $setLocId; ?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'page.php'){echo "class='active'";}?>>
                     <a href="page.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-file-text" title="Pages"></i> Pages</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'aboutus.php'){echo "class='active'";}?>>
                     <a href="aboutus.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-building" title="About Us"></i> About</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'contactus.php'){echo "class='active'";}?>>
                     <a href="contactus.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-map-marker" title="Contact Us"></i> Contact</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'socialmedia.php'){echo "class='active'";}?>>
                     <a href="socialmedia.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-share-square" title="Social Media"></i> Social Media</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'services.php'){echo "class='active'";}?>>
                     <a href="services.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-list-alt" title="Services"></i> Services</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'team.php'){echo "class='active'";}?>>
                     <a href="team.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-address-card" title="Team"></i> Team</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'hottitles.php'){echo "class='active'";}?>>
                     <a href="hottitles.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-fire" title="Hot Titles"></i> Hot Titles</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'databases.php'){echo "class='active'";}?>>
                     <a href="databases.php?section=<?php echo $custSections[0] . "&" . $setLocId; ?>"><i class="fa fa-fw fa-link" title="Databases"></i> Databases</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'generalinfo.php'){echo "class='active'";}?>>
                     <a href="generalinfo.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-info-circle" title="General Info"></i> General Info</a>
                 </li>
-                <li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'uploads.php'){echo "class='active'";}?>>
                     <a href="uploads.php?<?php echo $setLocId; ?>"><i class="fa fa-fw fa-upload" title="Uploads"></i> Uploads</a>
                 </li>
                 <?php
                 if ($_SESSION['user_level'] == 1) {
-                    echo "<li>";
+                    echo "<li ";
+                        if (basename($_SERVER['PHP_SELF']) == 'usermanager.php'){echo "class='active'";}
+                    echo  " >";
                     echo "<a href='usermanager.php?".$setLocId."'><i class='fa fa-fw fa-users' title='User Manager'></i> User Manager</a>";
                     echo "</li>";
                 }
