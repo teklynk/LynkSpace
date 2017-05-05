@@ -565,8 +565,8 @@ $(document).ready(function () {
             $('.slider_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
-    $('.databases_defaults_checkbox_1').change(function () {
-        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=1', {
+    $('.databases_defaults_checkbox').change(function () {
+        $.get('ajax/update_databasesdefaults.php?update=true&section='+getUrlVars()['section'], {
             id: this.id,
             checked: this.checked
         });

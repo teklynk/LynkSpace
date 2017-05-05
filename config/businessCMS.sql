@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2017 at 08:46 PM
+-- Generation Time: May 04, 2017 at 11:42 PM
 -- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
 -- PHP Version: 5.6.30-10+deb.sury.org~trusty+2
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `aboutus` (
 --
 
 INSERT INTO `aboutus` (`id`, `heading`, `content`, `image`, `image_align`, `use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 1),
+(1, 'About Us', '', '', 'right', 'false', '2017-04-30 03:05:38', 'admin', 1),
 (2, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 2),
 (3, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 3),
 (4, 'About Us', '', '', '', 'true', '0000-00-00 00:00:00', 'admin_script', 4),
@@ -592,14 +592,13 @@ CREATE TABLE IF NOT EXISTS `category_customers` (
   `author_name` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `category_customers_loc_id_fk` (`cust_loc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `category_customers`
 --
 
 INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `sort`, `datetime`, `author_name`) VALUES
-(0, 'None', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
 (2, 'Databases', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
 (4, 'Other Resources', '1', 1, 0, '2017-01-19 17:15:38', 'admin'),
 (6, 'African-American Resources', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
@@ -615,7 +614,8 @@ INSERT INTO `category_customers` (`id`, `name`, `section`, `cust_loc_id`, `sort`
 (16, 'Science', '2', 1, 0, '2017-01-19 17:15:38', 'admin'),
 (17, 'Social Science', '2', 1, 0, '2017-03-06 21:39:56', 'admin'),
 (18, 'SOAR Links', '3', 1, 1, '2017-03-06 21:41:14', 'jhorning'),
-(19, 'Other Links', '3', 1, 2, '2017-03-06 21:41:18', 'jhorning');
+(19, 'Other Links', '3', 1, 2, '2017-03-06 21:41:18', 'jhorning'),
+(20, 'test', '1', 285, 1, '2017-05-05 00:31:03', 'admin');
 
 -- --------------------------------------------------------
 
@@ -676,7 +676,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 --
 
 INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '920253', 'default', '', 'true', 'ES, MS, HS, Other', 'https://www.cps.edu', 'http://pac.library.cps.edu', 3600, '5000', '', '2017-04-25 14:51:35', 'admin');
+(1, '920253', 'default', '', 'true', 'ES,MS,HS,Other', 'https://www.cps.edu', 'http://pac.library.cps.edu', 3600, '5000', '', '2017-04-30 04:53:42', 'admin');
 
 -- --------------------------------------------------------
 
@@ -1272,24 +1272,24 @@ CREATE TABLE IF NOT EXISTS `customers` (
 --
 
 INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `catid`, `section`, `featured`, `active`, `sort`, `datetime`, `author_name`, `loc_id`) VALUES
-(4, 'cps_itke_icon.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 3, '2017-01-19 18:33:43', 'jhorning', 1),
-(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en EspaÃ±ol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', 5, '2017-01-19 18:33:23', 'jhorning', 1),
-(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 4, '2017-01-19 18:33:30', 'jhorning', 1),
-(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 9, '2017-01-19 18:33:05', 'jhorning', 1),
-(8, 'cps_sric_icon.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 1, '2017-01-20 20:10:11', 'jhorning', 1),
-(14, 'cps_ric_icon.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 2, '2017-01-19 18:33:54', 'jhorning', 1),
-(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 7, '2017-01-19 18:32:51', 'jhorning', 1),
-(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 8, '2017-01-19 18:32:46', 'jhorning', 1),
-(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(22, '', 'simplybuilt', 'The History Makers', 'http://www.thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'jhorning', 1),
-(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', 2, '2017-01-20 20:12:46', 'jhorning', 1),
-(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', 1, '2017-01-20 20:12:56', 'jhorning', 1),
-(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', 3, '2017-01-20 20:12:41', 'jhorning', 1),
+(4, 'cps_itke_icon.png', '', 'Kids InfoBits', 'http://infotrac.galegroup.com/itweb/cps?db=ITKE', 'For K-5 students. Features a visually graphic interface, a topic tree search and age-appropriate, curriculum-related magazine, newspaper and reference content.', 2, '1', 'false', 'true', 3, '2017-01-19 18:33:43', 'admin', 1),
+(5, 'BritannicaSpanishRef_Icon_150x150.gif', '', 'Encyclopedia Universal en EspaÃ±ol', 'http://www.spanish.eb.com/', 'Our subscription includes Britannica''s Spanish language version.', 2, '1', 'false', 'true', 5, '2017-01-19 18:33:23', 'admin', 1),
+(6, 'BritannicaSchool_Icon_150x150.gif', '', 'Britannica', 'http://school.eb.com/', 'In addition to millions of articles on as many topics, this online encyclopedia includes Internet links, journal and magazine articles, teacher resources, timelines, dictionary and atlas resources. Select the appropriate grade level.', 2, '1', 'false', 'true', 4, '2017-01-19 18:33:30', 'admin', 1),
+(7, 'icon_worldcat.png', '', 'First Search', 'http://firstsearch.oclc.org/', 'Professional and educational magazine and journal articles. Includes ERIC , WorldCat , Article-First , and others.', 2, '1', 'false', 'true', 9, '2017-01-19 18:33:05', 'admin', 1),
+(8, 'cps_sric_icon.png', '', 'Student Resources', 'http://infotrac.galegroup.com/itweb/cps?db=SUIC', 'A fully integrated database for high school containing thousands of curriculum-targeted primary documents, biographies, essays, critical analyses, full-text coverage of over 1,000 magazines, newspapers, photographs, illustrations, and audio.', 2, '1', 'false', 'true', 1, '2017-01-20 20:10:11', 'admin', 1),
+(14, 'cps_ric_icon.png', '', 'Research in Context', 'http://infotrac.galegroup.com/itweb/cps?db=MSIC', 'Access continuously updated reference content with full-text magazines, academic journals, news articles, primary source documents, images, videos, audio files and links to vetted websites organized in a user friendly website.', 2, '1', 'false', 'true', 2, '2017-01-19 18:33:54', 'admin', 1),
+(15, 'tblogo-circle-blue-2x.png', '', 'TeachingBooks', 'http://teachingbooks.net/home/', 'Provides original, in-studio movies of authors and illustrators and a wealth of multimedia resources on K-12 books that generate enthusiasm for books and reading.', 2, '1', 'false', 'true', 7, '2017-01-19 18:32:51', 'admin', 1),
+(16, 'flipster_icon_1.png', '', 'Flipster', 'http://search.ebscohost.com/login.aspx?authtype=uid&amp;profile=eon', 'Access Cricket Media magazine titles via the EBSCO Flipster Carousal. Click on the login information link above for the user ID and password information. This is a one-year donation that expires June 30, 2017.', 2, '1', 'false', 'true', 8, '2017-01-19 18:32:46', 'admin', 1),
+(17, 'safari_icon_1.png', '', 'Safari Montage', 'http://safari.cps.k12.il.us/', 'View curriculum and standards-focused educational videos from leading publishers.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(18, '', 'book', 'Encyclopedia of Chicago', 'http://encyclopedia.chicagohistory.org/', 'Free, comprehensive reference source of Chicago history.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(19, 'cpl.png', '', 'CPL', 'http://www.chipublib.org/', 'Provides subscriber access to over 30 databases for children and adults, including JuniorQuest Magazines; ProQuest Newspapers; SIRS Discoverer; Spanish-language databases; and WorldBook.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(20, '', 'laptop', 'eCUIP Digital Library', 'http://ecuip.lib.uchicago.edu/', 'Reference and reading materials specially created in support of the CPS curriculum for teachers and students.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(21, 'PBS_logo_icon.jpg', '', 'PBS Learning Media', 'http://illinois.pbslearningmedia.org/help/Tools-FAQ/', 'The PBS Learning Media site will help you navigate your students through the various resources developed by PBS &amp; WGBH Educational Foundation. Teachers can create their own learning pathways, complete with quizzes and storyboards.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(22, '', 'simplybuilt', 'The History Makers', 'http://www.thehistorymakers.com/', 'Free online source for African American biographies, history, timelines, events.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(23, 'library_of_congress_icon_1.png', '', 'Library of Congress', 'http://www.loc.gov/', 'Free online resource for American history. Digital collection includes more than 8 million primary source materials, including historic maps, documents, audio and video.', 4, '1', 'false', 'true', 0, '2017-01-19 18:31:49', 'admin', 1),
+(24, '', 'wpexplorer', 'Recommended Websites', 'databases.php?section=2&amp;loc_id=[loc_id]', '', 0, '1', 'true', 'true', 2, '2017-01-20 20:12:46', 'admin', 1),
+(25, '', 'paper-plane-o', 'Databases', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=2', '', 0, '1', 'true', 'true', 1, '2017-01-20 20:12:56', 'admin', 1),
+(26, '', 'anchor', 'Other Resources', 'databases.php?loc_id=[loc_id]&amp;section=1&amp;cat_id=4', '', 0, '1', 'true', 'true', 3, '2017-01-20 20:12:41', 'admin', 1),
 (32, '', 'link', 'San Francisco Symphony', 'http://www.sfskids.org/', '', 7, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (33, '', 'link', 'Chicago Public Library A-Z Resources for Kids!', 'http://www.chipublib.org/kids-subject/kids-dbs-a-to-z/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
 (34, '', 'link', 'Daily Infographic', 'http://dailyinfographic.com/', '', 12, '2', 'false', 'true', 0, '2017-01-19 17:16:10', 'admin', 1),
@@ -1380,13 +1380,13 @@ INSERT INTO `customers` (`id`, `image`, `icon`, `name`, `link`, `content`, `cati
 (119, '', 'link', 'International Children''s Digital Library', 'http://en.childrenslibrary.org/', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:10:25', 'admin', 1),
 (120, '', 'link', 'Bookshare', 'https://www.bookshare.org/cms', '', 12, '2', 'false', 'true', 0, '2017-01-26 14:11:56', 'admin', 1),
 (121, '', 'link', 'Commission on Presidential Debates', 'http://debates.org/index.php?page=debate-history', '', 17, '2', 'false', 'true', 0, '2017-02-13 19:11:34', 'admin', 1),
-(122, '', 'link', 'LS2 Staff', 'https://circ.library.cps.edu', '', 18, '3', 'false', 'true', 1, '2017-02-27 21:14:32', 'jhorning', 1),
-(123, '', 'link', 'LS2 Reports', 'https://reports.library.cps.edu', '', 18, '3', 'false', 'true', 2, '2017-02-27 21:15:00', 'jhorning', 1),
-(124, '', 'link', 'Real Time Inventory', 'https://library.cps.edu/rti/', '', 18, '3', 'false', 'true', 3, '2017-02-27 21:15:32', 'jhorning', 1),
-(125, '', 'users', 'SOAR Wiki', 'http://cpssoar.wikispaces.com', '', 18, '3', 'false', 'true', 4, '2017-02-27 21:16:49', 'jhorning', 1),
-(126, '', 'link', 'CPS Libraries Wiki', 'http://cpslibraries.wikispaces.com/', '', 19, '3', 'false', 'true', 5, '2017-02-27 21:19:55', 'jhorning', 1),
-(127, '', 'laptop', 'Tech Training', 'https://sites.google.com/site/cpsmobilary/', '', 19, '3', 'false', 'true', 6, '2017-02-27 21:20:53', 'jhorning', 1),
-(128, 'nytimes.gif', '', 'New York Times', 'http://www.nytimes.com', 'Access online editions of the New York Times newspaper from any device within the CPS network. No user registration or login is required. Also access archive editions from 1851 to present with some exceptions.', 2, '1', 'false', 'true', 6, '2017-03-20 18:50:51', 'jhorning', 1);
+(122, '', 'link', 'LS2 Staff', 'https://circ.library.cps.edu', '', 18, '3', 'false', 'true', 1, '2017-02-27 21:14:32', 'admin', 1),
+(123, '', 'link', 'LS2 Reports', 'https://reports.library.cps.edu', '', 18, '3', 'false', 'true', 2, '2017-02-27 21:15:00', 'admin', 1),
+(124, '', 'link', 'Real Time Inventory', 'https://library.cps.edu/rti/', '', 18, '3', 'false', 'true', 3, '2017-02-27 21:15:32', 'admin', 1),
+(125, '', 'users', 'SOAR Wiki', 'http://cpssoar.wikispaces.com', '', 18, '3', 'false', 'true', 4, '2017-02-27 21:16:49', 'admin', 1),
+(126, '', 'link', 'CPS Libraries Wiki', 'http://cpslibraries.wikispaces.com/', '', 19, '3', 'false', 'true', 5, '2017-02-27 21:19:55', 'admin', 1),
+(127, '', 'laptop', 'Tech Training', 'https://sites.google.com/site/cpsmobilary/', '', 19, '3', 'false', 'true', 6, '2017-02-27 21:20:53', 'admin', 1),
+(128, 'nytimes.gif', '', 'New York Times', 'http://www.nytimes.com', 'Access online editions of the New York Times newspaper from any device within the CPS network. No user registration or login is required. Also access archive editions from 1851 to present with some exceptions.', 2, '1', 'false', 'true', 6, '2017-03-20 18:50:51', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -2524,12 +2524,12 @@ CREATE TABLE IF NOT EXISTS `hottitles` (
 --
 
 INSERT INTO `hottitles` (`id`, `title`, `url`, `loc_type`, `sort`, `active`, `datetime`, `loc_id`) VALUES
-(1, 'New York Times', 'https://content.tlcdelivers.com/econtent/xml/NYTimes.xml', 'All', 1, 'false', '2017-04-25 15:32:27', 1),
-(2, 'Auditory Processing', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921425/rss', 'All', 2, 'false', '2017-04-25 15:26:42', 1),
-(5, 'Autism', 'http://beacon.tlcdelivers.com:8080/list/dynamic/133470319/rss', 'All', 3, 'false', '2017-04-25 15:26:43', 1),
-(6, 'Dyscalculia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss', 'All', 4, 'false', '2017-04-25 15:26:43', 1),
-(7, 'Dysgraphia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921421/rss', 'All', 5, 'false', '2017-04-25 15:26:43', 1),
-(8, 'Dyslexia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/200144044/rss', 'All', 6, 'false', '2017-04-25 15:26:43', 1);
+(1, 'New York Times', 'https://content.tlcdelivers.com/econtent/xml/NYTimes.xml', 'All', 1, 'true', '2017-04-30 03:50:19', 1),
+(2, 'Auditory Processing', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921425/rss', 'All', 2, 'false', '2017-04-30 03:48:09', 1),
+(5, 'Autism', 'http://beacon.tlcdelivers.com:8080/list/dynamic/133470319/rss', 'All', 3, 'false', '2017-04-30 03:48:09', 1),
+(6, 'Dyscalculia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss', 'All', 4, 'false', '2017-04-30 03:48:09', 1),
+(7, 'Dysgraphia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/1921421/rss', 'All', 5, 'true', '2017-04-30 03:48:09', 1),
+(8, 'Dyslexia', 'http://beacon.tlcdelivers.com:8080/list/dynamic/200144044/rss', 'All', 6, 'true', '2017-04-30 03:48:09', 1);
 
 -- --------------------------------------------------------
 
@@ -3788,6 +3788,36 @@ INSERT INTO `pages` (`id`, `title`, `image`, `content`, `active`, `datetime`, `a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sections_customers`
+--
+
+CREATE TABLE IF NOT EXISTS `sections_customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `heading` text NOT NULL,
+  `content` text NOT NULL,
+  `section` text NOT NULL,
+  `use_defaults` text NOT NULL,
+  `author_name` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `sections_customers`
+--
+
+INSERT INTO `sections_customers` (`id`, `heading`, `content`, `section`, `use_defaults`, `author_name`, `datetime`, `loc_id`) VALUES
+(1, 'Resources', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃƒÂ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', '1', 'true', 'admin', '2017-05-05 02:45:42', 1),
+(2, 'Recommended Websites', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '2', 'true', 'admin', '2017-05-05 02:46:18', 1),
+(3, 'Librarian Links', '', '3', 'true', 'admin', '2017-05-05 02:46:45', 1),
+(4, 'test', 'teatataetse', '4', 'true', 'admin', '2017-05-05 02:19:24', 230),
+(5, '', '', '1', 'false', 'admin', '2017-05-05 02:32:14', 230),
+(6, 'test5', 'test', '5', 'false', 'admin', '2017-05-05 02:55:04', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -3859,7 +3889,7 @@ CREATE TABLE IF NOT EXISTS `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', '', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-04-25 15:57:48', 'jhorning', 1),
+(1, 'Chicago Public Schools', '', '', 'ysm', 'cpslogo@2x.png', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', '', 'Access the <a href="http://bit.ly/2kDlkeP" target="_blank">database login information</a> with your CPS login. (<a href="http://bit.ly/2kIZBV7" target="_blank">en EspaÃ±ol</a>). Charter schools: Contact <a href="mailto:library@cps.edu?subject=Request Login Information">library@cps.edu</a> for login information.', 'Submit Explore! Links to <a target="_blank" href="http://bit.ly/explore_submission">http://bit.ly/explore_submission</a>.  Please share the very best free web resources available for our students and teachers to explore.', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-04-30 03:48:09', 'jhorning', 1),
 (2, 'Jane A Neil Elementary School', '', '', '5060', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 2),
 (3, 'William P Gray Elementary School', '', '', '3620', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 3),
 (4, 'Edwin G Foreman High School', '', '', '1330', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 4),
@@ -4122,7 +4152,7 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 (281, 'Charles R Henderson Elementary School', '', '', '3920', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 282),
 (282, 'James G Blaine Elementary School', '', '', '2300', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 283),
 (283, 'Orr Academy High School', '', '', '1830', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 284),
-(284, 'Chicago Military Academy High School', '', '', '1800', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 285),
+(284, 'Chicago Military Academy High School', '', '', '1800', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-05-05 00:30:45', 'admin', 285),
 (285, 'Woodlawn Community Elementary School', '', '', '3860', 'cpslogo@2x.png', 'true', 'true', 2, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 286),
 (286, 'Chicago Academy High School', '', '', '7770', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 287),
 (287, 'Wells Community Academy High School', '', '', '1640', 'cpslogo@2x.png', 'true', 'false', 1, '', 'Pages', 'Services', 'Slides', 'Meet the Team', '', 'Resources', '', '', '', '', '', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-03-27 15:21:28', 'admin_script', 288),
@@ -5029,12 +5059,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `level`, `datetime`, `clientip`, `loc_id`) VALUES
-(1, 'admin', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'rjones@tlcdelivers.com', 1, '2017-04-30 00:45:43', '127.0.0.1', 1),
-(3, 'kgray', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'kgray@tlcdelivers.com', 1, '2017-04-25 14:47:52', '192.168.0.45', 1),
-(4, 'eczaja', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'eczaja@tlcdelivers.com', 1, '2017-04-25 14:47:55', '192.168.3.26', 1),
-(5, 'kbageant', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'kbageant@tlcdelivers.com', 1, '2017-04-25 14:47:57', '192.168.2.55', 1),
-(8, 'jhorning', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'jhorning@tlcdelivers.com', 1, '2017-04-25 14:47:58', '98.228.83.225', 1),
-(9, 'akirkland', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'akirkland@tlcdelivers.com', 1, '2017-04-25 14:47:59', '192.168.2.105', 1),
+(1, 'admin', '20dc1af52c7aff60d4c0dc4fd136bca3f00531e6', 'rjones@tlcdelivers.com', 1, '2017-05-05 00:06:58', '127.0.0.1', 1),
 (11, 'libadmin', '5894440ae97d7eecedd92e3f263cec68233f23af', 'support@tlcdelivers.com', 1, '2017-04-26 16:46:48', '192.168.2.105', 1);
 
 --
@@ -5100,6 +5125,12 @@ ALTER TABLE `navigation`
 --
 ALTER TABLE `pages`
   ADD CONSTRAINT `pages_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sections_customers`
+--
+ALTER TABLE `sections_customers`
+  ADD CONSTRAINT `sections_customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `services`

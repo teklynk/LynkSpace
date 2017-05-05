@@ -38,52 +38,33 @@ if ($_GET['preview'] > "") {
 }
 //loop through the array of customerSections
 $custMenuStr = "";
-$custArrlength = count($custSections);
 
-for ($x = 0; $x < $custArrlength; $x++) {
+for ($custSections = 1; $custSections < 21; $custSections++) {
 
-    if ($custSections[$x] == $_GET['section']) {
+    if ($custSections == $_GET['section']) {
         $isSectionSelected = "SELECTED";
     } else {
         $isSectionSelected = "";
     }
 
-    $custMenuStr .= "<option value=" . $custSections[$x] . " " . $isSectionSelected . ">" . $custSections[$x] . "</option>";
+    $custMenuStr .= "<option value=" . $custSections . " " . $isSectionSelected . ">" . $custSections . "</option>";
 
-    $custSectionFirstItem = $custSections[0];
 }
 
 //Redirect to section=1 if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
-    header("Location: databases.php?section=" . $custSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "");
-    echo "<script>window.location.href='databases.php?section=" . $custSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
+    header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "");
+    echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
+
 //check if using default location
-$sqlSetup = mysqli_query($db_conn, "SELECT customersheading_1, customersheading_2, customersheading_3, customerscontent_1, customerscontent_2, customerscontent_3, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSetup = mysqli_fetch_array($sqlSetup);
+$sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . " ");
+$rowSections = mysqli_fetch_array($sqlSections);
 
 //set Default toggle depending on which section you are on
-if ($_GET['section'] == $custSections[0]) {
-    $custSubSection = "1";
+if ($_GET['section'] == $rowSections['section']) {
     //use default view
-    if ($rowSetup['databases_use_defaults_1'] == 'true') {
-        $selDefaults = "CHECKED";
-    } else {
-        $selDefaults = "";
-    }
-} elseif ($_GET['section'] == $custSections[1]){
-    $custSubSection = "2";
-    //use default view
-    if ($rowSetup['databases_use_defaults_2'] == 'true') {
-        $selDefaults = "CHECKED";
-        $custSubSection = "2";
-    } else {
-        $selDefaults = "";
-    }
-} elseif ($_GET['section'] == $custSections[2]){
-    $custSubSection = "3";
-    //use default view
-    if ($rowSetup['databases_use_defaults_3'] == 'true') {
+    if ($rowSections['use_defaults'] == 'true') {
         $selDefaults = "CHECKED";
     } else {
         $selDefaults = "";
@@ -363,8 +344,18 @@ if ($_GET['section'] == $custSections[0]) {
             //update heading on submit
             if ($_POST['save_main']) {
 
-                $setupUpdate = "UPDATE setup SET customersheading_$custSubSection='" . safeCleanStr($_POST['customer_heading_'.$custSubSection]) . "', customerscontent_$custSubSection='" . sqlEscapeStr($_POST['main_content_'.$custSubSection]) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-                mysqli_query($db_conn, $setupUpdate);
+                $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ");
+                $rowSection = mysqli_fetch_array($sqlSections);
+
+                if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $_GET['section']) {
+                    //Do update
+                    $sectionsUpdate = "UPDATE sections_customers SET heading='" . safeCleanStr($_POST['customer_heading']) . "', content='" . sqlEscapeStr($_POST['main_content']) . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ";
+                    mysqli_query($db_conn, $sectionsUpdate);
+                } else {
+                    //Do Insert
+                    $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['customer_heading']) . "', '" . sqlEscapeStr($_POST['main_content']) . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    mysqli_query($db_conn, $sectionsInsert);
+                }
 
                 for ($i = 0; $i < $_POST['cust_count']; $i++) {
 
@@ -380,8 +371,8 @@ if ($_GET['section'] == $custSections[0]) {
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT customersheading_$custSubSection, customerscontent_$custSubSection, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id']." ");
-            $rowSetup  = mysqli_fetch_array($sqlSetup);
+            $sqlSections = mysqli_query($db_conn, "SELECT heading, content, section, use_defaults FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=".$_GET['loc_id']." ");
+            $rowSections  = mysqli_fetch_array($sqlSections);
 
             //delete category
             $delCatId = $_GET['deletecat'];
@@ -483,7 +474,7 @@ if ($_GET['section'] == $custSections[0]) {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="databases_defaults_checkbox_<?php echo $custSubSection; ?> defaults-toggle"  id="<?php echo $_GET['loc_id'] ?>" name="databases_defaults_<?php echo $custSubSection; ?>" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="databases_defaults_checkbox defaults-toggle"  id="<?php echo $_GET['loc_id'] ?>" name="databases_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -568,11 +559,11 @@ if ($_GET['section'] == $custSections[0]) {
                 <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="customer_heading_<?php echo $custSubSection; ?>" maxlength="255" value="<?php echo $rowSetup['customersheading_'.$custSubSection]; ?>" placeholder="My Database" autofocus required>
+                        <input class="form-control count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSections['heading']; ?>" placeholder="My Database" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control count-text" name="main_content_<?php echo $custSubSection; ?>" placeholder="About our databases" maxlength="999"><?php echo $rowSetup['customerscontent_'.$custSubSection]; ?></textarea>
+                        <textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our databases" maxlength="999"><?php echo $rowSections['content']; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>

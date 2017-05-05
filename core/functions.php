@@ -518,59 +518,35 @@ function getCustomers($custType){
     global $customerCatId;
     global $customerCatName;
     global $customerCatSort;
-    global $customerSection;
     global $custDefaultLoc;
-    global $custSections;
+    global $customerSection;
     global $db_conn;
-
-    //loop through the array of custSections - config.php
-    $custSectionIndex1 = "";
-    $custSectionIndex2 = "";
-    $custSectionIndex3 = "";
-
-    $custArrlength = count($custSections); //from config.php
-
-    for ($x = 0; $x < $custArrlength; $x++) {
-        $custSectionIndex1 = $custSections[0];
-        $custSectionIndex2 = $custSections[1];
-        $custSectionIndex3 = $custSections[2];
-    }
 
     if (!empty($_GET['section'])) {
         $customerSection = $_GET['section'];
     } else {
-        $customerSection = $custSections[0];
+        $customerSection = '1';
     }
 
     //get the default values from setup table where get loc_id
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults FROM sections_customers WHERE section='".$_GET['section']."' AND loc_id=" . $_GET['loc_id'] . " ");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
-    if ($customerSection == $custSectionIndex1 && $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
-        $custDefaultLoc = 1;
-    } elseif ($customerSection == $custSectionIndex2 && $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
-        $custDefaultLoc = 1;
-    } elseif ($customerSection == $custSectionIndex3 && $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
-        $custDefaultLoc = 1;
+    if ($customerSection == $rowCustomerSetup['section'] && $rowCustomerSetup['use_defaults'] == 'true') {
+        $custDefaultLoc = '1';
     } else {
         $custDefaultLoc = $_GET['loc_id'];
     }
 
     //sets to use defaults if conditions are true where loc_id = $custDefaultLoc
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, customersheading_1, customersheading_2, customersheading_3, customerscontent_1, customerscontent_2, customerscontent_3 FROM setup WHERE loc_id=" . $custDefaultLoc . " ");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section, heading, content FROM sections_customers WHERE section='".$_GET['section']."' AND loc_id=" . $custDefaultLoc . " ");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
-    if ($customerSection == $custSectionIndex1 && $rowCustomerSetup['databases_use_defaults_1'] == 'true') {
-        $customerHeading = $rowCustomerSetup['customersheading_1'];
-        $customerBlurb = $rowCustomerSetup['customerscontent_1'];
-    } elseif ($customerSection == $custSectionIndex2 && $rowCustomerSetup['databases_use_defaults_2'] == 'true') {
-        $customerHeading = $rowCustomerSetup['customersheading_2'];
-        $customerBlurb = $rowCustomerSetup['customerscontent_2'];
-    } elseif ($customerSection == $custSectionIndex3 && $rowCustomerSetup['databases_use_defaults_3'] == 'true') {
-        $customerHeading = $rowCustomerSetup['customersheading_3'];
-        $customerBlurb = $rowCustomerSetup['customerscontent_3'];
+    if ($customerSection == $rowCustomerSetup['section'] && $rowCustomerSetup['use_defaults'] == 'true') {
+        $customerHeading = $rowCustomerSetup['heading'];
+        $customerBlurb = $rowCustomerSetup['content'];
     }
 
     //Get Category

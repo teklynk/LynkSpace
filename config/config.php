@@ -62,9 +62,6 @@ $target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
 
-//Database Sections
-$custSections = array("1", "2", "3");
-
 //Location Types
 $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);

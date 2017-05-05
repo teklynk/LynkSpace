@@ -17,13 +17,13 @@ if ($customerNumRows > 0) {
 
     if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<h1 class='customers customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($customerBlurb)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left'>".$customerBlurb."</p>";
+        echo "<p class='text-left customersblurb'>".$customerBlurb."</p>";
         echo "</div>";
     }
 

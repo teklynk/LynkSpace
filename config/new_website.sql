@@ -850,6 +850,22 @@ CREATE TABLE `navigation` (
   `author_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Table structure for table `sections_customers`
+--
+
+CREATE TABLE IF NOT EXISTS `sections_customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `heading` text NOT NULL,
+  `content` text NOT NULL,
+  `section` text NOT NULL,
+  `use_defaults` text NOT NULL,
+  `author_name` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
 -- --------------------------------------------------------
 
 --
@@ -1315,6 +1331,12 @@ ALTER TABLE `navigation`
 --
 ALTER TABLE `pages`
   ADD CONSTRAINT `pages_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sections_customers`
+--
+ALTER TABLE `sections_customers`
+  ADD CONSTRAINT `sections_customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `services`

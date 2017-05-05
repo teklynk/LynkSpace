@@ -12,11 +12,7 @@ if ($customerNumRows > 0) {
 
     echo "<div class='row' id='databases'>";
 
-    if (!empty($customerCatName)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
-        echo "</div>";
-    } elseif (!empty($customerHeading)) {
+    if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
         echo "<h1 class='customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
@@ -24,7 +20,13 @@ if ($customerNumRows > 0) {
 
     if (!empty($customerBlurb)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left'>" . $customerBlurb . "</p>";
+        echo "<p class='text-left customersblurb'>" . $customerBlurb . "</p>";
+        echo "</div>";
+    }
+
+    if (!empty($customerCatName)) {
+        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
         echo "</div>";
     }
 
@@ -33,7 +35,7 @@ if ($customerNumRows > 0) {
     $customersCatCount = 0;
 
     //Gets catname
-    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
+    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name123, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
     while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers)) {
 
         $customerCatId = $rowCatCustomers['id'];

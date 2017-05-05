@@ -22,12 +22,16 @@
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=45&amp;loc_id=1</loc>
-		<lastmod>2017-04-12 16:18:24</lastmod>
+		<lastmod>2017-02-06 10:24:13</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=44&amp;loc_id=1</loc>
 		<lastmod>2017-01-19 12:18:11</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=20&amp;loc_id=285</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
@@ -92,10 +96,6 @@
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=2&amp;loc_id=1</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=0&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
