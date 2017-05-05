@@ -35,7 +35,7 @@ if ($customerNumRows > 0) {
     $customersCatCount = 0;
 
     //Gets catname
-    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name123, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
+    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
     while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers)) {
 
         $customerCatId = $rowCatCustomers['id'];
