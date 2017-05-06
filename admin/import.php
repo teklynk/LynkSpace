@@ -62,7 +62,7 @@ if ($_POST['save_main']) {
                 mysqli_query($db_conn, $locationInsert);
 
                 //Insert into setup table
-                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, customersheading_1, customersheading_2, customersheading_3, slider_use_defaults, databases_use_defaults_1, databases_use_defaults_2, databases_use_defaults_3, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
+                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $setupInsert);
 
                 $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[3])) . "', '" . safeCleanStr(addslashes($locData[4])) . "', '" . safeCleanStr(addslashes($locData[5])) . "', '" . safeCleanStr(addslashes($locData[6])) . "', '" . safeCleanStr(addslashes($locData[7])) . "', '" . safeCleanStr(addslashes($locData[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
@@ -171,69 +171,69 @@ if ($_GET['update'] == 'true') {
     $pageMsg = "<div class='alert alert-success'>The data has been imported.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='import.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 ?>
-<div class="row">
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Settings</a></li>
-            <li class="active">Import Data</li>
-        </ol>
-        <h1 class="page-header">
-            Import Data
-        </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Settings</a></li>
+                <li class="active">Import Data</li>
+            </ol>
+            <h1 class="page-header">
+                Import Data
+            </h1>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <?php
-        if ($errorMsg !="") {
-            echo $errorMsg;
-        } else {
-            echo $pageMsg;
-        }
-        ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <?php
+            if ($errorMsg !="") {
+                echo $errorMsg;
+            } else {
+                echo $pageMsg;
+            }
+            ?>
 
-        <form name="importForm" class="dirtyForm" method="post" action="" enctype="multipart/form-data">
-            <div class="form-group">
-                <p>
-                    <i class="fa fa-download"></i> <a href="import/templates/locations.csv" download="locations.csv">Download the CSV Template</a>
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Import Locations</label>
-                <input type="file" name="csvLocationsImport" id="csvLocationsImport">
-                <input type="hidden" name="importLocationsCSV" value="1">
-
-                <div class="checkbox">
-                    <label><input type="checkbox" name="empty_locTables"><small>Truncate "locations, setup, contactus" Tables?</small></label>
+            <form name="importForm" class="dirtyForm" method="post" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <p>
+                        <i class="fa fa-download"></i> <a href="import/templates/locations.csv" download="locations.csv">Download the CSV Template</a>
+                    </p>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Import Locations</label>
+                    <input type="file" name="csvLocationsImport" id="csvLocationsImport">
+                    <input type="hidden" name="importLocationsCSV" value="1">
 
-            <hr/>
-            <div class="form-group">
-                <p>
-                    <i class="fa fa-download"></i> <a href="import/templates/pages.csv" download="pages.csv">Download the CSV Template</a>
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Import Pages</label>
-                <input type="file" name="csvPagesImport" id="csvPagesImport">
-                <input type="hidden" name="importPagesCSV">
-
-                <div class="checkbox">
-                    <label><input type="checkbox" name="empty_pagesTables"><small>Truncate "pages" Table?</small></label>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="empty_locTables"><small>Truncate "locations, setup, contactus" Tables?</small></label>
+                    </div>
                 </div>
-            </div>
 
-            <hr/>
+                <hr/>
+                <div class="form-group">
+                    <p>
+                        <i class="fa fa-download"></i> <a href="import/templates/pages.csv" download="pages.csv">Download the CSV Template</a>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label>Import Pages</label>
+                    <input type="file" name="csvPagesImport" id="csvPagesImport">
+                    <input type="hidden" name="importPagesCSV">
 
-            <input type="hidden" name="save_main" value="true"/>
-            <button type="submit" name="importForm_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".csv - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Import CSV(s)</button>
-            <small>
-            </small>
-        </form>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="empty_pagesTables"><small>Truncate "pages" Table?</small></label>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <input type="hidden" name="save_main" value="true"/>
+                <button type="submit" name="importForm_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".csv - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Import CSV(s)</button>
+                <small>
+                </small>
+            </form>
+        </div>
     </div>
-</div>
 
 <?php
 include_once('includes/footer.inc.php');

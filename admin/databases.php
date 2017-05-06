@@ -120,15 +120,15 @@ if ($_GET['section'] == $rowSections['section']) {
                     <div class="nav-section">
                         <label for="nav_menu">Database Sections</label>
                         <div class="input-group">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Section" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
-                            </span>
+
                             <select class="form-control" name="nav_menu" id="nav_menu">
                                 <?php echo $custMenuStr; ?>
                             </select>
                             <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Section" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete this Database Section" onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-trash"></i></button>
                             </span>
+
                         </div>
                     </div>
                 </div>
@@ -684,9 +684,9 @@ if ($_GET['section'] == $rowSections['section']) {
             <?php
         } //end of long else
 
-        echo "</div>
-	</div>
-	<p></p>";
+echo "</div>
+</div>
+<p></p>";
 
-        include_once('includes/footer.inc.php');
-        ?>
+include_once('includes/footer.inc.php');
+?>

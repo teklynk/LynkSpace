@@ -926,18 +926,9 @@ CREATE TABLE `setup` (
   `sliderheading` text NOT NULL,
   `teamheading` text NOT NULL,
   `hottitlesheading` text NOT NULL,
-  `customersheading_1` text NOT NULL,
-  `customersheading_2` text NOT NULL,
-  `customersheading_3` text NOT NULL,
   `servicescontent` text NOT NULL,
-  `customerscontent_1` text NOT NULL,
-  `customerscontent_2` text NOT NULL,
-  `customerscontent_3` text NOT NULL,
   `teamcontent` text NOT NULL,
   `slider_use_defaults` text NOT NULL,
-  `databases_use_defaults_1` text NOT NULL,
-  `databases_use_defaults_2` text NOT NULL,
-  `databases_use_defaults_3` text NOT NULL,
   `navigation_use_defaults_1` text NOT NULL,
   `navigation_use_defaults_2` text NOT NULL,
   `navigation_use_defaults_3` text NOT NULL,
@@ -953,8 +944,8 @@ CREATE TABLE `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `customersheading_1`, `customersheading_2`, `customersheading_3`, `servicescontent`, `customerscontent_1`, `customerscontent_2`, `customerscontent_3`, `teamcontent`, `slider_use_defaults`, `databases_use_defaults_1`, `databases_use_defaults_2`, `databases_use_defaults_3`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', 'Resources', 'Recommended Websites', 'Librarian Links', '', '', '', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 18:59:07', 'admin', 1);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 18:59:07', 'admin', 1);
 
 -- --------------------------------------------------------
 
