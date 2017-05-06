@@ -529,12 +529,12 @@ function getCustomers($custType){
     }
 
     //get the default values from setup table where get loc_id
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults FROM sections_customers WHERE section='".$_GET['section']."' AND loc_id=" . $_GET['loc_id'] . " ");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section FROM sections_customers WHERE section='".$_GET['section']."' AND loc_id=" . $_GET['loc_id'] . " ");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
     if ($customerSection == $rowCustomerSetup['section'] && $rowCustomerSetup['use_defaults'] == 'true') {
-        $custDefaultLoc = '1';
+        $custDefaultLoc = 1;
     } else {
         $custDefaultLoc = $_GET['loc_id'];
     }
@@ -552,7 +552,7 @@ function getCustomers($custType){
     //Get Category
     //If cat_id=int then display a page of databases for only that category
     if (!empty($_GET['cat_id'])) {
-        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort FROM category_customers WHERE id IN (SELECT catid FROM customers WHERE catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ")");
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort FROM category_customers WHERE id IN (SELECT catid, section FROM customers WHERE section='".$_GET['section']."' AND catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ")");
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
