@@ -708,8 +708,8 @@ $(document).ready(function () {
     });
 
     //Boostrap-select actions
-    $('select.selectpicker').change(function () {
-        var selected = $('.selectpicker option:selected').val();
+    $('select.selectpicker-auto').change(function () {
+        var selected = $('.selectpicker-auto option:selected').val();
         window.location.href = '?loc_id=' + selected;
     });
 

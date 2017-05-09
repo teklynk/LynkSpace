@@ -11,19 +11,19 @@ if ($servicesNumRows > 0) {
     echo "<div class='container-fluid services'>";
     echo "<div class='container bannerwrapper'>";
 
-    echo "<div class='row' id='services'>";
-
     if (!empty($servicesHeading)) {
         echo "<div class='col-lg-12'>";
-        echo "<h1 class='servicesheading'>" . $servicesHeading . "</h1>";
+        echo "<h1 class='text-left servicesheading'>" . $servicesHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($servicesBlurb)) {
         echo "<div class='col-lg-12'>";
-        echo "<h3>" . $servicesBlurb . "</h3>";
+        echo "<p class='text-left servicesblurb'>" . $servicesBlurb . "</p>";
         echo "</div>";
     }
+
+    echo "<div class='row' id='services'>";
 
     while ($rowServices = mysqli_fetch_array($sqlServices)) {
 

@@ -160,20 +160,10 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<label>Choose an icon</label>
-			<select class="form-control" name="service_icon_select" id="service_icon_select">
+			<select class="form-control selectpicker ays-ignore" data-container="body" data-dropup-auto="false" data-size="10" name="service_icon_select" id="service_icon_select">
 				<option value="">None</option>
 				<?php
-
-				$sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
-				while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
-					$icon=$rowIcon['icon'];
-					if ($icon===$rowServices['icon']) {
-						$iconCheck="SELECTED";
-					} else {
-						$iconCheck="";
-					}
-					echo "<option value=".$icon." ".$iconCheck.">".$icon."</option>";
-				}
+					getIconDropdownList($rowServices['icon']);
 				?>
 			</select>
 		</div>
@@ -183,7 +173,7 @@ if ($_GET['preview']>"") {
 				<option value="">None</option>
 				<?php
                     getImageDropdownList($image_dir, $rowServices['image']);
-                    ?>
+                ?>
 			</select>
 		</div>
 		<hr/>

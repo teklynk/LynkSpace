@@ -7,19 +7,19 @@ if (!defined('inc_access')) {
 
 if ($servicesNumRows > 0) {
 
-    echo "<div class='row' id='services'>";
-
     if (!empty($servicesHeading)) {
         echo "<div class='col-lg-12'>";
-        echo "<h2 class='page-header services'>".$servicesHeading."</h2>";
+        echo "<h2 class='page-header servicesheading'>".$servicesHeading."</h2>";
         echo "</div>";
     }
 
     if (!empty($servicesBlurb)) {
         echo "<div class='col-lg-12'>";
-        echo "<p class='text-center'>".$servicesBlurb."</p>";
+        echo "<p class='text-left servicesblurb'>".$servicesBlurb."</p>";
         echo "</div>";
     }
+
+    echo "<div class='row' id='services'>";
 
     while ($rowServices = mysqli_fetch_array($sqlServices)) {
 

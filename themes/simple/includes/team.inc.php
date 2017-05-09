@@ -7,19 +7,19 @@ if (!defined('inc_access')) {
 
 if ($teamNumRows > 0) {
 
-    echo "<div class='row' id='team'>";
-
     if (!empty($teamHeading)) {
         echo "<div class='col-lg-12'>";
-        echo "<h2 class='page-header team'>" . $teamHeading . "</h2>";
+        echo "<h2 class='page-header teamheading'>" . $teamHeading . "</h2>";
         echo "</div>";
     }
 
     if (!empty($teamBlurb)) {
         echo "<div class='col-lg-12'>";
-        echo "<p class='text-center'>".$teamBlurb."</p>";
+        echo "<p class='text-left teamblurb'>".$teamBlurb."</p>";
         echo "</div>";
     }
+
+    echo "<div class='row' id='team'>";
 
     while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
         echo "<div class='col-sm-6 col-md-3 col-lg-3 team-item'>";

@@ -9,23 +9,19 @@ if ($servicesNumRows > 0) {
     echo "<div class='row' id='services'>";
     echo "<div class='box'>";
 
-    echo "<div class='col-lg-12'>";
-
     if (!empty($servicesHeading)) {
+        echo "<div class='col-lg-12'>";
         echo "<hr>";
-        echo "<h2 class='intro-text text-center'>" . $servicesHeading . "</h2>";
+        echo "<h2 class='intro-text text-center servicesheading'>" . $servicesHeading . "</h2>";
         echo "<hr>";
+        echo "</div>"; //col-lg-12
     }
-
-    echo "</div>"; //col-lg-12
 
     if (!empty($servicesBlurb)) {
-        echo "<div class='col-md-6'>";
-        echo "<p>" . $servicesBlurb . "</p>";
+        echo "<div class='col-md-12'>";
+        echo "<p class='text-left servicesblurb'>" . $servicesBlurb . "</p>";
         echo "</div>";
-        //echo "<div class='clearfix'></div>";
     }
-
 
     echo "</div>"; //box
     echo "</div>"; //row

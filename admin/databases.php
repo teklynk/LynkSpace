@@ -259,20 +259,10 @@ if ($_GET['section'] == $rowSections['section']) {
                 </div>
                 <div class="form-group">
                     <label>Choose an icon</label>
-                    <select class="form-control" name="customer_icon_select" id="customer_icon_select">
+                    <select class="form-control selectpicker ays-ignore" data-container="body" data-dropup-auto="false" data-size="10" name="customer_icon_select" id="customer_icon_select">
                         <option value="">None</option>
                         <?php
-
-                        $sqlCustomerIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
-                        while ($rowIcon = mysqli_fetch_array($sqlCustomerIcon)) {
-                            $icon = $rowIcon['icon'];
-                            if ($icon === $rowCustomer['icon']) {
-                                $iconCheck = "SELECTED";
-                            } else {
-                                $iconCheck = "";
-                            }
-                            echo "<option value='" . $icon . "' " . $iconCheck . ">" . $icon . "</option>";
-                        }
+                            getIconDropdownList($rowCustomer['icon']);
                         ?>
                     </select>
                 </div>
@@ -338,11 +328,11 @@ if ($_GET['section'] == $rowSections['section']) {
             $deleteSectionName = $_GET['section'];
 
             //Delete Section and all databases in the section
-            if ($_GET['deletesection'] && $_GET['section'] && $_GET['loc_id'] && !$_GET['confirm']) {
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete the entire Section " . safeCleanStr(addslashes($getCustSection)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletename=" . safeCleanStr(addslashes($getCustSection)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
+                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete the entire Section " . safeCleanStr(addslashes($getCustSection)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletesection=true&deletename=" . safeCleanStr(addslashes($getCustSection)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
-            } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete section after clicking Yes
                 $sectionDelete = "DELETE FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $sectionDelete);

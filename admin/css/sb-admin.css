@@ -413,6 +413,11 @@ dl, ol, ul {
     .shrink_wrap {
         padding-left: 45px !important;
     }
+
+    .img-select-option {
+        max-width: 20px;
+        min-width: 20px;
+    }
 }
 
 @media screen and (max-width: 769px) {

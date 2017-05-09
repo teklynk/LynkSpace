@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
 }
 
 //Random password generator for password reset - generates characters, symbol and number
-function generateRandomPasswordString($length = 10){
+function generateRandomPasswordString(){
     global $randomString;
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -16,7 +16,7 @@ function generateRandomPasswordString($length = 10){
     $randomString = '';
     $randomSpecialCharString = '';
     $numberCharactersString = '';
-    for ($i = 0; $i < $length; $i++) {
+    for ($i = 0; $i < 6; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     for ($i = 0; $i < 1; $i++) {
@@ -44,7 +44,12 @@ function generateRandomString($length = 10){
 
 //Random Blowfish Salt
 function blowfishSaltRandomString($hashThisString){
-    return password_hash($hashThisString, PASSWORD_DEFAULT);
+    //Check if server supports CRYPT_BLOWFISH
+    if(defined('CRYPT_BLOWFISH') && CRYPT_BLOWFISH) {
+        return crypt($hashThisString, '$2a$07$jY5ic27XPTOBXWfGhmRGsOm0K1foJhd4/G3iYNOqTLdPNyDUpwMG6');
+    } else {
+        echo 'CRYPT_BLOWFISH is NOT enabled!';
+    }
 }
 
 function getImageDropdownList($image_dir, $image_selected) {
@@ -67,7 +72,24 @@ function getImageDropdownList($image_dir, $image_selected) {
         } else {
             $imageCheck = "";
         }
-        echo "<option value='".$file."' $imageCheck>".$file."</option>";
+        //echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='../uploads/".$_GET['loc_id']."/".$file."'/>&nbsp;".$file."</span>\" value='".$file."' $imageCheck>".$file."</option>";
+        echo "<option data-ays-ignore='true' value='".$file."' $imageCheck>".$file."</option>";
+
+    }
+}
+
+function getIconDropdownList($icon_selected) {
+    global $db_conn;
+
+    $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
+    while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
+        $icon=$rowIcon['icon'];
+        if ($icon === $icon_selected) {
+            $iconCheck="SELECTED";
+        } else {
+            $iconCheck="";
+        }
+        echo "<option data-ays-ignore='true' data-icon='fa fa-".$icon."' value='".$icon."' ".$iconCheck.">".$icon."</option>";
     }
 }
 
@@ -184,7 +206,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] ==
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
-    $adminOnlyShow = "style='display:none;'";
+    $adminOnlyShow = "style='display:none !important;'";
     $adminIsCheck = "false";
 }
 

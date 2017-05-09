@@ -10,19 +10,17 @@ if ($teamNumRows > 0) {
     echo "<div class='row' id='team'>";
     echo "<div class='box'>";
 
-    echo "<div class='col-lg-12'>";
-
     if (!empty($teamHeading)) {
+        echo "<div class='col-lg-12'>";
         echo "<hr>";
-        echo "<h2 class='intro-text text-center'>" . $teamHeading . "</h2>";
+        echo "<h2 class='intro-text text-center teamheading'>" . $teamHeading . "</h2>";
         echo "<hr>";
+        echo "</div>"; //col-lg-12
     }
 
-    echo "</div>"; //col-lg-12
-
     if (!empty($teamBlurb)) {
-        echo "<div class='col-md-6'>";
-        echo "<p>" . $teamBlurb . "</p>";
+        echo "<div class='col-lg-12'>";
+        echo "<p class='text-left teamblurb'>" . $teamBlurb . "</p>";
         echo "</div>";
         //echo "<div class='clearfix'></div>";
     }

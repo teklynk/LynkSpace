@@ -11,26 +11,26 @@ if ($teamNumRows > 0) {
     echo "<div class='container-fluid team'>";
     echo "<div class='container bannerwrapper'>";
 
-    echo "<div class='row' id='team'>";
-
     if (!empty($teamHeading)) {
         echo "<div class='col-xs-12 col-sm-12'>";
-        echo "<h1 class='teamheading'>" . $teamHeading . "</h1>";
+        echo "<h1 class='text-left teamheading'>" . $teamHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($teamBlurb)) {
         echo "<div class='col-lg-12'>";
-        echo "<h3>" . $teamBlurb . "</h3>";
+        echo "<p class='text-left teamblurb'>" . $teamBlurb . "</h3>";
         echo "</div>";
     }
+
+    echo "<div class='row' id='team'>";
 
     while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
         echo "<div class='col-sm-6 col-md-3 col-lg-3 team-item'>";
         echo "<div class='thumbnail'>";
 
         if (!empty($rowTeam['image'])) {
-            echo "<img class='img-responsive' src='uploads/" . $_GET['loc_id'] . "/" . $rowTeam['image'] . "' alt='" . $rowTeam['name'] . "' title='" . $rowTeam['name'] . "'>";
+            echo "<img class='img-responsive img-circle' src='uploads/" . $_GET['loc_id'] . "/" . $rowTeam['image'] . "' alt='" . $rowTeam['name'] . "' title='" . $rowTeam['name'] . "'>";
         }
 
         echo "<div class='caption'>";
