@@ -139,17 +139,19 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
 <!--CodeMirror JS & CSS -->
 <script>
     $(document).ready(function(){
-        var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
-            lineNumbers: true,
-            mode: 'text/css',
-            autofocus: true,
-            matchBrackets: true,
-            styleActiveLine: true,
-            indentWithTabs: true
-        });
-        setTimeout(function() {
-            editor.refresh();
-        }, 300);
+        if ($('#edit_file').length){
+            var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
+                lineNumbers: true,
+                mode: 'text/css',
+                autofocus: true,
+                matchBrackets: true,
+                styleActiveLine: true,
+                indentWithTabs: true
+            });
+            setTimeout(function() {
+                editor.refresh();
+            }, 300);
+        }
     });
 </script>
 <style>

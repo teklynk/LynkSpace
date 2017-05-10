@@ -128,28 +128,31 @@ session_start();
         ?>
         <script type="text/javascript">
             $(document).ready(function() {
-                tinymce.init({
-                    selector: 'textarea.tinymce',
-                    height: 500,
-                    theme: 'modern',
-                    plugins: 'save link image lists paste code',
-                    convert_urls: false,
-                    paste_data_images: false,
-                    paste_as_text: true,
-                    paste_auto_cleanup_on_paste: true,
-                    paste_remove_styles: true,
-                    paste_remove_styles_if_webkit: true,
-                    paste_strip_class_attributes: true,
-                    image_dimensions: false,
-                    object_resizing: false,
-                    document_base_url: '<?php echo $image_baseURL; ?>',
-                    resize: 'both',
-                    image_list: [<?php echo rtrim($fileListJson, ","); ?>],
-                    link_list: [<?php echo rtrim($linkListJson, ","); ?>],
-                    menubar: false,
-                    toolbar_items_size: 'small',
-                    toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code'
-                });
+                if ($('textarea.tinymce').length){
+                    tinymce.init({
+                        selector: 'textarea.tinymce',
+                        height: 500,
+                        theme: 'modern',
+                        plugins: 'save link image media lists paste code',
+                        convert_urls: false,
+                        paste_data_images: false,
+                        paste_as_text: true,
+                        paste_auto_cleanup_on_paste: true,
+                        paste_remove_styles: true,
+                        paste_remove_styles_if_webkit: true,
+                        paste_strip_class_attributes: true,
+                        image_dimensions: false,
+                        object_resizing: false,
+                        document_base_url: '<?php echo $image_baseURL; ?>',
+                        resize: 'both',
+                        image_list: [<?php echo rtrim($fileListJson, ","); ?>],
+                        link_list: [<?php echo rtrim($linkListJson, ","); ?>],
+                        menubar: false,
+                        toolbar_items_size: 'small',
+                        toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
+                        media_live_embeds: true
+                    });
+                }
             });
         </script>
         <?php
