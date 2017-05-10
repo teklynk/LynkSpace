@@ -175,11 +175,13 @@ if (isset($_SESSION['loggedIn'])) {
                             </div>
                             <?php
                         } else {
+
                             //create a random password and set it as a session variable
                             $_SESSION['temp_password'] = generateRandomPasswordString();
 
                             //Creates a unique refering value/token - exposed in post
                             $_SESSION['unique_referer'] = generateRandomString();
+
                             ?>
 
                             <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">

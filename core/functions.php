@@ -577,6 +577,7 @@ function getSlider($sliderType){
     //EXAMPLE: getSlider("slide")
     //EXAMPLE: getSlider("random")
     global $sliderLink;
+    global $sliderCount;
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;

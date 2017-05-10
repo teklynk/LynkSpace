@@ -31,8 +31,7 @@ body {
 
 .top-nav > li > a {
     padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 20px;
+    line-height: 24px;
     color: #999;
 }
 
@@ -276,12 +275,6 @@ small {
     min-width: 250px !important;
     min-height: 400px !important;
 }
-
-.top-nav > li > a {
-    padding-top: 11px !important;
-    padding-bottom: 7px !important;
-}
-
 .navbar-brand {
     padding-top: 16px !important;
     padding-bottom: 7px !important;
@@ -345,6 +338,10 @@ dl, ol, ul {
     border: 1px solid #e1e1e8;
     border-radius: 4px;
 }
+.dropdown.alert-menu, .dropdown.user-menu {
+    height: 50px;
+}
+
 
 /** Media Queries **/
 @media screen and (min-width: 768px) {

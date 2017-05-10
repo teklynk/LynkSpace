@@ -32,6 +32,7 @@ RewriteRule . /index.php [L]
 
 #Lock down the config folder - forbidden 403
 RedirectMatch 403 ^/config/$
+RedirectMatch 403 ^/uploads/$
 
 #Deny access to these files - forbidden 403
 <FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">

@@ -10,4 +10,8 @@ getSlider("slide");
 echo "</header>";
 echo "</div>";
 echo "</div>";
+
+if ($sliderCount == 0) {
+    echo "<style>.slider {display:none !important;}</style>";
+}
 ?>

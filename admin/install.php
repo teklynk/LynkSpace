@@ -15,7 +15,7 @@ $dbBlowfishLoc = "../config/blowfishsalt.php";
 // Name of the Source sql dump file
 $dbFilename = "../config/new_website.sql";
 
-// Generate a random Blowfish Salt key using the random string function
+// Generate a random Blowfish Salt key using the random password string function
 $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 
 // Check if sql file exists

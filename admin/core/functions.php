@@ -6,50 +6,45 @@ if (!defined('inc_access')) {
 
 //Random password generator for password reset - generates characters, symbol and number
 function generateRandomPasswordString(){
-    global $randomString;
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $specialCharacters = '!@#$%';
     $specialCharactersLength = strlen($specialCharacters);
     $numberCharacters = '0123456789';
     $numberCharactersLength = strlen($numberCharacters);
-    $randomString = '';
+    $randomCharString = '';
     $randomSpecialCharString = '';
-    $numberCharactersString = '';
+    $randomNumberCharString = '';
+    //Generate 6 characters
     for ($i = 0; $i < 6; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
+        $randomCharString .= $characters[rand(0, $charactersLength - 1)];
     }
+    //Generate 1 special character
     for ($i = 0; $i < 1; $i++) {
         $randomSpecialCharString .= $specialCharacters[rand(0, $specialCharactersLength - 1)];
     }
+    //Generate 1 number
     for ($i = 0; $i < 1; $i++) {
-        $numberCharactersString .= $numberCharacters[rand(0, $numberCharactersLength - 1)];
+        $randomNumberCharString .= $numberCharacters[rand(0, $numberCharactersLength - 1)];
     }
-    return $randomString . $randomSpecialCharString . $numberCharactersString;
+    //Shuffle the string to generate a randomly mixed, 6 char, 1 special char, 1 digit string
+    return str_shuffle($randomCharString . $randomSpecialCharString . $randomNumberCharString);
 }
 
 //Random string generator - used to create a unique md5 referrer
-function generateRandomString($length = 10){
-    global $randomString;
+function generateRandomString(){
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
-
-    for ($i = 0; $i < $length; $i++) {
+    for ($i = 0; $i < 10; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-
     return md5($randomString);
 }
 
 //Random Blowfish Salt
-function blowfishSaltRandomString($hashThisString){
-    //Check if server supports CRYPT_BLOWFISH
-    if(defined('CRYPT_BLOWFISH') && CRYPT_BLOWFISH) {
-        return crypt($hashThisString, '$2a$07$jY5ic27XPTOBXWfGhmRGsOm0K1foJhd4/G3iYNOqTLdPNyDUpwMG6');
-    } else {
-        echo 'CRYPT_BLOWFISH is NOT enabled!';
-    }
+function blowfishSaltRandomString($saltThisString){
+    return password_hash($saltThisString, PASSWORD_DEFAULT);
 }
 
 function getImageDropdownList($image_dir, $image_selected) {
@@ -95,7 +90,7 @@ function getIconDropdownList($icon_selected) {
 
 //Get gravatar image based on users email value
 function getGravatar($email, $size){
-    $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-32.png";
+    $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-24.png";
     return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
 }
 
