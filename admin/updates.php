@@ -31,9 +31,36 @@ if ($deleteMsg != "") {
 <ul>
     <li>
         Check a remote file/script to get the latest YSM7 version.<br/>
-        file_get_contents('http://your-server.com/CMS-UPDATE-PACKAGES/current-release-versions.php') or die ('ERROR');<br/>
+        file_get_contents('http://your-server.com/CMS-UPDATE-PACKAGES/current-release-versions.php') or die ('ERROR');
     </li>
-    <li></li>
+    <li>
+        Compare remote version number to local version number. If remote version greater than local then show Update Available button.
+    </li>
+    <li>
+        Show link/button to download a remote zip file containing the new files and any migration scripts.<br/>
+        Show a link to changelog file.
+    </li>
+    <li>
+        Check that file has been downloaded and inside the temp "upgrade" folder and file size and/or MD5 hash matches remote zip.
+    </li>
+    <li>
+        Show link to install updates.
+    </li>
+    <li>
+        $openZip = zip_open('upgrades/newversion-7-0-2.zip');<br/>
+        $readZip = zip_read($openZip);<br/>
+        $fileName = zip_entry_name($readZip);<br/>
+        Loop through zip, create folders if not in project.<br/>
+        zip_entry_read to read contents of each file.<br/>
+        fwrite to write the file contents.
+    </li>
+    <li>
+        Execute migration scripts.<br/>
+        Delete migration scripts.
+    </li>
+    <li>
+        Show a success message.
+    </li>
 </ul>
 
 <?php

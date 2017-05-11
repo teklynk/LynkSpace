@@ -1,5 +1,6 @@
 <?php
 define('inc_access', TRUE);
+define('datePicker', TRUE);
 
 include_once('includes/header.inc.php');
 
@@ -483,21 +484,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 echo "</div>
 	</div>
 	<p></p>";
-?>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            if ($('.datepicker').length){
-                $('.datepicker').datepicker({
-                    format: "yyyy-mm-dd",
-                    startView: "month",
-                    startDate: Date(),
-                    todayHighlight: true,
-                    autoclose: true,
-                    forceParse: false
-                });
-            }
-        });
-    </script>
-<?php
+
 include_once('includes/footer.inc.php');
 ?>

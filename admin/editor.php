@@ -1,6 +1,7 @@
 <?php
 session_start();
 define('inc_access', TRUE);
+define('codeMirror', TRUE);
 
 include_once('includes/header.inc.php');
 
@@ -50,7 +51,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     }
     //check if file is writable
     if (!is_writable($fileToEdit_dir)) {
-        die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+        die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
     }
 
     //open file for Reading
@@ -71,7 +72,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
                 closedir($handle);
             }
         } else {
-            die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+            die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
         }
     }
     ?>
@@ -97,7 +98,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
                     echo $pageMsg;
                 }
                 if (!is_writable($fileToEdit_dir)) {
-                    die("<div class='alert alert-danger'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+                    die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
                 }
                 ?>
                 <form name="editForm" class="dirtyForm" method="post">

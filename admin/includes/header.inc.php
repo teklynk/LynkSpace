@@ -6,6 +6,7 @@ session_start();
 <head>
 
     <?php
+
     if (!defined('inc_access')) {
         die('Direct access not permitted');
     }
@@ -18,7 +19,7 @@ session_start();
 
     //If Super Admin then bypass iprange restriction.
     //super admin
-    if ($_SESSION['super_admin'] == false && basename($_SERVER['SCRIPT_NAME']) != 'index.php'){
+    if ($_SESSION['super_admin'] == false && basename($_SERVER['PHP_SELF']) != 'index.php'){
     //IP Range is set in config and contains numbers
         if (!empty($IPrange)) {
             if (!strstr(getRealIpAddr(), $IPrange)) {
@@ -50,11 +51,17 @@ session_start();
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
+    <?php
+    if (defined('tinyMCE')) {
+    ?>
     <!-- TinyMCE -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/tinymce/tinymce.min.js"></script>
+    <?php
+    }
+    ?>
 
     <?php
-    if (basename($_SERVER['SCRIPT_NAME']) == 'editor.php') {
+    if (defined('codeMirror')) {
     ?>
         <!-- CodeMirror -->
         <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/codemirror/lib/codemirror.min.css">
@@ -93,7 +100,8 @@ session_start();
 
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
-    if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+    //TinyMCE setup
+    if (defined('tinyMCE') && isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
 
         //Initializing variables
         $fileListJson = "";
@@ -215,7 +223,7 @@ session_start();
             </li>
         </ul>
         <?php
-        if (isset($_SESSION['loc_list']) && $multiBranch == 'true' && $_SESSION['user_level'] == 1) {
+        if ($multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
             ?>
             <ul class="nav navbar-right top-nav">
                 <li style="margin-top:8px;">

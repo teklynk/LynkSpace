@@ -20,9 +20,9 @@ if (!empty($_POST)) {
         $usersUpdate = "UPDATE users SET username='" . sqlEscapeStr($username) . "', password=SHA1('" . $blowfishSalt . safeCleanStr($userpass) . "'), email='" . validateEmail($useremail) . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='".getRealIpAddr()."' WHERE id=" . $userid . " ";
         mysqli_query($db_conn, $usersUpdate);
 
-        $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
     } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
     }
 
     if ($_GET['updatepassword'] == 'true') {

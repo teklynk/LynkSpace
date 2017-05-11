@@ -29,10 +29,30 @@ if (!defined('inc_access')) {
 <!-- /#wrapper -->
 <!-- Scroll to Top -->
 <a href="#" class="scrollToTop">Scroll To Top</a>
+<?php
+if (defined('datePicker')) {
+    ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('.datepicker').length) {
+                $('.datepicker').datepicker({
+                    format: "yyyy-mm-dd",
+                    startView: "month",
+                    startDate: Date(),
+                    todayHighlight: true,
+                    autoclose: true,
+                    forceParse: false
+                });
+            }
+        });
+    </script>
+    <?php
+}
+?>
 </body>
 </html>
 <?php
-//close all config connections
+//close all database connections
 mysqli_close($db_conn);
 die();
 ?>

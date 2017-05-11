@@ -86,7 +86,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                 echo $deleteMsg;
             }
             if (!is_writable('../uploads')) {
-                echo "<div class='alert alert-danger'>Unable to write to the uploads folder. Check folder permissions.</div>";
+                echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
             }
             ?>
 
@@ -163,7 +163,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] ==
                     <i class='fa fa-fw fa-refresh'></i> Copy Files To ALL Locations
                 </button>
                 <br/>
-                <small class="copy_files_to_locs_msg status_msg">
+                <small class="copy_files_to_locs_msg">
                     <?php
                     if (!is_writable('../uploads')) {
                         echo "Unable to write to the uploads folder. Check folder permissions.";

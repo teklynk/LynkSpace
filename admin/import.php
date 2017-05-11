@@ -131,7 +131,7 @@ if ($_POST['save_main']) {
 
                 //If a page URL exists in the csv
                 if (!empty($pageData[2])) {
-                    $html = file_get_contents($pageData[2]);
+                    $html = file_get_contents($pageData[2]) or die('Error accessing file');
                     $dom = new domDocument;
                     // load the html into the object
                     $dom->loadHTML($html);

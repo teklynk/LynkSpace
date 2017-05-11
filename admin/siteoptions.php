@@ -154,7 +154,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
                     </small>
                     <br/>
-                    <small class="sitemap_builder_msg status_msg">
+                    <small class="sitemap_builder_msg">
                     <?php
                     if (!is_writable('../sitemap.xml')) {
                         echo "<p class='text-danger'>Unable to write to sitemap.xml. Check file permissions.</p><br/>";

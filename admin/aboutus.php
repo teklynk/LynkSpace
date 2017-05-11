@@ -1,5 +1,6 @@
 <?php
 define('inc_access', TRUE);
+define('tinyMCE', TRUE);
 
 include_once('includes/header.inc.php');
 
