@@ -23,6 +23,7 @@ if (!empty($_POST)) {
             $_SESSION['user_ip'] = getRealIpAddr();
             $_SESSION['loggedIn'] = 1;
             $_SESSION['session_hash'] = md5($rowLogin['username']);
+            $_SESSION['updates_available'] = checkForUpdates();
 
             //If is Admin
             if ($rowLogin['level'] == 1 && $multiBranch == 'true') {
@@ -118,8 +119,12 @@ if (isset($_SESSION['loggedIn'])) {
             margin: 0 auto;
         }
         footer {
-            display: block !important;
-            visibility: visible !important;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            padding: 10px;
+            margin-left: 0;
         }
     </style>
 

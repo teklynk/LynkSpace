@@ -36,14 +36,14 @@ if ($_GET['preview'] > "") {
                 <li><a href='page.php?loc=" . $_GET['loc_id'] . "'>Pages</a></li>
                 <li class='active'>New Page</li>
                 </ol>";
-                echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } elseif ($_GET['editpage']) {
                 echo "<ol class='breadcrumb'>
                 <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
                 <li><a href='page.php?loc=" . $_GET['loc_id'] . "'>Pages</a></li>
                 <li class='active'>Edit Page</li>
                 </ol>";
-                echo "<h1 class='page-header'>Pages (Edit) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                echo "<h1 class='page-header'>Pages (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
                 <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
@@ -284,7 +284,7 @@ if ($_GET['preview'] > "") {
                             <input type="text" class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" autofocus required>
                         </div>
                         <hr/>
-                        <table class="table table-bordered table-hover table-striped dataTable" id="dataTable">
+                        <table class="table table-bordered table-hover table-striped table-responsive dataTable" id="dataTable">
                             <thead>
                             <tr>
                                 <th>Page Title</th>

@@ -196,6 +196,20 @@ function rrmdir($dir) {
     }
 }
 
+//Updater
+function checkForUpdates(){
+    global $ysmVersion;
+    global $getVersion;
+
+    $getVersion = file_get_contents('http://10.10.15.142/ysmversion.txt');
+
+    if ((string)trim($getVersion) > (string)trim($ysmVersion)){
+        return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
+    } else {
+        return false;
+    }
+}
+
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";

@@ -106,9 +106,9 @@ if ($_GET['section'] == $rowSections['section']) {
                 <div class="form-group">
                     <?php
                     if ($_GET['newcustomer'] == 'true' || $_GET['addsection'] == 'true') {
-                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                     } elseif ($_GET['editcustomer']) {
-                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                     } else {
                         echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
                     }
@@ -583,7 +583,7 @@ if ($_GET['section'] == $rowSections['section']) {
                         <label>Description</label>
                         <textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our databases" maxlength="999"><?php echo $rowSections['content']; ?></textarea>
                     </div>
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped table-responsive">
                         <thead>
                         <tr>
                             <th>Sort</th>

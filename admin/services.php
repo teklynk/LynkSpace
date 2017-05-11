@@ -45,14 +45,14 @@ if ($_GET['preview']>"") {
             <li><a href='services.php?loc=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>New Services</li>
             </ol>";
-			echo "<h1 class='page-header'>Services (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+			echo "<h1 class='page-header'>Services (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
 		} elseif ($_GET['editservice']) {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='services.php?loc=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>Edit Services</li>
             </ol>";
-            echo "<h1 class='page-header'>Services (Edit) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+            echo "<h1 class='page-header'>Services (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
 		} else {
 			echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
@@ -338,7 +338,7 @@ if ($_GET['preview']>"") {
 				<label>Description</label>
 				<textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our services" maxlength="255"><?php echo $rowSetup['servicescontent']; ?></textarea>
 			</div>
-			<table class="table table-bordered table-hover table-striped">
+			<table class="table table-bordered table-hover table-striped table-responsive">
 				<thead>
 				<tr>
 					<th>Sort</th>

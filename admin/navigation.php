@@ -343,7 +343,7 @@ if ($_GET['section'] == $navSections[0]) {
                 </fieldset>
                 <hr/>
                 <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" id="nav_Table">
+                <table class="table table-bordered table-hover table-striped table-responsive" id="nav_Table">
                     <thead>
                     <tr>
                         <th>Sort</th>

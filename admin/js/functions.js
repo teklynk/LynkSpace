@@ -16,11 +16,13 @@ $(document).ready(function () {
         if ($('.side-nav').hasClass('shrink')) {
             $.cookie('sidebar-collapse', 1);
             $('.fa-dedent').attr('title', 'Expand Menu');
+            $('.navbar-brand').toggleClass('shrink_brand');
         } else {
             $.cookie('sidebar-collapse', null);
             $('.fa-dedent').removeClass('fa-indent');
             $('.side-nav').removeClass('shrink');
             $('#wrapper').removeClass('shrink_wrap');
+            $('.navbar-brand').removeClass('shrink_brand');
             $('.fa-dedent').attr('title', 'Collapse Menu');
         }
     });

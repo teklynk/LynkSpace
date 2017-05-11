@@ -30,11 +30,11 @@ if ($deleteMsg != "") {
 ?>
 <ul>
     <li>
-        Check a remote file/script to get the latest YSM7 version.<br/>
-        file_get_contents('http://your-server.com/CMS-UPDATE-PACKAGES/current-release-versions.php') or die ('ERROR');
+        After login, Check a remote file/script to get the latest YSM7 version.<br/>
+        file_get_contents('http://your-server.com/CMS-UPDATE-PACKAGES/current-release-versions.php') or die ('ERROR');<br/>
     </li>
     <li>
-        Compare remote version number to local version number. If remote version greater than local then show Update Available button.
+        Compare remote version number to local version number. If remote version greater than local then create a session object and Update Available button.
     </li>
     <li>
         Show link/button to download a remote zip file containing the new files and any migration scripts.<br/>
@@ -56,7 +56,8 @@ if ($deleteMsg != "") {
     </li>
     <li>
         Execute migration scripts.<br/>
-        Delete migration scripts.
+        Delete migration scripts.<br/>
+        clear session object.<br/>
     </li>
     <li>
         Show a success message.

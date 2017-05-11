@@ -196,15 +196,32 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a><a class="navbar-brand">YouSeeMore <?php if (!empty($_SESSION['loc_name'])) {echo ' - ' . $_SESSION['loc_name'];} ?></a>
+            <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a>
+            <a class="navbar-brand">YOUSEEMORE</a>
+            <?php
+            if ($multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
+            ?>
+            <ul class="nav navbar-right top-nav">
+                <li style="margin-top:8px; margin-left:0px;">
+
+                    <select class="selectpicker selectpicker-auto" data-container="body" data-dropup-auto="false" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
+                        <?php
+                        echo $_SESSION['loc_list'];
+                        ?>
+                    </select>
+
+                </li>
+            </ul>
+            <?php } ?>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li class="alert-menu">
-                <a href="updates.php?loc_id=<?php echo $_SESSION['loc_id']; ?>">
-                    <span class="label label-info"><i class="fa fa-bell"></i>&nbsp;Updates Available</span>
-                </a>
+
+            <!-- Updates and Alerts Button-->
+            <li class="update-menu">
+                <?php echo $_SESSION['updates_available']; ?>
             </li>
+
             <li class="dropdown user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 24); ?>"/> <?php echo $_SESSION['user_name']; ?>
                     <b class="caret"></b></a>
@@ -215,6 +232,9 @@ session_start();
                     <li>
                         <a href="users.php?loc_id=<?php echo $_SESSION['loc_id']; ?>"><i class="fa fa-fw fa-user"></i> My Account</a>
                     </li>
+                    <li>
+                        <a href="#" target="_blank"><i class="fa fa-fw fa-question-circle"></i> Help</a>
+                    </li>
                     <li class="divider"></li>
                     <li>
                         <a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
@@ -222,21 +242,8 @@ session_start();
                 </ul>
             </li>
         </ul>
+
         <?php
-        if ($multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
-            ?>
-            <ul class="nav navbar-right top-nav">
-                <li style="margin-top:8px;">
-
-                    <select class="selectpicker selectpicker-auto" data-container="body" data-dropup-auto="false" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
-                        <?php
-                        echo $_SESSION['loc_list'];
-                        ?>
-                    </select>
-
-                </li>
-            </ul>
-        <?php }
 
         if (isset($_SESSION['loc_id'])) {
             $setLocId = "loc_id=" . $_SESSION['loc_id'];
