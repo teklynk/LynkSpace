@@ -131,7 +131,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         $email_subject = "$server_domain - User Account has been added:  $user_name";
         $email_body = "To log on the site, use the following credentials.\n\n";
         $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . validateEmail($_POST['useremail']) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nDatabase Name: " . safeCleanStr($_POST['dbname']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
-        $email_body .= "If you have any questions or encounter any problems logging in, please contact the web site administrator.\n\n";
+        $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
         $headers = "From: noreply@$server_domain\n";
         $headers .= "Reply-To: noreply@$server_domain";
 
@@ -155,47 +155,41 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 ?>
     <style type="text/css">
         html, body {
-            margin-top: 0 !important;
-            background: #fcfcfc url('images/color-splash-3.jpg') center center;
-            /*background: #fcfcfc;*/
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #fcfcfc url('images/color-splash-3.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
         }
-
-        h2, .h2 {
-            font-size: 30px;
-            border-bottom: solid 1px #ccc;
-            padding-bottom: 4px;
+        .form-signin {
+            max-width: 330px;
+            padding: 0;
+            margin: 0 auto;
         }
-
+        #page-wrapper {
+            background-color: transparent !important;
+        }
+        .navbar-inverse, .scrollToTop {
+            display: none !important;
+        }
+        #wrapper {
+            padding-left: 0 !important;
+        }
         .login-panel {
             margin-top: 60px;
         }
-
         .login-panel img {
             margin: 20px auto;
             vertical-align: middle;
         }
-
         .login-panel .img-center {
             display: inline;
         }
-
-        #page-wrapper {
-            background-color: transparent !important;
-        }
-
-        .navbar-inverse, .scrollToTop {
-            display: none !important;
-        }
-
-        #wrapper {
-            padding-left: 0 !important;
-        }
-
-        .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
+        footer {
+            display: none!important;
+            visibility: hidden !important;
         }
     </style>
 

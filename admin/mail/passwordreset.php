@@ -41,7 +41,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
         $email_subject = "$server_domain - User Account Information Change:  $user_name";
         $email_body = "This email confirms that your password has been changed. To log on the site, use the following credentials.\n\n";
         $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
-        $email_body .= "If you have any questions or encounter any problems logging in, please contact the web site administrator.\n\n";
+        $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
         // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
         $headers = "From: noreply@$server_domain\n";
         $headers .= "Reply-To: noreply@$server_domain";

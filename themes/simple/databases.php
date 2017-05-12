@@ -3,6 +3,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+echo "<div class='page-databases>";
+
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/featured.inc.php';
@@ -27,6 +29,8 @@ if (!empty($_GET['cat_id'])) {
     include 'includes/customers.inc.php';
 }
 echo "</div>";
+echo "</div>";
+
 echo "</div>";
 
 include_once('includes/footer.inc.php');

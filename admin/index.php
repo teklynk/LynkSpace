@@ -47,7 +47,7 @@ if (!empty($_POST)) {
             }
 
         } else {
-            $message = "<div class='alert alert-danger' role='alert'>Invalid Username or Password!<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+            $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
         }
 
     }
@@ -82,49 +82,41 @@ if (isset($_SESSION['loggedIn'])) {
 ?>
     <style type="text/css">
         html, body {
-            margin-top: 0 !important;
-            background: #fcfcfc url('images/color-splash-3.jpg') center center;
-            /*background: #fcfcfc;*/
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #fcfcfc url('images/color-splash-3.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
         }
-
+        .form-signin {
+            max-width: 330px;
+            padding: 0;
+            margin: 0 auto;
+        }
+        #page-wrapper {
+            background-color: transparent !important;
+        }
+        .navbar-inverse, .scrollToTop {
+            display: none !important;
+        }
+        #wrapper {
+            padding-left: 0 !important;
+        }
         .login-panel {
             margin-top: 60px;
         }
-
         .login-panel img {
             margin: 20px auto;
             vertical-align: middle;
         }
-
         .login-panel .img-center {
             display: inline;
         }
-
-        #page-wrapper {
-            background-color: transparent !important;
-        }
-
-        .navbar-inverse, .scrollToTop {
-            display: none !important;
-        }
-
-        #wrapper {
-            padding-left: 0 !important;
-        }
-
-        .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
         footer {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0px;
-            padding: 10px;
-            margin-left: 0;
+            display: inline-block !important;
+            visibility: visible !important;
         }
     </style>
 
@@ -151,21 +143,21 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="form-group">
                                         <label>Username</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>User Email</label>
+                                        <label>Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidationPattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>User Password</label>
+                                        <label>Password</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo $passwordValidationPattern; ?>" title="<?php echo $passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
@@ -176,7 +168,7 @@ if (isset($_SESSION['loggedIn'])) {
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">
-                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i class='fa fa-question-circle-o'></i></small>
+                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i class='fa fa-fw fa-question-circle'></i></small>
                             </div>
                             <?php
                         } else {
@@ -199,7 +191,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="form-group">
                                         <label>Username</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>

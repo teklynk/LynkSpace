@@ -4,6 +4,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+echo "<div class='page-page'>";
+
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/featured.inc.php';
@@ -54,6 +56,8 @@ if ($pageImage > "") {
 }
 
 echo "</div>";
+echo "</div>";
+
 echo "</div>";
 
 include_once('includes/footer.inc.php');

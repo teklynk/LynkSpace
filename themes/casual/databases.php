@@ -2,6 +2,8 @@
 define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
+
+echo "<div class='page-databases'>";
 ?>
     <div class="row">
         <div class="box">
@@ -30,6 +32,8 @@ if (!empty($_GET['cat_id'])) {
 
 echo "</div>";
 echo "</div>";
+echo "</div>";
+
 echo "</div>";
 
 include_once('includes/footer.inc.php');

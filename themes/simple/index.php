@@ -3,6 +3,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+echo "<div class='page-index'>";
+
 echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed'>";
     include 'includes/slider.inc.php';
 echo "</header>";
@@ -80,6 +82,8 @@ echo "<div class='container-fluid'>";
 echo "<div class='container'>";
     include 'includes/team.inc.php';
 echo "</div>";
+echo "</div>";
+
 echo "</div>";
 
 include_once('includes/footer.inc.php');

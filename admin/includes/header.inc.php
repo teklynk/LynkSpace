@@ -48,6 +48,9 @@ session_start();
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
 
+    <!-- Google Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
+
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
 
@@ -198,21 +201,25 @@ session_start();
             </button>
             <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a>
             <a class="navbar-brand">YOUSEEMORE</a>
+
             <?php
             if ($multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
             ?>
             <ul class="nav navbar-right top-nav">
-                <li style="margin-top:8px; margin-left:0px;">
+                <li class="loc-select">
 
                     <select class="selectpicker selectpicker-auto" data-container="body" data-dropup-auto="false" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
                         <?php
-                        echo $_SESSION['loc_list'];
+                            echo $_SESSION['loc_list'];
                         ?>
                     </select>
 
                 </li>
             </ul>
-            <?php } ?>
+            <?php
+            }
+            ?>
+
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -230,7 +237,7 @@ session_start();
                         <a href="../index.php?loc_id=<?php echo $_SESSION['loc_id']; ?>" target="_blank"><i class="fa fa-fw fa-home"></i> View My Site</a>
                     </li>
                     <li>
-                        <a href="users.php?loc_id=<?php echo $_SESSION['loc_id']; ?>"><i class="fa fa-fw fa-user"></i> My Account</a>
+                        <a href="users.php?loc_id=<?php echo $_SESSION['loc_id']; ?>"><i class="fa fa-fw fa-user-circle"></i> My Account</a>
                     </li>
                     <li>
                         <a href="#" target="_blank"><i class="fa fa-fw fa-question-circle"></i> Help</a>

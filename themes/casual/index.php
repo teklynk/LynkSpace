@@ -2,6 +2,8 @@
 define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
+
+echo "<div class='page-index'>";
 ?>
 <div class="row">
     <div class="box">
@@ -81,4 +83,5 @@ if ($hottitlesCount > 0) {
     </div>
 </div>
 
+</div>
 <?php include_once("includes/footer.inc.php"); ?>

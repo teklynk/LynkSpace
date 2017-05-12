@@ -4,6 +4,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+echo "<div class='page-contact'>";
+
 //needed for mailprocessor.php
 $_SESSION['file_referer'] = 'contact.php';
 
@@ -93,7 +95,7 @@ $_SESSION['unique_referer'] = generateRandomString();
         </div>
     </div>
 </div>
-
+</div>
 <?php
 include_once('includes/footer.inc.php');
 ?>

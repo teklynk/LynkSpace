@@ -207,6 +207,7 @@ if ($_GET['loc_id'] != 1) {
                             echo "<th>Location Type</th>";
                         }
                         ?>
+
                         <th>Active</th>
                         <th>Actions</th>
                     </tr>

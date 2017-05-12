@@ -3,6 +3,8 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
+echo "<div class='page-search'>";
+
 echo "<div class='container-fluid sitesearch'>";
 echo "<div class='container bannerwrapper'>";
 
@@ -19,6 +21,8 @@ if (!empty($_POST['sitesearchterm'])) {
 }
 
 echo "</div>";
+echo "</div>";
+
 echo "</div>";
 
 include_once('includes/footer.inc.php');

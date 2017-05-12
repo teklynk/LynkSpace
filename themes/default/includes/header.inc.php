@@ -22,7 +22,10 @@ session_start();
     <meta name="author" content="<?php echo $setupAuthor; ?>">
 
     <title><?php echo $theTitle; ?></title>
-
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+    <link rel="apple-touch-icon" href="../images/nonretina76x76.png" sizes="76x76" />
+    <link rel="apple-touch-icon" href="../images/iphone120x120.png" sizes="120x120" />
+    <link rel="apple-touch-icon" href="../images/iPad152x152.png" sizes="152x152" />
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/core/css/main.min.css">
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/core/css/font-awesome.min.css">

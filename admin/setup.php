@@ -105,7 +105,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Settings</a></li>
             <li class='active'>New Location</li>
             </ol>";
-                echo "<h1 class='page-header'>Settings (New) <button type='button' class='btn btn-link' onclick='javascript: window.history.go(-1)'> Cancel</button></h1>";
+                echo "<h1 class='page-header'>Settings (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
@@ -185,7 +185,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                             <i class='fa fa-fw fa-edit'></i> Site Options
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Edit global web site settings, themes, styles.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                            &nbsp;&nbsp;Edit global website settings, themes, styles.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                                         </small>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                                 <i class='fa fa-fw fa-upload'></i> Import CSV
                                             </button>
                                             <small>
-                                                &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                                &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                                             </small>
                                         </div>
                                     </div>
@@ -220,7 +220,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                     <div class="form-group" id="new_location">
                                         <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
                                         <small>
-                                            &nbsp;&nbsp;Add a new branch / location to the web site.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                            &nbsp;&nbsp;Add a new branch / location to the website.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                                         </small>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                             <i class='fa fa-fw fa-trash'></i> Delete this Location
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Permanently delete this location.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                            &nbsp;&nbsp;Permanently delete this location.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                                         </small>
                                     </div>
                                 </div>
@@ -259,7 +259,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                                                 <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
                                             </label>
                                             <small>
-                                                &nbsp;&nbsp;Make this location active.&nbsp;<i class="fa fa-question-circle-o"></i>
+                                                &nbsp;&nbsp;Make this location active.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                                             </small>
                                         </div>
                                     </div>

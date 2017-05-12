@@ -2,6 +2,8 @@
 define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
+
+echo "<div class='page-team'>";
 ?>
     <div class="row">
         <div class="box">
@@ -19,6 +21,8 @@ include_once('includes/header.inc.php');
 <?php
 
 include 'includes/team.inc.php';
+
+echo "</div>";
 
 include_once('includes/footer.inc.php');
 ?>

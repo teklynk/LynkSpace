@@ -91,7 +91,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         <i class='fa fa-fw fa-edit'></i> File Editor
                     </button>
                     <small>
-                        &nbsp;&nbsp;Over-ride theme CSS styles and other files.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
+                        &nbsp;&nbsp;Over-ride theme CSS styles and other files.&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                     </small>
                 </div>
                 <hr/>
@@ -137,13 +137,13 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <div class="form-group">
                     <label>Admin Panel IP Range Access</label>
                     <small>
-                        &nbsp;&nbsp;Restrict access to an external or internal IP address.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?>&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
+                        &nbsp;&nbsp;Restrict access to an external or internal IP address.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?>&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                     </small>
                     <input type="text" class="form-control count-text" name="site_iprange" maxlength="20" value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0." data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top">
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <label>Web Site Analytics</label>
+                    <label>Website Analytics</label>
                     <input type="text" class="form-control count-text" name="site_analytics" maxlength="20" value="<?php echo $rowConfig['analytics']; ?>" placeholder="UA-XXXXXX-Y">
                 </div>
                 <div class="form-group" id="sitemap_builder">
@@ -151,7 +151,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         <i class='fa fa-fw fa-refresh'></i> Update Sitemap.xml
                     </button>
                     <small>
-                        &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i>
+                        &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                     </small>
                     <br/>
                     <small class="sitemap_builder_msg">

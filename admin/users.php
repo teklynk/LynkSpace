@@ -70,7 +70,7 @@ if ($_GET['passwordupdated'] == 'true') {
             <div class="form-group">
                 <label>Username</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                     <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $rowUsers['username']; ?>" placeholder="Username" autofocus autocomplete="off" required>
                 </div>
             </div>
