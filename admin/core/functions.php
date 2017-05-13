@@ -196,17 +196,38 @@ function rrmdir($dir) {
     }
 }
 
+function getUrlContents($getUrl) {
+    $ch = curl_init();
+    $timeout = 3;
+    curl_setopt($ch, CURLOPT_URL, $getUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if ($http_status != 200) {
+        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
+        curl_close($ch);
+    }
+    curl_close($ch);
+
+    return $data;
+}
+
 //Updater
 function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
 
-    $getVersion = file_get_contents('http://10.10.15.142/ysmversion.txt');
+    $http_status = '';
 
-    if ((string)trim($getVersion) > (string)trim($ysmVersion)){
-        return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
-    } else {
-        return false;
+    $updatesURL = 'http://10.10.15.142/ysmversion.txt';
+
+    $getVersion = getUrlContents($updatesURL);
+
+    if ($http_status == 200) {
+        if ((string)trim($getVersion) > (string)trim($ysmVersion)){
+            return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
+        }
     }
 }
 
