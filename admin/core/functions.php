@@ -197,8 +197,10 @@ function rrmdir($dir) {
 }
 
 function getUrlContents($getUrl) {
+    global $http_status;
+
     $ch = curl_init();
-    $timeout = 3;
+    $timeout = 5;
     curl_setopt($ch, CURLOPT_URL, $getUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
@@ -217,10 +219,9 @@ function getUrlContents($getUrl) {
 function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
+    global $http_status;
 
-    $http_status = '';
-
-    $updatesURL = 'http://10.10.15.142/ysmversion.txt';
+    $updatesURL = 'https://www.teklynk.com/ysmversion.txt';
 
     $getVersion = getUrlContents($updatesURL);
 
