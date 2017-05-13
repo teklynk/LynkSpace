@@ -48,8 +48,8 @@ session_start();
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
 
-    <!-- Google Fonts -->
-    <link href='//fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
+    <!-- Custom Fonts from: localfont.com -->
+    <link href='//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/fonts.min.css' rel='stylesheet'>
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
