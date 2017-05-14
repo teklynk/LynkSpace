@@ -215,7 +215,7 @@ function getUrlContents($getUrl) {
     return $data;
 }
 
-//Updater
+//Check if a new version is available
 function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
@@ -229,7 +229,19 @@ function checkForUpdates(){
         if ((string)trim($getVersion) > (string)trim($ysmVersion)){
             return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
         }
+    } else {
+        return false;
     }
+}
+
+//Download and install the update
+function getUpdates(){
+    checkForUpdates();
+    global $getVersion;
+
+    echo "<p>NEW VERSION: ".$getVersion."</p>";
+    echo "<p>Reading Current Releases List</p>";
+
 }
 
 //Variable to hide elements from non-admin users

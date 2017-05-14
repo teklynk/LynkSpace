@@ -27,7 +27,10 @@ if ($errorMsg !="") {
 if ($deleteMsg != "") {
     echo $deleteMsg;
 }
+
+getUpdates();
 ?>
+
 <ul>
     <li>
         After login, Check a remote file/script to get the latest YSM7 version.<br/>
