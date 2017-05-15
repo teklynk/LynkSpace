@@ -196,17 +196,101 @@ function rrmdir($dir) {
     }
 }
 
-//Updater
+function getUrlContents($getUrl) {
+    global $http_status;
+
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch, CURLOPT_URL, $getUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if ($http_status != 200) {
+        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
+        curl_close($ch);
+    }
+    curl_close($ch);
+
+    return $data;
+}
+
+//Check if a new version is available
 function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
+    global $http_status;
 
-    $getVersion = file_get_contents('http://10.10.15.142/ysmversion.txt');
+    $updatesURL = 'https://www.teklynk.com/updates/version.txt';
 
-    if ((string)trim($getVersion) > (string)trim($ysmVersion)){
-        return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
+    $getVersion = getUrlContents($updatesURL);
+
+    if (!isset($_SESSION['updates_available'])) {
+        if ($http_status == 200) {
+            if ((string)trim($getVersion) > (string)trim($ysmVersion)){
+                return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
+//Download and install the update
+function getUpdates(){
+    checkForUpdates();
+    global $getVersion;
+    global $updatesFile;
+    global $changeLogFile;
+
+    $changeLogFile = 'https://www.teklynk.com/updates/changelog'.$getVersion.'.txt';
+    $updatesFile = 'https://www.teklynk.com/updates/version'.$getVersion.'.zip';
+}
+
+//Download file and save to a directory on the server
+function downloadFile($url, $path) {
+    //example: downloadFile($updatesFile, 'upgrade/version' . $getVersion . '.zip');
+    $fileResource = fopen($path, 'w');
+    // Get The Zip File From Server
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 400);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_FILE, $fileResource);
+    $curl_errno = curl_errno($ch);
+    $curl_error = curl_error($ch);
+    $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+    $page = curl_exec($ch);
+
+    if (!$page) {
+        echo "Error :- " . curl_error($ch);
+    }
+
+    if ($curl_errno > 0) {
+        echo "downloadFile() Error ($curl_errno): $curl_error\n";
+    }
+
+    curl_close($ch);
+}
+
+//$target_file is the uploaded file's name and location
+function extractZip($zipFile, $extractPath){
+    //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
+    $zip = new ZipArchive;
+    $res = $zip->open($zipFile);
+
+    if ($res === true) {
+        $zip->extractTo($extractPath);
+        $zip->close();
     } else {
-        return false;
+        print 'extractZip() Error';
     }
 }
 

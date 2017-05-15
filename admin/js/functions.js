@@ -4,9 +4,9 @@ $(document).ready(function () {
         $('.fa-dedent').addClass('fa-indent');
         $('.side-nav').addClass('shrink');
         $('#wrapper').addClass('shrink_wrap');
-        $('.fa-dedent').attr('title', 'Expand Menu');
+        $('#button-menu').attr('title', 'Expand Menu');
     } else {
-        $('.fa-dedent').attr('title', 'Collapse Menu');
+        $('#button-menu').attr('title', 'Collapse Menu');
     }
 
     $('#button-menu').click(function () {
@@ -15,7 +15,7 @@ $(document).ready(function () {
         $('#wrapper').toggleClass('shrink_wrap');
         if ($('.side-nav').hasClass('shrink')) {
             $.cookie('sidebar-collapse', 1);
-            $('.fa-dedent').attr('title', 'Expand Menu');
+            $('#button-menu').attr('title', 'Expand Menu');
             $('.navbar-brand').toggleClass('shrink_brand');
         } else {
             $.cookie('sidebar-collapse', null);
@@ -23,7 +23,7 @@ $(document).ready(function () {
             $('.side-nav').removeClass('shrink');
             $('#wrapper').removeClass('shrink_wrap');
             $('.navbar-brand').removeClass('shrink_brand');
-            $('.fa-dedent').attr('title', 'Collapse Menu');
+            $('#button-menu').attr('title', 'Collapse Menu');
         }
     });
 
@@ -694,6 +694,22 @@ $(document).ready(function () {
         }, 500);
     });
 
+    //Updates/Ugrades Button
+    $('#update_download').click(function () {
+        setTimeout(function() {
+            $('#update_download').attr('disabled', true);
+            $('#update_download>i').removeClass('fa-cloud-download');
+            $('#update_download>i').addClass('fa-refresh fa-spin');
+        }, 500);
+    });
+    $('#update_install').click(function () {
+        setTimeout(function() {
+            $('#update_install').attr('disabled', true);
+            $('#update_install>i').removeClass('fa-cloud-upload');
+            $('#update_install>i').addClass('fa-refresh fa-spin');
+        }, 500);
+    });
+
     //Not a Robot Function
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
@@ -784,6 +800,7 @@ function showMyModal(myTitle, myFile) {
     $('#webpageDialog').modal('show');
     $('#databasesDialog').modal('show');
     $('#webserviceDialog').modal('show');
+    $('#changlogDialog').modal('show');
 }
 //Page Load/Performance Checker
 window.onload = function () {

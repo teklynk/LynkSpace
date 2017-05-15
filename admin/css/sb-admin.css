@@ -503,8 +503,8 @@ dl, ol, ul {
         height: 0;
         /*padding-left: 15px;*/
         padding-right: 34px !important;
-        padding-bottom: 24px !important;
-        padding-top: 8px !important;
+        padding-bottom: 22px !important;
+        padding-top: 4px !important;
         border-bottom: 0;
     }
     .shrink_wrap {

@@ -27,43 +27,82 @@ if ($errorMsg !="") {
 if ($deleteMsg != "") {
     echo $deleteMsg;
 }
-?>
-<ul>
-    <li>
-        After login, Check a remote file/script to get the latest YSM7 version.<br/>
-        file_get_contents('http://your-server.com/CMS-UPDATE-PACKAGES/current-release-versions.php') or die ('ERROR');<br/>
-    </li>
-    <li>
-        Compare remote version number to local version number. If remote version greater than local then create a session object and Update Available button.
-    </li>
-    <li>
-        Show link/button to download a remote zip file containing the new files and any migration scripts.<br/>
-        Show a link to changelog file.
-    </li>
-    <li>
-        Check that file has been downloaded and inside the temp "upgrade" folder and file size and/or MD5 hash matches remote zip.
-    </li>
-    <li>
-        Show link to install updates.
-    </li>
-    <li>
-        $openZip = zip_open('upgrades/newversion-7-0-2.zip');<br/>
-        $readZip = zip_read($openZip);<br/>
-        $fileName = zip_entry_name($readZip);<br/>
-        Loop through zip, create folders if not in project.<br/>
-        zip_entry_read to read contents of each file.<br/>
-        fwrite to write the file contents.
-    </li>
-    <li>
-        Execute migration scripts.<br/>
-        Delete migration scripts.<br/>
-        clear session object.<br/>
-    </li>
-    <li>
-        Show a success message.
-    </li>
-</ul>
 
+getUpdates();
+
+if (!is_writable(dirname('upgrade'))) {
+
+    echo "Unable to write to folder. Check file permissions.";
+
+} else {
+
+    if (isset($_SESSION['updates_available'])) {
+        echo "<h3>An updated version of YouSeeMore is available: ".$getVersion."</h3>";
+        echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
+        echo "<p>You can update to version ".$getVersion." automatically:</p>";
+
+        if (!file_exists('upgrade/version'.$getVersion.'.zip')) {
+            echo "<button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Download Now</button>";
+        } else {
+            echo "<button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button>";
+        }
+
+    } else {
+        echo "<h3>No updates available.</h3>";
+        echo "<p>You are currently on version ".$getVersion."</p>";
+        unset($_SESSION['updates_available']);
+    }
+
+}
+
+//Download the updated zip file from a remote server
+if ($_GET['download'] == 'true') {
+    if (!file_exists('upgrade/version' . $getVersion . '.zip' )) {
+        downloadFile($updatesFile, 'upgrade/version' . $getVersion . '.zip');
+    }
+}
+//Extract and install the zip file contents
+if ($_GET['install'] == 'true' && file_exists('upgrade/version'.$getVersion.'.zip')){
+    if (file_exists('upgrade/version'.$getVersion.'.zip')){
+        extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
+    }
+    //Delete the zip file
+    unlink('upgrade/version'.$getVersion.'.zip');
+    //remove session variable
+    unset($_SESSION['updates_available']);
+}
+
+?>
+<!--modal preview window-->
+
+<style>
+    #webslideDialog iframe {
+        width: 100%;
+        height: 400px;
+        border: none;
+    }
+
+    .modal-dialog {
+        width: 50%;
+    }
+</style>
+
+<div class="modal fade" id="webslideDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+                <h4 class="modal-title">&nbsp;</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="myModalFile" src="" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">&nbsp;</div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <?php
 include_once('includes/footer.inc.php');
 ?>
