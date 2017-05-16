@@ -28,6 +28,7 @@ if ($deleteMsg != "") {
     echo $deleteMsg;
 }
 
+//Check for updates. Get global variables.
 getUpdates();
 
 if (!is_writable(dirname('upgrade'))) {
@@ -37,7 +38,7 @@ if (!is_writable(dirname('upgrade'))) {
 } else {
 
     if (isset($_SESSION['updates_available'])) {
-        echo "<h3>An updated version of YouSeeMore is available: ".$getVersion."</h3>";
+        echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
         echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
         echo "<p>You can update to version ".$getVersion." automatically:</p>";
 
@@ -48,7 +49,7 @@ if (!is_writable(dirname('upgrade'))) {
         }
 
     } else {
-        echo "<h3>No updates available.</h3>";
+        echo "<h2>No updates available.</h2>";
         echo "<p>You are currently on version ".$getVersion."</p>";
         unset($_SESSION['updates_available']);
     }

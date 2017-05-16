@@ -30,7 +30,7 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
             $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         } else {
-            //Delete the file if it is to large
+            //Delete the file if it is too large
             unlink($target_file);
             $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 

@@ -82,7 +82,10 @@ header.carousel .fill {
 #hottitlesTabs .center-tabs>li.active>a {
     cursor: default;
 }
-
+.databases-featured {
+    margin-top: 20px;
+    clear: both;
+}
 /* 404 Page Styles */
 
 .error-404 {

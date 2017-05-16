@@ -4,12 +4,13 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
+
 getCustomers('featured');
 
 $customersItemCount = 0;
 
 if ($customerNumRows > 0) {
-    echo "<div class='row' id='databases'>";
+    echo "<div class='row databases-featured' id='databases'>";
 
     if (!empty($customerHeading)) {
         echo "<div class='col-lg-12'>";
@@ -22,6 +23,7 @@ if ($customerNumRows > 0) {
         echo "<p class='text-left'>".$customerBlurb."</p>";
         echo "</div>";
     }
+
     echo "<div style='clear:both;'></div>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
