@@ -521,7 +521,7 @@ if ($_GET['section'] == $rowSections['section']) {
                                 </div>
                             </div>
                             <div class="col-lg-10">
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="cust_newcat">Category</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">

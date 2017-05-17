@@ -282,7 +282,7 @@ if ($_GET['section'] == $navSections[0]) {
                     <div class="col-lg-8">
                         <fieldset class="well">
                             <div class="col-lg-12">
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="nav_newcat">Category</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="nav_newcat" id="nav_newcat" maxlength="255" data-toggle="tooltip" title="Create a new category first, and then create the associated links.">
