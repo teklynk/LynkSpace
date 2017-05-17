@@ -58,19 +58,32 @@ if (!is_writable(dirname('upgrade'))) {
 
 //Download the updated zip file from a remote server
 if ($_GET['download'] == 'true') {
+    if (!file_exists('upgrade')) {
+        mkdir('upgrade', 0755, true);
+    } else {
+        echo 'Could not create Upgrade directory.';
+    }
+
+    sleep(2); // wait
+
     if (!file_exists('upgrade/version' . $getVersion . '.zip' )) {
         downloadFile($updatesFile, 'upgrade/version' . $getVersion . '.zip');
     }
 }
+
 //Extract and install the zip file contents
-if ($_GET['install'] == 'true' && file_exists('upgrade/version'.$getVersion.'.zip')){
-    if (file_exists('upgrade/version'.$getVersion.'.zip')){
+if ($_GET['install'] == 'true' && file_exists('upgrade/version'.$getVersion.'.zip')) {
+    if (file_exists('upgrade/version'.$getVersion.'.zip')) {
         extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
+
+        sleep(2); // wait
+
+        //Delete the zip file
+        unlink('upgrade/version'.$getVersion.'.zip');
+        //remove session variable
+        unset($_SESSION['updates_available']);
     }
-    //Delete the zip file
-    unlink('upgrade/version'.$getVersion.'.zip');
-    //remove session variable
-    unset($_SESSION['updates_available']);
+
 }
 
 ?>

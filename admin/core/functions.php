@@ -186,7 +186,7 @@ function rrmdir($dir) {
             if ($object != "." && $object != "..") {
                 if (filetype($dir."/".$object) == "dir"){
                     rrmdir($dir."/".$object);
-                }else{
+                } else {
                     unlink($dir."/".$object);
                 }
             }
@@ -280,9 +280,10 @@ function downloadFile($url, $path) {
     curl_close($ch);
 }
 
-//$target_file is the uploaded file's name and location
+//Extracts zip file source to destination, overwriting existing files
 function extractZip($zipFile, $extractPath){
     //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
+    //Requires php-zip extension - apt-get install php5.6-zip php-zip
     $zip = new ZipArchive;
     $res = $zip->open($zipFile);
 

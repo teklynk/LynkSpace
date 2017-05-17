@@ -160,7 +160,7 @@ if ($_GET['loc_id'] != 1) {
                         if ($adminIsCheck == "true") {
                             ?>
                             <div class="form-group">
-                                <label for="location_type">Location Type</label>
+                                <label for="location_type">Location Group</label>
                                 <select class='form-control' name='location_type' id='location_type'>
                                     <?php echo $locMenuStr; ?>
                                 </select>
@@ -204,7 +204,7 @@ if ($_GET['loc_id'] != 1) {
                         <?php
                         // if is admin then show the table header
                         if ($adminIsCheck == "true") {
-                            echo "<th>Location Type</th>";
+                            echo "<th>Location Group</th>";
                         }
                         ?>
 

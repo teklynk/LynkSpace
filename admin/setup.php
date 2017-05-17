@@ -324,7 +324,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 if ($multiBranch == 'true') {
                     ?>
                     <div class="form-group">
-                        <label for="location_type">Location Type</label>
+                        <label for="location_type">Location Group</label>
                         <select class="form-control" name="location_type" id="location_type">
                             <?php echo $locMenuStr; ?>
                         </select>

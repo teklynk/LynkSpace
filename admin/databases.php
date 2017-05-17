@@ -118,7 +118,7 @@ if ($_GET['section'] == $rowSections['section']) {
             <div class="col-lg-2">
                 <div class="form-group">
                     <div class="nav-section">
-                        <label for="nav_menu">Database Sections</label>
+                        <label for="nav_menu">Database Pages</label>
                         <div class="input-group">
 
                             <select class="form-control" name="nav_menu" id="nav_menu">
@@ -588,7 +588,7 @@ if ($_GET['section'] == $rowSections['section']) {
                         <tr>
                             <th>Sort</th>
                             <th>Name</th>
-                            <th>Category</th>
+                            <th>Category (Sort)</th>
                             <th>Featured</th>
                             <th>Active</th>
                             <th>Actions</th>

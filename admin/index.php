@@ -32,7 +32,7 @@ if (!empty($_POST)) {
             }
 
             //Super Admin
-            if (strpos($_SESSION['user_name'],'libadmin') !== false && strpos($_SESSION['user_email'], '@tlcdelivers.com') !== false) {
+            if (strpos($_SESSION['user_name'],'tlcadmin') !== false && strpos($_SESSION['user_email'], '@tlcdelivers.com') !== false) {
                 $_SESSION['super_admin'] = true;
             }
 

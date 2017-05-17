@@ -110,7 +110,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <?php
                 if ($rowConfig['multibranch'] == 'true') {
                     echo "<div class='form-group'>";
-                    echo "<label>Location Types</label>";
+                    echo "<label>Location Groups</label>";
                     echo "<input type='text' class='form-control count-text' name='site_loc_types' maxlength='255' value='". $rowConfig['loc_types'] ."' placeholder='1,2,3,4,5'>";
                     echo "</div>";
                 } else {

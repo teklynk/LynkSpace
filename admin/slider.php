@@ -186,7 +186,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         // if is admin then show the table header
         if ($adminIsCheck == "true") {
             echo "<div class='form-group'>";
-            echo "<label>Location Type</label>";
+            echo "<label>Location Group</label>";
             //loop through the array of location Types
             $locMenuStr = "";
             $locArrlength = count($locTypes);
@@ -391,7 +391,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<th>Slide Title</th>";
         // if is admin then show the table header
 		if ($adminIsCheck == "true") {
-            echo "<th>Location Type</th>";
+            echo "<th>Location Group</th>";
         }
 		echo "<th>Start Date</th>
         <th>End Date</th>
