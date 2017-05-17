@@ -195,7 +195,7 @@ function rrmdir($dir) {
         rmdir($dir);
     }
 }
-
+//cURL a URL to get contents
 function getUrlContents($getUrl) {
     global $http_status;
 
@@ -214,17 +214,14 @@ function getUrlContents($getUrl) {
 
     return $data;
 }
-
 //Check if a new version is available
 function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
     global $http_status;
-
-    $updatesURL = 'https://www.teklynk.com/updates/version.txt';
-
+    $updatesURL = 'http://ysmupdates.local.com/version.txt';
     $getVersion = getUrlContents($updatesURL);
-
+    $getVersion = trim($getVersion);
     if (!isset($_SESSION['updates_available'])) {
         if ($http_status == 200) {
             if ((string)trim($getVersion) > (string)trim($ysmVersion)){
@@ -235,18 +232,20 @@ function checkForUpdates(){
         }
     }
 }
-
 //Download and install the update
 function getUpdates(){
     checkForUpdates();
     global $getVersion;
-    global $updatesFile;
+    global $updatesRemoteFile;
     global $changeLogFile;
+    global $updatesDestination;
+    global $updatesCheckerURL;
 
-    $changeLogFile = 'https://www.teklynk.com/updates/changelog'.$getVersion.'.txt';
-    $updatesFile = 'https://www.teklynk.com/updates/version'.$getVersion.'.zip';
+    $changeLogFile = 'http://ysmupdates.local.com/changelog'.$getVersion.'.txt';
+    $updatesRemoteFile = 'http://ysmupdates.local.com/version'.$getVersion.'.zip';
+    $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
+    $updatesCheckerURL = 'http://ysmupdates.local.com/versionupdatechecker.php';
 }
-
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {
     //example: downloadFile($updatesFile, 'upgrade/version' . $getVersion . '.zip');
@@ -266,22 +265,92 @@ function downloadFile($url, $path) {
     curl_setopt($ch, CURLOPT_FILE, $fileResource);
     $curl_errno = curl_errno($ch);
     $curl_error = curl_error($ch);
-    $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
     $page = curl_exec($ch);
-
     if (!$page) {
-        echo "Error :- " . curl_error($ch);
+        echo 'Error :- ' . curl_error($ch) . PHP_EOL;
     }
-
     if ($curl_errno > 0) {
-        echo "downloadFile() Error ($curl_errno): $curl_error\n";
+        echo 'downloadFile() Error ($curl_errno): $curl_error' . PHP_EOL;
     }
-
     curl_close($ch);
 }
 
+function extractZip($filename, $dest)
+{
+    if(is_dir($dest)) {
+        // Remove directory's contents
+        //rrmdir($dest, false);
+
+        // Load up the zip
+        $zip = new ZipArchive;
+        $unzip = $zip->open($filename);
+        if($unzip === true) {
+            for($i=0; $i<$zip->numFiles; $i++) {
+                $name = $zip->getNameIndex($i);
+
+                // Remove the first directory in the string if necessary
+                $parts = explode('/', $name);
+                if(count($parts) > 1) {
+                    array_shift($parts);
+                }
+                $file = $dest . '/' . implode('/', $parts);
+
+                // Create the directories if necessary
+                $dir = dirname($file);
+                if(!is_dir($dir))
+                    mkdir($dir, 0777, true);
+
+                // Check if $name is a file or directory
+                if(substr($file, -1) == "/") {
+                    // $name is a directory
+                    // Create the directory
+                    if(!is_dir($file))
+                        mkdir($file, 0777, true);
+                } else {
+                    // $name is a file
+                    // Read from Zip and write to disk
+                    $fpr = $zip->getStream($name);
+                    $fpw = fopen($file, 'w');
+                    while($data = fread($fpr, 1024)) {
+                        fwrite($fpw, $data);
+                    }
+                    fclose($fpr);
+                    fclose($fpw);
+                }
+            }
+            echo 'Success';
+        } else
+            echo 'Extraction of zip failed.';
+    } else
+        echo 'The output directory does not exist!';
+}
+
+
 //Extracts zip file source to destination, overwriting existing files
-function extractZip($zipFile, $extractPath){
+function extractZip2($zipFile, $extractPath){
+    //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
+    //Requires php-zip extension - apt-get install php5.6-zip php-zip
+
+    $zip = new ZipArchive();
+    if ($zip->open($zipFile) === true) {
+        for($i = 0; $i < $zip->numFiles; $i++) {
+            $filename = $zip->getNameIndex($i);
+            $fileinfo = pathinfo($filename);
+            if ($fileinfo['basename'] != '.' || $fileinfo['basename'] != '..'){
+                if (is_dir($fileinfo)) {
+                    mkdir($fileinfo, 0755);
+                } else {
+                    copy('zip://'.$zipFile.'#'.$filename, $extractPath.$fileinfo['basename']);
+                }
+            }
+        }
+        $zip->close();
+    } else {
+        echo 'extractZip() Error' . PHP_EOL;
+    }
+}
+//Extracts zip file source to destination, overwriting existing files
+function extractZip3($zipFile, $extractPath){
     //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
     //Requires php-zip extension - apt-get install php5.6-zip php-zip
     $zip = new ZipArchive;
@@ -291,7 +360,7 @@ function extractZip($zipFile, $extractPath){
         $zip->extractTo($extractPath);
         $zip->close();
     } else {
-        print 'extractZip() Error';
+        echo 'extractZip() Error';
     }
 }
 
