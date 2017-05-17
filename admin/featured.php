@@ -100,7 +100,7 @@ if ($_GET['update'] == 'true') {
                     <?php
                 }
                 ?>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Heading</label>
                     <input type="text" class="form-control count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" autofocus required>
                 </div>

@@ -102,7 +102,7 @@ if ($deleteMsg != "") {
             <fieldset class="well">
                 <form name="userForm" class="dirtyForm" method="post" action="">
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="user_name">Username</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
@@ -111,7 +111,7 @@ if ($deleteMsg != "") {
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="user_email">User Email</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -120,7 +120,7 @@ if ($deleteMsg != "") {
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="user_password">User Password</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
@@ -129,7 +129,7 @@ if ($deleteMsg != "") {
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="user_password_confirm">Password Confirm</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
@@ -141,7 +141,7 @@ if ($deleteMsg != "") {
                     if ($multiBranch == 'true') {
                         ?>
                         <div class="col-lg-12">
-                            <div class="form-group">
+                            <div class="form-group required">
                                 <label for="user_location">User Location</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
@@ -159,9 +159,9 @@ if ($deleteMsg != "") {
                     }
                     ?>
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="user_level">User Level</label>
-                            <div class="input-group">
+                            <div class="input-group required">
                                 <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
                                 <select class="form-control" name="user_level" required>
                                     <option>Choose a user level</option>

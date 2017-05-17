@@ -136,7 +136,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </div>
         </div>
         <hr/>
-        <div class="form-group">
+        <div class="form-group required">
             <label><?php echo $slideLabel; ?></label>
             <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
         </div>
@@ -225,7 +225,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         <!-- date time picker -->
         <div class="col-md-6" style="padding-left:0px;">
-            <div class="form-group">
+            <div class="form-group required">
                 <label>Start Date</label>
                 <div class="input-group date">
                     <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
@@ -236,7 +236,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </div>
         </div>
         <div class="col-md-6" style="padding-right:0px;">
-            <div class="form-group">
+            <div class="form-group required">
                 <label>End Date</label>
                 <div class="input-group date">
                     <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
@@ -380,7 +380,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
-		<div class='form-group'>
+		<div class='form-group required'>
 		<label>Heading</label>
 		<input class='form-control count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' autofocus required>
 		</div>

@@ -88,7 +88,7 @@ if ($_GET['update'] == 'true') {
             }
             ?>
 
-            <div class="form-group">
+            <div class="form-group required">
                 <label>Heading</label>
                 <input type="text" class="form-control count-text" name="generalinfo_heading" maxlength="255" value="<?php echo $rowGeneralinfo['heading']; ?>" placeholder="Heading" autofocus required>
             </div>

@@ -275,7 +275,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                 }
                 ?>
 
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Site Title</label>
                     <input type="text" class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
                 </div>
@@ -295,7 +295,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label>Location Name</label>
                             <input type="text" class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
                         </div>

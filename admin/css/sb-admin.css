@@ -9,6 +9,11 @@ body {
     line-height: 1.42857;
     color: #404040;
 }
+div.required label:not(span):before, td.required:before {
+    content: '* ';
+    color: #d9534f;
+    font-weight: bold;
+}
 .alert-danger p {
     color: #404040;
     margin: 0 0 .3em;

@@ -201,32 +201,32 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                         <form name="frmInstall" class="form-signin" method="post" action="">
                             <fieldset>
                                 <h2 class="form-signin-heading">Database Connection</h2>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label>Database Server</label>
                                     <input class="form-control" type="text" name="dbserver" maxlength="100" autofocus autocomplete="off" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="dbusername">Database Username</label>
                                     <input class="form-control" type="text" name="dbusername" maxlength="100" autocomplete="off" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="dbpassword">Database Password</label>
                                     <input class="form-control" type="text" name="dbpassword" maxlength="100" autocomplete="off" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="dbname">Database Name</label>
                                     <input class="form-control" type="text" name="dbname" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <h2 class="form-signin-heading">Create an Admin user</h2>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="username">Username</label>
                                     <input class="form-control" type="text" name="username" id="user_name" maxlength="100" autocomplete="off" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="useremail">User Email</label>
                                     <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo $emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group required">
                                     <label for="password">Password</label>
                                     <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo $passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo $passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
                                 </div>

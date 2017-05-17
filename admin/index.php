@@ -140,21 +140,21 @@ if (isset($_SESSION['loggedIn'])) {
                             ?>
                             <form name="frmSignin" class="form-signin" method="post" action="">
                                 <fieldset>
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Username</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo $emailValidationPattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
@@ -188,14 +188,14 @@ if (isset($_SESSION['loggedIn'])) {
                                             <h3 class="text-center">Request a new password</h3>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Username</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autocomplete="off" autofocus required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>User Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>

@@ -80,20 +80,20 @@ if ($_GET['section'] == $rowSections['section']) {
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li>New Database</li>
-            <li class='active'>Section: ".$_GET['section']."</li>
+            <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } elseif ($_GET['editcustomer']) {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li class='active'>Edit Database</li>
-            <li class='active'>Section: ".$_GET['section']."</li>
+            <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } else {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
-            <li class='active'>Section: ".$_GET['section']."</li>
+            <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         }
         ?>
@@ -125,8 +125,8 @@ if ($_GET['section'] == $rowSections['section']) {
                                 <?php echo $custMenuStr; ?>
                             </select>
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Section" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
-                                <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete this Database Section" onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Page" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
+                                <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete this Database Page" onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-trash"></i></button>
                             </span>
 
                         </div>
@@ -237,7 +237,7 @@ if ($_GET['section'] == $rowSections['section']) {
                 </div>
 
                 <hr/>
-                <div class="form-group">
+                <div class="form-group required">
                     <label><?php echo $customerLabel; ?></label>
                     <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" autofocus required>
                 </div>
@@ -575,9 +575,9 @@ if ($_GET['section'] == $rowSections['section']) {
                 }
                 ?>
                 <form name="customerForm" class="dirtyForm" method="post" action="">
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSections['heading']; ?>" placeholder="My Database" autofocus required>
+                        <input class="form-control count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSections['heading']; ?>" placeholder="My Database Page">
                     </div>
                     <div class="form-group">
                         <label>Description</label>

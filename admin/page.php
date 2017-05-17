@@ -146,7 +146,7 @@ if ($_GET['preview'] > "") {
                         </div>
                     </div>
                     <hr/>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label><?php echo $pageLabel; ?></label>
                         <input type="text" class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
                     </div>
@@ -279,7 +279,7 @@ if ($_GET['preview'] > "") {
                     }
                     ?>
                     <form name="pageForm" class="dirtyForm" method="post" action="">
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label>Heading</label>
                             <input type="text" class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['pageheading']; ?>" placeholder="My page" autofocus required>
                         </div>
