@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
+		<loc>http://cpswebapp.local.com/page.php?page_id=51&amp;loc_id=1</loc>
+		<lastmod>2017-05-03 16:13:43</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=50&amp;loc_id=1</loc>
 		<lastmod>2017-02-27 15:53:00</lastmod>
 		<changefreq>monthly</changefreq>
@@ -28,10 +33,6 @@
 	<url>
 		<loc>http://cpswebapp.local.com/page.php?page_id=44&amp;loc_id=1</loc>
 		<lastmod>2017-01-19 12:18:11</lastmod>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=20&amp;loc_id=285</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
@@ -96,6 +97,14 @@
 	</url>
 	<url>
 		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=2&amp;loc_id=1</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=0&amp;loc_id=1</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://cpswebapp.local.com/index.php?loc_id=569</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
