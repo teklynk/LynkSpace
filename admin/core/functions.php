@@ -274,12 +274,9 @@ function downloadFile($url, $path) {
     }
     curl_close($ch);
 }
-
-function extractZip($filename, $dest)
-{
+//Extract zip files/folder to specified destination
+function extractZip($filename, $dest){
     if(is_dir($dest)) {
-        // Remove directory's contents
-        //rrmdir($dest, false);
 
         // Load up the zip
         $zip = new ZipArchive;
@@ -298,14 +295,14 @@ function extractZip($filename, $dest)
                 // Create the directories if necessary
                 $dir = dirname($file);
                 if(!is_dir($dir))
-                    mkdir($dir, 0777, true);
+                    mkdir($dir, 0755, true);
 
                 // Check if $name is a file or directory
                 if(substr($file, -1) == "/") {
                     // $name is a directory
                     // Create the directory
                     if(!is_dir($file))
-                        mkdir($file, 0777, true);
+                        mkdir($file, 0755, true);
                 } else {
                     // $name is a file
                     // Read from Zip and write to disk
@@ -323,45 +320,6 @@ function extractZip($filename, $dest)
             echo 'Extraction of zip failed.';
     } else
         echo 'The output directory does not exist!';
-}
-
-
-//Extracts zip file source to destination, overwriting existing files
-function extractZip2($zipFile, $extractPath){
-    //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
-    //Requires php-zip extension - apt-get install php5.6-zip php-zip
-
-    $zip = new ZipArchive();
-    if ($zip->open($zipFile) === true) {
-        for($i = 0; $i < $zip->numFiles; $i++) {
-            $filename = $zip->getNameIndex($i);
-            $fileinfo = pathinfo($filename);
-            if ($fileinfo['basename'] != '.' || $fileinfo['basename'] != '..'){
-                if (is_dir($fileinfo)) {
-                    mkdir($fileinfo, 0755);
-                } else {
-                    copy('zip://'.$zipFile.'#'.$filename, $extractPath.$fileinfo['basename']);
-                }
-            }
-        }
-        $zip->close();
-    } else {
-        echo 'extractZip() Error' . PHP_EOL;
-    }
-}
-//Extracts zip file source to destination, overwriting existing files
-function extractZip3($zipFile, $extractPath){
-    //example: extractZip('upgrade/version'.$getVersion.'.zip', __DIR__ . '/../');
-    //Requires php-zip extension - apt-get install php5.6-zip php-zip
-    $zip = new ZipArchive;
-    $res = $zip->open($zipFile);
-
-    if ($res === true) {
-        $zip->extractTo($extractPath);
-        $zip->close();
-    } else {
-        echo 'extractZip() Error';
-    }
 }
 
 //Variable to hide elements from non-admin users

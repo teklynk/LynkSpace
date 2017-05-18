@@ -71,14 +71,6 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 
     sleep(1); // wait
 
-    if (!file_exists('upgrade/extract')) {
-        mkdir('upgrade/extract', 0755, true);
-    } else {
-        echo 'Could not create upgrade/extract directory.';
-    }
-
-    sleep(1); // wait
-
     if (!file_exists($updatesDestination)) {
         downloadFile($updatesRemoteFile, $updatesDestination);
     }
@@ -96,7 +88,7 @@ if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
 //Extract and install the zip file contents
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
-        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/admin/upgrade/extract');
+        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/');
 
         sleep(1); // wait
 
