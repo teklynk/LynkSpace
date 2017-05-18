@@ -277,40 +277,46 @@ function downloadFile($url, $path) {
 //Extract zip files/folder to specified destination
 function extractZip($filename, $dest){
     if(is_dir($dest)) {
-
         // Load up the zip
         $zip = new ZipArchive;
         $unzip = $zip->open($filename);
-        if($unzip === true) {
-            for($i=0; $i<$zip->numFiles; $i++) {
+
+        if ($unzip === true) {
+            for ($i=0; $i<$zip->numFiles; $i++) {
                 $name = $zip->getNameIndex($i);
 
                 // Remove the first directory in the string if necessary
                 $parts = explode('/', $name);
+
                 if(count($parts) > 1) {
                     array_shift($parts);
                 }
+
                 $file = $dest . '/' . implode('/', $parts);
 
                 // Create the directories if necessary
                 $dir = dirname($file);
-                if(!is_dir($dir))
+
+                if (!is_dir($dir))
                     mkdir($dir, 0755, true);
 
                 // Check if $name is a file or directory
-                if(substr($file, -1) == "/") {
+                if (substr($file, -1) == "/") {
                     // $name is a directory
                     // Create the directory
-                    if(!is_dir($file))
+                    if (!is_dir($file))
                         mkdir($file, 0755, true);
+
                 } else {
                     // $name is a file
                     // Read from Zip and write to disk
                     $fpr = $zip->getStream($name);
                     $fpw = fopen($file, 'w');
-                    while($data = fread($fpr, 1024)) {
-                        fwrite($fpw, $data);
+
+                    while ($data = fread($fpr, 1024)) {
+                         fwrite($fpw, $data);
                     }
+
                     fclose($fpr);
                     fclose($fpw);
                 }
@@ -321,6 +327,10 @@ function extractZip($filename, $dest){
     } else
         echo 'The output directory does not exist!';
 }
+
+//TODO: function that checks the upgrade zip file for a migration.php file.
+//Run the migration script (database changes, permission changes..)
+//List or array of files/folders to skip/ignore during the upgrade/overwrite
 
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 ){

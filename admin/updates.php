@@ -88,6 +88,7 @@ if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
 //Extract and install the zip file contents
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
+
         extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/');
 
         sleep(1); // wait
