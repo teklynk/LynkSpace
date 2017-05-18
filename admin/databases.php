@@ -126,6 +126,7 @@ if ($_GET['section'] == $rowSections['section']) {
                             </select>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Page" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
+                                <button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview this Database Page" class="btn btn-info" onclick="showMyModal('databases.php?section=<?php echo $_GET['section']; ?>&loc_id=<?php echo $_GET['loc_id']; ?>', '../databases.php?section=<?php echo $_GET['section']; ?>&loc_id=<?php echo $_GET['loc_id']; ?>')"><i class="fa fa-eye"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete this Database Page" onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-trash"></i></button>
                             </span>
 
