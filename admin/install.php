@@ -27,6 +27,9 @@ if (!file_exists($dbFilename)) {
     echo "$dbFilename does not exist";
 }
 
+// Check that everything is installed on the server.
+checkDependencies();
+
 // Get server domain name
 $server_domain = $_SERVER['SERVER_NAME'];
 

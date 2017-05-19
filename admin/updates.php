@@ -34,31 +34,23 @@ $upgradeOption = '';
 //Check for updates. Get global variables.
 getUpdates();
 
-if (!is_writable(dirname('upgrade'))) {
+if (isset($_SESSION['updates_available'])) {
+    echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
+    echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
+    echo "<p>You can update to version ".$getVersion." automatically:</p>";
 
-    echo "Unable to write to folder. Check file permissions.";
-
-} else {
-
-    if (isset($_SESSION['updates_available'])) {
-        echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
-        echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
-        echo "<p>You can update to version ".$getVersion." automatically:</p>";
-
-        if (!file_exists($updatesDestination)) {
-            $upgradeOption = 'download';
-            echo "<button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Download Now</button>";
-        } else {
-            $upgradeOption = 'install';
-            echo "<button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button>";
-        }
-
+    if (!file_exists($updatesDestination)) {
+        $upgradeOption = 'download';
+        echo "<button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Download Now</button>";
     } else {
-        echo "<h2>No updates available.</h2>";
-        echo "<p>You are currently on version ".$getVersion."</p>";
-        unset($_SESSION['updates_available']);
+        $upgradeOption = 'install';
+        echo "<button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button>";
     }
 
+} else {
+    echo "<h2>No updates available.</h2>";
+    echo "<p>You are currently on version ".$getVersion."</p>";
+    unset($_SESSION['updates_available']);
 }
 
 //Download the updated zip file from a remote server

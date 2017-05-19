@@ -30,12 +30,21 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 
-#Lock down the config folder - forbidden 403
+#Deny access to these folders - forbidden 403
 RedirectMatch 403 ^/config/$
 RedirectMatch 403 ^/uploads/$
+RedirectMatch 403 ^/themes/$
 
 #Deny access to these files - forbidden 403
 <FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+#Prevent html,php files from being loaded inside an iframe.
+<IfModule mod_headers.c>
+    Header always append X-FRAME-OPTIONS SAMEORIGIN
+    <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+         Header unset X-Frame-Options
+    </FilesMatch>
+</IfModule>

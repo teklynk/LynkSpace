@@ -162,6 +162,32 @@ function getLocList() {
     return $locList;
 }
 
+// Script to test if the CURL extension is installed on this server
+function checkDependencies() {
+    if  (!in_array('curl', get_loaded_extensions())){
+        print_r("<div class='alert alert-danger'><span>cURL (php-curl) is NOT installed on the server.<br/>Try: sudo apt-get install php-curl</span></div><br/>");
+    }
+    if  (!in_array('xml', get_loaded_extensions())){
+        print_r("<div class='alert alert-danger'><span>xml (php-xml) is NOT installed on the server.<br/>Try: sudo apt-get install php-xml</span></div><br/>");
+    }
+    if  (!in_array('zip', get_loaded_extensions())){
+        print_r("<div class='alert alert-danger'><span>zip (php-zip) is NOT installed on the server.<br/>Try: sudo apt-get install php-zip</span></div><br/>");
+    }
+    if  (!in_array('mbstring', get_loaded_extensions())){
+        print_r("<div class='alert alert-danger'><span>mbstring (php-mbstring) is NOT installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div><br/>");
+    }
+    if (!in_array('mod_rewrite', apache_get_modules())){
+        print_r("<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div><br/>");
+    }
+    if (!in_array('mod_headers', apache_get_modules())){
+        print_r("<div class='alert alert-danger'><span>Apache module (mod_headers) is not enabled on the server.<br/>Try: sudo a2enmod headers</span></div><br/>");
+    }
+    if (!in_array('mod_vhost_alias', apache_get_modules())){
+        print_r("<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div><br/>");
+    }
+    return false;
+}
+
 //Copy folder contents to another
 function recurse_copy($src, $dst) {
     $dir = opendir($src);
@@ -219,7 +245,8 @@ function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
     global $http_status;
-    $updatesURL = 'http://ysmupdates.local.com/version.txt';
+    global $updatesSever;
+    $updatesURL = $updatesSever.'/version.txt';
     $getVersion = getUrlContents($updatesURL);
     $getVersion = trim($getVersion);
     if (!isset($_SESSION['updates_available'])) {
@@ -232,7 +259,7 @@ function checkForUpdates(){
         }
     }
 }
-//Download and install the update
+//Set update variables
 function getUpdates(){
     checkForUpdates();
     global $getVersion;
@@ -240,11 +267,12 @@ function getUpdates(){
     global $changeLogFile;
     global $updatesDestination;
     global $updatesCheckerURL;
+    global $updatesSever;
 
-    $changeLogFile = 'http://ysmupdates.local.com/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = 'http://ysmupdates.local.com/version'.$getVersion.'.zip';
+    $changeLogFile = $updatesSever.'/changelog'.$getVersion.'.txt';
+    $updatesRemoteFile = $updatesSever.'version'.$getVersion.'.zip';
     $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
-    $updatesCheckerURL = 'http://ysmupdates.local.com/versionupdatechecker.php';
+    $updatesCheckerURL = $updatesSever.'/versionupdatechecker.php';
 }
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {

@@ -11,6 +11,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     mysqli_select_db($db_conn, $db_name);
 
     if (mysqli_connect_errno($db_conn)) {
+        echo "Go to <a href='admin/install.php'>admin/install.php</a> to install the database. " . PHP_EOL;
         die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
     }
 
@@ -89,4 +90,7 @@ require_once('blowfishsalt.php');
 $versionFile = __DIR__ . 'version.txt';
 $versionFile = str_replace('config', '', $versionFile);
 $ysmVersion = file_get_contents($versionFile);
+
+//Updates remote URL
+$updatesSever = "http://ysmupdates.local.com";
 ?>
