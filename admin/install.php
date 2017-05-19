@@ -21,10 +21,26 @@ $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 // Check if sql file exists
 if (!file_exists($dbFileLoc)) {
     echo "$dbFileLoc does not exist";
+} else {
+    if (!is_writeable($dbFileLoc)){
+        die("$dbFileLoc is not writable. Check file permissions.");
+    }
 }
 // Check if dbconn.php file exists
 if (!file_exists($dbFilename)) {
     echo "$dbFilename does not exist";
+} else {
+    if (!is_writeable($dbFilename)){
+        die("$dbFilename is not writable. Check file permissions.");
+    }
+}
+// Check if blowfishsalt.php file exists
+if (!file_exists($dbBlowfishLoc)) {
+    echo "$dbBlowfishLoc does not exist";
+} else {
+    if (!is_writeable($dbBlowfishLoc)){
+        die("$dbBlowfishLoc is not writable. Check file permissions.");
+    }
 }
 
 // Check that everything is installed on the server.
@@ -92,7 +108,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(2);
 
         // Write to dbconn file
-        $dbfile = fopen($dbFileLoc, "w") or die("Unable to open file!");
+        $dbfile = fopen($dbFileLoc, "w") or die("Unable to open $dbFileLoc");
 
         $writeline = "<?php\n";
         fwrite($dbfile, $writeline);
@@ -110,7 +126,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         fclose($dbfile);
 
         // Write to blowfish file
-        $dbBlowfish = fopen($dbBlowfishLoc, "a") or die("Unable to open file!");
+        $dbBlowfish = fopen($dbBlowfishLoc, "a") or die("Unable to open $dbBlowfishLoc");
         $writeline = "<?php";
         fwrite($dbBlowfish, $writeline);
         $writeline = "\n\$blowfishSalt = '" . $blowfishHash . "';\n";
