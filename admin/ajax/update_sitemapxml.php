@@ -9,19 +9,22 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     if (!empty($_GET) && $_GET['update']) {
 
-        //create sitemap file
         $sitemapFileLoc = "../../sitemap.xml";
+
+        $otherPages = array("index.php", "about.php", "team.php", "services.php", "contact.php", "databases.php");
+
+        if (!file_exists($sitemapFileLoc)) {
+            die("$sitemapFileLoc does not exist" . PHP_EOL);
+        }
 
         if (!is_writable($sitemapFileLoc)) {
             die("Unable to write to sitemap.xml. Check file permissions." . PHP_EOL);
         }
 
         $sitemapfile = fopen($sitemapFileLoc, "w") or die("Unable to open sitemap.xml. Check file permissions.");
-        $otherPages = array("index.php", "about.php", "team.php", "services.php", "contact.php", "databases.php");
 
-        if (!file_exists($sitemapFileLoc)) {
-            die("$sitemapFileLoc does not exist" . PHP_EOL);
-        }
+        //Clear the file
+        ftruncate($sitemapFileLoc, 0);
 
         $writeline = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         fwrite($sitemapfile, $writeline);
@@ -105,11 +108,14 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             die("Unable to write to robots.txt. Check file permissions." . PHP_EOL);
         }
 
-        $robotsfile = fopen($robotsFileLoc, "w") or die("Unable to open robots.txt! Check file permissions.");
-
         if (!file_exists($robotsFileLoc)) {
             die("$robotsFileLoc does not exist" . PHP_EOL);
         }
+
+        $robotsfile = fopen($robotsFileLoc, "w") or die("Unable to open robots.txt! Check file permissions.");
+
+        //Clear the file
+        ftruncate($robotsFileLoc, 0);
 
         $writeline = "User-agent: *\n";
         fwrite($robotsfile, $writeline);
