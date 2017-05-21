@@ -75,6 +75,9 @@ $dbFilename = __DIR__ . "/new_website.sql";
 // Name of the sitemap file
 $siteFilename = __DIR__ . "/../sitemap.xml";
 
+// Name of the robots.txt file
+$robotsFilename = __DIR__ . "/../robot.xt";
+
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
 
