@@ -167,6 +167,7 @@ function checkDependencies(){
     global $dbFileLoc;
     global $dbFilename;
     global $dbBlowfishLoc;
+    global $siteFilename;
 
     if  (!in_array('curl', get_loaded_extensions())) {
         print_r("<div class='alert alert-danger'><span>cURL (php-curl) is NOT installed on the server.<br/>Try: sudo apt-get install php-curl</span></div><br/>");
@@ -212,6 +213,14 @@ function checkDependencies(){
     } else {
         if (!is_writeable($dbBlowfishLoc)) {
             die("$dbBlowfishLoc is not writable. Check file permissions.");
+        }
+    }
+    // Check if sitemap file exists
+    if (!file_exists($siteFilename)) {
+        echo "$siteFilename does not exist";
+    } else {
+        if (!is_writeable($siteFilename)) {
+            die("$siteFilename is not writable. Check file permissions.");
         }
     }
     return false;
