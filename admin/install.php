@@ -27,6 +27,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             mkdir(__DIR__ . "/../uploads", 0755, true);
         }
 
+        //Clear the file sitemap file
+        ftruncate(__DIR__ . "/../sitemap.xml", 0);
+
+
         // MySQL host
         $mysql_host = $_POST["dbserver"];
         // MySQL username
@@ -82,7 +86,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Write to dbconn file
         $dbfile = fopen($dbFileLoc, "w") or die("Unable to open $dbFileLoc");
 
-        //Clear the file
+        //Clear the file dbconn file
         ftruncate($dbFileLoc, 0);
 
         $writeline = "<?php\n";
@@ -103,7 +107,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Write to blowfish file
         $dbBlowfish = fopen($dbBlowfishLoc, "w") or die("Unable to open $dbBlowfishLoc");
 
-        //Clear the file
+        //Clear the file blowfish file
         ftruncate($dbBlowfishLoc, 0);
 
         $writeline = "<?php";
