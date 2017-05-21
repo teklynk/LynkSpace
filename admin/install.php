@@ -19,10 +19,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
         //Truncate Uploads folder
-        if (file_exists("../uploads")) {
-            unlink(__DIR__ . "../uploads");
+        if (file_exists(__DIR__ . "/../uploads")) {
+            unlink(__DIR__ . "/../uploads");
             sleep(1); // wait
-            mkdir(__DIR__ . "../uploads", 0755, true);
+            mkdir(__DIR__ . "/../uploads", 0755, true);
         } else {
             die("Could not create Uploads directory.");
         }
