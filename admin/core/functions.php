@@ -225,7 +225,7 @@ function checkDependencies(){
         }
     }
     // Check if robots.txt file exists
-    if (!file_exists($siteFilename)) {
+    if (!file_exists($robotsFilename)) {
         echo "$robotsFilename does not exist";
     } else {
         if (!is_writeable($robotsFilename)) {
