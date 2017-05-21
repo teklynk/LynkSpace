@@ -73,10 +73,10 @@ $dbBlowfishLoc = __DIR__ . "/blowfishsalt.php";
 $dbFilename = __DIR__ . "/new_website.sql";
 
 // Name of the sitemap file
-$siteFilename = __DIR__ . "/../sitemap.xml";
+$sitemapFilename = __DIR__ . "/../sitemap.xml";
 
 // Name of the robots.txt file
-$robotsFilename = __DIR__ . "/../robots.xt";
+$robotsFilename = __DIR__ . "/../robots.txt";
 
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");

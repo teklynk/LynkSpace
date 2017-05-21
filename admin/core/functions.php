@@ -167,7 +167,7 @@ function checkDependencies(){
     global $dbFileLoc;
     global $dbFilename;
     global $dbBlowfishLoc;
-    global $siteFilename;
+    global $sitemapFilename;
     global $robotsFilename;
 
     if  (!in_array('curl', get_loaded_extensions())) {
@@ -217,11 +217,11 @@ function checkDependencies(){
         }
     }
     // Check if sitemap.xml file exists
-    if (!file_exists($siteFilename)) {
-        echo "$siteFilename does not exist";
+    if (!file_exists($sitemapFilename)) {
+        echo "$sitemapFilename does not exist";
     } else {
-        if (!is_writeable($siteFilename)) {
-            die("$siteFilename is not writable. Check file permissions.");
+        if (!is_writeable($sitemapFilename)) {
+            die("$sitemapFilename is not writable. Check file permissions.");
         }
     }
     // Check if robots.txt file exists
