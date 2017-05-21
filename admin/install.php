@@ -23,6 +23,8 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             unlink(__DIR__ . "/../uploads");
             sleep(1); // wait
             mkdir(__DIR__ . "/../uploads", 0755, true);
+        } else {
+            mkdir(__DIR__ . "/../uploads", 0755, true);
         }
 
         // MySQL host
