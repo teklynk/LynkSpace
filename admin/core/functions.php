@@ -162,28 +162,57 @@ function getLocList() {
     return $locList;
 }
 
-// Script to test if the CURL extension is installed on this server
-function checkDependencies() {
-    if  (!in_array('curl', get_loaded_extensions())){
+// Script to test if extension are installed and permissions are correct on this server
+function checkDependencies(){
+    global $dbFileLoc;
+    global $dbFilename;
+    global $dbBlowfishLoc;
+
+    if  (!in_array('curl', get_loaded_extensions())) {
         print_r("<div class='alert alert-danger'><span>cURL (php-curl) is NOT installed on the server.<br/>Try: sudo apt-get install php-curl</span></div><br/>");
     }
-    if  (!in_array('xml', get_loaded_extensions())){
+    if  (!in_array('xml', get_loaded_extensions())) {
         print_r("<div class='alert alert-danger'><span>xml (php-xml) is NOT installed on the server.<br/>Try: sudo apt-get install php-xml</span></div><br/>");
     }
-    if  (!in_array('zip', get_loaded_extensions())){
+    if  (!in_array('zip', get_loaded_extensions())) {
         print_r("<div class='alert alert-danger'><span>zip (php-zip) is NOT installed on the server.<br/>Try: sudo apt-get install php-zip</span></div><br/>");
     }
-    if  (!in_array('mbstring', get_loaded_extensions())){
+    if  (!in_array('mbstring', get_loaded_extensions())) {
         print_r("<div class='alert alert-danger'><span>mbstring (php-mbstring) is NOT installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div><br/>");
     }
-    if (!in_array('mod_rewrite', apache_get_modules())){
+    if (!in_array('mod_rewrite', apache_get_modules())) {
         print_r("<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div><br/>");
     }
-    if (!in_array('mod_headers', apache_get_modules())){
+    if (!in_array('mod_headers', apache_get_modules())) {
         print_r("<div class='alert alert-danger'><span>Apache module (mod_headers) is not enabled on the server.<br/>Try: sudo a2enmod headers</span></div><br/>");
     }
-    if (!in_array('mod_vhost_alias', apache_get_modules())){
+    if (!in_array('mod_vhost_alias', apache_get_modules())) {
         print_r("<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div><br/>");
+    }
+
+    // Check if sql file exists
+    if (!file_exists($dbFileLoc)) {
+        echo "$dbFileLoc does not exist";
+    } else {
+        if (!is_writeable($dbFileLoc)) {
+            die("$dbFileLoc is not writable. Check file permissions.");
+        }
+    }
+    // Check if dbconn.php file exists
+    if (!file_exists($dbFilename)) {
+        echo "$dbFilename does not exist";
+    } else {
+        if (!is_writeable($dbFilename)) {
+            die("$dbFilename is not writable. Check file permissions.");
+        }
+    }
+    // Check if blowfishsalt.php file exists
+    if (!file_exists($dbBlowfishLoc)) {
+        echo "$dbBlowfishLoc does not exist";
+    } else {
+        if (!is_writeable($dbBlowfishLoc)) {
+            die("$dbBlowfishLoc is not writable. Check file permissions.");
+        }
     }
     return false;
 }
@@ -270,7 +299,7 @@ function getUpdates(){
     global $updatesSever;
 
     $changeLogFile = $updatesSever.'/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = $updatesSever.'version'.$getVersion.'.zip';
+    $updatesRemoteFile = $updatesSever.'/version'.$getVersion.'.zip';
     $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
     $updatesCheckerURL = $updatesSever.'/versionupdatechecker.php';
 }
@@ -304,7 +333,7 @@ function downloadFile($url, $path) {
 }
 //Extract zip files/folder to specified destination
 function extractZip($filename, $dest){
-    if(is_dir($dest)) {
+    if (is_dir($dest)) {
         // Load up the zip
         $zip = new ZipArchive;
         $unzip = $zip->open($filename);
@@ -316,7 +345,7 @@ function extractZip($filename, $dest){
                 // Remove the first directory in the string if necessary
                 $parts = explode('/', $name);
 
-                if(count($parts) > 1) {
+                if (count($parts) > 1) {
                     array_shift($parts);
                 }
 

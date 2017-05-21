@@ -71,7 +71,7 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 //MD5 Checksum Compare
 if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
-        echo 'MD5 check sums do not match. The downloaded file may be incomplete. Please download again.';
+        echo '<div>MD5 check sums do not match. The downloaded file may be incomplete. Please download again.</div>';
         //Delete the zip file
         unlink($updatesDestination);
     }

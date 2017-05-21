@@ -60,6 +60,18 @@ $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
 //Upload function
 $target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
 
+// Name of the dbconn file
+$dbFileLoc = __DIR__ . "/dbconn.php";
+
+// Name of the config file
+$dbConfigLoc = __DIR__ . "/config.php";
+
+// Name of the blowfish file
+$dbBlowfishLoc = __DIR__ . "/blowfishsalt.php";
+
+// Name of the Source sql dump file
+$dbFilename = __DIR__ . "/new_website.sql";
+
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
 

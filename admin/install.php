@@ -3,46 +3,6 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-// Name of the dbconn file
-$dbFileLoc = "../config/dbconn.php";
-
-// Name of the config file
-$dbConfigLoc = "../config/config.php";
-
-// Name of the blowfish file
-$dbBlowfishLoc = "../config/blowfishsalt.php";
-
-// Name of the Source sql dump file
-$dbFilename = "../config/new_website.sql";
-
-// Generate a random Blowfish Salt key using the random password string function
-$blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
-
-// Check if sql file exists
-if (!file_exists($dbFileLoc)) {
-    echo "$dbFileLoc does not exist";
-} else {
-    if (!is_writeable($dbFileLoc)){
-        die("$dbFileLoc is not writable. Check file permissions.");
-    }
-}
-// Check if dbconn.php file exists
-if (!file_exists($dbFilename)) {
-    echo "$dbFilename does not exist";
-} else {
-    if (!is_writeable($dbFilename)){
-        die("$dbFilename is not writable. Check file permissions.");
-    }
-}
-// Check if blowfishsalt.php file exists
-if (!file_exists($dbBlowfishLoc)) {
-    echo "$dbBlowfishLoc does not exist";
-} else {
-    if (!is_writeable($dbBlowfishLoc)){
-        die("$dbBlowfishLoc is not writable. Check file permissions.");
-    }
-}
-
 // Check that everything is installed on the server.
 checkDependencies();
 
@@ -52,8 +12,19 @@ $server_domain = $_SERVER['SERVER_NAME'];
 // Get client IP address
 $user_ip = getRealIpAddr();
 
+// Generate a random Blowfish Salt key using the random password string function
+$blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
+
 if (!empty($_POST) && $_POST['db_install'] == 'true') {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+
+        //Truncate Uploads folder
+        if (file_exists("../uploads")) {
+            unlink("../uploads");
+            mkdir("../uploads", 0755, true);
+        } else {
+            die("Could not create Uploads directory.");
+        }
 
         // MySQL host
         $mysql_host = $_POST["dbserver"];
@@ -152,17 +123,6 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Insert super admin user into users table. User Level 99 = Super Admin
         $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
-
-        // Create the email and send the message
-        $email_subject = "$server_domain - User Account has been added:  $user_name";
-        $email_body = "To log on the site, use the following credentials.\n\n";
-        $email_body .= "Username: " . safeCleanStr($_POST['username']) . "\n\nEmail: " . validateEmail($_POST['useremail']) . "\n\nPassword: " . safeCleanStr($_POST['password']) . "\n\nDatabase Name: " . safeCleanStr($_POST['dbname']) . "\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
-        $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
-        $headers = "From: noreply@$server_domain\n";
-        $headers .= "Reply-To: noreply@$server_domain";
-
-        // Send the email
-        mail(validateEmail($_POST['useremail']), $email_subject, $email_body, $headers);
 
         // Wait before proceeding to the next step
         sleep(2);
