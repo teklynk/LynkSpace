@@ -27,9 +27,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             mkdir(__DIR__ . "/../uploads", 0755, true);
         }
 
+        // open and truncate sitemap file
+        $sitemapFile = fopen(__DIR__ . "/../sitemap.xml", "w") or die("Unable to open ". __DIR__ . "/../sitemap.xml. Check file permissions");
         //Clear the file sitemap file
         ftruncate(__DIR__ . "/../sitemap.xml", 0);
+        fclose($sitemapFile);
 
+        sleep(1); // wait
 
         // MySQL host
         $mysql_host = $_POST["dbserver"];
@@ -81,7 +85,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         }
 
         // Wait before proceeding to the next step
-        sleep(2);
+        sleep(1);
 
         // Write to dbconn file
         $dbfile = fopen($dbFileLoc, "w") or die("Unable to open $dbFileLoc");
@@ -123,14 +127,14 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         mysqli_query($db_conn, 'TRUNCATE TABLE users');
 
         // Wait before proceeding to the next step
-        sleep(2);
+        sleep(1);
 
         // Insert super admin user into users table. User Level 99 = Super Admin
         $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
 
         // Wait before proceeding to the next step
-        sleep(2);
+        sleep(1);
 
         // Rename install page so that it can not be accessed after the initial install
         rename("install.php", "~install.old");
