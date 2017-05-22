@@ -356,6 +356,8 @@ function extractZip($filename, $dest){
         $zip = new ZipArchive;
         $unzip = $zip->open($filename);
 
+        $ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store');
+
         if ($unzip === true) {
             for ($i=0; $i<$zip->numFiles; $i++) {
                 $name = $zip->getNameIndex($i);
@@ -385,6 +387,11 @@ function extractZip($filename, $dest){
                 } else {
                     // $name is a file
                     // Read from Zip and write to disk
+
+                    if ('.' === $file) continue;
+                    if ('..' === $file) continue;
+                    if (in_array($file, $ignoreListArr)) continue;
+
                     $fpr = $zip->getStream($name);
                     $fpw = fopen($file, 'w');
 
