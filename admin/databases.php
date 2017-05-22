@@ -518,14 +518,14 @@ if ($_GET['section'] == $rowSections['section']) {
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="cust_newcatsort">Sort Order</label>
-                                    <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3" required>
+                                    <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort" maxlength="3">
                                 </div>
                             </div>
                             <div class="col-lg-10">
                                 <div class="form-group required">
                                     <label for="cust_newcat">Category</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database.">
+                                        <input type="text" class="form-control" name="cust_newcat" id="cust_newcat" maxlength="255" data-toggle="tooltip" title="To display the category with the database, add the category first before adding the database." required>
                                         <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus' style="color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Add" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatsort='+$('#cust_newcatsort').val()+'&addcatname='+$('#cust_newcat').val();"></i></span>
                                         <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save' style="visibility:hidden; color:#337ab7; cursor:pointer;" data-toggle="tooltip" title="Save" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#cust_newcat').val()+'&newcatsort='+$('#cust_newcatsort').val();"></i></span>
                                         <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash' style="visibility:hidden; color:#c9302c; cursor:pointer;" data-toggle="tooltip" title="Delete" onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#cust_newcat').val();"></i></span>
@@ -578,7 +578,7 @@ if ($_GET['section'] == $rowSections['section']) {
                 <form name="customerForm" class="dirtyForm" method="post" action="">
                     <div class="form-group required">
                         <label>Heading</label>
-                        <input class="form-control count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSections['heading']; ?>" placeholder="My Database Page">
+                        <input class="form-control count-text" name="customer_heading" maxlength="255" value="<?php echo $rowSections['heading']; ?>" placeholder="My Database Page" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>

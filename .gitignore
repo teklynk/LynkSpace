@@ -2,3 +2,5 @@
 .idea/
 .svn/
 node_modules/
+uploads
+custom-styles.css

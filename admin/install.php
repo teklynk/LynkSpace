@@ -129,7 +129,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Wait before proceeding to the next step
         sleep(1);
 
-        // Insert super admin user into users table. User Level 99 = Super Admin
+        // Insert super admin user into users table.
         $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
 
