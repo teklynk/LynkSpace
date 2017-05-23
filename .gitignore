@@ -2,7 +2,8 @@
 .idea/
 .svn/
 node_modules/
-uploads
-upgrade
+uploads/
+backups/
+upgrade/
 custom-styles.css
 /sitemap.xml

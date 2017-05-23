@@ -250,7 +250,23 @@ function recurse_copy($src, $dst) {
     }
     closedir($dir);
 }
+//Database Dump Backup
+function databaseDumpBackup($dest, $table_name){
 
+    global $db_name;
+    global $db_conn;
+
+    $backup_file = $dest . $table_name . '-' . date("Y-m-d-H-i-s") . '.sql';
+    $sqlDump = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
+
+    mysqli_select_db($db_conn, $db_name);
+    $retval = mysqli_query($db_conn, $sqlDump);
+
+    if(!$retval ) {
+        die('Could not make a database backup: ' . mysqli_error($db_conn));
+    }
+
+}
 //Remove Directory
 function rrmdir($dir) {
     if (is_dir($dir)) {

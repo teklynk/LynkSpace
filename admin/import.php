@@ -12,10 +12,24 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSI
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
+//Check that backups folder is writable.
+if(!is_writeable(__DIR__ . '/backups/')){
+    $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";
+}
+
 //update table on submit
 if ($_POST['save_main']) {
 
     if ($_FILES['csvLocationsImport']['size'] > 0) {
+
+        //Create a backup of the locations table.
+        databaseDumpBackup(__DIR__ . '/backups/', 'locations');
+
+        //Create a backup of the setup table.
+        databaseDumpBackup(__DIR__ . '/backups/', 'setup');
+
+        //Create a backup of the contactus table.
+        databaseDumpBackup(__DIR__ . '/backups/', 'contactus');
 
         //example csv headers
         //name,type,config,address,city,state,zipcode,phone,email,hours
@@ -89,6 +103,9 @@ if ($_POST['save_main']) {
 
     //Pages Import
     if ($_FILES['csvPagesImport']['size'] > 0) {
+
+        //Create a backup of the locations table.
+        databaseDumpBackup(__DIR__ . '/backups/', 'pages');
 
         //example csv headers
         //title,content,url
