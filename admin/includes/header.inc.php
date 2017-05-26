@@ -40,25 +40,25 @@ session_start();
     <title>YouSeeMore - Admin Panel</title>
 
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/admin.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/css/admin.min.css">
 
     <!-- Admin Panel Fonts -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/css/font-awesome.min.css">
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/sb-admin.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/css/sb-admin.min.css">
 
     <!-- Custom Fonts from: localfont.com -->
-    <link href='//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/fonts.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'] ?>/admin/css/fonts.min.css">
 
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/admin.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/js/admin.min.js"></script>
 
     <?php
     if (defined('tinyMCE')) {
     ?>
     <!-- TinyMCE -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/js/tinymce/tinymce.min.js"></script>
     <?php
     }
     ?>
@@ -67,15 +67,15 @@ session_start();
     if (defined('codeMirror')) {
     ?>
         <!-- CodeMirror -->
-        <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/css/codemirror/lib/codemirror.min.css">
-        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/codemirror/lib/codemirror.min.js"></script>
-        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/codemirror/mode/css/css.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/css/codemirror/lib/codemirror.min.css">
+        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/js/codemirror/lib/codemirror.min.js"></script>
+        <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/js/codemirror/mode/css/css.min.js"></script>
     <?php
     }
     ?>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST']; ?>/admin/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/js/functions.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

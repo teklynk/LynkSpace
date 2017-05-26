@@ -6,7 +6,7 @@ require_once('dbconn.php');
 
 if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 
-//Establish config connection
+    //Establish config connection
     $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
     mysqli_select_db($db_conn, $db_name);
 
@@ -18,6 +18,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 }
+
 //Get server/host protocol
 if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
     $serverProtocol = 'https://';
@@ -25,6 +26,14 @@ if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
     $serverProtocol = 'http://';
 }
 
+//Get Sub-folder name
+if (basename(dirname($_SERVER['PHP_SELF']))){
+    $subDirectory = "/".basename(dirname($_SERVER['PHP_SELF']));
+} else {
+    $subDirectory = "";
+}
+
+//Theme value
 $themeOption = $rowConfig['theme'];
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
