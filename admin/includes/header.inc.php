@@ -12,7 +12,7 @@ session_start();
     }
 
     //DB connection string and Global variables
-    require_once '../config/config.php';
+    require_once('../config/config.php');
 
     //Admin panel functions
     require_once('core/functions.php');

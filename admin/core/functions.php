@@ -390,15 +390,17 @@ function extractZip($filename, $dest){
                 // Create the directories if necessary
                 $dir = dirname($file);
 
-                if (!is_dir($dir))
+                if (!is_dir($dir)) {
                     mkdir($dir, 0755, true);
+                }
 
                 // Check if $name is a file or directory
                 if (substr($file, -1) == "/") {
                     // $name is a directory
                     // Create the directory
-                    if (!is_dir($file))
+                    if (!is_dir($file)) {
                         mkdir($file, 0755, true);
+                    }
 
                 } else {
                     // $name is a file
@@ -420,16 +422,13 @@ function extractZip($filename, $dest){
                 }
             }
             echo 'Success';
-        } else
+        } else {
             echo 'Extraction of zip failed.';
-    } else
+        }
+    } else {
         echo 'The output directory does not exist!';
+    }
 }
-
-//TODO: function that checks the upgrade zip file for a migration.php file.
-//Run the migration script (database changes, permission changes..)
-//List or array of files/folders to skip/ignore during the upgrade/overwrite
-
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";

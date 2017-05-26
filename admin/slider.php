@@ -228,7 +228,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <div class="form-group required">
                 <label>Start Date</label>
                 <div class="input-group date">
-                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
+                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo $dateValidationPattern; ?>" required/>
                     <span class="input-group-addon">
                         <span class="fa fa-calendar"></span>
                     </span>
@@ -239,7 +239,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <div class="form-group required">
                 <label>End Date</label>
                 <div class="input-group date">
-                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="2015-10-21" pattern="<?php echo $dateValidationPattern; ?>" required/>
+                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo $dateValidationPattern; ?>" required/>
                     <span class="input-group-addon">
                         <span class="fa fa-calendar"></span>
                     </span>
@@ -452,12 +452,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."' required>
+            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='YYYY-MM-DD' pattern='".$dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='2015-10-21' pattern='".$dateValidationPattern."' required>
+            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='YYYY-MM-DD' pattern='".$dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>

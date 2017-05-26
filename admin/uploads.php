@@ -12,37 +12,39 @@ if (is_numeric($_GET['loc_id'])) {
     }
 }
 
-if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+if (isset($_POST["uploadFile"])) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-    $fileExt = substr(basename($_FILES["fileToUpload"]["name"]), -4);
-    $fileSize = filesize($target_file);
+        $fileExt = substr(basename($_FILES["fileToUpload"]["name"]), -4);
+        $checkMineType = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
-    //Check if file is a image format
-    if ($fileExt == ".png" || $fileExt == ".jpg" || $fileExt == ".gif" ) {
-        //Check if file is less than 2mb
-        if ($fileSize < 2048000) {
+        //Check if file is a image format
+        if ($fileExt == ".png" || $fileExt == ".jpg" || $fileExt == ".gif" || $checkMineType !== false) {
+            //Check if file is less than 2mb
+            if ($_FILES["fileToUpload"]["size"] < 2048000) {
 
-            //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
-            $search = array('(', ')', ' ', '\'');
-            $replace = array('-', '', '-', '');
+                //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
+                $search = array('(', ')', ' ', '\'');
+                $replace = array('-', '', '-', '');
 
-            rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+                rename($target_file, str_replace($search, $replace, strtolower($target_file)));
 
-            $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            } else {
+                //Delete the file if it is too large
+                unlink($target_file);
+                $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
+            }
         } else {
-            //Delete the file if it is too large
+            //Delete the file if it is not an image
             unlink($target_file);
-            $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
+            $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
-    } else {
-        //Delete the file if it is not an image
-        unlink($target_file);
-        $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    }
 
-} else {
-    $uploadMsg = "";
+    } else {
+        $uploadMsg = "<div class='alert alert-danger fade in'>Sorry, there was an error uploading your file.</div>";
+    }
 }
 
 //Delete file

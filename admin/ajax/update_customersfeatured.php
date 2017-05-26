@@ -12,7 +12,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $customersFeaturedChecked = $_GET['checked'];
 
         if ($customersFeaturedID) {
-            $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "' WHERE id=" . $customersFeaturedID . " ";
+            if ($customersFeaturedChecked == 'true'){
+                $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "', catid=0 WHERE id=" . $customersFeaturedID . " ";
+            } else {
+                $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "' WHERE id=" . $customersFeaturedID . " ";
+            }
         }
 
         mysqli_query($db_conn, $customersFeaturedUpdate);

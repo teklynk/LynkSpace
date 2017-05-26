@@ -110,5 +110,5 @@ $versionFile = str_replace('config', '', $versionFile);
 $ysmVersion = file_get_contents($versionFile);
 
 //Updates remote URL
-$updatesSever = "http://ysmupdates.local.com";
+$updatesSever = "http://ysmservices.local.com/ysmversionupdates";
 ?>

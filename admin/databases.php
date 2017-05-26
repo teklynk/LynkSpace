@@ -439,6 +439,11 @@ if ($_GET['section'] == $rowSections['section']) {
 
             // add category
             if ($_GET['addcatname'] > "") {
+
+                if ($_GET['addcatsort'] == '') {
+                    $_GET['addcatsort'] = 0;
+                }
+
                 $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
                 mysqli_query($db_conn, $custAddCat);
 

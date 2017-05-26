@@ -13,7 +13,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSI
 }
 
 //Check that backups folder is writable.
-if(!is_writeable(__DIR__ . '/backups/')){
+if (!is_writeable(__DIR__ . '/backups/')){
     $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";
 }
 

@@ -12,8 +12,8 @@ php_flag session.auto_start 0
 php_flag session.bug_compat_warn 0
 php_value max_execution_time 200
 php_value max_input_time 200
-php_value upload_max_filesize 2M
-php_value post_max_size 2M
+php_value upload_max_filesize 4M
+php_value post_max_size 4M
 php_value docref_root 0
 php_value docref_ext 0
 php_value error_reporting -1
@@ -34,6 +34,7 @@ RewriteRule . /index.php [L]
 RedirectMatch 403 ^/config/$
 RedirectMatch 403 ^/uploads/$
 RedirectMatch 403 ^/themes/$
+RedirectMatch 403 ^/backups/$
 
 #Deny access to these files - forbidden 403
 <FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
