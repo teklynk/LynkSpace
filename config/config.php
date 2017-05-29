@@ -29,7 +29,15 @@ if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
 //Get Sub-folder name
 $subDirs = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $subPath = parse_url($subDirs, PHP_URL_PATH);
-$subDirectory = explode('/', '/'.$subPath)[1];
+$subDirectory = explode('/', $subPath)[1];
+if ($subDirectory !== 'admin'){
+    $subDirectory = '/'.$subDirectory;
+} else {
+    $subDirectory = '';
+}
+
+echo $subDirs;
+echo $subDirectory;
 
 //Theme value
 $themeOption = $rowConfig['theme'];
