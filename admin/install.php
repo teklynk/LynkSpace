@@ -239,6 +239,5 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     </div>
 
 <?php
-echo $subDirectory;
 include_once('includes/footer.inc.php');
 ?>
