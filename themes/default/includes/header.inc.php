@@ -24,17 +24,17 @@ session_start();
     <title><?php echo $theTitle; ?></title>
 
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="/core/css/main.min.css">
-    <link rel="stylesheet" type="text/css" href="/core/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/font-awesome.min.css">
 
     <!-- Default CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="/core/css/core-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="/themes/<?php echo $themeOption; ?>/css/cps-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/cps-style.min.css">
 
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="/themes/<?php echo $themeOption; ?>/css/custom-style.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
 
     <?php
     //Google Analytics UID
@@ -62,13 +62,13 @@ session_start();
     ?>
 
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="/core/js/main.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/main.min.js"></script>
 
     <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="/core/js/searchscript.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/searchscript.min.js"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="/core/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/functions.min.js"></script>
 
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
