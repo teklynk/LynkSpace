@@ -36,9 +36,6 @@ if ($subDirectory !== 'admin'){
     $subDirectory = '';
 }
 
-echo $subDirs;
-echo $subDirectory;
-
 //Theme value
 $themeOption = $rowConfig['theme'];
 
