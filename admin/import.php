@@ -11,7 +11,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSI
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
-
+//Create the backup folder
+if (!file_exists(__DIR__ . '/backups/')) {
+    @mkdir(__DIR__ . '/backups/', 0755);
+}
 //Check that backups folder is writable.
 if (!is_writeable(__DIR__ . '/backups/')){
     $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";

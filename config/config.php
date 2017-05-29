@@ -32,6 +32,7 @@ if (basename(dirname($_SERVER['PHP_SELF']))){
 } else {
     $subDirectory = "";
 }
+echo "test";
 
 //Theme value
 $themeOption = $rowConfig['theme'];
