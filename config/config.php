@@ -27,9 +27,9 @@ if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
 }
 
 //Get Sub-folder name
-$subDirs = $_SERVER['REQUEST_URI'];
-$subDirectory = explode("/", $subDirs);
-echo $subDirectory[2];
+$subDirs = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$subPath = parse_url($subDirs, PHP_URL_PATH);
+$subDirectory = explode('/', '/'.$subPath)[1];
 
 //Theme value
 $themeOption = $rowConfig['theme'];
