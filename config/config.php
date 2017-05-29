@@ -28,11 +28,12 @@ if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
 
 //Get Sub-folder name
 if (basename(dirname($_SERVER['PHP_SELF']))){
-    $subDirectory = "/".basename(dirname($_SERVER['PHP_SELF']));
+    //$subDirectory = "/".basename(dirname($_SERVER['PHP_SELF']));
 } else {
     $subDirectory = "";
 }
-echo "test";
+
+echo $subDirectory;
 
 //Theme value
 $themeOption = $rowConfig['theme'];
