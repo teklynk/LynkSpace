@@ -34,9 +34,9 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="images/favicon.ico"/>
-
     <title>YouSeeMore - Admin Panel</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/admin/images/favicon.ico">
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/admin/css/admin.min.css">

@@ -23,18 +23,20 @@ session_start();
 
     <title><?php echo $theTitle; ?></title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/themes/<?php echo $themeOption; ?>/images/favicon.ico">
+
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/main.min.css">
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/core/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/core/css/font-awesome.min.css">
 
     <!-- Default CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/core-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/cps-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/themes/<?php echo $themeOption; ?>/css/cps-style.min.css">
 
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
 
     <?php
     //Google Analytics UID

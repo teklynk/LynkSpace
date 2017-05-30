@@ -137,7 +137,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /js/\n";
         fwrite($robotsfile, $writeline);
-        $writeline = "Sitemap: " . str_replace('admin/ajax/update_sitemapxml.php', '', "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "sitemap.xml");
+        $writeline = "Sitemap: " . $serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/sitemap.xml";
         fwrite($robotsfile, $writeline);
 
         fclose($robotsfile);
