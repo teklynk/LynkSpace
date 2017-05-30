@@ -6,4 +6,5 @@ uploads/
 backups/
 upgrade/
 custom-styles.css
-/sitemap.xml
+sitemap.xml
+robots.txt
