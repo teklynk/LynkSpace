@@ -24,17 +24,17 @@ session_start();
 
     <title><?php echo $theTitle; ?></title>
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/css/main.min.css">
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/font-awesome.min.css">
 
     <!-- Default CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/css/core-style.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/css/core-style.min.css">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/themes/<?php echo $themeOption; ?>/css/business-casual.min.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/business-casual.min.css">
 
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
+    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/themes/<?php echo $themeOption; ?>/css/custom-style.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -66,22 +66,22 @@ session_start();
     }
     ?>
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/js/main.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/main.min.js"></script>
 
     <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/js/searchscript.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/searchscript.min.js"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory ?>/core/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//<?php echo $_SERVER['HTTP_HOST'].$subDirectory; ?>/core/js/functions.min.js"></script>
 
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "<?php echo $setupPACURL ?>";
-        var TLCConfig = "<?php echo $setupConfig ?>";
+        var TLCDomain = "<?php echo $setupPACURL; ?>";
+        var TLCConfig = "<?php echo $setupConfig; ?>";
         var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo $setupPACURL ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig ?>";
+        var TLCClassicDomain = "<?php echo $setupPACURL; ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
