@@ -66,7 +66,7 @@ $customerId = $rowConfig['customer_id'];
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/";
 
 //Absolute web url path to uploads folder for tinyMCE
-$image_url = $serverProtocol . $_SERVER['SERVER_NAME'] . "/uploads/" . $_GET['loc_id'] . "/";
+$image_url = $serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/uploads/" . $_GET['loc_id'] . "/";
 
 //Relative web url path to uploads folder for tinyMCE
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
