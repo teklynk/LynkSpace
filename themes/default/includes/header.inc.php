@@ -101,7 +101,7 @@ session_start();
             <div class="alert alert-danger fade in" role="alert" >
                 <h4>Did you know that your Internet Explorer is out of date?</h4>
                 <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
-                <p><a href="http://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>
+                <p><a href="https://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>
             </div>
         </div>
     </div>

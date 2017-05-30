@@ -28,7 +28,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         $writeline = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         fwrite($sitemapfile, $writeline);
-        $writeline = "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+        $writeline = "<urlset xmlns=\"https://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         fwrite($sitemapfile, $writeline);
 
         //get pages from config

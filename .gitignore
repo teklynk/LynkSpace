@@ -5,6 +5,8 @@ node_modules/
 uploads/
 backups/
 upgrade/
-custom-styles.css
-sitemap.xml
-robots.txt
+*blowfishsalt.php
+*dbconn.php
+*custom-style.css
+*sitemap.xml
+*robots.txt
