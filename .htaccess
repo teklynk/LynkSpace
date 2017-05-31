@@ -36,6 +36,10 @@ RedirectMatch 403 ^/config/$
 RedirectMatch 403 ^/uploads/$
 RedirectMatch 403 ^/themes/$
 RedirectMatch 403 ^/includes/$
+RedirectMatch 403 ^/images/$
+RedirectMatch 403 ^/fonts/$
+RedirectMatch 403 ^/css/$
+RedirectMatch 403 ^/js/$
 RedirectMatch 403 ^/mail/$
 RedirectMatch 403 ^/ajax/$
 RedirectMatch 403 ^/import/$

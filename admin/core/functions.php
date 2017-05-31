@@ -171,65 +171,65 @@ function checkDependencies(){
     global $robotsFilename;
 
     if  (!in_array('curl', get_loaded_extensions())) {
-        print_r("<div class='alert alert-danger'><span>cURL (php-curl) is NOT installed on the server.<br/>Try: sudo apt-get install php-curl</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>cURL (php-curl) is not installed on the server.<br/>Try: sudo apt-get install php-curl</span></div>";
     }
     if  (!in_array('xml', get_loaded_extensions())) {
-        print_r("<div class='alert alert-danger'><span>xml (php-xml) is NOT installed on the server.<br/>Try: sudo apt-get install php-xml</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>xml (php-xml) is not installed on the server.<br/>Try: sudo apt-get install php-xml</span></div>";
     }
     if  (!in_array('zip', get_loaded_extensions())) {
-        print_r("<div class='alert alert-danger'><span>zip (php-zip) is NOT installed on the server.<br/>Try: sudo apt-get install php-zip</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>zip (php-zip) is not installed on the server.<br/>Try: sudo apt-get install php-zip</span></div>";
     }
     if  (!in_array('mbstring', get_loaded_extensions())) {
-        print_r("<div class='alert alert-danger'><span>mbstring (php-mbstring) is NOT installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>mbstring (php-mbstring) is not installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div>";
     }
     if (!in_array('mod_rewrite', apache_get_modules())) {
-        print_r("<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div>";
     }
     if (!in_array('mod_headers', apache_get_modules())) {
-        print_r("<div class='alert alert-danger'><span>Apache module (mod_headers) is not enabled on the server.<br/>Try: sudo a2enmod headers</span></div><br/>");
+        echo "<div class='alert alert-danger'><span>Apache module (mod_headers) is not enabled on the server.<br/>Try: sudo a2enmod headers</span></div>";
     }
     if (!in_array('mod_vhost_alias', apache_get_modules())) {
-        print_r("<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div><br/>");
+       echo "<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div>";
     }
 
     // Check if sql file exists
     if (!file_exists($dbFileLoc)) {
-        echo "$dbFileLoc does not exist";
+        echo "<div class='alert alert-danger'><span>$dbFileLoc does not exist.</span></div>";
     } else {
         if (!is_writeable($dbFileLoc)) {
-            die("$dbFileLoc is not writable. Check file permissions.");
+            echo "<div class='alert alert-danger'><span>$dbFileLoc is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if dbconn.php file exists
     if (!file_exists($dbFilename)) {
-        echo "$dbFilename does not exist";
+        echo "<div class='alert alert-danger'><span>$dbFilename does not exist.</span></div>";
     } else {
         if (!is_writeable($dbFilename)) {
-            die("$dbFilename is not writable. Check file permissions.");
+            echo "<div class='alert alert-danger'><span>$dbFilename is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if blowfishsalt.php file exists
     if (!file_exists($dbBlowfishLoc)) {
-        echo "$dbBlowfishLoc does not exist";
+        echo "<div class='alert alert-danger'><span>$dbBlowfishLoc does not exist.</span></div>";
     } else {
         if (!is_writeable($dbBlowfishLoc)) {
-            die("$dbBlowfishLoc is not writable. Check file permissions.");
+            echo "<div class='alert alert-danger'><span>$dbBlowfishLoc is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if sitemap.xml file exists
     if (!file_exists($sitemapFilename)) {
-        echo "$sitemapFilename does not exist";
+        echo "<div class='alert alert-danger'><span>$sitemapFilename does not exist.</span></div>";
     } else {
         if (!is_writeable($sitemapFilename)) {
-            die("$sitemapFilename is not writable. Check file permissions.");
+            echo "<div class='alert alert-danger'><span>$sitemapFilename is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if robots.txt file exists
     if (!file_exists($robotsFilename)) {
-        echo "$robotsFilename does not exist";
+        echo "<div class='alert alert-danger'><span>$robotsFilename does not exist.</span></div>";
     } else {
         if (!is_writeable($robotsFilename)) {
-            die("$robotsFilename is not writable. Check file permissions.");
+            echo "<div class='alert alert-danger'><span>$robotsFilename is not writable. Check file permissions.</span></div>";
         }
     }
     return false;

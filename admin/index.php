@@ -130,8 +130,6 @@ if (isset($_SESSION['loggedIn'])) {
                     if ($message != "") {
                         echo $message;
                     }
-                    // Check that everything is installed on the server.
-                    checkDependencies();
                     ?>
                 </div>
                 <div class="panel-body">
