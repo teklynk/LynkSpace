@@ -42,6 +42,13 @@ function generateRandomString(){
     return md5($randomString);
 }
 
+//Renames directory if it exists
+function renameDir($oldname, $newname){
+    if (file_exists(dirname($oldname))) {
+        return rename($oldname, $newname);
+    }
+}
+
 //Random Blowfish Salt
 function blowfishSaltRandomString($saltThisString){
     return password_hash($saltThisString, PASSWORD_DEFAULT);
@@ -364,6 +371,46 @@ function downloadFile($url, $path) {
         echo 'downloadFile() Error ($curl_errno): $curl_error' . PHP_EOL;
     }
     curl_close($ch);
+}
+// compress all files in the source directory to destination directory
+function zipFile($source, $destination, $flag = '') {
+    if (!extension_loaded('zip') || !file_exists($source)) {
+        return false;
+    }
+
+    $zip = new ZipArchive();
+
+    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+        return false;
+    }
+
+    $source = str_replace('\\', '/', realpath($source));
+
+    if ($flag) {
+        $flag = basename($source) . '/';
+    }
+
+    if (is_dir($source) === true) {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach ($files as $file) {
+
+            $file = str_replace('\\', '/', realpath($file));
+
+            if (strpos($flag.$file,$source) !== false) { // this will add only the folder we want to add in zip
+
+                if (is_dir($file) === true) {
+                    $zip->addEmptyDir(str_replace($source . '/', '', $flag.$file . '/'));
+                } elseif (is_file($file) === true) {
+                    $zip->addFromString(str_replace($source . '/', '', $flag.$file), file_get_contents($file));
+                }
+            }
+        }
+    } elseif (is_file($source) === true) {
+        $zip->addFromString($flag.basename($source), file_get_contents($source));
+    }
+
+    return $zip->close();
 }
 //Extract zip files/folder to specified destination
 function extractZip($filename, $dest){
