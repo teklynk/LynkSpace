@@ -799,7 +799,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     if (!empty($customerId)) {
 
         $ch = curl_init($checkUrl);
-        curl_setopt($ch,  CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $response = curl_exec($ch);
         //Check for 404 (file not found) OR 403 (access denied)
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);

@@ -21,8 +21,9 @@ session_start();
     if ($_SESSION['super_admin'] == false && basename($_SERVER['PHP_SELF']) != 'index.php'){
     //IP Range is set in config and contains numbers
         if (!empty($IPrange)) {
-            if (!strstr(getRealIpAddr(), $IPrange)) {
-                die('Permission denied'); //Do not execute any more code on the page
+            $IPmatch = (str_replace($IPrange, '', getRealIpAddr()) != getRealIpAddr());
+            if ($IPmatch != true) {
+                die('Permission denied. Not inside network. Your IP is ' . getRealIpAddr()); //Do not execute any more code on the page
             }
         }
     }

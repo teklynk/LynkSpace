@@ -50,7 +50,7 @@ function toggleSrc(rss, loc_id) {
         $('#hottitlesTabs li.hot-tab a').addClass('disable-anchor');
         setTimeout(function() {
             $.ajax({
-                url: '../core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
+                url: 'core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
                 type: 'GET',
                 timeout: 20000, //20 seconds
                 success: function(result){
