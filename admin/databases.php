@@ -425,7 +425,7 @@ if ($_GET['section'] == $rowSections['section']) {
 
             //Rename category and set categories to new name
             if ($_GET['renamecat'] && $_GET['newcatname'] && !$_GET['confirm']) {
-                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr(addslashes($renameCatTitle)) . "? <a href='?section=" . $getCustSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&newcatsort=" . $renameCatSort . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to update " . safeCleanStr(addslashes($renameCatTitle)) . "? <a href='?section=" . $getCustSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&newcatsort=" . $renameCatSort . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
 
             } elseif ($_GET['renamecat'] && $_GET['newcatname'] && $_GET['confirm'] == 'yes') {
