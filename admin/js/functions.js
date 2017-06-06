@@ -149,6 +149,7 @@ $(document).ready(function () {
         $('.defaults-toggle').attr('disabled', false);
         $('#loc_id_list').attr('disabled', false);
         $('#nav_menu').attr('disabled', false);
+        $('#updates_btn').attr('disabled', false);
         $('[data-id="loc_id_list"]').attr('disabled', false);
     }).change();
 

@@ -322,7 +322,7 @@ function checkForUpdates(){
     if (!isset($_SESSION['updates_available'])) {
         if ($http_status == 200) {
             if ((string)trim($getVersion) > (string)trim($ysmVersion)){
-                return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning'><i class='fa fa-bell'></i> Update Available</button></a>";
+                return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
             }
         } else {
             return false;
