@@ -296,7 +296,7 @@ function getUrlContents($getUrl) {
     global $http_status;
 
     $ch = curl_init();
-    $timeout = 5;
+    $timeout = 10;
     curl_setopt($ch, CURLOPT_URL, $getUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
@@ -315,8 +315,8 @@ function checkForUpdates(){
     global $ysmVersion;
     global $getVersion;
     global $http_status;
-    global $updatesSever;
-    $updatesURL = $updatesSever.'/version.txt';
+    global $updatesServer;
+    $updatesURL = $updatesServer.'/version.txt';
     $getVersion = getUrlContents($updatesURL);
     $getVersion = trim($getVersion);
     if (!isset($_SESSION['updates_available'])) {
@@ -337,12 +337,12 @@ function getUpdates(){
     global $changeLogFile;
     global $updatesDestination;
     global $updatesCheckerURL;
-    global $updatesSever;
+    global $updatesServer;
 
-    $changeLogFile = $updatesSever.'/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = $updatesSever.'/version'.$getVersion.'.zip';
+    $changeLogFile = $updatesServer.'/changelog'.$getVersion.'.txt';
+    $updatesRemoteFile = $updatesServer.'/version'.$getVersion.'.zip';
     $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
-    $updatesCheckerURL = $updatesSever.'/versionupdatechecker.php';
+    $updatesCheckerURL = $updatesServer.'/versionupdatechecker.php';
 }
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {
@@ -365,10 +365,13 @@ function downloadFile($url, $path) {
     $curl_error = curl_error($ch);
     $page = curl_exec($ch);
     if (!$page) {
-        echo 'Error :- ' . curl_error($ch) . PHP_EOL;
+        echo 'Error: ' . curl_error($ch) . PHP_EOL;
     }
     if ($curl_errno > 0) {
         echo 'downloadFile() Error ($curl_errno): $curl_error' . PHP_EOL;
+        //Delete the downloaded file
+        unlink($path);
+        return false;
     }
     curl_close($ch);
 }
@@ -419,7 +422,7 @@ function extractZip($filename, $dest){
         $zip = new ZipArchive;
         $unzip = $zip->open($filename);
 
-        $ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store');
+        $ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', 'robots.txt', 'sitemap.xml');
 
         if ($unzip === true) {
             for ($i=0; $i<$zip->numFiles; $i++) {

@@ -58,7 +58,7 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
     if (!file_exists('upgrade')) {
         mkdir('upgrade', 0755, true);
     } else {
-        echo 'Could not create Upgrade directory.';
+        echo '<div class="updates_error" >Could not create Upgrade directory.</div>';
     }
 
     sleep(1); // wait
@@ -71,9 +71,9 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 //MD5 Checksum Compare
 if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
-        echo '<div>MD5 check sums do not match. The downloaded file may be incomplete. Please download again.</div>';
+        echo '<div class="updates_error" >MD5 check sums do not match. The downloaded file may be incomplete. Please download again.</div>';
         //Delete the zip file
-        unlink($updatesDestination);
+        unlink($updatesRemoteFile);
     }
 }
 
@@ -81,7 +81,7 @@ if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
 
-        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/');
+        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/'.$subDirectory.'/');
 
         sleep(1); // wait
 

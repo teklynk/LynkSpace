@@ -124,5 +124,5 @@ $versionFile = str_replace('config', '', $versionFile);
 $ysmVersion = file_get_contents($versionFile);
 
 //Updates remote URL
-$updatesSever = "http://ysmservices.tlcdelivers.com/ysmversionupdates";
+$updatesServer = "http://ysmservices.tlcdelivers.com/ysmversionupdates";
 ?>
