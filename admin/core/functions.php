@@ -169,7 +169,7 @@ function getLocList() {
     return $locList;
 }
 
-// Script to test if extension are installed and permissions are correct on this server
+// Script to test if extensions/modules are installed and permissions are correct on this server
 function checkDependencies(){
     global $dbFileLoc;
     global $dbFilename;
