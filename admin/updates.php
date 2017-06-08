@@ -35,6 +35,11 @@ $upgradeOption = '';
 getUpdates();
 
 if (isset($_SESSION['updates_available'])) {
+    //Check that files are writeable
+    if (file_exists('../version.txt') && !is_writeable('../version.txt')) {
+        echo "<div class='alert alert-danger'><span>../version.txt is not writable. Check file permissions. <br/>Files will need write access in order to complete the upgrade. All folders and files should be set to 755.<br/>Try:<br/>sudo find . -type f -exec chmod 775 {} +<br/>sudo find . -type d -exec chmod 775 {} +</span></div>";
+    }
+
     echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
     echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";
@@ -49,7 +54,7 @@ if (isset($_SESSION['updates_available'])) {
 
 } else {
     echo "<h2>No updates available.</h2>";
-    echo "<p>You are currently on version ".$getVersion."</p>";
+    echo "<p>You are on the current version: ".$getVersion."</p>";
     unset($_SESSION['updates_available']);
 }
 
@@ -58,7 +63,7 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
     if (!file_exists('upgrade')) {
         mkdir('upgrade', 0755, true);
     } else {
-        echo '<div class="updates_error" >Could not create Upgrade directory.</div>';
+        echo '<div class="alert alert-danger" >Could not create Upgrade directory.</div>';
     }
 
     sleep(1); // wait
