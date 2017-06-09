@@ -40,7 +40,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . htmlspecialchars($serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/page.php?page_id=" . $pageId . "&loc_id=" . $locId) . "</loc>\n";
+            $writeline = "\t\t<loc>" . htmlspecialchars($serverUrlStr . "/page.php?page_id=" . $pageId . "&loc_id=" . $locId) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<lastmod>" . $pageDate . "</lastmod>\n";
             fwrite($sitemapfile, $writeline);
@@ -59,7 +59,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . htmlspecialchars($serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/databases.php?section=" . $custSection . "&cat_id=" . $custCatId . "&loc_id=" . $custLocId) . "</loc>\n";
+            $writeline = "\t\t<loc>" . htmlspecialchars($serverUrlStr . "/databases.php?section=" . $custSection . "&cat_id=" . $custCatId . "&loc_id=" . $custLocId) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -75,7 +75,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . htmlspecialchars($serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/index.php?loc_id=" . $locId) . "</loc>\n";
+            $writeline = "\t\t<loc>" . htmlspecialchars($serverUrlStr . "/index.php?loc_id=" . $locId) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -88,7 +88,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         for ($x = 0; $x < $pagesArrlength; $x++) {
             $writeline = "\t<url>\n";
             fwrite($sitemapfile, $writeline);
-            $writeline = "\t\t<loc>" . htmlspecialchars($serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/" . $otherPages[$x]) . "</loc>\n";
+            $writeline = "\t\t<loc>" . htmlspecialchars($serverUrlStr . "/" . $otherPages[$x]) . "</loc>\n";
             fwrite($sitemapfile, $writeline);
             $writeline = "\t\t<changefreq>monthly</changefreq>\n";
             fwrite($sitemapfile, $writeline);
@@ -137,7 +137,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /js/\n";
         fwrite($robotsfile, $writeline);
-        $writeline = "Sitemap: " . $serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/sitemap.xml";
+        $writeline = "Sitemap: " . $serverUrlStr . "/sitemap.xml";
         fwrite($robotsfile, $writeline);
 
         fclose($robotsfile);

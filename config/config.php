@@ -26,6 +26,19 @@ if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
     $serverProtocol = 'http://';
 }
 
+//Get server host name
+$serverHostname = $_SERVER['SERVER_NAME'];
+
+//Get server port number. if not port 80
+if ($_SERVER['SERVER_PORT'] != 80){
+    $serverPort = ':'.$_SERVER['SERVER_PORT'];
+} else {
+    $serverPort = '';
+}
+
+//Build the server url string
+$serverUrlStr = $serverProtocol . $serverHostname . $serverPort . $subDirectory;
+
 //Get Sub-folder name
 $subURL = $_SERVER['REQUEST_URI'];
 $subPath = parse_url($subURL, PHP_URL_PATH);
@@ -66,7 +79,7 @@ $customerId = $rowConfig['customer_id'];
 $image_dir = "../uploads/" . $_GET['loc_id'] . "/";
 
 //Absolute web url path to uploads folder for tinyMCE
-$image_url = $serverProtocol . $_SERVER['SERVER_NAME'] . $subDirectory . "/uploads/" . $_GET['loc_id'] . "/";
+$image_url = $serverUrlStr . "/uploads/" . $_GET['loc_id'] . "/";
 
 //Relative web url path to uploads folder for tinyMCE
 $image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
