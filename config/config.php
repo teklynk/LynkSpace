@@ -36,9 +36,6 @@ if ($_SERVER['SERVER_PORT'] != 80){
     $serverPort = '';
 }
 
-//Build the server url string
-$serverUrlStr = $serverProtocol . $serverHostname . $serverPort . $subDirectory;
-
 //Get Sub-folder name
 $subURL = $_SERVER['REQUEST_URI'];
 $subPath = parse_url($subURL, PHP_URL_PATH);
@@ -50,6 +47,9 @@ if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false ) {
 } else {
     $subDirectory = '/'.$subDir;
 }
+
+//Build the server url string
+$serverUrlStr = $serverProtocol . $serverHostname . $serverPort . $subDirectory;
 
 //Theme value
 $themeOption = $rowConfig['theme'];
