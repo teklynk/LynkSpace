@@ -290,6 +290,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
     global $navCatLinksUrl;
     global $navCatLinksCatID;
     global $navSections;
+    global $sitesearchlink;
 
     echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
     if ($dropdown == "true"){
