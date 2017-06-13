@@ -37,10 +37,8 @@ getUpdates();
 if (isset($_SESSION['updates_available'])) {
 
     //Check that files are writeable
-    if (file_exists('../version.txt') && !is_writeable('../version.txt')) {
-        echo "<div class='alert alert-danger'><span>version.txt is not writable. Check file permissions.<br/>Files and folders will need write access in order to complete the upgrade. All website folders and files should be set to 775.</span></div>";
-    } else {
-        echo "<div class='alert alert-danger'><span>version.txt does not exist.</span></div>";
+    if (!is_writeable('../version.txt')) {
+        echo "<div class='alert alert-danger'><span>version.txt is not writable. Check file permissions.<br/>Files and folders will need write access in order to complete the upgrade.</span></div>";
     }
 
     echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";

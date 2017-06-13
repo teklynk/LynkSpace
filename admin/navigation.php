@@ -223,16 +223,12 @@ if ($_GET['section'] == $navSections[0]) {
             $renameCatTitle = $_GET['newcatname'];
 
             //Rename category and set nav categories to new name
-            if ($_GET['renamecat'] && $_GET['newcatname'] && !$_GET['confirm']) {
-                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to rename " . safeCleanStr(addslashes($renameCatTitle)) . "? <a href='?section=" . $getNavSection . "&renamecat=" . $renameCatId . "&newcatname=" . safeCleanStr(addslashes($renameCatTitle)) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $renameMsg;
-
-            } elseif ($_GET['renamecat'] && $_GET['newcatname'] && $_GET['confirm'] == 'yes') {
+            if ($_GET['renamecat'] && $_GET['newcatname']) {
 
                 $navRenameCatUpdate = "UPDATE category_navigation SET name='" . safeCleanStr(addslashes($renameCatTitle)) . "', nav_section='" . safeCleanStr($_GET['section']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $navRenameCatUpdate);
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr(addslashes($renameCatTitle)) . " has been renamed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr(addslashes($renameCatTitle)) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
             }
 

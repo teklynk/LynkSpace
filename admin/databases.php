@@ -424,11 +424,7 @@ if ($_GET['section'] == $rowSections['section']) {
             $renameCatSort = $_GET['newcatsort'];
 
             //Rename category and set categories to new name
-            if ($_GET['renamecat'] && $_GET['newcatname'] && !$_GET['confirm']) {
-                $renameMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to update " . safeCleanStr(addslashes($renameCatTitle)) . "? <a href='?section=" . $getCustSection . "&renamecat=" . $renameCatId . "&newcatname=" . $renameCatTitle . "&newcatsort=" . $renameCatSort . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $renameMsg;
-
-            } elseif ($_GET['renamecat'] && $_GET['newcatname'] && $_GET['confirm'] == 'yes') {
+            if ($_GET['renamecat'] && $_GET['newcatname'] ) {
 
                 $custRenameCatUpdate = "UPDATE category_customers SET name='" . safeCleanStr(addslashes($renameCatTitle)) . "', sort='" . safeCleanStr($renameCatSort) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $custRenameCatUpdate);
