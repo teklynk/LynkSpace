@@ -20,11 +20,14 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 }
 
 //Get server/host protocol
-if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on') {
-    $serverProtocol = 'https://';
-} else {
-    $serverProtocol = 'http://';
-}
+//if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on' || $_SERVER['SERVER_PORT'] == 443) {
+//    $serverProtocol = 'https://';
+//} else {
+//    $serverProtocol = 'http://';
+//}
+
+//Protocol-relative/agnostic
+$serverProtocol = '//';
 
 //Get server host name
 $serverHostname = $_SERVER['SERVER_NAME'];
