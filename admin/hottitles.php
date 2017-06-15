@@ -83,7 +83,7 @@ if ($_POST['add_hottitles']) {
     $errorMsg = "";
     //Insert Hot Titles
     if (strpos(validateUrl($_POST['hottitles_url']), 'econtent') || strpos(validateUrl($_POST['hottitles_url']), 'dynamic') || strpos(validateUrl($_POST['hottitles_url']), 'static')){
-        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'true', '" . date("Y-m-d H:i:s") . "')";
+        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");

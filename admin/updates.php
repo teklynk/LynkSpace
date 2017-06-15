@@ -74,10 +74,10 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
     }
 }
 
-//MD5 Checksum Compare
+//MD5 Checksum - Compare Downloaded File with Remote File Checksum
 if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
-        echo '<div class="updates_error" >MD5 check sums do not match. The downloaded file may be incomplete. Please download again.</div>';
+        echo '<div class="updates_error" >MD5 checksums do not match. The downloaded file may be incomplete. Please download again.</div>';
         //Delete the zip file
         unlink($updatesRemoteFile);
     }

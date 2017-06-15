@@ -67,6 +67,12 @@ if ($_GET['preview'] > "") {
 
             $teamMsg = "";
 
+            if ($_POST['team_status'] == 'on') {
+                $_POST['team_status'] = 'true';
+            } else {
+                $_POST['team_status'] = 'false';
+            }
+
             //Update existing team
             if ($_GET['editteam']) {
                 $theteamId = $_GET['editteam'];
@@ -74,12 +80,6 @@ if ($_GET['preview'] > "") {
 
                 //update data on submit
                 if (!empty($_POST['team_title'])) {
-
-                    if ($_POST['team_status'] == 'on') {
-                        $_POST['team_status'] = 'true';
-                    } else {
-                        $_POST['team_status'] = 'false';
-                    }
 
                     $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
@@ -97,7 +97,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, '" . $_POST['team_status'] . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
                     header("Location: team.php?loc_id=" . $_GET['loc_id'] . "");

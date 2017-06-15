@@ -143,7 +143,22 @@ if ($_GET['section'] == $rowSections['section']) {
 
         if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
-            $customerMsg = "";
+            //alert messages
+            if ($customerMsg != "") {
+                echo $customerMsg;
+            }
+
+            if ($_POST['customer_status'] == 'on') {
+                $_POST['customer_status'] = 'true';
+            } else {
+                $_POST['customer_status'] = 'false';
+            }
+
+            if ($_POST['customer_featured'] == 'on') {
+                $_POST['customer_featured'] = 'true';
+            } else {
+                $_POST['customer_featured'] = 'false';
+            }
 
             //Update existing customer
             if ($_GET['editcustomer']) {
@@ -153,19 +168,7 @@ if ($_GET['section'] == $rowSections['section']) {
                 //update data on submit
                 if (!empty($_POST['customer_name'])) {
 
-                    if ($_POST['customer_status'] == 'on') {
-                        $_POST['customer_status'] = 'true';
-                    } else {
-                        $_POST['customer_status'] = 'false';
-                    }
-
-                    if ($_POST['customer_featured'] == 'on') {
-                        $_POST['customer_featured'] = 'true';
-                    } else {
-                        $_POST['customer_featured'] = 'false';
-                    }
-
-                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . safeCleanStr($_POST['customer_featured']) . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . $_POST['customer_featured'] . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -181,7 +184,7 @@ if ($_GET['section'] == $rowSections['section']) {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'true', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', '" . $_POST['customer_featured'] . "', '" . $_POST['customer_status'] . "', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "");
@@ -189,24 +192,17 @@ if ($_GET['section'] == $rowSections['section']) {
                 }
             }
 
-            //alert messages
-            if ($customerMsg != "") {
-                echo $customerMsg;
+            //active status
+            if ($rowCustomer['active'] == 'true') {
+                $selActive = "CHECKED";
+            } else {
+                $selActive = "";
             }
-
-            if ($_GET['editcustomer']) {
-                //active status
-                if ($rowCustomer['active'] == 'true') {
-                    $selActive = "CHECKED";
-                } else {
-                    $selActive = "";
-                }
-                //featured status
-                if ($rowCustomer['featured'] == 'true') {
-                    $selFeatured = "CHECKED";
-                } else {
-                    $selFeatured = "";
-                }
+            //featured status
+            if ($rowCustomer['featured'] == 'true') {
+                $selFeatured = "CHECKED";
+            } else {
+                $selFeatured = "";
             }
             ?>
             <div class="col-lg-8">
@@ -272,7 +268,7 @@ if ($_GET['section'] == $rowSections['section']) {
                     <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
-                        getImageDropdownList($image_dir, $rowCustomer['image']);
+                            getImageDropdownList($image_dir, $rowCustomer['image']);
                         ?>
                         ?>
                     </select>

@@ -60,6 +60,26 @@ if ($_GET['preview'] > "") {
 
             if ($_GET['newpage'] || $_GET['editpage']) {
 
+                //alert messages
+                if ($errorMsg !="") {
+                    echo $errorMsg;
+                } else {
+                    echo $pageMsg;
+                }
+
+                if ($_POST['page_status'] == 'on') {
+                    $_POST['page_status'] = 'true';
+                } else {
+                    $_POST['page_status'] = 'false';
+                }
+
+                //active status
+                if ($rowPages['active'] == 'true') {
+                    $selActive = "CHECKED";
+                } else {
+                    $selActive = "";
+                }
+
                 // Update existing page
                 if ($_GET['editpage']) {
                     $thePageId = $_GET['editpage'];
@@ -67,12 +87,6 @@ if ($_GET['preview'] > "") {
 
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
-
-                        if ($_POST['page_status'] == 'on') {
-                            $_POST['page_status'] = 'true';
-                        } else {
-                            $_POST['page_status'] = 'false';
-                        }
 
                         $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
@@ -90,29 +104,12 @@ if ($_GET['preview'] > "") {
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', '" . $_POST['page_status'] . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
                     }
-                }
-
-                //alert messages
-                if ($errorMsg !="") {
-                    echo $errorMsg;
-                } else {
-                    echo $pageMsg;
-                }
-
-                if ($_GET['editpage']) {
-                    //active status
-                    if ($rowPages['active'] == 'true') {
-                        $selActive = "CHECKED";
-                    } else {
-                        $selActive = "";
-                    }
-
                 }
 
                 if ($rowPages['image'] == "") {

@@ -60,6 +60,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     $slideMsg = "";
 
+    if ($_POST['slider_status'] == 'on') {
+        $_POST['slider_status'] = 'true';
+    } else {
+        $_POST['slider_status'] = 'false';
+    }
+
     //Update existing slide
     if ($_GET['editslide']) {
         $theslideId = $_GET['editslide'];
@@ -67,12 +73,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //update data on submit
         if (!empty($_POST['slide_title'])) {
-
-            if ($_POST['slider_status'] == 'on') {
-                $_POST['slider_status'] = 'true';
-            } else {
-                $_POST['slider_status'] = 'false';
-            }
 
             $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', active='" . $_POST['slider_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
@@ -90,7 +90,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . safeCleanStr($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '" . safeCleanStr($_POST['start_date']) . "', '" . safeCleanStr($_POST['end_date']) . "', '".safeCleanStr($_POST['location_type'])."', 0, 'true', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . safeCleanStr($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '" . safeCleanStr($_POST['start_date']) . "', '" . safeCleanStr($_POST['end_date']) . "', '".safeCleanStr($_POST['location_type'])."', 0, '" . $_POST['slider_status'] . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             header("slider.php?loc_id=" . $_GET['loc_id'] . "");

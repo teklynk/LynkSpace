@@ -68,7 +68,14 @@ if ($_GET['preview']>"") {
 <?php
 
 	if ($_GET['newservice'] || $_GET['editservice']) {
+
 		$serviceMsg="";
+
+		if ($_POST['service_status']=='on') {
+			$_POST['service_status']='true';
+		} else {
+			$_POST['service_status']='false';
+		}
 
 		//Update existing service
 		if ($_GET['editservice']) {
@@ -77,12 +84,6 @@ if ($_GET['preview']>"") {
 
 			//update data on submit
 			if (!empty($_POST['service_title'])) {
-
-				if ($_POST['service_status']=='on') {
-					$_POST['service_status']='true';
-				} else {
-					$_POST['service_status']='false';
-				}
 
 				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
@@ -100,7 +101,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', 'true', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', '".$_POST['service_status']."', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				header("Location: services.php?loc_id=".$_GET['loc_id']."");
