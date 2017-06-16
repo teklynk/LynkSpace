@@ -44,7 +44,7 @@ if ($_GET['update'] == 'true') {
                 <li class="active">Contact</li>
             </ol>
             <h1 class="page-header">
-                Contact
+                Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview the Contact Page" class="btn btn-info" onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>')"><i class="fa fa-eye"></i></button>
             </h1>
         </div>
     </div>
@@ -142,7 +142,35 @@ if ($_GET['update'] == 'true') {
 
         </div>
     </div>
+    <!--modal preview window-->
+    <style>
+        #webpageDialog iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
 
+        .modal-dialog {
+            width: 95%;
+        }
+    </style>
+
+    <div class="modal fade" id="webpageDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                    <h4 class="modal-title">&nbsp;</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="myModalFile" src="" frameborder="0"></iframe>
+                </div>
+                <div class="modal-footer">&nbsp;</div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <?php
 include_once('includes/footer.inc.php');
 ?>

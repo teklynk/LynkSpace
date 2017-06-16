@@ -37,8 +37,10 @@ if ($_GET['preview'] > "") {
     }
 
     if ($rowCustomerPreview['link'] > "") {
-        echo "<br/><p><b>Page Link:</b> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>" . $rowCustomerPreview['link'] . "</a></p>";
+        echo "<br/><p><b>Database Link:</b> <a href='" . $rowCustomerPreview['link'] . "' target='_blank'>" . $rowCustomerPreview['link'] . "</a></p>";
     }
+
+    echo "<br/><p><b>Page URL:</b> <a href='../databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&cat_id=".$rowCustomerPreview['catid']."' title='Page URL' target='_blank'>databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&cat_id=".$rowCustomerPreview['catid']."</a></p>";
 
     echo "</div>";
 }
@@ -46,6 +48,16 @@ if ($_GET['preview'] > "") {
 //check if using default location
 $sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSections = mysqli_fetch_array($sqlSections);
+
+//set Default toggle depending on which section you are on
+if ($_GET['section'] == $rowSections['section']) {
+    //use default view
+    if ($rowSections['use_defaults'] == 'true') {
+        $selDefaults = "CHECKED";
+    } else {
+        $selDefaults = "";
+    }
+}
 
 //Get sections from loc_id
 $sectionCount = 1;
@@ -62,15 +74,6 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
     $custMenuStr .= "<option value=" . $rowSections['section'] . " " . $isSectionSelected . ">" . $rowSections['section'] . "</option>";
 }
 
-//set Default toggle depending on which section you are on
-if ($_GET['section'] == $rowSections['section']) {
-    //use default view
-    if ($rowSections['use_defaults'] == 'true') {
-        $selDefaults = "CHECKED";
-    } else {
-        $selDefaults = "";
-    }
-}
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -104,15 +107,18 @@ if ($_GET['section'] == $rowSections['section']) {
         <div class="row">
             <div class="col-lg-10">
                 <div class="form-group">
+                    <h1 class="page-header">
                     <?php
                     if ($_GET['newcustomer'] == 'true' || $_GET['addsection'] == 'true') {
-                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                        echo "Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                     } elseif ($_GET['editcustomer']) {
-                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                        echo "Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                     } else {
-                        echo "<h1 class='page-header'>Databases (" . $_GET['section'] . ")</h1>";
+                        echo "Databases (" . $_GET['section'] . ")&nbsp;";
+                        echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview this Database Page' class='btn btn-info' onclick=\"showMyModal('databases.php?section=".$_GET['section']."&loc_id=".$_GET['loc_id']."', '../databases.php?section=".$_GET['section']."&loc_id=".$_GET['loc_id']."')\"><i class='fa fa-eye'></i></button>";
                     }
                     ?>
+                    </h1>
                 </div>
             </div>
             <div class="col-lg-2">
@@ -126,7 +132,6 @@ if ($_GET['section'] == $rowSections['section']) {
                             </select>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new Database Page" onclick="window.location.href='databases.php?section=<?php echo $sectionCount+1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-plus"></i></button>
-                                <button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview this Database Page" class="btn btn-info" onclick="showMyModal('databases.php?section=<?php echo $_GET['section']; ?>&loc_id=<?php echo $_GET['loc_id']; ?>', '../databases.php?section=<?php echo $_GET['section']; ?>&loc_id=<?php echo $_GET['loc_id']; ?>')"><i class="fa fa-eye"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete this Database Page" onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i class="fa fa-trash"></i></button>
                             </span>
 
@@ -625,7 +630,8 @@ if ($_GET['section'] == $rowSections['section']) {
                         </td>
 						<td>
 						<input type='hidden' name='cust_id[]' value='" . $customerId . "' >
-						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a></td>
+						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a>
+						</td>
 						<td>";
                             echo "<select class='form-control' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";

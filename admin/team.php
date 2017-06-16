@@ -29,6 +29,9 @@ if ($_GET['preview'] > "") {
     }
 
     echo "<p>" . $rowTeamPreview['content'] . "</p>";
+
+    echo "<br/><p><b>Page URL:</b> <a href='../team.php?loc_id=" . $_GET['loc_id'] . "' title='Page URL' target='_blank'>team.php?loc_id=" . $_GET['loc_id'] . "</a></p>";
+
     echo "</div>";
 }
 ?>
@@ -54,7 +57,9 @@ if ($_GET['preview'] > "") {
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Team</li>
             </ol>";
-            echo "<h1 class='page-header'>Team</h1>";
+            echo "<h1 class='page-header'>Team&nbsp;";
+            echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Team Page' class='btn btn-info' onclick=\"showMyModal('team.php?loc_id=".$_GET['loc_id']."', '../team.php?loc_id=".$_GET['loc_id']."')\"><i class='fa fa-eye'></i></button>";
+            echo "</h1>";
         }
         ?>
     </div>

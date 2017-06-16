@@ -6,26 +6,6 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'page.php';
 
-//Page preview
-if ($_GET['preview'] > "") {
-
-    $pagePreviewId = $_GET['preview'];
-
-    $sqlPagePreview = mysqli_query($db_conn, "SELECT id, title, image, content, loc_id FROM pages WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
-    $rowPagePreview = mysqli_fetch_array($sqlPagePreview);
-
-    echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
-
-    if ($rowPagePreview['title'] > "") {
-        echo "<h4>" . $rowPagePreview['title'] . "</h4>";
-    }
-
-    if ($rowPagePreview['image'] > "") {
-        echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowPagePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
-    }
-
-    echo $rowPagePreview['content'];
-}
 ?>
     <div class="row">
         <div class="col-lg-12">
@@ -307,15 +287,15 @@ if ($_GET['preview'] > "") {
                                 }
 
                                 echo "<tr>
-						<td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId' title='Edit'>" . $pageTitle . "</a></td>
-						<td class='col-xs-1'>
-						<input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' " . $isActive . ">
-						</td>
-						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($pageTitle) . "', 'page.php?loc_id=" . $_GET['loc_id'] . "&preview=$pageId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr($pageTitle) . "'\"><i class='fa fa-fw fa-trash'></i></button>
-						</td>
-						</tr>";
+                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId' title='Edit'>" . $pageTitle . "</a></td>
+                                <td class='col-xs-1'>
+                                <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' " . $isActive . ">
+                                </td>
+                                <td class='col-xs-2'>
+                                <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=".$pageId."', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=".$pageId."')\"><i class='fa fa-fw fa-eye'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr($pageTitle) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                </td>
+                                </tr>";
 
                             }
                             ?>

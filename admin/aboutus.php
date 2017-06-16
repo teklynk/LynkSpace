@@ -45,9 +45,12 @@ if ($_GET['update'] == 'true') {
             <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
             <li class="active">About</li>
         </ol>
-        <h1 class="page-header">
-            About
-        </h1>
+        <div class="col-lg-4">
+            <h1 class="page-header">
+                About&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview this Page" class="btn btn-info" onclick="showMyModal('about.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../about.php?loc_id=<?php echo $_GET['loc_id']; ?>')"><i class="fa fa-eye"></i></button>
+            </h1>
+        </div>
+
     </div>
 </div>
 <div class="row">
@@ -83,6 +86,7 @@ if ($_GET['update'] == 'true') {
         }
 
         ?>
+
         <form name="aboutForm" class="dirtyForm" method="post" action="">
             <?php
                 if ($_GET['loc_id'] != 1) {
@@ -145,7 +149,35 @@ if ($_GET['update'] == 'true') {
 
     </div>
 </div>
+<!--modal preview window-->
+<style>
+    #webpageDialog iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+    }
 
+    .modal-dialog {
+        width: 95%;
+    }
+</style>
+
+<div class="modal fade" id="webpageDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+                <h4 class="modal-title">&nbsp;</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="myModalFile" src="" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">&nbsp;</div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <?php
 include_once('includes/footer.inc.php');
 ?>

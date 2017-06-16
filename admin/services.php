@@ -33,6 +33,8 @@ if ($_GET['preview']>"") {
 		echo "<br/><p><b>Page Link:</b> <a href='" . $rowServicesPreview['link'] . "' target='_blank'>" . $rowServicesPreview['link'] . "</a></p>";
 	}
 
+	echo "<br/><p><b>Page URL:</b> <a href='../services.php?loc_id=" . $_GET['loc_id'] . "' title='Page URL' target='_blank'>services.php?loc_id=" . $_GET['loc_id'] . "</a></p>";
+
 	echo "</div>";
 }
 ?>
@@ -58,7 +60,9 @@ if ($_GET['preview']>"") {
             <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Services</li>
             </ol>";
-			echo "<h1 class='page-header'>Services</h1>";
+			echo "<h1 class='page-header'>Services&nbsp;";
+			echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Services Page' class='btn btn-info' onclick=\"showMyModal('services.php?loc_id=".$_GET['loc_id']."', '../services.php?loc_id=".$_GET['loc_id']."')\"><i class='fa fa-eye'></i></button>";
+            echo "</h1>";
 		}
 	?>
 	</div>

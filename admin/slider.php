@@ -20,7 +20,7 @@ if ($_GET['preview'] > "") {
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
     if ($rowSlidePreview['link']) {
-        echo "<br/><p><b>Page Link:</b> <a href='" . $rowSlidePreview['link'] . "' target='_blank'>" . $rowSlidePreview['link'] . "</a></p>";
+        echo "<br/><p><b>Link:</b> <a href='" . $rowSlidePreview['link'] . "' target='_blank'>" . $rowSlidePreview['link'] . "</a></p>";
     }
 }
 ?>
