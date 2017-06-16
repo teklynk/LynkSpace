@@ -10,7 +10,7 @@ getCustomers('featured');
 $customersItemCount = 0;
 
 if ($customerNumRows > 0) {
-    echo "<div class='container-fluid featureddatabases'>";
+    echo "<div class='page-container container-fluid featureddatabases'>";
     echo "<div class='container bannerwrapper'>";
 
     echo "<div class='row' id='featureddatabases'>";

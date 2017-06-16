@@ -3,7 +3,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-echo "<div class='container-fluid about'>";
+echo "<div class='page-container container-fluid about'>";
 echo "<div class='container bannerwrapper'>";
 
 echo "<div class='row'>";
