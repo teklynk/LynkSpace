@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
 }
 echo "<div class='grad-blue container-fluid slider'>";
 echo "<div class='container'>";
-echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='$carouselSpeed'>";
+echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='".carouselSpeed."'>";
 getSlider("slide");
 echo "</header>";
 echo "</div>";

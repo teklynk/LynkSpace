@@ -791,15 +791,13 @@ function getFeatured(){
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
-    global $customerId;
-    global $setupPACURL;
 
     $jacketSize = strtoupper($jacketSize);
 
-    $checkUrl = 'https://ls2content.tlcdelivers.com/tlccontent?customerid='.$customerId.'&appid=ls2pac&requesttype=BOOKJACKET-SM&isbn=123456789';
+    $checkUrl = 'https://ls2content.tlcdelivers.com/tlccontent?customerid='.customerNumber.'&appid=ls2pac&requesttype=BOOKJACKET-SM&isbn=123456789';
 
     //Check if customerid is set up on the content server
-    if (!empty($customerId)) {
+    if (!empty(customerNumber)) {
 
         $ch = curl_init($checkUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -809,7 +807,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
         if ($http_status != 200 || curl_errno($ch) > 0) {
             echo "HTTP status: " . $http_status . ". Error loading URL. " . curl_errno($ch) . "." . PHP_EOL;
-            echo "Not a valid Customer ID " . $customerId . "." . PHP_EOL;
+            echo "Not a valid Customer ID " . customerNumber . "." . PHP_EOL;
             curl_close($ch);
             die();
         }
@@ -873,10 +871,10 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
                 $xmlisbn = (string)$xmlitem->ISBN;
 
                 //https://ls2content2.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
-                $xmlimage = "https://ls2content$loadBalancer.tlcdelivers.com/tlccontent?customerid=$customerId&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
+                $xmlimage = "https://ls2content".$loadBalancer.".tlcdelivers.com/tlccontent?customerid=".customerNumber."&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
 
                 //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
-                $xmllink = "$setupPACURL/?config=ysm#section=search&term=$xmltitle";
+                $xmllink = setupPACURL."/?config=ysm#section=search&term=".$xmltitle;
 
                 //Gets the image dimensions from the xmltheimage url as an array.
                 $xmlimagesize = getimagesize($xmlimage);
@@ -1106,16 +1104,14 @@ function generateRandomString($length = 10){
 //Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database
 function getShortCode($urlStr){
     global $setupConfig;
-    global $setupPACURL;
-    global $homePageURL;
 
     //add a space to the front of var so that str_replace will see it. strange, right?
     $urlStr = ' ' . $urlStr;
 
     if (strpos($urlStr, '[pac_url]') == true) {
-        $urlStr = str_replace('[pac_url]', $setupPACURL, $urlStr);
+        $urlStr = str_replace('[pac_url]', setupPACURL, $urlStr);
     } elseif (strpos($urlStr, '[homepage_url]') == true) {
-        $urlStr = str_replace('[homepage_url]', $homePageURL, $urlStr);
+        $urlStr = str_replace('[homepage_url]', homePageURL, $urlStr);
     } elseif (strpos($urlStr, '[config]') == true) {
         $urlStr = str_replace('[config]', $setupConfig, $urlStr);
     } elseif (strpos($urlStr, '[loc_id]') == true) {
@@ -1162,7 +1158,7 @@ if (empty($_GET['loc_id'])){
     header("Location: $pageRedirect");
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
 
-} elseif ($multiBranch == "false" && $_GET['loc_id'] != 1){
+} elseif (multiBranch == "false" && $_GET['loc_id'] != 1){
     header("Location: index.php?loc_id=1");
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
 }

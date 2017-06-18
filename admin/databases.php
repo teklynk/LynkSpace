@@ -273,7 +273,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
-                            getImageDropdownList($image_dir, $rowCustomer['image']);
+                            getImageDropdownList(image_dir, $rowCustomer['image']);
                         ?>
                         ?>
                     </select>

@@ -14,7 +14,7 @@ if (!defined('inc_access')) {
 <a href="#" class="scrollToTop">Scroll To Top</a>
 
 <footer>
-    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo $ysmVersion; ?></span>
+    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo ysmVersion; ?></span>
     <div class="pull-right">
         <ul class="nav-footer">
             <li>

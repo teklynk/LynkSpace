@@ -150,7 +150,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <select class="form-control" name="slide_image" id="slide_image">
                 <option value="">None</option>
                 <?php
-                getImageDropdownList($image_dir, $rowSlides['image']);
+                getImageDropdownList(image_dir, $rowSlides['image']);
                 ?>
             </select>
         </div>

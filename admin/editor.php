@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     $pageMsg="";
 
     //array of allowed files that can be edited
-    $editFileListArr = array("../themes/".$themeOption."/css/custom-style.css");
+    $editFileListArr = array("../themes/".themeOption."/css/custom-style.css");
 
     $editFileListArrlength = count($editFileListArr);
     $editFileListStr = "";

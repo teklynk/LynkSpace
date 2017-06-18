@@ -26,7 +26,7 @@ if (!empty($_POST)) {
             $_SESSION['updates_available'] = checkForUpdates();
 
             //If is Admin
-            if ($rowLogin['level'] == 1 && $multiBranch == 'true') {
+            if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
                 $_SESSION['loc_list'] = getLocList();
             }

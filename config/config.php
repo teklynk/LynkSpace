@@ -19,13 +19,6 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $rowConfig = mysqli_fetch_array($sqlConfig);
 }
 
-//Get server/host protocol
-//if ($_SERVER['HTTPS'] == true || $_SERVER['HTTPS'] == 'on' || $_SERVER['SERVER_PORT'] == 443) {
-//    $serverProtocol = 'https://';
-//} else {
-//    $serverProtocol = 'http://';
-//}
-
 //Protocol-relative/agnostic
 $serverProtocol = '//';
 
@@ -52,61 +45,62 @@ if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false ) {
 }
 
 //Build the server url string
-$serverUrlStr = $serverProtocol . $serverHostname . $serverPort . $subDirectory;
+define('serverUrlStr', $serverProtocol . $serverHostname . $serverPort . $subDirectory);
 
 //Theme value
-$themeOption = $rowConfig['theme'];
+define('themeOption', $rowConfig['theme']);
 
 //Limit/Lock access to admin panel to a specific IP range. leave off the last octet for range.
 //example: "127.0.0."
-$IPrange = $rowConfig['iprange'];
+define('IPrange', $rowConfig['iprange']);
 
 //Multi-Branch - more than one location
 //true or false
-$multiBranch = $rowConfig['multibranch'];
+define('multiBranch', $rowConfig['multibranch']);
 
 //Homepage URL
-$homePageURL = $rowConfig['homepageurl'];
+define('homePageURL', $rowConfig['homepageurl']);
 
 //LS2PAC Server Domain or IP
-$setupPACURL = $rowConfig['setuppacurl'];
+//setupPACURL = $rowConfig['setuppacurl'];
+define('setupPACURL', $rowConfig['setuppacurl']);
 
 //Web Site Analytics
-$site_analytics = $rowConfig['analytics'];
+define('site_analytics', $rowConfig['analytics']);
 
-//TLC Customer ID
-$customerId = $rowConfig['customer_id'];
+//TLC Customer Number
+define('customerNumber', $rowConfig['customer_id']);
 
 //Edit values for your web site. leave as is in most cases.
 //physical path to uploads folder
-$image_dir = "../uploads/" . $_GET['loc_id'] . "/";
+define('image_dir', "../uploads/" . $_GET['loc_id'] . "/");
 
 //Absolute web url path to uploads folder for tinyMCE
-$image_url = $serverUrlStr . "/uploads/" . $_GET['loc_id'] . "/";
+define('image_url', serverUrlStr . "/uploads/" . $_GET['loc_id'] . "/");
 
 //Relative web url path to uploads folder for tinyMCE
-$image_baseURL = "uploads/" . $_GET['loc_id'] . "/";
+define('image_baseURL', "uploads/" . $_GET['loc_id'] . "/");
 
 //Upload function
-$target_file = $image_dir . basename($_FILES["fileToUpload"]["name"]);
+define('target_file', image_dir . basename($_FILES["fileToUpload"]["name"]));
 
 // Name of the dbconn file
-$dbFileLoc = __DIR__ . "/dbconn.php";
+define('dbFileLoc', __DIR__ . "/dbconn.php");
 
 // Name of the config file
-$dbConfigLoc = __DIR__ . "/config.php";
+define('dbConfigLoc', __DIR__ . "/config.php");
 
 // Name of the blowfish file
-$dbBlowfishLoc = __DIR__ . "/blowfishsalt.php";
+define('dbBlowfishLoc', __DIR__ . "/blowfishsalt.php");
 
 // Name of the Source sql dump file
-$dbFilename = __DIR__ . "/new_website.sql";
+define('dbFilename', __DIR__ . "/new_website.sql");
 
 // Name of the sitemap file
-$sitemapFilename = __DIR__ . "/../sitemap.xml";
+define('sitemapFilename', __DIR__ . "/../sitemap.xml");
 
 // Name of the robots.txt file
-$robotsFilename = __DIR__ . "/../robots.txt";
+define('robotsFilename', __DIR__ . "/../robots.txt");
 
 //Navigation options for front-end template
 $navSections = array("Top", "Footer", "Search");
@@ -114,7 +108,7 @@ $navSections = array("Top", "Footer", "Search");
 //Location Types
 $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);
-if ($multiBranch == 'true'){
+if (multiBranch == 'true'){
     $locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
 } else {
     $locTypes = 'Default';
@@ -125,11 +119,11 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" .
 
 //Session timeout
 //3600 = 60mins
-$sessionTimeout = $rowConfig['session_timeout'];
+define('sessionTimeout', $rowConfig['session_timeout']);
 
 //Slide Carousel Speed
 //5000 = 5secs
-$carouselSpeed = $rowConfig['carousel_speed'];
+define('carouselSpeed', $rowConfig['carousel_speed']);
 
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
@@ -137,7 +131,8 @@ require_once('blowfishsalt.php');
 //Version Number
 $versionFile = __DIR__ . 'version.txt';
 $versionFile = str_replace('config', '', $versionFile);
-$ysmVersion = file_get_contents($versionFile);
+//ysmVersion = file_get_contents($versionFile);
+define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL
 $updatesServer = "http://ysmservices.tlcdelivers.com/ysmversionupdates";

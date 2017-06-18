@@ -17,7 +17,7 @@ include 'includes/featured.inc.php';
 echo "<div class='grad-orange container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
-if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
+if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
     include 'includes/searchlocations.inc.php';
 } else {
     include 'includes/searchpac.inc.php';

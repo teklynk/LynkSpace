@@ -138,7 +138,7 @@ if ($deleteMsg != "") {
                         </div>
                     </div>
                     <?php
-                    if ($multiBranch == 'true') {
+                    if (multiBranch == 'true') {
                         ?>
                         <div class="col-lg-12">
                             <div class="form-group required">

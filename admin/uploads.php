@@ -7,13 +7,13 @@ $_SESSION['file_referer'] = 'uploads.php';
 
 //Create location upload folder if it does not exist.
 if (is_numeric($_GET['loc_id'])) {
-    if (!file_exists($image_dir)) {
-        @mkdir($image_dir, 0755);
+    if (!file_exists(image_dir)) {
+        @mkdir(image_dir, 0755);
     }
 }
 
 if (isset($_POST["uploadFile"])) {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], target_file)) {
 
         $fileExt = substr(basename($_FILES["fileToUpload"]["name"]), -4);
         $checkMineType = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -27,18 +27,18 @@ if (isset($_POST["uploadFile"])) {
                 $search = array('(', ')', ' ', '\'');
                 $replace = array('-', '', '-', '');
 
-                rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+                rename(target_file, str_replace($search, $replace, strtolower(target_file)));
 
                 $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             } else {
                 //Delete the file if it is too large
-                unlink($target_file);
+                unlink(target_file);
                 $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
             }
         } else {
             //Delete the file if it is not an image
-            unlink($target_file);
+            unlink(target_file);
             $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . basename($_FILES["fileToUpload"]["name"]) . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
@@ -119,7 +119,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                     </thead>
                     <tbody>
                     <?php
-                    if ($handle = opendir($image_dir)) {
+                    if ($handle = opendir(image_dir)) {
 
                         $count = 0;
 
@@ -132,13 +132,13 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                             if ($file === "index.html") continue;
 
                             $count++;
-                            $modDate = date('m-d-Y, H:i:s', filemtime($image_dir . $file));
+                            $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
 
                             echo "<tr data-index='" . $count . "'>
-								<td><a href='#' onclick=\"showMyModal('$file', '$image_dir$file')\" title='Preview'>" . strtolower($file) . "</a></td>
+								<td><a href='#' onclick=\"showMyModal('$file', '".image_dir.$file."')\" title='Preview'>" . strtolower($file) . "</a></td>
 								<td class='col-xs-3'>" . $modDate . "</td>
 								<td class='col-xs-1'>
-								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=$image_dir$file'\"><i class='fa fa-fw fa-trash'></i></button>
+								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=".image_dir.$file."'\"><i class='fa fa-fw fa-trash'></i></button>
 								</td>
 								</tr>";
                         }
@@ -154,7 +154,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
 <?php
 //Check if user_level is Admin user and default location
-if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1) {
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
     ?>
 
     <hr/>

@@ -177,7 +177,7 @@ if ($_GET['preview']>"") {
 			<select class="form-control" name="service_image_select" id="service_image_select">
 				<option value="">None</option>
 				<?php
-                    getImageDropdownList($image_dir, $rowServices['image']);
+                    getImageDropdownList(image_dir, $rowServices['image']);
                 ?>
 			</select>
 		</div>

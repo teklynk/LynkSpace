@@ -54,8 +54,8 @@ function blowfishSaltRandomString($saltThisString){
     return password_hash($saltThisString, PASSWORD_DEFAULT);
 }
 
-function getImageDropdownList($image_dir, $image_selected) {
-    if ($handle = opendir($image_dir)) {
+function getImageDropdownList($imageDir, $image_selected) {
+    if ($handle = opendir($imageDir)) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
             if ('..' === $file) continue;
@@ -171,11 +171,6 @@ function getLocList() {
 
 // Script to test if extensions/modules are installed and permissions are correct on this server
 function checkDependencies(){
-    global $dbFileLoc;
-    global $dbFilename;
-    global $dbBlowfishLoc;
-    global $sitemapFilename;
-    global $robotsFilename;
 
     if  (!in_array('curl', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>cURL (php-curl) is not installed on the server.<br/>Try: sudo apt-get install php-curl</span></div>";
@@ -200,43 +195,43 @@ function checkDependencies(){
     }
 
     // Check if sql file exists
-    if (!file_exists($dbFileLoc)) {
-        echo "<div class='alert alert-danger'><span>$dbFileLoc does not exist.</span></div>";
+    if (!file_exists(dbFileLoc)) {
+        echo "<div class='alert alert-danger'><span>".dbFileLoc." does not exist.</span></div>";
     } else {
-        if (!is_writeable($dbFileLoc)) {
-            echo "<div class='alert alert-danger'><span>$dbFileLoc is not writable. Check file permissions.</span></div>";
+        if (!is_writeable(dbFileLoc)) {
+            echo "<div class='alert alert-danger'><span>".dbFileLoc." is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if dbconn.php file exists
-    if (!file_exists($dbFilename)) {
-        echo "<div class='alert alert-danger'><span>$dbFilename does not exist.</span></div>";
+    if (!file_exists(dbFilename)) {
+        echo "<div class='alert alert-danger'><span>".dbFilename." does not exist.</span></div>";
     } else {
-        if (!is_writeable($dbFilename)) {
-            echo "<div class='alert alert-danger'><span>$dbFilename is not writable. Check file permissions.</span></div>";
+        if (!is_writeable(dbFilename)) {
+            echo "<div class='alert alert-danger'><span>".dbFilename." is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if blowfishsalt.php file exists
-    if (!file_exists($dbBlowfishLoc)) {
-        echo "<div class='alert alert-danger'><span>$dbBlowfishLoc does not exist.</span></div>";
+    if (!file_exists(dbBlowfishLoc)) {
+        echo "<div class='alert alert-danger'><span>".dbBlowfishLoc." does not exist.</span></div>";
     } else {
-        if (!is_writeable($dbBlowfishLoc)) {
-            echo "<div class='alert alert-danger'><span>$dbBlowfishLoc is not writable. Check file permissions.</span></div>";
+        if (!is_writeable(dbBlowfishLoc)) {
+            echo "<div class='alert alert-danger'><span>".dbBlowfishLoc." is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if sitemap.xml file exists
-    if (!file_exists($sitemapFilename)) {
-        echo "<div class='alert alert-danger'><span>$sitemapFilename does not exist.</span></div>";
+    if (!file_exists(sitemapFilename)) {
+        echo "<div class='alert alert-danger'><span>".sitemapFilename." does not exist.</span></div>";
     } else {
-        if (!is_writeable($sitemapFilename)) {
-            echo "<div class='alert alert-danger'><span>$sitemapFilename is not writable. Check file permissions.</span></div>";
+        if (!is_writeable(sitemapFilename)) {
+            echo "<div class='alert alert-danger'><span>".sitemapFilename." is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if robots.txt file exists
-    if (!file_exists($robotsFilename)) {
-        echo "<div class='alert alert-danger'><span>$robotsFilename does not exist.</span></div>";
+    if (!file_exists(robotsFilename)) {
+        echo "<div class='alert alert-danger'><span>".robotsFilename." does not exist.</span></div>";
     } else {
-        if (!is_writeable($robotsFilename)) {
-            echo "<div class='alert alert-danger'><span>$robotsFilename is not writable. Check file permissions.</span></div>";
+        if (!is_writeable(robotsFilename)) {
+            echo "<div class='alert alert-danger'><span>".robotsFilename." is not writable. Check file permissions.</span></div>";
         }
     }
     return false;
@@ -312,7 +307,6 @@ function getUrlContents($getUrl) {
 }
 //Check if a new version is available
 function checkForUpdates(){
-    global $ysmVersion;
     global $getVersion;
     global $http_status;
     global $updatesServer;
@@ -321,7 +315,7 @@ function checkForUpdates(){
     $getVersion = trim($getVersion);
     if (!isset($_SESSION['updates_available'])) {
         if ($http_status == 200) {
-            if ((string)trim($getVersion) > (string)trim($ysmVersion)){
+            if ((string)trim($getVersion) > (string)trim(ysmVersion)){
                 return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
             }
         } else {
@@ -480,7 +474,7 @@ function extractZip($filename, $dest){
     }
 }
 //Variable to hide elements from non-admin users
-if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] == 1 ){
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
@@ -495,7 +489,7 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
-} elseif ($multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
+} elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
 }

@@ -24,7 +24,7 @@ if (!empty($_GET['rssurl'])) {
                 '<span class="right carousel-control" data-slide="next"><i class="icon-next"></i></span>'
             ],
             autoplay: true,
-            autoplayTimeout: <?php echo $carouselSpeed; ?>,
+            autoplayTimeout: <?php echo carouselSpeed; ?>,
             autoplayHoverPause: true,
             items: 8,
             responsive:{

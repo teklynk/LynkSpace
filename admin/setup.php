@@ -81,14 +81,14 @@ if ($_GET['update'] == 'true') {
 }
 
 //delete a location and all references to it in the config. this will do a cascading delete where loc_id = id
-if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
     if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes') {
         $locDelete = "DELETE FROM locations WHERE id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $locDelete);
 
         //Delete the uploads folder if it exists, uses rrmdir() from functions.php
-        if (file_exists($image_dir)) {
-            rrmdir($image_dir);
+        if (file_exists(image_dir)) {
+            rrmdir(image_dir);
         }
 
         header("Location: setup.php?loc_id=1");
@@ -212,7 +212,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                         }
 
                         //Check if user_level is Admin user
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['newlocation'] != 'true') {
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['newlocation'] != 'true') {
                             ?>
                             <hr/>
                             <div class="row">
@@ -228,7 +228,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                             <?php
                         }
 
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
                             ?>
                             <hr/>
                             <div class="row">
@@ -248,7 +248,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                         }
 
                         //Check if user_level is Admin user and is Multibranch
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
                             ?>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -321,7 +321,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
                 }
 
-                if ($multiBranch == 'true') {
+                if (multiBranch == 'true') {
                     ?>
                     <div class="form-group">
                         <label for="location_type">Location Group</label>
@@ -344,7 +344,7 @@ if ($_SESSION['user_level'] == 1 && $multiBranch == 'true' && $_GET['loc_id'] !=
                     <select class="form-control" name="site_logo" id="site_logo">
                         <option value="">None</option>
                         <?php
-                        getImageDropdownList($image_dir, $rowSetup['logo']);
+                        getImageDropdownList(image_dir, $rowSetup['logo']);
                         ?>
                     </select>
                 </div>

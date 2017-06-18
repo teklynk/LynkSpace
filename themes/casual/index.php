@@ -17,7 +17,7 @@ echo "<div class='page-index'>";
     <div class="box">
         <div class="col-lg-12">
 
-            <header id="sliderCarousel" class="carousel slide" data-ride="carousel" data-interval="<?php echo $carouselSpeed; ?>">
+            <header id="sliderCarousel" class="carousel slide" data-ride="carousel" data-interval="<?php echo carouselSpeed; ?>">
                 <?php include 'includes/slider.inc.php'; ?>
             </header>
             
@@ -27,7 +27,7 @@ echo "<div class='page-index'>";
                 <div class="box">
                     <div class="col-lg-12">
                         <?php
-                        if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
+                        if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
                             include 'includes/searchlocations.inc.php';
                         } else {
                             include 'includes/searchpac.inc.php';

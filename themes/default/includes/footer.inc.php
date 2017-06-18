@@ -32,7 +32,7 @@ if (!defined('inc_access')) {
     </footer>
 
     <div id="ysm_brand_footer">
-        <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo $ysmVersion; ?></span>
+        <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo ysmVersion; ?></span>
         <div class="pull-right">
             <ul class="nav-footer">
                 <li>

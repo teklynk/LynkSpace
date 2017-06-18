@@ -136,7 +136,7 @@ $_SESSION['file_referer'] = 'page.php';
                         <select class="form-control" name="page_image" id="page_image">
                             <option value="">None</option>
                             <?php
-                            getImageDropdownList($image_dir, $rowPages['image']);
+                            getImageDropdownList(image_dir, $rowPages['image']);
                             ?>
                         </select>
                     </div>

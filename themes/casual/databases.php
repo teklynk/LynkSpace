@@ -9,7 +9,7 @@ echo "<div class='page-databases'>";
         <div class="box">
             <div class="col-lg-12">
                 <?php
-                if ($_GET['loc_id'] == 1 && $multiBranch == 'true') {
+                if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
                     include 'includes/searchlocations.inc.php';
                 } else {
                     include 'includes/searchpac.inc.php';

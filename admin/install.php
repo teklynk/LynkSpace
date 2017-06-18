@@ -88,10 +88,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Write to dbconn file
-        $dbfile = fopen($dbFileLoc, "w") or die("Unable to open $dbFileLoc");
+        $dbfile = fopen(dbFileLoc, "w") or die("Unable to open dbFileLoc");
 
         //Clear the file dbconn file
-        ftruncate($dbFileLoc, 0);
+        ftruncate(dbFileLoc, 0);
 
         $writeline = "<?php\n";
         fwrite($dbfile, $writeline);
@@ -109,10 +109,10 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         fclose($dbfile);
 
         // Write to blowfish file
-        $dbBlowfish = fopen($dbBlowfishLoc, "w") or die("Unable to open $dbBlowfishLoc");
+        $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open dbBlowfishLoc");
 
         //Clear the file blowfish file
-        ftruncate($dbBlowfishLoc, 0);
+        ftruncate(dbBlowfishLoc, 0);
 
         $writeline = "<?php";
         fwrite($dbBlowfish, $writeline);

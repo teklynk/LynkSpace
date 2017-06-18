@@ -121,7 +121,7 @@ if ($_GET['update'] == 'true') {
                 <select class="form-control" name="about_image" id="about_image">
                     <option value="">None</option>
                     <?php
-                    getImageDropdownList($image_dir, $rowAbout['image']);
+                    getImageDropdownList(image_dir, $rowAbout['image']);
                     ?>
                 </select>
             </div>

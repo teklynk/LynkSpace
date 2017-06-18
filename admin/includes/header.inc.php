@@ -20,8 +20,8 @@ session_start();
     //super admin
     if ($_SESSION['super_admin'] == false && basename($_SERVER['PHP_SELF']) != 'index.php'){
     //IP Range is set in config and contains numbers
-        if (!empty($IPrange)) {
-            $IPmatch = (str_replace($IPrange, '', getRealIpAddr()) != getRealIpAddr());
+        if (!empty(IPrange)) {
+            $IPmatch = (str_replace(IPrange, '', getRealIpAddr()) != getRealIpAddr());
             if ($IPmatch != true) {
                 die('Permission denied. Not inside network. Your IP is ' . getRealIpAddr()); //Do not execute any more code on the page
             }
@@ -29,7 +29,7 @@ session_start();
     }
 
     ?>
-    <meta http-equiv="refresh" content="<?php echo $sessionTimeout; ?>; URL=index.php?logout=true"/>
+    <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; URL=index.php?logout=true"/>
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,28 +37,28 @@ session_start();
 
     <title>YouSeeMore - Admin Panel</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $serverUrlStr; ?>/admin/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo serverUrlStr; ?>/admin/images/favicon.ico">
 
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $serverUrlStr; ?>/admin/css/admin.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/admin.min.css">
 
     <!-- Admin Panel Fonts -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $serverUrlStr; ?>/admin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/font-awesome.min.css">
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $serverUrlStr; ?>/admin/css/sb-admin.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/sb-admin.min.css">
 
     <!-- Custom Fonts from: localfont.com -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $serverUrlStr; ?>/admin/css/fonts.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/fonts.min.css">
 
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="<?php echo $serverUrlStr; ?>/admin/js/admin.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js"></script>
 
     <?php
     if (defined('tinyMCE')) {
     ?>
     <!-- TinyMCE -->
-    <script type="text/javascript" language="javascript" src="<?php echo $serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js"></script>
     <?php
     }
     ?>
@@ -67,15 +67,15 @@ session_start();
     if (defined('codeMirror')) {
     ?>
         <!-- CodeMirror -->
-        <link rel="stylesheet" type="text/css" href="<?php echo $serverUrlStr; ?>/admin/css/codemirror/lib/codemirror.min.css">
-        <script type="text/javascript" language="javascript" src="<?php echo $serverUrlStr; ?>/admin/js/codemirror/lib/codemirror.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo $serverUrlStr; ?>/admin/js/codemirror/mode/css/css.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/codemirror/lib/codemirror.min.css">
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/lib/codemirror.min.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/mode/css/css.min.js"></script>
     <?php
     }
     ?>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="<?php echo $serverUrlStr; ?>/admin/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/functions.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -111,7 +111,7 @@ session_start();
         $linkListJson = "";
 
         //Build list of images in uploads folder for tinymce
-        if ($handle = opendir($image_dir)) {
+        if ($handle = opendir(image_dir)) {
 
             while (false !== ($imgfile = readdir($handle))) {
                 if ('.' === $imgfile) continue;
@@ -125,7 +125,7 @@ session_start();
         }
         sort($allimgfiles);
         foreach($allimgfiles as $imgfile) {
-            $fileListJson .= "{title: '" . $imgfile . "', value: '" . $image_url . $imgfile . "'},";
+            $fileListJson .= "{title: '" . $imgfile . "', value: '" . image_url . $imgfile . "'},";
         }
 
         //get and build page list for TinyMCE
@@ -154,7 +154,7 @@ session_start();
                         paste_strip_class_attributes: true,
                         image_dimensions: false,
                         object_resizing: false,
-                        document_base_url: '<?php echo $image_baseURL; ?>',
+                        document_base_url: '<?php echo image_baseURL; ?>',
                         resize: 'both',
                         image_list: [<?php echo rtrim($fileListJson, ","); ?>],
                         link_list: [<?php echo rtrim($linkListJson, ","); ?>],
@@ -203,7 +203,7 @@ session_start();
             <a class="navbar-brand">YOUSEEMORE</a>
 
             <?php
-            if ($multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
+            if (multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
             ?>
             <ul class="nav navbar-right top-nav">
                 <li class="loc-select">
@@ -272,7 +272,7 @@ session_start();
                     <a href="slider.php?<?php echo $setLocId; ?>" title="Image Slider"><i class="fa fa-fw fa-picture-o"></i> Image Slider</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'navigation.php'){echo "class='active'";}?>>
-                    <a href="navigation.php?section=<?php echo $navSections[0] . "&" . $setLocId; ?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
+                    <a href="navigation.php?section=<?php echo navSections[0] . "&" . $setLocId; ?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'page.php'){echo "class='active'";}?>>
                     <a href="page.php?<?php echo $setLocId; ?>" title="Pages"><i class="fa fa-fw fa-file-text"></i> Pages</a>
