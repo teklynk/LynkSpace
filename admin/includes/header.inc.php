@@ -272,7 +272,7 @@ session_start();
                     <a href="slider.php?<?php echo $setLocId; ?>" title="Image Slider"><i class="fa fa-fw fa-picture-o"></i> Image Slider</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'navigation.php'){echo "class='active'";}?>>
-                    <a href="navigation.php?section=<?php echo navSections[0] . "&" . $setLocId; ?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
+                    <a href="navigation.php?section=<?php echo $navSections[0] . "&" . $setLocId; ?>" title="Navigation"><i class="fa fa-fw fa-bars"></i> Navigation</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'page.php'){echo "class='active'";}?>>
                     <a href="page.php?<?php echo $setLocId; ?>" title="Pages"><i class="fa fa-fw fa-file-text"></i> Pages</a>
@@ -296,7 +296,7 @@ session_start();
                     <a href="hottitles.php?<?php echo $setLocId; ?>" title="Hot Titles"><i class="fa fa-fw fa-fire"></i> Hot Titles</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'databases.php'){echo "class='active'";}?>>
-                    <a href="databases.php?section=<?php echo $custSections[0] . "&" . $setLocId; ?>" title="Databases"><i class="fa fa-fw fa-link"></i> Databases</a>
+                    <a href="databases.php?section=1&<?php echo $setLocId; ?>" title="Databases"><i class="fa fa-fw fa-link"></i> Databases</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'generalinfo.php'){echo "class='active'";}?>>
                     <a href="generalinfo.php?<?php echo $setLocId; ?>" title="General Info"><i class="fa fa-fw fa-info-circle"></i> General Info</a>
