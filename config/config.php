@@ -62,7 +62,6 @@ define('multiBranch', $rowConfig['multibranch']);
 define('homePageURL', $rowConfig['homepageurl']);
 
 //LS2PAC Server Domain or IP
-//setupPACURL = $rowConfig['setuppacurl'];
 define('setupPACURL', $rowConfig['setuppacurl']);
 
 //Web Site Analytics
@@ -131,9 +130,8 @@ require_once('blowfishsalt.php');
 //Version Number
 $versionFile = __DIR__ . 'version.txt';
 $versionFile = str_replace('config', '', $versionFile);
-//ysmVersion = file_get_contents($versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL
-$updatesServer = "http://ysmservices.tlcdelivers.com/ysmversionupdates";
+define('updatesServer', "http://ysmservices.tlcdelivers.com/ysmversionupdates");
 ?>

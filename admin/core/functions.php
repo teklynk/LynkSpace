@@ -309,8 +309,8 @@ function getUrlContents($getUrl) {
 function checkForUpdates(){
     global $getVersion;
     global $http_status;
-    global $updatesServer;
-    $updatesURL = $updatesServer.'/version.txt';
+
+    $updatesURL = updatesServer.'/version.txt';
     $getVersion = getUrlContents($updatesURL);
     $getVersion = trim($getVersion);
     if (!isset($_SESSION['updates_available'])) {
@@ -331,12 +331,11 @@ function getUpdates(){
     global $changeLogFile;
     global $updatesDestination;
     global $updatesCheckerURL;
-    global $updatesServer;
 
-    $changeLogFile = $updatesServer.'/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = $updatesServer.'/version'.$getVersion.'.zip';
+    $changeLogFile = updatesServer.'/changelog'.$getVersion.'.txt';
+    $updatesRemoteFile = updatesServer.'/version'.$getVersion.'.zip';
     $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
-    $updatesCheckerURL = $updatesServer.'/versionupdatechecker.php';
+    $updatesCheckerURL = updatesServer.'/versionupdatechecker.php';
 }
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {
