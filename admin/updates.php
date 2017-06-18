@@ -91,6 +91,8 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
 
         sleep(1); // wait
 
+        //TODO: Check if zip contains a migration script for database changes.
+
         //Delete the zip file
         unlink($updatesDestination);
         //remove session variable

@@ -351,6 +351,17 @@ $(document).ready(function () {
             $('#nav_Table .nav_win_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('#nav_Table .nav_active_checkbox').change(function () {
+        $.get('ajax/update_navactive.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+
+        $('#nav_Table .nav_active_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('#nav_Table .nav_active_checkbox').attr('disabled', false);
+        }, 500);
+    });
 
     //Disable radio buttons if one checkbox is active
     if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {

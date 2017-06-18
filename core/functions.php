@@ -277,6 +277,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
     global $navLinksUrl;
     global $navLinksCatId;
     global $navLinksSection;
+    global $navLinksActive;
     global $navLinksWin;
     global $navLinksLocId;
     global $navLinksDateTime;
@@ -335,8 +336,8 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
         $navDefaultLoc = $_GET['loc_id'];
     }
 
-    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND sort>0 AND loc_id=" . $navDefaultLoc . " ORDER BY sort");
-    //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.loc_id, category_navigation.nav_loc_id
+    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND active='true' AND loc_id=" . $navDefaultLoc . " ORDER BY sort, cat_name ASC");
+    //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.loc_id, category_navigation.nav_loc_id
     $tempLink = 0;
 
     while ($rowNavLinks = mysqli_fetch_array($sqlNavLinks)) {
@@ -348,13 +349,14 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
         $navLinksUrl = $rowNavLinks[3];
         $navLinksCatId = $rowNavLinks[4];
         $navLinksSection = $rowNavLinks[5];
-        $navLinksWin = $rowNavLinks[6];
-        $navLinksLocId = $rowNavLinks[7];
-        $navLinksDateTime = $rowNavLinks[8];
-        $navLinks_Author = $rowNavLinks[9];
-        $navLinks_CatId = $rowNavLinks[10];
-        $navLinks_CatName = $rowNavLinks[11];
-        $navLinks_CatNavLocId = $rowNavLinks[12];
+        $navLinksActive = $rowNavLinks[6];
+        $navLinksWin = $rowNavLinks[7];
+        $navLinksLocId = $rowNavLinks[8];
+        $navLinksDateTime = $rowNavLinks[9];
+        $navLinks_Author = $rowNavLinks[10];
+        $navLinks_CatId = $rowNavLinks[11];
+        $navLinks_CatName = $rowNavLinks[12];
+        $navLinks_CatNavLocId = $rowNavLinks[13];
 
         //Check if link contains shortcode
         $navLinksUrl = getShortCode($navLinksUrl);
@@ -371,8 +373,8 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
 
             if ($navLinksCatId != $tempLink){
 
-                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND sort>0 AND loc_id='" . $navDefaultLoc . "' ORDER BY sort");
-                //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.name, category_navigation.nav_loc_id
+                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id='" . $navDefaultLoc . "' ORDER BY sort, name ASC");
+                //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.nav_loc_id
 
                 echo "<li class='$dropdown'>";
                 echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>";

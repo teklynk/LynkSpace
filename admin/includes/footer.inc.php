@@ -18,12 +18,6 @@ if (!defined('inc_access')) {
     <div class="pull-right">
         <ul class="nav-footer">
             <li>
-                <a href="#" target="_blank">Privacy</a>
-            </li>
-            <li>
-                <a href="#" target="_blank">Feedback</a>
-            </li>
-            <li>
                 <a href="#" target="_blank">Help</a>
             </li>
         </ul>
