@@ -62,7 +62,7 @@ CREATE TABLE `category_customers` (
 
 CREATE TABLE `category_navigation` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `cat_name` text NOT NULL,
   `nav_section` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -73,7 +73,7 @@ CREATE TABLE `category_navigation` (
 -- Dumping data for table `category_navigation`
 --
 
-INSERT INTO `category_navigation` (`id`, `name`, `nav_section`, `nav_loc_id`, `datetime`, `author_name`) VALUES
+INSERT INTO `category_navigation` (`id`, `cat_name`, `nav_section`, `nav_loc_id`, `datetime`, `author_name`) VALUES
 (0, 'None', '', 0, '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
@@ -1043,6 +1043,7 @@ CREATE TABLE `navigation` (
   `url` text NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `section` text NOT NULL,
+  `active` text NOT NULL,
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
