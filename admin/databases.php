@@ -339,12 +339,12 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $sectionDelete = "DELETE FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $sectionDelete);
 
-                //Delete all database with in the section
+                //Delete all databases with in the section
                 $sectionDeleteDatabases = "DELETE FROM customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $sectionDeleteDatabases);
 
-                $deleteMsg = "<div class='alert alert-success'>Section " . $getCustSection . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_SESSION['loc_id'] . "&sectiondeleted=true';</script>";
+
             }
 
             //delete customer
@@ -357,6 +357,14 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
                 mysqli_query($db_conn, $customerDelete);
 
+                echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&databasedeleted=true';</script>";
+            }
+
+            //Display deleted message
+            if ($_GET['sectiondeleted'] == true){
+                $deleteMsg = "<div class='alert alert-success'>Section " . $getCustSection . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                echo $deleteMsg;
+            } elseif ($_GET['databasedeleted'] == true){
                 $deleteMsg = "<div class='alert alert-success'>" . $delcustomerName . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
             }
@@ -388,6 +396,12 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
                 }
 
+                echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&databaseupdated=true';</script>";
+
+            }
+
+            //Display updated message
+            if ($_GET['databaseupdated'] == true){
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
