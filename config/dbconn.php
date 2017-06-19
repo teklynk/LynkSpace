@@ -1,6 +1,6 @@
 <?php
-$db_servername = 'localhost';
-$db_username = 'root';
-$db_password = 'r00t';
-$db_name = 'businessCMS';
+define('db_servername', 'localhost');
+define('db_username', 'root');
+define('db_password', 'r00t');
+define('db_name', 'businessCMS');
 ?>

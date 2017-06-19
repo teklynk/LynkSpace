@@ -95,13 +95,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
         $writeline = "<?php\n";
         fwrite($dbfile, $writeline);
-        $writeline = "\$db_servername = '" . safeCleanStr($_POST['dbserver']) . "';\n";
+        $writeline = "define('db_servername', '" . safeCleanStr($_POST['dbserver']) . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "\$db_username = '" . safeCleanStr($_POST['dbusername']) . "';\n";
+        $writeline = "define('db_username', '" . safeCleanStr($_POST['dbusername']) . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "\$db_password = '" . safeCleanStr($_POST['dbpassword']) . "';\n";
+        $writeline = "define('db_password', '" . safeCleanStr($_POST['dbpassword']) . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "\$db_name = '" . safeCleanStr($_POST['dbname']) . "';\n";
+        $writeline = "define('db_name', '" . safeCleanStr($_POST['dbname']) . "');\n";
         fwrite($dbfile, $writeline);
         $writeline = "?>";
         fwrite($dbfile, $writeline);
@@ -114,9 +114,9 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         //Clear the file blowfish file
         ftruncate(dbBlowfishLoc, 0);
 
-        $writeline = "<?php";
+        $writeline = "<?php\n";
         fwrite($dbBlowfish, $writeline);
-        $writeline = "\n\$blowfishSalt = '" . $blowfishHash . "';\n";
+        $writeline = "define('blowfishSalt', '" . $blowfishHash . "');\n";
         fwrite($dbBlowfish, $writeline);
         $writeline = "?>";
         fwrite($dbBlowfish, $writeline);

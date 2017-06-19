@@ -29,7 +29,11 @@ if (!empty($_POST)) {
 
         } elseif ($_POST['exist_cat'] > "" && $_POST['nav_newcat'] > "") {
 
-            $getTheCat = $_POST['exist_cat']; //use existing category id
+            $getTheCat = $_POST['exist_cat']; //use existing category id from add/edit category section
+
+        } elseif ($_POST['exist_cat_main'] > 0) {
+
+            $getTheCat = $_POST['exist_cat_main']; //use existing category id from main page
 
         } else {
 
@@ -333,6 +337,26 @@ if ($_GET['section'] == $navSections[0]) {
                             <?php
                             echo "<option value=''>Custom</option>";
                             echo $pagesStr;
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exist_cat_main">Existing Category</label>
+                        <select class="form-control" name="exist_cat_main" id="exist_cat_main">
+                            <?php
+                            echo "<option value='0'>None</option>";
+                            //get and build category list, find selected
+                            $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY cat_name");
+                            while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
+
+                                if ($rowExistNavCat['id'] != 0) {
+                                    $navExistCatId = $rowExistNavCat['id'];
+                                    $navExistCatName = $rowExistNavCat['cat_name'];
+
+                                    echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
+                                }
+
+                            }
                             ?>
                         </select>
                     </div>

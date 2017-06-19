@@ -7,8 +7,8 @@ require_once('dbconn.php');
 if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 
     //Establish config connection
-    $db_conn = mysqli_connect($db_servername, $db_username, $db_password);
-    mysqli_select_db($db_conn, $db_name);
+    $db_conn = mysqli_connect(db_servername, db_username, db_password);
+    mysqli_select_db($db_conn, db_name);
 
     if (mysqli_connect_errno($db_conn)) {
         echo "Go to <a href='admin/install.php'>admin/install.php</a> to install the database. " . PHP_EOL;
@@ -26,10 +26,10 @@ $serverProtocol = '//';
 $serverHostname = $_SERVER['SERVER_NAME'];
 
 //Get server port number. if not port 80
-if ($_SERVER['SERVER_PORT'] != 80){
-    $serverPort = ':'.$_SERVER['SERVER_PORT'];
-} else {
+if ($_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443) {
     $serverPort = '';
+} else {
+    $serverPort = ':'.$_SERVER['SERVER_PORT'];
 }
 
 //Get Sub-folder name
@@ -107,7 +107,7 @@ $navSections = array("Top", "Footer", "Search");
 //Location Types
 $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);
-if (multiBranch == 'true'){
+if (multiBranch == 'true') {
     $locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
 } else {
     $locTypes = 'Default';
