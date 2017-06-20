@@ -331,7 +331,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             //Delete Section and all databases in the section
             if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete the entire Section " . safeCleanStr(addslashes($getCustSection)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletesection=true&deletename=" . safeCleanStr(addslashes($getCustSection)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete the entire Section " . safeCleanStr(addslashes($getCustSection)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletesection=true&deletename=" . safeCleanStr(addslashes($getCustSection)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -349,7 +349,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             //delete customer
             if ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && !$_GET['confirm']) {
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr(addslashes($delcustomerName)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=" . $delcustomerId . "&deletename=" . safeCleanStr(addslashes($delcustomerName)) . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr(addslashes($delcustomerName)) . "? <a href='?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=" . $delcustomerId . "&deletename=" . safeCleanStr(addslashes($delcustomerName)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -415,7 +415,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             //Delete category and set categories to zero
             if ($_GET['deletecat'] && $_GET['deletecatname'] && !$_GET['confirm']) {
 
-                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete the category " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getCustSection . "&deletecat=" . $delCatId . "&deletecatname=" . safeCleanStr($delCatTitle) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete the category " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getCustSection . "&deletecat=" . $delCatId . "&deletecatname=" . safeCleanStr($delCatTitle) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {

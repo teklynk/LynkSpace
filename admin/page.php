@@ -178,7 +178,7 @@ $_SESSION['file_referer'] = 'page.php';
             //delete page
             if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'>Yes</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
 
             } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
