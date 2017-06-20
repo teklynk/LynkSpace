@@ -133,5 +133,8 @@ $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL
-define('updatesServer', "http://ysmservices.tlcdelivers.com/ysmversionupdates");
+define('updatesServer', "//ysmservices.tlcdelivers.com/ysmversionupdates");
+
+//Help URL
+define('helpURL', "//ysmhelp.tlcdelivers.com/".ysmVersion."");
 ?>
