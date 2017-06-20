@@ -361,7 +361,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
         $navLinksUrl = getShortCode($navLinksUrl);
 
         //New Window
-        if ($navLinksWin == 'true'){
+        if ($navLinksWin == 'true' || $navLinksWin == 'on'){
             $navWin = "target='_blank'";
         } else {
             $navWin = "";
@@ -387,13 +387,14 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
                     $navCatLinksUrl = $rowNavCatLinks[3];
                     $navCatLinksCatID = $rowNavCatLinks[4];
                     $navCatLinksCatSection = $rowNavCatLinks[5];
-                    $navCatLinksWin = $rowNavCatLinks[6];
+                    $navCatLinksActive = $rowNavCatLinks[6];
+                    $navCatLinksWin = $rowNavCatLinks[7];
 
                     //Check if cat link contains shortcode
                     $navCatLinksUrl = getShortCode($navCatLinksUrl);
 
                     //New Window
-                    if ($navCatLinksWin == 'true'){
+                    if ($navCatLinksWin == 'true' || $navCatLinksWin == 'on'){
                         $navCatWin = "target='_blank'";
                     } else {
                         $navCatWin = "";
