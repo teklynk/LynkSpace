@@ -324,21 +324,21 @@ if ($_GET['section'] == $navSections[0]) {
             <form name="navForm" class="dirtyForm" method="post" action="">
                 <fieldset>
                     <div class="form-group">
+                        <label for="exist_page">Existing Page</label>
+                        <select class="form-control" name="exist_page" id="exist_page">
+                            <?php
+                            echo "<option value=''>None</option>";
+                            echo $pagesStr;
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nav_newname">Link Name</label>
                         <input type="text" class="form-control count-text" name="nav_newname" id="nav_newname" maxlength="255" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="nav_newurl">Link URL</label>
                         <input type="text" class="form-control count-text" name="nav_newurl" id="nav_newurl" maxlength="255">
-                    </div>
-                    <div class="form-group">
-                        <label for="exist_page">Existing Page</label>
-                        <select class="form-control" name="exist_page" id="exist_page">
-                            <?php
-                            echo "<option value=''>Custom</option>";
-                            echo $pagesStr;
-                            ?>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="exist_cat_main">Existing Category</label>

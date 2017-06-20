@@ -40,25 +40,25 @@ session_start();
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo serverUrlStr; ?>/admin/images/favicon.ico">
 
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/admin.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/admin.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Admin Panel Fonts -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/sb-admin.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/sb-admin.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Custom Fonts from: localfont.com -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/fonts.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/fonts.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php
     if (defined('tinyMCE')) {
     ?>
     <!-- TinyMCE -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
     <?php
     }
     ?>
@@ -67,15 +67,15 @@ session_start();
     if (defined('codeMirror')) {
     ?>
         <!-- CodeMirror -->
-        <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/codemirror/lib/codemirror.min.css">
-        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/lib/codemirror.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/mode/css/css.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/codemirror/lib/codemirror.min.css?v=<?php echo ysmVersion; ?>">
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/lib/codemirror.min.js?v=<?php echo ysmVersion; ?>"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/codemirror/mode/css/css.min.js?v=<?php echo ysmVersion; ?>"></script>
     <?php
     }
     ?>
 
     <!-- Custom Functions -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/functions.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

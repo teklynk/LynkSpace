@@ -35,15 +35,6 @@ if (!defined('inc_access')) {
         <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo ysmVersion; ?></span>
         <div class="pull-right">
             <ul class="nav-footer">
-                <li>
-                    <a href="#" target="_blank">Privacy</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">Feedback</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">Help</a>
-                </li>
             </ul>
             <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="https://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
         </div>

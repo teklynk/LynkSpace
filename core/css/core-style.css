@@ -14,6 +14,9 @@ body {
 .img-hover:hover {
     opacity: 0.8;
 }
+.img-nonresponsive {
+    height: 100%;
+}
 
 /* Home Page Carousel */
 .slider.container-fluid, .slider.container-fluid .container {
