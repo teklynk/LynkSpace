@@ -284,7 +284,6 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
     global $navLinks_CatId;
     global $navLinks_CatName;
     global $navLinks_CatNavLocId;
-    global $navLinks_CatDateTime;
     global $navCatLinksID;
     global $navCatLinksSort;
     global $navCatLinksName;
@@ -336,7 +335,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
         $navDefaultLoc = $_GET['loc_id'];
     }
 
-    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND active='true' AND loc_id=" . $navDefaultLoc . " ORDER BY sort, cat_name ASC");
+    $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND active='true' AND loc_id=" . $navDefaultLoc . " ORDER BY navigation.sort, navigation.name ASC");
     //returns: navigation.id, navigation.sort, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.loc_id, category_navigation.nav_loc_id
     $tempLink = 0;
 
@@ -373,7 +372,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
 
             if ($navLinksCatId != $tempLink){
 
-                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id='" . $navDefaultLoc . "' ORDER BY sort, name ASC");
+                $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id='" . $navDefaultLoc . "' ORDER BY navigation.sort, navigation.name ASC");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.nav_loc_id
 
                 echo "<li class='$dropdown'>";
