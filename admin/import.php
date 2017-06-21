@@ -153,6 +153,7 @@ if ($_POST['save_main']) {
                 if (!empty($pageData[2])) {
                     $html = file_get_contents($pageData[2]) or die('Error accessing file');
                     $dom = new domDocument;
+
                     // load the html into the object
                     $dom->loadHTML($html);
                     $dom->preserveWhiteSpace = false;
@@ -166,6 +167,7 @@ if ($_POST['save_main']) {
                         $extracted_contents = $dom->getElementsByTagName('body');
                     }
 
+                    //Removes html from pageContent and just gets the text
                     $pageContent = $dom->saveHTML($extracted_contents);
                     $pageContent = sanitizeStr($pageContent);
                     $pageContent = strip_tags($pageContent);

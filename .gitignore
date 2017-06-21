@@ -9,3 +9,4 @@
 /node_modules/
 /config/blowfishsalt.php
 /config/dbconn.php
+/uploads/

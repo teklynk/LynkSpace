@@ -98,7 +98,7 @@ echo "</div>";
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" pattern="<?php echo $emailValidationPattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                            <input type="email" pattern="<?php echo emailValidationPattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
                         </div>
                     </div>
                     <div class="control-group form-group">

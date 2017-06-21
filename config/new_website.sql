@@ -1145,7 +1145,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 18:59:07', 'admin', 1);
+(1, 'My Library', '', '', 'ysm', 'None', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 18:59:07', 'admin', 1);
 
 -- --------------------------------------------------------
 

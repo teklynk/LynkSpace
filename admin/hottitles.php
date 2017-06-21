@@ -150,7 +150,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group required">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" pattern="<?php echo $urlValidationPattern; ?>" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
+                            <input class="form-control" type="url" name="hottitles_url" maxlength="255" pattern="<?php echo urlValidationPattern; ?>" placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -258,7 +258,7 @@ if ($_GET['loc_id'] != 1) {
                                 <input class='form-control' name='hottitles_title[]' value='" . $hottitlesTitle . "' type='text' maxlength='255' required>
                             </td>";
 
-                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' pattern='".$urlValidationPattern."' maxlength='255' required></td>";
+                            echo "<td><input class='form-control' type='url' name='hottitles_url[]' value='".$hottitlesUrl."' pattern='".urlValidationPattern."' maxlength='255' required></td>";
 
                             //If admin, show location type drop down list else show a hidden input with the locations type value
                             if ($adminIsCheck == "true") {

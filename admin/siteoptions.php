@@ -119,11 +119,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 ?>
                 <div class="form-group">
                     <label>Home Page URL</label>
-                    <input type="url" pattern="<?php echo $urlValidationPattern; ?>" class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
+                    <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
                 </div>
                 <div class="form-group">
                     <label>PAC URL</label>
-                    <input type="url" pattern="<?php echo $urlValidationPattern; ?>" class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
+                    <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
                 </div>
                 <div class="form-group">
                     <label>Carousel Speed</label>

@@ -669,6 +669,22 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
+
+    $('.set_logo_default').click(function () {
+        $.get('ajax/update_logodefaults.php?loc_id=1&update=true&defaultlogo='+$('select[name=site_logo] option:selected').text(), {
+            success: function () {
+                $('.set_logo_default').attr('disabled', true);
+                $('.set_logo_default>i').addClass('fa-spin');
+                $('.set_logo_default_msg').html('');
+                setTimeout(function() {
+                    $('.set_logo_default').attr('disabled', false);
+                    $('.set_logo_default>i').removeClass('fa-spin');
+                    $('.set_logo_default_msg').html('Process may still be running in the background');
+                }, 3000);
+            }
+        });
+    });
+
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?loc_id=1&update=true', {
             success: function () {

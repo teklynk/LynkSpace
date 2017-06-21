@@ -69,7 +69,7 @@ $_SESSION['unique_referer'] = generateRandomString();
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Email Address</label>
-                        <input type="email" pattern="<?php echo $emailValidationPattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                        <input type="email" pattern="<?php echo emailValidationPattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Phone Number</label>

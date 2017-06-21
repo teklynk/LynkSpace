@@ -124,11 +124,11 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control count-text" name="contact_email" pattern="<?php echo $emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_email" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
                 <div class="form-group">
                     <label>Send To Email</label>
-                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo $emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
 
                 <div class="form-group">

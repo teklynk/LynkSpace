@@ -137,4 +137,17 @@ define('updatesServer', "//ysmservices.tlcdelivers.com/ysmversionupdates");
 
 //Help URL
 define('helpURL', "//ysmhelp.tlcdelivers.com/".ysmVersion."");
+
+//html5 pattern property for input type=email
+define('emailValidationPattern', "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}");
+
+//html5 date validation - Full Date Validation (YYYY-MM-DD)
+define('dateValidationPattern', "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])");
+
+//html5 URL validation pattern
+define('urlValidationPattern', "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?");
+
+//html5 password validation pattern
+define('passwordValidationPattern', "(?=(?:[^a-zA-Z]*[a-zA-Z]){4})(?=(?:\D*\d){1}).*");
+define('passwordValidationTitle', "1 or more digits and a min. of 4 letters are required");
 ?>

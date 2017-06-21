@@ -335,8 +335,26 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 }
                 ?>
 
-                <div class="form-group">
-                    <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
+                        </div>
+                        <?php
+                        //Check if user_level is Admin user and default location
+                        if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
+                        ?>
+                        <div class="form-group">
+                            <button type="button" class="set_logo_default btn btn-primary" name="set_logo_default" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
+                                <i class="fa fa-fw fa-refresh"></i> Set as the default logo for ALL locations?
+                            </button>
+                            <br/>
+                            <small class="small set_logo_default_msg"></small>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
 
                 <div class="form-group">

@@ -12,7 +12,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     require_once('../../config/config.php');
     require_once('../core/functions.php');
 
-    if (!empty($_GET) && $_GET['update']) {
+    if (!empty($_GET) && $_GET['update'] && multiBranch == 'true') {
 
         //Copy images from default location
         $srcPath = str_replace('admin/ajax', 'uploads/1', __DIR__);

@@ -130,11 +130,7 @@ function getContactInfo(){
     global $contactHours;
     global $contactFormSendToEmail;
     global $contactFormMsg;
-    global $emailValidationPattern;
-
     global $db_conn;
-
-    $emailValidationPattern = "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}";
 
     $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowContact = mysqli_fetch_array($sqlContact);
@@ -1108,15 +1104,13 @@ function getShortCode($urlStr){
     //add a space to the front of var so that str_replace will see it. strange, right?
     $urlStr = ' ' . $urlStr;
 
-    if (strpos($urlStr, '[pac_url]') == true) {
-        $urlStr = str_replace('[pac_url]', setupPACURL, $urlStr);
-    } elseif (strpos($urlStr, '[homepage_url]') == true) {
-        $urlStr = str_replace('[homepage_url]', homePageURL, $urlStr);
-    } elseif (strpos($urlStr, '[config]') == true) {
-        $urlStr = str_replace('[config]', $setupConfig, $urlStr);
-    } elseif (strpos($urlStr, '[loc_id]') == true) {
-        $urlStr = str_replace('[loc_id]', $_GET['loc_id'], $urlStr);
-    }
+    $urlStr = str_replace('[pac_url]', setupPACURL, $urlStr);
+
+    $urlStr = str_replace('[homepage_url]', homePageURL, $urlStr);
+
+    $urlStr = str_replace('[config]', $setupConfig, $urlStr);
+
+    $urlStr = str_replace('[loc_id]', $_GET['loc_id'], $urlStr);
 
     return trim($urlStr);
 }

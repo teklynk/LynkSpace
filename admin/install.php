@@ -219,11 +219,11 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 </div>
                                 <div class="form-group required">
                                     <label for="useremail">User Email</label>
-                                    <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo $emailValidationPattern; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo $passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo $passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
                                 </div>
                                 <div class="checkbox">
                                     <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>

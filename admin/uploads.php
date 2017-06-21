@@ -161,7 +161,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
     <div class="row">
         <div class="col-lg-4">
             <div class="form-group" id="copyfiles">
-                <button class="copy_files_to_locs btn btn-primary" id="<?php echo $_GET['loc_id'] ?>" name="copy_files_to_locs" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
+                <button type="button" class="copy_files_to_locs btn btn-primary" id="<?php echo $_GET['loc_id'] ?>" name="copy_files_to_locs" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
                     <i class='fa fa-fw fa-refresh'></i> Copy Files To ALL Locations
                 </button>
                 <br/>
