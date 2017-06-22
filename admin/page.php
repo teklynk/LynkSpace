@@ -53,8 +53,6 @@ $_SESSION['file_referer'] = 'page.php';
                     $_POST['page_status'] = 'false';
                 }
 
-
-
                 // Update existing page
                 if ($_GET['editpage']) {
                     $thePageId = $_GET['editpage'];
