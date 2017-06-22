@@ -44,7 +44,7 @@ if (!empty($_GET['rssurl'])) {
     <?php
 
     $rssUrl = $_GET['rssurl'];
-    //example: getHottitlesCarousel("http://beacon.tlcdelivers.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
+    //example: getHottitlesCarousel("http://test.library.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
     getHottitlesCarousel($rssUrl, 'MD', 'true', 50);
 
 } else {

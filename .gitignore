@@ -1,12 +1,9 @@
 .git/
 .idea/
 .svn/
-*custom-style.css
-*sitemap.xml
-*robots.txt
-/admin/upgrade/
-/admin/backups/
+!/admin/upgrade/*
+!/admin/backups/*
 /node_modules/
 /config/blowfishsalt.php
 /config/dbconn.php
-/uploads/
+!/uploads/*

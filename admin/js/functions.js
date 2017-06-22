@@ -669,7 +669,6 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
-
     $('.set_logo_default').click(function () {
         $.get('ajax/update_logodefaults.php?loc_id=1&update=true&defaultlogo='+$('select[name=site_logo] option:selected').text(), {
             success: function () {
@@ -684,7 +683,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?loc_id=1&update=true', {
             success: function () {
@@ -695,7 +693,7 @@ $(document).ready(function () {
                     $('.copy_files_to_locs').attr('disabled', false);
                     $('.copy_files_to_locs>i').removeClass('fa-spin');
                     $('.copy_files_to_locs_msg').html('Process may still be running in the background');
-                }, 10000);
+                }, 3000);
             }
         });
     });
@@ -709,7 +707,7 @@ $(document).ready(function () {
                     $('.sitemap_builder').attr('disabled', false);
                     $('.sitemap_builder>i').removeClass('fa-spin');
                     $('.sitemap_builder_msg').html('View the <a href="../sitemap.xml" target="_blank">Sitemap.xml</a>');
-                }, 10000);
+                }, 3000);
             }
         });
     });
@@ -832,7 +830,6 @@ function showMyModal(myTitle, myFile) {
 }
 //Page Load/Performance Checker
 window.onload = function () {
-    //var loadTime = ((window.performance.timing.domComplete- window.performance.timing.navigationStart)/1000)+" sec.";
     var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
     console.log('Page load time is ' + loadTime);
     console.log(window.performance);
