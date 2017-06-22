@@ -36,7 +36,7 @@ if (!defined('inc_access')) {
         <div class="pull-right">
             <ul class="nav-footer">
             </ul>
-            <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="https://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
+            <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="//www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
         </div>
     </div>
 

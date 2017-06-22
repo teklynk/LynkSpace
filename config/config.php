@@ -10,9 +10,9 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $db_conn = mysqli_connect(db_servername, db_username, db_password);
     mysqli_select_db($db_conn, db_name);
 
-    if (mysqli_connect_errno($db_conn)) {
+    if (mysqli_connect_errno()) {
         echo "Go to <a href='admin/install.php'>admin/install.php</a> to install the database. " . PHP_EOL;
-        die("Failed to connect to MySQL: " . mysqli_connect_error($db_conn));
+        die("Failed to connect to MySQL: " . mysqli_connect_error());
     }
 
     $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");

@@ -55,8 +55,10 @@ echo "</div>";
         echo "<div class='col-md-4'>";
 
         if (!empty($contactAddress)) {
+            echo "<address>";
             echo "<p><i class='fa fa-home'></i>";
             echo "&nbsp;" . $contactAddress . ",&nbsp;" . $contactCity . ",&nbsp;" . $contactState . "&nbsp;" . $contactZipcode . "</p>";
+            echo "</address>";
         }
 
         if (!empty($contactPhone)) {

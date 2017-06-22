@@ -53,12 +53,7 @@ $_SESSION['file_referer'] = 'page.php';
                     $_POST['page_status'] = 'false';
                 }
 
-                //active status
-                if ($rowPages['active'] == 'true') {
-                    $selActive = "CHECKED";
-                } else {
-                    $selActive = "";
-                }
+
 
                 // Update existing page
                 if ($_GET['editpage']) {
@@ -76,6 +71,13 @@ $_SESSION['file_referer'] = 'page.php';
 
                     $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, author_name, datetime, image_align, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowPages = mysqli_fetch_array($sqlPages);
+
+                    //active status
+                    if ($rowPages['active'] == 'true') {
+                        $selActive = "CHECKED";
+                    } else {
+                        $selActive = "";
+                    }
 
                     //Create new page
                 } elseif ($_GET['newpage']) {

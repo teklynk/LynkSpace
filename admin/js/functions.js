@@ -272,6 +272,8 @@ $(document).ready(function () {
     });
     $('#service_icon_select').change(function () {
         if ($('#service_icon_select').val() == '') {
+            $('[data-id="service_icon_select"] > span.filter-option').text('None');
+            $('[data-id="service_icon_select"]').attr('title', 'None');
             $('#service_icon').attr('class', '');
             $('#service_image_preview').attr('src', '');
             $('#service_image_preview').css('display', 'none');
@@ -289,6 +291,8 @@ $(document).ready(function () {
             $('#service_icon').attr('class', 'fa fa-fw fa-' + $('#service_icon_select').val());
         } else {
             $('#service_icon_select').val(''); //Sets icon select value to None
+            $('[data-id="service_icon_select"] > span.filter-option').text('None');
+            $('[data-id="service_icon_select"]').attr('title', 'None');
             $('#service_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#service_image_select').val());
             $('#service_image_preview').css('display', 'block');
             $('#service_icon').attr('class', '');
@@ -296,6 +300,8 @@ $(document).ready(function () {
     });
     $('#customer_icon_select').change(function () {
         if ($('#customer_icon_select').val() == '') {
+            $('[data-id="customer_icon_select"] > span.filter-option').text('None');
+            $('[data-id="customer_icon_select"]').attr('title', 'None');
             $('#customer_icon').attr('class', '');
             $('#customer_image_preview').attr('src', '');
             $('#customer_image_preview').css('display', 'none');
@@ -313,6 +319,8 @@ $(document).ready(function () {
             $('#customer_icon').attr('class', 'fa fa-fw fa-' + $('#customer_icon_select').val());
         } else {
             $('#customer_icon_select').val(''); //Sets icon select value to None
+            $('[data-id="customer_icon_select"] > span.filter-option').text('None');
+            $('[data-id="customer_icon_select"]').attr('title', 'None');
             $('#customer_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#customer_image_select').val());
             $('#customer_image_preview').css('display', 'block');
             $('#customer_icon').attr('class', '');

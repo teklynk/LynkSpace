@@ -250,13 +250,13 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 <div class="form-group">
                     <?php
 
-                    if ($rowCustomer['image'] == "") {
-                        $imgSrc = "//placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+                    if ($rowCustomer['image'] == "" || $_GET['newcustomer'] == 'true') {
+                        $imgSrc = "//placehold.it/140x100&text=No Image"; //small image just to give the source a value
                     } else {
                         $imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowCustomer['image'];
                     }
 
-                    echo "<img src='" . $imgSrc . "' id='customer_image_preview' style='max-width:140px; height:auto; display:block;'/>";
+                    echo "<img src='" . $imgSrc . "' id='customer_image_preview' style='max-width:140px; height:auto; background-color: #ccc;'/>";
                     ?>
                 </div>
                 <div class="form-group">

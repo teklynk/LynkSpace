@@ -75,7 +75,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             <form name="siteoptionsform" class="dirtyForm" method="post">
                 <div class="form-group">
                     <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank" id="theme_href_preview">
-                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px; background-color: #ccc;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
+                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px; background:url('//placehold.it/280x240&text=No Image') 0 0 no-repeat;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
                     </a>
                 </div>
                 <div class="form-group">

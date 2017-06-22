@@ -154,8 +154,8 @@ if ($_GET['preview']>"") {
 		<div class="form-group">
 			<?php
 
-			if ($rowServices['image']=="") {
-				$imgSrc = "//placehold.it/2/ffffff/ffffff"; //small image just to give the source a value
+			if ($rowServices['image']=="" || $_GET['newservice'] == 'true') {
+				$imgSrc = "//placehold.it/140x100&text=No Image"; //small image just to give the source a value
 			} else {
 				$imgSrc = "../uploads/".$_GET['loc_id']."/".$rowServices['image'];
 			}
