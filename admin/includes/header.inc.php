@@ -55,6 +55,7 @@ session_start();
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php
+
     if (defined('tinyMCE')) {
     ?>
     <!-- TinyMCE -->
@@ -144,7 +145,8 @@ session_start();
                         selector: 'textarea.tinymce',
                         height: 500,
                         theme: 'modern',
-                        plugins: 'save link image media imagetools lists paste code',
+                        plugins: 'save link image media imagetools lists table paste code',
+                        convert_urls: false,
                         paste_data_images: false,
                         paste_as_text: true,
                         paste_auto_cleanup_on_paste: true,
@@ -153,11 +155,13 @@ session_start();
                         paste_strip_class_attributes: true,
                         document_base_url: '<?php echo image_baseURL; ?>',
                         resize: 'both',
+                        image_advtab: true,
+                        image_title: true,
                         image_list: [<?php echo rtrim($fileListJson, ","); ?>],
                         link_list: [<?php echo rtrim($linkListJson, ","); ?>],
                         menubar: false,
                         toolbar_items_size: 'small',
-                        toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
+                        toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code',
                         media_live_embeds: true
                     });
                 }

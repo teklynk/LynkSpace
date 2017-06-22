@@ -1,8 +1,9 @@
 $(document).ready(function () {
     //Add responsive classes to wysiwyg elements
-    $('.container img, #featured img').addClass('img-responsive');
+    $('.container img, #featured img').addClass('img-responsive img');
     $('iframe, embed, video, object').wrap("<div class='embed-responsive embed-responsive-16by9'/>");
     $('iframe, embed, video, object').addClass('embed-responsive-item iframe');
+    $('table').addClass('table-responsive table');
 
 
     // Sticky Footer initial page load and resize
