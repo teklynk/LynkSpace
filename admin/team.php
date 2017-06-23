@@ -78,7 +78,7 @@ if ($_GET['preview'] > "") {
                 $teamLabel = "Edit Team Title";
 
                 //update data on submit
-                if (!empty($_POST['team_title'])) {
+                if (!empty($_POST['team_name'])) {
 
                     $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
