@@ -40,19 +40,6 @@ $_SESSION['file_referer'] = 'page.php';
 
             if ($_GET['newpage'] || $_GET['editpage']) {
 
-                //alert messages
-                if ($errorMsg !="") {
-                    echo $errorMsg;
-                } else {
-                    echo $pageMsg;
-                }
-
-                if ($_POST['page_status'] == 'on') {
-                    $_POST['page_status'] = 'true';
-                } else {
-                    $_POST['page_status'] = 'false';
-                }
-
                 // Update existing page
                 if ($_GET['editpage']) {
                     $thePageId = $_GET['editpage'];
@@ -61,21 +48,14 @@ $_SESSION['file_referer'] = 'page.php';
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', image='" . $_POST['page_image'] . "', image_align='" . $_POST['page_image_align'] . "', active='" . $_POST['page_status'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
+                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . safeCleanStr($_POST['page_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, author_name, datetime, image_align, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowPages = mysqli_fetch_array($sqlPages);
-
-                    //active status
-                    if ($rowPages['active'] == 'true') {
-                        $selActive = "CHECKED";
-                    } else {
-                        $selActive = "";
-                    }
 
                     //Create new page
                 } elseif ($_GET['newpage']) {
@@ -84,7 +64,7 @@ $_SESSION['file_referer'] = 'page.php';
 
                     //insert data on submit
                     if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, image, image_align, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', '" . $_POST['page_image'] . "', '" . $_POST['page_image_align'] . "', '" . $_POST['page_status'] . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
@@ -92,61 +72,21 @@ $_SESSION['file_referer'] = 'page.php';
                     }
                 }
 
-                if ($rowPages['image'] == "") {
-                    $image = "//placehold.it/140x100&text=No Image";
+                //alert messages
+                if ($errorMsg !="") {
+                    echo $errorMsg;
                 } else {
-                    $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowPages['image'];
-                }
-
-                //image align status
-                if ($rowPages['image_align'] == "left") {
-                    $selAlignLeft = "SELECTED";
-                    $selAlignRight = "";
-                } else {
-                    $selAlignRight = "SELECTED";
-                    $selAlignLeft = "";
+                    echo $pageMsg;
                 }
                 ?>
                 <div class="col-lg-8">
                 <form name="pageForm" class="dirtyForm" method="post" action="">
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group" id="pageactive">
-                                <label>Active</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input class="page_status_checkbox" id="<?php echo $_GET['editpage'] ?>" name="page_status" type="checkbox" <?php if ($_GET['editpage']) {echo $selActive;} ?> data-toggle="toggle">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr/>
                     <div class="form-group required">
                         <label><?php echo $pageLabel; ?></label>
                         <input type="text" class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
                     </div>
-                    <hr/>
-                    <div class="form-group">
-                        <img src="<?php echo $image; ?>" id="page_image_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Use an Existing Image</label>
-                        <select class="form-control" name="page_image" id="page_image">
-                            <option value="">None</option>
-                            <?php
-                            getImageDropdownList(image_dir, $rowPages['image']);
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Image Alignment</label>
-                        <select class="form-control" name="page_image_align">
-                            <option value="left" <?php echo $selAlignLeft; ?>>Left</option>
-                            <option value="right" <?php echo $selAlignRight; ?>>Right</option>
-                        </select>
-                    </div>
+
                     <hr/>
 
                     <?php
@@ -158,7 +98,7 @@ $_SESSION['file_referer'] = 'page.php';
                         <label>Text / HTML</label>
                         <textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
                     </div>
-                    <input name="image" type="file" id="upload" class="hidden" onchange="">
+
                     <div class="form-group">
                         <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
                     </div>
@@ -169,40 +109,42 @@ $_SESSION['file_referer'] = 'page.php';
                 </div>
 
             <?php
+
             } else {
-            $deleteMsg = "";
-            $deleteConfirm = "";
-            $pageMsg = "";
-            $delPageId = $_GET['deletepage'];
-            $delPageTitle = $_GET['deletetitle'];
 
-            //delete page
-            if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+                $deleteMsg = "";
+                $deleteConfirm = "";
+                $pageMsg = "";
+                $delPageId = $_GET['deletepage'];
+                $delPageTitle = $_GET['deletetitle'];
 
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                //delete page
+                if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-            } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+                    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                    echo $deleteMsg;
 
-                //delete page after clicking Yes
-                $pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
-                mysqli_query($db_conn, $pageDelete);
+                } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
 
-                $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
-            }
+                    //delete page after clicking Yes
+                    $pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
+                    mysqli_query($db_conn, $pageDelete);
 
-            //update heading on submit
-            if (!empty($_POST['main_heading'])) {
+                    $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                    echo $deleteMsg;
+                }
 
-                $setupUpdate = "UPDATE setup SET pageheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-                mysqli_query($db_conn, $setupUpdate);
+                //update heading on submit
+                if (!empty($_POST['main_heading'])) {
 
-                $pageMsg = "<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-            }
+                    $setupUpdate = "UPDATE setup SET pageheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                    mysqli_query($db_conn, $setupUpdate);
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-            $rowSetup = mysqli_fetch_array($sqlSetup);
+                    $pageMsg = "<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                }
+
+                $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+                $rowSetup = mysqli_fetch_array($sqlSetup);
             ?>
                 <!--modal preview window-->
 
@@ -272,12 +214,11 @@ $_SESSION['file_referer'] = 'page.php';
                             </thead>
                             <tbody>
                             <?php
-                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, image, content, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
+                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
                             while ($rowPages = mysqli_fetch_array($sqlPages)) {
 
                                 $pageId = $rowPages['id'];
                                 $pageTitle = $rowPages['title'];
-                                $pageTumbnail = $rowPages['image'];
                                 $pageContent = $rowPages['content'];
                                 $pageActive = $rowPages['active'];
 

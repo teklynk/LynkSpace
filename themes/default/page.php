@@ -27,29 +27,9 @@ echo "<div class='col-lg-12'>";
 echo "<h1 class='page'>" . $pageTitle . "</h1>";
 echo "</div>";
 
-if ($pageImage > "") {
-
-    if ($pageImageAlign == "right") {
-        echo "<div class='col-xs-12 col-md-10'>";
-        echo $pageContent;
-        echo "</div>";
-        echo "<div class='hidden-xs col-md-2'>";
-        echo $pageImage;
-        echo "</div>";
-    } else {
-        echo "<div class='hidden-xs col-md-2'>";
-        echo $pageImage;
-        echo "</div>";
-        echo "<div class='col-xs-12 col-md-10'>";
-        echo $pageContent;
-        echo "</div>";
-    }
-
-} else {
-    echo "<div class='col-xs-12 col-lg-12'>";
-    echo $pageContent;
-    echo "</div>";
-}
+echo "<div class='col-xs-12 col-lg-12 page-content'>";
+echo $pageContent;
+echo "</div>";
 
 echo "</div>";
 echo "</div>";

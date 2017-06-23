@@ -75,12 +75,6 @@ if ($_GET['preview']>"") {
 
 		$serviceMsg="";
 
-		if ($_POST['service_status']=='on') {
-			$_POST['service_status']='true';
-		} else {
-			$_POST['service_status']='false';
-		}
-
 		//Update existing service
 		if ($_GET['editservice']) {
 			$theserviceId = $_GET['editservice'];
@@ -89,7 +83,7 @@ if ($_GET['preview']>"") {
 			//update data on submit
 			if (!empty($_POST['service_title'])) {
 
-				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', active='".$_POST['service_status']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+				$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 				mysqli_query($db_conn, $servicesUpdate);
 
 				$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -105,7 +99,7 @@ if ($_GET['preview']>"") {
 
 			//insert data on submit
 			if (!empty($_POST['service_title'])) {
-				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', '".$_POST['service_status']."', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
+				$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', 'false', '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
 				mysqli_query($db_conn, $servicesInsert);
 
 				header("Location: services.php?loc_id=".$_GET['loc_id']."");
@@ -117,32 +111,10 @@ if ($_GET['preview']>"") {
 		if ($serviceMsg != "") {
 			echo $serviceMsg;
 		}
-
-		if ($_GET['editservice']) {
-			//active status
-			if ($rowServices['active']=='true') {
-				$selActive="CHECKED";
-			} else {
-				$selActive="";
-			}
-		}
 ?>
     <div class="col-lg-8">
 	<form name="serviceForm" class="dirtyForm" method="post" action="">
 
-		<div class="row">
-			<div class="col-lg-4">
-				<div class="form-group" id="servicesactive">
-					<label>Active</label>
-					<div class="checkbox">
-						<label>
-							<input class="services_status_checkbox" id="<?php echo $_GET['editservice']?>" name="service_status" type="checkbox" <?php if($_GET['editservice']){echo $selActive;}?> data-toggle="toggle">
-						</label>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr/>
 		<div class="form-group required">
 			<label><?php echo $serviceLabel; ?></label>
 			<input type="text" class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" autofocus required>

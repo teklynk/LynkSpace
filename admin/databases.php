@@ -148,23 +148,6 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
         if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
-            //alert messages
-            if ($customerMsg != "") {
-                echo $customerMsg;
-            }
-
-            if ($_POST['customer_status'] == 'on') {
-                $_POST['customer_status'] = 'true';
-            } else {
-                $_POST['customer_status'] = 'false';
-            }
-
-            if ($_POST['customer_featured'] == 'on') {
-                $_POST['customer_featured'] = 'true';
-            } else {
-                $_POST['customer_featured'] = 'false';
-            }
-
             //Update existing customer
             if ($_GET['editcustomer']) {
                 $thecustomerId = $_GET['editcustomer'];
@@ -173,7 +156,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 //update data on submit
                 if (!empty($_POST['customer_name'])) {
 
-                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', featured='" . $_POST['customer_featured'] . "', active='" . $_POST['customer_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -189,7 +172,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
                 //insert data on submit
                 if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', '" . $_POST['customer_featured'] . "', '" . $_POST['customer_status'] . "', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "");
@@ -197,48 +180,14 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 }
             }
 
-            //active status
-            if ($rowCustomer['active'] == 'true') {
-                $selActive = "CHECKED";
-            } else {
-                $selActive = "";
-            }
-            //featured status
-            if ($rowCustomer['featured'] == 'true') {
-                $selFeatured = "CHECKED";
-            } else {
-                $selFeatured = "";
+            //alert messages
+            if ($customerMsg != "") {
+                echo $customerMsg;
             }
             ?>
             <div class="col-lg-8">
             <form name="customerForm" class="dirtyForm" method="post" action="">
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group" id="customeractive">
-                            <label>Active</label>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="customer_status_checkbox" id="<?php echo $_GET['editcustomer'] ?>" name="customer_status" type="checkbox" <?php if ($_GET['editcustomer']) {echo $selActive;} ?> data-toggle="toggle">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group" id="customerfeatured">
-                            <label>Featured</label>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="customer_featured_checkbox" id="<?php echo $_GET['editcustomer'] ?>" name="customer_featured" type="checkbox" <?php if ($_GET['editcustomer']) {echo $selFeatured;} ?> data-toggle="toggle">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr/>
                 <div class="form-group required">
                     <label><?php echo $customerLabel; ?></label>
                     <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" autofocus required>

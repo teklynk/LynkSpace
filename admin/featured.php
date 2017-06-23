@@ -6,7 +6,7 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'featured.php';
 
-$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
@@ -21,11 +21,11 @@ if (!empty($_POST)) {
 
         if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . sqlEscapeStr($_POST['featured_content']) . "', image='" . $_POST['featured_image'] . "', image_align='" . $_POST['featured_image_align'] . "', use_defaults='" . safeCleanStr($_POST['featured_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . sqlEscapeStr($_POST['featured_content']) . "', use_defaults='" . safeCleanStr($_POST['featured_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $featuredUpdate);
         } else {
             //Do Insert
-            $featuredInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '" . $_POST['featured_image'] . "', '" . $_POST['featured_image_align'] . "',  'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $featuredInsert);
         }
 
@@ -58,20 +58,6 @@ if ($_GET['update'] == 'true') {
                 echo $pageMsg;
             }
 
-            if ($rowFeatured['image'] == "") {
-                $thumbNail = "//placehold.it/140x100&text=No Image";
-            } else {
-                $thumbNail = "../uploads/" . $_GET['loc_id'] . "/" . $rowFeatured['image'];
-            }
-
-            //image align status
-            if ($rowFeatured['image_align'] == "left") {
-                $selAlignLeft = "SELECTED";
-                $selAlignRight = "";
-            } else {
-                $selAlignRight = "SELECTED";
-                $selAlignLeft = "";
-            }
             //use default view
             if ($rowFeatured['use_defaults'] == 'true') {
                 $selDefaults = "CHECKED";
@@ -107,26 +93,6 @@ if ($_GET['update'] == 'true') {
                 <div class="form-group">
                     <label>Intro Title</label>
                     <input type="text" class="form-control count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <img src="<?php echo $thumbNail; ?>" id="featured_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
-                </div>
-                <div class="form-group">
-                    <label>Use an Existing Image</label>
-                    <select class="form-control" name="featured_image" id="featured_image">
-                        <option value="">None</option>
-                        <?php
-                        getImageDropdownList(image_dir, $rowFeatured['image']);
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Image Alignment</label>
-                    <select class="form-control" name="featured_image_align">
-                        <option value="left" <?php echo $selAlignLeft; ?>>Left</option>
-                        <option value="right" <?php echo $selAlignRight; ?>>Right</option>
-                    </select>
                 </div>
                 <hr/>
                 <div class="form-group">

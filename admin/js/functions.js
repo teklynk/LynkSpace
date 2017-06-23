@@ -157,12 +157,9 @@ $(document).ready(function () {
     $(':reset').click(function () {
         $('#del_cat .fa-trash').css('visibility', 'hidden');
         $('#rename_cat .fa-save').css('visibility', 'hidden');
-        $('#page_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
-        $('#featured_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#customer_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#service_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#team_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
-        $('#about_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#slide_image_preview').attr('src', '//placehold.it/350x150&text=No Image');
         $('#theme_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
         $('#service_image_select').val('');
@@ -254,13 +251,6 @@ $(document).ready(function () {
             $('#slide_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#slide_image').val());
         }
     });
-    $('#page_image').change(function () {
-        if ($('#page_image').val() == '') {
-            $('#page_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
-        } else {
-            $('#page_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#page_image').val());
-        }
-    });
     $('#site_theme').change(function () {
         if ($('#site_theme').val() == '') {
             $('#theme_image_preview').attr('src', '//placehold.it/240x280&text=No Image');
@@ -324,20 +314,6 @@ $(document).ready(function () {
             $('#customer_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#customer_image_select').val());
             $('#customer_image_preview').css('display', 'block');
             $('#customer_icon').attr('class', '');
-        }
-    });
-    $('#featured_image').change(function () {
-        if ($('#featured_image').val() == '') {
-            $('#featured_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
-        } else {
-            $('#featured_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#featured_image').val());
-        }
-    });
-    $('#about_image').change(function () {
-        if ($('#about_image').val() == '') {
-            $('#about_image_preview').attr('src', '//placehold.it/140x100&text=No Image');
-        } else {
-            $('#about_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#about_image').val());
         }
     });
     $('#team_image').change(function () {

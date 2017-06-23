@@ -48,27 +48,20 @@ function getPageList(){
 }
 
 function getPage(){
-    global $pageImage;
     global $pageTitle;
     global $pageContent;
-    global $pageImageAlign;
     global $pageRefId;
     global $db_conn;
 
     if (ctype_digit($_GET['page_id'])){
         $pageRefId = $_GET['page_id'];
-        $sqlPage = mysqli_query($db_conn, "SELECT id, title, image, image_align, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
         $rowPage = mysqli_fetch_array($sqlPage);
 
         if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']){
 
-            if ($rowPage['image'] > ""){
-                $pageImage = "<img src='uploads/" . $_GET['loc_id'] . "/" . $rowPage['image'] . "' alt='" . $rowPage['title'] . "' title='" . $rowPage['title'] . "'>";
-            }
-
             $pageTitle = $rowPage['title'];
             $pageContent = $rowPage['content'];
-            $pageImageAlign = $rowPage['image_align'];
 
         } else {
 
@@ -86,17 +79,14 @@ function getPage(){
 function getAbout(){
     global $aboutTitle;
     global $aboutContent;
-    global $aboutImage;
-    global $aboutImageAlign;
     global $imagePath;
     global $db_conn;
 
-    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowAbout = mysqli_fetch_array($sqlAbout);
-    $imagePath = $_GET['loc_id'];
 
     if ($rowAbout['use_defaults'] == "true" || $rowAbout['use_defaults'] == "" || $rowAbout['use_defaults'] == NULL) {
-        $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, loc_id FROM aboutus WHERE loc_id=1");
+        $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, loc_id FROM aboutus WHERE loc_id=1");
         $rowAbout = mysqli_fetch_array($sqlAbout);
 
         $imagePath = 1;
@@ -109,12 +99,6 @@ function getAbout(){
     if (!empty($rowAbout['content'])){
         $aboutContent = $rowAbout['content'];
     }
-
-    if (!empty($rowAbout['image'])){
-        $aboutImage = "<img src='uploads/" . $imagePath . "/" . $rowAbout['image'] . "' alt='" . $rowAbout['image'] . "' title='" . $rowAbout['image'] . "'>";
-    }
-
-    $aboutImageAlign = $rowAbout['image_align'];
 }
 
 function getContactInfo(){
@@ -750,17 +734,15 @@ function getFeatured(){
     global $featuredContent;
     global $featuredHeading;
     global $featuredBlurb;
-    global $featuredImage;
-    global $featuredImageAlign;
     global $imagePath;
     global $db_conn;
 
-    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align, use_defaults FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowFeatured = mysqli_fetch_array($sqlFeatured);
     $imagePath = $_GET['loc_id'];
 
     if ($rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == NULL){
-        $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, image, image_align FROM featured WHERE loc_id=1 ");
+        $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content FROM featured WHERE loc_id=1 ");
         $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
         $imagePath = 1;
@@ -778,11 +760,6 @@ function getFeatured(){
         $featuredContent = $rowFeatured['content'];
     }
 
-    if (!empty($rowFeatured['image'])){
-        $featuredImage = "<img class='img-landing hidden-xs' src='uploads/" . $imagePath . "/" . $rowFeatured['image'] . "' alt='" . $rowFeatured['image'] . "' title='" . $rowFeatured['image'] . "'>";
-    }
-
-    $featuredImageAlign = $rowFeatured['image_align'];
 }
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {

@@ -6,7 +6,7 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'aboutus.php';
 
-$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, image, image_align, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlAbout = mysqli_query($db_conn, "SELECT heading, content, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
@@ -21,11 +21,11 @@ if (!empty($_POST)) {
 
         if ($rowAbout['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . sqlEscapeStr($_POST['about_content']) . "', image='" . $_POST['about_image'] . "', image_align='" . $_POST['about_image_align'] . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . sqlEscapeStr($_POST['about_content']) . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $aboutUpdate);
         } else {
             //Do Insert
-            $aboutInsert = "INSERT INTO aboutus (heading, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . sqlEscapeStr($_POST['about_content']) . "', '" . $_POST['about_image'] . "', '" . $_POST['about_image_align'] . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $aboutInsert = "INSERT INTO aboutus (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . sqlEscapeStr($_POST['about_content']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $aboutInsert);
         }
 
@@ -64,20 +64,6 @@ if ($_GET['update'] == 'true') {
             echo $pageMsg;
         }
 
-        if ($rowAbout['image'] == "") {
-            $thumbNail = "//placehold.it/140x100&text=No Image";
-        } else {
-            $thumbNail = "../uploads/" . $_GET['loc_id'] . "/" . $rowAbout['image'];
-        }
-
-        //image align status
-        if ($rowAbout['image_align'] == "left") {
-            $selAlignLeft = "SELECTED";
-            $selAlignRight = "";
-        } else {
-            $selAlignRight = "SELECTED";
-            $selAlignLeft = "";
-        }
         //use default view
         if ($rowAbout['use_defaults'] == 'true') {
             $selDefaults = "CHECKED";
@@ -111,26 +97,6 @@ if ($_GET['update'] == 'true') {
             <div class="form-group required">
                 <label>Heading</label>
                 <input type="text" class="form-control count-text" name="about_heading" maxlength="255" value="<?php echo $rowAbout['heading']; ?>" placeholder="About Me" autofocus required>
-            </div>
-            <hr/>
-            <div class="form-group">
-                <img src="<?php echo $thumbNail; ?>" id="about_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
-            </div>
-            <div class="form-group">
-                <label>Use an Existing Image</label>
-                <select class="form-control" name="about_image" id="about_image">
-                    <option value="">None</option>
-                    <?php
-                    getImageDropdownList(image_dir, $rowAbout['image']);
-                    ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Image Alignment</label>
-                <select class="form-control" name="about_image_align">
-                    <option value="left" <?php echo $selAlignLeft; ?>>Left</option>
-                    <option value="right" <?php echo $selAlignRight; ?>>Right</option>
-                </select>
             </div>
             <hr/>
             <div class="form-group">

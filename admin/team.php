@@ -72,12 +72,6 @@ if ($_GET['preview'] > "") {
 
             $teamMsg = "";
 
-            if ($_POST['team_status'] == 'on') {
-                $_POST['team_status'] = 'true';
-            } else {
-                $_POST['team_status'] = 'false';
-            }
-
             //Update existing team
             if ($_GET['editteam']) {
                 $theteamId = $_GET['editteam'];
@@ -86,7 +80,7 @@ if ($_GET['preview'] > "") {
                 //update data on submit
                 if (!empty($_POST['team_title'])) {
 
-                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', active='" . $_POST['team_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='team.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -102,7 +96,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, '" . $_POST['team_status'] . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
                     header("Location: team.php?loc_id=" . $_GET['loc_id'] . "");
@@ -116,15 +110,6 @@ if ($_GET['preview'] > "") {
                 echo $teamMsg;
             }
 
-            if ($_GET['editteam']) {
-                //active status
-                if ($rowTeam['active'] == 'true') {
-                    $selActive = "CHECKED";
-                } else {
-                    $selActive = "";
-                }
-            }
-
             if ($rowTeam['image'] == "") {
                 $thumbNail = "//placehold.it/140x100&text=No Image";
             } else {
@@ -134,20 +119,6 @@ if ($_GET['preview'] > "") {
             <div class="col-lg-8">
             <form name="teamForm" class="dirtyForm" method="post" action="">
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group" id="teamactive">
-                            <label>Active</label>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="team_status_checkbox" id="<?php echo $_GET['editteam'] ?>" name="team_status" type="checkbox" <?php if ($_GET['editteam']) {echo $selActive;} ?> data-toggle="toggle">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr/>
                 <div class="form-group">
                     <img src="<?php echo $thumbNail; ?>" id="team_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
                 </div>

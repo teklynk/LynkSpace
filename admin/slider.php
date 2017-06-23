@@ -60,12 +60,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     $slideMsg = "";
 
-    if ($_POST['slider_status'] == 'on') {
-        $_POST['slider_status'] = 'true';
-    } else {
-        $_POST['slider_status'] = 'false';
-    }
-
     //Update existing slide
     if ($_GET['editslide']) {
         $theslideId = $_GET['editslide'];
@@ -74,7 +68,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //update data on submit
         if (!empty($_POST['slide_title'])) {
 
-            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', active='" . $_POST['slider_status'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
+            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
 
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . safeCleanStr($_POST['slide_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -90,7 +84,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST['slide_title'])) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . safeCleanStr($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '" . safeCleanStr($_POST['start_date']) . "', '" . safeCleanStr($_POST['end_date']) . "', '".safeCleanStr($_POST['location_type'])."', 0, '" . $_POST['slider_status'] . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['slide_title']) . "', '" . safeCleanStr($_POST['slide_content']) . "', '" . safeCleanStr($_POST['slide_link']) . "', '" . $_POST['slide_image'] . "', '" . safeCleanStr($_POST['start_date']) . "', '" . safeCleanStr($_POST['end_date']) . "', '".safeCleanStr($_POST['location_type'])."', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
             header("slider.php?loc_id=" . $_GET['loc_id'] . "");
@@ -104,15 +98,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         echo $slideMsg;
     }
 
-    if ($_GET['editslide']) {
-        //active status
-        if ($rowSlides['active'] == 'true') {
-            $selActive = "CHECKED";
-        } else {
-            $selActive = "";
-        }
-    }
-
     if ($rowSlides['image'] == "") {
         $image = "//placehold.it/350x150&text=No Image";
     } else {
@@ -123,19 +108,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     <div class="col-lg-8">
     <form name="slideForm" class="dirtyForm" method="post" action="">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group" id="slideractive">
-                    <label>Active</label>
-                    <div class="checkbox">
-                        <label>
-                            <input class="slider_status_checkbox" id="<?php echo $_GET['editslide'] ?>" name="slider_status" type="checkbox" <?php if ($_GET['editslide']) {echo $selActive;} ?> data-toggle="toggle">
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr/>
         <div class="form-group required">
             <label><?php echo $slideLabel; ?></label>
             <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
