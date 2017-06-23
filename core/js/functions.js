@@ -1,10 +1,9 @@
 $(document).ready(function () {
     //Add responsive classes to wysiwyg elements
     $('.container img, #featured img').addClass('img-responsive img');
-    $('iframe, embed, video, object').wrap("<div class='embed-responsive embed-responsive-16by9'/>");
-    $('iframe, embed, video, object').addClass('embed-responsive-item iframe');
-    $('table').addClass('table-responsive table');
-
+    $('iframe, frame, embed, video, object').wrap("<div class='embed-responsive embed-responsive-16by9'/>");
+    $('iframe, frame, embed, video, object').addClass('embed-responsive-item iframe');
+    $('table, frameset').addClass('table-responsive table');
 
     // Sticky Footer initial page load and resize
     $(window).on('load resize', function () {
@@ -55,7 +54,9 @@ function toggleSrc(rss, loc_id) {
             $.ajax({
                 url: 'core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
                 type: 'GET',
-                timeout: 20000, //20 seconds
+                timeout: 10000, //10 seconds
+                tryCount : 0,
+                retryLimit : 2,
                 success: function(result){
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
                     $('#hottitlesCarousel').removeClass('loader');
@@ -64,6 +65,12 @@ function toggleSrc(rss, loc_id) {
                     $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
                 },
                 error: function() {
+                    this.tryCount++;
+                    if (this.tryCount <= this.retryLimit) {
+                        //try again
+                        $.ajax(this);
+                        return;
+                    }
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
                     $('#hottitlesCarousel').removeClass('loader');
                     $('#hottitlesCarousel .carousel-control').removeClass('hidden');

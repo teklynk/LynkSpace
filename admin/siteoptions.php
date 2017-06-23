@@ -127,11 +127,17 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <div class="form-group">
                     <label>Carousel Speed</label>
-                    <input type="text" class="form-control count-text" name="site_carousel_speed" maxlength="10" value="<?php echo $rowConfig['carousel_speed']; ?>" placeholder="5000">
+                    <small>
+                        &nbsp;&nbsp;Seconds&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                    </small>
+                    <input type="text" class="form-control count-text" name="site_carousel_speed" maxlength="5" value="<?php echo $rowConfig['carousel_speed']; ?>" placeholder="5000">
                 </div>
                 <div class="form-group">
                     <label>Admin Session Log Out Time Limit</label>
-                    <input type="text" class="form-control count-text" name="site_session_timeout" maxlength="10" value="<?php echo $rowConfig['session_timeout']; ?>" placeholder="3600">
+                    <small>
+                        &nbsp;&nbsp;Minutes&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                    </small>
+                    <input type="text" class="form-control count-text" name="site_session_timeout" maxlength="5" value="<?php echo $rowConfig['session_timeout']; ?>" placeholder="3600">
                 </div>
                 <hr/>
                 <div class="form-group">

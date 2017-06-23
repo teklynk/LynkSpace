@@ -1,4 +1,9 @@
 <?php
+//Check if requested via Ajax
+if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+    die('Direct access not permitted');
+}
+
 //updates the databases featured on databases.php. Called from js/functions.js via jquery/ajax.
 session_start();
 

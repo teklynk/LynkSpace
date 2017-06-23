@@ -158,6 +158,7 @@ $_SESSION['file_referer'] = 'page.php';
                         <label>Text / HTML</label>
                         <textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
                     </div>
+                    <input name="image" type="file" id="upload" class="hidden" onchange="">
                     <div class="form-group">
                         <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
                     </div>

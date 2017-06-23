@@ -118,11 +118,13 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" .
 
 //Session timeout
 //3600 = 60mins
-define('sessionTimeout', $rowConfig['session_timeout']);
+$session_timeout_minutes = $rowConfig['session_timeout'] * 60;
+define('sessionTimeout', $session_timeout_minutes);
 
 //Slide Carousel Speed
 //5000 = 5secs
-define('carouselSpeed', $rowConfig['carousel_speed']);
+$carousel_speed_seconds = $rowConfig['carousel_speed'] * 1000;
+define('carouselSpeed', $carousel_speed_seconds);
 
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
