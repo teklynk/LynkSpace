@@ -249,14 +249,14 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <?php
+                    $imgSrc = "//placehold.it/140x100&text=No Image";
 
-                    if ($rowCustomer['image'] == "" || $_GET['newcustomer'] == 'true') {
-                        $imgSrc = "//placehold.it/140x100&text=No Image"; //small image just to give the source a value
-                    } else {
+                    if ($rowCustomer['image'] == "" && $rowCustomer['icon'] > "") {
+                        $imgSrc = "//placehold.it/1/ffffff/ffffff"; //small image just to give the source a value
+                    } elseif ($rowCustomer['image'] > "" && $rowCustomer['icon'] == "") {
                         $imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowCustomer['image'];
                     }
-
-                    echo "<img src='" . $imgSrc . "' id='customer_image_preview' style='max-width:140px; height:auto; background-color: #ccc;'/>";
+                    echo "<img src='" . $imgSrc . "' id='customer_image_preview' style='max-width:140px; height:auto; display:block;'/>";
                     ?>
                 </div>
                 <div class="form-group">

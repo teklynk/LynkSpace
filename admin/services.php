@@ -153,13 +153,13 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<?php
+			$imgSrc = "//placehold.it/140x100&text=No Image";
 
-			if ($rowServices['image']=="" || $_GET['newservice'] == 'true') {
-				$imgSrc = "//placehold.it/140x100&text=No Image"; //small image just to give the source a value
-			} else {
-				$imgSrc = "../uploads/".$_GET['loc_id']."/".$rowServices['image'];
+			if ($rowServices['image'] == "" && $rowServices['icon'] > "") {
+				$imgSrc = "//placehold.it/1/ffffff/ffffff"; //small image just to give the source a value
+			} elseif ($rowServices['image'] > "" && $rowServices['icon'] == "") {
+				$imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowServices['image'];
 			}
-
 			echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block; background-color: #ccc;'/>";
 			?>
 		</div>
