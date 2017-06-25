@@ -63,7 +63,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Import sql dump file into the database.
 
         // Read in entire file
-        $lines = file($dbFilename);
+        $lines = file(dbFilename);
 
         // Loop through each line
         foreach ($lines as $line) {
