@@ -10,8 +10,9 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $db_conn = mysqli_connect(db_servername, db_username, db_password);
     mysqli_select_db($db_conn, db_name);
 
-    if (mysqli_connect_errno()) {
-        echo "Go to <a href='admin/install.php'>admin/install.php</a> to install the database. " . PHP_EOL;
+    if (mysqli_connect_error()) {
+        $db_conn = NULL;
+        echo "Go to <a href='../admin/install.php'>".$_SERVER['SERVER_NAME']."/admin/install.php</a> to install the database. " . PHP_EOL;
         die("Failed to connect to MySQL: " . mysqli_connect_error());
     }
 
@@ -118,11 +119,20 @@ $extraPages = "<optgroup label='Other Pages'><option value='about.php?loc_id=" .
 
 //Session timeout
 //3600 = 60mins
-$session_timeout_minutes = $rowConfig['session_timeout'] * 60;
+if ($rowConfig['session_timeout'] == NULL){
+    $session_timeout_minutes = 3600;
+} else {
+    $session_timeout_minutes = $rowConfig['session_timeout'] * 60;
+}
 define('sessionTimeout', $session_timeout_minutes);
 
 //Slide Carousel Speed
 //5000 = 5secs
+if ($rowConfig['carousel_speed'] == NULL){
+    $carousel_speed_seconds = 5000;
+} else {
+    $carousel_speed_seconds = $rowConfig['carousel_speed'] * 60;
+}
 $carousel_speed_seconds = $rowConfig['carousel_speed'] * 1000;
 define('carouselSpeed', $carousel_speed_seconds);
 

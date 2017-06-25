@@ -30,8 +30,6 @@ CREATE TABLE `aboutus` (
   `id` int(11) NOT NULL,
   `heading` text NOT NULL,
   `content` text NOT NULL,
-  `image` text NOT NULL,
-  `image_align` text NOT NULL,
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
@@ -165,8 +163,6 @@ CREATE TABLE `featured` (
   `heading` text NOT NULL,
   `introtext` text NOT NULL,
   `content` text NOT NULL,
-  `image` text NOT NULL,
-  `image_align` text NOT NULL,
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
@@ -1075,12 +1071,10 @@ CREATE TABLE IF NOT EXISTS `sections_customers` (
 CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
-  `image` text NOT NULL,
   `content` text NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
-  `image_align` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
