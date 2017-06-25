@@ -102,7 +102,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '', 'default', '', 'false', '1,2,3', '', '', '', 3600, '5000', '', '2017-04-14 18:31:52', '');
+(1, '', 'default', '', 'false', '1,2,3', '', '', '', 60, '5', '', '2017-04-14 18:31:52', '');
 
 -- --------------------------------------------------------
 
