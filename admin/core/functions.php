@@ -194,7 +194,7 @@ function checkDependencies(){
        echo "<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div>";
     }
 
-    // Check if sql file exists
+    // Check if dbconn file exists
     if (!file_exists(dbFileLoc)) {
         echo "<div class='alert alert-danger'><span>".dbFileLoc." does not exist.</span></div>";
     } else {
@@ -202,7 +202,7 @@ function checkDependencies(){
             echo "<div class='alert alert-danger'><span>".dbFileLoc." is not writable. Check file permissions.</span></div>";
         }
     }
-    // Check if dbconn.php file exists
+    // Check if sql dump file exists
     if (!file_exists(dbFilename)) {
         echo "<div class='alert alert-danger'><span>".dbFilename." does not exist.</span></div>";
     } else {
