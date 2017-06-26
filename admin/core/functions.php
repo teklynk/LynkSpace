@@ -3,6 +3,36 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
+//Output to browser console
+function debug_to_console($data) {
+    $output = $data;
+
+    if (is_array($output)){
+        $output = implode(',', $output);
+    }
+
+    echo "<script>console.log('Debug Objects: " . $output . "');</script>";
+}
+
+//Phinx migration runner
+function phinxMigration($phinxCommand, $environment){
+    require __DIR__ . '/../../vendor/autoload.php';
+
+    $phinxApp = new \Phinx\Console\PhinxApplication();
+    $phinxTextWrapper = new \Phinx\Wrapper\TextWrapper($phinxApp);
+
+    $phinxConfigFile = __DIR__ . '/../../phinx.php';
+
+    $phinxTextWrapper->setOption('configuration', $phinxConfigFile);
+    $phinxTextWrapper->setOption('parser', 'PHP');
+    $phinxTextWrapper->setOption('environment', $environment);
+
+    if ($phinxCommand == 'migrate'){
+        $log = $phinxTextWrapper->getMigrate();
+    } elseif ($phinxCommand == 'rollback') {
+        $log = $phinxTextWrapper->getRollback();
+    }
+}
 
 //Random password generator for password reset - generates characters, symbol and number
 function generateRandomPasswordString(){
@@ -234,6 +264,7 @@ function checkDependencies(){
             echo "<div class='alert alert-danger'><span>".robotsFilename." is not writable. Check file permissions.</span></div>";
         }
     }
+
     return false;
 }
 

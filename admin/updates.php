@@ -4,6 +4,7 @@ define('inc_access', TRUE);
 include_once('includes/header.inc.php');
 
 $_SESSION['file_referer'] = 'updates.php';
+
 ?>
 
     <div class="row">
@@ -91,7 +92,10 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
 
         sleep(1); // wait
 
-        //TODO: Check if zip contains a migration script for database changes.
+        //Run Phinx migrations
+        phinxMigration('migrate', 'development');
+
+        sleep(1); // wait
 
         //Delete the zip file
         unlink($updatesDestination);
