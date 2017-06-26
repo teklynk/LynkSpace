@@ -33,6 +33,12 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         ftruncate(__DIR__ . "/../sitemap.xml", 0);
         fclose($sitemapFile);
 
+        // open and truncate robots.txt file
+        $robotsTxtFile = fopen(__DIR__ . "/../robots.txt", "w") or die("Unable to open ". __DIR__ . "/../robots.txt. Check file permissions");
+        //Clear the file robots.txt file
+        ftruncate(__DIR__ . "/../robots.txt", 0);
+        fclose($robotsTxtFile);
+
         sleep(1); // wait
 
         // MySQL host

@@ -37,7 +37,7 @@ if (isset($_POST["uploadFile"])) {
             } else {
                 //Delete the file if it is too large
                 unlink(target_file);
-                $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName. " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
             }
         } else {

@@ -1,4394 +1,2254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=51&amp;loc_id=1</loc>
-		<lastmod>2017-05-03 16:13:43</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=51&amp;loc_id=1</loc>
+		<lastmod>2017-06-23 16:43:29</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=50&amp;loc_id=1</loc>
-		<lastmod>2017-02-27 15:53:00</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=50&amp;loc_id=1</loc>
+		<lastmod>2017-02-27 20:53:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=48&amp;loc_id=1</loc>
-		<lastmod>2017-01-19 12:18:11</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=48&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 17:18:11</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=47&amp;loc_id=1</loc>
-		<lastmod>2017-01-19 12:18:11</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=47&amp;loc_id=1</loc>
+		<lastmod>2017-06-23 10:33:46</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=46&amp;loc_id=1</loc>
-		<lastmod>2017-01-19 12:18:11</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=46&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 17:18:11</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=45&amp;loc_id=1</loc>
-		<lastmod>2017-02-06 10:24:13</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=45&amp;loc_id=1</loc>
+		<lastmod>2017-02-06 15:24:13</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/page.php?page_id=44&amp;loc_id=1</loc>
-		<lastmod>2017-01-19 12:18:11</lastmod>
+		<loc>//cpswebapp.local.com/page.php?page_id=44&amp;loc_id=1</loc>
+		<lastmod>2017-01-19 17:18:11</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=21&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=3&amp;cat_id=19&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=20&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=3&amp;cat_id=18&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=3&amp;cat_id=19&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=17&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=3&amp;cat_id=18&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=16&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=17&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=15&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=16&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=14&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=15&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=13&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=14&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=12&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=13&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=11&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=12&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=10&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=11&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=9&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=10&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=8&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=9&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=7&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=8&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=2&amp;cat_id=6&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=7&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=1&amp;cat_id=4&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=2&amp;cat_id=6&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=1&amp;cat_id=2&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=4&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/databases.php?section=1&amp;cat_id=1&amp;loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=2&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=568</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/databases.php?section=1&amp;cat_id=0&amp;loc_id=1</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=567</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1101</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=566</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1100</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=565</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1099</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=564</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1098</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=563</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1097</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=562</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1096</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=561</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1095</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=560</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1094</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=559</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1093</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=558</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1092</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=557</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1091</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=556</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1090</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=555</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1089</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=554</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1088</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=553</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1087</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=552</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1086</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=551</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1085</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=550</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1084</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=549</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1083</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=548</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1082</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=547</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1081</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=546</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1080</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=545</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1079</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=544</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1078</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=543</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1077</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=542</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1076</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=541</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1075</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=540</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1074</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=539</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1073</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=538</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1072</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=537</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1071</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=536</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1070</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=535</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1069</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=534</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1068</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=533</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1067</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=532</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1066</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=531</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1065</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=530</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1064</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=529</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1063</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=528</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1062</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=527</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1061</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=526</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1060</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=525</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1059</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=524</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1058</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=523</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1057</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=522</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1056</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=521</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1055</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=520</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1054</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=519</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1053</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=518</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1052</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=517</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1051</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=516</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1050</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=515</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1049</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=514</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1048</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=512</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1047</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=511</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1046</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=510</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1045</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=509</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1044</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=508</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1043</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=507</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1042</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=506</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1041</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=505</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1040</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=504</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1039</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=503</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1038</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=502</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1037</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=501</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1036</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=500</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1035</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=499</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1034</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=498</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1033</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=497</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1032</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=496</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1031</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=495</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1030</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=494</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1029</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=493</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1028</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=492</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1027</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=491</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1026</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=490</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1025</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=489</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1024</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=488</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1023</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=487</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1022</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=486</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1021</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=485</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1020</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=484</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1019</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=483</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1018</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=482</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1017</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=481</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1016</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=480</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1015</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=479</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1014</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=478</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1013</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=477</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1012</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=476</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1011</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=475</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1010</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=474</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1009</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=473</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1008</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=472</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1007</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=471</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1006</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=470</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1005</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=469</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1004</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=468</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1003</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=467</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1002</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=466</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1001</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=465</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1000</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=464</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=999</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=463</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=998</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=462</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=997</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=461</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=996</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=460</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=995</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=459</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=994</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=458</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=993</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=457</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=992</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=456</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=991</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=455</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=990</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=454</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=989</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=453</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=988</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=452</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=987</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=451</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=986</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=450</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=985</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=449</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=984</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=448</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=983</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=447</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=982</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=446</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=981</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=445</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=980</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=444</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=979</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=443</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=978</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=442</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=977</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=441</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=976</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=440</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=975</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=439</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=974</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=438</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=973</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=437</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=972</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=436</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=971</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=435</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=970</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=434</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=969</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=433</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=968</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=432</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=967</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=431</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=966</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=430</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=965</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=429</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=964</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=428</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=963</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=427</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=962</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=426</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=961</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=424</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=960</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=421</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=959</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=420</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=958</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=419</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=957</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=418</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=956</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=417</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=955</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=416</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=954</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=414</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=953</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=413</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=952</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=412</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=951</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=411</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=950</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=410</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=949</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=409</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=948</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=408</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=947</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=407</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=946</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=406</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=945</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=405</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=944</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=404</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=943</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=402</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=942</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=401</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=941</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=400</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=940</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=399</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=939</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=398</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=938</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=397</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=937</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=396</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=936</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=395</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=935</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=394</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=934</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=393</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=933</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=392</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=932</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=391</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=931</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=390</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=930</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=389</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=929</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=388</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=928</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=387</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=927</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=386</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=926</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=385</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=925</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=384</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=924</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=383</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=923</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=382</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=922</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=381</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=921</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=380</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=920</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=379</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=919</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=378</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=918</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=375</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=917</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=374</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=916</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=373</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=915</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=372</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=914</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=371</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=913</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=370</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=912</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=368</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=911</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=366</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=910</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=365</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=909</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=364</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=908</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=363</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=907</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=362</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=906</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=361</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=905</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=360</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=904</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=359</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=903</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=358</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=902</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=357</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=901</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=356</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=900</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=355</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=899</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=354</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=898</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=353</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=897</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=352</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=896</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=351</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=895</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=350</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=894</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=349</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=893</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=348</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=892</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=347</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=891</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=346</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=890</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=345</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=889</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=344</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=888</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=343</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=887</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=342</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=886</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=341</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=885</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=340</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=884</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=339</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=883</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=338</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=882</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=337</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=881</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=336</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=880</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=335</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=879</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=334</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=878</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=333</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=877</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=332</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=876</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=331</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=875</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=330</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=874</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=329</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=873</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=327</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=872</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=326</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=871</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=325</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=870</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=324</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=869</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=323</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=868</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=322</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=867</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=321</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=866</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=320</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=865</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=319</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=864</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=318</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=863</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=317</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=862</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=313</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=861</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=312</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=860</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=311</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=859</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=310</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=858</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=309</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=857</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=308</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=856</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=307</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=855</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=306</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=854</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=305</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=853</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=304</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=852</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=303</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=851</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=302</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=850</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=301</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=849</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=300</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=848</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=298</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=847</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=297</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=846</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=296</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=845</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=295</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=844</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=294</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=843</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=293</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=842</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=292</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=841</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=291</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=840</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=290</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=839</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=289</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=838</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=288</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=837</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=287</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=836</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=286</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=835</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=285</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=834</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=284</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=833</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=283</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=832</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=282</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=831</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=281</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=830</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=280</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=829</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=278</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=828</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=277</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=827</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=275</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=826</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=274</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=825</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=273</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=824</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=271</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=823</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=270</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=822</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=269</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=821</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=268</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=820</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=267</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=819</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=266</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=818</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=265</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=817</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=264</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=816</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=263</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=815</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=262</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=814</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=261</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=813</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=260</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=812</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=259</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=811</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=258</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=810</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=257</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=809</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=256</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=808</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=255</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=807</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=254</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=806</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=253</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=805</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=252</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=804</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=251</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=803</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=250</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=802</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=249</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=801</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=245</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=800</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=244</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=799</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=243</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=798</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=242</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=797</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=241</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=796</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=240</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=795</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=239</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=794</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=238</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=793</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=237</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=792</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=236</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=791</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=235</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=790</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=234</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=789</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=233</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=788</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=232</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=787</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=231</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=786</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=230</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=785</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=229</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=784</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=228</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=783</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=227</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=782</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=225</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=781</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=223</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=780</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=222</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=779</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=221</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=778</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=220</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=777</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=219</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=776</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=218</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=775</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=217</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=774</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=216</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=773</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=215</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=772</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=214</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=771</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=213</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=770</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=212</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=769</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=211</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=768</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=210</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=767</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=209</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=766</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=208</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=765</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=207</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=764</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=206</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=763</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=205</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=762</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=204</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=761</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=203</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=760</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=202</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=759</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=201</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=758</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=200</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=757</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=199</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=756</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=198</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=755</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=197</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=754</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=196</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=753</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=195</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=752</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=194</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=751</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=193</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=750</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=192</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=749</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=191</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=748</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=190</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=747</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=189</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=746</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=188</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=745</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=187</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=744</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=186</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=743</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=185</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=742</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=184</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=741</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=183</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=740</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=182</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=739</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=181</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=738</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=180</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=737</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=178</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=736</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=177</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=735</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=176</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=734</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=175</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=733</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=174</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=732</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=173</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=731</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=172</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=730</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=171</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=729</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=170</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=728</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=169</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=727</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=168</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=726</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=167</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=725</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=166</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=724</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=165</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=723</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=164</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=722</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=163</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=721</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=160</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=720</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=159</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=719</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=158</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=718</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=157</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=717</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=156</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=716</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=155</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=715</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=154</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=714</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=153</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=713</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=152</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=712</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=151</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=711</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=150</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=710</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=149</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=709</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=148</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=708</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=147</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=707</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=145</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=706</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=144</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=705</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=141</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=704</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=140</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=703</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=139</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=702</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=138</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=701</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=137</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=700</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=136</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=699</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=135</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=698</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=134</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=697</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=133</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=696</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=132</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=695</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=131</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=694</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=130</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=693</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=129</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=692</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=128</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=691</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=127</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=690</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=126</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=689</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=125</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=688</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=124</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=687</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=123</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=686</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=122</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=685</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=121</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=684</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=120</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=683</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=119</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=682</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=118</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=681</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=117</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=680</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=115</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=679</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=112</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=678</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=111</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=677</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=110</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=676</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=109</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=675</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=108</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=674</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=107</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=673</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=106</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=672</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=105</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=671</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=104</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=670</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=102</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=669</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=101</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=668</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=100</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=667</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=99</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=666</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=98</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=665</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=97</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=664</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=96</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=663</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=95</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=662</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=94</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=661</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=93</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=660</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=92</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=659</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=91</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=658</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=90</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=657</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=89</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=656</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=88</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=655</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=87</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=654</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=86</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=653</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=85</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=652</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=84</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=651</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=83</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=650</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=82</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=649</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=81</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=648</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=80</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=647</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=79</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=646</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=78</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=645</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=77</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=644</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=76</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=643</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=75</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=642</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=74</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=641</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=73</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=640</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=72</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=639</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=71</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=638</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=70</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=637</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=69</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=636</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=68</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=635</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=67</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=634</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=66</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=633</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=65</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=632</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=64</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=631</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=63</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=630</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=62</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=629</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=61</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=628</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=59</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=627</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=58</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=626</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=57</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=625</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=56</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=624</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=55</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=623</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=54</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=622</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=53</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=621</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=52</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=620</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=51</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=619</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=50</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=618</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=49</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=617</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=48</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=616</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=47</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=615</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=46</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=614</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=45</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=613</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=44</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=612</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=43</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=611</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=42</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=610</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=41</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=609</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=40</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=608</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=39</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=607</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=38</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=606</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=37</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=605</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=36</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=604</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=35</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=603</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=34</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=602</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=33</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=601</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=32</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=600</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=31</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=599</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=30</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=598</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=29</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=597</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=28</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=596</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=27</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=595</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=26</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=594</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=25</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=593</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=24</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=592</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=23</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=591</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=22</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=590</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=21</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=589</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=19</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=588</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=18</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=587</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=17</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=586</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=15</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=585</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=14</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=584</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=12</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=583</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=11</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=582</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=10</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=581</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=9</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=580</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=8</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=579</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=7</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=578</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=6</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=577</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=5</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=576</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=4</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=575</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=3</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=574</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=2</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=573</loc>
+		<loc>//cpswebapp.local.com/index.php?loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=572</loc>
+		<loc>//cpswebapp.local.com/index.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=571</loc>
+		<loc>//cpswebapp.local.com/about.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=570</loc>
+		<loc>//cpswebapp.local.com/team.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=569</loc>
+		<loc>//cpswebapp.local.com/services.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=568</loc>
+		<loc>//cpswebapp.local.com/contact.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=567</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=566</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=565</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=564</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=563</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=562</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=561</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=560</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=559</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=558</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=557</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=556</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=555</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=554</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=553</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=552</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=551</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=550</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=549</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=548</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=547</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=546</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=545</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=544</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=543</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=542</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=541</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=540</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=539</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=538</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=537</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=536</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=535</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=534</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=533</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=532</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=531</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=530</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=529</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=528</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=527</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=526</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=525</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=524</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=523</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=522</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=521</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=520</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=519</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=518</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=517</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=516</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=515</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=514</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=512</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=511</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=510</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=509</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=508</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=507</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=506</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=505</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=504</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=503</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=502</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=501</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=500</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=499</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=498</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=497</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=496</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=495</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=494</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=493</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=492</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=491</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=490</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=489</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=488</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=487</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=486</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=485</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=484</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=483</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=482</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=481</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=480</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=479</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=478</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=477</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=476</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=475</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=474</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=473</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=472</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=471</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=470</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=469</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=468</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=467</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=466</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=465</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=464</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=463</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=462</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=461</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=460</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=459</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=458</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=457</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=456</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=455</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=454</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=453</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=452</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=451</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=450</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=449</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=448</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=447</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=446</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=445</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=444</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=443</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=442</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=441</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=440</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=439</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=438</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=437</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=436</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=435</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=434</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=433</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=432</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=431</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=430</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=429</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=428</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=427</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=426</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=424</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=421</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=420</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=419</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=418</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=417</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=416</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=414</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=413</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=412</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=411</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=410</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=409</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=408</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=407</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=406</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=405</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=404</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=402</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=401</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=400</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=399</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=398</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=397</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=396</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=395</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=394</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=393</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=392</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=391</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=390</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=389</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=388</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=387</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=386</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=385</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=384</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=383</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=382</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=381</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=380</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=379</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=378</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=375</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=374</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=373</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=372</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=371</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=370</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=368</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=366</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=365</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=364</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=363</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=362</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=361</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=360</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=359</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=358</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=357</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=356</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=355</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=354</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=353</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=352</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=351</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=350</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=349</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=348</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=347</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=346</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=345</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=344</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=343</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=342</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=341</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=340</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=339</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=338</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=337</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=336</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=335</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=334</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=333</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=332</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=331</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=330</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=329</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=327</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=326</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=325</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=324</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=323</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=322</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=321</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=320</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=319</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=318</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=317</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=313</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=312</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=311</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=310</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=309</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=308</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=307</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=306</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=305</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=304</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=303</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=302</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=301</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=300</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=298</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=297</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=296</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=295</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=294</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=293</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=292</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=291</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=290</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=289</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=288</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=287</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=286</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=285</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=284</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=283</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=282</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=281</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=280</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=278</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=277</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=275</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=274</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=273</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=271</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=270</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=269</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=268</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=267</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=266</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=265</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=264</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=263</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=262</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=261</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=260</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=259</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=258</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=257</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=256</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=255</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=254</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=253</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=252</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=251</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=250</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=249</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=245</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=244</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=243</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=242</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=241</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=240</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=239</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=238</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=237</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=236</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=235</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=234</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=233</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=232</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=231</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=230</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=229</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=228</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=227</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=225</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=223</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=222</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=221</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=220</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=219</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=218</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=217</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=216</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=215</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=214</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=213</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=212</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=211</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=210</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=209</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=208</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=207</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=206</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=205</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=204</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=203</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=202</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=201</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=200</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=199</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=198</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=197</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=196</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=195</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=194</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=193</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=192</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=191</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=190</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=189</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=188</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=187</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=186</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=185</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=184</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=183</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=182</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=181</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=180</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=178</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=177</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=176</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=175</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=174</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=173</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=172</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=171</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=170</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=169</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=168</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=167</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=166</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=165</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=164</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=163</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=160</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=159</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=158</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=157</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=156</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=155</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=154</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=153</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=152</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=151</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=150</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=149</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=148</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=147</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=145</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=144</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=141</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=140</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=139</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=138</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=137</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=136</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=135</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=134</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=133</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=132</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=131</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=130</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=129</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=128</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=127</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=126</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=125</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=124</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=123</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=122</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=121</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=120</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=119</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=118</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=117</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=115</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=112</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=111</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=110</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=109</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=108</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=107</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=106</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=105</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=104</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=102</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=101</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=100</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=99</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=98</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=97</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=96</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=95</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=94</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=93</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=92</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=91</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=90</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=89</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=88</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=87</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=86</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=85</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=84</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=83</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=82</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=81</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=80</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=79</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=78</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=77</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=76</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=75</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=74</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=73</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=72</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=71</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=70</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=69</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=68</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=67</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=66</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=65</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=64</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=63</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=62</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=61</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=59</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=58</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=57</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=56</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=55</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=54</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=53</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=52</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=51</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=50</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=49</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=48</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=47</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=46</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=45</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=44</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=43</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=42</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=41</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=40</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=39</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=38</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=37</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=36</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=35</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=34</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=33</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=32</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=31</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=30</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=29</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=28</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=27</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=26</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=25</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=24</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=23</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=22</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=21</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=19</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=18</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=17</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=15</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=14</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=12</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=11</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=10</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=9</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=8</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=7</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=6</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=5</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=4</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=3</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=2</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php?loc_id=1</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/index.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/about.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/team.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/services.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/contact.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>http://cpswebapp.local.com/databases.php</loc>
+		<loc>//cpswebapp.local.com/databases.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 </urlset>

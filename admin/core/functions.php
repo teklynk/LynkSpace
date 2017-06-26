@@ -232,14 +232,6 @@ function checkDependencies(){
             echo "<div class='alert alert-danger'><span>".dbFileLoc." is not writable. Check file permissions.</span></div>";
         }
     }
-    // Check if sql dump file exists
-    if (!file_exists(dbFilename)) {
-        echo "<div class='alert alert-danger'><span>".dbFilename." does not exist.</span></div>";
-    } else {
-        if (!is_writeable(dbFilename)) {
-            echo "<div class='alert alert-danger'><span>".dbFilename." is not writable. Check file permissions.</span></div>";
-        }
-    }
     // Check if blowfishsalt.php file exists
     if (!file_exists(dbBlowfishLoc)) {
         echo "<div class='alert alert-danger'><span>".dbBlowfishLoc." does not exist.</span></div>";
