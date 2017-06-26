@@ -141,9 +141,9 @@ $(document).ready(function () {
     //Disable inputs if the Use Defaults checkbox is active
     $('.defaults-toggle').change(function () {
         if ($('.defaults-toggle').prop('checked') == true) {
-            $('form :input, form :button, form, button, select, textarea').attr('disabled', true);
+            $('form :input, form :button, form, button, select, textarea, .mce-tinymce').attr('disabled', true);
         } else {
-            $('form :input, form :button, form, button, select, textarea').attr('disabled', false);
+            $('form :input, form :button, form, button, select, textarea, .mce-tinymce').attr('disabled', false);
         }
         //prevents Use Default button from disabling these elements
         $('.defaults-toggle').attr('disabled', false);

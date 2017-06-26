@@ -346,7 +346,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         ?>
                         <div class="form-group">
                             <button type="button" class="set_logo_default btn btn-primary" name="set_logo_default" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
-                                <i class="fa fa-fw fa-refresh"></i> Set as the default logo for ALL locations?
+                                <i class="fa fa-fw fa-cog"></i> Set as the default logo for ALL locations?
                             </button>
                             <br/>
                             <small class="small set_logo_default_msg"></small>

@@ -154,7 +154,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <div class="form-group" id="sitemap_builder">
                     <button type="button" data-toggle="tooltip" class="sitemap_builder btn btn-primary" name="sitemap_builder">
-                        <i class='fa fa-fw fa-refresh'></i> Update Sitemap.xml
+                        <i class='fa fa-fw fa-cog'></i> Update Sitemap.xml
                     </button>
                     <small>
                         &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
