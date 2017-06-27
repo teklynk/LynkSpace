@@ -160,16 +160,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         &nbsp;&nbsp;Generate a search engine site map for web crawlers.&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                     </small>
                     <br/>
-                    <small class="sitemap_builder_msg">
-                    <?php
-                    if (!is_writable('../sitemap.xml')) {
-                        echo "<p class='text-danger'>Unable to write to sitemap.xml. Check file permissions.</p><br/>";
-                    }
-                    if (!is_writable('../robots.txt')) {
-                        echo "<p class='text-danger'>Unable to write to robots.txt. Check file permissions.</p><br/>";
-                    }
-                    ?>
-                    </small>
+                    <small class="sitemap_builder_msg"></small>
                 </div>
                 <hr/>
                 <div class="form-group">

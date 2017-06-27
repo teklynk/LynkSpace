@@ -78,7 +78,7 @@ class Init extends Command
         }
 
         // Compute the file path
-        $fileName = 'phinx.yml'; // TODO - maybe in the future we allow custom config names.
+        $fileName = 'phinx.php'; // TODO - maybe in the future we allow custom config names.
         $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
 
         if (file_exists($filePath)) {
@@ -90,9 +90,9 @@ class Init extends Command
 
         // load the config template
         if (is_dir(__DIR__ . '/../../../data/Phinx')) {
-            $contents = file_get_contents(__DIR__ . '/../../../data/Phinx/phinx.yml');
+            $contents = file_get_contents(__DIR__ . '/../../../data/Phinx/phinx.php');
         } else {
-            $contents = file_get_contents(__DIR__ . '/../../../../phinx.yml');
+            $contents = file_get_contents(__DIR__ . '/../../../../phinx.php');
         }
 
         if (false === file_put_contents($filePath, $contents)) {

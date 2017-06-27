@@ -700,7 +700,7 @@ $(document).ready(function () {
         setTimeout(function() {
             $('#run_installer').attr('disabled', true);
             $('#run_installer>i').removeClass('fa-cloud-upload');
-            $('#run_installer>i').addClass('fa-refresh fa-spin');
+            $('#run_installer>i').addClass('fa-cog fa-spin');
         }, 500);
     });
 
@@ -709,14 +709,14 @@ $(document).ready(function () {
         setTimeout(function() {
             $('#update_download').attr('disabled', true);
             $('#update_download>i').removeClass('fa-cloud-download');
-            $('#update_download>i').addClass('fa-refresh fa-spin');
+            $('#update_download>i').addClass('fa-cog fa-spin');
         }, 500);
     });
     $('#update_install').click(function () {
         setTimeout(function() {
             $('#update_install').attr('disabled', true);
             $('#update_install>i').removeClass('fa-cloud-upload');
-            $('#update_install>i').addClass('fa-refresh fa-spin');
+            $('#update_install>i').addClass('fa-cog fa-spin');
         }, 500);
     });
 

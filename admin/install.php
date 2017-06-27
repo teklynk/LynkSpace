@@ -198,6 +198,9 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-body">
+                    <div class="text-center login-logo">
+                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YouSeeMore" alt="YouSeeMore"/>
+                    </div>
                     <section class="install-form">
                         <form name="frmInstall" class="form-signin" method="post" action="">
                             <fieldset>
@@ -236,6 +239,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 </div>
                                 <input type="hidden" name="db_install" value="true">
                                 <button class="run_installer btn btn-lg btn-primary btn-block" disabled="disabled" id="run_installer" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
+                                <br/>
                             </fieldset>
                         </form>
                     </section>

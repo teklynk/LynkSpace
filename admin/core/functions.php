@@ -128,7 +128,7 @@ function getIconDropdownList($icon_selected) {
 //Get gravatar image based on users email value
 function getGravatar($email, $size){
     $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-24.png";
-    return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
+    return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size . "&secure=true";
 }
 
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
