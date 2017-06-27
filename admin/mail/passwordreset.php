@@ -2,12 +2,16 @@
 session_start();
 define('inc_access', TRUE);
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && isset($_SESSION['temp_password']) && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
 
     include_once('../../config/config.php');
     include_once('../core/functions.php');
 
+    //create a random hashed string and set it as a session variable
+    $temp_password_reset_hash = generateRandomString();
+
     $redirectPage = "../index.php?msgsent=reset";
+    $redirectPageRequest = "../index.php?msgsent=resetinstructions";
 
     //if an error user and email combo not found in config occurs
     $errorPageNotFound = "../index.php?forgotpassword=true&msgsent=notfound";
@@ -18,9 +22,8 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     $server_domain = $_SERVER['SERVER_NAME'];
     $user_ip = getRealIpAddr();
 
-    $user_name = trim($_POST['user_name']);
-    $email_address = trim($_POST['user_email']);
-    $temp_password = $_SESSION['temp_password'];
+    $user_name = safeCleanStr($_POST['user_name']);
+    $email_address = safeCleanStr($_POST['user_email']);
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -37,23 +40,67 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
         return false;
 
     } else {
-        // Create the email and send the message
-        $email_subject = "$server_domain - User Account Information Change:  $user_name";
-        $email_body = "This email confirms that your password has been changed. To log on the site, use the following credentials.\n\n";
-        $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nTemp Password: $temp_password\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
-        $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
-        // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-        $headers = "From: noreply@$server_domain\n";
-        $headers .= "Reply-To: noreply@$server_domain";
 
-        //Update user password with temp_password where email and username match
-        $contactUpdate = "UPDATE users SET username='" . $user_name . "', password=SHA1('" . blowfishSalt . $temp_password . "') WHERE email='" . validateEmail($email_address) . "' AND username='" . $user_name . "' ";
-        mysqli_query($db_conn, $contactUpdate);
+        if ($_POST['password_reset'] == 'true' && !empty($_POST['key'])) {
 
-        mail($email_address, $email_subject, $email_body, $headers);
+            $newUserPassword = safeCleanStr($_POST['user_password']);
+            $newUserPasswordConfirm = safeCleanStr($_POST['user_password_confirm']);
+            $keyHashed = sha1(blowfishSalt . safeCleanStr($_POST['key']));
+            $passwordHashed = sha1(blowfishSalt . safeCleanStr($_POST['$newUserPassword']));
 
-        header("Location: $redirectPage");
-        echo "<script>window.location.href='$redirectPage';</script>";
+            $sqlUserReset = mysqli_query($db_conn, "SELECT password_reset, password_reset_date, email FROM users WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ");
+            $rowUserReset = mysqli_fetch_array($sqlUserReset);
+
+            if ($keyHashed == $rowUserReset['password_reset'] && $rowUserReset['password_reset_date'] == date("Y-m-d")){
+
+                // Create the email and send the message
+                $email_subject = "$server_domain - User Account Information Change:  $user_name";
+                $email_body = "This email confirms that your password has been changed. To log on the site, use the following credentials.\n\n";
+                $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
+                $email_body .= "Your password has been reset. Visit: " . serverUrlStr . "/index.php to sign in.\n\n";
+                $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
+                $headers = "From: noreply@$server_domain\n";
+                $headers .= "Reply-To: noreply@$server_domain";
+
+                //Update user password where password_reset and email match
+                $userUpdate = "UPDATE users SET password='" . $passwordHashed . "' WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ";
+                mysqli_query($db_conn, $userUpdate);
+
+                mail($email_address, $email_subject, $email_body, $headers);
+
+                header("Location: $redirectPage");
+                echo "<script>window.location.href='$redirectPage';</script>";
+                return false;
+
+            } else {
+
+                header("Location: $errorPageNotFound");
+                echo "<script>window.location.href='$errorPageNotFound';</script>";
+                return false;
+            }
+
+        } else {
+
+            $tempPasswordHashed = sha1(blowfishSalt . safeCleanStr($temp_password_reset_hash));
+
+            // Create the email and send the message
+            $email_subject = "$server_domain - User Account Information Change:  $user_name";
+            $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
+            $email_body .= "To reset your password, visit the following address:\n\n" . serverUrlStr . "/admin/index.php?passwordreset=true&key=" . $temp_password_reset_hash . "\n\n";
+            $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";
+            $headers = "From: noreply@$server_domain\n";
+            $headers .= "Reply-To: noreply@$server_domain";
+
+            //Update user password_reset with $temp_password_reset_hash where email and username match
+            $userUpdate = "UPDATE users SET password_reset='" . $tempPasswordHashed . "', password_reset_date='" . date("Y-m-d") . "' WHERE email='" . validateEmail($email_address) . "' AND username='" . $user_name . "' ";
+            mysqli_query($db_conn, $userUpdate);
+
+            mail($email_address, $email_subject, $email_body, $headers);
+        }
+
+        //password reset request message
+        header("Location: $redirectPageRequest");
+        echo "<script>window.location.href='$redirectPageRequest';</script>";
         return true;
     }
 }

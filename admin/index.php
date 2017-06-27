@@ -8,6 +8,9 @@ session_unset();
 
 $_SESSION['file_referer'] = 'index.php';
 
+//Creates a unique refering value/token - exposed in post
+$_SESSION['unique_referer'] = generateRandomString();
+
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
@@ -55,14 +58,19 @@ if (!empty($_POST)) {
 
 //Reset password page messages
 if ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound') {
-    $message = "<div class='alert alert-danger' role='alert'>Invalid email.  Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    $message = "<div class='alert alert-danger' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 } elseif ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'error') {
     $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
+//Password reset instructions
+if ($_GET['msgsent'] == 'resetinstructions') {
+    $message = "<div class='alert alert-danger' role='alert'>Please check your email for instructions on how to reset your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+}
+
 //Password reset message
 if ($_GET['msgsent'] == 'reset') {
-    $message = "<div class='alert alert-danger' role='alert'>Your password is reset.  A temporary password was sent to your email address.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+    $message = "<div class='alert alert-danger' role='alert'>Your password is reset. Please sign in with your new password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
 //If logged in then...
@@ -136,51 +144,8 @@ if (isset($_SESSION['loggedIn'])) {
                     </div>
                     <section class="login-form">
                         <?php
-                        if (!$_GET['forgotpassword']) {
-                            ?>
-                            <form name="frmSignin" class="form-signin" method="post" action="">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo emailValidationPattern ?>" autocomplete="off" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
-                                    </div>
-                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in</button>
-                                </fieldset>
-                            </form>
-                            <div class="panel-heading text-center">
-                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i class='fa fa-fw fa-question-circle'></i></small>
-                            </div>
-                            <?php
-                        } else {
-
-                            //create a random password and set it as a session variable
-                            $_SESSION['temp_password'] = generateRandomPasswordString();
-
-                            //Creates a unique refering value/token - exposed in post
-                            $_SESSION['unique_referer'] = generateRandomString();
-
-                            ?>
-
+                        if ($_GET['forgotpassword']) {
+                        ?>
                             <form name="frmForgotPassword" class="form-signin" method="post" action="mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
@@ -212,7 +177,94 @@ if (isset($_SESSION['loggedIn'])) {
                             <div class="panel-heading text-center">
                                 <small><i class="fa fa-long-arrow-left"></i> <a href="index.php">Back to Login</a></small>
                             </div>
-                            <?php
+                        <?php
+                        } elseif ($_GET['passwordreset'] == "true" && $_GET['key']) {
+                        ?>
+                            <form name="frmResetPassword" class="form-signin" method="post" action="mail/passwordreset.php">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3 class="text-center">Change your password</h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="user_name" type="text" autocomplete="off" autofocus required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>User Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo emailValidationPattern ?>" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password Confirm</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Password Confirm" id="user_password_confirm" name="user_password_confirm" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
+                                    </div>
+                                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
+                                    <input type="hidden" id="password_reset" name="password_reset" value="<?php echo $_GET['passwordreset']; ?>"/>
+                                    <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>
+                                    <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
+                                </fieldset>
+                            </form>
+                            <div class="panel-heading text-center">
+                                <small><i class="fa fa-long-arrow-left"></i> <a href="index.php">Back to Login</a></small>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <form name="frmSignin" class="form-signin" method="post" action="">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Username" id="user_name" name="username" type="text" autocomplete="off" autofocus required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="email" type="email" pattern="<?php echo emailValidationPattern ?>" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
+                                            <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
+                                    </div>
+                                    <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in
+                                    </button>
+                                </fieldset>
+                            </form>
+                            <div class="panel-heading text-center">
+                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i
+                                        class='fa fa-fw fa-question-circle'></i></small>
+                            </div>
+                        <?php
                         }
                         ?>
                     </section>

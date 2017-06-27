@@ -42,6 +42,8 @@ if (isset($_SESSION['updates_available'])) {
         echo "<div class='alert alert-danger'><span>version.txt is not writable. Check file permissions.<br/>Files and folders will need write access in order to complete the upgrade.</span></div>";
     }
 
+    //Message
+    echo "<div class='alert alert-info'><strong>Important:</strong>&nbsp;before updating, please back up your database and files.</div>";
     echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
     echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";
