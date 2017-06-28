@@ -4,7 +4,7 @@ define('tinyMCE', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'page.php';
+$_SESSION['file_referrer'] = 'page.php';
 
 ?>
     <div class="row">

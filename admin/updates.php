@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'updates.php';
+$_SESSION['file_referrer'] = 'updates.php';
 
 ?>
 

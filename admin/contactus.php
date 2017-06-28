@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'contactus.php';
+$_SESSION['file_referrer'] = 'contactus.php';
 
 $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowContact = mysqli_fetch_array($sqlContact);

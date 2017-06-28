@@ -182,11 +182,17 @@ function getRealIpAddr(){
 }
 
 //Location list for level 1 admins only
-function getLocList() {
+function getLocList($active) {
     global $locList;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations ORDER BY name ASC");
+    if ($active == 'true'){
+        $getActive = "WHERE active='true'";
+    } else {
+        $getActive = "";
+    }
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations $getActive ORDER BY name ASC");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
         if ($rowLocationSearch['id'] == 1) {
@@ -371,7 +377,7 @@ function downloadFile($url, $path) {
     curl_setopt($ch, CURLOPT_FAILONERROR, true);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+    curl_setopt($ch, CURLOPT_AUTOreferrer, true);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 400);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);

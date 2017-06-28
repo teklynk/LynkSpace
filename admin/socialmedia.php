@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'socialmedia.php';
+$_SESSION['file_referrer'] = 'socialmedia.php';
 
 $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSocial = mysqli_fetch_array($sqlSocial);

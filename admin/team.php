@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'team.php';
+$_SESSION['file_referrer'] = 'team.php';
 
 //Page preview
 if ($_GET['preview'] > "") {

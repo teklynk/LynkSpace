@@ -3,15 +3,13 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'usermanager.php';
+$_SESSION['file_referrer'] = 'usermanager.php';
 
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
-
 
 $pageMsg = "";
 $deleteMsg = "";
@@ -37,34 +35,22 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 //insert data on submit
 if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
-        $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . sqlEscapeStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . SHA1(blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
-        mysqli_query($db_conn, $usersInsert);
 
-        $pageMsg = "<div class='alert alert-success'>The user " . safeCleanStr($_POST['user_name']) . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+        $sqlUsersInfo = mysqli_query($db_conn, "SELECT username, email FROM users WHERE username='".sqlEscapeStr($_POST['user_name'])."' AND email='".validateEmail($_POST['user_email'])."' ");
+        $rowCheckUser = mysqli_num_rows($sqlUsersInfo);
+
+        if ($rowCheckUser > 0) {
+            $pageMsg = "<div class='alert alert-danger'>Username: ".$_POST['user_name']." and Email: ".$_POST['user_email']." already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+        } else {
+            $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . sqlEscapeStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . sha1(blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
+            mysqli_query($db_conn, $usersInsert);
+
+            $pageMsg = "<div class='alert alert-success'>The user " . safeCleanStr($_POST['user_name']) . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+        }
+
     } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
     }
-}
-
-//Get user info, exclude super admin user
-$sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE username != 'tlcadmin' ORDER BY username, email, level, datetime ASC");
-$rowcount = mysqli_num_rows($sqlUsers);
-
-//Get Location ID and Name
-$sqlUsersLoc = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name ASC");
-
-//build locations drop down list
-while ($rowUsersLoc = mysqli_fetch_array($sqlUsersLoc)) {
-    $locUsersId = $rowUsersLoc['id'];
-    $locUsersName = $rowUsersLoc['name'];
-
-    if ($locUsersId == 1) {
-        $isDefault = " (Default)";
-    } else {
-        $isDefault = "";
-    }
-
-    $locUsersMenuStr .= "<option value=" . $locUsersId . ">" . $locUsersName . $isDefault . "</option>";
 }
 
 ?>
@@ -147,7 +133,7 @@ if ($deleteMsg != "") {
                                     <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
                                     <select class="form-control" name="user_location" required>
                                         <option>Choose a location</option>
-                                        <?php echo $locUsersMenuStr; ?>
+                                        <?php echo getLocList('true'); ?>
                                     </select>
                                 </div>
                             </div>
@@ -203,6 +189,8 @@ if ($deleteMsg != "") {
                 </thead>
                 <tbody>
                 <?php
+                //Get user info, exclude super admin user
+                $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE username != 'tlcadmin' ORDER BY username, email, level, datetime ASC");
                 while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
                     $usersID = $rowUsers['id'];
                     $usersName = $rowUsers['username'];

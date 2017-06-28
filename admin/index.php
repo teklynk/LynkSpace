@@ -6,10 +6,10 @@ include_once('includes/header.inc.php');
 //clear all session variables
 session_unset();
 
-$_SESSION['file_referer'] = 'index.php';
+$_SESSION['file_referrer'] = 'index.php';
 
 //Creates a unique refering value/token - exposed in post
-$_SESSION['unique_referer'] = generateRandomString();
+$_SESSION['unique_referrer'] = generateRandomString();
 
 if (!empty($_POST)) {
     if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
@@ -31,7 +31,7 @@ if (!empty($_POST)) {
             //If is Admin
             if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
-                $_SESSION['loc_list'] = getLocList();
+                $_SESSION['loc_list'] = getLocList('false');
             }
 
             //Super Admin
@@ -165,7 +165,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
+                                    <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
                             </form>
@@ -213,7 +213,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
                                     </div>
-                                    <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
+                                    <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <input type="hidden" id="password_reset" name="password_reset" value="<?php echo $_GET['passwordreset']; ?>"/>
                                     <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>

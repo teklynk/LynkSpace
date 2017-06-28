@@ -4,7 +4,7 @@ define('tinyMCE', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'aboutus.php';
+$_SESSION['file_referrer'] = 'aboutus.php';
 
 $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowAbout = mysqli_fetch_array($sqlAbout);

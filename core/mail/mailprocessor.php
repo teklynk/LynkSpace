@@ -3,28 +3,24 @@ define('inc_access', TRUE);
 
 session_start();
 
-if ($_SESSION['file_referer'] != 'contact.php'){
-    die('Direct access not permitted');
-}
-
 //redirect back to contact form or home page
 $redirectPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";
 //if an error occurs
 $errorPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=error#contactForm";
 
-$name = $_POST['name'];
-$email_address = $_POST['email'];
-$phone = $_POST['phone'];
-$message = $_POST['message'];
-$sendTo = $_POST['sendToEmail'];
+$name = safeCleanStr($_POST['name']);
+$email_address = safeCleanStr($_POST['email']);
+$phone = safeCleanStr($_POST['phone']);
+$message = safeCleanStr($_POST['message']);
+$sendTo = safeCleanStr($_POST['sendToEmail']);
 
-if (!empty($_POST) && $_POST['referer'] == $_SESSION['unique_referer']) {
+if (!empty($_POST) && $_POST['referrer'] == $_SESSION['unique_referrer']) {
     // Check for empty fields
     if (empty($_POST['name']) ||
         empty($_POST['email']) ||
         empty($_POST['phone']) ||
         empty($_POST['message']) ||
-        !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
+        !validateEmail($_POST['email'])
     ) {
         header("Location: $errorPage");
         echo "<script>window.location.href='$errorPage';</script>";

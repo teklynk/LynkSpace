@@ -7,10 +7,10 @@ include_once('includes/header.inc.php');
 echo "<div class='page-contact'>";
 
 //needed for mailprocessor.php
-$_SESSION['file_referer'] = 'contact.php';
+$_SESSION['file_referrer'] = 'contact.php';
 
 //Creates a unique refering value/token - exposed in post
-$_SESSION['unique_referer'] = generateRandomString();
+$_SESSION['unique_referrer'] = generateRandomString();
 
 echo "<div class='container-fluid'>";
 echo "<div class='container'>";
@@ -113,7 +113,7 @@ echo "</div>";
                     </div>
                 </div>
                 <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail; ?>"/>
-                <input type="hidden" id="referer" name="referer" value="<?php echo $_SESSION['unique_referer']; ?>"/>
+                <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                 <br>
                 <!-- For success/fail messages -->
                 <?php

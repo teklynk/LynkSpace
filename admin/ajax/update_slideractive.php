@@ -8,7 +8,7 @@ if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'slider.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referrer'] == 'slider.php') {
 
     include_once('../../config/config.php');
 

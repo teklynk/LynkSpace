@@ -4,7 +4,7 @@ define('datePicker', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'slider.php';
+$_SESSION['file_referrer'] = 'slider.php';
 
 //slide preview
 if ($_GET['preview'] > "") {

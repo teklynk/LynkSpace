@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'navigation.php';
+$_SESSION['file_referrer'] = 'navigation.php';
 
 $getNavSection = $_GET['section'];
 
@@ -367,8 +367,8 @@ if ($_GET['section'] == $navSections[0]) {
                     <thead>
                     <tr>
                         <th>Sort</th>
-                        <th>Name</th>
-                        <th>URL</th>
+                        <th>Link Name</th>
+                        <th>Link URL</th>
                         <th>Category</th>
                         <th>External Link</th>
                         <th>Active</th>

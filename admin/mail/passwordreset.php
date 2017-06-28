@@ -4,13 +4,13 @@ session_start();
 define('inc_access', TRUE);
 
 //Redirect to login page if this file is accessed directly
-if (empty($_POST)) {
+if ($_SESSION['unique_referrer'] != $_POST['referrer'] || empty($_POST)) {
     header("Location: ../index.php");
     echo "<script>window.location.href='../index.php';</script>";
-    die();
+    die('Direct access not permitted');
 }
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referrer'] == 'index.php' && $_POST['referrer'] == $_SESSION['unique_referrer']) {
 
     include_once('../../config/config.php');
     include_once('../core/functions.php');
@@ -32,7 +32,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     $user_ip = getRealIpAddr();
 
     $user_name = sqlEscapeStr($_POST['user_name']);
-    $email_address = validateEmail($_POST['user_email']);
+    $email_address = sqlEscapeStr($_POST['user_email']);
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -61,7 +61,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             if ($newUserPassword == $newUserPasswordConfirm && $keyHashed == $rowUserReset['password_reset'] && date("Y-m-d") == $rowUserReset['password_reset_date']) {
 
                 // Create the email and send the message
-                $email_subject = "$server_domain - User Account Information Change:  $user_name";
+                $email_subject = "$server_domain - User Account Information Change: $user_name";
                 $email_body = "This email confirms that your password has been changed. To log on the site, use the following credentials.\n\n";
                 $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
                 $email_body .= "Your password has been reset. Visit: " . serverUrlStr . "/index.php to sign in.\n\n";
@@ -93,7 +93,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             $tempPasswordHashed = sha1(blowfishSalt . safeCleanStr($temp_password_reset_hash));
 
             // Create the email and send the message
-            $email_subject = "$server_domain - User Account Information Change:  $user_name";
+            $email_subject = "$server_domain - User Account Information Change: $user_name";
             $email_body .= "Username: $user_name\n\nEmail: $email_address\n\nReferrer: $server_domain\n\nIP Address: $user_ip\n\n";
             $email_body .= "To reset your password, visit the following address:\n\n" . serverUrlStr . "/admin/index.php?passwordreset=true&key=" . $temp_password_reset_hash . "\n\n";
             $email_body .= "If you have any questions or encounter any problems logging in, please contact the website administrator.\n\n";

@@ -4,7 +4,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'siteoptions.php';
+$_SESSION['file_referrer'] = 'siteoptions.php';
 
 //check if user is logged in and is admin
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {

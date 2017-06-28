@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'users.php';
+$_SESSION['file_referrer'] = 'users.php';
 
 $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, id FROM users WHERE id=" . $_SESSION['user_id'] . " ");
 $rowUsers = mysqli_fetch_array($sqlUsers);

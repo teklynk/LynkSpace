@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'databases.php';
+$_SESSION['file_referrer'] = 'databases.php';
 
 $getCustSection = $_GET['section'];
 

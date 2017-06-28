@@ -12,7 +12,7 @@ session_start();
 //This will add files and not delete existing.
 
 //check if user is logged in and that the requesting page is valid.
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referer'] == 'uploads.php') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name']) && $_SESSION['file_referrer'] == 'uploads.php') {
 
     require_once('../../config/config.php');
     require_once('../core/functions.php');

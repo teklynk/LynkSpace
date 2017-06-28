@@ -3,7 +3,7 @@ define('inc_access', TRUE);
 
 include_once('includes/header.inc.php');
 
-$_SESSION['file_referer'] = 'uploads.php';
+$_SESSION['file_referrer'] = 'uploads.php';
 
 //Create location upload folder if it does not exist.
 if (is_numeric($_GET['loc_id'])) {
