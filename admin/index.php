@@ -56,7 +56,7 @@ if (!empty($_POST)) {
     }
 }
 
-//Reset password page messages
+//Reset password error messages
 if ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound') {
     $message = "<div class='alert alert-danger' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 } elseif ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'error') {
@@ -76,14 +76,9 @@ if ($_GET['msgsent'] == 'reset') {
 //If logged in then...
 if (isset($_SESSION['loggedIn'])) {
 
-    // redirect user to user manager page to update password info
-    if ($_GET['msgsent'] == 'reset') {
-        header("Location: users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "");
-        echo "<script>window.location.href='users.php?updatepassword=true&loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
-    } else {
-        header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "");
-        echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
-    }
+    // redirect user to setup page
+    header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "");
+    echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 
 }
 
@@ -261,8 +256,7 @@ if (isset($_SESSION['loggedIn'])) {
                                 </fieldset>
                             </form>
                             <div class="panel-heading text-center">
-                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i
-                                        class='fa fa-fw fa-question-circle'></i></small>
+                                <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i class='fa fa-fw fa-question-circle'></i></small>
                             </div>
                         <?php
                         }

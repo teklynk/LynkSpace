@@ -1,6 +1,14 @@
 <?php
 session_start();
+
 define('inc_access', TRUE);
+
+//Redirect to login page if this file is accessed directly
+if (empty($_POST)) {
+    header("Location: ../index.php");
+    echo "<script>window.location.href='../index.php';</script>";
+    die();
+}
 
 if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referer'] == 'index.php' && $_POST['referer'] == $_SESSION['unique_referer']) {
 
@@ -10,10 +18,11 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     //create a random hashed string and set it as a session variable
     $temp_password_reset_hash = generateRandomString();
 
+    //redirect to pages
     $redirectPage = "../index.php?msgsent=reset";
     $redirectPageRequest = "../index.php?msgsent=resetinstructions";
 
-    //if an error user and email combo not found in config occurs
+    //if an error user and email not found occurs
     $errorPageNotFound = "../index.php?forgotpassword=true&msgsent=notfound";
 
     //if an error occurs
@@ -22,8 +31,8 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     $server_domain = $_SERVER['SERVER_NAME'];
     $user_ip = getRealIpAddr();
 
-    $user_name = safeCleanStr($_POST['user_name']);
-    $email_address = safeCleanStr($_POST['user_email']);
+    $user_name = sqlEscapeStr($_POST['user_name']);
+    $email_address = validateEmail($_POST['user_email']);
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
     $rowUsers = mysqli_fetch_array($sqlUsers);
@@ -32,26 +41,24 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     if (empty($user_name) || empty($email_address) || !validateEmail($email_address)) {
         header("Location: $errorPage");
         echo "<script>window.location.href='$errorPage';</script>";
-        return false;
 
     } elseif ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
         header("Location: $errorPageNotFound");
         echo "<script>window.location.href='$errorPageNotFound';</script>";
-        return false;
 
     } else {
-
+        //Reset the user password
         if ($_POST['password_reset'] == 'true' && !empty($_POST['key'])) {
 
-            $newUserPassword = safeCleanStr($_POST['user_password']);
-            $newUserPasswordConfirm = safeCleanStr($_POST['user_password_confirm']);
-            $keyHashed = sha1(blowfishSalt . safeCleanStr($_POST['key']));
-            $passwordHashed = sha1(blowfishSalt . safeCleanStr($_POST['$newUserPassword']));
+            $newUserPassword = sqlEscapeStr($_POST['password']);
+            $newUserPasswordConfirm = sqlEscapeStr($_POST['user_password_confirm']);
+            $keyHashed = sha1(blowfishSalt . sqlEscapeStr($_POST['key']));
+            $passwordHashed = sha1(blowfishSalt . sqlEscapeStr($_POST['password']));
 
             $sqlUserReset = mysqli_query($db_conn, "SELECT password_reset, password_reset_date, email FROM users WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ");
             $rowUserReset = mysqli_fetch_array($sqlUserReset);
 
-            if ($keyHashed == $rowUserReset['password_reset'] && $rowUserReset['password_reset_date'] == date("Y-m-d")){
+            if ($newUserPassword == $newUserPasswordConfirm && $keyHashed == $rowUserReset['password_reset'] && date("Y-m-d") == $rowUserReset['password_reset_date']) {
 
                 // Create the email and send the message
                 $email_subject = "$server_domain - User Account Information Change:  $user_name";
@@ -68,19 +75,21 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
 
                 mail($email_address, $email_subject, $email_body, $headers);
 
+                //redirect to successful reset message
                 header("Location: $redirectPage");
                 echo "<script>window.location.href='$redirectPage';</script>";
-                return false;
 
             } else {
 
+                //redirect to error message
                 header("Location: $errorPageNotFound");
                 echo "<script>window.location.href='$errorPageNotFound';</script>";
-                return false;
+
             }
 
         } else {
 
+            //Send email with password reset instructions.
             $tempPasswordHashed = sha1(blowfishSalt . safeCleanStr($temp_password_reset_hash));
 
             // Create the email and send the message
@@ -92,16 +101,16 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             $headers .= "Reply-To: noreply@$server_domain";
 
             //Update user password_reset with $temp_password_reset_hash where email and username match
-            $userUpdate = "UPDATE users SET password_reset='" . $tempPasswordHashed . "', password_reset_date='" . date("Y-m-d") . "' WHERE email='" . validateEmail($email_address) . "' AND username='" . $user_name . "' ";
+            $userUpdate = "UPDATE users SET password_reset='" . $tempPasswordHashed . "', password_reset_date='" . date("Y-m-d") . "' WHERE email='" . $email_address . "' AND username='" . $user_name . "' ";
             mysqli_query($db_conn, $userUpdate);
 
             mail($email_address, $email_subject, $email_body, $headers);
         }
 
-        //password reset request message
+        //send password reset request message
         header("Location: $redirectPageRequest");
         echo "<script>window.location.href='$redirectPageRequest';</script>";
-        return true;
+
     }
 }
 ?>
