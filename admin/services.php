@@ -197,14 +197,30 @@ if ($_GET['preview']>"") {
 		$deleteConfirm="";
 		$serviceMsg="";
 		$delserviceId = $_GET['deleteservice'];
-		$delserviceTitle = $_GET['deletetitle'];
+		$delserviceTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
 		//delete service
 		if ($_GET['deleteservice'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-			$deleteMsg="<div class='alert alert-danger'>Are you sure you want to delete ".$delserviceTitle."? <a href='?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".safeCleanStr(addslashes($delserviceTitle))."&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php'\">×</button></div>";
-			echo $deleteMsg;
-
+?>
+		<!-- Confirm delete Modal -->
+        <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Service?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete: <?php echo $delserviceTitle; ?>?</p>
+                    </div>
+                    <div class="modal-footer text-left">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='services.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteservice=<?php echo $delserviceId; ?>&deletetitle=<?php echo $delserviceTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
 		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
@@ -240,19 +256,6 @@ if ($_GET['preview']>"") {
 		$rowSetup  = mysqli_fetch_array($sqlSetup);
 ?>
 <!--modal preview window-->
-
-<style>
-	#webserviceDialog iframe {
-		width: 100%;
-		height: 600px;
-		border: none;
-	}
-	.modal-dialog {
-		width:95%;
-	}
-</style>
-
-
 <div class="modal fade" id="webserviceDialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -376,5 +379,24 @@ if ($_GET['preview']>"") {
 	</div>
 	<p></p>";
 
-	include_once ('includes/footer.inc.php');
+?>
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#confirm').on('hidden.bs.modal', function(){
+			setTimeout(function(){
+				window.location.href='services.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+			}, 100);
+		});
+
+		var url = window.location.href;
+		if (url.indexOf('deleteservice') != -1 && url.indexOf('confirm') == -1){
+			setTimeout(function(){
+				$('#confirm').modal('show');
+			}, 100);
+		}
+	});
+</script>
+<?php
+include_once ('includes/footer.inc.php');
 ?>

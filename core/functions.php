@@ -270,9 +270,9 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
     global $navCatLinksUrl;
     global $navCatLinksCatID;
     global $navSections;
-    global $sitesearchlink;
 
     echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection'>";
+
     if ($dropdown == "true"){
         $dropdownToggle = "dropdown-toggle";
         $dataToggle = "dropdown";
@@ -398,7 +398,7 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
 
     }
 
-    if ($sitesearchlink == 'true') {
+    if ($sitesearchlink == "true") {
         //Site search colapse link
         echo "<li class='hidden-xs' id='sitesearchlink'>";
         echo "<a class='navSearch' data-toggle='collapse' data-target='.sitesearch-collapse' href='#'>";

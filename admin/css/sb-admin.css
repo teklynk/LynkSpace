@@ -158,6 +158,11 @@ footer ul.nav-footer li {
 .pull-right {
     float: right !important;
 }
+#webslideDialog iframe, #webserviceDialog iframe, #webpageDialog iframe, #webpageDialog iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
 .modal-header {
     padding: 15px;
 }
@@ -165,6 +170,17 @@ footer ul.nav-footer li {
     text-align: left;
 }
 
+.modal-dialog {
+    width: 95%;
+}
+.modal-sm {
+    width: 25%;
+}
+.modal .modal-footer {
+    text-align: left;
+    border-radius: 0 0 6px 6px;
+    background-color: #f7f7f7;
+}
 .page-header {
     margin: 20px 0 20px;
 }

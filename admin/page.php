@@ -80,32 +80,32 @@ $_SESSION['file_referrer'] = 'page.php';
                 }
                 ?>
                 <div class="col-lg-8">
-                <form name="pageForm" class="dirtyForm" method="post" action="">
+                    <form name="pageForm" class="dirtyForm" method="post" action="">
 
-                    <div class="form-group required">
-                        <label><?php echo $pageLabel; ?></label>
-                        <input type="text" class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
-                    </div>
+                        <div class="form-group required">
+                            <label><?php echo $pageLabel; ?></label>
+                            <input type="text" class="form-control count-text" name="page_title" maxlength="255" value="<?php if ($_GET['editpage']) {echo $rowPages['title'];} ?>" placeholder="Page Title" autofocus required>
+                        </div>
 
-                    <hr/>
+                        <hr/>
 
-                    <?php
-                    $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-                    $rowSetup = mysqli_fetch_array($sqlSetup);
-                    ?>
+                        <?php
+                        $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+                        $rowSetup = mysqli_fetch_array($sqlSetup);
+                        ?>
 
-                    <div class="form-group">
-                        <label>Text / HTML</label>
-                        <textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>Text / HTML</label>
+                            <textarea class="form-control tinymce" rows="20" name="page_content" id="page_content"><?php if ($_GET['editpage']) {echo $rowPages['content'];} ?></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
-                    </div>
-                    <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
+                        <div class="form-group">
+                            <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
+                        </div>
+                        <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+                        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
-                </form>
+                    </form>
                 </div>
 
             <?php
@@ -116,13 +116,31 @@ $_SESSION['file_referrer'] = 'page.php';
                 $deleteConfirm = "";
                 $pageMsg = "";
                 $delPageId = $_GET['deletepage'];
-                $delPageTitle = $_GET['deletetitle'];
+                $delPageTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
                 //delete page
                 if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-                    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . safeCleanStr($delPageTitle) . "? <a href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                    echo $deleteMsg;
+            ?>
+                <!-- Confirm delete Modal -->
+                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Delete Page?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete: <?php echo $delPageTitle; ?>?</p>
+                            </div>
+                            <div class="modal-footer text-left">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='page.php?loc_id=<?php echo $_GET['loc_id']; ?>&deletepage=<?php echo $delPageId; ?>&deletetitle=<?php echo $delPageTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
 
                 } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
 
@@ -146,20 +164,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
                 $rowSetup = mysqli_fetch_array($sqlSetup);
             ?>
-                <!--modal preview window-->
-
-                <style>
-                    #webpageDialog iframe {
-                        width: 100%;
-                        height: 600px;
-                        border: none;
-                    }
-
-                    .modal-dialog {
-                        width: 95%;
-                    }
-                </style>
-
+                <!-- Preview Modal -->
                 <div class="modal fade" id="webpageDialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -255,6 +260,23 @@ $_SESSION['file_referrer'] = 'page.php';
     </div>
     <p></p>
 
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='page.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
+
+        var url = window.location.href;
+        if (url.indexOf('deletepage') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
 <?php
 include_once('includes/footer.inc.php');
 ?>

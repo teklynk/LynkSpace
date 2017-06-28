@@ -54,7 +54,26 @@ if (isset($_POST["uploadFile"])) {
 //Delete file
 $deleteMsg = "";
 if ($_GET["delete"] && !$_GET["confirm"]) {
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $_GET["delete"] . "? <a href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+?>
+    <!-- Confirm delete Modal -->
+    <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Image?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete: <?php echo $_GET["delete"]; ?>?</p>
+                </div>
+                <div class="modal-footer text-left">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>&delete=<?php echo $_GET["delete"]; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
     unlink($_GET["delete"]);
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -183,24 +202,42 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
     <?php
 }
 ?>
-    <!-- /.row -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a type="button" class="close" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                    <h4 class="modal-title">&nbsp;</h4>
-                </div>
-                <div class="modal-body">
-                    <img id="myModalFile" src="" class="img-responsive center-block"/>
-                </div>
-                <div class="modal-footer">&nbsp;</div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
+<!-- Image Preview -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+                <h4 class="modal-title">&nbsp;</h4>
+            </div>
+            <div class="modal-body">
+                <img id="myModalFile" src="" class="img-responsive center-block"/>
+            </div>
+            <div class="modal-footer">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
+
+        var url = window.location.href;
+        if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
 <?php
 include_once('includes/footer.inc.php');
 ?>

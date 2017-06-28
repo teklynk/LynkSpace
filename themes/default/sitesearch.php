@@ -12,6 +12,7 @@ if (!empty($_POST['sitesearchterm'])) {
 
     echo "<div class='sitesearchresultsmsg'><h1>Search results for: \"" . $_POST['sitesearchterm'] . "\"</h1></div>";
 
+    //getSiteSearchResults(search term, show page contents)
     getSiteSearchResults($_POST['sitesearchterm'], 'false');
 
     if ($siteSearchCount == 0){

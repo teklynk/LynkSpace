@@ -179,13 +179,30 @@ if ($_GET['section'] == $navSections[0]) {
             $deleteConfirm = "";
             $pageMsg = "";
             $delNavId = $_GET['deletenav'];
-            $delNavTitle = safeCleanStr($_GET['deletename']);
+            $delNavTitle = safeCleanStr(addslashes($_GET['deletename']));
 
             //Delete nav link
             if ($_GET['deletenav'] && $_GET['deletename'] && !$_GET['confirm']) {
-
-                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete " . safeCleanStr(addslashes($delNavTitle)) . "? <a href='?section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . safeCleanStr(addslashes($delNavTitle)) . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                ?>
+                <!-- Confirm delete Modal -->
+                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Delete Navigation Link?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete: <?php echo $delNavTitle; ?>?</p>
+                            </div>
+                            <div class="modal-footer text-left">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getNavSection; ?>&deletenav=<?php echo $delNavId; ?>&deletename=<?php echo $delNavTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
 
             } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
 
@@ -199,13 +216,30 @@ if ($_GET['section'] == $navSections[0]) {
 
             //delete category
             $delCatId = $_GET['deletecat'];
-            $delCatTitle = $_GET['deletecatname'];
+            $delCatTitle = safeCleanStr(addslashes($_GET['deletecatname']));
 
             //Delete category and set nav categories to zero
             if ($_GET['deletecat'] && $_GET['deletecatname'] && !$_GET['confirm']) {
-
-                $deleteMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete the category " . safeCleanStr($delCatTitle) . "? <a href='?section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&loc_id=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                ?>
+                <!-- Confirm delete Modal -->
+                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Delete Navigation Category?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete: <?php echo $delCatTitle; ?>?</p>
+                            </div>
+                            <div class="modal-footer text-left">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getNavSection; ?>&deletecat=<?php echo $delCatId; ?>&deletecatname=<?php echo $delCatTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
@@ -446,6 +480,23 @@ if ($_GET['section'] == $navSections[0]) {
         </div>
     </div>
 
+    <!-- Modal javascript logic -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#confirm').on('hidden.bs.modal', function(){
+                setTimeout(function(){
+                    window.location.href='navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $_GET['section']; ?>';
+                }, 100);
+            });
+
+            var url = window.location.href;
+            if (url.indexOf('deletenav') != -1 || url.indexOf('deletecat') != -1 && url.indexOf('confirm') == -1){
+                setTimeout(function(){
+                    $('#confirm').modal('show');
+                }, 100);
+            }
+        });
+    </script>
 <?php
 include_once('includes/footer.inc.php');
 ?>

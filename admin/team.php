@@ -156,13 +156,30 @@ if ($_GET['preview'] > "") {
             $deleteConfirm = "";
             $teamMsg = "";
             $delteamId = $_GET['deleteteam'];
-            $delteamTitle = $_GET['deletetitle'];
+            $delteamTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
             //delete team
             if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-                $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delteamTitle . "? <a href='?deleteteam=" . $delteamId . "&deletetitle=" . safeCleanStr(addslashes($delteamTitle)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                ?>
+                <!-- Confirm delete Modal -->
+                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Delete Team?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete: <?php echo $delteamTitle; ?>?</p>
+                            </div>
+                            <div class="modal-footer text-left">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='team.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteteam=<?php echo $delteamId; ?>&deletetitle=<?php echo $delteamTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
@@ -193,19 +210,6 @@ if ($_GET['preview'] > "") {
             $rowSetup = mysqli_fetch_array($sqlSetup);
             ?>
             <!--modal preview window-->
-
-            <style>
-                #webpageDialog iframe {
-                    width: 100%;
-                    height: 600px;
-                    border: none;
-                }
-
-                .modal-dialog {
-                    width: 95%;
-                }
-            </style>
-
             <div class="modal fade" id="webpageDialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -328,6 +332,24 @@ if ($_GET['preview'] > "") {
         echo "</div>
 	</div>
 	<p></p>";
+?>
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='team.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
 
-        include_once('includes/footer.inc.php');
-        ?>
+        var url = window.location.href;
+        if (url.indexOf('deleteteam') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
+<?php
+include_once('includes/footer.inc.php');
+?>

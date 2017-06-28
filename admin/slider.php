@@ -238,14 +238,30 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     $deleteConfirm = "";
     $slideMsg = "";
     $delslideId = $_GET['deleteslide'];
-    $delslideTitle = $_GET['deletetitle'];
+    $delslideTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
     //delete slide
     if ($_GET['deleteslide'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-        $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delslideTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&deletetitle=" . safeCleanStr(addslashes($delslideTitle)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $deleteMsg;
-
+    ?>
+        <!-- Confirm delete Modal -->
+        <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Slide?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete: <?php echo $delslideTitle; ?>?</p>
+                    </div>
+                    <div class="modal-footer text-left">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteslide=<?php echo $delslideId; ?>&deletetitle=<?php echo $delslideTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
         $slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
@@ -284,20 +300,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
     ?>
+
     <!--modal preview window-->
-
-    <style>
-        #webslideDialog iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-
-        .modal-dialog {
-            width: 95%;
-        }
-    </style>
-
     <div class="modal fade" id="webslideDialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -457,5 +461,24 @@ echo "</div>
 	</div>
 	<p></p>";
 
+?>
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
+
+        var url = window.location.href;
+        if (url.indexOf('deleteslide') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
+<?php
 include_once('includes/footer.inc.php');
 ?>

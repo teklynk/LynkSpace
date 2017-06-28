@@ -17,12 +17,29 @@ $usersCount=0;
 
 //delete user
 $deluserId = $_GET['deleteuser'];
-$deluserTitle = $_GET['deletetitle'];
+$deluserTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
 if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $deluserTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . safeCleanStr(addslashes($deluserTitle)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
+?>
+    <!-- Confirm delete Modal -->
+    <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete User?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete: <?php echo $deluserTitle; ?>?</p>
+                </div>
+                <div class="modal-footer text-left">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteuser=<?php echo $deluserId; ?>&deletetitle=<?php echo $deluserTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
     $userDelete = "DELETE FROM users WHERE id='$deluserId'";
@@ -240,7 +257,23 @@ if ($deleteMsg != "") {
         </div>
     </div>
 </div>
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
 
+        var url = window.location.href;
+        if (url.indexOf('deleteuser') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
 <?php
 include_once('includes/footer.inc.php');
 ?>
