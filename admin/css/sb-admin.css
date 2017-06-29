@@ -158,7 +158,7 @@ footer ul.nav-footer li {
 .pull-right {
     float: right !important;
 }
-#webslideDialog iframe, #webserviceDialog iframe, #webpageDialog iframe, #webpageDialog iframe {
+#myModal iframe, #webslideDialog iframe, #webserviceDialog iframe, #webpageDialog iframe, #webpageDialog iframe {
     width: 100%;
     height: 600px;
     border: none;

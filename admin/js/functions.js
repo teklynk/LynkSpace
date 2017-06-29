@@ -797,8 +797,6 @@ $(document).ready(function () {
     });
 });
 
-
-
 //--Outside of Document.Ready functions
 //modal preview window
 function showMyModal(myTitle, myFile) {

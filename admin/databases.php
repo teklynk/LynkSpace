@@ -209,7 +209,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     ?>
                 </div>
                 <div class="form-group">
-                    <label>Choose an icon</label>
+                    <label for="customer_icon_select">Choose an icon</label>
                     <select class="form-control selectpicker ays-ignore" data-container="body" data-dropup-auto="false" data-size="10" name="customer_icon_select" id="customer_icon_select">
                         <option value="">None</option>
                         <?php
@@ -218,7 +218,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Use an Existing Image</label>
+                    <label for="customer_image_select">Use an Existing Image</label>
                     <select class="form-control" name="customer_image_select" id="customer_image_select">
                         <option value="">None</option>
                         <?php
@@ -233,7 +233,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <input class="form-control count-text" name="customer_link" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['link'];} ?>" type="text" placeholder="http://www.google.com">
                 </div>
                 <div class="form-group">
-                    <label for="exist_cat">Category</label>
+                    <label for="customer_exist_cat">Category</label>
                     <select class="form-control" name="customer_exist_cat" id="customer_exist_cat">
                         <?php
                         echo "<option value='0'>None</option>";
@@ -280,26 +280,13 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             //Delete Section and all databases in the section
             if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
-            ?>
-                <!-- Confirm delete Modal -->
-                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Delete Database Page?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to delete the entire page: <?php echo safeCleanStr(addslashes($getCustSection)); ?>?</p>
-                            </div>
-                            <div class="modal-footer text-left">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getCustSection; ?>&deletesection=true&deletename=<?php echo safeCleanStr(addslashes($getCustSection)); ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php
+                showModalConfirm(
+                    "confirm",
+                    "Delete Database Page?",
+                    "Are you sure you want to delete: ".safeCleanStr(addslashes($getCustSection))."?",
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletesection=true&deletename=".safeCleanStr(addslashes($getCustSection))."&confirm=yes"
+                );
+
             } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete section after clicking Yes
                 $sectionDelete = "DELETE FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
@@ -315,26 +302,13 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             //delete customer
             if ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && !$_GET['confirm']) {
-            ?>
-                <!-- Confirm delete Modal -->
-                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Delete Database?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to delete: <?php echo safeCleanStr(addslashes($delcustomerName)); ?>?</p>
-                            </div>
-                            <div class="modal-footer text-left">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getCustSection; ?>&deletecustomer=<?php echo $delcustomerId; ?>&deletename=<?php echo safeCleanStr(addslashes($delcustomerName)); ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php
+                showModalConfirm(
+                    "confirm",
+                    "Delete Database?",
+                    "Are you sure you want to delete: ".safeCleanStr(addslashes($delcustomerName))."?",
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecustomer=".$delcustomerId."&deletename=".safeCleanStr(addslashes($delcustomerName))."&confirm=yes"
+                );
+
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete customer after clicking Yes
                 $customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
@@ -397,26 +371,13 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             //Delete category and set categories to zero
             if ($_GET['deletecat'] && $_GET['deletecatname'] && !$_GET['confirm']) {
-            ?>
-                <!-- Confirm delete Modal -->
-                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Delete Database Category?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to delete: <?php echo $delCatTitle; ?>?</p>
-                            </div>
-                            <div class="modal-footer text-left">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getCustSection; ?>&deletecat=<?php echo $delCatId; ?>&deletecatname=<?php echo $delCatTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php
+                showModalConfirm(
+                    "confirm",
+                    "Delete Database Category?",
+                    "Are you sure you want to delete: ".$delCatTitle."?",
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes"
+                );
+
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
                 $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
@@ -466,26 +427,10 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $_GET['addcat'] . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $addMsg;
             }
-            ?>
 
-            <div class="modal fade" id="webpageDialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <a type="button" class="close" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
-                            <h4 class="modal-title">&nbsp;</h4>
-                        </div>
-                        <div class="modal-body">
-                            <iframe id="myModalFile" src="" frameborder="0"></iframe>
-                        </div>
-                        <div class="modal-footer">&nbsp;</div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+            //Modal preview box
+            showModalPreview("webpageDialog");
 
-            <?php
             if ($_GET['loc_id'] != 1) {
                 ?>
 

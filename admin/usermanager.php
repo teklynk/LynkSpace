@@ -20,26 +20,13 @@ $deluserId = $_GET['deleteuser'];
 $deluserTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
 if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-?>
-    <!-- Confirm delete Modal -->
-    <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete User?</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete: <?php echo $deluserTitle; ?>?</p>
-                </div>
-                <div class="modal-footer text-left">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteuser=<?php echo $deluserId; ?>&deletetitle=<?php echo $deluserTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php
+    showModalConfirm(
+        "confirm",
+        "Delete User?",
+        "Are you sure you want to delete: ".$deluserTitle."?",
+        "usermanager.php?loc_id=".$_GET['loc_id']."&deleteuser=".$deluserId."&deletetitle=".$deluserTitle."&confirm=yes"
+    );
+
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
     $userDelete = "DELETE FROM users WHERE id='$deluserId'";

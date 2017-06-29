@@ -201,26 +201,14 @@ if ($_GET['preview']>"") {
 
 		//delete service
 		if ($_GET['deleteservice'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-?>
-		<!-- Confirm delete Modal -->
-        <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Delete Service?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete: <?php echo $delserviceTitle; ?>?</p>
-                    </div>
-                    <div class="modal-footer text-left">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='services.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteservice=<?php echo $delserviceId; ?>&deletetitle=<?php echo $delserviceTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-<?php
+
+			showModalConfirm(
+				"confirm",
+				"Delete Service?",
+				"Are you sure you want to delete: ".$delserviceTitle."?",
+				"services.php?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes"
+			);
+
 		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
 			//delete service after clicking Yes
 			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
@@ -254,26 +242,10 @@ if ($_GET['preview']>"") {
 
 		$sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id']." ");
 		$rowSetup  = mysqli_fetch_array($sqlSetup);
-?>
-<!--modal preview window-->
-<div class="modal fade" id="webserviceDialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-                <a type="button" class="close" data-dismiss="modal">
-                   <i class="fa fa-times"></i>
-                </a>
-                <h4 class="modal-title">&nbsp;</h4>
-			</div>
-			<div class="modal-body">
-				<iframe id="myModalFile" src="" frameborder="0"></iframe>
-			</div>
-			<div class="modal-footer">&nbsp;</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
-    <?php
+		//Modal preview box
+		showModalPreview("webserviceDialog");
+
     //use default view
     if ($rowSetup['services_use_defaults'] == 'true') {
         $selDefaults = "CHECKED";

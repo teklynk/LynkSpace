@@ -123,7 +123,7 @@ if ($_GET['preview'] > "") {
                     <img src="<?php echo $thumbNail; ?>" id="team_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
                 </div>
                 <div class="form-group">
-                    <label>Use an Existing Image</label>
+                    <label for="team_image">Use an Existing Image</label>
                     <select class="form-control" name="team_image" id="team_image">
                         <option value="">None</option>
                         <?php
@@ -160,26 +160,13 @@ if ($_GET['preview'] > "") {
 
             //delete team
             if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-                ?>
-                <!-- Confirm delete Modal -->
-                <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Delete Team?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to delete: <?php echo $delteamTitle; ?>?</p>
-                            </div>
-                            <div class="modal-footer text-left">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='team.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteteam=<?php echo $delteamId; ?>&deletetitle=<?php echo $delteamTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
+
+                showModalConfirm(
+                    "confirm",
+                    "Delete Team?",
+                    "Are you sure you want to delete: ".$delteamTitle."?",
+                    "team.php?loc_id=".$_GET['loc_id']."&deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes"
+                );
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
@@ -208,26 +195,10 @@ if ($_GET['preview'] > "") {
 
             $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
             $rowSetup = mysqli_fetch_array($sqlSetup);
-            ?>
-            <!--modal preview window-->
-            <div class="modal fade" id="webpageDialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <a type="button" class="close" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
-                            <h4 class="modal-title">&nbsp;</h4>
-                        </div>
-                        <div class="modal-body">
-                            <iframe id="myModalFile" src="" frameborder="0"></iframe>
-                        </div>
-                        <div class="modal-footer">&nbsp;</div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
 
-            <?php
+            //Modal preview box
+            showModalPreview("webpageDialog");
+
             //use default view
             if ($rowSetup['team_use_defaults'] == 'true') {
                 $selDefaults = "CHECKED";

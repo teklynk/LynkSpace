@@ -105,24 +105,9 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
         unset($_SESSION['updates_available']);
     }
 }
-?>
-    <!--modal preview window-->
-    <div class="modal fade" id="webslideDialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a type="button" class="close" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                    <h4 class="modal-title">&nbsp;</h4>
-                </div>
-                <div class="modal-body">
-                    <iframe id="myModalFile" src="" frameborder="0"></iframe>
-                </div>
-                <div class="modal-footer">&nbsp;</div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-<?php
+
+//Modal preview box
+showModalPreview("webpageDialog");
+
 include_once('includes/footer.inc.php');
 ?>

@@ -54,26 +54,14 @@ if (isset($_POST["uploadFile"])) {
 //Delete file
 $deleteMsg = "";
 if ($_GET["delete"] && !$_GET["confirm"]) {
-?>
-    <!-- Confirm delete Modal -->
-    <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete Image?</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete: <?php echo $_GET["delete"]; ?>?</p>
-                </div>
-                <div class="modal-footer text-left">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>&delete=<?php echo $_GET["delete"]; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php
+
+    showModalConfirm(
+        "confirm",
+        "Delete Image?",
+        "Are you sure you want to delete: ".$_GET["delete"]."?",
+        "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes"
+    );
+
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
     unlink($_GET["delete"]);
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -203,7 +191,6 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 }
 ?>
 
-<!-- Image Preview -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -214,7 +201,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
                 <h4 class="modal-title">&nbsp;</h4>
             </div>
             <div class="modal-body">
-                <img id="myModalFile" src="" class="img-responsive center-block"/>
+                <img id="myModalFile" src="" class="img-responsive center-block" />
             </div>
             <div class="modal-footer">&nbsp;</div>
         </div>

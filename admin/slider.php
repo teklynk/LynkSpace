@@ -242,26 +242,14 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     //delete slide
     if ($_GET['deleteslide'] && $_GET['deletetitle'] && !$_GET['confirm']) {
-    ?>
-        <!-- Confirm delete Modal -->
-        <div id="confirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Delete Slide?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete: <?php echo $delslideTitle; ?>?</p>
-                    </div>
-                    <div class="modal-footer text-left">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>&deleteslide=<?php echo $delslideId; ?>&deletetitle=<?php echo $delslideTitle; ?>&confirm=yes'"><i class='fa fa-trash'></i> Delete</button>
-                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
+
+        showModalConfirm(
+            "confirm",
+            "Delete Slide?",
+            "Are you sure you want to delete: ".$delslideTitle."?",
+            "slider.php?loc_id=".$_GET['loc_id']."&deleteslide=".$delslideId."&deletetitle=".$delslideTitle."&confirm=yes"
+        );
+
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
         $slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
@@ -299,27 +287,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     //get location type from locations table
     $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
-    ?>
 
-    <!--modal preview window-->
-    <div class="modal fade" id="webslideDialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a type="button" class="close" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                    <h4 class="modal-title">&nbsp;</h4>
-                </div>
-                <div class="modal-body">
-                    <iframe id="myModalFile" src="" frameborder="0"></iframe>
-                </div>
-                <div class="modal-footer">&nbsp;</div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    //Modal preview box
+    showModalPreview("webslideDialog");
 
-    <?php
     //use default view
     if ($rowSetup['slider_use_defaults'] == 'true') {
         $selDefaults = "CHECKED";

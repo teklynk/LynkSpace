@@ -204,7 +204,45 @@ function getLocList($active) {
     }
     return $locList;
 }
-
+// Modal and Dialog Confirm
+function showModalConfirm($id, $title, $body, $action){
+    echo "<div id='".$id."' class='modal fade' role='dialog' data-keyboard='false' data-backdrop='static'>
+    <div class='modal-dialog modal-sm'>
+    <div class='modal-content'>
+    <div class='modal-header'>
+    <button type='button' class='close' data-dismiss='modal'>&times;</button>
+    <h4 class='modal-title'>".$title."</h4>
+    </div>
+    <div class='modal-body'>
+    <p>".$body."</p>
+    </div>
+    <div class='modal-footer text-left'>
+    <button type='button' class='btn btn-danger' data-dismiss='modal' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
+    <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>
+    </div>
+    </div>
+    </div>
+    </div>";
+}
+// Modal Preview using iframe
+function showModalPreview($id){
+    echo "<div class='modal fade' id='".$id."'>
+    <div class='modal-dialog'>
+    <div class='modal-content'>
+    <div class='modal-header'>
+    <a type='button' class='close' data-dismiss='modal'>
+        <i class='fa fa-times'></i>
+    </a>
+    <h4 class='modal-title'>&nbsp;</h4>
+    </div>
+    <div class='modal-body'>
+    <iframe id='myModalFile' src='' frameborder='0'></iframe>
+    </div>
+    <div class='modal-footer text-left'>&nbsp;</div>
+    </div>
+    </div>
+    </div>";
+}
 // Script to test if extensions/modules are installed and permissions are correct on this server
 function checkDependencies(){
 

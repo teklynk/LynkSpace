@@ -44,13 +44,18 @@ if ($deleteMsg != "") {
 }
 
 $delhottitlesId = $_GET['deletehottitles'];
-$delhottitlesTitle = $_GET['deletetitle'];
+$delhottitlesTitle =safeCleanStr(addslashes($_GET['deletetitle']));
 
 //delete hottitle
 if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
-    $deleteMsg = "<div class='alert alert-danger'>Are you sure you want to delete " . $delhottitlesTitle . "? <a href='?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&deletetitle=" . safeCleanStr(addslashes($delhottitlesTitle)) . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    echo $deleteMsg;
+    showModalConfirm(
+        "confirm",
+        "Delete Hot Title?",
+        "Are you sure you want to delete: ".$delhottitlesTitle."?",
+        "team.php?loc_id=".$_GET['loc_id']."&deletehottitles=".$delhottitlesId."&deletetitle=".$delhottitlesTitle."&confirm=yes"
+    );
+
 
 } elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete hot title after clicking Yes
@@ -291,7 +296,23 @@ if ($_GET['loc_id'] != 1) {
         </div>
     </div>
 </div>
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm').on('hidden.bs.modal', function(){
+            setTimeout(function(){
+                window.location.href='hottitles.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+            }, 100);
+        });
 
+        var url = window.location.href;
+        if (url.indexOf('deletehottitles') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
 <?php
 include_once('includes/footer.inc.php');
 ?>
