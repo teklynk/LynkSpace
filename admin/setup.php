@@ -77,7 +77,12 @@ $pageMsg = '';
 if ($_GET['update'] == 'true') {
     $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 } elseif ($_GET['deleteloc'] == 'true') {
-    $pageMsg = "<div class='alert alert-danger fade in' data-alert='alert'>Are you sure you want to delete this location? <a href='?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes' class='alert-link'><i class='fa fa-fw fa-trash'></i> Delete</a><button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    showModalConfirm(
+        "confirm",
+        "Delete Location?",
+        "Are you sure you want to delete this location?",
+        "setup.php?loc_id=".$_GET['loc_id']."&deleteloc=".$_GET['loc_id']."&confirm=yes"
+    );
 }
 
 //delete a location and all references to it in the config. this will do a cascading delete where loc_id = id
@@ -418,6 +423,23 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
         </div>
     </div>
+    <!-- Modal javascript logic -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#confirm').on('hidden.bs.modal', function(){
+                setTimeout(function(){
+                    window.location.href='setup.php?loc_id=1';
+                }, 100);
+            });
+
+            var url = window.location.href;
+            if (url.indexOf('deleteloc') != -1 && url.indexOf('confirm') == -1) {
+                setTimeout(function(){
+                    $('#confirm').modal('show');
+                }, 100);
+            }
+        });
+    </script>
 <?php
 include_once('includes/footer.inc.php');
 ?>

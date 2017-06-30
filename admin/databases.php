@@ -275,8 +275,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             $deleteConfirm = "";
             $customerMsg = "";
             $delcustomerId = $_GET['deletecustomer'];
-            $delcustomerName = $_GET['deletename'];
-            $deleteSectionName = $_GET['section'];
+            $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
+            $deleteSectionName = safeCleanStr(addslashes($_GET['section']));
 
             //Delete Section and all databases in the section
             if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
@@ -284,7 +284,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     "confirm",
                     "Delete Database Page?",
                     "Are you sure you want to delete: ".safeCleanStr(addslashes($getCustSection))."?",
-                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletesection=true&deletename=".safeCleanStr(addslashes($getCustSection))."&confirm=yes"
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletesection=true&deletename=".$getCustSection."&confirm=yes"
                 );
 
             } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -305,8 +305,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 showModalConfirm(
                     "confirm",
                     "Delete Database?",
-                    "Are you sure you want to delete: ".safeCleanStr(addslashes($delcustomerName))."?",
-                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecustomer=".$delcustomerId."&deletename=".safeCleanStr(addslashes($delcustomerName))."&confirm=yes"
+                    "Are you sure you want to delete: ".$delcustomerName."?",
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecustomer=".$delcustomerId."&deletename=".$delcustomerName."&confirm=yes"
                 );
 
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -314,7 +314,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
                 mysqli_query($db_conn, $customerDelete);
 
-                echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&databasedeleted=true';</script>";
+                echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&deletename=".$delcustomerName."&databasedeleted=true';</script>";
             }
 
             //Display deleted message
@@ -387,7 +387,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $custCatDelete = "DELETE FROM category_customers WHERE id='$delCatId'";
                 mysqli_query($db_conn, $custCatDelete);
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delCatTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
             }
 

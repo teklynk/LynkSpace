@@ -122,7 +122,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
                     showModalConfirm(
                         "confirm",
-                        "$delPageTitle",
+                        "Delete Page?",
                         "Are you sure you want to delete: ".$delPageTitle."?",
                         "page.php?loc_id=".$_GET['loc_id']."&deletepage=".$delPageId."&deletetitle=".$delPageTitle."&confirm=yes"
                     );

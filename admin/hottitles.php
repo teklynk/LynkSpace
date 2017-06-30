@@ -53,7 +53,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         "confirm",
         "Delete Hot Title?",
         "Are you sure you want to delete: ".$delhottitlesTitle."?",
-        "team.php?loc_id=".$_GET['loc_id']."&deletehottitles=".$delhottitlesId."&deletetitle=".$delhottitlesTitle."&confirm=yes"
+        "hottitles.php?loc_id=".$_GET['loc_id']."&deletehottitles=".$delhottitlesId."&deletetitle=".$delhottitlesTitle."&confirm=yes"
     );
 
 
