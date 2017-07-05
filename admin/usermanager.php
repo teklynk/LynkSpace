@@ -29,7 +29,7 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
-    $userDelete = "DELETE FROM users WHERE id='$deluserId'";
+    $userDelete = "DELETE FROM users WHERE id=".$deluserId." ";
     mysqli_query($db_conn, $userDelete);
 
     $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

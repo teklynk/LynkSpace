@@ -165,17 +165,7 @@ if ($_GET['preview']>"") {
 			<select class="form-control" name="service_exist_page" id="service_exist_page">
 				<option value="">None</option>
 				<?php
-				$pagesStr="";
-				$sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$_GET['loc_id']." ORDER BY title ASC");
-				while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink)) {
-					$serviceLinkId=$rowServicesLink['id'];
-					$serviceLinkTitle=$rowServicesLink['title'];
-
-					$pagesStr .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=".$_GET['loc_id']." '>" . $serviceLinkTitle . "</option>";
-				}
-
-				$pagesStr = "<optgroup label='Existing Pages'>".$pagesStr."</optgroup>";
-				echo $pagesStr;
+                echo getPages($_GET['loc_id']);
 				?>
 			</select>
 		</div>
@@ -211,7 +201,7 @@ if ($_GET['preview']>"") {
 
 		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
 			//delete service after clicking Yes
-			$servicesDelete = "DELETE FROM services WHERE id='$delserviceId'";
+			$servicesDelete = "DELETE FROM services WHERE id=".$delserviceId." AND loc_id=" . $_GET['loc_id'] . " ";
 			mysqli_query($db_conn, $servicesDelete);
 
 			$deleteMsg="<div class='alert alert-success'>".$delserviceTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";

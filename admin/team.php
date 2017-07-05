@@ -170,7 +170,7 @@ if ($_GET['preview'] > "") {
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
-                $teamDelete = "DELETE FROM team WHERE id='$delteamId'";
+                $teamDelete = "DELETE FROM team WHERE id=".$delteamId." AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $teamDelete);
 
                 $deleteMsg = "<div class='alert alert-success'>" . $delteamTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='team.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

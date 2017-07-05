@@ -130,7 +130,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
 
                     //delete page after clicking Yes
-                    $pageDelete = "DELETE FROM pages WHERE id='$delPageId'";
+                    $pageDelete = "DELETE FROM pages WHERE id=".$delPageId." AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $pageDelete);
 
                     $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

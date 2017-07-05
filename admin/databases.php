@@ -311,7 +311,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete customer after clicking Yes
-                $customerDelete = "DELETE FROM customers WHERE id='$delcustomerId'";
+                $customerDelete = "DELETE FROM customers WHERE id=".$delcustomerId." AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $customerDelete);
 
                 echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&deletename=".$delcustomerName."&databasedeleted=true';</script>";
@@ -384,7 +384,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 mysqli_query($db_conn, $custCatUpdate);
 
                 //delete category after clicking Yes
-                $custCatDelete = "DELETE FROM category_customers WHERE id='$delCatId'";
+                $custCatDelete = "DELETE FROM category_customers WHERE id=".$delCatId." AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $custCatDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

@@ -204,6 +204,22 @@ function getLocList($active) {
     }
     return $locList;
 }
+//Get existing Pages
+function getPages($loc) {
+    global $pagesList;
+    global $db_conn;
+
+    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$loc." ORDER BY title ASC");
+    while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink)) {
+        $serviceLinkId=$rowServicesLink['id'];
+        $serviceLinkTitle=$rowServicesLink['title'];
+
+        $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=".$loc." '>" . $serviceLinkTitle . "</option>";
+    }
+
+    $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>";
+    return $pagesList;
+}
 // Modal and Dialog Confirm
 function showModalConfirm($id, $title, $body, $action){
     echo "<div id='".$id."' class='modal fade' role='dialog' data-keyboard='false' data-backdrop='static'>
@@ -389,6 +405,7 @@ function checkForUpdates(){
             return false;
         }
     }
+    return true;
 }
 //Set update variables
 function getUpdates(){
@@ -415,14 +432,13 @@ function downloadFile($url, $path) {
     curl_setopt($ch, CURLOPT_FAILONERROR, true);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_AUTOreferrer, true);
+    curl_setopt($ch, CURLOPT_AUTOREFERER, true);
     curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 400);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_FILE, $fileResource);
     $curl_errno = curl_errno($ch);
-    $curl_error = curl_error($ch);
     $page = curl_exec($ch);
     if (!$page) {
         echo 'Error: ' . curl_error($ch) . PHP_EOL;
@@ -434,6 +450,7 @@ function downloadFile($url, $path) {
         return false;
     }
     curl_close($ch);
+    return true;
 }
 // compress all files in the source directory to destination directory
 function zipFile($source, $destination, $flag = '') {
@@ -547,7 +564,6 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
     $adminOnlyShow = "style='display:none !important;'";
     $adminIsCheck = "false";
 }
-
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");

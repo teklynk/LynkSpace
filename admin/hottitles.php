@@ -59,7 +59,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 } elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete hot title after clicking Yes
-    $hottitlesDelete = "DELETE FROM hottitles WHERE id='$delhottitlesId'";
+    $hottitlesDelete = "DELETE FROM hottitles WHERE id=".$delhottitlesId." AND loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $hottitlesDelete);
 
     $deleteMsg = "<div class='alert alert-success'>" . $delhottitlesTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

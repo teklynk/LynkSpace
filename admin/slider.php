@@ -138,18 +138,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <select class="form-control" name="slide_exist_page" id="slide_exist_page">
                 <option value="">None</option>
                 <?php
-                //Get list of existing pages for the location
-                $pagesStr = "";
-                $sqlSliderLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title ASC ");
-                while ($rowSliderLink = mysqli_fetch_array($sqlSliderLink)) {
-                    $sliderLinkId = $rowSliderLink['id'];
-                    $sliderLinkTitle = $rowSliderLink['title'];
-
-                    $pagesStr .= "<option value='page.php?page_id=" . $sliderLinkId . "&loc_id=".$_GET['loc_id']." '>" . $sliderLinkTitle . "</option>";
-                }
-
-                $pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>";
-                echo $pagesStr;
+                echo getPages($_GET['loc_id']);
                 ?>
             </select>
         </div>
@@ -252,7 +241,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
-        $slideDelete = "DELETE FROM slider WHERE id='$delslideId'";
+        $slideDelete = "DELETE FROM slider WHERE id=".$delslideId." AND loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $slideDelete);
 
         $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

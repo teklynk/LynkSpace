@@ -159,21 +159,6 @@ if ($_GET['section'] == $navSections[0]) {
                 echo $pageMsg;
             }
 
-            //get and built pages list
-            $pagesStr = "";
-
-            $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active, loc_id FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title");
-
-            while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
-
-                $getPageId = $rowGetPages['id'];
-                $getPageTitle = $rowGetPages['title'];
-                $pagesStr .= "<option value=" . $getPageId . ">" . $getPageTitle . "</option>";
-
-            }
-
-            $pagesStr = "<optgroup label='Existing Pages'>" . $pagesStr . "</optgroup>" . $extraPages;
-
             //delete nav
             $deleteMsg = "";
             $deleteConfirm = "";
@@ -193,7 +178,7 @@ if ($_GET['section'] == $navSections[0]) {
             } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
 
                 //delete nav after clicking Yes
-                $navDelete = "DELETE FROM navigation WHERE id='$delNavId'";
+                $navDelete = "DELETE FROM navigation WHERE id=".$delNavId." AND " . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $navDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delNavTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -219,7 +204,7 @@ if ($_GET['section'] == $navSections[0]) {
                 mysqli_query($db_conn, $navCatUpdate);
 
                 //delete category after clicking Yes
-                $navCatDelete = "DELETE FROM category_navigation WHERE id='$delCatId'";
+                $navCatDelete = "DELETE FROM category_navigation WHERE id=".$delCatId." AND loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $navCatDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delCatTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -334,7 +319,7 @@ if ($_GET['section'] == $navSections[0]) {
                         <select class="form-control" name="exist_page" id="exist_page">
                             <?php
                             echo "<option value=''>None</option>";
-                            echo $pagesStr;
+                            echo getPages($_GET['loc_id']);
                             ?>
                         </select>
                     </div>
