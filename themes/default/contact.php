@@ -27,6 +27,7 @@ echo "</div>";
 echo "</div>";
 
 ?>
+<a name="contact"></a>
 <div class="container" id="contact">
     <div class="content">
         <div class="row row_pad">

@@ -7,6 +7,8 @@ if (!defined('inc_access')) {
 
 getServices();
 
+echo "<a name='services'></a>";
+
 if ($servicesNumRows > 0) {
     echo "<div class='container-fluid services'>";
     echo "<div class='container bannerwrapper'>";

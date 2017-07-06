@@ -7,6 +7,8 @@ if (!defined('inc_access')) {
 
 getTeam();
 
+echo "<a name='team'></a>";
+
 if ($teamNumRows > 0) {
     echo "<div class='container-fluid team'>";
     echo "<div class='container bannerwrapper'>";

@@ -44,7 +44,7 @@ if ($_GET['update'] == 'true') {
                 <li class="active">Contact</li>
             </ol>
             <h1 class="page-header">
-                Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview the Contact Page" class="btn btn-info" onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>')"><i class="fa fa-eye"></i></button>
+                Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview the Contact Page" class="btn btn-info" onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>#contact')"><i class="fa fa-eye"></i></button>
             </h1>
         </div>
     </div>
