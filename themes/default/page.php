@@ -1,4 +1,3 @@
-<!-- Pages Section -->
 <?php
 define('inc_access', TRUE);
 

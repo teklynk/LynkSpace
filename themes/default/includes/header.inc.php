@@ -9,6 +9,8 @@ session_start();
         die('Direct access not permitted');
     }
 
+
+
     getLocation();
 
     ?>
