@@ -531,9 +531,12 @@ dl, ol, ul {
     .shrink_wrap {
         padding-left: 45px !important;
     }
-    .img-select-option {
-        max-width: 20px;
-        min-width: 20px;
+    img.img-select-option {
+        max-width: 24px;
+        min-width: 24px;
+    }
+    .icon-select-option>.glyphicon{
+        /*font-size: 16pt;*/
     }
 }
 

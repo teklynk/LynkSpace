@@ -345,6 +345,15 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         <div class="form-group">
                             <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
                         </div>
+                        <div class="form-group">
+                            <label for="site_logo">Choose a Logo</label>
+                            <select class="form-control selectpicker" name="site_logo" id="site_logo">
+                                <option value="">None</option>
+                                <?php
+                                getImageDropdownList(image_dir, $rowSetup['logo']);
+                                ?>
+                            </select>
+                        </div>
                         <?php
                         //Check if user_level is Admin user and default location
                         if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
@@ -353,7 +362,6 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <button type="button" class="set_logo_default btn btn-primary" name="set_logo_default" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
                                 <i class="fa fa-fw fa-cog"></i> Set as the default logo for ALL locations?
                             </button>
-                            <br/>
                             <small class="small set_logo_default_msg"></small>
                         </div>
                         <?php
@@ -362,15 +370,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Choose a Logo</label>
-                    <select class="form-control selectpicker" name="site_logo" id="site_logo">
-                        <option value="">None</option>
-                        <?php
-                        getImageDropdownList(image_dir, $rowSetup['logo']);
-                        ?>
-                    </select>
-                </div>
+                <hr/>
 
                 <div class="row">
                     <div class="col-lg-2">
@@ -411,6 +411,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 </div>
 
                 <hr/>
+
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
                 </div>

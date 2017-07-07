@@ -161,7 +161,7 @@ function getImageDropdownList($imageDir, $image_selected) {
             $imageCheck = "";
         }
         echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='../uploads/".$_GET['loc_id']."/".$file."'/>&nbsp;".$file."</span>\" value='".$file."' $imageCheck>".$file."</option>";
-        //echo "<option data-ays-ignore='true' value='".$file."' $imageCheck>".$file."</option>";
+        //echo "<option class='img-select-option' data-ays-ignore='true' value='".$file."' $imageCheck>".$file."</option>";
 
     }
 }
@@ -177,7 +177,7 @@ function getIconDropdownList($icon_selected) {
         } else {
             $iconCheck="";
         }
-        echo "<option data-ays-ignore='true' data-icon='fa fa-".$icon."' value='".$icon."' ".$iconCheck.">".$icon."</option>";
+        echo "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-".$icon."' value='".$icon."' ".$iconCheck.">".$icon."</option>";
     }
 }
 

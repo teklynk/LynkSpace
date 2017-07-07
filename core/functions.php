@@ -1,5 +1,6 @@
 <?php
-//Front-end functions
+//Front-end functions used in templates and themes
+
 if (!defined('inc_access')){
     die('Direct access not permitted');
 }
