@@ -127,7 +127,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         <label for="nav_menu">Database Pages</label>
                         <div class="input-group">
 
-                            <select class="form-control" name="nav_menu" id="nav_menu">
+                            <select class="form-control selectpicker" name="nav_menu" id="nav_menu">
                                 <?php echo $custMenuStr; ?>
                             </select>
                             <span class="input-group-btn">
@@ -210,7 +210,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <label for="customer_icon_select">Choose an icon</label>
-                    <select class="form-control selectpicker ays-ignore" data-container="body" data-dropup-auto="false" data-size="10" name="customer_icon_select" id="customer_icon_select">
+                    <select class="form-control selectpicker" data-container="body" data-dropup-auto="false" data-size="10" name="customer_icon_select" id="customer_icon_select">
                         <option value="">None</option>
                         <?php
                             getIconDropdownList($rowCustomer['icon']);
@@ -219,7 +219,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <label for="customer_image_select">Use an Existing Image</label>
-                    <select class="form-control" name="customer_image_select" id="customer_image_select">
+                    <select class="form-control selectpicker" name="customer_image_select" id="customer_image_select" title="Choose an existing image">
                         <option value="">None</option>
                         <?php
                             getImageDropdownList(image_dir, $rowCustomer['image']);
@@ -234,7 +234,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <label for="customer_exist_cat">Category</label>
-                    <select class="form-control" name="customer_exist_cat" id="customer_exist_cat">
+                    <select class="form-control selectpicker" name="customer_exist_cat" id="customer_exist_cat">
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
@@ -482,7 +482,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exist_cat">Edit an Existing Category</label>
-                                    <select class="form-control" name="exist_cat" id="exist_cat">
+                                    <select class="form-control selectpicker" name="exist_cat" id="exist_cat">
                                         <?php
                                         echo "<option data-sort='0' value='0'>None</option>";
                                         //Cat list for adding a new category
@@ -578,7 +578,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a>
 						</td>
 						<td>";
-                            echo "<select class='form-control' name='cust_cat[]'>'";
+                            echo "<select class='form-control selectpicker' name='cust_cat[]'>'";
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
                             $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");

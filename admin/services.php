@@ -116,7 +116,7 @@ if ($_GET['preview']>"") {
 	<form name="serviceForm" class="dirtyForm" method="post" action="">
 
 		<div class="form-group required">
-			<label><?php echo $serviceLabel; ?></label>
+			<label for="service_title"><?php echo $serviceLabel; ?></label>
 			<input type="text" class="form-control count-text" name="service_title" maxlength="255" value="<?php if($_GET['editservice']){echo $rowServices['title'];} ?>" placeholder="Service Title" autofocus required>
 		</div>
 		<hr/>
@@ -136,8 +136,8 @@ if ($_GET['preview']>"") {
 			?>
 		</div>
 		<div class="form-group">
-			<label>Choose an icon</label>
-			<select class="form-control selectpicker ays-ignore" data-container="body" data-dropup-auto="false" data-size="10" name="service_icon_select" id="service_icon_select">
+			<label for="service_icon_select">Choose an icon</label>
+			<select class="form-control selectpicker" data-container="body" data-dropup-auto="false" data-size="10" name="service_icon_select" id="service_icon_select" title="Choose an icon">
 				<option value="">None</option>
 				<?php
 					getIconDropdownList($rowServices['icon']);
@@ -145,8 +145,8 @@ if ($_GET['preview']>"") {
 			</select>
 		</div>
 		<div class="form-group">
-			<label>Use an Existing Image</label>
-			<select class="form-control" name="service_image_select" id="service_image_select">
+			<label for="service_image_select">Use an Existing Image</label>
+			<select class="form-control selectpicker" name="service_image_select" id="service_image_select" title="Choose an existing image">
 				<option value="">None</option>
 				<?php
                     getImageDropdownList(image_dir, $rowServices['image']);
@@ -156,13 +156,13 @@ if ($_GET['preview']>"") {
 		<hr/>
 
 		<div class="form-group">
-            <label>Link URL</label>
+            <label for="service_link">Link URL</label>
             <input type="text" class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
         </div>
 
 		<div class="form-group">
-			<label>Existing Page</label>
-			<select class="form-control" name="service_exist_page" id="service_exist_page">
+			<label for="service_exist_page">Existing Page</label>
+			<select class="form-control selectpicker" name="service_exist_page" id="service_exist_page" title="Choose an existing page">
 				<option value="">None</option>
 				<?php
                 echo getPages($_GET['loc_id']);
@@ -171,7 +171,7 @@ if ($_GET['preview']>"") {
 		</div>
 		<hr/>
 		<div class="form-group">
-			<label>Description</label>
+			<label for="service_content">Description</label>
 			<textarea class="form-control count-text" rows="3" name="service_content" placeholder="Text" maxlength="999"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 		</div>
 
@@ -248,7 +248,7 @@ if ($_GET['preview']>"") {
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group" id="servicesdefaults">
-                    <label>Use Defaults</label>
+                    <label for="services_defaults">Use Defaults</label>
                     <div class="checkbox">
                         <label>
                             <input class="services_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="services_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">

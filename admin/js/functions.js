@@ -269,6 +269,8 @@ $(document).ready(function () {
             $('#service_image_preview').css('display', 'none');
         } else {
             $('#service_image_select').val(''); //Sets image select value to None
+            $('[data-id="service_image_select"] > span.filter-option').text('None');
+            $('[data-id="service_image_select"]').attr('title', 'None');
             $('#service_icon').attr('class', 'fa fa-fw fa-' + $('#service_icon_select').val());
             $('#service_image_preview').attr('src', '');
             $('#service_image_preview').css('display', 'none');
@@ -276,6 +278,8 @@ $(document).ready(function () {
     });
     $('#service_image_select').change(function () {
         if ($('#service_image_select').val() == '') {
+            $('[data-id="service_image_select"] > span.filter-option').text('None');
+            $('[data-id="service_image_select"]').attr('title', 'None');
             $('#service_image_preview').attr('src', '');
             $('#service_image_preview').css('display', 'none');
             $('#service_icon').attr('class', 'fa fa-fw fa-' + $('#service_icon_select').val());
@@ -297,6 +301,8 @@ $(document).ready(function () {
             $('#customer_image_preview').css('display', 'none');
         } else {
             $('#customer_image_select').val(''); //Sets image select value to None
+            $('[data-id="customer_image_select"] > span.filter-option').text('None');
+            $('[data-id="customer_image_select"]').attr('title', 'None');
             $('#customer_icon').attr('class', 'fa fa-fw fa-' + $('#customer_icon_select').val());
             $('#customer_image_preview').attr('src', '');
             $('#customer_image_preview').css('display', 'none');
@@ -304,6 +310,8 @@ $(document).ready(function () {
     });
     $('#customer_image_select').change(function () {
         if ($('#customer_image_select').val() == '') {
+            $('[data-id="customer_image_select"] > span.filter-option').text('None');
+            $('[data-id="customer_image_select"]').attr('title', 'None');
             $('#customer_image_preview').attr('src', '');
             $('#customer_image_preview').css('display', 'none');
             $('#customer_icon').attr('class', 'fa fa-fw fa-' + $('#customer_icon_select').val());

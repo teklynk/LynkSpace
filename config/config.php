@@ -68,7 +68,7 @@ define('setupPACURL', $rowConfig['setuppacurl']);
 //Web Site Analytics
 define('site_analytics', $rowConfig['analytics']);
 
-//TLC Customer Number
+//Customer Number
 define('customerNumber', $rowConfig['customer_id']);
 
 //Edit values for your web site. leave as is in most cases.
@@ -80,9 +80,6 @@ define('image_url', serverUrlStr . "/uploads/" . $_GET['loc_id'] . "/");
 
 //Relative web url path to uploads folder for tinyMCE
 define('image_baseURL', "uploads/" . $_GET['loc_id'] . "/");
-
-//Upload function
-define('target_file', image_dir . basename($_FILES["fileToUpload"]["name"]));
 
 // Name of the dbconn file
 define('dbFileLoc', __DIR__ . "/dbconn.php");

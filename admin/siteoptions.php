@@ -80,7 +80,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <div class="form-group">
                     <label>Themes</label>
-                    <select class="form-control" name="site_theme" id="site_theme">
+                    <select class="form-control selectpicker" name="site_theme" id="site_theme">
                         <?php
                         echo $themesStr;
                         ?>

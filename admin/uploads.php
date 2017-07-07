@@ -5,54 +5,14 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Create location upload folder if it does not exist.
-if (is_numeric($_GET['loc_id'])) {
-    if (!file_exists(image_dir)) {
-        @mkdir(image_dir, 0755);
-    }
-}
-
-if (isset($_POST["uploadFile"])) {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], target_file)) {
-
-        //Get file info
-        $checkMineType = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        $fileExt = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-        $fileName = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_BASENAME);
-        $fileSize = basename($_FILES["fileToUpload"]["size"]);
-        $fileSizeLimit = 2048000;
-
-        //Check if file is a image format
-        if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $checkMineType !== false) {
-            //Check if file is less than 2mb
-            if ($fileSize <= $fileSizeLimit) {
-
-                //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
-                $search = array('(', ')', ' ', '\'');
-                $replace = array('-', '', '-', '');
-
-                rename(target_file, str_replace($search, $replace, strtolower(target_file)));
-
-                $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . $fileName . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-            } else {
-                //Delete the file if it is too large
-                unlink(target_file);
-                $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
-            }
-        } else {
-            //Delete the file if it is not an image
-            unlink(target_file);
-            $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        }
-
-    } else {
-        $uploadMsg = "<div class='alert alert-danger fade in'>Sorry, there was an error uploading your file.</div>";
-    }
+//Upload Action - Do the upload
+if (isset($_POST)){
+    uploadFile($_POST["uploadFile"], image_dir);
 }
 
 //Delete file
 $deleteMsg = "";
+
 if ($_GET["delete"] && !$_GET["confirm"]) {
 
     showModalConfirm(

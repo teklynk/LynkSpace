@@ -330,7 +330,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     ?>
                     <div class="form-group">
                         <label for="location_type">Location Group</label>
-                        <select class="form-control" name="location_type" id="location_type">
+                        <select class="form-control selectpicker" name="location_type" id="location_type">
                             <?php echo $locMenuStr; ?>
                         </select>
                     </div>
@@ -364,7 +364,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
                 <div class="form-group">
                     <label>Choose a Logo</label>
-                    <select class="form-control" name="site_logo" id="site_logo">
+                    <select class="form-control selectpicker" name="site_logo" id="site_logo">
                         <option value="">None</option>
                         <?php
                         getImageDropdownList(image_dir, $rowSetup['logo']);

@@ -106,119 +106,119 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     ?>
     <div class="col-lg-8">
-    <form name="slideForm" class="dirtyForm" method="post" action="">
+        <form name="slideForm" class="dirtyForm" method="post" action="">
 
-        <div class="form-group required">
-            <label><?php echo $slideLabel; ?></label>
-            <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
-        </div>
-        <hr/>
-        <div class="form-group">
-            <img src="<?php echo $image; ?>" id="slide_image_preview" style="max-width:350px; max-height:150px; background-color: #ccc;"/>
-        </div>
+            <div class="form-group required">
+                <label><?php echo $slideLabel; ?></label>
+                <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <img src="<?php echo $image; ?>" id="slide_image_preview" style="max-width:350px; max-height:150px; background-color: #ccc;"/>
+            </div>
 
-        <div class="form-group">
-            <label>Use an Existing Image</label>
-            <select class="form-control" name="slide_image" id="slide_image">
-                <option value="">None</option>
-                <?php
-                getImageDropdownList(image_dir, $rowSlides['image']);
-                ?>
-            </select>
-        </div>
-        <hr/>
+            <div class="form-group">
+                <label>Use an Existing Image</label>
+                <select class="form-control selectpicker" name="slide_image" id="slide_image" title="Choose an existing image">
+                    <option value="" >None</option>
+                    <?php
+                    getImageDropdownList(image_dir, $rowSlides['image']);
+                    ?>
+                </select>
+            </div>
+            <hr/>
 
-        <div class="form-group">
-            <label>Link URL</label>
-            <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
-        </div>
+            <div class="form-group">
+                <label>Link URL</label>
+                <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
+            </div>
 
-        <div class="form-group">
-            <label>Existing Page</label>
-            <select class="form-control" name="slide_exist_page" id="slide_exist_page">
-                <option value="">None</option>
-                <?php
-                echo getPages($_GET['loc_id']);
-                ?>
-            </select>
-        </div>
+            <div class="form-group">
+                <label>Existing Page</label>
+                <select class="form-control selectpicker" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
+                    <option value="">None</option>
+                    <?php
+                    echo getPages($_GET['loc_id']);
+                    ?>
+                </select>
+            </div>
 
-        <?php
-        // if is admin then show the table header
-        if ($adminIsCheck == "true") {
-            echo "<div class='form-group'>";
-            echo "<label>Location Group</label>";
-            //loop through the array of location Types
-            $locMenuStr = "";
-            $locArrlength = count($locTypes);
+            <?php
+            // if is admin then show the table header
+            if ($adminIsCheck == "true") {
+                echo "<div class='form-group'>";
+                echo "<label>Location Group</label>";
+                //loop through the array of location Types
+                $locMenuStr = "";
+                $locArrlength = count($locTypes);
 
-            for ($x = 0; $x < $locArrlength; $x++) {
-                if ($locTypes[$x] == $rowSlides['loc_type']) {
-                    $isSectionSelected = "SELECTED";
-                } else {
-                    $isSectionSelected = "";
+                for ($x = 0; $x < $locArrlength; $x++) {
+                    if ($locTypes[$x] == $rowSlides['loc_type']) {
+                        $isSectionSelected = "SELECTED";
+                    } else {
+                        $isSectionSelected = "";
+                    }
+                    $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
                 }
-                $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
+
+                echo "<select class='form-control selectpicker' name='location_type' title='Set the location group'>";
+                echo $locMenuStr;
+                echo "</select>";
+                echo "</div>";
+            } else {
+                echo "<input type='hidden' name='location_type' value='".$rowLocations['type']."'/>";
+            }
+            ?>
+
+            <?php
+            if ($rowSlides['startdate'] == '0000-00-00'){
+                $startDate = "";
+            } else {
+                $startDate = $rowSlides['startdate'];
+            }
+            if ($rowSlides['enddate'] == '0000-00-00') {
+                $endDate = "";
+            } else {
+                $endDate = $rowSlides['enddate'];
             }
 
-            echo "<select class='form-control' name='location_type'>";
-            echo $locMenuStr;
-            echo "</select>";
-            echo "</div>";
-        } else {
-            echo "<input type='hidden' name='location_type' value='".$rowLocations['type']."'/>";
-        }
-        ?>
+            ?>
 
-        <?php
-        if ($rowSlides['startdate'] == '0000-00-00'){
-            $startDate = "";
-        } else {
-            $startDate = $rowSlides['startdate'];
-        }
-        if ($rowSlides['enddate'] == '0000-00-00') {
-            $endDate = "";
-        } else {
-            $endDate = $rowSlides['enddate'];
-        }
-
-        ?>
-
-        <!-- date time picker -->
-        <div class="col-md-6" style="padding-left:0px;">
-            <div class="form-group required">
-                <label>Start Date</label>
-                <div class="input-group date">
-                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
-                    <span class="input-group-addon">
+            <!-- date time picker -->
+            <div class="col-md-6" style="padding-left:0px;">
+                <div class="form-group required">
+                    <label>Start Date</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <span class="input-group-addon">
                         <span class="fa fa-calendar"></span>
                     </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6" style="padding-right:0px;">
-            <div class="form-group required">
-                <label>End Date</label>
-                <div class="input-group date">
-                    <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
-                    <span class="input-group-addon">
+            <div class="col-md-6" style="padding-right:0px;">
+                <div class="form-group required">
+                    <label>End Date</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <span class="input-group-addon">
                         <span class="fa fa-calendar"></span>
                     </span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr/>
+            <hr/>
 
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
-        </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
+            </div>
 
-        <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-        <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
+            <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+            <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
-    </form>
+        </form>
     </div>
 
     <?php
@@ -325,11 +325,11 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<tr>
 		<th>Sort</th>
 		<th>Slide Title</th>";
-        // if is admin then show the table header
-		if ($adminIsCheck == "true") {
-            echo "<th>Location Group</th>";
-        }
-		echo "<th>Start Date</th>
+    // if is admin then show the table header
+    if ($adminIsCheck == "true") {
+        echo "<th>Location Group</th>";
+    }
+    echo "<th>Start Date</th>
         <th>End Date</th>
         <th>Active</th>
 		<th>Actions</th>
@@ -379,7 +379,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //If admin, show location type drop down list else show a hidden input with the locations type value
         if ($adminIsCheck == "true") {
             echo "<td>";
-            echo "<select class='form-control' name='location_type[]'>";
+            echo "<select class='form-control selectpicker' name='location_type[]'>";
             echo $locMenuStr;
             echo "</select>";
             echo "</td>";
@@ -422,23 +422,23 @@ echo "</div>
 	<p></p>";
 
 ?>
-<!-- Modal javascript logic -->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#confirm').on('hidden.bs.modal', function(){
-            setTimeout(function(){
-                window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
-            }, 100);
-        });
+    <!-- Modal javascript logic -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#confirm').on('hidden.bs.modal', function(){
+                setTimeout(function(){
+                    window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                }, 100);
+            });
 
-        var url = window.location.href;
-        if (url.indexOf('deleteslide') != -1 && url.indexOf('confirm') == -1){
-            setTimeout(function(){
-                $('#confirm').modal('show');
-            }, 100);
-        }
-    });
-</script>
+            var url = window.location.href;
+            if (url.indexOf('deleteslide') != -1 && url.indexOf('confirm') == -1){
+                setTimeout(function(){
+                    $('#confirm').modal('show');
+                }, 100);
+            }
+        });
+    </script>
 <?php
 include_once('includes/footer.inc.php');
 ?>
