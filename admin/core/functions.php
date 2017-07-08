@@ -70,11 +70,11 @@ function uploadFile($postName, $target, $thumbnail){
 
                     //Creates a thumbnail image
                     if ($thumbnail == 'true') {
-                        //if ($fileDim_width => 1000 || $fileDim_height => 1000) {
+                        if ($fileDim_width >= 1000 || $fileDim_height >= 1000) {
                             $thumb_width = $fileDim_width / 4;
                             $thumb_height = $fileDim_height / 4;
                             resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
-                        //}
+                        }
                     }
 
                     //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
