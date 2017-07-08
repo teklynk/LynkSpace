@@ -35,7 +35,7 @@ function phinxMigration($phinxCommand, $environment){
 }
 
 //File Uploader
-function uploadFile($postName, $target){
+function uploadFile($postName, $target, $thumbnail){
     global $uploadMsg;
 
     if (isset($postName) && is_writable($target)) {
@@ -69,10 +69,12 @@ function uploadFile($postName, $target){
                 if ($fileSize <= $fileSizeLimit) {
 
                     //Creates a thumbnail image
-                    if ($fileDim_width > 1000 || $fileDim_height > 1000) {
-                        $thumb_width = $fileDim_width / 4;
-                        $thumb_height = $fileDim_height / 4;
-                        resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
+                    if ($thumbnail == 'true') {
+                        //if ($fileDim_width => 1000 || $fileDim_height => 1000) {
+                            $thumb_width = $fileDim_width / 4;
+                            $thumb_height = $fileDim_height / 4;
+                            resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
+                        //}
                     }
 
                     //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name

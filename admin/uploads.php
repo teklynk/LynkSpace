@@ -7,7 +7,7 @@ $_SESSION['file_referrer'] = 'uploads.php';
 
 //Upload Action - Do the upload
 if (isset($_POST["uploadFile"])){
-    uploadFile($_POST["uploadFile"], image_dir);
+    uploadFile($_POST["uploadFile"], image_dir, 'true');
 }
 
 //Delete file
