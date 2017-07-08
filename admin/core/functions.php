@@ -38,7 +38,7 @@ function phinxMigration($phinxCommand, $environment){
 function uploadFile($postName, $target){
     global $uploadMsg;
 
-    if (isset($postName)) {
+    if (isset($postName) && is_writable($target)) {
         //Create upload folder if it does not exist.
         if (is_numeric($_GET['loc_id'])) {
             if (!file_exists($target)) {
@@ -47,28 +47,40 @@ function uploadFile($postName, $target){
         }
 
         $target_file = $target . basename($_FILES["fileToUpload"]["name"]);
+        $target_thumb_file = $target . 'thumb-' . basename($_FILES["fileToUpload"]["name"]);
 
         //Upload the file
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
             //Get file info
-            $checkMineType = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            $fileExt = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-            $fileName = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_BASENAME);
+            $fileInfo = getimagesize($target_file);
+            $fileExt = pathinfo($target_file, PATHINFO_EXTENSION);
+            $fileName = pathinfo($target_file, PATHINFO_BASENAME);
+            $fileMime = $fileInfo['mime'];
+            $fileDim_width = $fileInfo[0];
+            $fileDim_height = $fileInfo[1];
             $fileSize = basename($_FILES["fileToUpload"]["size"]);
-            $fileSizeLimit = 2048000;
+            $fileSizeLimit = 2048000; //Max file size limit
 
             //Check if file is a image format
-            if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $checkMineType !== false) {
+            if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $fileMime !== false) {
 
                 //Check if file is less than 2mb
                 if ($fileSize <= $fileSizeLimit) {
 
+                    //Creates a thumbnail image
+                    if ($fileDim_width > 1000 || $fileDim_height > 1000) {
+                        $thumb_width = $fileDim_width / 4;
+                        $thumb_height = $fileDim_height / 4;
+                        resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
+                    }
+
                     //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
-                    $search = array('(', ')', ' ', '\'');
-                    $replace = array('-', '', '-', '');
+                    $search = array('(', ')', ' ', '\'', ':', ';', '@', '!', '?');
+                    $replace = array('-', '-', '-', '-', '-', '-', '', '', '');
 
                     rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+                    rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
 
                     $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . $fileName . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 } else {
@@ -90,6 +102,19 @@ function uploadFile($postName, $target){
         }
     }
 }
+
+//Resizes image for thumbnails
+function resizeImage($imagePath, $resizedFileName, $width, $height) {
+    $image = new Imagick();
+    $image_filehandle = fopen($imagePath, 'a+');
+    $image->readImageFile($image_filehandle);
+
+    $image->scaleImage($width, $height, FALSE);
+
+    $image_resize_filehandle = fopen($resizedFileName, 'a+');
+    $image->writeImageFile($image_resize_filehandle);
+}
+
 //Random password generator for password reset - generates characters, symbol and number
 function generateRandomPasswordString(){
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
