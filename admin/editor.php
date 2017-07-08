@@ -107,7 +107,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="nav_menu">Files</label>
-                                <select class="form-control selectpicker" name="nav_menu" id="nav_menu" autofocus="autofocus">
+                                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="nav_menu" id="nav_menu" autofocus="autofocus">
                                     <?php echo $editFileListStr; ?>
                                 </select>
                             </div>

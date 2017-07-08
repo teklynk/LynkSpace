@@ -135,7 +135,7 @@ if ($deleteMsg != "") {
                                 <label for="user_location">User Location</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                                    <select class="form-control selectpicker" name="user_location" required>
+                                    <select class="form-control selectpicker show-tick" data-live-search="true" data-container="body" data-dropup-auto="false" data-size="10" name="user_location" required>
                                         <option>Choose a location</option>
                                         <?php echo getLocList('true'); ?>
                                     </select>
@@ -153,7 +153,7 @@ if ($deleteMsg != "") {
                             <label for="user_level">User Level</label>
                             <div class="input-group required">
                                 <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
-                                <select class="form-control selectpicker" name="user_level" required>
+                                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="user_level" required>
                                     <option>Choose a user level</option>
                                     <option value="0">User</option>
                                     <option value="1">Admin</option>

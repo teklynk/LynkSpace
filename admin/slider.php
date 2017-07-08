@@ -119,7 +119,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group">
                 <label>Use an Existing Image</label>
-                <select class="form-control selectpicker" name="slide_image" id="slide_image" title="Choose an existing image">
+                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
                     <option value="" >None</option>
                     <?php
                     getImageDropdownList(image_dir, $rowSlides['image']);
@@ -135,7 +135,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group">
                 <label>Existing Page</label>
-                <select class="form-control selectpicker" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
+                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
                     <option value="">None</option>
                     <?php
                     echo getPages($_GET['loc_id']);
@@ -161,7 +161,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
                 }
 
-                echo "<select class='form-control selectpicker' name='location_type' title='Set the location group'>";
+                echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type' title='Set the location group'>";
                 echo $locMenuStr;
                 echo "</select>";
                 echo "</div>";
@@ -379,7 +379,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //If admin, show location type drop down list else show a hidden input with the locations type value
         if ($adminIsCheck == "true") {
             echo "<td>";
-            echo "<select class='form-control selectpicker' name='location_type[]'>";
+            echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type[]'>";
             echo $locMenuStr;
             echo "</select>";
             echo "</td>";

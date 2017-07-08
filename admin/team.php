@@ -124,7 +124,7 @@ if ($_GET['preview'] > "") {
                 </div>
                 <div class="form-group">
                     <label for="team_image">Use an Existing Image</label>
-                    <select class="form-control selectpicker" name="team_image" id="team_image" title="Choose an existing image">
+                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="team_image" id="team_image" title="Choose an existing image">
                         <option value="">None</option>
                         <?php
                         getImageDropdownList(image_dir, $rowTeam['image']);

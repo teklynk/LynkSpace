@@ -137,7 +137,7 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<label for="service_icon_select">Choose an icon</label>
-			<select class="form-control selectpicker" data-container="body" data-dropup-auto="false" data-size="10" name="service_icon_select" id="service_icon_select" title="Choose an icon">
+			<select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="service_icon_select" id="service_icon_select" title="Choose an icon">
 				<option value="">None</option>
 				<?php
 					getIconDropdownList($rowServices['icon']);
@@ -146,7 +146,7 @@ if ($_GET['preview']>"") {
 		</div>
 		<div class="form-group">
 			<label for="service_image_select">Use an Existing Image</label>
-			<select class="form-control selectpicker" name="service_image_select" id="service_image_select" title="Choose an existing image">
+			<select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="service_image_select" id="service_image_select" title="Choose an existing image">
 				<option value="">None</option>
 				<?php
                     getImageDropdownList(image_dir, $rowServices['image']);
@@ -162,7 +162,7 @@ if ($_GET['preview']>"") {
 
 		<div class="form-group">
 			<label for="service_exist_page">Existing Page</label>
-			<select class="form-control selectpicker" name="service_exist_page" id="service_exist_page" title="Choose an existing page">
+			<select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="service_exist_page" id="service_exist_page" title="Choose an existing page">
 				<option value="">None</option>
 				<?php
                 echo getPages($_GET['loc_id']);

@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('.container img, #featured img').addClass('img-responsive img');
     $('iframe, frame, embed, video, object').wrap("<div class='embed-responsive embed-responsive-16by9'/>");
     $('iframe, frame, embed, video, object').addClass('embed-responsive-item iframe');
-    $('table, frameset').addClass('table-responsive table');
+    $('table, frameset').addClass('table-responsive');
 
     // Sticky Footer initial page load and resize
     $(window).on('load resize', function () {

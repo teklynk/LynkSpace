@@ -171,7 +171,7 @@ if ($_GET['loc_id'] != 1) {
                             ?>
                             <div class="form-group">
                                 <label for="location_type">Location Group</label>
-                                <select class='form-control selectpicker' name='location_type' id='location_type'>
+                                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type">
                                     <?php echo $locMenuStr; ?>
                                 </select>
                             </div>
@@ -268,7 +268,7 @@ if ($_GET['loc_id'] != 1) {
                             //If admin, show location type drop down list else show a hidden input with the locations type value
                             if ($adminIsCheck == "true") {
                                 echo "<td>";
-                                echo "<select class='form-control selectpicker' name='location_type[]'>";
+                                echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type[]'>";
                                 echo $locMenuStr;
                                 echo "</select>";
                                 echo "</td>";

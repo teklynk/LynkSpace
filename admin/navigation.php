@@ -139,7 +139,7 @@ if ($_GET['section'] == $navSections[0]) {
                     <div class="form-group">
                         <div class="nav-section">
                             <label for="nav_menu">Navigation Sections</label>
-                            <select class="form-control selectpicker" name="nav_menu" id="nav_menu">
+                            <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="nav_menu" id="nav_menu">
                                 <?php echo $navMenuStr; ?>
                             </select>
                         </div>
@@ -286,7 +286,7 @@ if ($_GET['section'] == $navSections[0]) {
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exist_cat">Edit an Existing Category</label>
-                                    <select class="form-control selectpicker" name="exist_cat" id="exist_cat">
+                                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="exist_cat" id="exist_cat">
                                         <?php
                                         echo "<option value='0'>None</option>";
                                         //get and build category list, find selected
@@ -316,7 +316,7 @@ if ($_GET['section'] == $navSections[0]) {
                 <fieldset>
                     <div class="form-group">
                         <label for="exist_page">Existing Page</label>
-                        <select class="form-control selectpicker" name="exist_page" id="exist_page">
+                        <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="exist_page" id="exist_page">
                             <?php
                             echo "<option value=''>None</option>";
                             echo getPages($_GET['loc_id']);
@@ -333,7 +333,7 @@ if ($_GET['section'] == $navSections[0]) {
                     </div>
                     <div class="form-group">
                         <label for="exist_cat_main">Existing Category</label>
-                        <select class="form-control selectpicker" name="exist_cat_main" id="exist_cat_main">
+                        <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="exist_cat_main" id="exist_cat_main">
                             <?php
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
@@ -398,7 +398,7 @@ if ($_GET['section'] == $navSections[0]) {
 							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='text' maxlength='3' required></td>
 							<td><input class='form-control' name='nav_name[]' value='" . $navName . "' type='text'></td>
 							<td><input class='form-control' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
-                        echo "<td><select class='form-control selectpicker' name='nav_cat[]'>'";
+                        echo "<td><select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='nav_cat[]'>'";
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
                         $sqlNavCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY cat_name");

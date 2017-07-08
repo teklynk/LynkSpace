@@ -210,7 +210,7 @@ session_start();
             <ul class="nav navbar-right top-nav">
                 <li class="loc-select">
 
-                    <select class="selectpicker selectpicker-auto" data-container="body" data-dropup-auto="false" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
+                    <select class="selectpicker selectpicker-auto show-tick" data-container="body" data-dropup-auto="false" data-width="auto" data-size="10" data-live-search="true" name="loc_id_list" id="loc_id_list">
                         <?php
                             echo $_SESSION['loc_list'];
                         ?>
