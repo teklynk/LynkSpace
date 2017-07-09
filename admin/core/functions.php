@@ -63,7 +63,7 @@ function uploadFile($postName, $target, $thumbnail){
             $fileSizeLimit = 2048000; //Max file size limit
 
             //Check if file is a image format
-            if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $fileMime !== false) {
+            if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $fileInfo !== false) {
 
                 //Check if file is less than 2mb
                 if ($fileSize <= $fileSizeLimit) {
