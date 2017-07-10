@@ -234,7 +234,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <label for="customer_exist_cat">Category</label>
-                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="customer_exist_cat" id="customer_exist_cat">
+                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="customer_exist_cat" id="customer_exist_cat" title="Choose a category">
                         <?php
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
@@ -516,7 +516,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             </div>
             <button type="button" class="btn btn-primary" onclick="window.location='?section=<?php echo $getCustSection; ?>&newcustomer=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Database</button>
             <h2></h2>
-            <div class="table-responsive">
+            <div>
                 <?php
                 if ($customerMsg != "") {
                     echo $customerMsg;

@@ -265,7 +265,7 @@ if ($_GET['preview']>"") {
 
 	<button type="button" class="btn btn-primary" onclick="window.location='?newservice=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Service</button>
 	<h2></h2>
-	<div class="table-responsive">
+	<div>
 		<?php
 		if ($serviceMsg != "") {
 			echo $serviceMsg;

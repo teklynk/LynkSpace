@@ -166,7 +166,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 </script>
                 <button type="button" class="btn btn-primary" onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Page</button>
                 <h2></h2>
-                <div class="table-responsive">
+                <div>
                     <?php
                     if ($errorMsg !="") {
                         echo $errorMsg;

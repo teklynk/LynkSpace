@@ -22,22 +22,6 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 
-    //Get theme names from themes folder
-    $themeDirectories = glob('../themes/*' , GLOB_ONLYDIR);
-
-    // Build themes drop down list
-    foreach($themeDirectories as $themes) {
-        $themes = str_replace('../themes/', '', $themes);
-        $themesImg = '../themes/'.$themes.'/screenshot.png.png';
-
-        if ($themes == $rowConfig['theme']) {
-            $isThemeSelected = "SELECTED";
-        } else {
-            $isThemeSelected = "";
-        }
-
-        $themesStr .= "<option value=" . $themes . " " . $isThemeSelected . ">" . ucwords($themes) . "</option>";
-    }
 ?>
 
     <div class="row">
@@ -75,17 +59,18 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             <form name="siteoptionsform" class="dirtyForm" method="post">
                 <div class="form-group">
                     <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank" id="theme_href_preview">
-                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="height:240px; width:280px; background:url('//placehold.it/280x240&text=No Image') 0 0 no-repeat;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
+                        <img src="../themes/<?php echo $rowConfig['theme']; ?>/screenshot_thumb.png" id="theme_image_preview" style="max-width:240px; background:url('//placehold.it/280x240&text=No Image') 0 0 no-repeat;" data-toggle="tooltip" data-original-title="Click to enlarge" data-placement="right"/>
                     </a>
                 </div>
-                <div class="form-group">
-                    <label>Themes</label>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <label for="site_theme">Themes</label>
                     <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="site_theme" id="site_theme">
                         <?php
-                        echo $themesStr;
+                        getThemesDropdownList($rowConfig['theme']);
                         ?>
                     </select>
                 </div>
+
                 <div class="form-group" id="file_editor">
                     <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                         <i class='fa fa-fw fa-edit'></i> File Editor

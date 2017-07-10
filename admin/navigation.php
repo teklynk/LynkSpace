@@ -353,7 +353,7 @@ if ($_GET['section'] == $navSections[0]) {
                     </div>
                 </fieldset>
                 <hr/>
-                <div class="table-responsive">
+                <div>
                 <table class="table table-bordered table-hover table-striped table-responsive" id="nav_Table">
                     <thead>
                     <tr>

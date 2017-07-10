@@ -228,7 +228,7 @@ if ($_GET['preview'] > "") {
 
             <button type="button" class="btn btn-primary" onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Team Member</button>
             <h2></h2>
-            <div class="table-responsive">
+            <div>
                 <?php
                 if ($teamMsg != "") {
                     echo $teamMsg;

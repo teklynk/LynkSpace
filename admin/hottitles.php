@@ -203,7 +203,7 @@ if ($_GET['loc_id'] != 1) {
                     <label>Heading</label>
                     <input type="text" class="form-control count-text" name="main_heading" maxlength="255" value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus required>
                 </div>
-                <div class="table-responsive">
+                <div>
                 <table class="table table-bordered table-hover table-striped table-responsive">
                     <thead>
                     <tr>

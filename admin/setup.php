@@ -347,7 +347,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         </div>
                         <div class="form-group">
                             <label for="site_logo">Choose a Logo</label>
-                            <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="site_logo" id="site_logo">
+                            <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="site_logo" id="site_logo" title='Set the logo'>
                                 <option value="">None</option>
                                 <?php
                                 getImageDropdownList(image_dir, $rowSetup['logo']);

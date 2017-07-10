@@ -309,7 +309,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     <button type="button" class="btn btn-primary" onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Slide</button>
     <h2></h2>
-    <div class="table-responsive">
+    <div>
     <?php
     if ($slideMsg != "") {
         echo $slideMsg;

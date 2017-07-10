@@ -175,6 +175,31 @@ function blowfishSaltRandomString($saltThisString){
     return password_hash($saltThisString, PASSWORD_DEFAULT);
 }
 
+//Generates a drop down list of theme thumbnails
+function getThemesDropdownList($theme_selected){
+    global $themesStr;
+
+    // Get theme names from themes folder
+    $themeDirectories = glob('../themes/*' , GLOB_ONLYDIR);
+
+    // Build themes drop down list
+    foreach($themeDirectories as $themes) {
+        $themes = str_replace('../themes/', '', $themes);
+        $themesImg = '../themes/'.$themes.'/screenshot.png';
+        $themesThumbnail= '../themes/'.$themes.'/screenshot_thumb.png';
+
+        if ($themes == $theme_selected) {
+            $isThemeSelected = "SELECTED";
+        } else {
+            $isThemeSelected = "";
+        }
+
+        echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='".$themesThumbnail."'/>&nbsp;".ucwords($themes)."</span>\" value='".$themes."' $isThemeSelected>".ucwords($themes)."</option>";
+
+    }
+}
+
+//Images folder drop down list
 function getImageDropdownList($imageDir, $image_selected) {
     if ($handle = opendir($imageDir)) {
         while (false !== ($file = readdir($handle))) {
@@ -200,7 +225,7 @@ function getImageDropdownList($imageDir, $image_selected) {
 
     }
 }
-
+//Fontawesome icon list
 function getIconDropdownList($icon_selected) {
     global $db_conn;
 
