@@ -117,6 +117,14 @@ function resizeImage($imagePath, $resizedFileName, $width, $height) {
     $image->writeImageFile($image_resize_filehandle);
 }
 
+//File size conversion to KB, MB, GB....
+function filesize_formatted($theFile){
+    $size = filesize($theFile);
+    $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    $power = $size > 0 ? floor(log($size, 1024)) : 0;
+    return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+}
+
 //Random password generator for password reset - generates characters, symbol and number
 function generateRandomPasswordString(){
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

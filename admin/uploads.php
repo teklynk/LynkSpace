@@ -31,7 +31,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
         $(document).ready(function () {
             $('#dataTable').dataTable({
                 "iDisplayLength": 25,
-                "order": [[1, "desc"]],
+                "order": [[2, "desc"]],
                 "columnDefs": [{
                     "targets": 'no-sort',
                     "orderable": false
@@ -84,6 +84,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Size</th>
                         <th>Date</th>
                         <th class="no-sort">Actions</th>
                     </tr>
@@ -104,10 +105,12 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
                             $count++;
                             $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
+                            $fileSize = filesize_formatted(image_dir . $file);
 
                             echo "<tr data-index='" . $count . "'>
-								<td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir).$file."', '".image_dir.$file."')\" title='Preview'>" . strtolower($file) . "</a></td>
-								<td class='col-xs-3'>" . $modDate . "</td>
+								<td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir).$file." : ".$fileSize."', '".image_dir.$file."')\" title='Preview'>" . $file . "</a></td>
+								<td class='col-xs-2'>" . $fileSize . "</td>
+								<td class='col-xs-2'>" . $modDate . "</td>
 								<td class='col-xs-1'>
 								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=".image_dir.$file."'\"><i class='fa fa-fw fa-trash'></i></button>
 								</td>
