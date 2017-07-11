@@ -11,7 +11,7 @@ echo "<div class='container bannerwrapper'>";
 
 echo "<div class='row' id='featured'>";
 
-echo "<div class='col-xs-12 col-sm-12'>";
+echo "<div class='col-xs-12 col-sm-12 featured-heading'>";
 
 if (!empty($featuredHeading)) {
     echo "<h1>" . $featuredHeading . "</h1>";
@@ -22,7 +22,7 @@ if (!empty($featuredBlurb)) {
 }
 
 if (!empty($featuredContent)) {
-    echo "<div class='featuredcontent'>" . $featuredContent . "</div>";
+    echo "<div class='featured-content'>" . $featuredContent . "</div>";
 }
 
 echo "</div>"; //col-xs-12 col-sm-12

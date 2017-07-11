@@ -7,7 +7,7 @@ echo "<div class='page-page'>";
 
 include 'includes/featured.inc.php';
 
-echo "<div class='container'>";
+echo "<div class='container bannerwrapper'>";
 echo "<div class='row content' id='page'>";
 
 echo "<div class='col-lg-12'>";

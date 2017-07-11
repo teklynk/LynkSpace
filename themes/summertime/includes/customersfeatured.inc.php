@@ -13,7 +13,7 @@ if ($customerNumRows > 0) {
     echo "<div class='page-container container-fluid featureddatabases'>";
     echo "<div class='container bannerwrapper'>";
 
-    echo "<div class='row' id='featureddatabases'>";
+    echo "<div class='row ' id='featureddatabases'>";
 
     if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
@@ -27,7 +27,7 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
-    echo "<div class='row'>";
+    echo "<div class='row row_pad'>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
         if ($rowCustomers['featured'] == 'true') {

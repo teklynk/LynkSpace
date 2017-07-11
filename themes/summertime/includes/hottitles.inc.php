@@ -11,11 +11,11 @@ if ($hottitlesCount > 0) {
 
     echo "<div style='clear:both;'></div>";
 
-    echo "<div class='well'>";
+    echo "<div class=''>";
 
     //Carousel Tabs
     echo "<div id='hottitlesTabs'>";
-    echo "<div class='panel text-center'>";
+    echo "<div class='text-center'>";
     echo "<ul class='nav nav-pills center-tabs'>";
     echo $hottitlesTabs; //gets the hot title tabs
     echo "</ul>";

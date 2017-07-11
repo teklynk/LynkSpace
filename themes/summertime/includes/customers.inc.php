@@ -30,8 +30,6 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
-    echo "<div class='row bannerwrapper'>";
-
     $customersCatCount = 0;
 
     //Gets catname
@@ -109,8 +107,6 @@ if ($customerNumRows > 0) {
 
         }
     }
-
-    echo "</div>"; //row
 
     echo "</div>"; //row_pad
 

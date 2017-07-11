@@ -8,18 +8,15 @@ if (!defined('inc_access')) {
 getGeneralInfo();
 
 if (!empty($generalInfoContent)) {
-    echo "<div class='page-container row' id='generalinfo'>";
 
     if (!empty($generalInfoHeading)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<div>";
         echo "<h3 class='generalinfoheading'>" . $generalInfoHeading . "</h3>";
         echo "</div>";
     }
 
-    echo "<div class='col-xs-12 col-md-12'>";
+    echo "<div>";
     echo $generalInfoContent;
-    echo "</div>";
-
     echo "</div>";
 }
 ?>

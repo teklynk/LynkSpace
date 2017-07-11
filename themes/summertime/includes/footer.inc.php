@@ -7,28 +7,25 @@ if (!defined('inc_access')) {
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
-            <div class="row">
-                <?php
-                getNav('Footer', 'false', 'left', 'false');
-                ?>
-            </div>
-            <div class="socialDiv pull-left ">
-                <div class="row">
-                    <?php include 'socialmedia.inc.php'; ?>
-                </div>
-            </div>
-            <div style="clear:both;"></div>
+        <div class="footer-nav no-side-padding text-center">
+            <?php
+            getNav('Footer', 'false', 'center', 'false');
+            ?>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="socialDiv fa-1x">
+            <?php include 'socialmedia.inc.php'; ?>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="no-side-padding" id="generalinfo">
             <?php include 'generalinfo.inc.php'; ?>
         </div>
+        <div style="clear:both;"></div>
         <div id="belowfooter">
-            <div class="container">
-                <div style="clear:both;"></div>
-                <div class="row">
-                    <p>
-                        <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-                    </p>
-                </div>
-            </div>
+            <p>
+                <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
+            </p>
+        </div>
         </div>
     </footer>
 

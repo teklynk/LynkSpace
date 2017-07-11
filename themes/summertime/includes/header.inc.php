@@ -72,6 +72,9 @@ session_start();
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
+    <!-- Theme Functions -->
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/js/theme-functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+
     <!-- TLC search variables -->
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
@@ -107,65 +110,62 @@ session_start();
     </div>
 </div>
 <![endif]-->
-<div class="container bannerwrapper">
-    <div class="row">
-        <div class="pull-right col-lg-12 hidden-sm hidden-xs">
-            <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-            <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
-            <script type="text/javascript">
-                function googleTranslateElementInit() {
-                    new google.translate.TranslateElement({
-                        pageLanguage: 'en',
-                        includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
-                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                        autoDisplay: false
-                    }, 'google_translate_element');
-                }
-            </script>
-            <!--End Google Translate Code -->
-        </div>
+<div class="container bannerwrapper nav-header">
+    <div class="pull-right col-lg-12">
+        <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        </script>
+        <!--End Google Translate Code -->
+        <?php
+        //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+        getNav('Search', 'true', 'right', 'false');
+        ?>
     </div>
 </div>
-<div class="container bannerwrapper">
-    <div class="row">
-        <div class="pull-left col-xs-12 col-sm-6 col-lg-4 pull-left">
-            <?php
-            if (!empty($setupLogo)) {
-                ?>
-                <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" alt="Home" title="Home" border="0"/></a>
-                <?php
-            }
+<div class="container bannerwrapper header-top">
+    <div class="pull-left col-xs-12 col-sm-6 col-lg-6">
+        <?php
+        if (!empty($setupLogo)) {
             ?>
-        </div>
-        <div class="pull-right col-xs-12 col-sm-6 col-lg-8">
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" alt="Home" title="Home" border="0"/></a>
             <?php
-            include 'searchpac.inc.php';
-            ?>
-        </div>
+        }
+        ?>
+    </div>
+    <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
+        <h3>Search the catalog</h3>
+        <?php
+        include 'searchpac.inc.php';
+        ?>
     </div>
 </div>
 
-<div class="container bannerwrapper">
-    <div class="row">
-        <!-- Navigation -->
-        <nav class="navbar" id="top" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                    <i class="fa fa-bars fa-2x"></i>
-                    <span class="cps-blue toggbutton">MENU</span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
-                <?php
-                //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                getNav('Top', 'true', 'center', 'false');
-                ?>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+<!-- Navigation -->
+<nav id="top" class="container navbar navbar-default nav-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <i class="fa fa-bars fa-2x"></i>
+            <span class="cps-blue toggbutton">MENU</span>
+        </button>
     </div>
-</div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
+        <?php
+        //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+        getNav('Top', 'true', 'center', 'false');
+        ?>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>
 
 
 <a name="main-content" tabindex="-1"></a>

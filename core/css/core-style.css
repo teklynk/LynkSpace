@@ -279,9 +279,6 @@ footer {
     display: none !important;
 }
 
-.databases {
-    border-top: solid 1px #eee;
-}
 div.database-break {
     clear:both;
 }

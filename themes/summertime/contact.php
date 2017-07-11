@@ -16,7 +16,7 @@ include 'includes/featured.inc.php';
 
 ?>
 <a name="contact"></a>
-<div class="container" id="contact">
+<div class="container bannerwrapper" id="contact">
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
