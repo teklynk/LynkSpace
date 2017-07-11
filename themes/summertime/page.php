@@ -7,20 +7,8 @@ echo "<div class='page-page'>";
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-    include 'includes/searchlocations.inc.php';
-} else {
-    include 'includes/searchpac.inc.php';
-}
-
-echo "</div>";
-echo "</div>";
-
 echo "<div class='container'>";
-echo "<div class='row row_pad content' id='page'>";
+echo "<div class='row content' id='page'>";
 
 echo "<div class='col-lg-12'>";
 echo "<h1 class='page'>" . $pageTitle . "</h1>";

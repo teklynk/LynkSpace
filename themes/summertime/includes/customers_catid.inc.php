@@ -34,7 +34,7 @@ if ($customerNumRows > 0) {
 
     $customersItemCount = 0;
 
-    echo "<div class='row row_pad'>";
+    echo "<div class='row bannerwrapper'>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
 

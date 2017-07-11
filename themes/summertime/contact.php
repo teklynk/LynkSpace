@@ -14,36 +14,24 @@ $_SESSION['unique_referrer'] = generateRandomString();
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-    include 'includes/searchlocations.inc.php';
-} else {
-    include 'includes/searchpac.inc.php';
-}
-
-echo "</div>";
-echo "</div>";
-
 ?>
 <a name="contact"></a>
 <div class="container" id="contact">
     <div class="content">
-        <div class="row row_pad">
+        <div class="row">
             <div class="col-lg-12">
                 <h1 class="contact"><?php echo $contactHeading; ?></h1>
             </div>
         </div>
 
-        <div class="row row_pad">
+        <div class="row">
             <div class="col-lg-12">
                 <h3><?php echo $contactBlurb; ?></h3><br/>
             </div>
         </div>
 
         <?php
-        echo "<div class='row row_pad'>";
+        echo "<div class='row'>";
 
         //Embedded Google Map -->
         if (!empty($contactMap)) {
@@ -81,7 +69,7 @@ echo "</div>";
         echo "</div>"; //col-md-4
         ?>
         <!-- Contact Form -->
-        <div class="row row_pad contactform">
+        <div class="row contactform">
             <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
                 <form name="sentMessage" id="contactForm" method="post" action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">

@@ -30,7 +30,7 @@ if ($customerNumRows > 0) {
         echo "</div>";
     }
 
-    echo "<div class='row row_pad'>";
+    echo "<div class='row bannerwrapper'>";
 
     $customersCatCount = 0;
 

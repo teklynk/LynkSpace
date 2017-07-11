@@ -7,7 +7,7 @@ if (!defined('inc_access')) {
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
-            <div class="row row_pad">
+            <div class="row">
                 <?php
                 getNav('Footer', 'false', 'left', 'false');
                 ?>
@@ -23,7 +23,7 @@ if (!defined('inc_access')) {
         <div id="belowfooter">
             <div class="container">
                 <div style="clear:both;"></div>
-                <div class="row row_pad">
+                <div class="row">
                     <p>
                         <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
                     </p>

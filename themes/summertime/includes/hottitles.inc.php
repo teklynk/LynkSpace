@@ -2,11 +2,11 @@
 //Hot Titles Carousel
 getHottitlesTabs();
 if ($hottitlesCount > 0) {
-    echo "<div class='grad-blue container-fluid hottitles'>";
+    echo "<div class='container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
     echo "<div class='col-xs-12 col-lg-12 hottitles-title'>";
-    echo "<h1 class='text-white'>" . $hottitlesHeading . "</h1>";
+    echo "<h1>" . $hottitlesHeading . "</h1>";
     echo "</div>";
 
     echo "<div style='clear:both;'></div>";

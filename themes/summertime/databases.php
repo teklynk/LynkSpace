@@ -7,18 +7,6 @@ echo "<div class='page-databases'>";
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
-echo "<div class='container bannerwrapper'>";
-
-if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-    include 'includes/searchlocations.inc.php';
-} else {
-    include 'includes/searchpac.inc.php';
-}
-
-echo "</div>";
-echo "</div>";
-
 if (!empty($_GET['cat_id'])) {
     include 'includes/customers_catid.inc.php';
 } else {

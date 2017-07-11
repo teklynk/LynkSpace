@@ -9,8 +9,6 @@ session_start();
         die('Direct access not permitted');
     }
 
-
-
     getLocation();
 
     ?>
@@ -99,7 +97,7 @@ session_start();
 <!--[if lte IE 9]>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-lg-12">
             <div class="alert alert-danger fade in" role="alert" >
                 <h4>Did you know that your Internet Explorer is out of date?</h4>
                 <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
@@ -109,60 +107,65 @@ session_start();
     </div>
 </div>
 <![endif]-->
-
-<!-- Navigation -->
-<nav class="navbar navbar-static-top" id="top" role="navigation" style="margin-bottom: 0;">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                <i class="fa fa-bars fa-2x cps-blue"></i>
-                <span class="cps-blue toggbutton">MENU</span>
-            </button>
+<div class="container bannerwrapper">
+    <div class="row">
+        <div class="pull-right col-lg-12 hidden-sm hidden-xs">
+            <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
+            <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                        autoDisplay: false
+                    }, 'google_translate_element');
+                }
+            </script>
+            <!--End Google Translate Code -->
+        </div>
+    </div>
+</div>
+<div class="container bannerwrapper">
+    <div class="row">
+        <div class="pull-left col-xs-12 col-sm-6 col-lg-4 pull-left">
             <?php
             if (!empty($setupLogo)) {
-            ?>
+                ?>
                 <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" alt="Home" title="Home" border="0"/></a>
-            <?php
+                <?php
             }
             ?>
         </div>
-        <?php
-        if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-            include 'searchlocations.inc.php';
-        } else {
-            include 'searchpac.inc.php';
-        }
-        ?>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
+        <div class="pull-right col-xs-12 col-sm-6 col-lg-8">
             <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-            getNav('Top', 'true', 'left', 'true');
+            include 'searchpac.inc.php';
             ?>
-            <div class="pull-right hidden-xs" style="min-width:300px;">
-                <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
-                <script type="text/javascript">
-                    function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false
-                        }, 'google_translate_element');
-                    }
-                </script>
-                <!--End Google Translate Code -->
-            </div>
-            <div style="clear:both;"></div>
-            <div id="sitesearch-collapse-wrapper" class="sitesearch-collapse collapse">
-                <?php include 'searchsite.inc.php'; ?>
-            </div>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
-</nav>
+</div>
+
+<div class="container bannerwrapper">
+    <div class="row">
+        <!-- Navigation -->
+        <nav class="navbar" id="top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <i class="fa fa-bars fa-2x"></i>
+                    <span class="cps-blue toggbutton">MENU</span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
+                <?php
+                //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+                getNav('Top', 'true', 'center', 'false');
+                ?>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>
+
 
 <a name="main-content" tabindex="-1"></a>
