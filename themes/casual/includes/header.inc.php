@@ -42,27 +42,8 @@ session_start();
 
     <?php
     //Google Analytics UID
-    //Can also use $setupLocAnalytics for location specific analytics UA
-    if (!empty($setupDefaultAnalytics)) {
-        ?>
-        <!-- Google Analytics UID -->
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo $setupDefaultAnalytics; ?>']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-        <?php
+    if (!empty(site_analytics)) {
+        getGoogleAnalyticsTrackingCode(site_analytics);
     }
     ?>
     <!-- Core JS Libraries -->
@@ -118,19 +99,9 @@ if (!empty($setupLogo)) {
 ?>
 <div class="banner-header" <?php echo $showBanner; ?>>
 <div class="socialDiv pull-right hidden-xs">
-    <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-    <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <!--End Google Translate Code -->
+    <?php
+    getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
+    ?>
     <?php include 'socialmedia.inc.php'; ?>
 </div>
 <div style="clear:both;"></div>

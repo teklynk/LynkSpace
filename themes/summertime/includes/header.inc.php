@@ -41,25 +41,7 @@ session_start();
     <?php
     //Google Analytics UID
     if (!empty(site_analytics)) {
-        ?>
-        <!-- Google Analytics UID -->
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo site_analytics; ?>']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-        <?php
+        getGoogleAnalyticsTrackingCode(site_analytics);
     }
     ?>
 
@@ -112,19 +94,10 @@ session_start();
 <![endif]-->
 <div class="container bannerwrapper nav-header">
     <div class="pull-right col-lg-12">
-        <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-        <div id="google_translate_element"></div>
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: 'ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false
-                }, 'google_translate_element');
-            }
-        </script>
-        <!--End Google Translate Code -->
+        <?php
+        getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
+        ?>
+
         <?php
         //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
         getNav('Search', 'true', 'right', 'false');
@@ -150,7 +123,7 @@ session_start();
 </div>
 
 <!-- Navigation -->
-<nav id="top" class="container navbar navbar-default nav-top" role="navigation">
+<nav id="top" class="container navbar navbar-default nav-top navbar-static-top" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
             <i class="fa fa-bars fa-2x"></i>

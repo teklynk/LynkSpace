@@ -37,27 +37,8 @@ session_start();
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.css">
     <?php
     //Google Analytics UID
-    //Can also use $setupLocAnalytics for location specific analytics UA
     if (!empty(site_analytics)) {
-        ?>
-        <!-- Google Analytics UID -->
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo site_analytics; ?>']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-        <?php
+        getGoogleAnalyticsTrackingCode(site_analytics);
     }
     ?>
 
@@ -104,7 +85,9 @@ session_start();
     </div>
 </div>
 <![endif]-->
-
+<?php
+getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
+?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" id='top' role="navigation">
     <div class="container">

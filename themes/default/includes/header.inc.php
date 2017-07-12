@@ -9,8 +9,6 @@ session_start();
         die('Direct access not permitted');
     }
 
-
-
     getLocation();
 
     ?>
@@ -35,7 +33,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/cps-style.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/default-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Custom over-write  -->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.css">
@@ -43,25 +41,7 @@ session_start();
     <?php
     //Google Analytics UID
     if (!empty(site_analytics)) {
-        ?>
-        <!-- Google Analytics UID -->
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<?php echo site_analytics; ?>']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-        <?php
+        getGoogleAnalyticsTrackingCode(site_analytics);
     }
     ?>
 
@@ -111,13 +91,13 @@ session_start();
 <![endif]-->
 
 <!-- Navigation -->
-<nav class="navbar navbar-static-top" id="top" role="navigation" style="margin-bottom: 0;">
+<nav class="navbar navbar-fixed-top" id="top" role="navigation" style="margin-bottom: 0;">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                <i class="fa fa-bars fa-2x cps-blue"></i>
-                <span class="cps-blue toggbutton">MENU</span>
+                <i class="fa fa-bars fa-2x"></i>
+                <span class="toggbutton">MENU</span>
             </button>
             <?php
             if (!empty($setupLogo)) {
@@ -134,19 +114,10 @@ session_start();
             getNav('Top', 'true', 'left', 'true');
             ?>
             <div class="socialDiv pull-right hidden-xs" style="min-width:300px;">
-                <!--Google Translate code taken from: https://translate.google.com/manager/website/-->
-                <div style="padding-left:10px; padding-top:6px; float:right; min-width:174px;" id="google_translate_element"></div>
-                <script type="text/javascript">
-                    function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false
-                        }, 'google_translate_element');
-                    }
-                </script>
-                <!--End Google Translate Code -->
+                <?php
+                getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
+                ?>
+
                 <?php include 'socialmedia.inc.php'; ?>
             </div>
             <div style="clear:both;"></div>
