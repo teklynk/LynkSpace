@@ -163,7 +163,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         </div>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                     </div>
                                     <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
@@ -211,7 +211,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         </div>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                     </div>
                                     <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <input type="hidden" id="password_reset" name="password_reset" value="<?php echo $_GET['passwordreset']; ?>"/>
@@ -249,7 +249,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         </div>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                     </div>
                                     <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in
                                     </button>

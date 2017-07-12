@@ -18,12 +18,14 @@ session_start();
 
     //If Super Admin then bypass iprange restriction.
     //super admin
-    if ($_SESSION['super_admin'] == false && basename($_SERVER['PHP_SELF']) != 'index.php'){
+    if ($_SESSION['super_admin'] == false){
     //IP Range is set in config and contains numbers
         if (!empty(IPrange)) {
             $IPmatch = (str_replace(IPrange, '', getRealIpAddr()) != getRealIpAddr());
-            if ($IPmatch != true) {
-                die('Permission denied. Not inside network. Your IP is ' . getRealIpAddr()); //Do not execute any more code on the page
+            if ($IPmatch !== true) {
+                header("HTTP/1.1 302 Moved Temporarily");
+                header("Location: ../index.php?loc_id=1");
+                die('Permission denied. Your IP is ' . getRealIpAddr()); //Do not execute any more code on the page
             }
         }
     }

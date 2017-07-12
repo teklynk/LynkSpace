@@ -140,7 +140,7 @@ session_start();
                     function googleTranslateElementInit() {
                         new google.translate.TranslateElement({
                             pageLanguage: 'en',
-                            includedLanguages: 'ar,en,es,pl,tl,uk,ur,vi,zh-CN',
+                            includedLanguages: 'ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN',
                             layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                             autoDisplay: false
                         }, 'google_translate_element');

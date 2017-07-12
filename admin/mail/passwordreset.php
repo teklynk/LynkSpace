@@ -73,6 +73,10 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
                 $userUpdate = "UPDATE users SET password='" . $passwordHashed . "' WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ";
                 mysqli_query($db_conn, $userUpdate);
 
+                //Clear password_reset column and password_reset_date column. Set to nothing
+                $userResetUpdate = "UPDATE users SET password_reset='', password_reset_date='' WHERE password='" . $passwordHashed . "' AND username='" . $user_name . "' AND email='" . $email_address . "' ";
+                mysqli_query($db_conn, $userResetUpdate);
+
                 mail($email_address, $email_subject, $email_body, $headers);
 
                 //redirect to successful reset message
@@ -105,11 +109,11 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             mysqli_query($db_conn, $userUpdate);
 
             mail($email_address, $email_subject, $email_body, $headers);
-        }
 
-        //send password reset request message
-        header("Location: $redirectPageRequest");
-        echo "<script>window.location.href='$redirectPageRequest';</script>";
+            //send password reset request message
+            header("Location: $redirectPageRequest");
+            echo "<script>window.location.href='$redirectPageRequest';</script>";
+        }
 
     }
 }
