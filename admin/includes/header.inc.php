@@ -16,19 +16,8 @@ session_start();
     //Admin panel functions
     require_once('core/functions.php');
 
-    //If Super Admin then bypass iprange restriction.
-    //super admin
-    if ($_SESSION['super_admin'] == false){
-    //IP Range is set in config and contains numbers
-        if (!empty(IPrange)) {
-            $IPmatch = (str_replace(IPrange, '', getRealIpAddr()) != getRealIpAddr());
-            if ($IPmatch !== true) {
-                header("HTTP/1.1 302 Moved Temporarily");
-                header("Location: ../index.php?loc_id=1");
-                die('Permission denied. Your IP is ' . getRealIpAddr()); //Do not execute any more code on the page
-            }
-        }
-    }
+    //Check for IP restrictions
+    checkIPRange();
 
     ?>
     <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; URL=index.php?logout=true"/>

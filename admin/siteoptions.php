@@ -128,9 +128,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <div class="form-group">
                     <label>Admin Panel IP Range Access</label>
                     <small>
-                        &nbsp;&nbsp;Restrict access to an external or internal IP address.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?>&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                        &nbsp;&nbsp;Restrict access to external and/or internal IP addresses.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?>&nbsp;&nbsp;<i class="fa fa-fw fa-info-circle"></i>
                     </small>
-                    <input type="text" class="form-control count-text" name="site_iprange" maxlength="20" value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0." data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top">
+                    <input type="text" class="form-control count-text" name="site_iprange" maxlength="999" value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0,10.10.0,127.0.0" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top">
                 </div>
                 <hr/>
                 <div class="form-group">

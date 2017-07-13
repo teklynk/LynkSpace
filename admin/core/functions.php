@@ -671,6 +671,39 @@ function extractZip($filename, $dest){
         echo 'The output directory does not exist!';
     }
 }
+
+function checkIPRange(){
+    //If Super Admin then bypass iprange restriction.
+    //super admin
+    if ($_SESSION['super_admin'] == false){
+
+        //IP Restrictions set in config
+        if (defined('IPrange') && !empty(IPrange)) {
+
+            $IPrangeArr = explode(',', IPrange);
+            $usersIP = getRealIpAddr();
+
+            if (count($IPrangeArr) > 0 && is_array($IPrangeArr)) {
+                foreach ($IPrangeArr as $IPrangeItems) {
+                    $IPmatch = str_replace($IPrangeItems, '', $usersIP) != $usersIP;
+
+                    if ($IPmatch){
+                        break;
+                    }
+                }
+            } else {
+                $IPmatch = true;
+            }
+
+            if ($IPmatch === false) {
+                header("HTTP/1.1 302 Moved Temporarily");
+                header("Location: ../index.php?loc_id=1");
+                die('Permission denied. Your IP is ' . $usersIP); //Do not execute any more code on the page
+            }
+        }
+    }
+}
+
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";
