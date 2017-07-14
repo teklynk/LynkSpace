@@ -5,5 +5,5 @@
 !/admin/backups/*
 /config/blowfishsalt.php
 /config/dbconn.php
-!/uploads/*
 /vendor/
+/uploads/1/*
