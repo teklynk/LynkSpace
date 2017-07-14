@@ -672,38 +672,37 @@ function extractZip($filename, $dest){
     }
 }
 
-function checkIPRange(){
-    //If Super Admin then bypass iprange restriction.
-    //super admin
-    if ($_SESSION['super_admin'] == false){
+function checkIPRange() {
+    //IP Restrictions set in config
+    if (defined('IPrange') && !empty(IPrange)) {
 
-        //IP Restrictions set in config
-        if (defined('IPrange') && !empty(IPrange)) {
+        //Turn the string into an array
+        $IPrangeArr = explode(',', IPrange);
+        //Get users IP address
+        $usersIP = getRealIpAddr();
 
-            $IPrangeArr = explode(',', IPrange);
-            $usersIP = getRealIpAddr();
+        $IPmatch = '';
 
-            if (count($IPrangeArr) > 0 && is_array($IPrangeArr)) {
-                foreach ($IPrangeArr as $IPrangeItems) {
-                    $IPmatch = str_replace($IPrangeItems, '', $usersIP) != $usersIP;
+        if (count($IPrangeArr) > 0 && is_array($IPrangeArr)) {
+            foreach ($IPrangeArr as $IPrangeItems) {
+                $IPmatch = str_replace($IPrangeItems, '', $usersIP) != $usersIP;
 
-                    if ($IPmatch){
-                        break;
-                    }
+                if ($IPmatch){
+                    break;
                 }
-            } else {
-                $IPmatch = true;
             }
+        } else {
+            $IPmatch = true;
+        }
 
-            if ($IPmatch === false) {
-                header("HTTP/1.1 302 Moved Temporarily");
-                header("Location: ../index.php?loc_id=1");
-                die('Permission denied. Your IP is ' . $usersIP); //Do not execute any more code on the page
-            }
+        if ($IPmatch === false) {
+            header("HTTP/1.1 302 Moved Temporarily");
+            header("Location: ../index.php?loc_id=1");
+            die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
 }
-
+print_r($_SESSION['ip_match']);
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";

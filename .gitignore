@@ -1,8 +1,9 @@
 .git/
-.idea/
+.idea/*
 .svn/
 !/admin/upgrade/*
 !/admin/backups/*
 /config/blowfishsalt.php
 /config/dbconn.php
 !/uploads/*
+/vendor/
