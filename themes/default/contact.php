@@ -14,7 +14,7 @@ $_SESSION['unique_referrer'] = generateRandomString();
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='grad-blue container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {

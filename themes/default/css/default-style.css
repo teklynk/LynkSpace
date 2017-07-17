@@ -18,7 +18,7 @@ p {
 }
 
 a {
-    color: #0033a0;
+    color: #15698C;
 }
 
 a:hover, a:focus {
@@ -31,7 +31,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 h1, .h1 {
-    color: #0033a0;
+    color: #15698C;
 }
 
 h3.sublinktitle {
@@ -43,10 +43,10 @@ h3.sublinktitle {
 
 footer {
     bottom: 0;
-    background: linear-gradient(#111, #414141, #414141);
-    background: -webkit-linear-gradient(#111, #414141, #414141);
-    background: -o-linear-gradient(#111, #414141, #414141);
-    background: -moz-linear-gradient(#111, #414141, #414141);
+    background: linear-gradient(#111,#0F0F0F,#202020);
+    background: -webkit-linear-gradient(#111,#0F0F0F,#202020);
+    background: -o-linear-gradient(#111,#0F0F0F,#202020);
+    background: -moz-linear-gradient(#111,#0F0F0F,#202020);
     color: #fff;
     padding: 70px 50px 0 50px;
     margin-top: 0;
@@ -65,7 +65,8 @@ footer a:hover {
 }
 
 #belowfooter {
-    background-color: #414141;
+    background-color: transparent !important;
+    background: transparent !important;
     padding: 25px;
     color: #fff;
     height: 80px;
@@ -150,22 +151,16 @@ footer a:hover {
 }
 
 .navbar-Top > li > a {
-    -webkit-transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
-    -moz-transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
-    -o-transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
-    transition: border-bottom ease-in-out .3s, padding-bottom ease-in-out .3s;
     border-bottom: 0;
     line-height: 15px;
     font-size: 1.1em;
-    color: #0033a0;
+    color: #15698C;
     padding: 45px 0 6px;
 }
 
 .navbar-Top > li > a:hover, .navbar-Top > li > a:focus {
-    border-bottom: solid 3px #008eaa;
     color: #008eaa;
     background-color: transparent;
-    padding-bottom: 16px;
 }
 
 .img-landing {
@@ -188,7 +183,7 @@ footer a:hover {
 }
 
 .socialDiv .fa-inverse-socialmedia {
-    color: #0033a0;
+    color: #15698C;
 }
 
 .socialDiv .fa-inverse-socialmedia:hover {
@@ -261,11 +256,11 @@ footer a:hover {
 }
 
 .grad-blue {
-    background: -webkit-linear-gradient(-200deg, #0033a0, #008eaa);
-    background: -o-linear-gradient(-200deg, #0033a0, #008eaa);
-    background: -moz-linear-gradient(-200deg, #0033a0, #008eaa);
-    background: linear-gradient(-200deg, #0033a0, #008eaa);
-    background-color: #0033a0;
+    background: -webkit-linear-gradient(-200deg, #15698C, #008eaa);
+    background: -o-linear-gradient(-200deg, #15698C, #008eaa);
+    background: -moz-linear-gradient(-200deg, #15698C, #008eaa);
+    background: linear-gradient(-200deg, #15698C, #008eaa);
+    background-color: #15698C;
 }
 
 .grad-gray {
@@ -377,6 +372,10 @@ footer a:hover {
 
 #sliderCarousel.carousel {
     height: 400px;
+}
+.slider {
+    background-color: #fff !important;
+    background: #fff !important;
 }
 .sitesearch {
     min-height: 400px;
@@ -579,20 +578,23 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 }
 #hottitlesTabs .nav-pills>li.active>a {
     color: #fff;
-    background-color: #0033a0;
+    background-color: #1C8AB8;
 }
 .btn-primary {
     color: #fff;
-    background-color: #0033a0;
-    border-color: #003382;
+    background-color: #1C8AB8;
+    border-color: #1C8AB8;
 }
 .btn-primary:hover, .btn-primary:focus {
     color: #fff;
     background-color: #008eaa;
     border-color: #00718c;
 }
+.text-primary {
+    color: #1C8AB8;
+}
 .service-item .text-primary {
-    color: #0033a0;
+    color: #1C8AB8;
 }
 #sliderCarousel.carousel .fill {
     width: 100%;
@@ -622,7 +624,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     margin-top: -40px;
     font-style: normal;
     font-size: 4em;
-    color:#0033a0;
+    color:#1C8AB8;
     opacity:1.0;
 }
 #hottitlesCarousel .carousel-control {
@@ -676,13 +678,6 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
     #sliderCarousel .carousel-caption {
         bottom:20%;
-    }
-    .navbar-Top > li > a {
-        padding: 10px 20px !important;
-    }
-
-    .nav > li > a:hover, .nav > li > a:focus {
-        border-bottom: none !important;
     }
 
     .navbar-Footer > .nav-Footer {

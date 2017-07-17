@@ -27,11 +27,6 @@ if (!defined('inc_access')) {
                 <?php include 'generalinfo.inc.php'; ?>
             </div>
             <div style="clear:both;"></div>
-            <div id="belowfooter">
-                <p>
-                    <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-                </p>
-            </div>
         </div>
     </footer>
 

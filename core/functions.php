@@ -547,7 +547,7 @@ function getCustomers($custType){
     }
 
     if ($custType == "featured") {
-        $customerSectionWhere = "";
+        $customerSectionWhere = "featured='true' AND ";
     } else {
         $customerSectionWhere = "section='" . $customerSection . "' AND ";
     }
@@ -1132,6 +1132,7 @@ function getGoogleTranslateCode($languages){
     </script>
     <?php
 }
+
 //Call these functions depending on which page you are visiting
 //Sets the page title and calls the main function for each page.
 if (basename($_SERVER['PHP_SELF']) == "page.php"){

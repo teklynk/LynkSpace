@@ -1,4 +1,5 @@
 <!-- Databases Section -->
+<a name="databases" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');
@@ -6,21 +7,26 @@ if (!defined('inc_access')) {
 
 if ($customerNumRows > 0) {
 
+    echo "<div class='container-fluid databases'>";
+    echo "<div class='container bannerwrapper'>";
+
     echo "<div class='row' id='databases'>";
 
-    if (!empty($customerCatName)) {
+    if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
-        echo "</div>";
-    } elseif (!empty($customerHeading)) {
-        echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<h1 class='customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($customerBlurb)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left'>" . $customerBlurb . "</p>";
+        echo "<p class='text-left customersblurb'>" . $customerBlurb . "</p>";
+        echo "</div>";
+    }
+
+    if (!empty($customerCatName)) {
+        echo "<div class='col-xs-12 col-lg-12'>";
+        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
         echo "</div>";
     }
 
@@ -29,7 +35,7 @@ if ($customerNumRows > 0) {
     $customersCatCount = 0;
 
     //Gets catname
-    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
+    $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
     while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers)) {
 
         $customerCatId = $rowCatCustomers['id'];
@@ -108,10 +114,17 @@ if ($customerNumRows > 0) {
 
     echo "</div>"; //row_pad
 
+    echo "</div>";
+    echo "</div>";
+
 } else {
+    echo "<div class='container-fluid databases'>";
+    echo "<div class='container bannerwrapper'>";
 
     echo "<div class='col-lg-12'><h1 class='page'>Page not found</h1></div>";
     echo "<div class='col-xs-12 col-lg-12'>This page is not available.</div>";
 
+    echo "</div>";
+    echo "</div>";
 }
 ?>

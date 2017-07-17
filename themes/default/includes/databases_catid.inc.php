@@ -1,42 +1,51 @@
 <!-- Databases Section -->
+<a name="databases" tabindex="-1"></a>
 <?php
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getCustomers('featured');
-
-$customersItemCount = 0;
-
 if ($customerNumRows > 0) {
+
+    echo "<div class='container-fluid cat_databases'>";
+    echo "<div class='container bannerwrapper'>";
 
     echo "<div class='row' id='databases'>";
 
     if (!empty($customerHeading)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<h1 class='customers'>" . $customerHeading . "</h1>";
+        echo "<h1 class='customers customersheading'>" . $customerHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($customerBlurb)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left'>".$customerBlurb."</p>";
+        echo "<p class='text-left customersblurb'>".$customerBlurb."</p>";
         echo "</div>";
     }
+
+    if (!empty($customerCatName)) {
+        echo "<div class='col-xs-12 col-lg-12 cat-title'>";
+        echo "<h1 class='customers'>" . $customerCatName . "</h1>";
+        echo "</div>";
+    }
+
+    echo "<div style='clear:both;'></div>";
+
+    $customersItemCount = 0;
 
     echo "<div class='row row_pad'>";
 
     while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
-        if ($rowCustomers['featured'] == 'true') {
-            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
+
+        if ($rowCustomers['featured'] == 'false' || $rowCustomers['featured'] == "" || $rowCustomers['featured'] == NULL) {
 
             $customersItemCount++;
 
-            if (!empty($rowCustomers['link'])) {
-                //Check if the link contains any shortCode
-                $rowCustomers['link'] = getShortCode($rowCustomers['link']);
+            echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 
-                echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "'>";
+            if (!empty($rowCustomers['link'])) {
+                echo "<a href='" . $rowCustomers['link'] . "' title='" . $rowCustomers['name'] . "' target='_blank'>";
             }
 
             echo "<div class='media'>";
@@ -74,7 +83,7 @@ if ($customerNumRows > 0) {
                 echo "</a>"; //close href
             }
 
-            echo "</div>"; //col-
+            echo "</div>"; //database-item
 
             //Start a new row if item count is divisible by 3
             if (($customersItemCount % 3) === 0) {
@@ -86,5 +95,8 @@ if ($customerNumRows > 0) {
     echo "</div>"; //row
 
     echo "</div>"; //#customers
+
+    echo "</div>";
+    echo "</div>";
 }
 ?>

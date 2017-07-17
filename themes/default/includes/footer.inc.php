@@ -22,11 +22,6 @@ if (!defined('inc_access')) {
                     </div>
                 </div>
                 <div style="clear:both;"></div>
-                <div class="row row_pad">
-                    <p>
-                        <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-                    </p>
-                </div>
             </div>
         </div>
     </footer>

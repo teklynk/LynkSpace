@@ -7,7 +7,7 @@ echo "<div class='page-databases'>";
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='grad-blue container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
@@ -20,9 +20,9 @@ echo "</div>";
 echo "</div>";
 
 if (!empty($_GET['cat_id'])) {
-    include 'includes/customers_catid.inc.php';
+    include 'includes/databases_catid.inc.php';
 } else {
-    include 'includes/customers.inc.php';
+    include 'includes/databases.inc.php';
 }
 
 echo "</div>";

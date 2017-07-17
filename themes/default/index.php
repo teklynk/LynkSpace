@@ -9,7 +9,7 @@ include 'includes/featured.inc.php';
 
 include 'includes/slider.inc.php';
 
-echo "<div class='grad-orange container-fluid search'>";
+echo "<div class='grad-blue container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
@@ -21,7 +21,7 @@ if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
 echo "</div>";
 echo "</div>";
 
-include 'includes/customersfeatured.inc.php';
+include 'includes/databasesfeatured.inc.php';
 
 include 'includes/hottitles.inc.php';
 
