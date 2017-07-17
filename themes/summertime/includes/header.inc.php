@@ -92,18 +92,21 @@ session_start();
     </div>
 </div>
 <![endif]-->
-<div class="container bannerwrapper nav-header">
-    <div class="pull-right col-lg-12">
-        <?php
-        getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
-        ?>
 
-        <?php
-        //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-        getNav('Search', 'true', 'right', 'false');
-        ?>
-    </div>
+<!-- Navigation -->
+<div class="container nav-header">
+    <nav id="top" class="navbar-static-top" role="navigation">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-Search">
+            <?php
+            //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+            getNav('Search', 'true', 'right', 'false');
+            ?>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
 </div>
+
 <div class="container bannerwrapper header-top">
     <div class="pull-left col-xs-12 col-sm-6 col-lg-6">
         <?php
@@ -127,7 +130,7 @@ session_start();
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
             <i class="fa fa-bars fa-2x"></i>
-            <span class="cps-blue toggbutton">MENU</span>
+            <span class="toggbutton">MENU</span>
         </button>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->

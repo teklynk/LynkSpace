@@ -7,25 +7,31 @@ if (!defined('inc_access')) {
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
-        <div class="footer-nav no-side-padding text-center">
-            <?php
-            getNav('Footer', 'false', 'center', 'false');
-            ?>
-        </div>
-        <div style="clear:both;"></div>
-        <div class="socialDiv fa-1x">
-            <?php include 'socialmedia.inc.php'; ?>
-        </div>
-        <div style="clear:both;"></div>
-        <div class="no-side-padding" id="generalinfo">
-            <?php include 'generalinfo.inc.php'; ?>
-        </div>
-        <div style="clear:both;"></div>
-        <div id="belowfooter">
-            <p>
-                <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
-            </p>
-        </div>
+            <!-- Navigation -->
+            <nav id="top" class="navbar navbar-static-bottom" role="navigation">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="navbar-Footer">
+                    <?php
+                    //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+                    getNav('Footer', 'false', 'center', 'false');
+                    ?>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+            <div style="clear:both;"></div>
+            <div class="socialDiv fa-1x">
+                <?php include 'socialmedia.inc.php'; ?>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="no-side-padding" id="generalinfo">
+                <?php include 'generalinfo.inc.php'; ?>
+            </div>
+            <div style="clear:both;"></div>
+            <div id="belowfooter">
+                <p>
+                    <span id="currentYear">Copyright &copy; <?php echo $_SERVER['SERVER_NAME'] . "&nbsp;" . date("Y"); ?></span>
+                </p>
+            </div>
         </div>
     </footer>
 

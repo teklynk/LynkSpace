@@ -1,0 +1,52 @@
+h1, .h1 {
+    color: #15698C;
+}
+a {
+    color: #15698C;
+}
+.navbar-Top>li>a {
+    color: #15698C;
+}
+.socialDiv .fa-inverse-socialmedia {
+    color: #15698C;
+}
+.grad-blue {
+    background-color: #15698C !important;
+    background: #15698C !important;
+}
+.grad-orange {
+    background-color: #15698C !important;
+    background: #15698C !important;
+}
+footer {
+    background: linear-gradient(#111,#0F0F0F,#202020);
+    background: -webkit-linear-gradient(#111,#0F0F0F,#202020);
+    background: -o-linear-gradient(#111,#0F0F0F,#202020);
+    background: -moz-linear-gradient(#111,#0F0F0F,#202020);
+}
+.slider {
+    background-color: #fff !important;
+    background: #fff !important;
+}
+.text-primary {
+    color: #1C8AB8;
+}
+.service-item .text-primary {
+    color: #1C8AB8;
+}
+#hottitlesTabs .nav-pills>li.active>a {
+    color: #fff;
+    background-color: #1C8AB8;
+}
+#hottitlesCarousel .carousel-control i {
+    color: #1C8AB8;
+}
+.btn-primary, .btn-primary:hover {
+    color: #fff;
+    background-color: #1C8AB8;
+    border-color: #1C8AB8;
+}
+#belowfooter {
+    background-color: transparent !important;
+    background: transparent !important;
+}

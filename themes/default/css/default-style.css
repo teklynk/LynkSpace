@@ -41,46 +41,6 @@ h3.sublinktitle {
     color: #fff;
 }
 
-.cps-teal {
-    color: #008eaa;
-}
-
-.cps-purple {
-    color: #93328e;
-}
-
-.cps-green {
-    color: #78be20;
-}
-
-.cps-orange {
-    color: #ffc72c;
-}
-
-.cps-blue {
-    color: #0033a0;
-}
-
-.cps-teal-bkg {
-    background-color: #008eaa;
-}
-
-.cps-purple-bkg {
-    background-color: #93328e;
-}
-
-.cps-green-bkg {
-    background-color: #78be20;
-}
-
-.cps-orange-bkg {
-    background-color: #ffc72c;
-}
-
-.cps-blue-bkg {
-    background-color: #0033a0;
-}
-
 footer {
     bottom: 0;
     background: linear-gradient(#111, #414141, #414141);
@@ -270,10 +230,6 @@ footer a:hover {
     line-height: 1em;
     display: block;
     font-weight: bold;
-}
-
-.cps-blue {
-    color: #0033a0;
 }
 
 .bannerwrapper {
@@ -755,10 +711,6 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     #generalinfo div {
         padding: 0;
         margin: 0;
-    }
-
-    .panel-default > .panel-heading {
-        display: none;
     }
 
     .navbar-Search > li {
