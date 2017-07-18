@@ -126,7 +126,7 @@ session_start();
 </div>
 
 <!-- Navigation -->
-<nav id="top" class="container navbar navbar-default nav-top navbar-static-top" role="navigation">
+<nav id="top" class="container navbar navbar-default nav-top navbar-static-top" role="navigation" id="topNav">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
             <i class="fa fa-bars fa-2x"></i>

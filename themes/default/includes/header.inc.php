@@ -62,6 +62,17 @@ session_start();
         var TLCBranch = "";
         var TLCClassicDomain = "<?php echo setupPACURL; ?>";
         var TLCClassicConfig = "<?php echo $setupConfig; ?>";
+
+        //scroll detect
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 150) {
+                $("#topNav").addClass("nav-shrink");
+            } else {
+                $("#topNav").removeClass("nav-shrink");
+            }
+        });
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -91,7 +102,7 @@ session_start();
 <![endif]-->
 
 <!-- Navigation -->
-<nav class="navbar navbar-fixed-top" id="top" role="navigation" style="margin-bottom: 0;">
+<nav class="navbar navbar-fixed-top" id="topNav" role="navigation" style="margin-bottom: 0;">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

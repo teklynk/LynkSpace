@@ -6,4 +6,14 @@ $(document).ready(function(e){
         $('.search-panel span#search_concept').text(concept);
         $('.input-group #search_param').val(param);
     });
+
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 150) {
+            $("#topNav").addClass("nav-shrink");
+        } else {
+            $("#topNav").removeClass("nav-shrink");
+        }
+    });
 });
