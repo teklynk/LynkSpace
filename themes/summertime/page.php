@@ -21,7 +21,7 @@ echo "</div>";
 echo "</div>";
 echo "</div>";
 
-include 'includes/customersfeatured.inc.php';
+include 'includes/databasesfeatured.inc.php';
 
 echo "</div>";
 

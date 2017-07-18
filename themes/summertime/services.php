@@ -9,7 +9,7 @@ include 'includes/featured.inc.php';
 
 include 'includes/services.inc.php';
 
-include 'includes/customersfeatured.inc.php';
+include 'includes/databasesfeatured.inc.php';
 
 echo "</div>";
 

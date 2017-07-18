@@ -8,7 +8,7 @@ if (!defined('inc_access')) {
     <footer class="footer" id="footer">
         <div class="container">
             <!-- Navigation -->
-            <nav id="top" class="navbar navbar-static-bottom" role="navigation">
+            <nav class="navbar navbar-static-bottom " role="navigation">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-Footer">
                     <?php

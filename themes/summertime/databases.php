@@ -8,9 +8,9 @@ echo "<div class='page-databases'>";
 include 'includes/featured.inc.php';
 
 if (!empty($_GET['cat_id'])) {
-    include 'includes/customers_catid.inc.php';
+    include 'includes/databases_catid.inc.php';
 } else {
-    include 'includes/customers.inc.php';
+    include 'includes/databases.inc.php';
 }
 
 echo "</div>";

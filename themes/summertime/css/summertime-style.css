@@ -42,12 +42,15 @@ h3.sublinktitle {
     color: #fff;
 }
 .nav-header {
+    padding: 4px 12px 4px 12px;
     background-color: #286192 !important;
 }
 .header-top {
 
 }
-
+.navbar-Search {
+    padding: 4px 12px 4px 12px;
+}
 .nav-top {
     background-color: #337ab7 !important;
     border-radius: 0;
@@ -150,7 +153,7 @@ footer a:hover {
 }
 
 .navbar-Top > li {
-
+    padding: 0px;
 }
 
 .navbar-Top > li > a {
@@ -619,7 +622,13 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 #hottitlesCarousel:hover .carousel-control {
 
 }
-
+.navbar-Top {
+    margin-bottom: -2px !important;
+}
+.navbar-nav>li>a {
+    padding-top: 9px;
+    padding-bottom: 8px;
+}
 @media (max-width: 1276px) {
     #sliderCarousel.carousel {
         height: 330px;
@@ -663,7 +672,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         bottom:20%;
     }
     .navbar-Top > li > a {
-        padding: 10px 20px !important;
+        padding: 10px 10px !important;
     }
 
     .nav > li > a:hover, .nav > li > a:focus {
