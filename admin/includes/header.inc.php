@@ -282,8 +282,8 @@ session_start();
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'services.php'){echo "class='active'";}?>>
                     <a href="services.php?<?php echo $setLocId; ?>" title="Services"><i class="fa fa-fw fa-list-alt"></i> Services</a>
                 </li>
-                <li <?php if (basename($_SERVER['PHP_SELF']) == 'team.php'){echo "class='active'";}?>>
-                    <a href="team.php?<?php echo $setLocId; ?>" title="Team"><i class="fa fa-fw fa-address-card"></i> Team</a>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'staff.php'){echo "class='active'";}?>>
+                    <a href="staff.php?<?php echo $setLocId; ?>" title="Staff"><i class="fa fa-fw fa-address-card"></i> Staff</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'hottitles.php'){echo "class='active'";}?>>
                     <a href="hottitles.php?<?php echo $setLocId; ?>" title="Hot Titles"><i class="fa fa-fw fa-fire"></i> Hot Titles</a>

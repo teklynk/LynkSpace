@@ -25,7 +25,7 @@ include 'includes/databasesfeatured.inc.php';
 
 include 'includes/hottitles.inc.php';
 
-include 'includes/team.inc.php';
+include 'includes/staff.inc.php';
 
 include 'includes/services.inc.php';
 

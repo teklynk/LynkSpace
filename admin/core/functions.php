@@ -35,7 +35,7 @@ function phinxMigration($phinxCommand, $environment){
 }
 
 //File Uploader
-function uploadFile($postName, $target, $thumbnail){
+function uploadFile($postName, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize){
     global $uploadMsg;
 
     if (isset($postName) && is_writable($target)) {
@@ -52,6 +52,19 @@ function uploadFile($postName, $target, $thumbnail){
         //Upload the file
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
+            //Check if $maxScale parameter is set. if not then give it a default value
+            if ($maxScale == NULL || $maxScale == ''){
+                $maxScale = 1000;
+            }
+            //Check if $maxFileSize parameter is set. if not then give it a default value
+            if ($maxFileSize == NULL || $maxFileSize == ''){
+                $maxFileSize = 2048000;
+            }
+            //Check if $reduceScale parameter is set. if not then give it a default value
+            if ($reduceScale == NULL || $reduceScale == '') {
+                $reduceScale = 4;
+            }
+
             //Get file info
             $fileInfo = getimagesize($target_file);
             $fileExt = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -60,7 +73,7 @@ function uploadFile($postName, $target, $thumbnail){
             $fileDim_width = $fileInfo[0];
             $fileDim_height = $fileInfo[1];
             $fileSize = basename($_FILES["fileToUpload"]["size"]);
-            $fileSizeLimit = 2048000; //Max file size limit
+            $fileSizeLimit = $maxFileSize; //Max file size limit (ex: 2048000)
 
             //Check if file is a image format
             if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $fileInfo !== false) {
@@ -70,9 +83,9 @@ function uploadFile($postName, $target, $thumbnail){
 
                     //Creates a thumbnail image
                     if ($thumbnail == 'true') {
-                        if ($fileDim_width >= 1000 || $fileDim_height >= 1000) {
-                            $thumb_width = $fileDim_width / 4;
-                            $thumb_height = $fileDim_height / 4;
+                        if ($fileDim_width >= $maxScale || $fileDim_height >= $maxScale) {
+                            $thumb_width = $fileDim_width / $reduceScale;
+                            $thumb_height = $fileDim_height / $reduceScale;
                             resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
                         }
                     }

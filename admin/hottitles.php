@@ -171,7 +171,7 @@ if ($_GET['loc_id'] != 1) {
                             ?>
                             <div class="form-group">
                                 <label for="location_type">Location Group</label>
-                                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type">
+                                <select class="form-control selectpicker bs-placeholder show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type" title="Choose a location group">
                                     <?php echo $locMenuStr; ?>
                                 </select>
                             </div>

@@ -6,9 +6,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referrer'] = 'uploads.php';
 
 //Upload Action - Do the upload
-if (isset($_POST["uploadFile"])){
-    uploadFile($_POST["uploadFile"], image_dir, 'true');
-}
+uploadFile($_POST["uploadFile"], image_dir, 'true', 800, 4, 2048000);
 
 //Delete file
 $deleteMsg = "";

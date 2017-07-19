@@ -452,7 +452,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.team_status_checkbox').change(function () {
-        $.get('ajax/update_teamactive.php?update=true', {
+        $.get('ajax/update_staffactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -642,7 +642,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.team_defaults_checkbox').change(function () {
-        $.get('ajax/update_teamdefaults.php?update=true', {
+        $.get('ajax/update_staffdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -661,6 +661,7 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
+
     $('.set_logo_default').click(function () {
         $.get('ajax/update_logodefaults.php?loc_id=1&update=true&defaultlogo='+$('select[name=site_logo] option:selected').text(), {
             success: function () {

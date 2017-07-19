@@ -201,13 +201,14 @@ footer ul.nav-footer li {
 .side-nav > li > ul > li > a:hover {
     color: #F7F7F7;
 }
+
 .nav-section {
     background: #f7f7f7;
-    border-top: none;
+    border-top: solid 1px #cccccc;
     border-bottom: solid 1px #cccccc;
     border-right: solid 1px #cccccc;
     border-left: solid 1px #cccccc;
-    border-radius: 0px 0px 4px 4px;
+    border-radius: 4px;
     padding: 12px;
 }
 /* Flot Chart Containers */

@@ -202,6 +202,12 @@ CREATE TABLE `hottitles` (
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `hottitles`
+--
+
+INSERT INTO `hottitles` (`id`, `title`, `url`, `loc_type`, `sort`, `active`, `datetime`, `loc_id`) VALUES ('1', 'New York Times', 'https://content.tlcdelivers.com/econtent/xml/NYTimes.xml', 'ALL', '1', 'true', '0000-00-00 00:00:00.000000', '1');
+
 -- --------------------------------------------------------
 
 --

@@ -165,9 +165,7 @@ footer a:hover {
 .nav-shrink .navbar-brand {
     height: 60px !important;
 }
-.nav-shrink .navbar-Top>li>a {
-    padding: 30px 0 6px !important;
-}
+
 .nav-shrink {
     min-height: 80px !important;
     -webkit-transition: min-height .5s; /* For Safari 3.1 to 6.0 */

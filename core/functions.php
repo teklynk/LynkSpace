@@ -1147,7 +1147,7 @@ if (basename($_SERVER['PHP_SELF']) == "page.php"){
 } elseif (basename($_SERVER['PHP_SELF']) == "services.php"){
     getServices();
     $theTitle = $setupTitle . " - " . $servicesHeading;
-} elseif (basename($_SERVER['PHP_SELF']) == "team.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "staff.php"){
     getTeam();
     $theTitle = $setupTitle . " - " . $teamHeading;
 } elseif (basename($_SERVER['PHP_SELF']) == "databases.php"){

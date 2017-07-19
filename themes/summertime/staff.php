@@ -7,7 +7,7 @@ echo "<div class='page-team'>";
 
 include 'includes/featured.inc.php';
 
-include 'includes/team.inc.php';
+include 'includes/staff.inc.php';
 
 include 'includes/databasesfeatured.inc.php';
 

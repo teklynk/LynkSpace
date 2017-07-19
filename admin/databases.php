@@ -105,7 +105,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 <div class="row">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="form-group">
                     <h1 class="page-header">
                     <?php
@@ -121,7 +121,10 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     </h1>
                 </div>
             </div>
-            <div class="col-lg-2">
+            <?php
+            if (!(isset($_GET['newcustomer']) || isset($_GET['editcustomer']))) {
+            ?>
+            <div class="col-lg-12">
                 <div class="form-group">
                     <div class="nav-section">
                         <label for="nav_menu">Database Pages</label>
@@ -139,6 +142,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     </div>
                 </div>
             </div>
+            <?php }?>
         </div>
     </div>
 </div>
@@ -192,7 +196,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <label><?php echo $customerLabel; ?></label>
                     <input class="form-control count-text" name="customer_name" maxlength="255" value="<?php if ($_GET['editcustomer']) {echo $rowCustomer['name'];} ?>" data-toggle="tooltip" title="To associate the new database with a category, add the new category before adding the database." placeholder="Database Name" autofocus required>
                 </div>
-                <hr/>
+
                 <div class="form-group">
                     <i id="customer_icon" style="font-size:6.0em;" class="fa fa-fw fa-<?php echo $rowCustomer['icon']; ?>"></i>
                 </div>
@@ -219,7 +223,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 </div>
                 <div class="form-group">
                     <label for="customer_image_select">Use an Existing Image</label>
-                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="customer_image_select" id="customer_image_select" title="Choose an existing image">
+                    <select class="form-control selectpicker bs-placeholder show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="customer_image_select" id="customer_image_select" title="Choose an existing image">
                         <option value="">None</option>
                         <?php
                             getImageDropdownList(image_dir, $rowCustomer['image']);
@@ -482,7 +486,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exist_cat">Edit an Existing Category</label>
-                                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="exist_cat" id="exist_cat">
+                                    <select class="form-control selectpicker bs-placeholder show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="exist_cat" id="exist_cat" title="Choose an existing category">
                                         <?php
                                         echo "<option data-sort='0' value='0'>None</option>";
                                         //Cat list for adding a new category
