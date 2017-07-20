@@ -172,7 +172,8 @@ if ($_GET['section'] == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Link?",
                     "Are you sure you want to delete: ".$delNavTitle."?",
-                    "navigation.php?loc_id=".$_GET['loc_id']."&section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&confirm=yes"
+                    "navigation.php?loc_id=".$_GET['loc_id']."&section=".$getNavSection."&deletenav=".$delNavId."&deletename=".$delNavTitle."&confirm=yes",
+                    false
                 );
 
             } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
@@ -195,7 +196,8 @@ if ($_GET['section'] == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Category?",
                     "Are you sure you want to delete: ".$delCatTitle."?",
-                    "navigation.php?loc_id=".$_GET['loc_id']."&section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes"
+                    "navigation.php?loc_id=".$_GET['loc_id']."&section=".$getNavSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes",
+                    false
                 );
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {

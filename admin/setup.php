@@ -81,7 +81,8 @@ if ($_GET['update'] == 'true') {
         "confirm",
         "Delete Location?",
         "Are you sure you want to delete this location?",
-        "setup.php?loc_id=".$_GET['loc_id']."&deleteloc=".$_GET['loc_id']."&confirm=yes"
+        "setup.php?loc_id=".$_GET['loc_id']."&deleteloc=".$_GET['loc_id']."&confirm=yes",
+        false
     );
 }
 
@@ -307,31 +308,12 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     </div>
                 </div>
                 <?php
-                //loop through the array of location Types
-                $locMenuStr = "";
-                $locArrlength = count($locTypes);
-
-                for ($x = 0; $x < $locArrlength; $x++) {
-
-                    if ($locTypes[$x] == $rowLocation['type']) {
-
-                        $isSectionSelected = "SELECTED";
-
-                    } else {
-
-                        $isSectionSelected = "";
-
-                    }
-
-                    $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
-                }
-
                 if (multiBranch == 'true') {
                     ?>
                     <div class="form-group">
                         <label for="location_type">Location Group</label>
                         <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type">
-                            <?php echo $locMenuStr; ?>
+                            <?php echo getLocGroups($rowLocation['type']); ?>
                         </select>
                     </div>
                     <?php

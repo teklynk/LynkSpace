@@ -196,7 +196,8 @@ if ($_GET['preview']>"") {
 				"confirm",
 				"Delete Service?",
 				"Are you sure you want to delete: ".$delserviceTitle."?",
-				"services.php?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes"
+				"services.php?loc_id=".$_GET['loc_id']."&deleteservice=".$delserviceId."&deletetitle=".$delserviceTitle."&confirm=yes",
+                false
 			);
 
 		} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {

@@ -64,7 +64,14 @@ div.required label:not(span):before, td.required:before {
     background-color: #17a2d0;
     border-color: #1c8ab8;
 }
+.btn-popover-container {
+    display: inline-block;
+}
 
+
+.btn-popover-container .btn-popover-title, .btn-popover-container .btn-popover-content {
+    display: none;
+}
 /* Top Navigation */
 
 .top-nav {

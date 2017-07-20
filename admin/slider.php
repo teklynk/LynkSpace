@@ -148,21 +148,9 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             if ($adminIsCheck == "true") {
                 echo "<div class='form-group'>";
                 echo "<label>Location Group</label>";
-                //loop through the array of location Types
-                $locMenuStr = "";
-                $locArrlength = count($locTypes);
-
-                for ($x = 0; $x < $locArrlength; $x++) {
-                    if ($locTypes[$x] == $rowSlides['loc_type']) {
-                        $isSectionSelected = "SELECTED";
-                    } else {
-                        $isSectionSelected = "";
-                    }
-                    $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
-                }
 
                 echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type' title='Set the location group'>";
-                echo $locMenuStr;
+                echo getLocGroups($rowSlides['loc_type']);
                 echo "</select>";
                 echo "</div>";
             } else {
@@ -355,18 +343,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $isActive = "";
         }
 
-        //loop through the array of location Types
-        $locMenuStr = "";
-        $locArrlength = count($locTypes);
-        for ($x = 0; $x < $locArrlength; $x++) {
-            if ($locTypes[$x] == $slideLocType) {
-                $isSectionSelected = "SELECTED";
-            } else {
-                $isSectionSelected = "";
-            }
-            $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
-        }
-
         echo "<tr>
             <td class='col-xs-1'>
             <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3' required>
@@ -380,7 +356,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         if ($adminIsCheck == "true") {
             echo "<td>";
             echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type[]'>";
-            echo $locMenuStr;
+            echo getLocGroups($slideLocType);
             echo "</select>";
             echo "</td>";
         } else {

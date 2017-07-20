@@ -11,25 +11,44 @@ uploadFile($_POST["uploadFile"], image_dir, 'true', 800, 4, 2048000);
 //Delete file
 $deleteMsg = "";
 
+//Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {
 
     showModalConfirm(
         "confirm",
         "Delete Image?",
         "Are you sure you want to delete: ".$_GET["delete"]."?",
-        "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes"
+        "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
+        false
     );
 
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
     unlink($_GET["delete"]);
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
+
+//Share modal window
+if ($_GET["share"] && !$_GET["confirm"]) {
+
+    showModalConfirm(
+        "confirm",
+        "Share Image?",
+        "<form><select>".getLocList()."</select></form>",
+        "<button type='button' class='btn btn-primary' data-dismiss='modal' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&share=".$_GET["share"]."&confirm=yes'\"><i class='fa fa-save'></i> Save</button>
+    <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>",
+        true
+    );
+
+} elseif ($_GET["share"] && $_GET["confirm"] == 'yes') {
+    header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "");
+    echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+}
 ?>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#dataTable').dataTable({
                 "iDisplayLength": 25,
-                "order": [[2, "desc"]],
+                "order": [[3, "desc"]],
                 "columnDefs": [{
                     "targets": 'no-sort',
                     "orderable": false
@@ -37,6 +56,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             });
         });
     </script>
+
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
@@ -82,6 +102,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Shared</th>
                         <th>Size</th>
                         <th>Date</th>
                         <th class="no-sort">Actions</th>
@@ -107,7 +128,10 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
                             echo "<tr data-index='" . $count . "'>
 								<td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir).$file." : ".$fileSize."', '".image_dir.$file."')\" title='Preview'>" . $file . "</a></td>
-								<td class='col-xs-2'>" . $fileSize . "</td>
+								<td class='col-xs-1'>
+								<button type='button' data-toggle='tooltip' title='Share' class='btn btn-info' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=".image_dir.$file."'\"><i class='fa fa-fw fa-share-alt'></i></button>
+								</td>
+								<td class='col-xs-1'>" . $fileSize . "</td>
 								<td class='col-xs-2'>" . $modDate . "</td>
 								<td class='col-xs-1'>
 								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=".image_dir.$file."'\"><i class='fa fa-fw fa-trash'></i></button>
@@ -180,6 +204,11 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
         var url = window.location.href;
         if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1){
+            setTimeout(function(){
+                $('#confirm').modal('show');
+            }, 100);
+        }
+        if (url.indexOf('share') != -1){
             setTimeout(function(){
                 $('#confirm').modal('show');
             }, 100);

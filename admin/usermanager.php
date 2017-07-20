@@ -24,7 +24,8 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         "confirm",
         "Delete User?",
         "Are you sure you want to delete: ".$deluserTitle."?",
-        "usermanager.php?loc_id=".$_GET['loc_id']."&deleteuser=".$deluserId."&deletetitle=".$deluserTitle."&confirm=yes"
+        "usermanager.php?loc_id=".$_GET['loc_id']."&deleteuser=".$deluserId."&deletetitle=".$deluserTitle."&confirm=yes",
+        false
     );
 
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {

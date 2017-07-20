@@ -288,7 +288,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     "confirm",
                     "Delete Database Page?",
                     "Are you sure you want to delete: ".safeCleanStr(addslashes($getCustSection))."?",
-                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletesection=true&deletename=".$getCustSection."&confirm=yes"
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletesection=true&deletename=".$getCustSection."&confirm=yes",
+                    false
                 );
 
             } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -310,7 +311,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     "confirm",
                     "Delete Database?",
                     "Are you sure you want to delete: ".$delcustomerName."?",
-                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecustomer=".$delcustomerId."&deletename=".$delcustomerName."&confirm=yes"
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecustomer=".$delcustomerId."&deletename=".$delcustomerName."&confirm=yes",
+                    false
                 );
 
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
@@ -379,7 +381,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     "confirm",
                     "Delete Database Category?",
                     "Are you sure you want to delete: ".$delCatTitle."?",
-                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes"
+                    "databases.php?loc_id=".$_GET['loc_id']."&section=".$getCustSection."&deletecat=".$delCatId."&deletecatname=".$delCatTitle."&confirm=yes",
+                    false
                 );
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {

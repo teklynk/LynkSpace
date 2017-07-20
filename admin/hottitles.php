@@ -53,7 +53,8 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         "confirm",
         "Delete Hot Title?",
         "Are you sure you want to delete: ".$delhottitlesTitle."?",
-        "hottitles.php?loc_id=".$_GET['loc_id']."&deletehottitles=".$delhottitlesId."&deletetitle=".$delhottitlesTitle."&confirm=yes"
+        "hottitles.php?loc_id=".$_GET['loc_id']."&deletehottitles=".$delhottitlesId."&deletetitle=".$delhottitlesTitle."&confirm=yes",
+        false
     );
 
 
@@ -88,7 +89,12 @@ if ($_POST['add_hottitles']) {
     $errorMsg = "";
     //Insert Hot Titles
     if (strpos(validateUrl($_POST['hottitles_url']), 'econtent') || strpos(validateUrl($_POST['hottitles_url']), 'dynamic') || strpos(validateUrl($_POST['hottitles_url']), 'static')){
-        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . safeCleanStr($_POST['hottitles_sort']) . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
+        if (!empty($_POST['hottitles_sort'])){
+            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);
+        } else {
+            $hottitles_sort = 0;
+        }
+        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . safeCleanStr($_POST['hottitles_title']) . "', '" . validateUrl($_POST['hottitles_url']) . "', '" . safeCleanStr($_POST['location_type']) . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true");
@@ -160,19 +166,13 @@ if ($_GET['loc_id'] != 1) {
                     </div>
                     <div class="col-lg-12">
                         <?php
-                        //loop through the array of location Types
-                        $locMenuStr = "";
-                        $locArrlength = count($locTypes);
-                        for ($x = 0; $x < $locArrlength; $x++) {
-                            $locMenuStr .= "<option value=" . $locTypes[$x] . ">" . $locTypes[$x] . "</option>";
-                        }
 
                         if ($adminIsCheck == "true") {
                             ?>
                             <div class="form-group">
                                 <label for="location_type">Location Group</label>
                                 <select class="form-control selectpicker bs-placeholder show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type" title="Choose a location group">
-                                    <?php echo $locMenuStr; ?>
+                                    <?php echo getLocGroups(); ?>
                                 </select>
                             </div>
                             <?php
@@ -241,18 +241,6 @@ if ($_GET['loc_id'] != 1) {
                             $isActive = "";
                         }
 
-                        //loop through the array of location Types
-                        $locMenuStr = "";
-                        $locArrlength = count($locTypes);
-                        for ($x = 0; $x < $locArrlength; $x++) {
-                            if ($locTypes[$x] == $hottitlesLocType) {
-                                $isSectionSelected = "SELECTED";
-                            } else {
-                                $isSectionSelected = "";
-                            }
-                            $locMenuStr .= "<option value=" . $locTypes[$x] . " " . $isSectionSelected . ">" . $locTypes[$x] . "</option>";
-                        }
-
                         echo "<tr>
                             <td class='col-xs-1'>
                                 <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='text' maxlength='3' required>
@@ -269,7 +257,7 @@ if ($_GET['loc_id'] != 1) {
                             if ($adminIsCheck == "true") {
                                 echo "<td>";
                                 echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type[]'>";
-                                echo $locMenuStr;
+                                echo getLocGroups($hottitlesLocType);
                                 echo "</select>";
                                 echo "</td>";
                             } else {

@@ -333,6 +333,23 @@ function getLocList($active) {
     }
     return $locList;
 }
+function getLocGroups($active){
+    global $locTypes;
+    global $locMenuStr;
+    //loop through the array of location Types
+    $locMenuStr = "";
+    $locArrlength = count($locTypes);
+
+    for ($x = 0; $x < $locArrlength; $x++) {
+        if (safeCleanStr($locTypes[$x]) == safeCleanStr($active)) {
+            $isSectionSelected = ' SELECTED';
+        } else {
+            $isSectionSelected = '';
+        }
+        $locMenuStr .= "<option value=" . safeCleanStr($locTypes[$x]) . " " . $isSectionSelected . ">" . safeCleanStr($locTypes[$x]) . "</option>";
+    }
+    return $locMenuStr;
+}
 //Get existing Pages
 function getPages($loc) {
     global $pagesList;
@@ -350,7 +367,7 @@ function getPages($loc) {
     return $pagesList;
 }
 // Modal and Dialog Confirm
-function showModalConfirm($id, $title, $body, $action){
+function showModalConfirm($id, $title, $body, $action, $custom=false){
     echo "<div id='".$id."' class='modal fade' role='dialog' data-keyboard='false' data-backdrop='static'>
     <div class='modal-dialog modal-sm'>
     <div class='modal-content'>
@@ -361,10 +378,16 @@ function showModalConfirm($id, $title, $body, $action){
     <div class='modal-body'>
     <p>".$body."</p>
     </div>
-    <div class='modal-footer text-left'>
-    <button type='button' class='btn btn-danger' data-dismiss='modal' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
-    <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>
-    </div>
+    <div class='modal-footer text-left'>";
+
+    if ($custom == false || $custom == NULL || $custom == ''){
+        echo "<button type='button' class='btn btn-danger' data-dismiss='modal' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
+    <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>";
+    } else {
+        echo $action;
+    }
+
+    echo "</div>
     </div>
     </div>
     </div>";
@@ -452,7 +475,7 @@ function checkDependencies(){
 function recurse_copy($src, $dst) {
     $dir = opendir($src);
     @mkdir($dst, 0755, true);
-    while (false !== ( $file = readdir($dir)) ) {
+    while (false !== ($file = readdir($dir))) {
         if (($file != '.') && ($file != '..')) {
             if (is_dir($src . '/' . $file)) {
                 recurse_copy($src . '/' . $file, $dst . '/' . $file);
