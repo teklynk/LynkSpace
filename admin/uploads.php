@@ -27,13 +27,26 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
+//Share setting modal html
+$shareFormHTML = "<div class='form-group'>
+        <form>
+            <label for='location_type'>Location Group</label>
+            <select class='form-control selectpicker show-tick' data-dropup-auto='false' data-size='10' name='location_type' title='Share to a location group'>".getLocGroups()."</select>
+                <div class='text-center'>
+                    <h3>-- OR --</h3>
+                </div>
+            <label for='location_list'>Location(s)</label>
+            <select class='form-control selectpicker' multiple name='location_list' title='Share to specific location(s)'>".getLocList()."</select>
+        </form>
+    </div>";
+
 //Share modal window
 if ($_GET["share"] && !$_GET["confirm"]) {
 
     showModalConfirm(
         "confirm",
-        "Share Image?",
-        "<form><select>".getLocList()."</select></form>",
+        "Share Image? <small>".$_GET['share']."</small>",
+        $shareFormHTML,
         "<button type='button' class='btn btn-primary' data-dismiss='modal' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&share=".$_GET["share"]."&confirm=yes'\"><i class='fa fa-save'></i> Save</button>
     <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>",
         true
