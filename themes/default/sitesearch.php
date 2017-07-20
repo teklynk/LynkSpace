@@ -5,14 +5,16 @@ include_once('includes/header.inc.php');
 
 echo "<div class='page-search'>";
 
-echo "<div class='container-fluid sitesearch'>";
-echo "<div class='container bannerwrapper'>";
+echo "<div class='container bannerwrapper' id='sitesearch'>";
+echo "<div class='row'>";
+
+include 'includes/searchsite.inc.php';
 
 if (!empty($_POST['sitesearchterm'])) {
 
     echo "<div class='sitesearchresultsmsg'><h1>Search results for: \"" . $_POST['sitesearchterm'] . "\"</h1></div>";
 
-    //getSiteSearchResults(search term, show page contents)
+    //getSiteSearchResults(search term, show page contents in results)
     getSiteSearchResults($_POST['sitesearchterm'], 'false');
 
     if ($siteSearchCount == 0){

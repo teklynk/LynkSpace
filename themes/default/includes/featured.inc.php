@@ -11,7 +11,7 @@ echo "<div class='container bannerwrapper'>";
 
 echo "<div class='row' id='featured'>";
 
-echo "<div class='col-xs-12 col-sm-12'>";
+echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
 
 if (!empty($featuredHeading)) {
     echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";

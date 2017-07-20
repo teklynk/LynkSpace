@@ -249,7 +249,7 @@ function getTeam(){
     $teamNumRows = mysqli_num_rows($sqlTeam);
 }
 
-function getNav($navSection, $dropdown, $pull, $sitesearchlink){
+function getNav($navSection, $dropdown, $pull){
     //EXAMPLE: getNav('Top','true','right','true')
     global $db_conn;
     global $navLinksID;
@@ -397,15 +397,6 @@ function getNav($navSection, $dropdown, $pull, $sitesearchlink){
 
         $tempLink = $navLinksCatId;
 
-    }
-
-    if ($sitesearchlink == "true") {
-        //Site search colapse link
-        echo "<li class='hidden-xs' id='sitesearchlink'>";
-        echo "<a class='navSearch' data-toggle='collapse' data-target='.sitesearch-collapse' href='#'>";
-        echo "<i class='fa fa-search fa-lg' aria-hidden='true'></i>";
-        echo "</a>";
-        echo "</li>";
     }
 
     echo "</ul>";
@@ -1009,7 +1000,7 @@ function getHottitlesTabs(){
 }
 
 function getSiteSearchResults($searchTerm, $showPageContent) {
-    //getSiteSearchResults('how do i check out a book', true)
+    //getSiteSearchResults('how do i check out a book', true = shows page contents in search results)
     global $db_conn;
     global $siteSearchId;
     global $siteSearchLodId;
