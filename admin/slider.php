@@ -129,11 +129,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <hr/>
 
             <div class="form-group">
-                <label>Link URL</label>
-                <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
-            </div>
-
-            <div class="form-group">
                 <label>Existing Page</label>
                 <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
                     <option value="">None</option>
@@ -141,6 +136,11 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     echo getPages($_GET['loc_id']);
                     ?>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label>Link URL</label>
+                <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
             </div>
 
             <?php

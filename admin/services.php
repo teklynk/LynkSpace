@@ -156,19 +156,20 @@ if ($_GET['preview']>"") {
 		<hr/>
 
 		<div class="form-group">
-            <label for="service_link">Link URL</label>
-            <input type="text" class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
-        </div>
-
-		<div class="form-group">
 			<label for="service_exist_page">Existing Page</label>
 			<select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="service_exist_page" id="service_exist_page" title="Choose an existing page">
 				<option value="">None</option>
 				<?php
-                echo getPages($_GET['loc_id']);
+				echo getPages($_GET['loc_id']);
 				?>
 			</select>
 		</div>
+
+		<div class="form-group">
+            <label for="service_link">Link URL</label>
+            <input type="text" class="form-control count-text" name="service_link" id="service_link" maxlength="255" value="<?php if ($_GET['editservice']) {echo $rowServices['link'];} ?>" >
+        </div>
+
 		<hr/>
 		<div class="form-group">
 			<label for="service_content">Description</label>

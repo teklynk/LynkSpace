@@ -24,7 +24,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
 
     <title>YouSeeMore - Admin Panel</title>
 
