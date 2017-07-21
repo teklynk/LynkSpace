@@ -23,29 +23,29 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
     );
 
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
+    //TODO: Delete from shared_uploads table where file name = $_GET["delete"]
     unlink($_GET["delete"]);
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
-//Share setting modal html
-$shareFormHTML = "<div class='form-group'>
+//Share modal window
+if ($_GET["share"] && !$_GET["confirm"]) {
+    //Share settings - modal html
+    $shareFormHTML = "<div class='form-group'>
         <form>
-            <label for='location_type'>Location Group</label>
-            <select class='form-control selectpicker show-tick' data-dropup-auto='false' data-size='10' name='location_type' title='Share to a location group'>".getLocGroups()."</select>
+            <label for='share_location_type'>Location Group</label>
+            <select id='share_loc_type' class='form-control selectpicker show-tick' data-id='share_loc_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>".getLocGroups()."</select>
                 <div class='text-center'>
-                    <h3>-- OR --</h3>
+                    <h3>- OR -</h3>
                 </div>
-            <label for='location_list'>Location(s)</label>
-            <select class='form-control selectpicker' multiple name='location_list' title='Share to specific location(s)'>".getLocList()."</select>
+            <label for='share_location_list'>Location(s)</label>
+            <select id='share_loc_list' class='form-control selectpicker' multiple data-id='share_loc_list' data-dropup-auto='false' data-size='10' name='share_location_list' title='Share to specific location(s)'><option value=''>None</option>".getLocList()."</select>
         </form>
     </div>";
 
-//Share modal window
-if ($_GET["share"] && !$_GET["confirm"]) {
-
     showModalConfirm(
         "confirm",
-        "Share Image? <small>".$_GET['share']."</small>",
+        "Share Image? <br><small>".$_GET['share']."</small>",
         $shareFormHTML,
         "<button type='button' class='btn btn-primary' data-dismiss='modal' onclick=\"window.location.href='uploads.php?loc_id=".$_GET['loc_id']."&share=".$_GET["share"]."&confirm=yes'\"><i class='fa fa-save'></i> Save</button>
     <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>",
@@ -53,6 +53,10 @@ if ($_GET["share"] && !$_GET["confirm"]) {
     );
 
 } elseif ($_GET["share"] && $_GET["confirm"] == 'yes') {
+    //TODO: Save to shared_uploads table
+    //TODO: Select records
+    //TODO: Check if image name already exists
+    //TODO: If exists, Do Update, Else, Do Insert
     header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "");
     echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 }
@@ -115,7 +119,12 @@ if ($_GET["share"] && !$_GET["confirm"]) {
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Shared</th>
+                        <?php
+                        // if is admin then show the table header
+                        if ($adminIsCheck == "true" && multiBranch == 'true') {
+                            echo "<th>Shared</th>";
+                        }
+                        ?>
                         <th>Size</th>
                         <th>Date</th>
                         <th class="no-sort">Actions</th>
@@ -140,11 +149,13 @@ if ($_GET["share"] && !$_GET["confirm"]) {
                             $fileSize = filesize_formatted(image_dir . $file);
 
                             echo "<tr data-index='" . $count . "'>
-								<td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir).$file." : ".$fileSize."', '".image_dir.$file."')\" title='Preview'>" . $file . "</a></td>
-								<td class='col-xs-1'>
-								<button type='button' data-toggle='tooltip' title='Share' class='btn btn-info' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=".image_dir.$file."'\"><i class='fa fa-fw fa-share-alt'></i></button>
-								</td>
-								<td class='col-xs-1'>" . $fileSize . "</td>
+								<td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir).$file." : ".$fileSize."', '".image_dir.$file."')\" title='Preview'>" . $file . "</a></td>";
+                                if ($adminIsCheck == "true" && multiBranch == 'true') {
+                                    echo "<td class='col-xs-1'>
+                                    <button type='button' data-toggle='tooltip' title='Share' class='btn btn-info' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
+                                    </td>";
+                                }
+								echo "<td class='col-xs-1'>" . $fileSize . "</td>
 								<td class='col-xs-2'>" . $modDate . "</td>
 								<td class='col-xs-1'>
 								<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=".image_dir.$file."'\"><i class='fa fa-fw fa-trash'></i></button>

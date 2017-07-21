@@ -5,7 +5,7 @@ if ($hottitlesCount > 0) {
     echo "<div class='grad-blue container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
-    echo "<div class='col-xs-12 col-lg-12 hottitles-title'>";
+    echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 hottitles-title'>";
     echo "<h1 class='text-white'>" . $hottitlesHeading . "</h1>";
     echo "</div>";
 

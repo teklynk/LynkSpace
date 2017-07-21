@@ -143,7 +143,8 @@ footer a:hover {
 
 .navbar-Search > li > a:focus, .navbar-Search > li > a:hover {
     background: transparent;
-    color: #008eaa;
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 .navbar-Top > li {
@@ -162,16 +163,20 @@ footer a:hover {
     color: #008eaa;
     background-color: transparent;
 }
+.nav-shrink ul.navbar-Top > li > a {
+    padding: 24px 0px 12px 0px;
+}
 .nav-shrink .navbar-brand {
     height: 60px !important;
 }
-
 .nav-shrink {
-    min-height: 80px !important;
+    min-height: 60px !important;
     -webkit-transition: min-height .5s; /* For Safari 3.1 to 6.0 */
     transition: min-height .5s;
 }
-
+.nav-shrink .fa-inverse-socialmedia, .nav-shrink .fa-stack {
+    font-size: 1.2em;
+}
 .img-landing {
     padding: 4px;
     background-color: transparent;
@@ -384,7 +389,6 @@ footer a:hover {
 }
 .slider {
     background-color: #fff !important;
-    background: #fff !important;
 }
 .sitesearch {
     min-height: 400px;
@@ -613,13 +617,11 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     background-repeat: no-repeat;
 }
 #sliderCarousel .carousel-control {
-    background:none;
+    background: none;
     visibility: hidden;
-    width: 5%;
 }
 #sliderCarousel:hover .carousel-control {
     visibility: visible;
-    width: 5%;
 }
 
 #sliderCarousel .carousel-control i {
@@ -639,11 +641,9 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 #hottitlesCarousel .carousel-control {
     background:none;
     visibility: hidden;
-    width: 5%;
 }
 #hottitlesCarousel:hover .carousel-control {
     visibility: visible;
-    width: 5%;
 }
 
 @media (max-width: 1276px) {
@@ -679,6 +679,19 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     }
 }
 @media (max-width: 760px) {
+    .nav-shrink {
+        min-height: 50px !important;
+    }
+    .nav-shrink .navbar-toggle {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .navbar-Top>li>a {
+        padding: 10px 14px 10px 14px;
+    }
+    .nav-shrink ul.navbar-Top > li > a {
+        padding: 12px 12px 12px 12px;
+    }
     #sliderCarousel.carousel {
         height: 250px;
     }
@@ -686,61 +699,31 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         background-size: contain;
     }
     #sliderCarousel .carousel-caption {
-        bottom:20%;
-    }
-
-    .navbar-Footer > .nav-Footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    .navbar-Footer > li > a {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    .bannerwrapper {
-        padding: 18px;
-    }
-
-    .content {
-        padding: 4px 6px 30px;
-        min-height: 120px;
-    }
-
-    #generalinfo {
-        padding: 0;
-    }
-
-    #generalinfo div {
-        padding: 0;
-        margin: 0;
-    }
-
-    .navbar-Search > li {
-        position: relative;
-        display: inherit;
-        float: left;
-    }
-
-    footer {
-        padding: 20px;
-        width: 100%;
-    }
-
-    #belowfooter {
-        height: auto;
-        padding: 10px 0 0 0;
-    }
-
-    #belowfooter .container {
-        padding: 0;
-        margin: 0;
-        width: 100%;
+        bottom: 20%;
     }
 
     #sliderCarousel .carousel-control {visibility: visible;}
     #hottitlesCarousel .carousel-control {visibility: visible;}
+
+    .container-fluid {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    #generalinfo {
+        padding: 0px;
+    }
+
+    footer {
+        padding: 50px 12px 0 12px;
+    }
+    #belowfooter {
+        padding: 0px;
+    }
+    #belowfooter .socialDiv {
+        float: none;
+        padding: 10px;
+    }
 }
 @media (max-width: 700px) {
     #sliderCarousel.carousel {
@@ -763,11 +746,9 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     #sliderCarousel .carousel-control {
         background: none;
         visibility: visible;
-        width: 5%;
     }
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
         visibility: visible;
-        width: 5%;
     }
 }
 @media (max-width: 476px) {
@@ -795,11 +776,9 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     #sliderCarousel .carousel-control, #sliderCarousel:hover .carousel-control {
         background:none;
         visibility: visible;
-        width: 5%;
     }
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
         visibility: visible;
-        width: 5%;
     }
 }
 @media (max-width: 316px) {

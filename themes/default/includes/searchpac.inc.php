@@ -11,7 +11,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
     ?>
 
     <div class="row" id="searchpac">
-        <div class="col-xs-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div class="row">
 
@@ -99,7 +99,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                     </div>
 
                 </div>
-                <div class="input-group col-md-12 text-center center-block">
+                <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center center-block">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
                 getNav('Search', 'false', 'center', 'false');

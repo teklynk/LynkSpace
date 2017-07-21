@@ -14,13 +14,13 @@ if ($teamNumRows > 0) {
     echo "<div class='container bannerwrapper'>";
 
     if (!empty($teamHeading)) {
-        echo "<div class='col-xs-12 col-sm-12'>";
+        echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
         echo "<h1 class='text-left teamheading'>" . $teamHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($teamBlurb)) {
-        echo "<div class='col-lg-12'>";
+        echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
         echo "<p class='text-left teamblurb'>" . $teamBlurb . "</h3>";
         echo "</div>";
     }

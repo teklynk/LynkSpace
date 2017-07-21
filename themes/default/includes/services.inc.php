@@ -14,13 +14,13 @@ if ($servicesNumRows > 0) {
     echo "<div class='container bannerwrapper'>";
 
     if (!empty($servicesHeading)) {
-        echo "<div class='col-lg-12'>";
+        echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
         echo "<h1 class='text-left servicesheading'>" . $servicesHeading . "</h1>";
         echo "</div>";
     }
 
     if (!empty($servicesBlurb)) {
-        echo "<div class='col-lg-12'>";
+        echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
         echo "<p class='text-left servicesblurb'>" . $servicesBlurb . "</p>";
         echo "</div>";
     }

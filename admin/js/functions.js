@@ -331,6 +331,32 @@ $(document).ready(function () {
             $('#team_image_preview').attr('src', '../uploads/' + getUrlVars()['loc_id'] + '/' + $('#team_image').val());
         }
     });
+
+    //Share image - settings options
+    $('#share_loc_type').change(function () {
+        if ($('#share_loc_type').val() == '') {
+            $('[data-id="share_loc_type"] > span.filter-option').text('None');
+            $('[data-id="share_loc_type"]').attr('title', 'None');
+            $('[data-id="share_loc_list"]').attr('disabled', false);
+        } else {
+            $('#share_loc_list').val('');
+            $('[data-id="share_loc_list"] > span.filter-option').text('None');
+            $('[data-id="share_loc_list"]').attr('title', 'None');
+            $('[data-id="share_loc_list"]').attr('disabled', true);
+        }
+    });
+    $('#share_loc_list').change(function () {
+        if ($('#share_loc_list').val() == '') {
+            $('[data-id="share_loc_list"] > span.filter-option').text('None');
+            $('[data-id="share_loc_list"]').attr('title', 'None');
+            $('[data-id="share_loc_type"]').attr('disabled', false);
+        } else {
+            $('#share_loc_type').val('');
+            $('[data-id="share_loc_type"] > span.filter-option').text('None');
+            $('[data-id="share_loc_type"]').attr('title', 'None');
+            $('[data-id="share_loc_type"]').attr('disabled', true);
+        }
+    });
     //Ajax Calls
     $('#nav_Table .nav_win_checkbox').change(function () {
         $.get('ajax/update_navwin.php?update=true', {
