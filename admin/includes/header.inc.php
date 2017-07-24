@@ -49,8 +49,8 @@ session_start();
 
     if (defined('tinyMCE')) {
     ?>
-    <!-- TinyMCE -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
+        <!-- TinyMCE -->
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
     <?php
     }
     ?>
@@ -98,34 +98,14 @@ session_start();
     //TinyMCE setup
     if (defined('tinyMCE') && isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
 
-        //Initializing variables
-        $fileListJson = "";
-        $linkListJson = "";
-
-        //Build list of images in uploads folder for tinymce
-        if ($handle = opendir(image_dir)) {
-
-            while (false !== ($imgfile = readdir($handle))) {
-                if ('.' === $imgfile) continue;
-                if ('..' === $imgfile) continue;
-                if ($imgfile === "Thumbs.db") continue;
-                if ($imgfile === ".DS_Store") continue;
-                if ($imgfile === "index.html") continue;
-                $allimgfiles[] = strtolower($imgfile);
-            }
-            closedir($handle);
-        }
-        sort($allimgfiles);
-        foreach($allimgfiles as $imgfile) {
-            $fileListJson .= "{title: '" . $imgfile . "', value: '" . image_url . $imgfile . "'},";
-        }
+        getSharedFiles($_GET['loc_id']);
 
         //get and build page list for TinyMCE
         $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title");
         while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
             $getPageId = $rowGetPages['id'];
             $getPageTitle = $rowGetPages['title'];
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},";
+            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
         }
 
         ?>

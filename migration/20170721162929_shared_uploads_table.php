@@ -16,6 +16,8 @@ class SharedUploadsTable extends AbstractMigration
             ->save();
         //Modifies the datetime column so that it grabs the current date when the row s updated. Phinx does not have this natively.
         $this->execute('ALTER TABLE `shared_uploads` MODIFY COLUMN `datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
+        //Add foreign key constraint to loc_id. Delete row when location is deleted. Based on loc_id.
+        $this->execute('ALTER TABLE `shared_uploads` ADD CONSTRAINT `shared_uploads_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE');
     }
 
 
