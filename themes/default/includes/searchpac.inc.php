@@ -4,7 +4,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 
-    getSetup(); //from functions.php
+    getSetup($_GET['loc_id']); //from functions.php
 }
 
 if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {

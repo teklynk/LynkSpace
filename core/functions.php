@@ -402,7 +402,7 @@ function getNav($navSection, $dropdown, $pull){
     echo "</ul>";
 }
 
-function getSetup(){
+function getSetup($loc){
     global $setupTitle;
     global $setupAuthor;
     global $setupKeywords;
@@ -412,10 +412,10 @@ function getSetup(){
     global $setupLs2kids;
     global $setupSearchDefault;
     global $setupLogo;
-    global $setupLocAnalytics;
+    global $setupLogoDefaults;
     global $db_conn;
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, logo_use_defaults, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=" . $loc . " ");
     $rowSetup = mysqli_fetch_array($sqlSetup);
 
     $setupDescription = $rowSetup['description'];
@@ -427,8 +427,26 @@ function getSetup(){
     $setupLs2pac = $rowSetup['ls2pac'];
     $setupLs2kids = $rowSetup['ls2kids'];
     $setupSearchDefault = $rowSetup['searchdefault'];
+    $setupLogoDefaults = $rowSetup['logo_use_defaults'];
 }
+function getLogo($loc){
+    global $db_conn;
+    global $getLogo;
 
+    $sqlGetLogoDefault = mysqli_query($db_conn, "SELECT logo, loc_id FROM setup WHERE loc_id=1 ");
+    $rowGetLogoDefault = mysqli_fetch_array($sqlGetLogoDefault);
+    $defaultLogo = $rowGetLogoDefault['logo'];
+
+    $sqlGetLogoOptions = mysqli_query($db_conn, "SELECT logo, logo_use_defaults, loc_id FROM setup WHERE loc_id=" . $loc . " ");
+    $rowGetLogoOptions = mysqli_fetch_array($sqlGetLogoOptions);
+
+    if ($rowGetLogoOptions['logo_use_defaults'] == 'true') {
+        $getLogo = "uploads/1/".$defaultLogo;
+    } else {
+        $getLogo = "uploads/".$loc."/".$rowGetLogoOptions['logo'];
+    }
+    echo $getLogo;
+}
 function getSocialMediaIcons($shape, $section){
     //EXAMPLE: getSocialMediaIcons("circle","top")
     //EXAMPLE: getSocialMediaIcons("square","footer")
@@ -1050,7 +1068,7 @@ function getUrlContents($getUrl) {
 }
 
 //Call - getSetup is used everywhere
-getSetup();
+getSetup($_GET['loc_id']);
 
 //Random string generator - used to create a unique md5 referrer
 function generateRandomString($length = 10){

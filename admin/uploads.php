@@ -12,7 +12,15 @@ uploadFile($_POST["action"] == 'uploadFile', image_dir, 'true', 800, 4, 2048000)
 $deleteMsg = "";
 
 //Get the file name from the URL
-$getSharedFileName = str_replace('..', '', $_GET["share"]);
+if ($_GET["share"]) {
+    $urlParam = $_GET["share"];
+} elseif ($_GET["delete"]) {
+    $urlParam = $_GET["delete"];
+} else {
+    $urlParam = '';
+}
+
+$getSharedFileName = str_replace('..', '', $urlParam);
 $getSharedFileNameArr = explode('/', $getSharedFileName);
 $getFileName = safeCleanStr($getSharedFileNameArr[3]);
 
@@ -28,7 +36,11 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
     );
 
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
-    //TODO: Delete from shared_uploads table where filename = $_GET["delete"]
+
+    //delete file if shared after clicking Yes
+    $sharedFileDelete = "DELETE FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ";
+    mysqli_query($db_conn, $sharedFileDelete);
+
     unlink($_GET["delete"]);
     $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
@@ -52,7 +64,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                 <h3>- OR -</h3>
             </div>
             <label for='share_location_list'>Location(s)</label>
-            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>".getLocList($rowSharedUploadsOption['shared'])."</select>
+            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>".getLocList($rowSharedUploadsOption['shared'])."</select>
             <input type='hidden' name='action' value='shareFile'>
         </div>",
         "<button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>

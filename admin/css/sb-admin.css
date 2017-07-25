@@ -183,6 +183,13 @@ footer ul.nav-footer li {
 .modal-sm {
     width: 20%;
 }
+.modal-md {
+    width: 40%;
+}
+.modal-lg {
+    width: 80%;
+}
+
 .modal .modal-footer {
     text-align: left;
     border-radius: 0 0 6px 6px;

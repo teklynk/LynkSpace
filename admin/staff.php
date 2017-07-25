@@ -212,7 +212,7 @@ if ($_GET['preview'] > "") {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="teamdefaults">
-                            <label>Use Defaults</label>
+                            <label for="team_defaults">Use Defaults</label>
                             <div class="checkbox">
                                 <label>
                                     <input class="team_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="team_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">

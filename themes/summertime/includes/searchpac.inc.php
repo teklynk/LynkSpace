@@ -4,7 +4,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 
     getLocList();
-    getSetup(); //from functions.php
+    getSetup($_GET['loc_id']); //from functions.php
 }
 ?>
 <script type="text/javascript" language="javascript">

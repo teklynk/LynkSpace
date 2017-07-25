@@ -112,7 +112,7 @@ session_start();
         <?php
         if (!empty($setupLogo)) {
             ?>
-            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" alt="Home" title="Home" border="0"/></a>
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id']); ?>" alt="Home" title="Home" border="0"/></a>
             <?php
         }
         ?>

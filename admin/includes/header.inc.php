@@ -24,7 +24,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
 
     <title>YouSeeMore - Admin Panel</title>
 
@@ -49,8 +49,8 @@ session_start();
 
     if (defined('tinyMCE')) {
     ?>
-    <!-- TinyMCE -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
+        <!-- TinyMCE -->
+        <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
     <?php
     }
     ?>
@@ -87,47 +87,17 @@ session_start();
         //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
         $_SESSION['loc_id'] = $_GET['loc_id'];
 
-        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $_SESSION['loc_id'] . " ");
+        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE active='true' AND id=" . $_SESSION['loc_id'] . " ");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
         $_SESSION['loc_name'] = $rowGetLocation['name'];
+        $_SESSION['loc_type'] = $rowGetLocation['type'];
     }
 
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' "); //part of while loop
 
     //TinyMCE setup
     if (defined('tinyMCE') && isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-
-        //Initializing variables
-        $fileListJson = "";
-        $linkListJson = "";
-
-        //Build list of images in uploads folder for tinymce
-        if ($handle = opendir(image_dir)) {
-
-            while (false !== ($imgfile = readdir($handle))) {
-                if ('.' === $imgfile) continue;
-                if ('..' === $imgfile) continue;
-                if ($imgfile === "Thumbs.db") continue;
-                if ($imgfile === ".DS_Store") continue;
-                if ($imgfile === "index.html") continue;
-                $allimgfiles[] = strtolower($imgfile);
-            }
-            closedir($handle);
-        }
-        sort($allimgfiles);
-        foreach($allimgfiles as $imgfile) {
-            $fileListJson .= "{title: '" . $imgfile . "', value: '" . image_url . $imgfile . "'},";
-        }
-
-        //get and build page list for TinyMCE
-        $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title");
-        while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
-            $getPageId = $rowGetPages['id'];
-            $getPageTitle = $rowGetPages['title'];
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},";
-        }
-
         ?>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -149,8 +119,8 @@ session_start();
                         automatic_uploads: false,
                         image_advtab: true,
                         image_title: true,
-                        image_list: [<?php echo rtrim($fileListJson, ","); ?>],
-                        link_list: [<?php echo rtrim($linkListJson, ","); ?>],
+                        image_list: [<?php echo getSharedFilesJsonList($_GET['loc_id']); ?>],
+                        link_list: [<?php echo getPageJsonList($_GET['loc_id']); ?>],
                         menubar: false,
                         toolbar_items_size: 'small',
                         toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code',

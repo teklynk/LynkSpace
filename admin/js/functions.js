@@ -687,21 +687,39 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
-
-    $('.set_logo_default').click(function () {
-        $.get('ajax/update_logodefaults.php?loc_id=1&update=true&defaultlogo='+$('select[name=site_logo] option:selected').text(), {
-            success: function () {
-                $('.set_logo_default').attr('disabled', true);
-                $('.set_logo_default>i').addClass('fa-spin');
-                $('.set_logo_default_msg').html('');
-                setTimeout(function() {
-                    $('.set_logo_default').attr('disabled', false);
-                    $('.set_logo_default>i').removeClass('fa-spin');
-                    $('.set_logo_default_msg').html('Process may still be running in the background');
-                }, 3000);
-            }
+    $('.logo_defaults_checkbox').change(function () {
+        $.get('ajax/update_logodefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
         });
+        $('.logo_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.logo_defaults_checkbox').attr('disabled', false);
+        }, 500);
+        //Disable select dropdown if default logo is true
+        if ($('.logo_defaults_checkbox').prop('checked') == true) {
+            setTimeout(function() {
+                $('#site_logo').attr('disabled', true);
+                //set value to nothing
+                $('.selectpicker').selectpicker('val', '');
+                $('.selectpicker').selectpicker('refresh');
+            }, 500);
+        } else {
+            setTimeout(function() {
+                $('#site_logo').attr('disabled', false);
+                $('.selectpicker').selectpicker('refresh');
+            }, 500);
+        }
     });
+
+    if ($('.logo_defaults_checkbox').prop('checked') == true) {
+        $('#site_logo').attr('disabled', true);
+        $('.selectpicker').selectpicker('refresh');
+    } else {
+        $('#site_logo').attr('disabled', false);
+        $('.selectpicker').selectpicker('refresh');
+    }
+
     $('.copy_files_to_locs').click(function () {
         $.get('ajax/update_images.php?loc_id=1&update=true', {
             success: function () {

@@ -17,7 +17,7 @@ $sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locati
 $rowLocation = mysqli_fetch_array($sqlLocation);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit
@@ -162,6 +162,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 $logo = "//placehold.it/140x100&text=No Image";
             } else {
                 $logo = "../uploads/" . $_GET['loc_id'] . "/" . $rowSetup['logo'];
+            }
+
+            //use default view
+            if ($rowSetup['logo_use_defaults'] == 'true') {
+                $selLogoDefaults = "CHECKED";
+            } else {
+                $selLogoDefaults = "";
             }
             ?>
 
@@ -337,14 +344,19 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             </select>
                         </div>
                         <?php
-                        //Check if user_level is Admin user and default location
-                        if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
+                        if ($_GET['loc_id'] != 1) {
                         ?>
-                        <div class="form-group">
-                            <button type="button" class="set_logo_default btn btn-primary" name="set_logo_default" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="right">
-                                <i class="fa fa-fw fa-cog"></i> Set as the default logo for ALL locations?
-                            </button>
-                            <small class="small set_logo_default_msg"></small>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group" id="logodefaults">
+                                    <label for="logo_defaults">Use Defaults Logo</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selLogoDefaults;} ?> data-toggle="toggle">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <?php
                         }

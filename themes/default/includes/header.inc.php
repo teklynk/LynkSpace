@@ -110,13 +110,7 @@ session_start();
                 <i class="fa fa-bars fa-2x"></i>
                 <span class="toggbutton">MENU</span>
             </button>
-            <?php
-            if (!empty($setupLogo)) {
-            ?>
-                <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="uploads/<?php echo $_GET['loc_id']; ?>/<?php echo $setupLogo; ?>" alt="Home" title="Home" border="0"/></a>
-            <?php
-            }
-            ?>
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id']); ?>" alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
