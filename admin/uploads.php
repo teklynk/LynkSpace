@@ -89,106 +89,106 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 }
 ?>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#dataTable').dataTable({
-            "iDisplayLength": 25,
-            "order": [[3, "desc"]],
-            "columnDefs": [{
-                "targets": 'no-sort',
-                "orderable": false
-            }]
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTable').dataTable({
+                "iDisplayLength": 25,
+                "order": [[3, "desc"]],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false
+                }]
+            });
         });
-    });
-</script>
+    </script>
 
-<div class="row">
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
-            <li class="active">Uploads</li>
-        </ol>
-        <h1 class="page-header">
-            Uploads
-        </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li class="active">Uploads</li>
+            </ol>
+            <h1 class="page-header">
+                Uploads
+            </h1>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-8">
-        <?php if ($uploadMsg != "") {
-            echo $uploadMsg;
-        }
-        if ($deleteMsg != "") {
-            echo $deleteMsg;
-        }
-        if (!is_writable('../uploads')) {
-            echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
-        }
-        ?>
+    <div class="row">
+        <div class="col-lg-8">
+            <?php if ($uploadMsg != "") {
+                echo $uploadMsg;
+            }
+            if ($deleteMsg != "") {
+                echo $deleteMsg;
+            }
+            if (!is_writable('../uploads')) {
+                echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
+            }
+            ?>
 
-        <form name="uploadForm" id="uploadForm" method="post" action="" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Upload Image</label>
-                <input type="file" name="fileToUpload" id="fileToUpload">
-                <input type="hidden" name="action" value="uploadFile">
-            </div>
-            <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
-                Image
-            </button>
-        </form>
+            <form name="uploadForm" id="uploadForm" method="post" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Upload Image</label>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="hidden" name="action" value="uploadFile">
+                </div>
+                <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+                    Image
+                </button>
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <hr/>
-        <div>
-            <table class="table table-bordered table-hover table-striped table-responsive dataTable" id="dataTable">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <?php
-                    // if is admin then show the table header
-                    if ($adminIsCheck == "true" && multiBranch == 'true') {
-                        echo "<th>Shared</th>";
-                    }
-                    ?>
-                    <th>Size</th>
-                    <th>Date</th>
-                    <th class="no-sort">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if ($handle = opendir(image_dir)) {
-
-                    $count = 0;
-
-                    while (false !== ($file = readdir($handle))) {
-
-                        if ('.' === $file) continue;
-                        if ('..' === $file) continue;
-                        //exclude these files
-                        if ($file === "Thumbs.db") continue;
-                        if ($file === ".DS_Store") continue;
-                        if ($file === "index.html") continue;
-
-                        $count++;
-                        $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
-                        $fileSize = filesize_formatted(image_dir . $file);
-
-                        //Check shared_uploads table for any shared images
-                        $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1");
-                        $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads);
-
-                        if ($rowSharedUploads['filename'] == $file) {
-                            $isShared = 'btn btn-primary';
-                        } else {
-                            $isShared = 'btn btn-default';
+    <div class="row">
+        <div class="col-lg-12">
+            <hr/>
+            <div>
+                <table class="table table-bordered table-hover table-striped table-responsive dataTable" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <?php
+                        // if is admin then show the table header
+                        if ($adminIsCheck == "true" && multiBranch == 'true') {
+                            echo "<th>Shared</th>";
                         }
+                        ?>
+                        <th>Size</th>
+                        <th>Date</th>
+                        <th class="no-sort">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if ($handle = opendir(image_dir)) {
 
-                        echo "<tr data-index='" . $count . "'>
+                        $count = 0;
+
+                        while (false !== ($file = readdir($handle))) {
+
+                            if ('.' === $file) continue;
+                            if ('..' === $file) continue;
+                            //exclude these files
+                            if ($file === "Thumbs.db") continue;
+                            if ($file === ".DS_Store") continue;
+                            if ($file === "index.html") continue;
+
+                            $count++;
+                            $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
+                            $fileSize = filesize_formatted(image_dir . $file);
+
+                            //Check shared_uploads table for any shared images
+                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1");
+                            $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads);
+
+                            if ($rowSharedUploads['filename'] == $file) {
+                                $isShared = 'btn btn-primary';
+                            } else {
+                                $isShared = 'btn btn-default';
+                            }
+
+                            echo "<tr data-index='" . $count . "'>
                             <td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir) . $file . " : " . $fileSize . "', '" . image_dir . $file . "')\" title='Preview'>" . $file . "</a></td>";
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
                                 //TODO: Check DB, compare image filenames with shared filenames, show that the image is shared.
@@ -202,57 +202,57 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
+                        }
+
+                        closedir($handle);
                     }
-
-                    closedir($handle);
-                }
-                ?>
-                </tbody>
-            </table>
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Uploads Preview Modal -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a type="button" class="close" data-dismiss="modal">
-                    <i class="fa fa-times"></i>
-                </a>
-                <h4 class="modal-title">&nbsp;</h4>
+    <!-- Uploads Preview Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                    <h4 class="modal-title">&nbsp;</h4>
+                </div>
+                <div class="modal-body">
+                    <img id="myModalFile" src="" class="img-responsive center-block" />
+                </div>
+                <div class="modal-footer">&nbsp;</div>
             </div>
-            <div class="modal-body">
-                <img id="myModalFile" src="" class="img-responsive center-block" />
-            </div>
-            <div class="modal-footer">&nbsp;</div>
         </div>
     </div>
-</div>
 
-<!-- Modal javascript logic -->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#confirm').on('hidden.bs.modal', function(){
-            setTimeout(function(){
-                window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
-            }, 100);
+    <!-- Modal javascript logic -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#confirm').on('hidden.bs.modal', function(){
+                setTimeout(function(){
+                    window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                }, 100);
+            });
+
+            var url = window.location.href;
+            if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1){
+                setTimeout(function(){
+                    $('#confirm').modal('show');
+                }, 100);
+            }
+            if (url.indexOf('share') != -1){
+                setTimeout(function(){
+                    $('#confirm').modal('show');
+                }, 100);
+            }
         });
-
-        var url = window.location.href;
-        if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1){
-            setTimeout(function(){
-                $('#confirm').modal('show');
-            }, 100);
-        }
-        if (url.indexOf('share') != -1){
-            setTimeout(function(){
-                $('#confirm').modal('show');
-            }, 100);
-        }
-    });
-</script>
+    </script>
 
 <?php
 include_once('includes/footer.inc.php');

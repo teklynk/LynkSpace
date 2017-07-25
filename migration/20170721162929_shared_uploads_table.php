@@ -5,8 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class SharedUploadsTable extends AbstractMigration
 {
 
-    public function up()
-    {
+    public function up(){
         $sharedUploads = $this->table('shared_uploads');
         $sharedUploads->addColumn('shared', 'text')
             ->addColumn('filename', 'text')
@@ -21,8 +20,7 @@ class SharedUploadsTable extends AbstractMigration
     }
 
 
-    public function down()
-    {
+    public function down(){
         $this->dropTable('shared_uploads');
     }
 }

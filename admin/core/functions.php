@@ -35,10 +35,10 @@ function phinxMigration($phinxCommand, $environment){
 }
 
 //File Uploader
-function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize){
+function uploadFile($postName, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize){
     global $uploadMsg;
 
-    if ($postAction) {
+    if (isset($postName) && is_writable($target)) {
         //Create upload folder if it does not exist.
         if (is_numeric($_GET['loc_id'])) {
             if (!file_exists($target)) {
@@ -315,7 +315,13 @@ function getLocList($active) {
     global $locList;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name ASC");
+    if ($active == 'true'){
+        $getActive = "WHERE active='true'";
+    } else {
+        $getActive = "";
+    }
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations $getActive ORDER BY name ASC");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
         if ($rowLocationSearch['id'] == 1) {
@@ -323,25 +329,7 @@ function getLocList($active) {
         } else {
             $isDefault = "";
         }
-        //Check if action value is a list - used for multi-selects
-        if (strpos(safeCleanStr($active), ',') !== false) {
-            $activeList = explode(',', $active); //Convert the list into an array
-
-            //Check if item is in the array
-            if (in_array($rowLocationSearch['id'], $activeList)) {
-                $isSectionSelected = ' SELECTED';
-            } else {
-                $isSectionSelected = '';
-            }
-        } else {
-            //Check if action value is a single item
-            if (safeCleanStr($rowLocationSearch['id']) == safeCleanStr($active)) {
-                $isSectionSelected = ' SELECTED';
-            } else {
-                $isSectionSelected = '';
-            }
-        }
-        $locList .= "<option class='loc_list_option' data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' " . $isSectionSelected . ">" . $rowLocationSearch['name'] . $isDefault ."</option>";
+        $locList .= "<option class='loc_list_option' data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' >" . $rowLocationSearch['name'] . $isDefault ."</option>";
     }
     return $locList;
 }
@@ -378,6 +366,7 @@ function getPages($loc) {
     $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>";
     return $pagesList;
 }
+
 //Get list of shared files for the specific location id.
 function getSharedFilesJsonList($loc){
     global $sharedFilesList;
@@ -385,38 +374,27 @@ function getSharedFilesJsonList($loc){
     global $fileListJson;
     global $fileListJson2;
     global $db_conn;
-
     $fileListJson[] = NULL;
     $fileListJson2[] = NULL;
-
     $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
     while ($rowSharedList = mysqli_fetch_array($sqlSharedList)) {
-
         $sharedOptions=$rowSharedList['shared'];
         $sharedFileName=$rowSharedList['filename'];
-
         $sharedOptionsArr = explode(',', $sharedOptions);
-
         if (in_array($loc, $sharedOptionsArr)){
             $sharedFilesList .= $sharedFileName . ",";
         }
-
     }
-
     $sharedFilesListArr = explode(",", rtrim($sharedFilesList, ","));
     sort($sharedFilesListArr); //Sort the image names
-
     foreach($sharedFilesListArr as $imgfiles2) {
         $locFilePath = str_replace($_GET['loc_id'], '1', image_url);
         if ($imgfiles2 != ''){
             $fileListJson2[] .= "{title: '" . $imgfiles2 . "', value: '" . $locFilePath . $imgfiles2 . "'}"; //creates a json list of images
         }
-
     }
-
     //Build list of images in uploads folder
     if ($handle = opendir(image_dir)) {
-
         while (false !== ($imgfile = readdir($handle))) {
             if ('.' === $imgfile) continue;
             if ('..' === $imgfile) continue;
@@ -428,13 +406,11 @@ function getSharedFilesJsonList($loc){
         closedir($handle);
     }
     sort($allimgfiles); //Sort the image names
-
     foreach($allimgfiles as $imgfiles) {
         if ($imgfiles != '') {
             $fileListJson[] .= "{title: '" . $imgfiles . "', value: '" . image_url . $imgfiles . "'}"; //creates a json list of images
         }
     }
-
     //Merge the 2 arrays
     $allImagesArr = array_merge($fileListJson, $fileListJson2);
     //Sort the merged arrays
@@ -444,10 +420,10 @@ function getSharedFilesJsonList($loc){
     //Clean string
     $allImagesStr = ltrim($allImagesStr, ',');
     $allImagesStr = rtrim($allImagesStr, ',');
-
     //Return json string
     echo $allImagesStr;
 }
+
 function getPageJsonList($loc) {
     global $linkListJson;
     global $db_conn;
@@ -482,7 +458,7 @@ function showModalConfirm($id, $title, $body, $action, $custom=false){
     <div class='modal-footer text-left'>";
 
     if ($custom == false || $custom == NULL || $custom == ''){
-        echo "<button type='button' class='btn btn-danger' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
+        echo "<button type='button' class='btn btn-danger' data-dismiss='modal' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
     <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>";
     } else {
         echo $action;
