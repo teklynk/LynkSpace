@@ -38,7 +38,7 @@ function phinxMigration($phinxCommand, $environment){
 function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize){
     global $uploadMsg;
 
-    if ($postAction && is_writable($target)) {
+    if ($postAction) {
         //Create upload folder if it does not exist.
         if (is_numeric($_GET['loc_id'])) {
             if (!file_exists($target)) {
@@ -379,13 +379,15 @@ function getPages($loc) {
     return $pagesList;
 }
 //Get list of shared files for the specific location id.
-function getSharedFiles($loc){
+function getSharedFilesJsonList($loc){
     global $sharedFilesList;
     global $sharedFilesListArr;
     global $fileListJson;
+    global $fileListJson2;
     global $db_conn;
 
-    $allimgfiles = '';
+    $fileListJson[] = NULL;
+    $fileListJson2[] = NULL;
 
     $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
     while ($rowSharedList = mysqli_fetch_array($sqlSharedList)) {
@@ -402,8 +404,17 @@ function getSharedFiles($loc){
     }
 
     $sharedFilesListArr = explode(",", rtrim($sharedFilesList, ","));
+    sort($sharedFilesListArr); //Sort the image names
 
-    //Build list of images in uploads folder for tinymce
+    foreach($sharedFilesListArr as $imgfiles2) {
+        $locFilePath = str_replace($_GET['loc_id'], '1', image_url);
+        if ($imgfiles2 != ''){
+            $fileListJson2[] .= "{title: '" . $imgfiles2 . "', value: '" . $locFilePath . $imgfiles2 . "'}"; //creates a json list of images
+        }
+
+    }
+
+    //Build list of images in uploads folder
     if ($handle = opendir(image_dir)) {
 
         while (false !== ($imgfile = readdir($handle))) {
@@ -416,26 +427,45 @@ function getSharedFiles($loc){
         }
         closedir($handle);
     }
+    sort($allimgfiles); //Sort the image names
 
-    if ($allimgfiles !== NULL){
-        //Add shared images to the list of uploaded images
-        array_merge($allimgfiles, $sharedFilesListArr);
-        //Sort the array
-        sort($allimgfiles); //Sort the image names
-        foreach($allimgfiles as $imgfile) {
-            $fileListJson .= "{title: '" . $imgfile . "', value: '" . image_url . $imgfile . "'},"; //creates a json list of images
-        }
-    } else {
-        //Sort the array
-        sort($sharedFilesListArr); //Sort the image names
-        foreach($sharedFilesListArr as $imgfile) {
-            $fileListJson .= "{title: '" . $imgfile . "', value: '" . image_url . $imgfile . "'},"; //creates a json list of images
+    foreach($allimgfiles as $imgfiles) {
+        if ($imgfiles != '') {
+            $fileListJson[] .= "{title: '" . $imgfiles . "', value: '" . image_url . $imgfiles . "'}"; //creates a json list of images
         }
     }
 
+    //Merge the 2 arrays
+    $allImagesArr = array_merge($fileListJson, $fileListJson2);
+    //Sort the merged arrays
+    sort($allImagesArr);
+    //Convert merged array into a string
+    $allImagesStr = implode(',',$allImagesArr);
+    //Clean string
+    $allImagesStr = ltrim($allImagesStr, ',');
+    $allImagesStr = rtrim($allImagesStr, ',');
 
+    //Return json string
+    echo $allImagesStr;
+}
+function getPageJsonList($loc) {
+    global $linkListJson;
+    global $db_conn;
 
-    return $fileListJson;
+    //get and build page list for TinyMCE
+    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title");
+    while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
+        $getPageId = $rowGetPages['id'];
+        $getPageTitle = $rowGetPages['title'];
+        if ($getPageTitle != ''){
+            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+        }
+    }
+    //Clean string
+    $linkListJson = ltrim($linkListJson, ',');
+    $linkListJson = rtrim($linkListJson, ',');
+
+    echo $linkListJson;
 }
 // Modal and Dialog Confirm
 function showModalConfirm($id, $title, $body, $action, $custom=false){

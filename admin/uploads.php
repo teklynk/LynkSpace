@@ -127,13 +127,13 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         }
         ?>
 
-        <form name="uploadForm" method="post" action="" enctype="multipart/form-data">
+        <form name="uploadForm" id="uploadForm" method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Upload Image</label>
                 <input type="file" name="fileToUpload" id="fileToUpload">
                 <input type="hidden" name="action" value="uploadFile">
             </div>
-            <button type="submit" name="upload_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+            <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                 Image
             </button>
         </form>

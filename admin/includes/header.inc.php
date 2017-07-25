@@ -97,17 +97,6 @@ session_start();
 
     //TinyMCE setup
     if (defined('tinyMCE') && isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-
-        getSharedFiles($_GET['loc_id']);
-
-        //get and build page list for TinyMCE
-        $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $_GET['loc_id'] . " ORDER BY title");
-        while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
-            $getPageId = $rowGetPages['id'];
-            $getPageTitle = $rowGetPages['title'];
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
-        }
-
         ?>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -129,8 +118,8 @@ session_start();
                         automatic_uploads: false,
                         image_advtab: true,
                         image_title: true,
-                        image_list: [<?php echo rtrim($fileListJson, ","); ?>],
-                        link_list: [<?php echo rtrim($linkListJson, ","); ?>],
+                        image_list: [<?php echo getSharedFilesJsonList($_GET['loc_id']); ?>],
+                        link_list: [<?php echo getPageJsonList($_GET['loc_id']); ?>],
                         menubar: false,
                         toolbar_items_size: 'small',
                         toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code',
