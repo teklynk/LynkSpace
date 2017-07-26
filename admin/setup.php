@@ -51,7 +51,7 @@ if (!empty($_POST)) {
             $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
             mysqli_query($db_conn, $locationInsert);
             //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $setupInsert);
             //Insert Contact defaults
             $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
@@ -161,7 +161,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
             if ($rowSetup['logo'] == "") {
                 $logo = "//placehold.it/140x100&text=No Image";
             } else {
-                $logo = "../uploads/" . $_GET['loc_id'] . "/" . $rowSetup['logo'];
+                $logo = $rowSetup['logo'];
             }
 
             //use default view
@@ -331,6 +331,24 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
                 <div class="row">
                     <div class="col-lg-6">
+                        <?php
+                        if ($_GET['loc_id'] != 1) {
+                            ?>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group" id="logodefaults">
+                                        <label for="logo_defaults">Use Defaults Logo</label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selLogoDefaults;} ?> data-toggle="toggle">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <div class="form-group">
                             <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
                         </div>
@@ -339,28 +357,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="site_logo" id="site_logo" title='Set the logo'>
                                 <option value="">None</option>
                                 <?php
-                                getImageDropdownList(image_dir, $rowSetup['logo']);
+                                getImageDropdownList($_GET['loc_id'], image_dir, $rowSetup['logo']);
                                 ?>
                             </select>
                         </div>
-                        <?php
-                        if ($_GET['loc_id'] != 1) {
-                        ?>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group" id="logodefaults">
-                                    <label for="logo_defaults">Use Defaults Logo</label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selLogoDefaults;} ?> data-toggle="toggle">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                        }
-                        ?>
                     </div>
                 </div>
 

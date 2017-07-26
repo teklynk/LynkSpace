@@ -17,7 +17,7 @@ if ($_GET['preview'] > "") {
     echo "<div class='col-lg-12'>";
 
     if ($rowTeamPreview['image'] > "") {
-        echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowTeamPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
+        echo "<p><img src='" . $rowTeamPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
     }
 
     if ($rowTeamPreview['name'] > "") {
@@ -113,7 +113,7 @@ if ($_GET['preview'] > "") {
             if ($rowTeam['image'] == "") {
                 $thumbNail = "//placehold.it/140x100&text=No Image";
             } else {
-                $thumbNail = "../uploads/" . $_GET['loc_id'] . "/" . $rowTeam['image'];
+                $thumbNail = $rowTeam['image'];
             }
             ?>
             <div class="col-lg-8">
@@ -127,7 +127,7 @@ if ($_GET['preview'] > "") {
                     <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="team_image" id="team_image" title="Choose an existing image">
                         <option value="">None</option>
                         <?php
-                        getImageDropdownList(image_dir, $rowTeam['image']);
+                        getImageDropdownList($_GET['loc_id'], image_dir, $rowTeam['image']);
                         ?>
                     </select>
                 </div>

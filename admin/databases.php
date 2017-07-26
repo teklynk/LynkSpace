@@ -27,7 +27,7 @@ if ($_GET['preview'] > "") {
     }
 
     if ($rowCustomerPreview['image'] > "") {
-        echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowCustomerPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
+        echo "<p><img src='" . $rowCustomerPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
     } elseif ($rowCustomerPreview['icon'] > "") {
         echo "<p><i id='customer_icon' style='font-size:6.0em;' class='fa fa-fw fa-" . $rowCustomerPreview['icon'] . "'></i></p>";
     }
@@ -207,7 +207,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     if ($rowCustomer['image'] == "" && $rowCustomer['icon'] > "") {
                         $imgSrc = "//placehold.it/1/ffffff/ffffff"; //small image just to give the source a value
                     } elseif ($rowCustomer['image'] > "" && $rowCustomer['icon'] == "") {
-                        $imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowCustomer['image'];
+                        $imgSrc = $rowCustomer['image'];
                     }
                     echo "<img src='" . $imgSrc . "' id='customer_image_preview' style='max-width:140px; height:auto; display:block;'/>";
                     ?>
@@ -226,8 +226,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <select class="form-control selectpicker bs-placeholder show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="customer_image_select" id="customer_image_select" title="Choose an existing image">
                         <option value="">None</option>
                         <?php
-                            getImageDropdownList(image_dir, $rowCustomer['image']);
-                        ?>
+                            getImageDropdownList($_GET['loc_id'], image_dir, $rowCustomer['image']);
                         ?>
                     </select>
                 </div>

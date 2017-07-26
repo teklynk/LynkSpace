@@ -97,7 +97,7 @@ if ($deleteMsg != "") {
                                 <label for="user_name">Username</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="text" name="user_name" maxlength="255" placeholder="Username" autofocus autocomplete="off" required>
+                                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $_POST['user_name']; ?>" placeholder="Username" autofocus autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ if ($deleteMsg != "") {
                                 <label for="user_email">User Email</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="email" name="user_email" maxlength="255" placeholder="Email Address" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $_POST['user_email']; ?>" placeholder="Email Address" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ if ($deleteMsg != "") {
                                 <label for="user_password">User Password</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password" placeholder="Password" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="<?php echo $_POST['user_password']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ if ($deleteMsg != "") {
                                 <label for="user_password_confirm">Password Confirm</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $_POST['user_password_confirm']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>

@@ -212,32 +212,6 @@ function getThemesDropdownList($theme_selected){
     }
 }
 
-//Images folder drop down list
-function getImageDropdownList($imageDir, $image_selected) {
-    if ($handle = opendir($imageDir)) {
-        while (false !== ($file = readdir($handle))) {
-            if ('.' === $file) continue;
-            if ('..' === $file) continue;
-            if ($file==="Thumbs.db") continue;
-            if ($file===".DS_Store") continue;
-            if ($file==="index.html") continue;
-            $allfiles[] = strtolower($file);
-        }
-        closedir($handle);
-    }
-    sort($allfiles);
-
-    foreach($allfiles as $file) {
-        if ($file === $image_selected) {
-            $imageCheck = "SELECTED";
-        } else {
-            $imageCheck = "";
-        }
-        echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='../uploads/".$_GET['loc_id']."/".$file."'/>&nbsp;".$file."</span>\" value='".$file."' $imageCheck>".$file."</option>";
-        //echo "<option class='img-select-option' data-ays-ignore='true' value='".$file."' $imageCheck>".$file."</option>";
-
-    }
-}
 //Fontawesome icon list
 function getIconDropdownList($icon_selected) {
     global $db_conn;
@@ -378,6 +352,65 @@ function getPages($loc) {
     $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>";
     return $pagesList;
 }
+//Images folder drop down list
+function getImageDropdownList($loc, $imageDir, $image_selected) {
+    global $db_conn;
+    global $sharedFilesList;
+    global $fileList;
+
+    $sharedFilesListArr[] = NULL;
+    $allfiles[] = NULL;
+
+    //Build a list of shared images
+    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
+    while ($rowSharedList = mysqli_fetch_array($sqlSharedList)) {
+
+        $sharedOptions = $rowSharedList['shared'];
+        $sharedFileName = $rowSharedList['filename'];
+
+        $sharedOptionsArr = explode(',', trim($sharedOptions));
+
+        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)){
+            $sharedFilesList .= $sharedFileName . ',';
+        }
+    }
+
+    $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
+
+    if ($handle = opendir($imageDir)) {
+        while (false !== ($file = readdir($handle))) {
+            if ('.' === $file) continue;
+            if ('..' === $file) continue;
+            if ($file==="Thumbs.db") continue;
+            if ($file===".DS_Store") continue;
+            if ($file==="index.html") continue;
+            $allfiles[] = strtolower($file);
+        }
+        closedir($handle);
+    }
+
+    //Merge the lists / arrays
+    $allImagesArr = array_merge($allfiles, $sharedFilesListArr);
+    sort($allImagesArr);
+
+    foreach($allImagesArr as $file) {
+        if (in_array($file, $sharedFilesListArr)){
+            $location = '../uploads/1/';
+        } else {
+            $location = '../uploads/' . $loc . '/';
+        }
+        if ($location . $file === $image_selected) {
+            $imageCheck = 'SELECTED';
+        } else {
+            $imageCheck = '';
+        }
+        if ($file != '') {
+            $fileList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $file . "'/>&nbsp;" . $file . "</span>\" value='" . $location . $file . "' $imageCheck>" . $file . "</option>";
+        }
+    }
+    echo $fileList;
+
+}
 //Get list of shared files for the specific location id.
 function getSharedFilesJsonList($loc){
     global $sharedFilesList;
@@ -399,13 +432,12 @@ function getSharedFilesJsonList($loc){
         $sharedOptionsArr = explode(',', trim($sharedOptions));
 
         if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)){
-            $sharedFilesList .= $sharedFileName . ",";
+            $sharedFilesList .= $sharedFileName . ',';
         }
 
     }
 
     $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
-    sort($sharedFilesListArr); //Sort the image names
 
     foreach($sharedFilesListArr as $imgfilesShared) {
         $locFilePath = str_replace($_GET['loc_id'], '1', image_url); //replace loc_id in image_url with 1
@@ -428,7 +460,6 @@ function getSharedFilesJsonList($loc){
         }
         closedir($handle);
     }
-    sort($allimgfiles); //Sort the image names
 
     foreach($allimgfiles as $imgfiles) {
         if ($imgfiles != '') {

@@ -20,9 +20,9 @@ if (!empty($_POST)) {
         $usersUpdate = "UPDATE users SET username='" . sqlEscapeStr($username) . "', password=SHA1('" . blowfishSalt . safeCleanStr($userpass) . "'), email='" . validateEmail($useremail) . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='".getRealIpAddr()."' WHERE id=" . $userid . " ";
         mysqli_query($db_conn, $usersUpdate);
 
-        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
     } else {
-        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
+        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
     }
 
     if ($_GET['updatepassword'] == 'true') {
@@ -36,7 +36,7 @@ if ($_GET['updatepassword'] == 'true') {
 }
 
 if ($_GET['passwordupdated'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">x</button></div>";
+    $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 ?>
 <div class="row">
@@ -85,14 +85,14 @@ if ($_GET['passwordupdated'] == 'true') {
                 <label>User Password</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" value="" placeholder="Password" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="<?php echo $_POST['user_password']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group required">
                 <label>Password Confirm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" value="" placeholder="Password Confirm" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $_POST['user_password_confirm']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>

@@ -15,4 +15,12 @@ class UseDefaultLogoColumn extends AbstractMigration
         //Update Active status
         $this->query('UPDATE setup SET logo_use_defaults="true";');
     }
+
+    public function down()
+    {
+        //Create logo_use_defaults column
+        $table = $this->table('setup');
+        $table->removeColumn('logo_use_defaults')
+            ->save();
+    }
 }

@@ -21,7 +21,7 @@ if ($_GET['preview']>"") {
 	}
 
 	if ($rowServicesPreview['image']>"") {
-		echo "<p><img src='../uploads/".$_SESSION['loc_id']."/".$rowServicesPreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
+		echo "<p><img src='".$rowServicesPreview['image']."' style='max-width:350px; max-height:150px;' /></p>";
 	}
 
 	if ($rowServicesPreview['title']>"") {
@@ -130,7 +130,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				if ($rowServices['image'] == "" && $rowServices['icon'] > "") {
 					$imgSrc = "//placehold.it/1/ffffff/ffffff"; //small image just to give the source a value
 				} elseif ($rowServices['image'] > "" && $rowServices['icon'] == "") {
-					$imgSrc = "../uploads/" . $_GET['loc_id'] . "/" . $rowServices['image'];
+					$imgSrc = $rowServices['image'];
 				}
 				echo "<img src='".$imgSrc."' id='service_image_preview' style='max-width:140px; height:auto; display:block; background-color: #ccc;'/>";
 				?>
@@ -149,7 +149,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				<select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="service_image_select" id="service_image_select" title="Choose an existing image">
 					<option value="">None</option>
 					<?php
-					getImageDropdownList(image_dir, $rowServices['image']);
+					getImageDropdownList($_GET['loc_id'], image_dir, $rowServices['image']);
 					?>
 				</select>
 			</div>

@@ -441,9 +441,9 @@ function getLogo($loc){
     $rowGetLogoOptions = mysqli_fetch_array($sqlGetLogoOptions);
 
     if ($rowGetLogoOptions['logo_use_defaults'] == 'true') {
-        $getLogo = "uploads/1/".$defaultLogo;
+        $getLogo = $defaultLogo;
     } else {
-        $getLogo = "uploads/".$loc."/".$rowGetLogoOptions['logo'];
+        $getLogo = $rowGetLogoOptions['logo'];
     }
     echo $getLogo;
 }
@@ -642,7 +642,7 @@ function getSlider($sliderType){
                     echo "<div class='item $slideActive'>";
 
                     if (!empty($rowSlider['image'])) {
-                        echo "<div class='fill img-responsive img-full' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
+                        echo "<div class='fill img-responsive img-full' style='background-image:url(" . $rowSlider['image'] . ");'></div>";
                     } else {
                         echo "<div class='fill img-responsive img-full'></div>";
                     }
@@ -685,7 +685,7 @@ function getSlider($sliderType){
                 echo "<div class='item active'>";
 
                 if (!empty($rowSlider['image'])) {
-                    echo "<div class='fill' style='background-image:url(uploads/" . $imagePath . "/" . $rowSlider['image'] . ");'></div>";
+                    echo "<div class='fill' style='background-image:url(" . $rowSlider['image'] . ");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
                 }

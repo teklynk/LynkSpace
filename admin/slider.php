@@ -16,7 +16,7 @@ if ($_GET['preview'] > "") {
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<h4>" . $rowSlidePreview['title'] . "</h4>";
-    echo "<p><img src='../uploads/" . $_SESSION['loc_id'] . "/" . $rowSlidePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p><br/>";
+    echo "<p><img src='" . $rowSlidePreview['image'] . "' style='max-width:350px; max-height:150px;' /></p><br/>";
     echo "<p>" . $rowSlidePreview['content'] . "</p>";
 
     if ($rowSlidePreview['link']) {
@@ -101,7 +101,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     if ($rowSlides['image'] == "") {
         $image = "//placehold.it/350x150&text=No Image";
     } else {
-        $image = "../uploads/" . $_GET['loc_id'] . "/" . $rowSlides['image'];
+        $image = $rowSlides['image'];
     }
 
     ?>
@@ -122,7 +122,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
                     <option value="" >None</option>
                     <?php
-                    getImageDropdownList(image_dir, $rowSlides['image']);
+                    getImageDropdownList($_GET['loc_id'], image_dir, $rowSlides['image']);
                     ?>
                 </select>
             </div>

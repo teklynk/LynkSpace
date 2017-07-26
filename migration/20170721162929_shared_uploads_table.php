@@ -23,6 +23,10 @@ class SharedUploadsTable extends AbstractMigration
 
     public function down()
     {
-        $this->dropTable('shared_uploads');
+        $exists = $this->hasTable('shared_uploads');
+        if ($exists) {
+            $table = $this->table('shared_uploads');
+            $table->drop();
+        }
     }
 }
