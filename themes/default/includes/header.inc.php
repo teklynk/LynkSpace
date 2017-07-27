@@ -17,6 +17,12 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
+    <meta property="og:title" content="<?php echo $theTitle; ?>"/>
+    <meta property="og:url" content="<?php echo serverUrlStr; ?>"/>
+    <meta property="og:site_name" content="<?php echo $theTitle; ?>"/>
+    <meta property="og:description" content="<?php echo $theTitle; ?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="<?php getLogo($_GET['loc_id'], 'absolute'); ?>"/>
     <meta name="description" content="<?php echo $setupDescription; ?>">
     <meta name="keywords" content="<?php echo $setupKeywords; ?>">
     <meta name="author" content="<?php echo $setupAuthor; ?>">
@@ -110,7 +116,7 @@ session_start();
                 <i class="fa fa-bars fa-2x"></i>
                 <span class="toggbutton">MENU</span>
             </button>
-            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id']); ?>" alt="Home" title="Home" border="0"/></a>
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id'], 'relative'); ?>" alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">

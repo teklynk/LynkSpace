@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $logoDefaultsChecked = $_GET['checked'];
 
         //Do Update
-        $logoDefaultsUpdate = "UPDATE setup SET logo_use_defaults='" . $logoDefaultsChecked . "', logo='', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$logoDefaultsID." ";
+        $logoDefaultsUpdate = "UPDATE setup SET logo_use_defaults='" . $logoDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$logoDefaultsID." ";
         mysqli_query($db_conn, $logoDefaultsUpdate);
 
         mysqli_close($db_conn);

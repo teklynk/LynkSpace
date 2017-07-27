@@ -695,20 +695,22 @@ $(document).ready(function () {
         $('.logo_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.logo_defaults_checkbox').attr('disabled', false);
-        }, 500);
+        }, 200);
         //Disable select dropdown if default logo is true
         if ($('.logo_defaults_checkbox').prop('checked') == true) {
             setTimeout(function() {
-                $('#site_logo').attr('disabled', true);
+                $('#site_logo.selectpicker').attr('disabled', true);
+                $('#site_logo_preview').attr('src', '//placehold.it/140x100&text=No Image');
                 //set value to nothing
-                $('.selectpicker').selectpicker('val', '');
-                $('.selectpicker').selectpicker('refresh');
-            }, 500);
+                //$('#site_logo.selectpicker').selectpicker('val', '');
+                $('#site_logo.selectpicker').selectpicker('refresh');
+            }, 200);
         } else {
             setTimeout(function() {
-                $('#site_logo').attr('disabled', false);
-                $('.selectpicker').selectpicker('refresh');
-            }, 500);
+                //$('#site_logo.selectpicker').selectpicker('val');
+                $('#site_logo.selectpicker').attr('disabled', false);
+                $('#site_logo.selectpicker').selectpicker('refresh');
+            }, 200);
         }
     }).change();
     $('.sitemap_builder').click(function () {

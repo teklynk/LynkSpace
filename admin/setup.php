@@ -23,6 +23,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
 //update table on submit
 if (!empty($_POST)) {
     if (!empty($_POST['site_title'])) {
+
         $site_keywords = $_POST['site_keywords'];
         $site_author = $_POST['site_author'];
         $site_description = $_POST['site_description'];
@@ -31,6 +32,13 @@ if (!empty($_POST)) {
             $_POST['location_status'] = 'true';
         } else {
             $_POST['location_status'] = 'false';
+        }
+
+        //use default logo
+        if ($_POST['logo_defaults'] == 'on') {
+            $_POST['logo_defaults']  = 'true';
+        } else {
+            $_POST['logo_defaults']  = 'false';
         }
 
         //Always set default location to active/true
@@ -44,7 +52,7 @@ if (!empty($_POST)) {
             $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $locationUpdate);
             //Update Setup
-            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . $_POST['site_logo'] . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $setupUpdate);
         } else {
             //Insert Location
@@ -66,6 +74,10 @@ if (!empty($_POST)) {
             $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $socialInsert);
         }
+
+        //Reset/Reload loc_list drop down to get the newest locations
+        unset($_SESSION['loc_list']);
+        $_SESSION['loc_list'] = getLocList('false');
 
         header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
         echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
@@ -198,7 +210,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                             <i class='fa fa-fw fa-edit'></i> Site Options
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Edit global website settings, themes, styles.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                                            &nbsp;&nbsp;Edit global website settings, themes, styles.
                                         </small>
                                     </div>
                                 </div>
@@ -215,7 +227,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                                 <i class='fa fa-fw fa-upload'></i> Import CSV
                                             </button>
                                             <small>
-                                                &nbsp;&nbsp;Bulk add locations and web page content.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                                                &nbsp;&nbsp;Bulk add locations and web page content.
                                             </small>
                                         </div>
                                     </div>
@@ -233,7 +245,18 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     <div class="form-group" id="new_location">
                                         <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
                                         <small>
-                                            &nbsp;&nbsp;Add a new branch / location to the website.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                                            &nbsp;&nbsp;Add a new branch / location to the website.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group" id="view_groups_location">
+                                        <button type="button" class="btn btn-primary" onclick="showMyModal('Locations and Groups', 'locationgroups.php');"><i class='fa fa-fw fa-eye'></i> View Locations and Groups</button>
+                                        <small>
+                                            &nbsp;&nbsp;View a list of groups and the locations in those groups.
                                         </small>
                                     </div>
                                 </div>
@@ -251,7 +274,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                             <i class='fa fa-fw fa-trash'></i> Delete this Location
                                         </button>
                                         <small>
-                                            &nbsp;&nbsp;Permanently delete this location.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                                            &nbsp;&nbsp;Permanently delete this location.&nbsp
                                         </small>
                                     </div>
                                 </div>
@@ -272,7 +295,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                                 <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
                                             </label>
                                             <small>
-                                                &nbsp;&nbsp;Make this location active.&nbsp;<i class="fa fa-fw fa-info-circle"></i>
+                                                &nbsp;&nbsp;Make this location active.
                                             </small>
                                         </div>
                                     </div>
@@ -418,6 +441,12 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
         </div>
     </div>
+
+<?php
+    //Modal preview box
+    showModalPreview("webpageDialog");
+?>
+
     <!-- Modal javascript logic -->
     <script type="text/javascript">
         $(document).ready(function(){

@@ -27,13 +27,23 @@ $getFileName = safeCleanStr($getSharedFileNameArr[3]);
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {
 
-    showModalConfirm(
-        "confirm",
-        "Delete Image?",
-        "Are you sure you want to delete: ".$_GET["delete"]."?",
-        "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
-        false
-    );
+    if ($_GET["isshared"] == 'false'){
+        showModalConfirm(
+            "confirm",
+            "Delete Image?",
+            "Are you sure you want to delete: ".$_GET["delete"]."?",
+            "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
+            false
+        );
+    } else {
+        showModalConfirm(
+            "confirm",
+            "Delete Image?",
+            "Are you sure you want to delete: ".$_GET["delete"]."? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
+            "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
+            false
+        );
+    }
 
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
 
@@ -196,14 +206,15 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                             if ($rowSharedUploads['filename'] == $file) {
                                 $isShared = 'btn btn-primary';
+                                $isSharedVal = 'true';
                             } else {
                                 $isShared = 'btn btn-default';
+                                $isSharedVal = 'false';
                             }
 
                             echo "<tr data-index='" . $count . "'>
                             <td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir) . $file . " : " . $fileSize . "', '" . image_dir . $file . "')\" title='Preview'>" . $file . "</a></td>";
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
-                                //TODO: Check DB, compare image filenames with shared filenames, show that the image is shared.
                                 echo "<td class='col-xs-1'>
                                 <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
@@ -211,7 +222,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $modDate . "</td>
                             <td class='col-xs-1'>
-                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "&isshared=".$isSharedVal."'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
                         }

@@ -43,7 +43,7 @@ if (isset($_SESSION['updates_available'])) {
     }
 
     //Message
-    echo "<div class='alert alert-info'><i class='fa fa-fw alert-icon fa-info-circle'></i><strong>Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
+    echo "<div class='alert alert-info'><strong>Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
     echo "<h2>An updated version of YouSeeMore is available: ".$getVersion."</h2>";
     echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";

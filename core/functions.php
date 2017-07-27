@@ -429,7 +429,7 @@ function getSetup($loc){
     $setupSearchDefault = $rowSetup['searchdefault'];
     $setupLogoDefaults = $rowSetup['logo_use_defaults'];
 }
-function getLogo($loc){
+function getLogo($loc, $type){
     global $db_conn;
     global $getLogo;
 
@@ -445,7 +445,15 @@ function getLogo($loc){
     } else {
         $getLogo = $rowGetLogoOptions['logo'];
     }
-    echo $getLogo;
+
+    if ($type == 'absolute'){
+        echo str_replace('..', serverUrlStr, $getLogo);
+    } elseif ($type == 'relative') {
+        echo $getLogo;
+    } else {
+        echo $getLogo;
+    }
+
 }
 function getSocialMediaIcons($shape, $section){
     //EXAMPLE: getSocialMediaIcons("circle","top")
