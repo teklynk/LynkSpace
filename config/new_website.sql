@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2017 at 02:59 PM
--- Server version: 5.5.54-MariaDB-1ubuntu0.14.04.1
--- PHP Version: 5.6.30-10+deb.sury.org~trusty+2
+-- Generation Time: Jul 27, 2017 at 05:07 PM
+-- Server version: 5.5.56-MariaDB-1ubuntu0.14.04.1
+-- PHP Version: 5.6.31-2+ubuntu14.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -82,20 +82,20 @@ INSERT INTO `category_navigation` (`id`, `cat_name`, `nav_section`, `nav_loc_id`
 
 CREATE TABLE `config` (
   `id` int(11) NOT NULL,
-  `customer_id` text NOT NULL,
-  `theme` text NOT NULL,
-  `iprange` text NOT NULL,
-  `multibranch` text NOT NULL,
-  `loc_types` text NOT NULL,
-  `homepageurl` text NOT NULL,
-  `setuppacurl` text NOT NULL,
-  `searchform` text NOT NULL,
+  `customer_id` text COLLATE utf8_unicode_ci NOT NULL,
+  `theme` text COLLATE utf8_unicode_ci NOT NULL,
+  `iprange` text COLLATE utf8_unicode_ci NOT NULL,
+  `multibranch` text COLLATE utf8_unicode_ci NOT NULL,
+  `loc_types` text COLLATE utf8_unicode_ci NOT NULL,
+  `homepageurl` text COLLATE utf8_unicode_ci NOT NULL,
+  `setuppacurl` text COLLATE utf8_unicode_ci NOT NULL,
+  `searchform` text COLLATE utf8_unicode_ci NOT NULL,
   `session_timeout` int(11) NOT NULL,
-  `carousel_speed` text NOT NULL,
-  `analytics` text NOT NULL,
+  `carousel_speed` text COLLATE utf8_unicode_ci NOT NULL,
+  `analytics` text COLLATE utf8_unicode_ci NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `author_name` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `config`
@@ -193,20 +193,21 @@ CREATE TABLE `generalinfo` (
 
 CREATE TABLE `hottitles` (
   `id` int(11) NOT NULL,
-  `title` text NOT NULL,
-  `url` text NOT NULL,
-  `loc_type` text NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `url` text COLLATE utf8_unicode_ci NOT NULL,
+  `loc_type` text COLLATE utf8_unicode_ci NOT NULL,
   `sort` int(11) NOT NULL,
-  `active` text NOT NULL,
+  `active` text COLLATE utf8_unicode_ci NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hottitles`
 --
 
-INSERT INTO `hottitles` (`id`, `title`, `url`, `loc_type`, `sort`, `active`, `datetime`, `loc_id`) VALUES ('1', 'New York Times', 'https://content.tlcdelivers.com/econtent/xml/NYTimes.xml', 'ALL', '1', 'true', '0000-00-00 00:00:00.000000', '1');
+INSERT INTO `hottitles` (`id`, `title`, `url`, `loc_type`, `sort`, `active`, `datetime`, `loc_id`) VALUES
+(1, 'New York Times', 'https://content.tlcdelivers.com/econtent/xml/NYTimes.xml', 'ALL', 1, 'true', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -1019,11 +1020,11 @@ INSERT INTO `icons_list` (`id`, `icon`) VALUES
 
 CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `type` text NOT NULL,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` text COLLATE utf8_unicode_ci NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `active` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `locations`
@@ -1052,22 +1053,6 @@ CREATE TABLE `navigation` (
   `author_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `sections_customers`
---
-
-CREATE TABLE IF NOT EXISTS `sections_customers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `heading` text NOT NULL,
-  `content` text NOT NULL,
-  `section` text NOT NULL,
-  `use_defaults` text NOT NULL,
-  `author_name` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `loc_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
 
 --
@@ -1083,6 +1068,54 @@ CREATE TABLE `pages` (
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phinxlog`
+--
+
+CREATE TABLE `phinxlog` (
+  `version` bigint(20) NOT NULL,
+  `migration_name` varchar(100) DEFAULT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `breakpoint` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phinxlog`
+--
+
+INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
+(20170619190706, 'NavAddColumnActive', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
+(20170620140024, 'NavCatRenameNameColumn', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
+(20170623195513, 'AboutRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:44', 0),
+(20170623201643, 'FeaturedRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:45', 0),
+(20170623202903, 'PagesRemoveImageAlignColumns', '2017-06-23 21:07:45', '2017-06-23 21:07:45', 0),
+(20170627150736, 'ConfigTimeOutValues', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
+(20170627181837, 'UserPasswordResetHash', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
+(20170718181748, 'ChangeCharSetUtf8', '2017-07-18 18:37:09', '2017-07-18 18:37:09', 0),
+(20170721162929, 'SharedUploadsTable', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
+(20170725174836, 'UseDefaultLogoColumn', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
+(20170726203814, 'PrependImagePathToImages', '2017-07-26 21:12:09', '2017-07-26 21:12:10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sections_customers`
+--
+
+CREATE TABLE `sections_customers` (
+  `id` int(11) NOT NULL,
+  `heading` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `section` text COLLATE utf8_unicode_ci NOT NULL,
+  `use_defaults` text COLLATE utf8_unicode_ci NOT NULL,
+  `author_name` text COLLATE utf8_unicode_ci NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `loc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1135,6 +1168,7 @@ CREATE TABLE `setup` (
   `services_use_defaults` text NOT NULL,
   `team_use_defaults` text NOT NULL,
   `hottitles_use_defaults` text NOT NULL,
+  `logo_use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
@@ -1144,8 +1178,22 @@ CREATE TABLE `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', '2017-04-14 18:59:07', 'admin', 1);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `logo_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', 'true', '2017-07-27 21:06:48', 'admin', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shared_uploads`
+--
+
+CREATE TABLE `shared_uploads` (
+  `id` int(11) NOT NULL,
+  `shared` text NOT NULL,
+  `filename` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `loc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1218,6 +1266,8 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
+  `password_reset` text NOT NULL,
+  `password_reset_date` date NOT NULL,
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -1318,6 +1368,18 @@ ALTER TABLE `pages`
   ADD KEY `pages_loc_id_fk` (`loc_id`);
 
 --
+-- Indexes for table `phinxlog`
+--
+ALTER TABLE `phinxlog`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Indexes for table `sections_customers`
+--
+ALTER TABLE `sections_customers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -1330,6 +1392,14 @@ ALTER TABLE `services`
 ALTER TABLE `setup`
   ADD PRIMARY KEY (`id`),
   ADD KEY `setup_loc_id_fk` (`loc_id`);
+
+--
+-- Indexes for table `shared_uploads`
+--
+ALTER TABLE `shared_uploads`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `shared_uploads_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `slider`
@@ -1382,7 +1452,7 @@ ALTER TABLE `category_navigation`
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `contactus`
 --
@@ -1407,17 +1477,17 @@ ALTER TABLE `generalinfo`
 -- AUTO_INCREMENT for table `hottitles`
 --
 ALTER TABLE `hottitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `icons_list`
 --
 ALTER TABLE `icons_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=787;
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `navigation`
 --
@@ -1429,6 +1499,11 @@ ALTER TABLE `navigation`
 ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `sections_customers`
+--
+ALTER TABLE `sections_customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
@@ -1437,7 +1512,12 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `setup`
 --
 ALTER TABLE `setup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `shared_uploads`
+--
+ALTER TABLE `shared_uploads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `slider`
 --
@@ -1457,7 +1537,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- Constraints for dumped tables
 --
@@ -1475,88 +1555,16 @@ ALTER TABLE `category_customers`
   ADD CONSTRAINT `category_customers_loc_id_fk` FOREIGN KEY (`cust_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `category_navigation`
---
-ALTER TABLE `category_navigation`
-  ADD CONSTRAINT `category_loc_id_fk` FOREIGN KEY (`nav_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `contactus`
 --
 ALTER TABLE `contactus`
   ADD CONSTRAINT `contactus_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `customers`
+-- Constraints for table `shared_uploads`
 --
-ALTER TABLE `customers`
-  ADD CONSTRAINT `customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `featured`
---
-ALTER TABLE `featured`
-  ADD CONSTRAINT `featured_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `generalinfo`
---
-ALTER TABLE `generalinfo`
-  ADD CONSTRAINT `generalinfo_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `hottitles`
---
-ALTER TABLE `hottitles`
-  ADD CONSTRAINT `hottitles_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `navigation`
---
-ALTER TABLE `navigation`
-  ADD CONSTRAINT `navigation_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `pages`
---
-ALTER TABLE `pages`
-  ADD CONSTRAINT `pages_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `sections_customers`
---
-ALTER TABLE `sections_customers`
-  ADD CONSTRAINT `sections_customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `services`
---
-ALTER TABLE `services`
-  ADD CONSTRAINT `services_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `setup`
---
-ALTER TABLE `setup`
-  ADD CONSTRAINT `setup_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `slider`
---
-ALTER TABLE `slider`
-  ADD CONSTRAINT `slider_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `socialmedia`
---
-ALTER TABLE `socialmedia`
-  ADD CONSTRAINT `socialmedia_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `team`
---
-ALTER TABLE `team`
-  ADD CONSTRAINT `team_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `shared_uploads`
+  ADD CONSTRAINT `shared_uploads_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
