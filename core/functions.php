@@ -5,18 +5,18 @@ if (!defined('inc_access')){
     die('Direct access not permitted');
 }
 
-function getLocation(){
+function getLocation($loc){
     global $locationName;
     global $locationActive;
     global $locationID;
     global $db_conn;
 
-    if (ctype_digit($_GET['loc_id'])){
+    if (ctype_digit($loc)){
 
-        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $_GET['loc_id'] . " ");
+        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $loc . " ");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation);
 
-        if ($rowGetLocation['active'] == 'true' && $_GET['loc_id'] == $rowGetLocation['id']){
+        if ($rowGetLocation['active'] == 'true' && $loc == $rowGetLocation['id']){
             $locationName = $rowGetLocation['name'];
             $locationActive = $rowGetLocation['active'];
             $locationID = $rowGetLocation['id'];
@@ -48,7 +48,7 @@ function getPageList(){
     }
 }
 
-function getPage(){
+function getPage($loc){
     global $pageTitle;
     global $pageContent;
     global $pageRefId;
@@ -56,7 +56,7 @@ function getPage(){
 
     if (ctype_digit($_GET['page_id'])){
         $pageRefId = $_GET['page_id'];
-        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $loc . " ");
         $rowPage = mysqli_fetch_array($sqlPage);
 
         if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']){
@@ -77,13 +77,13 @@ function getPage(){
     }
 }
 
-function getAbout(){
+function getAbout($loc){
     global $aboutTitle;
     global $aboutContent;
     global $imagePath;
     global $db_conn;
 
-    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $loc . " ");
     $rowAbout = mysqli_fetch_array($sqlAbout);
 
     if ($rowAbout['use_defaults'] == "true" || $rowAbout['use_defaults'] == "" || $rowAbout['use_defaults'] == NULL) {
@@ -102,7 +102,7 @@ function getAbout(){
     }
 }
 
-function getContactInfo(){
+function getContactInfo($loc){
     global $contactHeading;
     global $contactBlurb;
     global $contactMap;
@@ -117,7 +117,7 @@ function getContactInfo(){
     global $contactFormMsg;
     global $db_conn;
 
-    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $loc . " ");
     $rowContact = mysqli_fetch_array($sqlContact);
 
     if ($rowContact['use_defaults'] == "true" || $rowContact['use_defaults'] == "" || $rowContact['use_defaults'] == NULL) {
@@ -178,7 +178,7 @@ function getContactInfo(){
     }
 }
 
-function getServices(){
+function getServices($loc){
     global $sqlServicesHeading;
     global $rowServicesHeading;
     global $servicesHeading;
@@ -189,14 +189,14 @@ function getServices(){
     global $servicesIcon;
     global $db_conn;
 
-    $sqlServicesSetup = mysqli_query($db_conn, "SELECT services_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlServicesSetup = mysqli_query($db_conn, "SELECT services_use_defaults FROM setup WHERE loc_id=" . $loc . " ");
     $rowServicesSetup = mysqli_fetch_array($sqlServicesSetup);
 
     //toggle default location value
     if ($rowServicesSetup['services_use_defaults'] == 'true' || $rowServicesSetup['services_use_defaults'] == "" || $rowServicesSetup['services_use_defaults'] == NULL) {
         $servicesDefaultLoc = 1;
     } else {
-        $servicesDefaultLoc = $_GET['loc_id'];
+        $servicesDefaultLoc = $loc;
     }
 
     $sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=" . $servicesDefaultLoc . " ");
@@ -213,7 +213,7 @@ function getServices(){
     $servicesCount = 0;
 }
 
-function getTeam(){
+function getTeam($loc){
     global $sqlTeamHeading;
     global $rowTeamHeading;
     global $sqlTeam;
@@ -226,14 +226,14 @@ function getTeam(){
     global $teamNumRows;
     global $db_conn;
 
-    $sqlTeamSetup = mysqli_query($db_conn, "SELECT team_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlTeamSetup = mysqli_query($db_conn, "SELECT team_use_defaults FROM setup WHERE loc_id=" . $loc . " ");
     $rowTeamSetup = mysqli_fetch_array($sqlTeamSetup);
 
     //toggle default location value
     if ($rowTeamSetup['team_use_defaults'] == 'true' || $rowTeamSetup['team_use_defaults'] == "" || $rowTeamSetup['team_use_defaults'] == NULL) {
         $teamDefaultLoc = 1;
     } else {
-        $teamDefaultLoc = $_GET['loc_id'];
+        $teamDefaultLoc = $loc;
     }
 
     $sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=" . $teamDefaultLoc . " ");
@@ -249,8 +249,8 @@ function getTeam(){
     $teamNumRows = mysqli_num_rows($sqlTeam);
 }
 
-function getNav($navSection, $dropdown, $pull){
-    //EXAMPLE: getNav('Top','true','right','true')
+function getNav($loc, $navSection, $dropdown, $pull){
+    //EXAMPLE: getNav($_GET['loc_id'], 'Top','true','right','true')
     global $db_conn;
     global $navLinksID;
     global $navLinksSort;
@@ -302,7 +302,7 @@ function getNav($navSection, $dropdown, $pull){
     }
 
     //check if using default location
-    $sqlNavDefaults = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlNavDefaults = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $loc . " ");
     $rowNavDefaults = mysqli_fetch_array($sqlNavDefaults);
 
     //toggle default location value if conditions are true
@@ -313,7 +313,7 @@ function getNav($navSection, $dropdown, $pull){
     } elseif ($navSection == $navSectionIndex3 && $rowNavDefaults['navigation_use_defaults_3'] == 'true') {
         $navDefaultLoc = 1;
     } else {
-        $navDefaultLoc = $_GET['loc_id'];
+        $navDefaultLoc = $loc;
     }
 
     $sqlNavLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='$navSection' AND active='true' AND loc_id=" . $navDefaultLoc . " ORDER BY navigation.sort, navigation.name ASC");
@@ -429,6 +429,7 @@ function getSetup($loc){
     $setupSearchDefault = $rowSetup['searchdefault'];
     $setupLogoDefaults = $rowSetup['logo_use_defaults'];
 }
+
 function getLogo($loc, $type){
     global $db_conn;
     global $getLogo;
@@ -455,16 +456,88 @@ function getLogo($loc, $type){
     }
 
 }
-function getSocialMediaIcons($shape, $section){
-    //EXAMPLE: getSocialMediaIcons("circle","top")
-    //EXAMPLE: getSocialMediaIcons("square","footer")
+
+function getCoreHeader($loc){
+    getLocation($loc);
+    getSetup($loc);
+    global $setupConfig;
+    global $setupTitle;
+    global $setupAuthor;
+    global $setupKeywords;
+    global $setupDescription;
+    ?>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="refresh" content="3600; url=index.php?loc_id=<?php echo $loc; ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
+    <meta property="og:title" content="<?php echo $setupTitle; ?>"/>
+    <meta property="og:url" content="<?php echo serverUrlStr; ?>"/>
+    <meta property="og:site_name" content="<?php echo $setupTitle; ?>"/>
+    <meta property="og:description" content="<?php echo $setupTitle; ?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="<?php getLogo($loc, 'absolute'); ?>"/>
+    <meta name="description" content="<?php echo $setupDescription; ?>">
+    <meta name="keywords" content="<?php echo $setupKeywords; ?>">
+    <meta name="author" content="<?php echo $setupAuthor; ?>">
+
+    <title><?php echo $setupTitle; ?></title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/images/favicon.ico">
+
+    <!-- Core CSS Libraries -->
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
+
+    <!-- Default CSS - Do not remove-->
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
+
+    <!-- Core JS Libraries -->
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+
+    <!-- TLC LS2 search script -->
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
+
+    <!-- Core js file-->
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <!-- TLC search variables -->
+    <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
+    <script type="text/javascript" language="javascript">
+        var TLCDomain = "<?php echo setupPACURL; ?>";
+        var TLCConfig = "<?php echo $setupConfig; ?>";
+        var TLCBranch = "";
+        var TLCClassicDomain = "<?php echo setupPACURL; ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
+    </script>
+
+    <?php
+    //Google Analytics UID
+    if (!empty(site_analytics)) {
+        getGoogleAnalyticsTrackingCode(site_analytics);
+    }
+    ?>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <noscript>Javascript is not enabled in your browser.</noscript>
+    <?php
+}
+
+function getSocialMediaIcons($loc, $shape, $section){
+    //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
+    //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")
     global $socialMediaIcons;
     global $socialMediaHeading;
     global $sqlSocialMedia;
     global $rowSocialMedia;
     global $db_conn;
 
-    $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $loc . " ");
     $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
 
     //use default location
@@ -508,7 +581,9 @@ function getSocialMediaIcons($shape, $section){
     }
 }
 
-function getCustomers($custType){
+function getCustomers($loc, $custType){
+    //getCustomers($_GET['loc_id'], 'featured')
+    //getCustomers($_GET['loc_id'], NULL)
     global $sqlCustomers;
     global $customerHeading;
     global $customerBlurb;
@@ -530,14 +605,14 @@ function getCustomers($custType){
     }
 
     //get the default values from setup table where get loc_id
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section FROM sections_customers WHERE section='".$customerSection."' AND loc_id=" . $_GET['loc_id'] . " ");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section FROM sections_customers WHERE section='".$customerSection."' AND loc_id=" . $loc . " ");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup);
 
     //toggle default location value if conditions are true
     if ($customerSection == $rowCustomerSetup['section'] && $rowCustomerSetup['use_defaults'] == 'true') {
         $custDefaultLoc = 1;
     } else {
-        $custDefaultLoc = $_GET['loc_id'];
+        $custDefaultLoc = $loc;
     }
 
     //sets to use defaults if conditions are true where loc_id = $custDefaultLoc
@@ -574,9 +649,9 @@ function getCustomers($custType){
 
 }
 
-function getSlider($sliderType){
-    //EXAMPLE: getSlider("slide")
-    //EXAMPLE: getSlider("random")
+function getSlider($loc, $sliderType){
+    //EXAMPLE: getSlider($_GET['loc_id'], "slide")
+    //EXAMPLE: getSlider($_GET['loc_id'], "random")
     global $sliderLink;
     global $sliderCount;
     global $sliderTitle;
@@ -594,10 +669,10 @@ function getSlider($sliderType){
     }
 
     $sliderCount = 0;
-    $imagePath = $_GET['loc_id'];
+    $imagePath = $loc;
 
     //get location type from locations table
-    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $loc . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
 
     if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
@@ -609,10 +684,10 @@ function getSlider($sliderType){
     }
 
     //get the default value from setup table
-    $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $loc . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
-    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, startdate, enddate, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " $sliderOrderBy");
+    $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, startdate, enddate, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $loc . " $sliderOrderBy");
     $sliderNumRows = mysqli_num_rows($sqlSlider);
 
     //use default location
@@ -725,12 +800,12 @@ function getSlider($sliderType){
     }
 }
 
-function getGeneralInfo(){
+function getGeneralInfo($loc){
     global $generalInfoContent;
     global $generalInfoHeading;
     global $db_conn;
 
-    $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $loc . " ");
     $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
     //use default location
@@ -748,16 +823,16 @@ function getGeneralInfo(){
     }
 }
 
-function getFeatured(){
+function getFeatured($loc){
     global $featuredContent;
     global $featuredHeading;
     global $featuredBlurb;
     global $imagePath;
     global $db_conn;
 
-    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults FROM featured WHERE loc_id=" . $loc . " ");
     $rowFeatured = mysqli_fetch_array($sqlFeatured);
-    $imagePath = $_GET['loc_id'];
+    $imagePath = $loc;
 
     if ($rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == NULL){
         $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content FROM featured WHERE loc_id=1 ");
@@ -960,7 +1035,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     echo "</div>";
 }
 
-function getHottitlesTabs(){
+function getHottitlesTabs($loc){
     global $hottitlesTile;
     global $hottitlesUrl;
     global $hottitlesLoadFirstUrl;
@@ -972,12 +1047,12 @@ function getHottitlesTabs(){
     global $db_conn;
 
     //get the heading value from setup table
-    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $loc. " ");
     $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
     $hottitlesHeading = $rowHottitlesSetup['hottitlesheading'];
 
     //get location type from locations table
-    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+    $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $loc . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
 
     if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
@@ -989,11 +1064,11 @@ function getHottitlesTabs(){
     }
 
     //get the default value from setup table
-    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults, loc_id FROM setup WHERE loc_id=" . $loc . " ");
     $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup);
 
-    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, loc_type, sort, active, loc_id FROM hottitles WHERE active='true' AND $locTypeWhere loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC");
-    $hottitlesLocID = $_GET['loc_id'];
+    $sqlHottitles = mysqli_query($db_conn, "SELECT id, title, url, loc_type, sort, active, loc_id FROM hottitles WHERE active='true' AND $locTypeWhere loc_id=" . $loc . " ORDER BY sort ASC");
+    $hottitlesLocID = $loc;
 
     //use default location
     if ($rowHottitlesSetup['hottitles_use_defaults'] == "true" || $rowHottitlesSetup['hottitles_use_defaults'] == "" || $rowHottitlesSetup['hottitles_use_defaults'] == NULL) {
@@ -1153,22 +1228,22 @@ function getGoogleTranslateCode($languages){
 //Call these functions depending on which page you are visiting
 //Sets the page title and calls the main function for each page.
 if (basename($_SERVER['PHP_SELF']) == "page.php"){
-    getPage();
+    getPage($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $pageTitle;
 } elseif (basename($_SERVER['PHP_SELF']) == "about.php"){
-    getAbout();
+    getAbout($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $aboutTitle;
 } elseif (basename($_SERVER['PHP_SELF']) == "contact.php"){
-    getContactInfo();
+    getContactInfo($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $contactHeading;
 } elseif (basename($_SERVER['PHP_SELF']) == "services.php"){
-    getServices();
+    getServices($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $servicesHeading;
 } elseif (basename($_SERVER['PHP_SELF']) == "staff.php"){
-    getTeam();
+    getTeam($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $teamHeading;
 } elseif (basename($_SERVER['PHP_SELF']) == "databases.php"){
-    getCustomers(NULL);
+    getCustomers($_GET['loc_id'], NULL);
     $theTitle = $setupTitle . " - " . $customerHeading;
 } else {
     $theTitle = $setupTitle;

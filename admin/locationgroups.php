@@ -17,8 +17,8 @@ echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .v
 <table class="table table-bordered table-hover table-striped table-responsive">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Type</th>
+        <th>Location</th>
+        <th>Location Group</th>
     </tr>
     </thead>
         <tbody>

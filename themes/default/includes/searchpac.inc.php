@@ -102,7 +102,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                 <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center center-block">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                getNav('Search', 'false', 'center', 'false');
+                getNav($_GET['loc_id'], 'Search', 'false', 'center', 'false');
                 ?>
             </div>
         </div>

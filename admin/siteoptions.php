@@ -73,7 +73,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <br>
                 <div class="form-group" id="file_editor">
                     <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
-                        <i class='fa fa-fw fa-edit'></i> File Editor
+                        <i class='fa fa-fw fa-edit'></i> Theme Editor
                     </button>
                     <small>
                         &nbsp;&nbsp;Over-ride theme CSS styles and other files.

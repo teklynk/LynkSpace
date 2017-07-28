@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getTeam();
+getTeam($_GET['loc_id']);
 
 echo "<a name='team'></a>";
 

@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getCustomers('featured');
+getCustomers($_GET['loc_id'], 'featured');
 
 $customersItemCount = 0;
 

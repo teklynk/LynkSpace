@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getGeneralInfo();
+getGeneralInfo($_GET['loc_id']);
 
 if (!empty($generalInfoContent)) {
     echo "<div class='container-fluid page-container row' id='generalinfo'>";

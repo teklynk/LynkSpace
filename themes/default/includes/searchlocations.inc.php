@@ -131,7 +131,7 @@ getSetup($_GET['loc_id']); //from functions.php
                 <div class="input-group col-md-12 text-center center-block">
                     <?php
                     //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                    getNav('Search', 'false', 'center', 'false');
+                    getNav($_GET['loc_id'], 'Search', 'false', 'center', 'false');
                     ?>
                 </div>
             </div>

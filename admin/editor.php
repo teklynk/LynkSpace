@@ -12,43 +12,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-    $fileToEdit_dir = $_GET['section'];
     $pageMsg="";
 
-    //array of allowed files that can be edited
-    $editFileListArr = array("../themes/".themeOption."/css/custom-style.css");
+    //css file that can be edited
+    $fileToEdit_dir = "../themes/".themeOption."/css/custom-style.css";
 
-    $editFileListArrlength = count($editFileListArr);
-    $editFileListStr = "";
-
-    //loop through the array of $editFileListArr
-    for ($x = 0; $x < $editFileListArrlength; $x++) {
-
-        if ($editFileListArr[$x] == $_GET['section']) {
-
-            $isSectionSelected = "SELECTED";
-
-        } else {
-
-            $isSectionSelected = "";
-
-        }
-
-        $editFileListStr .= "<option value=" . $editFileListArr[$x] . " " . $isSectionSelected . ">" . $editFileListArr[$x] . "</option>";
-
-        $editFileListArrFirstItem = $editFileListArr[0];
-    }
-
-    //Redirect to section=firstarrayitem if section is not in querystring
-    if ($_GET['section'] == "" && $_GET['loc_id']) {
-        header("Location: editor.php?section=" . $editFileListArrFirstItem . "&loc_id=" . $_GET['loc_id'] . "");
-        echo "<script>window.location.href='editor.php?section=" . $editFileListArrFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
-    }
-
-    //do not open file if it is not in the array of allowed files
-    if (!in_array($fileToEdit_dir, $editFileListArr, true)) {
-        die('Unable to find: ' . $fileToEdit_dir);
-    }
     //check if file is writable
     if (!is_writable($fileToEdit_dir)) {
         die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
@@ -59,18 +27,15 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     $fileData = fread($handle,filesize($fileToEdit_dir));
 
     if ($_POST['save_main']) {
-        //check if file is in the array
-        if (in_array($fileToEdit_dir, $editFileListArr, true)) {
-            if (file_exists($fileToEdit_dir)) {
-                //open file for Writing
-                $handle = fopen($fileToEdit_dir, 'w') or die('Cannot write to file: ' . $fileToEdit_dir . '. Check file permissions.');
-                $fileData = sanitizeStr($_POST['edit_file']);
-                fwrite($handle, $fileData);
+        if (file_exists($fileToEdit_dir)) {
+            //open file for Writing
+            $handle = fopen($fileToEdit_dir, 'w') or die('Unable to write to ' . $fileToEdit_dir . '. Check file permissions.');
+            $fileData = sanitizeStr($_POST['edit_file']);
+            fwrite($handle, $fileData);
 
-                $pageMsg = "<div class='alert alert-success'>" . $fileToEdit_dir . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            $pageMsg = "<div class='alert alert-success'>" . $fileToEdit_dir . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
-                closedir($handle);
-            }
+            closedir($handle);
         } else {
             die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
         }
@@ -83,10 +48,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
                     <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Home</a></li>
                     <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Settings</a></li>
                     <li><a href="siteoptions.php?loc=<?php echo $_GET['loc_id']; ?>">Site Options</a></li>
-                    <li class="active">File Editor</li>
+                    <li class="active">Theme Editor</li>
                 </ol>
                 <h1 class="page-header">
-                    File Editor
+                    Theme Editor
                 </h1>
             </div>
 
@@ -102,21 +67,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
                 }
                 ?>
                 <form name="editForm" class="dirtyForm" method="post">
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="nav_menu">Files</label>
-                                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="nav_menu" id="nav_menu" autofocus="autofocus">
-                                    <?php echo $editFileListStr; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <hr/>
-
                     <div class="form-group">
-                        <label><?php echo $fileToEdit_dir; ?></label>
+                        <label for="edit_file"><?php echo $fileToEdit_dir; ?></label>
+                        <small>
+                            &nbsp;&nbsp;Over-ride theme CSS styles.
+                        </small>
                         <textarea id="edit_file" class="form-control" name="edit_file" rows="60"><?php echo $fileData; ?></textarea>
                     </div>
                     <div class="form-group">
@@ -138,7 +93,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
         </div><!--close main container-->
 
 <!--CodeMirror JS & CSS -->
-<script>
+<script type="text/javascript" language="javascript">
     $(document).ready(function(){
         if ($('#edit_file').length){
             var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
@@ -155,7 +110,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
         }
     });
 </script>
-<style>
+<style type="text/css">
     .CodeMirror {
         position: relative;
         border: 1px solid #eee;

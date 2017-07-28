@@ -20,8 +20,8 @@ session_start();
     checkIPRange();
 
     ?>
-    <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; URL=index.php?logout=true"/>
-    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; url=index.php?logout=true"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">

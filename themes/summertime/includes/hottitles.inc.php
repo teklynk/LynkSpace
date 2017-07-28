@@ -1,6 +1,6 @@
 <?php
 //Hot Titles Carousel
-getHottitlesTabs();
+getHottitlesTabs($_GET['loc_id']);
 if ($hottitlesCount > 0) {
     echo "<div class='container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";

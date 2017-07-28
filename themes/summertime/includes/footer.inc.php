@@ -13,7 +13,7 @@ if (!defined('inc_access')) {
                 <div class="navbar-Footer">
                     <?php
                     //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                    getNav('Footer', 'false', 'center', 'false');
+                    getNav($_GET['loc_id'], 'Footer', 'false', 'center', 'false');
                     ?>
                 </div>
                 <!-- /.navbar-collapse -->

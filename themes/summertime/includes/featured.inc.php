@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-getFeatured();
+getFeatured($_GET['loc_id']);
 echo "<div class='container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
 

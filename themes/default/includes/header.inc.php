@@ -1,78 +1,23 @@
 <?php
 session_start();
+
+if (!defined('inc_access')) {
+    die('Direct access not permitted');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php
-    if (!defined('inc_access')) {
-        die('Direct access not permitted');
-    }
 
-    getLocation();
+    getLocation($_GET['loc_id']);
+
+    getCoreHeader($_GET['loc_id']);
 
     ?>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="3600; URL=index.php?loc_id=<?php echo $_GET['loc_id']; ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="index,follow">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
-    <meta property="og:title" content="<?php echo $theTitle; ?>"/>
-    <meta property="og:url" content="<?php echo serverUrlStr; ?>"/>
-    <meta property="og:site_name" content="<?php echo $theTitle; ?>"/>
-    <meta property="og:description" content="<?php echo $theTitle; ?>"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content="<?php getLogo($_GET['loc_id'], 'absolute'); ?>"/>
-    <meta name="description" content="<?php echo $setupDescription; ?>">
-    <meta name="keywords" content="<?php echo $setupKeywords; ?>">
-    <meta name="author" content="<?php echo $setupAuthor; ?>">
-
-    <title><?php echo $theTitle; ?></title>
-
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/images/favicon.ico">
-
-    <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
-
-    <!-- Default CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
-
-    <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/default-style.min.css?v=<?php echo ysmVersion; ?>">
-
-    <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.css">
-
-    <?php
-    //Google Analytics UID
-    if (!empty(site_analytics)) {
-        getGoogleAnalyticsTrackingCode(site_analytics);
-    }
-    ?>
-
-    <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
-
-    <!-- TLC LS2 search script -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
-
-    <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
-
-    <!-- TLC search variables -->
-    <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
-        var TLCDomain = "<?php echo setupPACURL; ?>";
-        var TLCConfig = "<?php echo $setupConfig; ?>";
-        var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo setupPACURL; ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
-
-        //scroll detect
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
-
             if (scroll >= 150) {
                 $("#topNav").addClass("nav-shrink");
             } else {
@@ -81,14 +26,11 @@ session_start();
         });
     </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- CSS Template -->
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/default-style.min.css?v=<?php echo ysmVersion; ?>">
+    <!-- Custom over-write  -->
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.css">
 
-    <noscript>Javascript is not enabled in your browser.</noscript>
 </head>
 
 <body>
@@ -122,7 +64,7 @@ session_start();
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
             <?php
             //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav('Top', 'true', 'left');
+            getNav($_GET['loc_id'], 'Top', 'true', 'left');
             ?>
             <div class="socialDiv pull-right hidden-xs hidden-sm">
                 <?php
