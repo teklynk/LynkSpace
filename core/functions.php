@@ -527,7 +527,30 @@ function getCoreHeader($loc){
     <noscript>Javascript is not enabled in your browser.</noscript>
     <?php
 }
+//Theme options
+function getDynamicCss(array $themeSelectors, array $themeProperties){
+    global $db_conn;
 
+    session_start();
+
+    $_SESSION['themeselectors'] = $themeSelectors;
+    $_SESSION['themeproperties'] = $themeProperties;
+
+    //Gets themoptions
+    $sqlThemeOpions = mysqli_query($db_conn, "SELECT id, themename, themeoptions, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $_GET['loc_id'] . " ");
+    $rowThemeOpions = mysqli_fetch_array($sqlThemeOpions);
+
+    //Builds array from themeoptions column
+    $themOption = explode(',', trim($rowThemeOpions['themeoptions']));
+    $_SESSION['themeoptions'] = $themOption;
+
+    //Generates the CSS
+    foreach ($themeSelectors as $key => $value) {
+        if ($themOption[$key] != ''){
+            echo $themeSelectors[$key] . " {" . $themeProperties[$key] . ": " . $themOption[$key] . " !important;}" . PHP_EOL;
+        }
+    }
+}
 function getSocialMediaIcons($loc, $shape, $section){
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")

@@ -184,7 +184,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group">
                             <input type="hidden" name="add_hottitles" value="true"/>
-                            <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-plus'></i> Add List</button>
+                            <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         </div>
                     </div>
                 </form>

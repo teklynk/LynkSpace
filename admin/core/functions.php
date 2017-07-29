@@ -283,7 +283,6 @@ function getRealIpAddr(){
     }
     return $clientip;
 }
-
 //Location list for level 1 admins only
 function getLocList($active) {
     global $locList;
