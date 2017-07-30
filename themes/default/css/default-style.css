@@ -65,8 +65,8 @@ footer a:hover {
 }
 
 #belowfooter {
-    background-color: transparent !important;
-    background: transparent !important;
+    background-color: transparent;
+    background: transparent;
     padding: 25px;
     color: #fff;
     height: 80px;
@@ -96,9 +96,9 @@ footer a:hover {
 }
 
 .navbar {
-    min-height: 100px !important;
-    background-color: #FFF !important;
-    border-bottom: #DDD 1px solid !important;
+    min-height: 100px;
+    background-color: #FFF;
+    border-bottom: #DDD 1px solid;
     margin-bottom: 0;
 }
 
@@ -117,8 +117,8 @@ footer a:hover {
 .navTitle {
     font-family: "Century Gothic", Sans-serif;
     padding-top: 30px;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
+    margin-left: 10px;
+    margin-right: 10px;
     color: #0032a0;
 }
 
@@ -167,10 +167,10 @@ footer a:hover {
     padding: 24px 0px 12px 0px;
 }
 .nav-shrink .navbar-brand {
-    height: 60px !important;
+    height: 60px;
 }
 .nav-shrink {
-    min-height: 60px !important;
+    min-height: 60px;
     -webkit-transition: min-height .5s; /* For Safari 3.1 to 6.0 */
     transition: min-height .5s;
 }
@@ -218,7 +218,7 @@ footer a:hover {
 }
 
 #belowfooter .socialDiv a.pull-right {
-    float: left !important;
+    float: left;
 }
 
 #belowfooter .socialDiv .fa-inverse-socialmedia {
@@ -388,7 +388,7 @@ footer a:hover {
     height: 400px;
 }
 .slider {
-    background-color: #fff !important;
+    background-color: #fff;
 }
 .sitesearch {
     min-height: 400px;
@@ -446,7 +446,7 @@ footer a:hover {
 }
 
 .nav-Footer > .cat-Footer {
-    font-size: 2em !important;
+    font-size: 2em;
     margin-bottom: 12px;
     border-bottom: solid 1px;
     padding: 0 0 12px;
@@ -482,7 +482,7 @@ footer a:hover {
     font-size: 10em;
 }
 .img-circle {
-    padding:3px !important;
+    padding:3px;
 }
 
 .copyright {
@@ -493,17 +493,17 @@ footer a:hover {
     padding: 0 15px 0 15px;
 }
 .cat-title:not(:first-child) {
-    margin-top: 30px !important;
+    margin-top: 30px;
 }
 .cat-title {
-    margin-bottom: 4px !important;
+    margin-bottom: 4px ;
     margin-top: 12px;
-    border-bottom: solid 1px #eee !important;
+    border-bottom: solid 1px #eee;
 }
 .database-item, .service-item {
-    float: left !important;
-    margin-top: 15px !important;
-    margin-bottom: 15px !important;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 div.database-break {
@@ -680,7 +680,7 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 }
 @media (max-width: 760px) {
     .nav-shrink {
-        min-height: 50px !important;
+        min-height: 50px;
     }
     .nav-shrink .navbar-toggle {
         margin-top: 2px;

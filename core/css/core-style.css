@@ -61,7 +61,7 @@ header.carousel .fill {
     margin-right: 1em;
 }
 #ysm_brand_footer .pull-right {
-    float: right !important;
+    float: right;
 }
 
 /* Pricing Page Styles */
@@ -276,7 +276,7 @@ footer {
 }
 
 #contact > .row > .page-header .socialmedia {
-    display: none !important;
+    display: none;
 }
 
 div.database-break {
@@ -311,7 +311,7 @@ div.database-break {
     margin-top: 15px;
 }
 .disable-anchor {
-    pointer-events: none !important;
+    pointer-events: none;
     cursor: default;
 }
 

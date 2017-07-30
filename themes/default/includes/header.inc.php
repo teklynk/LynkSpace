@@ -50,7 +50,7 @@ if (!defined('inc_access')) {
 <![endif]-->
 
 <!-- Navigation -->
-<nav class="navbar navbar-fixed-top" id="topNav" role="navigation" style="margin-bottom: 0;">
+<nav class="navbar navbar-fixed-top themebase-bgcolor" id="topNav" role="navigation" style="margin-bottom: 0;">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

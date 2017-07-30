@@ -7,7 +7,7 @@ echo "<div class='page-team'>";
 
 include 'includes/featured.inc.php';
 
-echo "<div class='grad-blue container-fluid search'>";
+echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {

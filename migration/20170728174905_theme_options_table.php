@@ -9,7 +9,9 @@ class ThemeOptionsTable extends AbstractMigration
     {
         $sharedUploads = $this->table('theme_options');
         $sharedUploads->addColumn('themename', 'text')
-            ->addColumn('themeoptions', 'text')
+            ->addColumn('selector', 'text')
+            ->addColumn('property', 'text')
+            ->addColumn('cssvalue', 'text')
             ->addColumn('datetime', 'datetime')
             ->addColumn('loc_id', 'integer')
             ->addIndex(array('id'), array('unique' => true))

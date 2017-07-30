@@ -492,6 +492,8 @@ function getCoreHeader($loc){
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php">
+
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
 
@@ -528,29 +530,21 @@ function getCoreHeader($loc){
     <?php
 }
 //Theme options
-function getDynamicCss(array $themeSelectors, array $themeProperties){
+function getDynamicCss($loc){
     global $db_conn;
 
-    session_start();
+    header('Content-type: text/css; charset: UTF-8');
+    header('Cache-control: must-revalidate');
 
-    $_SESSION['themeselectors'] = $themeSelectors;
-    $_SESSION['themeproperties'] = $themeProperties;
-
-    //Gets themoptions
-    $sqlThemeOpions = mysqli_query($db_conn, "SELECT id, themename, themeoptions, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $_GET['loc_id'] . " ");
-    $rowThemeOpions = mysqli_fetch_array($sqlThemeOpions);
-
-    //Builds array from themeoptions column
-    $themOption = explode(',', trim($rowThemeOpions['themeoptions']));
-    $_SESSION['themeoptions'] = $themOption;
-
-    //Generates the CSS
-    foreach ($themeSelectors as $key => $value) {
-        if ($themOption[$key] != ''){
-            echo $themeSelectors[$key] . " {" . $themeProperties[$key] . ": " . $themOption[$key] . " !important;}" . PHP_EOL;
+    //Gets themeoptions
+    $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $loc . " ");
+    while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions)){
+        if ($rowGetThemeOpions['cssvalue'] != '#000000'){//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+            echo $rowGetThemeOpions['selector'] . " {" . $rowGetThemeOpions['property'] . ": " . $rowGetThemeOpions['cssvalue'] . " !important;}" . PHP_EOL;
         }
     }
 }
+
 function getSocialMediaIcons($loc, $shape, $section){
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")

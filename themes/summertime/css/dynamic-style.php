@@ -6,6 +6,6 @@
 //$themeCssSelectors = ['.themebasecolor', '.footerbgcolor', '.headerbgcolor', '.fontcolor'];
 //$themeCssProperties = ['background-color', 'background-color', 'background-color', 'font-color'];
 
-$themeCssSelectors = ['.themebase-bgcolor', '.themebase-fontcolor', '.themebase-footerbgcolor', '.themebase-navbarbgcolor', '.themebase-footerfontcolor'];
-$themeCssProperties = ['background', 'font-color', 'background', 'background', 'font-color'];
+$themeCssSelectors = ['.themebasecolor1', '.themebasecolor2', '.themenavbar', '.themefontcolor'];
+$themeCssProperties = ['background-color', 'background-color', 'background-color', 'font-color'];
 ?>

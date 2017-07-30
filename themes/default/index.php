@@ -9,7 +9,7 @@ include 'includes/featured.inc.php';
 
 include 'includes/slider.inc.php';
 
-echo "<div class='grad-blue container-fluid search'>";
+echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
