@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
 ?>
 
     <!-- Footer -->
-    <footer class="footer" id="footer">
+    <footer class="footer themebase-footerbgcolor" id="footer">
         <div class="container">
             <div class="row row_pad">
                 <?php

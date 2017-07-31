@@ -31,7 +31,7 @@ if (!empty($_POST)) {
             //If is Admin
             if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
-                $_SESSION['loc_list'] = getLocList('false');
+                $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
             }
 
             //Super Admin

@@ -74,7 +74,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                 <h3>- OR -</h3>
             </div>
             <label for='share_location_list'>Location(s)</label>
-            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>".getLocList($rowSharedUploadsOption['shared'])."</select>
+            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>".getLocList($rowSharedUploadsOption['shared'], 'true')."</select>
             <input type='hidden' name='action' value='shareFile'>
         </div>",
         "<button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>

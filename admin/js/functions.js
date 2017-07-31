@@ -687,6 +687,7 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
+
     $('.logo_defaults_checkbox').change(function () {
         $.get('ajax/update_logodefaults.php?update=true', {
             id: this.id,
@@ -842,6 +843,7 @@ function showMyModal(myTitle, myFile) {
     $('#webserviceDialog').modal('show');
     $('#changlogDialog').modal('show');
 }
+
 //Page Load/Performance Checker
 window.onload = function () {
     var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;

@@ -137,7 +137,7 @@ if ($deleteMsg != "") {
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
                                         <select class="form-control selectpicker show-tick" data-live-search="true" data-container="body" data-dropup-auto="false" data-size="10" name="user_location" title="Choose a location" required>
-                                            <?php echo getLocList('true'); ?>
+                                            <?php echo getLocList($_GET['loc_id'], 'true'); ?>
                                         </select>
                                     </div>
                                 </div>

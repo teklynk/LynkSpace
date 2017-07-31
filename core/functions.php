@@ -28,11 +28,19 @@ function getLocation($loc){
     }
 }
 
-function getLocList(){
+function getLocList($active, $showActiveOnly){
     global $locationListJson;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT name, active FROM locations WHERE active='true'");
+    $active = $_GET['loc_id'];
+
+    if ($showActiveOnly == 'true'){
+        $showActive = "WHERE active='true'";
+    } else {
+        $showActive = "";
+    }
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations ".$showActive." ORDER BY name ASC");
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)){
         $locationListJson .= "'" . $rowLocationSearch['name'] . "',";
     }

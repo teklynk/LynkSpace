@@ -284,11 +284,18 @@ function getRealIpAddr(){
     return $clientip;
 }
 //Location list for level 1 admins only
-function getLocList($active) {
+function getLocList($active, $showActiveOnly) {
     global $locList;
     global $db_conn;
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY name ASC");
+    //Selects Active of InActive locations.
+    if ($showActiveOnly == 'true'){
+        $showActive = "WHERE active='true'";
+    } else {
+        $showActive = "";
+    }
+
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations ".$showActive." ORDER BY name ASC");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
         if ($rowLocationSearch['id'] == 1) {

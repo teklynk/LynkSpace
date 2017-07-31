@@ -56,7 +56,7 @@ if (!empty($_POST)) {
             mysqli_query($db_conn, $setupUpdate);
         } else {
             //Insert Location
-            $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
+            $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false')";
             mysqli_query($db_conn, $locationInsert);
             //Insert Setup
             $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
@@ -77,7 +77,7 @@ if (!empty($_POST)) {
 
         //Reset/Reload loc_list drop down to get the newest locations
         unset($_SESSION['loc_list']);
-        $_SESSION['loc_list'] = getLocList('false');
+        $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
         header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
         echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
@@ -108,6 +108,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         if (file_exists(image_dir)) {
             rrmdir(image_dir);
         }
+
+        //Reset/Reload loc_list drop down to get the newest locations
+        unset($_SESSION['loc_list']);
+        $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
         header("Location: setup.php?loc_id=1");
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
@@ -358,7 +362,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         if ($_GET['loc_id'] != 1) {
                             ?>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group" id="logodefaults">
                                         <label for="logo_defaults">Use Defaults Logo</label>
                                         <div class="checkbox">
