@@ -72,7 +72,7 @@ if ($_POST['save_main']) {
             <li class="active">Theme Editor</li>
         </ol>
         <h1 class="page-header">
-            Theme Editor (Theme: <?php echo ucwords(themeOption); ?>)
+            Theme Editor (<?php echo ucwords(themeOption); ?>)
         </h1>
     </div>
 
@@ -93,7 +93,8 @@ if ($_POST['save_main']) {
 
             //Check if dynamic-style.php variables exist
             if (isset($themeCssSelectors) && isset($themeCssProperties)){
-                echo "<small>&nbsp;&nbsp;Change the theme base colors.</small>";
+                echo "<label for='edit_base_theme_options'><i class='fa fa-paint-brush'></i>&nbsp;&nbsp;Theme Colors</label>
+                        <small>&nbsp;&nbsp;Change the theme base colors.</small>";
                 echo "<div class='well'>";
 
                 $elementCount = 0;
@@ -105,7 +106,7 @@ if ($_POST['save_main']) {
                     $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='".themeOption."' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
 
-                    echo "<div class='form-group'>".$themeCssSelectors[$key].": 
+                    echo "<div class='form-group'>".$themeCssSelectors[$key].":&nbsp; 
                     <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
                     <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>
                     <input type='color' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>";
@@ -122,7 +123,7 @@ if ($_POST['save_main']) {
             ?>
 
             <div class="form-group">
-                <label for="edit_file"><?php echo $fileToEdit_dir; ?></label>
+                <label for="edit_file"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo $fileToEdit_dir; ?></label>
                 <small>
                     &nbsp;&nbsp;Over-ride theme CSS styles or add your own CSS.
                 </small>
