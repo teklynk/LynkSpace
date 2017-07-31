@@ -27,7 +27,9 @@ echo "<h1 class='page'>" . $pageTitle . "</h1>";
 echo "</div>";
 
 echo "<div class='col-xs-12 col-lg-12 page-content'>";
+
 echo $pageContent;
+
 echo "</div>";
 
 echo "</div>";

@@ -1,7 +1,9 @@
 <?php
 //Hot Titles Carousel
 getHottitlesTabs($_GET['loc_id']);
+
 if ($hottitlesCount > 0) {
+
     echo "<div class='grad-blue themebase-bgcolor container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";
 
@@ -33,5 +35,6 @@ if ($hottitlesCount > 0) {
 
     echo "</div>"; //.container
     echo "</div>"; //.grad-blue
+
 }
 ?>

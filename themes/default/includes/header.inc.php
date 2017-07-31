@@ -5,6 +5,7 @@ if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +49,7 @@ if (!defined('inc_access')) {
     </div>
 </div>
 <![endif]-->
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-fixed-top themebase-navbarbgcolor" id="topNav" role="navigation" style="margin-bottom: 0;">

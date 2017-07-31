@@ -5,8 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class ThemeOptionsTable extends AbstractMigration
 {
 
-    public function up()
-    {
+    public function up(){
         $sharedUploads = $this->table('theme_options');
         $sharedUploads->addColumn('themename', 'text')
             ->addColumn('selector', 'text')
@@ -23,8 +22,7 @@ class ThemeOptionsTable extends AbstractMigration
     }
 
 
-    public function down()
-    {
+    public function down(){
         $exists = $this->hasTable('theme_options');
         if ($exists) {
             $table = $this->table('theme_options');

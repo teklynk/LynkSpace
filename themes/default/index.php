@@ -21,6 +21,7 @@ if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
 echo "</div>";
 echo "</div>";
 
+
 include 'includes/databasesfeatured.inc.php';
 
 include 'includes/hottitles.inc.php';

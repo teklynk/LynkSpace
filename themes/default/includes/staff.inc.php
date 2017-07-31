@@ -62,5 +62,6 @@ if ($teamNumRows > 0) {
 
     echo "</div>";
     echo "</div>";
+
 }
 ?>

@@ -27,5 +27,6 @@ if (!empty($_GET['cat_id'])) {
 
 echo "</div>";
 
+
 include_once('includes/footer.inc.php');
 ?>

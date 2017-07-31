@@ -352,6 +352,7 @@ function getPages($loc) {
     $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>".$extraPages;
     return $pagesList;
 }
+
 //Images folder drop down list
 function getImageDropdownList($loc, $imageDir, $image_selected) {
     global $db_conn;

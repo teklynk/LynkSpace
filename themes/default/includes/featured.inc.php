@@ -6,6 +6,7 @@ if (!defined('inc_access')) {
 }
 
 getFeatured($_GET['loc_id']);
+
 echo "<div class='grad-blue themebase-bgcolor container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
 

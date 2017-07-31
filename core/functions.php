@@ -816,7 +816,6 @@ function getSlider($loc, $sliderType){
 
     }
 }
-
 function getGeneralInfo($loc){
     global $generalInfoContent;
     global $generalInfoHeading;
@@ -839,7 +838,6 @@ function getGeneralInfo($loc){
         $generalInfoHeading = $rowGeneralinfo['heading'];
     }
 }
-
 function getFeatured($loc){
     global $featuredContent;
     global $featuredHeading;

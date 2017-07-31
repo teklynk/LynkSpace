@@ -8,4 +8,6 @@
 
 $themeCssSelectors = ['.themebasecolor1', '.themebasecolor2', '.themenavbar', '.themefontcolor'];
 $themeCssProperties = ['background-color', 'background-color', 'background-color', 'font-color'];
+
+
 ?>
