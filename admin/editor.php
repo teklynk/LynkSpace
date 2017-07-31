@@ -97,13 +97,22 @@ if ($_POST['save_main']) {
                 echo "<div class='well'>";
 
                 $elementCount = 0;
-                //Gets the themeproperties from $fileDynamicCSS_dir
+
                 foreach ($themeCssSelectors as $key => $value) {
                     $elementCount ++;
+
                     //Gets themeoptions
-                    $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='".themeOption."' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
-                    echo "<div class='form-group'>".$themeCssSelectors[$key].": <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'><input type='hidden' name='property[]' value='".$themeCssProperties[$key]."' ><input type='color' name='cssvalue[]' value='".$rowThemeOptions['cssvalue']."'></div>";
+
+                    echo "<div class='form-group'>".$themeCssSelectors[$key].": 
+                    <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
+                    <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>
+                    <input type='color' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>";
+                    ?>
+
+                    &nbsp;&nbsp;<button type="button" class="btn btn-xs btn-link" id="reset-color" onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';">Reset</button></div>
+                <?php
                 }
 
                 echo "<input type='hidden' name='element_count' value='".$elementCount."'>";
