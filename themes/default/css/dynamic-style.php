@@ -9,29 +9,44 @@
 
 $themeCssLabels = [
     'Base Color',
+    'Buttons',
+    'Buttons: Hover',
     'Fonts',
     'Links',
-    'Links Hover',
+    'Links: Hover',
     'Navigation Bar',
+    'Navigation Bar: Links',
+    'Navigation Bar: Sub-Links',
     'Footer Background',
-    'Footer Links'
+    'Footer: Fonts',
+    'Footer: Links'
 ];
 $themeCssSelectors = [
-    '.themebase-bgcolor,.btn-primary',
-    'p,h1,h2,h3,h4,.text-primary,.socialDiv .fa-inverse-socialmedia,.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus',
+    '.themebase-bgcolor,.grad-blue',
+    '.btn-primary,ul.nav-pills>li.active>a,ul.nav-pills>li>a',
+    '.btn-primary:hover,.btn-primary:focus',
+    'p,h1,h2,h3,h4,.text-primary,.service-item .text-primary',
     'a,a:link',
-    'a:hover,a:focus,.socialDiv .fa-inverse-socialmedia:hover',
+    'a:hover,a:focus,.fa-inverse-socialmedia:hover',
     '.themebase-navbarbgcolor',
-    '.themebase-footerbgcolor',
-    '.themebase-footerbgcolor a'
+    'ul.navbar-Top>li>a,.fa-inverse-socialmedia',
+    '.dropdown-menu>li>a',
+    '.themebase-footerbgcolor, .footer',
+    '#generalinfo>p',
+    'ul.navbar-Footer>li>a'
 ];
 $themeCssProperties = [
     'background',
+    'background-color',
+    'background-color',
     'color',
     'color',
     'color',
-    'background',
-    'background',
+    'background-color',
+    'color',
+    'color',
+    'background-color',
+    'color',
     'color'
 ];
 ?>

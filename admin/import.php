@@ -11,10 +11,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSI
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
+
 //Create the backup folder
 if (!file_exists(__DIR__ . '/backups/')) {
     @mkdir(__DIR__ . '/backups/', 0755);
 }
+
 //Check that backups folder is writable.
 if (!is_writeable(__DIR__ . '/backups/')){
     $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";
@@ -78,8 +80,8 @@ if ($_POST['save_main']) {
                 $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $locIdCount . ", '" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[1])) . "', '" . date("Y-m-d H:i:s") . "', 'true')";
                 mysqli_query($db_conn, $locationInsert);
 
-                //Insert into setup table
-                $setupInsert = "INSERT INTO setup (title, config, ls2pac, ls2kids, searchdefault, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', '" . safeCleanStr(addslashes($locData[2])) . "', 'true', 'true', 3, 'Pages', 'Our Services', 'Slides', 'Meet the Team', 'New Titles', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
+                //Insert Setup
+                $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', '', '', '" . safeCleanStr(addslashes($locData[2])) . "', '', 'true', 'true', 1, 'admin_import', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $setupInsert);
 
                 $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[3])) . "', '" . safeCleanStr(addslashes($locData[4])) . "', '" . safeCleanStr(addslashes($locData[5])) . "', '" . safeCleanStr(addslashes($locData[6])) . "', '" . safeCleanStr(addslashes($locData[7])) . "', '" . safeCleanStr(addslashes($locData[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
@@ -90,7 +92,7 @@ if ($_POST['save_main']) {
                 mysqli_query($db_conn, $aboutInsert);
 
                 //Insert Featured defaults
-                $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
+                $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $featuredInsert);
 
                 //Do Insert

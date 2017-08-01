@@ -596,12 +596,14 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 .btn-primary {
     color: #fff;
     background-color: #1C8AB8;
-    border-color: #1C8AB8;
+    /*border-color: #1C8AB8;*/
+    border-color: transparent;
 }
 .btn-primary:hover, .btn-primary:focus {
     color: #fff;
     background-color: #008eaa;
-    border-color: #00718c;
+    /*border-color: #00718c;*/
+    border-color: transparent;
 }
 .text-primary {
     color: #1C8AB8;
