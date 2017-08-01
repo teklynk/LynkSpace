@@ -500,7 +500,7 @@ function getCoreHeader($loc){
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
@@ -544,8 +544,18 @@ function getDynamicCss($loc){
     header('Content-type: text/css; charset: UTF-8');
     header('Cache-control: must-revalidate');
 
+    //Get setup table columns
+    $sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $rowSetup = mysqli_fetch_array($sqlSetup);
+
+    if ($rowSetup['theme_use_defaults'] == 'true') {
+        $locId = 1;
+    } else {
+        $locId = $loc;
+    }
+
     //Gets themeoptions
-    $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $loc . " ");
+    $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $locId . " ");
     while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions)){
         if ($rowGetThemeOpions['cssvalue'] != '#000000'){//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
             echo $rowGetThemeOpions['selector'] . " {" . $rowGetThemeOpions['property'] . ": " . $rowGetThemeOpions['cssvalue'] . " !important;}" . PHP_EOL;

@@ -1086,7 +1086,8 @@ INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `
 (20170718181748, 'ChangeCharSetUtf8', '2017-07-18 18:37:09', '2017-07-18 18:37:09', 0),
 (20170721162929, 'SharedUploadsTable', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
 (20170725174836, 'UseDefaultLogoColumn', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
-(20170726203814, 'PrependImagePathToImages', '2017-07-26 21:12:09', '2017-07-26 21:12:10', 0);
+(20170726203814, 'PrependImagePathToImages', '2017-07-26 21:12:09', '2017-07-26 21:12:10', 0),
+(20170728174905, 'ThemeOptionsTable', '2017-07-31 09:41:03', '2017-07-31 09:41:03', 0);
 
 -- --------------------------------------------------------
 
@@ -1157,6 +1158,7 @@ CREATE TABLE `setup` (
   `team_use_defaults` text NOT NULL,
   `hottitles_use_defaults` text NOT NULL,
   `logo_use_defaults` text NOT NULL,
+  `theme_use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
@@ -1166,8 +1168,8 @@ CREATE TABLE `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `logo_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', '', 'true', '2017-07-27 21:06:48', 'admin', 1);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `logo_use_defaults`, `theme_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+(1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '2017-07-27 21:06:48', 'admin', 1);
 
 -- --------------------------------------------------------
 

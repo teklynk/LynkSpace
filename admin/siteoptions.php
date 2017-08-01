@@ -6,8 +6,15 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'siteoptions.php';
 
+//Keeps user in the default location when on this page. Only Default loc can edit this page.
+if ($_GET['loc_id'] != 1) {
+    header('Location: siteoptions.php?loc_id=1');
+    echo "<script>window.location.href='siteoptions.php?loc_id=1';</script>";
+}
+
 //check if user is logged in and is admin
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+
     $pageMsg = "";
 
     if ($_POST['save_main']) {
@@ -69,15 +76,6 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         getThemesDropdownList($rowConfig['theme']);
                         ?>
                     </select>
-                </div>
-                <br>
-                <div class="form-group" id="file_editor">
-                    <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
-                        <i class='fa fa-fw fa-edit'></i> Theme Editor
-                    </button>
-                    <small>
-                        &nbsp;&nbsp;Over-ride theme CSS styles and other files.
-                    </small>
                 </div>
                 <hr/>
                 <div class="form-group">

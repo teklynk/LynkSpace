@@ -59,7 +59,7 @@ if (!empty($_POST)) {
             $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false')";
             mysqli_query($db_conn, $locationInsert);
             //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $setupInsert);
             //Insert Contact defaults
             $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
@@ -205,6 +205,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         </div>
 
                         <?php
+                        //Check if is Admin
                         if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_GET['newlocation'] != 'true') {
                             ?>
                             <div class="row">
@@ -217,10 +218,18 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                             &nbsp;&nbsp;Edit global website settings, themes, styles.
                                         </small>
                                     </div>
+                                    <div class="form-group" id="file_editor">
+                                        <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                            <i class='fa fa-fw fa-edit'></i> Theme Editor
+                                        </button>
+                                        <small>
+                                            &nbsp;&nbsp;Override theme CSS styles and other files.
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                             <?php
-                            //only show this button to super-admin
+                            //only show this button to Super-Admin
                             if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['super_admin'] == true) {
                                 ?>
                                 <hr/>
@@ -240,7 +249,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             }
                         }
 
-                        //Check if user_level is Admin user
+                        //Check if user_level is Admin user and Multibranch
                         if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['newlocation'] != 'true') {
                             ?>
                             <hr/>
@@ -267,7 +276,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             </div>
                             <?php
                         }
-
+                        //Check if user_level is Admin user and Multibranch
                         if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
                             ?>
                             <hr/>
@@ -287,7 +296,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <?php
                         }
 
-                        //Check if user_level is Admin user and is Multibranch
+                        //Check if user_level is Admin user and Multibranch
                         if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
                             ?>
                             <div class="row">

@@ -5,6 +5,8 @@ define('codeMirror', TRUE);
 
 include_once('includes/header.inc.php');
 
+$_SESSION['file_referrer'] = 'editor.php';
+
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     header('Location: index.php?logout=true');
@@ -30,49 +32,66 @@ $fileData = fread($handle,filesize($fileToEdit_dir));
 
 if ($_POST['save_main']) {
 
+    //use theme defaults
+    if ($_POST['theme_defaults'] == 'on') {
+        $_POST['theme_defaults']  = 'true';
+    } else {
+        $_POST['theme_defaults']  = 'false';
+    }
+
     for ($i = 0; $i < $_POST['element_count']; $i++) {
 
-        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='".safeCleanStr($_POST['selector'][$i])."' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='".$_POST['selector'][$i]."' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
 
-        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == safeCleanStr($_POST['selector'][$i]) && $rowThemeOptions['property'] == safeCleanStr($_POST['property'][$i])) {
+        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $_POST['selector'][$i] && $rowThemeOptions['property'] == $_POST['property'][$i]) {
             //Do Update
-            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . safeCleanStr($_POST['selector'][$i]) . "', property='" . safeCleanStr($_POST['property'][$i]) . "', cssvalue='" . $_POST['cssvalue'][$i] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . safeCleanStr($_POST['selector'][$i]) . "' AND property='" . safeCleanStr($_POST['property'][$i]) . "' AND loc_id=" . $_GET['loc_id'] . " ";
+            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $_POST['selector'][$i] . "', property='" . $_POST['property'][$i] . "', cssvalue='" . $_POST['cssvalue'][$i] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $_POST['selector'][$i] . "' AND property='" . $_POST['property'][$i] . "' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $themeOptionUpdate);
         } else {
             //Do Insert
             if ($_POST['cssvalue'][$i] != '#000000') { //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
-                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . safeCleanStr($_POST['selector'][$i]) . "', '" . safeCleanStr($_POST['property'][$i]) . "', '" . $_POST['cssvalue'][$i] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $_POST['selector'][$i] . "', '" . $_POST['property'][$i] . "', '" . $_POST['cssvalue'][$i] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                 mysqli_query($db_conn, $themeOptionInsert);
             }
         }
     }
 
-    if (file_exists($fileToEdit_dir)) {
-        //open file for Writing
-        $handle = fopen($fileToEdit_dir, 'w') or die('Unable to write to ' . $fileToEdit_dir . '. Check file permissions.');
-        $fileData = sanitizeStr($_POST['edit_file']);
-        fwrite($handle, $fileData);
+    //Update Setup
+    $setupUpdate = "UPDATE setup SET theme_use_defaults='" . $_POST['theme_defaults'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    mysqli_query($db_conn, $setupUpdate);
 
-        $pageMsg = "<div class='alert alert-success'>Theme has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    //Only Default location can see this
+    if ($_GET['loc_id'] == 1){
+        if (file_exists($fileToEdit_dir)) {
+            //open file for Writing
+            $handle = fopen($fileToEdit_dir, 'w') or die('Unable to write to ' . $fileToEdit_dir . '. Check file permissions.');
+            $fileData = sanitizeStr($_POST['edit_file']);
+            fwrite($handle, $fileData);
 
-        closedir($handle);
-    } else {
-        die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+            closedir($handle);
+        } else {
+            die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+        }
     }
+
+    $pageMsg = "<div class='alert alert-success'>Theme has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
+
+//Get setup table columns
+$sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$rowSetup = mysqli_fetch_array($sqlSetup);
 ?>
 
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Home</a></li>
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Settings</a></li>
-            <li><a href="siteoptions.php?loc=<?php echo $_GET['loc_id']; ?>">Site Options</a></li>
             <li class="active">Theme Editor</li>
         </ol>
         <h1 class="page-header">
-            Theme Editor (<?php echo ucwords(themeOption); ?>)
+            Theme Editor
         </h1>
     </div>
 
@@ -83,13 +102,36 @@ if ($_POST['save_main']) {
         } else {
             echo $pageMsg;
         }
+        //use default theme
+        if ($rowSetup['theme_use_defaults'] == 'true') {
+            $selThemeDefaults = "CHECKED";
+        } else {
+            $selThemeDefaults = "";
+        }
         if (!is_writable($fileToEdit_dir)) {
             die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
         }
-        ?>
-        <form name="editForm" class="dirtyForm" method="post">
+
+        if ($_GET['loc_id'] != 1) {
+            ?>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group" id="themedefaults">
+                        <label for="theme_defaults">Use Defaults</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="theme_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="theme_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selThemeDefaults;} ?> data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
 
             <?php
+        }
+
+            echo "<form name='editForm' class='dirtyForm' method='post' action=''>";
 
             //Check if dynamic-style.php variables exist
             if (isset($themeCssSelectors) && isset($themeCssProperties)){
@@ -100,20 +142,29 @@ if ($_POST['save_main']) {
                 $elementCount = 0;
 
                 foreach ($themeCssSelectors as $key => $value) {
+
                     $elementCount ++;
 
                     //Gets themeoptions
                     $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='".themeOption."' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
                     $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
 
-                    echo "<div class='form-group'>
-                    <input type='color' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>&nbsp;&nbsp;
-                    ".$themeCssSelectors[$key]." 
-                    <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
-                    <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>";
-                    ?>
+                    echo "<div class='row'>
+                    <div class='col-lg-4'>
+                        <label for='cssvalue[]'>".$themeCssLabels[$key]."</label>
+                        <div class='input-group'>
+                            <input type='color' class='form-control' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>
+                            <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
+                            <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>";
+                            ?>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" id="reset-color" title='Reset' onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';"><i class="fa fa-refresh"></i></button>
+                            </span>
+                        </div>
+                        <br>
+                    </div>
+                    </div>
 
-                    &nbsp;&nbsp;<button type="button" class="btn btn-xs btn-link" id="reset-color" onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';">Reset</button></div>
                 <?php
                 }
 
@@ -122,22 +173,28 @@ if ($_POST['save_main']) {
             }
 
             ?>
-
+            <?php
+            //Only Default location can see this
+            if ($_GET['loc_id'] == 1){
+            ?>
             <div class="form-group">
                 <label for="edit_file"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo $fileToEdit_dir; ?></label>
                 <small>
-                    &nbsp;&nbsp;Over-ride theme CSS styles or add your own CSS.
+                    &nbsp;&nbsp;Override theme CSS styles or add your own CSS.
                 </small>
                 <textarea id="edit_file" class="form-control" name="edit_file" rows="60"><?php echo $fileData; ?></textarea>
             </div>
+            <?php
+            }
+            ?>
             <div class="form-group">
-            <span><small>
-                <?php
-                if (file_exists($fileToEdit_dir)) {
-                    echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
-                }
-                ?>
-            </small></span>
+                <span><small>
+                    <?php
+                    //if (file_exists($fileToEdit_dir)) {
+                    //    echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
+                    //}
+                    ?>
+                </small></span>
             </div>
             <input type="hidden" name="save_main" value="true"/>
             <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

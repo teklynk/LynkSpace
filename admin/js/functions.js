@@ -687,6 +687,16 @@ $(document).ready(function () {
             $('.location_status_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('.theme_defaults_checkbox').change(function () {
+        $.get('ajax/update_themedefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.theme_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.theme_defaults_checkbox').attr('disabled', false);
+        }, 500);
+    });
 
     $('.logo_defaults_checkbox').change(function () {
         $.get('ajax/update_logodefaults.php?update=true', {
