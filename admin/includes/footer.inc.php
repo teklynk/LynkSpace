@@ -18,7 +18,6 @@ if (!defined('inc_access')) {
     <div class="pull-right">
         <ul class="nav-footer">
             <li>
-                <a href="<?php echo helpURL; ?>" target="_blank">Help</a>
             </li>
         </ul>
         <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="https://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>

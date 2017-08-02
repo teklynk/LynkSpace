@@ -203,7 +203,14 @@ session_start();
                         <a href="users.php?loc_id=<?php echo $_SESSION['loc_id']; ?>"><i class="fa fa-fw fa-user-circle"></i> My Account</a>
                     </li>
                     <li>
-                        <a href="<?php echo helpURL; ?>" target="_blank"><i class="fa fa-fw fa-question-circle"></i> Help</a>
+                        <?php
+                        //Help files
+                        if ($_SESSION['user_level'] == 1) {
+                            echo "<a href='".helpURLAdmin."' target='_blank'><i class='fa fa-fw fa-question-circle'></i> Help</a>";
+                        } else {
+                            echo "<a href='".helpURLUser."' target='_blank'><i class='fa fa-fw fa-question-circle'></i> Help</a>";
+                        }
+                        ?>
                     </li>
                     <li class="divider"></li>
                     <li>

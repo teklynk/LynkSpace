@@ -37,15 +37,15 @@ $themeCssSelectors = [
 ];
 $themeCssProperties = [
     'background',
-    'background-color',
-    'background-color',
+    'background',
+    'background',
     'color',
     'color',
     'color',
-    'background-color',
+    'background',
     'color',
     'color',
-    'background-color',
+    'background',
     'color',
     'color'
 ];
