@@ -1097,11 +1097,11 @@ INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `
 
 CREATE TABLE `sections_customers` (
   `id` int(11) NOT NULL,
-  `heading` text COLLATE utf8_unicode_ci NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `section` text COLLATE utf8_unicode_ci NOT NULL,
-  `use_defaults` text COLLATE utf8_unicode_ci NOT NULL,
-  `author_name` text COLLATE utf8_unicode_ci NOT NULL,
+  `heading` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `section` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `use_defaults` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `author_name` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1385,7 +1385,8 @@ ALTER TABLE `phinxlog`
 -- Indexes for table `sections_customers`
 --
 ALTER TABLE `sections_customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sections_customers_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `services`
@@ -1516,7 +1517,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `sections_customers`
 --
 ALTER TABLE `sections_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `services`
 --
@@ -1557,12 +1558,6 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `theme_options`
---
-ALTER TABLE `theme_options`
-  ADD CONSTRAINT `theme_options_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `aboutus`
 --
 ALTER TABLE `aboutus`
@@ -1575,16 +1570,100 @@ ALTER TABLE `category_customers`
   ADD CONSTRAINT `category_customers_loc_id_fk` FOREIGN KEY (`cust_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `category_navigation`
+--
+ALTER TABLE `category_navigation`
+  ADD CONSTRAINT `category_loc_id_fk` FOREIGN KEY (`nav_loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `contactus`
 --
 ALTER TABLE `contactus`
   ADD CONSTRAINT `contactus_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `customers`
+--
+ALTER TABLE `customers`
+  ADD CONSTRAINT `customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `featured`
+--
+ALTER TABLE `featured`
+  ADD CONSTRAINT `featured_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `generalinfo`
+--
+ALTER TABLE `generalinfo`
+  ADD CONSTRAINT `generalinfo_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hottitles`
+--
+ALTER TABLE `hottitles`
+  ADD CONSTRAINT `hottitles_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `navigation`
+--
+ALTER TABLE `navigation`
+  ADD CONSTRAINT `navigation_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pages`
+--
+ALTER TABLE `pages`
+  ADD CONSTRAINT `pages_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sections_customers`
+--
+ALTER TABLE `sections_customers`
+  ADD CONSTRAINT `sections_customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `setup`
+--
+ALTER TABLE `setup`
+  ADD CONSTRAINT `setup_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `shared_uploads`
 --
 ALTER TABLE `shared_uploads`
   ADD CONSTRAINT `shared_uploads_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `slider`
+--
+ALTER TABLE `slider`
+  ADD CONSTRAINT `slider_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `socialmedia`
+--
+ALTER TABLE `socialmedia`
+  ADD CONSTRAINT `socialmedia_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `team`
+--
+ALTER TABLE `team`
+  ADD CONSTRAINT `team_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `theme_options`
+--
+ALTER TABLE `theme_options`
+  ADD CONSTRAINT `theme_options_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
