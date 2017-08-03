@@ -21,8 +21,6 @@ echo "</div>";
 echo "</div>";
 echo "</div>";
 
-include 'includes/databasesfeatured.inc.php';
-
 echo "</div>";
 
 include_once('includes/footer.inc.php');

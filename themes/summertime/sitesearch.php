@@ -1,12 +1,14 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+include('includes/header.inc.php');
 
 echo "<div class='page-search'>";
 
 echo "<div class='container-fluid sitesearch'>";
 echo "<div class='container bannerwrapper'>";
+
+include('includes/searchsite.inc.php');
 
 if (!empty($_POST['sitesearchterm'])) {
 
@@ -22,9 +24,11 @@ if (!empty($_POST['sitesearchterm'])) {
 }
 
 echo "</div>";
-echo "</div>";
+
+include('includes/databasesfeatured.inc.php');
 
 echo "</div>";
+echo "</div>";
 
-include_once('includes/footer.inc.php');
+include('includes/footer.inc.php');
 ?>

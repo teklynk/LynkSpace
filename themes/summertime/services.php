@@ -9,8 +9,6 @@ include 'includes/featured.inc.php';
 
 include 'includes/services.inc.php';
 
-include 'includes/databasesfeatured.inc.php';
-
 echo "</div>";
 
 include_once('includes/footer.inc.php');

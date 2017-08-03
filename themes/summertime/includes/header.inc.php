@@ -75,7 +75,6 @@ if (!defined('inc_access')) {
         ?>
     </div>
     <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
-        <h3>Search the catalog</h3>
         <?php
         include 'searchpac.inc.php';
         ?>

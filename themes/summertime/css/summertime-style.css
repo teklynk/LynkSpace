@@ -78,6 +78,10 @@ footer a:hover {
 
 }
 
+.navbar-static-top {
+    z-index: 99;
+}
+
 #belowfooter {
     padding: 20px 0 10px 0;
 }

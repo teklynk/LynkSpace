@@ -86,6 +86,8 @@ if ($customerNumRows > 0) {
         }
     }
 
+    echo "<div class='database-break'><br><br></div>";
+
     echo "</div>"; //row
 
     echo "</div>"; //#customers
