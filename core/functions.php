@@ -710,16 +710,16 @@ function getSlider($loc, $sliderType){
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $loc . " ");
     $rowLocations = mysqli_fetch_array($sqlLocations);
 
-    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
-        $sliderLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND";
+    $sliderLocType = $rowLocations['type'];
+
+    if ($sliderLocType == '' || $sliderLocType == NULL || $sliderLocType == $locTypes[0]){
+        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND ";
     } else {
-        $sliderLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'All') AND";
+        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'All') AND ";
     }
 
     //get the default value from setup table
-    $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults, loc_id FROM setup WHERE loc_id=" . $loc . " ");
+    $sqlSliderSetup = mysqli_query($db_conn, "SELECT slider_use_defaults FROM setup WHERE loc_id=" . $loc . " ");
     $rowSliderSetup = mysqli_fetch_array($sqlSliderSetup);
 
     $sqlSlider = mysqli_query($db_conn, "SELECT id, title, image, link, content, loc_type, sort, startdate, enddate, active, loc_id FROM slider WHERE active='true' AND $locTypeWhere loc_id=" . $loc . " $sliderOrderBy");

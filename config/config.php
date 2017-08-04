@@ -105,6 +105,7 @@ $navSections = array("Top", "Footer", "Search");
 //Location Types
 $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);
+
 if (multiBranch == 'true') {
     $locTypes = array_merge($defaultLocTypes,$explodedLocTypes); //returns an array
 } else {

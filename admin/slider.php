@@ -23,6 +23,10 @@ if ($_GET['preview'] > "") {
         echo "<br/><p><b>Link:</b> <a href='" . $rowSlidePreview['link'] . "' target='_blank'>" . $rowSlidePreview['link'] . "</a></p>";
     }
 }
+
+//get location type from locations table
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$rowLocations = mysqli_fetch_array($sqlLocations);
 ?>
 
     <div class="row">
@@ -238,6 +242,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     //update heading on submit
     if (($_POST['save_main'])) {
+        //var_dump($_POST);
+        //die();
 
         if ($_POST['slider_defaults'] == 'on') {
             $_POST['slider_defaults'] = 'true';
@@ -260,10 +266,6 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
     $rowSetup = mysqli_fetch_array($sqlSetup);
-
-    //get location type from locations table
-    $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
-    $rowLocations = mysqli_fetch_array($sqlLocations);
 
     //Modal preview box
     showModalPreview("webslideDialog");
@@ -317,6 +319,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     if ($adminIsCheck == "true") {
         echo "<th>Location Group</th>";
     }
+
     echo "<th>Start Date</th>
         <th>End Date</th>
         <th>Active</th>

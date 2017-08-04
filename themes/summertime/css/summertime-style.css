@@ -77,6 +77,14 @@ footer a {
 footer a:hover {
 
 }
+/* nav bar search box - drop down menu button */
+.navbar .navbar-search .dropdown-menu { min-width: 25px; }
+.dropdown-menu .label-icon { margin-left: 5px; }
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
 
 .navbar-static-top {
     z-index: 99;
