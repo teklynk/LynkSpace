@@ -44,6 +44,7 @@ function getLocList($active, $showActiveOnly){
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)){
         $locationListJson .= "'" . $rowLocationSearch['name'] . "',";
     }
+    echo $locationListJson;
 }
 
 function getPageList(){
@@ -54,6 +55,7 @@ function getPageList(){
     while ($rowPageList = mysqli_fetch_array($sqlGetPageList)){
         $pageListJson .= "'" . $rowPageList['title'] . "',";
     }
+    echo $pageListJson;
 }
 
 function getPage($loc){

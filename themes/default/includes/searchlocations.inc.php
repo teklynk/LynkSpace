@@ -13,7 +13,7 @@ getSetup($_GET['loc_id']); //from functions.php
         $(document).ready(function () {
             //jQueryUI AutoComplete
             $(function () {
-                var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
+                var availableTags = [<?php getLocList($_GET['loc_id'], 'true');?>];
                 $('#loc_name').autocomplete({
                     source: availableTags,
                     minLength: 3,

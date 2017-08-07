@@ -3,10 +3,26 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 
-    getLocList($_GET['loc_id'], 'true');
     getSetup($_GET['loc_id']); //from functions.php
 }
 ?>
+<script type="text/javascript" language="javascript">
+    //Gets the list of locations
+    $(document).ready(function () {
+        //jQueryUI AutoComplete
+        $(function () {
+            var availableTags = [<?php getLocList($_GET['loc_id'], 'true');?>];
+            $('#search_term').autocomplete({
+                source: availableTags,
+                minLength: 3,
+                select: function(event, ui) {
+                    $('#search_term').val(ui.item.value);
+                    $('form[name="searchform"]').submit();
+                }
+            });
+        });
+    });
+</script>
 
 <nav class="navbar navbar-default">
     <div class="nav nav-justified navbar-nav">
@@ -38,6 +54,12 @@ if (!defined('inc_access')) {
                                 </a>
                             </li>
                         <?php } ?>
+                        <li>
+                            <a href="#" onclick="$('#search_term').attr('name', 'term'), $('#searchform').attr('action', 'index.php');">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="label-icon">Location Search</span>
+                            </a>
+                        </li>
                     </ul>
                     <?php } elseif($setupSearchDefault == 2) { ?>
                     <button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
@@ -62,10 +84,16 @@ if (!defined('inc_access')) {
                                 </a>
                             </li>
                         <?php } ?>
-                    </ul>
-                    <?php } ?>
-                </div>
 
+                    <?php } ?>
+                        <li>
+                            <a href="#" onclick="$('#search_term').attr('name', 'term'), $('#searchform').attr('action', 'index.php');">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="label-icon">Location Search</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <input type="hidden" name="config" id="search_config" value="<?php echo $setupConfig; ?>">
                 <input type="hidden" name="section" id="search_section" value="search">
                 <input type="text" name="term" id="search_term" class="form-control" value="">
@@ -95,22 +123,6 @@ if (!defined('inc_access')) {
         $(".input-group-btn .dropdown-menu li a").click(function(){
             var selText = $(this).html();
             $(this).parents('.input-group-btn').find('.btn-search').html(selText);
-        });
-    });
-
-    //Gets the list of locations
-    $(document).ready(function () {
-        //jQueryUI AutoComplete
-        $(function () {
-            var availableTags = [<?php echo rtrim($locationListJson, ",");?>];
-            $('#loc_name').autocomplete({
-                source: availableTags,
-                minLength: 3,
-                select: function(event, ui) {
-                    $('#loc_name').val(ui.item.value);
-                    $('form[name="searchform"]').submit();
-                }
-            });
         });
     });
 </script>
