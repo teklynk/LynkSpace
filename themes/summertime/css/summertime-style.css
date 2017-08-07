@@ -43,7 +43,7 @@ h3.sublinktitle {
 }
 .nav-header {
     padding: 4px 12px 4px 12px;
-    background-color: #286192 !important;
+    background-color: #286192;
 }
 .header-top {
 
@@ -52,7 +52,7 @@ h3.sublinktitle {
     padding: 4px 12px 4px 12px;
 }
 .nav-top {
-    background-color: #337ab7 !important;
+    background-color: #337ab7;
     border-radius: 0;
     min-height: 0;
     margin-bottom: 0 !important;
@@ -346,7 +346,7 @@ footer a:hover {
     background-color: #fff;
     border-color: #ddd;
     border-bottom-color: transparent;
-    border-top: solid 3px #d9534f;
+    /*border-top: solid 3px #d9534f;*/
 }
 
 .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
@@ -437,6 +437,7 @@ footer a:hover {
     padding-right: 12px;
     padding-left: 12px;
     margin-right: 12px;
+    text-align: left;
 }
 
 .nav-Footer > .cat-Footer {
@@ -599,10 +600,10 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 
 }
 .btn-primary {
-
+    border-color: transparent;
 }
 .btn-primary:hover, .btn-primary:focus {
-
+    border-color: transparent;
 }
 .service-item .text-primary {
 

@@ -4,7 +4,6 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
-getLocList($_GET['loc_id'], 'true');
 getSetup($_GET['loc_id']); //from functions.php
     ?>
 
@@ -31,7 +30,7 @@ getSetup($_GET['loc_id']); //from functions.php
 
             <div class="row">
 
-                <h1 class="text-white searchlocationsheading">Search School Libraries</h1>
+                <h1 class="text-white searchlocationsheading">Search</h1>
 
                 <div class="panel with-nav-tabs panel-default">
                     <?php

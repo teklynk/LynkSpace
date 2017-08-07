@@ -15,7 +15,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
 
             <div class="row">
 
-                <h1 class="text-white searchpacheading">Search the Catalog</h1>
+                <h1 class="text-white searchpacheading">Search</h1>
 
                 <div class="panel with-nav-tabs panel-default">
 

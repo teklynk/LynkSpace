@@ -8,45 +8,33 @@
 //$themeCssProperties = ['background-color', 'color', 'color'];
 
 $themeCssLabels = [
-    'Base Color',
+    'Navbar Header',
+    'Navbar Header: Links',
+    'Navbar Main',
+    'Navbar Main: Links',
+    'Footer',
+    'Footer: Links',
     'Buttons',
-    'Buttons: Hover',
-    'Fonts',
-    'Links',
-    'Links: Hover',
-    'Navigation Bar',
-    'Navigation Bar: Links',
-    'Navigation Bar: Sub-Links',
-    'Footer Background',
-    'Footer: Fonts',
-    'Footer: Links'
+    'Icons'
 ];
 $themeCssSelectors = [
-    '.themebase-bgcolor,.grad-blue',
-    '.btn-primary,ul.nav-pills>li.active>a,ul.nav-pills>li>a',
-    '.btn-primary:hover,.btn-primary:focus',
-    'p,h1,h2,h3,h4,.text-primary,.service-item .text-primary',
-    'a,a:link',
-    'a:hover,a:focus,.fa-inverse-socialmedia:hover',
-    '.themebase-navbarbgcolor',
-    'ul.navbar-Top>li>a,.fa-inverse-socialmedia',
-    '.dropdown-menu>li>a',
-    '.themebase-footerbgcolor, .footer',
-    '#generalinfo>p',
-    'ul.navbar-Footer>li>a'
+    '.nav-header',
+    '.navbar-Search>li>a,.navbar-Search>li>a:focus,.navbar-Search>li>a:hover',
+    '.nav-top',
+    '.navbar-default .navbar-nav>li>a,.navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover',
+    'footer',
+    '.navbar-Footer>.nav-Footer>a,.navbar-Footer>.nav-Footer>a:focus,.navbar-Footer>.nav-Footer>a:hover,.nav-Footer>.cat-links>a',
+    '.btn-primary,.btn-default,#hottitlesTabs .nav-pills>li a',
+    '.database-item .media-object, .service-item .media-object,.socialDiv>a'
 ];
 $themeCssProperties = [
-    'background',
-    'background',
-    'background',
+    'background-color',
     'color',
+    'background-color',
     'color',
+    'background-color',
     'color',
-    'background',
-    'color',
-    'color',
-    'background',
-    'color',
+    'background-color',
     'color'
 ];
 ?>

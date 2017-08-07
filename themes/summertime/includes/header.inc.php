@@ -76,7 +76,11 @@ if (!defined('inc_access')) {
     </div>
     <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
         <?php
-        include 'searchpac.inc.php';
+        if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
+            include 'searchlocations.inc.php';
+        } else {
+            include 'searchpac.inc.php';
+        }
         ?>
     </div>
 </div>
