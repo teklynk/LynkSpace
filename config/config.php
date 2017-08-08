@@ -16,7 +16,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
         die("Failed to connect to MySQL: " . mysqli_connect_error());
     }
 
-    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
+    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 }
 
@@ -70,6 +70,12 @@ define('setupLS2PACLabel', $rowConfig['searchlabel_ls2pac']);
 
 //LS2Kids Label
 define('setupLS2KidsLabel', $rowConfig['searchlabel_ls2kids']);
+
+//LS2PAC Placeholder
+define('setupLS2PACPlaceholder', $rowConfig['searchplaceholder_ls2pac']);
+
+//LS2Kids Placeholder
+define('setupLS2KidsPlaceholder', $rowConfig['searchplaceholder_ls2kids']);
 
 //Web Site Analytics
 define('site_analytics', $rowConfig['analytics']);

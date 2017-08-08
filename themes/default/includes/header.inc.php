@@ -50,6 +50,22 @@ if (!defined('inc_access')) {
 </div>
 <![endif]-->
 
+<!-- Alerts box -->
+<?php
+
+//only show on index.php/homepage
+if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'){
+
+    getEvents($_GET['loc_id']);
+
+    if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
+        echo "<div class='alert fade in notify-bar' data-dismiss='alert'><h3 class='text-white'>". $eventAlert ."</h3><button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <div><button type='button' class='btn btn-link notify-close text-white' data-dismiss='alert'>(Click to close this message)</button></div></div>";
+    } else {
+        echo "<div class='alert notify-bar hidden'></div>";
+    }
+}
+?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-fixed-top themebase-navbarbgcolor" id="topNav" role="navigation" style="margin-bottom: 0;">

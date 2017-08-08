@@ -108,6 +108,27 @@ iframe {
 .loader-size-LG {
     height: 400px;
 }
+/** Alerts Box **/
+.notify-bar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 32768;
+    border-radius: 0;
+    font-size: 14px;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 24px 24px 12px 24px;
+    background-color:rgba(250, 114, 82, 1.0);
+    border-bottom: solid 1px rgba(250, 114, 82, 1.0);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+.notify-close {
+    margin-top: 32px;
+    display: inline-block;
+}
 
 /** Calendar Iframe **/
 .calContainer iframe, .calContainer.loader {

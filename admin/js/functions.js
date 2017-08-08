@@ -547,6 +547,16 @@ $(document).ready(function () {
             $('.featured_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('.event_defaults_checkbox').change(function () {
+        $.get('ajax/update_eventdefaults.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+        $('.event_defaults_checkbox').attr('disabled', true);
+        setTimeout(function() {
+            $('.event_defaults_checkbox').attr('disabled', false);
+        }, 500);
+    });
     $('.multibranch_checkbox').change(function () {
         $.get('ajax/update_multibranch.php?update=true', {
             id: this.id,

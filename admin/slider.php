@@ -183,8 +183,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     <div class="input-group date">
                         <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+                            <span class="fa fa-calendar"></span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -194,8 +194,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     <div class="input-group date">
                         <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+                            <span class="fa fa-calendar"></span>
+                        </span>
                     </div>
                 </div>
             </div>

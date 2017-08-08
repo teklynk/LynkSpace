@@ -19,14 +19,14 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     if ($_POST['save_main']) {
         //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', searchlabel_ls2pac='" . safeCleanStr($_POST['ls2pac_label']) . "', searchlabel_ls2kids='" . safeCleanStr($_POST['ls2kids_label']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
+        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', searchlabel_ls2pac='" . safeCleanStr($_POST['ls2pac_label']) . "', searchplaceholder_ls2pac='" . safeCleanStr($_POST['ls2pac_placeholder']) . "', searchlabel_ls2kids='" . safeCleanStr($_POST['ls2kids_label']) . "', searchplaceholder_ls2kids='" . safeCleanStr($_POST['ls2kids_placeholder']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);
 
         $pageMsg = "<div class='alert alert-success'>Site options have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='siteoptions.php'\">×</button></div>";
     }
 
     //Get data
-    $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
+    $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchplaceholder_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 
 ?>
@@ -79,11 +79,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <label>Customer ID</label>
+                    <label for="site_customer_id">Customer ID</label>
                     <input type="text" class="form-control count-text" name="site_customer_id" maxlength="10" value="<?php echo $rowConfig['customer_id']; ?>" placeholder="8675309">
                 </div>
                 <div class="form-group" id="multibranchactive">
-                    <label>Multibranch</label>
+                    <label for="multibranch_active">Multibranch</label>
                     <div class="checkbox">
                         <label>
                             <input class="multibranch_checkbox" id="multibranch_active" name="multibranch_active" type="checkbox" <?php echo $selActive; ?> data-toggle="toggle">
@@ -101,40 +101,58 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 }
                 ?>
                 <div class="form-group">
-                    <label>Home Page URL</label>
+                    <label flor="site_homepageurl">Home Page URL</label>
                     <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
                 </div>
                 <div class="form-group">
-                    <label>PAC URL</label>
+                    <label for="site_pacurl">PAC URL</label>
                     <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
                 </div>
                 <div class="col-md-6" style="padding-left:0px;">
                     <div class="form-group">
-                        <label>LS2 PAC : Search Label</label>
+                        <label for="ls2pac_label">LS2 PAC : Search Label</label>
                         <small>
-                            &nbsp;&nbsp;The label for the search box.
+                            &nbsp;&nbsp;Label for the LS2 PAC search box.
                         </small>
-                        <input type="text" class="form-control" name="ls2pac_label" id="ls2pac_label" value="<?php echo $rowConfig['searchlabel_ls2pac']; ?>" placeholder="Catalog"/>
+                        <input type="text" class="form-control count-text" name="ls2pac_label" id="ls2pac_label" maxlength="255" value="<?php echo $rowConfig['searchlabel_ls2pac']; ?>" placeholder="Catalog"/>
                     </div>
                 </div>
                 <div class="col-md-6" style="padding-right:0px;">
                     <div class="form-group">
-                        <label>LS2 Kids : Search Label</label>
+                        <label for="ls2kids_label">LS2 Kids : Search Label</label>
                         <small>
-                            &nbsp;&nbsp;The label for the search box.
+                            &nbsp;&nbsp;Label for the LS2 Kids search box.
                         </small>
-                        <input type="text" class="form-control" name="ls2kids_label" id="ls2kids_label" value="<?php echo $rowConfig['searchlabel_ls2kids']; ?>" placeholder="Kid's Catalog"/>
+                        <input type="text" class="form-control count-text" name="ls2kids_label" id="ls2kids_label" maxlength="255" value="<?php echo $rowConfig['searchlabel_ls2kids']; ?>" placeholder="Kid's Catalog"/>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-left:0px;">
+                    <div class="form-group">
+                        <label for="ls2pac_placeholder">LS2 PAC : Placeholder</label>
+                        <small>
+                            &nbsp;&nbsp;Placeholder text for the LS2 PAC search box.
+                        </small>
+                        <input type="text" class="form-control count-text" name="ls2pac_placeholder" id="ls2pac_placeholder" maxlength="255" value="<?php echo $rowConfig['searchplaceholder_ls2pac']; ?>" placeholder="Find anything at the library. Start here."/>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-right:0px;">
+                    <div class="form-group">
+                        <label for="ls2kids_placeholder">LS2 Kids : Placeholder</label>
+                        <small>
+                            &nbsp;&nbsp;Placeholder text for the LS2 Kids search box.
+                        </small>
+                        <input type="text" class="form-control count-text" name="ls2kids_placeholder" id="ls2kids_placeholder" maxlength="255" value="<?php echo $rowConfig['searchplaceholder_ls2kids']; ?>" placeholder="Find children's book and more."/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Carousel Speed</label>
+                    <label for="site_carousel_speed">Carousel Speed</label>
                     <small>
                         &nbsp;&nbsp;Seconds
                     </small>
                     <input type="text" class="form-control count-text" name="site_carousel_speed" maxlength="5" value="<?php echo $rowConfig['carousel_speed']; ?>" placeholder="5000">
                 </div>
                 <div class="form-group">
-                    <label>Admin Session Log Out Time Limit</label>
+                    <label for="site_session_timeout">Admin Session Log Out Time Limit</label>
                     <small>
                         &nbsp;&nbsp;Minutes
                     </small>
@@ -142,7 +160,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <label>Admin Panel IP Range Access</label>
+                    <label for="site_iprange">Admin Panel IP Range Access</label>
                     <small>
                         &nbsp;&nbsp;Restrict access to external and/or internal IP addresses.&nbsp;&nbsp;Your IP address is <?php echo getRealIpAddr();?></i>
                     </small>
@@ -150,7 +168,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <label>Website Analytics</label>
+                    <label for="site_analytics">Website Analytics</label>
                     <input type="text" class="form-control count-text" name="site_analytics" maxlength="20" value="<?php echo $rowConfig['analytics']; ?>" placeholder="UA-XXXXXX-Y">
                 </div>
                 <div class="form-group" id="sitemap_builder">

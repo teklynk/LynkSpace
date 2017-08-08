@@ -79,6 +79,8 @@ CREATE TABLE `config` (
   `setuppacurl` text COLLATE utf8_unicode_ci NOT NULL,
   `searchlabel_ls2pac` text COLLATE utf8_unicode_ci NOT NULL,
   `searchlabel_ls2kids` text COLLATE utf8_unicode_ci NOT NULL,
+  `searchplaceholder_ls2pac` text COLLATE utf8_unicode_ci NOT NULL,
+  `searchplaceholder_ls2kids` text COLLATE utf8_unicode_ci NOT NULL,
   `searchform` text COLLATE utf8_unicode_ci NOT NULL,
   `session_timeout` int(11) NOT NULL,
   `carousel_speed` text COLLATE utf8_unicode_ci NOT NULL,
@@ -91,8 +93,8 @@ CREATE TABLE `config` (
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchlabel_ls2pac`, `searchlabel_ls2kids`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '', 'default', '', 'false', '1,2,3', '', '', 'Catalog', 'Kids Catalog', '', 60, '5', '', '2017-04-14 18:31:52', '');
+INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchlabel_ls2pac`, `searchlabel_ls2kids`, `searchplaceholder_ls2pac`, `searchplaceholder_ls2kids`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
+(1, '', 'default', '', 'false', '1,2,3', '', '', 'Catalog', 'Kid\'s Catalog', 'Find anything at the library. Start here.', 'Find children\'s books and more.', '', 60, '5', '', '2017-04-14 18:31:52', '');
 
 -- --------------------------------------------------------
 
@@ -139,6 +141,23 @@ CREATE TABLE `customers` (
   `sort` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
+  `loc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `heading` text NOT NULL,
+  `alert` text NOT NULL,
+  `startdate` date NOT NULL,
+  `enddate` date NOT NULL,
+  `calendar` text NOT NULL,
+  `use_defaults` text NOT NULL,
+  `author_name` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1078,18 +1097,24 @@ CREATE TABLE `phinxlog` (
 --
 
 INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
-(20170619190706, 'NavAddColumnActive', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
-(20170620140024, 'NavCatRenameNameColumn', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
-(20170623195513, 'AboutRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:44', 0),
-(20170623201643, 'FeaturedRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:45', 0),
-(20170623202903, 'PagesRemoveImageAlignColumns', '2017-06-23 21:07:45', '2017-06-23 21:07:45', 0),
-(20170627150736, 'ConfigTimeOutValues', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
-(20170627181837, 'UserPasswordResetHash', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
-(20170718181748, 'ChangeCharSetUtf8', '2017-07-18 18:37:09', '2017-07-18 18:37:09', 0),
-(20170721162929, 'SharedUploadsTable', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
-(20170725174836, 'UseDefaultLogoColumn', '2017-07-26 21:00:38', '2017-07-26 21:00:38', 0),
-(20170726203814, 'PrependImagePathToImages', '2017-07-26 21:12:09', '2017-07-26 21:12:10', 0),
-(20170728174905, 'ThemeOptionsTable', '2017-07-31 09:41:03', '2017-07-31 09:41:03', 0);
+  (20170619190706, 'NavAddColumnActive', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
+  (20170620140024, 'NavCatRenameNameColumn', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
+  (20170623195513, 'AboutRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:44', 0),
+  (20170623201643, 'FeaturedRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:45', 0),
+  (20170623202903, 'PagesRemoveImageAlignColumns', '2017-06-23 21:07:45', '2017-06-23 21:07:45', 0),
+  (20170627150736, 'ConfigTimeOutValues', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
+  (20170627181837, 'UserPasswordResetHash', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
+  (20170718181748, 'ChangeCharSetUtf8', '2017-07-18 18:42:22', '2017-07-18 18:42:22', 0),
+  (20170721162929, 'SharedUploadsTable', '2017-07-25 13:39:38', '2017-07-25 13:39:38', 0),
+  (20170725174836, 'UseDefaultLogoColumn', '2017-07-26 12:52:34', '2017-07-26 12:52:34', 0),
+  (20170726203814, 'PrependImagePathToImages', '2017-07-26 21:26:18', '2017-07-26 21:26:18', 0),
+  (20170728174905, 'ThemeOptionsTable', '2017-07-31 13:41:03', '2017-07-31 13:41:03', 0),
+  (20170801163004, 'ColumnThemeUseDefaults', '2017-08-01 17:15:55', '2017-08-01 17:15:55', 0),
+  (20170803183909, 'AddForiegnKeySectionCustomersLocId', '2017-08-03 19:42:56', '2017-08-03 19:42:56', 0),
+  (20170807235741, 'Ls2SearchLabels', '2017-08-08 13:11:38', '2017-08-08 13:11:38', 0),
+  (20170808131502, 'SearchLabelValues', '2017-08-08 13:17:32', '2017-08-08 13:17:32', 0),
+  (20170808131817, 'SearchPlaceholderColumnsAndValues', '2017-08-08 13:23:45', '2017-08-08 13:23:45', 0),
+  (20170808143011, 'EventsAlertsTable', '2017-08-08 16:18:40', '2017-08-08 16:18:40', 0);
 
 -- --------------------------------------------------------
 
@@ -1331,6 +1356,14 @@ ALTER TABLE `customers`
   ADD KEY `customers_loc_id_fk` (`loc_id`);
 
 --
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `events_loc_id_fk` (`loc_id`);
+
+--
 -- Indexes for table `featured`
 --
 ALTER TABLE `featured`
@@ -1481,6 +1514,11 @@ ALTER TABLE `contactus`
 ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `featured`
 --
 ALTER TABLE `featured`
@@ -1588,6 +1626,12 @@ ALTER TABLE `contactus`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `featured`

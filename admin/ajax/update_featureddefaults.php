@@ -25,7 +25,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
             mysqli_query($db_conn, $featuredDefaultsUpdate);
         } else {
             //Do Insert
-            $featuredDefaultsInsert = "INSERT INTO featured (heading, introtext, content, image, image_align, use_defaults, author_name, datetime, loc_id) VALUES ('', '', '', '', '',  'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+            $featuredDefaultsInsert = "INSERT INTO featured (heading, introtext, content, image, use_defaults, author_name, datetime, loc_id) VALUES ('', '', '', '',  'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
             mysqli_query($db_conn, $featuredDefaultsInsert);
         }
 

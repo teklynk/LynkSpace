@@ -386,11 +386,11 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
-                $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
+                $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid=".$delCatId." ";
                 mysqli_query($db_conn, $custCatUpdate);
 
                 //delete category after clicking Yes
-                $custCatDelete = "DELETE FROM category_customers WHERE id=".$delCatId." AND loc_id=" . $_GET['loc_id'] . " ";
+                $custCatDelete = "DELETE FROM category_customers WHERE id=".$delCatId." AND cust_loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $custCatDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

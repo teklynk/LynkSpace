@@ -889,6 +889,43 @@ function getFeatured($loc){
     }
 
 }
+function getEvents($loc){
+    global $eventAlert;
+    global $eventHeading;
+    global $eventStartdate;
+    global $eventEnddate;
+    global $eventCalendar;
+    global $eventAlertDateCheck;
+    global $db_conn;
+
+    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . " ");
+    $rowEvent = mysqli_fetch_array($sqlEvent);
+
+    if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == NULL){
+        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, author_name, datetime, loc_id FROM events WHERE loc_id=1");
+        $rowEvent = mysqli_fetch_array($sqlEvent);
+    }
+
+    if (!empty($rowEvent['heading'])){
+        $eventHeading = $rowEvent['heading'];
+    }
+
+    if (!empty($rowEvent['alert'])){
+        $eventAlert = $rowEvent['alert'];
+        $eventStartdate = $rowEvent['startdate'];
+        $eventEnddate = $rowEvent['enddate'];
+
+        if (strtotime(date('Y-m-d')) >= strtotime($eventStartdate) && strtotime(date('Y-m-d')) <= strtotime($eventEnddate)) {
+            $eventAlertDateCheck = 'true';
+        } else {
+            $eventAlertDateCheck = 'false';
+        }
+    }
+
+    if (!empty($rowEvent['calendar'])){
+        $eventCalendar = $rowEvent['calendar'];
+    }
+}
 
 function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);

@@ -268,6 +268,9 @@ session_start();
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'databases.php'){echo "class='active'";}?>>
                     <a href="databases.php?section=1&<?php echo $setLocId; ?>" title="Databases"><i class="fa fa-fw fa-link"></i> Databases</a>
                 </li>
+                <li <?php if (basename($_SERVER['PHP_SELF']) == 'events.php'){echo "class='active'";}?>>
+                    <a href="events.php?<?php echo $setLocId; ?>" title="Events"><i class="fa fa-fw fa-calendar"></i> Events</a>
+                </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'generalinfo.php'){echo "class='active'";}?>>
                     <a href="generalinfo.php?<?php echo $setLocId; ?>" title="General Info"><i class="fa fa-fw fa-info-circle"></i> General Info</a>
                 </li>
