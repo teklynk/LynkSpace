@@ -77,6 +77,8 @@ CREATE TABLE `config` (
   `loc_types` text COLLATE utf8_unicode_ci NOT NULL,
   `homepageurl` text COLLATE utf8_unicode_ci NOT NULL,
   `setuppacurl` text COLLATE utf8_unicode_ci NOT NULL,
+  `searchlabel_ls2pac` text COLLATE utf8_unicode_ci NOT NULL,
+  `searchlabel_ls2kids` text COLLATE utf8_unicode_ci NOT NULL,
   `searchform` text COLLATE utf8_unicode_ci NOT NULL,
   `session_timeout` int(11) NOT NULL,
   `carousel_speed` text COLLATE utf8_unicode_ci NOT NULL,
@@ -89,8 +91,8 @@ CREATE TABLE `config` (
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-(1, '', 'default', '', 'false', '1,2,3', '', '', '', 60, '5', '', '2017-04-14 18:31:52', '');
+INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchlabel_ls2pac`, `searchlabel_ls2kids`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
+(1, '', 'default', '', 'false', '1,2,3', '', '', 'Catalog', 'Kids Catalog', '', 60, '5', '', '2017-04-14 18:31:52', '');
 
 -- --------------------------------------------------------
 

@@ -43,17 +43,17 @@ getSetup($_GET['loc_id']); //from functions.php
 
                                 if ($setupSearchDefault == 1) {
                                     if ($setupLs2pac == 'true') {
-                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2 PAC</a></li>";
+                                        echo "<li><a href='#tab2default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
                                     }
                                     if ($setupLs2kids == 'true') {
-                                        echo "<li><a href='#tab3default' data-toggle='tab'>LS2 Kids</a></li>";
+                                        echo "<li><a href='#tab3default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
                                     }
                                 } else {
                                     if ($setupLs2kids == 'true') {
-                                        echo "<li><a href='#tab3default' data-toggle='tab'>LS2 Kids</a></li>";
+                                        echo "<li><a href='#tab3default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
                                     }
                                     if ($setupLs2pac == 'true') {
-                                        echo "<li><a href='#tab2default' data-toggle='tab'>LS2 PAC</a></li>";
+                                        echo "<li><a href='#tab2default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
                                     }
                                 }
                                 ?>
@@ -89,7 +89,7 @@ getSetup($_GET['loc_id']); //from functions.php
                                     <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
+                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2PACLabel; ?>"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-danger" type="submit" name="ls2pac_submit">
                                                         <span class="fa fa-search"></span>
@@ -109,7 +109,7 @@ getSetup($_GET['loc_id']); //from functions.php
                                     <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
+                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2KidsLabel; ?>"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-danger" type="submit" name="ls2kids_submit">
                                                         <span class="fa fa-search"></span>

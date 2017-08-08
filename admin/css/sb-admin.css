@@ -14,6 +14,7 @@ div.required label:not(span):before, td.required:before {
     color: #d9534f;
     font-weight: bold;
 }
+
 .alert-danger p {
     color: #404040;
     margin: 0 0 .3em;

@@ -19,14 +19,14 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     if ($_POST['save_main']) {
         //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
+        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', searchlabel_ls2pac='" . safeCleanStr($_POST['ls2pac_label']) . "', searchlabel_ls2kids='" . safeCleanStr($_POST['ls2kids_label']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);
 
         $pageMsg = "<div class='alert alert-success'>Site options have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='siteoptions.php'\">×</button></div>";
     }
 
     //Get data
-    $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
+    $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
     $rowConfig = mysqli_fetch_array($sqlConfig);
 
 ?>
@@ -107,6 +107,24 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <div class="form-group">
                     <label>PAC URL</label>
                     <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_pacurl" maxlength="100" value="<?php echo $rowConfig['setuppacurl']; ?>" placeholder="http://www.librarypac.com">
+                </div>
+                <div class="col-md-6" style="padding-left:0px;">
+                    <div class="form-group">
+                        <label>LS2 PAC : Search Label</label>
+                        <small>
+                            &nbsp;&nbsp;The label for the search box.
+                        </small>
+                        <input type="text" class="form-control" name="ls2pac_label" id="ls2pac_label" value="<?php echo $rowConfig['searchlabel_ls2pac']; ?>" placeholder="Catalog"/>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-right:0px;">
+                    <div class="form-group">
+                        <label>LS2 Kids : Search Label</label>
+                        <small>
+                            &nbsp;&nbsp;The label for the search box.
+                        </small>
+                        <input type="text" class="form-control" name="ls2kids_label" id="ls2kids_label" value="<?php echo $rowConfig['searchlabel_ls2kids']; ?>" placeholder="Kid's Catalog"/>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Carousel Speed</label>

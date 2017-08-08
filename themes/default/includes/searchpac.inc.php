@@ -27,11 +27,11 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
 
                                 <?php
                                 if ($setupSearchDefault == 1) {
-                                    echo "<li class='active'><a href='#tab1default' data-toggle='tab'>LS2 PAC</a></li>";
-                                    echo "<li><a href='#tab2default' data-toggle='tab'>LS2 Kids</a></li>";
+                                    echo "<li class='active'><a href='#tab1default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
+                                    echo "<li><a href='#tab2default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
                                 } else {
-                                    echo "<li class='active'><a href='#tab2default' data-toggle='tab'>LS2 Kids</a></li>";
-                                    echo "<li><a href='#tab1default' data-toggle='tab'>LS2 PAC</a></li>";
+                                    echo "<li class='active'><a href='#tab2default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
+                                    echo "<li><a href='#tab1default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
                                 }
                                 ?>
 
@@ -56,7 +56,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                     <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 PAC"/>
+                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2PACLabel; ?>"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-danger" type="submit" name="ls2pac_submit">
                                                         <span class="fa fa-search"></span>
@@ -81,7 +81,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                     <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="LS2 Kids"/>
+                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2KidsLabel; ?>"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-danger" type="submit" name="ls2packids_submit">
                                                         <span class="fa fa-search"></span>
