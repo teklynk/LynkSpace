@@ -898,11 +898,11 @@ function getEvents($loc){
     global $eventAlertDateCheck;
     global $db_conn;
 
-    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . " ");
+    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . " ");
     $rowEvent = mysqli_fetch_array($sqlEvent);
 
     if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == NULL){
-        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, author_name, datetime, loc_id FROM events WHERE loc_id=1");
+        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=1");
         $rowEvent = mysqli_fetch_array($sqlEvent);
     }
 
