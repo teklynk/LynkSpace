@@ -7,7 +7,7 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'events.php';
 
-$sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowEvent = mysqli_fetch_array($sqlEvent);
 
 //update table on submit
