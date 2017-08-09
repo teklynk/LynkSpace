@@ -895,25 +895,22 @@ function getEvents($loc){
     global $eventStartdate;
     global $eventEnddate;
     global $eventCalendar;
-    global $eventAlertActive;
     global $eventAlertDateCheck;
     global $db_conn;
 
-    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, active, use_defaults, author_name, datetime, loc_id FROM events WHERE active='true' AND loc_id=" . $loc . " ");
+    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . " ");
     $rowEvent = mysqli_fetch_array($sqlEvent);
 
     if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == NULL){
-        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, active, use_defaults, author_name, datetime, loc_id FROM events WHERE active='true' AND loc_id=1");
+        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=1");
         $rowEvent = mysqli_fetch_array($sqlEvent);
     }
-
-    $eventAlertActive = $rowEvent['active'];
 
     if (!empty($rowEvent['heading'])){
         $eventHeading = $rowEvent['heading'];
     }
 
-    if ($eventAlertActive == 'true' && !empty($rowEvent['alert'])){
+    if (!empty($rowEvent['alert'])){
         $eventAlert = $rowEvent['alert'];
         $eventStartdate = $rowEvent['startdate'];
         $eventEnddate = $rowEvent['enddate'];
