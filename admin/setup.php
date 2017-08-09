@@ -28,6 +28,7 @@ if (!empty($_POST)) {
         $site_author = $_POST['site_author'];
         $site_description = $_POST['site_description'];
 
+        //location Active?
         if ($_POST['location_status'] == 'on') {
             $_POST['location_status'] = 'true';
         } else {
@@ -70,9 +71,12 @@ if (!empty($_POST)) {
             //Insert Featured defaults
             $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $featuredInsert);
-            //Do Insert
+            //SocialMedia
             $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $socialInsert);
+            //Events
+            $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . $_GET['loc_id'] . ")";
+            mysqli_query($db_conn, $eventsInsert);
         }
 
         //Reset/Reload loc_list drop down to get the newest locations

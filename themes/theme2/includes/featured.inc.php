@@ -6,6 +6,7 @@ if (!defined('inc_access')) {
 }
 
 getFeatured($_GET['loc_id']);
+
 echo "<div class='container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";
 
@@ -13,7 +14,7 @@ echo "<div class='row' id='featured'>";
 
 echo "<div class='col-xs-12 col-sm-12 featured-heading'>";
 
-if (!empty($featuredContent) && !empty($eventCalendar)) {
+if (!empty($eventCalendar)) {
 
     echo "<div class='featuredcontent' style='float:left; width:70%;'>";
 
@@ -61,6 +62,7 @@ if (!empty($featuredContent) && !empty($eventCalendar)) {
 
 } else {
 
+    echo "<h1 class='featuredheading'>" . $featuredHeading . "</h1>";
     echo "<div class='featuredcontent'>" . $featuredContent . "</div>";
 
 }
@@ -71,5 +73,6 @@ echo "</div>"; // .row
 
 echo "</div>";
 echo "</div>";
+
 echo "<div style='clear:both;'></div>";
 ?>

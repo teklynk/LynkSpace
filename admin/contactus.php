@@ -95,7 +95,7 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label>Map Embed Code</label>
-                    <small>&nbsp;&nbsp;<a href="//support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;&nbsp;<i class='fa fa-fw fa-info-circle'></i></small>
+                    <small>&nbsp;&nbsp;<a href="//support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></small>
                     <textarea class="form-control count-text" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
                 <div class="form-group">

@@ -95,9 +95,13 @@ if ($_POST['save_main']) {
                 $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $featuredInsert);
 
-                //Do Insert
+                //Do Insert SocialMedia
                 $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $locIdCount . ")";
                 mysqli_query($db_conn, $socialInsert);
+
+                //Do Insert Events
+                $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . $locIdCount . ")";
+                mysqli_query($db_conn, $eventsInsert);
 
             }
         }

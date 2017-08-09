@@ -104,7 +104,8 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <div class="form-group">
-                    <label for="event_calendar">Calendar</label>&nbsp;&nbsp;<small></small>
+                    <label for="event_calendar">Calendar</label>
+                    <small>&nbsp;&nbsp;<a href="//support.google.com/calendar/answer/41207?hl=en" target="_blank">How to embed a Google Calendar</a>&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></small>
                     <textarea class="form-control tinymce" name="event_calendar" id="event_calendar" rows="20"><?php echo $rowEvent['calendar']; ?></textarea>
                 </div>
 

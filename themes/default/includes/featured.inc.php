@@ -15,7 +15,7 @@ echo "<div class='row' id='featured'>";
 
 echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
 
-if (!empty($featuredContent) && !empty($eventCalendar)) {
+if (!empty($featuredHeading) && !empty($eventCalendar)) {
 
     echo "<div class='text-white featuredcontent' style='float:left; width:70%;'>";
 
@@ -46,7 +46,7 @@ if (!empty($featuredContent) && !empty($eventCalendar)) {
 
     echo "</div>";
 
-} elseif (empty($featuredContent) && !empty($eventCalendar)) {
+} elseif (empty($featuredHeading) && !empty($eventCalendar)) {
 
     echo "<div class='text-white events'>";
 
@@ -63,6 +63,7 @@ if (!empty($featuredContent) && !empty($eventCalendar)) {
 
 } else {
 
+    echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
     echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
 
 }
@@ -73,5 +74,6 @@ echo "</div>"; // .row
 
 echo "</div>";
 echo "</div>";
+
 echo "<div style='clear:both;'></div>";
 ?>
