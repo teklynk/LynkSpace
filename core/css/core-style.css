@@ -138,7 +138,13 @@ div.events {
 }
 .notify-close {
     margin-top: 32px;
-    display: inline-block;
+    font-size: 1em;
+}
+.alert_close_x {
+    color: #fff;
+    font-weight: bold;
+    font-size: 3em;
+    opacity: 1;
 }
 
 /** Calendar Iframe **/

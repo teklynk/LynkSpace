@@ -79,6 +79,7 @@ if ($_GET['update'] == 'true') {
             }
             ?>
             <form name="eventsForm" class="dirtyForm" method="post" action="">
+
                 <?php
                 if ($_GET['loc_id'] != 1) {
                     ?>
@@ -99,17 +100,23 @@ if ($_GET['update'] == 'true') {
                     <?php
                 }
                 ?>
-                <div class="form-group required">
+                <div class="form-group">
                     <label for="event_heading">Heading</label>
-                    <input type="text" class="form-control count-text" name="event_heading" maxlength="255" value="<?php echo $rowEvent['heading']; ?>" placeholder="Upcoming Events" autofocus required>
+                    <input type="text" class="form-control count-text" name="event_heading" maxlength="255" value="<?php echo $rowEvent['heading']; ?>" placeholder="Upcoming Events" autofocus>
                 </div>
 
-                <hr/>
+                <div class="form-group">
+                    <label for="event_calendar">Calendar</label>&nbsp;&nbsp;<small></small>
+                    <textarea class="form-control tinymce" name="event_calendar" id="event_calendar" rows="20"><?php echo $rowEvent['calendar']; ?></textarea>
+                </div>
+
+                <hr>
 
                 <div class="form-group">
                     <label for="event_alert">Alert Message</label>&nbsp;&nbsp;<small>Displays a prominent alert message on the home page.</small>
-                    <textarea class="form-control count-text" name="event_alert" id="event_alert" rows="6" maxlength="999"><?php echo $rowEvent['alert']; ?></textarea>
+                    <textarea class="form-control count-text" name="event_alert" id="event_alert" rows="4" maxlength="999"><?php echo $rowEvent['alert']; ?></textarea>
                 </div>
+
                 <!-- date time picker -->
                 <div class="col-md-6" style="padding-left:0px;">
                     <div class="form-group">
@@ -135,12 +142,8 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <div style="clear:both;"></div>
-                <hr/>
 
-                <div class="form-group">
-                    <label for="event_calendar">Calendar</label>&nbsp;&nbsp;<small></small>
-                    <textarea class="form-control tinymce" name="event_calendar" rows="20"><?php echo $rowEvent['calendar']; ?></textarea>
-                </div>
+                <hr/>
 
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowEvent['datetime'])) . " By: " . $rowEvent['author_name']; ?></small></span>

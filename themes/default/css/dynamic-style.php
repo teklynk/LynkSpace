@@ -19,7 +19,9 @@ $themeCssLabels = [
     'Navigation Bar: Sub-Links',
     'Footer Background',
     'Footer: Fonts',
-    'Footer: Links'
+    'Footer: Links',
+    'Alert Box: Background',
+    'Alert Box: Font'
 ];
 $themeCssSelectors = [
     '.themebase-bgcolor,.grad-blue',
@@ -31,9 +33,11 @@ $themeCssSelectors = [
     '.themebase-navbarbgcolor',
     'ul.navbar-Top>li>a,.fa-inverse-socialmedia',
     '.dropdown-menu>li>a',
-    '.themebase-footerbgcolor, .footer',
+    '.themebase-footerbgcolor,.footer',
     '#generalinfo>p',
-    'ul.navbar-Footer>li>a'
+    'ul.navbar-Footer>li>a',
+    '.notify-bar',
+    '.notify-bar>.text-white'
 ];
 $themeCssProperties = [
     'background',
@@ -47,6 +51,8 @@ $themeCssProperties = [
     'color',
     'background',
     'color',
+    'color',
+    'background',
     'color'
 ];
 ?>

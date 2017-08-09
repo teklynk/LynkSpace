@@ -15,7 +15,9 @@ $themeCssLabels = [
     'Footer',
     'Footer: Links',
     'Buttons',
-    'Icons'
+    'Icons',
+    'Alert Box: Background',
+    'Alert Box: Font'
 ];
 $themeCssSelectors = [
     '.nav-header',
@@ -25,7 +27,9 @@ $themeCssSelectors = [
     'footer',
     '.navbar-Footer>.nav-Footer>a,.navbar-Footer>.nav-Footer>a:focus,.navbar-Footer>.nav-Footer>a:hover,.nav-Footer>.cat-links>a',
     '.btn-primary,.btn-default,#hottitlesTabs .nav-pills>li a',
-    '.database-item .media-object, .service-item .media-object,.socialDiv>a'
+    '.database-item .media-object,.service-item .media-object,.socialDiv>a',
+    '.notify-bar',
+    '.notify-bar>.text-white'
 ];
 $themeCssProperties = [
     'background-color',
@@ -35,6 +39,8 @@ $themeCssProperties = [
     'background-color',
     'color',
     'background-color',
+    'color',
+    'background',
     'color'
 ];
 ?>
