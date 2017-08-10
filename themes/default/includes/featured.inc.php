@@ -17,7 +17,7 @@ echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>";
 
 if (!empty($featuredHeading) && !empty($eventCalendar)) {
 
-    echo "<div class='text-white featuredcontent' style='float:left; width:70%;'>";
+    echo "<div class='col-lg-8 text-white featuredcontent'>";
 
     if (!empty($featuredHeading)) {
         echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
@@ -33,7 +33,7 @@ if (!empty($featuredHeading) && !empty($eventCalendar)) {
 
     echo "</div>";
 
-    echo "<div class='text-white events' style='float:right; width:30%;'>";
+    echo "<div class='col-lg-4 text-white events'>";
 
     if (!empty($eventCalendar)) {
 
@@ -48,7 +48,7 @@ if (!empty($featuredHeading) && !empty($eventCalendar)) {
 
 } elseif (empty($featuredHeading) && !empty($eventCalendar)) {
 
-    echo "<div class='text-white events'>";
+    echo "<div class='col-lg-12 text-white events'>";
 
     if (!empty($eventCalendar)) {
 
@@ -64,7 +64,7 @@ if (!empty($featuredHeading) && !empty($eventCalendar)) {
 } else {
 
     echo "<h1 class='text-white featuredheading'>" . $featuredHeading . "</h1>";
-    echo "<div class='text-white featuredcontent'>" . $featuredContent . "</div>";
+    echo "<div class='col-lg-12 text-white featuredcontent'>" . $featuredContent . "</div>";
 
 }
 

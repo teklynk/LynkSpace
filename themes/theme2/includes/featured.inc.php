@@ -16,7 +16,7 @@ echo "<div class='col-xs-12 col-sm-12 featured-heading'>";
 
 if (!empty($eventCalendar)) {
 
-    echo "<div class='featuredcontent' style='float:left; width:70%;'>";
+    echo "<div class='col-lg-8 featuredcontent'>";
 
     if (!empty($featuredHeading)) {
         echo "<h1 class='featuredheading'>" . $featuredHeading . "</h1>";
@@ -32,7 +32,7 @@ if (!empty($eventCalendar)) {
 
     echo "</div>";
 
-    echo "<div class='events' style='float:right; width:30%;'>";
+    echo "<div class='col-lg-4 events'>";
 
     if (!empty($eventCalendar)) {
 
@@ -47,7 +47,7 @@ if (!empty($eventCalendar)) {
 
 } elseif (empty($featuredContent) && !empty($eventCalendar)) {
 
-    echo "<div class='events'>";
+    echo "<div class='col-lg-12 events'>";
 
     if (!empty($eventCalendar)) {
 
@@ -63,7 +63,7 @@ if (!empty($eventCalendar)) {
 } else {
 
     echo "<h1 class='featuredheading'>" . $featuredHeading . "</h1>";
-    echo "<div class='featuredcontent'>" . $featuredContent . "</div>";
+    echo "<div class='col-lg-12 featuredcontent'>" . $featuredContent . "</div>";
 
 }
 
