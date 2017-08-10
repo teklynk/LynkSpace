@@ -41,10 +41,10 @@ if ($_GET['update'] == 'true') {
         <div class="col-lg-12">
             <ol class="breadcrumb">
                 <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
-                <li class="active">Events</li>
+                <li class="active">Alerts & Events</li>
             </ol>
             <h1 class="page-header">
-                Events
+                Alerts & Events
             </h1>
         </div>
     </div>

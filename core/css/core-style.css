@@ -92,7 +92,7 @@ iframe {
 }
 div.events {
     padding: 0 8px 0 8px;
-    height: 410px;
+    height: auto;
     overflow: hidden;
 }
 .events h3 {
