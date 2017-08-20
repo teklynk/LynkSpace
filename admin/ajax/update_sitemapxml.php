@@ -142,6 +142,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($robotsfile, $writeline);
         $writeline = "Disallow: /js/\n";
         fwrite($robotsfile, $writeline);
+        $writeline = "Disallow: /migration/\n";
+        fwrite($robotsfile, $writeline);
+        $writeline = "Disallow: /vendor/\n";
+        fwrite($robotsfile, $writeline);
         $writeline = "Sitemap: " . serverUrlStr . "/sitemap.xml";
         fwrite($robotsfile, $writeline);
 

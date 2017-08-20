@@ -8,4 +8,3 @@ Disallow: /themes/
 Disallow: /mail/
 Disallow: /core/
 Disallow: /js/
-Sitemap: //cpswebapp.local.com/sitemap.xml
