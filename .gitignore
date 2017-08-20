@@ -1,9 +1,9 @@
 .git/
 .idea/*
 .svn/
-!/admin/upgrade/*
-!/admin/backups/*
 /config/blowfishsalt.php
 /config/dbconn.php
 /vendor/
-/uploads/1/*
+/uploads/*
+/node_modules/
+/composer.lock
