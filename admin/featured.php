@@ -5,6 +5,7 @@ define('tinyMCE', TRUE);
 include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'featured.php';
+
 //TODO: Turn selects into a function
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);

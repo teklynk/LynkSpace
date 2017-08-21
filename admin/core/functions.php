@@ -875,21 +875,7 @@ function checkIPRange() {
         }
     }
 }
-//SQL function for inserts and updates
-function sqlEdit($loc, $table, $columns, $values){
-    global $db_conn;
 
-    $columns = array($columns);
-    $values = array($values);
-
-    if ($loc) {
-        //Do Update
-        return "UPDATE $table SET $values WHERE loc_id=" . $loc . " ";
-    } else {
-        //Do Insert
-        return "INSERT INTO $table ($columns) VALUES ($values)";
-    }
-}
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";
