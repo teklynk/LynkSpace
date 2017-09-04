@@ -1,5 +1,7 @@
 {
   "require": {
-    "robmorgan/phinx": "*"
+    "robmorgan/phinx": "*",
+    "vlucas/phpdotenv": "^2.4",
+    "twig/twig": "1.31.*"
   }
 }
