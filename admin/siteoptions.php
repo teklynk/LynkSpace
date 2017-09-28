@@ -93,7 +93,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 <?php
                 if ($rowConfig['multibranch'] == 'true') {
                     echo "<div class='form-group'>";
-                    echo "<label>Location Groups</label>";
+                    echo "<label for='site_loc_types'>Location Groups</label>";
                     echo "<input type='text' class='form-control count-text' name='site_loc_types' maxlength='255' value='". $rowConfig['loc_types'] ."' placeholder='1,2,3,4,5'>";
                     echo "</div>";
                 } else {
@@ -101,7 +101,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 }
                 ?>
                 <div class="form-group">
-                    <label flor="site_homepageurl">Home Page URL</label>
+                    <label for="site_homepageurl">Home Page URL</label>
                     <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text" name="site_homepageurl" maxlength="100" value="<?php echo $rowConfig['homepageurl']; ?>" placeholder="http://www.myhomepage.com">
                 </div>
                 <div class="form-group">

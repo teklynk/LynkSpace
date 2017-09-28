@@ -145,6 +145,9 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
     <div class="row">
         <div class="col-lg-8">
             <?php
+            $isActive_default1 = '';
+            $isActive_default2 = '';
+            $errorMsg = '';
 
             if ($errorMsg !="") {
                 echo $errorMsg;
@@ -337,11 +340,11 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     <input type="text" class="form-control count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
                 </div>
                 <div class="form-group">
-                    <label>Keywords</label>
-                    <textarea type="text" class="form-control count-text" name="site_keywords" rows="3" maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
+                    <label for="site_keywords">Keywords</label>
+                    <textarea class="form-control count-text" name="site_keywords" rows="3" maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
+                    <label for="site_description">Description</label>
                     <textarea class="form-control count-text" name="site_description" rows="3" maxlength="999"><?php echo $rowSetup['description']; ?></textarea>
                 </div>
                 <hr/>
@@ -349,8 +352,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group required">
-                            <label>Location Name</label>
-                            <input type="text" class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required>
+                            <label for="location_name">Location Name
+                            <input type="text" class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required></label>
                         </div>
                     </div>
                 </div>
@@ -379,7 +382,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     <div class="form-group" id="logodefaults">
                                         <label for="logo_defaults">Use Defaults Logo</label>
                                         <div class="checkbox">
-                                            <label>
+                                            <label for="logo_defaults">
                                                 <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selLogoDefaults;} ?> data-toggle="toggle">
                                             </label>
                                         </div>
@@ -409,7 +412,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>PAC Config</label>
+                            <label for="site_config">PAC Config</label>
                             <input type="text" class="form-control count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
                         </div>
                     </div>
@@ -420,23 +423,23 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         <div class="form-group" id="searchoptions">
                             <label>PAC Search Options</label>
                             <div class="checkbox">
-                                <label>
-                                    <input class="searchopt_checkbox ls2pac_active" id="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
+                                <label for="ls2pac">
+                                    <input class="searchopt_checkbox ls2pac_active" id="ls2pac" name="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
                                 </label>
                             </div>
                             <div class="radio">
-                                <label>
+                                <label for="defaultsearch">
                                     <input class="searchopt_radio ls2pac_default" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Use as Default
                                 </label>
                             </div>
                             <h1></h1>
                             <div class="checkbox">
-                                <label>
-                                    <input class="searchopt_checkbox ls2kids_active" id="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
+                                <label for="ls2kids">
+                                    <input class="searchopt_checkbox ls2kids_active" id="ls2kids" name="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
                                 </label>
                             </div>
                             <div class="radio">
-                                <label>
+                                <label for="defaultsearch">
                                     <input class="searchopt_radio ls2kids_default" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Use as Default
                                 </label>
                             </div>

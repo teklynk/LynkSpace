@@ -113,7 +113,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <form name="slideForm" class="dirtyForm" method="post" action="">
 
             <div class="form-group required">
-                <label><?php echo $slideLabel; ?></label>
+                <label for="slide_title"><?php echo $slideLabel; ?></label>
                 <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
             </div>
             <hr/>
@@ -122,7 +122,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </div>
 
             <div class="form-group">
-                <label>Use an Existing Image</label>
+                <label for="slide_image">Use an Existing Image</label>
                 <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
                     <option value="" >None</option>
                     <?php
@@ -133,7 +133,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <hr/>
 
             <div class="form-group">
-                <label>Existing Page</label>
+                <label for="slide_exist_page">Existing Page</label>
                 <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
                     <option value="">None</option>
                     <?php
@@ -143,7 +143,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </div>
 
             <div class="form-group">
-                <label>Link URL</label>
+                <label for="slide_link">Link URL</label>
                 <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
             </div>
 
@@ -151,7 +151,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             // if is admin then show the table header
             if ($adminIsCheck == "true") {
                 echo "<div class='form-group'>";
-                echo "<label>Location Group</label>";
+                echo "<label for='location_type'>Location Group</label>";
 
                 echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type' title='Set the location group'>";
                 echo getLocGroups($rowSlides['loc_type']);
@@ -179,7 +179,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <!-- date time picker -->
             <div class="col-md-6" style="padding-left:0px;">
                 <div class="form-group required">
-                    <label>Start Date</label>
+                    <label for="start_date">Start Date</label>
                     <div class="input-group date">
                         <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
@@ -190,7 +190,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             </div>
             <div class="col-md-6" style="padding-right:0px;">
                 <div class="form-group required">
-                    <label>End Date</label>
+                    <label for="end_date">End Date</label>
                     <div class="input-group date">
                         <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
@@ -203,7 +203,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             <hr/>
 
             <div class="form-group">
-                <label>Description</label>
+                <label for="slide_content">Description</label>
                 <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
             </div>
 
@@ -282,7 +282,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group" id="sliderdefaults">
-                    <label>Use Defaults</label>
+                    <label for="slider_defaults">Use Defaults</label>
                     <div class="checkbox">
                         <label>
                             <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
@@ -307,7 +307,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
 		<div class='form-group required'>
-		<label>Heading</label>
+		<label for='main_heading'>Heading</label>
 		<input class='form-control count-text' name='main_heading' maxlength='255' value='" . $rowSetup['sliderheading'] . "' placeholder='My Slides' autofocus required>
 		</div>
 		<table class='table table-bordered table-hover table-striped table-responsive'>
