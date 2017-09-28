@@ -256,7 +256,7 @@ function validateUrl($cleanStr) {
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
         return filter_var(trim($cleanStr), FILTER_VALIDATE_URL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." is not a valid URL<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -267,7 +267,7 @@ function validateEmail($cleanStr) {
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
         return filter_var(trim($cleanStr), FILTER_VALIDATE_EMAIL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." is not a valid Email<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -283,6 +283,7 @@ function getRealIpAddr(){
     }
     return $clientip;
 }
+
 //Location list for level 1 admins only
 function getLocList($active, $showActiveOnly) {
     global $locList;

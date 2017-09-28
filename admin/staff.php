@@ -136,9 +136,9 @@ if ($_GET['preview'] > "") {
                     <label>Name</label>
                     <input type="text" class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" autofocus required>
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Title</label>
-                    <input type="text" class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title">
+                    <input type="text" class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title" required>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
