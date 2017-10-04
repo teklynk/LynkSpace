@@ -162,7 +162,9 @@ if ($deleteMsg != "") {
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
+
                                 <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                             </div>

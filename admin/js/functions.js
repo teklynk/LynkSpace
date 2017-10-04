@@ -232,7 +232,6 @@ $(document).ready(function () {
             $('#rename_cat .fa-save').css('visibility', 'visible');
         }
     });
-
     $('#nav_menu').change(function () {
         var loc_id = getUrlVars()['loc_id'];
         window.location.href = '?section=' + $('#nav_menu').val() + '&loc_id=' + getUrlVars()['loc_id'];
@@ -331,7 +330,6 @@ $(document).ready(function () {
             $('#team_image_preview').attr('src', $('#team_image').val());
         }
     });
-
     //Share image - settings options
     $('#share_loc_type').change(function () {
         if ($('#share_loc_type').val() == '') {
@@ -380,7 +378,6 @@ $(document).ready(function () {
             $('#nav_Table .nav_active_checkbox').attr('disabled', false);
         }, 500);
     });
-
     //Disable radio buttons if one checkbox is active
     if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {
         $('.ls2pac_default').attr('disabled', false);
@@ -389,7 +386,6 @@ $(document).ready(function () {
         $('.ls2pac_default').attr('disabled', true);
         $('.ls2kids_default').attr('disabled', true);
     }
-
     //Ajax calls for PAC setting checkboxes and radios
     $('.searchopt_checkbox').change(function () {
         $.get('ajax/update_searchoptions.php?update=true', {
@@ -436,7 +432,6 @@ $(document).ready(function () {
             });
         }
     });
-
     $('.searchopt_radio').change(function () {
         $.get('ajax/update_searchdefault.php?update=true', {
             value: this.value,
@@ -707,7 +702,6 @@ $(document).ready(function () {
             $('.theme_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
-
     $('.logo_defaults_checkbox').change(function () {
         $.get('ajax/update_logodefaults.php?update=true', {
             id: this.id,
@@ -772,7 +766,6 @@ $(document).ready(function () {
             $('#update_install>i').addClass('fa-cog fa-spin');
         }, 500);
     });
-
     //Not a Robot Function
     $('#not_robot').change(function () {
         if ($('#user_name').val().length && $('#user_email').val().length) {
@@ -787,13 +780,11 @@ $(document).ready(function () {
             }
         }
     });
-
     //Boostrap-select actions
     $('select.selectpicker-auto').change(function () {
         var selected = $('.selectpicker-auto option:selected').val();
         window.location.href = '?loc_id=' + selected;
     });
-
     //Category expand/collapse
     $('#addCat_button').click(function () {
         setTimeout(function () {
@@ -804,7 +795,6 @@ $(document).ready(function () {
             }
         }, 500);
     });
-
     $('#addHottitles_button').click(function () {
         setTimeout(function () {
             if ($('#addHottitlesDiv').hasClass('in')) {
@@ -814,7 +804,6 @@ $(document).ready(function () {
             }
         }, 500);
     });
-
     $('#addUser_button').click(function () {
         setTimeout(function () {
             if ($('#addUserDiv').hasClass('in')) {
@@ -838,7 +827,6 @@ $(document).ready(function () {
             $('select[name="loc_id_list"]').val(queryStrVal);
         }
     });
-
     //Dirty Form Check - Confirmation Message
     $(function() {
         $('.dirtyForm').areYouSure({
@@ -863,7 +851,6 @@ function showMyModal(myTitle, myFile) {
     $('#webserviceDialog').modal('show');
     $('#changlogDialog').modal('show');
 }
-
 //Page Load/Performance Checker
 window.onload = function () {
     var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;

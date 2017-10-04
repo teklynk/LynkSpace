@@ -70,7 +70,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         $slideLabel = "Edit Slide Title";
 
         //update data on submit
-        if (!empty($_POST['slide_title'])) {
+        if (!empty($_POST['slide_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
             $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
@@ -207,6 +207,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
             </div>
 
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
             <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -241,7 +243,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     //update heading on submit
-    if (($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+    if (($_POST['save_main']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
         //var_dump($_POST);
         //die();
 

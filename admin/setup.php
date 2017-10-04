@@ -21,72 +21,71 @@ $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords,
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit
-if (!empty($_POST)) {
-    if (!empty($_POST['site_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+if (!empty($_POST['site_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
-        $site_keywords = $_POST['site_keywords'];
-        $site_author = $_POST['site_author'];
-        $site_description = $_POST['site_description'];
+    $site_keywords = $_POST['site_keywords'];
+    $site_author = $_POST['site_author'];
+    $site_description = $_POST['site_description'];
 
-        //location Active?
-        if ($_POST['location_status'] == 'on') {
-            $_POST['location_status'] = 'true';
-        } else {
-            $_POST['location_status'] = 'false';
-        }
-
-        //use default logo
-        if ($_POST['logo_defaults'] == 'on') {
-            $_POST['logo_defaults']  = 'true';
-        } else {
-            $_POST['logo_defaults']  = 'false';
-        }
-
-        //Always set default location to active/true
-        if ($_GET['loc_id'] == 1) {
-            $_POST['location_status'] = 'true';
-        }
-
-        //update table on submit
-        if ($rowSetup['loc_id'] == $_GET['loc_id']) {
-            //Update Location
-            $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
-            mysqli_query($db_conn, $locationUpdate);
-            //Update Setup
-            $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-            mysqli_query($db_conn, $setupUpdate);
-        } else {
-            //Insert Location
-            $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false')";
-            mysqli_query($db_conn, $locationInsert);
-            //Insert Setup
-            $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $setupInsert);
-            //Insert Contact defaults
-            $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $contactInsert);
-            //Insert About defaults
-            $aboutInsert = "INSERT INTO aboutus (heading, use_defaults, author_name, datetime, loc_id) VALUES ('About Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $aboutInsert);
-            //Insert Featured defaults
-            $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $featuredInsert);
-            //SocialMedia
-            $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $socialInsert);
-            //Events
-            $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $eventsInsert);
-        }
-
-        //Reset/Reload loc_list drop down to get the newest locations
-        unset($_SESSION['loc_list']);
-        $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
-
-        header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
-        echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    //location Active?
+    if ($_POST['location_status'] == 'on') {
+        $_POST['location_status'] = 'true';
+    } else {
+        $_POST['location_status'] = 'false';
     }
+
+    //use default logo
+    if ($_POST['logo_defaults'] == 'on') {
+        $_POST['logo_defaults']  = 'true';
+    } else {
+        $_POST['logo_defaults']  = 'false';
+    }
+
+    //Always set default location to active/true
+    if ($_GET['loc_id'] == 1) {
+        $_POST['location_status'] = 'true';
+    }
+
+    //update table on submit
+    if ($rowSetup['loc_id'] == $_GET['loc_id']) {
+        //Update Location
+        $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
+        mysqli_query($db_conn, $locationUpdate);
+        //Update Setup
+        $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        mysqli_query($db_conn, $setupUpdate);
+    } else {
+        //Insert Location
+        $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false')";
+        mysqli_query($db_conn, $locationInsert);
+        //Insert Setup
+        $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $setupInsert);
+        //Insert Contact defaults
+        $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $contactInsert);
+        //Insert About defaults
+        $aboutInsert = "INSERT INTO aboutus (heading, use_defaults, author_name, datetime, loc_id) VALUES ('About Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $aboutInsert);
+        //Insert Featured defaults
+        $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $featuredInsert);
+        //SocialMedia
+        $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $socialInsert);
+        //Events
+        $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $eventsInsert);
+    }
+
+    //Reset/Reload loc_list drop down to get the newest locations
+    unset($_SESSION['loc_list']);
+    $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
+
+    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
+
 
 $pageMsg = '';
 

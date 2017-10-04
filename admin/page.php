@@ -46,7 +46,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "Edit Page Title";
 
                     //update data on submit
-                    if (!empty($_POST['page_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+                    if (!empty($_POST['page_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                         $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
@@ -63,7 +63,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "New Page Title";
 
                     //insert data on submit
-                    if (!empty($_POST['page_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+                    if (!empty($_POST['page_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
                         $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
@@ -142,7 +142,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 }
 
                 //update heading on submit
-                if (!empty($_POST['main_heading'])) {
+                if (!empty($_POST['main_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                     $setupUpdate = "UPDATE setup SET pageheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $setupUpdate);

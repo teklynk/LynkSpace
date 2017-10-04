@@ -78,7 +78,7 @@ if ($_GET['preview'] > "") {
                 $teamLabel = "Edit Staff Title";
 
                 //update data on submit
-                if (!empty($_POST['team_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+                if (!empty($_POST['team_name']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                     $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
@@ -181,7 +181,7 @@ if ($_GET['preview'] > "") {
             }
 
             //update heading on submit
-            if (($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+            if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                 $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
@@ -237,7 +237,7 @@ if ($_GET['preview'] > "") {
                     echo $teamMsg;
                 }
                 ?>
-                <form role="teamForm" class="dirtyForm" method="post" action="">
+                <form name="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group required">
                         <label>Heading</label>
                         <input type="text" class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>

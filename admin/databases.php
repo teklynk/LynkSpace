@@ -158,7 +158,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerLabel = "Edit Database Name";
 
                 //update data on submit
-                if (!empty($_POST['customer_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+                if (!empty($_POST['customer_name']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                     $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);

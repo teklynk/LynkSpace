@@ -85,7 +85,7 @@ if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
     }
 }
 
-if ($_POST['add_hottitles']) {
+if ($_POST['add_hottitles'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
     $errorMsg = "";
     //Insert Hot Titles
     if (strpos(validateUrl($_POST['hottitles_url']), 'econtent') || strpos(validateUrl($_POST['hottitles_url']), 'dynamic') || strpos(validateUrl($_POST['hottitles_url']), 'static')){
@@ -183,7 +183,9 @@ if ($_GET['loc_id'] != 1) {
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
+
                             <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                             <input type="hidden" name="add_hottitles" value="true"/>
                             <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         </div>

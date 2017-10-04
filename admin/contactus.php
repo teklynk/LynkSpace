@@ -9,7 +9,7 @@ $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email,
 $rowContact = mysqli_fetch_array($sqlContact);
 
 //update table on submit
-if (!empty($_POST['contact_heading'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+if (!empty($_POST['contact_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     if ($_POST['contact_defaults'] == 'on') {
         $_POST['contact_defaults'] = 'true';
