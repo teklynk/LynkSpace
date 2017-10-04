@@ -78,7 +78,7 @@ if ($_GET['preview'] > "") {
                 $teamLabel = "Edit Staff Title";
 
                 //update data on submit
-                if (!empty($_POST['team_name'])) {
+                if (!empty($_POST['team_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
                     $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $teamUpdate);
@@ -145,6 +145,8 @@ if ($_GET['preview'] > "") {
                     <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="999"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
 
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                 <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -179,7 +181,7 @@ if ($_GET['preview'] > "") {
             }
 
             //update heading on submit
-            if (($_POST['save_main'])) {
+            if (($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
                 $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                 mysqli_query($db_conn, $setupUpdate);
@@ -292,6 +294,9 @@ if ($_GET['preview'] > "") {
                         ?>
                         </tbody>
                     </table>
+
+                    <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                     <input type="hidden" name="save_main" value="true"/>
                     <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>
                     <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>

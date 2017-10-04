@@ -11,7 +11,7 @@ $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['generalinfo_heading'])) {
+    if (!empty($_POST['generalinfo_heading'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
         if ($_POST['generalinfo_defaults'] == 'on') {
             $_POST['generalinfo_defaults'] = 'true';
@@ -101,6 +101,8 @@ if ($_GET['update'] == 'true') {
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowGeneralinfo['datetime'])) . " By: " . $rowGeneralinfo['author_name']; ?></small></span>
             </div>
+
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
             <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

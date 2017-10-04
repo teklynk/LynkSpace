@@ -44,7 +44,7 @@ if ($deleteMsg != "") {
 }
 
 $delhottitlesId = $_GET['deletehottitles'];
-$delhottitlesTitle =safeCleanStr(addslashes($_GET['deletetitle']));
+$delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 
 //delete hottitle
 if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -68,7 +68,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 }
 
 //update heading on submit
-if ($_POST['save_main']) {
+if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     $setupUpdate = "UPDATE setup SET hottitlesheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $setupUpdate);
@@ -183,6 +183,7 @@ if ($_GET['loc_id'] != 1) {
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
+                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                             <input type="hidden" name="add_hottitles" value="true"/>
                             <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         </div>
@@ -276,6 +277,9 @@ if ($_GET['loc_id'] != 1) {
                     </tbody>
                 </table>
                 </div>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                 <input type="hidden" name="hottitles_count" value="<?php echo $hottitlesCount; ?>"/>
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="hottitlesMain_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>

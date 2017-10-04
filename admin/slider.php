@@ -241,7 +241,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     //update heading on submit
-    if (($_POST['save_main'])) {
+    if (($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
         //var_dump($_POST);
         //die();
 
@@ -387,6 +387,9 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     echo "</tbody>
 		</table>
+		
+		<input type='hidden' name='csrf' value='" . $_SESSION['unique_referrer'] . "'/>
+		
 		<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
 		<input type='hidden' name='save_main' value='true'/>
 		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>

@@ -30,7 +30,7 @@ if (!is_writable($fileToEdit_dir)) {
 $handle = fopen($fileToEdit_dir, 'r');
 $fileData = fread($handle,filesize($fileToEdit_dir));
 
-if ($_POST['save_main']) {
+if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     //use theme defaults
     if ($_POST['theme_defaults'] == 'on') {
@@ -196,6 +196,9 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
                     ?>
                 </small></span>
             </div>
+
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
             <input type="hidden" name="save_main" value="true"/>
             <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

@@ -9,7 +9,7 @@ $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email,
 $rowContact = mysqli_fetch_array($sqlContact);
 
 //update table on submit
-if (!empty($_POST['contact_heading'])) {
+if (!empty($_POST['contact_heading'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
     if ($_POST['contact_defaults'] == 'on') {
         $_POST['contact_defaults'] = 'true';
@@ -134,6 +134,8 @@ if ($_GET['update'] == 'true') {
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])) . " By: ".$rowContact['author_name']; ?></small></span>
                 </div>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
                 <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

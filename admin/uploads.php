@@ -82,31 +82,33 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         true
     );
 
-    if ($_POST['share_location_type'] || $_POST['share_location_list']) {
+    if ($_POST['csrf'] == $_SESSION['unique_referrer']) {
+        if ($_POST['share_location_type'] || $_POST['share_location_list']) {
 
-        $locTypeOptions = $_POST['share_location_type'];
-        $locListOptions = implode(',', $_POST['share_location_list']); //Convert array to string
+            $locTypeOptions = $_POST['share_location_type'];
+            $locListOptions = implode(',', $_POST['share_location_list']); //Convert array to string
 
-        if ($locTypeOptions <> '') {
-            $sharedOptions = safeCleanStr($locTypeOptions); //Clean string
-        } elseif ($locListOptions <> '') {
-            $sharedOptions = safeCleanStr($locListOptions); //Clean string
-        } else {
-            $sharedOptions = '';
+            if ($locTypeOptions <> '') {
+                $sharedOptions = safeCleanStr($locTypeOptions); //Clean string
+            } elseif ($locListOptions <> '') {
+                $sharedOptions = safeCleanStr($locListOptions); //Clean string
+            } else {
+                $sharedOptions = '';
+            }
+
+            if ($rowSharedUploadsOption['filename'] == $getFileName) {
+                //Do Update
+                $sharedUploadsOptionUpdate = "UPDATE shared_uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ";
+                mysqli_query($db_conn, $sharedUploadsOptionUpdate);
+            } else {
+                //Do Insert
+                $sharedUploadsOptionInsert = "INSERT INTO shared_uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                mysqli_query($db_conn, $sharedUploadsOptionInsert);
+            }
+
+            header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "");
+            echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
         }
-
-        if ($rowSharedUploadsOption['filename'] == $getFileName) {
-            //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE shared_uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ";
-            mysqli_query($db_conn, $sharedUploadsOptionUpdate);
-        } else {
-            //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO shared_uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $sharedUploadsOptionInsert);
-        }
-
-        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "");
-        echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 }
 ?>
@@ -155,6 +157,9 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <input type="hidden" name="action" value="uploadFile">
                 </div>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                 <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>

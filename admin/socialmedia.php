@@ -10,7 +10,7 @@ $rowSocial = mysqli_fetch_array($sqlSocial);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['social_heading'])) {
+    if (!empty($_POST['social_heading'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
         if ($_POST['social_defaults'] == 'on') {
             $_POST['social_defaults'] = 'true';
@@ -117,6 +117,8 @@ if ($_GET['update'] == 'true') {
                 <label>YouTube</label>
                 <input class="form-control" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.youtube.com/user/username">
             </div>
+
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
             <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>

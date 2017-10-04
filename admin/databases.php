@@ -158,7 +158,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerLabel = "Edit Database Name";
 
                 //update data on submit
-                if (!empty($_POST['customer_name'])) {
+                if (!empty($_POST['customer_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
                     $customerUpdate = "UPDATE customers SET name='" . safeCleanStr($_POST['customer_name']) . "', icon='" . $_POST['customer_icon_select'] . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
@@ -175,7 +175,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerLabel = "New Database Name";
 
                 //insert data on submit
-                if (!empty($_POST['customer_name'])) {
+                if (!empty($_POST['customer_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
                     $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
@@ -266,6 +266,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <textarea class="form-control count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
 
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -332,7 +334,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             }
 
             //update heading on submit
-            if ($_POST['save_main']) {
+            if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
                 $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ");
                 $rowSection = mysqli_fetch_array($sqlSections);
@@ -620,6 +622,9 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         ?>
                         </tbody>
                     </table>
+
+                    <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                     <input type="hidden" name="cust_count" value="<?php echo $custCount; ?>" />
                     <input type="hidden" name="save_main" value="true"/>
                     <button type="submit" class="btn btn-primary" name="customer_submit"><i class="fa fa-fw fa-save"></i> Save Changes</button>

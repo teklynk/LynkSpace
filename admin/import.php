@@ -23,7 +23,7 @@ if (!is_writeable(__DIR__ . '/backups/')){
 }
 
 //update table on submit
-if ($_POST['save_main']) {
+if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     if ($_FILES['csvLocationsImport']['size'] > 0) {
 
@@ -254,6 +254,8 @@ if ($_GET['update'] == 'true') {
                 </div>
 
                 <hr/>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="importForm_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".csv - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Import CSV(s)</button>

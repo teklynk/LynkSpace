@@ -11,7 +11,7 @@ $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, c
 $rowEvent = mysqli_fetch_array($sqlEvent);
 
 //update table on submit
-if (!empty($_POST)) {
+if ($_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     if ($_POST['event_defaults'] == 'on') {
         $_POST['event_defaults'] = 'true';
@@ -147,6 +147,8 @@ if ($_GET['update'] == 'true') {
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowEvent['datetime'])) . " By: " . $rowEvent['author_name']; ?></small></span>
                 </div>
+
+
 
                 <button type="submit" name="event_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

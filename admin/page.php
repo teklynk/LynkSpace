@@ -46,7 +46,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "Edit Page Title";
 
                     //update data on submit
-                    if (!empty($_POST['page_title'])) {
+                    if (!empty($_POST['page_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
                         $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
@@ -63,7 +63,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "New Page Title";
 
                     //insert data on submit
-                    if (!empty($_POST['page_title'])) {
+                    if (!empty($_POST['page_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
                         $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
@@ -102,6 +102,9 @@ $_SESSION['file_referrer'] = 'page.php';
                         <div class="form-group">
                             <span><small><?php if ($_GET['editpage']) {echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];} ?></small></span>
                         </div>
+
+                        <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                         <button type="submit" name="page_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -220,6 +223,8 @@ $_SESSION['file_referrer'] = 'page.php';
                             ?>
                             </tbody>
                         </table>
+
+                        <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
                         <button type="submit" name="pageNew_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

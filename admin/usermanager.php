@@ -38,7 +38,7 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 //Add User
 //insert data on submit
-if ($_POST['save_main']) {
+if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
 
         $sqlUsersInfo = mysqli_query($db_conn, "SELECT username, email FROM users WHERE username='".sqlEscapeStr($_POST['user_name'])."' AND email='".validateEmail($_POST['user_email'])."' ");
@@ -162,6 +162,7 @@ if ($deleteMsg != "") {
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
+                                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                             </div>
