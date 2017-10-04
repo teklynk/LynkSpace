@@ -22,7 +22,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['site_title'])) {
+    if (!empty($_POST['site_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
 
         $site_keywords = $_POST['site_keywords'];
         $site_author = $_POST['site_author'];
@@ -452,6 +452,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
                 </div>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
                 <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
                 </button>

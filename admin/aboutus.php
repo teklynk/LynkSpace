@@ -11,7 +11,7 @@ $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['about_heading'])) {
+    if (!empty($_POST['about_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
         if ($_POST['aboutus_defaults'] == 'on') {
             $_POST['aboutus_defaults'] = 'true';
@@ -107,6 +107,8 @@ if ($_GET['update'] == 'true') {
             <div class="form-group">
                 <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowAbout['datetime'])) . " By: ". $rowAbout['author_name'] ?></small></span>
             </div>
+
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
             <button type="submit" name="aboutus_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

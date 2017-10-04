@@ -6,20 +6,19 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'featured.php';
 
-//TODO: Turn selects into a function
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
 $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['featured_heading'])) {
+    if (!empty($_POST['featured_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
         if ($_POST['featured_defaults'] == 'on') {
             $_POST['featured_defaults'] = 'true';
         } else {
             $_POST['featured_defaults'] = 'false';
         }
-//TODO: Turn this action into a function that checks if loc_id exists, do update else do insert. Use 2 arrays containing columns and values
+
         if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
             //Do Update
             $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . sqlEscapeStr($_POST['featured_content']) . "', use_defaults='" . safeCleanStr($_POST['featured_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
@@ -104,6 +103,8 @@ if ($_GET['update'] == 'true') {
                 <div class="form-group">
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowFeatured['datetime'])) . " By: " . $rowFeatured['author_name']; ?></small></span>
                 </div>
+
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
 
                 <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
