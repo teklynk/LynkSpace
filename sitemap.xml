@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>//localhost/businessCMS/index.php?loc_id=1</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/index.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/about.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/staff.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/services.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/contact.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//localhost/businessCMS/databases.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+</urlset>

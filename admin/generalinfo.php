@@ -11,6 +11,7 @@ $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 
 //update table on submit
 if (!empty($_POST)) {
+
     if (!empty($_POST['generalinfo_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
         if ($_POST['generalinfo_defaults'] == 'on') {
@@ -25,7 +26,7 @@ if (!empty($_POST)) {
             mysqli_query($db_conn, $generalinfoUpdate);
         } else {
             //Do Insert
-            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . sqlEscapeStr($_POST['generalinfo_content']) . "', 'true', ''" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['generalinfo_heading']) . "', '" . sqlEscapeStr($_POST['generalinfo_content']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $generalinfoInsert);
         }
 
