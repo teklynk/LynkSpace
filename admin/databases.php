@@ -175,7 +175,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerLabel = "New Database Name";
 
                 //insert data on submit
-                if (!empty($_POST['customer_name'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+                if (!empty($_POST['customer_name']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
                     $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 

@@ -23,7 +23,7 @@ if (!empty($_POST['contact_heading']) && $_POST['csrf'] == $_SESSION['unique_ref
         mysqli_query($db_conn, $contactUpdate);
     } else {
         //Do Insert
-        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['contact_heading']) . "', '" . safeCleanStr($_POST['contact_introtext']) . "', '" . trim($_POST['contact_mapcode']) . "', '" . validateEmail($_POST["contact_email"]) . "', '" . validateEmail($_POST['contact_sendtoemail']) . "', '" . safeCleanStr($_POST['contact_address']) . "', '" . safeCleanStr($_POST['contact_city']) . "', '" . safeCleanStr($_POST['contact_state']) . "', '" . safeCleanStr($_POST['contact_zipcode']) . "', '" . safeCleanStr($_POST['contact_phone']) . "', '" . safeCleanStr($_POST['contact_hours']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['contact_heading']) . "', '" . safeCleanStr($_POST['contact_introtext']) . "', '" . trim($_POST['contact_mapcode']) . "', '" . validateEmail($_POST["contact_email"]) . "', '" . validateEmail($_POST['contact_sendtoemail']) . "', '" . safeCleanStr($_POST['contact_address']) . "', '" . safeCleanStr($_POST['contact_city']) . "', '" . safeCleanStr($_POST['contact_state']) . "', '" . safeCleanStr($_POST['contact_zipcode']) . "', '" . safeCleanStr($_POST['contact_phone']) . "', '" . safeCleanStr($_POST['contact_hours']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
         mysqli_query($db_conn, $contactInsert);
     }
 
@@ -86,48 +86,48 @@ if ($_GET['update'] == 'true') {
                 }
                 ?>
                 <div class="form-group required">
-                    <label>Heading</label>
+                    <label for="contact_heading">Heading</label>
                     <input type="text" class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
                 </div>
                 <div class="form-group">
-                    <label>Intro Text</label>
+                    <label for="contact_introtext">Intro Text</label>
                     <textarea class="form-control count-text" name="contact_introtext" rows="3" maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Map Embed Code</label>
+                    <label for="contact_mapcode">Map Embed Code</label>
                     <small>&nbsp;&nbsp;<a href="//support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></small>
                     <textarea class="form-control count-text" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Street Address</label>
+                    <label for="contact_address">Street Address</label>
                     <input type="text" class="form-control count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
                 </div>
                 <div class="form-group">
-                    <label>City</label>
+                    <label for="contact_city">City</label>
                     <input type="text" class="form-control count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
                 </div>
                 <div class="form-group">
-                    <label>State</label>
+                    <label for="contact_state">State</label>
                     <input type="text" class="form-control count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
                 </div>
                 <div class="form-group">
-                    <label>ZIP Code</label>
+                    <label for="contact_zipcode">ZIP Code</label>
                     <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
-                    <label>Phone</label>
+                    <label for="contact_phone">Phone</label>
                     <input class="form-control count-text" name="contact_phone" maxlength="100" value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
                 </div>
                 <div class="form-group">
-                    <label>Hours</label>
+                    <label for="contact_hours">Hours</label>
                     <textarea class="form-control count-text" name="contact_hours" rows="3" maxlength="255" placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Main Contact Email</label>
+                    <label for="contact_email">Main Contact Email</label>
                     <input class="form-control count-text" name="contact_email" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
                 <div class="form-group">
-                    <label>Comment Form Email</label>
+                    <label for="contact_sendtoemail">Comment Form Email</label>
                     <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
 

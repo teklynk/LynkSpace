@@ -47,8 +47,11 @@ if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
         if ($rowCheckUser > 0) {
             $pageMsg = "<div class='alert alert-danger'>Username: ".$_POST['user_name']." and Email: ".$_POST['user_email']." already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
         } else {
-            $usersInsert = "INSERT INTO users (username, email, password, level, clientip, loc_id) VALUES ('" . sqlEscapeStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . sha1(blowfishSalt . safeCleanStr($_POST['user_password'])) . "', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
+            $usersInsert = "INSERT INTO users (username, email, password, password_reset, password_reset_date, level, clientip, loc_id) VALUES ('" . sqlEscapeStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . sha1(blowfishSalt . safeCleanStr($_POST['user_password'])) . "', '', '0000-00-00', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
             mysqli_query($db_conn, $usersInsert);
+
+            print_r(mysqli_error($db_conn));
+            die();
 
             $pageMsg = "<div class='alert alert-success'>The user " . safeCleanStr($_POST['user_name']) . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
         }
