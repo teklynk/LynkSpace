@@ -180,6 +180,8 @@ function generateRandomString(){
 function renameDir($oldname, $newname){
     if (file_exists(dirname($oldname))) {
         return rename($oldname, $newname);
+    } else {
+        return false;
     }
 }
 
@@ -608,8 +610,6 @@ function checkDependencies(){
             echo "<div class='alert alert-danger'><span>".robotsFilename." is not writable. Check file permissions.</span></div>";
         }
     }
-
-    return false;
 }
 
 //Copy folder contents to another

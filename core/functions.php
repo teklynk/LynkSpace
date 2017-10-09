@@ -559,8 +559,8 @@ function getDynamicCss($loc){
     //Gets themeoptions
     $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $locId . " ");
     while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions)){
-        if ($rowGetThemeOpions['cssvalue'] != '#000000'){//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
-            echo $rowGetThemeOpions['selector'] . " {" . $rowGetThemeOpions['property'] . ": " . $rowGetThemeOpions['cssvalue'] . " !important;}" . PHP_EOL;
+        if (trim($rowGetThemeOpions['cssvalue']) != '#000000'){//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+            echo $rowGetThemeOpions['selector'] . " {" . trim($rowGetThemeOpions['property']) . ": " . trim($rowGetThemeOpions['cssvalue']) . " !important;}" . PHP_EOL;
         }
     }
 }
@@ -583,6 +583,7 @@ function getSocialMediaIcons($loc, $shape, $section){
         $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia);
     }
 
+    $socialMediaHeading = "";
     $socialMediaIcons = "";
 
     if (!empty($rowSocialMedia['heading'])){
@@ -590,31 +591,31 @@ function getSocialMediaIcons($loc, $shape, $section){
     }
 
     if (!empty($rowSocialMedia['facebook'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['facebook'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['facebook']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['google'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['google'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['google']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['pinterest'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['pinterest'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['pinterest']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['twitter'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['twitter'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['twitter']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['instagram'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['instagram'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['instagram']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['youtube'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['youtube'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['youtube']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
     if (!empty($rowSocialMedia['tumblr'])){
-        $socialMediaIcons .= "<a href=" . $rowSocialMedia['tumblr'] . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+        $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['tumblr']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 }
 
@@ -1339,7 +1340,7 @@ if (empty($_GET['loc_id'])){
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
 }
 
-//School search box redirect to loc_id where loc_name = querystring
+//location search box redirect to loc_id where loc_name = querystring
 if (!empty($_GET['loc_name'])){
 
     $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='" . $_GET['loc_name'] . "' LIMIT 1");
