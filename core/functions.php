@@ -467,7 +467,7 @@ function getLogo($loc, $type){
 
 }
 
-function getCoreHeader($loc){
+function getCoreHeader($loc, $addHeader=null){
     getLocation($loc);
     getSetup($loc);
     global $setupConfig;
@@ -538,6 +538,8 @@ function getCoreHeader($loc){
 
     <noscript>Javascript is not enabled in your browser.</noscript>
     <?php
+    //if addHeader parameter exists.
+    echo "\n" . $addHeader . "\n";
 }
 //Theme options
 function getDynamicCss($loc){
