@@ -11,7 +11,7 @@ $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['featured_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+    if (!empty($_POST['featured_heading'])) {
 
         if ($_POST['featured_defaults'] == 'on') {
             $_POST['featured_defaults'] = 'true';

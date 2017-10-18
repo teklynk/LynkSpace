@@ -81,7 +81,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 		$serviceLabel = "Edit Service Title";
 
 		//update data on submit
-		if (!empty($_POST['service_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+		if (!empty($_POST['service_title'])) {
 
 			$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
 			mysqli_query($db_conn, $servicesUpdate);
@@ -98,7 +98,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 		$serviceLabel = "New Service Title";
 
 		//insert data on submit
-		if (!empty($_POST['service_title'] && $_POST['csrf'] == $_SESSION['unique_referrer'])) {
+		if (!empty($_POST['service_title'])) {
 			$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, sort, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', 'false', 0, '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $servicesInsert);
 
@@ -213,7 +213,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 	}
 
 	//update heading on submit
-	if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+	if ($_POST['save_main']) {
 
 		if ($_POST['services_defaults'] == 'on') {
 			$_POST['services_defaults'] = 'true';

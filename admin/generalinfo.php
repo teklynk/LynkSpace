@@ -12,7 +12,7 @@ $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 //update table on submit
 if (!empty($_POST)) {
 
-    if (!empty($_POST['generalinfo_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+    if (!empty($_POST['generalinfo_heading'])) {
 
         if ($_POST['generalinfo_defaults'] == 'on') {
             $_POST['generalinfo_defaults'] = 'true';

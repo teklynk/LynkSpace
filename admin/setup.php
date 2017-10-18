@@ -21,7 +21,7 @@ $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords,
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit
-if (!empty($_POST['site_title']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if (!empty($_POST['site_title'])) {
 
     $site_keywords = $_POST['site_keywords'];
     $site_author = $_POST['site_author'];

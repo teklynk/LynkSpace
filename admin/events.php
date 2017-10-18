@@ -11,7 +11,7 @@ $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, c
 $rowEvent = mysqli_fetch_array($sqlEvent);
 
 //update table on submit
-if ($_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST) {
 
     if ($_POST['event_defaults'] == 'on') {
         $_POST['event_defaults'] = 'true';

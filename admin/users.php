@@ -9,7 +9,7 @@ $sqlUsers = mysqli_query($db_conn, "SELECT username, password, email, datetime, 
 $rowUsers = mysqli_fetch_array($sqlUsers);
 
 //update table on submit
-if (!empty($_POST) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if (!empty($_POST)) {
     $username = $_POST['user_name'];
     $useremail = $_POST['user_email'];
     $userpass = $_POST['user_password'];

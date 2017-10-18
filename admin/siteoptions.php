@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     $pageMsg = "";
 
-    if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+    if ($_POST['save_main']) {
         //Update record in DB
         $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', searchlabel_ls2pac='" . safeCleanStr($_POST['ls2pac_label']) . "', searchplaceholder_ls2pac='" . safeCleanStr($_POST['ls2pac_placeholder']) . "', searchlabel_ls2kids='" . safeCleanStr($_POST['ls2kids_label']) . "', searchplaceholder_ls2kids='" . safeCleanStr($_POST['ls2kids_placeholder']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);

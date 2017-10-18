@@ -11,7 +11,7 @@ $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['about_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+    if (!empty($_POST['about_heading'])) {
 
         if ($_POST['aboutus_defaults'] == 'on') {
             $_POST['aboutus_defaults'] = 'true';
@@ -100,7 +100,7 @@ if ($_GET['update'] == 'true') {
             </div>
             <hr/>
             <div class="form-group">
-                <label>Text / HTML</label>
+                <label for="about_content">Text / HTML</label>
                 <textarea class="form-control tinymce" name="about_content" rows="20"><?php echo $rowAbout['content']; ?></textarea>
             </div>
 

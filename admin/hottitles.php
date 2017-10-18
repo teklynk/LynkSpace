@@ -68,7 +68,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 }
 
 //update heading on submit
-if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['save_main']) {
 
     $setupUpdate = "UPDATE setup SET hottitlesheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $setupUpdate);
@@ -85,7 +85,7 @@ if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
     }
 }
 
-if ($_POST['add_hottitles'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['add_hottitles']) {
     $errorMsg = "";
     //Insert Hot Titles
     if (strpos(validateUrl($_POST['hottitles_url']), 'econtent') || strpos(validateUrl($_POST['hottitles_url']), 'dynamic') || strpos(validateUrl($_POST['hottitles_url']), 'static')){

@@ -896,4 +896,14 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
+
+//csrf checker
+if ($_POST['csrf']) {
+    if (safeCleanStr($_POST['csrf']) != $_SESSION['unique_referrer']) {
+        header("Location: ../index.php?loc_id=1");
+        echo "<script>window.location.href='../index.php?loc_id=1';</script>";
+        die('Direct access not permitted');
+    }
+}
+
 ?>

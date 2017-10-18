@@ -8,7 +8,7 @@ $_SESSION['file_referrer'] = 'navigation.php';
 $getNavSection = $_GET['section'];
 
 //update table on submit
-if (!empty($_POST) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if (!empty($_POST)) {
 
     if (!empty($_POST['nav_newname'])) {
 

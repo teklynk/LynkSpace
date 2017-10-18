@@ -23,7 +23,7 @@ if (!is_writeable(__DIR__ . '/backups/')){
 }
 
 //update table on submit
-if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['save_main']) {
 
     if ($_FILES['csvLocationsImport']['size'] > 0) {
 

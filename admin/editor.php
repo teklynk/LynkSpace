@@ -30,7 +30,7 @@ if (!is_writable($fileToEdit_dir)) {
 $handle = fopen($fileToEdit_dir, 'r');
 $fileData = fread($handle,filesize($fileToEdit_dir));
 
-if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['save_main']) {
 
     //use theme defaults
     if ($_POST['theme_defaults'] == 'on') {

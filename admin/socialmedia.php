@@ -10,7 +10,7 @@ $rowSocial = mysqli_fetch_array($sqlSocial);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['social_heading']) && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+    if (!empty($_POST['social_heading'])) {
 
         if ($_POST['social_defaults'] == 'on') {
             $_POST['social_defaults'] = 'true';

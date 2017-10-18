@@ -38,7 +38,7 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 //Add User
 //insert data on submit
-if ($_POST['save_main'] && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
 
         $sqlUsersInfo = mysqli_query($db_conn, "SELECT username, email FROM users WHERE username='".sqlEscapeStr($_POST['user_name'])."' AND email='".validateEmail($_POST['user_email'])."' ");
