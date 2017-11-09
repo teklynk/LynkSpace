@@ -565,8 +565,14 @@ function checkDependencies(){
     if  (!in_array('zip', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>zip (php-zip) is not installed on the server.<br/>Try: sudo apt-get install php-zip</span></div>";
     }
+    if  (!in_array('imagick', get_loaded_extensions())) {
+        echo "<div class='alert alert-danger'><span>imagick (php-imagick) is not installed on the server.<br/>Try: sudo apt-get install php-imagick</span></div>";
+    }
     if  (!in_array('mbstring', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>mbstring (php-mbstring) is not installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div>";
+    }
+    if  (!in_array('mcrypt', get_loaded_extensions())) {
+        echo "<div class='alert alert-danger'><span>mcrypt (php-mcrypt) is not installed on the server.<br/>Try: sudo apt-get install php-mcrypt</span></div>";
     }
     if (!in_array('mod_rewrite', apache_get_modules())) {
         echo "<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div>";
