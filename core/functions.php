@@ -502,6 +502,7 @@ function getCoreHeader($loc, $addHeader=null){
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
+    <!--Dynamic CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
@@ -541,6 +542,7 @@ function getCoreHeader($loc, $addHeader=null){
     //if addHeader parameter exists.
     echo "\n" . $addHeader . "\n";
 }
+
 //Theme options
 function getDynamicCss($loc){
     global $db_conn;
@@ -697,6 +699,8 @@ function getSlider($loc, $sliderType){
     global $sliderTitle;
     global $sliderContent;
     global $sliderImage;
+    global $sliderImageList;
+    global $sliderImageArr;
     global $sliderLocType;
     global $imagePath;
     global $locTypes;
@@ -786,6 +790,8 @@ function getSlider($loc, $sliderType){
 
                 } //end of startdate check
 
+                $sliderImageList .= $rowSlider['image'] . ",";
+
             }//end of while loop
 
             //Controls
@@ -827,6 +833,8 @@ function getSlider($loc, $sliderType){
                 echo "</div>"; //.item
 
                 echo "</div>"; //.carousel-inner
+
+                $sliderImageList = $rowSlider['image'];
             }
         } else {
             $rowSlider = mysqli_fetch_array($sqlSlider);
@@ -835,7 +843,12 @@ function getSlider($loc, $sliderType){
             $sliderContent = $rowSlider['content'];
             $sliderImage = $rowSlider['image'];
             $sliderLocType = $rowSlider['loc_type'];
+            $sliderImageList = $rowSlider['image'];
         }
+
+        //Clean sliderImageList
+        $sliderImageList = rtrim($sliderImageList, ",");
+        $sliderImageArr = explode(",", $sliderImageList);
 
     }
 }
