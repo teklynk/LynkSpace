@@ -35,7 +35,7 @@ if (!empty($_POST)) {
             }
 
             //Super Admin
-            if (strpos($_SESSION['user_name'],'tlcadmin') !== false && strpos($_SESSION['user_email'], '@tlcdelivers.com') !== false) {
+            if (strpos($_SESSION['user_name'],'tlcadmin') !== false) {
                 $_SESSION['super_admin'] = true;
             }
 
@@ -135,7 +135,7 @@ if (isset($_SESSION['loggedIn'])) {
                 </div>
                 <div class="panel-body">
                     <div class="text-center login-logo">
-                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YouSeeMore" alt="YouSeeMore"/>
+                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="CMS" alt="YouSeeMore"/>
                     </div>
                     <section class="login-form">
                         <?php

@@ -508,12 +508,12 @@ function getCoreHeader($loc, $addHeader=null){
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
 
-    <!-- TLC LS2 search script -->
+    <!-- LS2 search script -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
-    <!-- TLC search variables -->
+
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
     <script type="text/javascript" language="javascript">
         var TLCDomain = "<?php echo setupPACURL; ?>";

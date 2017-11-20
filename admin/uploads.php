@@ -5,9 +5,6 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Upload Action - Do the upload
-uploadFile($_POST["action"] == 'uploadFile', image_dir, 'true', 800, 4, 2048000);
-
 //Delete file
 $deleteMsg = "";
 
@@ -20,9 +17,15 @@ if ($_GET["share"]) {
     $urlParam = '';
 }
 
+$action = safeCleanStr($_POST["action"]);
 $getSharedFileName = str_replace('..', '', $urlParam);
 $getSharedFileNameArr = explode('/', $getSharedFileName);
 $getFileName = safeCleanStr($getSharedFileNameArr[3]);
+$share_location_type = safeCleanStr($_POST['share_location_type']);
+$share_location_list = safeCleanStr($_POST['share_location_list']);
+
+//Upload Action - Do the upload
+uploadFile($action == 'uploadFile', image_dir, 'true', 800, 4, 2048000);
 
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {
@@ -82,13 +85,12 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         true
     );
 
-    if ($_POST['share_location_type'] || $_POST['share_location_list']) {
+    if ($share_location_type || $share_location_list) {
 
-        $locTypeOptions = $_POST['share_location_type'];
-        $locListOptions = implode(',', $_POST['share_location_list']); //Convert array to string
+        $locListOptions = implode(',', $share_location_list); //Convert array to string
 
-        if ($locTypeOptions <> '') {
-            $sharedOptions = safeCleanStr($locTypeOptions); //Clean string
+        if ($share_location_type <> '') {
+            $sharedOptions = safeCleanStr($share_location_type); //Clean string
         } elseif ($locListOptions <> '') {
             $sharedOptions = safeCleanStr($locListOptions); //Clean string
         } else {

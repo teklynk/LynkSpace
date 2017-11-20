@@ -71,12 +71,12 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 if (!empty($_POST['save_main'])) {
 
     $main_heading = safeCleanStr($_POST['main_heading']);
-    $hottitles_count = $_POST['hottitles_count'];
+    $hottitles_count = safeCleanStr($_POST['hottitles_count']);
     $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);
     $hottitles_title = safeCleanStr($_POST['hottitles_title']);
     $hottitles_url = validateUrl($_POST['hottitles_url']);
     $location_type = safeCleanStr($_POST['location_type']);
-    $hottitles_id = $_POST['hottitles_id'];
+    $hottitles_id = safeCleanStr($_POST['hottitles_id']);
 
     $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $setupUpdate);

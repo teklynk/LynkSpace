@@ -10,21 +10,33 @@ $rowSocial = mysqli_fetch_array($sqlSocial);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['social_heading'])) {
 
-        if ($_POST['social_defaults'] == 'on') {
-            $_POST['social_defaults'] = 'true';
+    $social_heading = safeCleanStr($_POST['social_heading']);
+    $social_defaults = safeCleanStr($_POST['social_defaults']);
+    $social_facebook = trim($_POST['social_facebook']);
+    $social_youtube = trim($_POST['social_youtube']);
+    $social_twitter = trim($_POST['social_twitter']);
+    $social_google = trim($_POST['social_google']);
+    $social_pinterest = trim($_POST['social_pinterest']);
+    $social_instagram = trim($_POST['social_instagram']);
+    $social_tumblr = trim($_POST['social_tumblr']);
+
+
+    if (!empty($social_heading)) {
+
+        if ($social_defaults == 'on') {
+            $social_defaults = 'true';
         } else {
-            $_POST['social_defaults'] = 'false';
+            $social_defaults = 'false';
         }
 
         if ($rowSocial['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $socialUpdate = "UPDATE socialmedia SET heading='" . safeCleanStr($_POST['social_heading']) . "', facebook='" . trim($_POST['social_facebook']) . "', youtube='" . trim($_POST['social_youtube']) . "', twitter='" . trim($_POST['social_twitter']) . "', google='" . trim($_POST['social_google']) . "', pinterest='" . trim($_POST['social_pinterest']) . "', instagram='" . trim($_POST['social_instagram']) . "', tumblr='" . trim($_POST['social_tumblr']) . "', use_defaults='" . safeCleanStr($_POST['social_defaults']) . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $socialUpdate);
         } else {
             //Do Insert
-            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . safeCleanStr($_POST['social_heading']) . "', '" . trim($_POST['social_facebook']) . "', '" . trim($_POST['social_youtube']) . "', '" . trim($_POST['social_twitter']) . "', '" . trim($_POST['social_google']) . "', '" . trim($_POST['social_pinterest']) . "', '" . trim($_POST['social_instagram']) . "', '" . trim($_POST['social_tumblr']) . "', '" . safeCleanStr($_POST['social_defaults']) . "', " . $_GET['loc_id'] . ")";
+            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_defaults . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $socialInsert);
         }
 

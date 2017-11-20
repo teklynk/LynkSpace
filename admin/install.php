@@ -42,13 +42,15 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1); // wait
 
         // MySQL host
-        $mysql_host = $_POST["dbserver"];
+        $mysql_host = safeCleanStr($_POST["dbserver"]);
         // MySQL username
-        $mysql_username = $_POST["dbusername"];
+        $mysql_username = $safeCleanStr($_POST['dbusername']);
         // MySQL password
-        $mysql_password = $_POST["dbpassword"];
+        $mysql_password = safeCleanStr($_POST['dbpassword']);
         // Database name
-        $mysql_database = $_POST["dbname"];
+        $mysql_database = safeCleanStr($_POST['dbname']);
+        // User email
+        $useremail = validateEmail($_POST['useremail']);
 
         // establish config connection
         $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
@@ -101,13 +103,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
         $writeline = "<?php\n";
         fwrite($dbfile, $writeline);
-        $writeline = "define('db_servername', '" . safeCleanStr($_POST['dbserver']) . "');\n";
+        $writeline = "define('db_servername', '" . $mysql_host . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "define('db_username', '" . safeCleanStr($_POST['dbusername']) . "');\n";
+        $writeline = "define('db_username', '" . $mysql_username . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "define('db_password', '" . safeCleanStr($_POST['dbpassword']) . "');\n";
+        $writeline = "define('db_password', '" . $mysql_password . "');\n";
         fwrite($dbfile, $writeline);
-        $writeline = "define('db_name', '" . safeCleanStr($_POST['dbname']) . "');\n";
+        $writeline = "define('db_name', '" . $mysql_database . "');\n";
         fwrite($dbfile, $writeline);
         $writeline = "?>";
         fwrite($dbfile, $writeline);
@@ -136,7 +138,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Insert super admin user into users table.
-        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . safeCleanStr($_POST['username']) . "','" . validateEmail($_POST['useremail']) . "', SHA1('" . $blowfishHash . safeCleanStr($_POST['password']) . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
+        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $mysql_username . "','" . $useremail . "', SHA1('" . $blowfishHash . $mysql_password . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
 
         // Wait before proceeding to the next step
@@ -199,7 +201,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             <div class="login-panel panel panel-default">
                 <div class="panel-body">
                     <div class="text-center login-logo">
-                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="YouSeeMore" alt="YouSeeMore"/>
+                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="CMS" alt="YouSeeMore"/>
                     </div>
                     <section class="install-form">
                         <form name="frmInstall" class="form-signin" method="post" action="">

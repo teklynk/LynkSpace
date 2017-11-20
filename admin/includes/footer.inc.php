@@ -14,13 +14,13 @@ if (!defined('inc_access')) {
 <a href="#" class="scrollToTop">Scroll To Top</a>
 
 <footer>
-    <span class="product-name">YouSeeMore</span> <span class="product-version">v<?php echo ysmVersion; ?></span>
+    <span class="product-name">CMS</span> <span class="product-version">v<?php echo ysmVersion; ?></span>
     <div class="pull-right">
         <ul class="nav-footer">
             <li>
             </li>
         </ul>
-        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="https://www.tlcdelivers.com" target="_blank">The Library Corporation</a></span>
+        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="#" target="_blank">CMS</a></span>
     </div>
 </footer>
 

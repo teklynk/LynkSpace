@@ -10,14 +10,14 @@ $rowUsers = mysqli_fetch_array($sqlUsers);
 
 //update table on submit
 if (!empty($_POST)) {
-    $username = $_POST['user_name'];
-    $useremail = $_POST['user_email'];
-    $userpass = $_POST['user_password'];
-    $userpassconfirm = $_POST['user_password_confirm'];
-    $userid = $_POST['user_id'];
+    $username = safeCleanStr($_POST['user_name']);
+    $useremail = validateEmail($_POST['user_email']);
+    $userpass = safeCleanStr($_POST['user_password']);
+    $userpassconfirm = safeCleanStr($_POST['user_password_confirm']);
+    $userid = safeCleanStr($_POST['user_id']);
 
     if ($userpass == $userpassconfirm) {
-        $usersUpdate = "UPDATE users SET username='" . sqlEscapeStr($username) . "', password=SHA1('" . blowfishSalt . safeCleanStr($userpass) . "'), email='" . validateEmail($useremail) . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='".getRealIpAddr()."' WHERE id=" . $userid . " ";
+        $usersUpdate = "UPDATE users SET username='" . $username . "', password=SHA1('" . blowfishSalt . $userpass . "'), email='" . $useremail . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='" . getRealIpAddr() . "' WHERE id=" . $userid . " ";
         mysqli_query($db_conn, $usersUpdate);
 
         $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -85,14 +85,14 @@ if ($_GET['passwordupdated'] == 'true') {
                 <label>User Password</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="<?php echo $_POST['user_password']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="<?php echo $userpass; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group required">
                 <label>Password Confirm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $_POST['user_password_confirm']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $userpassconfirm; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>

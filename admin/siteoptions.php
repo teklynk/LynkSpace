@@ -18,8 +18,23 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     $pageMsg = "";
 
     if ($_POST['save_main']) {
+
+        $site_customer_id = safeCleanStr($_POST['site_customer_id']);
+        $site_theme = safeCleanStr($_POST['site_theme']);
+        $site_loc_types = safeCleanStr($_POST['site_loc_types']);
+        $site_analytics = safeCleanStr($_POST['site_analytics']);
+        $site_session_timeout = safeCleanStr($_POST['site_session_timeout']);
+        $site_carousel_speed = safeCleanStr($_POST['site_carousel_speed']);
+        $site_pacurl = validateUrl($_POST['site_pacurl']);
+        $ls2pac_label = safeCleanStr($_POST['ls2pac_label']);
+        $ls2pac_placeholder = safeCleanStr($_POST['ls2pac_placeholder']);
+        $ls2kids_label = safeCleanStr($_POST['ls2kids_label']);
+        $ls2kids_placeholder = safeCleanStr($_POST['ls2kids_placeholder']);
+        $site_homepageurl = validateUrl($_POST['site_homepageurl']);
+        $site_iprange = safeCleanStr($_POST['site_iprange']);
+
         //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . safeCleanStr($_POST['site_customer_id']) . "', theme='" . safeCleanStr($_POST['site_theme']) . "', loc_types='" . safeCleanStr($_POST['site_loc_types']) . "', analytics='" . safeCleanStr($_POST['site_analytics']) . "', session_timeout=" . safeCleanStr($_POST['site_session_timeout']) . ", carousel_speed='" . safeCleanStr($_POST['site_carousel_speed']) . "', setuppacurl='" . validateUrl($_POST['site_pacurl']) . "', searchlabel_ls2pac='" . safeCleanStr($_POST['ls2pac_label']) . "', searchplaceholder_ls2pac='" . safeCleanStr($_POST['ls2pac_placeholder']) . "', searchlabel_ls2kids='" . safeCleanStr($_POST['ls2kids_label']) . "', searchplaceholder_ls2kids='" . safeCleanStr($_POST['ls2kids_placeholder']) . "', homepageurl='" . validateUrl($_POST['site_homepageurl']) . "', iprange='" . safeCleanStr($_POST['site_iprange']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
+        $configUpdate = "UPDATE config SET customer_id='" . $site_customer_id . "', theme='" . $site_theme. "', loc_types='" . $site_loc_types . "', analytics='" . $site_analytics . "', session_timeout=" . $site_session_timeout . ", carousel_speed='" . $site_carousel_speed . "', setuppacurl='" . $site_pacurl . "', searchlabel_ls2pac='" . $ls2pac_label . "', searchplaceholder_ls2pac='" . $ls2pac_placeholder . "', searchlabel_ls2kids='" . $ls2kids_label . "', searchplaceholder_ls2kids='" . $ls2kids_placeholder . "', homepageurl='" . $site_homepageurl . "', iprange='" . $site_iprange . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1 ";
         mysqli_query($db_conn, $configUpdate);
 
         $pageMsg = "<div class='alert alert-success'>Site options have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='siteoptions.php'\">×</button></div>";

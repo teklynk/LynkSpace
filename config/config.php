@@ -155,11 +155,11 @@ $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL requires: http:// or https://
-define('updatesServer', "http://ysmservices.tlcdelivers.com/ysmversionupdates");
+define('updatesServer', "#");
 
 //Help URLs
-define('helpURLUser', "//ysmhelp.tlcdelivers.com/".ysmVersion."/YSMUser");
-define('helpURLAdmin', "//ysmhelp.tlcdelivers.com/".ysmVersion."/YSMAdmin");
+define('helpURLUser', "#");
+define('helpURLAdmin', "#");
 
 //html5 pattern property for input type=email
 define('emailValidationPattern', "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}");
