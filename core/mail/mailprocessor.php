@@ -16,11 +16,11 @@ $sendTo = safeCleanStr($_POST['sendToEmail']);
 
 if (!empty($_POST) && $_POST['referrer'] == $_SESSION['unique_referrer']) {
     // Check for empty fields
-    if (empty($_POST['name']) ||
-        empty($_POST['email']) ||
-        empty($_POST['phone']) ||
-        empty($_POST['message']) ||
-        !validateEmail($_POST['email'])
+    if (empty($name) ||
+        empty($email_address) ||
+        empty($phone) ||
+        empty($message) ||
+        !validateEmail($email_address)
     ) {
         header("Location: $errorPage");
         echo "<script>window.location.href='$errorPage';</script>";

@@ -32,33 +32,40 @@ $fileData = fread($handle,filesize($fileToEdit_dir));
 
 if ($_POST['save_main']) {
 
+    $theme_defaults = $_POST['theme_defaults'];
+    $element_count = $_POST['element_count'];
+    $selector = $_POST['selector'];
+    $property = $_POST['property'];
+    $cssvalue = $_POST['cssvalue'];
+    $edit_file = sanitizeStr($_POST['edit_file']);
+
     //use theme defaults
-    if ($_POST['theme_defaults'] == 'on') {
-        $_POST['theme_defaults']  = 'true';
+    if ($theme_defaults == 'on') {
+        $theme_defaults  = 'true';
     } else {
-        $_POST['theme_defaults']  = 'false';
+        $theme_defaults = 'false';
     }
 
-    for ($i = 0; $i < $_POST['element_count']; $i++) {
+    for ($i = 0; $i < $element_count; $i++) {
 
-        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='".$_POST['selector'][$i]."' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector[$i] . "' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
 
-        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $_POST['selector'][$i] && $rowThemeOptions['property'] == $_POST['property'][$i]) {
+        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector[$i] && $rowThemeOptions['property'] == $property[$i]) {
             //Do Update
-            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $_POST['selector'][$i] . "', property='" . $_POST['property'][$i] . "', cssvalue='" . $_POST['cssvalue'][$i] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $_POST['selector'][$i] . "' AND property='" . $_POST['property'][$i] . "' AND loc_id=" . $_GET['loc_id'] . " ";
+            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector[$i] . "', property='" . $property[$i] . "', cssvalue='" . $cssvalue[$i] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector[$i] . "' AND property='" . $property[$i] . "' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $themeOptionUpdate);
         } else {
             //Do Insert
-            if ($_POST['cssvalue'][$i] != '#000000') { //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
-                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $_POST['selector'][$i] . "', '" . $_POST['property'][$i] . "', '" . $_POST['cssvalue'][$i] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            if ($cssvalue[$i] != '#000000') { //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector[$i] . "', '" . $property[$i] . "', '" . $cssvalue[$i] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                 mysqli_query($db_conn, $themeOptionInsert);
             }
         }
     }
 
     //Update Setup
-    $setupUpdate = "UPDATE setup SET theme_use_defaults='" . $_POST['theme_defaults'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    $setupUpdate = "UPDATE setup SET theme_use_defaults='" . $theme_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
     mysqli_query($db_conn, $setupUpdate);
 
     //Only Default location can see this
@@ -66,7 +73,7 @@ if ($_POST['save_main']) {
         if (file_exists($fileToEdit_dir)) {
             //open file for Writing
             $handle = fopen($fileToEdit_dir, 'w') or die('Unable to write to ' . $fileToEdit_dir . '. Check file permissions.');
-            $fileData = sanitizeStr($_POST['edit_file']);
+            $fileData = $edit_file;
             fwrite($handle, $fileData);
 
             closedir($handle);

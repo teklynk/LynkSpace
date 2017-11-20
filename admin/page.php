@@ -48,10 +48,13 @@ $_SESSION['file_referrer'] = 'page.php';
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . safeCleanStr($_POST['page_title']) . "', content='" . sqlEscapeStr($_POST['page_content']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
+                        $page_title = safeCleanStr($_POST['page_title']);
+                        $page_content = sqlEscapeStr($_POST['page_content']);
+
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title. "', content='" . $page_content . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
 
-                        $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . safeCleanStr($_POST['page_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                        $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
                     $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
@@ -63,8 +66,8 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "New Page Title";
 
                     //insert data on submit
-                    if (!empty($_POST['page_title'])) {
-                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['page_title']) . "', '" . sqlEscapeStr($_POST['page_content']) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    if (!empty($page_title)) {
+                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
@@ -120,6 +123,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 $pageMsg = "";
                 $delPageId = $_GET['deletepage'];
                 $delPageTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+                $main_heading = safeCleanStr($_POST['main_heading']);
 
                 //delete page
                 if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -142,9 +146,9 @@ $_SESSION['file_referrer'] = 'page.php';
                 }
 
                 //update heading on submit
-                if (!empty($_POST['main_heading'])) {
+                if (!empty($main_heading)) {
 
-                    $setupUpdate = "UPDATE setup SET pageheading='" . safeCleanStr($_POST['main_heading']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                    $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $setupUpdate);
 
                     $pageMsg = "<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -198,7 +202,7 @@ $_SESSION['file_referrer'] = 'page.php';
                             while ($rowPages = mysqli_fetch_array($sqlPages)) {
 
                                 $pageId = $rowPages['id'];
-                                $pageTitle = $rowPages['title'];
+                                $pageTitle = safeCleanStr($rowPages['title']);
                                 $pageContent = $rowPages['content'];
                                 $pageActive = $rowPages['active'];
 
@@ -215,7 +219,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 </td>
                                 <td class='col-xs-2'>
                                 <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=".$pageId."', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=".$pageId."')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr($pageTitle) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . $pageTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 

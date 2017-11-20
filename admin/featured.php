@@ -11,25 +11,28 @@ $rowFeatured = mysqli_fetch_array($sqlFeatured);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['featured_heading'])) {
 
-        if ($_POST['featured_defaults'] == 'on') {
-            $_POST['featured_defaults'] = 'true';
-        } else {
-            $_POST['featured_defaults'] = 'false';
-        }
+    $featured_defaults = $_POST['featured_defaults'];
+    $featured_heading = safeCleanStr($_POST['featured_heading']);
+    $featured_introtext = safeCleanStr($_POST['featured_introtext']);
+    $featured_content = trim($_POST['featured_content']);
 
-        if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
-            //Do Update
-            $featuredUpdate = "UPDATE featured SET heading='" . safeCleanStr($_POST['featured_heading']) . "', introtext='" . safeCleanStr($_POST['featured_introtext']) . "', content='" . sqlEscapeStr($_POST['featured_content']) . "', use_defaults='" . safeCleanStr($_POST['featured_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-            mysqli_query($db_conn, $featuredUpdate);
-        } else {
-            //Do Insert
-            $featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['featured_heading']) . "', '" . safeCleanStr($_POST['featured_introtext']) . "', '" . trim($_POST['featured_content']) . "', '".safeCleanStr($_POST['featured_defaults'])."', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
-            mysqli_query($db_conn, $featuredInsert);
-        }
-
+    if ($featured_defaults == 'on') {
+        $featured_defaults = 'true';
+    } else {
+        $featured_defaults = 'false';
     }
+
+    if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
+        //Do Update
+        $featuredUpdate = "UPDATE featured SET heading='" . $featured_heading . "', introtext='" . $featured_introtext . "', content='" . $featured_content . "', use_defaults='" . $featured_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        mysqli_query($db_conn, $featuredUpdate);
+    } else {
+        //Do Insert
+        $featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $featured_heading . "', '" . $featured_introtext . "', '" . $featured_content . "', '" . $featured_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        mysqli_query($db_conn, $featuredInsert);
+    }
+
     header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true");
     echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 }

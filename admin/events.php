@@ -13,19 +13,26 @@ $rowEvent = mysqli_fetch_array($sqlEvent);
 //update table on submit
 if ($_POST) {
 
-    if ($_POST['event_defaults'] == 'on') {
-        $_POST['event_defaults'] = 'true';
+    $event_defaults = $_POST['event_defaults'];
+    $event_heading = sqlEscapeStr($_POST['event_heading']);
+    $event_alert = sqlEscapeStr($_POST['event_alert']);
+    $event_startdate = safeCleanStr($_POST['event_startdate']);
+    $event_enddate = safeCleanStr($_POST['event_enddate']);
+    $event_calendar = trim($_POST['event_calendar']);
+
+    if ($event_defaults == 'on') {
+        $event_defaults = 'true';
     } else {
-        $_POST['event_defaults'] = 'false';
+        $event_defaults = 'false';
     }
 
     if ($rowEvent['loc_id'] == $_GET['loc_id']) {
         //Do Update
-        $eventUpdate = "UPDATE events SET heading='" . sqlEscapeStr($_POST['event_heading']) . "', alert='" . sqlEscapeStr($_POST['event_alert']) . "', startdate='" . safeCleanStr($_POST['event_startdate']) . "', enddate='" . safeCleanStr($_POST['event_enddate']) . "', calendar='" . $_POST['event_calendar'] . "', use_defaults='" . safeCleanStr($_POST['event_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $eventUpdate);
     } else {
         //Do Insert
-        $eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . sqlEscapeStr($_POST['event_heading']) . "', '" . sqlEscapeStr($_POST['event_alert']) . "', '" . safeCleanStr($_POST['event_startdate']) . "', '" . safeCleanStr($_POST['event_enddate']) . "', '" . $_POST['event_calendar'] . "', '".safeCleanStr($_POST['event_defaults'])."', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
         mysqli_query($db_conn, $eventInsert);
     }
 

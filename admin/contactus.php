@@ -9,21 +9,35 @@ $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email,
 $rowContact = mysqli_fetch_array($sqlContact);
 
 //update table on submit
-if (!empty($_POST['contact_heading'])) {
+if (!empty($_POST)) {
 
-    if ($_POST['contact_defaults'] == 'on') {
-        $_POST['contact_defaults'] = 'true';
+    $contact_heading = safeCleanStr($_POST['contact_heading']);
+    $contact_defaults = $_POST['contact_defaults'];
+    $contact_introtext = safeCleanStr($_POST['contact_introtext']);
+    $contact_mapcode = trim($_POST['contact_mapcode']);
+    $contact_email = validateEmail($_POST['contact_email']);
+    $contact_sendtoemail = validateEmail($_POST['contact_sendtoemail']);
+    $contact_address = safeCleanStr($_POST['contact_address']);
+    $contact_city = safeCleanStr($_POST['contact_city']);
+    $contact_state = safeCleanStr($_POST['contact_state']);
+    $contact_zipcode = safeCleanStr($_POST['contact_zipcode']);
+    $contact_phone = safeCleanStr($_POST['contact_phone']);
+    $contact_hours = safeCleanStr($_POST['contact_hours']);
+    $contact_defaults = safeCleanStr($_POST['contact_defaults']);
+
+    if ($contact_defaults == 'on') {
+        $contact_defaults = 'true';
     } else {
-        $_POST['contact_defaults'] = 'false';
+        $contact_defaults = 'false';
     }
 
     if ($rowContact['loc_id'] == $_GET['loc_id']) {
         //Do Update
-        $contactUpdate = "UPDATE contactus SET heading='" . safeCleanStr($_POST['contact_heading']) . "', introtext='" . safeCleanStr($_POST['contact_introtext']) . "', mapcode='" . trim($_POST['contact_mapcode']) . "', email='" . validateEmail($_POST['contact_email']) . "', sendtoemail='" . validateEmail($_POST['contact_sendtoemail']) . "', address='" . safeCleanStr($_POST['contact_address']) . "', city='" . safeCleanStr($_POST['contact_city']) . "', state='" . safeCleanStr($_POST['contact_state']) . "', zipcode='" . safeCleanStr($_POST['contact_zipcode']) . "', phone='" . safeCleanStr($_POST['contact_phone']) . "', hours='" . safeCleanStr($_POST['contact_hours']) . "', use_defaults='" . safeCleanStr($_POST['contact_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
         mysqli_query($db_conn, $contactUpdate);
     } else {
         //Do Insert
-        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['contact_heading']) . "', '" . safeCleanStr($_POST['contact_introtext']) . "', '" . trim($_POST['contact_mapcode']) . "', '" . validateEmail($_POST["contact_email"]) . "', '" . validateEmail($_POST['contact_sendtoemail']) . "', '" . safeCleanStr($_POST['contact_address']) . "', '" . safeCleanStr($_POST['contact_city']) . "', '" . safeCleanStr($_POST['contact_state']) . "', '" . safeCleanStr($_POST['contact_zipcode']) . "', '" . safeCleanStr($_POST['contact_phone']) . "', '" . safeCleanStr($_POST['contact_hours']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
         mysqli_query($db_conn, $contactInsert);
     }
 

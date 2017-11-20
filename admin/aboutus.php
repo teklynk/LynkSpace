@@ -11,21 +11,27 @@ $rowAbout = mysqli_fetch_array($sqlAbout);
 
 //update table on submit
 if (!empty($_POST)) {
-    if (!empty($_POST['about_heading'])) {
 
-        if ($_POST['aboutus_defaults'] == 'on') {
-            $_POST['aboutus_defaults'] = 'true';
+    //get and clean the post values
+    $about_heading = safeCleanStr($_POST['about_heading']);
+    $about_defaults = safeCleanStr($_POST['aboutus_defaults']);
+    $about_content = sqlEscapeStr($_POST['about_content']);
+
+    if (!empty($about_heading)) {
+
+        if ($about_defaults == 'on') {
+            $about_defaults = 'true';
         } else {
-            $_POST['aboutus_defaults'] = 'false';
+            $about_defaults = 'false';
         }
 
         if ($rowAbout['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $aboutUpdate = "UPDATE aboutus SET heading='" . safeCleanStr($_POST['about_heading']) . "', content='" . sqlEscapeStr($_POST['about_content']) . "', use_defaults='" . safeCleanStr($_POST['aboutus_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $aboutUpdate = "UPDATE aboutus SET heading='" . $about_heading . "', content='" . $about_content . "', use_defaults='" . $about_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $aboutUpdate);
         } else {
             //Do Insert
-            $aboutInsert = "INSERT INTO aboutus (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['about_heading']) . "', '" . sqlEscapeStr($_POST['about_content']) . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $aboutInsert = "INSERT INTO aboutus (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $about_heading . "', '" . $about_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $aboutInsert);
         }
 
