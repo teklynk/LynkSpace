@@ -201,7 +201,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             <div class="login-panel panel panel-default">
                 <div class="panel-body">
                     <div class="text-center login-logo">
-                        <img src="images/ysm-logo.png" class="img-responsive img-center" title="CMS" alt="YouSeeMore"/>
+                        <img src="" class="img-responsive img-center"/>
                     </div>
                     <section class="install-form">
                         <form name="frmInstall" class="form-signin" method="post" action="">
