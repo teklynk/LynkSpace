@@ -42,15 +42,19 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1); // wait
 
         // MySQL host
-        $mysql_host = safeCleanStr($_POST["dbserver"]);
+        $mysql_host = safeCleanStr($_POST['dbserver']);
         // MySQL username
-        $mysql_username = $safeCleanStr($_POST['dbusername']);
+        $mysql_username = safeCleanStr($_POST['dbusername']);
         // MySQL password
         $mysql_password = safeCleanStr($_POST['dbpassword']);
-        // Database name
+        // MySql Database name
         $mysql_database = safeCleanStr($_POST['dbname']);
+        // User Name
+        $username = safeCleanStr($_POST['username']);
         // User email
         $useremail = validateEmail($_POST['useremail']);
+        // User Password
+        $userpassword = safeCleanStr($_POST['password']);
 
         // establish config connection
         $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
@@ -138,7 +142,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Insert super admin user into users table.
-        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $mysql_username . "','" . $useremail . "', SHA1('" . $blowfishHash . $mysql_password . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
+        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $username . "','" . $useremail . "', SHA1('" . $blowfishHash . $userpassword . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
         mysqli_query($db_conn, $userInsert);
 
         // Wait before proceeding to the next step
