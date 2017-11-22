@@ -367,8 +367,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     $cust_sort = safeCleanStr($_POST['cust_sort'][$i]);
                     $cust_id = safeCleanStr($_POST['cust_id'][$i]);
 
-                    if ($cust_cat[$i] == "") {
-                        $cust_cat[$i] = 0; //None
+                    if ($cust_cat == "") {
+                        $cust_cat = 0; //None
                     }
 
                     $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat . ", sort=" . $cust_sort . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id . " ";
