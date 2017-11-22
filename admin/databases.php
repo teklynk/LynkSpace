@@ -7,6 +7,8 @@ $_SESSION['file_referrer'] = 'databases.php';
 
 $getCustSection = $_GET['section'];
 
+$customerMsg = '';
+
 //Redirect to section=1 if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
     header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "");
@@ -361,15 +363,15 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
                 for ($i = 0; $i < $cust_count; $i++) {
 
-                    $cust_cat = safeCleanStr($_POST['cust_cat']);
-                    $cust_sort = safeCleanStr($_POST['cust_sort']);
-                    $cust_id = safeCleanStr($_POST['cust_id']);
+                    $cust_cat = safeCleanStr($_POST['cust_cat'][$i]);
+                    $cust_sort = safeCleanStr($_POST['cust_sort'][$i]);
+                    $cust_id = safeCleanStr($_POST['cust_id'][$i]);
 
                     if ($cust_cat[$i] == "") {
                         $cust_cat[$i] = 0; //None
                     }
 
-                    $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat[$i] . ", sort=" . $cust_sort[$i] . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id[$i] . " ";
+                    $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat . ", sort=" . $cust_sort . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id . " ";
                     mysqli_query($db_conn, $custCatUpdate);
 
                 }
