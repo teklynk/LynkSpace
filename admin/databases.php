@@ -152,21 +152,25 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
         if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
+            $customer_name = safeCleanStr($_POST['customer_name']);
+            $customer_icon_select = safeCleanStr($_POST['customer_icon_select']);
+            $customer_image_select = safeCleanStr($_POST['customer_image_select']);
+            $customer_exist_cat = safeCleanStr($_POST['customer_exist_cat']);
+            $customer_link = safeCleanStr($_POST['customer_link']);
+            $customer_content = sqlEscapeStr($_POST['customer_content']);
+
             //Update existing customer
             if ($_GET['editcustomer']) {
                 $thecustomerId = $_GET['editcustomer'];
                 $customerLabel = "Edit Database Name";
 
-                $customer_name = safeCleanStr($_POST['customer_name']);
-                $customer_icon_select = $_POST['customer_icon_select'];
-
                 //update data on submit
-                if (!empty($_POST['customer_name'])) {
+                if (!empty($customer_name)) {
 
-                    $customerUpdate = "UPDATE customers SET name='" . $customer_name . "', icon='" . $customer_icon_select . "', image='" . $_POST['customer_image_select'] . "', catid='" . safeCleanStr($_POST['customer_exist_cat']) . "', link='" . safeCleanStr($_POST['customer_link']) . "', content='" . sqlEscapeStr($_POST['customer_content']) . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . $customer_name . "', icon='" . $customer_icon_select . "', image='" . $customer_image_select . "', catid='" . $customer_exist_cat . "', link='" . $customer_link . "', content='" . $customer_content . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $customerUpdate);
 
-                    $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . safeCleanStr($_POST['customer_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                    $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . $customer_name . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
                 $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
@@ -178,8 +182,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 $customerLabel = "New Database Name";
 
                 //insert data on submit
-                if (!empty($_POST['customer_name'])) {
-                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $_POST['customer_icon_select'] . "', '" . $_POST['customer_image_select'] . "', '" . safeCleanStr($_POST['customer_name']) . "', '" . safeCleanStr($_POST['customer_link']) . "', '" . $_POST['customer_exist_cat'] . "', '" . $getCustSection . "', '" . safeCleanStr($_POST['customer_content']) . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                if (!empty($customer_name)) {
+                    $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . $customer_exist_cat . "', '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
                     header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "");
@@ -285,6 +289,9 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             $delcustomerId = $_GET['deletecustomer'];
             $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
             $deleteSectionName = safeCleanStr(addslashes($_GET['section']));
+            $customer_heading = safeCleanStr($_POST['customer_heading']);
+            $main_content = sqlEscapeStr($_POST['main_content']);
+            $cust_count = safeCleanStr($_POST['cust_count']);
 
             //Delete Section and all databases in the section
             if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
@@ -344,21 +351,25 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 
                 if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $_GET['section']) {
                     //Do update
-                    $sectionsUpdate = "UPDATE sections_customers SET heading='" . safeCleanStr($_POST['customer_heading']) . "', content='" . sqlEscapeStr($_POST['main_content']) . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $sectionsUpdate = "UPDATE sections_customers SET heading='" . $customer_heading . "', content='" . $main_content . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ";
                     mysqli_query($db_conn, $sectionsUpdate);
                 } else {
                     //Do Insert
-                    $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['customer_heading']) . "', '" . sqlEscapeStr($_POST['main_content']) . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . $customer_heading . "', '" . $main_content . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $sectionsInsert);
                 }
 
-                for ($i = 0; $i < $_POST['cust_count']; $i++) {
+                for ($i = 0; $i < $cust_count; $i++) {
 
-                    if ($_POST['cust_cat'][$i] == "") {
-                        $_POST['cust_cat'][$i] = 0; //None
+                    $cust_cat = safeCleanStr($_POST['cust_cat']);
+                    $cust_sort = safeCleanStr($_POST['cust_sort']);
+                    $cust_id = safeCleanStr($_POST['cust_id']);
+
+                    if ($cust_cat[$i] == "") {
+                        $cust_cat[$i] = 0; //None
                     }
 
-                    $custCatUpdate = "UPDATE customers SET catid=" . $_POST['cust_cat'][$i] . ", sort=" . safeCleanStr($_POST['cust_sort'][$i]) . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['cust_id'][$i] . " ";
+                    $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat[$i] . ", sort=" . $cust_sort[$i] . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id[$i] . " ";
                     mysqli_query($db_conn, $custCatUpdate);
 
                 }
@@ -406,16 +417,16 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             $renameMsg = "";
             $renameConfirm = "";
             $renameCatId = $_GET['renamecat'];
-            $renameCatTitle = $_GET['newcatname'];
-            $renameCatSort = $_GET['newcatsort'];
+            $renameCatTitle = safeCleanStr(addslashes($_GET['newcatname']));
+            $renameCatSort = safeCleanStr($_GET['newcatsort']);
 
             //Rename category and set categories to new name
             if ($_GET['renamecat'] && $_GET['newcatname'] ) {
 
-                $custRenameCatUpdate = "UPDATE category_customers SET name='" . safeCleanStr(addslashes($renameCatTitle)) . "', sort='" . safeCleanStr($renameCatSort) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
+                $custRenameCatUpdate = "UPDATE category_customers SET name='" . $renameCatTitle . "', sort='" . $renameCatSort . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
                 mysqli_query($db_conn, $custRenameCatUpdate);
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr(addslashes($renameCatTitle)) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $renameMsg;
             }
 
@@ -559,7 +570,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC");
                         while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
                             $customerId = $rowCustomer['id'];
-                            $customerName = $rowCustomer['name'];
+                            $customerName = safeCleanStr($rowCustomer['name']);
                             $customerCat = $rowCustomer['catid'];
                             $customerContent = $rowCustomer['content'];
                             $customerLink = $rowCustomer['link'];
@@ -617,7 +628,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
 						<input data-toggle='toggle' title='Database Active' class='checkbox customer_status_checkbox' id='" . $customerId . "' type='checkbox' " . $isActive . ">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($customerName) . "', 'databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . $customerName . "', 'databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=$customerId&deletename=" . safeCleanStr(addslashes($customerName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
