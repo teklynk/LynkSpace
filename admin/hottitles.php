@@ -72,19 +72,18 @@ if (!empty($_POST['save_main'])) {
 
     $main_heading = safeCleanStr($_POST['main_heading']);
     $hottitles_count = safeCleanStr($_POST['hottitles_count']);
-    $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);
-    $hottitles_title = safeCleanStr($_POST['hottitles_title']);
-    $hottitles_url = validateUrl($_POST['hottitles_url']);
-    $location_type = safeCleanStr($_POST['location_type']);
-    $hottitles_id = safeCleanStr($_POST['hottitles_id']);
 
     $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
-    mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $hottitles_count; $i++) {
         $errorMsg = "";
+        $hottitles_sort = safeCleanStr($_POST['hottitles_sort'][$i]);
+        $hottitles_title = safeCleanStr($_POST['hottitles_title'][$i]);
+        $hottitles_url = validateUrl($_POST['hottitles_url'][$i]);
+        $location_type = safeCleanStr($_POST['location_type'][$i]);
+        $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort[$i] . ", title='" . $hottitles_title . "', url='" . $hottitles_url[$i] . "', loc_type='" . $location_type[$i] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id[$i] . " ";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " ";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
@@ -94,11 +93,16 @@ if (!empty($_POST['save_main'])) {
 }
 
 if ($_POST['add_hottitles']) {
+
+    $hottitles_title = safeCleanStr($_POST['hottitles_title']);
+    $hottitles_url = validateUrl($_POST['hottitles_url']);
+    $location_type = safeCleanStr($_POST['location_type']);
+
     $errorMsg = "";
     //Insert Hot Titles
     if (strpos($hottitles_url, 'econtent') || strpos($hottitles_url, 'dynamic') || strpos($hottitles_url, 'static')){
         if (!empty($hottitles_sort)){
-            return $hottitles_sort;
+            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);;
         } else {
             $hottitles_sort = 0;
         }
@@ -111,6 +115,7 @@ if ($_POST['add_hottitles']) {
         $pageMsg = "<div class='alert alert-danger'>".$hottitles_url." is not a valid LS2 PAC RSS feed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         echo $pageMsg;
     }
+
 }
 
 $sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
