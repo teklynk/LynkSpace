@@ -34,9 +34,6 @@ if ($_POST['save_main']) {
 
     $theme_defaults = $_POST['theme_defaults'];
     $element_count = $_POST['element_count'];
-    $selector = $_POST['selector'];
-    $property = $_POST['property'];
-    $cssvalue = $_POST['cssvalue'];
     $edit_file = sanitizeStr($_POST['edit_file']);
 
     //use theme defaults
@@ -48,17 +45,21 @@ if ($_POST['save_main']) {
 
     for ($i = 0; $i < $element_count; $i++) {
 
-        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector[$i] . "' AND loc_id=" . $_GET['loc_id'] . " ");
+        $selector = $_POST['selector'][$i];
+        $property = $_POST['property'][$i];
+        $cssvalue = $_POST['cssvalue'][$i];
+
+        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . " ");
         $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
 
-        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector[$i] && $rowThemeOptions['property'] == $property[$i]) {
+        if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector && $rowThemeOptions['property'] == $property) {
             //Do Update
-            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector[$i] . "', property='" . $property[$i] . "', cssvalue='" . $cssvalue[$i] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector[$i] . "' AND property='" . $property[$i] . "' AND loc_id=" . $_GET['loc_id'] . " ";
+            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector . "', property='" . $property . "', cssvalue='" . $cssvalue . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND property='" . $property . "' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $themeOptionUpdate);
         } else {
             //Do Insert
             if ($cssvalue[$i] != '#000000') { //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
-                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector[$i] . "', '" . $property[$i] . "', '" . $cssvalue[$i] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                 mysqli_query($db_conn, $themeOptionInsert);
             }
         }

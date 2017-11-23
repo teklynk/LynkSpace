@@ -12,7 +12,7 @@ $rowFeatured = mysqli_fetch_array($sqlFeatured);
 //update table on submit
 if (!empty($_POST)) {
 
-    $featured_defaults = $_POST['featured_defaults'];
+    $featured_defaults = safeCleanStr($_POST['featured_defaults']);
     $featured_heading = safeCleanStr($_POST['featured_heading']);
     $featured_introtext = safeCleanStr($_POST['featured_introtext']);
     $featured_content = trim($_POST['featured_content']);

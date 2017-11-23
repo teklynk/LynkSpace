@@ -68,11 +68,14 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     if ($_GET['editslide']) {
         $theslideId = $_GET['editslide'];
         $slideLabel = "Edit Slide Title";
+        $slide_title = safeCleanStr($_POST['slide_title']);
+        $slide_content = safeCleanStr($_POST['slide_content']);
+        $start_date = safeCleanStr($_POST['start_date']);
 
         //update data on submit
-        if (!empty($_POST['slide_title'])) {
+        if (!empty($slide_title)) {
 
-            $slideUpdate = "UPDATE slider SET title='" . safeCleanStr($_POST['slide_title']) . "', content='" . safeCleanStr($_POST['slide_content']) . "', startdate='" . safeCleanStr($_POST['start_date']) . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
+            $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . safeCleanStr($_POST['end_date']) . "', link='" . safeCleanStr($_POST['slide_link']) . "', image='" . $_POST['slide_image'] . "', loc_type='".safeCleanStr($_POST['location_type'])."', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theslideId' AND loc_id=" . $_GET['loc_id'] . " ";
             mysqli_query($db_conn, $slideUpdate);
 
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . safeCleanStr($_POST['slide_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

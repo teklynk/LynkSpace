@@ -12,7 +12,7 @@ $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
 //update table on submit
 if (!empty($_POST)) {
 
-    $generalinfo_defaults = $_POST['generalinfo_defaults'];
+    $generalinfo_defaults = safeCleanStr($_POST['generalinfo_defaults']);
     $generalinfo_heading = safeCleanStr($_POST["generalinfo_heading"]);
     $generalinfo_content = trim($_POST['generalinfo_content']);
 
