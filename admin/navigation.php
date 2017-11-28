@@ -10,11 +10,18 @@ $getNavSection = $_GET['section'];
 //update table on submit
 if (!empty($_POST)) {
 
-    if (!empty($_POST['nav_newname'])) {
+    $nav_newname = safeCleanStr($_POST['nav_newname']);
+
+    if (!empty($nav_newname)) {
+
+        $nav_newcat = safeCleanStr($_POST['nav_newcat']);
+        $exist_cat = $_POST['exist_cat'];
+        $exist_cat_main = $_POST['exist_cat_main'];
+        $nav_newurl = safeCleanStr($_POST['nav_newurl']);
 
         //Create new category if newcat is true
-        if (!empty($_POST['nav_newcat']) && $_POST['exist_cat'] == "") {
-            $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_POST['nav_newcat']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+        if (!empty($nav_newcat) && $exist_cat == "") {
+            $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
             mysqli_query($db_conn, $navNewCat);
 
             //get the new cat id
@@ -23,17 +30,17 @@ if (!empty($_POST)) {
             $navMaxCatId = $rowMaxCat[0];
         }
 
-        if ($_POST['exist_cat'] == "" && $_POST['nav_newcat'] > "") {
+        if ($exist_cat == "" && $nav_newcat > "") {
 
             $getTheCat = $navMaxCatId; //create & add new category name & get it's id
 
-        } elseif ($_POST['exist_cat'] > "" && $_POST['nav_newcat'] > "") {
+        } elseif ($exist_cat > "" && $nav_newcat > "") {
 
-            $getTheCat = $_POST['exist_cat']; //use existing category id from add/edit category section
+            $getTheCat = $exist_cat; //use existing category id from add/edit category section
 
-        } elseif ($_POST['exist_cat_main'] > 0) {
+        } elseif ($exist_cat_main > 0) {
 
-            $getTheCat = $_POST['exist_cat_main']; //use existing category id from main page
+            $getTheCat = $exist_cat_main; //use existing category id from main page
 
         } else {
 
@@ -41,18 +48,26 @@ if (!empty($_POST)) {
 
         }
 
-        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . safeCleanStr($_POST['nav_newname']) . "', '" . safeCleanStr($_POST['nav_newurl']) . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
         mysqli_query($db_conn, $navNew);
 
     }
 
-    for ($i = 0; $i < $_POST['nav_count']; $i++) {
+    $nav_count = $_POST['nav_count'];
 
-        if ($_POST['nav_cat'][$i] == "") {
-            $_POST['nav_cat'][$i] = 0; //None
+    for ($i = 0; $i < $nav_count; $i++) {
+
+        $nav_sort = $_POST['nav_sort'][$i];
+        $nav_name = safeCleanStr($_POST['nav_name'][$i]);
+        $nav_url = safeCleanStr($_POST['nav_url'][$i]);
+        $nav_cat = $_POST['nav_cat'][$i];
+        $nav_id = $_POST['nav_id'][$i];
+
+        if ($nav_cat == "") {
+            $nav_cat = 0; //None
         }
 
-        $navUpdate = "UPDATE navigation SET sort=" . $_POST['nav_sort'][$i] . ", name='" . safeCleanStr($_POST['nav_name'][$i]) . "', url='" . safeCleanStr($_POST['nav_url'][$i]) . "', catid=" . $_POST['nav_cat'][$i] . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $_POST['nav_id'][$i] . " ";
+        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url. "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $nav_id . " ";
         mysqli_query($db_conn, $navUpdate);
     }
 
