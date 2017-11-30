@@ -19,6 +19,7 @@ if (!empty($_POST)) {
         $exist_cat_main = (int)$_POST['exist_cat_main'];
         $nav_newurl = (string)safeCleanStr($_POST['nav_newurl']);
 
+
         //Create new category if newcat is true
         if (!empty($nav_newcat) && $exist_cat == "") {
             $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
