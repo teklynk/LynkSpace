@@ -13,11 +13,11 @@ $rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
 $locationNewID = $rowLocationMaxID[0] + 1;
 
 //Get location table columns
-$sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$sqlLocation = mysqli_query($db_conn, dbQuery('select', 'locations', 'id, name, type, active', NULL, 'id=' . $_GET['loc_id'], NULL));
 $rowLocation = mysqli_fetch_array($sqlLocation);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, dbQuery('select', 'setup', 'title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id', NULL, 'id=' . $_GET['loc_id'], NULL));
 $rowSetup = mysqli_fetch_array($sqlSetup);
 
 //update table on submit

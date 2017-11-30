@@ -883,6 +883,52 @@ function checkIPRange() {
     }
 }
 
+//Simple SQL CRUD statements
+function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=NULL, $orderBy=NULL) {
+    $query = NULL;
+    $clause = NULL;
+    $order = NULL;
+    $tableDb = NULL;
+
+    if (isset($table)){
+        $tableDb = db_name . "." . $table;
+    }
+
+    if (isset($where)) {
+        $clause = " WHERE " . $where;
+    } else {
+        $clause = NULL;
+    }
+
+    if (isset($orderBy)){
+        $order = " ORDER BY " . $orderBy;
+    } else {
+        $order = NULL;
+    }
+
+    switch ($method) {
+        case "select":
+            $query = "SELECT " . $fields . " FROM " . $tableDb . $clause . $order . ";";
+            break;
+        case "insert":
+            $query = "INSERT INTO " . $tableDb . " (" . $fields . ") VALUES (" . $values . ")" . $clause . $order . ";";
+            break;
+        case "update":
+            //for loop through fields and values
+            $query = "UPDATE " . $tableDb . " SET " . $fields . $values . $clause . $order . ";";
+            break;
+        case "delete":
+            $query = "DELETE FROM " . $tableDb . $clause . ";";
+            break;
+        default:
+            return false;
+    }
+    
+    return $query;
+    //for multiple: $query .= $query;
+    
+}
+
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";
