@@ -10,11 +10,11 @@ $rowUsers = mysqli_fetch_array($sqlUsers);
 
 //update table on submit
 if (!empty($_POST)) {
-    $user_name = safeCleanStr($_POST['user_name']);
-    $user_email = validateEmail($_POST['user_email']);
-    $user_password = safeCleanStr($_POST['user_password']);
-    $user_password_confirm = safeCleanStr($_POST['user_password_confirm']);
-    $user_id = safeCleanStr($_POST['user_id']);
+    $user_name = (string)safeCleanStr($_POST['user_name']);
+    $user_email = (string)validateEmail($_POST['user_email']);
+    $user_password = (string)safeCleanStr($_POST['user_password']);
+    $user_password_confirm = (string)safeCleanStr($_POST['user_password_confirm']);
+    $user_id = (int)safeCleanStr($_POST['user_id']);
 
     if ($user_password == $user_password_confirm) {
         $usersUpdate = "UPDATE users SET username='" . $user_name . "', password=SHA1('" . blowfishSalt . $user_password . "'), email='" . $user_email . "', datetime='" . date("Y-m-d H:i:s") . "', clientip='" . getRealIpAddr() . "' WHERE id=" . $user_id . " ";

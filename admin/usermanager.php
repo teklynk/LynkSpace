@@ -13,7 +13,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
 
 $pageMsg = "";
 $deleteMsg = "";
-$usersCount=0;
+$usersCount = 0;
 
 //delete user
 $deluserId = $_GET['deleteuser'];
@@ -196,7 +196,7 @@ if ($deleteMsg != "") {
                     <tbody>
                     <?php
                     //Get user info, exclude super admin user
-                    $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users WHERE username != 'tlcadmin' ORDER BY username, email, level, datetime ASC");
+                    $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email, level, datetime ASC");
                     while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
                         $usersID = $rowUsers['id'];
                         $usersName = $rowUsers['username'];
