@@ -10,14 +10,14 @@ $getNavSection = $_GET['section'];
 //update table on submit
 if (!empty($_POST)) {
 
-    $nav_newname = safeCleanStr($_POST['nav_newname']);
+    $nav_newname = (string)safeCleanStr($_POST['nav_newname']);
 
     if (!empty($nav_newname)) {
 
-        $nav_newcat = safeCleanStr($_POST['nav_newcat']);
-        $exist_cat = $_POST['exist_cat'];
-        $exist_cat_main = $_POST['exist_cat_main'];
-        $nav_newurl = safeCleanStr($_POST['nav_newurl']);
+        $nav_newcat = (int)safeCleanStr($_POST['nav_newcat']);
+        $exist_cat = (int)$_POST['exist_cat'];
+        $exist_cat_main = (int)$_POST['exist_cat_main'];
+        $nav_newurl = (string)safeCleanStr($_POST['nav_newurl']);
 
         //Create new category if newcat is true
         if (!empty($nav_newcat) && $exist_cat == "") {
@@ -53,15 +53,15 @@ if (!empty($_POST)) {
 
     }
 
-    $nav_count = $_POST['nav_count'];
+    $nav_count = (int)$_POST['nav_count'];
 
     for ($i = 0; $i < $nav_count; $i++) {
 
-        $nav_sort = $_POST['nav_sort'][$i];
-        $nav_name = safeCleanStr($_POST['nav_name'][$i]);
-        $nav_url = safeCleanStr($_POST['nav_url'][$i]);
-        $nav_cat = $_POST['nav_cat'][$i];
-        $nav_id = $_POST['nav_id'][$i];
+        $nav_sort = (int)$_POST['nav_sort'][$i];
+        $nav_name = (string)safeCleanStr($_POST['nav_name'][$i]);
+        $nav_url = (string)safeCleanStr($_POST['nav_url'][$i]);
+        $nav_cat = (int)$_POST['nav_cat'][$i];
+        $nav_id = (int)$_POST['nav_id'][$i];
 
         if ($nav_cat == "") {
             $nav_cat = 0; //None
