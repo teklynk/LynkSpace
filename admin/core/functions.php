@@ -895,13 +895,13 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
     }
 
     if (isset($where)) {
-        $clause = " WHERE " . $where;
+        $clause = " WHERE " . trim($where);
     } else {
         $clause = NULL;
     }
 
     if (isset($orderBy)){
-        $order = " ORDER BY " . $orderBy;
+        $order = " ORDER BY " . trim($orderBy);
     } else {
         $order = NULL;
     }
@@ -911,11 +911,19 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
             $query = "SELECT " . $fields . " FROM " . $tableDb . $clause . $order . ";";
             break;
         case "insert":
-            $query = "INSERT INTO " . $tableDb . " (" . $fields . ") VALUES (" . $values . ")" . $clause . $order . ";";
+            $query = "INSERT INTO " . trim($tableDb) . " (" . trim($fields) . ") VALUES (" . trim($values) . ")" . ";";
             break;
         case "update":
-            //for loop through fields and values
-            $query = "UPDATE " . $tableDb . " SET " . $fields . $values . $clause . $order . ";";
+            $fields = explode(",", $fields);
+            $values = explode(",", $values);
+            $count = count($fields);
+            $fieldValues = "";
+
+            for ($i=0; $i<$count; $i++){
+                $fieldValues .= trim($fields[$i]) . "=" . trim($values[$i]) . ",";
+            }
+
+            $query = "UPDATE " . $tableDb . " SET " . rtrim($fieldValues, ",") . $clause . $order . ";";
             break;
         case "delete":
             $query = "DELETE FROM " . $tableDb . $clause . ";";
