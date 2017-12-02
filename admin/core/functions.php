@@ -885,6 +885,7 @@ function checkIPRange() {
 
 //Simple SQL CRUD statements
 function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=NULL, $orderBy=NULL) {
+    global $db_conn;
     $query = NULL;
     $clause = NULL;
     $order = NULL;
@@ -906,35 +907,38 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
         $order = NULL;
     }
 
-    switch ($method) {
-        case "select":
-            $query = "SELECT " . $fields . " FROM " . $tableDb . $clause . $order . ";";
-            break;
-        case "insert":
-            $query = "INSERT INTO " . trim($tableDb) . " (" . trim($fields) . ") VALUES (" . trim($values) . ")" . ";";
-            break;
-        case "update":
-            $fields = explode(",", $fields);
-            $values = explode(",", $values);
-            $count = count($fields);
-            $fieldValues = "";
+    if (isset($method)) {
+        switch ($method) {
+            case "select":
+                $query = "SELECT " . $fields . " FROM " . $tableDb . $clause . $order . ";";
+                break;
+            case "insert":
+                $query = "INSERT INTO " . trim($tableDb) . " (" . trim($fields) . ") VALUES (" . trim($values) . ")" . ";";
+                break;
+            case "update":
+                $fields = explode(",", $fields);
+                $values = explode(",", $values);
+                $count = count($fields);
+                $fieldValues = "";
 
-            for ($i=0; $i<$count; $i++){
-                $fieldValues .= trim($fields[$i]) . "=" . trim($values[$i]) . ",";
-            }
+                for ($i = 0; $i < $count; $i++) {
+                    $fieldValues .= trim($fields[$i]) . "=" . trim($values[$i]) . ",";
+                }
 
-            $query = "UPDATE " . $tableDb . " SET " . rtrim($fieldValues, ",") . $clause . $order . ";";
-            break;
-        case "delete":
-            $query = "DELETE FROM " . $tableDb . $clause . ";";
-            break;
-        default:
-            return false;
+                $query = "UPDATE " . $tableDb . " SET " . rtrim($fieldValues, ",") . $clause . $order . ";";
+                break;
+            case "delete":
+                $query = "DELETE FROM " . $tableDb . $clause . ";";
+                break;
+            default:
+                $query = "";
+                $queryExecute = "";
+                return false;
+        }
+
+        $queryExecute = mysqli_query($db_conn, $query);
+        return $queryExecute;
     }
-    
-    return $query;
-    //for multiple: $query .= $query;
-    
 }
 
 //Variable to hide elements from non-admin users
