@@ -10,6 +10,8 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $db_conn = mysqli_connect(db_servername, db_username, db_password);
     mysqli_select_db($db_conn, db_name);
 
+    //$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=admin123");
+
     if (mysqli_connect_error()) {
         $db_conn = NULL;
         echo "Go to <a href='../admin/install.php'>".$_SERVER['SERVER_NAME']."/admin/install.php</a> to install the database. " . PHP_EOL;

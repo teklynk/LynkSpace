@@ -936,6 +936,7 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
                 return false;
         }
 
+        //$queryExecute = pg_query($db_conn, $query);
         $queryExecute = mysqli_query($db_conn, $query);
         return $queryExecute;
     }
