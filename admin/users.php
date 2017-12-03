@@ -108,8 +108,8 @@ if ($_GET['passwordupdated'] == 'true') {
                     <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $user_password_confirm; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                 </div>
             </div>
+
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>
-            <input type="hidden" name="passwdUpdated" value="<?php echo $pagePasswdUpdate; ?>"/>
 
             <div class="form-group">
                 <span><small><?php echo "Last Logged In: " . date('m-d-Y, H:i:s', strtotime($rowUsers['datetime'])); ?></small></span>
