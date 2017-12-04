@@ -938,6 +938,12 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
 
         //$queryExecute = pg_query($db_conn, $query);
         $queryExecute = mysqli_query($db_conn, $query);
+
+        if (!$queryExecute) {
+            echo "An error occurred.\n";
+            exit;
+        }
+
         return $queryExecute;
     }
 }
