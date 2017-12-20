@@ -256,7 +256,7 @@ function sanitizeStr($cleanStr) {
 function validateUrl($cleanStr) {
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
-        return filter_var(trim($cleanStr), FILTER_VALIDATE_URL);
+        return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
         $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
@@ -267,7 +267,7 @@ function validateUrl($cleanStr) {
 function validateEmail($cleanStr) {
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
-        return filter_var(trim($cleanStr), FILTER_VALIDATE_EMAIL);
+        return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
     } else {
         $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
