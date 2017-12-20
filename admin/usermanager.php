@@ -30,27 +30,56 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
-    $userDelete = "DELETE FROM users WHERE id=".$deluserId." ";
-    mysqli_query($db_conn, $userDelete);
+    dbQuery(
+            'delete',
+            'users',
+            NULL,
+            NULL,
+            'id=' . $deluserId,
+            NULL
+    );
 
     $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
 //Add User
 //insert data on submit
+$userName = sqlEscapeStr($_POST['user_name']);
+$userEmail = $_POST['user_email'];
+$userPassword = sha1(blowfishSalt . safeCleanStr($_POST['user_password']));
+$userPasswordConfirm = $_POST['user_password_confirm'];
+$userLevel = safeCleanStr($_POST['user_level']);
+$userLocation = safeCleanStr($_POST['user_location']);
+$userIp = getRealIpAddr();
+
 if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
 
-        $sqlUsersInfo = mysqli_query($db_conn, "SELECT username, email FROM users WHERE username='".sqlEscapeStr($_POST['user_name'])."' AND email='".validateEmail($_POST['user_email'])."' ");
+        $sqlUsersInfo = dbQuery(
+                'select',
+                'users',
+                'username, email',
+                NULL,
+                'username="' . $userName . '" AND email="' . validateEmail($userEmail) . '" ',
+                NULL
+        );
+
         $rowCheckUser = mysqli_num_rows($sqlUsersInfo);
 
         if ($rowCheckUser > 0) {
-            $pageMsg = "<div class='alert alert-danger'>Username: ".$_POST['user_name']." and Email: ".$_POST['user_email']." already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+            $pageMsg = "<div class='alert alert-danger'>Username: " . $userName . " and Email: " . $userEmail . " already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
         } else {
-            $usersInsert = "INSERT INTO users (username, email, password, password_reset, password_reset_date, level, clientip, loc_id) VALUES ('" . sqlEscapeStr($_POST['user_name']) . "', '" . validateEmail($_POST['user_email']) . "', '" . sha1(blowfishSalt . safeCleanStr($_POST['user_password'])) . "', '', '0000-00-00', " . safeCleanStr($_POST['user_level']) . ", '" . getRealIpAddr() . "', " . safeCleanStr($_POST['user_location']) . ")";
-            mysqli_query($db_conn, $usersInsert);
 
-            $pageMsg = "<div class='alert alert-success'>The user " . safeCleanStr($_POST['user_name']) . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+            dbQuery(
+                    'insert',
+                    'users',
+                    'username, email, password, password_reset, password_reset_date, level, clientip, loc_id',
+                    ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", 0000-00-00, "' . $userLevel . '", "' . $userIp . '", "' . $userLocation . '" ',
+                    NULL,
+                    NULL
+            );
+
+            $pageMsg = "<div class='alert alert-success'>The user " . $userName . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
         }
 
     } else {
@@ -71,15 +100,16 @@ if ($_POST['save_main']) {
             </h1>
         </div>
     </div>
+
 <?php
-if ($errorMsg !="") {
-    echo $errorMsg;
-} else {
-    echo $pageMsg;
-}
-if ($deleteMsg != "") {
-    echo $deleteMsg;
-}
+    if ($errorMsg !="") {
+        echo $errorMsg;
+    } else {
+        echo $pageMsg;
+    }
+    if ($deleteMsg != "") {
+        echo $deleteMsg;
+    }
 ?>
     <!-- Add user form-->
     <button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
@@ -97,7 +127,7 @@ if ($deleteMsg != "") {
                                 <label for="user_name">Username</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $_POST['user_name']; ?>" placeholder="Username" autofocus autocomplete="off" required>
+                                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $userName; ?>" placeholder="Username" autofocus autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +136,7 @@ if ($deleteMsg != "") {
                                 <label for="user_email">User Email</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $_POST['user_email']; ?>" placeholder="Email Address" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $userEmail; ?>" placeholder="Email Address" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +145,7 @@ if ($deleteMsg != "") {
                                 <label for="user_password">User Password</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="<?php echo $_POST['user_password']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +154,7 @@ if ($deleteMsg != "") {
                                 <label for="user_password_confirm">Password Confirm</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="<?php echo $_POST['user_password_confirm']; ?>" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -196,10 +226,19 @@ if ($deleteMsg != "") {
                     <tbody>
                     <?php
                     //Get user info, exclude super admin user
-                    $sqlUsers = mysqli_query($db_conn, "SELECT id, username, email, clientip, level, datetime, loc_id FROM users ORDER BY username, email, level, datetime ASC");
+                    $sqlUsers = dbQuery(
+                            'select',
+                            'users',
+                            'id, username, email, clientip, level, datetime, loc_id',
+                            NULL,
+                            NULL,
+                            'username, email, level, datetime ASC'
+                    );
+
                     while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
+
                         $usersID = $rowUsers['id'];
-                        $usersName = $rowUsers['username'];
+                        $usersName = safeCleanStr(addslashes($rowUsers['username']));
                         $usersEmail = $rowUsers['email'];
                         $usersClientIP = $rowUsers['clientip'];
                         $usersLevel = $rowUsers['level'];
@@ -222,7 +261,15 @@ if ($deleteMsg != "") {
                         }
 
                         //get location name for each user
-                        $sqlUsersLocName = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE id=".$usersLocID." ");
+                        $sqlUsersLocName = dbQuery(
+                                'select',
+                                'locations',
+                                'id, name',
+                                NULL,
+                                'id=' . $usersLocID,
+                                NULL
+                        );
+
                         $rowLocName = mysqli_fetch_array($sqlUsersLocName);
 
                         $locationName = $rowLocName['name'];
@@ -236,7 +283,7 @@ if ($deleteMsg != "") {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . safeCleanStr(addslashes($usersName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                     }

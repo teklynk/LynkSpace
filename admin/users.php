@@ -24,6 +24,7 @@ if (!empty($_POST)) {
     $user_id = (int)safeCleanStr($_POST['user_id']);
 
     if ($user_password == $user_password_confirm) {
+
         dbQuery(
             'update',
             'users',
