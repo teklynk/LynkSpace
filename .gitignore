@@ -1,8 +1,8 @@
 .git/
 .idea/*
 .svn/
-*blowfishsalt.php
-*dbconn.php
+config/*blowfishsalt.php
+config/*dbconn.php
 /vendor/
 /uploads/*
 /node_modules/

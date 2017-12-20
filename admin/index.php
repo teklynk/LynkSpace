@@ -135,7 +135,8 @@ if (isset($_SESSION['loggedIn'])) {
                 </div>
                 <div class="panel-body">
                     <div class="text-center login-logo">
-                        <img src="" class="img-responsive img-center"/>
+                        <h2><?php echo cmsTitle; ?></h2>
+                        <h3><?php echo cmsDescription; ?></h3>
                     </div>
                     <section class="login-form">
                         <?php

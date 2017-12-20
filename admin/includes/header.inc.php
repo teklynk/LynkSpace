@@ -163,7 +163,7 @@ session_start();
                 <span class="icon-bar"></span>
             </button>
             <a type="button" id="button-menu" class="pull-left"><i class="fa fa-dedent"></i></a>
-            <a class="navbar-brand">CMS</a>
+            <a class="navbar-brand"><?php echo cmsTitle; ?></a>
 
             <?php
             if (multiBranch == 'true' && isset($_SESSION['loc_list']) && $_SESSION['user_level'] == 1) {
