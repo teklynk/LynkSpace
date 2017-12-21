@@ -20,7 +20,7 @@ if (!defined('inc_access')) {
             <li>
             </li>
         </ul>
-        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="#" target="_blank">CMS</a></span>
+        <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="#" target="_blank"><?php echo cmsTitle; ?></a></span>
     </div>
 </footer>
 

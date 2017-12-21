@@ -223,7 +223,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
             var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
                 lineNumbers: true,
                 mode: 'text/css',
-                autofocus: true,
+                autofocus: false,
                 matchBrackets: true,
                 styleActiveLine: true,
                 indentWithTabs: true

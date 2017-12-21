@@ -193,7 +193,7 @@ session_start();
             </li>
 
             <li class="dropdown user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 24); ?>"/> <?php echo $_SESSION['user_name']; ?>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 24); ?>"/> <?php echo ucwords($_SESSION['user_name']); ?>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
