@@ -39,9 +39,6 @@ session_start();
     <!-- Admin Panel CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/sb-admin.min.css?v=<?php echo ysmVersion; ?>">
 
-    <!-- Custom Fonts from: localfont.com -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/admin/css/fonts.min.css?v=<?php echo ysmVersion; ?>">
-
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
