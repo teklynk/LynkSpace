@@ -47,6 +47,11 @@ if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false ) {
     $subDirectory = '/'.$subDir;
 }
 
+//CMS branding, title, description
+define('cmsTitle', 'LynkSpace');
+define('cmsDescription', 'small, simple, cms');
+define('cmsWebsite', 'http://www.lynkspace.com');
+
 //Build the server url string
 define('serverUrlStr', $serverProtocol . $serverHostname . $serverPort . $subDirectory);
 
