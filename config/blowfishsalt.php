@@ -1,3 +1,3 @@
 <?php
-define('blowfishSalt', '$2y$10$k9OEPSJYeligUr2/ybR9yeP2UUso1Tyl4VN3JDyCQpSguC3BMb.cW');
+define('blowfishSalt', '$2y$10$j7ZL6kbzu0qkT8e0SXuSkOmrfAaP61ZxadgFe1Av3/Cu.gPIqad4W');
 ?>
