@@ -1,8 +1,9 @@
 .git/
-.idea/*
 .svn/
 /vendor/
-/uploads/*
 /node_modules/
 uploads/
 .DS_Store
+*blowfishsalt.php
+*dbconn.php
+.idea/
