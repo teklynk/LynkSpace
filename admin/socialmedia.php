@@ -130,7 +130,7 @@ if ($_GET['update'] == 'true') {
                 <input class="form-control" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.youtube.com/user/username">
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
             <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>

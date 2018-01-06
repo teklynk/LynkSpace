@@ -145,7 +145,7 @@ if ($_GET['preview'] > "") {
                     <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="999"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -295,7 +295,7 @@ if ($_GET['preview'] > "") {
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                     <input type="hidden" name="save_main" value="true"/>
                     <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>

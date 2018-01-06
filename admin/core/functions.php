@@ -970,6 +970,18 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
     }
 }
 
+//CSRF token validation
+function csrf_validate($token){
+    if (!empty($_POST)){
+        if (safeCleanStr($_POST['csrf']) != $token) {
+            session_unset();
+            //log errors
+            die('Direct access not permitted');
+        }
+    }
+    echo $token;
+}
+
 //Variable to hide elements from non-admin users
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
     $adminOnlyShow = "";
@@ -988,15 +1000,6 @@ if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id'])
 } elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
     header("Location: ?loc_id=1");
     echo "<script>window.location.href='?loc_id=1';</script>";
-}
-
-//csrf checker
-if ($_POST['csrf']) {
-    if (safeCleanStr($_POST['csrf']) != $_SESSION['unique_referrer']) {
-        header("Location: ../index.php?loc_id=1");
-        echo "<script>window.location.href='../index.php?loc_id=1';</script>";
-        die('Direct access not permitted');
-    }
 }
 
 ?>

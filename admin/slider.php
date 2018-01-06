@@ -213,7 +213,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
             <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -404,7 +404,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     echo "</tbody>
 		</table>
 		
-		<input type='hidden' name='csrf' value='" . $_SESSION['unique_referrer'] . "'/>
+		<input type='hidden' name='csrf' value='" . csrf_validate($_SESSION['unique_referrer']) . "'/>
 		
 		<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
 		<input type='hidden' name='save_main' value='true'/>

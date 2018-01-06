@@ -197,7 +197,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <div class="form-group">
 
-                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                             <input type="hidden" name="add_hottitles" value="true"/>
                             <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -293,7 +293,7 @@ if ($_GET['loc_id'] != 1) {
                 </table>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <input type="hidden" name="hottitles_count" value="<?php echo $hottitlesCount; ?>"/>
                 <input type="hidden" name="save_main" value="true"/>

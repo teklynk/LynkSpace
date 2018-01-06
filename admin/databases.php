@@ -275,7 +275,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <textarea class="form-control count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -639,7 +639,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                     <input type="hidden" name="cust_count" value="<?php echo $custCount; ?>" />
                     <input type="hidden" name="save_main" value="true"/>
