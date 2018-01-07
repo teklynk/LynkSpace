@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $aboutusDefaultsChecked = $_GET['checked'];
 
         $sqlAboutus = mysqli_query($db_conn, "SELECT loc_id FROM aboutus WHERE loc_id=" . $_SESSION['loc_id'] . " ");
-        $rowAboutus = mysqli_fetch_array($sqlAboutus);
+        $rowAboutus = mysqli_fetch_array($sqlAboutus, MYSQLI_ASSOC);
 
         if ($rowAboutus['loc_id'] == $aboutusDefaultsID) {
             //Do Update

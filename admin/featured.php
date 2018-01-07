@@ -7,7 +7,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referrer'] = 'featured.php';
 
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowFeatured = mysqli_fetch_array($sqlFeatured);
+$rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {
@@ -107,7 +107,7 @@ if ($_GET['update'] == 'true') {
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowFeatured['datetime'])) . " By: " . $rowFeatured['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

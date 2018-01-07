@@ -13,7 +13,7 @@ $sqlUsers = dbQuery(
     'id=' . $_GET['loc_id'],
     NULL
 );
-$rowUsers = mysqli_fetch_array($sqlUsers);
+$rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {
@@ -116,7 +116,7 @@ if ($_GET['passwordupdated'] == 'true') {
                 <span><small><?php echo "Last Logged In: " . date('m-d-Y, H:i:s', strtotime($rowUsers['datetime'])); ?></small></span>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
             <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

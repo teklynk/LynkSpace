@@ -24,7 +24,7 @@ echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .v
         <tbody>
         <?php
             $sqlLocList = mysqli_query($db_conn, "SELECT type, name FROM locations ORDER BY type, name");
-            while ($rowLocList = mysqli_fetch_array($sqlLocList)){
+            while ($rowLocList = mysqli_fetch_array($sqlLocList, MYSQLI_ASSOC)){
                 echo "<tr><td>".$rowLocList['name']."</td><td>".$rowLocList['type']."</td></tr>";
             }
         ?>

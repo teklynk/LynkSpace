@@ -63,7 +63,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     //Check shared_uploads table for any shared images
     $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ");
-    $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption);
+    $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
     //Share setting/options Modal with Form
     showModalConfirm(
@@ -140,7 +140,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <?php if ($uploadMsg != "") {
                 echo $uploadMsg;
             }
@@ -159,7 +159,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <input type="hidden" name="action" value="uploadFile">
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
@@ -208,7 +208,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                             //Check shared_uploads table for any shared images
                             $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1");
-                            $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads);
+                            $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads, MYSQLI_ASSOC);
 
                             if ($rowSharedUploads['filename'] == $file) {
                                 $isShared = 'btn btn-primary';

@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $featuredDefaultsChecked = $_GET['checked'];
 
         $sqlFeatured = mysqli_query($db_conn, "SELECT loc_id FROM featured WHERE loc_id=" . $_SESSION['loc_id'] . " ");
-        $rowFeatured = mysqli_fetch_array($sqlFeatured);
+        $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
         if ($rowFeatured['loc_id'] == $_SESSION['loc_id']) {
             //Do Update

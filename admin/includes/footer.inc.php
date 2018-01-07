@@ -51,7 +51,6 @@ if (defined('datePicker')) {
 </body>
 </html>
 <?php
-//close all database connections
-mysqli_close($db_conn);
-die();
+    mysqli_close($db_conn);
+    die();
 ?>

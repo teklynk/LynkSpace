@@ -19,7 +19,7 @@ if ($_GET['section'] == "" && $_GET['loc_id']) {
 if ($_GET['preview'] > "") {
     $pagePreviewId = $_GET['preview'];
     $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content FROM customers WHERE id='$pagePreviewId'");
-    $rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview);
+    $rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview, MYSQLI_ASSOC);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<div class='col-lg-12'>";
@@ -49,7 +49,7 @@ if ($_GET['preview'] > "") {
 
 //check if using default location
 $sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSections = mysqli_fetch_array($sqlSections);
+$rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
 //set Default toggle depending on which section you are on
 if ($_GET['section'] == $rowSections['section']) {
@@ -65,7 +65,7 @@ if ($_GET['section'] == $rowSections['section']) {
 $sectionCount = 1;
 $custMenuStr = "<option value='1' " . $isSectionSelected . ">1</option>";
 
-while ($rowSections = mysqli_fetch_array($sqlSections)) {
+while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     $sectionCount ++;
     if ($rowSections['section'] == $_GET['section']) {
         $isSectionSelected = "SELECTED";
@@ -176,7 +176,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                 }
 
                 $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
-                $rowCustomer = mysqli_fetch_array($sqlCustomer);
+                $rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC);
 
                 //Create new customer
             } elseif ($_GET['newcustomer']) {
@@ -251,7 +251,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
                         $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='".$getCustSection."' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY sort, name");
-                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
+                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat, MYSQLI_ASSOC)) {
 
                             if ($rowExistCustCat['id'] != 0) {
                                 $custExistCatId = $rowExistCustCat['id'];
@@ -275,7 +275,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                     <textarea class="form-control count-text" rows="3" name="customer_content" placeholder="Text" maxlength="255"><?php if ($_GET['editcustomer']) {echo $rowCustomer['content'];} ?></textarea>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="customers_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -349,7 +349,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             if ($_POST['save_main']) {
 
                 $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ");
-                $rowSection = mysqli_fetch_array($sqlSections);
+                $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
                 if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $_GET['section']) {
                     //Do update
@@ -386,7 +386,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
             }
 
             $sqlSections = mysqli_query($db_conn, "SELECT heading, content, section, use_defaults FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=".$_GET['loc_id']." ");
-            $rowSections  = mysqli_fetch_array($sqlSections);
+            $rowSections  = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
             //delete category
             $delCatId = $_GET['deletecat'];
@@ -512,7 +512,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                                         //Cat list for adding a new category
                                         //get and build category list, find selected
                                         $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, cust_loc_id, sort FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY sort, name");
-                                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat)) {
+                                        while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat, MYSQLI_ASSOC)) {
 
                                             if ($rowExistCustCat['id'] != 0) {
                                                 $custExistCatId = $rowExistCustCat['id'];
@@ -570,7 +570,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         <?php
                         $custCount = "";
                         $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC");
-                        while ($rowCustomer = mysqli_fetch_array($sqlCustomer)) {
+                        while ($rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC)) {
                             $customerId = $rowCustomer['id'];
                             $customerName = safeCleanStr($rowCustomer['name']);
                             $customerCat = $rowCustomer['catid'];
@@ -606,7 +606,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
                             $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
-                            while ($rowCustCat = mysqli_fetch_array($sqlCustCat)) {
+                            while ($rowCustCat = mysqli_fetch_array($sqlCustCat, MYSQLI_ASSOC)) {
                                 if ($rowCustCat['id'] != 0) {
                                     $custCatId = $rowCustCat['id'];
                                     $custCatName = $rowCustCat['name'];
@@ -639,7 +639,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections)) {
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                     <input type="hidden" name="cust_count" value="<?php echo $custCount; ?>" />
                     <input type="hidden" name="save_main" value="true"/>

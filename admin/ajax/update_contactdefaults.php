@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $contactDefaultsChecked = $_GET['checked'];
 
         $sqlContact = mysqli_query($db_conn, "SELECT loc_id FROM contactus WHERE loc_id=" . $_SESSION['loc_id'] . " ");
-        $rowContact = mysqli_fetch_array($sqlContact);
+        $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
         if ($rowContact['loc_id'] == $_SESSION['loc_id']) {
             //Do Update

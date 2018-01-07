@@ -6,7 +6,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referrer'] = 'socialmedia.php';
 
 $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSocial = mysqli_fetch_array($sqlSocial);
+$rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {
@@ -130,7 +130,7 @@ if ($_GET['update'] == 'true') {
                 <input class="form-control" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.youtube.com/user/username">
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
             <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
             <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>

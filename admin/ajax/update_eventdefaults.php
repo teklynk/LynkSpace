@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $eventDefaultsChecked = $_GET['checked'];
 
         $sqlEvent = mysqli_query($db_conn, "SELECT loc_id FROM events WHERE loc_id=" . $_SESSION['loc_id'] . " ");
-        $rowEvent = mysqli_fetch_array($sqlEvent);
+        $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
         if ($rowEvent['loc_id'] == $_SESSION['loc_id']) {
             //Do Update

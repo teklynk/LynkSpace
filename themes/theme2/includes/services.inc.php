@@ -27,7 +27,7 @@ if ($servicesNumRows > 0) {
 
     echo "<div class='row' id='services'>";
 
-    while ($rowServices = mysqli_fetch_array($sqlServices)) {
+    while ($rowServices = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC)) {
 
         echo "<div class='col-sm-6 col-md-3 col-lg-3 service-item'>";
         echo "<div class='panel panel-default text-center'>";

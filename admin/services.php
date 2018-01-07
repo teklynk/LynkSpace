@@ -11,7 +11,7 @@ if ($_GET['preview']>"") {
 	$pagePreviewId=$_GET['preview'];
 
 	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, loc_id FROM services WHERE id='$pagePreviewId' AND loc_id=".$_SESSION['loc_id']." ");
-	$rowServicesPreview  = mysqli_fetch_array($sqlServicesPreview);
+	$rowServicesPreview  = mysqli_fetch_array($sqlServicesPreview, MYSQLI_ASSOC);
 
 	echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
 	echo "<div class='col-lg-12'>";
@@ -90,7 +90,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 		}
 
 		$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
-		$rowServices = mysqli_fetch_array($sqlServices);
+		$rowServices = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC);
 
 		//Create new service
 	} elseif ($_GET['newservice']) {
@@ -176,7 +176,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				<textarea class="form-control count-text" rows="3" name="service_content" placeholder="Text" maxlength="999"><?php if($_GET['editservice']){echo $rowServices['content'];} ?></textarea>
 			</div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
 			<button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
 			<button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -235,7 +235,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 	}
 
 	$sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id']." ");
-	$rowSetup  = mysqli_fetch_array($sqlSetup);
+	$rowSetup  = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 	//Modal preview box
 	showModalPreview("webserviceDialog");
@@ -297,7 +297,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				<?php
 				$serviceCount = "";
 				$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, link, sort, active, loc_id FROM services WHERE loc_id=".$_GET['loc_id']." ORDER BY sort ASC");
-				while ($rowServices  = mysqli_fetch_array($sqlServices)) {
+				while ($rowServices  = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC)) {
 					$serviceId=$rowServices['id'];
 					$serviceTitle=$rowServices['title'];
 					$serviceTumbnail=$rowServices['icon'];
@@ -333,7 +333,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				</tbody>
 			</table>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
 			<input type="hidden" name="service_count" value="<?php echo $serviceCount; ?>"/>
 			<input type="hidden" name="save_main" value="true"/>

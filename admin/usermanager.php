@@ -193,7 +193,7 @@ if ($_POST['save_main']) {
                         <div class="col-lg-12">
                             <div class="form-group">
 
-                                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
@@ -226,16 +226,17 @@ if ($_POST['save_main']) {
                     <tbody>
                     <?php
                     //Get user info, exclude super admin user
-                    $sqlUsers = dbQuery(
-                            'select',
-                            'users',
-                            'id, username, email, clientip, level, datetime, loc_id',
-                            NULL,
-                            NULL,
-                            'username, email, level, datetime ASC'
-                    );
 
-                    while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
+                    $sqlUsers = dbQuery(
+                        'select',
+                        'users',
+                        'id, username, email, clientip, level, datetime, loc_id',
+                        NULL,
+                        NULL,
+                        'level, email, username ASC'
+                    );
+                    //$sqlUsers = mysqli_query($db_conn, $sqlUsers);
+                    while ($rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC)) {
 
                         $usersID = $rowUsers['id'];
                         $usersName = safeCleanStr(addslashes($rowUsers['username']));
@@ -270,7 +271,7 @@ if ($_POST['save_main']) {
                                 NULL
                         );
 
-                        $rowLocName = mysqli_fetch_array($sqlUsersLocName);
+                        $rowLocName = mysqli_fetch_array($sqlUsersLocName, MYSQLI_ASSOC);
 
                         $locationName = $rowLocName['name'];
 

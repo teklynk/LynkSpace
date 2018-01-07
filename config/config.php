@@ -19,7 +19,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     }
 
     $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
-    $rowConfig = mysqli_fetch_array($sqlConfig);
+    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 }
 
 //Protocol-relative/agnostic
@@ -180,4 +180,8 @@ define('urlValidationPattern', "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))
 //html5 password validation pattern
 define('passwordValidationPattern', "(?=(?:[^a-zA-Z]*[a-zA-Z]){4})(?=(?:\D*\d){1}).*");
 define('passwordValidationTitle', "1 or more digits and a min. of 4 letters are required");
+
+//define variables used throughout the site.
+$errorMsg = '';
+$pageMsg = '';
 ?>

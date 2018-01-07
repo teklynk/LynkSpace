@@ -42,7 +42,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     //Get data
     $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchplaceholder_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
-    $rowConfig = mysqli_fetch_array($sqlConfig);
+    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 
 ?>
 
@@ -201,7 +201,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowConfig['datetime'])) . " By: " . $rowConfig['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="siteoptionsform_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>

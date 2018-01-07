@@ -27,7 +27,7 @@ if ($teamNumRows > 0) {
 
     echo "<div class='row' id='team'>";
 
-    while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
+    while ($rowTeam = mysqli_fetch_array($sqlTeam, MYSQLI_ASSOC)) {
         echo "<div class='col-sm-6 col-md-3 col-lg-3 team-item'>";
         echo "<div class='thumbnail'>";
 

@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 
             //get the new cat id
             $sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " ORDER BY id DESC LIMIT 1");
-            $rowMaxCat = mysqli_fetch_array($sqlNavCatID);
+            $rowMaxCat = mysqli_fetch_array($sqlNavCatID, MYSQLI_ASSOC);
             $navMaxCatId = $rowMaxCat[0];
         }
 
@@ -104,7 +104,7 @@ if ($_GET['section'] == "" && $_GET['loc_id']) {
 
 //check if using default location
 $sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSetup = mysqli_fetch_array($sqlSetup);
+$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //set Default toggle depending on which navigation you are on
 if ($_GET['section'] == $navSections[0]) {
@@ -309,7 +309,7 @@ if ($_GET['section'] == $navSections[0]) {
                                         echo "<option value='0'>None</option>";
                                         //get and build category list, find selected
                                         $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY cat_name");
-                                        while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
+                                        while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat, MYSQLI_ASSOC)) {
 
                                             if ($rowExistNavCat['id'] != 0) {
                                                 $navExistCatId = $rowExistNavCat['id'];
@@ -356,7 +356,7 @@ if ($_GET['section'] == $navSections[0]) {
                             echo "<option value='0'>None</option>";
                             //get and build category list, find selected
                             $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY cat_name");
-                            while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat)) {
+                            while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat, MYSQLI_ASSOC)) {
 
                                 if ($rowExistNavCat['id'] != 0) {
                                     $navExistCatId = $rowExistNavCat['id'];
@@ -389,7 +389,7 @@ if ($_GET['section'] == $navSections[0]) {
                     $navCount = "";
 
                     $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, active, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid");
-                    while ($rowNav = mysqli_fetch_array($sqlNav)) {
+                    while ($rowNav = mysqli_fetch_array($sqlNav, MYSQLI_ASSOC)) {
                         $navId = $rowNav['id'];
                         $navName = $rowNav['name'];
                         $navURL = $rowNav['url'];
@@ -420,7 +420,7 @@ if ($_GET['section'] == $navSections[0]) {
                         echo "<option value='0'>None</option>";
                         //get and build category list, find selected
                         $sqlNavCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='".$_GET['section']."' ORDER BY cat_name");
-                        while ($rowNavCat = mysqli_fetch_array($sqlNavCat)) {
+                        while ($rowNavCat = mysqli_fetch_array($sqlNavCat, MYSQLI_ASSOC)) {
                             if ($rowNavCat['id'] != 0) {
                                 $navCatId = $rowNavCat['id'];
                                 $navCatName = $rowNavCat['cat_name'];
@@ -448,7 +448,7 @@ if ($_GET['section'] == $navSections[0]) {
                 </table>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>

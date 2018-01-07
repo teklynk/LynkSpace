@@ -7,18 +7,18 @@ $_SESSION['file_referrer'] = 'setup.php';
 
 //Get max location ID number - for creating a new location
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
-$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
+$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID, MYSQLI_ASSOC);
 
 //Get highest ID number and add 1. Used for adding a new location.
 $locationNewID = $rowLocationMaxID[0] + 1;
 
 //Get location table columns
 $sqlLocation = mysqli_query($db_conn, dbQuery('select', 'locations', 'id, name, type, active', NULL, 'id=' . $_GET['loc_id'], NULL));
-$rowLocation = mysqli_fetch_array($sqlLocation);
+$rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
 //Get setup table columns
 $sqlSetup = mysqli_query($db_conn, dbQuery('select', 'setup', 'title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id', NULL, 'id=' . $_GET['loc_id'], NULL));
-$rowSetup = mysqli_fetch_array($sqlSetup);
+$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST['site_title'])) {
@@ -452,7 +452,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowSetup['datetime'])) . " By: " . $rowSetup['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
                 </button>

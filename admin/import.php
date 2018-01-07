@@ -56,7 +56,7 @@ if ($_POST['save_main']) {
             mysqli_query($db_conn, 'TRUNCATE TABLE contactus');
         } else {
             $locationSelect = mysqli_query($db_conn, "SELECT MAX(id) FROM locations LIMIT 1");
-            $locationCount = mysqli_fetch_array($locationSelect);
+            $locationCount = mysqli_fetch_array($locationSelect, MYSQLI_ASSOC);
         }
 
         while (($locData = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -136,7 +136,7 @@ if ($_POST['save_main']) {
             mysqli_query($db_conn, 'TRUNCATE TABLE pages');
         } else {
             $pagesSelect = mysqli_query($db_conn, "SELECT MAX(id) FROM pages LIMIT 1");
-            $pagesCount = mysqli_fetch_array($pagesSelect);
+            $pagesCount = mysqli_fetch_array($pagesSelect, MYSQLI_ASSOC);
         }
 
         while (($pageData = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -255,7 +255,7 @@ if ($_GET['update'] == 'true') {
 
                 <hr/>
 
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="importForm_submit" class="btn btn-primary" data-toggle="tooltip" data-original-title=".csv - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Import CSV(s)</button>

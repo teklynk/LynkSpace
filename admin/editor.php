@@ -50,7 +50,7 @@ if ($_POST['save_main']) {
         $cssvalue = $_POST['cssvalue'][$i];
 
         $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . " ");
-        $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
+        $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
 
         if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector && $rowThemeOptions['property'] == $property) {
             //Do Update
@@ -89,7 +89,7 @@ if ($_POST['save_main']) {
 
 //Get setup table columns
 $sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSetup = mysqli_fetch_array($sqlSetup);
+$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 ?>
 
 <div class="row">
@@ -155,7 +155,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
 
                     //Gets themeoptions
                     $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='".themeOption."' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
-                    $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions);
+                    $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
 
                     echo "<div class='row'>
                     <div class='col-lg-4'>
@@ -205,7 +205,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup);
                 </small></span>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
             <input type="hidden" name="save_main" value="true"/>
             <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
