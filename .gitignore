@@ -7,3 +7,4 @@ uploads/
 *blowfishsalt.php
 *dbconn.php
 .idea/
+*.log

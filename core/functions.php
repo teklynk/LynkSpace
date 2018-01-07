@@ -1337,7 +1337,6 @@ if (basename($_SERVER['PHP_SELF']) == "page.php"){
     $theTitle = $setupTitle;
 }
 
-$hotTitleCount = $hotCount;
 //redirect to default location if loc_id or script name not defined
 if (empty($_GET['loc_id'])){
 

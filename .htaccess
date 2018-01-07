@@ -16,13 +16,13 @@ php_value upload_max_filesize 4M
 php_value post_max_size 4M
 php_value docref_root 0
 php_value docref_ext 0
-php_value error_reporting -1
+php_value error_reporting 32767
 php_value log_errors_max_len 0
 
 #Disable these PHP function if they are enabled on the server.
 php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
 
-#php_value error_log /var/log/php_errors.log
+php_value error_log "/home/rjones/htdocs/LynkSpace/logs/php_errors.log"
 
 DirectoryIndex index.php
 
