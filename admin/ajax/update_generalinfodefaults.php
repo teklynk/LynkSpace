@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $generalinfoDefaultsChecked = $_GET['checked'];
 
         $sqlGeneralInfo = mysqli_query($db_conn, "SELECT loc_id FROM generalinfo WHERE loc_id=" . $_SESSION['loc_id'] . " ");
-        $rowGeneralInfo = mysqli_fetch_array($sqlGeneralInfo);
+        $rowGeneralInfo = mysqli_fetch_array($sqlGeneralInfo, MYSQLI_ASSOC);
 
         if ($rowGeneralInfo['loc_id'] == $_SESSION['loc_id']) {
             //Do Update

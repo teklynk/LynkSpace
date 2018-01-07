@@ -7,7 +7,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referrer'] = 'aboutus.php';
 
 $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, author_name, datetime, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowAbout = mysqli_fetch_array($sqlAbout);
+$rowAbout = mysqli_fetch_array($sqlAbout, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {

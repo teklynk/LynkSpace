@@ -226,16 +226,17 @@ if ($_POST['save_main']) {
                     <tbody>
                     <?php
                     //Get user info, exclude super admin user
-                    $sqlUsers = dbQuery(
-                            'select',
-                            'users',
-                            'id, username, email, clientip, level, datetime, loc_id',
-                            NULL,
-                            NULL,
-                            'username, email, level, datetime ASC'
-                    );
 
-                    while ($rowUsers = mysqli_fetch_array($sqlUsers)) {
+                    $sqlUsers = dbQuery(
+                        'select',
+                        'users',
+                        'id, username, email, clientip, level, datetime, loc_id',
+                        NULL,
+                        NULL,
+                        'level, email, username ASC'
+                    );
+                    //$sqlUsers = mysqli_query($db_conn, $sqlUsers);
+                    while ($rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC)) {
 
                         $usersID = $rowUsers['id'];
                         $usersName = safeCleanStr(addslashes($rowUsers['username']));
@@ -270,7 +271,7 @@ if ($_POST['save_main']) {
                                 NULL
                         );
 
-                        $rowLocName = mysqli_fetch_array($sqlUsersLocName);
+                        $rowLocName = mysqli_fetch_array($sqlUsersLocName, MYSQLI_ASSOC);
 
                         $locationName = $rowLocName['name'];
 

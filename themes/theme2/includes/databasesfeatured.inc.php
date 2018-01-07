@@ -29,7 +29,7 @@ if ($customerNumRows > 0) {
 
     echo "<div class='row row_pad'>";
 
-    while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
+    while ($rowCustomers = mysqli_fetch_array($sqlCustomers, MYSQLI_ASSOC)) {
         if ($rowCustomers['featured'] == 'true') {
             echo "<div class='col-sm-8 col-md-4 col-lg-4 database-item'>";
 

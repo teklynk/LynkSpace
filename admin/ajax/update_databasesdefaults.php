@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $databasesDefaultsChecked = $_GET['checked'];
 
         $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$databasesSubSection."' AND loc_id=" . $databasesDefaultsID . " ");
-        $rowSection = mysqli_fetch_array($sqlSections);
+        $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
         if ($rowSection['loc_id'] == $databasesDefaultsID && $rowSection['section'] == $databasesSubSection) {
             //Do Update

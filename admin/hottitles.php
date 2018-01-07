@@ -10,7 +10,7 @@ $deleteMsg = "";
 
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
-$rowLocations = mysqli_fetch_array($sqlLocations);
+$rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
 ?>
 <div class="row">
@@ -119,7 +119,7 @@ if ($_POST['add_hottitles']) {
 }
 
 $sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowSetup = mysqli_fetch_array($sqlSetup);
+$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //use default location
 if ($rowSetup['hottitles_use_defaults'] == 'true') {
@@ -242,7 +242,7 @@ if ($_GET['loc_id'] != 1) {
                     <?php
                     $hottitlesCount = "";
                     $sqlHottitles = mysqli_query($db_conn, "SELECT id, sort, title, url, loc_type, active, loc_id FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC");
-                    while ($rowHottitles = mysqli_fetch_array($sqlHottitles)) {
+                    while ($rowHottitles = mysqli_fetch_array($sqlHottitles, MYSQLI_ASSOC)) {
                         $hottitlesId = $rowHottitles['id'];
                         $hottitlesSort = $rowHottitles['sort'];
                         $hottitlesTitle = $rowHottitles['title'];

@@ -11,7 +11,7 @@ if ($_GET['preview'] > "") {
     $pagePreviewId = $_GET['preview'];
 
     $sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
-    $rowTeamPreview = mysqli_fetch_array($sqlteamPreview);
+    $rowTeamPreview = mysqli_fetch_array($sqlteamPreview, MYSQLI_ASSOC);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
     echo "<div class='col-lg-12'>";
@@ -87,7 +87,7 @@ if ($_GET['preview'] > "") {
                 }
 
                 $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
-                $rowTeam = mysqli_fetch_array($sqlteam);
+                $rowTeam = mysqli_fetch_array($sqlteam, MYSQLI_ASSOC);
 
                 //Create new team
             } elseif ($_GET['newteam']) {
@@ -197,7 +197,7 @@ if ($_GET['preview'] > "") {
             }
 
             $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-            $rowSetup = mysqli_fetch_array($sqlSetup);
+            $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
             //Modal preview box
             showModalPreview("webpageDialog");
@@ -259,7 +259,7 @@ if ($_GET['preview'] > "") {
                         <?php
                         $teamCount = "";
                         $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC");
-                        while ($rowTeam = mysqli_fetch_array($sqlTeam)) {
+                        while ($rowTeam = mysqli_fetch_array($sqlTeam, MYSQLI_ASSOC)) {
                             $teamId = $rowTeam['id'];
                             $teamTitle = $rowTeam['title'];
                             $teamName = $rowTeam['name'];

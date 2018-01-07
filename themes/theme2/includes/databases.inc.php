@@ -34,7 +34,7 @@ if ($customerNumRows > 0) {
 
     //Gets catname
     $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, section FROM category_customers WHERE section='" . $customerSection . "' AND cust_loc_id=" . $custDefaultLoc . " ORDER BY sort, name ASC");
-    while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers)) {
+    while ($rowCatCustomers = mysqli_fetch_array($sqlCatCustomers, MYSQLI_ASSOC)) {
 
         $customerCatId = $rowCatCustomers['id'];
         $customerCatName = $rowCatCustomers['name'];
@@ -53,7 +53,7 @@ if ($customerNumRows > 0) {
         //Gets links for each cat
         $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND featured='false' AND catid=".$customerCatId." AND loc_id=".$custDefaultLoc." ORDER BY catid, sort, name ASC"); //While loop
         $itemCount = mysqli_num_rows($sqlCustomers);
-        while ($rowCustomers = mysqli_fetch_array($sqlCustomers)) {
+        while ($rowCustomers = mysqli_fetch_array($sqlCustomers, MYSQLI_ASSOC)) {
 
             $customersItemCount++;
 

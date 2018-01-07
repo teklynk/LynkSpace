@@ -40,16 +40,17 @@ $_SESSION['file_referrer'] = 'page.php';
 
             if ($_GET['newpage'] || $_GET['editpage']) {
 
+                $page_title = safeCleanStr($_POST['page_title']);
+                $page_content = sqlEscapeStr($_POST['page_content']);
+
                 // Update existing page
                 if ($_GET['editpage']) {
+
                     $thePageId = $_GET['editpage'];
                     $pageLabel = "Edit Page Title";
 
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
-
-                        $page_title = safeCleanStr($_POST['page_title']);
-                        $page_content = sqlEscapeStr($_POST['page_content']);
 
                         $pageUpdate = "UPDATE pages SET title='" . $page_title. "', content='" . $page_content . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
                         mysqli_query($db_conn, $pageUpdate);
@@ -58,7 +59,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     }
 
                     $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
-                    $rowPages = mysqli_fetch_array($sqlPages);
+                    $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
                 } elseif ($_GET['newpage']) {
@@ -94,7 +95,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                         <?php
                         $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-                        $rowSetup = mysqli_fetch_array($sqlSetup);
+                        $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                         ?>
 
                         <div class="form-group">
@@ -155,7 +156,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 }
 
                 $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-                $rowSetup = mysqli_fetch_array($sqlSetup);
+                $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
                 //Modal preview box
                 showModalPreview("webpageDialog");
@@ -199,7 +200,7 @@ $_SESSION['file_referrer'] = 'page.php';
                             <tbody>
                             <?php
                             $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC");
-                            while ($rowPages = mysqli_fetch_array($sqlPages)) {
+                            while ($rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC)) {
 
                                 $pageId = $rowPages['id'];
                                 $pageTitle = safeCleanStr($rowPages['title']);

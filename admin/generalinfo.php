@@ -7,7 +7,7 @@ include_once('includes/header.inc.php');
 $_SESSION['file_referrer'] = 'generalinfo.php';
 
 $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
-$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo);
+$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {

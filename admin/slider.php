@@ -26,7 +26,7 @@ if ($_GET['preview'] > "") {
 
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
-$rowLocations = mysqli_fetch_array($sqlLocations);
+$rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 ?>
 
     <div class="row">
@@ -86,7 +86,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
 
         $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . " ");
-        $rowSlides = mysqli_fetch_array($sqlSlides);
+        $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC);
 
         //Create new slide
     } elseif ($_GET['newslide']) {
@@ -281,7 +281,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
-    $rowSetup = mysqli_fetch_array($sqlSetup);
+    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     //Modal preview box
     showModalPreview("webslideDialog");
@@ -345,7 +345,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		<tbody>";
     $slideCount = "";
     $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC");
-    while ($rowSlides = mysqli_fetch_array($sqlslides)) {
+    while ($rowSlides = mysqli_fetch_array($sqlslides, MYSQLI_ASSOC)) {
         $slideId = $rowSlides['id'];
         $slideTitle = $rowSlides['title'];
         $slideLocType = $rowSlides['loc_type'];
@@ -402,11 +402,13 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     echo "</tbody>
-		</table>
-		
-		<input type='hidden' name='csrf' value='" . csrf_validate($_SESSION['unique_referrer']) . "'/>
-		
-		<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
+		</table>";
+    ?>
+
+        <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>" />
+
+    <?php
+		echo "<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
 		<input type='hidden' name='save_main' value='true'/>
 		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Reset</button>

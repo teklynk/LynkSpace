@@ -10,3 +10,14 @@ Enable .htaccess by editing your sites-enabled config file:
         allow from all
  </Directory>
  ```
+ 
+ Create a virtual host for the project:
+ ```
+ DocumentRoot "/var/www/html/LynkSpace"
+ServerName linkspace.local
+<Directory "/var/www/html/LynkSpace">
+allow from all
+Options None
+Require all granted
+</Directory>
+ ```

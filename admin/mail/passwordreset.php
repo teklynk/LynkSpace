@@ -35,7 +35,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     $email_address = sqlEscapeStr($_POST['user_email']);
 
     $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
-    $rowUsers = mysqli_fetch_array($sqlUsers);
+    $rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
 
     // Check for empty fields
     if (empty($user_name) || empty($email_address) || !validateEmail($email_address)) {
@@ -56,7 +56,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             $passwordHashed = sha1(blowfishSalt . sqlEscapeStr($_POST['password']));
 
             $sqlUserReset = mysqli_query($db_conn, "SELECT password_reset, password_reset_date, email FROM users WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ");
-            $rowUserReset = mysqli_fetch_array($sqlUserReset);
+            $rowUserReset = mysqli_fetch_array($sqlUserReset, MYSQLI_ASSOC);
 
             if ($newUserPassword == $newUserPasswordConfirm && $keyHashed == $rowUserReset['password_reset'] && date("Y-m-d") == $rowUserReset['password_reset_date']) {
 

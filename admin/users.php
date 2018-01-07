@@ -13,7 +13,7 @@ $sqlUsers = dbQuery(
     'id=' . $_GET['loc_id'],
     NULL
 );
-$rowUsers = mysqli_fetch_array($sqlUsers);
+$rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {

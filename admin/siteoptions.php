@@ -42,7 +42,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
     //Get data
     $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchplaceholder_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1 ");
-    $rowConfig = mysqli_fetch_array($sqlConfig);
+    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 
 ?>
 

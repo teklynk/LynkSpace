@@ -18,15 +18,16 @@ php_value docref_root 0
 php_value docref_ext 0
 php_value error_reporting 32767
 php_value log_errors_max_len 0
-
-#Disable these PHP function if they are enabled on the server.
+# Disable these PHP functions if they are enabled on the server.
 php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
-
-php_value error_log "/home/rjones/htdocs/LynkSpace/logs/php_errors.log"
+# Error log path. Set this to use the log folder inside the project.
+php_value error_log /home/rjones/htdocs/LynkSpace/logs/php_errors.log
 
 DirectoryIndex index.php
 
 Options +FollowSymLinks
+# Disable directory browsing
+Options All -Indexes
 
 RewriteEngine On
 
@@ -36,7 +37,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 
-#Deny access to these folders - forbidden 403
+# Deny access to these folders - forbidden 403
 RedirectMatch 403 ^/vendor/$
 RedirectMatch 403 ^/node_modules/$
 RedirectMatch 403 ^/migration/$
@@ -53,14 +54,41 @@ RedirectMatch 403 ^/mail/$
 RedirectMatch 403 ^/ajax/$
 RedirectMatch 403 ^/import/$
 RedirectMatch 403 ^/backups/$
+RedirectMatch 403 ^/logs/$
 
-#Deny access to these files - forbidden 403
+# Force SSL (force https://)
+#RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Always use www - redirect non-www to www permanently (force www.)
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteCond %{HTTPS}s on(s)|
+#RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+# File caching for optimizing website loading time
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
+    Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+
+# Deny access to these files - forbidden 403
 <FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
 
-#Prevent html,php files from being loaded inside an iframe.
+# Prevent html,php files from being loaded inside an iframe.
 <IfModule mod_headers.c>
     Header append X-FRAME-OPTIONS "SAMEORIGIN"
     <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">

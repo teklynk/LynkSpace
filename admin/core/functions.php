@@ -3,6 +3,7 @@
 if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
+
 //Output to browser console
 function debug_to_console($data) {
     $output = $data;
@@ -38,7 +39,7 @@ function loginAttempt($value) {
     global $db_conn;
 
     $sqlLoginAttempt = mysqli_query($db_conn, "SELECT * FROM login_attempts WHERE ip='$value' ");
-    $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt);
+    $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt, MYSQLI_ASSOC);
 
     if ($rowLoginAttempt) {
 
@@ -243,7 +244,7 @@ function getIconDropdownList($icon_selected) {
     global $db_conn;
 
     $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
-    while ($rowIcon = mysqli_fetch_array($sqlServicesIcon)) {
+    while ($rowIcon = mysqli_fetch_array($sqlServicesIcon, MYSQLI_ASSOC)) {
         $icon=$rowIcon['icon'];
         if ($icon === $icon_selected) {
             $iconCheck="SELECTED";
@@ -324,7 +325,7 @@ function getLocList($active, $showActiveOnly) {
 
     $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations ".$showActive." ORDER BY name ASC");
 
-    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch)) {
+    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch, MYSQLI_ASSOC)) {
         if ($rowLocationSearch['id'] == 1) {
             $isDefault = " (Default)";
         } else {
@@ -376,7 +377,7 @@ function getPages($loc) {
     global $db_conn;
 
     $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$loc." ORDER BY title ASC");
-    while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink)) {
+    while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
         $serviceLinkId=$rowServicesLink['id'];
         $serviceLinkTitle=$rowServicesLink['title'];
 
@@ -398,7 +399,7 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
 
     //Build a list of shared images
     $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
-    while ($rowSharedList = mysqli_fetch_array($sqlSharedList)) {
+    while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
 
         $sharedOptions = $rowSharedList['shared'];
         $sharedFileName = $rowSharedList['filename'];
@@ -459,7 +460,7 @@ function getSharedFilesJsonList($loc){
 
     //Build a list of shared images
     $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
-    while ($rowSharedList = mysqli_fetch_array($sqlSharedList)) {
+    while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
 
         $sharedOptions = $rowSharedList['shared'];
         $sharedFileName = $rowSharedList['filename'];
@@ -520,7 +521,7 @@ function getPageJsonList($loc) {
 
     //get and build page list for TinyMCE
     $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title");
-    while ($rowGetPages = mysqli_fetch_array($sqlGetPages)) {
+    while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
         $getPageId = $rowGetPages['id'];
         $getPageTitle = $rowGetPages['title'];
         if ($getPageTitle != ''){
@@ -914,6 +915,8 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
     $clause = NULL;
     $order = NULL;
     $tableDb = NULL;
+    $query = NULL;
+    $queryExecute = NULL;
 
     if (isset($table)){
         $tableDb = db_name . "." . $table;
@@ -922,13 +925,13 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
     if (isset($where)) {
         $clause = " WHERE " . trim($where);
     } else {
-        $clause = NULL;
+        $clause = "";
     }
 
     if (isset($orderBy)){
         $order = " ORDER BY " . trim($orderBy);
     } else {
-        $order = NULL;
+        $order = "";
     }
 
     if (isset($method)) {
@@ -955,23 +958,27 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
                 $query = "DELETE FROM " . $tableDb . $clause . ";";
                 break;
             default:
-                $query = "";
-                $queryExecute = "";
+                $query = NULL;
+                $queryExecute = NULL;
                 return false;
         }
 
+        //echo $query;
+
         $queryExecute = mysqli_query($db_conn, $query);
 
-        if (!$queryExecute) {
-            die("An error occurred. " . mysqli_errno($db_conn) . ": " . mysqli_error($db_conn));
+        if (mysqli_error($db_conn)){
+            die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : ". mysqli_error($db_conn));
         }
 
         return $queryExecute;
+
     }
 }
 
 //CSRF token validation
 function csrf_validate($token){
+    //global $token;
     if (!empty($_POST)){
         if (safeCleanStr($_POST['csrf']) != $token) {
             session_unset();
@@ -979,17 +986,18 @@ function csrf_validate($token){
             die('Direct access not permitted');
         }
     }
-    echo $token;
+    print_r($token);
 }
 
 //Variable to hide elements from non-admin users
-if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1 ){
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1){
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
     $adminOnlyShow = "style='display:none !important;'";
     $adminIsCheck = "false";
 }
+
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");
