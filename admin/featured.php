@@ -53,7 +53,7 @@ if ($_GET['update'] == 'true') {
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <?php
             if ($errorMsg !="") {
                 echo $errorMsg;

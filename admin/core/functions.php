@@ -963,9 +963,9 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
                 return false;
         }
 
-        //echo $query;
-
         $queryExecute = mysqli_query($db_conn, $query);
+
+        //echo $query;
 
         if (mysqli_error($db_conn)){
             die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : ". mysqli_error($db_conn));
