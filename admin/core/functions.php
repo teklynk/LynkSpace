@@ -963,7 +963,6 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
                 return false;
         }
 
-        $query = mysqli_escape_string($db_conn, $query);
         $queryExecute = mysqli_query($db_conn, $query);
 
         //echo $query;
