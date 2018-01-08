@@ -83,7 +83,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     echo $pageMsg;
                 }
                 ?>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <form name="pageForm" class="dirtyForm" method="post" action="">
 
                         <div class="form-group required">
