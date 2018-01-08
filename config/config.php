@@ -41,7 +41,7 @@ $subPath = parse_url($subURL, PHP_URL_PATH);
 $subDir = explode('/', $subPath)[1];
 $subDir = trim($subDir);
 
-if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false ) {
+if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false) {
     $subDirectory = '';
 } else {
     $subDirectory = '/'.$subDir;

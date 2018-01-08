@@ -99,6 +99,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <div class="form-group" id="multibranchactive">
                     <label for="multibranch_active">Multibranch</label>
+                    <small>
+                        &nbsp;&nbsp;Multiple sites or locations
+                    </small>
                     <div class="checkbox">
                         <label>
                             <input class="multibranch_checkbox" id="multibranch_active" name="multibranch_active" type="checkbox" <?php echo $selActive; ?> data-toggle="toggle">
