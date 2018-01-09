@@ -571,7 +571,7 @@ function getDynamicCss($loc){
 
 //Gets the image path and converts it to absolute image path.
 function getAbsoluteImagePath($imagePath){
-    if (strpos($imagePath, '../uploads') !== false){
+    if (strpos($imagePath, '../uploads/') !== false){
         $absolutePath = serverUrlStr . str_replace('../', '/', $imagePath);
     } else {
         $absolutePath = $imagePath;
