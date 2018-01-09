@@ -13,7 +13,7 @@ allow from all
  Create a virtual host for the project:
  ```
 DocumentRoot /var/www/html/LynkSpace
-ServerName linkspace.local
+ServerName lynkspace.local
 <Directory "/var/www/html/LynkSpace">
 allow from all
 Options None
