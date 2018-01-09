@@ -569,6 +569,16 @@ function getDynamicCss($loc){
     }
 }
 
+//Gets the image path and converts it to absolute image path.
+function getAbsoluteImagePath($imagePath){
+    if (strpos($imagePath, '../uploads') !== false){
+        $absolutePath = serverUrlStr . str_replace('../', '/', $imagePath);
+    } else {
+        $absolutePath = $imagePath;
+    }
+    return $absolutePath;
+}
+
 function getSocialMediaIcons($loc, $shape, $section){
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")
@@ -769,7 +779,7 @@ function getSlider($loc, $sliderType){
                     echo "<div class='item $slideActive'>";
 
                     if (!empty($rowSlider['image'])) {
-                        echo "<div class='fill img-responsive img-full' style='background-image:url(" . $rowSlider['image'] . ");'></div>";
+                        echo "<div class='fill img-responsive img-full' style='background-image:url(" . getAbsoluteImagePath($rowSlider['image']) . ");'></div>";
                     } else {
                         echo "<div class='fill img-responsive img-full'></div>";
                     }
@@ -790,7 +800,7 @@ function getSlider($loc, $sliderType){
 
                 } //end of startdate check
 
-                $sliderImageList .= $rowSlider['image'] . ",";
+                $sliderImageList .= getAbsoluteImagePath($rowSlider['image']) . ",";
 
             }//end of while loop
 
@@ -814,7 +824,7 @@ function getSlider($loc, $sliderType){
                 echo "<div class='item active'>";
 
                 if (!empty($rowSlider['image'])) {
-                    echo "<div class='fill' style='background-image:url(" . $rowSlider['image'] . ");'></div>";
+                    echo "<div class='fill' style='background-image:url(" . getAbsoluteImagePath($rowSlider['image']) . ");'></div>";
                 } else {
                     echo "<div class='fill'></div>";
                 }
@@ -834,16 +844,16 @@ function getSlider($loc, $sliderType){
 
                 echo "</div>"; //.carousel-inner
 
-                $sliderImageList = $rowSlider['image'];
+                $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
             }
         } else {
             $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
             $sliderLink = $rowSlider['link'];
             $sliderTitle = $rowSlider['title'];
             $sliderContent = $rowSlider['content'];
-            $sliderImage = $rowSlider['image'];
+            $sliderImage = getAbsoluteImagePath($rowSlider['image']);
             $sliderLocType = $rowSlider['loc_type'];
-            $sliderImageList = $rowSlider['image'];
+            $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
         }
 
         //Clean sliderImageList

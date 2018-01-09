@@ -74,7 +74,7 @@ if ($customerNumRows > 0) {
             }
 
             if (!empty($rowCustomers['image'])) {
-                echo "<img class='img-responsive img-circle' src='" . $rowCustomers['image'] . "' alt='" . $rowCustomers['name'] . "' title='" . $rowCustomers['name'] . "'>";
+                echo "<img class='img-responsive img-circle' src='" . getAbsoluteImagePath($rowCustomers['image']) . "' alt='" . $rowCustomers['name'] . "' title='" . $rowCustomers['name'] . "'>";
             }
 
             echo "</span>";
