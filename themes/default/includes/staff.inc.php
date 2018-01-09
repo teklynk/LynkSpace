@@ -32,7 +32,7 @@ if ($teamNumRows > 0) {
         echo "<div class='thumbnail'>";
 
         if (!empty($rowTeam['image'])) {
-            echo "<img class='img-responsive img-circle' src='" . $rowTeam['image'] . "' alt='" . $rowTeam['name'] . "' title='" . $rowTeam['name'] . "'>";
+            echo "<img class='img-responsive img-circle' src='" . getAbsoluteImagePath($rowTeam['image']) . "' alt='" . $rowTeam['name'] . "' title='" . $rowTeam['name'] . "'>";
         }
 
         echo "<div class='caption'>";

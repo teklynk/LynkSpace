@@ -46,7 +46,7 @@ if ($servicesNumRows > 0) {
         }
 
         if (!empty($rowServices['image'])) {
-            echo "<img class='img-responsive img-square' style='padding:8px;' src='" . $rowServices['image'] . "' alt='" . $rowServices['title'] . "' title='" . $rowServices['title'] . "'>";
+            echo "<img class='img-responsive img-square' style='padding:8px;' src='" . getAbsoluteImagePath($rowServices['image']) . "' alt='" . $rowServices['title'] . "' title='" . $rowServices['title'] . "'>";
         }
 
         echo "</span>";
