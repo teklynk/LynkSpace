@@ -31,12 +31,12 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 } elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
     dbQuery(
-            'delete',
-            'users',
-            NULL,
-            NULL,
-            'id=' . $deluserId,
-            NULL
+        'delete',
+        'users',
+        NULL,
+        NULL,
+        'id=' . $deluserId,
+        NULL
     );
 
     $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -56,12 +56,12 @@ if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
 
         $sqlUsersInfo = dbQuery(
-                'select',
-                'users',
-                'username, email',
-                NULL,
-                'username="' . $userName . '" AND email="' . validateEmail($userEmail) . '" ',
-                NULL
+            'select',
+            'users',
+            'username, email',
+            NULL,
+            'username="' . $userName . '" AND email="' . validateEmail($userEmail) . '" ',
+            NULL
         );
 
         $rowCheckUser = mysqli_num_rows($sqlUsersInfo);
@@ -71,12 +71,12 @@ if ($_POST['save_main']) {
         } else {
 
             dbQuery(
-                    'insert',
-                    'users',
-                    'username, email, password, password_reset, password_reset_date, level, clientip, loc_id',
-                    ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", 0000-00-00, "' . $userLevel . '", "' . $userIp . '", "' . $userLocation . '" ',
-                    NULL,
-                    NULL
+                'insert',
+                'users',
+                'username, email, password, password_reset, password_reset_date, level, clientip, loc_id',
+                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", 0000-00-00, "' . $userLevel . '", "' . $userIp . '", "' . $userLocation . '" ',
+                NULL,
+                NULL
             );
 
             $pageMsg = "<div class='alert alert-success'>The user " . $userName . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
@@ -263,12 +263,12 @@ if ($_POST['save_main']) {
 
                         //get location name for each user
                         $sqlUsersLocName = dbQuery(
-                                'select',
-                                'locations',
-                                'id, name',
-                                NULL,
-                                'id=' . $usersLocID,
-                                NULL
+                            'select',
+                            'locations',
+                            'id, name',
+                            NULL,
+                            'id=' . $usersLocID,
+                            NULL
                         );
 
                         $rowLocName = mysqli_fetch_array($sqlUsersLocName, MYSQLI_ASSOC);
