@@ -2,7 +2,6 @@
 .svn/
 /vendor/
 /node_modules/
-uploads/
 .DS_Store
 *blowfishsalt.php
 *dbconn.php
