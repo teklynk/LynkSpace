@@ -3,8 +3,9 @@
 /vendor/
 /node_modules/
 .DS_Store
-*blowfishsalt.php
-*dbconn.php
 .idea/
 *.log
 /uploads/*
+~install.old
+/config/blowfishsalt.php
+/config/dbconn.php
