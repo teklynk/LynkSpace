@@ -7,3 +7,4 @@
 *dbconn.php
 .idea/
 *.log
+/uploads/*
