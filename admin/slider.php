@@ -1,6 +1,5 @@
 <?php
 define('inc_access', TRUE);
-define('datePicker', TRUE);
 
 include_once('includes/header.inc.php');
 
@@ -67,8 +66,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     $slideLabel = "Edit Slide Title";
     $slide_title = safeCleanStr($_POST['slide_title']);
     $slide_content = safeCleanStr($_POST['slide_content']);
-    $start_date = safeCleanStr($_POST['start_date']);
-    $end_date = safeCleanStr($_POST['end_date']);
+    $start_date = dateTimeFormat(1, $_POST['start_date']);
+    $end_date = dateTimeFormat(1, $_POST['end_date']);
     $slide_link = safeCleanStr($_POST['slide_link']);
     $slide_image = safeCleanStr($_POST['slide_image']);
     $location_type = safeCleanStr($_POST['location_type']);
@@ -169,15 +168,15 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             ?>
 
             <?php
-            if ($rowSlides['startdate'] == '0000-00-00'){
+            if ($rowSlides['startdate'] == '0000-00-00' || $rowSlides['startdate'] == ''){
                 $startDate = "";
             } else {
-                $startDate = $rowSlides['startdate'];
+                $startDate = dateTimeFormat(1, $rowSlides['startdate']);
             }
-            if ($rowSlides['enddate'] == '0000-00-00') {
+            if ($rowSlides['enddate'] == '0000-00-00' || $rowSlides['enddate'] == '') {
                 $endDate = "";
             } else {
-                $endDate = $rowSlides['enddate'];
+                $endDate = dateTimeFormat(1, $rowSlides['enddate']);
             }
 
             ?>
@@ -187,7 +186,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <div class="form-group required">
                     <label for="start_date">Start Date</label>
                     <div class="input-group date">
-                        <input type="text" class="form-control datepicker" data-provide="datepicker" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="mm/dd/yyyy" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -198,7 +197,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <div class="form-group required">
                     <label for="end_date">End Date</label>
                     <div class="input-group date">
-                        <input type="text" class="form-control datepicker" data-provide="datepicker" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="mm/dd/yyyy" pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -267,8 +266,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         for ($i = 0; $i < $slide_count; $i++) {
 
             $slide_sort = safeCleanStr($_POST['slide_sort'][$i]);
-            $slide_startdate = safeCleanStr($_POST['slide_startdate'][$i]);
-            $slide_enddate = safeCleanStr($_POST['slide_enddate'][$i]);
+            $slide_startdate = dateTimeFormat(1, $_POST['slide_startdate'][$i]);
+            $slide_enddate = dateTimeFormat(1, $_POST['slide_enddate'][$i]);
             $location_type = safeCleanStr($_POST['location_type'][$i]);
             $slide_id = safeCleanStr($_POST['slide_id'][$i]);
 
@@ -351,8 +350,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         $slideLocType = $rowSlides['loc_type'];
         $slideContent = $rowSlides['content'];
         $slideSort = $rowSlides['sort'];
-        $slideStartDate = $rowSlides['startdate'];
-        $slideEndDate = $rowSlides['enddate'];
+        $slideStartDate = dateTimeFormat(1, $rowSlides['startdate']);
+        $slideEndDate = dateTimeFormat(1, $rowSlides['enddate']);
         $slideActive = $rowSlides['active'];
         $slideCount++;
 
@@ -383,12 +382,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker' name='slide_startdate[]' value='" . $slideStartDate . "' type='text' maxlength='12' placeholder='YYYY-MM-DD' pattern='".dateValidationPattern."' required>
+            <input class='form-control' name='slide_startdate[]' value='" . $slideStartDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='".dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control datepicker' data-provide='datepicker'  name='slide_enddate[]' value='" . $slideEndDate . "' type='text' maxlength='12' placeholder='YYYY-MM-DD' pattern='".dateValidationPattern."' required>
+            <input class='form-control' name='slide_enddate[]' value='" . $slideEndDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='".dateValidationPattern."' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
