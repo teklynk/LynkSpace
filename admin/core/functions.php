@@ -908,7 +908,7 @@ function checkIPRange() {
     }
 }
 
-function dateTimeFormat($format, $date){
+function dateTimeFormat($format=NULL, $date=NULL){
     switch ($format) {
         case 1:
             return date("Y-m-d", strtotime(safeCleanStr($date)));
