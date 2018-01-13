@@ -9,3 +9,4 @@
 ~install.old
 /config/blowfishsalt.php
 /config/dbconn.php
+/.htaccess
