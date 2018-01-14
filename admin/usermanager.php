@@ -284,7 +284,7 @@ if ($_POST['save_main']) {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable. "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                     }

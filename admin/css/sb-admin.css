@@ -339,6 +339,10 @@ small {
     color: #848484 !important;
 }
 
+.disabled {
+    cursor: not-allowed;
+}
+
 .status_msg {
     color: #3c763d !important;
 }
