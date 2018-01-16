@@ -908,6 +908,19 @@ function checkIPRange() {
     }
 }
 
+function dateTimeFormat($format=NULL, $date=NULL){
+    switch ($format) {
+        case 1:
+            return date("Y-m-d", strtotime(safeCleanStr($date)));
+            break;
+        case 2:
+            return date("m-d-Y", strtotime(safeCleanStr($date)));
+            break;
+        default:
+            return date("m-d-Y", strtotime(safeCleanStr($date)));
+    }
+}
+
 //Simple SQL CRUD statements
 function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=NULL, $orderBy=NULL) {
     global $db_conn;

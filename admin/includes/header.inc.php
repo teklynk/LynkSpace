@@ -22,8 +22,9 @@ session_start();
     ?>
     <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; url=index.php?logout=true"/>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
 
     <title><?php echo cmsTitle; ?> - Admin Panel</title>

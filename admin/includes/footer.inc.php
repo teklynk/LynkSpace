@@ -27,27 +27,6 @@ if (!defined('inc_access')) {
 </div>
 <!-- /#wrapper -->
 
-<?php
-if (defined('datePicker')) {
-    ?>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            if ($('.datepicker').length) {
-                $('.datepicker').datepicker({
-                    format: "yyyy-mm-dd",
-                    startView: "month",
-                    startDate: Date(),
-                    todayHighlight: true,
-                    autoclose: true,
-                    forceParse: false
-                });
-            }
-        });
-    </script>
-    <?php
-}
-?>
-
 </body>
 </html>
 <?php

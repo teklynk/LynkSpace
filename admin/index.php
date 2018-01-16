@@ -8,7 +8,7 @@ session_unset();
 
 $_SESSION['file_referrer'] = 'index.php';
 
-//Creates a unique refering value/token - exposed in post
+//Creates a unique referring value/token
 $_SESSION['unique_referrer'] = generateRandomString();
 
 if (!empty($_POST)) {
@@ -32,11 +32,6 @@ if (!empty($_POST)) {
             if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
                 $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
-            }
-
-            //Super Admin
-            if (strpos($_SESSION['user_name'],'tlcadmin') !== false) {
-                $_SESSION['super_admin'] = true;
             }
 
             //get the client IP and datetime at each log in. update the database row

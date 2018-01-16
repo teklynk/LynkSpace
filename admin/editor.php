@@ -158,19 +158,19 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                     $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
 
                     echo "<div class='row'>
-                    <div class='col-lg-4'>
-                        <label for='cssvalue[]'>".$themeCssLabels[$key]."</label>
-                        <div class='input-group'>
-                            <input type='color' class='form-control' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>
-                            <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
-                            <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>";
-                            ?>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" id="reset-color" title='Reset' onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';"><i class="fa fa-refresh"></i></button>
-                            </span>
+                        <div class='col-lg-4'>
+                            <label for='cssvalue[]'>".$themeCssLabels[$key]."</label>
+                            <div class='input-group'>
+                                <input type='color' data-toggle='tooltip' data-original-title='Click to change color' class='form-control' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>
+                                <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
+                                <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>";
+                                ?>
+                                <span class="input-group-btn">
+                                    <button type="button" data-toggle='tooltip' data-original-title='Reset color' class="btn btn-default" id="reset-color" title='Reset' onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';"><i class="fa fa-refresh"></i></button>
+                                </span>
+                            </div>
+                            <br>
                         </div>
-                        <br>
-                    </div>
                     </div>
 
                 <?php

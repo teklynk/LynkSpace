@@ -1,7 +1,6 @@
 <?php
 define('inc_access', TRUE);
 define('tinyMCE', TRUE);
-define('datePicker', TRUE);
 
 include_once('includes/header.inc.php');
 
@@ -16,8 +15,8 @@ if ($_POST) {
     $event_defaults = $_POST['event_defaults'];
     $event_heading = sqlEscapeStr($_POST['event_heading']);
     $event_alert = sqlEscapeStr($_POST['event_alert']);
-    $event_startdate = safeCleanStr($_POST['event_startdate']);
-    $event_enddate = safeCleanStr($_POST['event_enddate']);
+    $event_startdate = dateTimeFormat(1, $_POST['event_startdate']);
+    $event_enddate = dateTimeFormat(1, $_POST['event_enddate']);
     $event_calendar = trim($_POST['event_calendar']);
 
     if ($event_defaults == 'on') {
@@ -71,15 +70,15 @@ if ($_GET['update'] == 'true') {
                 $selDefaults = "";
             }
 
-            if ($rowEvent['startdate'] == '0000-00-00'){
+            if ($rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == ''){
                 $startDate = "";
             } else {
-                $startDate = $rowEvent['startdate'];
+                $startDate = dateTimeFormat(1, $rowEvent['startdate']);
             }
-            if ($rowEvent['enddate'] == '0000-00-00') {
+            if ($rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == '') {
                 $endDate = "";
             } else {
-                $endDate = $rowEvent['enddate'];
+                $endDate = dateTimeFormat(1, $rowEvent['enddate']);
             }
 
             ?>
@@ -128,7 +127,7 @@ if ($_GET['update'] == 'true') {
                     <div class="form-group">
                         <label for="event_startdate">Start Date</label>&nbsp;&nbsp;<small>Start alert on.</small>
                         <div class="input-group date">
-                            <input type="text" class="form-control datepicker" data-provide="datepicker" name="event_startdate" id="event_startdate" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" />
+                            <input type="date" class="form-control"  name="event_startdate" id="event_startdate" value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" />
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </span>
@@ -139,7 +138,7 @@ if ($_GET['update'] == 'true') {
                     <div class="form-group">
                         <label for="event_enddate">End Date</label>&nbsp;&nbsp;<small>End alert on.</small>
                         <div class="input-group date">
-                            <input type="text" class="form-control datepicker" data-provide="datepicker" name="event_enddate" id="event_enddate" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" />
+                            <input type="date" class="form-control" name="event_enddate" id="event_enddate" value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD" pattern="<?php echo dateValidationPattern; ?>" />
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </span>

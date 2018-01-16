@@ -497,6 +497,7 @@ function getCoreHeader($loc, $addHeader=null){
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Default CSS - Do not remove-->
@@ -507,6 +508,7 @@ function getCoreHeader($loc, $addHeader=null){
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- LS2 search script -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
