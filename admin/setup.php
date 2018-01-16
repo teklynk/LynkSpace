@@ -234,10 +234,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                            //only show this button to Super-Admin
-                            if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['super_admin'] == true) {
-                                ?>
+
                                 <hr/>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -252,7 +249,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     </div>
                                 </div>
                                 <?php
-                            }
+
                         }
 
                         //Check if user_level is Admin user and Multibranch
