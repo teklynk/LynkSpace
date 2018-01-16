@@ -5,13 +5,6 @@ include_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'import.php';
 
-// Only allow super-admin users access to this page
-if (isset($_SESSION['loggedIn']) && $_SESSION['super_admin'] == false || $_SESSION['user_level'] != 1) {
-
-    header('Location: index.php?logout=true');
-    echo "<script>window.location.href='index.php?logout=true';</script>";
-}
-
 //Create the backup folder
 if (!file_exists(__DIR__ . '/backups/')) {
     @mkdir(__DIR__ . '/backups/', 0755);
