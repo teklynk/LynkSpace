@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'setup.php';
 
@@ -10,7 +10,9 @@ $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER 
 $rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID, MYSQLI_ASSOC);
 
 //Get highest ID number and add 1. Used for adding a new location.
-$locationNewID = $rowLocationMaxID[0] + 1;
+if (isset($rowLocationMaxID[0])) {
+    $locationNewID = $rowLocationMaxID[0] + 1;
+}
 
 //Get location table columns
 $sqlLocation = mysqli_query($db_conn,"SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . " ");
@@ -483,5 +485,5 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         });
     </script>
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

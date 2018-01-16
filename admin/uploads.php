@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
@@ -284,5 +284,5 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
     </script>
 
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

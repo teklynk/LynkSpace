@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 // Check that everything is installed on the server.
 checkDependencies();
@@ -256,5 +256,5 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     </div>
 
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

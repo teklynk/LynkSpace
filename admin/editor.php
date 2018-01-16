@@ -3,7 +3,7 @@ session_start();
 define('inc_access', TRUE);
 define('codeMirror', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'editor.php';
 
@@ -19,7 +19,7 @@ $pageMsg="";
 $fileToEdit_dir = "../themes/".themeOption."/css/custom-style.css";
 
 //Dynamic CSS - Location of dynamic-style.php that is inside the themes folder
-include_once("../themes/".themeOption."/css/dynamic-style.php");
+require_once("../themes/".themeOption."/css/dynamic-style.php");
 
 //check if file is writable
 if (!is_writable($fileToEdit_dir)) {
@@ -246,5 +246,5 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 </style>
 <?php
 
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

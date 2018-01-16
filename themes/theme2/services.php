@@ -1,15 +1,15 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 echo "<div class='page-services'>";
 
-include 'includes/featured.inc.php';
+require_once('includes/featured.inc.php');
 
-include 'includes/services.inc.php';
+require_once('includes/services.inc.php');
 
 echo "</div>";
 
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

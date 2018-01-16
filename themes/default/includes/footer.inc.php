@@ -12,13 +12,13 @@ if (!defined('inc_access')) {
                 getNav($_GET['loc_id'], 'Footer', 'false', 'left', 'false');
                 ?>
             </div>
-            <?php include 'generalinfo.inc.php'; ?>
+            <?php require_once('generalinfo.inc.php'); ?>
         </div>
         <div id="belowfooter">
             <div class="container">
                 <div class="socialDiv pull-left hidden-sm hidden-md hidden-lg hidden-xl">
                     <div class="row">
-                        <?php include 'socialmedia.inc.php'; ?>
+                        <?php require_once('socialmedia.inc.php'); ?>
                     </div>
                 </div>
                 <div style="clear:both;"></div>

@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'databases.php';
 
@@ -672,5 +672,5 @@ echo "</div>
     });
 </script>
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>
