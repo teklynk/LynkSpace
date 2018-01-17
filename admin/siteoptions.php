@@ -2,7 +2,7 @@
 session_start();
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'siteoptions.php';
 
@@ -221,5 +221,5 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     header('Location: index.php?logout=true');
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

@@ -2,7 +2,7 @@
 define('inc_access', TRUE);
 define('tinyMCE', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'featured.php';
 
@@ -115,5 +115,5 @@ if ($_GET['update'] == 'true') {
         </div>
     </div>
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

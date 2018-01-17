@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'locationgroups.php';
 
@@ -33,5 +33,5 @@ echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .v
 </table>
 <?php
 
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

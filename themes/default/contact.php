@@ -2,7 +2,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 echo "<div class='page-contact'>";
 
@@ -12,15 +12,15 @@ $_SESSION['file_referrer'] = 'contact.php';
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referrer'] = generateRandomString();
 
-include 'includes/featured.inc.php';
+require_once('includes/featured.inc.php');
 
 echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
 if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-    include 'includes/searchlocations.inc.php';
+    require_once('includes/searchlocations.inc.php');
 } else {
-    include 'includes/searchpac.inc.php';
+    require_once('includes/searchpac.inc.php');
 }
 
 echo "</div>";
@@ -131,5 +131,5 @@ echo "</div>";
 </div>
 
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>

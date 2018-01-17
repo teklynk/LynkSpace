@@ -2,7 +2,7 @@
 <?php
 define('inc_access', TRUE);
 
-include_once('includes/header.inc.php');
+require_once('includes/header.inc.php');
 
 echo "<div class='page-contact'>";
 
@@ -12,7 +12,7 @@ $_SESSION['file_referrer'] = 'contact.php';
 //Creates a unique refering value/token - exposed in post
 $_SESSION['unique_referrer'] = generateRandomString();
 
-include 'includes/featured.inc.php';
+require_once('includes/featured.inc.php');
 
 ?>
 <a name="contact"></a>
@@ -118,5 +118,5 @@ include 'includes/featured.inc.php';
 </div>
 </div>
 <?php
-include_once('includes/footer.inc.php');
+require_once('includes/footer.inc.php');
 ?>
