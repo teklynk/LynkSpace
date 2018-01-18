@@ -737,8 +737,8 @@ function getUpdates(){
     global $updatesCheckerURL;
 
     $changeLogFile = updatesServer.'/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = updatesServer.'/version'.$getVersion.'.zip';
-    $updatesDestination = 'upgrade/version'.$getVersion.'.zip';
+    $updatesRemoteFile = updatesServer.'/'.$getVersion.'.zip';
+    $updatesDestination = 'upgrade/'.$getVersion.'.zip';
     $updatesCheckerURL = updatesServer.'/versionupdatechecker.php';
 }
 //Download file and save to a directory on the server
