@@ -43,6 +43,8 @@ session_start();
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
     <?php
 
     if (defined('tinyMCE')) {

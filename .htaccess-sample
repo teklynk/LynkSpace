@@ -21,7 +21,7 @@ php_value log_errors_max_len 0
 # Disable these PHP functions if they are enabled on the server.
 php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
 # Error log path. Set this to use the log folder inside the project. Set write permissions.
-php_value error_log /home/rjones/htdocs/LynkSpace/logs/php_errors.log
+php_value error_log /var/www/html/LynkSpace/logs/php_errors.log
 
 DirectoryIndex index.php
 

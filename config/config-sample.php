@@ -156,13 +156,17 @@ define('carouselSpeed', $carousel_speed_seconds);
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
 
+//Recaptcha API Key
+define('recaptcha_secret_key', "");
+define('recaptcha_site_key', "");
+
 //Version Number
 $versionFile = __DIR__ . 'version.txt';
 $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL requires: http:// or https://
-define('updatesServer', "#");
+define('updatesServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/master/");
 
 //Help URLs
 define('helpURLUser', "#");
