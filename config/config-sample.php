@@ -156,10 +156,6 @@ define('carouselSpeed', $carousel_speed_seconds);
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
 
-//Recaptcha API Key
-define('recaptcha_secret_key', "");
-define('recaptcha_site_key', "");
-
 //Version Number
 $versionFile = __DIR__ . 'version.txt';
 $versionFile = str_replace('config', '', $versionFile);
@@ -188,4 +184,13 @@ define('passwordValidationTitle', "1 or more digits and a minimum of 4 letters a
 //define variables used throughout the site.
 $errorMsg = '';
 $pageMsg = '';
+
+//Recaptcha API Key
+define('recaptcha_secret_key', "");
+define('recaptcha_site_key', "");
+//API Keys
+define('apiProject_key_1', "");
+define('apiProject_key_2', "");
+define('apiProject_key_3', "");
+define('apiProject_key_4', "");
 ?>

@@ -21,11 +21,11 @@ session_start();
 
     ?>
     <meta http-equiv="refresh" content="<?php echo sessionTimeout; ?>; url=index.php?logout=true"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex,nofollow">
-    <meta name="referrer" content="no-referrer">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="robots" content="noindex,nofollow"/>
+    <meta name="referrer" content="origin-when-crossorigin"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=yes"/>
 
     <title><?php echo cmsTitle; ?> - Admin Panel</title>
 
@@ -43,9 +43,13 @@ session_start();
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-
     <?php
+    if (!empty(recaptcha_site_key)) {
+    ?>
+        <!-- Google Recaptcha -->
+        <script type="text/javascript" language="javascript" src="//www.google.com/recaptcha/api.js"></script>
+    <?php
+    }
 
     if (defined('tinyMCE')) {
     ?>
@@ -53,9 +57,7 @@ session_start();
         <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/tinymce/tinymce.min.js?v=<?php echo ysmVersion; ?>"></script>
     <?php
     }
-    ?>
 
-    <?php
     if (defined('codeMirror')) {
     ?>
         <!-- CodeMirror -->
