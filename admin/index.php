@@ -2,23 +2,6 @@
 define('inc_access', TRUE);
 
 require_once('includes/header.inc.php');
-require_once('core/recaptchalib.php');
-
-$response = null;
-$reCaptcha = new ReCaptcha(recaptcha_secret_key);
-
-if ($_POST["g-recaptcha-response"]) {
-    $response = $reCaptcha->verifyResponse(
-        $_SERVER["REMOTE_ADDR"],
-        $_POST["g-recaptcha-response"]
-    );
-}
-
-if ($response != null && $response->success) {
-    echo "success reponse form google reCaptcha, insert data into database.";
-} else {
-    echo "Display an error message";
-}
 
 //clear all session variables
 session_unset();
@@ -28,8 +11,26 @@ $_SESSION['file_referrer'] = 'index.php';
 //Creates a unique referring value/token
 $_SESSION['unique_referrer'] = generateRandomString();
 
+//Recaptcha validation
+if (recaptcha_secret_key && recaptcha_site_key) {
+    $reCaptcha_enabled = true;
+    require_once('core/recaptchalib.php');
+    $response = null;
+    $reCaptcha = new ReCaptcha(recaptcha_secret_key);
+} else {
+    $reCaptcha_enabled = false;
+    $reCaptcha = NULL;
+}
+
+if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse (
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+
 if (!empty($_POST)) {
-    if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+    if ($response != null && $response->success || $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
         $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . sqlEscapeStr($_POST['username']) . "' AND password=SHA1('" . blowfishSalt . safeCleanStr($_POST['password']) . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1");
         $rowLogin = mysqli_fetch_array($userLogin, MYSQLI_ASSOC);
@@ -62,6 +63,7 @@ if (!empty($_POST)) {
             }
 
         } else {
+            session_unset();
             $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
         }
 
@@ -175,9 +177,13 @@ if (isset($_SESSION['loggedIn'])) {
                                             <input class="form-control" maxlength="255" placeholder="Email Address" id="user_email" name="user_email" type="email" pattern="<?php echo emailValidationPattern ?>" autocomplete="off" required>
                                         </div>
                                     </div>
-                                    <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
-                                    </div>
+                                    <?php if ($reCaptcha_enabled == true) { ?>
+                                        <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                    <?php } else { ?>
+                                        <div class="checkbox">
+                                            <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
+                                        </div>
+                                    <?php } ?>
                                     <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
@@ -223,9 +229,13 @@ if (isset($_SESSION['loggedIn'])) {
                                             <input class="form-control" maxlength="255" placeholder="Password Confirm" id="user_password_confirm" name="user_password_confirm" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
-                                    <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
-                                    </div>
+                                    <?php if ($reCaptcha_enabled == true) { ?>
+                                        <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                    <?php } else { ?>
+                                        <div class="checkbox">
+                                            <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
+                                        </div>
+                                    <?php } ?>
                                     <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                                     <input type="hidden" id="password_reset" name="password_reset" value="<?php echo $_GET['passwordreset']; ?>"/>
                                     <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>
@@ -261,10 +271,13 @@ if (isset($_SESSION['loggedIn'])) {
                                             <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
-                                    <div class="g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
-                                    <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
-                                    </div>
+                                    <?php if ($reCaptcha_enabled == true) { ?>
+                                        <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                    <?php } else { ?>
+                                        <div class="checkbox">
+                                            <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
+                                        </div>
+                                    <?php } ?>
                                     <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in
                                     </button>
                                 </fieldset>

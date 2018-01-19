@@ -767,19 +767,26 @@ $(document).ready(function () {
         }, 500);
     });
     //Not a Robot Function
-    $('#not_robot').change(function () {
-        if ($('#user_name').val().length && $('#user_email').val().length) {
-            if ($('#not_robot').prop('checked')) {
-                $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
-                $('#sign_in').attr('disabled', false);
-                $('#run_installer').attr('disabled', false);
-            } else {
-                $('#not_robot').attr('value', '');
-                $('#sign_in').attr('disabled', true);
-                $('#run_installer').attr('disabled', true);
+    if ($('#not_robot').length) {
+        //No Recaptcha
+        $('#not_robot').change(function () {
+            if ($('#user_name').val().length && $('#user_email').val().length) {
+                if ($('#not_robot').prop('checked')) {
+                    $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
+                    $('#sign_in').attr('disabled', false);
+                    $('#run_installer').attr('disabled', false);
+                } else {
+                    $('#not_robot').attr('value', '');
+                    $('#sign_in').attr('disabled', true);
+                    $('#run_installer').attr('disabled', true);
+                }
             }
-        }
-    });
+        });
+    } else {
+        //if Recaptcha is used
+        $('#sign_in').attr('disabled', false);
+        $('#run_installer').attr('disabled', false);
+    }
     //Boostrap-select actions
     $('select.selectpicker-auto').change(function () {
         var selected = $('.selectpicker-auto option:selected').val();
