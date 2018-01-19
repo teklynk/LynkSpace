@@ -156,7 +156,7 @@ define('carouselSpeed', $carousel_speed_seconds);
 //Blowfish Salt goes here after the installer runs.
 require_once('blowfishsalt.php');
 
-//Recaptcha Secret API Key
+//Recaptcha API Key
 define('recaptcha_secret_key', "");
 define('recaptcha_site_key', "");
 
