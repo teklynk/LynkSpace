@@ -6,7 +6,6 @@
 .idea/
 *.log
 /uploads/*
-~install.old
 /config/blowfishsalt.php
 /config/dbconn.php
 /config/config.php
