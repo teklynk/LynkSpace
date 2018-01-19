@@ -15,7 +15,7 @@ $_SESSION['unique_referrer'] = generateRandomString();
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once('core/recaptchalib.php');
-    $response = null;
+    $response = NULL;
     $reCaptcha = new ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
@@ -33,7 +33,7 @@ if (!empty($_POST)) {
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
-        if ($response != null && $response->success){
+        if ($response != NULL && $response->success){
             $sucessfulResponse = true;
         } else {
             $sucessfulResponse = false;

@@ -32,8 +32,8 @@ $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once('core/recaptchalib.php');
-    $response = null;
-    $reCaptcha = new ReCaptcha(recaptcha_secret_key);
+    $response = NULL;
+    $reCaptcha = NEW ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
     $reCaptcha = NULL;
@@ -50,7 +50,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
-        if ($response != null && $response->success){
+        if ($response != NULL && $response->success){
             $sucessfulResponse = true;
         } else {
             $sucessfulResponse = false;
@@ -64,7 +64,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         }
     }
 
-    if ($sucessfulResponse == true && isset($_SESSION['unique_referrer']) && $_SESSION['file_referrer'] == 'index.php') {
+    if ($sucessfulResponse == true) {
 
         //Truncate Uploads folder
         if (file_exists(__DIR__ . "/../uploads")) {
@@ -148,7 +148,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Write to dbconn file
-        $dbfile = fopen(dbFileLoc, "w") or die("Unable to open dbFileLoc");
+        $dbfile = fopen(dbFileLoc, "w") or die("Unable to open " . $dbfile . "");
 
         //Clear the file dbconn file
         ftruncate($dbfile, 0);
@@ -169,7 +169,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         fclose($dbfile);
 
         // Write to blowfish file
-        $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open dbBlowfishLoc");
+        $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open " . dbBlowfishLoc . "");
 
         //Clear the file blowfish file
         ftruncate($dbBlowfish, 0);
