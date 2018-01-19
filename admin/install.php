@@ -28,12 +28,12 @@ $user_ip = getRealIpAddr();
 // Generate a random Blowfish Salt key using the random password string function
 $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 
-//Recaptcha validation
+//Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once('core/recaptchalib.php');
-    $response = null;
-    $reCaptcha = new ReCaptcha(recaptcha_secret_key);
+    $response = NULL;
+    $reCaptcha = NEW ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
     $reCaptcha = NULL;
@@ -47,7 +47,24 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 }
 
 if (!empty($_POST) && $_POST['db_install'] == 'true') {
-    if ($response != null && $response->success || $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+
+    // Check if using Google Recaptcha
+    if ($reCaptcha_enabled == true) {
+        if ($response != NULL && $response->success){
+            $sucessfulResponse = true;
+        } else {
+            $sucessfulResponse = false;
+        }
+        // Check if using standard checkbox validation
+    } elseif ($reCaptcha_enabled == false) {
+        if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+            $sucessfulResponse = true;
+        } else {
+            $sucessfulResponse = false;
+        }
+    }
+
+    if ($sucessfulResponse == true) {
 
         //Truncate Uploads folder
         if (file_exists(__DIR__ . "/../uploads")) {
@@ -131,7 +148,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Write to dbconn file
-        $dbfile = fopen(dbFileLoc, "w") or die("Unable to open dbFileLoc");
+        $dbfile = fopen(dbFileLoc, "w") or die("Unable to open " . $dbfile . "");
 
         //Clear the file dbconn file
         ftruncate($dbfile, 0);
@@ -152,7 +169,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         fclose($dbfile);
 
         // Write to blowfish file
-        $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open dbBlowfishLoc");
+        $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open " . dbBlowfishLoc . "");
 
         //Clear the file blowfish file
         ftruncate($dbBlowfish, 0);
