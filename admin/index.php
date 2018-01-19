@@ -11,7 +11,7 @@ $_SESSION['file_referrer'] = 'index.php';
 //Creates a unique referring value/token
 $_SESSION['unique_referrer'] = generateRandomString();
 
-//Recaptcha validation
+//Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once('core/recaptchalib.php');
@@ -30,7 +30,24 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 }
 
 if (!empty($_POST)) {
-    if ($response != null && $response->success || $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+
+    // Check if using Google Recaptcha
+    if ($reCaptcha_enabled == true) {
+        if ($response != null && $response->success){
+            $sucessfulResponse = true;
+        } else {
+            $sucessfulResponse = false;
+        }
+        // Check if using standard checkbox validation
+    } elseif ($reCaptcha_enabled == false) {
+        if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+            $sucessfulResponse = true;
+        } else {
+            $sucessfulResponse = false;
+        }
+    }
+
+    if ($sucessfulResponse == true && isset($_SESSION['unique_referrer']) && $_SESSION['file_referrer'] == 'index.php') {
 
         $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . sqlEscapeStr($_POST['username']) . "' AND password=SHA1('" . blowfishSalt . safeCleanStr($_POST['password']) . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1");
         $rowLogin = mysqli_fetch_array($userLogin, MYSQLI_ASSOC);
