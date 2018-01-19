@@ -1,0 +1,159 @@
+# PHP overrides
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off
+php_flag log_errors on
+php_flag ignore_repeated_errors on
+php_flag ignore_repeated_source on
+php_flag report_memleaks on
+php_flag track_errors on
+php_flag file_uploads 1
+php_flag session.auto_start 0
+php_flag session.bug_compat_warn 0
+php_value max_execution_time 200
+php_value max_input_time 200
+php_value upload_max_filesize 4M
+php_value post_max_size 4M
+php_value docref_root 0
+php_value docref_ext 0
+php_value error_reporting 32767
+php_value log_errors_max_len 0
+# Disable these PHP functions if they are enabled on the server.
+php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
+# Error log path. Set this to use the log folder inside the project. Set write permissions.
+php_value error_log /var/www/html/LynkSpace/logs/php_errors.log
+
+DirectoryIndex index.php
+
+Options +FollowSymLinks
+# Disable directory browsing
+Options All -Indexes
+
+RewriteEngine On
+
+# If your app is in a subfolder:
+#RewriteBase /my_app/
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+# Everything that is not a PHP file is redirected to index.php
+# If you do not wish to redirect all to index.php, then write different RewriteRules for this reason
+# Everything redirected through Index gateway will make a small hit on performance, but offer better handling and control in PHP
+#RewriteRule !^(.*)\.php$ ./index.php [QSA,L]
+
+# Deny access to these folders - forbidden 403
+RedirectMatch 403 ^/vendor/$
+RedirectMatch 403 ^/node_modules/$
+RedirectMatch 403 ^/migration/$
+RedirectMatch 403 ^/core/$
+RedirectMatch 403 ^/config/$
+RedirectMatch 403 ^/uploads/$
+RedirectMatch 403 ^/themes/$
+RedirectMatch 403 ^/includes/$
+RedirectMatch 403 ^/images/$
+RedirectMatch 403 ^/fonts/$
+RedirectMatch 403 ^/css/$
+RedirectMatch 403 ^/js/$
+RedirectMatch 403 ^/mail/$
+RedirectMatch 403 ^/ajax/$
+RedirectMatch 403 ^/import/$
+RedirectMatch 403 ^/backups/$
+RedirectMatch 403 ^/logs/$
+
+# Force SSL (force https://)
+#RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Always use www - redirect non-www to www permanently (force www.)
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteCond %{HTTPS}s on(s)|
+#RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Compress text, html, javascript, css, xml.
+<IfModule mod_deflate.c>
+    # Force deflate for mangled headers developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
+    <IfModule mod_setenvif.c>
+        <IfModule mod_headers.c>
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+        </IfModule>
+    </IfModule>
+    # HTML, TXT, CSS, JavaScript, JSON, XML, HTC:
+    <IfModule filter_module.c>
+        <IfModule version.c>
+            <IfVersion >= 2.4>
+                FilterDeclare  COMPRESS
+                FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^text/(html|css|plain|xml|x-component)#i"
+                FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^application/(javascript|json|xml|xhtml+xml|rss+xml|atom+xml|vnd.ms-fontobject|x-font-ttf)#i"
+                FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^image/(svg+xml|x-icon)#i"
+                FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} = 'font/opentype'"
+                FilterChain    COMPRESS
+                FilterProtocol COMPRESS DEFLATE change=yes;byteranges=no
+            </IfVersion>
+            <IfVersion < 2.4>
+                FilterDeclare COMPRESS
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $text/html
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $text/css
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $text/plain
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $text/xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $text/x-component
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/javascript
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/json
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/xhtml+xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/rss+xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/atom+xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $image/svg+xml
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $image/x-icon
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $application/x-font-ttf
+                FilterProvider COMPRESS DEFLATE resp=Content-Type $font/opentype
+                FilterChain COMPRESS
+                FilterProtocol COMPRESS DEFLATE change=yes;byteranges=no
+            </IfVersion>
+        </IfModule>
+        <IfModule !version.c>
+            FilterDeclare COMPRESS
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $text/html
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $text/css
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $text/plain
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $text/xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $text/x-component
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/javascript
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/json
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/xhtml+xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/rss+xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/atom+xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $image/svg+xml
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $image/x-icon
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $application/x-font-ttf
+            FilterProvider COMPRESS DEFLATE resp=Content-Type $font/opentype
+            FilterChain COMPRESS
+            FilterProtocol COMPRESS DEFLATE change=yes;byteranges=no
+        </IfModule>
+    </IfModule>
+</IfModule>
+
+# File caching for optimizing website loading time
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
+    Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+
+# Deny access to these files - forbidden 403
+<FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent html,php files from being loaded inside an iframe.
+<IfModule mod_headers.c>
+    Header append X-FRAME-OPTIONS "SAMEORIGIN"
+    <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+         Header unset X-Frame-Options
+    </FilesMatch>
+</IfModule>
