@@ -1,10 +1,23 @@
 <?php
+//Create these files if they do not exist.
+// Copy config-sample.php to config.php
+if (!file_exists("../config/config.php")) {
+    copy("../config/config-sample.php", "../config/config.php");
+}
+
+// Copy htaccess-sample to .htaccess
+if (!file_exists("../.htaccess")) {
+    copy("../.htaccess-sample", "../.htaccess");
+}
+
+
+
 define('inc_access', TRUE);
 
 require_once('includes/header.inc.php');
 
 // Check that everything is installed on the server.
-checkDependencies();
+//checkDependencies();
 
 // Get server domain name
 $server_domain = $_SERVER['SERVER_NAME'];
@@ -15,8 +28,26 @@ $user_ip = getRealIpAddr();
 // Generate a random Blowfish Salt key using the random password string function
 $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 
+//Recaptcha validation
+if (recaptcha_secret_key && recaptcha_site_key) {
+    $reCaptcha_enabled = true;
+    require_once('core/recaptchalib.php');
+    $response = null;
+    $reCaptcha = new ReCaptcha(recaptcha_secret_key);
+} else {
+    $reCaptcha_enabled = false;
+    $reCaptcha = NULL;
+}
+
+if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse (
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+
 if (!empty($_POST) && $_POST['db_install'] == 'true') {
-    if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+    if ($response != null && $response->success || $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
 
         //Truncate Uploads folder
         if (file_exists(__DIR__ . "/../uploads")) {
@@ -30,13 +61,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // open and truncate sitemap file
         $sitemapFile = fopen(__DIR__ . "/../sitemap.xml", "w") or die("Unable to open ". __DIR__ . "/../sitemap.xml. Check file permissions");
         //Clear the file sitemap file
-        ftruncate(__DIR__ . "/../sitemap.xml", 0);
+        ftruncate($sitemapFile, 0);
         fclose($sitemapFile);
 
         // open and truncate robots.txt file
         $robotsTxtFile = fopen(__DIR__ . "/../robots.txt", "w") or die("Unable to open ". __DIR__ . "/../robots.txt. Check file permissions");
         //Clear the file robots.txt file
-        ftruncate(__DIR__ . "/../robots.txt", 0);
+        ftruncate($robotsTxtFile, 0);
         fclose($robotsTxtFile);
 
         sleep(1); // wait
@@ -103,7 +134,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         $dbfile = fopen(dbFileLoc, "w") or die("Unable to open dbFileLoc");
 
         //Clear the file dbconn file
-        ftruncate(dbFileLoc, 0);
+        ftruncate($dbfile, 0);
 
         $writeline = "<?php\n";
         fwrite($dbfile, $writeline);
@@ -124,7 +155,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         $dbBlowfish = fopen(dbBlowfishLoc, "w") or die("Unable to open dbBlowfishLoc");
 
         //Clear the file blowfish file
-        ftruncate(dbBlowfishLoc, 0);
+        ftruncate($dbBlowfish, 0);
 
         $writeline = "<?php\n";
         fwrite($dbBlowfish, $writeline);
@@ -134,6 +165,8 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         fwrite($dbBlowfish, $writeline);
 
         fclose($dbBlowfish);
+
+        clearstatcache();
 
         // Empty the users table
         mysqli_query($db_conn, 'TRUNCATE TABLE users');
@@ -154,6 +187,8 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // Redirect to admin login page
         header("Location: index.php");
         echo "<script>window.location.href='index.php';</script>"; // redirect to login page
+    } else {
+        die("Install Failed.");
     }
 
 } // end of the big IF
@@ -241,9 +276,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                     <label for="password">Password</label>
                                     <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
                                 </div>
-                                <div class="checkbox">
-                                    <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i> I'm not a robot</label>
-                                </div>
+                                <?php if ($reCaptcha_enabled == true) { ?>
+                                    <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                <?php } else { ?>
+                                    <div class="checkbox">
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
+                                    </div>
+                                <?php } ?>
                                 <input type="hidden" name="db_install" value="true">
                                 <button class="run_installer btn btn-lg btn-primary btn-block" disabled="disabled" id="run_installer" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
                                 <br/>
