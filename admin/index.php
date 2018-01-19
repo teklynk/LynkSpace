@@ -2,6 +2,23 @@
 define('inc_access', TRUE);
 
 require_once('includes/header.inc.php');
+require_once('core/recaptchalib.php');
+
+$response = null;
+$reCaptcha = new ReCaptcha(recaptcha_secret_key);
+
+if ($_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse(
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+
+if ($response != null && $response->success) {
+    echo "success reponse form google reCaptcha, insert data into database.";
+} else {
+    echo "Display an error message";
+}
 
 //clear all session variables
 session_unset();
@@ -244,6 +261,7 @@ if (isset($_SESSION['loggedIn'])) {
                                             <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
+                                    <div class="g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
                                     <div class="checkbox">
                                         <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                     </div>
