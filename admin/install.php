@@ -4,20 +4,21 @@
 if (!file_exists("../config/config.php")) {
     copy("../config/config-sample.php", "../config/config.php");
 }
-
+// Copy dbconn-sample.php to dbconn.php
+if (!file_exists("../config/dbconn.php")) {
+    copy("../config/dbconn-sample.php", "../config/dbconn.php");
+}
 // Copy htaccess-sample to .htaccess
 if (!file_exists("../.htaccess")) {
     copy("../.htaccess-sample", "../.htaccess");
 }
-
-
 
 define('inc_access', TRUE);
 
 require_once('includes/header.inc.php');
 
 // Check that everything is installed on the server.
-//checkDependencies();
+checkDependencies();
 
 // Get server domain name
 $server_domain = $_SERVER['SERVER_NAME'];
@@ -102,7 +103,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // User email
         $useremail = validateEmail($_POST['useremail']);
         // User Password
-        $userpassword = safeCleanStr($_POST['password']);
+        $userpassword = safeCleanStr($_POST['userpassword']);
 
         // establish config connection
         $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
@@ -266,19 +267,19 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 <h2 class="form-signin-heading">Database Connection</h2>
                                 <div class="form-group required">
                                     <label>Database Server</label>
-                                    <input class="form-control" type="text" name="dbserver" maxlength="100" autofocus autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbserver" id="dbserver" maxlength="100" autofocus autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbusername">Database Username</label>
-                                    <input class="form-control" type="text" name="dbusername" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbusername" id="dbusername" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbpassword">Database Password</label>
-                                    <input class="form-control" type="text" name="dbpassword" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbpassword" id="dbpassword" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbname">Database Name</label>
-                                    <input class="form-control" type="text" name="dbname" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbname" id="dbname" maxlength="100" autocomplete="off" required>
                                 </div>
                                 <h2 class="form-signin-heading">Create an Admin user</h2>
                                 <div class="form-group required">
@@ -290,8 +291,8 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                     <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
-                                    <label for="password">Password</label>
-                                    <input class="form-control" type="text" name="password" maxlength="100" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
+                                    <label for="password">User Password</label>
+                                    <input class="form-control" type="text" name="userpassword" id="user_password" maxlength="100" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
                                 </div>
                                 <?php if ($reCaptcha_enabled == true) { ?>
                                     <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
