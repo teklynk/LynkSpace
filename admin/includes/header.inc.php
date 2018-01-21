@@ -44,7 +44,7 @@ session_start();
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/admin/js/admin.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php
-    if (!empty(recaptcha_site_key)) {
+    if (!empty(recaptcha_site_key) && defined('recaptcha')) {
     ?>
         <!-- Google Recaptcha -->
         <script type="text/javascript" language="javascript" src="//www.google.com/recaptcha/api.js"></script>
