@@ -14,6 +14,7 @@ if (!file_exists("../.htaccess")) {
 }
 
 define('inc_access', TRUE);
+define('recaptcha', TRUE);
 
 require_once('includes/header.inc.php');
 
