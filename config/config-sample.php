@@ -190,5 +190,5 @@ define('recaptcha_secret_key', "");
 define('recaptcha_site_key', "");
 
 //Other API Keys apiKeysArray[0]
-define('apiKeysArray', array());
+define('apiKeysArray', array('api1','api2','api3','api4'));
 ?>

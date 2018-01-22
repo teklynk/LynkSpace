@@ -63,7 +63,8 @@ if ($_GET['section'] == $rowSections['section']) {
 
 //Get sections from loc_id
 $sectionCount = 1;
-$custMenuStr = "<option value='1' " . $isSectionSelected . ">1</option>";
+$isSectionSelected = '';
+$custMenuStr = "<option value='1'>1</option>";
 
 while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     $sectionCount ++;
