@@ -696,15 +696,17 @@ function rrmdir($dir) {
 function getUrlContents($getUrl) {
     global $http_status;
 
-    $ch = curl_init();
-    $timeout = 10;
+    $ch = curl_init($getUrl);
+    $timeout = 30;
     curl_setopt($ch, CURLOPT_URL, $getUrl);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 400);
     $data = curl_exec($ch);
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if ($http_status != 200) {
-        echo '<div class="updates_error clearfix">HTTP status : ' . $http_status . ' : Error loading URL : ' . curl_error($ch) . '</div>';
+        echo '<div class="updates_error clearfix">HTTP status : ' . $http_status . ' : Error loading URL.</div>';
         curl_close($ch);
     }
     curl_close($ch);
@@ -740,15 +742,15 @@ function getUpdates(){
     $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
     $updatesDestination = 'upgrade/' . $getVersion . '.zip';
 
-    //echo $updatesDestination;
 }
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {
     //example: downloadFile($updatesUrl, 'upgrade/version.zip');
     $fileResource = fopen($path, 'w');
     // Get The Zip File From Server
-    $ch = curl_init();
+    $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
     curl_setopt($ch, CURLOPT_FAILONERROR, true);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -761,8 +763,8 @@ function downloadFile($url, $path) {
     curl_setopt($ch, CURLOPT_FILE, $fileResource);
     $curl_errno = curl_errno($ch);
     $page = curl_exec($ch);
-    if (!$ch || !$page || $curl_errno > 0) {
-        echo 'Error: ' . curl_error($ch) . PHP_EOL;
+    if ($curl_errno > 0) {
+        echo '<div class="updates_error clearfix">Error : ' . $curl_errno . $page . ' : Error loading URL.</div>';
         //Delete the downloaded file
         unlink($path);
         return false;
