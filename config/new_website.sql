@@ -1045,6 +1045,19 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE `login_attempts` (
+  `id` int(11) NOT NULL,
+  `ip` text NOT NULL,
+  `attempts` int(11) NOT NULL DEFAULT '0',
+  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `navigation`
 --
 

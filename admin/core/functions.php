@@ -704,7 +704,7 @@ function getUrlContents($getUrl) {
     $data = curl_exec($ch);
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if ($http_status != 200) {
-        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
+        echo '<div class="updates_error clearfix">HTTP status : ' . $http_status . ' : Error loading URL : ' . curl_error($ch) . '</div>';
         curl_close($ch);
     }
     curl_close($ch);
@@ -716,9 +716,10 @@ function checkForUpdates(){
     global $getVersion;
     global $http_status;
 
-    $updatesURL = updatesServer.'/version.txt';
-    $getVersion = getUrlContents($updatesURL);
-    $getVersion = trim($getVersion);
+    //Checks the version.txt on the remote server (github master branch)
+    $updatesURL = updatesServer . '/version.txt';
+    $getVersion = getUrlContents(trim($updatesURL));
+
     if (!isset($_SESSION['updates_available'])) {
         if ($http_status == 200) {
             if ((string)trim($getVersion) > (string)trim(ysmVersion)){
@@ -734,16 +735,16 @@ function getUpdates(){
     global $updatesRemoteFile;
     global $changeLogFile;
     global $updatesDestination;
-    global $updatesCheckerURL;
 
-    $changeLogFile = updatesServer.'/changelog'.$getVersion.'.txt';
-    $updatesRemoteFile = updatesServer.'/'.$getVersion.'.zip';
-    $updatesDestination = 'upgrade/'.$getVersion.'.zip';
-    $updatesCheckerURL = updatesServer.'/versionupdatechecker.php';
+    $changeLogFile = updatesServer . '/changelog.txt';
+    $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
+    $updatesDestination = 'upgrade/' . $getVersion . '.zip';
+
+    //echo $updatesDestination;
 }
 //Download file and save to a directory on the server
 function downloadFile($url, $path) {
-    //example: downloadFile($updatesFile, 'upgrade/version' . $getVersion . '.zip');
+    //example: downloadFile($updatesUrl, 'upgrade/version.zip');
     $fileResource = fopen($path, 'w');
     // Get The Zip File From Server
     $ch = curl_init();
@@ -760,11 +761,8 @@ function downloadFile($url, $path) {
     curl_setopt($ch, CURLOPT_FILE, $fileResource);
     $curl_errno = curl_errno($ch);
     $page = curl_exec($ch);
-    if (!$page) {
+    if (!$ch || !$page || $curl_errno > 0) {
         echo 'Error: ' . curl_error($ch) . PHP_EOL;
-    }
-    if ($curl_errno > 0) {
-        echo 'downloadFile() Error ($curl_errno): $curl_error' . PHP_EOL;
         //Delete the downloaded file
         unlink($path);
         return false;
