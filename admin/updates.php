@@ -58,7 +58,7 @@ if (isset($_SESSION['updates_available'])) {
 
 } else {
     echo "<h2>No updates available.</h2>";
-    echo "<p>You are on the current version: ".$getVersion."</p>";
+    echo "<p>You are on the current version: " . $getVersion . "</p>";
     unset($_SESSION['updates_available']);
 }
 
@@ -78,13 +78,13 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 }
 
 //MD5 Checksum - Compare Downloaded File with Remote File Checksum
-if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
-    if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
-        echo '<div class="updates_error clearfix" >MD5 checksums do not match. The downloaded file may be incomplete. Please download again.</div>';
-        //Delete the zip file
-        unlink($updatesDestination);
-    }
-}
+//if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
+//    if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
+//        echo '<div class="updates_error clearfix" >MD5 checksums do not match. The downloaded file may be incomplete. Please download again.</div>';
+//        Delete the zip file
+//        unlink($updatesDestination);
+//    }
+//}
 
 //Extract and install the zip file contents
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
@@ -100,7 +100,7 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
         sleep(1); // wait
 
         //Delete the zip file
-        unlink($updatesDestination);
+        //unlink($updatesDestination);
         //remove session variable
         unset($_SESSION['updates_available']);
     }
