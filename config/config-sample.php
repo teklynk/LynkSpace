@@ -188,9 +188,7 @@ $pageMsg = '';
 //Recaptcha API Key
 define('recaptcha_secret_key', "");
 define('recaptcha_site_key', "");
-//API Keys
-define('apiProject_key_1', "");
-define('apiProject_key_2', "");
-define('apiProject_key_3', "");
-define('apiProject_key_4', "");
+
+//Other API Keys apiKeysArray[0]
+define('apiKeysArray', array());
 ?>
