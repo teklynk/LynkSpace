@@ -162,7 +162,8 @@ $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL requires: http:// or https://
-define('updatesServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/master/");
+define('updatesServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/master");
+define('updatesDownloadServer', "https://github.com/teklynk/LynkSpace/archive");
 
 //Help URLs
 define('helpURLUser', "#");
