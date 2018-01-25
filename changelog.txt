@@ -1,3 +1,0 @@
-Version 2.4 Changes:
-
-Auto Updates and Alerts are now working using Github Repo.
