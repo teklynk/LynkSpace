@@ -1,4 +1,4 @@
-/* Global Style Variables */
+/* Global Custom Properties */
 :root {
     --main-bg-color: #fff;
     --main-navbar-bg-color: #24292e;
@@ -22,12 +22,28 @@
   padding: var(--box-padding);
 }
 */
+
 html {
     background: var(--main-bg-color);
 }
 body {
     margin-top: 100px;
 }
+:focus {
+    outline: 0;
+}
+/* Removes placeholder text on focus */
+::-webkit-input-placeholder { opacity: 1; -webkit-transition: opacity .5s; transition: opacity .5s; }  /* Chrome <=56, Safari < 10 */
+:-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 4-18 */
+::-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 19-51 */
+:-ms-input-placeholder { opacity: 1; -ms-transition: opacity .5s; transition: opacity .5s; } /* IE 10+ */
+::placeholder { opacity: 1; transition: opacity .5s; } /* Modern Browsers */
+
+*:focus::-webkit-input-placeholder { opacity: 0; } /* Chrome <=56, Safari < 10 */
+*:focus:-moz-placeholder { opacity: 0; } /* FF 4-18 */
+*:focus::-moz-placeholder { opacity: 0; } /* FF 19-50 */
+*:focus:-ms-input-placeholder { opacity: 0; } /* IE 10+ */
+*:focus::placeholder { opacity: 0; } /* Modern Browsers */
 
 div.required label:not(span):before, td.required:before {
     content: '* ';
