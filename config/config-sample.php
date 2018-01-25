@@ -50,7 +50,7 @@ if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false) {
 //CMS branding, title, description
 define('cmsTitle', 'LynkSpace');
 define('cmsDescription', 'small, simple, cms');
-define('cmsWebsite', 'http://www.lynkspace.com');
+define('cmsWebsite', 'https://github.com/teklynk/LynkSpace');
 
 //Build the server url string
 define('serverUrlStr', $serverProtocol . $serverHostname . $serverPort . $subDirectory);
@@ -166,8 +166,8 @@ define('updatesServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/mas
 define('updatesDownloadServer', "https://github.com/teklynk/LynkSpace/archive");
 
 //Help URLs
-define('helpURLUser', "#");
-define('helpURLAdmin', "#");
+define('helpURLUser', "https://github.com/teklynk/LynkSpace/wiki");
+define('helpURLAdmin', "https://github.com/teklynk/LynkSpace/wiki");
 
 //html5 pattern property for input type=email
 define('emailValidationPattern', "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}");
