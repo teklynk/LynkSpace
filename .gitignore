@@ -12,3 +12,5 @@
 /.htaccess
 /admin/backups/*
 /admin/upgrade/*
+/robots.txt
+/sitemap.xml
