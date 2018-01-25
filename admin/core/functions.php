@@ -738,7 +738,7 @@ function getUpdates(){
     global $changeLogFile;
     global $updatesDestination;
 
-    $changeLogFile = updatesServer . '/changelog.txt';
+    $changeLogFile = updatesServer . 'changelog.txt';
     $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
     $updatesDestination = 'upgrade/' . $getVersion . '.zip';
 

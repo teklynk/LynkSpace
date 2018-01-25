@@ -39,13 +39,13 @@ if (isset($_SESSION['updates_available'])) {
 
     //Check that files are writeable
     if (!is_writeable('../version.txt')) {
-        echo "<div class='alert alert-danger clearfix'><span>version.txt is not writable. Check file permissions.<br/>Files and folders will need write access in order to complete the upgrade.</span></div>";
+        echo "<div class='alert alert-danger clearfix'><span><b>version.txt is not writable.</b> Check file permissions.<br/>Files and folders will need write access in order to complete the upgrade.</span></div>";
     }
 
     //Message
-    echo "<div class='alert alert-info clearfix'><strong>Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
+    echo "<div class='alert alert-warning clearfix'><strong><i class='fa fa-exclamation' aria-hidden='true'></i>  Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
     echo "<h2>An updated version is available: ".$getVersion."</h2>";
-    echo "<button type='button' class='btn btn-link' onclick=\"showMyModal('" . safeCleanStr($getVersion) . "', '" . safeCleanStr($changeLogFile) . "')\">Change log</button>";
+    echo "<a href='" . $changeLogFile . "' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Change log</a>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";
 
     if (!file_exists($updatesDestination)) {
