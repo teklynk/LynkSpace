@@ -23,7 +23,7 @@
 }
 */
 html {
-    background-color: var(--main-bg-color);
+    background: var(--main-bg-color);
 }
 body {
     margin-top: 100px;
@@ -344,9 +344,9 @@ small {
 }
 .navbar-brand {
     padding-top: 16px !important;
-    padding-bottom: 0px !important;
+    padding-bottom: 0 !important;
     padding-left: 20px !important;
-    padding-right: 0px !important;
+    padding-right: 0 !important;
 }
 .navbar-brand>img {
     display: none;
@@ -384,7 +384,7 @@ small {
 
 .breadcrumb {
     padding: 8px 15px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: -8px;
     margin-left: -24px;
     margin-right: -24px;
@@ -408,7 +408,7 @@ dl, ol, ul {
     outline: none;
 }
 .navbar-inverse {
-    background-color: var(--main-navbar-bg-color);
+    background: var(--main-navbar-bg-color);
     border-color: var(--main-border-color);
 }
 .navbar-inverse .navbar-nav>li>a {
@@ -492,7 +492,7 @@ dl, ol, ul {
         overflow-y: auto;
         overflow-x: hidden;
         transition: all 0.3s;
-        background-color: var(--main-sidebar-bg-color);
+        background: var(--main-sidebar-bg-color);
         padding-bottom: 40px;
     }
     .side-nav > li > a {
@@ -549,8 +549,8 @@ dl, ol, ul {
 @media screen and (max-height: 678px) {
     .side-nav {
         height: 89%;
-        margin-bottom: 0px;
-        bottom: 0px;
-        padding-bottom: 0px;
+        margin-bottom: 0;
+        bottom: 0;
+        padding-bottom: 0;
     }
 }
