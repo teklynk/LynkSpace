@@ -1,11 +1,13 @@
 /* Global Style Variables */
 :root {
     --main-bg-color: #fff;
-    --main-navbar-bg-color: #222;
-    --main-navbar-hover-color: #000;
+    --main-navbar-bg-color: #24292e;
+    --main-navbar-hover-color: #2f363d;
+    --main-navbar-active-color: #2f363d;
     --main-navbar-font-color: #ccc;
-    --main-sidebar-bg-color: #222;
-    --main-sidebar-hover-color: #000;
+    --main-sidebar-bg-color: #24292e;
+    --main-sidebar-hover-color: #2f363d;
+    --main-sidebar-active-color: #080808;
     --main-sidebar-font-color: #f7f7f7;
     --main-border-color: #080808;
 }
@@ -89,6 +91,9 @@ div.required label:not(span):before, td.required:before {
 
 .top-nav>.open>.dropdown-menu>li>a {
     white-space: normal;
+}
+.navbar-inverse .navbar-nav>.active>a {
+    background-color: var(--main-navbar-active-color);
 }
 
 ul.message-dropdown {
