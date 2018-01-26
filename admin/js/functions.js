@@ -522,16 +522,6 @@ $(document).ready(function () {
             $('.hottitles_defaults_checkbox').attr('disabled', false);
         }, 500);
     });
-    $('.aboutus_defaults_checkbox').change(function () {
-        $.get('ajax/update_aboutusdefaults.php?update=true', {
-            id: this.id,
-            checked: this.checked
-        });
-        $('.aboutus_defaults_checkbox').attr('disabled', true);
-        setTimeout(function() {
-            $('.aboutus_defaults_checkbox').attr('disabled', false);
-        }, 500);
-    });
     $('.featured_defaults_checkbox').change(function () {
         $.get('ajax/update_featureddefaults.php?update=true', {
             id: this.id,

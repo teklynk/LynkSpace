@@ -9,10 +9,6 @@
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/about.php</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
 		<loc>//lynkspace.local/staff.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>

@@ -87,31 +87,6 @@ function getPage($loc){
     }
 }
 
-function getAbout($loc){
-    global $aboutTitle;
-    global $aboutContent;
-    global $imagePath;
-    global $db_conn;
-
-    $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, use_defaults, loc_id FROM aboutus WHERE loc_id=" . $loc . " ");
-    $rowAbout = mysqli_fetch_array($sqlAbout, MYSQLI_ASSOC);
-
-    if ($rowAbout['use_defaults'] == "true" || $rowAbout['use_defaults'] == "" || $rowAbout['use_defaults'] == NULL) {
-        $sqlAbout = mysqli_query($db_conn, "SELECT heading, content, loc_id FROM aboutus WHERE loc_id=1");
-        $rowAbout = mysqli_fetch_array($sqlAbout, MYSQLI_ASSOC);
-
-        $imagePath = 1;
-    }
-
-    if (!empty($rowAbout['heading'])){
-        $aboutTitle = $rowAbout['heading'];
-    }
-
-    if (!empty($rowAbout['content'])){
-        $aboutContent = $rowAbout['content'];
-    }
-}
-
 function getContactInfo($loc){
     global $contactHeading;
     global $contactBlurb;
@@ -1330,9 +1305,6 @@ function getGoogleTranslateCode($languages){
 if (basename($_SERVER['PHP_SELF']) == "page.php"){
     getPage($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $pageTitle;
-} elseif (basename($_SERVER['PHP_SELF']) == "about.php"){
-    getAbout($_GET['loc_id']);
-    $theTitle = $setupTitle . " - " . $aboutTitle;
 } elseif (basename($_SERVER['PHP_SELF']) == "contact.php"){
     getContactInfo($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $contactHeading;

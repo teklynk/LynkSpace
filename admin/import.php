@@ -80,10 +80,6 @@ if ($_POST['save_main']) {
                 $contactInsert = "INSERT INTO contactus (email, sendtoemail, address, city, state, zipcode, phone, hours, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[8])) . "', '" . safeCleanStr(addslashes($locData[3])) . "', '" . safeCleanStr(addslashes($locData[4])) . "', '" . safeCleanStr(addslashes($locData[5])) . "', '" . safeCleanStr(addslashes($locData[6])) . "', '" . safeCleanStr(addslashes($locData[7])) . "', '" . safeCleanStr(addslashes($locData[9])) . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $contactInsert);
 
-                //Insert About defaults
-                $aboutInsert = "INSERT INTO aboutus (heading, use_defaults, author_name, datetime, loc_id) VALUES ('About Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
-                mysqli_query($db_conn, $aboutInsert);
-
                 //Insert Featured defaults
                 $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('" . safeCleanStr(addslashes($locData[0])) . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $locIdCount . ")";
                 mysqli_query($db_conn, $featuredInsert);

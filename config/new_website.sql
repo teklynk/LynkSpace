@@ -11,22 +11,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aboutus`
---
-
-CREATE TABLE `aboutus` (
-  `id` int(11) NOT NULL,
-  `heading` text NOT NULL,
-  `content` text NOT NULL,
-  `use_defaults` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text NOT NULL,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `category_customers`
 --
 
@@ -1052,7 +1036,7 @@ CREATE TABLE `login_attempts` (
   `id` int(11) NOT NULL,
   `ip` text NOT NULL,
   `attempts` int(11) NOT NULL DEFAULT '0',
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1104,30 +1088,6 @@ CREATE TABLE `phinxlog` (
   `end_time` timestamp NULL DEFAULT NULL,
   `breakpoint` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `phinxlog`
---
-
-INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
-  (20170619190706, 'NavAddColumnActive', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
-  (20170620140024, 'NavCatRenameNameColumn', '2017-06-20 18:56:40', '2017-06-20 18:56:40', 0),
-  (20170623195513, 'AboutRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:44', 0),
-  (20170623201643, 'FeaturedRemoveImageAlignColumns', '2017-06-23 21:07:44', '2017-06-23 21:07:45', 0),
-  (20170623202903, 'PagesRemoveImageAlignColumns', '2017-06-23 21:07:45', '2017-06-23 21:07:45', 0),
-  (20170627150736, 'ConfigTimeOutValues', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
-  (20170627181837, 'UserPasswordResetHash', '2017-06-28 15:38:06', '2017-06-28 15:38:06', 0),
-  (20170718181748, 'ChangeCharSetUtf8', '2017-07-18 18:42:22', '2017-07-18 18:42:22', 0),
-  (20170721162929, 'SharedUploadsTable', '2017-07-25 13:39:38', '2017-07-25 13:39:38', 0),
-  (20170725174836, 'UseDefaultLogoColumn', '2017-07-26 12:52:34', '2017-07-26 12:52:34', 0),
-  (20170726203814, 'PrependImagePathToImages', '2017-07-26 21:26:18', '2017-07-26 21:26:18', 0),
-  (20170728174905, 'ThemeOptionsTable', '2017-07-31 13:41:03', '2017-07-31 13:41:03', 0),
-  (20170801163004, 'ColumnThemeUseDefaults', '2017-08-01 17:15:55', '2017-08-01 17:15:55', 0),
-  (20170803183909, 'AddForiegnKeySectionCustomersLocId', '2017-08-03 19:42:56', '2017-08-03 19:42:56', 0),
-  (20170807235741, 'Ls2SearchLabels', '2017-08-08 13:11:38', '2017-08-08 13:11:38', 0),
-  (20170808131502, 'SearchLabelValues', '2017-08-08 13:17:32', '2017-08-08 13:17:32', 0),
-  (20170808131817, 'SearchPlaceholderColumnsAndValues', '2017-08-08 13:23:45', '2017-08-08 13:23:45', 0),
-  (20170808143011, 'EventsAlertsTable', '2017-08-08 16:18:40', '2017-08-08 16:18:40', 0);
 
 -- --------------------------------------------------------
 
@@ -1328,13 +1288,6 @@ ALTER TABLE `theme_options`
   ADD KEY `theme_options_loc_id_fk` (`loc_id`);
 
 --
--- Indexes for table `aboutus`
---
-ALTER TABLE `aboutus`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aboutus_loc_id_fk` (`loc_id`);
-
---
 -- Indexes for table `category_customers`
 --
 ALTER TABLE `category_customers`
@@ -1497,11 +1450,6 @@ ALTER TABLE `theme_options`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `aboutus`
---
-ALTER TABLE `aboutus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `category_customers`
 --
 ALTER TABLE `category_customers`
@@ -1609,12 +1557,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `aboutus`
---
-ALTER TABLE `aboutus`
-  ADD CONSTRAINT `aboutus_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `category_customers`
