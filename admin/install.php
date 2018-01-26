@@ -8,6 +8,10 @@ if (!file_exists("../config/config.php")) {
 if (!file_exists("../config/dbconn.php")) {
     copy("../config/dbconn-sample.php", "../config/dbconn.php");
 }
+// Copy blowfishsalt-sample.php to blowfishsalt.php
+if (!file_exists("../config/blowfishsalt.php")) {
+    copy("../config/blowfishsalt-sample.php", "../config/blowfishsalt.php");
+}
 // Copy htaccess-sample to .htaccess
 if (!file_exists("../.htaccess")) {
     copy("../.htaccess-sample", "../.htaccess");
