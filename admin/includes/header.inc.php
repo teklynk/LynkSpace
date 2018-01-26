@@ -249,9 +249,6 @@ session_start();
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'page.php'){echo "class='active'";}?>>
                     <a href="page.php?<?php echo $setLocId; ?>" title="Pages"><i class="fa fa-fw fa-file-text"></i> Pages</a>
                 </li>
-                <li <?php if (basename($_SERVER['PHP_SELF']) == 'aboutus.php'){echo "class='active'";}?>>
-                    <a href="aboutus.php?<?php echo $setLocId; ?>" title="About Us"><i class="fa fa-fw fa-building"></i> About</a>
-                </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'contactus.php'){echo "class='active'";}?>>
                     <a href="contactus.php?<?php echo $setLocId; ?>" title="Contact Us"><i class="fa fa-fw fa-map-marker"></i> Contact</a>
                 </li>

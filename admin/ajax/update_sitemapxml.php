@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         $sitemapFileLoc = "../../sitemap.xml";
 
-        $otherPages = array("index.php", "about.php", "staff.php", "services.php", "contact.php", "databases.php");
+        $otherPages = array("index.php", "staff.php", "services.php", "contact.php", "databases.php");
 
         if (!file_exists($sitemapFileLoc)) {
             die("$sitemapFileLoc does not exist" . PHP_EOL);
