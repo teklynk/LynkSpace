@@ -719,7 +719,7 @@ function checkForUpdates(){
     global $http_status;
 
     //Checks the version.txt on the remote server (github master branch)
-    $updatesURL = updatesServer . '/version.txt';
+    $updatesURL = updatesVersionFile;
     $getVersion = getUrlContents(trim($updatesURL));
 
     if (!isset($_SESSION['updates_available'])) {
@@ -738,7 +738,7 @@ function getUpdates(){
     global $changeLogFile;
     global $updatesDestination;
 
-    $changeLogFile = updatesServer . 'CHANGELOG.md';
+    $changeLogFile = updatesChangeLogFile;
     $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
     $updatesDestination = 'upgrade/' . $getVersion . '.zip';
 
@@ -813,13 +813,13 @@ function zipFile($source, $destination, $flag = '') {
     return $zip->close();
 }
 //Extract zip files/folder to specified destination
-function extractZip($filename, $dest){
+function extractZip($filename, $dest, $ignoreListArr){
     if (is_dir($dest)) {
         // Load up the zip
         $zip = new ZipArchive;
         $unzip = $zip->open($filename);
 
-        $ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', 'robots.txt', 'sitemap.xml');
+        //$ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', 'robots.txt', 'sitemap.xml');
 
         if ($unzip === true) {
             for ($i=0; $i<$zip->numFiles; $i++) {
