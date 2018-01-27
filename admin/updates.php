@@ -45,15 +45,24 @@ if (isset($_SESSION['updates_available'])) {
     //Message
     echo "<div class='alert alert-warning clearfix'><strong><i class='fa fa-exclamation' aria-hidden='true'></i>  Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
     echo "<h2>An updated version is available: ".$getVersion."</h2>";
-    echo "<a href='" . $changeLogFile . "' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Change log</a>";
+    echo "<a href='" . updatesChangeLogFile . "' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Change log</a>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";
 
     if (!file_exists($updatesDestination)) {
         $upgradeOption = 'download';
-        echo "<button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Download Now</button>";
+        echo "<div><button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Auto Update</button></div>";
+        echo "<div><a href='" . updatesDownloadServer . "/" . $getVersion . ".zip' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Manually Download File</a></div>";
     } else {
         $upgradeOption = 'install';
-        echo "<button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button>";
+        echo "<div><button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button></div>";
+        echo "<div><a href='updates.php?delete=true' class='btn btn-link' role='button' aria-pressed='true'>Remove (admin/upgrade/" . $getVersion . ".zip)</a></div>";
+        echo "<p>A backup will be automatically created in (admin/backups)</p>";
+    }
+
+    if ($_GET['delete'] == 'true'){
+        unlink($updatesDestination);
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
 } else {
@@ -67,7 +76,7 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
     if (!file_exists('upgrade')) {
         mkdir('upgrade', 0755, true);
     } else {
-        echo '<div class="alert alert-danger clearfix" >Could not create Upgrade directory.</div>';
+        echo '<div class="alert alert-danger clearfix" ><b>Could not create Upgrade directory.</b> Check file permissions.</div>';
     }
 
     sleep(1); // wait
@@ -77,20 +86,11 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
     }
 }
 
-//MD5 Checksum - Compare Downloaded File with Remote File Checksum
-//if ($upgradeOption == 'install' && file_exists($updatesDestination)) {
-//    if (md5_file($updatesDestination) !== getUrlContents($updatesCheckerURL)) {
-//        echo '<div class="updates_error clearfix" >MD5 checksums do not match. The downloaded file may be incomplete. Please download again.</div>';
-//        Delete the zip file
-//        unlink($updatesDestination);
-//    }
-//}
-
 //Extract and install the zip file contents
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
 
-        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/'.$subDirectory.'/');
+        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/'.$subDirectory.'/', array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', '.htaccess', 'robots.txt', 'sitemap.xml'));
 
         sleep(1); // wait
 
@@ -105,9 +105,6 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
         unset($_SESSION['updates_available']);
     }
 }
-
-//Modal preview box
-showModalPreview("webpageDialog");
 
 require_once('includes/footer.inc.php');
 ?>
