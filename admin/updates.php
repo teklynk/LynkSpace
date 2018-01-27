@@ -59,8 +59,11 @@ if (isset($_SESSION['updates_available'])) {
         echo "<p>A backup will be automatically created in (admin/backups)</p>";
     }
 
-    if ($_GET['delete'] == 'true'){
+    if ($_GET['delete'] == 'true') {
+
+        //Delete the zip file
         unlink($updatesDestination);
+
         header("updates.php?loc_id=" . $_GET['loc_id'] . "");
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
@@ -73,6 +76,7 @@ if (isset($_SESSION['updates_available'])) {
 
 //Download the updated zip file from a remote server
 if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
+
     if (!file_exists('upgrade')) {
         mkdir('upgrade', 0755, true);
     } else {
@@ -90,17 +94,23 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
 
+        //TODO: Add database backups using something like: https://davidwalsh.name/backup-mysql-database-php
+
+        //Backup files into admin/backups/currentDate.zip
+        zipFile(__DIR__ . "/../", __DIR__ . "/backups/" . date('Y-m-d-H-i-s') . ".zip");
+
+        //Extract/Un-zip the downloaded update from admin/upgrade
         extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/'.$subDirectory.'/', array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', '.htaccess', 'robots.txt', 'sitemap.xml'));
 
-        sleep(1); // wait
+        sleep(2); // wait
 
         //Run Phinx migrations
         phinxMigration('migrate', 'development');
 
-        sleep(1); // wait
+        sleep(2); // wait
 
-        //Delete the zip file
-        //unlink($updatesDestination);
+        //Delete the update zip file
+        unlink($updatesDestination);
         //remove session variable
         unset($_SESSION['updates_available']);
     }
