@@ -697,6 +697,9 @@ function databaseDumpBackup($dest){
     $sql = "SHOW TABLES FROM " . db_name . ";";
     $result = mysqli_query($db_conn, $sql);
 
+    //Turn off foreign key constraints
+    mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=0');
+
     while ($row = mysqli_fetch_row($result)) {
 
         $backup_file = $dest . $row[0] . '-' . date("Y-m-d-H-i-s") . '.csv';
@@ -708,9 +711,9 @@ function databaseDumpBackup($dest){
 
     }
 
+    //Turn on foreign key constraints
+    mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=1');
     mysqli_free_result($result);
-
-    zipFile();
 
 }
 

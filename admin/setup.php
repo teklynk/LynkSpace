@@ -233,20 +233,6 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     </div>
                                 </div>
                             </div>
-
-                                <hr/>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group" id="site_options">
-                                            <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='import.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
-                                                <i class='fa fa-fw fa-upload'></i> Import CSV
-                                            </button>
-                                            <small>
-                                                &nbsp;&nbsp;Bulk add locations and web page content.
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
                                 <?php
 
                         }
