@@ -690,20 +690,27 @@ function recurse_delete($src){
 }
 
 //Database Dump Backup
-function databaseDumpBackup($dest, $table_name){
+function databaseDumpBackup($dest){
 
-    global $db_name;
     global $db_conn;
 
-    $backup_file = $dest . $table_name . '-' . date("Y-m-d-H-i-s") . '.sql';
-    $sqlDump = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
+    $sql = "SHOW TABLES FROM " . db_name . ";";
+    $result = mysqli_query($db_conn, $sql);
 
-    mysqli_select_db($db_conn, $db_name);
-    $retval = mysqli_query($db_conn, $sqlDump);
+    while ($row = mysqli_fetch_row($result)) {
 
-    if(!$retval ) {
-        die('Could not make a database backup: ' . mysqli_error($db_conn));
+        $backup_file = $dest . $row[0] . '-' . date("Y-m-d-H-i-s") . '.csv';
+        mysqli_query($db_conn, "SELECT * INTO OUTFILE '" . $backup_file . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM " . $row[0] . ";");
+
+        if (mysqli_error($db_conn)) {
+            die('Could not make a database backup: ' . mysqli_error($db_conn));
+        }
+
     }
+
+    mysqli_free_result($result);
+
+    zipFile();
 
 }
 
@@ -805,7 +812,7 @@ function downloadFile($url, $path) {
     return true;
 }
 // compress all files in the source directory to destination directory
-function zipFile($src, $dest, $ignoreListArr) {
+function zipFile($src, $dest) {
     if (!extension_loaded('zip') || !file_exists($src)) {
         return false;
     }
@@ -834,16 +841,17 @@ function zipFile($src, $dest, $ignoreListArr) {
             if (strpos($flag.$file,$src) !== false) { // this will add only the folder we want to add in zip
 
                 if (is_dir($file) === true) {
-                    if (!in_array($file, $ignoreListArr)) {
-                        $zip->addEmptyDir(str_replace($src . '/', '', $flag.$file . '/'));
-                    }
+
+                    $zip->addEmptyDir(str_replace($src . '/', '', $flag.$file . '/'));
+
                 } elseif (is_file($file) === true) {
-                    if (!in_array($file, $ignoreListArr)) {
-                        $zip->addFromString(str_replace($src . '/', '', $flag . $file), file_get_contents($file));
-                    }
+
+                    $zip->addFromString(str_replace($src . '/', '', $flag . $file), file_get_contents($file));
+
                 }
             }
         }
+
     } elseif (is_file($src) === true) {
         $zip->addFromString($flag.basename($src), file_get_contents($src));
     }
