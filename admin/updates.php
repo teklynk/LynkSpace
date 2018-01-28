@@ -21,21 +21,22 @@ $_SESSION['file_referrer'] = 'updates.php';
 
 <?php
 
-if ($errorMsg !="") {
-    echo $errorMsg;
-} else {
-    echo $pageMsg;
-}
-if ($deleteMsg != "") {
-    echo $deleteMsg;
-}
-
 $upgradeOption = '';
 
 //Check for updates. Get global variables.
 getUpdates();
 
 if (isset($_SESSION['updates_available'])) {
+
+    //Create the backup folder
+    if (!file_exists(__DIR__ . '/backups/')) {
+        @mkdir(__DIR__ . '/backups/', 0755);
+    }
+
+    //Check that backups folder is writable.
+    if (!is_writeable(__DIR__ . '/backups/')){
+        $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";
+    }
 
     //Check that files are writeable
     if (!is_writeable('../version.txt')) {
@@ -126,17 +127,12 @@ if (isset($_SESSION['updates_available'])) {
         //Removes old backups before creating a new backup
         recurse_delete(__DIR__ . "/backups/*.zip");
 
-        recurse_delete(__DIR__ . "/backups/*.csv");
-
-        sleep(1); // wait
-
-        //Generate a SQL dump file backup
-        databaseDumpBackup(__DIR__ . "/backups/");
-
         sleep(1); // wait
 
         //Backup files into admin/backups/currentDate.zip
         zipFile(__DIR__ . "/../", __DIR__ . "/backups/" . cmsTitle . "-" . date('Y-m-d-H-i-s') . ".zip");
+
+        sleep(1); // wait
 
         header("updates.php?loc_id=" . $_GET['loc_id'] . "");
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
