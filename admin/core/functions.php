@@ -387,7 +387,33 @@ function getPages($loc) {
     $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>".$extraPages;
     return $pagesList;
 }
+//List files inside a directory/folder
+function getDirContents($src) {
 
+    if ($handle = opendir($src)) {
+
+        echo "<ul>";
+
+        while (false !== ($file = readdir($handle))) {
+            if ('.' === $file) continue;
+            if ('..' === $file) continue;
+            if ($file==="Thumbs.db") continue;
+            if ($file===".DS_Store") continue;
+            if ($file==="index.html") continue;
+
+            echo "<li>" . $file . "</li>";
+        }
+
+        closedir($handle);
+
+        echo "</ul>";
+
+        return true;
+    } else {
+        return false;
+    }
+
+}
 //Images folder drop down list
 function getImageDropdownList($loc, $imageDir, $image_selected) {
     global $db_conn;
@@ -658,6 +684,11 @@ function recurse_copy($src, $dst) {
     }
     closedir($dir);
 }
+//Deletes files inside a directory ($src)
+function recurse_delete($src){
+    array_map('unlink', glob($src));
+}
+
 //Database Dump Backup
 function databaseDumpBackup($dest, $table_name){
 
@@ -675,6 +706,7 @@ function databaseDumpBackup($dest, $table_name){
     }
 
 }
+
 //Remove Directory
 function rrmdir($dir) {
     if (is_dir($dir)) {
@@ -773,43 +805,50 @@ function downloadFile($url, $path) {
     return true;
 }
 // compress all files in the source directory to destination directory
-function zipFile($source, $destination, $flag = '') {
-    if (!extension_loaded('zip') || !file_exists($source)) {
+function zipFile($src, $dest, $ignoreListArr) {
+    if (!extension_loaded('zip') || !file_exists($src)) {
         return false;
     }
+
+    $flag = '';
 
     $zip = new ZipArchive();
 
-    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+    if (!$zip->open($dest, ZIPARCHIVE::CREATE)) {
         return false;
     }
 
-    $source = str_replace('\\', '/', realpath($source));
+    $src = str_replace('\\', '/', realpath($src));
 
     if ($flag) {
-        $flag = basename($source) . '/';
+        $flag = basename($src) . '/';
     }
 
-    if (is_dir($source) === true) {
-        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+    if (is_dir($src) === true) {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($src), RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($files as $file) {
 
             $file = str_replace('\\', '/', realpath($file));
 
-            if (strpos($flag.$file,$source) !== false) { // this will add only the folder we want to add in zip
+            if (strpos($flag.$file,$src) !== false) { // this will add only the folder we want to add in zip
 
                 if (is_dir($file) === true) {
-                    $zip->addEmptyDir(str_replace($source . '/', '', $flag.$file . '/'));
+                    if (!in_array($file, $ignoreListArr)) {
+                        $zip->addEmptyDir(str_replace($src . '/', '', $flag.$file . '/'));
+                    }
                 } elseif (is_file($file) === true) {
-                    $zip->addFromString(str_replace($source . '/', '', $flag.$file), file_get_contents($file));
+                    if (!in_array($file, $ignoreListArr)) {
+                        $zip->addFromString(str_replace($src . '/', '', $flag . $file), file_get_contents($file));
+                    }
                 }
             }
         }
-    } elseif (is_file($source) === true) {
-        $zip->addFromString($flag.basename($source), file_get_contents($source));
+    } elseif (is_file($src) === true) {
+        $zip->addFromString($flag.basename($src), file_get_contents($src));
     }
 
+    sleep(3);
     return $zip->close();
 }
 //Extract zip files/folder to specified destination

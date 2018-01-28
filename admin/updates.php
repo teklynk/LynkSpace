@@ -45,24 +45,42 @@ if (isset($_SESSION['updates_available'])) {
     //Message
     echo "<div class='alert alert-warning clearfix'><strong><i class='fa fa-exclamation' aria-hidden='true'></i>  Important:</strong>&nbsp;Before updating, please back up your database and files.</div>";
     echo "<h2>An updated version is available: ".$getVersion."</h2>";
-    echo "<a href='" . updatesChangeLogFile . "' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Change log</a>";
     echo "<p>You can update to version ".$getVersion." automatically:</p>";
 
     if (!file_exists($updatesDestination)) {
         $upgradeOption = 'download';
-        echo "<div><button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Auto Update</button></div>";
-        echo "<div><a href='" . updatesDownloadServer . "/" . $getVersion . ".zip' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Manually Download File</a></div>";
+        echo "<div><button type='button' class='btn btn-primary update' id='update_download' onclick=\"window.location.href='updates.php?download=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-download'></i> Auto Update</button>
+                <a href='" . updatesDownloadServer . "/" . $getVersion . ".zip' target='_blank' class='btn btn-link' role='button' aria-pressed='true'>Manually Download File</a></div>";
     } else {
         $upgradeOption = 'install';
         echo "<div><button type='button' class='btn btn-primary update' id='update_install' onclick=\"window.location.href='updates.php?install=true&version=" . $getVersion . "'\"><i class='fa fa-fw fa-cloud-upload'></i> Install Now</button></div>";
-        echo "<div><a href='updates.php?delete=true' class='btn btn-link' role='button' aria-pressed='true'>Remove (admin/upgrade/" . $getVersion . ".zip)</a></div>";
-        echo "<p>A backup will be automatically created in (admin/backups)</p>";
+        echo "<div><a href='updates.php?delete=true' class='btn btn-link' role='button' aria-pressed='true'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i> Remove " . $getVersion . ".zip</a></div>";
     }
+
+    echo "<hr/>";
+    echo "<div><a href='" . updatesChangeLogFile . "' target='_blank' class='btn btn-link' role='button' aria-pressed='true'><i class=\"fa fa-code-fork\" aria-hidden=\"true\"></i> Change log</a></div>";
+    echo "<div><a href='updates.php?backup=true' class='btn btn-link' role='button' aria-pressed='true'><i class='fa fa-file-archive-o' aria-hidden='true'></i> Backup site now </a></div>";
+    echo "<div><small><b>Last Backup (admin/backups)</b></small></div>";
+    echo "<div><small>";
+    getDirContents(__DIR__ . "/backups/");
+    echo "</small></div>";
 
     if ($_GET['delete'] == 'true') {
 
         //Delete the zip file
         unlink($updatesDestination);
+
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+    }
+
+    //Create a backup zip file
+    if ($_GET['backup'] == 'true') {
+        //TODO: generate a SQL dump file backup
+        //Removes old backups before creating a new backup
+        recurse_delete(__DIR__ . "/backups/*.zip");
+        //Backup files into admin/backups/currentDate.zip
+        zipFile(__DIR__ . "/../", __DIR__ . "/backups/" . date('Y-m-d-H-i-s') . ".zip", array("backups", "upgrade", "logs"));
 
         header("updates.php?loc_id=" . $_GET['loc_id'] . "");
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -83,7 +101,7 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
         echo '<div class="alert alert-danger clearfix" ><b>Could not create Upgrade directory.</b> Check file permissions.</div>';
     }
 
-    sleep(1); // wait
+    sleep(2); // wait
 
     if (!file_exists($updatesDestination)) {
         downloadFile($updatesRemoteFile, $updatesDestination);
@@ -94,13 +112,8 @@ if ($_GET['download'] == 'true' && $upgradeOption == 'download') {
 if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($updatesDestination)) {
     if (file_exists($updatesDestination)) {
 
-        //TODO: Add database backups using something like: https://davidwalsh.name/backup-mysql-database-php
-
-        //Backup files into admin/backups/currentDate.zip
-        zipFile(__DIR__ . "/../", __DIR__ . "/backups/" . date('Y-m-d-H-i-s') . ".zip");
-
         //Extract/Un-zip the downloaded update from admin/upgrade
-        extractZip($updatesDestination, $_SERVER['DOCUMENT_ROOT'].'/'.$subDirectory.'/', array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', '.htaccess', 'robots.txt', 'sitemap.xml'));
+        extractZip(__DIR__ . "/" . $updatesDestination, __DIR__ . "/../", array("updates.php", "custom-style.css", "Thumbs.db", ".DS_Store", "dbconn.php", "blowfishsalt.php", ".htaccess", "robots.txt", "sitemap.xml"));
 
         sleep(2); // wait
 
@@ -113,6 +126,8 @@ if ($_GET['install'] == 'true' && $upgradeOption == 'install' && file_exists($up
         unlink($updatesDestination);
         //remove session variable
         unset($_SESSION['updates_available']);
+    } else {
+        echo $updatesDestination . "  - does not exist.";
     }
 }
 
