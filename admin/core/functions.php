@@ -35,27 +35,27 @@ function phinxMigration($phinxCommand, $environment){
     }
 }
 
-function loginAttempt($value) {
+function loginAttempts($userIp, $maxAttempts) {
     global $db_conn;
 
-    $sqlLoginAttempt = mysqli_query($db_conn, "SELECT * FROM login_attempts WHERE ip='$value' ");
+    $sqlLoginAttempt = mysqli_query($db_conn, "SELECT * FROM login_attempts WHERE ip='" . $userIp . "';");
     $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt, MYSQLI_ASSOC);
 
     if ($rowLoginAttempt) {
 
-        $attempts = $rowLoginAttempt["attempts"]+1;
+        $attempts = $rowLoginAttempt['attempts'] + 1;
 
-        if ($attempts==3) {
-            $sql = "UPDATE login_attempts SET attempts=".$attempts.", lastlogin=NOW() WHERE ip='$value' ";
-            $result = mysqli_query($db_conn, $sql);
+        if ($attempts == $maxAttempts) {
+            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
+            $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         } else {
-            $sql = "UPDATE login_attempts SET attempts=".$attempts." WHERE ip='$value'";
-            $result = mysqli_query($db_conn, $sql);
+            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . " WHERE ip='" . $userIp . "';";
+            $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         }
 
     } else {
-        $sql = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '$value', NOW())";
-        $result = mysqli_query($db_conn, $sql);
+        $sqlLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW())";
+        $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
     }
 }
 

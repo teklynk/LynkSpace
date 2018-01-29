@@ -18,9 +18,9 @@ class AttemptsTable extends AbstractMigration
     }
 
     public function down(){
-        $exists = $this->hasTable('attempts');
+        $exists = $this->hasTable('login_attempts');
         if ($exists) {
-            $table = $this->table('attempts');
+            $table = $this->table('login_attempts');
             $table->drop();
         }
     }
