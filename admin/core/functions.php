@@ -376,7 +376,7 @@ function getPages($loc) {
     global $extraPages; //from config.php
     global $db_conn;
 
-    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$loc." ORDER BY title ASC");
+    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$loc." ORDER BY title ASC;");
     while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
         $serviceLinkId=$rowServicesLink['id'];
         $serviceLinkTitle=$rowServicesLink['title'];
