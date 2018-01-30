@@ -38,8 +38,20 @@ function phinxMigration($phinxCommand, $environment){
 function loginAttempts($userIp, $maxAttempts) {
     global $db_conn;
 
-    $sqlLoginAttempt = mysqli_query($db_conn, "SELECT * FROM login_attempts WHERE ip='" . $userIp . "';");
+    $sqlLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
     $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt, MYSQLI_ASSOC);
+
+    if ($userIp == $rowLoginAttempt['ip'] && strtotime(date('Y-m-d H:i:s')) >= strtotime($rowLoginAttempt['datetime'])) {
+        //echo $rowLoginAttempt['datetime'] . date('Y-m-d H:i:s');
+        $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
+        $currentTime = strtotime(date('Y-m-d H:i:s'));
+
+        if ($currentTime - $loginAttemptTime >= 1800) {
+            echo "Yay! It has been 30 minutes!";
+        } else {
+            echo "Wait! Its not been 30 minutes";
+        }
+    }
 
     if ($rowLoginAttempt) {
 
@@ -49,12 +61,14 @@ function loginAttempts($userIp, $maxAttempts) {
             $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
             $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         } else {
-            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . " WHERE ip='" . $userIp . "';";
+            //echo "max attempts reached";
+            //die('Direct access is not allowed.');
+            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
             $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         }
 
     } else {
-        $sqlLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW())";
+        $sqlLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW());";
         $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
     }
 }
