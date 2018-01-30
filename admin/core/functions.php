@@ -35,7 +35,7 @@ function phinxMigration($phinxCommand, $environment){
     }
 }
 
-function loginAttempts($userIp, $maxAttempts) {
+function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
     global $db_conn;
 
     $sqlLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
@@ -46,10 +46,10 @@ function loginAttempts($userIp, $maxAttempts) {
         $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
         $currentTime = strtotime(date('Y-m-d H:i:s'));
 
-        if ($currentTime - $loginAttemptTime >= 1800) {
-            echo "Yay! It has been 30 minutes!";
+        if ($currentTime - $loginAttemptTime >= $maxTimeout) {
+            //echo "Yay! It has been 30 minutes!";
         } else {
-            echo "Wait! Its not been 30 minutes";
+            die('Wait! Its not been 30 minutes');
         }
     }
 
