@@ -5,7 +5,7 @@ require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'socialmedia.php';
 
-$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 
 //update table on submit
@@ -32,11 +32,11 @@ if (!empty($_POST)) {
 
         if ($rowSocial['loc_id'] == $_GET['loc_id']) {
             //Do Update
-            $socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+            $socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $socialUpdate);
         } else {
             //Do Insert
-            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_defaults . "', " . $_GET['loc_id'] . ")";
+            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_defaults . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $socialInsert);
         }
 

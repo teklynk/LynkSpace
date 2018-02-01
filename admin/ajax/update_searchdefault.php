@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $searchDefault = $_GET['checked'];
 
         if ($searchDefaultID <> '' && $searchDefault <> '') {
-            $searchDefaultUpdate = "UPDATE setup SET searchdefault=" . $searchDefaultID . " WHERE loc_id=" . $_SESSION['loc_id'] . " ";
+            $searchDefaultUpdate = "UPDATE setup SET searchdefault=" . $searchDefaultID . " WHERE loc_id=" . $_SESSION['loc_id'] . ";";
         }
 
         mysqli_query($db_conn, $searchDefaultUpdate);

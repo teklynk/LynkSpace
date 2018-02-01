@@ -9,7 +9,7 @@ $pageMsg = "";
 $deleteMsg = "";
 
 //get location type from locations table
-$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
 ?>
@@ -60,7 +60,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 
 } elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
     //delete hot title after clicking Yes
-    $hottitlesDelete = "DELETE FROM hottitles WHERE id=".$delhottitlesId." AND loc_id=" . $_GET['loc_id'] . " ";
+    $hottitlesDelete = "DELETE FROM hottitles WHERE id=".$delhottitlesId." AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $hottitlesDelete);
 
     $deleteMsg = "<div class='alert alert-success'>" . $delhottitlesTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -73,7 +73,7 @@ if (!empty($_POST['save_main'])) {
     $main_heading = safeCleanStr($_POST['main_heading']);
     $hottitles_count = safeCleanStr($_POST['hottitles_count']);
 
-    $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
 
     for ($i = 0; $i < $hottitles_count; $i++) {
         $errorMsg = "";
@@ -83,7 +83,7 @@ if (!empty($_POST['save_main'])) {
         $location_type = safeCleanStr($_POST['location_type'][$i]);
         $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " ";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . ";";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
@@ -118,7 +118,7 @@ if ($_POST['add_hottitles']) {
 
 }
 
-$sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //use default location

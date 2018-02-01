@@ -48,7 +48,7 @@ if ($_GET['preview'] > "") {
 }
 
 //check if using default location
-$sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
 //set Default toggle depending on which section you are on
@@ -170,13 +170,13 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                 //update data on submit
                 if (!empty($customer_name)) {
 
-                    $customerUpdate = "UPDATE customers SET name='" . $customer_name . "', icon='" . $customer_icon_select . "', image='" . $customer_image_select . "', catid='" . $customer_exist_cat . "', link='" . $customer_link . "', content='" . $customer_content . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ";
+                    $customerUpdate = "UPDATE customers SET name='" . $customer_name . "', icon='" . $customer_icon_select . "', image='" . $customer_image_select . "', catid='" . $customer_exist_cat . "', link='" . $customer_link . "', content='" . $customer_content . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . ";";
                     mysqli_query($db_conn, $customerUpdate);
 
                     $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . $customer_name . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . ";");
                 $rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC);
 
                 //Create new customer
@@ -308,11 +308,11 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
 
             } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete section after clicking Yes
-                $sectionDelete = "DELETE FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
+                $sectionDelete = "DELETE FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $sectionDelete);
 
                 //Delete all databases with in the section
-                $sectionDeleteDatabases = "DELETE FROM customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ";
+                $sectionDeleteDatabases = "DELETE FROM customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $sectionDeleteDatabases);
 
                 echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_SESSION['loc_id'] . "&sectiondeleted=true';</script>";
@@ -331,7 +331,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
 
             } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
                 //delete customer after clicking Yes
-                $customerDelete = "DELETE FROM customers WHERE id=".$delcustomerId." AND loc_id=" . $_GET['loc_id'] . " ";
+                $customerDelete = "DELETE FROM customers WHERE id=".$delcustomerId." AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $customerDelete);
 
                 echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&deletename=".$delcustomerName."&databasedeleted=true';</script>";
@@ -349,16 +349,16 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
             //update heading on submit
             if ($_POST['save_main']) {
 
-                $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=" . $_GET['loc_id'] . ";");
                 $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
                 if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $_GET['section']) {
                     //Do update
-                    $sectionsUpdate = "UPDATE sections_customers SET heading='" . $customer_heading . "', content='" . $main_content . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $sectionsUpdate = "UPDATE sections_customers SET heading='" . $customer_heading . "', content='" . $main_content . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
                     mysqli_query($db_conn, $sectionsUpdate);
                 } else {
                     //Do Insert
-                    $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . $customer_heading . "', '" . $main_content . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                    $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . $customer_heading . "', '" . $main_content . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                     mysqli_query($db_conn, $sectionsInsert);
                 }
 
@@ -372,7 +372,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                         $cust_cat = 0; //None
                     }
 
-                    $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat . ", sort=" . $cust_sort . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id . " ";
+                    $custCatUpdate = "UPDATE customers SET catid=" . $cust_cat . ", sort=" . $cust_sort . ", author_name='" . $_SESSION['user_name'] . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $cust_id . ";";
                     mysqli_query($db_conn, $custCatUpdate);
 
                 }
@@ -386,7 +386,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                 $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
-            $sqlSections = mysqli_query($db_conn, "SELECT heading, content, section, use_defaults FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=".$_GET['loc_id']." ");
+            $sqlSections = mysqli_query($db_conn, "SELECT heading, content, section, use_defaults FROM sections_customers WHERE section='".$getCustSection."' AND loc_id=".$_GET['loc_id'].";");
             $rowSections  = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
             //delete category
@@ -405,11 +405,11 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
-                $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid=".$delCatId." ";
+                $custCatUpdate = "UPDATE customers SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid=".$delCatId.";";
                 mysqli_query($db_conn, $custCatUpdate);
 
                 //delete category after clicking Yes
-                $custCatDelete = "DELETE FROM category_customers WHERE id=".$delCatId." AND cust_loc_id=" . $_GET['loc_id'] . " ";
+                $custCatDelete = "DELETE FROM category_customers WHERE id=".$delCatId." AND cust_loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $custCatDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

@@ -10,7 +10,7 @@ if ($_GET['preview'] > "") {
 
     $pagePreviewId = $_GET['preview'];
 
-    $sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
     $rowTeamPreview = mysqli_fetch_array($sqlteamPreview, MYSQLI_ASSOC);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -80,13 +80,13 @@ if ($_GET['preview'] > "") {
                 //update data on submit
                 if (!empty($_POST['team_name'])) {
 
-                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ";
+                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . ";";
                     mysqli_query($db_conn, $teamUpdate);
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='staff.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " ");
+                $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . ";");
                 $rowTeam = mysqli_fetch_array($sqlteam, MYSQLI_ASSOC);
 
                 //Create new team
@@ -173,7 +173,7 @@ if ($_GET['preview'] > "") {
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
-                $teamDelete = "DELETE FROM team WHERE id=".$delteamId." AND loc_id=" . $_GET['loc_id'] . " ";
+                $teamDelete = "DELETE FROM team WHERE id=".$delteamId." AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $teamDelete);
 
                 $deleteMsg = "<div class='alert alert-success'>" . $delteamTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -183,12 +183,12 @@ if ($_GET['preview'] > "") {
             //update heading on submit
             if ($_POST['save_main']) {
 
-                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $setupUpdate);
 
                 for ($i = 0; $i < $_POST['team_count']; $i++) {
 
-                    $teamUpdate = "UPDATE team SET sort=" . safeCleanStr($_POST['team_sort'][$i]) . " WHERE id=" . $_POST['team_id'][$i] . " ";
+                    $teamUpdate = "UPDATE team SET sort=" . safeCleanStr($_POST['team_sort'][$i]) . " WHERE id=" . $_POST['team_id'][$i] . ";";
                     mysqli_query($db_conn, $teamUpdate);
 
                 }
@@ -196,7 +196,7 @@ if ($_GET['preview'] > "") {
                 $teamMsg = "<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+            $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
             $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
             //Modal preview box

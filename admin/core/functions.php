@@ -37,21 +37,24 @@ function phinxMigration($phinxCommand, $environment){
 
 function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
     global $db_conn;
+    global $loginWait;
 
-    $loginWait = false;
+    $attempts = 1;
 
     $sqlLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
     $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt, MYSQLI_ASSOC);
 
     if ($userIp == $rowLoginAttempt['ip'] && strtotime(date('Y-m-d H:i:s')) >= strtotime($rowLoginAttempt['datetime'])) {
-        //echo $rowLoginAttempt['datetime'] . date('Y-m-d H:i:s');
         $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
         $currentTime = strtotime(date('Y-m-d H:i:s'));
 
         if ($currentTime - $loginAttemptTime <= $maxTimeout) {
             $loginWait = true;
+            die('max attempts reached');
         } else {
             $loginWait = false;
+            $loginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
+            mysqli_query($db_conn, $loginAttemptDelete);
         }
     }
 
@@ -59,12 +62,7 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
 
         $attempts = $rowLoginAttempt['attempts'] + 1;
 
-        if ($attempts == $maxAttempts) {
-            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
-            $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
-        } else {
-            //echo "max attempts reached";
-            //die('Direct access is not allowed.');
+        if ($attempts != $maxAttempts) {
             $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
             $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         }

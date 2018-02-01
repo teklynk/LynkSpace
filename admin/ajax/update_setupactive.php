@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $setupActiveChecked = $_GET['checked'];
 
         if ($setupActiveID) {
-            $setupActiveUpdate = "UPDATE locations SET active='" . $setupActiveChecked . "' WHERE id=" . $setupActiveID . " ";
+            $setupActiveUpdate = "UPDATE locations SET active='" . $setupActiveChecked . "' WHERE id=" . $setupActiveID . ";";
             mysqli_query($db_conn, $setupActiveUpdate);
         }
 

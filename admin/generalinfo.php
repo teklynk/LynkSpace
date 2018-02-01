@@ -6,7 +6,7 @@ require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'generalinfo.php';
 
-$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
 
 //update table on submit
@@ -24,11 +24,11 @@ if (!empty($_POST)) {
 
     if ($rowGeneralinfo['loc_id'] == $_GET['loc_id']) {
         //Do Update
-        $generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $generalinfoUpdate);
     } else {
         //Do Insert
-        $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
         mysqli_query($db_conn, $generalinfoInsert);
     }
 

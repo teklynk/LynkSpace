@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $navActiveID = $_GET['id'];
         $navActiveChecked = $_GET['checked'];
 
-        $navActiveUpdate = "UPDATE navigation SET active='" . $navActiveChecked . "' WHERE id=" . $navActiveID . " ";
+        $navActiveUpdate = "UPDATE navigation SET active='" . $navActiveChecked . "' WHERE id=" . $navActiveID . ";";
         mysqli_query($db_conn, $navActiveUpdate);
 
         mysqli_close($db_conn);

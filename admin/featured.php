@@ -6,7 +6,7 @@ require_once('includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'featured.php';
 
-$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
 //update table on submit
@@ -25,11 +25,11 @@ if (!empty($_POST)) {
 
     if ($rowFeatured['loc_id'] == $_GET['loc_id']) {
         //Do Update
-        $featuredUpdate = "UPDATE featured SET heading='" . $featured_heading . "', introtext='" . $featured_introtext . "', content='" . $featured_content . "', use_defaults='" . $featured_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $featuredUpdate = "UPDATE featured SET heading='" . $featured_heading . "', introtext='" . $featured_introtext . "', content='" . $featured_content . "', use_defaults='" . $featured_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $featuredUpdate);
     } else {
         //Do Insert
-        $featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $featured_heading . "', '" . $featured_introtext . "', '" . $featured_content . "', '" . $featured_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+        $featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $featured_heading . "', '" . $featured_introtext . "', '" . $featured_content . "', '" . $featured_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
         mysqli_query($db_conn, $featuredInsert);
     }
 

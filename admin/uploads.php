@@ -51,7 +51,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
 
     //delete file if shared after clicking Yes
-    $sharedFileDelete = "DELETE FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ";
+    $sharedFileDelete = "DELETE FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $sharedFileDelete);
 
     unlink($_GET["delete"]);
@@ -62,7 +62,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     //Check shared_uploads table for any shared images
-    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
     $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
     //Share setting/options Modal with Form
@@ -99,11 +99,11 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
         if ($rowSharedUploadsOption['filename'] == $getFileName) {
             //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE shared_uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . " ";
+            $sharedUploadsOptionUpdate = "UPDATE shared_uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $sharedUploadsOptionUpdate);
         } else {
             //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO shared_uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+            $sharedUploadsOptionInsert = "INSERT INTO shared_uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 

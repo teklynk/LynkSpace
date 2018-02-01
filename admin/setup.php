@@ -15,11 +15,11 @@ if (isset($rowLocationMaxID[0])) {
 }
 
 //Get location table columns
-$sqlLocation = mysqli_query($db_conn,"SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$sqlLocation = mysqli_query($db_conn,"SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
 $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //update table on submit
@@ -51,10 +51,10 @@ if (!empty($_POST['site_title'])) {
     //update table on submit
     if ($rowSetup['loc_id'] == $_GET['loc_id']) {
         //Update Location
-        $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . " ";
+        $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $locationUpdate);
         //Update Setup
-        $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $setupUpdate);
     } else {
         //Insert Location
@@ -103,7 +103,7 @@ if ($_GET['update'] == 'true') {
 //delete a location and all references to it in the config. this will do a cascading delete where loc_id = id
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
     if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes') {
-        $locDelete = "DELETE FROM locations WHERE id=" . $_GET['loc_id'] . " ";
+        $locDelete = "DELETE FROM locations WHERE id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $locDelete);
 
         //Delete the uploads folder if it exists, uses rrmdir() from functions.php

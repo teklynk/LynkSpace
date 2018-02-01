@@ -76,13 +76,13 @@ if (!empty($_POST)) {
             }
 
             if (isset($_SESSION['user_ip'])) {
-                $userUpdate = "UPDATE users SET clientip='" . $_SESSION['user_ip'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_SESSION['user_id'] . " ";
+                $userUpdate = "UPDATE users SET clientip='" . $_SESSION['user_ip'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_SESSION['user_id'] . ";";
                 mysqli_query($db_conn, $userUpdate);
             }
 
         } else {
             // Check and record failed login attempts
-            loginAttempts(getRealIpAddr(), 6, 1800);
+            loginAttempts(getRealIpAddr(), 2, 60);
 
             session_unset();
             $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";

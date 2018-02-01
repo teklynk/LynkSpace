@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $pageActiveChecked = $_GET['checked'];
 
         if ($pageActiveID) {
-            $pageActiveUpdate = "UPDATE pages SET active='" . $pageActiveChecked . "' WHERE id=" . $pageActiveID . " ";
+            $pageActiveUpdate = "UPDATE pages SET active='" . $pageActiveChecked . "' WHERE id=" . $pageActiveID . ";";
         }
 
         mysqli_query($db_conn, $pageActiveUpdate);

@@ -81,7 +81,7 @@ session_start();
     <noscript>Javascript is not enabled in your browser.</noscript>
 
     <?php
-    $sqlSetup = mysqli_query($db_conn, "SELECT pageheading, servicesheading, sliderheading, teamheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT pageheading, servicesheading, sliderheading, teamheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     if (!empty($_GET['loc_id'])) {
@@ -89,7 +89,7 @@ session_start();
         //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
         $_SESSION['loc_id'] = $_GET['loc_id'];
 
-        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE active='true' AND id=" . $_SESSION['loc_id'] . " ");
+        $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE active='true' AND id=" . $_SESSION['loc_id'] . ";");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation, MYSQLI_ASSOC);
 
         $_SESSION['loc_name'] = $rowGetLocation['name'];
