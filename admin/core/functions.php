@@ -62,7 +62,10 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
 
         $attempts = $rowLoginAttempt['attempts'] + 1;
 
-        if ($attempts != $maxAttempts) {
+        if ($attempts !== $maxAttempts) {
+            $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
+            $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
+        } else {
             $sqlLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
             $resultLoginAttempt = mysqli_query($db_conn, $sqlLoginAttempt);
         }

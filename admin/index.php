@@ -82,7 +82,7 @@ if (!empty($_POST)) {
 
         } else {
             // Check and record failed login attempts
-            loginAttempts(getRealIpAddr(), 2, 60);
+            loginAttempts(getRealIpAddr(), 6, 60);
 
             session_unset();
             $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
