@@ -32,6 +32,9 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 
 if (!empty($_POST)) {
 
+    // Check and record failed login attempts
+    loginAttempts(getRealIpAddr(), 3, 30);
+
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
         if ($response != NULL && $response->success){
@@ -81,8 +84,6 @@ if (!empty($_POST)) {
             }
 
         } else {
-            // Check and record failed login attempts
-            loginAttempts(getRealIpAddr(), 6, 60);
 
             session_unset();
             $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";

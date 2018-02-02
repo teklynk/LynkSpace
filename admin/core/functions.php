@@ -37,7 +37,7 @@ function phinxMigration($phinxCommand, $environment){
 
 function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
     global $db_conn;
-    global $loginWait;
+    global $loginFailed;
 
     $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
     $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
@@ -52,26 +52,29 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
         $attempts = $loginAttempts + 1;
 
         if ($attempts != $maxAttempts) {
+
+            $loginFailed = false;
+
             $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
             mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+
+        } else {
+
+            if ($currentTime - $loginAttemptTime >= $maxTimeout || $_SESSION['loggedIn'] == 1){
+                $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
+                mysqli_query($db_conn, $sqlLoginAttemptDelete);
+            } else {
+                $loginFailed = true;
+                echo "<style>#wrapper {padding-left: 0 !important;}</style>";
+                echo "<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+                die();
+            }
+
         }
 
     } else {
         $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW());";
         mysqli_query($db_conn, $sqlUpdateLoginAttempt);
-    }
-
-    if ($currentTime >= $loginAttemptTime && $userIp == $loginUserIp) {
-
-        if ($currentTime - $loginAttemptTime <= $maxTimeout && $maxAttempts == $loginAttempts) {
-            $loginWait = true;
-            die("<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again.");
-        } else {
-            $loginWait = false;
-            //$sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
-            //mysqli_query($db_conn, $sqlLoginAttemptDelete);
-        }
-
     }
 
 }
