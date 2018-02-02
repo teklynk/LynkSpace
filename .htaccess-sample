@@ -141,7 +141,7 @@ RedirectMatch 403 ^/logs/$
 
 # File caching for optimizing website loading time
 <FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
-    Header set Cache-Control "max-age=2592000"
+    Header set Cache-Control "max-age=2628000, public"
 </FilesMatch>
 
 # Deny access to these files - forbidden 403

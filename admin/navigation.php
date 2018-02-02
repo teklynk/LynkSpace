@@ -68,7 +68,7 @@ if (!empty($_POST)) {
             $nav_cat = 0; //None
         }
 
-        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url. "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $nav_id . " ";
+        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url. "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $nav_id . ";";
         mysqli_query($db_conn, $navUpdate);
     }
 
@@ -103,7 +103,7 @@ if ($_GET['section'] == "" && $_GET['loc_id']) {
 }
 
 //check if using default location
-$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //set Default toggle depending on which navigation you are on
@@ -195,7 +195,7 @@ if ($_GET['section'] == $navSections[0]) {
             } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
 
                 //delete nav after clicking Yes
-                $navDelete = "DELETE FROM navigation WHERE id=".$delNavId." AND " . $_GET['loc_id'] . " ";
+                $navDelete = "DELETE FROM navigation WHERE id=".$delNavId." AND " . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $navDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delNavTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -218,11 +218,11 @@ if ($_GET['section'] == $navSections[0]) {
 
             } elseif ($_GET['deletecat'] && $_GET['deletecatname'] && $_GET['confirm'] == 'yes') {
 
-                $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId'";
+                $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid='$delCatId';";
                 mysqli_query($db_conn, $navCatUpdate);
 
                 //delete category after clicking Yes
-                $navCatDelete = "DELETE FROM category_navigation WHERE id=".$delCatId." AND loc_id=" . $_GET['loc_id'] . " ";
+                $navCatDelete = "DELETE FROM category_navigation WHERE id=".$delCatId." AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $navCatDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delCatTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";

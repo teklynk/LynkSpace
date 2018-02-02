@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $sliderDefaultsID = $_GET['id'];
         $sliderDefaultsChecked = $_GET['checked'];
 
-        $sliderDefaultsUpdate = "UPDATE setup SET slider_use_defaults='" . $sliderDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $sliderDefaultsID . " ";
+        $sliderDefaultsUpdate = "UPDATE setup SET slider_use_defaults='" . $sliderDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $sliderDefaultsID . ";";
         mysqli_query($db_conn, $sliderDefaultsUpdate);
 
         mysqli_close($db_conn);

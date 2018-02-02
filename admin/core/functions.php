@@ -35,28 +35,51 @@ function phinxMigration($phinxCommand, $environment){
     }
 }
 
-function loginAttempt($value) {
+function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
     global $db_conn;
+    global $loginFailed;
 
-    $sqlLoginAttempt = mysqli_query($db_conn, "SELECT * FROM login_attempts WHERE ip='$value' ");
-    $rowLoginAttempt = mysqli_fetch_array($sqlLoginAttempt, MYSQLI_ASSOC);
+    $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
+    $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
+
+    $currentTime = strtotime(date('Y-m-d H:i:s'));
+    $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
+    $loginAttempts = (int)$rowLoginAttempt['attempts'];
+    $loginUserIp = (string)$rowLoginAttempt['ip'];
 
     if ($rowLoginAttempt) {
 
-        $attempts = $rowLoginAttempt["attempts"]+1;
+        $attempts = $loginAttempts + 1;
 
-        if ($attempts==3) {
-            $sql = "UPDATE login_attempts SET attempts=".$attempts.", lastlogin=NOW() WHERE ip='$value' ";
-            $result = mysqli_query($db_conn, $sql);
+        if ($attempts != $maxAttempts) {
+
+            $loginFailed = false;
+
+            $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
+            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+
         } else {
-            $sql = "UPDATE login_attempts SET attempts=".$attempts." WHERE ip='$value'";
-            $result = mysqli_query($db_conn, $sql);
+
+            if ($currentTime - $loginAttemptTime >= $maxTimeout){
+                $loginFailed = false;
+                $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
+                mysqli_query($db_conn, $sqlLoginAttemptDelete);
+            } else {
+                $loginFailed = true;
+                echo "<style>#wrapper {padding-left: 0 !important;}</style>";
+                echo "<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+                die();
+            }
+
         }
 
     } else {
-        $sql = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '$value', NOW())";
-        $result = mysqli_query($db_conn, $sql);
+        $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW());";
+        mysqli_query($db_conn, $sqlUpdateLoginAttempt);
     }
+
+    return $loginFailed;
+
 }
 
 //File Uploader

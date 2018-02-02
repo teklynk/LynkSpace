@@ -52,13 +52,13 @@ $_SESSION['file_referrer'] = 'page.php';
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title. "', content='" . $page_content . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " ";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title. "', content='" . $page_content . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . ";";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . " ");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
@@ -68,7 +68,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     //insert data on submit
                     if (!empty($page_title)) {
-                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
@@ -94,7 +94,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         <hr/>
 
                         <?php
-                        $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+                        $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
                         $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                         ?>
 
@@ -139,7 +139,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
 
                     //delete page after clicking Yes
-                    $pageDelete = "DELETE FROM pages WHERE id=".$delPageId." AND loc_id=" . $_GET['loc_id'] . " ";
+                    $pageDelete = "DELETE FROM pages WHERE id=".$delPageId." AND loc_id=" . $_GET['loc_id'] . ";";
                     mysqli_query($db_conn, $pageDelete);
 
                     $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -149,13 +149,13 @@ $_SESSION['file_referrer'] = 'page.php';
                 //update heading on submit
                 if (!empty($main_heading)) {
 
-                    $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+                    $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
                     mysqli_query($db_conn, $setupUpdate);
 
                     $pageMsg = "<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
-                $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+                $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
                 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
                 //Modal preview box

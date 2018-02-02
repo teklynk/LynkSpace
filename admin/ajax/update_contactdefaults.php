@@ -16,12 +16,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $contactDefaultsID = $_GET['id'];
         $contactDefaultsChecked = $_GET['checked'];
 
-        $sqlContact = mysqli_query($db_conn, "SELECT loc_id FROM contactus WHERE loc_id=" . $_SESSION['loc_id'] . " ");
+        $sqlContact = mysqli_query($db_conn, "SELECT loc_id FROM contactus WHERE loc_id=" . $_SESSION['loc_id'] . ";");
         $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
         if ($rowContact['loc_id'] == $_SESSION['loc_id']) {
             //Do Update
-            $contactDefaultsUpdate = "UPDATE contactus SET use_defaults='" . $contactDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $contactDefaultsID . " ";
+            $contactDefaultsUpdate = "UPDATE contactus SET use_defaults='" . $contactDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $contactDefaultsID . ";";
             mysqli_query($db_conn, $contactDefaultsUpdate);
         } else {
             //Do Insert

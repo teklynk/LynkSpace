@@ -49,12 +49,12 @@ if ($_POST['save_main']) {
         $property = $_POST['property'][$i];
         $cssvalue = $_POST['cssvalue'][$i];
 
-        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . ";");
         $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
 
         if ($rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector && $rowThemeOptions['property'] == $property) {
             //Do Update
-            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector . "', property='" . $property . "', cssvalue='" . $cssvalue . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND property='" . $property . "' AND loc_id=" . $_GET['loc_id'] . " ";
+            $themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector . "', property='" . $property . "', cssvalue='" . $cssvalue . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND property='" . $property . "' AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $themeOptionUpdate);
         } else {
             //Do Insert
@@ -66,7 +66,7 @@ if ($_POST['save_main']) {
     }
 
     //Update Setup
-    $setupUpdate = "UPDATE setup SET theme_use_defaults='" . $theme_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+    $setupUpdate = "UPDATE setup SET theme_use_defaults='" . $theme_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $setupUpdate);
 
     //Only Default location can see this
@@ -88,7 +88,7 @@ if ($_POST['save_main']) {
 }
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+$sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 ?>
 

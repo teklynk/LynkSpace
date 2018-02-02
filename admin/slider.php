@@ -10,7 +10,7 @@ if ($_GET['preview'] > "") {
 
     $slidePreviewId = $_GET['preview'];
 
-    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . " ");
+    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -24,7 +24,7 @@ if ($_GET['preview'] > "") {
 }
 
 //get location type from locations table
-$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . " ");
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 ?>
 
@@ -78,13 +78,13 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //update data on submit
         if (!empty($_POST)) {
 
-            $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . $end_date . "', link='" . $slide_link . "', image='" . $slide_image . "', loc_type='" . $location_type . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . " ";
+            $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . $end_date . "', link='" . $slide_link . "', image='" . $slide_image . "', loc_type='" . $location_type . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $slideUpdate);
 
             $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . $slide_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
-        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . " ");
+        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . ";");
         $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC);
 
         //Create new slide
@@ -241,7 +241,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
-        $slideDelete = "DELETE FROM slider WHERE id=".$delslideId." AND loc_id=" . $_GET['loc_id'] . " ";
+        $slideDelete = "DELETE FROM slider WHERE id=".$delslideId." AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $slideDelete);
 
         $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -260,7 +260,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $slider_defaults = 'false';
         }
 
-        $setupUpdate = "UPDATE setup SET sliderheading='" . $main_heading . "', slider_use_defaults='" . $slider_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . " ";
+        $setupUpdate = "UPDATE setup SET sliderheading='" . $main_heading . "', slider_use_defaults='" . $slider_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $setupUpdate);
 
         for ($i = 0; $i < $slide_count; $i++) {
@@ -271,7 +271,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $location_type = safeCleanStr($_POST['location_type'][$i]);
             $slide_id = safeCleanStr($_POST['slide_id'][$i]);
 
-            $slideUpdate = "UPDATE slider SET sort=" . $slide_sort . ", startdate='" . $slide_startdate . "', enddate='" . $slide_enddate . "', loc_type='" . $location_type . "' WHERE id=" . $slide_id . " ";
+            $slideUpdate = "UPDATE slider SET sort=" . $slide_sort . ", startdate='" . $slide_startdate . "', enddate='" . $slide_enddate . "', loc_type='" . $location_type . "' WHERE id=" . $slide_id . ";";
             mysqli_query($db_conn, $slideUpdate);
 
         }
@@ -279,7 +279,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
     }
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . " ");
+    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     //Modal preview box
@@ -343,7 +343,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		</thead>
 		<tbody>";
     $slideCount = "";
-    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC");
+    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
     while ($rowSlides = mysqli_fetch_array($sqlslides, MYSQLI_ASSOC)) {
         $slideId = $rowSlides['id'];
         $slideTitle = $rowSlides['title'];

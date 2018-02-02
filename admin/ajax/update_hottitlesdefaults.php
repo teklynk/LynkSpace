@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $hottitlesDefaultsID = $_GET['id'];
         $hottitlesDefaultsChecked = $_GET['checked'];
 
-        $hottitlesDefaultsUpdate = "UPDATE setup SET hottitles_use_defaults='" . $hottitlesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $hottitlesDefaultsID . " ";
+        $hottitlesDefaultsUpdate = "UPDATE setup SET hottitles_use_defaults='" . $hottitlesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $hottitlesDefaultsID . ";";
         mysqli_query($db_conn, $hottitlesDefaultsUpdate);
 
         mysqli_close($db_conn);

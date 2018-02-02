@@ -16,12 +16,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $socialmediaDefaultsID = $_GET['id'];
         $socialmediaDefaultsChecked = $_GET['checked'];
 
-        $sqlSocialmedia = mysqli_query($db_conn, "SELECT loc_id FROM socialmedia WHERE loc_id=" . $_SESSION['loc_id'] . " ");
+        $sqlSocialmedia = mysqli_query($db_conn, "SELECT loc_id FROM socialmedia WHERE loc_id=" . $_SESSION['loc_id'] . ";");
         $rowSocialmedia = mysqli_fetch_array($sqlSocialmedia, MYSQLI_ASSOC);
 
         if ($rowSocialmedia['loc_id'] == $_SESSION['loc_id']) {
             //Do Update
-            $socialmediaDefaultsUpdate = "UPDATE socialmedia SET use_defaults='" . $socialmediaDefaultsChecked . "' WHERE loc_id=" . $socialmediaDefaultsID . " ";
+            $socialmediaDefaultsUpdate = "UPDATE socialmedia SET use_defaults='" . $socialmediaDefaultsChecked . "' WHERE loc_id=" . $socialmediaDefaultsID . ";";
             mysqli_query($db_conn, $socialmediaDefaultsUpdate);
         } else {
             //Do Insert

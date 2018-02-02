@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $servicesDefaultsID = $_GET['id'];
         $servicesDefaultsChecked = $_GET['checked'];
 
-        $servicesDefaultsUpdate = "UPDATE setup SET services_use_defaults='" . $servicesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $servicesDefaultsID . " ";
+        $servicesDefaultsUpdate = "UPDATE setup SET services_use_defaults='" . $servicesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $servicesDefaultsID . ";";
         mysqli_query($db_conn, $servicesDefaultsUpdate);
 
         mysqli_close($db_conn);

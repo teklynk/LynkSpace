@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $navigationDefaultsID = $_GET['id'];
         $navigationDefaultsChecked = $_GET['checked'];
 
-        $navigationDefaultsUpdate = "UPDATE setup SET navigation_use_defaults_$navSubSection='" . $navigationDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $navigationDefaultsID . " ";
+        $navigationDefaultsUpdate = "UPDATE setup SET navigation_use_defaults_$navSubSection='" . $navigationDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $navigationDefaultsID . ";";
         mysqli_query($db_conn, $navigationDefaultsUpdate);
 
         mysqli_close($db_conn);

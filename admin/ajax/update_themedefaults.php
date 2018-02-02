@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $themeDefaultsChecked = $_GET['checked'];
 
         //Do Update
-        $themeDefaultsUpdate = "UPDATE setup SET theme_use_defaults='" . $themeDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$themeDefaultsID." ";
+        $themeDefaultsUpdate = "UPDATE setup SET theme_use_defaults='" . $themeDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$themeDefaultsID.";";
         mysqli_query($db_conn, $themeDefaultsUpdate);
 
         mysqli_close($db_conn);

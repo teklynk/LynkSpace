@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $teamActiveChecked = $_GET['checked'];
 
         if ($teamActiveID) {
-            $teamActiveUpdate = "UPDATE team SET active='" . $teamActiveChecked . "' WHERE id=" . $teamActiveID . " ";
+            $teamActiveUpdate = "UPDATE team SET active='" . $teamActiveChecked . "' WHERE id=" . $teamActiveID . ";";
         }
 
         mysqli_query($db_conn, $teamActiveUpdate);

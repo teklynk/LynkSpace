@@ -10,7 +10,7 @@ if ($_GET['preview']>"") {
 
 	$pagePreviewId=$_GET['preview'];
 
-	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, loc_id FROM services WHERE id='$pagePreviewId' AND loc_id=".$_SESSION['loc_id']." ");
+	$sqlServicesPreview = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, loc_id FROM services WHERE id='$pagePreviewId' AND loc_id=".$_SESSION['loc_id'].";");
 	$rowServicesPreview  = mysqli_fetch_array($sqlServicesPreview, MYSQLI_ASSOC);
 
 	echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -83,13 +83,13 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 		//update data on submit
 		if (!empty($_POST['service_title'])) {
 
-			$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ";
+			$servicesUpdate = "UPDATE services SET title='".safeCleanStr($_POST['service_title'])."', content='".sqlEscapeStr($_POST['service_content'])."', link='".safeCleanStr($_POST['service_link'])."', icon='".$_POST['service_icon_select']."', image='".$_POST['service_image_select']."', author_name='".$_SESSION['user_name']."' WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id'].";";
 			mysqli_query($db_conn, $servicesUpdate);
 
 			$serviceMsg="<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=".$_GET['loc_id']."' class='alert-link'>Back</a> | The service ".safeCleanStr($_POST['service_title'])." has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 		}
 
-		$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id']." ");
+		$sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=".$_GET['loc_id'].";");
 		$rowServices = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC);
 
 		//Create new service
@@ -205,7 +205,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
 	} elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm']=='yes') {
 		//delete service after clicking Yes
-		$servicesDelete = "DELETE FROM services WHERE id=".$delserviceId." AND loc_id=" . $_GET['loc_id'] . " ";
+		$servicesDelete = "DELETE FROM services WHERE id=".$delserviceId." AND loc_id=" . $_GET['loc_id'] . ";";
 		mysqli_query($db_conn, $servicesDelete);
 
 		$deleteMsg="<div class='alert alert-success'>".$delserviceTitle." has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
@@ -221,12 +221,12 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 			$_POST['services_defaults'] = 'false';
 		}
 
-		$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".sqlEscapeStr($_POST['main_content'])."', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$_GET['loc_id']." ";
+		$setupUpdate = "UPDATE setup SET servicesheading='".safeCleanStr($_POST['main_heading'])."', servicescontent='".sqlEscapeStr($_POST['main_content'])."', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=".$_GET['loc_id'].";";
 		mysqli_query($db_conn, $setupUpdate);
 
 		for ($i = 0; $i < $_POST['service_count']; $i++) {
 
-			$servicesUpdate = "UPDATE services SET sort=" . safeCleanStr($_POST['service_sort'][$i]) . " WHERE id=" . $_POST['service_id'][$i] . " ";
+			$servicesUpdate = "UPDATE services SET sort=" . safeCleanStr($_POST['service_sort'][$i]) . " WHERE id=" . $_POST['service_id'][$i] . ";";
 			mysqli_query($db_conn, $servicesUpdate);
 
 		}
@@ -234,7 +234,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 		$serviceMsg="<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=".$_GET['loc_id']."'\">×</button></div>";
 	}
 
-	$sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id']." ");
+	$sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=".$_GET['loc_id'].";");
 	$rowSetup  = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 	//Modal preview box

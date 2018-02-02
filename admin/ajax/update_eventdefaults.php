@@ -16,12 +16,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $eventDefaultsID = $_GET['id'];
         $eventDefaultsChecked = $_GET['checked'];
 
-        $sqlEvent = mysqli_query($db_conn, "SELECT loc_id FROM events WHERE loc_id=" . $_SESSION['loc_id'] . " ");
+        $sqlEvent = mysqli_query($db_conn, "SELECT loc_id FROM events WHERE loc_id=" . $_SESSION['loc_id'] . ";");
         $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
         if ($rowEvent['loc_id'] == $_SESSION['loc_id']) {
             //Do Update
-            $eventDefaultsUpdate = "UPDATE events SET use_defaults='" . $eventDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $eventDefaultsID . " ";
+            $eventDefaultsUpdate = "UPDATE events SET use_defaults='" . $eventDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $eventDefaultsID . ";";
             mysqli_query($db_conn, $eventDefaultsUpdate);
         } else {
             //Do Insert

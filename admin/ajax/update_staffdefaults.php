@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $teamDefaultsID = $_GET['id'];
         $teamDefaultsChecked = $_GET['checked'];
 
-        $teamDefaultsUpdate = "UPDATE setup SET team_use_defaults='" . $teamDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $teamDefaultsID . " ";
+        $teamDefaultsUpdate = "UPDATE setup SET team_use_defaults='" . $teamDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $teamDefaultsID . ";";
         mysqli_query($db_conn, $teamDefaultsUpdate);
 
         mysqli_close($db_conn);

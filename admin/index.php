@@ -32,6 +32,9 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 
 if (!empty($_POST)) {
 
+    // Check and record failed login attempts
+    loginAttempts(getRealIpAddr(), 4, 30);
+
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
         if ($response != NULL && $response->success){
@@ -76,16 +79,22 @@ if (!empty($_POST)) {
             }
 
             if (isset($_SESSION['user_ip'])) {
-                $userUpdate = "UPDATE users SET clientip='" . $_SESSION['user_ip'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_SESSION['user_id'] . " ";
+                $userUpdate = "UPDATE users SET clientip='" . $_SESSION['user_ip'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_SESSION['user_id'] . ";";
                 mysqli_query($db_conn, $userUpdate);
             }
 
+            //Delete failed login attempts from login_attempts table
+            $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . getRealIpAddr() . "';";
+            mysqli_query($db_conn, $sqlLoginAttemptDelete);
+
         } else {
+
             session_unset();
             $message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
         }
 
     }
+
 }
 
 //Reset password error messages
