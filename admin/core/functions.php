@@ -60,7 +60,8 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
 
         } else {
 
-            if ($currentTime - $loginAttemptTime >= $maxTimeout || $_SESSION['loggedIn'] == 1){
+            if ($currentTime - $loginAttemptTime >= $maxTimeout){
+                $loginFailed = false;
                 $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
                 mysqli_query($db_conn, $sqlLoginAttemptDelete);
             } else {
@@ -76,6 +77,8 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
         $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) values (1, '" . $userIp . "', NOW());";
         mysqli_query($db_conn, $sqlUpdateLoginAttempt);
     }
+
+    return $loginFailed;
 
 }
 

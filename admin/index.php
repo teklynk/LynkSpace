@@ -33,7 +33,7 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 if (!empty($_POST)) {
 
     // Check and record failed login attempts
-    loginAttempts(getRealIpAddr(), 3, 30);
+    loginAttempts(getRealIpAddr(), 4, 30);
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
@@ -83,6 +83,10 @@ if (!empty($_POST)) {
                 mysqli_query($db_conn, $userUpdate);
             }
 
+            //Delete failed login attempts from login_attempts table
+            $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . getRealIpAddr() . "';";
+            mysqli_query($db_conn, $sqlLoginAttemptDelete);
+
         } else {
 
             session_unset();
@@ -90,6 +94,7 @@ if (!empty($_POST)) {
         }
 
     }
+
 }
 
 //Reset password error messages
