@@ -104,10 +104,12 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
             if ($maxScale == NULL || $maxScale == ''){
                 $maxScale = 1000;
             }
+
             //Check if $maxFileSize parameter is set. if not then give it a default value
             if ($maxFileSize == NULL || $maxFileSize == ''){
                 $maxFileSize = 2048000;
             }
+
             //Check if $reduceScale parameter is set. if not then give it a default value
             if ($reduceScale == NULL || $reduceScale == '') {
                 $reduceScale = 4;
