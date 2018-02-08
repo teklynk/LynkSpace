@@ -20,3 +20,19 @@ Options None
 Require all granted
 </Directory>
  ```
+ 
+ PHP Modules
+```
+curl
+xml
+zip
+imagick
+mbstring
+mcrypt
+```
+ Apache Modules
+```
+mod_rewrite
+mod_headers
+mod_vhost_alias
+```
