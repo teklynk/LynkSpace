@@ -118,7 +118,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         $(document).ready(function () {
             $('#dataTable').dataTable({
                 "iDisplayLength": 25,
-                "order": [[3, "desc"]],
+                "order": [[2, "desc"]],
                 "columnDefs": [{
                     "targets": 'no-sort',
                     "orderable": false
