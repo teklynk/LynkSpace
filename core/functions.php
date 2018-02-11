@@ -23,7 +23,6 @@ function getLocation($loc){
         } else {
             header("Location: index.php?loc_id=1",true,  301);
             echo "<script>window.location.href='index.php?loc_id=1';</script>";
-            exit;
         }
 
     }
@@ -1335,12 +1334,10 @@ if (empty($_GET['loc_id'])){
 
     header("Location: $pageRedirect",true,  301);
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
-    exit();
 
 } elseif (multiBranch == "false" && $_GET['loc_id'] != 1){
     header("Location: index.php?loc_id=1",true,  301);
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
-    exit();
 }
 
 //location search box redirect to loc_id where loc_name = querystring
