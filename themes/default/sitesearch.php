@@ -1,14 +1,14 @@
 <?php
 define('inc_access', TRUE);
 
-require_once('includes/header.inc.php');
+require_once(__DIR__ . '/includes/header.inc.php');
 
 echo "<div class='page-search'>";
 
 echo "<div class='container bannerwrapper' id='sitesearch'>";
 echo "<div class='row'>";
 
-require_once('includes/searchsite.inc.php');
+require_once(__DIR__ . '/includes/searchsite.inc.php');
 
 if (!empty($_POST['sitesearchterm'])) {
 

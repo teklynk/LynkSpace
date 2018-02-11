@@ -12,9 +12,9 @@ session_start();
     }
 
     //DB connection string and Global variables
-    require_once '../config/config.php';
+    require_once(__DIR__ . '/../../config/config.php');
     //Admin panel functions
-    require_once('core/functions.php');
+    require_once(__DIR__ . '/../core/functions.php');
 
     //Check for IP restrictions
     checkIPRange();

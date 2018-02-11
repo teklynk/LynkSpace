@@ -125,14 +125,14 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         <div class="col-lg-12">
             <?php if ($_GET['newlocation'] == 'true') {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Settings</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Settings</a></li>
             <li class='active'>New Location</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Settings</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings </h1>";

@@ -83,22 +83,22 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
         <?php
         if ($_GET['newcustomer'] == 'true') {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li>New Database</li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } elseif ($_GET['editcustomer']) {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li class='active'>Edit Database</li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } else {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         }

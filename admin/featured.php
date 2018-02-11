@@ -2,7 +2,7 @@
 define('inc_access', TRUE);
 define('tinyMCE', TRUE);
 
-require_once('includes/header.inc.php');
+require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'featured.php';
 
@@ -44,7 +44,7 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
                 <li class="active">Feature</li>
             </ol>
             <h1 class="page-header">

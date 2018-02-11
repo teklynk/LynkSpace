@@ -137,8 +137,8 @@ if ($_GET['section'] == $navSections[0]) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
-                <li><a href="navigation.php?loc=<?php echo $_GET['loc_id'] ?>">Navigation</a></li>
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
+                <li><a href="navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>">Navigation</a></li>
                 <li class="active">Section: <?php echo $_GET['section']; ?></li>
             </ol>
         </div>

@@ -89,7 +89,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'){
                 getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
                 ?>
 
-                <?php require_once('socialmedia.inc.php'); ?>
+                <?php require_once(__DIR__ . '/socialmedia.inc.php'); ?>
             </div>
             <div style="clear:both;"></div>
         </div>
