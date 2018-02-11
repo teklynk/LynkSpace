@@ -7,7 +7,7 @@ $_SESSION['file_referrer'] = 'setup.php';
 
 //Get max location ID number - for creating a new location
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
-$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID, MYSQLI_ASSOC);
+$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
 
 //Get highest ID number and add 1. Used for adding a new location.
 if (isset($rowLocationMaxID[0])) {
