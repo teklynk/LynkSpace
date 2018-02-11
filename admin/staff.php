@@ -1,7 +1,7 @@
 <?php
 define('inc_access', TRUE);
 
-require_once('includes/header.inc.php');
+require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'staff.php';
 
@@ -328,5 +328,5 @@ if ($_GET['preview'] > "") {
     });
 </script>
 <?php
-require_once('includes/footer.inc.php');
+require_once(__DIR__ . '/includes/footer.inc.php');
 ?>

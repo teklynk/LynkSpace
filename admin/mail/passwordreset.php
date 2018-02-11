@@ -12,8 +12,8 @@ if ($_SESSION['unique_referrer'] != $_POST['referrer'] || empty($_POST)) {
 
 if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referrer'] == 'index.php' && $_POST['referrer'] == $_SESSION['unique_referrer']) {
 
-    require_once('../../config/config.php');
-    require_once('../core/functions.php');
+    require_once(__DIR__ . '/../../config/config.php');
+    require_once(__DIR__ . '/../core/functions.php');
 
     //create a random hashed string and set it as a session variable
     $temp_password_reset_hash = generateRandomString();

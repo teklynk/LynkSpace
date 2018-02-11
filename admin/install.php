@@ -20,7 +20,7 @@ if (!file_exists("../.htaccess")) {
 define('inc_access', TRUE);
 define('recaptcha', TRUE);
 
-require_once('includes/header.inc.php');
+require_once(__DIR__ . '/includes/header.inc.php');
 
 // Check that everything is installed on the server.
 checkDependencies();
@@ -37,7 +37,7 @@ $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 //Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
-    require_once('core/recaptchalib.php');
+    require_once(__DIR__ . '/core/recaptchalib.php');
     $response = NULL;
     $reCaptcha = NEW ReCaptcha(recaptcha_secret_key);
 } else {
@@ -318,5 +318,5 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
     </div>
 
 <?php
-require_once('includes/footer.inc.php');
+require_once(__DIR__ . '/includes/footer.inc.php');
 ?>
