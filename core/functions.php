@@ -491,14 +491,16 @@ function getCoreHeader($loc, $addHeader=null){
     <!-- Core js file-->
     <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
-    <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
-    <script type="text/javascript" language="javascript">
-        var TLCDomain = "<?php echo setupPACURL; ?>";
-        var TLCConfig = "<?php echo $setupConfig; ?>";
-        var TLCBranch = "";
-        var TLCClassicDomain = "<?php echo setupPACURL; ?>";
-        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
-    </script>
+    <?php if (!empty(setupPACURL)) { ?>
+        <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
+        <script type="text/javascript" language="javascript">
+            var TLCDomain = "<?php echo setupPACURL; ?>";
+            var TLCConfig = "<?php echo $setupConfig; ?>";
+            var TLCBranch = "";
+            var TLCClassicDomain = "<?php echo setupPACURL; ?>";
+            var TLCClassicConfig = "<?php echo $setupConfig; ?>";
+        </script>
+    <?php } ?>
 
     <?php
     //Google Analytics UID
@@ -540,7 +542,8 @@ function getDynamicCss($loc){
     //Gets themeoptions
     $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $locId . ";");
     while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions, MYSQLI_ASSOC)){
-        if (trim($rowGetThemeOpions['cssvalue']) != '#000000'){//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+        //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+        if (trim($rowGetThemeOpions['cssvalue']) != '#000000'){
             echo $rowGetThemeOpions['selector'] . " {" . trim($rowGetThemeOpions['property']) . ": " . trim($rowGetThemeOpions['cssvalue']) . " !important;}" . PHP_EOL;
         }
     }
@@ -673,7 +676,7 @@ function getCustomers($loc, $custType){
         $customerSectionWhere = "section='" . $customerSection . "' AND ";
     }
 
-    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerSectionWhere . ";" . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY catid, sort, name ASC;"); //While loop
+    $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, section, link, catid, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND " . $customerSectionWhere . " " . $customerCatWhere . " loc_id=" . $custDefaultLoc . " ORDER BY catid, sort, name ASC;"); //While loop
     $customerNumRows = mysqli_num_rows($sqlCustomers);
 
 }
@@ -959,7 +962,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
     } else {
 
-        die('URL not found or parameters are not correct.');
+        die('URL not found or parameters are not correct. Customer number not set in Admin -> Site Options.');
     }
 
     if (!empty($xmlurl)) {

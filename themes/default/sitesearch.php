@@ -28,5 +28,5 @@ echo "</div>";
 
 echo "</div>";
 
-require_once('includes/footer.inc.php');
+require_once(__DIR__ . '/includes/footer.inc.php');
 ?>

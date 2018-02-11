@@ -20,11 +20,11 @@ if (!defined('inc_access')) {
             </nav>
             <div style="clear:both;"></div>
             <div class="socialDiv fa-1x">
-                <?php require_once('socialmedia.inc.php'); ?>
+                <?php require_once(__DIR__ . '/socialmedia.inc.php'); ?>
             </div>
             <div style="clear:both;"></div>
             <div class="no-side-padding" id="generalinfo">
-                <?php require_once('generalinfo.inc.php'); ?>
+                <?php require_once(__DIR__ . '/generalinfo.inc.php'); ?>
             </div>
             <div style="clear:both;"></div>
         </div>

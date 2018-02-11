@@ -94,9 +94,9 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'){
     <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
         <?php
         if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
-            require_once('searchlocations.inc.php');
+            require_once(__DIR__ . '/searchlocations.inc.php');
         } else {
-            require_once('searchpac.inc.php');
+            require_once(__DIR__ . '/searchpac.inc.php');
         }
         ?>
     </div>
