@@ -35,7 +35,7 @@ if ($_POST) {
         mysqli_query($db_conn, $eventInsert);
     }
 
-    header("Location: events.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: events.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 }
 

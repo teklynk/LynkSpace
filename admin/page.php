@@ -71,7 +71,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
-                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
+                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
                     }
                 }

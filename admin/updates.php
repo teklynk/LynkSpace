@@ -117,7 +117,7 @@ if (isset($_SESSION['updates_available'])) {
         //Delete the zip file
         unlink($updatesDestination);
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -134,7 +134,7 @@ if (isset($_SESSION['updates_available'])) {
 
         sleep(1); // wait
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 

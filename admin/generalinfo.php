@@ -32,7 +32,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $generalinfoInsert);
     }
 
-    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 

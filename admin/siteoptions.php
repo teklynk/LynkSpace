@@ -8,8 +8,9 @@ $_SESSION['file_referrer'] = 'siteoptions.php';
 
 //Keeps user in the default location when on this page. Only Default loc can edit this page.
 if ($_GET['loc_id'] != 1) {
-    header('Location: siteoptions.php?loc_id=1');
+    header('Location: siteoptions.php?loc_id=1',  true,  301);
     echo "<script>window.location.href='siteoptions.php?loc_id=1';</script>";
+    exit();
 }
 
 //check if user is logged in and is admin
@@ -218,7 +219,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
 } else {
     //redirect user if not admin
-    header('Location: index.php?logout=true');
+    header('Location: index.php?logout=true',  true,  301);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 require_once('includes/footer.inc.php');

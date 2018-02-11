@@ -295,7 +295,7 @@ session_start();
 if (!$_SESSION['loggedIn']) {
     if (basename($_SERVER['PHP_SELF']) != 'index.php') {
         if (basename($_SERVER['PHP_SELF']) != 'install.php') {
-            header('Location: index.php?logout=true');
+            header('Location: index.php?logout=true',  true,  301);
             echo "<script>window.location.href='index.php?logout=true';</script>";
         }
     }

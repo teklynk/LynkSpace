@@ -41,7 +41,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $contactInsert);
     }
 
-    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 
 }

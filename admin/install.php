@@ -208,7 +208,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         rename("install.php", "~install.old");
 
         // Redirect to admin login page
-        header("Location: index.php");
+        header("Location: index.php",  true,  301);
         echo "<script>window.location.href='index.php';</script>"; // redirect to login page
     } else {
         die("Install Failed.");

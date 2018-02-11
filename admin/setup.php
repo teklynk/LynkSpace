@@ -81,7 +81,7 @@ if (!empty($_POST['site_title'])) {
     unset($_SESSION['loc_list']);
     $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -115,7 +115,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         unset($_SESSION['loc_list']);
         $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-        header("Location: setup.php?loc_id=1");
+        header("Location: setup.php?loc_id=1",  true,  301);
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
     }
 }

@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
     }
 
-    header("Location: socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 

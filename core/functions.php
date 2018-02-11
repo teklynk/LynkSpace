@@ -21,8 +21,9 @@ function getLocation($loc){
             $locationActive = $rowGetLocation['active'];
             $locationID = $rowGetLocation['id'];
         } else {
-            header("Location: index.php?loc_id=1");
+            header("Location: index.php?loc_id=1",true,  301);
             echo "<script>window.location.href='index.php?loc_id=1';</script>";
+            exit;
         }
 
     }
@@ -1332,12 +1333,14 @@ if (empty($_GET['loc_id'])){
         $pageRedirect = basename($_SERVER['PHP_SELF']) . '?loc_id=1';
     }
 
-    header("Location: $pageRedirect");
+    header("Location: $pageRedirect",true,  301);
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
+    exit();
 
 } elseif (multiBranch == "false" && $_GET['loc_id'] != 1){
-    header("Location: index.php?loc_id=1");
+    header("Location: index.php?loc_id=1",true,  301);
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
+    exit();
 }
 
 //location search box redirect to loc_id where loc_name = querystring
@@ -1346,7 +1349,7 @@ if (!empty($_GET['loc_name'])){
     $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='" . $_GET['loc_name'] . "' LIMIT 1;");
     $rowLocName = mysqli_fetch_array($sqlLocName, MYSQLI_ASSOC);
 
-    header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "");
+    header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "",  true,  301);
     echo "<script>window.location.href='" . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id'] . "';</script>";
 }
 ?>

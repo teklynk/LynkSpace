@@ -33,7 +33,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $featuredInsert);
     }
 
-    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 }
 
