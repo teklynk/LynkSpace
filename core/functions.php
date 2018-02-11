@@ -959,7 +959,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
 
     } else {
 
-        die('URL not found or parameters are not correct.');
+        die('URL not found or parameters are not correct. Customer number not set in Admin -> Site Options.');
     }
 
     if (!empty($xmlurl)) {
