@@ -10,7 +10,7 @@ $_SESSION['file_referrer'] = 'updates.php';
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
                 <li class="active">Updates</li>
             </ol>
             <h1 class="page-header">
@@ -117,7 +117,7 @@ if (isset($_SESSION['updates_available'])) {
         //Delete the zip file
         unlink($updatesDestination);
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -134,7 +134,7 @@ if (isset($_SESSION['updates_available'])) {
 
         sleep(1); // wait
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "");
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 

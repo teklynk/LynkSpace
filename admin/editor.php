@@ -9,7 +9,7 @@ $_SESSION['file_referrer'] = 'editor.php';
 
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true');
+    header('Location: index.php?logout=true',  true,  301);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
@@ -95,7 +95,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id']; ?>">Home</a></li>
+            <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
             <li class="active">Theme Editor</li>
         </ol>
         <h1 class="page-header">

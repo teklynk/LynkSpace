@@ -41,7 +41,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $contactInsert);
     }
 
-    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 
 }
@@ -54,7 +54,7 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
                 <li class="active">Contact</li>
             </ol>
             <h1 class="page-header">

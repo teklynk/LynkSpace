@@ -11,7 +11,7 @@ $customerMsg = '';
 
 //Redirect to section=1 if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
-    header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "");
+    header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "",  true,  301);
     echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
@@ -83,22 +83,22 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
         <?php
         if ($_GET['newcustomer'] == 'true') {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li>New Database</li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } elseif ($_GET['editcustomer']) {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li class='active'>Edit Database</li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         } else {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='databases.php?loc=" . $_GET['loc_id'] . "'>Databases</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</a></li>
             <li class='active'>Page: ".$_GET['section']."</li>
             </ol>";
         }
@@ -189,7 +189,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                     $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . $customer_exist_cat . "', '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $customerInsert);
 
-                    header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "");
+                    header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "",  true,  301);
                     echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
                 }
             }

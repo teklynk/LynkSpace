@@ -12,9 +12,9 @@ session_start();
     }
 
     //DB connection string and Global variables
-    require_once '../config/config.php';
+    require_once(__DIR__ . '/../../config/config.php');
     //Admin panel functions
-    require_once('core/functions.php');
+    require_once(__DIR__ . '/../core/functions.php');
 
     //Check for IP restrictions
     checkIPRange();
@@ -295,7 +295,7 @@ session_start();
 if (!$_SESSION['loggedIn']) {
     if (basename($_SERVER['PHP_SELF']) != 'index.php') {
         if (basename($_SERVER['PHP_SELF']) != 'install.php') {
-            header('Location: index.php?logout=true');
+            header('Location: index.php?logout=true',  true,  301);
             echo "<script>window.location.href='index.php?logout=true';</script>";
         }
     }

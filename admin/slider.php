@@ -33,21 +33,21 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
             <?php
             if ($_GET['newslide'] == 'true') {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
                 <li class='active'>New Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } elseif ($_GET['editslide']) {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
                 <li class='active'>Edit Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
                 <li class='active'>Image Slider</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider</h1>";
@@ -97,7 +97,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
             mysqli_query($db_conn, $slideInsert);
 
-            header("slider.php?loc_id=" . $_GET['loc_id'] . "");
+            header("slider.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
         }
     }

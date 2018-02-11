@@ -43,21 +43,21 @@ if ($_GET['preview']>"") {
 			<?php
 			if ($_GET['newservice'] == 'true') {
 				echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='services.php?loc=" . $_GET['loc_id'] . "'>Services</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>New Services</li>
             </ol>";
 				echo "<h1 class='page-header'>Services (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
 			} elseif ($_GET['editservice']) {
 				echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='services.php?loc=" . $_GET['loc_id'] . "'>Services</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>Edit Services</li>
             </ol>";
 				echo "<h1 class='page-header'>Services (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
 			} else {
 				echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Services</li>
             </ol>";
 				echo "<h1 class='page-header'>Services&nbsp;";
@@ -102,7 +102,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 			$servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, sort, author_name, loc_id) VALUES ('".sqlEscapeStr($_POST['service_title'])."', '".safeCleanStr($_POST['service_content'])."', '".$_POST['service_icon_select']."', '".$_POST['service_image_select']."', '".safeCleanStr($_POST['service_link'])."', 'false', 0, '".$_SESSION['user_name']."', ".$_GET['loc_id'].")";
 			mysqli_query($db_conn, $servicesInsert);
 
-			header("Location: services.php?loc_id=".$_GET['loc_id']."");
+			header("Location: services.php?loc_id=".$_GET['loc_id']."",  true,  301);
 			echo "<script>window.location.href='services.php?loc_id=".$_GET['loc_id']."';</script>";
 		}
 	}

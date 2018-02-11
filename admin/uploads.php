@@ -107,7 +107,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 
-        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "");
+        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
         echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -130,7 +130,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
                 <li class="active">Uploads</li>
             </ol>
             <h1 class="page-header">

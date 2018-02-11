@@ -7,7 +7,7 @@ $_SESSION['file_referrer'] = 'locationgroups.php';
 
 // Only allow Admin users access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true');
+    header('Location: index.php?logout=true',  true,  301);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 //Hide admin navigation and header, footer

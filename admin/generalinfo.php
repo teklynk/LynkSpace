@@ -32,7 +32,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $generalinfoInsert);
     }
 
-    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -43,7 +43,7 @@ if ($_GET['update'] == 'true') {
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="setup.php?loc=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+            <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
             <li class="active">General Information</li>
         </ol>
         <h1 class="page-header">

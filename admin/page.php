@@ -12,21 +12,21 @@ $_SESSION['file_referrer'] = 'page.php';
             <?php
             if ($_GET['newpage'] == 'true') {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='page.php?loc=" . $_GET['loc_id'] . "'>Pages</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
                 <li class='active'>New Page</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } elseif ($_GET['editpage']) {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='page.php?loc=" . $_GET['loc_id'] . "'>Pages</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
                 <li class='active'>Edit Page</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
                 <li class='active'>Pages</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages</h1>";
@@ -71,7 +71,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
-                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "");
+                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
                     }
                 }

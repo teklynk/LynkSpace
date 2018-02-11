@@ -40,21 +40,21 @@ if ($_GET['preview'] > "") {
         <?php
         if ($_GET['newteam'] == 'true') {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='staff.php?loc=" . $_GET['loc_id'] . "'>Staff</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='staff.php?loc_id=" . $_GET['loc_id'] . "'>Staff</a></li>
             <li class='active'>New Staff Member</li>
             </ol>";
             echo "<h1 class='page-header'>Staff (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
         } elseif ($_GET['editteam']) {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='staff.php?loc=" . $_GET['loc_id'] . "'>Staff</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='staff.php?loc_id=" . $_GET['loc_id'] . "'>Staff</a></li>
             <li class='active'>Edit Staff</li>
             </ol>";
             echo "<h1 class='page-header'>Staff (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
         } else {
             echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Staff</li>
             </ol>";
             echo "<h1 class='page-header'>Staff&nbsp;";
@@ -99,7 +99,7 @@ if ($_GET['preview'] > "") {
                     $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
                     mysqli_query($db_conn, $teamInsert);
 
-                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "");
+                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
                     echo "<script>window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 
                 }

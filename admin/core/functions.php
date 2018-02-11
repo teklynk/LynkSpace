@@ -104,10 +104,12 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
             if ($maxScale == NULL || $maxScale == ''){
                 $maxScale = 1000;
             }
+
             //Check if $maxFileSize parameter is set. if not then give it a default value
             if ($maxFileSize == NULL || $maxFileSize == ''){
                 $maxFileSize = 2048000;
             }
+
             //Check if $reduceScale parameter is set. if not then give it a default value
             if ($reduceScale == NULL || $reduceScale == '') {
                 $reduceScale = 4;
@@ -974,8 +976,7 @@ function checkIPRange() {
         }
 
         if ($IPmatch === false) {
-            header("HTTP/1.1 302 Moved Temporarily");
-            header("Location: ../index.php?loc_id=1");
+            header("Location: ../index.php?loc_id=1",  true,  301);
             die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
@@ -1086,13 +1087,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "");
+    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "",  true,  301);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
-    header("Location: ?loc_id=1");
+    header("Location: ?loc_id=1",  true,  301);
     echo "<script>window.location.href='?loc_id=1';</script>";
 } elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
-    header("Location: ?loc_id=1");
+    header("Location: ?loc_id=1",  true,  301);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
 

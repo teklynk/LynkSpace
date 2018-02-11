@@ -7,7 +7,7 @@ $_SESSION['file_referrer'] = 'setup.php';
 
 //Get max location ID number - for creating a new location
 $sqlLocationMaxID = mysqli_query($db_conn, "SELECT MAX(id) FROM locations ORDER BY id DESC LIMIT 1");
-$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID, MYSQLI_ASSOC);
+$rowLocationMaxID = mysqli_fetch_array($sqlLocationMaxID);
 
 //Get highest ID number and add 1. Used for adding a new location.
 if (isset($rowLocationMaxID[0])) {
@@ -81,7 +81,7 @@ if (!empty($_POST['site_title'])) {
     unset($_SESSION['loc_list']);
     $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true");
+    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
     echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -115,7 +115,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         unset($_SESSION['loc_list']);
         $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-        header("Location: setup.php?loc_id=1");
+        header("Location: setup.php?loc_id=1",  true,  301);
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
     }
 }
@@ -125,14 +125,14 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         <div class="col-lg-12">
             <?php if ($_GET['newlocation'] == 'true') {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Settings</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Settings</a></li>
             <li class='active'>New Location</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li class='active'>Settings</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings </h1>";
