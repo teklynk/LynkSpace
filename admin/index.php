@@ -211,7 +211,7 @@ if (isset($_SESSION['loggedIn'])) {
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                         </div>
                                     <?php } ?>
-                                    <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
                                 </fieldset>
                             </form>
@@ -263,7 +263,7 @@ if (isset($_SESSION['loggedIn'])) {
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                         </div>
                                     <?php } ?>
-                                    <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+
                                     <input type="hidden" id="password_reset" name="password_reset" value="<?php echo $_GET['passwordreset']; ?>"/>
                                     <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit" id="sign_in" disabled="disabled" type="submit">Reset Password</button>
@@ -298,6 +298,7 @@ if (isset($_SESSION['loggedIn'])) {
                                             <input class="form-control" maxlength="255" placeholder="Password" id="user_password" name="password" type="password" value="" autocomplete="off" pattern="<?php echo passwordValidationPattern; ?>" title="<?php echo passwordValidationTitle; ?>" required>
                                         </div>
                                     </div>
+
                                     <?php if ($reCaptcha_enabled == true) { ?>
                                         <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
                                     <?php } else { ?>
@@ -305,6 +306,7 @@ if (isset($_SESSION['loggedIn'])) {
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
                                         </div>
                                     <?php } ?>
+
                                     <button class="btn btn-lg btn-primary btn-block" name="sign_in_submit" id="sign_in" disabled="disabled" type="submit"><i class="fa fa-fw fa-sign-in"></i> Log in
                                     </button>
                                 </fieldset>
