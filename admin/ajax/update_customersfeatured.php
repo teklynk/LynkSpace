@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $customersFeaturedChecked = $_GET['checked'];
 
         if ($customersFeaturedID) {
-            if ($customersFeaturedChecked == 'true'){
+            if ($customersFeaturedChecked == 'true') {
                 $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "', catid=0 WHERE id=" . $customersFeaturedID . ";";
             } else {
                 $customersFeaturedUpdate = "UPDATE customers SET featured='" . $customersFeaturedChecked . "' WHERE id=" . $customersFeaturedID . ";";

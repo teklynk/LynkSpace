@@ -13,7 +13,8 @@ if (!defined('inc_access')) {
         <form name="siteSearchForm" method="post" action="?loc_id=<?php echo $_GET['loc_id']; ?>">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="form-control" id="sitesearchterm" name="sitesearchterm" value="<?php echo $_POST['sitesearchterm']; ?>" placeholder="Search the web site"/>
+                    <input type="text" class="form-control" id="sitesearchterm" name="sitesearchterm"
+                           value="<?php echo $_POST['sitesearchterm']; ?>" placeholder="Search the web site"/>
                     <span class="input-group-btn">
                         <button class="btn btn-danger" type="submit" name="sitesearch_submit">
                             <span class="fa fa-search"></span>

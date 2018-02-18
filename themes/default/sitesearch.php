@@ -17,7 +17,7 @@ if (!empty($_POST['sitesearchterm'])) {
     //getSiteSearchResults(search term, show page contents in results)
     getSiteSearchResults($_POST['sitesearchterm'], 'false');
 
-    if ($siteSearchCount == 0){
+    if ($siteSearchCount == 0) {
         echo "<div class='col-lg-12'><h1>No results found.</h1></div>";
         echo "<div class='col-xs-12 col-lg-12'>Try a different search term.</div>";
     }

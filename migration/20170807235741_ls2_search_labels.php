@@ -4,7 +4,8 @@ use Phinx\Migration\AbstractMigration;
 
 class Ls2SearchLabels extends AbstractMigration
 {
-    public function up(){
+    public function up()
+    {
         $table = $this->table('config');
         $table->addColumn('searchlabel_ls2pac', 'text', array('after' => 'setuppacurl'))
             ->update();
@@ -12,7 +13,8 @@ class Ls2SearchLabels extends AbstractMigration
             ->update();
     }
 
-    public function down(){
+    public function down()
+    {
         $table = $this->table('config');
         $table->removeColumn('searchlabel_ls2pac')
             ->save();

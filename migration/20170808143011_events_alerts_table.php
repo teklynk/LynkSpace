@@ -4,7 +4,8 @@ use Phinx\Migration\AbstractMigration;
 
 class EventsAlertsTable extends AbstractMigration
 {
-    public function up(){
+    public function up()
+    {
         $eventsTable = $this->table('events');
         $eventsTable->addColumn('heading', 'text')
             ->addColumn('alert', 'text')
@@ -23,7 +24,8 @@ class EventsAlertsTable extends AbstractMigration
         $this->execute('ALTER TABLE `events` ADD CONSTRAINT `events_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE');
     }
 
-    public function down(){
+    public function down()
+    {
         $exists = $this->hasTable('events');
         if ($exists) {
             $table = $this->table('events');

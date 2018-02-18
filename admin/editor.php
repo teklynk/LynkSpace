@@ -9,26 +9,26 @@ $_SESSION['file_referrer'] = 'editor.php';
 
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true',  true,  301);
+    header('Location: index.php?logout=true', true, 301);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-$pageMsg="";
+$pageMsg = "";
 
 //css file that can be edited
-$fileToEdit_dir = "../themes/".themeOption."/css/custom-style.css";
+$fileToEdit_dir = "../themes/" . themeOption . "/css/custom-style.css";
 
 //Dynamic CSS - Location of dynamic-style.php that is inside the themes folder
-require_once(__DIR__ . "/../themes/".themeOption."/css/dynamic-style.php");
+require_once(__DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php");
 
 //check if file is writable
 if (!is_writable($fileToEdit_dir)) {
-    die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+    die("<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>");
 }
 
 //open file for Reading
 $handle = fopen($fileToEdit_dir, 'r');
-$fileData = fread($handle,filesize($fileToEdit_dir));
+$fileData = fread($handle, filesize($fileToEdit_dir));
 
 if ($_POST['save_main']) {
 
@@ -38,7 +38,7 @@ if ($_POST['save_main']) {
 
     //use theme defaults
     if ($theme_defaults == 'on') {
-        $theme_defaults  = 'true';
+        $theme_defaults = 'true';
     } else {
         $theme_defaults = 'false';
     }
@@ -70,7 +70,7 @@ if ($_POST['save_main']) {
     mysqli_query($db_conn, $setupUpdate);
 
     //Only Default location can see this
-    if ($_GET['loc_id'] == 1){
+    if ($_GET['loc_id'] == 1) {
         if (file_exists($fileToEdit_dir)) {
             //open file for Writing
             $handle = fopen($fileToEdit_dir, 'w') or die('Unable to write to ' . $fileToEdit_dir . '. Check file permissions.');
@@ -79,7 +79,7 @@ if ($_POST['save_main']) {
 
             closedir($handle);
         } else {
-            die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
+            die("<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>");
         }
     }
 
@@ -92,110 +92,119 @@ $sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 ?>
 
-<div class="row">
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
-            <li class="active">Theme Editor</li>
-        </ol>
-        <h1 class="page-header">
-            Theme Editor
-        </h1>
-    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
+                <li class="active">Theme Editor</li>
+            </ol>
+            <h1 class="page-header">
+                Theme Editor
+            </h1>
+        </div>
 
-    <div class="col-lg-8">
-        <?php
-        if ($errorMsg !="") {
-            echo $errorMsg;
-        } else {
-            echo $pageMsg;
-        }
-        //use default theme
-        if ($rowSetup['theme_use_defaults'] == 'true') {
-            $selThemeDefaults = "CHECKED";
-        } else {
-            $selThemeDefaults = "";
-        }
-        if (!is_writable($fileToEdit_dir)) {
-            die("<div class='alert alert-danger fade in'>Unable to write to ".$fileToEdit_dir.". Check file permissions.</div>");
-        }
+        <div class="col-lg-8">
+            <?php
+            if ($errorMsg != "") {
+                echo $errorMsg;
+            } else {
+                echo $pageMsg;
+            }
+            //use default theme
+            if ($rowSetup['theme_use_defaults'] == 'true') {
+                $selThemeDefaults = "CHECKED";
+            } else {
+                $selThemeDefaults = "";
+            }
+            if (!is_writable($fileToEdit_dir)) {
+                die("<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>");
+            }
 
-        if ($_GET['loc_id'] != 1) {
-            ?>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group" id="themedefaults">
-                        <label for="theme_defaults">Use Defaults</label>
-                        <div class="checkbox">
-                            <label>
-                                <input class="theme_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="theme_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selThemeDefaults;} ?> data-toggle="toggle">
-                            </label>
+            if ($_GET['loc_id'] != 1) {
+                ?>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group" id="themedefaults">
+                            <label for="theme_defaults">Use Defaults</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="theme_defaults_checkbox defaults-toggle"
+                                           id="<?php echo $_GET['loc_id'] ?>" name="theme_defaults"
+                                           type="checkbox" <?php if ($_GET['loc_id']) {
+                                        echo $selThemeDefaults;
+                                    } ?> data-toggle="toggle">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr>
+                <hr>
 
-            <?php
-        }
+                <?php
+            }
 
             echo "<form name='editForm' class='dirtyForm' method='post' action=''>";
 
             //Check if dynamic-style.php variables exist
             if (isset($themeCssSelectors) && isset($themeCssProperties)){
-                echo "<label for='edit_base_theme_options'><i class='fa fa-paint-brush'></i>&nbsp;&nbsp;Theme Colors</label>
+            echo "<label for='edit_base_theme_options'><i class='fa fa-paint-brush'></i>&nbsp;&nbsp;Theme Colors</label>
                         <small>&nbsp;&nbsp;Change the theme base colors.</small>";
-                echo "<div class='well'>";
+            echo "<div class='well'>";
 
-                $elementCount = 0;
+            $elementCount = 0;
 
-                foreach ($themeCssSelectors as $key => $value) {
+            foreach ($themeCssSelectors
 
-                    $elementCount ++;
+            as $key => $value) {
 
-                    //Gets themeoptions
-                    $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='".themeOption."' AND selector='".$themeCssSelectors[$key]."' AND property='".$themeCssProperties[$key]."' AND loc_id=" . $_GET['loc_id'] . " ");
-                    $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
+            $elementCount++;
 
-                    echo "<div class='row'>
+            //Gets themeoptions
+            $sqlThemeOptions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $themeCssSelectors[$key] . "' AND property='" . $themeCssProperties[$key] . "' AND loc_id=" . $_GET['loc_id'] . ";");
+            $rowThemeOptions = mysqli_fetch_array($sqlThemeOptions, MYSQLI_ASSOC);
+
+            echo "<div class='row'>
                         <div class='col-lg-4'>
-                            <label for='cssvalue[]'>".$themeCssLabels[$key]."</label>
+                            <label for='cssvalue[]'>" . $themeCssLabels[$key] . "</label>
                             <div class='input-group'>
-                                <input type='color' data-toggle='tooltip' data-original-title='Click to change color' class='form-control' name='cssvalue[]' id='cssval-".$elementCount."' value='".$rowThemeOptions['cssvalue']."'>
-                                <input type='hidden' name='selector[]' value='".$themeCssSelectors[$key]."'>
-                                <input type='hidden' name='property[]' value='".$themeCssProperties[$key]."'>";
-                                ?>
-                                <span class="input-group-btn">
-                                    <button type="button" data-toggle='tooltip' data-original-title='Reset color' class="btn btn-default" id="reset-color" title='Reset' onclick="document.getElementById('<?php echo "cssval-".$elementCount; ?>').value='#000000';"><i class="fa fa-refresh"></i></button>
+                                <input type='color' data-toggle='tooltip' data-original-title='Click to change color' class='form-control' name='cssvalue[]' id='cssval-" . $elementCount . "' value='" . $rowThemeOptions['cssvalue'] . "'>
+                                <input type='hidden' name='selector[]' value='" . $themeCssSelectors[$key] . "'>
+                                <input type='hidden' name='property[]' value='" . $themeCssProperties[$key] . "'>";
+            ?>
+            <span class="input-group-btn">
+                                    <button type="button" data-toggle='tooltip' data-original-title='Reset color'
+                                            class="btn btn-default" id="reset-color" title='Reset'
+                                            onclick="document.getElementById('<?php echo "cssval-" . $elementCount; ?>').value='#000000';"><i
+                                                class="fa fa-refresh"></i></button>
                                 </span>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
+        </div>
+        <br>
+    </div>
+    </div>
 
-                <?php
-                }
+    <?php
+}
 
-                echo "<input type='hidden' name='element_count' value='".$elementCount."'>";
-                echo "</div>";
-            }
+    echo "<input type='hidden' name='element_count' value='" . $elementCount . "'>";
+    echo "</div>";
+}
 
-            ?>
-            <?php
-            //Only Default location can see this
-            if ($_GET['loc_id'] == 1){
-            ?>
-            <div class="form-group">
-                <label for="edit_file"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo $fileToEdit_dir; ?></label>
-                <small>
-                    &nbsp;&nbsp;Override theme CSS styles or add your own CSS.
-                </small>
-                <textarea id="edit_file" class="form-control" name="edit_file" rows="60"><?php echo $fileData; ?></textarea>
-            </div>
-            <?php
-            }
-            ?>
-            <div class="form-group">
+?>
+<?php
+//Only Default location can see this
+if ($_GET['loc_id'] == 1) {
+    ?>
+    <div class="form-group">
+        <label for="edit_file"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo $fileToEdit_dir; ?></label>
+        <small>
+            &nbsp;&nbsp;Override theme CSS styles or add your own CSS.
+        </small>
+        <textarea id="edit_file" class="form-control" name="edit_file" rows="60"><?php echo $fileData; ?></textarea>
+    </div>
+    <?php
+}
+?>
+    <div class="form-group">
                 <span><small>
                     <?php
                     //if (file_exists($fileToEdit_dir)) {
@@ -203,47 +212,48 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                     //}
                     ?>
                 </small></span>
-            </div>
+    </div>
 
-            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-            <input type="hidden" name="save_main" value="true"/>
-            <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-            <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
+    <input type="hidden" name="save_main" value="true"/>
+    <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
+    </button>
+    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
-        </form>
+    </form>
 
     </div>
-</div><!--close main container-->
+    </div><!--close main container-->
 
-<!--CodeMirror JS & CSS -->
-<script type="text/javascript" language="javascript">
-    $(document).ready(function(){
-        if ($('#edit_file').length){
-            var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
-                lineNumbers: true,
-                mode: 'text/css',
-                autofocus: false,
-                matchBrackets: true,
-                styleActiveLine: true,
-                indentWithTabs: true
-            });
-            setTimeout(function() {
-                editor.refresh();
-            }, 300);
+    <!--CodeMirror JS & CSS -->
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            if ($('#edit_file').length) {
+                var editor = CodeMirror.fromTextArea(document.getElementById('edit_file'), {
+                    lineNumbers: true,
+                    mode: 'text/css',
+                    autofocus: false,
+                    matchBrackets: true,
+                    styleActiveLine: true,
+                    indentWithTabs: true
+                });
+                setTimeout(function () {
+                    editor.refresh();
+                }, 300);
+            }
+        });
+    </script>
+    <style type="text/css">
+        .CodeMirror {
+            position: relative;
+            border: 1px solid #eee;
+            overflow: hidden;
+            background: #fff;
+            height: 500px;
+            width: 100%;
         }
-    });
-</script>
-<style type="text/css">
-    .CodeMirror {
-        position: relative;
-        border: 1px solid #eee;
-        overflow: hidden;
-        background: #fff;
-        height: 500px;
-        width: 100%;
-    }
-</style>
+    </style>
 <?php
 
 require_once(__DIR__ . '/includes/footer.inc.php');

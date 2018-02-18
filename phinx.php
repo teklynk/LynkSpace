@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/config/dbconn.php';
+require __DIR__ . '/config/dbconn.php';
 
 return
     [

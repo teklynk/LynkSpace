@@ -17,22 +17,22 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $databasesDefaultsID = $_GET['id'];
         $databasesDefaultsChecked = $_GET['checked'];
 
-        $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='".$databasesSubSection."' AND loc_id=" . $databasesDefaultsID . ";");
+        $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='" . $databasesSubSection . "' AND loc_id=" . $databasesDefaultsID . ";");
         $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
         if ($rowSection['loc_id'] == $databasesDefaultsID && $rowSection['section'] == $databasesSubSection) {
             //Do Update
-            $databasesDefaultsUpdate = "UPDATE sections_customers SET use_defaults='" . $databasesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='".$databasesSubSection."' AND loc_id=" . $databasesDefaultsID . ";";
+            $databasesDefaultsUpdate = "UPDATE sections_customers SET use_defaults='" . $databasesDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $databasesSubSection . "' AND loc_id=" . $databasesDefaultsID . ";";
             mysqli_query($db_conn, $databasesDefaultsUpdate);
         } else {
             //Do Insert
-            $databasesDefaultsInsert = "INSERT INTO sections_customers (section, use_defaults, author_name, datetime, loc_id) VALUES ('".$databasesSubSection."', '".$databasesDefaultsChecked."', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
+            $databasesDefaultsInsert = "INSERT INTO sections_customers (section, use_defaults, author_name, datetime, loc_id) VALUES ('" . $databasesSubSection . "', '" . $databasesDefaultsChecked . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
             mysqli_query($db_conn, $databasesDefaultsInsert);
         }
 
         mysqli_close($db_conn);
 
-        die('Database Defaults ' . $databasesDefaultsID . ' - ' . $databasesSubSection .  ' set ' . $databasesDefaultsChecked);
+        die('Database Defaults ' . $databasesDefaultsID . ' - ' . $databasesSubSection . ' set ' . $databasesDefaultsChecked);
     }
 
 } else {

@@ -25,7 +25,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
             mysqli_query($db_conn, $socialmediaDefaultsUpdate);
         } else {
             //Do Insert
-            $socialmediaDefaultsInsert = "INSERT INTO socialmedia (heading, facebook, twitter, pinterest, google, instagram, youtube, tumblr, use_defaults, loc_id) VALUES ('', '', '', '', '', '', '', '','true', " . $_SESSION['loc_id'] . ")";
+            $socialmediaDefaultsInsert = "INSERT INTO socialmedia (heading, facebook, twitter, pinterest, google, instagram, youtube, tumblr, use_defaults, loc_id) VALUES ('', '', '', '', '', '', '', '','true', " . $_SESSION['loc_id'] . ");";
             mysqli_query($db_conn, $socialmediaDefaultsInsert);
         }
 

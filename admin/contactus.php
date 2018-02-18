@@ -41,7 +41,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $contactInsert);
     }
 
-    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
+    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
     echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 
 }
@@ -58,7 +58,10 @@ if ($_GET['update'] == 'true') {
                 <li class="active">Contact</li>
             </ol>
             <h1 class="page-header">
-                Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom" title="Preview the Contact Page" class="btn btn-info" onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>#contact')"><i class="fa fa-eye"></i></button>
+                Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom"
+                                     title="Preview the Contact Page" class="btn btn-info"
+                                     onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>#contact')">
+                    <i class="fa fa-eye"></i></button>
             </h1>
         </div>
     </div>
@@ -66,7 +69,7 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-8">
             <?php
-            if ($errorMsg !="") {
+            if ($errorMsg != "") {
                 echo $errorMsg;
             } else {
                 echo $pageMsg;
@@ -88,7 +91,11 @@ if ($_GET['update'] == 'true') {
                                 <label>Use Defaults</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input class="contact_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="contact_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                        <input class="contact_defaults_checkbox defaults-toggle"
+                                               id="<?php echo $_GET['loc_id'] ?>" name="contact_defaults"
+                                               type="checkbox" <?php if ($_GET['loc_id']) {
+                                            echo $selDefaults;
+                                        } ?> data-toggle="toggle">
                                     </label>
                                 </div>
                             </div>
@@ -101,64 +108,84 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group required">
                     <label for="contact_heading">Heading</label>
-                    <input type="text" class="form-control count-text" name="contact_heading" maxlength="255" value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
+                    <input type="text" class="form-control count-text" name="contact_heading" maxlength="255"
+                           value="<?php echo $rowContact['heading']; ?>" placeholder="Contact Me" autofocus required>
                 </div>
                 <div class="form-group">
                     <label for="contact_introtext">Intro Text</label>
-                    <textarea class="form-control count-text" name="contact_introtext" rows="3" maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
+                    <textarea class="form-control count-text" name="contact_introtext" rows="3"
+                              maxlength="999"><?php echo $rowContact['introtext']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="contact_mapcode">Map Embed Code</label>
-                    <small>&nbsp;&nbsp;<a href="//support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">How to embed a Google Map</a>&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></small>
-                    <textarea class="form-control count-text" name="contact_mapcode" rows="3" maxlength="999" placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
+                    <small>&nbsp;&nbsp;<a
+                                href="//support.google.com/maps/answer/144361?co=GENIE.Platform%3DDesktop&hl=en"
+                                target="_blank">How to embed a Google Map</a>&nbsp;&nbsp;<i class="fa fa-external-link"
+                                                                                            aria-hidden="true"></i>
+                    </small>
+                    <textarea class="form-control count-text" name="contact_mapcode" rows="3" maxlength="999"
+                              placeholder="Map embed code goes here"><?php echo $rowContact['mapcode']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="contact_address">Street Address</label>
-                    <input type="text" class="form-control count-text count-text" name="contact_address" maxlength="255" value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
+                    <input type="text" class="form-control count-text count-text" name="contact_address" maxlength="255"
+                           value="<?php echo $rowContact['address']; ?>" placeholder="123 Main Street">
                 </div>
                 <div class="form-group">
                     <label for="contact_city">City</label>
-                    <input type="text" class="form-control count-text" name="contact_city" maxlength="100" value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
+                    <input type="text" class="form-control count-text" name="contact_city" maxlength="100"
+                           value="<?php echo $rowContact['city']; ?>" placeholder="Beverly Hills">
                 </div>
                 <div class="form-group">
                     <label for="contact_state">State</label>
-                    <input type="text" class="form-control count-text" name="contact_state" maxlength="100" value="<?php echo $rowContact['state']; ?>" placeholder="CA">
+                    <input type="text" class="form-control count-text" name="contact_state" maxlength="100"
+                           value="<?php echo $rowContact['state']; ?>" placeholder="CA">
                 </div>
                 <div class="form-group">
                     <label for="contact_zipcode">ZIP Code</label>
-                    <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="10" value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
+                    <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="10"
+                           value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
                     <label for="contact_phone">Phone</label>
-                    <input class="form-control count-text" name="contact_phone" maxlength="100" value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
+                    <input class="form-control count-text" name="contact_phone" maxlength="100"
+                           value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
                 </div>
                 <div class="form-group">
                     <label for="contact_hours">Hours</label>
-                    <textarea class="form-control count-text" name="contact_hours" rows="3" maxlength="255" placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
+                    <textarea class="form-control count-text" name="contact_hours" rows="3" maxlength="255"
+                              placeholder="Monday - Friday: 9-5, Saturday: 9-3, Sunday: Closed"><?php echo $rowContact['hours']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="contact_email">Main Contact Email</label>
-                    <input class="form-control count-text" name="contact_email" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_email"
+                           pattern="<?php echo emailValidationPattern; ?>" maxlength="100"
+                           value="<?php echo $rowContact['email']; ?>" type="email" placeholder="john.doe@email.com">
                 </div>
                 <div class="form-group">
                     <label for="contact_sendtoemail">Comment Form Email</label>
-                    <input class="form-control count-text" name="contact_sendtoemail" pattern="<?php echo emailValidationPattern; ?>" maxlength="100" value="<?php echo $rowContact['sendtoemail']; ?>" type="email" placeholder="john.doe@email.com">
+                    <input class="form-control count-text" name="contact_sendtoemail"
+                           pattern="<?php echo emailValidationPattern; ?>" maxlength="100"
+                           value="<?php echo $rowContact['sendtoemail']; ?>" type="email"
+                           placeholder="john.doe@email.com">
                 </div>
 
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])) . " By: ".$rowContact['author_name']; ?></small></span>
+                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])) . " By: " . $rowContact['author_name']; ?></small></span>
                 </div>
 
                 <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+                <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
+                    Save Changes
+                </button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
             </form>
 
         </div>
     </div>
-<!--modal preview window-->
+    <!--modal preview window-->
 <?php
 //Modal preview box
 showModalPreview("webpageDialog");

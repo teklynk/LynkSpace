@@ -4,7 +4,8 @@ use Phinx\Migration\AbstractMigration;
 
 class SearchPlaceholderColumnsAndValues extends AbstractMigration
 {
-    public function up(){
+    public function up()
+    {
         $table = $this->table('config');
         $table->addColumn('searchplaceholder_ls2pac', 'text', array('after' => 'searchlabel_ls2pac'))
             ->update();
@@ -12,7 +13,9 @@ class SearchPlaceholderColumnsAndValues extends AbstractMigration
             ->update();
         $this->query('UPDATE config SET searchplaceholder_ls2kids="Find children\'s book and more.", searchplaceholder_ls2pac="Find anything at the library. Start here.";');
     }
-    public function down(){
+
+    public function down()
+    {
         $table = $this->table('config');
         $table->removeColumn('searchplaceholder_ls2pac')
             ->update();

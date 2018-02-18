@@ -33,7 +33,7 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $featuredInsert);
     }
 
-    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
+    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
     echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
 }
 
@@ -55,7 +55,7 @@ if ($_GET['update'] == 'true') {
     <div class="row">
         <div class="col-lg-12">
             <?php
-            if ($errorMsg !="") {
+            if ($errorMsg != "") {
                 echo $errorMsg;
             } else {
                 echo $pageMsg;
@@ -78,7 +78,11 @@ if ($_GET['update'] == 'true') {
                                 <label>Use Defaults</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input class="featured_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="featured_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                        <input class="featured_defaults_checkbox defaults-toggle"
+                                               id="<?php echo $_GET['loc_id'] ?>" name="featured_defaults"
+                                               type="checkbox" <?php if ($_GET['loc_id']) {
+                                            echo $selDefaults;
+                                        } ?> data-toggle="toggle">
                                     </label>
                                 </div>
                             </div>
@@ -91,16 +95,19 @@ if ($_GET['update'] == 'true') {
                 ?>
                 <div class="form-group required">
                     <label>Heading</label>
-                    <input type="text" class="form-control count-text" name="featured_heading" maxlength="255" value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" autofocus required>
+                    <input type="text" class="form-control count-text" name="featured_heading" maxlength="255"
+                           value="<?php echo $rowFeatured['heading']; ?>" placeholder="Welcome" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Intro Title</label>
-                    <input type="text" class="form-control count-text" name="featured_introtext" maxlength="255" value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
+                    <input type="text" class="form-control count-text" name="featured_introtext" maxlength="255"
+                           value="<?php echo $rowFeatured['introtext']; ?>" placeholder="John Doe">
                 </div>
                 <hr/>
                 <div class="form-group">
                     <label>Text / HTML</label>
-                    <textarea class="form-control tinymce" name="featured_content" rows="20"><?php echo $rowFeatured['content']; ?></textarea>
+                    <textarea class="form-control tinymce" name="featured_content"
+                              rows="20"><?php echo $rowFeatured['content']; ?></textarea>
                 </div>
 
                 <div class="form-group">
@@ -109,7 +116,9 @@ if ($_GET['update'] == 'true') {
 
                 <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+                <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
+                    Save Changes
+                </button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
             </form>
         </div>

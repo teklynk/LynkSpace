@@ -17,7 +17,8 @@ class AttemptsTable extends AbstractMigration
         $this->execute('ALTER TABLE `login_attempts` MODIFY COLUMN `datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
     }
 
-    public function down(){
+    public function down()
+    {
         $exists = $this->hasTable('login_attempts');
         if ($exists) {
             $table = $this->table('login_attempts');

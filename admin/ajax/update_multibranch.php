@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
         $multibranchActiveChecked = $_GET['checked'];
 
         if ($multibranchActiveID) {
-            $multibranchActiveUpdate = "UPDATE config SET multibranch='" . $multibranchActiveChecked . "' ";
+            $multibranchActiveUpdate = "UPDATE config SET multibranch='" . $multibranchActiveChecked . "';";
         }
 
         mysqli_query($db_conn, $multibranchActiveUpdate);

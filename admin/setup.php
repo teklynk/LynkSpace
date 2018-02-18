@@ -15,7 +15,7 @@ if (isset($rowLocationMaxID[0])) {
 }
 
 //Get location table columns
-$sqlLocation = mysqli_query($db_conn,"SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+$sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
 $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
 //Get setup table columns
@@ -38,9 +38,9 @@ if (!empty($_POST['site_title'])) {
 
     //use default logo
     if ($_POST['logo_defaults'] == 'on') {
-        $_POST['logo_defaults']  = 'true';
+        $_POST['logo_defaults'] = 'true';
     } else {
-        $_POST['logo_defaults']  = 'false';
+        $_POST['logo_defaults'] = 'false';
     }
 
     //Always set default location to active/true
@@ -81,7 +81,7 @@ if (!empty($_POST['site_title'])) {
     unset($_SESSION['loc_list']);
     $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
+    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
     echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -95,7 +95,7 @@ if ($_GET['update'] == 'true') {
         "confirm",
         "Delete Location?",
         "Are you sure you want to delete this location?",
-        "setup.php?loc_id=".$_GET['loc_id']."&deleteloc=".$_GET['loc_id']."&confirm=yes",
+        "setup.php?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes",
         false
     );
 }
@@ -115,7 +115,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         unset($_SESSION['loc_list']);
         $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-        header("Location: setup.php?loc_id=1",  true,  301);
+        header("Location: setup.php?loc_id=1", true, 301);
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
     }
 }
@@ -147,7 +147,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
             $isActive_default2 = '';
             $errorMsg = '';
 
-            if ($errorMsg !="") {
+            if ($errorMsg != "") {
                 echo $errorMsg;
             } else {
                 echo $pageMsg;
@@ -216,7 +216,9 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group" id="site_options">
-                                        <button type="button" class="delete_location btn btn-primary" name="site_options" onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                        <button type="button" class="delete_location btn btn-primary"
+                                                name="site_options"
+                                                onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                             <i class='fa fa-fw fa-edit'></i> Site Options
                                         </button>
                                         <small>
@@ -224,7 +226,9 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         </small>
                                     </div>
                                     <div class="form-group" id="file_editor">
-                                        <button type="button" data-toggle="tooltip" class="delete_location btn btn-primary" name="file_editor" onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                        <button type="button" data-toggle="tooltip"
+                                                class="delete_location btn btn-primary" name="file_editor"
+                                                onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
                                             <i class='fa fa-fw fa-edit'></i> Theme Editor
                                         </button>
                                         <small>
@@ -233,7 +237,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     </div>
                                 </div>
                             </div>
-                                <?php
+                            <?php
 
                         }
 
@@ -244,7 +248,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group" id="new_location">
-                                        <button type="button" class="btn btn-primary" onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Location</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="window.location='setup.php?newlocation=true&loc_id=<?php echo $locationNewID; ?>';">
+                                            <i class='fa fa-fw fa-plus'></i> Add a New Location
+                                        </button>
                                         <small>
                                             &nbsp;&nbsp;Add a new branch / location to the website.
                                         </small>
@@ -255,7 +262,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group" id="view_groups_location">
-                                        <button type="button" class="btn btn-primary" onclick="showMyModal('Locations and Groups', 'locationgroups.php');"><i class='fa fa-fw fa-eye'></i> View Locations and Groups</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="showMyModal('Locations and Groups', 'locationgroups.php');"><i
+                                                    class='fa fa-fw fa-eye'></i> View Locations and Groups
+                                        </button>
                                         <small>
                                             &nbsp;&nbsp;View a list of groups and the locations in those groups.
                                         </small>
@@ -271,7 +281,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group" id="delete_location">
-                                        <button type="button" class="delete_location btn btn-danger" name="delete_location" data-toggle="tooltip" data-original-title="Use Carefully!" data-placement="top" onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                        <button type="button" class="delete_location btn btn-danger"
+                                                name="delete_location" data-toggle="tooltip"
+                                                data-original-title="Use Carefully!" data-placement="top"
+                                                onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
                                             <i class='fa fa-fw fa-trash'></i> Delete this Location
                                         </button>
                                         <small>
@@ -293,7 +306,11 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         <label>Active</label>
                                         <div class="checkbox">
                                             <label>
-                                                <input class="location_status_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="location_status" type="checkbox" <?php if ($_GET['loc_id']) {echo $isActive_location;} ?> data-toggle="toggle">
+                                                <input class="location_status_checkbox"
+                                                       id="<?php echo $_GET['loc_id'] ?>" name="location_status"
+                                                       type="checkbox" <?php if ($_GET['loc_id']) {
+                                                    echo $isActive_location;
+                                                } ?> data-toggle="toggle">
                                             </label>
                                             <small>
                                                 &nbsp;&nbsp;Make this location active.
@@ -314,19 +331,23 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
                 <div class="form-group required">
                     <label>Site Title</label>
-                    <input type="text" class="form-control count-text" name="site_title" maxlength="255" value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
+                    <input type="text" class="form-control count-text" name="site_title" maxlength="255"
+                           value="<?php echo $rowSetup['title']; ?>" placeholder="My Website" autofocus required>
                 </div>
                 <div class="form-group">
                     <label>Author</label>
-                    <input type="text" class="form-control count-text" name="site_author" maxlength="255" value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
+                    <input type="text" class="form-control count-text" name="site_author" maxlength="255"
+                           value="<?php echo $rowSetup['author']; ?>" placeholder="John Doe">
                 </div>
                 <div class="form-group">
                     <label for="site_keywords">Keywords</label>
-                    <textarea class="form-control count-text" name="site_keywords" rows="3" maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
+                    <textarea class="form-control count-text" name="site_keywords" rows="3"
+                              maxlength="999"><?php echo $rowSetup['keywords']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="site_description">Description</label>
-                    <textarea class="form-control count-text" name="site_description" rows="3" maxlength="999"><?php echo $rowSetup['description']; ?></textarea>
+                    <textarea class="form-control count-text" name="site_description" rows="3"
+                              maxlength="999"><?php echo $rowSetup['description']; ?></textarea>
                 </div>
                 <hr/>
 
@@ -334,7 +355,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     <div class="col-lg-12">
                         <div class="form-group required">
                             <label for="location_name">Location Name
-                            <input type="text" class="form-control count-text" name="location_name" maxlength="255" value="<?php echo $rowLocation['name']; ?>" required></label>
+                                <input type="text" class="form-control count-text" name="location_name" maxlength="255"
+                                       value="<?php echo $rowLocation['name']; ?>" required></label>
                         </div>
                     </div>
                 </div>
@@ -343,7 +365,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     ?>
                     <div class="form-group">
                         <label for="location_type">Location Group</label>
-                        <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="location_type" id="location_type">
+                        <select class="form-control selectpicker show-tick" data-container="body"
+                                data-dropup-auto="false" data-size="10" name="location_type" id="location_type">
                             <?php echo getLocGroups($rowLocation['type']); ?>
                         </select>
                     </div>
@@ -364,7 +387,10 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         <label for="logo_defaults">Use Defaults Logo</label>
                                         <div class="checkbox">
                                             <label for="logo_defaults">
-                                                <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>" name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selLogoDefaults;} ?> data-toggle="toggle">
+                                                <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>"
+                                                       name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                                                    echo $selLogoDefaults;
+                                                } ?> data-toggle="toggle">
                                             </label>
                                         </div>
                                     </div>
@@ -374,11 +400,14 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         }
                         ?>
                         <div class="form-group">
-                            <img src="<?php echo $logo; ?>" id="site_logo_preview" style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
+                            <img src="<?php echo $logo; ?>" id="site_logo_preview"
+                                 style="max-width:140px; height:auto; display:block; background-color: #ccc;"/>
                         </div>
                         <div class="form-group">
                             <label for="site_logo">Choose a Logo</label>
-                            <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="site_logo" id="site_logo" title='Set the logo'>
+                            <select class="form-control selectpicker show-tick" data-container="body"
+                                    data-dropup-auto="false" data-size="10" name="site_logo" id="site_logo"
+                                    title='Set the logo'>
                                 <option value="">None</option>
                                 <?php
                                 getImageDropdownList($_GET['loc_id'], image_dir, $rowSetup['logo']);
@@ -394,7 +423,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="site_config">PAC Config</label>
-                            <input type="text" class="form-control count-text" name="site_config" maxlength="10" value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
+                            <input type="text" class="form-control count-text" name="site_config" maxlength="10"
+                                   value="<?php echo $rowSetup['config']; ?>" placeholder="1234">
                         </div>
                     </div>
                 </div>
@@ -405,23 +435,28 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <label>PAC Search Options</label>
                             <div class="checkbox">
                                 <label for="ls2pac">
-                                    <input class="searchopt_checkbox ls2pac_active" id="ls2pac" name="ls2pac" type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
+                                    <input class="searchopt_checkbox ls2pac_active" id="ls2pac" name="ls2pac"
+                                           type="checkbox" <?php echo $isActive_ls2pac; ?> data-toggle="toggle">LS2 PAC
                                 </label>
                             </div>
                             <div class="radio">
                                 <label for="defaultsearch">
-                                    <input class="searchopt_radio ls2pac_default" name="defaultsearch" type="radio" value="1" <?php echo $isActive_default1; ?>>Use as Default
+                                    <input class="searchopt_radio ls2pac_default" name="defaultsearch" type="radio"
+                                           value="1" <?php echo $isActive_default1; ?>>Use as Default
                                 </label>
                             </div>
                             <h1></h1>
                             <div class="checkbox">
                                 <label for="ls2kids">
-                                    <input class="searchopt_checkbox ls2kids_active" id="ls2kids" name="ls2kids" type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2 Kids
+                                    <input class="searchopt_checkbox ls2kids_active" id="ls2kids" name="ls2kids"
+                                           type="checkbox" <?php echo $isActive_ls2kids; ?> data-toggle="toggle">LS2
+                                    Kids
                                 </label>
                             </div>
                             <div class="radio">
                                 <label for="defaultsearch">
-                                    <input class="searchopt_radio ls2kids_default" name="defaultsearch" type="radio" value="2" <?php echo $isActive_default2; ?>>Use as Default
+                                    <input class="searchopt_radio ls2kids_default" name="defaultsearch" type="radio"
+                                           value="2" <?php echo $isActive_default2; ?>>Use as Default
                                 </label>
                             </div>
                         </div>
@@ -436,7 +471,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
                 <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
+                <button type="submit" name="setup_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                    Changes
                 </button>
                 <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -446,22 +482,22 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
     </div>
 
 <?php
-    //Modal preview box
-    showModalPreview("webpageDialog");
+//Modal preview box
+showModalPreview("webpageDialog");
 ?>
 
     <!-- Modal javascript logic -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#confirm').on('hidden.bs.modal', function(){
-                setTimeout(function(){
-                    window.location.href='setup.php?loc_id=1';
+        $(document).ready(function () {
+            $('#confirm').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    window.location.href = 'setup.php?loc_id=1';
                 }, 100);
             });
 
             var url = window.location.href;
             if (url.indexOf('deleteloc') != -1 && url.indexOf('confirm') == -1) {
-                setTimeout(function(){
+                setTimeout(function () {
                     $('#confirm').modal('show');
                 }, 100);
             }

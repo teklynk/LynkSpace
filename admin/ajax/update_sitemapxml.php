@@ -37,7 +37,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         fwrite($sitemapfile, $writeline);
 
         //get pages from config
-        $sqlpages = mysqli_query($db_conn, "SELECT id, datetime, loc_id FROM pages WHERE active='true' ORDER BY id DESC");
+        $sqlpages = mysqli_query($db_conn, "SELECT id, datetime, loc_id FROM pages WHERE active='true' ORDER BY id DESC;");
         while ($rowPages = mysqli_fetch_array($sqlpages, MYSQLI_ASSOC)) {
             $pageId = $rowPages['id'];
             $locId = $rowPages['loc_id'];
@@ -56,7 +56,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         }
 
         //get databases from config
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, section, cust_loc_id FROM category_customers ORDER BY id DESC");
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, section, cust_loc_id FROM category_customers ORDER BY id DESC;");
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers, MYSQLI_ASSOC)) {
             $custCatId = $rowCustomers['id'];
             $custSection = $rowCustomers['section'];
@@ -73,7 +73,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         }
 
         //get locations from config
-        $sqlLocations = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY id DESC");
+        $sqlLocations = mysqli_query($db_conn, "SELECT id, name FROM locations WHERE active='true' ORDER BY id DESC;");
         while ($rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC)) {
             $locId = $rowLocations['id'];
             $locName = $rowLocations['name'];

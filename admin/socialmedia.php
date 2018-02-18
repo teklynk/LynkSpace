@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
     }
 
-    header("Location: socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true",  true,  301);
+    header("Location: socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
     echo "<script>window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
 }
 
@@ -64,7 +64,7 @@ if ($_GET['update'] == 'true') {
 <div class="row">
     <div class="col-lg-8">
         <?php
-        if ($errorMsg !="") {
+        if ($errorMsg != "") {
             echo $errorMsg;
         } else {
             echo $pageMsg;
@@ -86,7 +86,11 @@ if ($_GET['update'] == 'true') {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="social_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="social_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="social_defaults_checkbox defaults-toggle"
+                                           id="<?php echo $_GET['loc_id'] ?>" name="social_defaults"
+                                           type="checkbox" <?php if ($_GET['loc_id']) {
+                                        echo $selDefaults;
+                                    } ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -99,40 +103,59 @@ if ($_GET['update'] == 'true') {
             ?>
             <div class="form-group required">
                 <label>Heading</label>
-                <input type="text" class="form-control" name="social_heading" maxlength="255" value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" autofocus required>
+                <input type="text" class="form-control" name="social_heading" maxlength="255"
+                       value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" autofocus required>
             </div>
             <div class="form-group">
                 <label>Facebook</label>
-                <input class="form-control" name="social_facebook" maxlength="255" value="<?php echo $rowSocial['facebook']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.facebook.com/username">
+                <input class="form-control" name="social_facebook" maxlength="255"
+                       value="<?php echo $rowSocial['facebook']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.facebook.com/username">
             </div>
             <div class="form-group">
                 <label>Twitter</label>
-                <input class="form-control" name="social_twitter" maxlength="255" value="<?php echo $rowSocial['twitter']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.twitter.com/username">
+                <input class="form-control" name="social_twitter" maxlength="255"
+                       value="<?php echo $rowSocial['twitter']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.twitter.com/username">
             </div>
             <div class="form-group">
                 <label>Google+</label>
-                <input class="form-control" name="social_google" maxlength="255" value="<?php echo $rowSocial['google']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://plus.google.com/8675309/posts">
+                <input class="form-control" name="social_google" maxlength="255"
+                       value="<?php echo $rowSocial['google']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>"
+                       placeholder="https://plus.google.com/8675309/posts">
             </div>
             <div class="form-group">
                 <label>Pinterest</label>
-                <input class="form-control" name="social_pinterest" maxlength="255" value="<?php echo $rowSocial['pinterest']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.pinterest.com/username/">
+                <input class="form-control" name="social_pinterest" maxlength="255"
+                       value="<?php echo $rowSocial['pinterest']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.pinterest.com/username/">
             </div>
             <div class="form-group">
                 <label>Instagram</label>
-                <input class="form-control" name="social_instagram" maxlength="255" value="<?php echo $rowSocial['instagram']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.instagram.com/username/">
+                <input class="form-control" name="social_instagram" maxlength="255"
+                       value="<?php echo $rowSocial['instagram']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.instagram.com/username/">
             </div>
             <div class="form-group">
                 <label>Tumblr</label>
-                <input class="form-control" name="social_tumblr" maxlength="255" value="<?php echo $rowSocial['tumblr']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://username.tumblr.com/">
+                <input class="form-control" name="social_tumblr" maxlength="255"
+                       value="<?php echo $rowSocial['tumblr']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://username.tumblr.com/">
             </div>
             <div class="form-group">
                 <label>YouTube</label>
-                <input class="form-control" name="social_youtube" maxlength="255" value="<?php echo $rowSocial['youtube']; ?>" type="url" pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.youtube.com/user/username">
+                <input class="form-control" name="social_youtube" maxlength="255"
+                       value="<?php echo $rowSocial['youtube']; ?>" type="url"
+                       pattern="<?php echo urlValidationPattern; ?>"
+                       placeholder="https://www.youtube.com/user/username">
             </div>
 
             <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-            <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
+            <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
+                Save Changes
+            </button>
             <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
 
         </form>

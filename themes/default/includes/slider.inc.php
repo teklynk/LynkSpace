@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
 }
 echo "<div class='grad-blue themebase-bgcolor container-fluid slider'>";
 
-echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='".carouselSpeed."'>";
+echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='" . carouselSpeed . "'>";
 
 getSlider($_GET['loc_id'], "slide");
 

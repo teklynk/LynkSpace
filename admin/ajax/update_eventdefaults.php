@@ -25,7 +25,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
             mysqli_query($db_conn, $eventDefaultsUpdate);
         } else {
             //Do Insert
-            $eventDefaultsInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('', '', '', '', '', '".$eventDefaultsChecked."', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+            $eventDefaultsInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('', '', '', '', '', '" . $eventDefaultsChecked . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
             mysqli_query($db_conn, $eventDefaultsInsert);
         }
 

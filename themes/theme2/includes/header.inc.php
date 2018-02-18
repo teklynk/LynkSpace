@@ -17,7 +17,7 @@ if (!defined('inc_access')) {
     ?>
 
     <script type="text/javascript" language="javascript">
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             var scroll = $(window).scrollTop();
             if (scroll >= 150) {
                 $("#topNav").addClass("nav-shrink");
@@ -28,9 +28,11 @@ if (!defined('inc_access')) {
     </script>
 
     <!-- CSS Template -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/summertime-style.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/summertime-style.min.css?v=<?php echo ysmVersion; ?>">
     <!-- Custom over-write  -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/css/custom-style.min.css?v=<?php echo ysmVersion; ?>">
 
 </head>
 
@@ -40,10 +42,12 @@ if (!defined('inc_access')) {
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-danger fade in" role="alert" >
+            <div class="alert alert-danger fade in" role="alert">
                 <h4>Did you know that your Internet Explorer is out of date?</h4>
-                <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
-                <p><a href="https://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>
+                <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit
+                    the Chrome download page, click the Get Chrome button below.</p>
+                <p><a href="https://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get
+                    Chrome</a></p>
             </div>
         </div>
     </div>
@@ -54,12 +58,12 @@ if (!defined('inc_access')) {
 <?php
 
 //only show on index.php/homepage
-if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'){
+if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
 
     getEvents($_GET['loc_id']);
 
     if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
-        echo "<div class='alert fade in notify-bar'><h3 class='text-white'>". $eventAlert ."</h3><button type='button' class='close alert_close_x' data-dismiss='alert'>&times;</button>
+        echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'>&times;</button>
         <div><button type='button' class='btn btn-link notify-close text-white' data-dismiss='alert'>(Click to close)</button></div></div>";
     } else {
         echo "<div class='alert notify-bar hidden'></div>";
@@ -86,7 +90,9 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'){
         <?php
         if (!empty($setupLogo)) {
             ?>
-            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id'], 'relative'); ?>" alt="Home" title="Home" border="0"/></a>
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
+                        class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id'], 'relative'); ?>"
+                        alt="Home" title="Home" border="0"/></a>
             <?php
         }
         ?>
