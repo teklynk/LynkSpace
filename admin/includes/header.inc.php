@@ -195,7 +195,7 @@ session_start();
             </li>
 
             <li class="dropdown user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 24); ?>"/> <?php echo ucwords($_SESSION['user_name']); ?>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class='img-circle' src="<?php echo getGravatar($_SESSION['user_email'], 24); ?>"/> <?php echo ucwords(trim($_SESSION['user_name'])); ?>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -250,7 +250,7 @@ session_start();
                     <a href="page.php?<?php echo $setLocId; ?>" title="Pages"><i class="fa fa-fw fa-file-text"></i> Pages</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'contactus.php'){echo "class='active'";}?>>
-                    <a href="contactus.php?<?php echo $setLocId; ?>" title="Contact Us"><i class="fa fa-fw fa-map-marker"></i> Contact</a>
+                    <a href="contactus.php?<?php echo $setLocId; ?>" title="Contact"><i class="fa fa-fw fa-map-marker"></i> Contact</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'socialmedia.php'){echo "class='active'";}?>>
                     <a href="socialmedia.php?<?php echo $setLocId; ?>" title="Social Media"><i class="fa fa-fw fa-share-square"></i> Social Media</a>
@@ -268,7 +268,7 @@ session_start();
                     <a href="databases.php?section=1&<?php echo $setLocId; ?>" title="Databases"><i class="fa fa-fw fa-link"></i> Databases</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'events.php'){echo "class='active'";}?>>
-                    <a href="events.php?<?php echo $setLocId; ?>" title="Events"><i class="fa fa-fw fa-calendar"></i> Alerts & Events</a>
+                    <a href="events.php?<?php echo $setLocId; ?>" title="Alerts & Events"><i class="fa fa-fw fa-calendar"></i> Alerts & Events</a>
                 </li>
                 <li <?php if (basename($_SERVER['PHP_SELF']) == 'generalinfo.php'){echo "class='active'";}?>>
                     <a href="generalinfo.php?<?php echo $setLocId; ?>" title="General Info"><i class="fa fa-fw fa-info-circle"></i> General Info</a>
