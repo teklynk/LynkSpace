@@ -46,7 +46,7 @@ if (recaptcha_secret_key && recaptcha_site_key) {
 }
 
 if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
-    $response = $reCaptcha->verifyResponse (
+    $response = $reCaptcha->verifyResponse(
         $_SERVER["REMOTE_ADDR"],
         $_POST["g-recaptcha-response"]
     );
@@ -56,7 +56,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
-        if ($response != NULL && $response->success){
+        if ($response != NULL && $response->success) {
             $sucessfulResponse = true;
         } else {
             $sucessfulResponse = false;
@@ -82,13 +82,13 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         }
 
         // open and truncate sitemap file
-        $sitemapFile = fopen(__DIR__ . "/../sitemap.xml", "w") or die("Unable to open ". __DIR__ . "/../sitemap.xml. Check file permissions");
+        $sitemapFile = fopen(__DIR__ . "/../sitemap.xml", "w") or die("Unable to open " . __DIR__ . "/../sitemap.xml. Check file permissions");
         //Clear the file sitemap file
         ftruncate($sitemapFile, 0);
         fclose($sitemapFile);
 
         // open and truncate robots.txt file
-        $robotsTxtFile = fopen(__DIR__ . "/../robots.txt", "w") or die("Unable to open ". __DIR__ . "/../robots.txt. Check file permissions");
+        $robotsTxtFile = fopen(__DIR__ . "/../robots.txt", "w") or die("Unable to open " . __DIR__ . "/../robots.txt. Check file permissions");
         //Clear the file robots.txt file
         ftruncate($robotsTxtFile, 0);
         fclose($robotsTxtFile);
@@ -198,7 +198,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Insert super admin user into users table.
-        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $username . "','" . $useremail . "', SHA1('" . $blowfishHash . $userpassword . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "')";
+        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $username . "','" . $useremail . "', SHA1('" . $blowfishHash . $userpassword . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "';)";
         mysqli_query($db_conn, $userInsert);
 
         // Wait before proceeding to the next step
@@ -208,7 +208,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         rename("install.php", "~install.old");
 
         // Redirect to admin login page
-        header("Location: index.php",  true,  301);
+        header("Location: index.php", true, 301);
         echo "<script>window.location.href='index.php';</script>"; // redirect to login page
     } else {
         die("Install Failed.");
@@ -228,32 +228,40 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
             -o-background-size: cover;
             background-size: cover;
         }
+
         .form-signin {
             max-width: 330px;
             padding: 0;
             margin: 0 auto;
         }
+
         #page-wrapper {
             background-color: transparent !important;
         }
+
         .navbar-inverse, .scrollToTop {
             display: none !important;
         }
+
         #wrapper {
             padding-left: 0 !important;
         }
+
         .login-panel {
             margin-top: 60px;
         }
+
         .login-panel img {
             margin: 20px auto;
             vertical-align: middle;
         }
+
         .login-panel .img-center {
             display: inline;
         }
+
         footer {
-            display: none!important;
+            display: none !important;
             visibility: hidden !important;
         }
     </style>
@@ -272,42 +280,60 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 <h2 class="form-signin-heading">Database Connection</h2>
                                 <div class="form-group required">
                                     <label>Database Server</label>
-                                    <input class="form-control" type="text" name="dbserver" id="dbserver" maxlength="100" autofocus autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbserver" id="dbserver"
+                                           maxlength="100" autofocus autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbusername">Database Username</label>
-                                    <input class="form-control" type="text" name="dbusername" id="dbusername" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbusername" id="dbusername"
+                                           maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbpassword">Database Password</label>
-                                    <input class="form-control" type="text" name="dbpassword" id="dbpassword" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbpassword" id="dbpassword"
+                                           maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="dbname">Database Name</label>
-                                    <input class="form-control" type="text" name="dbname" id="dbname" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="dbname" id="dbname" maxlength="100"
+                                           autocomplete="off" required>
                                 </div>
                                 <h2 class="form-signin-heading">Create an Admin user</h2>
                                 <div class="form-group required">
                                     <label for="username">Username</label>
-                                    <input class="form-control" type="text" name="username" id="user_name" maxlength="100" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="username" id="user_name"
+                                           maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="useremail">User Email</label>
-                                    <input class="form-control" type="email" name="useremail" id="user_email" maxlength="100" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="email" name="useremail" id="user_email"
+                                           maxlength="100" pattern="<?php echo emailValidationPattern; ?>"
+                                           autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="password">User Password</label>
-                                    <input class="form-control" type="text" name="userpassword" id="user_password" maxlength="100" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" data-placement="top" autocomplete="off" required>
+                                    <input class="form-control" type="text" name="userpassword" id="user_password"
+                                           maxlength="100" pattern="<?php echo passwordValidationPattern; ?>"
+                                           data-toggle="tooltip"
+                                           data-original-title="<?php echo passwordValidationTitle; ?>"
+                                           data-placement="top" autocomplete="off" required>
                                 </div>
                                 <?php if ($reCaptcha_enabled == true) { ?>
-                                    <div class="checkbox g-recaptcha" data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                    <div class="checkbox g-recaptcha"
+                                         data-sitekey=<?php echo recaptcha_site_key; ?>></div>
                                 <?php } else { ?>
                                     <div class="checkbox">
-                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot" id="not_robot" type="checkbox" required><i class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a robot</label>
+                                        <label><input title="I'm not a robot" class="checkbox" name="not_robot"
+                                                      id="not_robot" type="checkbox" required><i class="fa fa-android"
+                                                                                                 aria-hidden="true"></i>&nbsp;I'm
+                                            not a robot</label>
                                     </div>
                                 <?php } ?>
                                 <input type="hidden" name="db_install" value="true">
-                                <button class="run_installer btn btn-lg btn-primary btn-block" disabled="disabled" id="run_installer" name="install_submit" type="submit"><i class="fa fa-fw fa-cloud-upload"></i> Install</button>
+                                <button class="run_installer btn btn-lg btn-primary btn-block" disabled="disabled"
+                                        id="run_installer" name="install_submit" type="submit"><i
+                                            class="fa fa-fw fa-cloud-upload"></i> Install
+                                </button>
                                 <br/>
                             </fieldset>
                         </form>
