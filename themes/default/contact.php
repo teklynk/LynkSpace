@@ -84,7 +84,8 @@ echo "</div>";
         <div class="row row_pad contactform">
             <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" method="post" action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">
+                <form name="sentMessage" id="contactForm" method="post"
+                      action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>
@@ -95,23 +96,28 @@ echo "</div>";
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Phone Number:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" maxlength="25" placeholder="304-555-5555" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" maxlength="25"
+                                   placeholder="304-555-5555" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" pattern="<?php echo emailValidationPattern ?>" class="form-control" id="email" name="email" maxlength="255" placeholder="your@email.com" required>
+                            <input type="email" pattern="<?php echo emailValidationPattern ?>" class="form-control"
+                                   id="email" name="email" maxlength="255" placeholder="your@email.com" required>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Message:</label>
-                            <textarea rows="10" cols="100" class="form-control" id="message" name="message" maxlength="999" style="resize:none" required></textarea>
+                            <textarea rows="10" cols="100" class="form-control" id="message" name="message"
+                                      maxlength="999" style="resize:none" required></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="sendToEmail" name="sendToEmail" value="<?php echo $contactFormSendToEmail; ?>"/>
-                    <input type="hidden" id="referrer" name="referrer" value="<?php echo $_SESSION['unique_referrer']; ?>"/>
+                    <input type="hidden" id="sendToEmail" name="sendToEmail"
+                           value="<?php echo $contactFormSendToEmail; ?>"/>
+                    <input type="hidden" id="referrer" name="referrer"
+                           value="<?php echo $_SESSION['unique_referrer']; ?>"/>
                     <br>
                     <!-- For success/fail messages -->
                     <?php

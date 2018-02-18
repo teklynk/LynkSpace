@@ -5,10 +5,11 @@ if (!defined('inc_access')) {
 }
 
 //Output to browser console
-function debug_to_console($data) {
+function debug_to_console($data)
+{
     $output = $data;
 
-    if (is_array($output)){
+    if (is_array($output)) {
         $output = implode(',', $output);
     }
 
@@ -16,7 +17,8 @@ function debug_to_console($data) {
 }
 
 //Phinx migration runner
-function phinxMigration($phinxCommand, $environment){
+function phinxMigration($phinxCommand, $environment)
+{
     require __DIR__ . '/../../vendor/autoload.php';
 
     $phinxApp = new \Phinx\Console\PhinxApplication();
@@ -28,14 +30,15 @@ function phinxMigration($phinxCommand, $environment){
     $phinxTextWrapper->setOption('parser', 'PHP');
     $phinxTextWrapper->setOption('environment', $environment);
 
-    if ($phinxCommand == 'migrate'){
+    if ($phinxCommand == 'migrate') {
         $log = $phinxTextWrapper->getMigrate();
     } elseif ($phinxCommand == 'rollback') {
         $log = $phinxTextWrapper->getRollback();
     }
 }
 
-function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
+function loginAttempts($userIp, $maxAttempts, $maxTimeout)
+{
     global $db_conn;
     global $loginFailed;
 
@@ -60,7 +63,7 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
 
         } else {
 
-            if ($currentTime - $loginAttemptTime >= $maxTimeout){
+            if ($currentTime - $loginAttemptTime >= $maxTimeout) {
                 $loginFailed = false;
                 $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
                 mysqli_query($db_conn, $sqlLoginAttemptDelete);
@@ -83,7 +86,8 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout) {
 }
 
 //File Uploader
-function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize){
+function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize)
+{
     global $uploadMsg;
 
     if ($postAction) {
@@ -101,12 +105,12 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
             //Check if $maxScale parameter is set. if not then give it a default value
-            if ($maxScale == NULL || $maxScale == ''){
+            if ($maxScale == NULL || $maxScale == '') {
                 $maxScale = 1000;
             }
 
             //Check if $maxFileSize parameter is set. if not then give it a default value
-            if ($maxFileSize == NULL || $maxFileSize == ''){
+            if ($maxFileSize == NULL || $maxFileSize == '') {
                 $maxFileSize = 2048000;
             }
 
@@ -169,7 +173,8 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
 }
 
 //Resizes image for thumbnails
-function resizeImage($imagePath, $resizedFileName, $width, $height) {
+function resizeImage($imagePath, $resizedFileName, $width, $height)
+{
     $image = new Imagick();
     $image_filehandle = fopen($imagePath, 'a+');
     $image->readImageFile($image_filehandle);
@@ -181,15 +186,17 @@ function resizeImage($imagePath, $resizedFileName, $width, $height) {
 }
 
 //File size conversion to KB, MB, GB....
-function filesize_formatted($theFile){
+function filesize_formatted($theFile)
+{
     $size = filesize($theFile);
-    $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
     $power = $size > 0 ? floor(log($size, 1024)) : 0;
     return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
 }
 
 //Random password generator for password reset - generates characters, symbol and number
-function generateRandomPasswordString(){
+function generateRandomPasswordString()
+{
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $specialCharacters = '!@#$%';
@@ -216,7 +223,8 @@ function generateRandomPasswordString(){
 }
 
 //Random string generator - used to create a unique md5 referrer
-function generateRandomString(){
+function generateRandomString()
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -227,7 +235,8 @@ function generateRandomString(){
 }
 
 //Renames directory if it exists
-function renameDir($oldname, $newname){
+function renameDir($oldname, $newname)
+{
     if (file_exists(dirname($oldname))) {
         return rename($oldname, $newname);
     } else {
@@ -236,22 +245,24 @@ function renameDir($oldname, $newname){
 }
 
 //Random Blowfish Salt
-function blowfishSaltRandomString($saltThisString){
+function blowfishSaltRandomString($saltThisString)
+{
     return password_hash($saltThisString, PASSWORD_DEFAULT);
 }
 
 //Generates a drop down list of theme thumbnails
-function getThemesDropdownList($theme_selected){
+function getThemesDropdownList($theme_selected)
+{
     global $themesStr;
 
     // Get theme names from themes folder
-    $themeDirectories = glob('../themes/*' , GLOB_ONLYDIR);
+    $themeDirectories = glob('../themes/*', GLOB_ONLYDIR);
 
     // Build themes drop down list
-    foreach($themeDirectories as $themes) {
+    foreach ($themeDirectories as $themes) {
         $themes = str_replace('../themes/', '', $themes);
-        $themesImg = '../themes/'.$themes.'/screenshot.png';
-        $themesThumbnail= '../themes/'.$themes.'/screenshot_thumb.png';
+        $themesImg = '../themes/' . $themes . '/screenshot.png';
+        $themesThumbnail = '../themes/' . $themes . '/screenshot_thumb.png';
 
         if ($themes == $theme_selected) {
             $isThemeSelected = "SELECTED";
@@ -259,73 +270,81 @@ function getThemesDropdownList($theme_selected){
             $isThemeSelected = "";
         }
 
-        echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='".$themesThumbnail."'/>&nbsp;".ucwords($themes)."</span>\" value='".$themes."' $isThemeSelected>".ucwords($themes)."</option>";
+        echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords($themes) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords($themes) . "</option>";
 
     }
 }
 
 //Fontawesome icon list
-function getIconDropdownList($icon_selected) {
+function getIconDropdownList($icon_selected)
+{
     global $db_conn;
 
     $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
     while ($rowIcon = mysqli_fetch_array($sqlServicesIcon, MYSQLI_ASSOC)) {
-        $icon=$rowIcon['icon'];
+        $icon = $rowIcon['icon'];
         if ($icon === $icon_selected) {
-            $iconCheck="SELECTED";
+            $iconCheck = "SELECTED";
         } else {
-            $iconCheck="";
+            $iconCheck = "";
         }
-        echo "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-".$icon."' value='".$icon."' ".$iconCheck.">".$icon."</option>";
+        echo "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-" . $icon . "' value='" . $icon . "' " . $iconCheck . ">" . $icon . "</option>";
     }
 }
 
 //Get gravatar image based on users email value
-function getGravatar($email, $size){
+function getGravatar($email, $size)
+{
     $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-24.png";
     return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size . "&secure=true";
 }
 
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
-function safeCleanStr($cleanStr) {
+function safeCleanStr($cleanStr)
+{
     return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
 }
 
 //escape Quotes in textareas and string values - Escape special characters in a string
-function sqlEscapeStr($cleanStr) {
+function sqlEscapeStr($cleanStr)
+{
     global $db_conn;
     return mysqli_real_escape_string($db_conn, trim($cleanStr));
 }
 
 //sanitize string - Remove all HTML tags from a string:
-function sanitizeStr($cleanStr) {
+function sanitizeStr($cleanStr)
+{
     return filter_var(trim($cleanStr), FILTER_SANITIZE_STRING);
 }
 
 //validate url - Check if the variable $cleanStr is a valid URL
-function validateUrl($cleanStr) {
+function validateUrl($cleanStr)
+{
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
 
 //validate email - Check if the variable $email is a valid email address
-function validateEmail($cleanStr) {
+function validateEmail($cleanStr)
+{
     global $errorMsg;
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>".$cleanStr." Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
 
 //Gets clients real IP address
-function getRealIpAddr(){
+function getRealIpAddr()
+{
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $clientip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -337,18 +356,19 @@ function getRealIpAddr(){
 }
 
 //Location list for level 1 admins only
-function getLocList($active, $showActiveOnly) {
+function getLocList($active, $showActiveOnly)
+{
     global $locList;
     global $db_conn;
 
     //Selects Active of InActive locations.
-    if ($showActiveOnly == 'true'){
+    if ($showActiveOnly == 'true') {
         $showActive = "WHERE active='true'";
     } else {
         $showActive = "";
     }
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations ".$showActive." ORDER BY name ASC");
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations " . $showActive . " ORDER BY name ASC;");
 
     while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch, MYSQLI_ASSOC)) {
         if ($rowLocationSearch['id'] == 1) {
@@ -374,11 +394,13 @@ function getLocList($active, $showActiveOnly) {
                 $isSectionSelected = '';
             }
         }
-        $locList .= "<option class='loc_list_option' data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' " . $isSectionSelected . ">" . $rowLocationSearch['name'] . $isDefault ."</option>";
+        $locList .= "<option class='loc_list_option' data-icon='fa fa-fw fa-university' value='" . $rowLocationSearch['id'] . "' " . $isSectionSelected . ">" . $rowLocationSearch['name'] . $isDefault . "</option>";
     }
     return $locList;
 }
-function getLocGroups($active){
+
+function getLocGroups($active)
+{
     global $locTypes;
     global $locMenuStr;
     //loop through the array of location Types
@@ -395,25 +417,29 @@ function getLocGroups($active){
     }
     return $locMenuStr;
 }
+
 //Get existing Pages
-function getPages($loc) {
+function getPages($loc)
+{
     global $pagesList;
     global $extraPages; //from config.php
     global $db_conn;
 
-    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=".$loc." ORDER BY title ASC;");
+    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
     while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
-        $serviceLinkId=$rowServicesLink['id'];
-        $serviceLinkTitle=$rowServicesLink['title'];
+        $serviceLinkId = $rowServicesLink['id'];
+        $serviceLinkTitle = $rowServicesLink['title'];
 
-        $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=".$loc." '>" . $serviceLinkTitle . "</option>";
+        $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
     }
 
-    $pagesList = "<optgroup label='Existing Pages'>".$pagesList."</optgroup>".$extraPages;
+    $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . $extraPages;
     return $pagesList;
 }
+
 //List files inside a directory/folder
-function getDirContents($src) {
+function getDirContents($src)
+{
 
     if ($handle = opendir($src)) {
 
@@ -422,9 +448,9 @@ function getDirContents($src) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
             if ('..' === $file) continue;
-            if ($file==="Thumbs.db") continue;
-            if ($file===".DS_Store") continue;
-            if ($file==="index.html") continue;
+            if ($file === "Thumbs.db") continue;
+            if ($file === ".DS_Store") continue;
+            if ($file === "index.html") continue;
 
             echo "<li>" . $file . "</li>";
         }
@@ -439,8 +465,10 @@ function getDirContents($src) {
     }
 
 }
+
 //Images folder drop down list
-function getImageDropdownList($loc, $imageDir, $image_selected) {
+function getImageDropdownList($loc, $imageDir, $image_selected)
+{
     global $db_conn;
     global $sharedFilesList;
     global $fileList;
@@ -449,7 +477,7 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
     $allfiles[] = NULL;
 
     //Build a list of shared images
-    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
+    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC;");
     while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
 
         $sharedOptions = $rowSharedList['shared'];
@@ -457,7 +485,7 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
 
         $sharedOptionsArr = explode(',', trim($sharedOptions));
 
-        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)){
+        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)) {
             $sharedFilesList .= $sharedFileName . ',';
         }
     }
@@ -468,9 +496,9 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
         while (false !== ($file = readdir($handle))) {
             if ('.' === $file) continue;
             if ('..' === $file) continue;
-            if ($file==="Thumbs.db") continue;
-            if ($file===".DS_Store") continue;
-            if ($file==="index.html") continue;
+            if ($file === "Thumbs.db") continue;
+            if ($file === ".DS_Store") continue;
+            if ($file === "index.html") continue;
             $allfiles[] = strtolower($file);
         }
         closedir($handle);
@@ -480,8 +508,8 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
     $allImagesArr = array_merge($allfiles, $sharedFilesListArr);
     sort($allImagesArr);
 
-    foreach($allImagesArr as $file) {
-        if (in_array($file, $sharedFilesListArr)){
+    foreach ($allImagesArr as $file) {
+        if (in_array($file, $sharedFilesListArr)) {
             $location = '../uploads/1/';
         } else {
             $location = '../uploads/' . $loc . '/';
@@ -498,8 +526,10 @@ function getImageDropdownList($loc, $imageDir, $image_selected) {
     echo $fileList;
 
 }
+
 //Get list of shared files for the specific location id.
-function getSharedFilesJsonList($loc){
+function getSharedFilesJsonList($loc)
+{
     global $sharedFilesList;
     global $sharedFilesListArr;
     global $fileListJson;
@@ -510,7 +540,7 @@ function getSharedFilesJsonList($loc){
     $fileListJsonSharedImages[] = NULL;
 
     //Build a list of shared images
-    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC");
+    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC;");
     while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
 
         $sharedOptions = $rowSharedList['shared'];
@@ -518,7 +548,7 @@ function getSharedFilesJsonList($loc){
 
         $sharedOptionsArr = explode(',', trim($sharedOptions));
 
-        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)){
+        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)) {
             $sharedFilesList .= $sharedFileName . ',';
         }
 
@@ -526,10 +556,10 @@ function getSharedFilesJsonList($loc){
 
     $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
 
-    foreach($sharedFilesListArr as $imgfilesShared) {
+    foreach ($sharedFilesListArr as $imgfilesShared) {
         $locFilePath = str_replace($_GET['loc_id'], '1', image_url); //replace loc_id in image_url with 1
 
-        if ($imgfilesShared != ''){
+        if ($imgfilesShared != '') {
             $fileListJsonSharedImages[] .= "{title: '" . $imgfilesShared . "', value: '" . $locFilePath . $imgfilesShared . "'}"; //creates a json list of images
         }
     }
@@ -548,7 +578,7 @@ function getSharedFilesJsonList($loc){
         closedir($handle);
     }
 
-    foreach($allimgfiles as $imgfiles) {
+    foreach ($allimgfiles as $imgfiles) {
         if ($imgfiles != '') {
             $fileListJson[] .= "{title: '" . $imgfiles . "', value: '" . image_url . $imgfiles . "'}"; //creates a json list of images
         }
@@ -559,14 +589,16 @@ function getSharedFilesJsonList($loc){
     //Sort the merged arrays
     sort($allImagesArr);
     //Convert merged array into a string
-    $allImagesStr = implode(',',$allImagesArr);
+    $allImagesStr = implode(',', $allImagesArr);
     //Clean string
     $allImagesStr = trim($allImagesStr, ',');
 
     //Return json string
     echo $allImagesStr;
 }
-function getPageJsonList($loc) {
+
+function getPageJsonList($loc)
+{
     global $linkListJson;
     global $db_conn;
 
@@ -575,7 +607,7 @@ function getPageJsonList($loc) {
     while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
         $getPageId = $rowGetPages['id'];
         $getPageTitle = $rowGetPages['title'];
-        if ($getPageTitle != ''){
+        if ($getPageTitle != '') {
             $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
         }
     }
@@ -585,22 +617,24 @@ function getPageJsonList($loc) {
 
     echo $linkListJson;
 }
+
 // Modal and Dialog Confirm
-function showModalConfirm($id, $title, $body, $action, $custom=false){
-    echo "<div id='".$id."' class='modal fade' role='dialog' data-keyboard='false' data-backdrop='static'>
+function showModalConfirm($id, $title, $body, $action, $custom = false)
+{
+    echo "<div id='" . $id . "' class='modal fade' role='dialog' data-keyboard='false' data-backdrop='static'>
     <div class='modal-dialog modal-sm'>
     <div class='modal-content'>
     <div class='modal-header'>
     <button type='button' class='close' data-dismiss='modal'>&times;</button>
-    <h4 class='modal-title'>".$title."</h4>
+    <h4 class='modal-title'>" . $title . "</h4>
     </div>
     <div class='modal-body'>
-    <p>".$body."</p>
+    <p>" . $body . "</p>
     </div>
     <div class='modal-footer text-left'>";
 
-    if ($custom == false || $custom == NULL || $custom == ''){
-        echo "<button type='button' class='btn btn-danger' onclick=\"window.location.href='".$action."'\"><i class='fa fa-trash'></i> Delete</button>
+    if ($custom == false || $custom == NULL || $custom == '') {
+        echo "<button type='button' class='btn btn-danger' onclick=\"window.location.href='" . $action . "'\"><i class='fa fa-trash'></i> Delete</button>
                 <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>";
     } else {
         echo $action;
@@ -611,9 +645,11 @@ function showModalConfirm($id, $title, $body, $action, $custom=false){
     </div>
     </div>";
 }
+
 // Modal Preview using iframe
-function showModalPreview($id){
-    echo "<div class='modal fade' id='".$id."'>
+function showModalPreview($id)
+{
+    echo "<div class='modal fade' id='" . $id . "'>
     <div class='modal-dialog'>
     <div class='modal-content'>
     <div class='modal-header'>
@@ -630,24 +666,25 @@ function showModalPreview($id){
 }
 
 // Script to test if extensions/modules are installed and permissions are correct on this server
-function checkDependencies(){
+function checkDependencies()
+{
 
-    if  (!in_array('curl', get_loaded_extensions())) {
+    if (!in_array('curl', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>cURL (php-curl) is not installed on the server.<br/>Try: sudo apt-get install php-curl</span></div>";
     }
-    if  (!in_array('xml', get_loaded_extensions())) {
+    if (!in_array('xml', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>xml (php-xml) is not installed on the server.<br/>Try: sudo apt-get install php-xml</span></div>";
     }
-    if  (!in_array('zip', get_loaded_extensions())) {
+    if (!in_array('zip', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>zip (php-zip) is not installed on the server.<br/>Try: sudo apt-get install php-zip</span></div>";
     }
-    if  (!in_array('imagick', get_loaded_extensions())) {
+    if (!in_array('imagick', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>imagick (php-imagick) is not installed on the server.<br/>Try: sudo apt-get install php-imagick</span></div>";
     }
-    if  (!in_array('mbstring', get_loaded_extensions())) {
+    if (!in_array('mbstring', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>mbstring (php-mbstring) is not installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div>";
     }
-    if  (!in_array('mcrypt', get_loaded_extensions())) {
+    if (!in_array('mcrypt', get_loaded_extensions())) {
         echo "<div class='alert alert-danger'><span>mcrypt (php-mcrypt) is not installed on the server.<br/>Try: sudo apt-get install php-mcrypt</span></div>";
     }
     if (!in_array('mod_rewrite', apache_get_modules())) {
@@ -662,40 +699,41 @@ function checkDependencies(){
 
     // Check if dbconn file exists
     if (!file_exists(dbFileLoc)) {
-        echo "<div class='alert alert-danger'><span>".dbFileLoc." does not exist.</span></div>";
+        echo "<div class='alert alert-danger'><span>" . dbFileLoc . " does not exist.</span></div>";
     } else {
         if (!is_writeable(dbFileLoc)) {
-            echo "<div class='alert alert-danger'><span>".dbFileLoc." is not writable. Check file permissions.</span></div>";
+            echo "<div class='alert alert-danger'><span>" . dbFileLoc . " is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if blowfishsalt.php file exists
     if (!file_exists(dbBlowfishLoc)) {
-        echo "<div class='alert alert-danger'><span>".dbBlowfishLoc." does not exist.</span></div>";
+        echo "<div class='alert alert-danger'><span>" . dbBlowfishLoc . " does not exist.</span></div>";
     } else {
         if (!is_writeable(dbBlowfishLoc)) {
-            echo "<div class='alert alert-danger'><span>".dbBlowfishLoc." is not writable. Check file permissions.</span></div>";
+            echo "<div class='alert alert-danger'><span>" . dbBlowfishLoc . " is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if sitemap.xml file exists
     if (!file_exists(sitemapFilename)) {
-        echo "<div class='alert alert-danger'><span>".sitemapFilename." does not exist.</span></div>";
+        echo "<div class='alert alert-danger'><span>" . sitemapFilename . " does not exist.</span></div>";
     } else {
         if (!is_writeable(sitemapFilename)) {
-            echo "<div class='alert alert-danger'><span>".sitemapFilename." is not writable. Check file permissions.</span></div>";
+            echo "<div class='alert alert-danger'><span>" . sitemapFilename . " is not writable. Check file permissions.</span></div>";
         }
     }
     // Check if robots.txt file exists
     if (!file_exists(robotsFilename)) {
-        echo "<div class='alert alert-danger'><span>".robotsFilename." does not exist.</span></div>";
+        echo "<div class='alert alert-danger'><span>" . robotsFilename . " does not exist.</span></div>";
     } else {
         if (!is_writeable(robotsFilename)) {
-            echo "<div class='alert alert-danger'><span>".robotsFilename." is not writable. Check file permissions.</span></div>";
+            echo "<div class='alert alert-danger'><span>" . robotsFilename . " is not writable. Check file permissions.</span></div>";
         }
     }
 }
 
 //Copy folder contents to another
-function recurse_copy($src, $dst) {
+function recurse_copy($src, $dst)
+{
     $dir = opendir($src);
     @mkdir($dst, 0755, true);
     while (false !== ($file = readdir($dir))) {
@@ -709,13 +747,16 @@ function recurse_copy($src, $dst) {
     }
     closedir($dir);
 }
+
 //Deletes files inside a directory ($src)
-function recurse_delete($src){
+function recurse_delete($src)
+{
     array_map('unlink', glob($src));
 }
 
 //Database Dump Backup
-function databaseDumpBackup($dest){
+function databaseDumpBackup($dest)
+{
 
     global $db_conn;
 
@@ -723,7 +764,7 @@ function databaseDumpBackup($dest){
     $result = mysqli_query($db_conn, $sql);
 
     //Turn off foreign key constraints
-    mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=0');
+    mysqli_query($db_conn, 'SET FOREIGN_KEY_CHECKS=0');
 
     while ($row = mysqli_fetch_row($result)) {
 
@@ -737,21 +778,22 @@ function databaseDumpBackup($dest){
     }
 
     //Turn on foreign key constraints
-    mysqli_query($db_conn,'SET FOREIGN_KEY_CHECKS=1');
+    mysqli_query($db_conn, 'SET FOREIGN_KEY_CHECKS=1');
     mysqli_free_result($result);
 
 }
 
 //Remove Directory
-function rrmdir($dir) {
+function rrmdir($dir)
+{
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
-                if (filetype($dir."/".$object) == "dir"){
-                    rrmdir($dir."/".$object);
+                if (filetype($dir . "/" . $object) == "dir") {
+                    rrmdir($dir . "/" . $object);
                 } else {
-                    unlink($dir."/".$object);
+                    unlink($dir . "/" . $object);
                 }
             }
         }
@@ -759,8 +801,10 @@ function rrmdir($dir) {
         rmdir($dir);
     }
 }
+
 //cURL a URL to get contents
-function getUrlContents($getUrl) {
+function getUrlContents($getUrl)
+{
     global $http_status;
 
     $ch = curl_init($getUrl);
@@ -780,8 +824,10 @@ function getUrlContents($getUrl) {
 
     return $data;
 }
+
 //Check if a new version is available
-function checkForUpdates(){
+function checkForUpdates()
+{
     global $getVersion;
     global $http_status;
 
@@ -791,14 +837,16 @@ function checkForUpdates(){
 
     if (!isset($_SESSION['updates_available'])) {
         if ($http_status == 200) {
-            if ((string)trim($getVersion) > (string)trim(ysmVersion)){
-                return "<a href='updates.php?loc_id=".$_SESSION['loc_id']."'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
+            if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
+                return "<a href='updates.php?loc_id=" . $_SESSION['loc_id'] . "'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
             }
         }
     }
 }
+
 //Set update variables
-function getUpdates(){
+function getUpdates()
+{
     checkForUpdates();
     global $getVersion;
     global $updatesRemoteFile;
@@ -810,8 +858,10 @@ function getUpdates(){
     $updatesDestination = 'upgrade/' . $getVersion . '.zip';
 
 }
+
 //Download file and save to a directory on the server
-function downloadFile($url, $path) {
+function downloadFile($url, $path)
+{
     //example: downloadFile($updatesUrl, 'upgrade/version.zip');
     $fileResource = fopen($path, 'w');
     // Get The Zip File From Server
@@ -839,8 +889,10 @@ function downloadFile($url, $path) {
     curl_close($ch);
     return true;
 }
+
 // compress all files in the source directory to destination directory
-function zipFile($src, $dest) {
+function zipFile($src, $dest)
+{
     if (!extension_loaded('zip') || !file_exists($src)) {
         return false;
     }
@@ -866,11 +918,11 @@ function zipFile($src, $dest) {
 
             $file = str_replace('\\', '/', realpath($file));
 
-            if (strpos($flag.$file,$src) !== false) { // this will add only the folder we want to add in zip
+            if (strpos($flag . $file, $src) !== false) { // this will add only the folder we want to add in zip
 
                 if (is_dir($file) === true) {
 
-                    $zip->addEmptyDir(str_replace($src . '/', '', $flag.$file . '/'));
+                    $zip->addEmptyDir(str_replace($src . '/', '', $flag . $file . '/'));
 
                 } elseif (is_file($file) === true) {
 
@@ -881,14 +933,16 @@ function zipFile($src, $dest) {
         }
 
     } elseif (is_file($src) === true) {
-        $zip->addFromString($flag.basename($src), file_get_contents($src));
+        $zip->addFromString($flag . basename($src), file_get_contents($src));
     }
 
     sleep(3);
     return $zip->close();
 }
+
 //Extract zip files/folder to specified destination
-function extractZip($filename, $dest, $ignoreListArr){
+function extractZip($filename, $dest, $ignoreListArr)
+{
     if (is_dir($dest)) {
         // Load up the zip
         $zip = new ZipArchive;
@@ -897,7 +951,7 @@ function extractZip($filename, $dest, $ignoreListArr){
         //$ignoreListArr = array('custom-style.css', 'Thumbs.db', '.DS_Store', 'dbconn.php', 'blowfishsalt.php', 'robots.txt', 'sitemap.xml');
 
         if ($unzip === true) {
-            for ($i=0; $i<$zip->numFiles; $i++) {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
                 $name = $zip->getNameIndex($i);
 
                 // Remove the first directory in the string if necessary
@@ -952,7 +1006,8 @@ function extractZip($filename, $dest, $ignoreListArr){
     }
 }
 
-function checkIPRange() {
+function checkIPRange()
+{
     //IP Restrictions set in config
     if (defined('IPrange') && !empty(IPrange)) {
 
@@ -967,7 +1022,7 @@ function checkIPRange() {
             foreach ($IPrangeArr as $IPrangeItems) {
                 $IPmatch = str_replace($IPrangeItems, '', $usersIP) != $usersIP;
 
-                if ($IPmatch){
+                if ($IPmatch) {
                     break;
                 }
             }
@@ -976,13 +1031,14 @@ function checkIPRange() {
         }
 
         if ($IPmatch === false) {
-            header("Location: ../index.php?loc_id=1",  true,  301);
+            header("Location: ../index.php?loc_id=1", true, 301);
             die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
 }
 
-function dateTimeFormat($format=NULL, $date=NULL){
+function dateTimeFormat($format = NULL, $date = NULL)
+{
     switch ($format) {
         case 1:
             return date("Y-m-d", strtotime(safeCleanStr($date)));
@@ -996,7 +1052,8 @@ function dateTimeFormat($format=NULL, $date=NULL){
 }
 
 //Simple SQL CRUD statements
-function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=NULL, $orderBy=NULL) {
+function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, $where = NULL, $orderBy = NULL)
+{
     global $db_conn;
     $query = NULL;
     $clause = NULL;
@@ -1005,7 +1062,7 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
     $query = NULL;
     $queryExecute = NULL;
 
-    if (isset($table)){
+    if (isset($table)) {
         $tableDb = db_name . "." . $table;
     }
 
@@ -1015,7 +1072,7 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
         $clause = "";
     }
 
-    if (isset($orderBy)){
+    if (isset($orderBy)) {
         $order = " ORDER BY " . trim($orderBy);
     } else {
         $order = "";
@@ -1054,8 +1111,8 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
 
         //echo $query;
 
-        if (mysqli_error($db_conn)){
-            die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : ". mysqli_error($db_conn));
+        if (mysqli_error($db_conn)) {
+            die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
         }
 
         return $queryExecute;
@@ -1064,9 +1121,10 @@ function dbQuery($method=NULL, $table=NULL, $fields=NULL, $values=NULL, $where=N
 }
 
 //CSRF token validation
-function csrf_validate($token){
+function csrf_validate($token)
+{
     //global $token;
-    if (!empty($_POST)){
+    if (!empty($_POST)) {
         if (safeCleanStr($_POST['csrf']) != $token) {
             session_unset();
             //log errors
@@ -1077,7 +1135,7 @@ function csrf_validate($token){
 }
 
 //Variable to hide elements from non-admin users
-if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1){
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
@@ -1087,13 +1145,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "",  true,  301);
+    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
-    header("Location: ?loc_id=1",  true,  301);
+    header("Location: ?loc_id=1", true, 301);
     echo "<script>window.location.href='?loc_id=1';</script>";
-} elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']){
-    header("Location: ?loc_id=1",  true,  301);
+} elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
+    header("Location: ?loc_id=1", true, 301);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
 

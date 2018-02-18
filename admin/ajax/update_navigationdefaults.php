@@ -22,7 +22,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['session_hash'] == md5($_SESSION['
 
         mysqli_close($db_conn);
 
-        die('Navigation Defaults '. $navigationDefaultsID .' - '. $navSubSection .' set ' . $navigationDefaultsChecked);
+        die('Navigation Defaults ' . $navigationDefaultsID . ' - ' . $navSubSection . ' set ' . $navigationDefaultsChecked);
     }
 
 } else {

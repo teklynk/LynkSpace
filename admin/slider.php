@@ -94,10 +94,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         //insert data on submit
         if (!empty($_POST)) {
-            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+            $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $slideInsert);
 
-            header("slider.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
+            header("slider.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
         }
     }
@@ -119,17 +119,22 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group required">
                 <label for="slide_title"><?php echo $slideLabel; ?></label>
-                <input class="form-control count-text" name="slide_title" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['title'];} ?>" placeholder="Slide Title" autofocus required>
+                <input class="form-control count-text" name="slide_title" maxlength="255"
+                       value="<?php if ($_GET['editslide']) {
+                           echo $rowSlides['title'];
+                       } ?>" placeholder="Slide Title" autofocus required>
             </div>
             <hr/>
             <div class="form-group">
-                <img src="<?php echo $image; ?>" id="slide_image_preview" style="max-width:350px; max-height:150px; background-color: #ccc;"/>
+                <img src="<?php echo $image; ?>" id="slide_image_preview"
+                     style="max-width:350px; max-height:150px; background-color: #ccc;"/>
             </div>
 
             <div class="form-group">
                 <label for="slide_image">Use an Existing Image</label>
-                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
-                    <option value="" >None</option>
+                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
+                        data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
+                    <option value="">None</option>
                     <?php
                     getImageDropdownList($_GET['loc_id'], image_dir, $rowSlides['image']);
                     ?>
@@ -139,7 +144,8 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group">
                 <label for="slide_exist_page">Existing Page</label>
-                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
+                <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
+                        data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
                     <option value="">None</option>
                     <?php
                     echo getPages($_GET['loc_id']);
@@ -149,7 +155,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group">
                 <label for="slide_link">Link URL</label>
-                <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255" value="<?php if ($_GET['editslide']) {echo $rowSlides['link'];} ?>" >
+                <input class="form-control count-text" name="slide_link" id="slide_link" maxlength="255"
+                       value="<?php if ($_GET['editslide']) {
+                           echo $rowSlides['link'];
+                       } ?>">
             </div>
 
             <?php
@@ -163,12 +172,12 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 echo "</select>";
                 echo "</div>";
             } else {
-                echo "<input type='hidden' name='location_type' value='".$rowLocations['type']."'/>";
+                echo "<input type='hidden' name='location_type' value='" . $rowLocations['type'] . "'/>";
             }
             ?>
 
             <?php
-            if ($rowSlides['startdate'] == '0000-00-00' || $rowSlides['startdate'] == ''){
+            if ($rowSlides['startdate'] == '0000-00-00' || $rowSlides['startdate'] == '') {
                 $startDate = "";
             } else {
                 $startDate = dateTimeFormat(1, $rowSlides['startdate']);
@@ -186,7 +195,9 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <div class="form-group required">
                     <label for="start_date">Start Date</label>
                     <div class="input-group date">
-                        <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo $startDate; ?>" placeholder="mm/dd/yyyy" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <input type="date" class="form-control" name="start_date" id="start_date"
+                               value="<?php echo $startDate; ?>" placeholder="mm/dd/yyyy"
+                               pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -197,7 +208,9 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                 <div class="form-group required">
                     <label for="end_date">End Date</label>
                     <div class="input-group date">
-                        <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo $endDate; ?>" placeholder="mm/dd/yyyy" pattern="<?php echo dateValidationPattern; ?>" required/>
+                        <input type="date" class="form-control" name="end_date" id="end_date"
+                               value="<?php echo $endDate; ?>" placeholder="mm/dd/yyyy"
+                               pattern="<?php echo dateValidationPattern; ?>" required/>
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -209,12 +222,17 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
             <div class="form-group">
                 <label for="slide_content">Description</label>
-                <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text" maxlength="255"><?php if ($_GET['editslide']) {echo $rowSlides['content'];} ?></textarea>
+                <textarea class="form-control count-text" rows="3" name="slide_content" placeholder="Text"
+                          maxlength="255"><?php if ($_GET['editslide']) {
+                        echo $rowSlides['content'];
+                    } ?></textarea>
             </div>
 
             <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-            <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+            <button type="submit" name="slider_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
+                Changes
+            </button>
             <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
         </form>
@@ -235,13 +253,13 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         showModalConfirm(
             "confirm",
             "Delete Slide?",
-            "Are you sure you want to delete: ".$delslideTitle."?",
-            "slider.php?loc_id=".$_GET['loc_id']."&deleteslide=".$delslideId."&deletetitle=".$delslideTitle."&confirm=yes"
+            "Are you sure you want to delete: " . $delslideTitle . "?",
+            "slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&deletetitle=" . $delslideTitle . "&confirm=yes"
         );
 
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
         //delete slide after clicking Yes
-        $slideDelete = "DELETE FROM slider WHERE id=".$delslideId." AND loc_id=" . $_GET['loc_id'] . ";";
+        $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $slideDelete);
 
         $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -300,7 +318,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
                     <label for="slider_defaults">Use Defaults</label>
                     <div class="checkbox">
                         <label>
-                            <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                            <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>"
+                                   name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                                echo $selDefaults;
+                            } ?> data-toggle="toggle">
                         </label>
                     </div>
                 </div>
@@ -312,7 +333,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
     ?>
 
-    <button type="button" class="btn btn-primary" onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Slide</button>
+    <button type="button" class="btn btn-primary"
+            onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
+                class='fa fa-fw fa-plus'></i> Add a New Slide
+    </button>
     <h2></h2>
     <div>
     <?php
@@ -378,16 +402,16 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             echo "</select>";
             echo "</td>";
         } else {
-            echo "<input type='hidden' name='location_type[]' value='".$rowLocations['type']."' >";
+            echo "<input type='hidden' name='location_type[]' value='" . $rowLocations['type'] . "' >";
         }
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control' name='slide_startdate[]' value='" . $slideStartDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='".dateValidationPattern."' required>
+            <input class='form-control' name='slide_startdate[]' value='" . $slideStartDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='" . dateValidationPattern . "' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
             <div class='date'>
-            <input class='form-control' name='slide_enddate[]' value='" . $slideEndDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='".dateValidationPattern."' required>
+            <input class='form-control' name='slide_enddate[]' value='" . $slideEndDate . "' type='date' maxlength='10' placeholder='mm/dd/yyyy' pattern='" . dateValidationPattern . "' required>
             </div>
             </td>";
         echo "<td class='col-xs-1'>
@@ -404,10 +428,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 		</table>";
     ?>
 
-        <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>" />
+    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
     <?php
-		echo "<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
+    echo "<input type='hidden' name='slide_count' value='" . $slideCount . "'/>
 		<input type='hidden' name='save_main' value='true'/>
 		<button type='submit' name='sliderNew_submit' class='btn btn-primary'><i class='fa fa-fw fa-save'></i> Save Changes</button>
 		<button type='reset' class='btn btn-default'><i class='fa fa-fw fa-reply'></i> Reset</button>
@@ -423,16 +447,16 @@ echo "</div>
 ?>
     <!-- Modal javascript logic -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#confirm').on('hidden.bs.modal', function(){
-                setTimeout(function(){
-                    window.location.href='slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+        $(document).ready(function () {
+            $('#confirm').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    window.location.href = 'slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
                 }, 100);
             });
 
             var url = window.location.href;
-            if (url.indexOf('deleteslide') != -1 && url.indexOf('confirm') == -1){
-                setTimeout(function(){
+            if (url.indexOf('deleteslide') != -1 && url.indexOf('confirm') == -1) {
+                setTimeout(function () {
                     $('#confirm').modal('show');
                 }, 100);
             }

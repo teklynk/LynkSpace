@@ -58,7 +58,7 @@ if ($_GET['preview'] > "") {
             <li class='active'>Staff</li>
             </ol>";
             echo "<h1 class='page-header'>Staff&nbsp;";
-            echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Staff Page' class='btn btn-info' onclick=\"showMyModal('staff.php?loc_id=".$_GET['loc_id']."', '../staff.php?loc_id=".$_GET['loc_id']."#team')\"><i class='fa fa-eye'></i></button>";
+            echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Staff Page' class='btn btn-info' onclick=\"showMyModal('staff.php?loc_id=" . $_GET['loc_id'] . "', '../staff.php?loc_id=" . $_GET['loc_id'] . "#team')\"><i class='fa fa-eye'></i></button>";
             echo "</h1>";
         }
         ?>
@@ -96,10 +96,10 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ")";
+                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
                     mysqli_query($db_conn, $teamInsert);
 
-                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
+                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
                     echo "<script>window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 
                 }
@@ -117,40 +117,54 @@ if ($_GET['preview'] > "") {
             }
             ?>
             <div class="col-lg-8">
-            <form name="teamForm" class="dirtyForm" method="post" action="">
+                <form name="teamForm" class="dirtyForm" method="post" action="">
 
-                <div class="form-group">
-                    <img src="<?php echo $thumbNail; ?>" id="team_image_preview" style="max-width:140px; height:auto; background-color: #ccc;"/>
-                </div>
-                <div class="form-group">
-                    <label for="team_image">Use an Existing Image</label>
-                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="team_image" id="team_image" title="Choose an existing image">
-                        <option value="">None</option>
-                        <?php
-                        getImageDropdownList($_GET['loc_id'], image_dir, $rowTeam['image']);
-                        ?>
-                    </select>
-                </div>
-                <hr/>
-                <div class="form-group required">
-                    <label>Name</label>
-                    <input type="text" class="form-control count-text" name="team_name" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['name'];} ?>" placeholder="Name" autofocus required>
-                </div>
-                <div class="form-group required">
-                    <label>Title</label>
-                    <input type="text" class="form-control count-text" name="team_title" maxlength="255" value="<?php if ($_GET['editteam']) {echo $rowTeam['title'];} ?>" placeholder="Title" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text" maxlength="999"><?php if ($_GET['editteam']) {echo $rowTeam['content'];} ?></textarea>
-                </div>
+                    <div class="form-group">
+                        <img src="<?php echo $thumbNail; ?>" id="team_image_preview"
+                             style="max-width:140px; height:auto; background-color: #ccc;"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="team_image">Use an Existing Image</label>
+                        <select class="form-control selectpicker show-tick" data-container="body"
+                                data-dropup-auto="false" data-size="10" name="team_image" id="team_image"
+                                title="Choose an existing image">
+                            <option value="">None</option>
+                            <?php
+                            getImageDropdownList($_GET['loc_id'], image_dir, $rowTeam['image']);
+                            ?>
+                        </select>
+                    </div>
+                    <hr/>
+                    <div class="form-group required">
+                        <label>Name</label>
+                        <input type="text" class="form-control count-text" name="team_name" maxlength="255"
+                               value="<?php if ($_GET['editteam']) {
+                                   echo $rowTeam['name'];
+                               } ?>" placeholder="Name" autofocus required>
+                    </div>
+                    <div class="form-group required">
+                        <label>Title</label>
+                        <input type="text" class="form-control count-text" name="team_title" maxlength="255"
+                               value="<?php if ($_GET['editteam']) {
+                                   echo $rowTeam['title'];
+                               } ?>" placeholder="Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text"
+                                  maxlength="999"><?php if ($_GET['editteam']) {
+                                echo $rowTeam['content'];
+                            } ?></textarea>
+                    </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
-                <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
+                    <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
+                        Save Changes
+                    </button>
+                    <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
-            </form>
+                </form>
             </div>
             <?php
         } else {
@@ -166,14 +180,14 @@ if ($_GET['preview'] > "") {
                 showModalConfirm(
                     "confirm",
                     "Delete Staff?",
-                    "Are you sure you want to delete: ".$delteamTitle."?",
-                    "staff.php?loc_id=".$_GET['loc_id']."&deleteteam=".$delteamId."&deletetitle=".$delteamTitle."&confirm=yes",
+                    "Are you sure you want to delete: " . $delteamTitle . "?",
+                    "staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes",
                     false
                 );
 
             } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
                 //delete team after clicking Yes
-                $teamDelete = "DELETE FROM team WHERE id=".$delteamId." AND loc_id=" . $_GET['loc_id'] . ";";
+                $teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $teamDelete);
 
                 $deleteMsg = "<div class='alert alert-success'>" . $delteamTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -217,7 +231,11 @@ if ($_GET['preview'] > "") {
                             <label for="team_defaults">Use Defaults</label>
                             <div class="checkbox">
                                 <label>
-                                    <input class="team_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>" name="team_defaults" type="checkbox" <?php if ($_GET['loc_id']) {echo $selDefaults;} ?> data-toggle="toggle">
+                                    <input class="team_defaults_checkbox defaults-toggle"
+                                           id="<?php echo $_GET['loc_id'] ?>" name="team_defaults"
+                                           type="checkbox" <?php if ($_GET['loc_id']) {
+                                        echo $selDefaults;
+                                    } ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -229,7 +247,10 @@ if ($_GET['preview'] > "") {
             }
             ?>
 
-            <button type="button" class="btn btn-primary" onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i class='fa fa-fw fa-plus'></i> Add a New Staff Member</button>
+            <button type="button" class="btn btn-primary"
+                    onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
+                        class='fa fa-fw fa-plus'></i> Add a New Staff Member
+            </button>
             <h2></h2>
             <div>
                 <?php
@@ -240,11 +261,14 @@ if ($_GET['preview'] > "") {
                 <form name="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group required">
                         <label>Heading</label>
-                        <input type="text" class="form-control count-text" name="team_heading" maxlength="255" value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>
+                        <input type="text" class="form-control count-text" name="team_heading" maxlength="255"
+                               value="<?php echo $rowSetup['teamheading']; ?>" placeholder="My team" autofocus required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" class="form-control count-text" name="main_content" placeholder="About our team" maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
+                        <textarea rows="3" class="form-control count-text" name="main_content"
+                                  placeholder="About our team"
+                                  maxlength="255"><?php echo $rowSetup['teamcontent']; ?></textarea>
                     </div>
                     <table class="table table-bordered table-hover table-striped table-responsive">
                         <thead>
@@ -258,7 +282,7 @@ if ($_GET['preview'] > "") {
                         <tbody>
                         <?php
                         $teamCount = "";
-                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC");
+                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC;");
                         while ($rowTeam = mysqli_fetch_array($sqlTeam, MYSQLI_ASSOC)) {
                             $teamId = $rowTeam['id'];
                             $teamTitle = $rowTeam['title'];
@@ -299,7 +323,9 @@ if ($_GET['preview'] > "") {
 
                     <input type="hidden" name="save_main" value="true"/>
                     <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>
-                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save Changes</button>
+                    <button type="submit" name="teamNew_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
+                        Save Changes
+                    </button>
                     <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
                 </form>
             </div>
@@ -309,24 +335,24 @@ if ($_GET['preview'] > "") {
         echo "</div>
 	</div>
 	<p></p>";
-?>
-<!-- Modal javascript logic -->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#confirm').on('hidden.bs.modal', function(){
-            setTimeout(function(){
-                window.location.href='staff.php?loc_id=<?php echo $_GET['loc_id']; ?>';
-            }, 100);
-        });
+        ?>
+        <!-- Modal javascript logic -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#confirm').on('hidden.bs.modal', function () {
+                    setTimeout(function () {
+                        window.location.href = 'staff.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    }, 100);
+                });
 
-        var url = window.location.href;
-        if (url.indexOf('deleteteam') != -1 && url.indexOf('confirm') == -1){
-            setTimeout(function(){
-                $('#confirm').modal('show');
-            }, 100);
-        }
-    });
-</script>
-<?php
-require_once(__DIR__ . '/includes/footer.inc.php');
-?>
+                var url = window.location.href;
+                if (url.indexOf('deleteteam') != -1 && url.indexOf('confirm') == -1) {
+                    setTimeout(function () {
+                        $('#confirm').modal('show');
+                    }, 100);
+                }
+            });
+        </script>
+        <?php
+        require_once(__DIR__ . '/includes/footer.inc.php');
+        ?>

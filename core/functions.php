@@ -1,75 +1,79 @@
 <?php
 //Front-end functions used in templates and themes
 
-if (!defined('inc_access')){
+if (!defined('inc_access')) {
     die('Direct access not permitted');
 }
 
-function getLocation($loc){
+function getLocation($loc)
+{
     global $locationName;
     global $locationActive;
     global $locationID;
     global $db_conn;
 
-    if (ctype_digit($loc)){
+    if (ctype_digit($loc)) {
 
         $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $loc . ";");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation, MYSQLI_ASSOC);
 
-        if ($rowGetLocation['active'] == 'true' && $loc == $rowGetLocation['id']){
+        if ($rowGetLocation['active'] == 'true' && $loc == $rowGetLocation['id']) {
             $locationName = $rowGetLocation['name'];
             $locationActive = $rowGetLocation['active'];
             $locationID = $rowGetLocation['id'];
         } else {
-            header("Location: index.php?loc_id=1",true,  301);
+            header("Location: index.php?loc_id=1", true, 301);
             echo "<script>window.location.href='index.php?loc_id=1';</script>";
         }
 
     }
 }
 
-function getLocList($active, $showActiveOnly){
+function getLocList($active, $showActiveOnly)
+{
     global $locationListJson;
     global $db_conn;
 
     $active = $_GET['loc_id'];
 
-    if ($showActiveOnly == 'true'){
+    if ($showActiveOnly == 'true') {
         $showActive = "WHERE active='true'";
     } else {
         $showActive = "";
     }
 
-    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations ".$showActive." ORDER BY name ASC;");
-    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch, MYSQLI_ASSOC)){
+    $sqlGetLocSearch = mysqli_query($db_conn, "SELECT id, name, active FROM locations " . $showActive . " ORDER BY name ASC;");
+    while ($rowLocationSearch = mysqli_fetch_array($sqlGetLocSearch, MYSQLI_ASSOC)) {
         $locationListJson .= "'" . $rowLocationSearch['name'] . "',";
     }
     echo $locationListJson;
 }
 
-function getPageList(){
+function getPageList()
+{
     global $pageListJson;
     global $db_conn;
 
     $sqlGetPageList = mysqli_query($db_conn, "SELECT title, active FROM pages WHERE active='true';");
-    while ($rowPageList = mysqli_fetch_array($sqlGetPageList, MYSQLI_ASSOC)){
+    while ($rowPageList = mysqli_fetch_array($sqlGetPageList, MYSQLI_ASSOC)) {
         $pageListJson .= "'" . $rowPageList['title'] . "',";
     }
     echo $pageListJson;
 }
 
-function getPage($loc){
+function getPage($loc)
+{
     global $pageTitle;
     global $pageContent;
     global $pageRefId;
     global $db_conn;
 
-    if (ctype_digit($_GET['page_id'])){
+    if (ctype_digit($_GET['page_id'])) {
         $pageRefId = $_GET['page_id'];
         $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $loc . ";");
         $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
-        if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']){
+        if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']) {
 
             $pageTitle = $rowPage['title'];
             $pageContent = $rowPage['content'];
@@ -87,7 +91,8 @@ function getPage($loc){
     }
 }
 
-function getContactInfo($loc){
+function getContactInfo($loc)
+{
     global $contactHeading;
     global $contactBlurb;
     global $contactMap;
@@ -110,60 +115,61 @@ function getContactInfo($loc){
         $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
     }
 
-    if ($_GET['msgsent'] == "thankyou"){
+    if ($_GET['msgsent'] == "thankyou") {
         $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
-    } elseif ($_GET['msgsent'] == "error"){
+    } elseif ($_GET['msgsent'] == "error") {
         $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
     } else {
         $contactFormMsg = "";
     }
 
-    if (!empty($rowContact['heading'])){
+    if (!empty($rowContact['heading'])) {
         $contactHeading = $rowContact['heading'];
     }
 
-    if (!empty($rowContact['introtext'])){
+    if (!empty($rowContact['introtext'])) {
         $contactBlurb = $rowContact['introtext'];
     }
 
-    if (!empty($rowContact['mapcode'])){
+    if (!empty($rowContact['mapcode'])) {
         $contactMap = $rowContact['mapcode'];
     }
 
-    if (!empty($rowContact['address'])){
+    if (!empty($rowContact['address'])) {
         $contactAddress = $rowContact['address'];
     }
 
-    if (!empty($rowContact['city'])){
+    if (!empty($rowContact['city'])) {
         $contactCity = $rowContact['city'];
     }
 
-    if (!empty($rowContact['state'])){
+    if (!empty($rowContact['state'])) {
         $contactState = $rowContact['state'];
     }
 
-    if (!empty($rowContact['zipcode'])){
+    if (!empty($rowContact['zipcode'])) {
         $contactZipcode = $rowContact['zipcode'];
     }
 
-    if (!empty($rowContact['phone'])){
+    if (!empty($rowContact['phone'])) {
         $contactPhone = $rowContact['phone'];
     }
 
-    if (!empty($rowContact['email'])){
+    if (!empty($rowContact['email'])) {
         $contactEmail = $rowContact['email'];
     }
 
-    if (!empty($rowContact['hours'])){
+    if (!empty($rowContact['hours'])) {
         $contactHours = $rowContact['hours'];
     }
 
-    if (!empty($rowContact['sendtoemail'])){
+    if (!empty($rowContact['sendtoemail'])) {
         $contactFormSendToEmail = $rowContact['sendtoemail'];
     }
 }
 
-function getServices($loc){
+function getServices($loc)
+{
     global $sqlServicesHeading;
     global $rowServicesHeading;
     global $servicesHeading;
@@ -189,7 +195,7 @@ function getServices($loc){
 
     $servicesHeading = $rowServicesHeading['servicesheading'];
 
-    if (!empty($rowServicesHeading['servicescontent'])){
+    if (!empty($rowServicesHeading['servicescontent'])) {
         $servicesBlurb = $rowServicesHeading['servicescontent'];
     }
 
@@ -198,7 +204,8 @@ function getServices($loc){
     $servicesCount = 0;
 }
 
-function getTeam($loc){
+function getTeam($loc)
+{
     global $sqlTeamHeading;
     global $rowTeamHeading;
     global $sqlTeam;
@@ -226,7 +233,7 @@ function getTeam($loc){
 
     $teamHeading = $rowTeamHeading['teamheading'];
 
-    if (!empty($rowTeamHeading['teamcontent'])){
+    if (!empty($rowTeamHeading['teamcontent'])) {
         $teamBlurb = $rowTeamHeading['teamcontent'];
     }
 
@@ -234,7 +241,8 @@ function getTeam($loc){
     $teamNumRows = mysqli_num_rows($sqlTeam);
 }
 
-function getNav($loc, $navSection, $dropdown, $pull){
+function getNav($loc, $navSection, $dropdown, $pull)
+{
     //EXAMPLE: getNav($_GET['loc_id'], 'Top','true','right','true')
     global $db_conn;
     global $navLinksID;
@@ -259,7 +267,7 @@ function getNav($loc, $navSection, $dropdown, $pull){
 
     echo "<ul class='nav navbar-nav navbar-$pull navbar-$navSection text-$pull'>";
 
-    if ($dropdown == "true"){
+    if ($dropdown == "true") {
         $dropdownToggle = "dropdown-toggle";
         $dataToggle = "dropdown";
         $dropdown = "dropdown nav-$navSection";
@@ -327,16 +335,16 @@ function getNav($loc, $navSection, $dropdown, $pull){
         $navLinksUrl = getShortCode($navLinksUrl);
 
         //New Window
-        if ($navLinksWin == 'true' || $navLinksWin == 'on'){
+        if ($navLinksWin == 'true' || $navLinksWin == 'on') {
             $navWin = "target='_blank'";
         } else {
             $navWin = "";
         }
 
         //Create category - drop down menus
-        if ($navLinksCatId == $navLinks_CatId && $navLinksCatId != 0){ //NOTE: 0=None in the category table
+        if ($navLinksCatId == $navLinks_CatId && $navLinksCatId != 0) { //NOTE: 0=None in the category table
 
-            if ($navLinksCatId != $tempLink){
+            if ($navLinksCatId != $tempLink) {
 
                 $sqlNavCatLinks = mysqli_query($db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='" . $navSection . "' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id='" . $navDefaultLoc . "' ORDER BY navigation.sort, navigation.name ASC;");
                 //returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.nav_loc_id
@@ -344,7 +352,7 @@ function getNav($loc, $navSection, $dropdown, $pull){
                 echo "<li class='$dropdown'>";
                 echo "<a href='#' class='cat-$navSection' data-toggle='$dataToggle'>" . $navLinks_CatName . " $dropdownCaret</a>";
                 echo "<ul class='$dropdownMenu'>";
-                while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)){
+                while ($rowNavCatLinks = mysqli_fetch_array($sqlNavCatLinks)) {
 
                     //Variables for $rowNavCatLinks SQL Join
                     $navCatLinksID = $rowNavCatLinks[0];
@@ -360,7 +368,7 @@ function getNav($loc, $navSection, $dropdown, $pull){
                     $navCatLinksUrl = getShortCode($navCatLinksUrl);
 
                     //New Window
-                    if ($navCatLinksWin == 'true' || $navCatLinksWin == 'on'){
+                    if ($navCatLinksWin == 'true' || $navCatLinksWin == 'on') {
                         $navCatWin = "target='_blank'";
                     } else {
                         $navCatWin = "";
@@ -387,7 +395,8 @@ function getNav($loc, $navSection, $dropdown, $pull){
     echo "</ul>";
 }
 
-function getSetup($loc){
+function getSetup($loc)
+{
     global $setupTitle;
     global $setupAuthor;
     global $setupKeywords;
@@ -415,7 +424,8 @@ function getSetup($loc){
     $setupLogoDefaults = $rowSetup['logo_use_defaults'];
 }
 
-function getLogo($loc, $type){
+function getLogo($loc, $type)
+{
     global $db_conn;
     global $getLogo;
 
@@ -432,7 +442,7 @@ function getLogo($loc, $type){
         $getLogo = $rowGetLogoOptions['logo'];
     }
 
-    if ($type == 'absolute'){
+    if ($type == 'absolute') {
         echo str_replace('..', serverUrlStr, $getLogo);
     } elseif ($type == 'relative') {
         echo $getLogo;
@@ -442,7 +452,8 @@ function getLogo($loc, $type){
 
 }
 
-function getCoreHeader($loc, $addHeader=null){
+function getCoreHeader($loc, $addHeader = null)
+{
     getLocation($loc);
     getSetup($loc);
     global $setupConfig;
@@ -451,7 +462,7 @@ function getCoreHeader($loc, $addHeader=null){
     global $setupKeywords;
     global $setupDescription;
     ?>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <meta http-equiv="refresh" content="3600; url=index.php?loc_id=<?php echo $loc; ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="index,follow">
@@ -468,39 +479,49 @@ function getCoreHeader($loc, $addHeader=null){
 
     <title><?php echo $setupTitle; ?></title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="<?php echo serverUrlStr; ?>/themes/<?php echo themeOption; ?>/images/favicon.ico">
 
     <!-- Core CSS Libraries -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/core/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Default CSS - Do not remove-->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!--Dynamic CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <script type="text/javascript" language="javascript"
+            src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <script type="text/javascript" language="javascript"
+            src="<?php echo serverUrlStr; ?>/core/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- LS2 search script -->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <script type="text/javascript" language="javascript"
+            src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- Core js file-->
-    <script type="text/javascript" language="javascript" src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+    <script type="text/javascript" language="javascript"
+            src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php if (!empty(setupPACURL)) { ?>
-        <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
-        <script type="text/javascript" language="javascript">
-            var TLCDomain = "<?php echo setupPACURL; ?>";
-            var TLCConfig = "<?php echo $setupConfig; ?>";
-            var TLCBranch = "";
-            var TLCClassicDomain = "<?php echo setupPACURL; ?>";
-            var TLCClassicConfig = "<?php echo $setupConfig; ?>";
-        </script>
-    <?php } ?>
+    <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
+    <script type="text/javascript" language="javascript">
+        var TLCDomain = "<?php echo setupPACURL; ?>";
+        var TLCConfig = "<?php echo $setupConfig; ?>";
+        var TLCBranch = "";
+        var TLCClassicDomain = "<?php echo setupPACURL; ?>";
+        var TLCClassicConfig = "<?php echo $setupConfig; ?>";
+    </script>
+<?php } ?>
 
     <?php
     //Google Analytics UID
@@ -523,7 +544,8 @@ function getCoreHeader($loc, $addHeader=null){
 }
 
 //Theme options
-function getDynamicCss($loc){
+function getDynamicCss($loc)
+{
     global $db_conn;
 
     header('Content-type: text/css; charset: UTF-8');
@@ -541,17 +563,18 @@ function getDynamicCss($loc){
 
     //Gets themeoptions
     $sqlGetThemeOpions = mysqli_query($db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND loc_id=" . $locId . ";");
-    while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions, MYSQLI_ASSOC)){
+    while ($rowGetThemeOpions = mysqli_fetch_array($sqlGetThemeOpions, MYSQLI_ASSOC)) {
         //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
-        if (trim($rowGetThemeOpions['cssvalue']) != '#000000'){
+        if (trim($rowGetThemeOpions['cssvalue']) != '#000000') {
             echo $rowGetThemeOpions['selector'] . " {" . trim($rowGetThemeOpions['property']) . ": " . trim($rowGetThemeOpions['cssvalue']) . " !important;}" . PHP_EOL;
         }
     }
 }
 
 //Gets the image path and converts it to absolute image path.
-function getAbsoluteImagePath($imagePath){
-    if (strpos($imagePath, '../uploads/') !== false){
+function getAbsoluteImagePath($imagePath)
+{
+    if (strpos($imagePath, '../uploads/') !== false) {
         $absolutePath = serverUrlStr . str_replace('../', '/', $imagePath);
     } else {
         $absolutePath = $imagePath;
@@ -559,7 +582,8 @@ function getAbsoluteImagePath($imagePath){
     return $absolutePath;
 }
 
-function getSocialMediaIcons($loc, $shape, $section){
+function getSocialMediaIcons($loc, $shape, $section)
+{
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")
     global $socialMediaIcons;
@@ -580,40 +604,41 @@ function getSocialMediaIcons($loc, $shape, $section){
     $socialMediaHeading = "";
     $socialMediaIcons = "";
 
-    if (!empty($rowSocialMedia['heading'])){
+    if (!empty($rowSocialMedia['heading'])) {
         $socialMediaHeading = $rowSocialMedia['heading'];
     }
 
-    if (!empty($rowSocialMedia['facebook'])){
+    if (!empty($rowSocialMedia['facebook'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['facebook']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['google'])){
+    if (!empty($rowSocialMedia['google'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['google']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['pinterest'])){
+    if (!empty($rowSocialMedia['pinterest'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['pinterest']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['twitter'])){
+    if (!empty($rowSocialMedia['twitter'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['twitter']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['instagram'])){
+    if (!empty($rowSocialMedia['instagram'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['instagram']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['youtube'])){
+    if (!empty($rowSocialMedia['youtube'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['youtube']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 
-    if (!empty($rowSocialMedia['tumblr'])){
+    if (!empty($rowSocialMedia['tumblr'])) {
         $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['tumblr']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
     }
 }
 
-function getCustomers($loc, $custType){
+function getCustomers($loc, $custType)
+{
     //getCustomers($_GET['loc_id'], 'featured')
     //getCustomers($_GET['loc_id'], NULL)
     global $sqlCustomers;
@@ -637,7 +662,7 @@ function getCustomers($loc, $custType){
     }
 
     //get the default values from setup table where get loc_id
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section FROM sections_customers WHERE section='".$customerSection."' AND loc_id=" . $loc . ";");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section FROM sections_customers WHERE section='" . $customerSection . "' AND loc_id=" . $loc . ";");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup, MYSQLI_ASSOC);
 
     //toggle default location value if conditions are true
@@ -648,7 +673,7 @@ function getCustomers($loc, $custType){
     }
 
     //sets to use defaults if conditions are true where loc_id = $custDefaultLoc
-    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section, heading, content FROM sections_customers WHERE section='".$customerSection."' AND loc_id=" . $custDefaultLoc . ";");
+    $sqlCustomerSetup = mysqli_query($db_conn, "SELECT use_defaults, section, heading, content FROM sections_customers WHERE section='" . $customerSection . "' AND loc_id=" . $custDefaultLoc . ";");
     $rowCustomerSetup = mysqli_fetch_array($sqlCustomerSetup, MYSQLI_ASSOC);
 
     //toggle default location value if conditions are true
@@ -660,7 +685,7 @@ function getCustomers($loc, $custType){
     //Get Category
     //If cat_id=int then display a page of databases for only that category
     if (!empty($_GET['cat_id'])) {
-        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort FROM category_customers WHERE id IN (SELECT catid, section FROM customers WHERE section='".$customerSection."' AND catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ");");
+        $sqlCatCustomers = mysqli_query($db_conn, "SELECT id, name, sort FROM category_customers WHERE id IN (SELECT catid, section FROM customers WHERE section='" . $customerSection . "' AND catid = " . $_GET['cat_id'] . " AND loc_id=" . $custDefaultLoc . ");");
         $rowCatCustomers = mysqli_fetch_array($sqlCatCustomers, MYSQLI_ASSOC);
         $customerCatId = $rowCatCustomers[0];
         $customerCatName = $rowCatCustomers[1];
@@ -681,7 +706,8 @@ function getCustomers($loc, $custType){
 
 }
 
-function getSlider($loc, $sliderType){
+function getSlider($loc, $sliderType)
+{
     //EXAMPLE: getSlider($_GET['loc_id'], "slide")
     //EXAMPLE: getSlider($_GET['loc_id'], "random")
     global $sliderLink;
@@ -698,9 +724,9 @@ function getSlider($loc, $sliderType){
 
     $sliderOrderBy = '';
 
-    if ($sliderType == "slide"){
+    if ($sliderType == "slide") {
         $sliderOrderBy = "ORDER BY sort, title ASC";
-    } elseif ($sliderType == "random" || $sliderType == ""){
+    } elseif ($sliderType == "random" || $sliderType == "") {
         $sliderOrderBy = "ORDER BY RAND() LIMIT 1";
     }
 
@@ -713,10 +739,10 @@ function getSlider($loc, $sliderType){
 
     $sliderLocType = $rowLocations['type'];
 
-    if ($sliderLocType == '' || $sliderLocType == NULL || $sliderLocType == $locTypes[0]){
-        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND ";
+    if ($sliderLocType == '' || $sliderLocType == NULL || $sliderLocType == $locTypes[0]) {
+        $locTypeWhere = "loc_type IN ('" . $locTypes[0] . "', 'All') AND ";
     } else {
-        $locTypeWhere = "loc_type IN ('".$sliderLocType."', 'All') AND ";
+        $locTypeWhere = "loc_type IN ('" . $sliderLocType . "', 'All') AND ";
     }
 
     //get the default value from setup table
@@ -735,17 +761,17 @@ function getSlider($loc, $sliderType){
     }
 
     //hide carousel arrows if only one image is available
-    if ($sliderNumRows == 1){
+    if ($sliderNumRows == 1) {
         echo "<style>#sliderCarousel .carousel-control {display: none !important;}</style>";
     }
 
-    if ($sliderNumRows > 0){
+    if ($sliderNumRows > 0) {
 
-        if ($sliderType == "slide"){
+        if ($sliderType == "slide") {
 
             //Wrapper for slides
             echo "<div class='carousel-inner'>";
-            while ($rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC)){
+            while ($rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC)) {
 
                 //check if slide is with in date range
                 if (strtotime(date('Y-m-d')) >= strtotime($rowSlider['startdate']) && strtotime(date('Y-m-d')) <= strtotime($rowSlider['enddate'])) {
@@ -796,7 +822,7 @@ function getSlider($loc, $sliderType){
 
             echo "</div>"; //.carousel-inner
 
-        } elseif ($sliderType == "random"){
+        } elseif ($sliderType == "random") {
             $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
             //check if slide is with in date range
             if (strtotime(date('Y-m-d')) >= strtotime($rowSlider['startdate']) && strtotime(date('Y-m-d')) <= strtotime($rowSlider['enddate'])) {
@@ -844,7 +870,9 @@ function getSlider($loc, $sliderType){
 
     }
 }
-function getGeneralInfo($loc){
+
+function getGeneralInfo($loc)
+{
     global $generalInfoContent;
     global $generalInfoHeading;
     global $db_conn;
@@ -853,20 +881,22 @@ function getGeneralInfo($loc){
     $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
 
     //use default location
-    if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == NULL){
+    if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == NULL) {
         $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=1;");
         $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
     }
 
-    if (!empty($rowGeneralinfo['content'])){
+    if (!empty($rowGeneralinfo['content'])) {
         $generalInfoContent = $rowGeneralinfo['content'];
     }
 
-    if (!empty($rowGeneralinfo['heading'])){
+    if (!empty($rowGeneralinfo['heading'])) {
         $generalInfoHeading = $rowGeneralinfo['heading'];
     }
 }
-function getFeatured($loc){
+
+function getFeatured($loc)
+{
     global $featuredContent;
     global $featuredHeading;
     global $featuredBlurb;
@@ -877,27 +907,29 @@ function getFeatured($loc){
     $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
     $imagePath = $loc;
 
-    if ($rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == NULL){
+    if ($rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == NULL) {
         $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content FROM featured WHERE loc_id=1;");
         $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
         $imagePath = 1;
     }
 
-    if (!empty($rowFeatured['heading'])){
+    if (!empty($rowFeatured['heading'])) {
         $featuredHeading = $rowFeatured['heading'];
     }
 
-    if (!empty($rowFeatured['introtext'])){
+    if (!empty($rowFeatured['introtext'])) {
         $featuredBlurb = $rowFeatured['introtext'];
     }
 
-    if (!empty($rowFeatured['content'])){
+    if (!empty($rowFeatured['content'])) {
         $featuredContent = $rowFeatured['content'];
     }
 
 }
-function getEvents($loc){
+
+function getEvents($loc)
+{
     global $eventAlert;
     global $eventHeading;
     global $eventStartdate;
@@ -909,16 +941,16 @@ function getEvents($loc){
     $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . ";");
     $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
-    if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == NULL){
+    if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == NULL) {
         $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=1;");
         $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
     }
 
-    if (!empty($rowEvent['heading'])){
+    if (!empty($rowEvent['heading'])) {
         $eventHeading = $rowEvent['heading'];
     }
 
-    if (!empty($rowEvent['alert'])){
+    if (!empty($rowEvent['alert'])) {
         $eventAlert = $rowEvent['alert'];
         $eventStartdate = $rowEvent['startdate'];
         $eventEnddate = $rowEvent['enddate'];
@@ -930,17 +962,18 @@ function getEvents($loc){
         }
     }
 
-    if (!empty($rowEvent['calendar'])){
+    if (!empty($rowEvent['calendar'])) {
         $eventCalendar = $rowEvent['calendar'];
     }
 }
 
-function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
+function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
+{
     //getHottitlesCarousel("http://mylibrary.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
 
     $jacketSize = strtoupper($jacketSize);
 
-    $checkUrl = 'https://ls2content.tlcdelivers.com/tlccontent?customerid='.customerNumber.'&appid=ls2pac&requesttype=BOOKJACKET-SM&isbn=123456789';
+    $checkUrl = 'https://ls2content.tlcdelivers.com/tlccontent?customerid=' . customerNumber . '&appid=ls2pac&requesttype=BOOKJACKET-SM&isbn=123456789';
 
     //Check if customerid is set up on the content server
     if (!empty(customerNumber)) {
@@ -1003,119 +1036,120 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt) {
     }
 
     echo "<div class='owl-carousel owl-theme'>";
-        if (strstr($xmlurl, '/econtent/')) {
-            //Content server XML Lists - NYTimes
+    if (strstr($xmlurl, '/econtent/')) {
+        //Content server XML Lists - NYTimes
 
-            foreach ($xmlfeed->Book as $xmlitem) {
+        foreach ($xmlfeed->Book as $xmlitem) {
 
-                $itemcount++;
+            $itemcount++;
 
-                //get title node for each book
-                $xmltitle = (string)$xmlitem->Title;
+            //get title node for each book
+            $xmltitle = (string)$xmlitem->Title;
 
-                //get ISBN node for each book
-                $xmlisbn = (string)$xmlitem->ISBN;
+            //get ISBN node for each book
+            $xmlisbn = (string)$xmlitem->ISBN;
 
-                //https://ls2content2.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
-                $xmlimage = "https://ls2content".$loadBalancer.".tlcdelivers.com/tlccontent?customerid=".customerNumber."&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
+            //https://ls2content2.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
+            $xmlimage = "https://ls2content" . $loadBalancer . ".tlcdelivers.com/tlccontent?customerid=" . customerNumber . "&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
 
-                //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
-                $xmllink = setupPACURL."/?config=ysm#section=search&term=".$xmltitle;
+            //http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
+            $xmllink = setupPACURL . "/?config=ysm#section=search&term=" . $xmltitle;
 
-                //Gets the image dimensions from the xmltheimage url as an array.
-                $xmlimagesize = getimagesize($xmlimage);
-                $xmlimagewidth = $xmlimagesize[0];
-                $xmlimageheight = $xmlimagesize[1];
+            //Gets the image dimensions from the xmltheimage url as an array.
+            $xmlimagesize = getimagesize($xmlimage);
+            $xmlimagewidth = $xmlimagesize[0];
+            $xmlimageheight = $xmlimagesize[1];
 
-                echo "<div class='item'>";
+            echo "<div class='item'>";
 
-                //Check if has book jacket based on the image size (1x1)
-                if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
-                } else {
-                    if ($dummyJackets == 'true') {
-                        //TLC dummy book jacket img
-                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-".strtolower($jacketSize).".png'></a>";
-                    }
-                }
-
-                echo "</div>";
-
-                //stop parsing xml once it reaches the max count
-                if ($itemcount == $maxcnt) {
-                    break;
+            //Check if has book jacket based on the image size (1x1)
+            if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
+                echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
+            } else {
+                if ($dummyJackets == 'true') {
+                    //TLC dummy book jacket img
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
-        } elseif (strstr($xmlurl, '/list/')) {
-            //LS2PAC Saved Search XML Lists
 
-            foreach ($xmlfeed->channel->item as $xmlitem) {
+            echo "</div>";
 
-                $itemcount++;
-
-                //get title node for each book
-                $xmltitle = (string)$xmlitem->title;
-
-                //get url for each book
-                $xmllink = (string)$xmlitem->link;
-
-                //Get the ResourceID from the xmllink
-                parse_str($xmllink, $xmllinkArray);
-                $xmlResourceId = $xmllinkArray['resourceId'];
-
-                //get image url from img tag in the description node
-                preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
-
-                //set the image url. clean the image url string
-                $xmlimage = $xmltheimage[1];
-
-                //Replace http with https
-                $xmlimage = trim(str_replace('http:', 'https:', $xmlimage));
-
-                //Use the ls2content round-robin load balancer
-                $xmlimage = trim(str_replace("ls2content", "ls2content".$loadBalancer."", $xmlimage));
-
-                if ($jacketSize == 'SM') {
-                    $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
-                    $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
-                } elseif ($jacketSize == 'MD') {
-                    $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-MD', $xmlimage));
-                    $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-MD', $xmlimage));
-                } elseif ($jacketSize == 'LG') {
-                    $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-LG', $xmlimage));
-                    $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
-                }
-
-                //Gets the image dimensions from the xmltheimage url as an array.
-                $xmlimagesize = getimagesize($xmltheimage[1]);
-                $xmlimagewidth = $xmlimagesize[0];
-                $xmlimageheight = $xmlimagesize[1];
-
-                echo "<div class='item'>";
-
-                //Check if has book jacket based on the image size (1x1)
-                if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
-                } else {
-                    if ($dummyJackets == true) {
-                        //TLC dummy book jacket img
-                        echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-".strtolower($jacketSize).".png'></a>";
-                    }
-                }
-
-                echo "</div>";
-
-                //stop parsing xml once it reaches the max count
-                if ($itemcount == $maxcnt) {
-                    break;
-                }
-
-            } //end for loop
+            //stop parsing xml once it reaches the max count
+            if ($itemcount == $maxcnt) {
+                break;
+            }
         }
+    } elseif (strstr($xmlurl, '/list/')) {
+        //LS2PAC Saved Search XML Lists
+
+        foreach ($xmlfeed->channel->item as $xmlitem) {
+
+            $itemcount++;
+
+            //get title node for each book
+            $xmltitle = (string)$xmlitem->title;
+
+            //get url for each book
+            $xmllink = (string)$xmlitem->link;
+
+            //Get the ResourceID from the xmllink
+            parse_str($xmllink, $xmllinkArray);
+            $xmlResourceId = $xmllinkArray['resourceId'];
+
+            //get image url from img tag in the description node
+            preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', (string)$xmlitem->description, $xmltheimage);
+
+            //set the image url. clean the image url string
+            $xmlimage = $xmltheimage[1];
+
+            //Replace http with https
+            $xmlimage = trim(str_replace('http:', 'https:', $xmlimage));
+
+            //Use the ls2content round-robin load balancer
+            $xmlimage = trim(str_replace("ls2content", "ls2content" . $loadBalancer . "", $xmlimage));
+
+            if ($jacketSize == 'SM') {
+                $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage));
+                $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-SM', $xmlimage));
+            } elseif ($jacketSize == 'MD') {
+                $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-MD', $xmlimage));
+                $xmlimage = trim(str_replace('BOOKJACKET-LG', 'BOOKJACKET-MD', $xmlimage));
+            } elseif ($jacketSize == 'LG') {
+                $xmlimage = trim(str_replace('BOOKJACKET-SM', 'BOOKJACKET-LG', $xmlimage));
+                $xmlimage = trim(str_replace('BOOKJACKET-MD', 'BOOKJACKET-LG', $xmlimage));
+            }
+
+            //Gets the image dimensions from the xmltheimage url as an array.
+            $xmlimagesize = getimagesize($xmltheimage[1]);
+            $xmlimagewidth = $xmlimagesize[0];
+            $xmlimageheight = $xmlimagesize[1];
+
+            echo "<div class='item'>";
+
+            //Check if has book jacket based on the image size (1x1)
+            if ($xmlimageheight > '1' && $xmlimagewidth > '1') {
+                echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><img src='" . htmlspecialchars($xmlimage, ENT_QUOTES) . "' class='img-responsive center-block $jacketSize'></a>";
+            } else {
+                if ($dummyJackets == true) {
+                    //TLC dummy book jacket img
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                }
+            }
+
+            echo "</div>";
+
+            //stop parsing xml once it reaches the max count
+            if ($itemcount == $maxcnt) {
+                break;
+            }
+
+        } //end for loop
+    }
     echo "</div>";
 }
 
-function getHottitlesTabs($loc){
+function getHottitlesTabs($loc)
+{
     global $hottitlesTile;
     global $hottitlesUrl;
     global $hottitlesLoadFirstUrl;
@@ -1127,7 +1161,7 @@ function getHottitlesTabs($loc){
     global $db_conn;
 
     //get the heading value from setup table
-    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $loc. ";");
+    $sqlHottitlesSetup = mysqli_query($db_conn, "SELECT hottitlesheading, loc_id FROM setup WHERE loc_id=" . $loc . ";");
     $rowHottitlesSetup = mysqli_fetch_array($sqlHottitlesSetup, MYSQLI_ASSOC);
     $hottitlesHeading = $rowHottitlesSetup['hottitlesheading'];
 
@@ -1135,12 +1169,12 @@ function getHottitlesTabs($loc){
     $sqlLocations = mysqli_query($db_conn, "SELECT id, name, type FROM locations WHERE id=" . $loc . ";");
     $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
-    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]){
+    if ($rowLocations['type'] == '' || $rowLocations['type'] == NULL || $rowLocations['type'] == $locTypes[0]) {
         $hottitlesLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$locTypes[0]."', 'All') AND";
+        $locTypeWhere = "loc_type IN ('" . $locTypes[0] . "', 'All') AND";
     } else {
         $hottitlesLocType = $rowLocations['type'];
-        $locTypeWhere = "loc_type IN ('".$hottitlesLocType."', 'All') AND";
+        $locTypeWhere = "loc_type IN ('" . $hottitlesLocType . "', 'All') AND";
     }
 
     //get the default value from setup table
@@ -1164,7 +1198,7 @@ function getHottitlesTabs($loc){
         $hottitlesTile = trim($rowHottitles['title']);
         $hottitlesUrl = trim($rowHottitles['url']);
         $hottitlesLocType = trim($rowHottitles['loc_type']);
-        $hottitlesCount ++;
+        $hottitlesCount++;
 
         //Set active tab on initial page load where count=1
         if ($hottitlesCount == 1) {
@@ -1175,12 +1209,13 @@ function getHottitlesTabs($loc){
         }
 
         if ($hottitlesCount > 0) {
-            $hottitlesTabs .=  "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hottitlesCount');\">$hottitlesTile</a></li>";
+            $hottitlesTabs .= "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hottitlesCount');\">$hottitlesTile</a></li>";
         }
     }
 }
 
-function getSiteSearchResults($searchTerm, $showPageContent) {
+function getSiteSearchResults($searchTerm, $showPageContent)
+{
     //getSiteSearchResults('how do i check out a book', true = shows page contents in search results)
     global $db_conn;
     global $siteSearchId;
@@ -1189,13 +1224,13 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
     global $siteSearchContent;
     global $siteSearchCount;
 
-    $siteSearchTerm = "%".mysqli_real_escape_string($db_conn, strip_tags(trim($searchTerm)))."%";
+    $siteSearchTerm = "%" . mysqli_real_escape_string($db_conn, strip_tags(trim($searchTerm))) . "%";
     $siteSearchCount = 0;
 
     $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' ORDER BY title ASC;");
 
     while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch, MYSQLI_ASSOC)) {
-        $siteSearchCount ++;
+        $siteSearchCount++;
         $siteSearchId = $rowSiteSearch['id'];
         $siteSearchLodId = $rowSiteSearch['loc_id'];
         $siteSearchTitle = $rowSiteSearch['title'];
@@ -1212,7 +1247,8 @@ function getSiteSearchResults($searchTerm, $showPageContent) {
     }
 }
 
-function getUrlContents($getUrl) {
+function getUrlContents($getUrl)
+{
     $ch = curl_init();
     $timeout = 10;
     curl_setopt($ch, CURLOPT_URL, $getUrl);
@@ -1221,7 +1257,7 @@ function getUrlContents($getUrl) {
     $data = curl_exec($ch);
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if ($http_status != 200) {
-        echo "HTTP status ".$http_status.". Error loading URL. " .curl_error($ch);
+        echo "HTTP status " . $http_status . ". Error loading URL. " . curl_error($ch);
         curl_close($ch);
         die();
     }
@@ -1234,7 +1270,8 @@ function getUrlContents($getUrl) {
 getSetup($_GET['loc_id']);
 
 //Random string generator - used to create a unique md5 referrer
-function generateRandomString($length = 10){
+function generateRandomString($length = 10)
+{
     global $randomString;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -1248,7 +1285,8 @@ function generateRandomString($length = 10){
 }
 
 //Short Code function. Use [my_vals] in the Admin Panel to pull in values from the database
-function getShortCode($urlStr){
+function getShortCode($urlStr)
+{
     global $setupConfig;
 
     //add a space to the front of var so that str_replace will see it. strange, right?
@@ -1264,8 +1302,10 @@ function getShortCode($urlStr){
 
     return trim($urlStr);
 }
+
 //Google Analytic Tracker Code
-function getGoogleAnalyticsTrackingCode($uidcode){
+function getGoogleAnalyticsTrackingCode($uidcode)
+{
     if (!empty($uidcode)) {
         ?>
         <!-- Google Analytics -->
@@ -1286,9 +1326,11 @@ function getGoogleAnalyticsTrackingCode($uidcode){
         <?php
     }
 }
+
 //Google Translate Widget
 //getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN')
-function getGoogleTranslateCode($languages){
+function getGoogleTranslateCode($languages)
+{
     ?>
     <!-- Google Translate -->
     <div id="google_translate_element"></div>
@@ -1307,19 +1349,19 @@ function getGoogleTranslateCode($languages){
 
 //Call these functions depending on which page you are visiting
 //Sets the page title and calls the main function for each page.
-if (basename($_SERVER['PHP_SELF']) == "page.php"){
+if (basename($_SERVER['PHP_SELF']) == "page.php") {
     getPage($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $pageTitle;
-} elseif (basename($_SERVER['PHP_SELF']) == "contact.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "contact.php") {
     getContactInfo($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $contactHeading;
-} elseif (basename($_SERVER['PHP_SELF']) == "services.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "services.php") {
     getServices($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $servicesHeading;
-} elseif (basename($_SERVER['PHP_SELF']) == "staff.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "staff.php") {
     getTeam($_GET['loc_id']);
     $theTitle = $setupTitle . " - " . $teamHeading;
-} elseif (basename($_SERVER['PHP_SELF']) == "databases.php"){
+} elseif (basename($_SERVER['PHP_SELF']) == "databases.php") {
     getCustomers($_GET['loc_id'], NULL);
     $theTitle = $setupTitle . " - " . $customerHeading;
 } else {
@@ -1327,29 +1369,29 @@ if (basename($_SERVER['PHP_SELF']) == "page.php"){
 }
 
 //redirect to default location if loc_id or script name not defined
-if (empty($_GET['loc_id'])){
+if (empty($_GET['loc_id'])) {
 
-    if (basename($_SERVER['PHP_SELF']) == ""){
+    if (basename($_SERVER['PHP_SELF']) == "") {
         $pageRedirect = 'index.php?loc_id=1';
     } else {
         $pageRedirect = basename($_SERVER['PHP_SELF']) . '?loc_id=1';
     }
 
-    header("Location: $pageRedirect",true,  301);
+    header("Location: $pageRedirect", true, 301);
     echo "<script>window.location.href='" . $pageRedirect . "';</script>";
 
-} elseif (multiBranch == "false" && $_GET['loc_id'] != 1){
-    header("Location: index.php?loc_id=1",true,  301);
+} elseif (multiBranch == "false" && $_GET['loc_id'] != 1) {
+    header("Location: index.php?loc_id=1", true, 301);
     echo "<script>window.location.href='index.php?loc_id=1';</script>";
 }
 
 //location search box redirect to loc_id where loc_name = querystring
-if (!empty($_GET['loc_name'])){
+if (!empty($_GET['loc_name'])) {
 
     $sqlLocName = mysqli_query($db_conn, "SELECT name, id, active FROM locations WHERE active='true' AND name='" . $_GET['loc_name'] . "' LIMIT 1;");
     $rowLocName = mysqli_fetch_array($sqlLocName, MYSQLI_ASSOC);
 
-    header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "",  true,  301);
+    header("Location: " . basename($_SERVER['PHP_SELF']) . "?loc_id=" . $rowLocName['id'] . "", true, 301);
     echo "<script>window.location.href='" . basename($_SERVER['PHP_SELF']) . '?loc_id=' . $rowLocName['id'] . "';</script>";
 }
 ?>

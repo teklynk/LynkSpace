@@ -34,7 +34,7 @@ if (isset($_SESSION['updates_available'])) {
     }
 
     //Check that backups folder is writable.
-    if (!is_writeable(__DIR__ . '/backups/')){
+    if (!is_writeable(__DIR__ . '/backups/')) {
         $pageMsg = "<div class='alert alert-danger'>" . __DIR__ . "/backups is not writable. Check folder permissions.</div>";
     }
 
@@ -45,8 +45,8 @@ if (isset($_SESSION['updates_available'])) {
 
     //Message
     echo "<div class='alert alert-warning clearfix'><strong><i class='fa fa-exclamation' aria-hidden='true'></i>  Important:</strong>&nbsp;Before updating, please back up your database and files.  <a href='updates.php?backup=true'>Run a backup now.</a></div>";
-    echo "<h2>An updated version is available: ".$getVersion."</h2>";
-    echo "<p>You can update to version ".$getVersion." automatically:</p>";
+    echo "<h2>An updated version is available: " . $getVersion . "</h2>";
+    echo "<p>You can update to version " . $getVersion . " automatically:</p>";
 
     if (!file_exists($updatesDestination)) {
         $upgradeOption = 'download';
@@ -63,7 +63,7 @@ if (isset($_SESSION['updates_available'])) {
     echo "<div><a href='updates.php?backup=true' class='btn btn-link' role='button' aria-pressed='true'><i class='fa fa-file-archive-o' aria-hidden='true'></i> Backup now </a></div>";
     echo "<div><small><b>Backups (admin/backups)</b></small></div>";
     echo "<div><small>";
-        getDirContents(__DIR__ . "/backups/");
+    getDirContents(__DIR__ . "/backups/");
     echo "</small></div>";
 
 
@@ -117,7 +117,7 @@ if (isset($_SESSION['updates_available'])) {
         //Delete the zip file
         unlink($updatesDestination);
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -134,7 +134,7 @@ if (isset($_SESSION['updates_available'])) {
 
         sleep(1); // wait
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 

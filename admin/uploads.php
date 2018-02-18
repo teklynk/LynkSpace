@@ -30,20 +30,20 @@ uploadFile($action == 'uploadFile', image_dir, 'true', 800, 4, 2048000);
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {
 
-    if ($_GET["isshared"] == 'false'){
+    if ($_GET["isshared"] == 'false') {
         showModalConfirm(
             "confirm",
             "Delete Image?",
-            "Are you sure you want to delete: ".$_GET["delete"]."?",
-            "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
+            "Are you sure you want to delete: " . $_GET["delete"] . "?",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes",
             false
         );
     } else {
         showModalConfirm(
             "confirm",
             "Delete Image?",
-            "Are you sure you want to delete: ".$_GET["delete"]."? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=".$_GET['loc_id']."&delete=".$_GET["delete"]."&confirm=yes",
+            "Are you sure you want to delete: " . $_GET["delete"] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes",
             false
         );
     }
@@ -68,16 +68,16 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
     //Share setting/options Modal with Form
     showModalConfirm(
         "confirm",
-        "Share Image? <br><small>".$getFileName."</small>",
+        "Share Image? <br><small>" . $getFileName . "</small>",
         "<form name='share_form' id='share_form' method='post'>
         <div class='form-group'>
             <label for='share_location_type'>Location Group</label>
-            <select id='share_loc_type' class='form-control selectpicker show-tick' data-id='share_loc_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>".getLocGroups($rowSharedUploadsOption['shared'])."</select>
+            <select id='share_loc_type' class='form-control selectpicker show-tick' data-id='share_loc_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups($rowSharedUploadsOption['shared']) . "</select>
             <div class='text-center'>
                 <h3>- OR -</h3>
             </div>
             <label for='share_location_list'>Location(s)</label>
-            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>".getLocList($rowSharedUploadsOption['shared'], 'true')."</select>
+            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList($rowSharedUploadsOption['shared'], 'true') . "</select>
             <input type='hidden' name='action' value='shareFile'>
         </div>",
         "<button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
@@ -107,7 +107,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 
-        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "",  true,  301);
+        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
         echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -161,7 +161,9 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                 <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary" data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit" data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+                <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary"
+                        data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit"
+                        data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>
             </form>
@@ -207,7 +209,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             $fileSize = filesize_formatted(image_dir . $file);
 
                             //Check shared_uploads table for any shared images
-                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1");
+                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1;");
                             $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads, MYSQLI_ASSOC);
 
                             if ($rowSharedUploads['filename'] == $file) {
@@ -219,7 +221,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             }
 
                             echo "<tr data-index='" . $count . "'>
-                            <td><a href='#' onclick=\"showMyModal('".str_replace('../','',image_dir) . $file . " : " . $fileSize . "', '" . image_dir . $file . "')\" title='Preview'>" . $file . "</a></td>";
+                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file . " : " . $fileSize . "', '" . image_dir . $file . "')\" title='Preview'>" . $file . "</a></td>";
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
                                 echo "<td class='col-xs-1'>
                                 <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
@@ -228,7 +230,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $modDate . "</td>
                             <td class='col-xs-1'>
-                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "&isshared=".$isSharedVal."'\"><i class='fa fa-fw fa-trash'></i></button>
+                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
                         }
@@ -253,7 +255,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <h4 class="modal-title">&nbsp;</h4>
                 </div>
                 <div class="modal-body">
-                    <img id="myModalFile" src="" class="img-responsive center-block" />
+                    <img id="myModalFile" src="" class="img-responsive center-block"/>
                 </div>
                 <div class="modal-footer">&nbsp;</div>
             </div>
@@ -262,21 +264,21 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     <!-- Modal javascript logic -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#confirm').on('hidden.bs.modal', function(){
-                setTimeout(function(){
-                    window.location.href='uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+        $(document).ready(function () {
+            $('#confirm').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    window.location.href = 'uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
                 }, 100);
             });
 
             var url = window.location.href;
-            if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1){
-                setTimeout(function(){
+            if (url.indexOf('delete') != -1 && url.indexOf('confirm') == -1) {
+                setTimeout(function () {
                     $('#confirm').modal('show');
                 }, 100);
             }
-            if (url.indexOf('share') != -1){
-                setTimeout(function(){
+            if (url.indexOf('share') != -1) {
+                setTimeout(function () {
                     $('#confirm').modal('show');
                 }, 100);
             }

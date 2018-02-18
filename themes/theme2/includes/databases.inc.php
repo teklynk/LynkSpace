@@ -43,7 +43,7 @@ if ($customerNumRows > 0) {
             //prints the cat title/name
             $customersCatCount++;
             echo "<div class='col-xs-12 col-lg-12 cat-title catnameid-" . $customerCatId . " '>";
-            echo "<a href='databases.php?loc_id=".$_GET['loc_id']."&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
+            echo "<a href='databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
             echo "</div>";
             echo "<div style='clear:both;'></div>";
         }
@@ -51,7 +51,7 @@ if ($customerNumRows > 0) {
         $customersItemCount = 0;
 
         //Gets links for each cat
-        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND featured='false' AND catid=".$customerCatId." AND loc_id=".$custDefaultLoc." ORDER BY catid, sort, name ASC"); //While loop
+        $sqlCustomers = mysqli_query($db_conn, "SELECT id, image, icon, name, link, catid, section, content, featured, sort, datetime, active, loc_id FROM customers WHERE active='true' AND section='" . $customerSection . "' AND featured='false' AND catid=" . $customerCatId . " AND loc_id=" . $custDefaultLoc . " ORDER BY catid, sort, name ASC"); //While loop
         $itemCount = mysqli_num_rows($sqlCustomers);
         while ($rowCustomers = mysqli_fetch_array($sqlCustomers, MYSQLI_ASSOC)) {
 

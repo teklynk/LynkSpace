@@ -7,7 +7,7 @@ $_SESSION['file_referrer'] = 'usermanager.php';
 
 // Only allow Admin users have access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true',  true,  301);
+    header('Location: index.php?logout=true', true, 301);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
@@ -23,8 +23,8 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
     showModalConfirm(
         "confirm",
         "Delete User?",
-        "Are you sure you want to delete: ".$deluserTitle."?",
-        "usermanager.php?loc_id=".$_GET['loc_id']."&deleteuser=".$deluserId."&deletetitle=".$deluserTitle."&confirm=yes",
+        "Are you sure you want to delete: " . $deluserTitle . "?",
+        "usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes",
         false
     );
 
@@ -102,14 +102,14 @@ if ($_POST['save_main']) {
     </div>
 
 <?php
-    if ($errorMsg !="") {
-        echo $errorMsg;
-    } else {
-        echo $pageMsg;
-    }
-    if ($deleteMsg != "") {
-        echo $deleteMsg;
-    }
+if ($errorMsg != "") {
+    echo $errorMsg;
+} else {
+    echo $pageMsg;
+}
+if ($deleteMsg != "") {
+    echo $deleteMsg;
+}
 ?>
     <!-- Add user form-->
     <button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
@@ -127,7 +127,9 @@ if ($_POST['save_main']) {
                                 <label for="user_name">Username</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="text" name="user_name" maxlength="255" value="<?php echo $userName; ?>" placeholder="Username" autofocus autocomplete="off" required>
+                                    <input class="form-control" type="text" name="user_name" maxlength="255"
+                                           value="<?php echo $userName; ?>" placeholder="Username" autofocus
+                                           autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -135,8 +137,11 @@ if ($_POST['save_main']) {
                             <div class="form-group required">
                                 <label for="user_email">User Email</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="email" name="user_email" maxlength="255" value="<?php echo $userEmail; ?>" placeholder="Email Address" pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
+                                    <span class="input-group-addon"><i class="fa fa-envelope"
+                                                                       aria-hidden="true"></i></span>
+                                    <input class="form-control" type="email" name="user_email" maxlength="255"
+                                           value="<?php echo $userEmail; ?>" placeholder="Email Address"
+                                           pattern="<?php echo emailValidationPattern; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +150,11 @@ if ($_POST['save_main']) {
                                 <label for="user_password">User Password</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password" placeholder="Password" value="" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password"
+                                           placeholder="Password" value=""
+                                           pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip"
+                                           data-original-title="<?php echo passwordValidationTitle; ?>"
+                                           autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +163,11 @@ if ($_POST['save_main']) {
                                 <label for="user_password_confirm">Password Confirm</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="password" name="user_password_confirm" placeholder="Password Confirm" value="" pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip" data-original-title="<?php echo passwordValidationTitle; ?>" autocomplete="off" required>
+                                    <input class="form-control" type="password" name="user_password_confirm"
+                                           placeholder="Password Confirm" value=""
+                                           pattern="<?php echo passwordValidationPattern; ?>" data-toggle="tooltip"
+                                           data-original-title="<?php echo passwordValidationTitle; ?>"
+                                           autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +178,11 @@ if ($_POST['save_main']) {
                                 <div class="form-group required">
                                     <label for="user_location">User Location</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                                        <select class="form-control selectpicker show-tick" data-live-search="true" data-container="body" data-dropup-auto="false" data-size="10" name="user_location" title="Choose a location" required>
+                                        <span class="input-group-addon"><i class="fa fa-university"
+                                                                           aria-hidden="true"></i></span>
+                                        <select class="form-control selectpicker show-tick" data-live-search="true"
+                                                data-container="body" data-dropup-auto="false" data-size="10"
+                                                name="user_location" title="Choose a location" required>
                                             <?php echo getLocList($_GET['loc_id'], 'true'); ?>
                                         </select>
                                     </div>
@@ -183,7 +199,9 @@ if ($_POST['save_main']) {
                                 <label for="user_level">User Level</label>
                                 <div class="input-group required">
                                     <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
-                                    <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false" data-size="10" name="user_level" title="Choose a user level" required>
+                                    <select class="form-control selectpicker show-tick" data-container="body"
+                                            data-dropup-auto="false" data-size="10" name="user_level"
+                                            title="Choose a user level" required>
                                         <option value="0">User</option>
                                         <option value="1">Admin</option>
                                     </select>
@@ -193,10 +211,13 @@ if ($_POST['save_main']) {
                         <div class="col-lg-12">
                             <div class="form-group">
 
-                                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                                <input type="hidden" name="csrf"
+                                       value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                                 <input type="hidden" name="save_main" value="true">
-                                <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes</button>
+                                <button type="submit" name="user_submit" class="btn btn-primary"><i
+                                            class='fa fa-fw fa-save'></i> Save Changes
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -276,7 +297,7 @@ if ($_POST['save_main']) {
                         $locationName = $rowLocName['name'];
 
                         echo "<tr>
-                            <td><div class='text-center'><img class='img-circle' src=". getGravatar($usersEmail, 28) ."/></div></td>
+                            <td><div class='text-center'><img class='img-circle' src=" . getGravatar($usersEmail, 28) . "/></div></td>
                             <td>$usersName</td>
                             <td>$usersEmail</td>
                             <td>$usersLevel</td>
@@ -284,7 +305,7 @@ if ($_POST['save_main']) {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable. "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                     }
@@ -296,16 +317,16 @@ if ($_POST['save_main']) {
     </div>
     <!-- Modal javascript logic -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#confirm').on('hidden.bs.modal', function(){
-                setTimeout(function(){
-                    window.location.href='usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+        $(document).ready(function () {
+            $('#confirm').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    window.location.href = 'usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>';
                 }, 100);
             });
 
             var url = window.location.href;
-            if (url.indexOf('deleteuser') != -1 && url.indexOf('confirm') == -1){
-                setTimeout(function(){
+            if (url.indexOf('deleteuser') != -1 && url.indexOf('confirm') == -1) {
+                setTimeout(function () {
                     $('#confirm').modal('show');
                 }, 100);
             }

@@ -25,11 +25,11 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
 
                                 <?php
                                 if ($setupSearchDefault == 1) {
-                                    echo "<li class='active'><a href='#tab1default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
-                                    echo "<li><a href='#tab2default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
+                                    echo "<li class='active'><a href='#tab1default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
+                                    echo "<li><a href='#tab2default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
                                 } else {
-                                    echo "<li class='active'><a href='#tab2default' data-toggle='tab'>".setupLS2KidsLabel."</a></li>";
-                                    echo "<li><a href='#tab1default' data-toggle='tab'>".setupLS2PACLabel."</a></li>";
+                                    echo "<li class='active'><a href='#tab2default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
+                                    echo "<li><a href='#tab1default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
                                 }
                                 ?>
 
@@ -51,10 +51,12 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                 ?>
                                 <!-- LS2PACSearch Form -->
                                 <div class="tab-pane fade in <?php echo $isDefault1; ?>" id="tab1default">
-                                    <form name="ls2pacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
+                                    <form name="ls2pacForm" method="post"
+                                          onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'ls2', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2PACPlaceholder; ?>"/>
+                                                <input type="text" class="form-control" name="term"
+                                                       placeholder="<?php echo setupLS2PACPlaceholder; ?>"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="submit" name="ls2pac_submit">
                                                         <span class="fa fa-search"></span>
@@ -76,12 +78,15 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                                 ?>
                                 <!-- LS2Kids Search Form -->
                                 <div class="tab-pane fade in <?php echo $isDefault2; ?>" id="tab2default">
-                                    <form name="ls2kidspacForm" method="post" onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
+                                    <form name="ls2kidspacForm" method="post"
+                                          onSubmit="return getSearchString(3, this, TLCDomain, TLCConfig, TLCBranch, 'kids5', true);">
                                         <div id="custom-search-input">
                                             <div class="input-group col-md-12">
-                                                <input type="text" class="form-control" name="term" placeholder="<?php echo setupLS2KidsPlaceholder; ?>"/>
+                                                <input type="text" class="form-control" name="term"
+                                                       placeholder="<?php echo setupLS2KidsPlaceholder; ?>"/>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="submit" name="ls2packids_submit">
+                                                    <button class="btn btn-default" type="submit"
+                                                            name="ls2packids_submit">
                                                         <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>

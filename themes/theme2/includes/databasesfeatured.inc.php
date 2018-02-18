@@ -23,7 +23,7 @@ if ($customerNumRows > 0) {
 
     if (!empty($customerBlurb)) {
         echo "<div class='col-xs-12 col-lg-12'>";
-        echo "<p class='text-left customersblurb'>".$customerBlurb."</p>";
+        echo "<p class='text-left customersblurb'>" . $customerBlurb . "</p>";
         echo "</div>";
     }
 
