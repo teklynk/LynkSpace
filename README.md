@@ -20,7 +20,6 @@ Options None
 Require all granted
 </Directory>
  ```
- 
  PHP Modules
 ```
 curl
