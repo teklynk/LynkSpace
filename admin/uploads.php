@@ -206,7 +206,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                             $count++;
                             $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
-                            $fileSize = filesize_formatted(image_dir . $file);
+                            $fileSize = filesizeFormatted(image_dir . $file);
 
                             //Check shared_uploads table for any shared images
                             $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1;");

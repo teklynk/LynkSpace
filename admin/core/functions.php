@@ -5,7 +5,7 @@ if (!defined('inc_access')) {
 }
 
 //Output to browser console
-function debug_to_console($data)
+function debugToConsole($data)
 {
     $output = $data;
 
@@ -262,7 +262,7 @@ function resizeImage($imagePath, $resizedFileName, $width, $height)
 }
 
 //File size conversion to KB, MB, GB....
-function filesize_formatted($theFile)
+function filesizeFormatted($theFile)
 {
     $size = filesize($theFile);
     $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
@@ -808,14 +808,14 @@ function checkDependencies()
 }
 
 //Copy folder contents to another
-function recurse_copy($src, $dst)
+function recurseCopy($src, $dst)
 {
     $dir = opendir($src);
     @mkdir($dst, 0755, true);
     while (false !== ($file = readdir($dir))) {
         if (($file != '.') && ($file != '..')) {
             if (is_dir($src . '/' . $file)) {
-                recurse_copy($src . '/' . $file, $dst . '/' . $file);
+                recurseCopy($src . '/' . $file, $dst . '/' . $file);
             } else {
                 copy($src . '/' . $file, $dst . '/' . $file);
             }
@@ -825,7 +825,7 @@ function recurse_copy($src, $dst)
 }
 
 //Deletes files inside a directory ($src)
-function recurse_delete($src)
+function recurseDelete($src)
 {
     array_map('unlink', glob($src));
 }
@@ -860,21 +860,21 @@ function databaseDumpBackup($dest)
 }
 
 //Remove Directory
-function rrmdir($dir)
+function rrmDir($dir)
 {
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
                 if (filetype($dir . "/" . $object) == "dir") {
-                    rrmdir($dir . "/" . $object);
+                    rrmDir($dir . "/" . $object);
                 } else {
                     unlink($dir . "/" . $object);
                 }
             }
         }
         reset($objects);
-        rmdir($dir);
+        rrmDir($dir);
     }
 }
 

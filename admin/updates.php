@@ -125,7 +125,7 @@ if (isset($_SESSION['updates_available'])) {
     if ($_GET['backup'] == 'true') {
 
         //Removes old backups before creating a new backup
-        recurse_delete(__DIR__ . "/backups/*.zip");
+        recurseDelete(__DIR__ . "/backups/*.zip");
 
         sleep(1); // wait
 
