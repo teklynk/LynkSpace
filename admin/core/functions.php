@@ -85,6 +85,82 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
 
 }
 
+//Import from CSV
+function importFromCsv($fileInput, $dbTable)
+{
+    global $db_conn;
+    global $rowCount;
+    global $rowInsert;
+
+    //Check if action is Post, File input exists and that file is not empty
+    if (!empty($_POST) && !empty($_FILES[$fileInput]) && $_FILES[$fileInput]['size'] > 0) {
+
+        $rowCount = 0;
+
+        $dbTable = db_name . "." . $dbTable;
+
+        //Check if table name exists
+        $sqlCheckTable = "SELECT count(*) FROM " . $dbTable . ";";
+        $rowCheckTable = mysqli_query($db_conn, $sqlCheckTable);
+
+        if (!$rowCheckTable) {
+            die($dbTable . " table does not exist.");
+        }
+
+        //Get the csv file
+        $csvFile = $_FILES[$fileInput]['tmp_name'];
+        $handle = fopen($csvFile, 'r');
+
+        //Get Header row
+        $header = fgetcsv($handle, 0, ",", '"');
+
+        //Convert csv array to string
+        $headerRowValues = implode(",", $header);
+
+        while (($csvData = fgetcsv($handle, 0, ",", '"')) !== FALSE) {
+
+            $csvValues = '';
+
+            foreach ($csvData as $csvElement) {
+                $csvElement = safeCleanStr($csvElement);
+                //Check if csv value is an integer, else wrap the value in quotes.
+                if (preg_match ("/^([0-9]+)$/", $csvElement) || is_numeric($csvElement) || is_int($csvElement) || is_float($csvElement)) {
+                    $csvValues .= (int)$csvElement . ",";
+                } else {
+                    $csvValues .= "'" . (string)$csvElement . "',";
+                }
+            }
+
+            //Remove the last comma in the string
+            $csvValues = rtrim($csvValues, ",");
+
+            if ($csvValues != NULL || $csvValues != '') {
+
+                $rowCount++;
+
+                $sqlInsert = "INSERT INTO $dbTable ($headerRowValues) VALUES ($csvValues);";
+                $rowInsert = mysqli_query($db_conn, $sqlInsert);
+
+            } else {
+
+                $csvData = array();
+                $csvValues = NULL;
+                $sqlOffersInsert = NULL;
+                $rowCount = 0;
+
+                fclose($handle);
+                return false;
+            }
+
+        }
+
+        fclose($handle);
+        return true;
+    }
+
+    return false;
+}
+
 //File Uploader
 function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize)
 {
