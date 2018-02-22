@@ -1347,6 +1347,29 @@ function getGoogleTranslateCode($languages)
     <?php
 }
 
+//Disqus service
+function getDisqusCode($page_url, $unique_identifier)
+{
+    if (!empty(disqus_url)) {
+        ?>
+        <!-- Disqus service -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript" language="javascript">
+            var disqus_config = function () {
+                this.page.url = <?php echo $page_url; ?>;
+                this.page.identifier = <?php echo $unique_identifier; ?>;
+            };
+            (function () {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://<?php echo disqus_url; ?>/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <?php
+    }
+}
+
 //Call these functions depending on which page you are visiting
 //Sets the page title and calls the main function for each page.
 if (basename($_SERVER['PHP_SELF']) == "page.php") {

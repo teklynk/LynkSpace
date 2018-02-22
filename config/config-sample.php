@@ -55,6 +55,9 @@ define('cmsWebsite', 'https://github.com/teklynk/LynkSpace');
 //Build the server url string
 define('serverUrlStr', $serverProtocol . $serverHostname . $serverPort . $subDirectory);
 
+//Page URL
+define('pageUrlStr', $serverProtocol . $serverHostname . $_SERVER['REQUEST_URI']);;
+
 //Theme value
 define('themeOption', $rowConfig['theme']);
 
@@ -186,6 +189,9 @@ define('passwordValidationTitle', "1 or more digits and a minimum of 4 letters a
 //define variables used throughout the site.
 $errorMsg = '';
 $pageMsg = '';
+
+//Disqus URL
+define('disqus_url', "");
 
 //Recaptcha API Key
 define('recaptcha_secret_key', "");

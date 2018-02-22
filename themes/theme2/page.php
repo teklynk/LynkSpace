@@ -18,6 +18,8 @@ echo "<div class='col-xs-12 col-lg-12 page-content'>";
 echo $pageContent;
 echo "</div>";
 
+echo "<div>" . getDisqusCode(pageUrlStr,  $_SESSION['unique_referrer']) . "</div>";
+
 echo "</div>";
 echo "</div>";
 
