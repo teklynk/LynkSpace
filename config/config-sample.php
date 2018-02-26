@@ -22,7 +22,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 }
 
-//Protocol-relative/agnostic
+//Protocol-relative/agnostic (https:// or http:// or //)
 $serverProtocol = '//';
 
 //Get server host name
@@ -190,7 +190,7 @@ define('passwordValidationTitle', "1 or more digits and a minimum of 4 letters a
 $errorMsg = '';
 $pageMsg = '';
 
-//Disqus URL
+//Disqus URL (https://)
 define('disqus_url', "");
 
 //Recaptcha API Key

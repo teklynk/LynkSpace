@@ -1361,7 +1361,7 @@ function getDisqusCode($page_url, $unique_identifier)
             };
             (function () {
                 var d = document, s = d.createElement('script');
-                s.src = 'https://<?php echo disqus_url; ?>/embed.js';
+                s.src = '<?php echo disqus_url; ?>/embed.js';
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
             })();
