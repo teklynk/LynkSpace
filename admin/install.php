@@ -104,11 +104,11 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         // MySql Database name
         $mysql_database = safeCleanStr($_POST['dbname']);
         // User Name
-        $username = safeCleanStr($_POST['username']);
+        $username = safeCleanStr($_POST['user_name']);
         // User email
-        $useremail = validateEmail($_POST['useremail']);
+        $useremail = validateEmail($_POST['user_email']);
         // User Password
-        $userpassword = safeCleanStr($_POST['userpassword']);
+        $userpassword = safeCleanStr($_POST['user_password']);
 
         // establish config connection
         $db_conn = mysqli_connect($mysql_host, $mysql_username, $mysql_password) or die('Error connecting to MySQL server: ' . mysqli_error($db_conn));
@@ -198,7 +198,7 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
         sleep(1);
 
         // Insert super admin user into users table.
-        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $username . "','" . $useremail . "', SHA1('" . $blowfishHash . $userpassword . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "';)";
+        $userInsert = "INSERT INTO users (username, email, password, level, loc_id, datetime, clientip) VALUES ('" . $username . "','" . $useremail . "', SHA1('" . $blowfishHash . $userpassword . "'), 1, 1, '" . date("Y-m-d H:i:s") . "', '" . $user_ip . "');";
         mysqli_query($db_conn, $userInsert);
 
         // Wait before proceeding to the next step
@@ -301,18 +301,18 @@ if (!empty($_POST) && $_POST['db_install'] == 'true') {
                                 <h2 class="form-signin-heading">Create an Admin user</h2>
                                 <div class="form-group required">
                                     <label for="username">Username</label>
-                                    <input class="form-control" type="text" name="username" id="user_name"
+                                    <input class="form-control" type="text" name="user_name" id="user_name"
                                            maxlength="100" autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="useremail">User Email</label>
-                                    <input class="form-control" type="email" name="useremail" id="user_email"
+                                    <input class="form-control" type="email" name="user_email" id="user_email"
                                            maxlength="100" pattern="<?php echo emailValidationPattern; ?>"
                                            autocomplete="off" required>
                                 </div>
                                 <div class="form-group required">
                                     <label for="password">User Password</label>
-                                    <input class="form-control" type="text" name="userpassword" id="user_password"
+                                    <input class="form-control" type="text" name="user_password" id="user_password"
                                            maxlength="100" pattern="<?php echo passwordValidationPattern; ?>"
                                            data-toggle="tooltip"
                                            data-original-title="<?php echo passwordValidationTitle; ?>"
