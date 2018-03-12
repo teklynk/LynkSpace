@@ -614,6 +614,7 @@ function getSharedFilesJsonList($loc)
 
     $fileListJson[] = NULL;
     $fileListJsonSharedImages[] = NULL;
+    $allimgfiles[] = NULL;
 
     //Build a list of shared images
     $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC;");
@@ -642,7 +643,6 @@ function getSharedFilesJsonList($loc)
 
     //Build list of images in uploads folder
     if ($handle = opendir(image_dir)) {
-
         while (false !== ($imgfile = readdir($handle))) {
             if ('.' === $imgfile) continue;
             if ('..' === $imgfile) continue;
