@@ -204,8 +204,9 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-circle"
                                                                                aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username"
-                                                   id="user_name" name="user_name" type="text" autocomplete="off"
+                                            <input class="form-control" maxlength="20" placeholder="Username"
+                                                   id="user_name" name="user_name" type="text"
+                                                   pattern="<?php echo usernameValidationPattern; ?>" autocomplete="off"
                                                    autofocus required>
                                         </div>
                                     </div>
@@ -216,7 +217,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                                                aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Email Address"
                                                    id="user_email" name="user_email" type="email"
-                                                   pattern="<?php echo emailValidationPattern ?>" autocomplete="off"
+                                                   pattern="<?php echo emailValidationPattern; ?>" autocomplete="off"
                                                    required>
                                         </div>
                                     </div>
@@ -227,7 +228,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
                                                           id="not_robot" type="checkbox" required><i
-                                                        class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
+                                                    class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
                                                 robot</label>
                                         </div>
                                     <?php } ?>
@@ -257,8 +258,9 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-circle"
                                                                                aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username"
-                                                   id="user_name" name="user_name" type="text" autocomplete="off"
+                                            <input class="form-control" maxlength="20" placeholder="Username"
+                                                   id="user_name" name="user_name" type="text"
+                                                   pattern="<?php echo usernameValidationPattern; ?>" autocomplete="off"
                                                    autofocus required>
                                         </div>
                                     </div>
@@ -269,7 +271,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                                                aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Email Address"
                                                    id="user_email" name="user_email" type="email"
-                                                   pattern="<?php echo emailValidationPattern ?>" autocomplete="off"
+                                                   pattern="<?php echo emailValidationPattern; ?>" autocomplete="off"
                                                    required>
                                         </div>
                                     </div>
@@ -303,7 +305,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
                                                           id="not_robot" type="checkbox" required><i
-                                                        class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
+                                                    class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
                                                 robot</label>
                                         </div>
                                     <?php } ?>
@@ -330,8 +332,9 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-circle"
                                                                                aria-hidden="true"></i></span>
-                                            <input class="form-control" maxlength="255" placeholder="Username"
-                                                   id="user_name" name="username" type="text" autocomplete="off"
+                                            <input class="form-control" maxlength="20" placeholder="Username"
+                                                   id="user_name" name="username" type="text"
+                                                   pattern="<?php echo usernameValidationPattern; ?>" autocomplete="off"
                                                    autofocus required>
                                         </div>
                                     </div>
@@ -342,7 +345,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                                                aria-hidden="true"></i></span>
                                             <input class="form-control" maxlength="255" placeholder="Email Address"
                                                    id="user_email" name="email" type="email"
-                                                   pattern="<?php echo emailValidationPattern ?>" autocomplete="off"
+                                                   pattern="<?php echo emailValidationPattern; ?>" autocomplete="off"
                                                    required>
                                         </div>
                                     </div>
@@ -365,7 +368,7 @@ if (isset($_SESSION['loggedIn'])) {
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
                                                           id="not_robot" type="checkbox" required><i
-                                                        class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
+                                                    class="fa fa-android" aria-hidden="true"></i>&nbsp;I'm not a
                                                 robot</label>
                                         </div>
                                     <?php } ?>
@@ -377,7 +380,7 @@ if (isset($_SESSION['loggedIn'])) {
                             </form>
                             <div class="panel-heading text-center">
                                 <small><a href="index.php?forgotpassword=true">Forgot Password</a> <i
-                                            class='fa fa-fw fa-question-circle'></i></small>
+                                        class='fa fa-fw fa-question-circle'></i></small>
                             </div>
                             <?php
                         }
