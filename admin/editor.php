@@ -58,7 +58,8 @@ if ($_POST['save_main']) {
             mysqli_query($db_conn, $themeOptionUpdate);
         } else {
             //Do Insert
-            if ($cssvalue[$i] != '#000000') { //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+            //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
+            if ($cssvalue[$i] != '#000000') {
                 $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
                 mysqli_query($db_conn, $themeOptionInsert);
             }
@@ -167,7 +168,7 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                         <div class='col-lg-4'>
                             <label for='cssvalue[]'>" . $themeCssLabels[$key] . "</label>
                             <div class='input-group'>
-                                <input type='color' data-toggle='tooltip' data-original-title='Click to change color' class='form-control' name='cssvalue[]' id='cssval-" . $elementCount . "' value='" . $rowThemeOptions['cssvalue'] . "'>
+                                <input type='color' pattern='" . hexcolorValidationPattern . "' data-toggle='tooltip' data-original-title='Click to change color' class='form-control' name='cssvalue[]' id='cssval-" . $elementCount . "' value='" . $rowThemeOptions['cssvalue'] . "'>
                                 <input type='hidden' name='selector[]' value='" . $themeCssSelectors[$key] . "'>
                                 <input type='hidden' name='property[]' value='" . $themeCssProperties[$key] . "'>";
             ?>

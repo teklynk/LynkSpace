@@ -165,13 +165,14 @@ $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
 //Updates remote URL requires: http:// or https://
-define('updatesVersionFile', "https://raw.githubusercontent.com/teklynk/LynkSpace/master/version.txt");
+define('updatesServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/master");
 define('updatesDownloadServer', "https://github.com/teklynk/LynkSpace/archive");
-define('updatesChangeLogFile', "https://github.com/teklynk/LynkSpace/blob/master/CHANGELOG.md");
 
 //Help URLs
 define('helpURLUser', "https://github.com/teklynk/LynkSpace/wiki");
 define('helpURLAdmin', "https://github.com/teklynk/LynkSpace/wiki");
+
+//Visit: http://html5pattern.com/ for more html regex patterns
 
 //html5 pattern property for input type=email
 define('emailValidationPattern', "(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,25}");
@@ -185,6 +186,18 @@ define('urlValidationPattern', "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))
 //html5 password validation pattern
 define('passwordValidationPattern', "(?=(?:[^a-zA-Z]*[a-zA-Z]){4})(?=(?:\D*\d){1}).*");
 define('passwordValidationTitle', "1 or more digits and a minimum of 4 letters are required");
+
+//html5 phone number validation pattern
+define('phoneValidationPattern', "\d{3}[\-]\d{3}[\-]\d{4}");
+
+//html5 Hex-Color validation pattern
+define('hexcolorValidationPattern', "^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$");
+
+//html5 username validation pattern
+define('usernameValidationPattern', "^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$");
+
+//html5 Postal Code validation pattern
+define('postalcodeValidationPattern', "(\d{5}([\-]\d{4})?)");
 
 //define variables used throughout the site.
 $errorMsg = '';

@@ -143,12 +143,14 @@ if ($_GET['update'] == 'true') {
                 </div>
                 <div class="form-group">
                     <label for="contact_zipcode">ZIP Code</label>
-                    <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="10"
+                    <input type="text" class="form-control count-text" name="contact_zipcode" maxlength="12"
+                           pattern="<?php echo postalcodeValidationPattern ?>"
                            value="<?php echo $rowContact['zipcode']; ?>" placeholder="90210">
                 </div>
                 <div class="form-group">
                     <label for="contact_phone">Phone</label>
                     <input class="form-control count-text" name="contact_phone" maxlength="100"
+                           pattern="<?php echo phoneValidationPattern ?>"
                            value="<?php echo $rowContact['phone']; ?>" type="tel" placeholder="555-5555">
                 </div>
                 <div class="form-group">

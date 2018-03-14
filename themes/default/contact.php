@@ -96,7 +96,7 @@ echo "</div>";
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Phone Number:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" maxlength="25"
+                            <input type="tel" pattern="<?php echo phoneValidationPattern ?>" class="form-control" id="phone" name="phone" maxlength="25"
                                    placeholder="304-555-5555" required>
                         </div>
                     </div>
