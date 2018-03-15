@@ -223,7 +223,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     </div>
                                     <?php if ($reCaptcha_enabled == true) { ?>
                                         <div class="checkbox g-recaptcha"
-                                             data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                             data-sitekey="<?php echo recaptcha_site_key; ?>"></div>
                                     <?php } else { ?>
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
@@ -300,7 +300,7 @@ if (isset($_SESSION['loggedIn'])) {
                                     </div>
                                     <?php if ($reCaptcha_enabled == true) { ?>
                                         <div class="checkbox g-recaptcha"
-                                             data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                             data-sitekey="<?php echo recaptcha_site_key; ?>"></div>
                                     <?php } else { ?>
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
@@ -363,7 +363,7 @@ if (isset($_SESSION['loggedIn'])) {
 
                                     <?php if ($reCaptcha_enabled == true) { ?>
                                         <div class="checkbox g-recaptcha"
-                                             data-sitekey=<?php echo recaptcha_site_key; ?>></div>
+                                             data-sitekey="<?php echo recaptcha_site_key; ?>"></div>
                                     <?php } else { ?>
                                         <div class="checkbox">
                                             <label><input title="I'm not a robot" class="checkbox" name="not_robot"
