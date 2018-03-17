@@ -42,6 +42,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                 $page_title = safeCleanStr($_POST['page_title']);
                 $page_content = sqlEscapeStr($_POST['page_content']);
+                $page_keywords = sqlEscapeStr($_POST['page_keywords']);
 
                 // Update existing page
                 if ($_GET['editpage']) {
@@ -52,13 +53,13 @@ $_SESSION['file_referrer'] = 'page.php';
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . ";";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . ";";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
@@ -68,7 +69,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     //insert data on submit
                     if (!empty($page_title)) {
-                        $pageInsert = "INSERT INTO pages (title, content, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $pageInsert = "INSERT INTO pages (title, content, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
@@ -92,6 +93,14 @@ $_SESSION['file_referrer'] = 'page.php';
                                    value="<?php if ($_GET['editpage']) {
                                        echo $rowPages['title'];
                                    } ?>" placeholder="Page Title" autofocus required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Page Keywords</label>
+                            <input type="text" class="form-control count-text" name="page_keywords" maxlength="999"
+                                   value="<?php if ($_GET['editpage']) {
+                                       echo $rowPages['keywords'];
+                                   } ?>" placeholder="tech, coding, tutorials, books">
                         </div>
 
                         <hr/>
@@ -221,6 +230,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 $pageId = $rowPages['id'];
                                 $pageTitle = safeCleanStr($rowPages['title']);
                                 $pageContent = $rowPages['content'];
+                                $pageKeywords = $rowPages['keywords'];
                                 $pageActive = $rowPages['active'];
 
                                 if ($rowPages['active'] == 'true') {
