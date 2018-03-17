@@ -1370,6 +1370,16 @@ function getDisqusCode($page_url, $unique_identifier)
     }
 }
 
+//Keywords
+function getKeywords($table)
+{
+    //dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, $where = NULL, $orderBy = NULL)
+
+    $keywordsQuery = dbQuery('SELECT', $table, 'keywords', NULL, NULL, 'keywords');
+    echo $keywordsQuery;
+
+}
+
 //Call these functions depending on which page you are visiting
 //Sets the page title and calls the main function for each page.
 if (basename($_SERVER['PHP_SELF']) == "page.php") {
