@@ -65,18 +65,20 @@ function getPage($loc)
 {
     global $pageTitle;
     global $pageContent;
+    global $pageKeywords;
     global $pageRefId;
     global $db_conn;
 
     if (ctype_digit($_GET['page_id'])) {
         $pageRefId = $_GET['page_id'];
-        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $loc . ";");
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $loc . ";");
         $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
         if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']) {
 
             $pageTitle = $rowPage['title'];
             $pageContent = $rowPage['content'];
+            $pageKeywords = $rowPage['keywords'];
 
         } else {
 
@@ -456,10 +458,10 @@ function getCoreHeader($loc, $addHeader = null)
 {
     getLocation($loc);
     getSetup($loc);
+
     global $setupConfig;
     global $setupTitle;
     global $setupAuthor;
-    global $setupKeywords;
     global $setupDescription;
     ?>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -474,7 +476,7 @@ function getCoreHeader($loc, $addHeader = null)
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="<?php getLogo($loc, 'absolute'); ?>"/>
     <meta name="description" content="<?php echo $setupDescription; ?>">
-    <meta name="keywords" content="<?php echo $setupKeywords; ?>">
+    <meta name="keywords" content="<?php getKeywords($loc, $_GET['page_id']); ?>">
     <meta name="author" content="<?php echo $setupAuthor; ?>">
 
     <title><?php echo $setupTitle; ?></title>
@@ -1371,13 +1373,22 @@ function getDisqusCode($page_url, $unique_identifier)
 }
 
 //Keywords
-function getKeywords($table)
+function getKeywords($loc, $pageId = NULL)
 {
-    //dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, $where = NULL, $orderBy = NULL)
+    getSetup($loc);
+    getPage($loc);
 
-    $keywordsQuery = dbQuery('SELECT', $table, 'keywords', NULL, NULL, 'keywords');
-    echo $keywordsQuery;
+    global $keywords;
+    global $setupKeywords;
+    global $pageKeywords;
 
+    if (!empty($pageId)) {
+        $keywords = $pageKeywords;
+    } else {
+        $keywords = $setupKeywords;
+    }
+
+    echo $keywords;
 }
 
 //Call these functions depending on which page you are visiting
