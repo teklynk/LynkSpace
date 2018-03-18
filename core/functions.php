@@ -1229,7 +1229,7 @@ function getSiteSearchResults($searchTerm, $showPageContent)
     $siteSearchTerm = "%" . mysqli_real_escape_string($db_conn, strip_tags(trim($searchTerm))) . "%";
     $siteSearchCount = 0;
 
-    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' OR keyword LIKE '$siteSearchTerm' ORDER BY title ASC;");
+    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' OR keywords LIKE '$siteSearchTerm' ORDER BY title ASC;");
 
     while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch, MYSQLI_ASSOC)) {
         $siteSearchCount++;
