@@ -1383,7 +1383,7 @@ function getKeywords($loc, $pageId = NULL)
     global $setupKeywords;
     global $pageKeywords;
 
-    if (!empty($pageId)) {
+    if ($pageId && $pageKeywords != '') {
         $keywords = $pageKeywords;
     } else {
         $keywords = $setupKeywords;
