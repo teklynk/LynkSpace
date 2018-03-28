@@ -64,6 +64,7 @@ if ($_GET['section'] == $rowSections['section']) {
 //Get sections from loc_id
 $sectionCount = 1;
 $isSectionSelected = '';
+$maxSections = '';
 $custMenuStr = "<option value='1'>1</option>";
 
 while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
@@ -73,7 +74,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     } else {
         $isSectionSelected = "";
     }
-
+    $maxSections = (int)$rowSections['section'];
     $custMenuStr .= "<option value=" . $rowSections['section'] . " " . $isSectionSelected . ">" . $rowSections['section'] . "</option>";
 }
 
@@ -125,12 +126,15 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                     </div>
                 </div>
                 <?php
+
                 if (!(isset($_GET['newcustomer']) || isset($_GET['editcustomer']))) {
+
                     ?>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <div class="nav-section">
                                 <label for="nav_menu">Database Pages</label>
+
                                 <div class="input-group">
 
                                     <select class="form-control selectpicker show-tick" data-container="body"
@@ -140,7 +144,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                                     <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Add a new Database Page"
-                                        onclick="window.location.href='databases.php?section=<?php echo $sectionCount + 1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
+                                        onclick="window.location.href='databases.php?section=<?php echo $maxSections + 1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
                                             class="fa fa-plus"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Delete this Database Page"
