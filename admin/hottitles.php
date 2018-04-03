@@ -53,12 +53,12 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         "confirm",
         "Delete Hot Title?",
         "Are you sure you want to delete: " . $delhottitlesTitle . "?",
-        "hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes",
+        "hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
         false
     );
 
 
-} elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+} elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
     //delete hot title after clicking Yes
     $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $hottitlesDelete);

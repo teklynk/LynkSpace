@@ -254,10 +254,10 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             "confirm",
             "Delete Slide?",
             "Are you sure you want to delete: " . $delslideTitle . "?",
-            "slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&deletetitle=" . $delslideTitle . "&confirm=yes"
+            "slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&deletetitle=" . $delslideTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . ""
         );
 
-    } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+    } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete slide after clicking Yes
         $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $slideDelete);

@@ -331,11 +331,11 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             "confirm",
             "Delete Database Page?",
             "Are you sure you want to delete: " . safeCleanStr(addslashes($getCustSection)) . "?",
-            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletesection=true&deletename=" . $getCustSection . "&confirm=yes",
+            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletesection=true&deletename=" . $getCustSection . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
 
-    } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
+    } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete section after clicking Yes
         $sectionDelete = "DELETE FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $sectionDelete);
@@ -345,7 +345,6 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
         mysqli_query($db_conn, $sectionDeleteDatabases);
 
         echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_SESSION['loc_id'] . "&sectiondeleted=true';</script>";
-
     }
 
     //delete customer

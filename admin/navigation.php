@@ -189,11 +189,11 @@ if ($_GET['section'] == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Link?",
                     "Are you sure you want to delete: " . $delNavTitle . "?",
-                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . $delNavTitle . "&confirm=yes",
+                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
                 //delete nav after clicking Yes
                 $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND " . $_GET['loc_id'] . ";";

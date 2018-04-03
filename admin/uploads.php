@@ -35,7 +35,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             "confirm",
             "Delete Image?",
             "Are you sure you want to delete: " . $_GET["delete"] . "?",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
     } else {
@@ -43,12 +43,12 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             "confirm",
             "Delete Image?",
             "Are you sure you want to delete: " . $_GET["delete"] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
     }
 
-} elseif ($_GET["delete"] && $_GET["confirm"] == 'yes') {
+} elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
     //delete file if shared after clicking Yes
     $sharedFileDelete = "DELETE FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";

@@ -216,11 +216,11 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             "confirm",
             "Delete Service?",
             "Are you sure you want to delete: " . $delserviceTitle . "?",
-            "services.php?loc_id=" . $_GET['loc_id'] . "&deleteservice=" . $delserviceId . "&deletetitle=" . $delserviceTitle . "&confirm=yes",
+            "services.php?loc_id=" . $_GET['loc_id'] . "&deleteservice=" . $delserviceId . "&deletetitle=" . $delserviceTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer']. "",
             false
         );
 
-    } elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+    } elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete service after clicking Yes
         $servicesDelete = "DELETE FROM services WHERE id=" . $delserviceId . " AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $servicesDelete);

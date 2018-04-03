@@ -95,14 +95,14 @@ if ($_GET['update'] == 'true') {
         "confirm",
         "Delete Location?",
         "Are you sure you want to delete this location?",
-        "setup.php?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes",
+        "setup.php?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
         false
     );
 }
 
 //delete a location and all references to it in the config. this will do a cascading delete where loc_id = id
 if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
-    if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes') {
+    if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
         $locDelete = "DELETE FROM locations WHERE id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $locDelete);
 

@@ -151,11 +151,11 @@ $_SESSION['file_referrer'] = 'page.php';
                     "confirm",
                     "Delete Page?",
                     "Are you sure you want to delete: " . $delPageTitle . "?",
-                    "page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes",
+                    "page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
                 //delete page after clicking Yes
                 $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND loc_id=" . $_GET['loc_id'] . ";";

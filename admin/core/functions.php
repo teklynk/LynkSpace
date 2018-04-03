@@ -663,7 +663,7 @@ function getSharedFilesJsonList($loc)
     //Merge the lists / arrays
     $allImagesArr = array_merge($fileListJson, $fileListJsonSharedImages);
     //Sort the merged arrays
-    sort($allImagesArr);
+    arsort($allImagesArr);
     //Convert merged array into a string
     $allImagesStr = implode(',', $allImagesArr);
     //Clean string

@@ -181,11 +181,11 @@ if ($_GET['preview'] > "") {
                     "confirm",
                     "Delete Staff?",
                     "Are you sure you want to delete: " . $delteamTitle . "?",
-                    "staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes",
+                    "staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+            } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
                 //delete team after clicking Yes
                 $teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $teamDelete);
