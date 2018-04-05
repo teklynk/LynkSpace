@@ -232,7 +232,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                 robot</label>
                                         </div>
                                     <?php } ?>
-
+                                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit"
                                             id="sign_in" disabled="disabled" type="submit">Reset Password
                                     </button>
@@ -309,7 +309,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                 robot</label>
                                         </div>
                                     <?php } ?>
-
+                                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
                                     <input type="hidden" id="password_reset" name="password_reset"
                                            value="<?php echo $_GET['passwordreset']; ?>"/>
                                     <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>

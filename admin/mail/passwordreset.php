@@ -3,14 +3,8 @@ session_start();
 
 define('inc_access', TRUE);
 
-//Redirect to login page if this file is accessed directly
-if ($_SESSION['unique_referrer'] != $_POST['referrer'] || empty($_POST)) {
-    header("Location: ../index.php");
-    echo "<script>window.location.href='../index.php';</script>";
-    die('Direct access not permitted');
-}
 
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referrer'] == 'index.php' && $_POST['referrer'] == $_SESSION['unique_referrer']) {
+if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referrer'] == 'index.php' && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     require_once(__DIR__ . '/../../config/config.php');
     require_once(__DIR__ . '/../core/functions.php');
@@ -34,7 +28,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
     $user_name = sqlEscapeStr($_POST['user_name']);
     $email_address = sqlEscapeStr($_POST['user_email']);
 
-    $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "' ");
+    $sqlUsers = mysqli_query($db_conn, "SELECT username, email FROM users WHERE email='" . $email_address . "' AND username='" . $user_name . "';");
     $rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
 
     // Check for empty fields
@@ -55,7 +49,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             $keyHashed = sha1(blowfishSalt . sqlEscapeStr($_POST['key']));
             $passwordHashed = sha1(blowfishSalt . sqlEscapeStr($_POST['password']));
 
-            $sqlUserReset = mysqli_query($db_conn, "SELECT password_reset, password_reset_date, email FROM users WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ");
+            $sqlUserReset = mysqli_query($db_conn, "SELECT password_reset, password_reset_date, email FROM users WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' LIMIT 1;");
             $rowUserReset = mysqli_fetch_array($sqlUserReset, MYSQLI_ASSOC);
 
             if ($newUserPassword == $newUserPasswordConfirm && $keyHashed == $rowUserReset['password_reset'] && date("Y-m-d") == $rowUserReset['password_reset_date']) {
@@ -70,11 +64,11 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
                 $headers .= "Reply-To: noreply@$server_domain";
 
                 //Update user password where password_reset and email match
-                $userUpdate = "UPDATE users SET password='" . $passwordHashed . "' WHERE password_reset='" . $keyHashed . "' AND email='" . $email_address . "' ";
+                $userUpdate = "UPDATE users SET password='" . $passwordHashed . "' WHERE password_reset='" . $keyHashed . "' AND username='" . $user_name . "' AND email='" . $email_address . "';";
                 mysqli_query($db_conn, $userUpdate);
 
                 //Clear password_reset column and password_reset_date column. Set to nothing
-                $userResetUpdate = "UPDATE users SET password_reset='', password_reset_date='' WHERE password='" . $passwordHashed . "' AND username='" . $user_name . "' AND email='" . $email_address . "' ";
+                $userResetUpdate = "UPDATE users SET password_reset='', password_reset_date='' WHERE username='" . $user_name . "' AND email='" . $email_address . "';";
                 mysqli_query($db_conn, $userResetUpdate);
 
                 mail($email_address, $email_subject, $email_body, $headers);
@@ -105,7 +99,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52
             $headers .= "Reply-To: noreply@$server_domain";
 
             //Update user password_reset with $temp_password_reset_hash where email and username match
-            $userUpdate = "UPDATE users SET password_reset='" . $tempPasswordHashed . "', password_reset_date='" . date("Y-m-d") . "' WHERE email='" . $email_address . "' AND username='" . $user_name . "' ";
+            $userUpdate = "UPDATE users SET password_reset='" . $tempPasswordHashed . "', password_reset_date='" . date("Y-m-d h:i:s") . "' WHERE email='" . $email_address . "' AND username='" . $user_name . "';";
             mysqli_query($db_conn, $userUpdate);
 
             mail($email_address, $email_subject, $email_body, $headers);

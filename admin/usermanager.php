@@ -73,8 +73,8 @@ if ($_POST['save_main']) {
             dbQuery(
                 'insert',
                 'users',
-                'username, email, password, password_reset, password_reset_date, level, clientip, loc_id',
-                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", 0000-00-00, "' . $userLevel . '", "' . $userIp . '", "' . $userLocation . '" ',
+                'username, email, password, password_reset, password_reset_date, level, clientip, datetime, loc_id',
+                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . $userIp . '", "'.date("Y-m-d h:i:s").'", "' . $userLocation . '" ',
                 NULL,
                 NULL
             );
