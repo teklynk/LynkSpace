@@ -3,8 +3,7 @@ session_start();
 
 define('inc_access', TRUE);
 
-
-if ($_POST['user_name'] && $_POST['user_email'] && $_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3' && $_SESSION['file_referrer'] == 'index.php' && $_POST['csrf'] == $_SESSION['unique_referrer']) {
+if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] == 'index.php' && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     require_once(__DIR__ . '/../../config/config.php');
     require_once(__DIR__ . '/../core/functions.php');
