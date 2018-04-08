@@ -39,10 +39,11 @@ function phinxMigration($phinxCommand, $environment)
 
 function loginAttempts($userIp, $maxAttempts, $maxTimeout)
 {
+
     global $db_conn;
     global $loginFailed;
 
-    $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT attempts, ip, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
+    $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
     $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
 
     $currentTime = strtotime(date('Y-m-d H:i:s'));

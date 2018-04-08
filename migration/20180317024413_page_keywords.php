@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 
 class PageKeywords extends AbstractMigration
 {
-    public function change()
+    public function up()
     {
         $users = $this->table('pages');
         $users->addColumn('keywords', 'text', ['after' => 'content'])
