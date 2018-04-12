@@ -70,7 +70,6 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
                 mysqli_query($db_conn, $sqlLoginAttemptDelete);
             } else {
                 $loginFailed = true;
-                $loginFailed = true;
                 echo "<style>#wrapper {padding-left: 0 !important;}</style>";
                 echo "<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
                 die();
