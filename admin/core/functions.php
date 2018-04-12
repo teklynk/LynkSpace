@@ -70,6 +70,7 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
                 mysqli_query($db_conn, $sqlLoginAttemptDelete);
             } else {
                 $loginFailed = true;
+                $loginFailed = true;
                 echo "<style>#wrapper {padding-left: 0 !important;}</style>";
                 echo "<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
                 die();
@@ -745,65 +746,44 @@ function showModalPreview($id)
 // Script to test if extensions/modules are installed and permissions are correct on this server
 function checkDependencies()
 {
+    $apacheModulesArray = array(
+        'mod_rewrite',
+        'mod_headers',
+        'mod_vhost_alias'
+    );
 
-    if (!in_array('curl', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>cURL (php-curl) is not installed on the server.<br/>Try: sudo apt-get install php-curl</span></div>";
-    }
-    if (!in_array('xml', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>xml (php-xml) is not installed on the server.<br/>Try: sudo apt-get install php-xml</span></div>";
-    }
-    if (!in_array('zip', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>zip (php-zip) is not installed on the server.<br/>Try: sudo apt-get install php-zip</span></div>";
-    }
-    if (!in_array('imagick', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>imagick (php-imagick) is not installed on the server.<br/>Try: sudo apt-get install php-imagick</span></div>";
-    }
-    if (!in_array('mbstring', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>mbstring (php-mbstring) is not installed on the server.<br/>Try: sudo apt-get install php-mbstring</span></div>";
-    }
-    if (!in_array('mcrypt', get_loaded_extensions())) {
-        echo "<div class='alert alert-danger'><span>mcrypt (php-mcrypt) is not installed on the server.<br/>Try: sudo apt-get install php-mcrypt</span></div>";
-    }
-    if (!in_array('mod_rewrite', apache_get_modules())) {
-        echo "<div class='alert alert-danger'><span>Apache module (mod_rewrite) is not enabled on the server.<br/>Try: sudo a2enmod rewrite</span></div>";
-    }
-    if (!in_array('mod_headers', apache_get_modules())) {
-        echo "<div class='alert alert-danger'><span>Apache module (mod_headers) is not enabled on the server.<br/>Try: sudo a2enmod headers</span></div>";
-    }
-    if (!in_array('mod_vhost_alias', apache_get_modules())) {
-        echo "<div class='alert alert-danger'><span>Apache module (mod_vhost_alias) is not enabled on the server.<br/>Try: sudo a2enmod vhost_alias</span></div>";
+    $phpExtentionsArray = array(
+        'curl',
+        'xml',
+        'zip',
+        'imagick',
+        'mbstring',
+        'mcrypt',
+        'mysqli'
+    );
+
+    $filesArray = array(
+        dbFileLoc,
+        dbBlowfishLoc,
+        sitemapFilename,
+        robotsFilename
+    );
+
+    foreach ($apacheModulesArray as $module) {
+        if (!in_array($module, apache_get_modules())){
+            echo "<div class='alert alert-danger'><span>" . $module . " is not installed on the server.</span></div>";
+        }
     }
 
-    // Check if dbconn file exists
-    if (!file_exists(dbFileLoc)) {
-        echo "<div class='alert alert-danger'><span>" . dbFileLoc . " does not exist.</span></div>";
-    } else {
-        if (!is_writeable(dbFileLoc)) {
-            echo "<div class='alert alert-danger'><span>" . dbFileLoc . " is not writable. Check file permissions.</span></div>";
+    foreach ($phpExtentionsArray as $extention) {
+        if (!in_array($extention, get_loaded_extensions())){
+            echo "<div class='alert alert-danger'><span>" . $extention . " is not installed on the server.</span></div>";
         }
     }
-    // Check if blowfishsalt.php file exists
-    if (!file_exists(dbBlowfishLoc)) {
-        echo "<div class='alert alert-danger'><span>" . dbBlowfishLoc . " does not exist.</span></div>";
-    } else {
-        if (!is_writeable(dbBlowfishLoc)) {
-            echo "<div class='alert alert-danger'><span>" . dbBlowfishLoc . " is not writable. Check file permissions.</span></div>";
-        }
-    }
-    // Check if sitemap.xml file exists
-    if (!file_exists(sitemapFilename)) {
-        echo "<div class='alert alert-danger'><span>" . sitemapFilename . " does not exist.</span></div>";
-    } else {
-        if (!is_writeable(sitemapFilename)) {
-            echo "<div class='alert alert-danger'><span>" . sitemapFilename . " is not writable. Check file permissions.</span></div>";
-        }
-    }
-    // Check if robots.txt file exists
-    if (!file_exists(robotsFilename)) {
-        echo "<div class='alert alert-danger'><span>" . robotsFilename . " does not exist.</span></div>";
-    } else {
-        if (!is_writeable(robotsFilename)) {
-            echo "<div class='alert alert-danger'><span>" . robotsFilename . " is not writable. Check file permissions.</span></div>";
+
+    foreach ($filesArray as $file) {
+        if (!file_exists($file) || !is_writable($file)) {
+            echo "<div class='alert alert-danger'><span>" . $file . " does not exist and/or is not writable.</span></div>";
         }
     }
 }

@@ -30,6 +30,9 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
     );
 }
 
+// Check that everything is installed on the server.
+checkDependencies();
+
 if (!empty($_POST)) {
 
     // Check and record failed login attempts
