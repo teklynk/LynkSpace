@@ -99,7 +99,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
         //insert data on submit
         if (!empty($_POST['service_title'])) {
-            $servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ";)";
+            $servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $servicesInsert);
 
             header("Location: services.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
