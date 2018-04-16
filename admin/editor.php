@@ -60,7 +60,7 @@ if ($_POST['save_main']) {
             //Do Insert
             //Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
             if ($cssvalue[$i] != '#000000') {
-                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ")";
+                $themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                 mysqli_query($db_conn, $themeOptionInsert);
             }
         }
