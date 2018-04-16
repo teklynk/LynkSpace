@@ -29,7 +29,7 @@ if (!empty($_POST)) {
             'update',
             'users',
             'username, password, email, datetime, clientip',
-            " '" . $user_name . "', SHA1('" . blowfishSalt . $user_password . "'), '" . $user_email . "', date('Y-m-d H:i:s'), '" . getRealIpAddr() . "' ",
+            " '" . $user_name . "', SHA1('" . blowfishSalt . $user_password . "'), '" . $user_email . "', '" . date('Y-m-d H:i:s') . "', '" . getRealIpAddr() . "' ",
             "id=" . $_GET['loc_id'] . " ",
             NULL
         );

@@ -74,7 +74,7 @@ if ($_POST['save_main']) {
                 'insert',
                 'users',
                 'username, email, password, password_reset, password_reset_date, level, clientip, datetime, loc_id',
-                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . $userIp . '", "'.date("Y-m-d h:i:s").'", "' . $userLocation . '" ',
+                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . $userIp . '", "' . date("Y-m-d h:i:s") . '", "' . $userLocation . '" ',
                 NULL,
                 NULL
             );
