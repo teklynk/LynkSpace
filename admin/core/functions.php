@@ -1119,7 +1119,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
     $queryExecute = NULL;
 
     if (isset($table)) {
-        $tableDb = db_name . "." . $table;
+        $tableDb = "`" . db_name . "`.`" . $table . "`";
     }
 
     if (isset($where)) {
@@ -1160,18 +1160,19 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
             default:
                 $query = NULL;
                 $queryExecute = NULL;
-                return false;
         }
 
         $queryExecute = mysqli_query($db_conn, $query);
 
-        //echo $query;
-
-        if (mysqli_error($db_conn)) {
+        if (mysqli_error($db_conn) || $queryExecute == false) {
             die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
         }
 
         return $queryExecute;
+
+    } else {
+
+        return false;
 
     }
 }
