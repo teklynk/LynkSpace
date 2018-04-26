@@ -6,20 +6,19 @@ require_once('dbconn.php');
 
 if (basename($_SERVER['PHP_SELF']) != 'install.php') {
 
-    //Establish config connection
-    $db_conn = mysqli_connect(db_servername, db_username, db_password);
-    mysqli_select_db($db_conn, db_name);
+    //Create connection
+    $db_conn = new mysqli(db_servername, db_username, db_password, db_name);
 
-    //$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=admin123");
-
-    if (mysqli_connect_error()) {
+    //Check connection
+    if ($db_conn->connect_error) {
         $db_conn = NULL;
         echo "Go to <a href='../admin/install.php'>" . $_SERVER['SERVER_NAME'] . "/admin/install.php</a> to install the database. " . PHP_EOL;
-        die("Failed to connect to MySQL: " . mysqli_connect_error());
+        die("Connection failed: " . $db_conn->connect_error);
     }
 
-    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1;");
-    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
+    $sqlConfig = $db_conn->query("SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");
+    $rowConfig = $sqlConfig->fetch_assoc();
+
 }
 
 //Protocol-relative/agnostic (https:// or http:// or //)
