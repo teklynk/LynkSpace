@@ -33,5 +33,6 @@ if (!defined('inc_access')) {
     </html>
 <?php
 mysqli_close($db_conn);
+$db_conn->close();
 die();
 ?>

@@ -56,5 +56,6 @@ if (!defined('inc_access')) {
 <?php
 //close all config connections
 mysqli_close($db_conn);
+$db_conn->close();
 die();
 ?>
