@@ -52,3 +52,5 @@
 ehthumbs.db
 Thumbs.db
 !/config/new_website.sql
+*custom-style.css
+*custom-style.min.css

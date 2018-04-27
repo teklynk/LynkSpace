@@ -13,7 +13,7 @@ if (basename($_SERVER['PHP_SELF']) != 'install.php') {
     if ($db_conn->connect_error) {
         $db_conn = NULL;
         echo "Go to <a href='../admin/install.php'>" . $_SERVER['SERVER_NAME'] . "/admin/install.php</a> to install the database. " . PHP_EOL;
-        die("Connection failed: " . $db_conn->connect_error);
+        die("Error: " . $db_conn->connect_errorno . " : " . $db_conn->connect_error);
     }
 
     $sqlConfig = $db_conn->query("SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1");

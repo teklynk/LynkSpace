@@ -1110,13 +1110,15 @@ function dateTimeFormat($format = NULL, $date = NULL)
 //Simple SQL CRUD statements
 function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, $where = NULL, $orderBy = NULL)
 {
-    global $db_conn;
     $query = NULL;
     $clause = NULL;
     $order = NULL;
     $tableDb = NULL;
     $query = NULL;
     $queryExecute = NULL;
+
+    //Create connection
+    $db_conn = new mysqli(db_servername, db_username, db_password, db_name);
 
     if (isset($table)) {
         $tableDb = "`" . db_name . "`.`" . $table . "`";
@@ -1162,10 +1164,10 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
                 $queryExecute = NULL;
         }
 
-        $queryExecute = mysqli_query($db_conn, $query);
+        $queryExecute = $db_conn->query($query);
 
-        if (mysqli_error($db_conn) || $queryExecute == false) {
-            die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
+        if ($db_conn->connect_error || $queryExecute == false) {
+            die("Error: " . $db_conn->connect_errorno . " : " . $method . " : " . $query . " : " . $db_conn->connect_error);
         }
 
         return $queryExecute;
