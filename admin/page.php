@@ -224,7 +224,7 @@ $_SESSION['file_referrer'] = 'page.php';
                             </thead>
                             <tbody>
                             <?php
-                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC;");
+                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC;");
                             while ($rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC)) {
 
                                 $pageId = $rowPages['id'];
