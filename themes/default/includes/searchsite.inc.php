@@ -1,10 +1,5 @@
 <!-- Search Site Section -->
 <a name="sitesearch" tabindex="-1"></a>
-<?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-?>
 
 <h1 class="text-white sitesearchheading">Site Search</h1>
 <div class="panel panel-default">

@@ -17,7 +17,6 @@ if (!file_exists("../.htaccess")) {
     copy("../.htaccess-sample", "../.htaccess");
 }
 
-define('inc_access', TRUE);
 define('recaptcha', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');

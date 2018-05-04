@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-define('inc_access', TRUE);
-
 if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] == 'index.php' && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     require_once(__DIR__ . '/../../config/config.php');

@@ -1,8 +1,4 @@
 <?php
-//Back-end Admin Panel functions
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
 
 //Output to browser console
 function debugToConsole($data)
@@ -1170,7 +1166,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
             die("Error: " . $db_conn->connect_errorno . " : " . $method . " : " . $query . " : " . $db_conn->connect_error);
         }
 
-        return $queryExecute;
+        return $queryExecute . $db_conn->close();
 
     } else {
 

@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>//lynkspace.local/index.php?loc_id=1</loc>
+		<loc>//lynkspace.local.com/page.php?page_id=1&amp;loc_id=1</loc>
+		<lastmod>2018-04-15 21:12:05</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/index.php</loc>
+		<loc>//lynkspace.local.com/index.php?loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/staff.php</loc>
+		<loc>//lynkspace.local.com/index.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/services.php</loc>
+		<loc>//lynkspace.local.com/staff.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/contact.php</loc>
+		<loc>//lynkspace.local.com/services.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-		<loc>//lynkspace.local/databases.php</loc>
+		<loc>//lynkspace.local.com/contact.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>//lynkspace.local.com/databases.php</loc>
 		<changefreq>monthly</changefreq>
 	</url>
 </urlset>

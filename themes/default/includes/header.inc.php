@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
 ?>
 
 <!DOCTYPE html>

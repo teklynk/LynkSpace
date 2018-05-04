@@ -6,18 +6,19 @@ require_once('dbconn.php');
 
 $rowConfig = '';
 $db_conn = '';
+$errorMsg = '';
+$pageMsg = '';
+
+//Establish config connection
+$db_conn = mysqli_connect(db_servername, db_username, db_password);
+mysqli_select_db($db_conn, db_name);
+
+if (mysqli_connect_error() || mysqli_connect_errno()) {
+    echo "Go to <a href='../admin/install.php'>" . $_SERVER['SERVER_NAME'] . "/admin/install.php</a> to install the database. " . PHP_EOL;
+    die("MySQL Error: " . mysqli_connect_error() . " : " . mysqli_connect_errno());
+}
 
 if (basename($_SERVER['PHP_SELF']) != 'install.php') {
-
-    //Establish config connection
-    $db_conn = mysqli_connect(db_servername, db_username, db_password);
-    mysqli_select_db($db_conn, db_name);
-
-    if (mysqli_connect_error() || mysqli_connect_errno()) {
-        echo "Go to <a href='../admin/install.php'>" . $_SERVER['SERVER_NAME'] . "/admin/install.php</a> to install the database. " . PHP_EOL;
-        die("MySQL Error: " . mysqli_connect_error() . " : " . mysqli_connect_errno());
-    }
-
     $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1;");
     $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 }
@@ -198,10 +199,6 @@ define('usernameValidationPattern', "^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$");
 
 //html5 Postal Code validation pattern
 define('postalcodeValidationPattern', "(\d{5}([\-]\d{4})?)");
-
-//define variables used throughout the site.
-$errorMsg = '';
-$pageMsg = '';
 
 //Disqus URL (https://)
 define('disqus_url', "");

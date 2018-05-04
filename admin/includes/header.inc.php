@@ -7,10 +7,6 @@ session_start();
 
     <?php
 
-    if (!defined('inc_access')) {
-        die('Direct access not permitted');
-    }
-
     //DB connection string and Global variables
     require_once(__DIR__ . '/../../config/config.php');
     //Admin panel functions

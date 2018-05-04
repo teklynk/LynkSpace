@@ -1,6 +1,6 @@
 <?php
 session_start();
-define('inc_access', TRUE);
+
 define('codeMirror', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
