@@ -62,15 +62,20 @@ function getPage($loc)
     global $pageTitle;
     global $pageContent;
     global $pageKeywords;
-    global $pageRefId;
+    global $pageId;
     global $db_conn;
 
-    if (ctype_digit($_GET['page_id'])) {
-        $pageRefId = $_GET['page_id'];
-        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageRefId . " AND loc_id=" . $loc . ";");
+    if (isset($_GET['page_id'])){
+        $pageId = $_GET['page_id'];
+    } else {
+        $pageId = null;
+    }
+
+    if (ctype_digit($pageId)) {
+        $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageId . " AND loc_id=" . $loc . ";");
         $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
-        if ($rowPage['active'] == 'true' && $pageRefId == $rowPage['id']) {
+        if ($rowPage['active'] == 'true' && $pageId == $rowPage['id']) {
 
             $pageTitle = $rowPage['title'];
             $pageContent = $rowPage['content'];
@@ -459,6 +464,12 @@ function getCoreHeader($loc, $addHeader = null)
     global $setupTitle;
     global $setupAuthor;
     global $setupDescription;
+
+    if (isset($_GET['page_id'])){
+        $pageId = $_GET['page_id'];
+    } else {
+        $pageId = null;
+    }
     ?>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <meta http-equiv="refresh" content="3600; url=index.php?loc_id=<?php echo $loc; ?>">
@@ -472,7 +483,7 @@ function getCoreHeader($loc, $addHeader = null)
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="<?php getLogo($loc, 'absolute'); ?>"/>
     <meta name="description" content="<?php echo $setupDescription; ?>">
-    <meta name="keywords" content="<?php getKeywords($loc, $_GET['page_id']); ?>">
+    <meta name="keywords" content="<?php getKeywords($loc, $pageId); ?>">
     <meta name="author" content="<?php echo $setupAuthor; ?>">
 
     <title><?php echo $setupTitle; ?></title>
