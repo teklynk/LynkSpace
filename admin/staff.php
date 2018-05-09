@@ -117,7 +117,7 @@ if ($_GET['preview'] > "") {
             }
             ?>
             <div class="col-lg-8">
-                <form name="teamForm" class="dirtyForm" method="post" action="">
+                <form name="teamForm" class="dirtyForm" method="post">
 
                     <div class="form-group">
                         <img src="<?php echo $thumbNail; ?>" id="team_image_preview"

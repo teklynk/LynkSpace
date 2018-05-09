@@ -33,13 +33,13 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $featuredInsert);
     }
 
-    header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
+    $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
+
+    $pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
 
-if ($_GET['update'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The featured section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
     <div class="row">
         <div class="col-lg-12">
@@ -68,7 +68,7 @@ if ($_GET['update'] == 'true') {
                 $selDefaults = "";
             }
             ?>
-            <form name="landingForm" class="dirtyForm" method="post" action="">
+            <form name="landingForm" class="dirtyForm" method="post">
                 <?php
                 if ($_GET['loc_id'] != 1) {
                     ?>

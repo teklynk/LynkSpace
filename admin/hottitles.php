@@ -162,7 +162,7 @@ if ($_GET['loc_id'] != 1) {
     <div class="row">
         <div class="col-lg-8">
             <fieldset class="well">
-                <form name="addhottitlesForm" class="dirtyForm" method="post" action="">
+                <form name="addhottitlesForm" class="dirtyForm" method="post">
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="hottitles_sort">Sort Order</label>

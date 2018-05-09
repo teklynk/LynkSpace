@@ -32,13 +32,10 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $generalinfoInsert);
     }
 
-    header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    $pageMsg = "<div class='alert alert-success'>The general info section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
 
-if ($_GET['update'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The general info section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -66,7 +63,7 @@ if ($_GET['update'] == 'true') {
             $selDefaults = "";
         }
         ?>
-        <form name="generalinfoForm" class="dirtyForm" method="post" action="">
+        <form name="generalinfoForm" class="dirtyForm" method="post">
 
             <?php
             if ($_GET['loc_id'] != 1) {

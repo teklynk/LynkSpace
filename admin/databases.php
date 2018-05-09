@@ -211,7 +211,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     }
     ?>
     <div class="col-lg-8">
-        <form name="customerForm" class="dirtyForm" method="post" action="">
+        <form name="customerForm" class="dirtyForm" method="post">
 
             <div class="form-group required">
                 <label><?php echo $customerLabel; ?></label>
@@ -597,7 +597,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             echo $customerMsg;
         }
         ?>
-        <form name="customerForm" class="dirtyForm" method="post" action="">
+        <form name="customerForm" class="dirtyForm" method="post">
             <div class="form-group required">
                 <label>Heading</label>
                 <input class="form-control count-text" name="customer_heading" maxlength="255"

@@ -298,7 +298,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             echo $serviceMsg;
         }
         ?>
-        <form name="servicesForm" class="dirtyForm" method="post" action="">
+        <form name="servicesForm" class="dirtyForm" method="post">
             <div class="form-group required">
                 <label>Heading</label>
                 <input class="form-control count-text" name="main_heading" maxlength="255"
