@@ -121,7 +121,7 @@ if ($deleteMsg != "") {
         <div class="row">
             <div class="col-lg-8">
                 <fieldset class="well">
-                    <form name="userForm" class="dirtyForm" method="post" action="">
+                    <form name="userForm" class="dirtyForm" method="post">
                         <div class="col-lg-12">
                             <div class="form-group required">
                                 <label for="user_name">Username</label>

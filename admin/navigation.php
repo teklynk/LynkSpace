@@ -354,7 +354,7 @@ if ($_GET['section'] == $navSections[0]) {
             </div>
 
             <!-- Nav Link Section -->
-            <form name="navForm" class="dirtyForm" method="post" action="">
+            <form name="navForm" class="dirtyForm" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="exist_page">Existing Page</label>

@@ -115,7 +115,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     ?>
     <div class="col-lg-8">
-        <form name="slideForm" class="dirtyForm" method="post" action="">
+        <form name="slideForm" class="dirtyForm" method="post">
 
             <div class="form-group required">
                 <label for="slide_title"><?php echo $slideLabel; ?></label>

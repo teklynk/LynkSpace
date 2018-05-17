@@ -22,6 +22,8 @@ $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
+$pageMsg = '';
+
 //update table on submit
 if (!empty($_POST['site_title'])) {
 
@@ -81,16 +83,19 @@ if (!empty($_POST['site_title'])) {
     unset($_SESSION['loc_list']);
     $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-    header("Location: setup.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    //Get location table columns
+    $sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+    $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
+
+    //Get setup table columns
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . ";");
+    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+
+    $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
 
-
-$pageMsg = '';
-
-if ($_GET['update'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-} elseif ($_GET['deleteloc'] == 'true') {
+if ($_GET['deleteloc'] == 'true') {
     showModalConfirm(
         "confirm",
         "Delete Location?",
@@ -193,7 +198,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
             }
             ?>
 
-            <form name="setupForm" id="setupForm" class="dirtyForm" method="post" action="">
+            <form name="setupForm" id="setupForm" class="dirtyForm" method="post">
                 <!-- Admin Options Panel/Well-->
                 <?php
                 //Admin Options and Settings

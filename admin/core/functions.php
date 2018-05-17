@@ -500,6 +500,7 @@ function getPages($loc)
 {
     global $pagesList;
     global $extraPages; //from config.php
+    global $extraPagesArray; //from config.php
     global $db_conn;
 
     $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
@@ -509,6 +510,10 @@ function getPages($loc)
 
         $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
     }
+
+/*    foreach ($extraPagesArray as $label=>$value){
+        var_dump($label);
+    }*/
 
     $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . $extraPages;
     return $pagesList;
