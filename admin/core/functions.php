@@ -44,7 +44,7 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
     global $loginFailed;
 
     $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
-    $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
+    $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
     $currentTime = strtotime(date('Y-m-d H:i:s'));
     $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
@@ -60,14 +60,14 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
             $loginFailed = false;
 
             $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=NOW() WHERE ip='" . $userIp . "';";
-            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+            mysqli_query($db_conn, $sqlUpdateLoginAttempt) or die(mysqli_error($db_conn));
 
         } else {
 
             if ($currentTime - $loginAttemptTime >= $maxTimeout) {
                 $loginFailed = false;
                 $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
-                mysqli_query($db_conn, $sqlLoginAttemptDelete);
+                mysqli_query($db_conn, $sqlLoginAttemptDelete) or die(mysqli_error($db_conn));
             } else {
                 $loginFailed = true;
                 echo "<style>#wrapper {padding-left: 0 !important;}</style>";
@@ -102,7 +102,7 @@ function importFromCsv($fileInput, $dbTable)
 
         //Check if table name exists
         $sqlCheckTable = "SELECT count(*) FROM " . $dbTable . ";";
-        $rowCheckTable = mysqli_query($db_conn, $sqlCheckTable);
+        $rowCheckTable = mysqli_query($db_conn, $sqlCheckTable) or die(mysqli_error($db_conn));
 
         if (!$rowCheckTable) {
             die($dbTable . " table does not exist.");
@@ -402,7 +402,7 @@ function validateUrl($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -414,7 +414,7 @@ function validateEmail($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -1167,7 +1167,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
                 $queryExecute = NULL;
         }
 
-        $queryExecute = mysqli_query($db_conn, $query);
+        $queryExecute = mysqli_query($db_conn, $query) or die(mysqli_error($db_conn));
 
         if (mysqli_error($db_conn) || $queryExecute == false) {
             die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
