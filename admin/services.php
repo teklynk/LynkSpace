@@ -239,12 +239,12 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         }
 
         $setupUpdate = "UPDATE setup SET servicesheading='" . safeCleanStr($_POST['main_heading']) . "', servicescontent='" . sqlEscapeStr($_POST['main_content']) . "', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
-        mysqli_query($db_conn, $setupUpdate);
+        mysqli_query($db_conn, $setupUpdate) or die(mysqli_error($db_conn));
 
         for ($i = 0; $i < $_POST['service_count']; $i++) {
 
             $servicesUpdate = "UPDATE services SET sort=" . safeCleanStr($_POST['service_sort'][$i]) . " WHERE id=" . $_POST['service_id'][$i] . ";";
-            mysqli_query($db_conn, $servicesUpdate);
+            mysqli_query($db_conn, $servicesUpdate) or die(mysqli_error($db_conn));
 
         }
 
@@ -252,7 +252,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
-    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
     //Modal preview box
     showModalPreview("webserviceDialog");
@@ -339,7 +339,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
                     echo "<tr>
 				<td class='col-xs-1'>
-				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='text' maxlength='3' required>
+				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='number' maxlength='3' required>
 				</td>
 				<td>
 				<input type='hidden' name='service_id[]' value='" . $serviceId . "' >

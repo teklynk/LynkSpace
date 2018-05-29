@@ -81,13 +81,13 @@ if ($_GET['preview'] > "") {
                 if (!empty($_POST['team_name'])) {
 
                     $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . ";";
-                    mysqli_query($db_conn, $teamUpdate);
+                    mysqli_query($db_conn, $teamUpdate) or die(mysqli_error($db_conn));
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='staff.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
 
                 $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . ";");
-                $rowTeam = mysqli_fetch_array($sqlteam, MYSQLI_ASSOC);
+                $rowTeam = mysqli_fetch_array($sqlteam, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
                 //Create new team
             } elseif ($_GET['newteam']) {
@@ -97,7 +97,7 @@ if ($_GET['preview'] > "") {
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
                     $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
-                    mysqli_query($db_conn, $teamInsert);
+                    mysqli_query($db_conn, $teamInsert) or die(mysqli_error($db_conn));
 
                     header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
                     echo "<script>window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -198,12 +198,12 @@ if ($_GET['preview'] > "") {
             if ($_POST['save_main']) {
 
                 $setupUpdate = "UPDATE setup SET teamheading='" . safeCleanStr($_POST['team_heading']) . "', teamcontent='" . sqlEscapeStr($_POST['main_content']) . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
-                mysqli_query($db_conn, $setupUpdate);
+                mysqli_query($db_conn, $setupUpdate) or die(mysqli_error($db_conn));
 
                 for ($i = 0; $i < $_POST['team_count']; $i++) {
 
                     $teamUpdate = "UPDATE team SET sort=" . safeCleanStr($_POST['team_sort'][$i]) . " WHERE id=" . $_POST['team_id'][$i] . ";";
-                    mysqli_query($db_conn, $teamUpdate);
+                    mysqli_query($db_conn, $teamUpdate) or die(mysqli_error($db_conn));
 
                 }
 
@@ -211,7 +211,7 @@ if ($_GET['preview'] > "") {
             }
 
             $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
-            $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+            $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
             //Modal preview box
             showModalPreview("webpageDialog");
@@ -300,7 +300,7 @@ if ($_GET['preview'] > "") {
 
                             echo "<tr>
                         <td class='col-xs-1'>
-                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3' required>
+                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='number' maxlength='3' required>
                         </td>
                         <td>
                         <a href='staff.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a>

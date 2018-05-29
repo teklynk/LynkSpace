@@ -84,7 +84,7 @@ if (!empty($_POST['save_main'])) {
         $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
         $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . ";";
-        mysqli_query($db_conn, $hottitlesUpdate);
+        mysqli_query($db_conn, $hottitlesUpdate) or die(mysqli_error($db_conn));
     }
     if ($errorMsg == "") {
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
@@ -102,12 +102,12 @@ if ($_POST['add_hottitles']) {
     //Insert Hot Titles
     if (strpos($hottitles_url, 'econtent') || strpos($hottitles_url, 'dynamic') || strpos($hottitles_url, 'static')) {
         if (!empty($hottitles_sort)) {
-            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);;
+            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);
         } else {
             $hottitles_sort = 0;
         }
         $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
-        mysqli_query($db_conn, $hottitlesInsert);
+        mysqli_query($db_conn, $hottitlesInsert) or die(mysqli_error($db_conn));
 
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
@@ -166,7 +166,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="hottitles_sort">Sort Order</label>
-                            <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort"
+                            <input type="number" class="form-control" name="hottitles_sort" id="hottitles_sort"
                                    maxlength="3">
                         </div>
                     </div>
@@ -274,7 +274,7 @@ if ($_GET['loc_id'] != 1) {
 
                             echo "<tr>
                             <td class='col-xs-1'>
-                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='text' maxlength='3' required>
+                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='number' maxlength='3' required>
                             </td>
                             
                             <td>

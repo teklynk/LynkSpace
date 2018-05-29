@@ -85,7 +85,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         }
 
         $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND loc_id=" . $_GET['loc_id'] . ";");
-        $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC);
+        $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
         //Create new slide
     } elseif ($_GET['newslide']) {
@@ -95,7 +95,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
         //insert data on submit
         if (!empty($_POST)) {
             $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
-            mysqli_query($db_conn, $slideInsert);
+            mysqli_query($db_conn, $slideInsert) or die(mysqli_error($db_conn));
 
             header("slider.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
@@ -290,7 +290,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $slide_id = safeCleanStr($_POST['slide_id'][$i]);
 
             $slideUpdate = "UPDATE slider SET sort=" . $slide_sort . ", startdate='" . $slide_startdate . "', enddate='" . $slide_enddate . "', loc_type='" . $location_type . "' WHERE id=" . $slide_id . ";";
-            mysqli_query($db_conn, $slideUpdate);
+            mysqli_query($db_conn, $slideUpdate) or die(mysqli_error($db_conn));
 
         }
 
@@ -298,7 +298,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
-    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
     //Modal preview box
     showModalPreview("webslideDialog");
@@ -387,7 +387,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         echo "<tr>
             <td class='col-xs-1'>
-            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3' required>
+            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='number' maxlength='3' required>
             </td>
 			<td>
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
