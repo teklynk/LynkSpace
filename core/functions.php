@@ -432,11 +432,11 @@ function getLogo($loc, $type)
     global $getLogo;
 
     $sqlGetLogoDefault = mysqli_query($db_conn, "SELECT logo, loc_id FROM setup WHERE loc_id=1;");
-    $rowGetLogoDefault = mysqli_fetch_array($sqlGetLogoDefault, MYSQLI_ASSOC);
+    $rowGetLogoDefault = mysqli_fetch_array($sqlGetLogoDefault, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
     $defaultLogo = $rowGetLogoDefault['logo'];
 
     $sqlGetLogoOptions = mysqli_query($db_conn, "SELECT logo, logo_use_defaults, loc_id FROM setup WHERE loc_id=" . $loc . ";");
-    $rowGetLogoOptions = mysqli_fetch_array($sqlGetLogoOptions, MYSQLI_ASSOC);
+    $rowGetLogoOptions = mysqli_fetch_array($sqlGetLogoOptions, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
     if ($rowGetLogoOptions['logo_use_defaults'] == 'true') {
         $getLogo = $defaultLogo;
@@ -555,7 +555,7 @@ function getDynamicCss($loc)
 
     //Get setup table columns
     $sqlSetup = mysqli_query($db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
-    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+    $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
     if ($rowSetup['theme_use_defaults'] == 'true') {
         $locId = 1;
@@ -595,12 +595,12 @@ function getSocialMediaIcons($loc, $shape, $section)
     global $db_conn;
 
     $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $loc . ";");
-    $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
+    $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
 
     //use default location
     if ($rowSocialMedia['use_defaults'] == "true" || $rowSocialMedia['use_defaults'] == "" || $rowSocialMedia['use_defaults'] == NULL) {
         $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=1;");
-        $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
+        $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
     }
 
     $socialMediaHeading = "";
@@ -857,7 +857,7 @@ function getSlider($loc, $sliderType)
                 $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
             }
         } else {
-            $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
+            $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC) or die(mysqli_error($db_conn));;
             $sliderLink = $rowSlider['link'];
             $sliderTitle = $rowSlider['title'];
             $sliderContent = $rowSlider['content'];
@@ -880,12 +880,12 @@ function getGeneralInfo($loc)
     global $db_conn;
 
     $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $loc . ";");
-    $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
+    $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
 
     //use default location
     if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == NULL) {
         $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=1;");
-        $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
+        $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
     }
 
     if (!empty($rowGeneralinfo['content'])) {
