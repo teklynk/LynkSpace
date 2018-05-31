@@ -84,7 +84,7 @@ if (!empty($_POST['save_main'])) {
         $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
         $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . ";";
-        mysqli_query($db_conn, $hottitlesUpdate) or die(mysqli_error($db_conn));
+        mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
@@ -107,7 +107,7 @@ if ($_POST['add_hottitles']) {
             $hottitles_sort = 0;
         }
         $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
-        mysqli_query($db_conn, $hottitlesInsert) or die(mysqli_error($db_conn));
+        mysqli_query($db_conn, $hottitlesInsert);
 
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";

@@ -50,7 +50,7 @@ if (!empty($_POST)) {
         }
 
         $navNew = "INSERT INTO navigation (name, url, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
-        mysqli_query($db_conn, $navNew) or die(mysqli_error($db_conn));
+        mysqli_query($db_conn, $navNew);
 
     }
 
@@ -69,7 +69,7 @@ if (!empty($_POST)) {
         }
 
         $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $nav_id . ";";
-        mysqli_query($db_conn, $navUpdate) or die(mysqli_error($db_conn));
+        mysqli_query($db_conn, $navUpdate);
     }
 
     $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
