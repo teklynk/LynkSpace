@@ -1169,7 +1169,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
 
         $queryExecute = mysqli_query($db_conn, $query);
 
-        if (mysqli_error($db_conn) || $queryExecute == false) {
+        if (mysqli_error($db_conn) || mysqli_error($db_conn)) {
             die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
         }
 
