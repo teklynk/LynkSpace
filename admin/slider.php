@@ -114,7 +114,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
     ?>
     <div class="col-lg-8">
-        <form name="slideForm" class="dirtyForm" method="post" action="">
+        <form name="slideForm" class="dirtyForm" method="post">
 
             <div class="form-group required">
                 <label for="slide_title"><?php echo $slideLabel; ?></label>
@@ -386,7 +386,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
 
         echo "<tr>
             <td class='col-xs-1'>
-            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='text' maxlength='3' required>
+            <input class='form-control' name='slide_sort[]' value='" . $slideSort . "' type='number' maxlength='3' required>
             </td>
 			<td>
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >

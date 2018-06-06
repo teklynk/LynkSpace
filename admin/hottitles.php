@@ -101,7 +101,7 @@ if ($_POST['add_hottitles']) {
     //Insert Hot Titles
     if (strpos($hottitles_url, 'econtent') || strpos($hottitles_url, 'dynamic') || strpos($hottitles_url, 'static')) {
         if (!empty($hottitles_sort)) {
-            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);;
+            $hottitles_sort = safeCleanStr($_POST['hottitles_sort']);
         } else {
             $hottitles_sort = 0;
         }
@@ -161,11 +161,11 @@ if ($_GET['loc_id'] != 1) {
     <div class="row">
         <div class="col-lg-8">
             <fieldset class="well">
-                <form name="addhottitlesForm" class="dirtyForm" method="post" action="">
+                <form name="addhottitlesForm" class="dirtyForm" method="post">
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="hottitles_sort">Sort Order</label>
-                            <input type="text" class="form-control" name="hottitles_sort" id="hottitles_sort"
+                            <input type="number" class="form-control" name="hottitles_sort" id="hottitles_sort"
                                    maxlength="3">
                         </div>
                     </div>
@@ -273,7 +273,7 @@ if ($_GET['loc_id'] != 1) {
 
                             echo "<tr>
                             <td class='col-xs-1'>
-                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='text' maxlength='3' required>
+                                <input class='form-control' name='hottitles_sort[]' value='" . $hottitlesSort . "' type='number' maxlength='3' required>
                             </td>
                             
                             <td>

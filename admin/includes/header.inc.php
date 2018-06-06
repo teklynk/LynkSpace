@@ -132,6 +132,7 @@ session_start();
     ?>
 </head>
 <body>
+<div id="page-loader"></div>
 <!--[if lte IE 9]>
 <div class="container">
     <div class="row">

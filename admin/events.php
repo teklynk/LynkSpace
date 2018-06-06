@@ -9,7 +9,7 @@ $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, c
 $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
 //update table on submit
-if ($_POST) {
+if (!empty($_POST)) {
 
     $event_defaults = $_POST['event_defaults'];
     $event_heading = sqlEscapeStr($_POST['event_heading']);
@@ -34,13 +34,13 @@ if ($_POST) {
         mysqli_query($db_conn, $eventInsert);
     }
 
-    header("Location: events.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "&update=true ';</script>";
+    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
+
+    $pageMsg = "<div class='alert alert-success'>The events section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
 
-if ($_GET['update'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The events section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
     <div class="row">
         <div class="col-lg-12">
@@ -81,7 +81,7 @@ if ($_GET['update'] == 'true') {
             }
 
             ?>
-            <form name="eventsForm" class="dirtyForm" method="post" action="">
+            <form name="eventsForm" class="dirtyForm" method="post">
 
                 <?php
                 if ($_GET['loc_id'] != 1) {

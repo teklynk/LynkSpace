@@ -84,7 +84,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 }
                 ?>
                 <div class="col-lg-12">
-                    <form name="pageForm" class="dirtyForm" method="post" action="">
+                    <form name="pageForm" class="dirtyForm" method="post">
 
                         <div class="form-group required">
                             <label><?php echo $pageLabel; ?></label>

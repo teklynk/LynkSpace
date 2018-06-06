@@ -353,7 +353,7 @@ if ($_GET['section'] == $navSections[0]) {
             </div>
 
             <!-- Nav Link Section -->
-            <form name="navForm" class="dirtyForm" method="post" action="">
+            <form name="navForm" class="dirtyForm" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="exist_page">Existing Page</label>
@@ -442,7 +442,7 @@ if ($_GET['section'] == $navSections[0]) {
 
                             echo "<tr>
 							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value='" . $navId . "' >
-							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='text' maxlength='3' required></td>
+							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='number' maxlength='3' required></td>
 							<td><input class='form-control' name='nav_name[]' value='" . $navName . "' type='text'></td>
 							<td><input class='form-control' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
                             echo "<td><select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='nav_cat[]'>'";

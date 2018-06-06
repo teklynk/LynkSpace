@@ -864,7 +864,7 @@ function getSlider($loc, $sliderType)
                 $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
             }
         } else {
-            $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
+            $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);;
             $sliderLink = $rowSlider['link'];
             $sliderTitle = $rowSlider['title'];
             $sliderContent = $rowSlider['content'];
