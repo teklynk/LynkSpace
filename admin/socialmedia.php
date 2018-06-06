@@ -42,13 +42,13 @@ if (!empty($_POST)) {
 
     }
 
-    header("Location: socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
+
+    $pageMsg = "<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
 
-if ($_GET['update'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-}
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -76,7 +76,7 @@ if ($_GET['update'] == 'true') {
             $selDefaults = "";
         }
         ?>
-        <form name="socialmediaForm" class="dirtyForm" method="post" action="">
+        <form name="socialmediaForm" class="dirtyForm" method="post">
             <?php
             if ($_GET['loc_id'] != 1) {
                 ?>

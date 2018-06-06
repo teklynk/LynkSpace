@@ -41,14 +41,13 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $contactInsert);
     }
 
-    header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
-    echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
-}
-
-if ($_GET['update'] == 'true') {
     $pageMsg = "<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
 }
+
 ?>
 
     <div class="row">
@@ -81,7 +80,7 @@ if ($_GET['update'] == 'true') {
                 $selDefaults = "";
             }
             ?>
-            <form name="contactForm" class="dirtyForm" method="post" action="">
+            <form name="contactForm" class="dirtyForm" method="post">
                 <?php
                 if ($_GET['loc_id'] != 1) {
                     ?>

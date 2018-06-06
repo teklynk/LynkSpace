@@ -402,7 +402,7 @@ function validateUrl($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -414,7 +414,7 @@ function validateEmail($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
     } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -500,6 +500,7 @@ function getPages($loc)
 {
     global $pagesList;
     global $extraPages; //from config.php
+    global $extraPagesArray; //from config.php
     global $db_conn;
 
     $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
@@ -509,6 +510,10 @@ function getPages($loc)
 
         $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
     }
+
+/*    foreach ($extraPagesArray as $label=>$value){
+        var_dump($label);
+    }*/
 
     $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . $extraPages;
     return $pagesList;
@@ -1164,7 +1169,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
 
         $queryExecute = mysqli_query($db_conn, $query);
 
-        if (mysqli_error($db_conn) || $queryExecute == false) {
+        if (mysqli_error($db_conn) || mysqli_error($db_conn)) {
             die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
         }
 

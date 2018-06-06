@@ -74,7 +74,7 @@ if ($_GET['passwordupdated'] == 'true') {
                 echo $pageMsg;
             }
             ?>
-            <form name="userForm" class="dirtyForm" method="post" action="">
+            <form name="userForm" class="dirtyForm" method="post">
                 <div class="form-group">
                     <div class="input-group">
                         <img class='img-circle img-responsive'

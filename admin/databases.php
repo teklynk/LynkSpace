@@ -49,7 +49,7 @@ if ($_GET['preview'] > "") {
 
 //check if using default location
 $sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . ";");
-$rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
+$rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
 
 //set Default toggle depending on which section you are on
 if ($_GET['section'] == $rowSections['section']) {
@@ -197,7 +197,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
         //insert data on submit
         if (!empty($customer_name)) {
-            $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . $customer_exist_cat . "', '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ";)";
+            $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $customerInsert);
 
             header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 301);
@@ -454,7 +454,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     //Rename category and set categories to new name
     if ($_GET['renamecat'] && $_GET['newcatname']) {
 
-        $custRenameCatUpdate = "UPDATE category_customers SET name='" . $renameCatTitle . "', sort='" . $renameCatSort . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId'";
+        $custRenameCatUpdate = "UPDATE category_customers SET name='" . $renameCatTitle . "', sort='" . $renameCatSort . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId';";
         mysqli_query($db_conn, $custRenameCatUpdate);
 
         $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -468,7 +468,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             $_GET['addcatsort'] = 0;
         }
 
-        $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
+        $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
         mysqli_query($db_conn, $custAddCat);
 
         echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
@@ -522,7 +522,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="cust_newcatsort">Sort Order</label>
-                            <input type="text" class="form-control" name="cust_newcatsort" id="cust_newcatsort"
+                            <input type="number" class="form-control" name="cust_newcatsort" id="cust_newcatsort"
                                    maxlength="3">
                         </div>
                     </div>
@@ -622,7 +622,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                 <tbody>
                 <?php
                 $custCount = "";
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC;");
                 while ($rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC)) {
                     $customerId = $rowCustomer['id'];
                     $customerName = safeCleanStr($rowCustomer['name']);
@@ -648,7 +648,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
                     echo "<tr>
                         <td class='col-xs-1'>
-                        <input class='form-control' name='cust_sort[]' value='" . $customerSort . "' type='text' maxlength='3' required>
+                        <input class='form-control' name='cust_sort[]' value='" . $customerSort . "' type='number' maxlength='3' required>
                         </td>
 						<td>
 						<input type='hidden' name='cust_id[]' value='" . $customerId . "' >
@@ -658,7 +658,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                     echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='cust_cat[]'>'";
                     echo "<option value='0'>None</option>";
                     //get and build category list, find selected
-                    $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name");
+                    $sqlCustCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY name;");
                     while ($rowCustCat = mysqli_fetch_array($sqlCustCat, MYSQLI_ASSOC)) {
                         if ($rowCustCat['id'] != 0) {
                             $custCatId = $rowCustCat['id'];

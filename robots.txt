@@ -10,4 +10,4 @@ Disallow: /core/
 Disallow: /js/
 Disallow: /migration/
 Disallow: /vendor/
-Sitemap: //lynkspace.local/sitemap.xml
+Sitemap: //lynkspace.local.com/sitemap.xml

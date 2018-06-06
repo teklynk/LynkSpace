@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    //Page loading screen
+    $("#page-loader").css('display', 'none');
+    $(window).on('submit load', function() {
+        $("#page-loader").fadeOut();
+    });
+
     //Sibebar Nav Menu Collapse
     if ($.cookie('sidebar-collapse') == 1) {
         $('.fa-dedent').addClass('fa-indent');

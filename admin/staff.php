@@ -117,7 +117,7 @@ if ($_GET['preview'] > "") {
             }
             ?>
             <div class="col-lg-8">
-                <form name="teamForm" class="dirtyForm" method="post" action="">
+                <form name="teamForm" class="dirtyForm" method="post">
 
                     <div class="form-group">
                         <img src="<?php echo $thumbNail; ?>" id="team_image_preview"
@@ -300,7 +300,7 @@ if ($_GET['preview'] > "") {
 
                             echo "<tr>
                         <td class='col-xs-1'>
-                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='text' maxlength='3' required>
+                        <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='number' maxlength='3' required>
                         </td>
                         <td>
                         <a href='staff.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a>
