@@ -1165,7 +1165,7 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
         $queryExecute = $db_conn->query($query);
 
         if ($db_conn->connect_error || $queryExecute == false) {
-            die("Error: " . $db_conn->connect_errorno . " : " . $method . " : " . $query . " : " . $db_conn->connect_error);
+            die("Error: " . $method . " : " . $query . " : " . $db_conn->connect_error);
         }
 
         return $queryExecute . $db_conn->close();
