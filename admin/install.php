@@ -1,20 +1,24 @@
 <?php
 //Create these files if they do not exist.
 // Copy config-sample.php to config.php
-if (!file_exists("../config/config.php")) {
-    copy("../config/config-sample.php", "../config/config.php");
-}
-// Copy dbconn-sample.php to dbconn.php
-if (!file_exists("../config/dbconn.php")) {
-    copy("../config/dbconn-sample.php", "../config/dbconn.php");
-}
-// Copy blowfishsalt-sample.php to blowfishsalt.php
-if (!file_exists("../config/blowfishsalt.php")) {
-    copy("../config/blowfishsalt-sample.php", "../config/blowfishsalt.php");
-}
-// Copy htaccess-sample to .htaccess
-if (!file_exists("../.htaccess")) {
-    copy("../.htaccess-sample", "../.htaccess");
+if (!is_writable($_SERVER['DOCUMENT_ROOT'])) {
+    echo "<div class='alert alert-danger'><span>" . $_SERVER['DOCUMENT_ROOT'] . " directory is not writable.</span></div>";
+} else {
+    if (!file_exists(__DIR__ . "/../config/config.php")) {
+        @copy(__DIR__ . "/../config/config-sample.php", __DIR__ . "/../config/config.php");
+    }
+    // Copy dbconn-sample.php to dbconn.php
+    if (!file_exists(__DIR__ . "/../config/dbconn.php")) {
+        @copy(__DIR__ . "/../config/dbconn-sample.php", __DIR__ . "/../config/dbconn.php");
+    }
+    // Copy blowfishsalt-sample.php to blowfishsalt.php
+    if (!file_exists(__DIR__ . "/../config/blowfishsalt.php")) {
+        @copy(__DIR__ . "/../config/blowfishsalt-sample.php", __DIR__ . "/../config/blowfishsalt.php");
+    }
+    // Copy htaccess-sample to .htaccess
+    if (!file_exists(__DIR__ . "/../.htaccess")) {
+        @copy(__DIR__ . "/../.htaccess-sample", __DIR__ . "/../.htaccess");
+    }
 }
 
 define('recaptcha', TRUE);
@@ -33,11 +37,13 @@ $user_ip = getRealIpAddr();
 // Generate a random Blowfish Salt key using the random password string function
 $blowfishHash = blowfishSaltRandomString(generateRandomPasswordString());
 
+$response = NULL;
+$sucessfulResponse = NULL;
+
 //Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once(__DIR__ . '/core/recaptchalib.php');
-    $response = NULL;
     $reCaptcha = NEW ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
@@ -46,7 +52,7 @@ if (recaptcha_secret_key && recaptcha_site_key) {
 
 if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
     $response = $reCaptcha->verifyResponse(
-        $_SERVER["REMOTE_ADDR"],
+        filter_var($_SERVER["REMOTE_HOST"], FILTER_FLAG_HOST_REQUIRED),
         $_POST["g-recaptcha-response"]
     );
 }

@@ -11,11 +11,16 @@ $_SESSION['file_referrer'] = 'index.php';
 //Creates a unique referring value/token
 $_SESSION['unique_referrer'] = generateRandomString();
 
+$response = NULL;
+$sucessfulResponse = NULL;
+
+// Get client IP address
+$user_ip = getRealIpAddr();
+
 //Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once(__DIR__ . '/core/recaptchalib.php');
-    $response = NULL;
     $reCaptcha = new ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
@@ -24,7 +29,7 @@ if (recaptcha_secret_key && recaptcha_site_key) {
 
 if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
     $response = $reCaptcha->verifyResponse(
-        $_SERVER["REMOTE_ADDR"],
+        filter_var($_SERVER["REMOTE_HOST"], FILTER_FLAG_HOST_REQUIRED),
         $_POST["g-recaptcha-response"]
     );
 }
@@ -35,7 +40,7 @@ checkDependencies();
 if (!empty($_POST)) {
 
     // Check and record failed login attempts
-    loginAttempts(getRealIpAddr(), 4, 30);
+    loginAttempts($user_ip, 4, 30);
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
