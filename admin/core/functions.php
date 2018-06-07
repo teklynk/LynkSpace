@@ -423,11 +423,13 @@ function validateEmail($cleanStr)
 function getRealIpAddr()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $clientip = $_SERVER['HTTP_CLIENT_IP'];
+        $clientip = filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP);
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $clientip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP);
+    } elseif (!empty($_SERVER['REMOTE_ADDR'])){
+        $clientip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     } else {
-        $clientip = $_SERVER['REMOTE_ADDR'];
+        $clientip = "Client IP Not Found";
     }
     return $clientip;
 }
