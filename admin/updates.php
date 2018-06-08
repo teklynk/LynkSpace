@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
@@ -117,7 +116,7 @@ if (isset($_SESSION['updates_available'])) {
         //Delete the zip file
         unlink($updatesDestination);
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 
@@ -134,7 +133,7 @@ if (isset($_SESSION['updates_available'])) {
 
         sleep(1); // wait
 
-        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+        header("updates.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
         echo "<script>window.location.href='updates.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 

@@ -1,8 +1,3 @@
-<?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-?>
 
     <!-- Footer -->
     <footer class="footer themebase-footerbgcolor" id="footer">

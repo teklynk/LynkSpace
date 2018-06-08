@@ -1,8 +1,4 @@
-<?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-?>
+
 
     <!-- Footer -->
     <footer class="footer" id="footer">

@@ -5,8 +5,6 @@ if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     die('Direct access not permitted');
 }
 
-define('inc_access', TRUE);
-
 if (!empty($_GET['rssurl'])) {
 
     require_once(__DIR__ . '/../../config/config.php');

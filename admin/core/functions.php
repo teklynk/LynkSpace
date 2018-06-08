@@ -1,8 +1,4 @@
 <?php
-//Back-end Admin Panel functions
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
 
 //Output to browser console
 function debugToConsole($data)
@@ -402,7 +398,7 @@ function validateUrl($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
-        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -414,7 +410,7 @@ function validateEmail($cleanStr)
     if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
     } else {
-        //$errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
+        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
         return false;
     }
 }
@@ -423,11 +419,13 @@ function validateEmail($cleanStr)
 function getRealIpAddr()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $clientip = $_SERVER['HTTP_CLIENT_IP'];
+        $clientip = filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP);
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $clientip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP);
+    } elseif (!empty($_SERVER['REMOTE_ADDR'])){
+        $clientip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     } else {
-        $clientip = $_SERVER['REMOTE_ADDR'];
+        $clientip = "Client IP Not Found";
     }
     return $clientip;
 }
@@ -500,7 +498,6 @@ function getPages($loc)
 {
     global $pagesList;
     global $extraPages; //from config.php
-    global $extraPagesArray; //from config.php
     global $db_conn;
 
     $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
@@ -510,10 +507,6 @@ function getPages($loc)
 
         $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
     }
-
-/*    foreach ($extraPagesArray as $label=>$value){
-        var_dump($label);
-    }*/
 
     $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . $extraPages;
     return $pagesList;
@@ -1092,7 +1085,7 @@ function checkIPRange()
         }
 
         if ($IPmatch === false) {
-            header("Location: ../index.php?loc_id=1", true, 301);
+            header("Location: ../index.php?loc_id=1", true, 302);
             die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
@@ -1115,13 +1108,15 @@ function dateTimeFormat($format = NULL, $date = NULL)
 //Simple SQL CRUD statements
 function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, $where = NULL, $orderBy = NULL)
 {
-    global $db_conn;
     $query = NULL;
     $clause = NULL;
     $order = NULL;
     $tableDb = NULL;
     $query = NULL;
     $queryExecute = NULL;
+
+    //Create connection
+    $db_conn = new mysqli(db_servername, db_username, db_password, db_name);
 
     if (isset($table)) {
         $tableDb = "`" . db_name . "`.`" . $table . "`";
@@ -1167,13 +1162,13 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
                 $queryExecute = NULL;
         }
 
-        $queryExecute = mysqli_query($db_conn, $query);
+        $queryExecute = $db_conn->query($query);
 
-        if (mysqli_error($db_conn) || mysqli_error($db_conn)) {
-            die("Error: " . mysqli_errno($db_conn) . " : " . $method . " : " . $query . " : " . mysqli_error($db_conn));
+        if ($db_conn->connect_error || $queryExecute == false) {
+            die("Error: " . $method . " : " . $query . " : " . $db_conn->connect_error);
         }
 
-        return $queryExecute;
+        return $queryExecute . $db_conn->close();
 
     } else {
 
@@ -1207,13 +1202,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
+    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 } elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
 

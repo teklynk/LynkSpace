@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
@@ -7,7 +6,7 @@ $_SESSION['file_referrer'] = 'locationgroups.php';
 
 // Only allow Admin users access to this page
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true', true, 301);
+    header('Location: index.php?logout=true', true, 302);
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 

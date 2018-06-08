@@ -1,22 +1,26 @@
 <?php
-define('inc_access', TRUE);
 define('recaptcha', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
-//clear all session variables
+// Clear all session variables
 session_unset();
 
 $_SESSION['file_referrer'] = 'index.php';
 
-//Creates a unique referring value/token
+// Creates a unique referring value/token
 $_SESSION['unique_referrer'] = generateRandomString();
 
-//Google Recaptcha validation
+$response = NULL;
+$sucessfulResponse = NULL;
+
+// Get client IP address
+$user_ip = getRealIpAddr();
+
+// Google Recaptcha validation
 if (recaptcha_secret_key && recaptcha_site_key) {
     $reCaptcha_enabled = true;
     require_once(__DIR__ . '/core/recaptchalib.php');
-    $response = NULL;
     $reCaptcha = new ReCaptcha(recaptcha_secret_key);
 } else {
     $reCaptcha_enabled = false;
@@ -25,7 +29,7 @@ if (recaptcha_secret_key && recaptcha_site_key) {
 
 if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
     $response = $reCaptcha->verifyResponse(
-        $_SERVER["REMOTE_ADDR"],
+        filter_var($_SERVER["REMOTE_HOST"], FILTER_FLAG_HOST_REQUIRED),
         $_POST["g-recaptcha-response"]
     );
 }
@@ -35,8 +39,11 @@ checkDependencies();
 
 if (!empty($_POST)) {
 
+    // Make sure password is okay and cleaned
+    $postPassword = sqlEscapeStr($_POST['password']);
+
     // Check and record failed login attempts
-    loginAttempts(getRealIpAddr(), 4, 30);
+    loginAttempts($user_ip, 4, 30);
 
     // Check if using Google Recaptcha
     if ($reCaptcha_enabled == true) {
@@ -54,9 +61,16 @@ if (!empty($_POST)) {
         }
     }
 
+    // Check if password meets the regex requirement - Server Side Check
+    if (!preg_match(passwordValidationPattern, $postPassword)) {
+        $sucessfulResponse = true;
+    } else {
+        $sucessfulResponse = false;
+    }
+
     if ($sucessfulResponse == true && isset($_SESSION['unique_referrer']) && $_SESSION['file_referrer'] == 'index.php') {
 
-        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . sqlEscapeStr($_POST['username']) . "' AND password=SHA1('" . blowfishSalt . safeCleanStr($_POST['password']) . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1;");
+        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . sqlEscapeStr($_POST['username']) . "' AND password=SHA1('" . blowfishSalt . $postPassword . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1;");
         $rowLogin = mysqli_fetch_array($userLogin, MYSQLI_ASSOC);
 
         if (is_array($rowLogin)) {
@@ -70,13 +84,13 @@ if (!empty($_POST)) {
             $_SESSION['session_hash'] = md5($rowLogin['username']);
             $_SESSION['updates_available'] = checkForUpdates();
 
-            //If is Admin
+            // If is Admin
             if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
                 $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
             }
 
-            //get the client IP and datetime at each log in. update the database row
+            // Get the client IP and datetime at each log in. update the database row
             if ($_SESSION['user_ip'] == '' || $_SESSION['user_ip'] == NULL) {
                 $_SESSION['user_ip'] = '0.0.0.0';
             }
@@ -86,7 +100,7 @@ if (!empty($_POST)) {
                 mysqli_query($db_conn, $userUpdate);
             }
 
-            //Delete failed login attempts from login_attempts table
+            // Delete failed login attempts from login_attempts table
             $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . getRealIpAddr() . "';";
             mysqli_query($db_conn, $sqlLoginAttemptDelete);
 
@@ -100,28 +114,28 @@ if (!empty($_POST)) {
 
 }
 
-//Reset password error messages
+// Reset password error messages
 if ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound') {
     $message = "<div class='alert alert-danger' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 } elseif ($_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'error') {
     $message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
-//Password reset instructions
+// Password reset instructions
 if ($_GET['msgsent'] == 'resetinstructions') {
     $message = "<div class='alert alert-danger' role='alert'>Please check your email for instructions on how to reset your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
-//Password reset message
+// Password reset message
 if ($_GET['msgsent'] == 'reset') {
     $message = "<div class='alert alert-danger' role='alert'>Your password is reset. Please sign in with your new password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
-//If logged in then...
+// If logged in then...
 if (isset($_SESSION['loggedIn'])) {
 
-    // redirect user to setup page
-    header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
+    // Redirect user to setup page
+    header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 
 }

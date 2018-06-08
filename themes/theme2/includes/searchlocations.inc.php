@@ -1,10 +1,6 @@
 <!-- Search Locations Section -->
 <a name="search" tabindex="-1"></a>
 <?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-
 getSetup($_GET['loc_id']); //from functions.php
 ?>
 

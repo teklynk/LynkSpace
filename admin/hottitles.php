@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
@@ -87,7 +86,7 @@ if (!empty($_POST['save_main'])) {
         mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
-        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
+        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
     }
 }
@@ -109,7 +108,7 @@ if ($_POST['add_hottitles']) {
         $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
-        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 301);
+        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
     } else {
         $pageMsg = "<div class='alert alert-danger'>" . $hottitles_url . " is not a valid LS2 PAC RSS feed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
