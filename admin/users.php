@@ -39,7 +39,7 @@ if (!empty($_POST)) {
     }
 
     if ($_GET['updatepassword'] == 'true') {
-        header("Location: users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "", true, 301);
+        header("Location: users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "", true, 302);
         echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "';</script>";
     }
 }

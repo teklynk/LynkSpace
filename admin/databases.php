@@ -10,7 +10,7 @@ $customerMsg = '';
 
 //Redirect to section=1 if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
-    header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "", true, 301);
+    header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
@@ -199,7 +199,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $customerInsert);
 
-            header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 301);
+            header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
             echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
         }
     }

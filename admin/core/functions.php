@@ -1085,7 +1085,7 @@ function checkIPRange()
         }
 
         if ($IPmatch === false) {
-            header("Location: ../index.php?loc_id=1", true, 301);
+            header("Location: ../index.php?loc_id=1", true, 302);
             die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
@@ -1202,13 +1202,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
+    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 } elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
 

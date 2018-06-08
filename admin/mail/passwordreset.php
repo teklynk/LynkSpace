@@ -30,11 +30,11 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
 
     // Check for empty fields
     if (empty($user_name) || empty($email_address) || !validateEmail($email_address)) {
-        header("Location: $errorPage");
+        header("Location: $errorPage", true, 302);
         echo "<script>window.location.href='$errorPage';</script>";
 
     } elseif ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
-        header("Location: $errorPageNotFound");
+        header("Location: $errorPageNotFound", true, 302);
         echo "<script>window.location.href='$errorPageNotFound';</script>";
 
     } else {
@@ -71,13 +71,13 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
                 mail($email_address, $email_subject, $email_body, $headers);
 
                 //redirect to successful reset message
-                header("Location: $redirectPage");
+                header("Location: $redirectPage", true, 302);
                 echo "<script>window.location.href='$redirectPage';</script>";
 
             } else {
 
                 //redirect to error message
-                header("Location: $errorPageNotFound");
+                header("Location: $errorPageNotFound", true, 302);
                 echo "<script>window.location.href='$errorPageNotFound';</script>";
 
             }
@@ -102,7 +102,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
             mail($email_address, $email_subject, $email_body, $headers);
 
             //send password reset request message
-            header("Location: $redirectPageRequest");
+            header("Location: $redirectPageRequest", true, 302);
             echo "<script>window.location.href='$redirectPageRequest';</script>";
         }
 

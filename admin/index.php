@@ -135,7 +135,7 @@ if ($_GET['msgsent'] == 'reset') {
 if (isset($_SESSION['loggedIn'])) {
 
     // Redirect user to setup page
-    header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
+    header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 
 }

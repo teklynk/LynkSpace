@@ -96,7 +96,7 @@ if ($_GET['newslide'] || $_GET['editslide']) {
             $slideInsert = "INSERT INTO slider (title, content, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $slideInsert);
 
-            header("slider.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+            header("slider.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
             echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
         }
     }

@@ -21,7 +21,7 @@ if (!empty($_POST) && $_POST['referrer'] == $_SESSION['unique_referrer']) {
         empty($message) ||
         !validateEmail($email_address)
     ) {
-        header("Location: $errorPage", true, 301);
+        header("Location: $errorPage", true, 302);
         echo "<script>window.location.href='$errorPage';</script>";
         return false;
     } else {
@@ -31,7 +31,7 @@ if (!empty($_POST) && $_POST['referrer'] == $_SESSION['unique_referrer']) {
         $headers = "From: $email_address\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
         $headers .= "Reply-To: $email_address";
         mail($sendTo, $email_subject, $email_body, $headers);
-        header("Location: $redirectPage", true, 301);
+        header("Location: $redirectPage", true, 302);
         echo "<script>window.location.href='$redirectPage';</script>";
         return true;
     }

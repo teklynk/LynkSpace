@@ -98,7 +98,7 @@ if ($_GET['preview'] > "") {
                     $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
                     mysqli_query($db_conn, $teamInsert);
 
-                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+                    header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
                     echo "<script>window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 
                 }
