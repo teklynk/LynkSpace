@@ -5,15 +5,15 @@ if (!is_writable($_SERVER['DOCUMENT_ROOT'])) {
     echo "<div class='alert alert-danger'><span>" . $_SERVER['DOCUMENT_ROOT'] . " directory is not writable.</span></div>";
 } else {
     if (!file_exists(__DIR__ . "/../config/config.php")) {
-        @copy(__DIR__ . "/../config/config-sample.php", __DIR__ . "/../config/config.php");
+        @copy(__DIR__ . "/../config/config-sample.php", dbConfigLoc);
     }
     // Copy dbconn-sample.php to dbconn.php
     if (!file_exists(__DIR__ . "/../config/dbconn.php")) {
-        @copy(__DIR__ . "/../config/dbconn-sample.php", __DIR__ . "/../config/dbconn.php");
+        @copy(__DIR__ . "/../config/dbconn-sample.php", dbFileLoc);
     }
     // Copy blowfishsalt-sample.php to blowfishsalt.php
     if (!file_exists(__DIR__ . "/../config/blowfishsalt.php")) {
-        @copy(__DIR__ . "/../config/blowfishsalt-sample.php", __DIR__ . "/../config/blowfishsalt.php");
+        @copy(__DIR__ . "/../config/blowfishsalt-sample.php", dbBlowfishLoc);
     }
     // Copy htaccess-sample to .htaccess
     if (!file_exists(__DIR__ . "/../.htaccess")) {

@@ -48,7 +48,7 @@ if ($_GET['preview'] > "") {
 
 //check if using default location
 $sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . ";");
-$rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC) or die(mysqli_error($db_conn));
+$rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
 //set Default toggle depending on which section you are on
 if ($_GET['section'] == $rowSections['section']) {
