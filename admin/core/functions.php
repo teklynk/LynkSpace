@@ -882,36 +882,23 @@ function getUrlContents($getUrl)
 //Check if a new version is available
 function checkForUpdates()
 {
-    global $getVersion;
+    //global $getVersion;
     global $http_status;
 
     //Checks the version.txt on the remote server (github master branch)
-    $updatesURL = updatesVersionFile;
-    $getVersion = getUrlContents(trim($updatesURL));
+    $getVersion = getUrlContents(trim(updatesDownloadServer));
 
-    if (!isset($_SESSION['updates_available'])) {
-        if ($http_status == 200) {
-            if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
-                return "<a href='updates.php?loc_id=" . $_SESSION['loc_id'] . "'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
-            }
+    if ($http_status == 200) {
+        if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
+            echo "<a href='" . updatesServer . "' target='_blank'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
+        } else {
+            echo '';
         }
+    } else {
+        echo '';
     }
 }
 
-//Set update variables
-function getUpdates()
-{
-    checkForUpdates();
-    global $getVersion;
-    global $updatesRemoteFile;
-    global $changeLogFile;
-    global $updatesDestination;
-
-    $changeLogFile = updatesChangeLogFile;
-    $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
-    $updatesDestination = 'upgrade/' . $getVersion . '.zip';
-
-}
 
 //Download file and save to a directory on the server
 function downloadFile($url, $path)
