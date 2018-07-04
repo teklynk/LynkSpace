@@ -1,8 +1,4 @@
 <?php
-//Back-end Admin Panel functions
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
 
 //Output to browser console
 function debugToConsole($data)
@@ -423,11 +419,13 @@ function validateEmail($cleanStr)
 function getRealIpAddr()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $clientip = $_SERVER['HTTP_CLIENT_IP'];
+        $clientip = filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP);
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $clientip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP);
+    } elseif (!empty($_SERVER['REMOTE_ADDR'])){
+        $clientip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     } else {
-        $clientip = $_SERVER['REMOTE_ADDR'];
+        $clientip = "Client IP Not Found";
     }
     return $clientip;
 }
@@ -500,7 +498,6 @@ function getPages($loc)
 {
     global $pagesList;
     global $extraPages; //from config.php
-    global $extraPagesArray; //from config.php
     global $db_conn;
 
     $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
@@ -510,10 +507,6 @@ function getPages($loc)
 
         $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
     }
-
-/*    foreach ($extraPagesArray as $label=>$value){
-        var_dump($label);
-    }*/
 
     $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . $extraPages;
     return $pagesList;
@@ -889,36 +882,23 @@ function getUrlContents($getUrl)
 //Check if a new version is available
 function checkForUpdates()
 {
-    global $getVersion;
+    //global $getVersion;
     global $http_status;
 
     //Checks the version.txt on the remote server (github master branch)
-    $updatesURL = updatesVersionFile;
-    $getVersion = getUrlContents(trim($updatesURL));
+    $getVersion = getUrlContents(trim(updatesDownloadServer));
 
-    if (!isset($_SESSION['updates_available'])) {
-        if ($http_status == 200) {
-            if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
-                return "<a href='updates.php?loc_id=" . $_SESSION['loc_id'] . "'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
-            }
+    if ($http_status == 200) {
+        if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
+            echo "<a href='" . updatesServer . "' target='_blank'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
+        } else {
+            echo '';
         }
+    } else {
+        echo '';
     }
 }
 
-//Set update variables
-function getUpdates()
-{
-    checkForUpdates();
-    global $getVersion;
-    global $updatesRemoteFile;
-    global $changeLogFile;
-    global $updatesDestination;
-
-    $changeLogFile = updatesChangeLogFile;
-    $updatesRemoteFile = updatesDownloadServer . '/' . $getVersion . '.zip';
-    $updatesDestination = 'upgrade/' . $getVersion . '.zip';
-
-}
 
 //Download file and save to a directory on the server
 function downloadFile($url, $path)
@@ -1092,7 +1072,7 @@ function checkIPRange()
         }
 
         if ($IPmatch === false) {
-            header("Location: ../index.php?loc_id=1", true, 301);
+            header("Location: ../index.php?loc_id=1", true, 302);
             die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
@@ -1172,10 +1152,10 @@ function dbQuery($method = NULL, $table = NULL, $fields = NULL, $values = NULL, 
         $queryExecute = $db_conn->query($query);
 
         if ($db_conn->connect_error || $queryExecute == false) {
-            die("Error: " . $db_conn->connect_errorno . " : " . $method . " : " . $query . " : " . $db_conn->connect_error);
+            die("Error: " . $method . " : " . $query . " : " . $db_conn->connect_error);
         }
 
-        return $queryExecute;
+        return $queryExecute . $db_conn->close();
 
     } else {
 
@@ -1209,13 +1189,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
 if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 301);
+    header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
 } elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 } elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
-    header("Location: ?loc_id=1", true, 301);
+    header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }
 

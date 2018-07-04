@@ -1,10 +1,5 @@
 <!-- Search Site Section -->
 <a name="sitesearch" tabindex="-1"></a>
-<?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-?>
 
 <div class="col-xs-12 col-lg-12" id="sitesearch">
     <div class="row">

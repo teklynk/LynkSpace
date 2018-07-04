@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
@@ -120,7 +119,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         unset($_SESSION['loc_list']);
         $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
 
-        header("Location: setup.php?loc_id=1", true, 301);
+        header("Location: setup.php?loc_id=1", true, 302);
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
     }
 }

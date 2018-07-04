@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 define('tinyMCE', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
@@ -72,7 +71,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         $pageInsert = "INSERT INTO pages (title, content, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
-                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
                     }
                 }

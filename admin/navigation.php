@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');
 
@@ -98,7 +97,7 @@ for ($x = 0; $x < $navArrlength; $x++) {
 
 //Redirect to section=top if section is not in querystring
 if ($_GET['section'] == "" && $_GET['loc_id']) {
-    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "", true, 301);
+    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
@@ -250,7 +249,7 @@ if ($_GET['section'] == $navSections[0]) {
             if ($_GET['addcatname'] > "") {
                 $navAddCat = "INSERT INTO category_navigation (cat_name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . safeCleanStr($_GET['section']) . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
                 mysqli_query($db_conn, $navAddCat);
-                header("Location: navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "", true, 301);
+                header("Location: navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "", true, 302);
                 echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
 
             }
@@ -443,7 +442,7 @@ if ($_GET['section'] == $navSections[0]) {
 
                             echo "<tr>
 							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value='" . $navId . "' >
-							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='text' maxlength='3' required></td>
+							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='number' maxlength='3' required></td>
 							<td><input class='form-control' name='nav_name[]' value='" . $navName . "' type='text'></td>
 							<td><input class='form-control' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
                             echo "<td><select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='nav_cat[]'>'";

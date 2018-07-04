@@ -7,10 +7,6 @@ session_start();
 
     <?php
 
-    if (!defined('inc_access')) {
-        die('Direct access not permitted');
-    }
-
     //DB connection string and Global variables
     require_once(__DIR__ . '/../../config/config.php');
     //Admin panel functions
@@ -192,7 +188,7 @@ session_start();
 
             <!-- Updates and Alerts Button-->
             <li class="update-menu">
-                <?php echo $_SESSION['updates_available']; ?>
+                <?php checkForUpdates(); ?>
             </li>
 
             <li class="dropdown user-menu">

@@ -1,5 +1,4 @@
 <?php
-define('inc_access', TRUE);
 
 require_once('includes/header.inc.php');
 
@@ -102,7 +101,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             $servicesInsert = "INSERT INTO services (title, content, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $servicesInsert);
 
-            header("Location: services.php?loc_id=" . $_GET['loc_id'] . "", true, 301);
+            header("Location: services.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
             echo "<script>window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "';</script>";
         }
     }
@@ -339,7 +338,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
                     echo "<tr>
 				<td class='col-xs-1'>
-				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='text' maxlength='3' required>
+				<input class='form-control' name='service_sort[]' value='" . $serviceSort . "' type='number' maxlength='3' required>
 				</td>
 				<td>
 				<input type='hidden' name='service_id[]' value='" . $serviceId . "' >

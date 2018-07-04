@@ -1,8 +1,5 @@
 <!-- Slider Carousel -->
 <?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
 
 echo "<div class='container-fluid slider'>";
 echo "<div class='container bannerwrapper'>";

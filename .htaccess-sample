@@ -21,7 +21,7 @@ php_value log_errors_max_len 0
 # Disable these PHP functions if they are enabled on the server.
 php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
 # Error log path. Set this to use the log folder inside the project. Set write permissions.
-php_value error_log /var/www/html/LynkSpace/logs/php_errors.log
+#php_value error_log /var/www/html/LynkSpace/logs/php_errors.log
 
 DirectoryIndex index.php
 
@@ -153,7 +153,4 @@ RedirectMatch 403 ^/logs/$
 # Prevent html,php files from being loaded inside an iframe.
 <IfModule mod_headers.c>
     Header append X-FRAME-OPTIONS "SAMEORIGIN"
-    <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
-         Header unset X-Frame-Options
-    </FilesMatch>
 </IfModule>

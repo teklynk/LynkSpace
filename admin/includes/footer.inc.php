@@ -1,8 +1,4 @@
-<?php
-if (!defined('inc_access')) {
-    die('Direct access not permitted');
-}
-?>
+
 
     </div>
     <!-- /.container-fluid -->
@@ -33,6 +29,5 @@ if (!defined('inc_access')) {
     </html>
 <?php
 mysqli_close($db_conn);
-$db_conn->close();
 die();
 ?>
