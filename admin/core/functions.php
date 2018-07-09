@@ -203,7 +203,8 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
             $fileSizeLimit = $maxFileSize; //Max file size limit (ex: 2048000)
 
             //Check if file is a image format
-            if ($fileExt == "png" || $fileExt == "jpg" || $fileExt == "gif" || $fileInfo !== false) {
+            $allowedFileTypes = array('png', 'gif', 'jpg');
+            if (in_array($fileExt, $allowedFileTypes) && $fileInfo !== false) {
 
                 //Check if file is less than 2mb
                 if ($fileSize <= $fileSizeLimit) {
@@ -221,13 +222,13 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
                     $search = array('(', ')', ' ', '\'', ':', ';', '@', '!', '?');
                     $replace = array('-', '-', '-', '-', '-', '-', '', '', '');
 
-                    rename($target_file, str_replace($search, $replace, strtolower($target_file)));
-                    rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
+                    @rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+                    @rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
 
                     $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . $fileName . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 } else {
                     //Delete the file if it is too large
-                    unlink($target_file);
+                    @unlink($target_file);
                     $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
                 }
@@ -235,7 +236,7 @@ function uploadFile($postAction, $target, $thumbnail, $maxScale, $reduceScale, $
             } else {
 
                 //Delete the file if it is not an image
-                unlink($target_file);
+                @unlink($target_file);
                 $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
             }
 
