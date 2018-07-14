@@ -893,10 +893,10 @@ function checkForUpdates()
         if ((string)trim($getVersion) > (string)trim(ysmVersion)) {
             echo "<a href='" . updatesServer . "' target='_blank'><button type='button' class='btn btn-xs btn-warning' id='updates_btn'><i class='fa fa-bell'></i> Update Available</button></a>";
         } else {
-            echo '';
+            echo '<span></span>';
         }
     } else {
-        echo '';
+        echo '<span></span>';
     }
 }
 
