@@ -1,7 +1,10 @@
 <?php
 session_start();
-?>
 
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

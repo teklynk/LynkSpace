@@ -1,3 +1,8 @@
+<?php
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+?>
 <!-- Search Locations Section -->
 <a name="search" tabindex="-1"></a>
 <?php

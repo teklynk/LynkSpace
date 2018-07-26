@@ -1,4 +1,8 @@
 <?php
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+
 //Hot Titles Carousel
 getHottitlesTabs($_GET['loc_id']);
 if ($hottitlesCount > 0) {
