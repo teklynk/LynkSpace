@@ -18,7 +18,7 @@ $sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locati
 $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . ";");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 $pageMsg = '';
@@ -87,7 +87,7 @@ if (!empty($_POST['site_title'])) {
     $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
     //Get setup table columns
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE id=" . $_GET['loc_id'] . ";");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
