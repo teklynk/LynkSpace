@@ -35,3 +35,13 @@ mod_rewrite
 mod_headers
 mod_vhost_alias
 ```
+
+Run Composer
+```
+composer install
+```
+NPM (Development Tools)
+YUI Compressor
+```
+npm install
+```
