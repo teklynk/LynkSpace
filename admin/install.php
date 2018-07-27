@@ -1,4 +1,6 @@
 <?php
+define('ALLOW_INC', TRUE);
+
 //Create these files if they do not exist.
 // Copy config-sample.php to config.php
 if (!is_writable($_SERVER['DOCUMENT_ROOT'])) {

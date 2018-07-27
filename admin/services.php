@@ -1,4 +1,5 @@
 <?php
+define('ALLOW_INC', TRUE);
 
 require_once('includes/header.inc.php');
 

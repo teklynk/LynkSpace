@@ -1,6 +1,9 @@
 <?php
-
 session_start();
+
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
 
 //redirect back to contact form or home page
 $redirectPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";

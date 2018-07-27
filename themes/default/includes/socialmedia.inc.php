@@ -1,3 +1,8 @@
+<?php
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+?>
 <!-- Social Media Section -->
 <?php
 

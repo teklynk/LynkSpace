@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -188,7 +192,7 @@ session_start();
 
             <!-- Updates and Alerts Button-->
             <li class="update-menu">
-                <?php echo $_SESSION['updates_available']; ?>
+                <?php checkForUpdates(); ?>
             </li>
 
             <li class="dropdown user-menu">

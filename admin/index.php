@@ -1,4 +1,6 @@
 <?php
+define('ALLOW_INC', TRUE);
+
 define('recaptcha', TRUE);
 
 require_once(__DIR__ . '/includes/header.inc.php');

@@ -1,3 +1,8 @@
+<?php
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+?>
 <!-- Services Section -->
 <a name="services" tabindex="-1"></a>
 <?php

@@ -1,3 +1,8 @@
+<?php
+if (!defined('ALLOW_INC')) {
+	die('Direct access not permitted');
+}
+?>
 <!-- Featured Section -->
 <a name="featured" tabindex="-1"></a>
 <?php
