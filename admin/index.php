@@ -56,7 +56,7 @@ if (!empty($_POST)) {
         }
         // Check if using standard checkbox validation
     } elseif ($reCaptcha_enabled == false) {
-        if ($_POST['not_robot'] == 'e6a52c828d56b46129fbf85c4cd164b3') {
+        if ($_POST['not_robot'] == '814ff90c56a74b5e2bb48cd240331867a95357e1') {
             $sucessfulResponse = true;
         } else {
             $sucessfulResponse = false;
