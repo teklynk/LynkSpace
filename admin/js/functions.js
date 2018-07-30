@@ -770,7 +770,7 @@ $(document).ready(function () {
         $('#not_robot').change(function () {
             if ($('#user_name').val().length && $('#user_email').val().length) {
                 if ($('#not_robot').prop('checked')) {
-                    $('#not_robot').attr('value', 'e6a52c828d56b46129fbf85c4cd164b3');
+                    $('#not_robot').attr('value', '814ff90c56a74b5e2bb48cd240331867a95357e1');
                     $('#sign_in, #run_installer').attr('disabled', false);
                 } else {
                     $('#not_robot').attr('value', '');

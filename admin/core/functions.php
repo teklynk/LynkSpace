@@ -1016,7 +1016,7 @@ function extractZip( $filename, $dest, $ignoreListArr ) {
 				$dir = dirname( $file );
 
 				if ( ! is_dir( $dir ) ) {
-					mkdir( $dir, 0755, true );
+					@mkdir( $dir, 0755, true );
 				}
 
 				// Check if $name is a file or directory
@@ -1024,7 +1024,7 @@ function extractZip( $filename, $dest, $ignoreListArr ) {
 					// $name is a directory
 					// Create the directory
 					if ( ! is_dir( $file ) ) {
-						mkdir( $file, 0755, true );
+						@mkdir( $file, 0755, true );
 					}
 
 				} else {
@@ -1114,7 +1114,7 @@ function dbQuery( $method = null, $table = null, $fields = null, $values = null,
 	$queryExecute = null;
 
 	//Create connection
-	$db_conn = new mysqli( db_servername, db_username, db_password, db_name );
+	global $db_conn;
 
 	if ( isset( $table ) ) {
 		$tableDb = "`" . db_name . "`.`" . $table . "`";
@@ -1160,13 +1160,14 @@ function dbQuery( $method = null, $table = null, $fields = null, $values = null,
 				$queryExecute = null;
 		}
 
-		$queryExecute = $db_conn->query( $query );
+
+		$queryExecute = mysqli_query($db_conn, $query);
 
 		if ( $db_conn->connect_error || $queryExecute == false ) {
 			die( "Error: " . $method . " : " . $query . " : " . $db_conn->connect_error );
 		}
 
-		return $queryExecute . $db_conn->close();
+		return $queryExecute;
 
 	} else {
 
