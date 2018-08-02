@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
-}
-
 if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] == 'index.php' && $_POST['csrf'] == $_SESSION['unique_referrer']) {
 
     require_once(__DIR__ . '/../../config/config.php');
