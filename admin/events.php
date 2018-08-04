@@ -71,12 +71,12 @@ if (!empty($_POST)) {
                 $selDefaults = "";
             }
 
-            if ($rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == '') {
+            if ($rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == '' || $rowEvent['startdate'] == NULL) {
                 $startDate = "";
             } else {
                 $startDate = dateTimeFormat(1, $rowEvent['startdate']);
             }
-            if ($rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == '') {
+            if ($rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == ''  || $rowEvent['enddate'] == NULL) {
                 $endDate = "";
             } else {
                 $endDate = dateTimeFormat(1, $rowEvent['enddate']);
@@ -140,7 +140,7 @@ if (!empty($_POST)) {
                         <label for="event_startdate">Start Date</label>&nbsp;&nbsp;<small>Start alert on.</small>
                         <div class="input-group date">
                             <input type="date" class="form-control" name="event_startdate" id="event_startdate"
-                                   value="<?php echo $startDate; ?>" placeholder="YYYY-MM-DD"
+                                   value="<?php echo $startDate; ?>" placeholder="mm/dd/yyyy"
                                    pattern="<?php echo dateValidationPattern; ?>"/>
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
@@ -153,7 +153,7 @@ if (!empty($_POST)) {
                         <label for="event_enddate">End Date</label>&nbsp;&nbsp;<small>End alert on.</small>
                         <div class="input-group date">
                             <input type="date" class="form-control" name="event_enddate" id="event_enddate"
-                                   value="<?php echo $endDate; ?>" placeholder="YYYY-MM-DD"
+                                   value="<?php echo $endDate; ?>" placeholder="mm/dd/yyyy"
                                    pattern="<?php echo dateValidationPattern; ?>"/>
                             <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
