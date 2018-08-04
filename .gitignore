@@ -12,6 +12,8 @@
 /admin/upgrade/*
 /robots.txt
 /sitemap.xml
+~install.old
+
 
 ## Some common .gitignore configurations
 # Compiled source #
