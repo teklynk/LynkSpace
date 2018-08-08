@@ -21,7 +21,7 @@ php_value log_errors_max_len 0
 # Disable these PHP functions if they are enabled on the server.
 php_value disable_functions exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source
 # Error log path. Set this to use the log folder inside the project. Set write permissions.
-#php_value error_log /var/www/html/LynkSpace/logs/php_errors.log
+php_value error_log /home/rjones/html/businessCMS/logs/php_errors.log
 
 DirectoryIndex index.php
 
@@ -29,15 +29,6 @@ Options +FollowSymLinks
 # Disable directory browsing
 Options All -Indexes
 
-RewriteEngine On
-
-# If your app is in a subfolder:
-#RewriteBase /my_app/
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
 # Everything that is not a PHP file is redirected to index.php
 # If you do not wish to redirect all to index.php, then write different RewriteRules for this reason
 # Everything redirected through Index gateway will make a small hit on performance, but offer better handling and control in PHP
@@ -62,15 +53,34 @@ RedirectMatch 403 ^/import/$
 RedirectMatch 403 ^/backups/$
 RedirectMatch 403 ^/logs/$
 
-# Force SSL (force https://)
-#RewriteEngine On
-#RewriteCond %{HTTPS} off
-#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # RewriteBase /
 
-# Always use www - redirect non-www to www permanently (force www.)
-#RewriteCond %{HTTP_HOST} !^www\.
-#RewriteCond %{HTTPS}s on(s)|
-#RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    # If your app is in a subfolder:
+    #RewriteBase /my_app/
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+
+    # Force SSL (force https://)
+    #RewriteCond %{HTTPS} off
+    #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Always use www - redirect non-www to www permanently (force www.)
+    #RewriteCond %{HTTP_HOST} !^www\.
+    #RewriteCond %{HTTPS}s on(s)|
+    #RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Prevents files starting with dot to be viewed by browser
+    RewriteRule /\.|^\. - [F]
+
+    # Front controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz|map)$ index.php [L]
+</IfModule>
 
 # Compress text, html, javascript, css, xml.
 <IfModule mod_deflate.c>
@@ -153,4 +163,7 @@ RedirectMatch 403 ^/logs/$
 # Prevent html,php files from being loaded inside an iframe.
 <IfModule mod_headers.c>
     Header append X-FRAME-OPTIONS "SAMEORIGIN"
+    <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+         Header unset X-Frame-Options
+    </FilesMatch>
 </IfModule>
