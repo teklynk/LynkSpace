@@ -36,6 +36,12 @@ $serverProtocol = '//';
 //Get server host name
 $serverHostname = $_SERVER['SERVER_NAME'];
 
+//Themes directory path
+define('themes', __DIR__ . '/../themes');
+
+//Themes directory path
+define('uploads', __DIR__ . '/../uploads');
+
 //Get server port number. if not port 80
 if ( $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ) {
 	$serverPort = '';
