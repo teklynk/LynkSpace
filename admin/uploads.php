@@ -5,8 +5,11 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Delete file
+//Delete file - default
 $deleteMsg = "";
+
+//Upload message - default
+$uploadMsg = "";
 
 //Get the file name from the URL
 if ($_GET["share"]) {

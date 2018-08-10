@@ -2,7 +2,11 @@
 //This is the main Config/Setup file for the admin panel and Global variables used throughout the site. Change values as needed.
 //Create a virtual host alias for the directory that the project files are in.
 
+//Contains DB connection
 require_once( 'dbconn.php' );
+
+//Blowfish Salt goes here after the installer runs.
+require_once( 'blowfishsalt.php' );
 
 $rowConfig = '';
 $db_conn   = '';
@@ -31,6 +35,12 @@ $serverProtocol = '//';
 
 //Get server host name
 $serverHostname = $_SERVER['SERVER_NAME'];
+
+//Themes directory path
+define('themes', __DIR__ . '/../themes');
+
+//Themes directory path
+define('uploads', __DIR__ . '/../uploads');
 
 //Get server port number. if not port 80
 if ( $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ) {
@@ -148,6 +158,7 @@ if ( $rowConfig['session_timeout'] == null ) {
 } else {
 	$session_timeout_minutes = $rowConfig['session_timeout'] * 60;
 }
+
 define( 'sessionTimeout', $session_timeout_minutes );
 
 //Slide Carousel Speed
@@ -157,11 +168,9 @@ if ( $rowConfig['carousel_speed'] == null ) {
 } else {
 	$carousel_speed_seconds = $rowConfig['carousel_speed'] * 60;
 }
+
 $carousel_speed_seconds = $rowConfig['carousel_speed'] * 1000;
 define( 'carouselSpeed', $carousel_speed_seconds );
-
-//Blowfish Salt goes here after the installer runs.
-require_once( 'blowfishsalt.php' );
 
 //Version Number
 $versionFile = __DIR__ . 'version.txt';
@@ -169,7 +178,7 @@ $versionFile = str_replace( 'config', '', $versionFile );
 define( 'ysmVersion', file_get_contents( $versionFile ) );
 
 //Updates remote URL requires: http:// or https://
-define( 'updatesServer', "https://github.com/teklynk/LynkSpace/releases" );
+define( 'updatesServer', "https://github.com/teklynk/LynkSpace" );
 define( 'updatesDownloadServer', "https://raw.githubusercontent.com/teklynk/LynkSpace/master/version.txt" );
 
 //Help URLs
