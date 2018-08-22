@@ -50,11 +50,12 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     $thePageId = $_GET['editpage'];
                     $pageLabel = "Edit Page Title";
+                    $pageGuid = safeCleanStr($_GET['guid']);
 
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . ";";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $pageGuid. "';";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -243,7 +244,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 }
 
                                 echo "<tr>
-                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId' title='Edit'>" . $pageTitle . "</a></td>
+                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId&guid=$pageGuid' title='Edit'>" . $pageTitle . "</a></td>
                                 <td class='col-xs-1'>
                                 <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' " . $isActive . ">
                                 </td>
