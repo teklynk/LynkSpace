@@ -50,17 +50,18 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     $thePageId = $_GET['editpage'];
                     $pageLabel = "Edit Page Title";
+                    $pageGuid = safeCleanStr($_GET['guid']);
 
                     //update data on submit
                     if (!empty($_POST['page_title'])) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . ";";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $pageGuid. "';";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
@@ -70,7 +71,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     //insert data on submit
                     if (!empty($page_title)) {
-                        $pageInsert = "INSERT INTO pages (title, content, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid(). "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -143,23 +144,24 @@ $_SESSION['file_referrer'] = 'page.php';
             $deleteConfirm = "";
             $pageMsg = "";
             $delPageId = $_GET['deletepage'];
+            $delPageGuid = safeCleanStr($_GET['guid']);
             $delPageTitle = safeCleanStr(addslashes($_GET['deletetitle']));
             $main_heading = safeCleanStr($_POST['main_heading']);
 
             //delete page
-            if ($_GET['deletepage'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+            if ($delPageId && $delPageTitle && !$_GET['confirm']) {
                 showModalConfirm(
                     "confirm",
                     "Delete Page?",
                     "Are you sure you want to delete: " . $delPageTitle . "?",
-                    "page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+                    "page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes&guid=" . $delPageGuid . "&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deletepage'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+            } elseif ($delPageId && $delPageTitle && $_GET['confirm'] == 'yes' && $delPageGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
 
                 //delete page after clicking Yes
-                $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND loc_id=" . $_GET['loc_id'] . ";";
+                $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND guid='" . $delPageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $pageDelete);
 
                 $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -225,7 +227,7 @@ $_SESSION['file_referrer'] = 'page.php';
                             </thead>
                             <tbody>
                             <?php
-                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC;");
+                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC;");
                             while ($rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC)) {
 
                                 $pageId = $rowPages['id'];
@@ -233,6 +235,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 $pageContent = $rowPages['content'];
                                 $pageKeywords = $rowPages['keywords'];
                                 $pageActive = $rowPages['active'];
+                                $pageGuid = safeCleanStr($rowPages['guid']);
 
                                 if ($rowPages['active'] == 'true') {
                                     $isActive = "CHECKED";
@@ -241,13 +244,13 @@ $_SESSION['file_referrer'] = 'page.php';
                                 }
 
                                 echo "<tr>
-                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId' title='Edit'>" . $pageTitle . "</a></td>
+                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId&guid=$pageGuid' title='Edit'>" . $pageTitle . "</a></td>
                                 <td class='col-xs-1'>
                                 <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' " . $isActive . ">
                                 </td>
                                 <td class='col-xs-2'>
                                 <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . $pageTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . $pageTitle . "&guid=".$pageGuid."'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 

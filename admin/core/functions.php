@@ -31,6 +31,10 @@ function phinxMigration( $phinxCommand, $environment ) {
 	}
 }
 
+function getGuid($prefix= FALSE, $entropy = FALSE) {
+    return sha1(uniqid($prefix, $entropy));
+}
+
 function loginAttempts( $userIp, $maxAttempts, $maxTimeout ) {
 
 	global $db_conn;
@@ -407,18 +411,22 @@ function validateEmail( $cleanStr ) {
 }
 
 //Gets clients real IP address
-function getRealIpAddr() {
-	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-		$clientip = filter_var( $_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP );
-	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-		$clientip = filter_var( $_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP );
-	} elseif ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
-		$clientip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP );
-	} else {
-		$clientip = "Client IP Not Found";
-	}
+function getRealIpAddr()
+{
+    global $clientip;
 
-	return $clientip;
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        $clientip = filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP);
+    } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+        $clientip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $clientip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP);
+    } elseif (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+        $clientip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP);
+    } else {
+        $clientip = "Client IP Not Found";
+    }
+    return $clientip;
 }
 
 //Location list for level 1 admins only
@@ -1161,7 +1169,7 @@ function dbQuery( $method = null, $table = null, $fields = null, $values = null,
 		}
 
 
-		$queryExecute = mysqli_query($db_conn, $query);
+		$queryExecute = mysqli_query( $db_conn, $query );
 
 		if ( $db_conn->connect_error || $queryExecute == false ) {
 			die( "Error: " . $method . " : " . $query . " : " . $db_conn->connect_error );
