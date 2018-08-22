@@ -31,6 +31,10 @@ function phinxMigration( $phinxCommand, $environment ) {
 	}
 }
 
+function getGuid($prefix= FALSE, $entropy = FALSE) {
+    return sha1(uniqid($prefix, $entropy));
+}
+
 function loginAttempts( $userIp, $maxAttempts, $maxTimeout ) {
 
 	global $db_conn;
