@@ -1069,6 +1069,8 @@ CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
+  `guid` text NOT NULL,
+  `keywords` text NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
