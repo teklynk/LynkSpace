@@ -1120,6 +1120,7 @@ CREATE TABLE `services` (
   `image` text NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
+  `guid` text NOT NULL,
   `link` text NOT NULL,
   `active` text NOT NULL,
   `sort` int(11) NOT NULL,
