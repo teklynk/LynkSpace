@@ -48,20 +48,20 @@ $_SESSION['file_referrer'] = 'page.php';
                 // Update existing page
                 if ($_GET['editpage']) {
 
-                    $thePageId = $_GET['editpage'];
+                    $thePageId = safeCleanStr($_GET['editpage']);
                     $pageLabel = "Edit Page Title";
-                    $pageGuid = safeCleanStr($_GET['guid']);
+                    $thePageGuid = safeCleanStr($_GET['guid']);
 
                     //update data on submit
-                    if (!empty($_POST['page_title'])) {
+                    if (!empty(safeCleanStr($_POST['page_title']))) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $pageGuid. "';";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "';";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND loc_id=" . $_GET['loc_id'] . ";");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
@@ -70,7 +70,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $pageLabel = "New Page Title";
 
                     //insert data on submit
-                    if (!empty($page_title)) {
+                    if (!empty(safeCleanStr($page_title))) {
                         $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid(). "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
@@ -250,7 +250,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 </td>
                                 <td class='col-xs-2'>
                                 <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . $pageTitle . "&guid=".$pageGuid."'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr( addslashes( $pageTitle ) ) . "&guid=".$pageGuid."'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 

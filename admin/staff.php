@@ -76,11 +76,12 @@ if ($_GET['preview'] > "") {
             if ($_GET['editteam']) {
                 $theteamId = $_GET['editteam'];
                 $teamLabel = "Edit Staff Title";
+                $theteamGuid = safeCleanStr($_GET['guid']);
 
                 //update data on submit
                 if (!empty($_POST['team_name'])) {
 
-                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . ";";
+                    $teamUpdate = "UPDATE team SET title='" . safeCleanStr($_POST['team_title']) . "', content='" . sqlEscapeStr($_POST['team_content']) . "', name='" . safeCleanStr($_POST['team_name']) . "', image='" . $_POST['team_image'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theteamId' AND loc_id=" . $_GET['loc_id'] . " AND guid='" . $theteamGuid . "';";
                     mysqli_query($db_conn, $teamUpdate);
 
                     $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='staff.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The team member " . safeCleanStr($_POST['team_name']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -96,7 +97,7 @@ if ($_GET['preview'] > "") {
 
                 //insert data on submit
                 if (!empty($_POST['team_title'])) {
-                    $teamInsert = "INSERT INTO team (title, content, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
+                    $teamInsert = "INSERT INTO team (title, content, guid, image, name, sort, active, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['team_title']) . "', '" . safeCleanStr($_POST['team_content']) . "', '" . getGuid() . "', '" . $_POST['team_image'] . "', '" . safeCleanStr($_POST['team_name']) . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
                     mysqli_query($db_conn, $teamInsert);
 
                     header("Location: staff.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -173,6 +174,7 @@ if ($_GET['preview'] > "") {
             $teamMsg = "";
             $delteamId = $_GET['deleteteam'];
             $delteamTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+            $delteamGuid = safeCleanStr($_GET['guid']);
 
             //delete team
             if ($_GET['deleteteam'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -181,13 +183,13 @@ if ($_GET['preview'] > "") {
                     "confirm",
                     "Delete Staff?",
                     "Are you sure you want to delete: " . $delteamTitle . "?",
-                    "staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+                    "staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes&guid=" . $delteamGuid . "&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+            } elseif ($_GET['deleteteam'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delteamGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
                 //delete team after clicking Yes
-                $teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND loc_id=" . $_GET['loc_id'] . ";";
+                $teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND guid='" . $delteamGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $teamDelete);
 
                 $deleteMsg = "<div class='alert alert-success'>" . $delteamTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -249,7 +251,7 @@ if ($_GET['preview'] > "") {
 
             <button type="button" class="btn btn-primary"
                     onclick="window.location='?newteam=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-                        class='fa fa-fw fa-plus'></i> Add a New Staff Member
+                    class='fa fa-fw fa-plus'></i> Add a New Staff Member
             </button>
             <h2></h2>
             <div>
@@ -282,14 +284,15 @@ if ($_GET['preview'] > "") {
                         <tbody>
                         <?php
                         $teamCount = "";
-                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC;");
+                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, guid, name, sort, active, loc_id FROM team WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, title ASC;");
                         while ($rowTeam = mysqli_fetch_array($sqlTeam, MYSQLI_ASSOC)) {
                             $teamId = $rowTeam['id'];
                             $teamTitle = $rowTeam['title'];
-                            $teamName = $rowTeam['name'];
+                            $teamName = safeCleanStr(addslashes($rowTeam['name']));
                             $teamContent = $rowTeam['content'];
                             $teamActive = $rowTeam['active'];
                             $teamSort = $rowTeam['sort'];
+                            $teamGuid = $rowTeam['guid'];
                             $teamCount++;
 
                             if ($rowTeam['active'] == 'true') {
@@ -303,15 +306,15 @@ if ($_GET['preview'] > "") {
                         <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='number' maxlength='3' required>
                         </td>
                         <td>
-                        <a href='staff.php?loc_id=" . $_GET['loc_id'] . "&editteam=$teamId' title='Edit'>" . $teamName . "</a>
+                        <a href='staff.php?loc_id=" . $_GET['loc_id'] . "&editteam=" . $teamId . "&guid=" . $teamGuid . "' title='Edit'>" . $teamName . "</a>
                         <input type='hidden' name='team_id[]' value='" . $teamId . "' >
                         </td>
 						<td class='col-xs-1'>
 						<input data-toggle='toggle' title='Staff Active' class='checkbox team_status_checkbox' id='" . $teamId . "' type='checkbox' " . $isActive . ">
 						</td>
 						<td class='col-xs-2'>
-						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($teamName) . "', 'staff.php?loc_id=" . $_GET['loc_id'] . "&preview=$teamId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=$teamId&deletetitle=" . safeCleanStr(addslashes($teamName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . $teamName . "', 'staff.php?loc_id=" . $_GET['loc_id'] . "&preview=" . $teamId . "')\"><i class='fa fa-fw fa-eye'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='staff.php?loc_id=" . $_GET['loc_id'] . "&deleteteam=" . $teamId . "&deletetitle=" . $teamName . "&guid=" . $teamGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
                         }
