@@ -158,7 +158,13 @@ if ( multiBranch == 'true' ) {
 }
 
 //Extra Pages
-$extraPages = "<optgroup label='Additional Site Pages'><option value='contact.php?loc_id=" . $_GET['loc_id'] . "'>Contact</option><option value='databases.php?loc_id=" . $_GET['loc_id'] . "'>Databases</option><option value='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</option><option value='staff.php?loc_id=" . $_GET['loc_id'] . "'>Staff</option><option value='sitesearch.php?loc_id=" . $_GET['loc_id'] . "'>Site Search</option></optgroup>";
+$extraPagesArray = array(
+    "Contact" => "contact.php?loc_id=".$_GET['loc_id']."",
+    "Databases" => "databases.php?loc_id=" . $_GET['loc_id'] . "",
+    "Services" => "services.php?loc_id=" . $_GET['loc_id'] . "",
+    "Staff" => "staff.php?loc_id=" . $_GET['loc_id'] . "",
+    "Site Search" => "sitesearch.php?loc_id=" . $_GET['loc_id'] . ""
+);
 
 //Session timeout
 //3600 = 60mins
