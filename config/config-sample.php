@@ -39,6 +39,12 @@ $serverHostname = $_SERVER['SERVER_NAME'];
 //Themes directory path
 define('themes', __DIR__ . '/../themes');
 
+//Core directory path
+define('core', __DIR__ . '/../core');
+
+//Core directory path
+define('config', __DIR__ . '/../config');
+
 //Themes directory path
 define('uploads', __DIR__ . '/../uploads');
 
