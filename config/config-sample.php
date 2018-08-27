@@ -36,13 +36,16 @@ $serverProtocol = '//';
 //Get server host name
 $serverHostname = $_SERVER['SERVER_NAME'];
 
+//Admin directory path
+define('admin', __DIR__ . '/../admin');
+
 //Themes directory path
 define('themes', __DIR__ . '/../themes');
 
 //Core directory path
 define('core', __DIR__ . '/../core');
 
-//Core directory path
+//Config directory path
 define('config', __DIR__ . '/../config');
 
 //Themes directory path
