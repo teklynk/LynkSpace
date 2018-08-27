@@ -1200,6 +1200,7 @@ CREATE TABLE `slider` (
   `title` text NOT NULL,
   `link` text NOT NULL,
   `content` text NOT NULL,
+  `guid` text NOT NULL,
   `startdate` date NOT NULL,
   `enddate` date NOT NULL,
   `loc_type` text NOT NULL,
