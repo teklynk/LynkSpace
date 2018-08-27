@@ -118,6 +118,7 @@ CREATE TABLE `customers` (
   `name` text NOT NULL,
   `link` text NOT NULL,
   `content` text NOT NULL,
+  `guid` text NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `section` text NOT NULL,
   `featured` text NOT NULL,
