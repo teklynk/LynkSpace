@@ -1051,6 +1051,7 @@ CREATE TABLE `navigation` (
   `sort` int(11) NOT NULL DEFAULT '0',
   `name` text NOT NULL,
   `url` text NOT NULL,
+  `guid` text NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `section` text NOT NULL,
   `active` text NOT NULL,
