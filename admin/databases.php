@@ -145,11 +145,11 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                                 <button class="btn btn-primary" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Add a new Database Page"
                                         onclick="window.location.href='databases.php?section=<?php echo $maxSections + 1; ?>&addsection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
-                                            class="fa fa-plus"></i></button>
+                                        class="fa fa-plus"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Delete this Database Page"
                                         onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
-                                            class="fa fa-trash"></i></button>
+                                        class="fa fa-trash"></i></button>
                             </span>
 
                                 </div>
@@ -176,6 +176,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     //Update existing customer
     if ($_GET['editcustomer']) {
         $thecustomerId = $_GET['editcustomer'];
+        $thecustomerGuid = safeCleanStr($_GET['guid']);
         $customerLabel = "Edit Database Name";
 
         //update data on submit
@@ -187,7 +188,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . $customer_name . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
         }
 
-        $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . ";");
+        $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, guid, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND guid='" . $thecustomerGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
         $rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC);
 
         //Create new customer
@@ -197,7 +198,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 
         //insert data on submit
         if (!empty($customer_name)) {
-            $customerInsert = "INSERT INTO customers (icon, image, name, link, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
+            $customerInsert = "INSERT INTO customers (icon, image, name, link, guid, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . getGuid() . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $customerInsert);
 
             header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -318,7 +319,8 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     $deleteMsg = "";
     $deleteConfirm = "";
     $customerMsg = "";
-    $delcustomerId = $_GET['deletecustomer'];
+    $delcustomerId = safeCleanStr($_GET['deletecustomer']);
+    $delcustomerGuid = safeCleanStr($_GET['guid']);
     $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
     $deleteSectionName = safeCleanStr(addslashes($_GET['section']));
     $customer_heading = safeCleanStr($_POST['customer_heading']);
@@ -331,11 +333,11 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             "confirm",
             "Delete Database Page?",
             "Are you sure you want to delete: " . safeCleanStr(addslashes($getCustSection)) . "?",
-            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletesection=true&deletename=" . $getCustSection . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletesection=true&deletename=" . $getCustSection . "&guid=" . $delcustomerGuid . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
 
-    } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+    } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $delcustomerGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete section after clicking Yes
         $sectionDelete = "DELETE FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $sectionDelete);
@@ -353,13 +355,13 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             "confirm",
             "Delete Database?",
             "Are you sure you want to delete: " . $delcustomerName . "?",
-            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletecustomer=" . $delcustomerId . "&deletename=" . $delcustomerName . "&confirm=yes",
+            "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletecustomer=" . $delcustomerId . "&guid=" . $delcustomerGuid . "&deletename=" . $delcustomerName . "&confirm=yes",
             false
         );
 
-    } elseif ($_GET['deletecustomer'] && $_GET['deletename'] && $_GET['loc_id'] && $_GET['confirm'] == 'yes') {
+    } elseif ($delcustomerId && $delcustomerName && $_GET['loc_id'] && $delcustomerGuid && $_GET['confirm'] == 'yes') {
         //delete customer after clicking Yes
-        $customerDelete = "DELETE FROM customers WHERE id=" . $delcustomerId . " AND loc_id=" . $_GET['loc_id'] . ";";
+        $customerDelete = "DELETE FROM customers WHERE id=" . $delcustomerId . " AND guid='" . $delcustomerGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $customerDelete);
 
         echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&deletename=" . $delcustomerName . "&databasedeleted=true';</script>";
@@ -622,10 +624,11 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                 <tbody>
                 <?php
                 $custCount = "";
-                $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC;");
+                $sqlCustomer = mysqli_query($db_conn, "SELECT id, image, icon, name, link, content, guid, catid, section, featured, author_name, sort, datetime, active, loc_id FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY catid, sort, name ASC;");
                 while ($rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC)) {
                     $customerId = $rowCustomer['id'];
-                    $customerName = safeCleanStr($rowCustomer['name']);
+                    $customerGuid = safeCleanStr($rowCustomer['guid']);
+                    $customerName = safeCleanStr(addslashes($rowCustomer['name']));
                     $customerCat = $rowCustomer['catid'];
                     $customerContent = $rowCustomer['content'];
                     $customerLink = $rowCustomer['link'];
@@ -652,7 +655,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                         </td>
 						<td>
 						<input type='hidden' name='cust_id[]' value='" . $customerId . "' >
-						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=$customerId' title='Edit'>" . $customerName . "</a>
+						<a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&editcustomer=" . $customerId . "&guid=" . $customerGuid . "' title='Edit'>" . $customerName . "</a>
 						</td>
 						<td>";
                     echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='cust_cat[]'>'";
@@ -684,7 +687,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
 						</td>
 						<td class='col-xs-2'>
 						<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . $customerName . "', 'databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&preview=$customerId')\"><i class='fa fa-fw fa-eye'></i></button>
-						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=$customerId&deletename=" . safeCleanStr(addslashes($customerName)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "&deletecustomer=" . $customerId . "&guid=" . $customerGuid . "&deletename=" . $customerName . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
                 }

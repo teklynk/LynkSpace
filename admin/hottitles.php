@@ -43,8 +43,9 @@ if ($deleteMsg != "") {
     echo $deleteMsg;
 }
 
-$delhottitlesId = $_GET['deletehottitles'];
+$delhottitlesId = safeCleanStr($_GET['deletehottitles']);
 $delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+$delhottitlesGuid = safeCleanStr($_GET['guid']);
 
 //delete hottitle
 if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
@@ -53,14 +54,14 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
         "confirm",
         "Delete Hot Title?",
         "Are you sure you want to delete: " . $delhottitlesTitle . "?",
-        "hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+        "hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&guid=" . $delhottitlesGuid . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
         false
     );
 
 
-} elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+} elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delhottitlesGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
     //delete hot title after clicking Yes
-    $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND loc_id=" . $_GET['loc_id'] . ";";
+    $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND guid=" . $delhottitlesGuid . " AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $hottitlesDelete);
 
     $deleteMsg = "<div class='alert alert-success'>" . $delhottitlesTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -83,7 +84,7 @@ if (!empty($_POST['save_main'])) {
         $location_type = safeCleanStr($_POST['location_type'][$i]);
         $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . ";";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
     if ($errorMsg == "") {
@@ -106,7 +107,7 @@ if ($_POST['add_hottitles']) {
         } else {
             $hottitles_sort = 0;
         }
-        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
+        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, guid, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . getGuid() . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
@@ -212,7 +213,7 @@ if ($_GET['loc_id'] != 1) {
 
                             <input type="hidden" name="add_hottitles" value="true"/>
                             <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i
-                                        class='fa fa-fw fa-save'></i> Save Changes
+                                    class='fa fa-fw fa-save'></i> Save Changes
                             </button>
                         </div>
                     </div>
@@ -256,12 +257,13 @@ if ($_GET['loc_id'] != 1) {
                         <tbody>
                         <?php
                         $hottitlesCount = "";
-                        $sqlHottitles = mysqli_query($db_conn, "SELECT id, sort, title, url, loc_type, active, loc_id FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
+                        $sqlHottitles = mysqli_query($db_conn, "SELECT id, sort, title, url, guid, loc_type, active, loc_id FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
                         while ($rowHottitles = mysqli_fetch_array($sqlHottitles, MYSQLI_ASSOC)) {
                             $hottitlesId = $rowHottitles['id'];
                             $hottitlesSort = $rowHottitles['sort'];
-                            $hottitlesTitle = $rowHottitles['title'];
+                            $hottitlesTitle = safeCleanStr(addslashes($rowHottitles['title']));
                             $hottitlesUrl = $rowHottitles['url'];
+                            $hottitlesGuid = safeCleanStr($rowHottitles['guid']);
                             $hottitlesLocType = $rowHottitles['loc_type'];
                             $hottitlesActive = $rowHottitles['active'];
                             $hottitlesCount++;
@@ -300,7 +302,7 @@ if ($_GET['loc_id'] != 1) {
                             </td>";
 
                             echo "<td class='col-xs-2'>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=$hottitlesId&deletetitle=" . safeCleanStr(addslashes($hottitlesTitle)) . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $hottitlesId . "&guid=" . $hottitlesGuid . "&deletetitle=" . $hottitlesTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                         } ?>
@@ -313,7 +315,7 @@ if ($_GET['loc_id'] != 1) {
                 <input type="hidden" name="hottitles_count" value="<?php echo $hottitlesCount; ?>"/>
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="hottitlesMain_submit" class="btn btn-primary"><i
-                            class="fa fa-fw fa-save"></i> Save Changes
+                        class="fa fa-fw fa-save"></i> Save Changes
                 </button>
                 <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
             </form>
