@@ -55,7 +55,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     //update data on submit
                     if (!empty(safeCleanStr($_POST['page_title']))) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "';";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                         mysqli_query($db_conn, $pageUpdate);
 
                         $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -71,7 +71,7 @@ $_SESSION['file_referrer'] = 'page.php';
 
                     //insert data on submit
                     if (!empty(safeCleanStr($page_title))) {
-                        $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid(). "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -129,7 +129,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                         <button type="submit" name="page_submit" class="btn btn-primary"><i
-                                    class='fa fa-fw fa-save'></i> Save Changes
+                                class='fa fa-fw fa-save'></i> Save Changes
                         </button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
 
@@ -197,7 +197,7 @@ $_SESSION['file_referrer'] = 'page.php';
                 </script>
                 <button type="button" class="btn btn-primary"
                         onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
-                            class='fa fa-fw fa-plus'></i> Add a New Page
+                        class='fa fa-fw fa-plus'></i> Add a New Page
                 </button>
                 <h2></h2>
                 <div>
@@ -250,7 +250,7 @@ $_SESSION['file_referrer'] = 'page.php';
                                 </td>
                                 <td class='col-xs-2'>
                                 <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr( addslashes( $pageTitle ) ) . "&guid=".$pageGuid."'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr(addslashes($pageTitle)) . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 
@@ -262,7 +262,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
                         <button type="submit" name="pageNew_submit" class="btn btn-primary"><i
-                                    class='fa fa-fw fa-save'></i> Save Changes
+                                class='fa fa-fw fa-save'></i> Save Changes
                         </button>
                         <button type="reset" class="btn btn-default"><i class='fa fa-fw fa-reply'></i> Reset</button>
                     </form>

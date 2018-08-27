@@ -84,7 +84,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         //update data on submit
         if (!empty($_POST['service_title'])) {
 
-            $servicesUpdate = "UPDATE services SET title='" . safeCleanStr($_POST['service_title']) . "', content='" . sqlEscapeStr($_POST['service_content']) . "', link='" . safeCleanStr($_POST['service_link']) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id='$theserviceId' AND loc_id=" . $_GET['loc_id'] . " AND guid='" . $theServiceGuid . "';";
+            $servicesUpdate = "UPDATE services SET title='" . safeCleanStr($_POST['service_title']) . "', content='" . sqlEscapeStr($_POST['service_content']) . "', link='" . safeCleanStr($_POST['service_link']) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . $_GET['loc_id'] . " AND guid='" . $theServiceGuid . "';";
             mysqli_query($db_conn, $servicesUpdate);
 
             $serviceMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The service " . safeCleanStr($_POST['service_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
