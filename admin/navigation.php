@@ -19,7 +19,6 @@ if (!empty($_POST)) {
         $exist_cat_main = (int)$_POST['exist_cat_main'];
         $nav_newurl = (string)safeCleanStr($_POST['nav_newurl']);
 
-
         //Create new category if newcat is true
         if (!empty($nav_newcat) && $exist_cat == "") {
             $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
@@ -49,7 +48,7 @@ if (!empty($_POST)) {
 
         }
 
-        $navNew = "INSERT INTO navigation (name, url, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
+        $navNew = "INSERT INTO navigation (name, url, guid, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', '" . getGuid() . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
         mysqli_query($db_conn, $navNew);
 
     }
@@ -181,6 +180,7 @@ if ($_GET['section'] == $navSections[0]) {
             $deleteConfirm = "";
             $pageMsg = "";
             $delNavId = $_GET['deletenav'];
+            $delNavGuid = safeCleanStr($_GET['guid']);
             $delNavTitle = safeCleanStr(addslashes($_GET['deletename']));
 
             //Delete nav link
@@ -189,14 +189,14 @@ if ($_GET['section'] == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Link?",
                     "Are you sure you want to delete: " . $delNavTitle . "?",
-                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&guid=" . $delNavGuid . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
-            } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+            } elseif ($_GET['deletenav'] && $_GET['deletename'] && $_GET['confirm'] == 'yes' && $delNavGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
 
                 //delete nav after clicking Yes
-                $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND " . $_GET['loc_id'] . ";";
+                $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $navDelete);
 
                 $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delNavTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -269,10 +269,11 @@ if ($_GET['section'] == $navSections[0]) {
                             <label>Use Defaults</label>
                             <div class="checkbox">
                                 <label for="navigation_defaults_<?php echo $navSubSection ?>">
-                                    <input class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle"
-                                           id="<?php echo $_GET['loc_id'] ?>"
-                                           name="navigation_defaults_<?php echo $navSubSection ?>"
-                                           type="checkbox" <?php if ($_GET['loc_id']) {
+                                    <input
+                                        class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle"
+                                        id="<?php echo $_GET['loc_id'] ?>"
+                                        name="navigation_defaults_<?php echo $navSubSection ?>"
+                                        type="checkbox" <?php if ($_GET['loc_id']) {
                                         echo $selDefaults;
                                     } ?> data-toggle="toggle">
                                 </label>
@@ -418,10 +419,11 @@ if ($_GET['section'] == $navSections[0]) {
                         <?php
                         $navCount = "";
 
-                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, sort, active, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid;");
+                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='$getNavSection' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid;");
                         while ($rowNav = mysqli_fetch_array($sqlNav, MYSQLI_ASSOC)) {
                             $navId = $rowNav['id'];
-                            $navName = $rowNav['name'];
+                            $navGuid = safeCleanStr($rowNav['guid']);
+                            $navName = safeCleanStr(addslashes($rowNav['name']));
                             $navURL = $rowNav['url'];
                             $navSort = $rowNav['sort'];
                             $navActive = $rowNav['active'];
@@ -468,7 +470,7 @@ if ($_GET['section'] == $navSections[0]) {
                             echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id='$navId' type='checkbox' " . $isActive . "></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Active' class='checkbox nav_active_checkbox' id='$navId' type='checkbox' " . $isActiveLink . "></td>
-							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "&deletenav=$navId&deletename=" . safeCleanStr(addslashes($navName)) . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "&deletenav=" . $navId . "&guid=" . $navGuid . "&deletename=" . $navName . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
                         }
 
