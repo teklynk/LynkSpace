@@ -5,20 +5,20 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'navigation.php';
 
-$getNavSection = safeCleanStr($_GET['section']);
+//Used throughout the code
+$getNavSection = safeCleanStr(addslashes($_GET['section']));
 
 //update table on submit
 if (!empty($_POST)) {
 
-
-    $nav_newname = (string)safeCleanStr($_POST['nav_newname']);
+    $nav_newname = safeCleanStr($_POST['nav_newname']);
 
     if (!empty($nav_newname)) {
 
-        $nav_newcat = (int)safeCleanStr($_POST['nav_newcat']);
-        $exist_cat = (int)$_POST['exist_cat'];
-        $exist_cat_main = (int)$_POST['exist_cat_main'];
-        $nav_newurl = (string)safeCleanStr($_POST['nav_newurl']);
+        $nav_newcat = safeCleanStr($_POST['nav_newcat']);
+        $exist_cat = safeCleanStr($_POST['exist_cat']);
+        $exist_cat_main = safeCleanStr($_POST['exist_cat_main']);
+        $nav_newurl = safeCleanStr($_POST['nav_newurl']);
 
         //Create new category if newcat is true
         if (!empty($nav_newcat) && $exist_cat == "") {
@@ -54,15 +54,15 @@ if (!empty($_POST)) {
 
     }
 
-    $nav_count = (int)$_POST['nav_count'];
+    $nav_count = safeCleanStr($_POST['nav_count']);
 
     for ($i = 0; $i < $nav_count; $i++) {
 
-        $nav_sort = (int)$_POST['nav_sort'][$i];
-        $nav_name = (string)safeCleanStr($_POST['nav_name'][$i]);
-        $nav_url = (string)safeCleanStr($_POST['nav_url'][$i]);
-        $nav_cat = (int)$_POST['nav_cat'][$i];
-        $nav_id = (int)$_POST['nav_id'][$i];
+        $nav_sort = safeCleanStr($_POST['nav_sort'][$i]);
+        $nav_name = safeCleanStr($_POST['nav_name'][$i]);
+        $nav_url = safeCleanStr($_POST['nav_url'][$i]);
+        $nav_cat = safeCleanStr($_POST['nav_cat'][$i]);
+        $nav_id = safeCleanStr($_POST['nav_id'][$i]);
 
         if ($nav_cat == "") {
             $nav_cat = 0; //None
@@ -215,7 +215,7 @@ if ($getNavSection == $navSections[0]) {
                 $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $navDelete);
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delNavTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delNavTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
             }
 
@@ -239,7 +239,7 @@ if ($getNavSection == $navSections[0]) {
                 $navCatDelete = "DELETE FROM category_navigation WHERE id=" . $delCatId . " AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $navCatDelete);
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . safeCleanStr($delCatTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 echo $deleteMsg;
             }
 
@@ -343,8 +343,8 @@ if ($getNavSection == $navSections[0]) {
                                         while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat, MYSQLI_ASSOC)) {
 
                                             if ($rowExistNavCat['id'] != 0) {
-                                                $navExistCatId = $rowExistNavCat['id'];
-                                                $navExistCatName = $rowExistNavCat['cat_name'];
+                                                $navExistCatId = safeCleanStr($rowExistNavCat['id']);
+                                                $navExistCatName = safeCleanStr(addslashes($rowExistNavCat['cat_name']));
 
                                                 echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
                                             }
@@ -425,17 +425,17 @@ if ($getNavSection == $navSections[0]) {
                         <?php
                         $navCount = "";
 
-                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section=" . $getNavSection . " AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid;");
+                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid;");
                         while ($rowNav = mysqli_fetch_array($sqlNav, MYSQLI_ASSOC)) {
-                            $navId = $rowNav['id'];
+                            $navId = safeCleanStr($rowNav['id']);
                             $navGuid = safeCleanStr($rowNav['guid']);
                             $navName = safeCleanStr(addslashes($rowNav['name']));
-                            $navURL = $rowNav['url'];
-                            $navSort = $rowNav['sort'];
-                            $navActive = $rowNav['active'];
-                            $navWin = $rowNav['win'];
-                            $navCat = $rowNav['catid'];
-                            $navSection = $rowNav['section'];
+                            $navURL = safeCleanStr($rowNav['url']);
+                            $navSort = safeCleanStr($rowNav['sort']);
+                            $navActive = safeCleanStr($rowNav['active']);
+                            $navWin = safeCleanStr($rowNav['win']);
+                            $navCat = safeCleanStr($rowNav['catid']);
+                            $navSection = safeCleanStr($rowNav['section']);
                             $navCount++;
 
                             if ($navWin == 'true') {
