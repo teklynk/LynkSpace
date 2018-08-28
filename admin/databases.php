@@ -534,8 +534,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cust_newcat" id="cust_newcat"
                                        maxlength="255" data-toggle="tooltip"
-                                       title="To display the category with the database, add the category first before adding the database."
-                                       required>
+                                       title="To display the category with the database, add the category first before adding the database.">
                                 <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus'
                                                                                 style="color:#337ab7; cursor:pointer;"
                                                                                 data-toggle="tooltip" title="Add"

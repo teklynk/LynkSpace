@@ -304,8 +304,7 @@ if ($_GET['section'] == $navSections[0]) {
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="nav_newcat" id="nav_newcat"
                                                maxlength="255" data-toggle="tooltip"
-                                               title="Create a new category first, and then create the associated links."
-                                               required>
+                                               title="Create a new category first, and then create the associated links.">
                                         <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus'
                                                                                         style="color:#337ab7; cursor:pointer;"
                                                                                         data-toggle="tooltip"
