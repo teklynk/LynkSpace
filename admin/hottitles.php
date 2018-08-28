@@ -75,6 +75,7 @@ if (!empty($_POST['save_main'])) {
     $hottitles_count = safeCleanStr($_POST['hottitles_count']);
 
     $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+    mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $hottitles_count; $i++) {
         $errorMsg = "";
@@ -189,7 +190,7 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-12">
                         <?php
 
-                        if ($adminIsCheck == "true") {
+                        if ($adminIsCheck == "false") {
                             ?>
                             <div class="form-group">
                                 <label for="location_type">Location Group</label>
