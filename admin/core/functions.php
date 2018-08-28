@@ -551,9 +551,9 @@ function getPages($loc)
 function getDirContents($src)
 {
 
-    if ($handle = opendir($src)) {
+    global $fileIgnoreArray;
 
-        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
+    if ($handle = opendir($src)) {
 
         echo "<ul>";
 
@@ -583,6 +583,7 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
     global $db_conn;
     global $sharedFilesList;
     global $fileList;
+    global $fileIgnoreArray;
 
     $sharedFilesListArr[] = null;
     $allfiles[] = null;
@@ -604,8 +605,6 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
     $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
 
     if ($handle = opendir($imageDir)) {
-
-        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
 
         while (false !== ($file = readdir($handle))) {
 
@@ -648,6 +647,7 @@ function getSharedFilesJsonList($loc)
     global $sharedFilesListArr;
     global $fileListJson;
     global $fileListJsonSharedImages;
+    global $fileIgnoreArray;
     global $db_conn;
 
     $fileListJson[] = null;
@@ -681,8 +681,6 @@ function getSharedFilesJsonList($loc)
 
     //Build list of images in uploads folder
     if ($handle = opendir(image_dir)) {
-
-        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
 
         while (false !== ($imgfile = readdir($handle))) {
 

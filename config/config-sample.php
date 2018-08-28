@@ -161,6 +161,9 @@ $extraPagesArray = array(
     "Site Search" => "sitesearch.php?loc_id=" . $_GET['loc_id'] . ""
 );
 
+//Ignore these files inside directories
+$fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
+
 //Session timeout
 //3600 = 60mins
 if ($rowConfig['session_timeout'] == null) {
