@@ -553,19 +553,13 @@ function getDirContents($src)
 
     if ($handle = opendir($src)) {
 
+        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
+
         echo "<ul>";
 
         while (false !== ($file = readdir($handle))) {
-            if ('.' === $file) {
-                continue;
-            }
-            if ('..' === $file) {
-                continue;
-            }
-            if ($file === "Thumbs.db") {
-                continue;
-            }
-            if ($file === ".DS_Store") {
+
+            if (in_array($file, $fileIgnoreArray)){
                 continue;
             }
 
@@ -610,22 +604,15 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
     $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
 
     if ($handle = opendir($imageDir)) {
+
+        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
+
         while (false !== ($file = readdir($handle))) {
-            if ('.' === $file) {
+
+            if (in_array($file, $fileIgnoreArray)) {
                 continue;
             }
-            if ('..' === $file) {
-                continue;
-            }
-            if ($file === "Thumbs.db") {
-                continue;
-            }
-            if ($file === ".DS_Store") {
-                continue;
-            }
-            if ($file === "index.html") {
-                continue;
-            }
+
             $allfiles[] = strtolower($file);
         }
         closedir($handle);
@@ -694,22 +681,15 @@ function getSharedFilesJsonList($loc)
 
     //Build list of images in uploads folder
     if ($handle = opendir(image_dir)) {
+
+        $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.htm');
+
         while (false !== ($imgfile = readdir($handle))) {
-            if ('.' === $imgfile) {
+
+            if (in_array($imgfile, $fileIgnoreArray)){
                 continue;
             }
-            if ('..' === $imgfile) {
-                continue;
-            }
-            if ($imgfile === "Thumbs.db") {
-                continue;
-            }
-            if ($imgfile === ".DS_Store") {
-                continue;
-            }
-            if ($imgfile === "index.html") {
-                continue;
-            }
+
             $allimgfiles[] = strtolower($imgfile);
         }
         closedir($handle);
