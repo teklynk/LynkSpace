@@ -450,7 +450,7 @@ function getRealIpAddr()
 }
 
 //Location list for level 1 admins only
-function getLocList($active, $showActiveOnly)
+function getLocList($active = NULL, $showActiveOnly)
 {
     global $locList;
     global $db_conn;
@@ -494,7 +494,7 @@ function getLocList($active, $showActiveOnly)
     return $locList;
 }
 
-function getLocGroups($active)
+function getLocGroups($active = NULL)
 {
     global $locTypes;
     global $locMenuStr;
