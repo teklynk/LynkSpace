@@ -10,6 +10,7 @@ $getNavSection = safeCleanStr($_GET['section']);
 //update table on submit
 if (!empty($_POST)) {
 
+
     $nav_newname = (string)safeCleanStr($_POST['nav_newname']);
 
     if (!empty($nav_newname)) {
