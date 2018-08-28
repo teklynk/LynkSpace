@@ -799,8 +799,10 @@ $(document).ready(function () {
         setTimeout(function () {
             if ($('#addCatDiv').hasClass('in')) {
                 $('#addCat_button').html("<i class='fa fa-fw fa-times'></i> Close");
+                $('#nav_newcat').attr('required', true);
             } else {
                 $('#addCat_button').html("<i class='fa fa-fw fa-plus'></i> Add / Edit a Category");
+                $('#nav_newcat').removeAttr('required', false);
             }
         }, 500);
     });
