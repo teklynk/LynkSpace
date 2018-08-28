@@ -375,15 +375,15 @@ if ($newSlide || $editSlide) {
     $slideCount = "";
     $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
     while ($rowSlides = mysqli_fetch_array($sqlslides, MYSQLI_ASSOC)) {
-        $slideId = $rowSlides['id'];
+        $slideId = safeCleanStr($rowSlides['id']);
         $slideGuid = safeCleanStr($rowSlides['guid']);
         $slideTitle = safeCleanStr(addslashes($rowSlides['title']));
-        $slideLocType = $rowSlides['loc_type'];
-        $slideContent = $rowSlides['content'];
-        $slideSort = $rowSlides['sort'];
+        $slideLocType = safeCleanStr($rowSlides['loc_type']);
+        $slideContent = sqlEscapeStr($rowSlides['content']);
+        $slideSort = safeCleanStr($rowSlides['sort']);
         $slideStartDate = dateTimeFormat(1, $rowSlides['startdate']);
         $slideEndDate = dateTimeFormat(1, $rowSlides['enddate']);
-        $slideActive = $rowSlides['active'];
+        $slideActive = safeCleanStr($rowSlides['active']);
         $slideCount++;
 
         if ($rowSlides['active'] == 'true') {
