@@ -1217,11 +1217,11 @@ function dbQuery($method = null, $table = null, $fields = null, $values = null, 
 //CSRF token validation
 function csrf_validate($token)
 {
-    //global $token;
     if (!empty($_POST)) {
         if (safeCleanStr($_POST['csrf']) != $token) {
+            //Clear session.
             session_unset();
-            //log errors
+            //TODO: log errors
             die('Direct access not permitted');
         }
     }
