@@ -349,9 +349,9 @@ function getThemesDropdownList($theme_selected)
         $themesThumbnail = '../themes/' . $themes . '/screenshot_thumb.png';
 
         if ($themes == $theme_selected) {
-            $isThemeSelected = "SELECTED";
+            $isThemeSelected = ' SELECTED ';
         } else {
-            $isThemeSelected = "";
+            $isThemeSelected = '';
         }
 
         echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords($themes) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords($themes) . "</option>";
@@ -364,13 +364,13 @@ function getIconDropdownList($icon_selected)
 {
     global $db_conn;
 
-    $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC");
+    $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC;");
     while ($rowIcon = mysqli_fetch_array($sqlServicesIcon, MYSQLI_ASSOC)) {
         $icon = $rowIcon['icon'];
         if ($icon === $icon_selected) {
-            $iconCheck = "SELECTED";
+            $iconCheck = ' SELECTED ';
         } else {
-            $iconCheck = "";
+            $iconCheck = '';
         }
         echo "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-" . $icon . "' value='" . $icon . "' " . $iconCheck . ">" . $icon . "</option>";
     }
@@ -476,14 +476,14 @@ function getLocList($active = NULL, $showActiveOnly)
 
             //Check if item is in the array
             if (in_array($rowLocationSearch['id'], $activeList)) {
-                $isSectionSelected = ' SELECTED';
+                $isSectionSelected = ' SELECTED ';
             } else {
                 $isSectionSelected = '';
             }
         } else {
             //Check if action value is a single item
             if (safeCleanStr($rowLocationSearch['id']) == safeCleanStr($active)) {
-                $isSectionSelected = ' SELECTED';
+                $isSectionSelected = ' SELECTED ';
             } else {
                 $isSectionSelected = '';
             }
@@ -504,7 +504,7 @@ function getLocGroups($active = NULL)
 
     for ($x = 0; $x < $locArrlength; $x++) {
         if (safeCleanStr($locTypes[$x]) == safeCleanStr($active)) {
-            $isSectionSelected = ' SELECTED';
+            $isSectionSelected = ' SELECTED ';
         } else {
             $isSectionSelected = '';
         }
@@ -566,9 +566,6 @@ function getDirContents($src)
                 continue;
             }
             if ($file === ".DS_Store") {
-                continue;
-            }
-            if ($file === "index.html") {
                 continue;
             }
 
@@ -645,7 +642,7 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
             $location = '../uploads/' . $loc . '/';
         }
         if ($location . $file === $image_selected) {
-            $imageCheck = 'SELECTED';
+            $imageCheck = ' SELECTED ';
         } else {
             $imageCheck = '';
         }
@@ -743,7 +740,7 @@ function getPageJsonList($loc)
     global $db_conn;
 
     //get and build page list for TinyMCE
-    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title");
+    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title;");
     while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
         $getPageId = $rowGetPages['id'];
         $getPageTitle = $rowGetPages['title'];
