@@ -41,8 +41,11 @@ checkDependencies();
 
 if (!empty($_POST)) {
 
-    // Make sure password is okay and cleaned
+    // Make sure post values is okay and cleaned
     $postPassword = sqlEscapeStr($_POST['password']);
+	$userName = sqlEscapeStr($_POST['username']);
+	$userEmail = validateEmail($_POST['email']);
+	$userPassword = sha1(blowfishSalt . $postPassword);
 
     // Check and record failed login attempts
     loginAttempts($user_ip, 4, 30);
@@ -72,7 +75,10 @@ if (!empty($_POST)) {
 
     if ($sucessfulResponse == true && isset($_SESSION['unique_referrer']) && $_SESSION['file_referrer'] == 'index.php') {
 
-        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . sqlEscapeStr($_POST['username']) . "' AND password=SHA1('" . blowfishSalt . $postPassword . "') AND email='" . validateEmail($_POST['email']) . "' LIMIT 1;");
+
+
+
+        $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . $userName . "' AND password='" . $userPassword . "' AND email='" . $userEmail . "' LIMIT 1;");
         $rowLogin = mysqli_fetch_array($userLogin, MYSQLI_ASSOC);
 
         if (is_array($rowLogin)) {

@@ -107,7 +107,7 @@ if (!defined('ALLOW_INC')) {
                     tinymce.init({
                         selector: 'textarea.tinymce',
                         height: 500,
-                        themes: "modern",
+                        themes: 'modern',
                         plugins: 'save link image media lists table paste code',
                         convert_urls: false,
                         paste_data_images: false,
