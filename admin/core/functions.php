@@ -709,7 +709,8 @@ function getSharedFilesJsonList($loc)
     $allImagesStr = trim($allImagesStr, ',');
 
     //Return json string
-    echo $allImagesStr;
+	return $allImagesStr;
+
 }
 
 function getPageJsonList($loc)
@@ -730,7 +731,8 @@ function getPageJsonList($loc)
     $linkListJson = ltrim($linkListJson, ',');
     $linkListJson = rtrim($linkListJson, ',');
 
-    echo $linkListJson;
+	return $linkListJson;
+
 }
 
 // Modal and Dialog Confirm
@@ -937,6 +939,8 @@ function checkForUpdates()
     } else {
         echo '<span></span>';
     }
+
+    return true;
 }
 
 
