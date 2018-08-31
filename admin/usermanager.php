@@ -16,26 +16,27 @@ $deleteMsg = "";
 $usersCount = 0;
 
 //delete user
-$deluserId = $_GET['deleteuser'];
+$deluserId = safeCleanStr($_GET['deleteuser']);
 $deluserTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+$deluserGuid = safeCleanStr($_GET['guid']);
 
-if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+if ($deluserId && $deluserTitle && !$_GET['confirm']) {
     showModalConfirm(
         "confirm",
         "Delete User?",
         "Are you sure you want to delete: " . $deluserTitle . "?",
-        "usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&confirm=yes",
+        "usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&guid=" . $deluserGuid . "&confirm=yes",
         false
     );
 
-} elseif ($_GET['deleteuser'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes') {
+} elseif ($deluserId && $deluserTitle && $deluserGuid && $_GET['confirm'] == 'yes') {
     //delete user after clicking Yes
     dbQuery(
         'delete',
         'users',
         NULL,
         NULL,
-        'id=' . $deluserId,
+        'id=' . $deluserId .' AND guid="' . $deluserGuid . '" ',
         NULL
     );
 
@@ -45,7 +46,7 @@ if ($_GET['deleteuser'] && $_GET['deletetitle'] && !$_GET['confirm']) {
 //Add User
 //insert data on submit
 $userName = sqlEscapeStr($_POST['user_name']);
-$userEmail = $_POST['user_email'];
+$userEmail = safeCleanStr($_POST['user_email']);
 $userPassword = sha1(blowfishSalt . safeCleanStr($_POST['user_password']));
 $userPasswordConfirm = $_POST['user_password_confirm'];
 $userLevel = safeCleanStr($_POST['user_level']);
@@ -60,7 +61,7 @@ if ($_POST['save_main']) {
             'users',
             'username, email',
             NULL,
-            'username="' . $userName . '" AND email="' . validateEmail($userEmail) . '" ',
+            'username="' . $userName . '" AND email="' . $userEmail . '" ',
             NULL
         );
 
@@ -73,8 +74,8 @@ if ($_POST['save_main']) {
             dbQuery(
                 'insert',
                 'users',
-                'username, email, password, password_reset, password_reset_date, level, clientip, datetime, loc_id',
-                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . $userIp . '", "' . date("Y-m-d h:i:s") . '", "' . $userLocation . '" ',
+                'username, email, password, password_reset, password_reset_date, level, guid, clientip, datetime, loc_id',
+                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . getGuid() . '", "' . $userIp . '", "' . date("Y-m-d h:i:s") . '", "' . $userLocation . '" ',
                 NULL,
                 NULL
             );
@@ -216,7 +217,7 @@ if ($deleteMsg != "") {
 
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i
-                                            class='fa fa-fw fa-save'></i> Save Changes
+                                        class='fa fa-fw fa-save'></i> Save Changes
                                 </button>
                             </div>
                         </div>
@@ -251,7 +252,7 @@ if ($deleteMsg != "") {
                     $sqlUsers = dbQuery(
                         'select',
                         'users',
-                        'id, username, email, clientip, level, datetime, loc_id',
+                        'id, username, email, clientip, level, guid, datetime, loc_id',
                         NULL,
                         NULL,
                         'level, email, username ASC'
@@ -266,6 +267,7 @@ if ($deleteMsg != "") {
                         $usersLevel = $rowUsers['level'];
                         $usersDateTime = $rowUsers['datetime'];
                         $usersLocID = $rowUsers['loc_id'];
+                        $usersGuid = $rowUsers['guid'];
                         $usersCount++;
 
                         //Prevent someone from accidentally deleting self.
@@ -305,7 +307,7 @@ if ($deleteMsg != "") {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=$usersID&deletetitle=" . $usersName . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $usersID . "&deletetitle=" . $usersName . "&guid=" . $usersGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                     }
