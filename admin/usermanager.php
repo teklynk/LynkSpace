@@ -246,6 +246,7 @@ if ($deleteMsg != "") {
                     </tr>
                     </thead>
                     <tbody>
+
                     <?php
                     //Get user info, exclude super admin user
 

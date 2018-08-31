@@ -12,6 +12,7 @@ class AddGuidColumnUsers extends AbstractMigration
             ->save();
     }
 
+
     public function down()
     {
         $users = $this->table('users');
