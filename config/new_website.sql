@@ -1,12 +1,5 @@
--- Generation Time: Jul 27, 2017 at 05:07 PM
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 -- --------------------------------------------------------
 
@@ -54,24 +47,24 @@ INSERT INTO `category_navigation` (`id`, `cat_name`, `nav_section`, `nav_loc_id`
 
 CREATE TABLE `config` (
   `id` int(11) NOT NULL,
-  `customer_id` text COLLATE utf8_unicode_ci NOT NULL,
-  `theme` text COLLATE utf8_unicode_ci NOT NULL,
-  `iprange` text COLLATE utf8_unicode_ci NOT NULL,
-  `multibranch` text COLLATE utf8_unicode_ci NOT NULL,
-  `loc_types` text COLLATE utf8_unicode_ci NOT NULL,
-  `homepageurl` text COLLATE utf8_unicode_ci NOT NULL,
-  `setuppacurl` text COLLATE utf8_unicode_ci NOT NULL,
-  `searchlabel_ls2pac` text COLLATE utf8_unicode_ci NOT NULL,
-  `searchlabel_ls2kids` text COLLATE utf8_unicode_ci NOT NULL,
-  `searchplaceholder_ls2pac` text COLLATE utf8_unicode_ci NOT NULL,
-  `searchplaceholder_ls2kids` text COLLATE utf8_unicode_ci NOT NULL,
-  `searchform` text COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` text NOT NULL,
+  `theme` text NOT NULL,
+  `iprange` text NOT NULL,
+  `multibranch` text NOT NULL,
+  `loc_types` text NOT NULL,
+  `homepageurl` text NOT NULL,
+  `setuppacurl` text NOT NULL,
+  `searchlabel_ls2pac` text NOT NULL,
+  `searchlabel_ls2kids` text NOT NULL,
+  `searchplaceholder_ls2pac` text NOT NULL,
+  `searchplaceholder_ls2kids` text NOT NULL,
+  `searchform` text NOT NULL,
   `session_timeout` int(11) NOT NULL,
-  `carousel_speed` text COLLATE utf8_unicode_ci NOT NULL,
-  `analytics` text COLLATE utf8_unicode_ci NOT NULL,
+  `carousel_speed` text NOT NULL,
+  `analytics` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `author_name` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `author_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `config`
@@ -187,15 +180,15 @@ CREATE TABLE `generalinfo` (
 
 CREATE TABLE `hottitles` (
   `id` int(11) NOT NULL,
-  `title` text COLLATE utf8_unicode_ci NOT NULL,
-  `url` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` text NOT NULL,
+  `url` text NOT NULL,
   `guid` text NOT NULL,
-  `loc_type` text COLLATE utf8_unicode_ci NOT NULL,
+  `loc_type` text NOT NULL,
   `sort` int(11) NOT NULL,
-  `active` text COLLATE utf8_unicode_ci NOT NULL,
+  `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `hottitles`
@@ -1015,11 +1008,11 @@ INSERT INTO `icons_list` (`id`, `icon`) VALUES
 
 CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
-  `name` text COLLATE utf8_unicode_ci NOT NULL,
-  `type` text COLLATE utf8_unicode_ci NOT NULL,
+  `name` text NOT NULL,
+  `type` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `active` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `active` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `locations`
@@ -1102,14 +1095,14 @@ CREATE TABLE `phinxlog` (
 
 CREATE TABLE `sections_customers` (
   `id` int(11) NOT NULL,
-  `heading` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `section` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `use_defaults` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `author_name` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `heading` mediumtext NOT NULL,
+  `content` mediumtext NOT NULL,
+  `section` mediumtext NOT NULL,
+  `use_defaults` mediumtext NOT NULL,
+  `author_name` mediumtext NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1680,7 +1673,3 @@ ALTER TABLE `theme_options`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
