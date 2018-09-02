@@ -20,7 +20,7 @@ CREATE TABLE `category_customers` (
   `section` text NOT NULL,
   `cust_loc_id` int(11) NOT NULL,
   `sort` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -35,7 +35,7 @@ CREATE TABLE `category_navigation` (
   `cat_name` text NOT NULL,
   `nav_section` text NOT NULL,
   `nav_loc_id` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -100,7 +100,7 @@ CREATE TABLE `contactus` (
   `phone` text NOT NULL,
   `hours` text NOT NULL,
   `use_defaults` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -124,7 +124,7 @@ CREATE TABLE `customers` (
   `featured` text NOT NULL,
   `active` text NOT NULL,
   `sort` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -158,7 +158,7 @@ CREATE TABLE `featured` (
   `introtext` text NOT NULL,
   `content` text NOT NULL,
   `use_defaults` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -174,7 +174,7 @@ CREATE TABLE `generalinfo` (
   `heading` text NOT NULL,
   `content` text NOT NULL,
   `use_defaults` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -193,7 +193,7 @@ CREATE TABLE `hottitles` (
   `loc_type` text COLLATE utf8_unicode_ci NOT NULL,
   `sort` int(11) NOT NULL,
   `active` text COLLATE utf8_unicode_ci NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1017,7 +1017,7 @@ CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
   `name` text COLLATE utf8_unicode_ci NOT NULL,
   `type` text COLLATE utf8_unicode_ci NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `active` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1038,7 +1038,7 @@ CREATE TABLE `login_attempts` (
   `id` int(11) NOT NULL,
   `attempts` int(11) NOT NULL,
   `ip` text CHARACTER SET utf8 NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1058,7 +1058,7 @@ CREATE TABLE `navigation` (
   `active` text NOT NULL,
   `win` text NOT NULL,
   `loc_id` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1107,7 +1107,7 @@ CREATE TABLE `sections_customers` (
   `section` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `use_defaults` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `author_name` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1127,7 +1127,7 @@ CREATE TABLE `services` (
   `link` text NOT NULL,
   `active` text NOT NULL,
   `sort` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1165,7 +1165,7 @@ CREATE TABLE `setup` (
   `hottitles_use_defaults` text NOT NULL,
   `logo_use_defaults` text NOT NULL,
   `theme_use_defaults` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1209,7 +1209,7 @@ CREATE TABLE `slider` (
   `loc_type` text NOT NULL,
   `active` text NOT NULL,
   `sort` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1249,7 +1249,7 @@ CREATE TABLE `team` (
   `name` text NOT NULL,
   `active` text NOT NULL,
   `sort` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1269,7 +1269,7 @@ CREATE TABLE `users` (
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
   `guid` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
