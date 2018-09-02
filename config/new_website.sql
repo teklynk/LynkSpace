@@ -1030,7 +1030,7 @@ INSERT INTO `locations` (`id`, `name`, `type`, `datetime`, `active`) VALUES
 CREATE TABLE `login_attempts` (
   `id` int(11) NOT NULL,
   `attempts` int(11) NOT NULL,
-  `ip` text CHARACTER SET utf8 NOT NULL,
+  `ip` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
