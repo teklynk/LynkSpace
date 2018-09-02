@@ -189,6 +189,7 @@ CREATE TABLE `hottitles` (
   `id` int(11) NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `url` text COLLATE utf8_unicode_ci NOT NULL,
+  `guid` text NOT NULL,
   `loc_type` text COLLATE utf8_unicode_ci NOT NULL,
   `sort` int(11) NOT NULL,
   `active` text COLLATE utf8_unicode_ci NOT NULL,
@@ -1267,6 +1268,7 @@ CREATE TABLE `users` (
   `password_reset_date` date NOT NULL,
   `email` text NOT NULL,
   `level` int(11) NOT NULL,
+  `guid` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `clientip` text NOT NULL,
   `loc_id` int(11) NOT NULL
