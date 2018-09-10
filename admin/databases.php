@@ -5,20 +5,21 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'databases.php';
 
-$getCustSection = $_GET['section'];
+$getCustSection = isset($_GET['section']) ? safeCleanStr($_GET['section']) : false;
+$getCustPreview = isset($_GET['preview']) ? safeCleanStr($_GET['preview']) : false;
 
 $customerMsg = '';
 
 //Redirect to section=1 if section is not in querystring
-if ($_GET['section'] == "" && $_GET['loc_id']) {
+if ($getCustSection == "" && $_GET['loc_id']) {
     header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
 //Page preview
-if ($_GET['preview'] > "") {
-    $pagePreviewId = $_GET['preview'];
-    $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content FROM customers WHERE id='$pagePreviewId';");
+if ($getCustPreview > "") {
+    $pagePreviewId = $getCustPreview;
+    $sqlcustomerPreview = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content FROM customers WHERE id=" . $pagePreviewId . ";");
     $rowCustomerPreview = mysqli_fetch_array($sqlcustomerPreview, MYSQLI_ASSOC);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -52,7 +53,7 @@ $sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use
 $rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
 //set Default toggle depending on which section you are on
-if ($_GET['section'] == $rowSections['section']) {
+if ($getCustSection == $rowSections['section']) {
     //use default view
     if ($rowSections['use_defaults'] == 'true') {
         $selDefaults = "CHECKED";
@@ -69,7 +70,7 @@ $custMenuStr = "<option value='1'>1</option>";
 
 while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     $sectionCount++;
-    if ($rowSections['section'] == $_GET['section']) {
+    if ($rowSections['section'] == $getCustSection) {
         $isSectionSelected = "SELECTED";
     } else {
         $isSectionSelected = "";
@@ -114,12 +115,12 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                         <h1 class="page-header">
                             <?php
                             if ($_GET['newcustomer'] == 'true' || $_GET['addsection'] == 'true') {
-                                echo "Databases (" . $_GET['section'] . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                                echo "Databases (" . $getCustSection . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                             } elseif ($_GET['editcustomer']) {
-                                echo "Databases (" . $_GET['section'] . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                                echo "Databases (" . $getCustSection . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                             } else {
-                                echo "Databases (" . $_GET['section'] . ")&nbsp;";
-                                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Databases Page' class='btn btn-info' onclick=\"showMyModal('databases.php?section=" . $_GET['section'] . "&loc_id=" . $_GET['loc_id'] . "', '../databases.php?section=" . $_GET['section'] . "&loc_id=" . $_GET['loc_id'] . "#databases')\"><i class='fa fa-eye'></i></button>";
+                                echo "Databases (" . $getCustSection . ")&nbsp;";
+                                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Databases Page' class='btn btn-info' onclick=\"showMyModal('databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "', '../databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "#databases')\"><i class='fa fa-eye'></i></button>";
                             }
                             ?>
                         </h1>
@@ -148,7 +149,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                                         class="fa fa-plus"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Delete this Database Page"
-                                        onclick="window.location.href='databases.php?section=<?php echo $_GET['section']; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
+                                        onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&deletesection=true&loc_id=<?php echo $_GET['loc_id']; ?>'"><i
                                         class="fa fa-trash"></i></button>
                             </span>
 
@@ -164,7 +165,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     <div class="col-lg-12">
 <?php
 
-if ($_GET['newcustomer'] || $_GET['editcustomer']) {
+if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
     $customer_name = safeCleanStr($_POST['customer_name']);
     $customer_icon_select = safeCleanStr($_POST['customer_icon_select']);
@@ -174,7 +175,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     $customer_content = sqlEscapeStr($_POST['customer_content']);
 
     //Update existing customer
-    if ($_GET['editcustomer']) {
+    if (isset($_GET['editcustomer'])) {
         $thecustomerId = $_GET['editcustomer'];
         $thecustomerGuid = safeCleanStr($_GET['guid']);
         $customerLabel = "Edit Database Name";
@@ -192,7 +193,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
         $rowCustomer = mysqli_fetch_array($sqlCustomer, MYSQLI_ASSOC);
 
         //Create new customer
-    } elseif ($_GET['newcustomer']) {
+    } elseif (isset($_GET['newcustomer'])) {
 
         $customerLabel = "New Database Name";
 
@@ -322,13 +323,13 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
     $delcustomerId = safeCleanStr($_GET['deletecustomer']);
     $delcustomerGuid = safeCleanStr($_GET['guid']);
     $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
-    $deleteSectionName = safeCleanStr(addslashes($_GET['section']));
+    $deleteSectionName = safeCleanStr(addslashes($deleteSectionName));
     $customer_heading = safeCleanStr($_POST['customer_heading']);
     $main_content = sqlEscapeStr($_POST['main_content']);
     $cust_count = safeCleanStr($_POST['cust_count']);
 
     //Delete Section and all databases in the section
-    if ($_GET['deletesection'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
+    if ($deleteSectionName && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && !$_GET['confirm']) {
         showModalConfirm(
             "confirm",
             "Delete Database Page?",
@@ -337,7 +338,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
             false
         );
 
-    } elseif ($_GET['deletename'] && $_GET['section'] && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $delcustomerGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
+    } elseif ($_GET['deletename'] && $getCustSection && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $delcustomerGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete section after clicking Yes
         $sectionDelete = "DELETE FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $sectionDelete);
@@ -382,7 +383,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
         $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";");
         $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
-        if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $_GET['section']) {
+        if ($rowSection['loc_id'] == $_GET['loc_id'] && $rowSection['section'] == $getCustSection) {
             //Do update
             $sectionsUpdate = "UPDATE sections_customers SET heading='" . $customer_heading . "', content='" . $main_content . "', section='" . $getCustSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $sectionsUpdate);
@@ -534,8 +535,7 @@ if ($_GET['newcustomer'] || $_GET['editcustomer']) {
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cust_newcat" id="cust_newcat"
                                        maxlength="255" data-toggle="tooltip"
-                                       title="To display the category with the database, add the category first before adding the database."
-                                       required>
+                                       title="To display the category with the database, add the category first before adding the database.">
                                 <span class="input-group-addon" id="add_cat"><i class='fa fa-fw fa-plus'
                                                                                 style="color:#337ab7; cursor:pointer;"
                                                                                 data-toggle="tooltip" title="Add"
@@ -717,7 +717,7 @@ echo "</div>
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $_GET['section']; ?>';
+                    window.location.href = 'databases.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getCustSection; ?>';
                 }, 100);
             });
 

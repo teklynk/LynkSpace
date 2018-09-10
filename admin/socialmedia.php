@@ -11,16 +11,15 @@ $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 //update table on submit
 if (!empty($_POST)) {
 
-    $social_heading = safeCleanStr($_POST['social_heading']);
+    $social_heading = safeCleanStr(addslashes($_POST['social_heading']));
     $social_defaults = safeCleanStr($_POST['social_defaults']);
-    $social_facebook = trim($_POST['social_facebook']);
-    $social_youtube = trim($_POST['social_youtube']);
-    $social_twitter = trim($_POST['social_twitter']);
-    $social_google = trim($_POST['social_google']);
-    $social_pinterest = trim($_POST['social_pinterest']);
-    $social_instagram = trim($_POST['social_instagram']);
-    $social_tumblr = trim($_POST['social_tumblr']);
-
+    $social_facebook = safeCleanStr($_POST['social_facebook']);
+    $social_youtube = safeCleanStr($_POST['social_youtube']);
+    $social_twitter = safeCleanStr($_POST['social_twitter']);
+    $social_google = safeCleanStr($_POST['social_google']);
+    $social_pinterest = safeCleanStr($_POST['social_pinterest']);
+    $social_instagram = safeCleanStr($_POST['social_instagram']);
+    $social_tumblr = safeCleanStr($_POST['social_tumblr']);
 
     if (!empty($social_heading)) {
 

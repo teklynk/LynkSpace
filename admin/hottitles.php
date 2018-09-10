@@ -5,8 +5,8 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'hottitles.php';
 
-$pageMsg = "";
-$deleteMsg = "";
+$pageMsg = '';
+$deleteMsg = '';
 
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
@@ -26,7 +26,7 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 </div>
 <?php
 
-if ($_GET['update'] == 'true') {
+if (safeCleanStr($_GET['update']) == 'true') {
     $pageMsg = "<div class='alert alert-success'>The hot titles has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 
     if ($errorMsg != "") {
@@ -39,16 +39,17 @@ if ($_GET['update'] == 'true') {
     $pageMsg = '';
 }
 
-if ($deleteMsg != "") {
+if ($deleteMsg != '') {
     echo $deleteMsg;
 }
 
 $delhottitlesId = safeCleanStr($_GET['deletehottitles']);
 $delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 $delhottitlesGuid = safeCleanStr($_GET['guid']);
+$delhottitlesToken = safeCleanStr($_GET['token']);
 
 //delete hottitle
-if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
+if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
 
     showModalConfirm(
         "confirm",
@@ -59,7 +60,7 @@ if ($_GET['deletehottitles'] && $_GET['deletetitle'] && !$_GET['confirm']) {
     );
 
 
-} elseif ($_GET['deletehottitles'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delhottitlesGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
+} elseif ($delhottitlesId && $delhottitlesTitle && $_GET['confirm'] == 'yes' && $delhottitlesGuid && $delhottitlesToken == $_SESSION['unique_referrer']) {
     //delete hot title after clicking Yes
     $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND guid=" . $delhottitlesGuid . " AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $hottitlesDelete);
@@ -97,7 +98,7 @@ if (!empty($_POST['save_main'])) {
 if ($_POST['add_hottitles']) {
 
     $hottitles_title = safeCleanStr($_POST['hottitles_title']);
-    $hottitles_url = validateUrl($_POST['hottitles_url']);
+    $hottitles_url = validateUrl(safeCleanStr($_POST['hottitles_url']));
     $location_type = safeCleanStr($_POST['location_type']);
 
     $errorMsg = "";
@@ -125,9 +126,9 @@ $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //use default location
 if ($rowSetup['hottitles_use_defaults'] == 'true') {
-    $selDefaults = "CHECKED";
+    $selDefaults = ' CHECKED ';
 } else {
-    $selDefaults = "";
+    $selDefaults = '';
 }
 
 if ($_GET['loc_id'] != 1) {
@@ -175,14 +176,14 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-10">
                         <div class="form-group required">
                             <label for="hottitles_title">Title</label>
-                            <input class="form-control" type="text" name="hottitles_title" maxlength="255"
+                            <input class="form-control" type="text" name="hottitles_title" id="hottitles_title" maxlength="255"
                                    placeholder="Title" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group required">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="url" name="hottitles_url" maxlength="255"
+                            <input class="form-control" type="url" name="hottitles_url" id="hottitles_url" maxlength="255"
                                    pattern="<?php echo urlValidationPattern; ?>"
                                    placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
@@ -232,7 +233,7 @@ if ($_GET['loc_id'] != 1) {
             <form name="hottitlesForm" class="dirtyForm" method="post" action="">
                 <div class="form-group required">
                     <label>Heading</label>
-                    <input type="text" class="form-control count-text" name="main_heading" maxlength="255"
+                    <input type="text" class="form-control count-text" name="main_heading" id="main_heading"  maxlength="255"
                            value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus
                            required>
                 </div>
@@ -263,7 +264,7 @@ if ($_GET['loc_id'] != 1) {
                             $hottitlesId = $rowHottitles['id'];
                             $hottitlesSort = $rowHottitles['sort'];
                             $hottitlesTitle = safeCleanStr(addslashes($rowHottitles['title']));
-                            $hottitlesUrl = $rowHottitles['url'];
+                            $hottitlesUrl = validateUrl(safeCleanStr($rowHottitles['url']));
                             $hottitlesGuid = safeCleanStr($rowHottitles['guid']);
                             $hottitlesLocType = $rowHottitles['loc_type'];
                             $hottitlesActive = $rowHottitles['active'];

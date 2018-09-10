@@ -7,18 +7,21 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'page.php';
 
+$getNewpage = safeCleanStr($_GET['newpage']);
+$getEditpage = safeCleanStr($_GET['editpage']);
+
 ?>
     <div class="row">
         <div class="col-lg-12">
             <?php
-            if ($_GET['newpage'] == 'true') {
+            if ($getNewpage == 'true') {
                 echo "<ol class='breadcrumb'>
                 <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
                 <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
                 <li class='active'>New Page</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
-            } elseif ($_GET['editpage']) {
+            } elseif ($getEditpage) {
                 echo "<ol class='breadcrumb'>
                 <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
                 <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
@@ -39,21 +42,21 @@ $_SESSION['file_referrer'] = 'page.php';
         <div class="col-lg-12">
             <?php
 
-            if ($_GET['newpage'] || $_GET['editpage']) {
+            if ($getNewpage || $getEditpage) {
 
                 $page_title = safeCleanStr($_POST['page_title']);
                 $page_content = sqlEscapeStr($_POST['page_content']);
                 $page_keywords = sqlEscapeStr($_POST['page_keywords']);
 
                 // Update existing page
-                if ($_GET['editpage']) {
+                if ($getEditpage) {
 
-                    $thePageId = safeCleanStr($_GET['editpage']);
+                    $thePageId = safeCleanStr($getEditpage);
                     $pageLabel = "Edit Page Title";
                     $thePageGuid = safeCleanStr($_GET['guid']);
 
                     //update data on submit
-                    if (!empty(safeCleanStr($_POST['page_title']))) {
+                    if (!empty($page_title)) {
 
                         $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                         mysqli_query($db_conn, $pageUpdate);
@@ -65,7 +68,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
-                } elseif ($_GET['newpage']) {
+                } elseif ($getNewpage) {
 
                     $pageLabel = "New Page Title";
 
@@ -92,7 +95,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         <div class="form-group required">
                             <label><?php echo $pageLabel; ?></label>
                             <input type="text" class="form-control count-text" name="page_title" maxlength="255"
-                                   value="<?php if ($_GET['editpage']) {
+                                   value="<?php if ($getEditpage) {
                                        echo $rowPages['title'];
                                    } ?>" placeholder="Page Title" autofocus required>
                         </div>
@@ -100,7 +103,7 @@ $_SESSION['file_referrer'] = 'page.php';
                         <div class="form-group">
                             <label>Page Keywords</label>
                             <input type="text" class="form-control count-text" name="page_keywords" maxlength="999"
-                                   value="<?php if ($_GET['editpage']) {
+                                   value="<?php if ($getEditpage) {
                                        echo $rowPages['keywords'];
                                    } ?>" placeholder="tech, coding, tutorials, books">
                         </div>
@@ -115,13 +118,13 @@ $_SESSION['file_referrer'] = 'page.php';
                         <div class="form-group">
                             <label>Text / HTML</label>
                             <textarea class="form-control tinymce" rows="20" name="page_content"
-                                      id="page_content"><?php if ($_GET['editpage']) {
+                                      id="page_content"><?php if ($getEditpage) {
                                     echo $rowPages['content'];
                                 } ?></textarea>
                         </div>
 
                         <div class="form-group">
-                            <span><small><?php if ($_GET['editpage']) {
+                            <span><small><?php if ($getEditpage) {
                                         echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowPages['datetime'])) . " By: " . $rowPages['author_name'];
                                     } ?></small></span>
                         </div>
@@ -143,10 +146,11 @@ $_SESSION['file_referrer'] = 'page.php';
             $deleteMsg = "";
             $deleteConfirm = "";
             $pageMsg = "";
-            $delPageId = $_GET['deletepage'];
+            $delPageId = safeCleanStr($_GET['deletepage']);
             $delPageGuid = safeCleanStr($_GET['guid']);
+            $delPageToken = safeCleanStr($_GET['token']);
             $delPageTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-            $main_heading = safeCleanStr($_POST['main_heading']);
+            $main_heading = safeCleanStr(addslashes($_POST['main_heading']));
 
             //delete page
             if ($delPageId && $delPageTitle && !$_GET['confirm']) {
@@ -158,7 +162,7 @@ $_SESSION['file_referrer'] = 'page.php';
                     false
                 );
 
-            } elseif ($delPageId && $delPageTitle && $_GET['confirm'] == 'yes' && $delPageGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
+            } elseif ($delPageId && $delPageTitle && $_GET['confirm'] == 'yes' && $delPageGuid && $delPageToken == $_SESSION['unique_referrer']) {
 
                 //delete page after clicking Yes
                 $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND guid='" . $delPageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
@@ -231,10 +235,10 @@ $_SESSION['file_referrer'] = 'page.php';
                             while ($rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC)) {
 
                                 $pageId = $rowPages['id'];
-                                $pageTitle = safeCleanStr($rowPages['title']);
-                                $pageContent = $rowPages['content'];
-                                $pageKeywords = $rowPages['keywords'];
-                                $pageActive = $rowPages['active'];
+                                $pageTitle = safeCleanStr(addslashes($rowPages['title']));
+                                $pageContent = sqlEscapeStr($rowPages['content']);
+                                $pageKeywords = safeCleanStr($rowPages['keywords']);
+                                $pageActive = safeCleanStr($rowPages['active']);
                                 $pageGuid = safeCleanStr($rowPages['guid']);
 
                                 if ($rowPages['active'] == 'true') {
@@ -244,13 +248,13 @@ $_SESSION['file_referrer'] = 'page.php';
                                 }
 
                                 echo "<tr>
-                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=$pageId&guid=$pageGuid' title='Edit'>" . $pageTitle . "</a></td>
+                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=".$pageId."&guid=".$pageGuid."' title='Edit'>" . $pageTitle . "</a></td>
                                 <td class='col-xs-1'>
-                                <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='$pageId' type='checkbox' " . $isActive . ">
+                                <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='".$pageId."' type='checkbox' " . $isActive . ">
                                 </td>
                                 <td class='col-xs-2'>
                                 <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=$pageId&deletetitle=" . safeCleanStr(addslashes($pageTitle)) . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=".$pageId."&deletetitle=" . $pageTitle . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 
