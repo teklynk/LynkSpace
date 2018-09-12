@@ -205,7 +205,8 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 			$fileSizeLimit  = $maxFileSize; //Max file size limit (ex: 2048000)
 
 			//Check if file is a image format
-			$allowedFileTypes = array( 'png', 'gif', 'jpg' );
+			$allowedFileTypes = array('PNG', 'png', 'GIF', 'gif', 'JPG', 'jpg');
+
 			if ( in_array( $fileExt, $allowedFileTypes ) && $fileInfo !== false ) {
 
 				//Check if file is less than 2mb
