@@ -173,8 +173,9 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 			}
 		}
 
-		$target_file       = $target . basename( $_FILES["fileToUpload"]["name"] );
-		$target_thumb_file = $target . 'thumb-' . basename( $_FILES["fileToUpload"]["name"] );
+		$original_file 	   = strtolower(basename($_FILES["fileToUpload"]["name"]));
+		$target_file       = strtolower($target . basename( $_FILES["fileToUpload"]["name"] ));
+		$target_thumb_file = strtolower($target . 'thumb-' . basename( $_FILES["fileToUpload"]["name"] ));
 
 		//Upload the file
 		if ( move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file ) ) {
@@ -196,16 +197,16 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 
 			//Get file info
 			$fileInfo       = getimagesize( $target_file );
-			$fileExt        = pathinfo( $target_file, PATHINFO_EXTENSION );
-			$fileName       = pathinfo( $target_file, PATHINFO_BASENAME );
-			$fileMime       = $fileInfo['mime'];
+			$fileExt        = strtolower(pathinfo( $target_file, PATHINFO_EXTENSION ));
+			$fileName       = strtolower(pathinfo( $target_file, PATHINFO_BASENAME ));
+			$fileMime       = strtolower($fileInfo['mime']);
 			$fileDim_width  = $fileInfo[0];
 			$fileDim_height = $fileInfo[1];
 			$fileSize       = basename( $_FILES["fileToUpload"]["size"] );
 			$fileSizeLimit  = $maxFileSize; //Max file size limit (ex: 2048000)
 
 			//Check if file is a image format
-			$allowedFileTypes = array('PNG', 'png', 'GIF', 'gif', 'JPG', 'jpg');
+			$allowedFileTypes = array('png', 'gif', 'jpg');
 
 			if ( in_array( $fileExt, $allowedFileTypes ) && $fileInfo !== false ) {
 
@@ -224,6 +225,9 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 					//rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
 					$search  = array( '(', ')', ' ', '\'', ':', ';', '@', '!', '?' );
 					$replace = array( '-', '-', '-', '-', '-', '-', '', '', '' );
+
+					//TODO: Save file info to database.
+					//$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_ext, file_mime, file_size, user_id, guid, datetime) VALUES ('" . $type . "', " . $unique . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", " . $_SESSION['user_id'] . ", '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "');";
 
 					@rename( $target_file, str_replace( $search, $replace, strtolower( $target_file ) ) );
 					@rename( $target_thumb_file, str_replace( $search, $replace, strtolower( $target_thumb_file ) ) );
