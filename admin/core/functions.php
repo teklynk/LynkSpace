@@ -162,7 +162,7 @@ function importFromCsv( $fileInput, $dbTable ) {
 }
 
 //File Uploader
-function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize ) {
+function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize, $storeOnDb=true, $storeOnDisk=true) {
 	global $uploadMsg;
 
 	if ( $postAction ) {
@@ -177,8 +177,22 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 		$target_file       = strtolower($target . basename( $_FILES["fileToUpload"]["name"] ));
 		$target_thumb_file = strtolower($target . 'thumb-' . basename( $_FILES["fileToUpload"]["name"] ));
 
+		//Get data of file. Used to store file in database as a blob
+		if ($storeOnDb == true){
+			$fileData    = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));
+		} else {
+			$fileData    = NULL;
+		}
+
+		//Store file inside the uploads directory if true
+		if ($storeOnDisk == true) {
+			$uploadFile = move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file);
+		} else {
+			$uploadFile = $target_file;
+		}
+
 		//Upload the file
-		if ( move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file ) ) {
+		if ( $uploadFile ) {
 
 			//Check if $maxScale parameter is set. if not then give it a default value
 			if ( $maxScale == null || $maxScale == '' ) {
@@ -227,7 +241,7 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 					$replace = array( '-', '-', '-', '-', '-', '-', '', '', '' );
 
 					//TODO: Save file info to database.
-					//$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_ext, file_mime, file_size, user_id, guid, datetime) VALUES ('" . $type . "', " . $unique . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", " . $_SESSION['user_id'] . ", '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "');";
+					//$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, user_id, guid, datetime) VALUES ('" . $type . "', " . $unique . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", " . $_SESSION['user_id'] . ", '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "');";
 
 					@rename( $target_file, str_replace( $search, $replace, strtolower( $target_file ) ) );
 					@rename( $target_thumb_file, str_replace( $search, $replace, strtolower( $target_thumb_file ) ) );

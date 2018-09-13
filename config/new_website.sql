@@ -1191,6 +1191,28 @@ CREATE TABLE `shared_uploads` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `uploads`
+--
+
+CREATE TABLE `uploads` (
+  `id` int(11) NOT NULL,
+  `type` text NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `orig_file_name` text NOT NULL,
+  `file_name` text NOT NULL,
+  `file_data` blob,
+  `file_ext` text NOT NULL,
+  `file_mime` text NOT NULL,
+  `file_size` int(11) NOT NULL,
+  `guid` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `author_name` int(11) NOT NULL,
+  `loc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `slider`
 --
 
@@ -1549,6 +1571,11 @@ ALTER TABLE `setup`
 -- AUTO_INCREMENT for table `shared_uploads`
 --
 ALTER TABLE `shared_uploads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `shared_uploads`
+--
+ALTER TABLE `uploads`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `slider`
