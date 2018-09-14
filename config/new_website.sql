@@ -1177,25 +1177,11 @@ INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shared_uploads`
---
-
-CREATE TABLE `shared_uploads` (
-  `id` int(11) NOT NULL,
-  `shared` text NOT NULL,
-  `filename` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `loc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `uploads`
 --
 
 CREATE TABLE `uploads` (
-  `id` int(11) AUTO_INCREMENT primary key NOT NULL,
+  `id` int(11) NOT NULL,
   `type` text NOT NULL,
   `type_id` int(11) NOT NULL,
   `orig_file_name` text NOT NULL,
@@ -1203,6 +1189,7 @@ CREATE TABLE `uploads` (
   `file_data` blob,
   `file_ext` text NOT NULL,
   `file_mime` text NOT NULL,
+  `shared` text NOT NULL,
   `file_size` int(11) NOT NULL,
   `guid` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1436,13 +1423,6 @@ ALTER TABLE `setup`
   ADD KEY `setup_loc_id_fk` (`loc_id`);
 
 --
--- Indexes for table `shared_uploads`
---
-ALTER TABLE `shared_uploads`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shared_uploads_loc_id_fk` (`loc_id`);
-
---
 -- Indexes for table `slider`
 --
 ALTER TABLE `slider`
@@ -1575,12 +1555,7 @@ ALTER TABLE `services`
 ALTER TABLE `setup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `shared_uploads`
---
-ALTER TABLE `shared_uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `shared_uploads`
+-- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -1675,10 +1650,10 @@ ALTER TABLE `setup`
   ADD CONSTRAINT `setup_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `shared_uploads`
+-- Constraints for table `uploads`
 --
-ALTER TABLE `shared_uploads`
-  ADD CONSTRAINT `shared_uploads_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `uploads`
+  ADD CONSTRAINT `uploads_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `slider`

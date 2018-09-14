@@ -66,7 +66,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
     //delete file if shared after clicking Yes
-    $sharedFileDelete = "DELETE FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+    $sharedFileDelete = "DELETE FROM uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $sharedFileDelete);
 
     unlink($_GET["delete"]);
@@ -76,8 +76,8 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
-    //Check shared_uploads table for any shared images
-    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM shared_uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
+    //Check shared uploads for any shared images
+    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
     $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
     //Share setting/options Modal with Form
@@ -115,11 +115,11 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
         if ($rowSharedUploadsOption['filename'] == $getFileName) {
             //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE shared_uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $sharedUploadsOptionUpdate);
         } else {
             //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO shared_uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 
@@ -225,7 +225,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             $fileSize = filesizeFormatted(image_dir . $file);
 
                             //Check shared_uploads table for any shared images
-                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT  shared, filename, loc_id FROM shared_uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1;");
+                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1;");
                             $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads, MYSQLI_ASSOC);
 
                             if ($rowSharedUploads['filename'] == $file) {
