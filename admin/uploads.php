@@ -28,7 +28,19 @@ $share_location_type = safeCleanStr($_POST['share_location_type']);
 $share_location_list = safeCleanStr($_POST['share_location_list']);
 
 //Upload Action - Do the upload
-uploadFile($action == 'uploadFile', image_dir, 'true', 800, 4, 2048000);
+uploadFile(
+    $action == 'uploadFile',
+    image_dir,
+    'true',
+    800,
+    4,
+    2048000,
+    'upload',
+    $_GET["loc_id"],
+    true,
+    true,
+    array('png', 'gif', 'jpg')
+);
 
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {

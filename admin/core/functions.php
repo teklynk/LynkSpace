@@ -162,8 +162,9 @@ function importFromCsv( $fileInput, $dbTable ) {
 }
 
 //File Uploader
-function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, $maxFileSize, $storeOnDb=true, $storeOnDisk=true) {
+function uploadFile( $postAction, $target, $thumbnail, $maxScale=1000, $reduceScale=4, $maxFileSize=2048000, $type, $type_id, $storeOnDb=true, $storeOnDisk=true, $allowedFileTypes=array()) {
 	global $uploadMsg;
+	global $db_conn;
 
 	if ( $postAction ) {
 		//Create upload folder if it does not exist.
@@ -194,21 +195,6 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 		//Upload the file
 		if ( $uploadFile ) {
 
-			//Check if $maxScale parameter is set. if not then give it a default value
-			if ( $maxScale == null || $maxScale == '' ) {
-				$maxScale = 1000;
-			}
-
-			//Check if $maxFileSize parameter is set. if not then give it a default value
-			if ( $maxFileSize == null || $maxFileSize == '' ) {
-				$maxFileSize = 2048000;
-			}
-
-			//Check if $reduceScale parameter is set. if not then give it a default value
-			if ( $reduceScale == null || $reduceScale == '' ) {
-				$reduceScale = 4;
-			}
-
 			//Get file info
 			$fileInfo       = getimagesize( $target_file );
 			$fileExt        = strtolower(pathinfo( $target_file, PATHINFO_EXTENSION ));
@@ -220,8 +206,6 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 			$fileSizeLimit  = $maxFileSize; //Max file size limit (ex: 2048000)
 
 			//Check if file is a image format
-			$allowedFileTypes = array('png', 'gif', 'jpg');
-
 			if ( in_array( $fileExt, $allowedFileTypes ) && $fileInfo !== false ) {
 
 				//Check if file is less than 2mb
@@ -240,8 +224,9 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale, $reduceScale, 
 					$search  = array( '(', ')', ' ', '\'', ':', ';', '@', '!', '?' );
 					$replace = array( '-', '-', '-', '-', '-', '-', '', '', '' );
 
-					//TODO: Save file info to database.
-					//$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, user_id, guid, datetime) VALUES ('" . $type . "', " . $unique . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", " . $_SESSION['user_id'] . ", '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "');";
+					//Insert record into database
+					$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+					mysqli_query($db_conn, $sqlUploads) OR die('Failed: ' . $sqlUploads);
 
 					@rename( $target_file, str_replace( $search, $replace, strtolower( $target_file ) ) );
 					@rename( $target_thumb_file, str_replace( $search, $replace, strtolower( $target_thumb_file ) ) );

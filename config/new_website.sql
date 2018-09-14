@@ -1195,7 +1195,7 @@ CREATE TABLE `shared_uploads` (
 --
 
 CREATE TABLE `uploads` (
-  `id` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT primary key NOT NULL,
   `type` text NOT NULL,
   `type_id` int(11) NOT NULL,
   `orig_file_name` text NOT NULL,
@@ -1206,7 +1206,7 @@ CREATE TABLE `uploads` (
   `file_size` int(11) NOT NULL,
   `guid` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `author_name` int(11) NOT NULL,
+  `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1462,6 +1462,13 @@ ALTER TABLE `socialmedia`
 ALTER TABLE `team`
   ADD PRIMARY KEY (`id`),
   ADD KEY `team_loc_id_fk` (`loc_id`);
+
+--
+-- Indexes for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `uploads_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `users`
