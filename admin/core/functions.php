@@ -226,7 +226,7 @@ function uploadFile( $postAction, $target, $thumbnail, $maxScale=1000, $reduceSc
 
 					//Insert record into database
 					$sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
-					mysqli_query($db_conn, $sqlUploads) OR die('Failed: ' . $sqlUploads);
+					mysqli_query($db_conn, $sqlUploads) OR die('Failed: ' . $sqlUploads . mysqli_error($db_conn));
 
 					@rename( $target_file, str_replace( $search, $replace, strtolower( $target_file ) ) );
 					@rename( $target_thumb_file, str_replace( $search, $replace, strtolower( $target_thumb_file ) ) );

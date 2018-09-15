@@ -1189,7 +1189,7 @@ CREATE TABLE `uploads` (
   `file_data` blob,
   `file_ext` text NOT NULL,
   `file_mime` text NOT NULL,
-  `shared` text NOT NULL,
+  `shared` text,
   `file_size` int(11) NOT NULL,
   `guid` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
