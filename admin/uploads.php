@@ -23,9 +23,9 @@ if ($_GET["share"]) {
 $action = safeCleanStr($_POST["action"]);
 $getSharedFileName = str_replace('..', '', $urlParam);
 $getSharedFileNameArr = explode('/', $getSharedFileName);
-$getFileName = safeCleanStr($getSharedFileNameArr[3]);
-$share_location_type = safeCleanStr($_POST['share_location_type']);
-$share_location_list = safeCleanStr($_POST['share_location_list']);
+$getFileName = safeCleanStr($getSharedFileNameArr[3])?:null;
+$share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
+$share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
 
 //Upload Action - Do the upload
 uploadFile(
@@ -66,7 +66,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
     //delete file if shared after clicking Yes
-    $sharedFileDelete = "DELETE FROM uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+    $sharedFileDelete = "DELETE FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $sharedFileDelete);
 
     unlink($_GET["delete"]);
@@ -77,7 +77,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     //Check shared uploads for any shared images
-    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM uploads WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
+    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
     $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
     //Share setting/options Modal with Form
@@ -113,13 +113,13 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
             $sharedOptions = '';
         }
 
-        if ($rowSharedUploadsOption['filename'] == $getFileName) {
+        if ($rowSharedUploadsOption['file_name'] == $getFileName) {
             //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE filename='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $sharedUploadsOptionUpdate);
         } else {
             //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, filename, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, file_name, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 
@@ -225,10 +225,10 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             $fileSize = filesizeFormatted(image_dir . $file);
 
                             //Check shared_uploads table for any shared images
-                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT shared, filename, loc_id FROM uploads WHERE filename='" . $file . "' AND shared <> '' AND loc_id=1;");
+                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $file . "' AND shared <> '' AND loc_id=1;");
                             $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads, MYSQLI_ASSOC);
 
-                            if ($rowSharedUploads['filename'] == $file) {
+                            if ($rowSharedUploads['file_name'] == $file) {
                                 $isShared = 'btn btn-primary';
                                 $isSharedVal = 'true';
                             } else {
