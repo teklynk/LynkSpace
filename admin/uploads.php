@@ -27,6 +27,8 @@ $getFileName = safeCleanStr($getSharedFileNameArr[3])?:null;
 $share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
 $share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
 
+getUploads(null, 'uploadFile');
+
 //Upload Action - Do the upload
 uploadFile(
     $action == 'uploadFile',
@@ -66,11 +68,13 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
 
     //delete file if shared after clicking Yes
-    $sharedFileDelete = "DELETE FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
-    mysqli_query($db_conn, $sharedFileDelete);
+    //$sharedFileDelete = "DELETE FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+    //mysqli_query($db_conn, $sharedFileDelete);
 
-    unlink($_GET["delete"]);
-    $deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    removeUploads(image_dir, $_GET["file_id"], $_GET["guid"]);
+
+    //unlink($_GET["delete"]);
+    //$deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
 //Share settings - Actions, Modal, Form - Admin user only feature
