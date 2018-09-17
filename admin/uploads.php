@@ -29,20 +29,22 @@ $share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
 
 getUploads(null, 'uploadFile');
 
-//Upload Action - Do the upload
-uploadFile(
-    $action == 'uploadFile',
-    image_dir,
-    'true',
-    800,
-    4,
-    2048000,
-    'upload',
-    $_GET["loc_id"],
-    true,
-    true,
-    array('png', 'gif', 'jpg')
-);
+if ($action == 'uploadFile') {
+    //Upload Action - Do the upload
+    uploadFile(
+        $action == 'uploadFile',
+        image_dir,
+        'true',
+        800,
+        4,
+        2048000,
+        'upload',
+        $_GET["loc_id"],
+        true,
+        true,
+        array('png', 'gif', 'jpg')
+    );
+}
 
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {

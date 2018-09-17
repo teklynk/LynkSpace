@@ -234,22 +234,29 @@ function uploadFile($postAction, $target, $thumbnail = null, $maxScale = 1000, $
                     $sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                     mysqli_query($db_conn, $sqlUploads) OR die('SQL Failed: ' . $sqlUploads . mysqli_error($db_conn));
 
-                    @rename($target_file, str_replace($search, $replace, strtolower($target_file)));
-                    @rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
+                    if (file_exists($target_file)) {
+                        rename($target_file, str_replace($search, $replace, strtolower($target_file)));
+                        rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
+                    }
 
                     $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . $fileName . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 } else {
-                    //Delete the file if it is too large
-                    @unlink($target_file);
-                    $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+
+                    if (file_exists($target_file)) {
+                        //Delete the file if it is too large
+                        unlink($target_file) OR die('Could not delete file');
+                        $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is larger than 2mb.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                    }
 
                 }
 
             } else {
 
                 //Delete the file if it is not an image
-                @unlink($target_file);
-                $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                if (file_exists($target_file)) {
+                    unlink($target_file) OR die('Could not delete file');
+                    $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                }
             }
 
         } else {
@@ -278,12 +285,16 @@ function removeUploads($target, $arg_id, $guid)
     //Get the file name
     $fileName = $uploads_row['file_name'];
 
-    //Delete file from uploads folder
-    @unlink($target . $fileName);
+    if ($arg_id == $uploads_row['id'] && $guid == $uploads_row['guid']) {
+        //Remove file from the database
+        $uploads_sql = "DELETE FROM uploads WHERE id = " . $arg_id . " AND guid = '" . $guid . "' LIMIT 1;";
+        mysqli_query($db_conn, $uploads_sql);
 
-    //Remove file from the database
-    $uploads_sql = "DELETE FROM uploads WHERE id = " . $arg_id . " AND guid = '" . $guid . "' LIMIT 1;";
-    mysqli_query($db_conn, $uploads_sql);
+        //Delete file from uploads folder
+        if (file_exists($target . $fileName)){
+            unlink($target . $fileName) OR die('Could not delete file');
+        }
+    }
 
     return true;
 }
@@ -1004,7 +1015,7 @@ function downloadFile($url, $path)
     if ($curl_errno > 0) {
         echo '<div class="updates_error clearfix">Error : ' . $curl_errno . $page . ' : Error loading URL.</div>';
         //Delete the downloaded file
-        unlink($path);
+        unlink($path) OR die('Could not delete file');;
 
         return false;
     }
