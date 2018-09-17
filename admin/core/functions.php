@@ -288,7 +288,7 @@ function removeUploads($target, $arg_id, $guid)
     if ($arg_id == $uploads_row['id'] && $guid == $uploads_row['guid']) {
         //Remove file from the database
         $uploads_sql = "DELETE FROM uploads WHERE id = " . $arg_id . " AND guid = '" . $guid . "' LIMIT 1;";
-        mysqli_query($db_conn, $uploads_sql);
+        mysqli_query($db_conn, $uploads_sql) OR die('SQL Error: ' . $uploads_sql);
 
         //Delete file from uploads folder
         if (file_exists($target . $fileName)){
