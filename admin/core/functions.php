@@ -265,11 +265,11 @@ function uploadFile($postAction, $target, $thumbnail = null, $maxScale = 1000, $
     }
 }
 
-function getUploads($type_id=null, $type=null)
+function getUploads($type_id=null, $type=null, $orderBy='DESC')
 {
     global $db_conn;
 
-    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "';");
+    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' ORDER BY datetime " . $orderBy . ";");
     $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
 
     return $rowUploads;
