@@ -270,7 +270,7 @@ function getUploads($type_id=null, $type=null, $orderBy='DESC')
     global $db_conn;
 
     $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' ORDER BY datetime " . $orderBy . ";");
-    $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
+    $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
 
     return $rowUploads;
 }
@@ -313,9 +313,15 @@ function resizeImage($imagePath, $resizedFileName, $width, $height)
 }
 
 //File size conversion to KB, MB, GB....
-function filesizeFormatted($theFile)
+function filesizeFormatted($theFile, $readFile=false)
 {
-    $size = filesize($theFile);
+
+    if ($readFile == true) {
+        $size = filesize($theFile); //read file from disk and convert the file size
+    } else {
+        $size = $theFile; //convert number
+    }
+
     $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
     $power = $size > 0 ? floor(log($size, 1024)) : 0;
 

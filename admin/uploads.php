@@ -26,8 +26,7 @@ $getSharedFileNameArr = explode('/', $getSharedFileName);
 $getFileName = safeCleanStr($getSharedFileNameArr[3])?:null;
 $share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
 $share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
-
-getUploads(null, 'uploadFile', 'ASC');
+$fileList = getUploads(1, 'upload', 'ASC'); //returns an array
 
 if ($action == 'uploadFile') {
     //Upload Action - Do the upload
@@ -54,7 +53,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             "confirm",
             "Delete Image?",
             "Are you sure you want to delete: " . $_GET["delete"] . "?",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     } else {
@@ -62,18 +61,18 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
             "confirm",
             "Delete Image?",
             "Are you sure you want to delete: " . $_GET["delete"] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     }
 
-} elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+} elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['guid']) {
 
     //delete file if shared after clicking Yes
     //$sharedFileDelete = "DELETE FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
     //mysqli_query($db_conn, $sharedFileDelete);
 
-    removeUploads(image_dir, $_GET["file_id"], $_GET["guid"]);
+    removeUploads(image_dir, $_GET['delete'], $_GET['guid']);
 
     //unlink($_GET["delete"]);
     //$deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
@@ -213,28 +212,15 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     </thead>
                     <tbody>
                     <?php
-                    if ($handle = opendir(image_dir)) {
 
                         $count = 0;
 
-                        while (false !== ($file = readdir($handle))) {
-
-                            if ('.' === $file) continue;
-                            if ('..' === $file) continue;
-                            //exclude these files
-                            if ($file === "Thumbs.db") continue;
-                            if ($file === ".DS_Store") continue;
-                            if ($file === "index.html") continue;
+                        foreach ($fileList as $file) {
 
                             $count++;
-                            $modDate = date('m-d-Y, H:i:s', filemtime(image_dir . $file));
-                            $fileSize = filesizeFormatted(image_dir . $file);
+                            $fileSize = filesizeFormatted($file['file_size'],false);
 
-                            //Check shared_uploads table for any shared images
-                            $sqlSharedUploads = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $file . "' AND shared <> '' AND loc_id=1;");
-                            $rowSharedUploads = mysqli_fetch_array($sqlSharedUploads, MYSQLI_ASSOC);
-
-                            if ($rowSharedUploads['file_name'] == $file) {
+                            if ($file['shared'] <> '') {
                                 $isShared = 'btn btn-primary';
                                 $isSharedVal = 'true';
                             } else {
@@ -243,22 +229,22 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             }
 
                             echo "<tr data-index='" . $count . "'>
-                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file . " : " . $fileSize . "', '" . image_dir . $file . "')\" title='Preview'>" . $file . "</a></td>";
+                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . image_dir . $file['file_name'] . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
                                 echo "<td class='col-xs-1'>
-                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
                             }
                             echo "<td class='col-xs-1'>" . $fileSize . "</td>
-                            <td class='col-xs-2'>" . $modDate . "</td>
+                            <td class='col-xs-2'>" . $file['datetime'] . "</td>
                             <td class='col-xs-1'>
-                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . image_dir . $file . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $file['id'] . "&guid=" . $file['guid'] . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
+
                         }
 
-                        closedir($handle);
-                    }
+
                     ?>
                     </tbody>
                 </table>
