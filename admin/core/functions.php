@@ -167,7 +167,7 @@ function importFromCsv($fileInput, $dbTable)
 }
 
 //File Uploader
-function uploadFile($postAction, $target, $thumbnail = null, $maxScale = 1000, $reduceScale = 4, $maxFileSize = 2048000, $type = null, $type_id = null, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
+function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, $reduceScale = 4, $maxFileSize = 2048000, $type = null, $type_id = null, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {
     global $uploadMsg;
     global $db_conn;
@@ -265,7 +265,7 @@ function uploadFile($postAction, $target, $thumbnail = null, $maxScale = 1000, $
     }
 }
 
-function getUploads($type_id=null, $type=null, $orderBy='DESC')
+function getAllUploads($type_id=null, $type=null, $orderBy='DESC')
 {
     global $db_conn;
 
@@ -275,7 +275,17 @@ function getUploads($type_id=null, $type=null, $orderBy='DESC')
     return $rowUploads;
 }
 
-function removeUploads($target, $arg_id, $guid)
+function getSingleUploads($arg_id, $guid)
+{
+    global $db_conn;
+
+    $sqlSingleUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE id = " . $arg_id . " AND guid='" . $guid . "' LIMIT 1;");
+    $rowSingleUploads = mysqli_fetch_array($sqlSingleUploads, MYSQLI_ASSOC);
+
+    return $rowSingleUploads;
+}
+
+function deleteUploads($target, $arg_id, $guid)
 {
     global $db_conn;
 

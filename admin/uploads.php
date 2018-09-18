@@ -21,17 +21,16 @@ if ($_GET["share"]) {
 }
 
 $action = safeCleanStr($_POST["action"]);
-$getSharedFileName = str_replace('..', '', $urlParam);
+/*$getSharedFileName = str_replace('..', '', $urlParam);
 $getSharedFileNameArr = explode('/', $getSharedFileName);
 $getFileName = safeCleanStr($getSharedFileNameArr[3])?:null;
 $share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
-$share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
-$fileList = getUploads(1, 'upload', 'ASC'); //returns an array
+$share_location_list = safeCleanStr($_POST['share_location_list'])?:null;*/
+$fileList = getAllUploads(1, 'upload', 'ASC'); //returns an array
 
-
+//Upload Action - Do the upload
 if ($action == 'uploadFile') {
-    //Upload Action - Do the upload
-    uploadFile(
+    fileUploads(
         $action == 'uploadFile',
         image_dir,
         'true',
@@ -44,16 +43,21 @@ if ($action == 'uploadFile') {
         true,
         array('png', 'gif', 'jpg')
     );
+    //Redirect
+    header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+    echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 }
 
 //Delete confirm modal
 if ($_GET["delete"] && !$_GET["confirm"]) {
 
+    $theFile = getSingleUploads($_GET["delete"], $_GET["guid"]);
+
     if ($_GET["isshared"] == 'false') {
         showModalConfirm(
             "confirm",
             "Delete Image?",
-            "Are you sure you want to delete: " . $_GET["delete"] . "?",
+            "Are you sure you want to delete: " . $theFile . "?",
             "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
@@ -61,30 +65,29 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
         showModalConfirm(
             "confirm",
             "Delete Image?",
-            "Are you sure you want to delete: " . $_GET["delete"] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
+            "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
             "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     }
 
 } elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['guid']) {
+    //Remove and delete the file
+    deleteUploads(image_dir, $_GET['delete'], $_GET['guid']);
+    //Redirect back to uploads page
+    header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+    echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
 
-    //delete file if shared after clicking Yes
-    //$sharedFileDelete = "DELETE FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
-    //mysqli_query($db_conn, $sharedFileDelete);
-
-    removeUploads(image_dir, $_GET['delete'], $_GET['guid']);
-
-    //unlink($_GET["delete"]);
-    //$deleteMsg = "<div class='alert alert-success'>" . $_GET["delete"] . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
 }
 
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     //Check shared uploads for any shared images
-    $sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
-    $rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
+    //$sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
+    //$rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
+
+    $theFile = getSingleUploads($_GET["share"], $_GET["guid"]);
 
     //Share setting/options Modal with Form
     showModalConfirm(
