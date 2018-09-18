@@ -37,8 +37,8 @@ if ($action == 'uploadFile') {
         'upload',
         $_GET["loc_id"],
         false,
-        true,
         false,
+        true,
         array('png', 'gif', 'jpg')
     );
     //Redirect
@@ -231,16 +231,23 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                                 $isSharedVal = 'false';
                             }
 
-                            //Preview modal
+                            //Check if file is binary in the database.
+                            if ($file['file_data']){
+                                $previewSource = "data:image/jpeg;base64," . base64_encode($file['file_data']) . "";
+                            } else {
+                                $previewSource = image_dir . $file['file_name'];
+                            }
 
-                            //TODO: check if file is stored on disk or in DB. Change preview source
+                            //Preview modal
                             echo "<tr data-index='" . $count . "'>
-                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . image_dir . $file['file_name'] . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
+                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . $previewSource . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
+
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
                                 echo "<td class='col-xs-1'>
                                 <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
                             }
+
                             echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $file['datetime'] . "</td>
                             <td class='col-xs-1'>
@@ -249,7 +256,6 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             </tr>";
 
                         }
-
 
                     ?>
                     </tbody>

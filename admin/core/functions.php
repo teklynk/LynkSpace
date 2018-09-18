@@ -1,4 +1,7 @@
 <?php
+if (!defined('ALLOW_INC')) {
+    die('Direct access not permitted');
+}
 
 //Output to browser console
 function debugToConsole($data)
@@ -10,27 +13,6 @@ function debugToConsole($data)
     }
 
     echo "<script>console.log('Debug Objects: " . $output . "');</script>";
-}
-
-//Phinx migration runner
-function phinxMigration($phinxCommand, $environment)
-{
-    require __DIR__ . '/../../vendor/autoload.php';
-
-    $phinxApp = new \Phinx\Console\PhinxApplication();
-    $phinxTextWrapper = new \Phinx\Wrapper\TextWrapper($phinxApp);
-
-    $phinxConfigFile = __DIR__ . '/../../phinx.php';
-
-    $phinxTextWrapper->setOption('configuration', $phinxConfigFile);
-    $phinxTextWrapper->setOption('parser', 'PHP');
-    $phinxTextWrapper->setOption('environment', $environment);
-
-    if ($phinxCommand == 'migrate') {
-        $log = $phinxTextWrapper->getMigrate();
-    } elseif ($phinxCommand == 'rollback') {
-        $log = $phinxTextWrapper->getRollback();
-    }
 }
 
 function getGuid($prefix = false, $entropy = false)
@@ -212,9 +194,9 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
             $fileName = strtolower(pathinfo($target_file, PATHINFO_BASENAME)) ?: NULL;
             $fileMime = strtolower(basename($_FILES['fileToUpload']['type'])) ?: NULL;
             $fileSize = basename($_FILES['fileToUpload']['size']) ?: NULL;
-            $fileSizeLimit = $maxFileSize; //Max file size limit (ex: 2048000)
+            $fileSizeLimit = $maxFileSize;
 
-            //Check if file is a image format
+            //Check if file is allowed
             if (in_array($fileExt, $allowedFileTypes)) {
 
                 //Check if file is less than 2mb
@@ -233,7 +215,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                         $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "';";
                         mysqli_query($db_conn, $sqlUpdateUploads);
                     } else {
-                        //Save uploaded file to the database using unique file names
+                        //Save uploaded file to the database
                         $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $sqlInsertUploads);
                     }
@@ -260,6 +242,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                     unlink($target_file) OR die('Could not delete file');
                     $uploadMsg = "<div class='alert alert-danger' style='margin-top:12px;'>The file " . $fileName . " is not allowed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
                 }
+
             }
 
         } else {
