@@ -33,12 +33,10 @@ if ($action == 'uploadFile') {
     fileUploads(
         $action == 'uploadFile',
         image_dir,
-        'true',
-        800,
-        4,
         2048000,
         'upload',
         $_GET["loc_id"],
+        false,
         true,
         true,
         array('png', 'gif', 'jpg')
@@ -56,15 +54,15 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
     if ($_GET["isshared"] == 'false') {
         showModalConfirm(
             "confirm",
-            "Delete Image?",
-            "Are you sure you want to delete: " . $theFile . "?",
+            "Delete File?",
+            "Are you sure you want to delete: " . $theFile['file_name'] . "?",
             "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     } else {
         showModalConfirm(
             "confirm",
-            "Delete Image?",
+            "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
             "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false

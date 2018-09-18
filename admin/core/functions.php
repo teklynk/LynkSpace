@@ -167,7 +167,7 @@ function importFromCsv($fileInput, $dbTable)
 }
 
 //File Uploader
-function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, $reduceScale = 4, $maxFileSize = 2048000, $type = null, $type_id = null, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
+function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {
     global $uploadMsg;
     global $db_conn;
@@ -180,12 +180,15 @@ function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, 
             }
         }
 
+        //Gets the original file name before converting it.
         $original_file = strtolower(basename($_FILES["fileToUpload"]["name"]));
-        $target_file = strtolower($target . basename($_FILES["fileToUpload"]["name"]));
-        $target_thumb_file = strtolower($target . 'thumb-' . basename($_FILES["fileToUpload"]["name"]));
 
-        //TODO: add a parameter to allow unique file names to store on disk
-        //$target_file = strtolower($target . $type_id . '-' . uniqid() . '-' . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+        //Check if using uniqueFileNames. Prepend unique string to the front of file names
+        if ($uniqueFileNames == true) {
+            $target_file = strtolower($target . uniqid() . '-' . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+        } else {
+            $target_file = strtolower($target . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+        }
 
         //Get data of file. Used to store file in database as a blob
         if ($storeOnDb == true) {
@@ -205,9 +208,6 @@ function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, 
         if ($uploadFile) {
 
             //Get file info
-            $fileInfo = getimagesize($target_file) ?: NULL;
-            $fileDim_width = $fileInfo[0] ?: NULL; //Width
-            $fileDim_height = $fileInfo[1] ?: NULL; //Height
             $fileExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)) ?: NULL;
             $fileName = strtolower(pathinfo($target_file, PATHINFO_BASENAME)) ?: NULL;
             $fileMime = strtolower(basename($_FILES['fileToUpload']['type'])) ?: NULL;
@@ -215,31 +215,31 @@ function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, 
             $fileSizeLimit = $maxFileSize; //Max file size limit (ex: 2048000)
 
             //Check if file is a image format
-            if (in_array($fileExt, $allowedFileTypes) && $fileInfo !== false) {
+            if (in_array($fileExt, $allowedFileTypes)) {
 
                 //Check if file is less than 2mb
                 if ($fileSize <= $fileSizeLimit) {
-
-                    //Creates a thumbnail image
-                    if ($thumbnail == 'true') {
-                        if ($fileDim_width >= $maxScale || $fileDim_height >= $maxScale) {
-                            $thumb_width = $fileDim_width / $reduceScale;
-                            $thumb_height = $fileDim_height / $reduceScale;
-                            resizeImage($target_file, $target_thumb_file, $thumb_width, $thumb_height);
-                        }
-                    }
 
                     //rename file if it contains spaces, parenthesis, apostrophes or other characters and low case the file name
                     $search = array('(', ')', ' ', '\'', ':', ';', '@', '!', '?');
                     $replace = array('-', '-', '-', '-', '-', '-', '', '', '');
 
-                    //Insert record into database
-                    $sqlUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
-                    mysqli_query($db_conn, $sqlUploads) OR die('SQL Failed: ' . $sqlUploads . mysqli_error($db_conn));
+                    //Get file if file name matches existing filename else return null
+                    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' LIMIT 1;");
+                    $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
+
+                    if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file){
+                        //Update existing file in the database, where guid=$uploads_row['guid']
+                        $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "';";
+                        mysqli_query($db_conn, $sqlUpdateUploads);
+                    } else {
+                        //Save uploaded file to the database using unique file names
+                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        mysqli_query($db_conn, $sqlInsertUploads);
+                    }
 
                     if (file_exists($target_file)) {
                         rename($target_file, str_replace($search, $replace, strtolower($target_file)));
-                        rename($target_thumb_file, str_replace($search, $replace, strtolower($target_thumb_file)));
                     }
 
                     $uploadMsg = "<div class='alert alert-success' style='margin-top:12px;'>The file " . $fileName . " has been uploaded.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
