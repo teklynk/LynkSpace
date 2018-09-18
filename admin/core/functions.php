@@ -851,7 +851,8 @@ function checkDependencies()
         'imagick',
         'mbstring',
         'mcrypt',
-        'mysqli'
+        'mysqli',
+        'mysqlnd'
     );
 
     $filesArray = array(

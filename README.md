@@ -29,6 +29,7 @@ zip
 imagick
 mbstring
 mcrypt
+mysqlnd
 ```
  Apache Modules
 ```

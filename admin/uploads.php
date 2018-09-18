@@ -28,6 +28,7 @@ $share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
 $share_location_list = safeCleanStr($_POST['share_location_list'])?:null;
 $fileList = getUploads(1, 'upload', 'ASC'); //returns an array
 
+
 if ($action == 'uploadFile') {
     //Upload Action - Do the upload
     uploadFile(
