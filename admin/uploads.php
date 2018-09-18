@@ -80,6 +80,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
 }
 
+//TODO: Refactor shared files logic and queries. Can be imporved and reduced
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 

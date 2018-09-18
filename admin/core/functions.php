@@ -184,6 +184,9 @@ function fileUploads($postAction, $target, $thumbnail = null, $maxScale = 1000, 
         $target_file = strtolower($target . basename($_FILES["fileToUpload"]["name"]));
         $target_thumb_file = strtolower($target . 'thumb-' . basename($_FILES["fileToUpload"]["name"]));
 
+        //TODO: add a parameter to allow unique file names to store on disk
+        //$target_file = strtolower($target . $type_id . '-' . uniqid() . '-' . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+
         //Get data of file. Used to store file in database as a blob
         if ($storeOnDb == true) {
             $fileData = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));
