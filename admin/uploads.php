@@ -38,7 +38,7 @@ if ($action == 'uploadFile') {
         $_GET["loc_id"],
         false,
         true,
-        true,
+        false,
         array('png', 'gif', 'jpg')
     );
     //Redirect
@@ -231,6 +231,9 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                                 $isSharedVal = 'false';
                             }
 
+                            //Preview modal
+
+                            //TODO: check if file is stored on disk or in DB. Change preview source
                             echo "<tr data-index='" . $count . "'>
                             <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . image_dir . $file['file_name'] . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
                             if ($adminIsCheck == "true" && multiBranch == 'true') {
