@@ -148,6 +148,12 @@ function importFromCsv($fileInput, $dbTable)
     return false;
 }
 
+function renderImage($mimeType, $file)
+{
+    $imageSource = "data:image/" . $mimeType . ";base64," . base64_encode($file) . "";
+    return $imageSource;
+}
+
 //File Uploader
 function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {

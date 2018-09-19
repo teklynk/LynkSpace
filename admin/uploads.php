@@ -232,8 +232,8 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                             }
 
                             //Check if file is binary in the database.
-                            if ($file['file_data']){
-                                $previewSource = "data:image/" . $file['file_mime'] . ";base64," . base64_encode($file['file_data']) . "";
+                            if ($file['file_data']) {
+                                $previewSource = renderImage($file['file_mime'], $file['file_data']);
                             } else {
                                 $previewSource = image_dir . $file['file_name'];
                             }
