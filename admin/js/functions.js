@@ -34,11 +34,7 @@ $(document).ready(function () {
     });
 
     //Boostrap alert fadeout and close function
-    setTimeout(function () {
-        $('.alert-success').fadeTo('slow', 0.1, function () {
-            $('.alert-success').alert('close')
-        });
-    }, 3000);
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
     //Character Counter
     //Taken from https://www.codefromjames.com/scripts/charcount.js

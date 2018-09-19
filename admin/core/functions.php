@@ -148,6 +148,28 @@ function importFromCsv($fileInput, $dbTable)
     return false;
 }
 
+//$type = success, warning, info, danger
+function flashMessageSet($type, $message)
+{
+    if (!isset($_SESSION['message'][$type])) {
+        $_SESSION['message'][$type] = "<div class='alert alert-" . $type . "'>" . $message . "</div>";
+    }
+
+    return $_SESSION['message'][$type];
+}
+
+//$type = success, warning, info, danger
+function flashMessageGet($type)
+{
+    $message = isset($_SESSION['message'][$type]) ? $_SESSION['message'][$type] : null;
+
+    if (!is_null($message)) {
+        unset($_SESSION['message'][$type]);
+    }
+
+    return $message;
+}
+
 //Renders binary images from database or other source.
 function renderImage($mimeType, $fileData)
 {
@@ -156,7 +178,7 @@ function renderImage($mimeType, $fileData)
 }
 
 //File Uploader
-function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
+function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $user = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {
     global $uploadMsg;
     global $db_conn;
@@ -223,7 +245,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                         mysqli_query($db_conn, $sqlUpdateUploads);
                     } else {
                         //Save uploaded file to the database
-                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $_SESSION['user_name'] . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $sqlInsertUploads);
                     }
 

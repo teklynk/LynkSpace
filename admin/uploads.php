@@ -5,41 +5,41 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Delete file - default
-$deleteMsg = "";
-
-//Upload message - default
-$uploadMsg = "";
-
 //Get the file name from the URL
 if ($_GET["share"]) {
-    $urlParam = $_GET["share"];
-} elseif ($_GET["delete"]) {
-    $urlParam = $_GET["delete"];
+    $urlParam = $_GET['share'];
+} elseif ($_GET['delete']) {
+    $urlParam = $_GET['delete'];
 } else {
     $urlParam = '';
 }
 
-$action = safeCleanStr($_POST["action"]);
+$action = safeCleanStr($_POST['action']);
 
 $fileList = getAllUploads(1, 'upload', $_GET['loc_id'], 'ASC'); //returns an array
 
 //Upload Action - Do the upload
-if ($action == 'uploadFile') {
+if (!empty($_POST) && $action == 'uploadFile') {
+
     fileUploads(
         $action == 'uploadFile',
         image_dir,
         2048000,
         'upload',
+        $_SESSION['user_name'],
         $_GET['loc_id'],
         true,
         true,
         true,
         array('png', 'gif', 'jpg')
     );
+
+    flashMessageSet('success', 'The file has been uploaded.');
+
     //Redirect
     header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+    exit();
 }
 
 //Delete confirm modal
@@ -52,7 +52,7 @@ if ($_GET['delete'] && !$_GET['confirm']) {
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "?",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     } else {
@@ -60,7 +60,7 @@ if ($_GET['delete'] && !$_GET['confirm']) {
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET["delete"] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     }
@@ -68,9 +68,13 @@ if ($_GET['delete'] && !$_GET['confirm']) {
 } elseif ($_GET['delete'] && $_GET['confirm'] == 'yes' && $_GET['guid']) {
     //Remove and delete the file
     deleteUploads(image_dir, $_GET['delete'], $_GET['guid']);
+
+    flashMessageSet('success', 'The file has been deleted.');
+
     //Redirect back to uploads page
     header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+    exit();
 
 }
 
@@ -125,6 +129,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
         header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
         echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+        exit();
     }
 
 }
@@ -157,12 +162,10 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
     <div class="row">
         <div class="col-lg-12">
-            <?php if ($uploadMsg != "") {
-                echo $uploadMsg;
-            }
-            if ($deleteMsg != "") {
-                echo $deleteMsg;
-            }
+            <?php
+            //Alert messages
+            echo flashMessageGet('success');
+
             if (!is_writable('../uploads')) {
                 echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
             }
@@ -208,46 +211,46 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <tbody>
                     <?php
 
-                        $count = 0;
+                    $count = 0;
 
-                        foreach ($fileList as $file) {
+                    foreach ($fileList as $file) {
 
-                            $count++;
-                            $fileSize = filesizeFormatted($file['file_size'],false);
+                        $count++;
+                        $fileSize = filesizeFormatted($file['file_size'], false);
 
-                            if ($file['shared'] <> '') {
-                                $isShared = 'btn btn-primary';
-                                $isSharedVal = 'true';
-                            } else {
-                                $isShared = 'btn btn-default';
-                                $isSharedVal = 'false';
-                            }
+                        if ($file['shared'] <> '') {
+                            $isShared = 'btn btn-primary';
+                            $isSharedVal = 'true';
+                        } else {
+                            $isShared = 'btn btn-default';
+                            $isSharedVal = 'false';
+                        }
 
-                            //Check if file is binary in the database.
-                            if ($file['file_data']) {
-                                $previewSource = renderImage($file['file_mime'], $file['file_data']);
-                            } else {
-                                $previewSource = image_dir . $file['file_name'];
-                            }
+                        //Check if file is binary in the database.
+                        if ($file['file_data']) {
+                            $previewSource = renderImage($file['file_mime'], $file['file_data']);
+                        } else {
+                            $previewSource = image_dir . $file['file_name'];
+                        }
 
-                            //Preview modal
-                            echo "<tr data-index='" . $count . "'>
+                        //Preview modal
+                        echo "<tr data-index='" . $count . "'>
                             <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . $previewSource . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
 
-                            if ($adminIsCheck == "true" && multiBranch == 'true') {
-                                echo "<td class='col-xs-1'>
+                        if ($adminIsCheck == "true" && multiBranch == 'true') {
+                            echo "<td class='col-xs-1'>
                                 <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
-                            }
+                        }
 
-                            echo "<td class='col-xs-1'>" . $fileSize . "</td>
+                        echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $file['datetime'] . "</td>
                             <td class='col-xs-1'>
                             <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $file['id'] . "&guid=" . $file['guid'] . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
 
-                        }
+                    }
 
                     ?>
                     </tbody>
