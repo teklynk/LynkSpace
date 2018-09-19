@@ -20,12 +20,14 @@ $fileList = getAllUploads(1, 'upload', $_GET['loc_id'], 'ASC'); //returns an arr
 
 //Upload Action - Do the upload
 if (!empty($_POST) && $action == 'uploadFile') {
+//function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $user = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 
     fileUploads(
         $action == 'uploadFile',
         image_dir,
         2048000,
         'upload',
+        $_GET['loc_id'],
         $_SESSION['user_name'],
         $_GET['loc_id'],
         true,
