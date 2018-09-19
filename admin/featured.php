@@ -10,8 +10,6 @@ $_SESSION['file_referrer'] = 'featured.php';
 $sqlFeatured = mysqli_query($db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
-$pageMsg = "";
-
 //update table on submit
 if (!empty($_POST)) {
 
@@ -58,11 +56,8 @@ if (!empty($_POST)) {
         <div class="col-lg-12">
             <?php
 
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo flashMessageGet('success');
-            }
+            //Alert messages
+            echo flashMessageGet('success');
 
             //use default view
             if ($rowFeatured['use_defaults'] == 'true') {

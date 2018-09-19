@@ -75,7 +75,6 @@ if ($_GET['delete'] && !$_GET['confirm']) {
     header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
     echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
     exit();
-
 }
 
 //TODO: Refactor shared files logic and queries. Can be improved and reduced

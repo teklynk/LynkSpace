@@ -61,7 +61,8 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                         $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                         mysqli_query($db_conn, $pageUpdate);
 
-                        $pageMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='page.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The page " . $page_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                        //Alert messages
+                        flashMessageSet('success', "The page " . $page_title . " has been updated.");
                     }
 
                     $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
@@ -77,17 +78,18 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                         $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $pageInsert);
 
+                        //Alert Set messages
+                        flashMessageSet('success', "The new page has been added.");
+
                         header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
                         echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+                        exit();
                     }
                 }
 
-                //alert messages
-                if ($errorMsg != "") {
-                    echo $errorMsg;
-                } else {
-                    echo $pageMsg;
-                }
+                //Alert Show messages
+                echo flashMessageGet('success');
+
                 ?>
                 <div class="col-lg-12">
                     <form name="pageForm" class="dirtyForm" method="post">
@@ -143,9 +145,6 @@ $getEditpage = safeCleanStr($_GET['editpage']);
 
             } else {
 
-            $deleteMsg = "";
-            $deleteConfirm = "";
-            $pageMsg = "";
             $delPageId = safeCleanStr($_GET['deletepage']);
             $delPageGuid = safeCleanStr($_GET['guid']);
             $delPageToken = safeCleanStr($_GET['token']);
@@ -168,8 +167,13 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                 $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND guid='" . $delPageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $pageDelete);
 
-                $deleteMsg = "<div class='alert alert-success'>" . safeCleanStr($delPageTitle) . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-                echo $deleteMsg;
+                //Alert Set messages
+                flashMessageSet('success', safeCleanStr($delPageTitle) . " has been deleted.");
+
+                header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+                echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+                exit();
+
             }
 
             //update heading on submit
@@ -178,7 +182,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                 $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
                 mysqli_query($db_conn, $setupUpdate);
 
-                $pageMsg = "<div class='alert alert-success'>The pages have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                flashMessageSet('success', 'The pages have been updated.');
             }
 
             $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
@@ -206,11 +210,10 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                 <h2></h2>
                 <div>
                     <?php
-                    if ($errorMsg != "") {
-                        echo $errorMsg;
-                    } else {
-                        echo $pageMsg;
-                    }
+
+                    //Alert messages
+                    echo flashMessageGet('success');
+
                     ?>
                     <form name="pageForm" class="dirtyForm" method="post" action="">
                         <div class="form-group required">
