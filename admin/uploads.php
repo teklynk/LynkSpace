@@ -21,12 +21,8 @@ if ($_GET["share"]) {
 }
 
 $action = safeCleanStr($_POST["action"]);
-/*$getSharedFileName = str_replace('..', '', $urlParam);
-$getSharedFileNameArr = explode('/', $getSharedFileName);
-$getFileName = safeCleanStr($getSharedFileNameArr[3])?:null;
-$share_location_type = safeCleanStr($_POST['share_location_type'])?:null;
-$share_location_list = safeCleanStr($_POST['share_location_list'])?:null;*/
-$fileList = getAllUploads(1, 'upload', 'ASC'); //returns an array
+
+$fileList = getAllUploads(1, 'upload', $_GET['loc_id'], 'ASC'); //returns an array
 
 //Upload Action - Do the upload
 if ($action == 'uploadFile') {
@@ -35,7 +31,7 @@ if ($action == 'uploadFile') {
         image_dir,
         2048000,
         'upload',
-        $_GET["loc_id"],
+        $_GET['loc_id'],
         true,
         true,
         true,
@@ -81,10 +77,6 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 //TODO: Refactor shared files logic and queries. Can be imporved and reduced
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
-
-    //Check shared uploads for any shared images
-    //$sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, file_name, loc_id FROM uploads WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";");
-    //$rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
     $theFile = getSingleUploads($_GET["share"], $_GET["guid"]);
 

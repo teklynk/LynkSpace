@@ -156,7 +156,7 @@ function renderImage($mimeType, $fileData)
 }
 
 //File Uploader
-function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
+function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {
     global $uploadMsg;
     global $db_conn;
@@ -214,12 +214,12 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                     $replace = array('-', '-', '-', '-', '-', '-', '', '', '');
 
                     //Get file if file name matches existing filename else return null
-                    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' LIMIT 1;");
+                    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' AND loc_id=" . $loc_id . " LIMIT 1;");
                     $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
 
                     if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file){
                         //Update existing file in the database, where guid=$uploads_row['guid']
-                        $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "';";
+                        $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "' AND loc_id=" . $loc_id . ";";
                         mysqli_query($db_conn, $sqlUpdateUploads);
                     } else {
                         //Save uploaded file to the database
@@ -258,11 +258,11 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
     }
 }
 
-function getAllUploads($type_id=null, $type=null, $orderBy='DESC')
+function getAllUploads($type_id=null, $type=null, $loc_id, $orderBy='DESC')
 {
     global $db_conn;
 
-    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' ORDER BY datetime " . $orderBy . ";");
+    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc_id . " ORDER BY datetime " . $orderBy . ";");
     $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
 
     return $rowUploads;
@@ -697,79 +697,24 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
 }
 
 //Get list of shared files for the specific location id.
-function getSharedFilesJsonList($loc)
+function getFilesJsonList($loc)
 {
-    global $sharedFilesList;
-    global $sharedFilesListArr;
-    global $fileListJson;
-    global $fileListJsonSharedImages;
-    global $fileIgnoreArray;
-    global $db_conn;
+    $fileListJson = null;
 
-    $fileListJson[] = null;
-    $fileListJsonSharedImages[] = null;
-    $allimgfiles[] = null;
+    $fileList = getAllUploads(1, 'upload', $loc, 'ASC'); //returns an array
 
-    //Build a list of shared images
-    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC;");
-    while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
-
-        $sharedOptions = $rowSharedList['shared'];
-        $sharedFileName = $rowSharedList['filename'];
-
-        $sharedOptionsArr = explode(',', trim($sharedOptions));
-
-        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)) {
-            $sharedFilesList .= $sharedFileName . ',';
-        }
-
+    foreach ($fileList as $imgfiles) {
+        $fileListJson .= "{title: '" . $imgfiles['file_name'] . "', value: '" . image_url . $imgfiles['file_name'] . "'},"; //creates a json list of images
     }
 
-    $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
+    $fileListJson = ltrim($fileListJson, ',');
+    $fileListJson = rtrim($fileListJson, ',');
 
-    foreach ($sharedFilesListArr as $imgfilesShared) {
-        $locFilePath = str_replace($_GET['loc_id'], '1', image_url); //replace loc_id in image_url with 1
-
-        if ($imgfilesShared != '') {
-            $fileListJsonSharedImages[] .= "{title: '" . $imgfilesShared . "', value: '" . $locFilePath . $imgfilesShared . "'}"; //creates a json list of images
-        }
-    }
-
-    //Build list of images in uploads folder
-    if ($handle = opendir(image_dir)) {
-
-        while (false !== ($imgfile = readdir($handle))) {
-
-            if (in_array($imgfile, $fileIgnoreArray)) {
-                continue;
-            }
-
-            $allimgfiles[] = strtolower($imgfile);
-        }
-        closedir($handle);
-    }
-
-    foreach ($allimgfiles as $imgfiles) {
-        if ($imgfiles != '') {
-            $fileListJson[] .= "{title: '" . $imgfiles . "', value: '" . image_url . $imgfiles . "'}"; //creates a json list of images
-        }
-    }
-
-    //Merge the lists / arrays
-    $allImagesArr = array_merge($fileListJson, $fileListJsonSharedImages);
-    //Sort the merged arrays
-    arsort($allImagesArr);
-    //Convert merged array into a string
-    $allImagesStr = implode(',', $allImagesArr);
-    //Clean string
-    $allImagesStr = trim($allImagesStr, ',');
-
-    //Return json string
-    return $allImagesStr;
+    return $fileListJson;
 
 }
 
-function getPageJsonList($loc)
+function getPagesJsonList($loc)
 {
     global $linkListJson;
     global $db_conn;
