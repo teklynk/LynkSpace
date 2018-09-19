@@ -43,11 +43,11 @@ if ($action == 'uploadFile') {
 }
 
 //Delete confirm modal
-if ($_GET["delete"] && !$_GET["confirm"]) {
+if ($_GET['delete'] && !$_GET['confirm']) {
 
-    $theFile = getSingleUploads($_GET["delete"], $_GET["guid"]);
+    $theFile = getSingleUploads($_GET['delete'], $_GET['guid']);
 
-    if ($_GET["isshared"] == 'false') {
+    if ($_GET['isshared'] == 'false') {
         showModalConfirm(
             "confirm",
             "Delete File?",
@@ -65,7 +65,7 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
         );
     }
 
-} elseif ($_GET["delete"] && $_GET["confirm"] == 'yes' && $_GET['guid']) {
+} elseif ($_GET['delete'] && $_GET['confirm'] == 'yes' && $_GET['guid']) {
     //Remove and delete the file
     deleteUploads(image_dir, $_GET['delete'], $_GET['guid']);
     //Redirect back to uploads page
@@ -74,11 +74,11 @@ if ($_GET["delete"] && !$_GET["confirm"]) {
 
 }
 
-//TODO: Refactor shared files logic and queries. Can be imporved and reduced
+//TODO: Refactor shared files logic and queries. Can be improved and reduced
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
-    $theFile = getSingleUploads($_GET["share"], $_GET["guid"]);
+    $theFile = getSingleUploads($_GET['share'], $_GET['guid']);
 
     //Share setting/options Modal with Form
     showModalConfirm(
