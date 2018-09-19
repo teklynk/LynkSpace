@@ -1439,6 +1439,28 @@ function renderImage($mimeType, $fileData)
     return $imageSource;
 }
 
+//$type = success, warning, info, danger
+function flashMessageSet($type, $message)
+{
+    if (!isset($_SESSION['message'][$type])) {
+        $_SESSION['message'][$type] = "<div class='alert alert-" . $type . "'>" . $message . "</div>";
+    }
+
+    return $_SESSION['message'][$type];
+}
+
+//$type = success, warning, info, danger
+function flashMessageGet($type)
+{
+    $message = isset($_SESSION['message'][$type]) ? $_SESSION['message'][$type] : null;
+
+    if (!is_null($message)) {
+        unset($_SESSION['message'][$type]);
+    }
+
+    return $message;
+}
+
 //redirect to default location if loc_id or script name not defined
 if (empty($_GET['loc_id'])) {
 
