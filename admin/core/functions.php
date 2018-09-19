@@ -148,9 +148,10 @@ function importFromCsv($fileInput, $dbTable)
     return false;
 }
 
-function renderImage($mimeType, $file)
+//Renders binary images from database or other source.
+function renderImage($mimeType, $fileData)
 {
-    $imageSource = "data:image/" . $mimeType . ";base64," . base64_encode($file) . "";
+    $imageSource = "data:image/" . $mimeType . ";base64," . base64_encode($fileData) . "";
     return $imageSource;
 }
 

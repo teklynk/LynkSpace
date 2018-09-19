@@ -1432,6 +1432,13 @@ function getKeywords($loc, $pageId = null)
     echo $keywords;
 }
 
+//Renders binary images from database or other source.
+function renderImage($mimeType, $fileData)
+{
+    $imageSource = "data:image/" . $mimeType . ";base64," . base64_encode($fileData) . "";
+    return $imageSource;
+}
+
 //redirect to default location if loc_id or script name not defined
 if (empty($_GET['loc_id'])) {
 
