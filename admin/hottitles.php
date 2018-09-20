@@ -5,9 +5,6 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'hottitles.php';
 
-$pageMsg = '';
-$deleteMsg = '';
-
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
@@ -27,20 +24,9 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 <?php
 
 if (safeCleanStr($_GET['update']) == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The hot titles has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
-    if ($errorMsg != "") {
-        echo $errorMsg;
-    } else {
-        echo $pageMsg;
-    }
-
-} else {
-    $pageMsg = '';
-}
-
-if ($deleteMsg != '') {
-    echo $deleteMsg;
+	flashMessageSet('success', 'The hot titles has been updated.');
+	echo flashMessageGet('success');
+	exit();
 }
 
 $delhottitlesId = safeCleanStr($_GET['deletehottitles']);
@@ -65,8 +51,9 @@ if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
     $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND guid=" . $delhottitlesGuid . " AND loc_id=" . $_GET['loc_id'] . ";";
     mysqli_query($db_conn, $hottitlesDelete);
 
-    $deleteMsg = "<div class='alert alert-success'>" . $delhottitlesTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    echo $deleteMsg;
+    flashMessageSet('success', $delhottitlesTitle . " has been deleted.");
+    echo flashMessageGet('success');
+
 }
 
 //update heading on submit
@@ -79,7 +66,7 @@ if (!empty($_POST['save_main'])) {
     mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $hottitles_count; $i++) {
-        $errorMsg = "";
+
         $hottitles_sort = safeCleanStr($_POST['hottitles_sort'][$i]);
         $hottitles_title = safeCleanStr($_POST['hottitles_title'][$i]);
         $hottitles_url = validateUrl($_POST['hottitles_url'][$i]);
@@ -89,10 +76,10 @@ if (!empty($_POST['save_main'])) {
         $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
-    if ($errorMsg == "") {
-        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
-        echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
-    }
+
+	flashMessageSet('success', 'Successfully Updated.');
+	echo flashMessageGet('success');
+
 }
 
 if ($_POST['add_hottitles']) {
@@ -101,7 +88,6 @@ if ($_POST['add_hottitles']) {
     $hottitles_url = validateUrl(safeCleanStr($_POST['hottitles_url']));
     $location_type = safeCleanStr($_POST['location_type']);
 
-    $errorMsg = "";
     //Insert Hot Titles
     if (strpos($hottitles_url, 'econtent') || strpos($hottitles_url, 'dynamic') || strpos($hottitles_url, 'static')) {
         if (!empty($hottitles_sort)) {
@@ -115,8 +101,8 @@ if ($_POST['add_hottitles']) {
         header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
         echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
     } else {
-        $pageMsg = "<div class='alert alert-danger'>" . $hottitles_url . " is not a valid LS2 PAC RSS feed.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $pageMsg;
+	    flashMessageSet('danger', $hottitles_url . " is not a valid RSS feed.");
+	    echo flashMessageGet('danger');
     }
 
 }
