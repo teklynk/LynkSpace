@@ -187,6 +187,7 @@ CREATE TABLE `hottitles` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `url` text NOT NULL,
+  `guid` text NOT NULL,
   `loc_type` text NOT NULL,
   `sort` int(11) NOT NULL,
   `active` text NOT NULL,

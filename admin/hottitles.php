@@ -23,12 +23,6 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 </div>
 <?php
 
-if (safeCleanStr($_GET['update']) == 'true') {
-	flashMessageSet('success', 'The hot titles has been updated.');
-	echo flashMessageGet('success');
-	exit();
-}
-
 $delhottitlesId = safeCleanStr($_GET['deletehottitles']);
 $delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 $delhottitlesGuid = safeCleanStr($_GET['guid']);
@@ -77,8 +71,8 @@ if (!empty($_POST['save_main'])) {
         mysqli_query($db_conn, $hottitlesUpdate);
     }
 
-	flashMessageSet('success', 'Successfully Updated.');
-	echo flashMessageGet('success');
+    flashMessageSet('success', 'The hot titles section has been updated.');
+    echo flashMessageGet('success');
 
 }
 
@@ -95,14 +89,17 @@ if ($_POST['add_hottitles']) {
         } else {
             $hottitles_sort = 0;
         }
+
         $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, guid, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . getGuid() . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
-        header("Location: hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true", true, 302);
-        echo "<script>window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&update=true';</script>";
+        flashMessageSet('success', 'The hot titles has been updated.');
+        echo flashMessageGet('success');
+
     } else {
-	    flashMessageSet('danger', $hottitles_url . " is not a valid RSS feed.");
-	    echo flashMessageGet('danger');
+
+        flashMessageSet('danger', $hottitles_url . " is not a valid RSS feed.");
+        echo flashMessageGet('danger');
     }
 
 }
@@ -162,14 +159,16 @@ if ($_GET['loc_id'] != 1) {
                     <div class="col-lg-10">
                         <div class="form-group required">
                             <label for="hottitles_title">Title</label>
-                            <input class="form-control" type="text" name="hottitles_title" id="hottitles_title" maxlength="255"
+                            <input class="form-control" type="text" name="hottitles_title" id="hottitles_title"
+                                   maxlength="255"
                                    placeholder="Title" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group required">
                             <label for="hottitles_url">Saved Search RSS URL</label>
-                            <input class="form-control" type="url" name="hottitles_url" id="hottitles_url" maxlength="255"
+                            <input class="form-control" type="url" name="hottitles_url" id="hottitles_url"
+                                   maxlength="255"
                                    pattern="<?php echo urlValidationPattern; ?>"
                                    placeholder="http://mydomain.com:8080/list/dynamic/8675309/rss" required>
                         </div>
@@ -219,7 +218,8 @@ if ($_GET['loc_id'] != 1) {
             <form name="hottitlesForm" class="dirtyForm" method="post" action="">
                 <div class="form-group required">
                     <label>Heading</label>
-                    <input type="text" class="form-control count-text" name="main_heading" id="main_heading"  maxlength="255"
+                    <input type="text" class="form-control count-text" name="main_heading" id="main_heading"
+                           maxlength="255"
                            value="<?php echo $rowSetup['hottitlesheading']; ?>" placeholder="New Titles" autofocus
                            required>
                 </div>
