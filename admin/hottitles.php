@@ -175,8 +175,7 @@ if ($_GET['loc_id'] != 1) {
                     </div>
                     <div class="col-lg-12">
                         <?php
-
-                        if ($adminIsCheck == "false") {
+                        if ($adminIsCheck == "true") {
                             ?>
                             <div class="form-group">
                                 <label for="location_type">Location Group</label>
