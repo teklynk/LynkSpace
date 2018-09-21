@@ -26,9 +26,6 @@ if (!empty($_POST) && $action == 'uploadFile') {
         $action == 'uploadFile',
         image_dir,
         2048000,
-        true,
-        200,
-        200,
         'upload',
         $_GET['loc_id'],
         $_SESSION['user_name'],
@@ -39,7 +36,11 @@ if (!empty($_POST) && $action == 'uploadFile') {
         array('png', 'gif', 'jpg')
     );
 
-    flashMessageSet('success', 'The file has been uploaded.');
+    if ($uploadError == false) {
+	    flashMessageSet('success', 'The file has been uploaded.');
+    } else {
+	    flashMessageSet('danger', 'Invalid file format or the file is too large.');
+    }
 
     //Redirect
     header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -169,6 +170,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
             <?php
             //Alert messages
             echo flashMessageGet('success');
+            echo flashMessageGet('danger');
 
             if (!is_writable('../uploads')) {
                 echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
@@ -232,7 +234,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                         //Check if file is binary in the database.
                         if ($file['file_data']) {
-                            $previewSource = renderImage($file['file_mime'], $file['file_data']);
+                            $previewSource = renderBinaryImage($file['file_mime'], $file['file_data']);
                         } else {
                             $previewSource = image_dir . $file['file_name'];
                         }

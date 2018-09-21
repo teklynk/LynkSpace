@@ -1433,7 +1433,7 @@ function getKeywords($loc, $pageId = null)
 }
 
 //Renders binary images from database or other source.
-function renderImage($mimeType, $fileData)
+function renderBinaryImage($mimeType, $fileData)
 {
     $imageSource = "data:image/" . $mimeType . ";base64," . base64_encode($fileData) . "";
     return $imageSource;
