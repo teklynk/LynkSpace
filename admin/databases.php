@@ -202,15 +202,17 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
             $customerInsert = "INSERT INTO customers (icon, image, name, link, guid, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . getGuid() . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $customerInsert);
 
-            header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
-            echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
+	        flashMessageSet('success','The events section has been updated.');
+
+	        //Redirect back to uploads page
+	        header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
+	        echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "';</script>";
+	        exit();
         }
     }
 
-    //alert messages
-    if ($customerMsg != "") {
-        echo $customerMsg;
-    }
+	//Alert messages
+	echo flashMessageGet('success');
     ?>
     <div class="col-lg-8">
         <form name="customerForm" class="dirtyForm" method="post" action="">
@@ -408,7 +410,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
         }
 
-        echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&databaseupdated=true';</script>";
+	    flashMessageSet('success','Databases section has been updated');
 
     }
 
@@ -595,9 +597,8 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
     <h2></h2>
     <div>
         <?php
-        if ($customerMsg != "") {
-            echo $customerMsg;
-        }
+        //Alert messages
+        echo flashMessageGet('success');
         ?>
         <form name="customerForm" class="dirtyForm" method="post" action="">
             <div class="form-group required">

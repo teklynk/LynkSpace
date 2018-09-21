@@ -39,8 +39,12 @@ if (!empty($_POST)) {
     $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . ";");
     $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
-    $pageMsg = "<div class='alert alert-success'>The events section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+	flashMessageSet('success','The events section has been updated.');
 
+	//Redirect back to uploads page
+	header("Location: events.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+	echo "<script>window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	exit();
 }
 
 ?>
@@ -58,11 +62,8 @@ if (!empty($_POST)) {
     <div class="row">
         <div class="col-lg-8">
             <?php
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
+            //Alert messages
+            echo flashMessageGet('success');
 
             //use default view
             if ($rowEvent['use_defaults'] == 'true') {

@@ -38,6 +38,11 @@ if (!empty($_POST)) {
     $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 
     flashMessageSet('success','The featured section has been updated.');
+
+	//Redirect back to uploads page
+	header("Location: featured.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+	echo "<script>window.location.href='featured.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	exit();
 }
 
 ?>

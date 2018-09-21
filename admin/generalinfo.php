@@ -33,8 +33,12 @@ if (!empty($_POST)) {
         mysqli_query($db_conn, $generalinfoInsert);
     }
 
-    $pageMsg = "<div class='alert alert-success'>The general info section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+	flashMessageSet('success', 'The general info section has been updated.');
 
+	//Redirect back to uploads page
+	header("Location: generalinfo.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+	echo "<script>window.location.href='generalinfo.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	exit();
 }
 
 ?>
@@ -52,11 +56,10 @@ if (!empty($_POST)) {
 <div class="row">
     <div class="col-lg-12">
         <?php
-        if ($errorMsg != "") {
-            echo $errorMsg;
-        } else {
-            echo $pageMsg;
-        }
+
+        //Alert messages
+        echo flashMessageGet('success');
+
         //use default view
         if ($rowGeneralinfo['use_defaults'] == 'true') {
             $selDefaults = "CHECKED";

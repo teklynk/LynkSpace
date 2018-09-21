@@ -44,8 +44,12 @@ if (!empty($_POST)) {
     $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . ";");
     $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
-    $pageMsg = "<div class='alert alert-success'>The contact section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+	flashMessageSet('success','The contact section has been updated.');
 
+	//Redirect back to uploads page
+	header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+	echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	exit();
 }
 
 ?>
@@ -68,11 +72,9 @@ if (!empty($_POST)) {
     <div class="row">
         <div class="col-lg-8">
             <?php
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
+            //Alert messages
+            echo flashMessageGet('success');
+
             //use default view
             if ($rowContact['use_defaults'] == 'true') {
                 $selDefaults = "CHECKED";

@@ -90,8 +90,12 @@ if ( $_POST['save_main'] ) {
 	$sqlSetup = mysqli_query( $db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";" );
 	$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
-	$pageMsg = "<div class='alert alert-success'>Theme has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+	flashMessageSet('success','Theme has been updated');
 
+	//Redirect back to uploads page
+	header("Location: editor.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
+	echo "<script>window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	exit();
 }
 
 ?>
@@ -109,11 +113,9 @@ if ( $_POST['save_main'] ) {
 
         <div class="col-lg-8">
 			<?php
-			if ( $errorMsg != "" ) {
-				echo $errorMsg;
-			} else {
-				echo $pageMsg;
-			}
+			//Alert messages
+			echo flashMessageGet('success');
+
 			//use default theme
 			if ( $rowSetup['theme_use_defaults'] == 'true' ) {
 				$selThemeDefaults = "CHECKED";
