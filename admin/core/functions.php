@@ -178,12 +178,13 @@ function renderImage($mimeType, $fileData)
 }
 
 //File Uploader
-function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $user = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
+function fileUploads($postAction, $target, $maxFileSize = 2048000, $thumbNail = true, $thumbWidth = '50%', $thumbHeight = '50%', $type = null, $type_id = null, $user = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 {
     global $uploadMsg;
     global $db_conn;
 
     if ($postAction) {
+
         //Create upload folder if it does not exist.
         if (is_numeric($_GET['loc_id'])) {
             if (!file_exists($target)) {
@@ -192,13 +193,17 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
         }
 
         //Gets the original file name before converting it.
-        $original_file = strtolower(basename($_FILES["fileToUpload"]["name"]));
+        $original_file = strtolower(basename($_FILES['fileToUpload']['name']));
 
         //Check if using uniqueFileNames. Prepend unique string to the front of file names
         if ($uniqueFileNames == true) {
-            $target_file = strtolower($target . uniqid() . '-' . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+            //Creates a unique id for file name
+            $uniqueId = uniqid();
+            $target_file = strtolower($target . $uniqueId . '-' . basename($_FILES['fileToUpload']['name'])) ?: NULL;
+            $target_thumb_file = $target . 'thumb-' . $uniqueId . '-' . basename( $_FILES['fileToUpload']['name'] ) ?: NULL;
         } else {
-            $target_file = strtolower($target . basename($_FILES["fileToUpload"]["name"])) ?: NULL;
+            $target_file = strtolower($target . basename($_FILES['fileToUpload']['name'])) ?: NULL;
+            $target_thumb_file = strtolower($target . 'thumb_' . basename($_FILES['fileToUpload']['name'])) ?: NULL;
         }
 
         //Get data of file. Used to store file in database as a blob
@@ -221,6 +226,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
             //Get file info
             $fileExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)) ?: NULL;
             $fileName = strtolower(pathinfo($target_file, PATHINFO_BASENAME)) ?: NULL;
+            $thumbNailName = strtolower(pathinfo($target_thumb_file, PATHINFO_BASENAME)) ?: NULL;
             $fileMime = strtolower(basename($_FILES['fileToUpload']['type'])) ?: NULL;
             $fileSize = basename($_FILES['fileToUpload']['size']) ?: NULL;
             $fileSizeLimit = $maxFileSize;
@@ -235,6 +241,13 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                     $search = array('(', ')', ' ', '\'', ':', ';', '@', '!', '?');
                     $replace = array('-', '-', '-', '-', '-', '-', '', '', '');
 
+                    //Creates a thumbnail if the file type is an image
+                    if ($thumbNail == true) {
+                        if (is_array(getimagesize($target_file))) {
+                            resizeImage($target_file, $target_thumb_file, $thumbWidth, $thumbHeight);
+                        }
+                    }
+
                     //Get file if file name matches existing filename else return null
                     $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' AND loc_id=" . $loc_id . " LIMIT 1;");
                     $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
@@ -245,7 +258,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                         mysqli_query($db_conn, $sqlUpdateUploads);
                     } else {
                         //Save uploaded file to the database
-                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . str_replace($search, $replace, $fileName) . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, thumbnail_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . $fileName . "', '" . $thumbNailName . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
                         mysqli_query($db_conn, $sqlInsertUploads);
                     }
 
@@ -325,14 +338,12 @@ function deleteUploads($target, $arg_id, $guid)
 }
 
 //Resizes image for thumbnails
-function resizeImage($imagePath, $resizedFileName, $width, $height)
+function resizeImage($imagePath, $resizedFileName, $width = '200', $height = '200')
 {
     $image = new Imagick();
     $image_filehandle = fopen($imagePath, 'a+');
     $image->readImageFile($image_filehandle);
-
     $image->scaleImage($width, $height, false);
-
     $image_resize_filehandle = fopen($resizedFileName, 'a+');
     $image->writeImageFile($image_resize_filehandle);
 }

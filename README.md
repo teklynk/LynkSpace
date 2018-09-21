@@ -27,6 +27,7 @@ curl
 xml
 zip
 imagick
+gd
 mbstring
 mcrypt
 mysqlnd

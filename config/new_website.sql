@@ -1187,6 +1187,7 @@ CREATE TABLE `uploads` (
   `type_id` int(11) NOT NULL,
   `orig_file_name` text NOT NULL,
   `file_name` text NOT NULL,
+  `thumbnail_name` text,
   `file_data` longblob,
   `file_ext` text NOT NULL,
   `file_mime` text NOT NULL,
