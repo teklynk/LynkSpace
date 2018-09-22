@@ -63,6 +63,7 @@ if ($getCustSection == $rowSections['section']) {
 //Get sections from loc_id
 $sectionCount = 1;
 $isSectionSelected = '';
+$maxSections = 1;
 $custMenuStr = "<option value='1'>1</option>";
 
 while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
@@ -111,7 +112,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                     <div class="form-group">
                         <h1 class="page-header">
                             <?php
-                            if ($_GET['newcustomer'] == 'true' || $_GET['addsection'] == 'true') {
+                            if ($_GET['newcustomer'] == 'true') {
                                 echo "Databases (" . $getCustSection . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
                             } elseif ($_GET['editcustomer']) {
                                 echo "Databases (" . $getCustSection . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
