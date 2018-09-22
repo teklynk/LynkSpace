@@ -103,15 +103,17 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             $servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $servicesInsert);
 
+            flashMessageSet('success','The services section has been updated.');
+
+            //Redirect back to uploads page
             header("Location: services.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
             echo "<script>window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+            exit();
         }
     }
 
-    //alert messages
-    if ($serviceMsg != "") {
-        echo $serviceMsg;
-    }
+    //Alert messages
+    echo flashMessageGet('success');
     ?>
     <div class="col-lg-8">
         <form name="serviceForm" class="dirtyForm" method="post" action="">
@@ -227,8 +229,8 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         $servicesDelete = "DELETE FROM services WHERE id=" . $delserviceId . " AND guid='" . $delserviceGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $servicesDelete);
 
-        $deleteMsg = "<div class='alert alert-success'>" . $delserviceTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $deleteMsg;
+        flashMessageSet('success', $delserviceTitle . " has been deleted.");
+        echo flashMessageGet('success');
     }
 
     //update heading on submit
@@ -250,7 +252,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
         }
 
-        $serviceMsg = "<div class='alert alert-success'>The services have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        flashMessageSet('success','The services section has been updated.');
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
@@ -296,9 +298,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
     <h2></h2>
     <div>
         <?php
-        if ($serviceMsg != "") {
-            echo $serviceMsg;
-        }
+        echo flashMessageGet('success');
         ?>
         <form name="servicesForm" class="dirtyForm" method="post">
             <div class="form-group required">

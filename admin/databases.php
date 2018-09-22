@@ -8,8 +8,6 @@ $_SESSION['file_referrer'] = 'databases.php';
 $getCustSection = isset($_GET['section']) ? safeCleanStr($_GET['section']) : false;
 $getCustPreview = isset($_GET['preview']) ? safeCleanStr($_GET['preview']) : false;
 
-$customerMsg = '';
-
 //Redirect to section=1 if section is not in querystring
 if ($getCustSection == "" && $_GET['loc_id']) {
     header("Location: databases.php?section=1&loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -65,7 +63,6 @@ if ($getCustSection == $rowSections['section']) {
 //Get sections from loc_id
 $sectionCount = 1;
 $isSectionSelected = '';
-$maxSections = '';
 $custMenuStr = "<option value='1'>1</option>";
 
 while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
@@ -186,7 +183,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
             $customerUpdate = "UPDATE customers SET name='" . $customer_name . "', icon='" . $customer_icon_select . "', image='" . $customer_image_select . "', catid='" . $customer_exist_cat . "', link='" . $customer_link . "', content='" . $customer_content . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thecustomerId . " AND loc_id=" . $_GET['loc_id'] . ";";
             mysqli_query($db_conn, $customerUpdate);
 
-            $customerMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The database " . $customer_name . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            flashMessageSet('success',"The database " . $customer_name . " has been updated.");
         }
 
         $sqlCustomer = mysqli_query($db_conn, "SELECT id, icon, image, name, link, catid, section, content, guid, featured, active, author_name, sort, datetime, loc_id FROM customers WHERE section='" . $getCustSection . "' AND id=" . $thecustomerId . " AND guid='" . $thecustomerGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
@@ -202,7 +199,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
             $customerInsert = "INSERT INTO customers (icon, image, name, link, guid, catid, section, content, featured, active, sort, author_name, loc_id) VALUES ('" . $customer_icon_select . "', '" . $customer_image_select . "', '" . $customer_name . "', '" . $customer_link . "', '" . getGuid() . "', " . $customer_exist_cat . ", '" . $getCustSection . "', '" . $customer_content . "', 'false', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $customerInsert);
 
-	        flashMessageSet('success','The events section has been updated.');
+	        flashMessageSet('success','The database has been added.');
 
 	        //Redirect back to uploads page
 	        header("Location: databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
@@ -277,7 +274,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
                 <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
                         data-size="10" name="customer_exist_cat" id="customer_exist_cat" title="Choose a category">
                     <?php
-                    echo "<option value='0'>None</option>";
+                    echo "<option value='0' selected>None</option>";
                     //get and build category list, find selected
                     $sqlCustExistCat = mysqli_query($db_conn, "SELECT id, name, section, sort, cust_loc_id FROM category_customers WHERE section='" . $getCustSection . "' AND cust_loc_id=" . $_SESSION['loc_id'] . " ORDER BY sort, name;");
                     while ($rowExistCustCat = mysqli_fetch_array($sqlCustExistCat, MYSQLI_ASSOC)) {
@@ -319,9 +316,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
     <?php
 } else {
-    $deleteMsg = "";
     $deleteConfirm = "";
-    $customerMsg = "";
     $delcustomerId = safeCleanStr($_GET['deletecustomer']);
     $delcustomerGuid = safeCleanStr($_GET['guid']);
     $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
@@ -372,11 +367,11 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
     //Display deleted message
     if ($_GET['sectiondeleted'] == true) {
-        $deleteMsg = "<div class='alert alert-success'>Section " . $getCustSection . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=1&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $deleteMsg;
+        flashMessageSet('success', "Section " . $getCustSection . " has been deleted.");
+        echo flashMessageGet('success');
     } elseif ($_GET['databasedeleted'] == true) {
-        $deleteMsg = "<div class='alert alert-success'>" . $delcustomerName . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $deleteMsg;
+        flashMessageSet('success', $delcustomerName . " has been deleted.");
+        echo flashMessageGet('success');
     }
 
     //update heading on submit
@@ -414,11 +409,6 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
     }
 
-    //Display updated message
-    if ($_GET['databaseupdated'] == true) {
-        $customerMsg = "<div class='alert alert-success'>The databases have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-    }
-
     $sqlSections = mysqli_query($db_conn, "SELECT heading, content, section, use_defaults FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";");
     $rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
@@ -445,12 +435,11 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         $custCatDelete = "DELETE FROM category_customers WHERE id=" . $delCatId . " AND cust_loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $custCatDelete);
 
-        $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $deleteMsg;
+        flashMessageSet('success', $delCatTitle . " has been deleted.");
+        echo flashMessageGet('success');
     }
 
     //rename category
-    $renameMsg = "";
     $renameConfirm = "";
     $renameCatId = $_GET['renamecat'];
     $renameCatTitle = safeCleanStr(addslashes($_GET['newcatname']));
@@ -462,8 +451,8 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         $custRenameCatUpdate = "UPDATE category_customers SET name='" . $renameCatTitle . "', sort='" . $renameCatSort . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id='$renameCatId';";
         mysqli_query($db_conn, $custRenameCatUpdate);
 
-        $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $renameMsg;
+        flashMessageSet('success', $renameCatTitle . " category has been updated.");
+        echo flashMessageGet('success');
     }
 
     // add category
@@ -476,14 +465,17 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         $custAddCat = "INSERT INTO category_customers (name, section, sort, author_name, datetime, cust_loc_id) VALUES ('" . safeCleanStr($_GET['addcatname']) . "', '" . $getCustSection . "', " . safeCleanStr($_GET['addcatsort']) . ", '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
         mysqli_query($db_conn, $custAddCat);
 
+        flashMessageSet('success', safeCleanStr($_GET['addcatname']) . " category has been updated.");
+
         echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $_GET['addcatname'] . "';</script>";
+        exit();
 
     }
 
     // add category message
     if (!empty($_GET['addcat'])) {
-        $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $_GET['addcat'] . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-        echo $addMsg;
+        flashMessageSet('success', $_GET['addcat'] . " category has been added.");
+        flashMessageGet('success');
     }
 
     //Modal preview box

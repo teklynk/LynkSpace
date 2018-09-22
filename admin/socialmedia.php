@@ -44,8 +44,7 @@ if (!empty($_POST)) {
     $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . ";");
     $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 
-    $pageMsg = "<div class='alert alert-success'>The social media section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='socialmedia.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
-
+    flashMessageSet('success', "The social media section has been updated.");
 }
 
 ?>
@@ -63,11 +62,8 @@ if (!empty($_POST)) {
 <div class="row">
     <div class="col-lg-8">
         <?php
-        if ($errorMsg != "") {
-            echo $errorMsg;
-        } else {
-            echo $pageMsg;
-        }
+        echo flashMessageGet('success');
+
         //use default view
         if ($rowSocial['use_defaults'] == 'true') {
             $selDefaults = "CHECKED";
