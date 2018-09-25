@@ -95,7 +95,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
                             data-size="10" name="site_theme" id="site_theme">
                         <?php
-                        getThemesDropdownList($rowConfig['theme']);
+                        echo getThemesDropdownList($rowConfig['theme']);
                         ?>
                     </select>
                 </div>

@@ -148,7 +148,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                         data-size="10" name="service_icon_select" id="service_icon_select" title="Choose an icon">
                     <option value="">None</option>
                     <?php
-                    getIconDropdownList($rowServices['icon']);
+                    echo getIconDropdownList($rowServices['icon']);
                     ?>
                 </select>
             </div>

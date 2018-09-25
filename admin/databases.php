@@ -247,7 +247,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
                         data-size="10" name="customer_icon_select" id="customer_icon_select">
                     <option value="">None</option>
                     <?php
-                    getIconDropdownList($rowCustomer['icon']);
+                    echo getIconDropdownList($rowCustomer['icon']);
                     ?>
                 </select>
             </div>
