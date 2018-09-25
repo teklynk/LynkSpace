@@ -54,7 +54,7 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
             } else {
                 $loginFailed = true;
                 echo "<style>#wrapper {padding-left: 0 !important;}</style>";
-                echo "<div class='alert alert-danger' role='alert'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+                echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
                 die();
             }
 
@@ -315,6 +315,7 @@ function deleteUploads($target, $arg_id, $guid)
     $fileName = $uploads_row['file_name'];
 
     if ($arg_id == $uploads_row['id'] && $guid == $uploads_row['guid']) {
+
         //Remove file from the database
         $uploads_sql = "DELETE FROM uploads WHERE id = " . $arg_id . " AND guid = '" . $guid . "' LIMIT 1;";
         mysqli_query($db_conn, $uploads_sql) OR die('SQL Error: ' . $uploads_sql);
@@ -421,6 +422,8 @@ function getThemesDropdownList($theme_selected)
     // Get theme names from themes folder
     $themeDirectories = glob('../themes/*', GLOB_ONLYDIR);
 
+    $themDropDownList = "";
+
     // Build themes drop down list
     foreach ($themeDirectories as $themes) {
         $themes = str_replace('../themes/', '', $themes);
@@ -433,15 +436,18 @@ function getThemesDropdownList($theme_selected)
             $isThemeSelected = '';
         }
 
-        echo "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords($themes) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords($themes) . "</option>";
+        $themDropDownList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords($themes) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords($themes) . "</option>";
 
     }
+    return $themDropDownList;
 }
 
 //Fontawesome icon list
 function getIconDropdownList($icon_selected)
 {
     global $db_conn;
+
+    $iconDropDownList = "";
 
     $sqlServicesIcon = mysqli_query($db_conn, "SELECT icon FROM icons_list ORDER BY icon ASC;");
     while ($rowIcon = mysqli_fetch_array($sqlServicesIcon, MYSQLI_ASSOC)) {
@@ -451,8 +457,10 @@ function getIconDropdownList($icon_selected)
         } else {
             $iconCheck = '';
         }
-        echo "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-" . $icon . "' value='" . $icon . "' " . $iconCheck . ">" . $icon . "</option>";
+
+        $iconDropDownList .= "<option class='icon-select-option' data-ays-ignore='true' data-icon='fa fa-" . $icon . "' value='" . $icon . "' " . $iconCheck . ">" . $icon . "</option>";
     }
+    return $iconDropDownList;
 }
 
 //Get gravatar image based on users email value
@@ -460,13 +468,13 @@ function getGravatar($email, $size)
 {
     $default = "//cdn2.iconfinder.com/data/icons/basic-4/512/user-24.png";
 
-    return "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size . "&secure=true";
+    return "//www.gravatar.com/avatar/" . md5(strtolower(trim((STRING)$email))) . "?d=" . urlencode($default) . "&s=" . $size . "&secure=true";
 }
 
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr)
 {
-    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES);
+    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES, 'UTF-8' , true);
 }
 
 //escape Quotes in textareas and string values - Escape special characters in a string
@@ -497,27 +505,13 @@ function sanitizeInt($cleanInt) {
 //validate url - Check if the variable $cleanStr is a valid URL
 function validateUrl($cleanStr)
 {
-    global $errorMsg;
-    if (!filter_var($cleanStr, FILTER_VALIDATE_URL) == false) {
-        return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
-    } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-
-        return false;
-    }
+    return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_URL, FILTER_FLAG_QUERY_REQUIRED);
 }
 
 //validate email - Check if the variable $email is a valid email address
 function validateEmail($cleanStr)
 {
-    global $errorMsg;
-    if (!filter_var($cleanStr, FILTER_VALIDATE_EMAIL) === false) {
-        return filter_var(trim($cleanStr), FILTER_SANITIZE_EMAIL);
-    } else {
-        $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " Email is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
-
-        return false;
-    }
+    return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_EMAIL);
 }
 
 //Gets clients real IP address
@@ -727,7 +721,8 @@ function getImageDropdownList($loc, $imageDir, $image_selected)
             $fileList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $file . "'/>&nbsp;" . $file . "</span>\" value='" . $location . $file . "' $imageCheck>" . $file . "</option>";
         }
     }
-    echo $fileList;
+
+    return $fileList;
 
 }
 
@@ -797,6 +792,8 @@ function showModalConfirm($id, $title, $body, $action, $custom = false)
     </div>
     </div>
     </div>";
+
+    return true;
 }
 
 // Modal Preview using iframe
@@ -816,6 +813,8 @@ function showModalPreview($id)
     </div>
     </div>
     </div>";
+
+    return true;
 }
 
 // Script to test if extensions/modules are installed and permissions are correct on this server
@@ -862,6 +861,8 @@ function checkDependencies()
             echo "<div class='alert alert-danger'><span>" . $file . " does not exist and/or is not writable.</span></div>";
         }
     }
+
+    return true;
 }
 
 //Copy folder contents to another
