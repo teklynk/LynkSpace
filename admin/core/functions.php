@@ -480,7 +480,18 @@ function sqlEscapeStr($cleanStr)
 //sanitize string - Remove all HTML tags from a string:
 function sanitizeStr($cleanStr)
 {
-    return filter_var(trim($cleanStr), FILTER_SANITIZE_STRING);
+    return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_STRING);
+}
+
+//sanitize integers - removes anything that is not a number
+function sanitizeInt($cleanInt) {
+    $cleanInt = preg_replace("/[^0-9]/","", $cleanInt);
+
+    if ($cleanInt == '') {
+        $cleanInt = 0;
+    }
+
+    return filter_var(trim((INT)$cleanInt), FILTER_SANITIZE_NUMBER_INT);
 }
 
 //validate url - Check if the variable $cleanStr is a valid URL
