@@ -466,7 +466,7 @@ function getGravatar($email, $size)
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr)
 {
-    return htmlspecialchars(strip_tags(trim($cleanStr)), ENT_QUOTES);
+    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES);
 }
 
 //escape Quotes in textareas and string values - Escape special characters in a string
@@ -474,20 +474,20 @@ function sqlEscapeStr($cleanStr)
 {
     global $db_conn;
 
-    return mysqli_real_escape_string($db_conn, trim($cleanStr));
+    return mysqli_real_escape_string($db_conn, trim((STRING)$cleanStr));
 }
 
-//sanitize string - Remove all HTML tags from a string:
+//sanitize string - Remove all HTML tags from a string
 function sanitizeStr($cleanStr)
 {
-    return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_STRING);
+    return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 }
 
 //sanitize integers - removes anything that is not a number
 function sanitizeInt($cleanInt) {
     $cleanInt = preg_replace("/[^0-9]/","", $cleanInt);
 
-    if ($cleanInt == '') {
+    if ($cleanInt == "") {
         $cleanInt = 0;
     }
 
@@ -498,7 +498,7 @@ function sanitizeInt($cleanInt) {
 function validateUrl($cleanStr)
 {
     global $errorMsg;
-    if (!filter_var($cleanStr, FILTER_VALIDATE_URL) === false) {
+    if (!filter_var($cleanStr, FILTER_VALIDATE_URL) == false) {
         return filter_var(trim($cleanStr), FILTER_SANITIZE_URL);
     } else {
         $errorMsg = "<div class='alert alert-danger fade in' data-alert='alert'>" . $cleanStr . " URL is not valid<button type='button' class='close' data-dismiss='alert'>×</button></div>";
