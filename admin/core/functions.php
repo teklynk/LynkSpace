@@ -493,7 +493,7 @@ function sanitizeStr($cleanStr)
 
 //sanitize integers - removes anything that is not a number
 function sanitizeInt($cleanInt) {
-    $cleanInt = preg_replace("/[^0-9]/","", $cleanInt);
+    $cleanInt = preg_replace("/^([0-9]+)$/", "", $cleanInt);
 
     if ($cleanInt == "") {
         $cleanInt = 0;
@@ -512,6 +512,28 @@ function validateUrl($cleanStr)
 function validateEmail($cleanStr)
 {
     return filter_var(trim((STRING)$cleanStr), FILTER_SANITIZE_EMAIL);
+}
+
+//Check if string is a date
+function isDate($date)
+{
+    $splitDate = explode('/', $date);
+
+    if (checkdate($splitDate[0], $splitDate[1], $splitDate[2])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//Check if string is an integer
+function isInteger($integer)
+{
+    if (preg_match("/^([0-9]+)$/", $integer)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //Gets clients real IP address
