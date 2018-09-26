@@ -1083,8 +1083,6 @@ function zipFile($src, $dest)
         $zip->addFromString($flag . basename($src), file_get_contents($src));
     }
 
-    sleep(3);
-
     return $zip->close();
 }
 
