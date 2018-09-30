@@ -113,9 +113,9 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                         <h1 class="page-header">
                             <?php
                             if ($_GET['newcustomer'] == 'true') {
-                                echo "Databases (" . $getCustSection . " - New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                                echo "Databases (" . $getCustSection . " - New) <a href='databases.php' role='button' class='btn btn-link'> Cancel</a></h1>";
                             } elseif ($_GET['editcustomer']) {
-                                echo "Databases (" . $getCustSection . " - Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                                echo "Databases (" . $getCustSection . " - Edit) <a href='databases.php' role='button' class='btn btn-link'> Cancel</a></h1>";
                             } else {
                                 echo "Databases (" . $getCustSection . ")&nbsp;";
                                 echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Databases Page' class='btn btn-info' onclick=\"showMyModal('databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "', '../databases.php?section=" . $getCustSection . "&loc_id=" . $_GET['loc_id'] . "#databases')\"><i class='fa fa-eye'></i></button>";

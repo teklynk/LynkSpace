@@ -44,14 +44,14 @@ if ($_GET['preview'] > "") {
             <li><a href='staff.php?loc_id=" . $_GET['loc_id'] . "'>Staff</a></li>
             <li class='active'>New Staff Member</li>
             </ol>";
-            echo "<h1 class='page-header'>Staff (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+            echo "<h1 class='page-header'>Staff (New) <a href='staff.php' class='btn btn-link' role='button'> Cancel</a></h1>";
         } elseif ($_GET['editteam']) {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='staff.php?loc_id=" . $_GET['loc_id'] . "'>Staff</a></li>
             <li class='active'>Edit Staff</li>
             </ol>";
-            echo "<h1 class='page-header'>Staff (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+            echo "<h1 class='page-header'>Staff (Edit) <a href='staff.php' role='button' class='btn btn-link'> Cancel</a></h1>";
         } else {
             echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>

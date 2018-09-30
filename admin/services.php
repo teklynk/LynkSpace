@@ -47,14 +47,14 @@ if ($_GET['preview'] > "") {
             <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>New Services</li>
             </ol>";
-                echo "<h1 class='page-header'>Services (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                echo "<h1 class='page-header'>Services (New) <a href='services.php' role='button' class='btn btn-link'> Cancel</a></h1>";
             } elseif ($_GET['editservice']) {
                 echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
             <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
             <li class='active'>Edit Services</li>
             </ol>";
-                echo "<h1 class='page-header'>Services (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
+                echo "<h1 class='page-header'>Services (Edit) <a href='services.php' role='button' class='btn btn-link'> Cancel</a></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
