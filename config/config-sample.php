@@ -16,6 +16,7 @@ $pageMsg = '';
 //Establish config connection
 $db_conn = mysqli_connect(db_servername, db_username, db_password);
 mysqli_select_db($db_conn, db_name);
+mysqli_set_charset($db_conn, 'UTF-8');
 
 // If DB not found then halt the script and display a link to the install page.
 if (mysqli_connect_error() || mysqli_connect_errno()) {
