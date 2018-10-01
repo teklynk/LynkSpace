@@ -47,7 +47,7 @@ if ($getCustPreview > "") {
 }
 
 //check if using default location
-$sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlSections = mysqli_query($db_conn, "SELECT id, heading, content, section, guid, use_defaults, loc_id FROM sections_customers WHERE loc_id=" . $_GET['loc_id'] . ";");
 $rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
 
 //set Default toggle depending on which section you are on
@@ -321,7 +321,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
     $delcustomerId = safeCleanStr($_GET['deletecustomer']);
     $delcustomerGuid = safeCleanStr($_GET['guid']);
     $delcustomerName = safeCleanStr(addslashes($_GET['deletename']));
-    $deleteSectionName = safeCleanStr(addslashes($deleteSectionName));
+    $deleteSectionName = safeCleanStr(addslashes($_GET['section']));
     $customer_heading = safeCleanStr($_POST['customer_heading']);
     $main_content = sqlEscapeStr($_POST['main_content']);
     $cust_count = safeCleanStr($_POST['cust_count']);
@@ -331,14 +331,14 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         showModalConfirm(
             "confirm",
             "Delete Database Page?",
-            "Are you sure you want to delete: " . safeCleanStr(addslashes($getCustSection)) . "?",
+            "Are you sure you want to delete section: " . safeCleanStr(addslashes($getCustSection)) . "?",
             "databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getCustSection . "&deletesection=true&deletename=" . $getCustSection . "&guid=" . $delcustomerGuid . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
 
     } elseif ($_GET['deletename'] && $getCustSection && $_GET['deletesection'] == 'true' && $_GET['loc_id'] && $_GET['confirm'] == 'yes' && $delcustomerGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete section after clicking Yes
-        $sectionDelete = "DELETE FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . $_GET['loc_id'] . ";";
+        $sectionDelete = "DELETE FROM sections_customers WHERE section='" . $getCustSection . "' AND guid='" . $delcustomerGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
         mysqli_query($db_conn, $sectionDelete);
 
         //Delete all databases with in the section
@@ -387,7 +387,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
             mysqli_query($db_conn, $sectionsUpdate);
         } else {
             //Do Insert
-            $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, use_defaults, author_name, datetime, loc_id) VALUES ('" . $customer_heading . "', '" . $main_content . "', '" . $getCustSection . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+            $sectionsInsert = "INSERT INTO sections_customers (heading, content, section, guid, use_defaults, author_name, datetime, loc_id) VALUES ('" . $customer_heading . "', '" . $main_content . "', '" . $getCustSection . "', '" . getGuid() . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
             mysqli_query($db_conn, $sectionsInsert);
         }
 

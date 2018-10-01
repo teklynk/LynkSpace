@@ -1103,6 +1103,7 @@ CREATE TABLE `sections_customers` (
   `heading` mediumtext NOT NULL,
   `content` mediumtext NOT NULL,
   `section` mediumtext NOT NULL,
+  `guid` text NOT NULL,
   `use_defaults` mediumtext NOT NULL,
   `author_name` mediumtext NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
