@@ -47,7 +47,7 @@ $(document).ready(function () {
             extension = extension.toLowerCase();
         }
 
-        if (jQuery.inArray(extension, extArray) === 1) {
+        if (jQuery.inArray(extension, extArray) >= 0) {
             $('#upload_submit').removeAttr('disabled');
             $('#upload_submit').removeClass('disabled');
         } else {
