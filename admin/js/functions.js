@@ -33,6 +33,30 @@ $(document).ready(function () {
         }
     });
 
+    //File Uploads. Valid file extension. Disable uploading if file type is not allowed.
+    $('#fileToUpload').change(function () {
+        var filename = $('#fileToUpload').val();
+
+        var extension = filename.replace(/^.*\./, '');
+
+        var extArray = ['jpg', 'png', 'gif'];
+
+        if (extension == filename) {
+            extension = '';
+        } else {
+            extension = extension.toLowerCase();
+        }
+
+        if (jQuery.inArray(extension, extArray) === 1) {
+            $('#upload_submit').removeAttr('disabled');
+            $('#upload_submit').removeClass('disabled');
+        } else {
+            $('#upload_submit').attr('disabled', 'disabled');
+            $('#upload_submit').addClass('disabled');
+            alert('Invalid file type: ' + extension);
+        }
+    });
+
     //Boostrap alert fadeout and close function
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 

@@ -186,9 +186,9 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                 <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-                <button type="submit" name="upload_submit" form='uploadForm' class="btn btn-primary"
+                <button type="submit" name="upload_submit" id="upload_submit" form='uploadForm' class="btn btn-primary disabled"
                         data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit"
-                        data-placement="right"><i class="fa fa-fw fa-upload"></i> Upload
+                        data-placement="right" disabled><i class="fa fa-fw fa-upload"></i> Upload
                     Image
                 </button>
             </form>
