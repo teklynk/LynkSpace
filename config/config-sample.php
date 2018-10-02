@@ -75,7 +75,7 @@ define('cmsWebsite', 'https://github.com/teklynk/LynkSpace');
 define('serverUrlStr', $serverProtocol . $serverHostname . $serverPort . $subDirectory);
 
 //Page URL
-define('pageUrlStr', $serverProtocol . $serverHostname . $_SERVER['REQUEST_URI']);;
+define('pageUrlStr', $serverProtocol . $serverHostname . $_SERVER['REQUEST_URI']);
 
 //Theme value
 define('themeOption', $rowConfig['theme']);
