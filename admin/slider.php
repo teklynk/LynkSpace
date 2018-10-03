@@ -140,7 +140,7 @@ if ($newSlide || $editSlide) {
                         data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
                     <option value="">None</option>
                     <?php
-                    getImageDropdownList($_GET['loc_id'], image_dir, $rowSlides['image']);
+                    echo getImageDropdownList($_GET['loc_id'], $rowSlides['image']);
                     ?>
                 </select>
             </div>

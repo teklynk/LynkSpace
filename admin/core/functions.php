@@ -685,66 +685,31 @@ function getDirContents($src)
 }
 
 //Images folder drop down list
-function getImageDropdownList($loc, $imageDir, $image_selected)
+function getImageDropdownList($loc, $image_selected)
 {
     global $db_conn;
-    global $sharedFilesList;
-    global $fileList;
-    global $fileIgnoreArray;
+    global $uploadsList;
 
-    $sharedFilesListArr[] = null;
-    $allfiles[] = null;
+	$location = '../uploads/' . $loc . '/';
 
     //Build a list of shared images
-    $sqlSharedList = mysqli_query($db_conn, "SELECT shared, filename FROM shared_uploads ORDER BY filename ASC;");
-    while ($rowSharedList = mysqli_fetch_array($sqlSharedList, MYSQLI_ASSOC)) {
+    $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
+    while ($rowUploadsList = mysqli_fetch_array($sqlUploadsList, MYSQLI_ASSOC)) {
 
-        $sharedOptions = $rowSharedList['shared'];
-        $sharedFileName = $rowSharedList['filename'];
 
-        $sharedOptionsArr = explode(',', trim($sharedOptions));
+        $uploadFileName = $rowUploadsList['file_name'];
 
-        if (in_array($loc, $sharedOptionsArr) || in_array($_SESSION['loc_type'], $sharedOptionsArr)) {
-            $sharedFilesList .= $sharedFileName . ',';
-        }
+	    if ( $location . $uploadFileName === $image_selected ) {
+		    $imageCheck = ' SELECTED ';
+	    } else {
+		    $imageCheck = '';
+	    }
+
+	    $uploadsList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $uploadFileName . "'/>&nbsp;" . $uploadFileName . "</span>\" value='" . $location . $uploadFileName . "' $imageCheck>" . $uploadFileName . "</option>";
+
     }
 
-    $sharedFilesListArr = explode(",", trim($sharedFilesList, ','));
-
-    if ($handle = opendir($imageDir)) {
-
-        while (false !== ($file = readdir($handle))) {
-
-            if (in_array($file, $fileIgnoreArray)) {
-                continue;
-            }
-
-            $allfiles[] = strtolower($file);
-        }
-        closedir($handle);
-    }
-
-    //Merge the lists / arrays
-    $allImagesArr = array_merge($allfiles, $sharedFilesListArr);
-    sort($allImagesArr);
-
-    foreach ($allImagesArr as $file) {
-        if (in_array($file, $sharedFilesListArr)) {
-            $location = '../uploads/1/';
-        } else {
-            $location = '../uploads/' . $loc . '/';
-        }
-        if ($location . $file === $image_selected) {
-            $imageCheck = ' SELECTED ';
-        } else {
-            $imageCheck = '';
-        }
-        if ($file != '') {
-            $fileList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $file . "'/>&nbsp;" . $file . "</span>\" value='" . $location . $file . "' $imageCheck>" . $file . "</option>";
-        }
-    }
-
-    return $fileList;
+    return $uploadsList;
 
 }
 
