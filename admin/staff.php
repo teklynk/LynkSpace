@@ -136,7 +136,7 @@ if ($_GET['preview'] > "") {
                                 title="Choose an existing image">
                             <option value="">None</option>
                             <?php
-                            getImageDropdownList($_GET['loc_id'], image_dir, $rowTeam['image']);
+                            echo getImageDropdownList($_GET['loc_id'], $rowTeam['image']);
                             ?>
                         </select>
                     </div>

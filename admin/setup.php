@@ -415,7 +415,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     title='Set the logo'>
                                 <option value="">None</option>
                                 <?php
-                                getImageDropdownList($_GET['loc_id'], image_dir, $rowSetup['logo']);
+                                echo getImageDropdownList($_GET['loc_id'], $rowSetup['logo']);
                                 ?>
                             </select>
                         </div>

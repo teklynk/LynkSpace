@@ -159,7 +159,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                         title="Choose an existing image">
                     <option value="">None</option>
                     <?php
-                    getImageDropdownList($_GET['loc_id'], image_dir, $rowServices['image']);
+                    echo getImageDropdownList($_GET['loc_id'], $rowServices['image']);
                     ?>
                 </select>
             </div>

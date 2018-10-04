@@ -258,7 +258,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
                         title="Choose an existing image">
                     <option value="">None</option>
                     <?php
-                    getImageDropdownList($_GET['loc_id'], image_dir, $rowCustomer['image']);
+                    echo getImageDropdownList($_GET['loc_id'], $rowCustomer['image']);
                     ?>
                 </select>
             </div>
