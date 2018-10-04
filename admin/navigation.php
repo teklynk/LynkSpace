@@ -22,7 +22,7 @@ if (!empty($_POST)) {
 
         //Create new category if newcat is true
         if (!empty($nav_newcat) && $exist_cat == "") {
-            $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
+            $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
             mysqli_query($db_conn, $navNewCat);
 
             //get the new cat id
@@ -255,7 +255,7 @@ if ($getNavSection == $navSections[0]) {
 
             // add category
             if ($addCatNavName > "") {
-                $navAddCat = "INSERT INTO category_navigation (cat_name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . $addCatNavName . "', '" . $getNavSection . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ";)";
+                $navAddCat = "INSERT INTO category_navigation (cat_name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . $addCatNavName . "', '" . $getNavSection . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
                 mysqli_query($db_conn, $navAddCat);
                 header("Location: navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $addCatNavName . "", true, 302);
                 echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $addCatNavName . "';</script>";
