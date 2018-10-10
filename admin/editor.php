@@ -34,8 +34,8 @@ $fileData = fread( $handle, filesize( $fileToEdit_dir ) );
 
 if ( $_POST['save_main'] ) {
 
-	$theme_defaults = $_POST['theme_defaults'];
-	$element_count  = $_POST['element_count'];
+	$theme_defaults = safeCleanStr($_POST['theme_defaults']);
+	$element_count  = safeCleanStr($_POST['element_count']);
 	$edit_file      = sanitizeStr( $_POST['edit_file'] );
 
 	//use theme defaults
@@ -47,9 +47,9 @@ if ( $_POST['save_main'] ) {
 
 	for ( $i = 0; $i < $element_count; $i ++ ) {
 
-		$selector = $_POST['selector'][ $i ];
-		$property = $_POST['property'][ $i ];
-		$cssvalue = $_POST['cssvalue'][ $i ];
+		$selector = safeCleanStr($_POST['selector'][ $i ]);
+		$property = safeCleanStr($_POST['property'][ $i ]);
+		$cssvalue = safeCleanStr($_POST['cssvalue'][ $i ]);
 
 		$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . ";" );
 		$rowThemeOptions = mysqli_fetch_array( $sqlThemeOptions, MYSQLI_ASSOC );
