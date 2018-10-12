@@ -14,7 +14,6 @@
 /sitemap.xml
 ~install.old
 
-
 ## Some common .gitignore configurations
 # Compiled source #
 ###################
@@ -53,7 +52,8 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Exceptions
 !/config/new_website.sql
 *custom-style.css
 *custom-style.min.css
-uploads/
