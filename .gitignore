@@ -3,14 +3,13 @@
 /vendor/
 /node_modules/
 .idea/
-/uploads/*
+/htdocs/uploads/*
 /htdocs/config/blowfishsalt.php
 /htdocs/config/dbconn.php
 /htdocs/config/config.php
 /.htaccess
 /htdocs/admin/backups/*
 /htdocs/admin/upgrade/*
-/htdocs/uploads/*
 /htdocs/robots.txt
 /htdocs/sitemap.xml
 /htdocs/~install.old
