@@ -58,3 +58,4 @@ Thumbs.db
 # Exceptions
 *custom-style.css
 *custom-style.min.css
+!/new_website.sql
