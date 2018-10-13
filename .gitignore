@@ -3,7 +3,7 @@
 /vendor/
 /node_modules/
 .idea/
-/htdocs/uploads/*
+#/htdocs/uploads/*
 /htdocs/config/blowfishsalt.php
 /htdocs/config/dbconn.php
 /htdocs/config/config.php
@@ -56,7 +56,5 @@ ehthumbs.db
 Thumbs.db
 
 # Exceptions
-!/new_website.sql
-*custom-style.css
-*custom-style.min.css
-!/diagram.png
+#*custom-style.css
+#*custom-style.min.css
