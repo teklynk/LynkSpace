@@ -56,5 +56,5 @@ ehthumbs.db
 Thumbs.db
 
 # Exceptions
-#*custom-style.css
-#*custom-style.min.css
+*custom-style.css
+*custom-style.min.css
