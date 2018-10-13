@@ -12,9 +12,9 @@ Enable .htaccess by editing your sites-enabled config files:
  Create a virtual host for the project:
  ```
 <VirtualHost 127.0.0.1:80>
-    DocumentRoot /var/www/html/LynkSpace
+    DocumentRoot /var/www/html/LynkSpace/htdocs
     ServerName lynkspace.local
-    <Directory "/var/www/html/LynkSpace">
+    <Directory "/var/www/html/LynkSpace/htdocs">
         allow from all
         Options None
         Require all granted
@@ -27,8 +27,10 @@ curl
 xml
 zip
 imagick
+gd
 mbstring
 mcrypt
+mysqlnd
 ```
  Apache Modules
 ```

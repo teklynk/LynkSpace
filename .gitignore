@@ -3,17 +3,18 @@
 /vendor/
 /node_modules/
 .idea/
-/uploads/*
-/config/blowfishsalt.php
-/config/dbconn.php
-/config/config.php
+#/htdocs/uploads/*
+/htdocs/config/blowfishsalt.php
+/htdocs/config/dbconn.php
+/htdocs/config/config.php
+/htdocs/admin/css/*
 /.htaccess
-/admin/backups/*
-/admin/upgrade/*
-/robots.txt
-/sitemap.xml
-~install.old
-
+/htdocs/.htaccess
+/htdocs/admin/backups/*
+/htdocs/admin/upgrade/*
+/htdocs/robots.txt
+/htdocs/sitemap.xml
+/htdocs/~install.old
 
 ## Some common .gitignore configurations
 # Compiled source #
@@ -53,7 +54,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-!/config/new_website.sql
+
+# Exceptions
 *custom-style.css
 *custom-style.min.css
-uploads/
