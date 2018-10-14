@@ -187,7 +187,7 @@ $carousel_speed_seconds = $rowConfig['carousel_speed'] * 1000;
 define('carouselSpeed', $carousel_speed_seconds);
 
 //Version Number
-$versionFile = __DIR__ . 'version.txt';
+$versionFile = __DIR__ . '/../version.txt';
 $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
