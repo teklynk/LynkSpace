@@ -132,7 +132,7 @@ define('dbConfigLoc', __DIR__ . "/config.php");
 define('dbBlowfishLoc', __DIR__ . "/blowfishsalt.php");
 
 // Name of the Source sql dump file
-define('dbFilename', __DIR__ . "/new_website.sql" );
+define('dbFilename', __DIR__ . "/new_website.sql");
 
 // Name of the sitemap file
 define('sitemapFilename', __DIR__ . "/../sitemap.xml");
