@@ -26,44 +26,47 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
     global $db_conn;
     global $loginFailed;
 
-    $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
-    $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
+    if (isset($userIp) && !empty($userIp)){
 
-    $currentTime = strtotime(date('Y-m-d H:i:s'));
-    $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
-    $loginAttempts = $rowLoginAttempt['attempts'];
-    $loginUserIp = $rowLoginAttempt['ip'];
+        $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
+        $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
 
-    if ($rowLoginAttempt) {
+        $currentTime = strtotime(date('Y-m-d H:i:s'));
+        $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
+        $loginAttempts = $rowLoginAttempt['attempts'];
+        $loginUserIp = $rowLoginAttempt['ip'];
 
-        $attempts = $loginAttempts + 1;
+        if ($rowLoginAttempt) {
 
-        if ($attempts != $maxAttempts) {
+            $attempts = $loginAttempts + 1;
 
-            $loginFailed = false;
+            if ($attempts != $maxAttempts) {
 
-            $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=CURRENT_TIMESTAMP() WHERE ip='" . $userIp . "';";
-            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+                $loginFailed = false;
+
+                $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=CURRENT_TIMESTAMP() WHERE ip='" . $userIp . "';";
+                mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+
+            } else {
+
+                if ($currentTime - $loginAttemptTime >= $maxTimeout) {
+                    $loginFailed = false;
+                    $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
+                    mysqli_query($db_conn, $sqlLoginAttemptDelete);
+                } else {
+                    $loginFailed = true;
+                    echo "<style>#wrapper {padding-left: 0 !important;}</style>";
+                    echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+                    die();
+                }
+
+            }
 
         } else {
 
-            if ($currentTime - $loginAttemptTime >= $maxTimeout) {
-                $loginFailed = false;
-                $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
-                mysqli_query($db_conn, $sqlLoginAttemptDelete);
-            } else {
-                $loginFailed = true;
-                echo "<style>#wrapper {padding-left: 0 !important;}</style>";
-                echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
-                die();
-            }
-
+            $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) VALUES (1, '" . $userIp . "', CURRENT_TIMESTAMP());";
+            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
         }
-
-    } else {
-
-        $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) VALUES (1, '" . $userIp . "', CURRENT_TIMESTAMP());";
-        mysqli_query($db_conn, $sqlUpdateLoginAttempt);
     }
 
     return $loginFailed;
