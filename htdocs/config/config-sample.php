@@ -13,6 +13,8 @@ $db_conn = '';
 $errorMsg = '';
 $pageMsg = '';
 
+$getLocId = isset($_GET['loc_id']) ? $_GET['loc_id'] : null;
+
 //Establish config connection
 $db_conn = mysqli_connect(db_servername, db_username, db_password);
 mysqli_select_db($db_conn, db_name);
@@ -33,7 +35,7 @@ $serverProtocol = '//';
 $serverHostname = $_SERVER['SERVER_NAME'];
 
 //Location ID
-define('loc_id', trim(loc_id));
+define('loc_id', trim($getLocId));
 
 //Admin directory path
 define('admin', __DIR__ . '/../admin');
