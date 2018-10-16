@@ -17,7 +17,7 @@ require_once(__DIR__ . '/includes/featured.inc.php');
 echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
-if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
+if (loc_id == 1 && multiBranch == 'true') {
     require_once(__DIR__ . '/includes/searchlocations.inc.php');
 } else {
     require_once(__DIR__ . '/includes/searchpac.inc.php');
@@ -85,7 +85,7 @@ echo "</div>";
             <div class="col-xs-12 col-md-12">
                 <h3>Send us a Message</h3>
                 <form name="sentMessage" id="contactForm" method="post"
-                      action="../../core/mail/mailprocessor.php?loc_id=<?php echo $_GET['loc_id']; ?>">
+                      action="../../core/mail/mailprocessor.php?loc_id=<?php echo loc_id; ?>">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>

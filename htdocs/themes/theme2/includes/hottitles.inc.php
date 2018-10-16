@@ -4,7 +4,7 @@ if (!defined('ALLOW_INC')) {
 }
 
 //Hot Titles Carousel
-getHottitlesTabs($_GET['loc_id']);
+getHottitlesTabs(loc_id);
 if ($hottitlesCount > 0) {
     echo "<div class='container-fluid hottitles'>";
     echo "<div class='container bannerwrapper'>";

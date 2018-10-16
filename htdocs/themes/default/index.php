@@ -12,7 +12,7 @@ require_once(__DIR__ . '/includes/slider.inc.php');
 echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
 
-if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
+if (loc_id == 1 && multiBranch == 'true') {
     require_once(__DIR__ . '/includes/searchlocations.inc.php');
 } else {
     require_once(__DIR__ . '/includes/searchpac.inc.php');

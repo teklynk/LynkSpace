@@ -188,7 +188,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
 	    $uploadError = false;
 
         //Create upload folder if it does not exist.
-        if (is_numeric($_GET['loc_id'])) {
+        if (is_numeric(loc_id)) {
             if (!file_exists($target)) {
                 @mkdir($target, 0755);
             }
@@ -250,7 +250,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                         mysqli_query($db_conn, $sqlUpdateUploads) OR DIE(mysqli_error($db_conn));
                     } else {
                         //Save uploaded file to the database
-                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . $fileName . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . $fileName . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
                         mysqli_query($db_conn, $sqlInsertUploads) OR DIE(mysqli_error($db_conn));
                     }
 
@@ -742,7 +742,7 @@ function getPagesJsonList($loc)
         $getPageId = $rowGetPages['id'];
         $getPageTitle = $rowGetPages['title'];
         if ($getPageTitle != '') {
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . loc_id . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
         }
     }
     //Clean string
@@ -1256,7 +1256,7 @@ function csrf_validate($token)
 }
 
 //Variable to hide elements from non-admin users
-if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id == 1) {
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
@@ -1265,13 +1265,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 }
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
-if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
+if ($_SESSION['user_level'] != 1 && loc_id != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
-} elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
+} elseif ($_SESSION['user_level'] == 1 && loc_id == "") {
     header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
-} elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
+} elseif (multiBranch == 'false' && loc_id != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }

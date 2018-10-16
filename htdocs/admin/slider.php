@@ -24,7 +24,7 @@ if ($_GET['preview'] > "") {
 }
 
 //get location type from locations table
-$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
 $newSlide = safeCleanStr($_GET['newslide']);
@@ -36,21 +36,21 @@ $editSlide = safeCleanStr($_GET['editslide']);
             <?php
             if ($newSlide == 'true') {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . loc_id . "'>Image Slider</a></li>
                 <li class='active'>New Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (New) <a href='slider.php' class='btn btn-link' role='button'> Cancel</a></h1>";
             } elseif ($editSlide) {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . loc_id . "'>Image Slider</a></li>
                 <li class='active'>Edit Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (Edit) <a href='slider.php' class='btn btn-link'> Cancel</a></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
                 <li class='active'>Image Slider</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider</h1>";

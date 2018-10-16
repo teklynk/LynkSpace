@@ -84,10 +84,10 @@ if (!defined('ALLOW_INC')) {
     $sqlSetup = mysqli_query($db_conn, "SELECT pageheading, servicesheading, sliderheading, teamheading, loc_id FROM setup WHERE loc_id=" . $_SESSION['loc_id'] . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
-    if (!empty($_GET['loc_id'])) {
+    if (!empty(loc_id)) {
 
         //Create session variable from loc_id in querystring. Can use $_SESSION['loc_id'] in place of $_GET['loc_id] if loc_id is not available in the querystring
-        $_SESSION['loc_id'] = $_GET['loc_id'];
+        $_SESSION['loc_id'] = loc_id;
 
         $sqlGetLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE active='true' AND id=" . $_SESSION['loc_id'] . ";");
         $rowGetLocation = mysqli_fetch_array($sqlGetLocation, MYSQLI_ASSOC);
@@ -121,8 +121,8 @@ if (!defined('ALLOW_INC')) {
                         automatic_uploads: false,
                         image_advtab: true,
                         image_title: true,
-                        image_list: [<?php echo getFilesJsonList($_GET['loc_id']); ?>],
-                        link_list: [<?php echo getPagesJsonList($_GET['loc_id']); ?>],
+                        image_list: [<?php echo getFilesJsonList(loc_id); ?>],
+                        link_list: [<?php echo getPagesJsonList(loc_id); ?>],
                         menubar: false,
                         toolbar_items_size: 'small',
                         toolbar: 'save insertfile undo redo | bold italic removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code',

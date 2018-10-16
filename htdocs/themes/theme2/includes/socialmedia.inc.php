@@ -6,7 +6,7 @@ if (!defined('ALLOW_INC')) {
 <!-- Social Media Section -->
 <?php
 
-getSocialMediaIcons($_GET['loc_id'], "circle", "footer");
+getSocialMediaIcons(loc_id, "circle", "footer");
 //EXAMPLE: getSocialMediaIcons("circle","top")
 //EXAMPLE: getSocialMediaIcons("square","footer")
 if (!empty($socialMediaIcons)) {

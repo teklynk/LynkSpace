@@ -7,7 +7,7 @@ if (!defined('ALLOW_INC')) {
 <a name="generalinfo" tabindex="-1"></a>
 <?php
 
-getGeneralInfo($_GET['loc_id']);
+getGeneralInfo(loc_id);
 
 if (!empty($generalInfoContent)) {
 

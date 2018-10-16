@@ -7,7 +7,7 @@ if (!defined('ALLOW_INC')) {
 <a name="search" tabindex="-1"></a>
 <?php
 
-    getSetup($_GET['loc_id']); //from functions.php
+    getSetup(loc_id); //from functions.php
 
 if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
     ?>
@@ -107,7 +107,7 @@ if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
                 <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center center-block hidden">
                     <?php
                     //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                    getNav($_GET['loc_id'], 'Search', 'false', 'center', 'false');
+                    getNav(loc_id, 'Search', 'false', 'center', 'false');
                     ?>
                 </div>
             </div>

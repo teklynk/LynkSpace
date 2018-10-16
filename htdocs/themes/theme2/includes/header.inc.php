@@ -10,9 +10,9 @@ if (!defined('ALLOW_INC')) {
 <head>
     <?php
 
-    getLocation($_GET['loc_id']);
+    getLocation(loc_id);
 
-    getCoreHeader($_GET['loc_id']);
+    getCoreHeader(loc_id);
 
     ?>
 
@@ -60,7 +60,7 @@ if (!defined('ALLOW_INC')) {
 //only show on index.php/homepage
 if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
 
-    getEvents($_GET['loc_id']);
+    getEvents(loc_id);
 
     if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
         echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'>&times;</button>
@@ -78,7 +78,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
         <div class="navbar-Search">
             <?php
             //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-            getNav($_GET['loc_id'], 'Search', 'true', 'right', 'false');
+            getNav(loc_id, 'Search', 'true', 'right', 'false');
             ?>
         </div>
         <!-- /.navbar-collapse -->
@@ -91,7 +91,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
         if (!empty($setupLogo)) {
             ?>
             <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
-                        class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id'], 'relative'); ?>"
+                        class="pull-left img-nonresponsive" src="<?php getLogo(loc_id, 'relative'); ?>"
                         alt="Home" title="Home" border="0"/></a>
             <?php
         }
@@ -99,7 +99,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
     </div>
     <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
         <?php
-        if ($_GET['loc_id'] == 1 && multiBranch == 'true') {
+        if (loc_id == 1 && multiBranch == 'true') {
             require_once(__DIR__ . '/searchlocations.inc.php');
         } else {
             require_once(__DIR__ . '/searchpac.inc.php');
@@ -120,7 +120,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
     <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
         <?php
         //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-        getNav($_GET['loc_id'], 'Top', 'true', 'center', 'false');
+        getNav(loc_id, 'Top', 'true', 'center', 'false');
         ?>
     </div>
     <!-- /.navbar-collapse -->
