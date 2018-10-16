@@ -18,7 +18,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] != 1 ) {
 $pageMsg = "";
 
 //css file that can be edited
-$fileToEdit_dir = "../themes/" . themeOption . "/css/custom-style.css";
+$fileToEdit_dir = __DIR__ . "/../themes/" . themeOption . "/css/custom-style.css";
 
 //Dynamic CSS - Location of dynamic-style.php that is inside the themes folder
 require_once( __DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php" );
