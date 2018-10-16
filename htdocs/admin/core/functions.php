@@ -185,7 +185,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
 
     if ($postAction) {
 
-	    $uploadError = false;
+        $uploadError = false;
 
         //Create upload folder if it does not exist.
         if (is_numeric(loc_id)) {
@@ -244,7 +244,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                     $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' AND loc_id=" . $loc_id . " LIMIT 1;");
                     $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
 
-                    if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file){
+                    if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file) {
                         //Update existing file in the database, where guid=$uploads_row['guid']
                         $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "' AND loc_id=" . $loc_id . ";";
                         mysqli_query($db_conn, $sqlUpdateUploads) OR DIE(mysqli_error($db_conn));
@@ -272,21 +272,23 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
 
                 //Delete the file if it is not an image
                 if (file_exists($target_file)) {
-	                $uploadError = true;
+                    $uploadError = true;
                     unlink($target_file) OR die('Could not delete file');
                 }
 
             }
 
         } else {
-	        $uploadError = true;
+            $uploadError = true;
         }
     }
 }
 
-function getAllUploads($type_id=null, $type=null, $loc, $orderBy='DESC')
+function getAllUploads($type_id = null, $type = null, $loc, $orderBy = 'DESC')
 {
     global $db_conn;
+
+    $rowUploads = '';
 
     if (isset($loc) && !empty($loc)) {
 
@@ -324,7 +326,7 @@ function deleteUploads($target, $arg_id, $guid)
         mysqli_query($db_conn, $uploads_sql) OR die('SQL Error: ' . $uploads_sql);
 
         //Delete file from uploads folder
-        if (file_exists($target . $fileName)){
+        if (file_exists($target . $fileName)) {
             unlink($target . $fileName) OR die('Could not delete file');
         }
     }
@@ -344,7 +346,7 @@ function resizeImage($imagePath, $resizedFileName, $width = '200', $height = '20
 }
 
 //File size conversion to KB, MB, GB....
-function filesizeFormatted($theFile, $readFile=false)
+function filesizeFormatted($theFile, $readFile = false)
 {
 
     if ($readFile == true) {
@@ -477,7 +479,7 @@ function getGravatar($email, $size)
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr)
 {
-    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES, 'UTF-8' , true);
+    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES, 'UTF-8', true);
 }
 
 //escape Quotes in textareas and string values - Escape special characters in a string
@@ -495,7 +497,8 @@ function sanitizeStr($cleanStr)
 }
 
 //sanitize integers - removes anything that is not a number
-function sanitizeInt($cleanInt) {
+function sanitizeInt($cleanInt)
+{
     $cleanInt = preg_replace("/^([0-9]+)$/", "", $cleanInt);
 
     if ($cleanInt == "") {
@@ -644,7 +647,7 @@ function getPages($loc)
     global $extraPagesArray; //from config.php
     global $db_conn;
 
-    if (isset($loc) && !empty($loc)){
+    if (isset($loc) && !empty($loc)) {
 
         $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
         while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
@@ -655,6 +658,7 @@ function getPages($loc)
         }
 
         $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . getExtraPages($extraPagesArray);
+
     }
 
     return $pagesList;
@@ -696,9 +700,9 @@ function getImageDropdownList($loc, $image_selected)
     global $db_conn;
     global $uploadsList;
 
-	$location = '../uploads/' . $loc . '/';
+    $location = '../uploads/' . $loc . '/';
 
-    if (isset($loc) && !empty($loc)){
+    if (isset($loc) && !empty($loc)) {
 
         //Build a list of shared images
         $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
@@ -707,7 +711,7 @@ function getImageDropdownList($loc, $image_selected)
 
             $uploadFileName = $rowUploadsList['file_name'];
 
-            if ( $location . $uploadFileName === $image_selected ) {
+            if ($location . $uploadFileName === $image_selected) {
                 $imageCheck = ' SELECTED ';
             } else {
                 $imageCheck = '';
