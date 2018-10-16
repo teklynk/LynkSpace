@@ -284,12 +284,15 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
     }
 }
 
-function getAllUploads($type_id=null, $type=null, $loc_id, $orderBy='DESC')
+function getAllUploads($type_id=null, $type=null, $loc, $orderBy='DESC')
 {
     global $db_conn;
 
-    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc_id . " ORDER BY datetime " . $orderBy . ";");
-    $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
+    if (isset($loc) && !empty($loc)) {
+
+        $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc . " ORDER BY datetime " . $orderBy . ";");
+        $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
+    }
 
     return $rowUploads;
 }
@@ -641,15 +644,18 @@ function getPages($loc)
     global $extraPagesArray; //from config.php
     global $db_conn;
 
-    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
-    while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
-        $serviceLinkId = $rowServicesLink['id'];
-        $serviceLinkTitle = $rowServicesLink['title'];
+    if (isset($loc) && !empty($loc)){
 
-        $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
+        $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
+        while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
+            $serviceLinkId = $rowServicesLink['id'];
+            $serviceLinkTitle = $rowServicesLink['title'];
+
+            $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
+        }
+
+        $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . getExtraPages($extraPagesArray);
     }
-
-    $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . getExtraPages($extraPagesArray);
 
     return $pagesList;
 }
@@ -692,21 +698,24 @@ function getImageDropdownList($loc, $image_selected)
 
 	$location = '../uploads/' . $loc . '/';
 
-    //Build a list of shared images
-    $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
-    while ($rowUploadsList = mysqli_fetch_array($sqlUploadsList, MYSQLI_ASSOC)) {
+    if (isset($loc) && !empty($loc)){
+
+        //Build a list of shared images
+        $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
+        while ($rowUploadsList = mysqli_fetch_array($sqlUploadsList, MYSQLI_ASSOC)) {
 
 
-        $uploadFileName = $rowUploadsList['file_name'];
+            $uploadFileName = $rowUploadsList['file_name'];
 
-	    if ( $location . $uploadFileName === $image_selected ) {
-		    $imageCheck = ' SELECTED ';
-	    } else {
-		    $imageCheck = '';
-	    }
+            if ( $location . $uploadFileName === $image_selected ) {
+                $imageCheck = ' SELECTED ';
+            } else {
+                $imageCheck = '';
+            }
 
-	    $uploadsList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $uploadFileName . "'/>&nbsp;" . $uploadFileName . "</span>\" value='" . $location . $uploadFileName . "' $imageCheck>" . $uploadFileName . "</option>";
+            $uploadsList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $uploadFileName . "'/>&nbsp;" . $uploadFileName . "</span>\" value='" . $location . $uploadFileName . "' $imageCheck>" . $uploadFileName . "</option>";
 
+        }
     }
 
     return $uploadsList;
@@ -718,14 +727,17 @@ function getFilesJsonList($loc)
 {
     $fileListJson = null;
 
-    $fileList = getAllUploads(1, 'upload', $loc, 'ASC'); //returns an array
+    if (isset($loc) && !empty($loc)) {
 
-    foreach ($fileList as $imgfiles) {
-        $fileListJson .= "{title: '" . $imgfiles['file_name'] . "', value: '" . image_url . $imgfiles['file_name'] . "'},"; //creates a json list of images
+        $fileList = getAllUploads(1, 'upload', $loc, 'ASC'); //returns an array
+
+        foreach ($fileList as $imgfiles) {
+            $fileListJson .= "{title: '" . $imgfiles['file_name'] . "', value: '" . image_url . $imgfiles['file_name'] . "'},"; //creates a json list of images
+        }
+
+        $fileListJson = ltrim($fileListJson, ',');
+        $fileListJson = rtrim($fileListJson, ',');
     }
-
-    $fileListJson = ltrim($fileListJson, ',');
-    $fileListJson = rtrim($fileListJson, ',');
 
     return $fileListJson;
 
@@ -736,18 +748,20 @@ function getPagesJsonList($loc)
     global $linkListJson;
     global $db_conn;
 
-    //get and build page list for TinyMCE
-    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title;");
-    while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
-        $getPageId = $rowGetPages['id'];
-        $getPageTitle = $rowGetPages['title'];
-        if ($getPageTitle != '') {
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . loc_id . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+    if (isset($loc) && !empty($loc)) {
+        //get and build page list for TinyMCE
+        $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title;");
+        while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
+            $getPageId = $rowGetPages['id'];
+            $getPageTitle = $rowGetPages['title'];
+            if ($getPageTitle != '') {
+                $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . loc_id . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+            }
         }
+        //Clean string
+        $linkListJson = ltrim($linkListJson, ',');
+        $linkListJson = rtrim($linkListJson, ',');
     }
-    //Clean string
-    $linkListJson = ltrim($linkListJson, ',');
-    $linkListJson = rtrim($linkListJson, ',');
 
     return $linkListJson;
 
@@ -878,7 +892,6 @@ function recurseDelete($src)
 //Database Dump Backup
 function databaseDumpBackup($dest)
 {
-
     global $db_conn;
 
     $sql = "SHOW TABLES FROM " . db_name . ";";
