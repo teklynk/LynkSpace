@@ -5,7 +5,7 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'contactus.php';
 
-$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";");
 $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
 //update table on submit
@@ -31,24 +31,24 @@ if (!empty($_POST)) {
         $contact_defaults = 'false';
     }
 
-    if ($rowContact['loc_id'] == $_GET['loc_id']) {
+    if ($rowContact['loc_id'] == loc_id) {
         //Do Update
-        $contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+        $contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $contactUpdate);
     } else {
         //Do Insert
-        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
         mysqli_query($db_conn, $contactInsert);
     }
 
-    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";");
     $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
 	flashMessageSet('success','The contact section has been updated.');
 
 	//Redirect back to uploads page
-	header("Location: contactus.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-	echo "<script>window.location.href='contactus.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	header("Location: contactus.php?loc_id=" . loc_id . "", true, 302);
+	echo "<script>window.location.href='contactus.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
 
@@ -57,13 +57,13 @@ if (!empty($_POST)) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
                 <li class="active">Contact</li>
             </ol>
             <h1 class="page-header">
                 Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom"
                                      title="Preview the Contact Page" class="btn btn-info"
-                                     onclick="showMyModal('contact.php?loc_id=<?php echo $_GET['loc_id']; ?>', '../contact.php?loc_id=<?php echo $_GET['loc_id']; ?>#contact')">
+                                     onclick="showMyModal('contact.php?loc_id=<?php echo loc_id; ?>', '../contact.php?loc_id=<?php echo loc_id; ?>#contact')">
                     <i class="fa fa-eye"></i></button>
             </h1>
         </div>
@@ -84,7 +84,7 @@ if (!empty($_POST)) {
             ?>
             <form name="contactForm" class="dirtyForm" method="post">
                 <?php
-                if ($_GET['loc_id'] != 1) {
+                if (loc_id != 1) {
                     ?>
                     <div class="row">
                         <div class="col-lg-4">
@@ -93,8 +93,8 @@ if (!empty($_POST)) {
                                 <div class="checkbox">
                                     <label>
                                         <input class="contact_defaults_checkbox defaults-toggle"
-                                               id="<?php echo $_GET['loc_id'] ?>" name="contact_defaults"
-                                               type="checkbox" <?php if ($_GET['loc_id']) {
+                                               id="<?php echo loc_id ?>" name="contact_defaults"
+                                               type="checkbox" <?php if (loc_id) {
                                             echo $selDefaults;
                                         } ?> data-toggle="toggle">
                                     </label>

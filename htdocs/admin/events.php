@@ -7,7 +7,7 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'events.php';
 
-$sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";");
 $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
 //update table on submit
@@ -26,24 +26,24 @@ if (!empty($_POST)) {
         $event_defaults = 'false';
     }
 
-    if ($rowEvent['loc_id'] == $_GET['loc_id']) {
+    if ($rowEvent['loc_id'] == loc_id) {
         //Do Update
-        $eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+        $eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $eventUpdate);
     } else {
         //Do Insert
-        $eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+        $eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
         mysqli_query($db_conn, $eventInsert);
     }
 
-    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";");
     $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
 	flashMessageSet('success','The events section has been updated.');
 
 	//Redirect back to uploads page
-	header("Location: events.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-	echo "<script>window.location.href='events.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	header("Location: events.php?loc_id=" . loc_id . "", true, 302);
+	echo "<script>window.location.href='events.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
 
@@ -51,7 +51,7 @@ if (!empty($_POST)) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
                 <li class="active">Alerts & Events</li>
             </ol>
             <h1 class="page-header">
@@ -87,7 +87,7 @@ if (!empty($_POST)) {
             <form name="eventsForm" class="dirtyForm" method="post">
 
                 <?php
-                if ($_GET['loc_id'] != 1) {
+                if (loc_id != 1) {
                     ?>
                     <div class="row">
                         <div class="col-lg-4">
@@ -96,8 +96,8 @@ if (!empty($_POST)) {
                                 <div class="checkbox">
                                     <label>
                                         <input class="event_defaults_checkbox defaults-toggle"
-                                               id="<?php echo $_GET['loc_id'] ?>" name="event_defaults"
-                                               type="checkbox" <?php if ($_GET['loc_id']) {
+                                               id="<?php echo loc_id ?>" name="event_defaults"
+                                               type="checkbox" <?php if (loc_id) {
                                             echo $selDefaults;
                                         } ?> data-toggle="toggle">
                                     </label>

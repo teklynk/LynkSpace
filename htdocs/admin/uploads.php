@@ -16,7 +16,7 @@ if ($_GET["share"]) {
 
 $action = safeCleanStr($_POST['action']);
 
-$fileList = getAllUploads(1, 'upload', $_GET['loc_id'], 'ASC'); //returns an array
+$fileList = getAllUploads(1, 'upload', loc_id, 'ASC'); //returns an array
 
 //Upload Action - Do the upload
 if (!empty($_POST) && $action == 'uploadFile') {
@@ -27,9 +27,9 @@ if (!empty($_POST) && $action == 'uploadFile') {
         image_dir,
         2048000,
         'upload',
-        $_GET['loc_id'],
+	    loc_id,
         $_SESSION['user_name'],
-        $_GET['loc_id'],
+	    loc_id,
         true,
         true,
         true,
@@ -43,8 +43,8 @@ if (!empty($_POST) && $action == 'uploadFile') {
     }
 
     //Redirect
-    header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-    echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+    header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
+    echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
     exit();
 }
 
@@ -58,7 +58,7 @@ if ($_GET['delete'] && !$_GET['confirm']) {
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "?",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     } else {
@@ -66,7 +66,7 @@ if ($_GET['delete'] && !$_GET['confirm']) {
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
             false
         );
     }
@@ -78,8 +78,8 @@ if ($_GET['delete'] && !$_GET['confirm']) {
     flashMessageSet('success', 'The file has been deleted.');
 
     //Redirect back to uploads page
-    header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-    echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+    header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
+    echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
     exit();
 }
 
@@ -124,16 +124,16 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
         if ($rowSharedUploadsOption['file_name'] == $getFileName) {
             //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE file_name='" . $getFileName . "' AND loc_id=" . $_GET['loc_id'] . ";";
+            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE file_name='" . $getFileName . "' AND loc_id=" . loc_id . ";";
             mysqli_query($db_conn, $sharedUploadsOptionUpdate);
         } else {
             //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, file_name, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, file_name, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
             mysqli_query($db_conn, $sharedUploadsOptionInsert);
         }
 
-        header("Location: uploads.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-        echo "<script>window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+        header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
+        echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
         exit();
     }
 
@@ -156,7 +156,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
                 <li class="active">Uploads</li>
             </ol>
             <h1 class="page-header">
@@ -245,14 +245,14 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
                         if ($adminIsCheck == "true" && multiBranch == 'true') {
                             echo "<td class='col-xs-1'>
-                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
                         }
 
                         echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $file['datetime'] . "</td>
                             <td class='col-xs-1'>
-                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . $_GET['loc_id'] . "&delete=" . $file['id'] . "&guid=" . $file['guid'] . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                            <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&delete=" . $file['id'] . "&guid=" . $file['guid'] . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
 
@@ -288,7 +288,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'uploads.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    window.location.href = 'uploads.php?loc_id=<?php echo loc_id; ?>';
                 }, 100);
             });
 

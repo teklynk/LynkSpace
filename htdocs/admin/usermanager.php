@@ -25,7 +25,7 @@ if ($deluserId && $deluserTitle && !$_GET['confirm']) {
         "confirm",
         "Delete User?",
         "Are you sure you want to delete: " . $deluserTitle . "?",
-        "usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&guid=" . $deluserGuid . "&confirm=yes",
+        "usermanager.php?loc_id=" . loc_id . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&guid=" . $deluserGuid . "&confirm=yes",
         false
     );
 
@@ -40,7 +40,7 @@ if ($deluserId && $deluserTitle && !$_GET['confirm']) {
         NULL
     );
 
-    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . loc_id . "'\">×</button></div>";
 }
 
 //Add User
@@ -93,7 +93,7 @@ if ($_POST['save_main']) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
                 <li class="active">User Manager</li>
             </ol>
             <h1 class="page-header">
@@ -184,7 +184,7 @@ if ($deleteMsg != "") {
                                         <select class="form-control selectpicker show-tick" data-live-search="true"
                                                 data-container="body" data-dropup-auto="false" data-size="10"
                                                 name="user_location" title="Choose a location" required>
-                                            <?php echo getLocList($_GET['loc_id'], 'true'); ?>
+                                            <?php echo getLocList(loc_id, 'true'); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -308,7 +308,7 @@ if ($deleteMsg != "") {
                             <td>$usersDateTime</td>
                             <td>$usersClientIP</td>
                             <td>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . $_GET['loc_id'] . "&deleteuser=" . $usersID . "&deletetitle=" . $usersName . "&guid=" . $usersGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . loc_id . "&deleteuser=" . $usersID . "&deletetitle=" . $usersName . "&guid=" . $usersGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                     }
@@ -323,7 +323,7 @@ if ($deleteMsg != "") {
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'usermanager.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    window.location.href = 'usermanager.php?loc_id=<?php echo loc_id; ?>';
                 }, 100);
             });
 

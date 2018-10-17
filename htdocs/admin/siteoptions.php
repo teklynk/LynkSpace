@@ -8,7 +8,7 @@ require_once(__DIR__ . '/includes/header.inc.php');
 $_SESSION['file_referrer'] = 'siteoptions.php';
 
 //Keeps user in the default location when on this page. Only Default loc can edit this page.
-if ($_GET['loc_id'] != 1) {
+if (loc_id != 1) {
     header('Location: siteoptions.php?loc_id=1', true, 302);
     echo "<script>window.location.href='siteoptions.php?loc_id=1';</script>";
     exit();
@@ -51,8 +51,8 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Settings</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Settings</a></li>
                 <li class="active">Site Options</li>
             </ol>
             <h1 class="page-header">

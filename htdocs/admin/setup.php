@@ -15,11 +15,11 @@ if (isset($rowLocationMaxID[0])) {
 }
 
 //Get location table columns
-$sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+$sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . loc_id . ";");
 $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
 //Get setup table columns
-$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . loc_id . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 $pageMsg = '';
@@ -46,52 +46,52 @@ if (!empty($_POST['site_title'])) {
     }
 
     //Always set default location to active/true
-    if ($_GET['loc_id'] == 1) {
+    if (loc_id == 1) {
         $_POST['location_status'] = 'true';
     }
 
     //update table on submit
-    if ($rowSetup['loc_id'] == $_GET['loc_id']) {
+    if ($rowSetup['loc_id'] == loc_id) {
         //Update Location
-        $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $_GET['loc_id'] . ";";
+        $locationUpdate = "UPDATE locations SET name='" . safeCleanStr($_POST['location_name']) . "', type='" . $_POST['location_type'] . "', active='" . $_POST['location_status'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . loc_id . ";";
         mysqli_query($db_conn, $locationUpdate);
         //Update Setup
-        $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+        $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $setupUpdate);
     } else {
         //Insert Location
-        $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . $_GET['loc_id'] . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false');";
+        $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . loc_id . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false');";
         mysqli_query($db_conn, $locationInsert);
         //Insert Setup
-        $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
+        $setupInsert = "INSERT INTO setup (title, keywords, description, config, logo, ls2pac, ls2kids, searchdefault, author, pageheading, servicesheading, sliderheading, teamheading, hottitlesheading, servicescontent, teamcontent, slider_use_defaults, navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3, services_use_defaults, team_use_defaults, hottitles_use_defaults, logo_use_defaults, theme_use_defaults, datetime, author_name, loc_id) VALUES ('" . safeCleanStr($_POST['site_title']) . "', '" . safeCleanStr($site_keywords) . "', '" . safeCleanStr($site_description) . "', '" . safeCleanStr($_POST['site_config']) . "', '" . $_POST['site_logo'] . "', 'true', 'true', 1, '" . safeCleanStr($site_author) . "', 'Pages', 'Our Services', 'Slider', 'Meet the Team', 'New Items', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '" . date("Y-m-d H:i:s") . "', '" . $_SESSION['user_name'] . "', " . loc_id . ");";
         mysqli_query($db_conn, $setupInsert);
         //Insert Contact defaults
-        $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+        $contactInsert = "INSERT INTO contactus (heading, use_defaults, datetime, loc_id) VALUES ('Contact Us', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
         mysqli_query($db_conn, $contactInsert);
         //Insert Featured defaults
-        $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+        $featuredInsert = "INSERT INTO featured (heading, use_defaults, author_name, datetime, loc_id) VALUES ('Feature', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
         mysqli_query($db_conn, $featuredInsert);
         //SocialMedia
-        $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . $_GET['loc_id'] . ");";
+        $socialInsert = "INSERT INTO socialmedia (heading, use_defaults, loc_id) VALUES ('Follow Us', 'true', " . loc_id . ");";
         mysqli_query($db_conn, $socialInsert);
         //Events
-        $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . $_GET['loc_id'] . ");";
+        $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . loc_id . ");";
         mysqli_query($db_conn, $eventsInsert);
     }
 
     //Reset/Reload loc_list drop down to get the newest locations
     unset($_SESSION['loc_list']);
-    $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
+    $_SESSION['loc_list'] = getLocList(loc_id, 'false');
 
     //Get location table columns
-    $sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+    $sqlLocation = mysqli_query($db_conn, "SELECT id, name, type, active FROM locations WHERE id=" . loc_id . ";");
     $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 
     //Get setup table columns
-    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . loc_id . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
-    $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . loc_id . "'\">×</button></div>";
 
 }
 
@@ -100,15 +100,15 @@ if ($_GET['deleteloc'] == 'true') {
         "confirm",
         "Delete Location?",
         "Are you sure you want to delete this location?",
-        "setup.php?loc_id=" . $_GET['loc_id'] . "&deleteloc=" . $_GET['loc_id'] . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+        "setup.php?loc_id=" . loc_id . "&deleteloc=" . loc_id . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
         false
     );
 }
 
 //delete a location and all references to it in the config. this will do a cascading delete where loc_id = id
-if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1 && $_GET['newlocation'] != 'true') {
-    if ($_GET['loc_id'] && $_GET['deleteloc'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
-        $locDelete = "DELETE FROM locations WHERE id=" . $_GET['loc_id'] . ";";
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id != 1 && $_GET['newlocation'] != 'true') {
+    if (loc_id && $_GET['deleteloc'] && $_GET['confirm'] == 'yes' && $_GET['token'] == $_SESSION['unique_referrer']) {
+        $locDelete = "DELETE FROM locations WHERE id=" . loc_id . ";";
         mysqli_query($db_conn, $locDelete);
 
         //Delete the uploads folder if it exists, uses rrmdir() from functions.php
@@ -118,7 +118,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
 
         //Reset/Reload loc_list drop down to get the newest locations
         unset($_SESSION['loc_list']);
-        $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
+        $_SESSION['loc_list'] = getLocList(loc_id, 'false');
 
         header("Location: setup.php?loc_id=1", true, 302);
         echo "<script>window.location.href='setup.php?loc_id=1';</script>";
@@ -130,14 +130,14 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
         <div class="col-lg-12">
             <?php if ($_GET['newlocation'] == 'true') {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Settings</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Settings</a></li>
             <li class='active'>New Location</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li class='active'>Settings</li>
             </ol>";
                 echo "<h1 class='page-header'>Settings </h1>";
@@ -223,7 +223,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     <div class="form-group" id="site_options">
                                         <button type="button" class="delete_location btn btn-primary"
                                                 name="site_options"
-                                                onclick="window.location='siteoptions.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                                onclick="window.location='siteoptions.php?loc_id=<?php echo loc_id; ?>';">
                                             <i class='fa fa-fw fa-edit'></i> Site Options
                                         </button>
                                         <small>
@@ -233,7 +233,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     <div class="form-group" id="file_editor">
                                         <button type="button" data-toggle="tooltip"
                                                 class="delete_location btn btn-primary" name="file_editor"
-                                                onclick="window.location='editor.php?loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                                onclick="window.location='editor.php?loc_id=<?php echo loc_id; ?>';">
                                             <i class='fa fa-fw fa-edit'></i> Theme Editor
                                         </button>
                                         <small>
@@ -280,7 +280,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                             <?php
                         }
                         //Check if user_level is Admin user and Multibranch
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id != 1) {
                             ?>
                             <hr/>
                             <div class="row">
@@ -289,7 +289,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         <button type="button" class="delete_location btn btn-danger"
                                                 name="delete_location" data-toggle="tooltip"
                                                 data-original-title="Use Carefully!" data-placement="top"
-                                                onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo $_GET['loc_id']; ?>';">
+                                                onclick="window.location='setup.php?deleteloc=true&loc_id=<?php echo loc_id; ?>';">
                                             <i class='fa fa-fw fa-trash'></i> Delete this Location
                                         </button>
                                         <small>
@@ -303,7 +303,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                         }
 
                         //Check if user_level is Admin user and Multibranch
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 1) {
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id != 1) {
                             ?>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -312,8 +312,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         <div class="checkbox">
                                             <label>
                                                 <input class="location_status_checkbox"
-                                                       id="<?php echo $_GET['loc_id'] ?>" name="location_status"
-                                                       type="checkbox" <?php if ($_GET['loc_id']) {
+                                                       id="<?php echo loc_id ?>" name="location_status"
+                                                       type="checkbox" <?php if (loc_id) {
                                                     echo $isActive_location;
                                                 } ?> data-toggle="toggle">
                                             </label>
@@ -384,7 +384,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                 <div class="row">
                     <div class="col-lg-6">
                         <?php
-                        if ($_GET['loc_id'] != 1) {
+                        if (loc_id != 1) {
                             ?>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -392,8 +392,8 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                         <label for="logo_defaults">Use Defaults Logo</label>
                                         <div class="checkbox">
                                             <label for="logo_defaults">
-                                                <input class="logo_defaults_checkbox" id="<?php echo $_GET['loc_id'] ?>"
-                                                       name="logo_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                                                <input class="logo_defaults_checkbox" id="<?php echo loc_id ?>"
+                                                       name="logo_defaults" type="checkbox" <?php if (loc_id) {
                                                     echo $selLogoDefaults;
                                                 } ?> data-toggle="toggle">
                                             </label>
@@ -415,7 +415,7 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] != 
                                     title='Set the logo'>
                                 <option value="">None</option>
                                 <?php
-                                echo getImageDropdownList($_GET['loc_id'], $rowSetup['logo']);
+                                echo getImageDropdownList(loc_id, $rowSetup['logo']);
                                 ?>
                             </select>
                         </div>

@@ -10,7 +10,7 @@ $sqlUsers = dbQuery(
     'users',
     'username, password, email, datetime, id',
     NULL,
-    'id=' . $_GET['loc_id'],
+    'id=' . loc_id,
     NULL
 );
 $rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
@@ -30,33 +30,33 @@ if (!empty($_POST)) {
             'users',
             'username, password, email, datetime, clientip',
             " '" . $user_name . "', SHA1('" . blowfishSalt . $user_password . "'), '" . $user_email . "', '" . date('Y-m-d H:i:s') . "', '" . getRealIpAddr() . "' ",
-            "id=" . $_GET['loc_id'] . " ",
+            "id=" . loc_id . " ",
             NULL
         );
 
-        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
     } else {
-        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
     }
 
     if ($_GET['updatepassword'] == 'true') {
-        header("Location: users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "", true, 302);
-        echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . $_GET['loc_id'] . "';</script>";
+        header("Location: users.php?passwordupdated=true&loc_id=" . loc_id . "", true, 302);
+        echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . loc_id . "';</script>";
     }
 }
 
 if ($_GET['updatepassword'] == 'true') {
-    $pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\"></button></div>";
+    $pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\"></button></div>";
 }
 
 if ($_GET['passwordupdated'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
 }
 ?>
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
                 <li class="active">My Account</li>
             </ol>
             <h1 class="page-header">

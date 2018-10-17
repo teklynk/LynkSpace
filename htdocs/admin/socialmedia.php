@@ -5,7 +5,7 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'socialmedia.php';
 
-$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . loc_id . ";");
 $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 
 //update table on submit
@@ -29,19 +29,19 @@ if (!empty($_POST)) {
             $social_defaults = 'false';
         }
 
-        if ($rowSocial['loc_id'] == $_GET['loc_id']) {
+        if ($rowSocial['loc_id'] == loc_id) {
             //Do Update
-            $socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+            $socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . loc_id . ";";
             mysqli_query($db_conn, $socialUpdate);
         } else {
             //Do Insert
-            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_defaults . "', " . $_GET['loc_id'] . ");";
+            $socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_defaults . "', " . loc_id . ");";
             mysqli_query($db_conn, $socialInsert);
         }
 
     }
 
-    $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlSocial = mysqli_query($db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . loc_id . ";");
     $rowSocial = mysqli_fetch_array($sqlSocial, MYSQLI_ASSOC);
 
     flashMessageSet('success', "The social media section has been updated.");
@@ -51,7 +51,7 @@ if (!empty($_POST)) {
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+            <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
             <li class="active">Social Media</li>
         </ol>
         <h1 class="page-header">
@@ -73,7 +73,7 @@ if (!empty($_POST)) {
         ?>
         <form name="socialmediaForm" class="dirtyForm" method="post">
             <?php
-            if ($_GET['loc_id'] != 1) {
+            if (loc_id != 1) {
                 ?>
                 <div class="row">
                     <div class="col-lg-4">
@@ -82,8 +82,8 @@ if (!empty($_POST)) {
                             <div class="checkbox">
                                 <label>
                                     <input class="social_defaults_checkbox defaults-toggle"
-                                           id="<?php echo $_GET['loc_id'] ?>" name="social_defaults"
-                                           type="checkbox" <?php if ($_GET['loc_id']) {
+                                           id="<?php echo loc_id ?>" name="social_defaults"
+                                           type="checkbox" <?php if (loc_id) {
                                         echo $selDefaults;
                                     } ?> data-toggle="toggle">
                                 </label>

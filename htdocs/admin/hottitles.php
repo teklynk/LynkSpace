@@ -6,14 +6,14 @@ require_once(__DIR__ . '/includes/header.inc.php');
 $_SESSION['file_referrer'] = 'hottitles.php';
 
 //get location type from locations table
-$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
 ?>
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id'] ?>">Home</a></li>
+            <li><a href="setup.php?loc_id=<?php echo loc_id ?>">Home</a></li>
             <li class="active">Hot Titles</li>
         </ol>
         <h1 class="page-header">
@@ -35,14 +35,14 @@ if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
         "confirm",
         "Delete Hot Title?",
         "Are you sure you want to delete: " . $delhottitlesTitle . "?",
-        "hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $delhottitlesId . "&guid=" . $delhottitlesGuid . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes",
+        "hottitles.php?loc_id=" . loc_id . "&deletehottitles=" . $delhottitlesId . "&guid=" . $delhottitlesGuid . "&deletetitle=" . $delhottitlesTitle . "&confirm=yes",
         false
     );
 
 
 } elseif ($delhottitlesId && $delhottitlesTitle && $_GET['confirm'] == 'yes' && $delhottitlesGuid) {
     //delete hot title after clicking Yes
-    $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND guid='" . $delhottitlesGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+    $hottitlesDelete = "DELETE FROM hottitles WHERE id=" . $delhottitlesId . " AND guid='" . $delhottitlesGuid . "' AND loc_id=" . loc_id . ";";
     mysqli_query($db_conn, $hottitlesDelete);
 
     flashMessageSet('success', $delhottitlesTitle . " has been deleted.");
@@ -56,7 +56,7 @@ if (!empty($_POST['save_main'])) {
     $main_heading = safeCleanStr($_POST['main_heading']);
     $hottitles_count = safeCleanStr($_POST['hottitles_count']);
 
-    $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+    $setupUpdate = "UPDATE setup SET hottitlesheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
     mysqli_query($db_conn, $setupUpdate);
 
     for ($i = 0; $i < $hottitles_count; $i++) {
@@ -67,7 +67,7 @@ if (!empty($_POST['save_main'])) {
         $location_type = safeCleanStr($_POST['location_type'][$i]);
         $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
 
-        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " AND loc_id=" . $_GET['loc_id'] . ";";
+        $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $hottitlesUpdate);
     }
 
@@ -90,7 +90,7 @@ if ($_POST['add_hottitles']) {
             $hottitles_sort = 0;
         }
 
-        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, guid, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . getGuid() . "', '" . $location_type . "', " . $_GET['loc_id'] . ", 'false', '" . date("Y-m-d H:i:s") . "')";
+        $hottitlesInsert = "INSERT INTO hottitles (sort, title, url, guid, loc_type, loc_id, active, datetime) VALUES (" . $hottitles_sort . ", '" . $hottitles_title . "', '" . $hottitles_url . "', '" . getGuid() . "', '" . $location_type . "', " . loc_id . ", 'false', '" . date("Y-m-d H:i:s") . "')";
         mysqli_query($db_conn, $hottitlesInsert);
 
         flashMessageSet('success', 'The hot titles has been updated.');
@@ -104,7 +104,7 @@ if ($_POST['add_hottitles']) {
 
 }
 
-$sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlSetup = mysqli_query($db_conn, "SELECT hottitlesheading, hottitles_use_defaults FROM setup WHERE loc_id=" . loc_id . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //use default location
@@ -114,7 +114,7 @@ if ($rowSetup['hottitles_use_defaults'] == 'true') {
     $selDefaults = '';
 }
 
-if ($_GET['loc_id'] != 1) {
+if (loc_id != 1) {
     ?>
     <div class="row">
         <div class="col-lg-4">
@@ -122,8 +122,8 @@ if ($_GET['loc_id'] != 1) {
                 <label>Use Defaults</label>
                 <div class="checkbox">
                     <label>
-                        <input class="hottitles_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>"
-                               name="hottitles_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                        <input class="hottitles_defaults_checkbox defaults-toggle" id="<?php echo loc_id ?>"
+                               name="hottitles_defaults" type="checkbox" <?php if (loc_id) {
                             echo $selDefaults;
                         } ?> data-toggle="toggle">
                     </label>
@@ -244,7 +244,7 @@ if ($_GET['loc_id'] != 1) {
                         <tbody>
                         <?php
                         $hottitlesCount = "";
-                        $sqlHottitles = mysqli_query($db_conn, "SELECT id, sort, title, url, guid, loc_type, active, loc_id FROM hottitles WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
+                        $sqlHottitles = mysqli_query($db_conn, "SELECT id, sort, title, url, guid, loc_type, active, loc_id FROM hottitles WHERE loc_id=" . loc_id . " ORDER BY sort, loc_type, title ASC;");
                         while ($rowHottitles = mysqli_fetch_array($sqlHottitles, MYSQLI_ASSOC)) {
                             $hottitlesId = $rowHottitles['id'];
                             $hottitlesSort = $rowHottitles['sort'];
@@ -289,7 +289,7 @@ if ($_GET['loc_id'] != 1) {
                             </td>";
 
                             echo "<td class='col-xs-2'>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='hottitles.php?loc_id=" . $_GET['loc_id'] . "&deletehottitles=" . $hottitlesId . "&guid=" . $hottitlesGuid . "&deletetitle=" . $hottitlesTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='hottitles.php?loc_id=" . loc_id . "&deletehottitles=" . $hottitlesId . "&guid=" . $hottitlesGuid . "&deletetitle=" . $hottitlesTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
                         } ?>
@@ -314,7 +314,7 @@ if ($_GET['loc_id'] != 1) {
     $(document).ready(function () {
         $('#confirm').on('hidden.bs.modal', function () {
             setTimeout(function () {
-                window.location.href = 'hottitles.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                window.location.href = 'hottitles.php?loc_id=<?php echo loc_id; ?>';
             }, 100);
         });
 
