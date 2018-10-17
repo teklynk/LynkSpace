@@ -24,7 +24,7 @@ if ($_GET['preview'] > "") {
 }
 
 //get location type from locations table
-$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . $_GET['loc_id'] . ";");
+$sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 
 $newSlide = safeCleanStr($_GET['newslide']);
@@ -36,21 +36,21 @@ $editSlide = safeCleanStr($_GET['editslide']);
             <?php
             if ($newSlide == 'true') {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . loc_id . "'>Image Slider</a></li>
                 <li class='active'>New Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (New) <a href='slider.php' class='btn btn-link' role='button'> Cancel</a></h1>";
             } elseif ($editSlide) {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='slider.php?loc_id=" . $_GET['loc_id'] . "'>Image Slider</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='slider.php?loc_id=" . loc_id . "'>Image Slider</a></li>
                 <li class='active'>Edit Slide</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider (Edit) <a href='slider.php' class='btn btn-link'> Cancel</a></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
                 <li class='active'>Image Slider</li>
                 </ol>";
                 echo "<h1 class='page-header'>Image Slider</h1>";
@@ -82,13 +82,13 @@ if ($newSlide || $editSlide) {
         //update data on submit
         if (!empty($_POST)) {
 
-            $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . $end_date . "', link='" . $slide_link . "', image='" . $slide_image . "', loc_type='" . $location_type . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+            $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . $end_date . "', link='" . $slide_link . "', image='" . $slide_image . "', loc_type='" . $location_type . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . loc_id . ";";
             mysqli_query($db_conn, $slideUpdate);
 
-            $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The slide " . $slide_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . loc_id . "' class='alert-link'>Back</a> | The slide " . $slide_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
         }
 
-        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
+        $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . loc_id . ";");
         $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC);
 
         //Create new slide
@@ -98,11 +98,11 @@ if ($newSlide || $editSlide) {
 
         //insert data on submit
         if (!empty($_POST)) {
-            $slideInsert = "INSERT INTO slider (title, content, guid, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . getGuid() . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
+            $slideInsert = "INSERT INTO slider (title, content, guid, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . getGuid() . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . loc_id . ");";
             mysqli_query($db_conn, $slideInsert);
 
-            header("slider.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-            echo "<script>window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+            header("slider.php?loc_id=" . loc_id . "", true, 302);
+            echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
         }
     }
 
@@ -140,7 +140,7 @@ if ($newSlide || $editSlide) {
                         data-size="10" name="slide_image" id="slide_image" title="Choose an existing image">
                     <option value="">None</option>
                     <?php
-                    echo getImageDropdownList($_GET['loc_id'], $rowSlides['image']);
+                    echo getImageDropdownList(loc_id, $rowSlides['image']);
                     ?>
                 </select>
             </div>
@@ -152,7 +152,7 @@ if ($newSlide || $editSlide) {
                         data-size="10" name="slide_exist_page" id="slide_exist_page" title="Choose an existing page">
                     <option value="">None</option>
                     <?php
-                    echo getPages($_GET['loc_id']);
+                    echo getPages(loc_id);
                     ?>
                 </select>
             </div>
@@ -260,15 +260,15 @@ if ($newSlide || $editSlide) {
             "confirm",
             "Delete Slide?",
             "Are you sure you want to delete: " . $delslideTitle . "?",
-            "slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=" . $delslideId . "&guid=" . $delslideGuid . "&deletetitle=" . $delslideTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . ""
+            "slider.php?loc_id=" . loc_id . "&deleteslide=" . $delslideId . "&guid=" . $delslideGuid . "&deletetitle=" . $delslideTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . ""
         );
 
     } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delslideGuid && $delslideToken == $_SESSION['unique_referrer']) {
         //delete slide after clicking Yes
-        $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND guid='" . $delslideGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+        $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND guid='" . $delslideGuid . "' AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $slideDelete);
 
-        $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
         echo $deleteMsg;
     }
 
@@ -284,7 +284,7 @@ if ($newSlide || $editSlide) {
             $slider_defaults = 'false';
         }
 
-        $setupUpdate = "UPDATE setup SET sliderheading='" . $main_heading . "', slider_use_defaults='" . $slider_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+        $setupUpdate = "UPDATE setup SET sliderheading='" . $main_heading . "', slider_use_defaults='" . $slider_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $setupUpdate);
 
         for ($i = 0; $i < $slide_count; $i++) {
@@ -300,10 +300,10 @@ if ($newSlide || $editSlide) {
 
         }
 
-        $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+        $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
     }
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . loc_id . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     //Modal preview box
@@ -316,7 +316,7 @@ if ($newSlide || $editSlide) {
         $selDefaults = "";
     }
 
-    if ($_GET['loc_id'] != 1) {
+    if (loc_id != 1) {
         ?>
         <div class="row">
             <div class="col-lg-4">
@@ -324,8 +324,8 @@ if ($newSlide || $editSlide) {
                     <label for="slider_defaults">Use Defaults</label>
                     <div class="checkbox">
                         <label>
-                            <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>"
-                                   name="slider_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                            <input class="slider_defaults_checkbox defaults-toggle" id="<?php echo loc_id ?>"
+                                   name="slider_defaults" type="checkbox" <?php if (loc_id) {
                                 echo $selDefaults;
                             } ?> data-toggle="toggle">
                         </label>
@@ -340,7 +340,7 @@ if ($newSlide || $editSlide) {
     ?>
 
     <button type="button" class="btn btn-primary"
-            onclick="window.location='?newslide=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
+            onclick="window.location='?newslide=true&loc_id=<?php echo loc_id; ?>';"><i
             class='fa fa-fw fa-plus'></i> Add a New Slide
     </button>
     <h2></h2>
@@ -373,7 +373,7 @@ if ($newSlide || $editSlide) {
 		</thead>
 		<tbody>";
     $slideCount = "";
-    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort, loc_type, title ASC;");
+    $sqlslides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, sort, startdate, enddate, loc_type, active, loc_id FROM slider WHERE loc_id=" . loc_id . " ORDER BY sort, loc_type, title ASC;");
     while ($rowSlides = mysqli_fetch_array($sqlslides, MYSQLI_ASSOC)) {
         $slideId = safeCleanStr($rowSlides['id']);
         $slideGuid = safeCleanStr($rowSlides['guid']);
@@ -398,7 +398,7 @@ if ($newSlide || $editSlide) {
             </td>
 			<td>
 			<input type='hidden' name='slide_id[]' value='" . $slideId . "' >
-			<a href='slider.php?loc_id=" . $_GET['loc_id'] . "&editslide=" . $slideId . "&guid=" . $slideGuid . "' title='Edit'>" . $slideTitle . "</a>
+			<a href='slider.php?loc_id=" . loc_id . "&editslide=" . $slideId . "&guid=" . $slideGuid . "' title='Edit'>" . $slideTitle . "</a>
 			</td>";
 
         //If admin, show location type drop down list else show a hidden input with the locations type value
@@ -425,8 +425,8 @@ if ($newSlide || $editSlide) {
 			<input data-toggle='toggle' title='Slide Active' class='checkbox slider_status_checkbox' id='" . $slideId . "' type='checkbox' " . $isActive . ">
 			</td>
 			<td class='col-xs-2'>
-			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . $slideTitle . "', 'slider.php?loc_id=" . $_GET['loc_id'] . "&preview=".$slideId."')\"><i class='fa fa-fw fa-eye'></i></button>
-			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='slider.php?loc_id=" . $_GET['loc_id'] . "&deleteslide=".$slideId."&guid=".$slideGuid."&deletetitle=" . $slideTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
+			<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . $slideTitle . "', 'slider.php?loc_id=" . loc_id . "&preview=".$slideId."')\"><i class='fa fa-fw fa-eye'></i></button>
+			<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "&deleteslide=".$slideId."&guid=".$slideGuid."&deletetitle=" . $slideTitle . "'\"><i class='fa fa-fw fa-trash'></i></button>
 			</td>
 			</tr>";
     }
@@ -457,7 +457,7 @@ echo "</div>
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'slider.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    window.location.href = 'slider.php?loc_id=<?php echo loc_id; ?>';
                 }, 100);
             });
 

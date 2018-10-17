@@ -47,7 +47,7 @@ if ($customerNumRows > 0) {
             //prints the cat title/name
             $customersCatCount++;
             echo "<div class='col-xs-12 col-lg-12 cat-title catnameid-" . $customerCatId . " '>";
-            echo "<a href='databases.php?loc_id=" . $_GET['loc_id'] . "&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
+            echo "<a href='databases.php?loc_id=" . loc_id . "&section=" . $customerSection . "&cat_id=" . $customerCatId . "' title='" . $customerCatName . "'><h1 class='customers'>" . $customerCatName . "</h1></a>";
             echo "</div>";
             echo "<div style='clear:both;'></div>";
         }

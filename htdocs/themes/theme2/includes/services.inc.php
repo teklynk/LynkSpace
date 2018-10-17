@@ -7,7 +7,7 @@ if (!defined('ALLOW_INC')) {
 <a name="services" tabindex="-1"></a>
 <?php
 
-getServices($_GET['loc_id']);
+getServices(loc_id);
 
 echo "<a name='services'></a>";
 

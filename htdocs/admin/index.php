@@ -95,7 +95,7 @@ if (!empty($_POST)) {
             // If is Admin
             if ($rowLogin['level'] == 1 && multiBranch == 'true') {
                 //Loads the getLocList as a session variable
-                $_SESSION['loc_list'] = getLocList($_GET['loc_id'], 'false');
+                $_SESSION['loc_list'] = getLocList(loc_id, 'false');
             }
 
             // Get the client IP and datetime at each log in. update the database row

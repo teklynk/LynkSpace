@@ -26,44 +26,47 @@ function loginAttempts($userIp, $maxAttempts, $maxTimeout)
     global $db_conn;
     global $loginFailed;
 
-    $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
-    $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
+    if (isset($userIp) && !empty($userIp)){
 
-    $currentTime = strtotime(date('Y-m-d H:i:s'));
-    $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
-    $loginAttempts = $rowLoginAttempt['attempts'];
-    $loginUserIp = $rowLoginAttempt['ip'];
+        $sqlGetLoginAttempt = mysqli_query($db_conn, "SELECT ip, attempts, datetime FROM login_attempts WHERE ip='" . $userIp . "';");
+        $rowLoginAttempt = mysqli_fetch_array($sqlGetLoginAttempt, MYSQLI_ASSOC);
 
-    if ($rowLoginAttempt) {
+        $currentTime = strtotime(date('Y-m-d H:i:s'));
+        $loginAttemptTime = strtotime($rowLoginAttempt['datetime']);
+        $loginAttempts = $rowLoginAttempt['attempts'];
+        $loginUserIp = $rowLoginAttempt['ip'];
 
-        $attempts = $loginAttempts + 1;
+        if ($rowLoginAttempt) {
 
-        if ($attempts != $maxAttempts) {
+            $attempts = $loginAttempts + 1;
 
-            $loginFailed = false;
+            if ($attempts != $maxAttempts) {
 
-            $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=CURRENT_TIMESTAMP() WHERE ip='" . $userIp . "';";
-            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+                $loginFailed = false;
+
+                $sqlUpdateLoginAttempt = "UPDATE login_attempts SET attempts=" . $attempts . ", datetime=CURRENT_TIMESTAMP() WHERE ip='" . $userIp . "';";
+                mysqli_query($db_conn, $sqlUpdateLoginAttempt);
+
+            } else {
+
+                if ($currentTime - $loginAttemptTime >= $maxTimeout) {
+                    $loginFailed = false;
+                    $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
+                    mysqli_query($db_conn, $sqlLoginAttemptDelete);
+                } else {
+                    $loginFailed = true;
+                    echo "<style>#wrapper {padding-left: 0 !important;}</style>";
+                    echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+                    die();
+                }
+
+            }
 
         } else {
 
-            if ($currentTime - $loginAttemptTime >= $maxTimeout) {
-                $loginFailed = false;
-                $sqlLoginAttemptDelete = "DELETE FROM login_attempts WHERE ip='" . $userIp . "';";
-                mysqli_query($db_conn, $sqlLoginAttemptDelete);
-            } else {
-                $loginFailed = true;
-                echo "<style>#wrapper {padding-left: 0 !important;}</style>";
-                echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
-                die();
-            }
-
+            $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) VALUES (1, '" . $userIp . "', CURRENT_TIMESTAMP());";
+            mysqli_query($db_conn, $sqlUpdateLoginAttempt);
         }
-
-    } else {
-
-        $sqlUpdateLoginAttempt = "INSERT INTO login_attempts (attempts, ip, datetime) VALUES (1, '" . $userIp . "', CURRENT_TIMESTAMP());";
-        mysqli_query($db_conn, $sqlUpdateLoginAttempt);
     }
 
     return $loginFailed;
@@ -185,10 +188,10 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
 
     if ($postAction) {
 
-	    $uploadError = false;
+        $uploadError = false;
 
         //Create upload folder if it does not exist.
-        if (is_numeric($_GET['loc_id'])) {
+        if (is_numeric(loc_id)) {
             if (!file_exists($target)) {
                 @mkdir($target, 0755);
             }
@@ -244,13 +247,13 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                     $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id=" . $type_id . " AND orig_file_name='" . $original_file . "' AND loc_id=" . $loc_id . " LIMIT 1;");
                     $rowUploads = mysqli_fetch_array($sqlUploads, MYSQLI_ASSOC);
 
-                    if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file){
+                    if ($uniqueFileNames == false && $rowUploads['orig_file_name'] == $original_file) {
                         //Update existing file in the database, where guid=$uploads_row['guid']
                         $sqlUpdateUploads = "UPDATE uploads SET datetime = '" . date("Y-m-d H:i:s") . "', file_name = '" . $original_file . "', file_data = '" . $fileData . "' WHERE guid = '" . $rowUploads['guid'] . "' AND loc_id=" . $loc_id . ";";
                         mysqli_query($db_conn, $sqlUpdateUploads) OR DIE(mysqli_error($db_conn));
                     } else {
                         //Save uploaded file to the database
-                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . $fileName . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $sqlInsertUploads = "INSERT INTO uploads (type, type_id, file_name, orig_file_name, file_data, file_ext, file_mime, file_size, author_name, guid, datetime, loc_id) VALUES ('" . $type . "', " . $type_id . ", '" . $fileName . "', '" . $original_file . "', '" . $fileData . "', '" . $fileExt . "', '" . $fileMime . "', " . $fileSize . ", '" . $user . "', '" . getGuid() . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
                         mysqli_query($db_conn, $sqlInsertUploads) OR DIE(mysqli_error($db_conn));
                     }
 
@@ -272,24 +275,29 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
 
                 //Delete the file if it is not an image
                 if (file_exists($target_file)) {
-	                $uploadError = true;
+                    $uploadError = true;
                     unlink($target_file) OR die('Could not delete file');
                 }
 
             }
 
         } else {
-	        $uploadError = true;
+            $uploadError = true;
         }
     }
 }
 
-function getAllUploads($type_id=null, $type=null, $loc_id, $orderBy='DESC')
+function getAllUploads($type_id = null, $type = null, $loc, $orderBy = 'DESC')
 {
     global $db_conn;
 
-    $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc_id . " ORDER BY datetime " . $orderBy . ";");
-    $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
+    $rowUploads = '';
+
+    if (isset($loc) && !empty($loc)) {
+
+        $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc . " ORDER BY datetime " . $orderBy . ";");
+        $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
+    }
 
     return $rowUploads;
 }
@@ -321,7 +329,7 @@ function deleteUploads($target, $arg_id, $guid)
         mysqli_query($db_conn, $uploads_sql) OR die('SQL Error: ' . $uploads_sql);
 
         //Delete file from uploads folder
-        if (file_exists($target . $fileName)){
+        if (file_exists($target . $fileName)) {
             unlink($target . $fileName) OR die('Could not delete file');
         }
     }
@@ -341,7 +349,7 @@ function resizeImage($imagePath, $resizedFileName, $width = '200', $height = '20
 }
 
 //File size conversion to KB, MB, GB....
-function filesizeFormatted($theFile, $readFile=false)
+function filesizeFormatted($theFile, $readFile = false)
 {
 
     if ($readFile == true) {
@@ -474,7 +482,7 @@ function getGravatar($email, $size)
 //Cleans strings - removes html characters, trims spaces, converts to html entities.
 function safeCleanStr($cleanStr)
 {
-    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES, 'UTF-8' , true);
+    return htmlspecialchars(strip_tags(trim((STRING)$cleanStr)), ENT_QUOTES, 'UTF-8', true);
 }
 
 //escape Quotes in textareas and string values - Escape special characters in a string
@@ -492,7 +500,8 @@ function sanitizeStr($cleanStr)
 }
 
 //sanitize integers - removes anything that is not a number
-function sanitizeInt($cleanInt) {
+function sanitizeInt($cleanInt)
+{
     $cleanInt = preg_replace("/^([0-9]+)$/", "", $cleanInt);
 
     if ($cleanInt == "") {
@@ -641,15 +650,19 @@ function getPages($loc)
     global $extraPagesArray; //from config.php
     global $db_conn;
 
-    $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
-    while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
-        $serviceLinkId = $rowServicesLink['id'];
-        $serviceLinkTitle = $rowServicesLink['title'];
+    if (isset($loc) && !empty($loc)) {
 
-        $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
+        $sqlServicesLink = mysqli_query($db_conn, "SELECT id, title FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title ASC;");
+        while ($rowServicesLink = mysqli_fetch_array($sqlServicesLink, MYSQLI_ASSOC)) {
+            $serviceLinkId = $rowServicesLink['id'];
+            $serviceLinkTitle = $rowServicesLink['title'];
+
+            $pagesList .= "<option value='page.php?page_id=" . $serviceLinkId . "&loc_id=" . $loc . " '>" . $serviceLinkTitle . "</option>";
+        }
+
+        $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . getExtraPages($extraPagesArray);
+
     }
-
-    $pagesList = "<optgroup label='Existing Pages'>" . $pagesList . "</optgroup>" . getExtraPages($extraPagesArray);
 
     return $pagesList;
 }
@@ -690,23 +703,26 @@ function getImageDropdownList($loc, $image_selected)
     global $db_conn;
     global $uploadsList;
 
-	$location = '../uploads/' . $loc . '/';
+    $location = '../uploads/' . $loc . '/';
 
-    //Build a list of shared images
-    $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
-    while ($rowUploadsList = mysqli_fetch_array($sqlUploadsList, MYSQLI_ASSOC)) {
+    if (isset($loc) && !empty($loc)) {
+
+        //Build a list of shared images
+        $sqlUploadsList = mysqli_query($db_conn, "SELECT file_name FROM uploads ORDER BY file_name ASC;");
+        while ($rowUploadsList = mysqli_fetch_array($sqlUploadsList, MYSQLI_ASSOC)) {
 
 
-        $uploadFileName = $rowUploadsList['file_name'];
+            $uploadFileName = $rowUploadsList['file_name'];
 
-	    if ( $location . $uploadFileName === $image_selected ) {
-		    $imageCheck = ' SELECTED ';
-	    } else {
-		    $imageCheck = '';
-	    }
+            if ($location . $uploadFileName === $image_selected) {
+                $imageCheck = ' SELECTED ';
+            } else {
+                $imageCheck = '';
+            }
 
-	    $uploadsList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $uploadFileName . "'/>&nbsp;" . $uploadFileName . "</span>\" value='" . $location . $uploadFileName . "' $imageCheck>" . $uploadFileName . "</option>";
+            $uploadsList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $location . $uploadFileName . "'/>&nbsp;" . $uploadFileName . "</span>\" value='" . $location . $uploadFileName . "' $imageCheck>" . $uploadFileName . "</option>";
 
+        }
     }
 
     return $uploadsList;
@@ -718,14 +734,17 @@ function getFilesJsonList($loc)
 {
     $fileListJson = null;
 
-    $fileList = getAllUploads(1, 'upload', $loc, 'ASC'); //returns an array
+    if (isset($loc) && !empty($loc)) {
 
-    foreach ($fileList as $imgfiles) {
-        $fileListJson .= "{title: '" . $imgfiles['file_name'] . "', value: '" . image_url . $imgfiles['file_name'] . "'},"; //creates a json list of images
+        $fileList = getAllUploads(1, 'upload', $loc, 'ASC'); //returns an array
+
+        foreach ($fileList as $imgfiles) {
+            $fileListJson .= "{title: '" . $imgfiles['file_name'] . "', value: '" . image_url . $imgfiles['file_name'] . "'},"; //creates a json list of images
+        }
+
+        $fileListJson = ltrim($fileListJson, ',');
+        $fileListJson = rtrim($fileListJson, ',');
     }
-
-    $fileListJson = ltrim($fileListJson, ',');
-    $fileListJson = rtrim($fileListJson, ',');
 
     return $fileListJson;
 
@@ -736,18 +755,20 @@ function getPagesJsonList($loc)
     global $linkListJson;
     global $db_conn;
 
-    //get and build page list for TinyMCE
-    $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title;");
-    while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
-        $getPageId = $rowGetPages['id'];
-        $getPageTitle = $rowGetPages['title'];
-        if ($getPageTitle != '') {
-            $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+    if (isset($loc) && !empty($loc)) {
+        //get and build page list for TinyMCE
+        $sqlGetPages = mysqli_query($db_conn, "SELECT id, title, active FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY title;");
+        while ($rowGetPages = mysqli_fetch_array($sqlGetPages, MYSQLI_ASSOC)) {
+            $getPageId = $rowGetPages['id'];
+            $getPageTitle = $rowGetPages['title'];
+            if ($getPageTitle != '') {
+                $linkListJson .= "{title: '" . $getPageTitle . "', value: 'page.php?loc_id=" . loc_id . "&page_id=" . $getPageId . "'},"; //Create a json list of pages
+            }
         }
+        //Clean string
+        $linkListJson = ltrim($linkListJson, ',');
+        $linkListJson = rtrim($linkListJson, ',');
     }
-    //Clean string
-    $linkListJson = ltrim($linkListJson, ',');
-    $linkListJson = rtrim($linkListJson, ',');
 
     return $linkListJson;
 
@@ -878,7 +899,6 @@ function recurseDelete($src)
 //Database Dump Backup
 function databaseDumpBackup($dest)
 {
-
     global $db_conn;
 
     $sql = "SHOW TABLES FROM " . db_name . ";";
@@ -1256,7 +1276,7 @@ function csrf_validate($token)
 }
 
 //Variable to hide elements from non-admin users
-if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 1) {
+if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id == 1) {
     $adminOnlyShow = "";
     $adminIsCheck = "true";
 } else {
@@ -1265,13 +1285,13 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && $_GET['loc_id'] == 
 }
 
 //if not user level = 1 then keep the user on their own location. if loc_id is changed in querystring, redirect user back to their own loc_id.
-if ($_SESSION['user_level'] != 1 && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
+if ($_SESSION['user_level'] != 1 && loc_id != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
-} elseif ($_SESSION['user_level'] == 1 && $_GET['loc_id'] == "") {
+} elseif ($_SESSION['user_level'] == 1 && loc_id == "") {
     header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
-} elseif (multiBranch == 'false' && $_GET['loc_id'] != $_SESSION['user_loc_id']) {
+} elseif (multiBranch == 'false' && loc_id != $_SESSION['user_loc_id']) {
     header("Location: ?loc_id=1", true, 302);
     echo "<script>window.location.href='?loc_id=1';</script>";
 }

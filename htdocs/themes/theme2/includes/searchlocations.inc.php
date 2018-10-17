@@ -6,7 +6,7 @@ if (!defined('ALLOW_INC')) {
 <!-- Search Locations Section -->
 <a name="search" tabindex="-1"></a>
 <?php
-getSetup($_GET['loc_id']); //from functions.php
+getSetup(loc_id); //from functions.php
 ?>
 
 <script type="text/javascript" language="javascript">
@@ -14,7 +14,7 @@ getSetup($_GET['loc_id']); //from functions.php
     $(document).ready(function () {
         //jQueryUI AutoComplete
         $(function () {
-            var availableTags = [<?php getLocList($_GET['loc_id'], 'true');?>];
+            var availableTags = [<?php getLocList(loc_id, 'true');?>];
             $('#loc_name').autocomplete({
                 source: availableTags,
                 minLength: 3,
@@ -73,7 +73,7 @@ getSetup($_GET['loc_id']); //from functions.php
                                         <input type="search" class="form-control" id="loc_name" name="loc_name"
                                                placeholder="Location Name"/>
                                         <input type="hidden" id="loc_id" name="loc_id"
-                                               value="<?php echo $_GET['loc_id']; ?>"/>
+                                               value="<?php echo loc_id; ?>"/>
                                         <span class="input-group-btn">
                                                 <button class="btn btn-default" type="submit"
                                                         name="schoolsearch_submit">
@@ -137,7 +137,7 @@ getSetup($_GET['loc_id']); //from functions.php
             <div class="input-group col-md-12 text-center center-block hidden">
                 <?php
                 //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                getNav($_GET['loc_id'], 'Search', 'false', 'center', 'false');
+                getNav(loc_id, 'Search', 'false', 'center', 'false');
                 ?>
             </div>
         </div>

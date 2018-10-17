@@ -7,8 +7,8 @@ if (!defined('ALLOW_INC')) {
 <a name="featured" tabindex="-1"></a>
 <?php
 
-getFeatured($_GET['loc_id']);
-getEvents($_GET['loc_id']);
+getFeatured(loc_id);
+getEvents(loc_id);
 
 echo "<div class='grad-blue themebase-bgcolor container-fluid featured'>";
 echo "<div class='container bannerwrapper'>";

@@ -68,11 +68,11 @@ if (!empty($_POST)) {
             $nav_cat = 0; //None
         }
 
-        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . $_GET['loc_id'] . " WHERE id=" . $nav_id . ";";
+        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . loc_id . " WHERE id=" . $nav_id . ";";
         mysqli_query($db_conn, $navUpdate);
     }
 
-    $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+    $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
 }
 
 //loop through the array of navSections
@@ -97,13 +97,13 @@ for ($x = 0; $x < $navArrlength; $x++) {
 }
 
 //Redirect to section=top if section is not in querystring
-if ($getNavSection == "" && $_GET['loc_id']) {
-    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "", true, 302);
-    echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . $_GET['loc_id'] . "';</script>";
+if ($getNavSection == "" && loc_id) {
+    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "", true, 302);
+    echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "';</script>";
 }
 
 //check if using default location
-$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . loc_id . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
 //set Default toggle depending on which navigation you are on
@@ -137,8 +137,8 @@ if ($getNavSection == $navSections[0]) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
-                <li><a href="navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>">Navigation</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id; ?>">Home</a></li>
+                <li><a href="navigation.php?loc_id=<?php echo loc_id; ?>">Navigation</a></li>
                 <li class="active">Section: <?php echo $getNavSection; ?></li>
             </ol>
         </div>
@@ -205,17 +205,17 @@ if ($getNavSection == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Link?",
                     "Are you sure you want to delete: " . $delNavTitle . "?",
-                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&guid=" . $delNavGuid . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+                    "navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&guid=" . $delNavGuid . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
             } elseif ($delNavId && $delNavTitle && $_GET['confirm'] == 'yes' && $delNavGuid && $delNavToken == $_SESSION['unique_referrer']) {
 
                 //delete nav after clicking Yes
-                $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . $_GET['loc_id'] . ";";
+                $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . loc_id . ";";
                 mysqli_query($db_conn, $navDelete);
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delNavTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delNavTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
                 echo $deleteMsg;
             }
 
@@ -226,20 +226,20 @@ if ($getNavSection == $navSections[0]) {
                     "confirm",
                     "Delete Navigation Category?",
                     "Are you sure you want to delete: " . $delCatTitle . "?",
-                    "navigation.php?loc_id=" . $_GET['loc_id'] . "&section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&confirm=yes",
+                    "navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&confirm=yes",
                     false
                 );
 
             } elseif ($delCatId && $delCatTitle && $_GET['confirm'] == 'yes') {
 
-                $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . $_GET['loc_id'] . " AND catid=" . $delCatId . ";";
+                $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . loc_id . " AND catid=" . $delCatId . ";";
                 mysqli_query($db_conn, $navCatUpdate);
 
                 //delete category after clicking Yes
-                $navCatDelete = "DELETE FROM category_navigation WHERE id=" . $delCatId . " AND loc_id=" . $_GET['loc_id'] . ";";
+                $navCatDelete = "DELETE FROM category_navigation WHERE id=" . $delCatId . " AND loc_id=" . loc_id . ";";
                 mysqli_query($db_conn, $navCatDelete);
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
                 echo $deleteMsg;
             }
 
@@ -249,7 +249,7 @@ if ($getNavSection == $navSections[0]) {
                 $navRenameCatUpdate = "UPDATE category_navigation SET cat_name='" . $renameCatTitle . "', nav_section='" . $getNavSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $renameCatId . ";";
                 mysqli_query($db_conn, $navRenameCatUpdate);
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
                 echo $renameMsg;
             }
 
@@ -264,11 +264,11 @@ if ($getNavSection == $navSections[0]) {
 
             // add category message
             if (!empty($addCatNav)) {
-                $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $addCatNav . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+                $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $addCatNav . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
                 echo $addMsg;
             }
 
-            if ($_GET['loc_id'] != 1) {
+            if (loc_id != 1) {
                 ?>
                 <div class="row">
                     <div class="col-lg-4">
@@ -278,9 +278,9 @@ if ($getNavSection == $navSections[0]) {
                                 <label for="navigation_defaults_<?php echo $navSubSection ?>">
                                     <input
                                         class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle"
-                                        id="<?php echo $_GET['loc_id'] ?>"
+                                        id="<?php echo loc_id ?>"
                                         name="navigation_defaults_<?php echo $navSubSection ?>"
-                                        type="checkbox" <?php if ($_GET['loc_id']) {
+                                        type="checkbox" <?php if (loc_id) {
                                         echo $selDefaults;
                                     } ?> data-toggle="toggle">
                                 </label>
@@ -316,17 +316,17 @@ if ($getNavSection == $navSections[0]) {
                                                                                         style="color:#337ab7; cursor:pointer;"
                                                                                         data-toggle="tooltip"
                                                                                         title="Add"
-                                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
+                                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo loc_id; ?>&addcatname='+$('#nav_newcat').val();"></i></span>
                                         <span class="input-group-addon" id="rename_cat"><i class='fa fa-fw fa-save'
                                                                                            style="visibility:hidden; color:#337ab7; cursor:pointer;"
                                                                                            data-toggle="tooltip"
                                                                                            title="Save"
-                                                                                           onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
+                                                                                           onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo loc_id; ?>&renamecat='+$('#exist_cat').val()+'&newcatname='+$('#nav_newcat').val();"></i></span>
                                         <span class="input-group-addon" id="del_cat"><i class='fa fa-fw fa-trash'
                                                                                         style="visibility:hidden; color:#c9302c; cursor:pointer;"
                                                                                         data-toggle="tooltip"
                                                                                         title="Delete"
-                                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo $_GET['loc_id']; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
+                                                                                        onclick="window.location.href='navigation.php?section=<?php echo $getNavSection; ?>&loc_id=<?php echo loc_id; ?>&deletecat='+$('#exist_cat').val()+'&deletecatname='+$('#nav_newcat').val();"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +370,7 @@ if ($getNavSection == $navSections[0]) {
                                 title="Choose an existing page">
                             <?php
                             echo "<option value=''>None</option>";
-                            echo getPages($_GET['loc_id']);
+                            echo getPages(loc_id);
                             ?>
                         </select>
                     </div>
@@ -425,7 +425,7 @@ if ($getNavSection == $navSections[0]) {
                         <?php
                         $navCount = "";
 
-                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . $_GET['loc_id'] . " ORDER BY sort, catid;");
+                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . loc_id . " ORDER BY sort, catid;");
                         while ($rowNav = mysqli_fetch_array($sqlNav, MYSQLI_ASSOC)) {
                             $navId = safeCleanStr($rowNav['id']);
                             $navGuid = safeCleanStr($rowNav['guid']);
@@ -476,7 +476,7 @@ if ($getNavSection == $navSections[0]) {
                             echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id=" . $navId . " type='checkbox' " . $isActive . "></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Active' class='checkbox nav_active_checkbox' id=" . $navId . " type='checkbox' " . $isActiveLink . "></td>
-							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_GET['loc_id'] . "&deletenav=" . $navId . "&guid=" . $navGuid . "&deletename=" . $navName . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
+							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "&deletenav=" . $navId . "&guid=" . $navGuid . "&deletename=" . $navName . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
                         }
 
@@ -502,7 +502,7 @@ if ($getNavSection == $navSections[0]) {
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'navigation.php?loc_id=<?php echo $_GET['loc_id']; ?>&section=<?php echo $getNavSection; ?>';
+                    window.location.href = 'navigation.php?loc_id=<?php echo loc_id; ?>&section=<?php echo $getNavSection; ?>';
                 }, 100);
             });
 

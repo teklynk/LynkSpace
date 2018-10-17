@@ -18,7 +18,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] != 1 ) {
 $pageMsg = "";
 
 //css file that can be edited
-$fileToEdit_dir = "../themes/" . themeOption . "/css/custom-style.css";
+$fileToEdit_dir = __DIR__ . "/../themes/" . themeOption . "/css/custom-style.css";
 
 //Dynamic CSS - Location of dynamic-style.php that is inside the themes folder
 require_once( __DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php" );
@@ -51,29 +51,29 @@ if ( $_POST['save_main'] ) {
 		$property = safeCleanStr($_POST['property'][ $i ]);
 		$cssvalue = safeCleanStr($_POST['cssvalue'][ $i ]);
 
-		$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . $_GET['loc_id'] . ";" );
+		$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . loc_id . ";" );
 		$rowThemeOptions = mysqli_fetch_array( $sqlThemeOptions, MYSQLI_ASSOC );
 
 		if ( $rowThemeOptions['themename'] == themeOption && $rowThemeOptions['selector'] == $selector && $rowThemeOptions['property'] == $property ) {
 			//Do Update
-			$themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector . "', property='" . $property . "', cssvalue='" . $cssvalue . "', datetime='" . date( "Y-m-d H:i:s" ) . "', loc_id=" . $_GET['loc_id'] . " WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND property='" . $property . "' AND loc_id=" . $_GET['loc_id'] . ";";
+			$themeOptionUpdate = "UPDATE theme_options SET themename='" . themeOption . "', selector='" . $selector . "', property='" . $property . "', cssvalue='" . $cssvalue . "', datetime='" . date( "Y-m-d H:i:s" ) . "', loc_id=" . loc_id . " WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND property='" . $property . "' AND loc_id=" . loc_id . ";";
 			mysqli_query( $db_conn, $themeOptionUpdate );
 		} else {
 			//Do Insert
 			//Color Picker defaults to #000000 if the value is empty. To check if the value is empty, you have to check if value = #000000
 			if ( $cssvalue[ $i ] != '#000000' ) {
-				$themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date( "Y-m-d H:i:s" ) . "', " . $_GET['loc_id'] . ");";
+				$themeOptionInsert = "INSERT INTO theme_options (themename, selector, property, cssvalue, datetime, loc_id) VALUES ('" . themeOption . "', '" . $selector . "', '" . $property . "', '" . $cssvalue . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 				mysqli_query( $db_conn, $themeOptionInsert );
 			}
 		}
 	}
 
 	//Update Setup
-	$setupUpdate = "UPDATE setup SET theme_use_defaults='" . $theme_defaults . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+	$setupUpdate = "UPDATE setup SET theme_use_defaults='" . $theme_defaults . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 	mysqli_query( $db_conn, $setupUpdate );
 
 	//Only Default location can see this
-	if ( $_GET['loc_id'] == 1 ) {
+	if ( loc_id == 1 ) {
 		if ( file_exists( $fileToEdit_dir ) ) {
 			//open file for Writing
 			$handle = fopen( $fileToEdit_dir, 'w' ) or die( 'Unable to write to ' . $fileToEdit_dir . '. Check file permissions.' );
@@ -87,14 +87,14 @@ if ( $_POST['save_main'] ) {
 	}
 
 	//Get setup table columns
-	$sqlSetup = mysqli_query( $db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";" );
+	$sqlSetup = mysqli_query( $db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . loc_id . ";" );
 	$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
 	flashMessageSet('success','Theme has been updated');
 
 	//Redirect back to uploads page
-	header("Location: editor.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-	echo "<script>window.location.href='editor.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+	header("Location: editor.php?loc_id=" . loc_id . "", true, 302);
+	echo "<script>window.location.href='editor.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
 
@@ -103,7 +103,7 @@ if ( $_POST['save_main'] ) {
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
-                <li><a href="setup.php?loc_id=<?php echo $_GET['loc_id']; ?>">Home</a></li>
+                <li><a href="setup.php?loc_id=<?php echo loc_id; ?>">Home</a></li>
                 <li class="active">Theme Editor</li>
             </ol>
             <h1 class="page-header">
@@ -126,7 +126,7 @@ if ( $_POST['save_main'] ) {
 				die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 			}
 
-			if ( $_GET['loc_id'] != 1 ) {
+			if ( loc_id != 1 ) {
 				?>
                 <div class="row">
                     <div class="col-lg-6">
@@ -135,8 +135,8 @@ if ( $_POST['save_main'] ) {
                             <div class="checkbox">
                                 <label>
                                     <input class="theme_defaults_checkbox defaults-toggle"
-                                           id="<?php echo $_GET['loc_id'] ?>" name="theme_defaults"
-                                           type="checkbox" <?php if ( $_GET['loc_id'] ) {
+                                           id="<?php echo loc_id ?>" name="theme_defaults"
+                                           type="checkbox" <?php if ( loc_id ) {
 										echo $selThemeDefaults;
 									} ?> data-toggle="toggle">
                                 </label>
@@ -166,7 +166,7 @@ if ( $_POST['save_main'] ) {
 			$elementCount ++;
 
 			//Gets themeoptions
-			$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $themeCssSelectors[ $key ] . "' AND property='" . $themeCssProperties[ $key ] . "' AND loc_id=" . $_GET['loc_id'] . ";" );
+			$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $themeCssSelectors[ $key ] . "' AND property='" . $themeCssProperties[ $key ] . "' AND loc_id=" . loc_id . ";" );
 			$rowThemeOptions = mysqli_fetch_array( $sqlThemeOptions, MYSQLI_ASSOC );
 
 			echo "<div class='col-lg-4'>
@@ -196,7 +196,7 @@ if ( $_POST['save_main'] ) {
 ?>
 <?php
 //Only Default location can see this
-if ( $_GET['loc_id'] == 1 ) {
+if ( loc_id == 1 ) {
 	?>
     <div class="form-group">
         <label for="edit_file"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo $fileToEdit_dir; ?></label>

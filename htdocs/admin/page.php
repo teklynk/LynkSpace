@@ -16,21 +16,21 @@ $getEditpage = safeCleanStr($_GET['editpage']);
             <?php
             if ($getNewpage == 'true') {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='page.php?loc_id=" . loc_id . "'>Pages</a></li>
                 <li class='active'>New Page</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages (New) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } elseif ($getEditpage) {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-                <li><a href='page.php?loc_id=" . $_GET['loc_id'] . "'>Pages</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+                <li><a href='page.php?loc_id=" . loc_id . "'>Pages</a></li>
                 <li class='active'>Edit Page</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages (Edit) <button type='button' class='btn btn-link' onclick='window.history.go(-1)'> Cancel</button></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-                <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+                <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
                 <li class='active'>Pages</li>
                 </ol>";
                 echo "<h1 class='page-header'>Pages</h1>";
@@ -58,14 +58,14 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                     //update data on submit
                     if (!empty($page_title)) {
 
-                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+                        $pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
                         mysqli_query($db_conn, $pageUpdate);
 
                         //Alert messages
                         flashMessageSet('success', "The page " . $page_title . " has been updated.");
                     }
 
-                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";");
+                    $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";");
                     $rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC);
 
                     //Create new page
@@ -75,14 +75,14 @@ $getEditpage = safeCleanStr($_GET['editpage']);
 
                     //insert data on submit
                     if (!empty(safeCleanStr($page_title))) {
-                        $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_GET['loc_id'] . ");";
+                        $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
                         mysqli_query($db_conn, $pageInsert);
 
                         //Alert Set messages
                         flashMessageSet('success', "The new page has been added.");
 
-                        header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-                        echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+                        header("Location: page.php?loc_id=" . loc_id . "", true, 302);
+                        echo "<script>window.location.href='page.php?loc_id=" . loc_id . "';</script>";
                         exit();
                     }
                 }
@@ -113,7 +113,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                         <hr/>
 
                         <?php
-                        $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+                        $sqlSetup = mysqli_query($db_conn, "SELECT loc_id FROM setup WHERE loc_id=" . loc_id . ";");
                         $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
                         ?>
 
@@ -157,21 +157,21 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                     "confirm",
                     "Delete Page?",
                     "Are you sure you want to delete: " . $delPageTitle . "?",
-                    "page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes&guid=" . $delPageGuid . "&token=" . $_SESSION['unique_referrer'] . "",
+                    "page.php?loc_id=" . loc_id . "&deletepage=" . $delPageId . "&deletetitle=" . $delPageTitle . "&confirm=yes&guid=" . $delPageGuid . "&token=" . $_SESSION['unique_referrer'] . "",
                     false
                 );
 
             } elseif ($delPageId && $delPageTitle && $_GET['confirm'] == 'yes' && $delPageGuid && $delPageToken == $_SESSION['unique_referrer']) {
 
                 //delete page after clicking Yes
-                $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND guid='" . $delPageGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+                $pageDelete = "DELETE FROM pages WHERE id=" . $delPageId . " AND guid='" . $delPageGuid . "' AND loc_id=" . loc_id . ";";
                 mysqli_query($db_conn, $pageDelete);
 
                 //Alert Set messages
                 flashMessageSet('success', safeCleanStr($delPageTitle) . " has been deleted.");
 
-                header("Location: page.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-                echo "<script>window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+                header("Location: page.php?loc_id=" . loc_id . "", true, 302);
+                echo "<script>window.location.href='page.php?loc_id=" . loc_id . "';</script>";
                 exit();
 
             }
@@ -179,13 +179,13 @@ $getEditpage = safeCleanStr($_GET['editpage']);
             //update heading on submit
             if (!empty($main_heading)) {
 
-                $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+                $setupUpdate = "UPDATE setup SET pageheading='" . $main_heading . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
                 mysqli_query($db_conn, $setupUpdate);
 
                 flashMessageSet('success', 'The pages have been updated.');
             }
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+            $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . loc_id . ";");
             $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
             //Modal preview box
@@ -204,7 +204,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                     });
                 </script>
                 <button type="button" class="btn btn-primary"
-                        onclick="window.location='?newpage=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
+                        onclick="window.location='?newpage=true&loc_id=<?php echo loc_id; ?>';"><i
                         class='fa fa-fw fa-plus'></i> Add a New Page
                 </button>
                 <h2></h2>
@@ -234,7 +234,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                             </thead>
                             <tbody>
                             <?php
-                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, loc_id FROM pages WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY datetime DESC;");
+                            $sqlPages = mysqli_query($db_conn, "SELECT id, title, content, guid, keywords, active, loc_id FROM pages WHERE loc_id=" . loc_id . " ORDER BY datetime DESC;");
                             while ($rowPages = mysqli_fetch_array($sqlPages, MYSQLI_ASSOC)) {
 
                                 $pageId = $rowPages['id'];
@@ -251,13 +251,13 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                                 }
 
                                 echo "<tr>
-                                <td><a href='page.php?loc_id=" . $_GET['loc_id'] . "&editpage=".$pageId."&guid=".$pageGuid."' title='Edit'>" . $pageTitle . "</a></td>
+                                <td><a href='page.php?loc_id=" . loc_id . "&editpage=".$pageId."&guid=".$pageGuid."' title='Edit'>" . $pageTitle . "</a></td>
                                 <td class='col-xs-1'>
                                 <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='".$pageId."' type='checkbox' " . $isActive . ">
                                 </td>
                                 <td class='col-xs-2'>
-                                <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "', '../page.php?loc_id=" . $_GET['loc_id'] . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
-                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . $_GET['loc_id'] . "&deletepage=".$pageId."&deletetitle=" . $pageTitle . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "', '../page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . loc_id . "&deletepage=".$pageId."&deletetitle=" . $pageTitle . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
 
@@ -286,7 +286,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'page.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    window.location.href = 'page.php?loc_id=<?php echo loc_id; ?>';
                 }, 100);
             });
 

@@ -33,7 +33,7 @@ if ($_GET['preview'] > "") {
         echo "<br/><p><b>Page Link:</b> <a href='" . $rowServicesPreview['link'] . "' target='_blank'>" . $rowServicesPreview['link'] . "</a></p>";
     }
 
-    echo "<br/><p><b>Page URL:</b> <a href='../services.php?loc_id=" . $_GET['loc_id'] . "' title='Page URL' target='_blank'>services.php?loc_id=" . $_GET['loc_id'] . "</a></p>";
+    echo "<br/><p><b>Page URL:</b> <a href='../services.php?loc_id=" . loc_id . "' title='Page URL' target='_blank'>services.php?loc_id=" . loc_id . "</a></p>";
 
     echo "</div>";
 }
@@ -43,25 +43,25 @@ if ($_GET['preview'] > "") {
             <?php
             if ($_GET['newservice'] == 'true') {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+            <li><a href='services.php?loc_id=" . loc_id . "'>Services</a></li>
             <li class='active'>New Services</li>
             </ol>";
                 echo "<h1 class='page-header'>Services (New) <a href='services.php' role='button' class='btn btn-link'> Cancel</a></h1>";
             } elseif ($_GET['editservice']) {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
-            <li><a href='services.php?loc_id=" . $_GET['loc_id'] . "'>Services</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
+            <li><a href='services.php?loc_id=" . loc_id . "'>Services</a></li>
             <li class='active'>Edit Services</li>
             </ol>";
                 echo "<h1 class='page-header'>Services (Edit) <a href='services.php' role='button' class='btn btn-link'> Cancel</a></h1>";
             } else {
                 echo "<ol class='breadcrumb'>
-            <li><a href='setup.php?loc_id=" . $_GET['loc_id'] . "'>Home</a></li>
+            <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li class='active'>Services</li>
             </ol>";
                 echo "<h1 class='page-header'>Services&nbsp;";
-                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Services Page' class='btn btn-info' onclick=\"showMyModal('services.php?loc_id=" . $_GET['loc_id'] . "', '../services.php?loc_id=" . $_GET['loc_id'] . "#services')\"><i class='fa fa-eye'></i></button>";
+                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Services Page' class='btn btn-info' onclick=\"showMyModal('services.php?loc_id=" . loc_id . "', '../services.php?loc_id=" . loc_id . "#services')\"><i class='fa fa-eye'></i></button>";
                 echo "</h1>";
             }
             ?>
@@ -84,13 +84,13 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         //update data on submit
         if (!empty($_POST['service_title'])) {
 
-            $servicesUpdate = "UPDATE services SET title='" . safeCleanStr($_POST['service_title']) . "', content='" . sqlEscapeStr($_POST['service_content']) . "', link='" . safeCleanStr($_POST['service_link']) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . $_GET['loc_id'] . " AND guid='" . $theServiceGuid . "';";
+            $servicesUpdate = "UPDATE services SET title='" . safeCleanStr($_POST['service_title']) . "', content='" . sqlEscapeStr($_POST['service_content']) . "', link='" . safeCleanStr($_POST['service_link']) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . loc_id . " AND guid='" . $theServiceGuid . "';";
             mysqli_query($db_conn, $servicesUpdate);
 
-            $serviceMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=" . $_GET['loc_id'] . "' class='alert-link'>Back</a> | The service " . safeCleanStr($_POST['service_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "'\">×</button></div>";
+            $serviceMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=" . loc_id . "' class='alert-link'>Back</a> | The service " . safeCleanStr($_POST['service_title']) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . loc_id . "'\">×</button></div>";
         }
 
-        $sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=" . $_GET['loc_id'] . ";");
+        $sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id='$theserviceId' AND loc_id=" . loc_id . ";");
         $rowServices = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC);
 
         //Create new service
@@ -100,14 +100,14 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 
         //insert data on submit
         if (!empty($_POST['service_title'])) {
-            $servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . $_GET['loc_id'] . ");";
+            $servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr($_POST['service_title']) . "', '" . safeCleanStr($_POST['service_content']) . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr($_POST['service_link']) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . loc_id . ");";
             mysqli_query($db_conn, $servicesInsert);
 
             flashMessageSet('success','The services section has been updated.');
 
             //Redirect back to uploads page
-            header("Location: services.php?loc_id=" . $_GET['loc_id'] . "", true, 302);
-            echo "<script>window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "';</script>";
+            header("Location: services.php?loc_id=" . loc_id . "", true, 302);
+            echo "<script>window.location.href='services.php?loc_id=" . loc_id . "';</script>";
             exit();
         }
     }
@@ -159,7 +159,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                         title="Choose an existing image">
                     <option value="">None</option>
                     <?php
-                    echo getImageDropdownList($_GET['loc_id'], $rowServices['image']);
+                    echo getImageDropdownList(loc_id, $rowServices['image']);
                     ?>
                 </select>
             </div>
@@ -172,7 +172,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                         title="Choose an existing page">
                     <option value="">None</option>
                     <?php
-                    echo getPages($_GET['loc_id']);
+                    echo getPages(loc_id);
                     ?>
                 </select>
             </div>
@@ -220,13 +220,13 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             "confirm",
             "Delete Service?",
             "Are you sure you want to delete: " . $delserviceTitle . "?",
-            "services.php?loc_id=" . $_GET['loc_id'] . "&deleteservice=" . $delserviceId . "&deletetitle=" . $delserviceTitle . "&confirm=yes&guid=" . $delserviceGuid . "&token=" . $_SESSION['unique_referrer'] . "",
+            "services.php?loc_id=" . loc_id . "&deleteservice=" . $delserviceId . "&deletetitle=" . $delserviceTitle . "&confirm=yes&guid=" . $delserviceGuid . "&token=" . $_SESSION['unique_referrer'] . "",
             false
         );
 
     } elseif ($_GET['deleteservice'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delserviceGuid && $_GET['token'] == $_SESSION['unique_referrer']) {
         //delete service after clicking Yes
-        $servicesDelete = "DELETE FROM services WHERE id=" . $delserviceId . " AND guid='" . $delserviceGuid . "' AND loc_id=" . $_GET['loc_id'] . ";";
+        $servicesDelete = "DELETE FROM services WHERE id=" . $delserviceId . " AND guid='" . $delserviceGuid . "' AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $servicesDelete);
 
         flashMessageSet('success', $delserviceTitle . " has been deleted.");
@@ -242,7 +242,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
             $_POST['services_defaults'] = 'false';
         }
 
-        $setupUpdate = "UPDATE setup SET servicesheading='" . safeCleanStr($_POST['main_heading']) . "', servicescontent='" . sqlEscapeStr($_POST['main_content']) . "', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . $_GET['loc_id'] . ";";
+        $setupUpdate = "UPDATE setup SET servicesheading='" . safeCleanStr($_POST['main_heading']) . "', servicescontent='" . sqlEscapeStr($_POST['main_content']) . "', services_use_defaults='" . safeCleanStr($_POST['services_defaults']) . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $setupUpdate);
 
         for ($i = 0; $i < $_POST['service_count']; $i++) {
@@ -255,7 +255,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         flashMessageSet('success','The services section has been updated.');
     }
 
-    $sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=" . $_GET['loc_id'] . ";");
+    $sqlSetup = mysqli_query($db_conn, "SELECT servicesheading, servicescontent, services_use_defaults FROM setup WHERE loc_id=" . loc_id . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
     //Modal preview box
@@ -268,7 +268,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
         $selDefaults = "";
     }
 
-    if ($_GET['loc_id'] != 1) {
+    if (loc_id != 1) {
         ?>
         <div class="row">
             <div class="col-lg-4">
@@ -276,8 +276,8 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                     <label for="services_defaults">Use Defaults</label>
                     <div class="checkbox">
                         <label>
-                            <input class="services_defaults_checkbox defaults-toggle" id="<?php echo $_GET['loc_id'] ?>"
-                                   name="services_defaults" type="checkbox" <?php if ($_GET['loc_id']) {
+                            <input class="services_defaults_checkbox defaults-toggle" id="<?php echo loc_id ?>"
+                                   name="services_defaults" type="checkbox" <?php if (loc_id) {
                                 echo $selDefaults;
                             } ?> data-toggle="toggle">
                         </label>
@@ -292,7 +292,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
     ?>
 
     <button type="button" class="btn btn-primary"
-            onclick="window.location='?newservice=true&loc_id=<?php echo $_GET['loc_id']; ?>';"><i
+            onclick="window.location='?newservice=true&loc_id=<?php echo loc_id; ?>';"><i
             class='fa fa-fw fa-plus'></i> Add a New Service
     </button>
     <h2></h2>
@@ -323,7 +323,7 @@ if ($_GET['newservice'] || $_GET['editservice']) {
                 <tbody>
                 <?php
                 $serviceCount = "";
-                $sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, guid, link, sort, active, loc_id FROM services WHERE loc_id=" . $_GET['loc_id'] . " ORDER BY sort ASC;");
+                $sqlServices = mysqli_query($db_conn, "SELECT id, title, icon, content, guid, link, sort, active, loc_id FROM services WHERE loc_id=" . loc_id . " ORDER BY sort ASC;");
                 while ($rowServices = mysqli_fetch_array($sqlServices, MYSQLI_ASSOC)) {
                     $serviceId = $rowServices['id'];
                     $serviceTitle = $rowServices['title'];
@@ -346,14 +346,14 @@ if ($_GET['newservice'] || $_GET['editservice']) {
 				</td>
 				<td>
 				<input type='hidden' name='service_id[]' value='" . $serviceId . "' >
-				<a href='services.php?loc_id=" . $_GET['loc_id'] . "&editservice=$serviceId&guid=$serviceGuid' title='Edit'>" . $serviceTitle . "</a>
+				<a href='services.php?loc_id=" . loc_id . "&editservice=$serviceId&guid=$serviceGuid' title='Edit'>" . $serviceTitle . "</a>
 				</td>
 				<td class='col-xs-1'>
 				<input data-toggle='toggle' title='Service Active' class='checkbox services_status_checkbox' id='" . $serviceId . "' type='checkbox' " . $isActive . ">
 				</td>
 				<td class='col-xs-2'>
-				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($serviceTitle) . "', 'services.php?loc_id=" . $_GET['loc_id'] . "&preview=$serviceId')\"><i class='fa fa-fw fa-eye'></i></button>
-				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='services.php?loc_id=" . $_GET['loc_id'] . "&deleteservice=$serviceId&deletetitle=" . safeCleanStr(addslashes($serviceTitle)) . "&guid=" . $serviceGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
+				<button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('" . safeCleanStr($serviceTitle) . "', 'services.php?loc_id=" . loc_id . "&preview=$serviceId')\"><i class='fa fa-fw fa-eye'></i></button>
+				<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='services.php?loc_id=" . loc_id . "&deleteservice=$serviceId&deletetitle=" . safeCleanStr(addslashes($serviceTitle)) . "&guid=" . $serviceGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
 				</td>
 				</tr>";
                 }
@@ -384,7 +384,7 @@ echo "</div>
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
                 setTimeout(function () {
-                    window.location.href = 'services.php?loc_id=<?php echo $_GET['loc_id']; ?>';
+                    window.location.href = 'services.php?loc_id=<?php echo loc_id; ?>';
                 }, 100);
             });
 

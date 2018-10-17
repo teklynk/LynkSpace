@@ -9,7 +9,7 @@ if (!defined('ALLOW_INC')) {
 echo "<div class='container-fluid slider'>";
 echo "<div class='container bannerwrapper'>";
 echo "<header id='sliderCarousel' class='carousel slide' data-ride='carousel' data-interval='" . carouselSpeed . "'>";
-getSlider($_GET['loc_id'], "slide");
+getSlider(loc_id, "slide");
 echo "</header>";
 echo "</div>";
 echo "</div>";

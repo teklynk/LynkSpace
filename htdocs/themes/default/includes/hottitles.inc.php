@@ -4,7 +4,7 @@ if (!defined('ALLOW_INC')) {
 }
 
 //Hot Titles Carousel
-getHottitlesTabs($_GET['loc_id']);
+getHottitlesTabs(loc_id);
 
 if ($hottitlesCount > 0) {
 

@@ -7,7 +7,7 @@ if (!defined('ALLOW_INC')) {
 <a name="databases" tabindex="-1"></a>
 <?php
 
-getCustomers($_GET['loc_id'], 'featured');
+getCustomers(loc_id, 'featured');
 
 $customersItemCount = 0;
 

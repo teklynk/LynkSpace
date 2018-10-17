@@ -10,9 +10,9 @@ if (!defined('ALLOW_INC')) {
 <head>
     <?php
 
-    getLocation($_GET['loc_id']);
+    getLocation(loc_id);
 
-    getCoreHeader($_GET['loc_id']);
+    getCoreHeader(loc_id);
 
     ?>
     <script type="text/javascript" language="javascript">
@@ -59,7 +59,7 @@ if (!defined('ALLOW_INC')) {
 //only show on index.php/homepage
 if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
 
-    getEvents($_GET['loc_id']);
+    getEvents(loc_id);
 
     if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
         echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'><span>&times;</span></button>
@@ -81,14 +81,14 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
                 <span class="toggbutton">MENU</span>
             </button>
             <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
-                        class="pull-left img-nonresponsive" src="<?php getLogo($_GET['loc_id'], 'relative'); ?>"
+                        class="pull-left img-nonresponsive" src="<?php getLogo(loc_id, 'relative'); ?>"
                         alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
             <?php
             //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav($_GET['loc_id'], 'Top', 'true', 'left');
+            getNav(loc_id, 'Top', 'true', 'left');
             ?>
             <div class="socialDiv pull-right hidden-xs hidden-sm">
                 <?php

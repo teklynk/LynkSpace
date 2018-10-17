@@ -6,9 +6,9 @@ if (!defined('ALLOW_INC')) {
 }
 
 //redirect back to contact form or home page
-$redirectPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=thankyou#contactForm";
+$redirectPage = "../../contact.php?loc_id=" . loc_id . "&msgsent=thankyou#contactForm";
 //if an error occurs
-$errorPage = "../../contact.php?loc_id=" . $_GET['loc_id'] . "&msgsent=error#contactForm";
+$errorPage = "../../contact.php?loc_id=" . loc_id . "&msgsent=error#contactForm";
 
 $name = safeCleanStr($_POST['name']);
 $email_address = safeCleanStr($_POST['email']);

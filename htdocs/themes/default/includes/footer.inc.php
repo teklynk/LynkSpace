@@ -8,7 +8,7 @@ if (!defined('ALLOW_INC')) {
         <div class="container">
             <div class="row row_pad">
                 <?php
-                getNav($_GET['loc_id'], 'Footer', 'false', 'left', 'false');
+                getNav(loc_id, 'Footer', 'false', 'left', 'false');
                 ?>
             </div>
             <?php require_once(__DIR__ . '/generalinfo.inc.php'); ?>

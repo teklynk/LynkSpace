@@ -13,6 +13,8 @@ $db_conn = '';
 $errorMsg = '';
 $pageMsg = '';
 
+$getLocId = isset($_GET['loc_id']) ? $_GET['loc_id'] : null;
+
 //Establish config connection
 $db_conn = mysqli_connect(db_servername, db_username, db_password);
 mysqli_select_db($db_conn, db_name);
@@ -20,10 +22,10 @@ mysqli_set_charset($db_conn, 'UTF-8');
 
 // If DB not found then halt the script and display a link to the install page.
 if (mysqli_connect_error() || mysqli_connect_errno()) {
-    die("MySQL Error: " . mysqli_connect_error() . " : " . mysqli_connect_errno());
+	die("MySQL Error: " . mysqli_connect_error() . " : " . mysqli_connect_errno());
 } else {
-    $sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1;");
-    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
+	$sqlConfig = mysqli_query($db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1;");
+	$rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
 }
 
 //Protocol-relative/agnostic (https:// or http:// or //)
@@ -31,6 +33,9 @@ $serverProtocol = '//';
 
 //Get server host name
 $serverHostname = $_SERVER['SERVER_NAME'];
+
+//Location ID
+define('loc_id', (INT)$getLocId);
 
 //Admin directory path
 define('admin', __DIR__ . '/../admin');
@@ -49,9 +54,9 @@ define('uploads', __DIR__ . '/../uploads');
 
 //Get server port number. if not port 80
 if ($_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443) {
-    $serverPort = '';
+	$serverPort = '';
 } else {
-    $serverPort = ':' . $_SERVER['SERVER_PORT'];
+	$serverPort = ':' . $_SERVER['SERVER_PORT'];
 }
 
 //Get Sub-folder name
@@ -61,9 +66,9 @@ $subDir = explode('/', $subPath)[1];
 $subDir = trim($subDir);
 
 if (strpos($subDir, 'admin') !== false || strpos($subDir, '.php') !== false) {
-    $subDirectory = '';
+	$subDirectory = '';
 } else {
-    $subDirectory = '/' . $subDir;
+	$subDirectory = '/' . $subDir;
 }
 
 //CMS branding, title, description
@@ -114,13 +119,13 @@ define('customerNumber', $rowConfig['customer_id']);
 
 //Edit values for your web site. leave as is in most cases.
 //physical path to uploads folder
-define('image_dir', "../uploads/" . $_GET['loc_id'] . "/");
+define('image_dir', "../uploads/" . loc_id . "/");
 
 //Absolute web url path to uploads folder for tinyMCE
-define('image_url', serverUrlStr . "/uploads/" . $_GET['loc_id'] . "/");
+define('image_url', serverUrlStr . "/uploads/" . loc_id . "/");
 
 //Relative web url path to uploads folder for tinyMCE
-define('image_baseURL', "uploads/" . $_GET['loc_id'] . "/");
+define('image_baseURL', "uploads/" . loc_id . "/");
 
 // Name of the dbconn file
 define('dbFileLoc', __DIR__ . "/dbconn.php");
@@ -148,18 +153,18 @@ $defaultLocTypes = array("Default", "All");
 $explodedLocTypes = explode(',', $rowConfig['loc_types']);
 
 if (multiBranch == 'true') {
-    $locTypes = array_merge($defaultLocTypes, $explodedLocTypes); //returns an array
+	$locTypes = array_merge($defaultLocTypes, $explodedLocTypes); //returns an array
 } else {
-    $locTypes = 'Default';
+	$locTypes = 'Default';
 }
 
 //Extra Pages
 $extraPagesArray = array(
-    "Contact" => "contact.php?loc_id=" . $_GET['loc_id'] . "",
-    "Databases" => "databases.php?loc_id=" . $_GET['loc_id'] . "",
-    "Services" => "services.php?loc_id=" . $_GET['loc_id'] . "",
-    "Staff" => "staff.php?loc_id=" . $_GET['loc_id'] . "",
-    "Site Search" => "sitesearch.php?loc_id=" . $_GET['loc_id'] . ""
+	"Contact" => "contact.php?loc_id=" . loc_id . "",
+	"Databases" => "databases.php?loc_id=" . loc_id . "",
+	"Services" => "services.php?loc_id=" . loc_id . "",
+	"Staff" => "staff.php?loc_id=" . loc_id . "",
+	"Site Search" => "sitesearch.php?loc_id=" . loc_id . ""
 );
 
 //Ignore these files inside directories
@@ -168,9 +173,9 @@ $fileIgnoreArray = array('.','..','Thumbs.db','.DS_Store','index.html','index.ht
 //Session timeout
 //3600 = 60mins
 if ($rowConfig['session_timeout'] == null) {
-    $session_timeout_minutes = 3600;
+	$session_timeout_minutes = 3600;
 } else {
-    $session_timeout_minutes = $rowConfig['session_timeout'] * 60;
+	$session_timeout_minutes = $rowConfig['session_timeout'] * 60;
 }
 
 define('sessionTimeout', $session_timeout_minutes);
@@ -178,16 +183,16 @@ define('sessionTimeout', $session_timeout_minutes);
 //Slide Carousel Speed
 //5000 = 5secs
 if ($rowConfig['carousel_speed'] == null) {
-    $carousel_speed_seconds = 5000;
+	$carousel_speed_seconds = 5000;
 } else {
-    $carousel_speed_seconds = $rowConfig['carousel_speed'] * 60;
+	$carousel_speed_seconds = $rowConfig['carousel_speed'] * 60;
 }
 
 $carousel_speed_seconds = $rowConfig['carousel_speed'] * 1000;
 define('carouselSpeed', $carousel_speed_seconds);
 
 //Version Number
-$versionFile = __DIR__ . 'version.txt';
+$versionFile = __DIR__ . '/../version.txt';
 $versionFile = str_replace('config', '', $versionFile);
 define('ysmVersion', file_get_contents($versionFile));
 
@@ -234,5 +239,6 @@ define('recaptcha_secret_key', "");
 define('recaptcha_site_key', "");
 
 //Other API Keys apiKeysArray[0]
-define('apiKeysArray', array('api1', 'api2', 'api3', 'api4'));
+//define('apiKeysArray', array('api1', 'api2', 'api3', 'api4'));
+
 ?>
