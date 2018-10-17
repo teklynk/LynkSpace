@@ -35,7 +35,7 @@ $serverProtocol = '//';
 $serverHostname = $_SERVER['SERVER_NAME'];
 
 //Location ID
-define('loc_id', trim($getLocId));
+define('loc_id', (INT)$getLocId);
 
 //Admin directory path
 define('admin', __DIR__ . '/../admin');
@@ -240,4 +240,5 @@ define('recaptcha_site_key', "");
 
 //Other API Keys apiKeysArray[0]
 //define('apiKeysArray', array('api1', 'api2', 'api3', 'api4'));
+
 ?>
