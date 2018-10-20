@@ -1,6 +1,6 @@
 # LynkSpace
 
-Enable .htaccess by editing your sites-enabled config files:
+Enable .htaccess by editing your sites-enabled config files: example
 
 ```
 
@@ -11,7 +11,7 @@ Enable .htaccess by editing your sites-enabled config files:
 </Directory>
 
 ```
- Create a virtual host for the project:
+ Create a virtual host for the project: example
 
 ```
 
@@ -26,39 +26,21 @@ Enable .htaccess by editing your sites-enabled config files:
 </VirtualHost>
 
 ```
-Nginx configuration
+Nginx configuration: example
 
 ```
+server_name lynkspace.local;
 
 index index.php;
 
-location ~ /\.|^\. {
-    return 403;
-}
-
 autoindex off;
-
-location / {
-    if (!-e $request_filename){
-        rewrite ^(.*)$ /index.php break;
-    }
-}
-
-location ~ .(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$ {
-    deny all;
-}
-
-```
-Nginx vhost
-
-```
-
-server_name lynkspace.local;
 
 root /var/www/html/LynkSpace/htdocs;
 
 location /var/www/html/LynkSpace/htdocs {
-    allow all;
+    if (!-e $request_filename){
+        rewrite ^(.*)$ /index.php break;
+    }
 }
 
 ```
