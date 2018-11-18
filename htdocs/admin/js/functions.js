@@ -1,8 +1,9 @@
 $(document).ready(function () {
     //Page loading screen
     $("#page-loader").css('display', 'none');
-    $(window).on('submit load', function() {
-        $("#page-loader").fadeOut();
+
+    $(window).on('load', function() {
+        $("#page-loader").fadeOut('fast');
     });
 
     //Sibebar Nav Menu Collapse

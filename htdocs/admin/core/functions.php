@@ -1150,6 +1150,7 @@ function checkIPRange()
 
         //Turn the string into an array
         $IPrangeArr = explode(',', IPrange);
+
         //Get users IP address
         $usersIP = getRealIpAddr();
 
@@ -1168,8 +1169,9 @@ function checkIPRange()
         }
 
         if ($IPmatch === false) {
+        	session_unset();
             header("Location: ../index.php?loc_id=1", true, 302);
-            die('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
+            exit('Permission denied. Your IP is ' . $usersIP); //Do not execute anymore code on the page
         }
     }
 }
@@ -1269,7 +1271,7 @@ function csrf_validate($token)
             //Clear session.
             session_unset();
             //TODO: log errors
-            die('Direct access not permitted');
+            exit('Direct access not permitted');
         }
     }
     print_r($token);

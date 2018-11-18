@@ -13,6 +13,7 @@ if (!defined('ALLOW_INC')) {
 
     //DB connection string and Global variables
     require_once(__DIR__ . '/../../config/config.php');
+
     //Admin panel functions
     require_once(__DIR__ . '/../core/functions.php');
 
