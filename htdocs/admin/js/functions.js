@@ -147,7 +147,7 @@ $(document).ready(function () {
     $('.scrollToTop').click(function () {
         $('html, body').animate({
             scrollTop: 0
-        }, 800);
+        }, 500);
         return false;
     });
 
@@ -727,7 +727,7 @@ $(document).ready(function () {
         $('.logo_defaults_checkbox').attr('disabled', true);
         setTimeout(function() {
             $('.logo_defaults_checkbox').attr('disabled', false);
-        }, 200);
+        }, 500);
         //Disable select dropdown if default logo is true
         if ($('.logo_defaults_checkbox').prop('checked') == true) {
             setTimeout(function() {
@@ -736,13 +736,13 @@ $(document).ready(function () {
                 //set value to nothing
                 //$('#site_logo.selectpicker').selectpicker('val', '');
                 $('#site_logo.selectpicker').selectpicker('refresh');
-            }, 200);
+            }, 500);
         } else {
             setTimeout(function() {
                 //$('#site_logo.selectpicker').selectpicker('val');
                 $('#site_logo.selectpicker').attr('disabled', false);
                 $('#site_logo.selectpicker').selectpicker('refresh');
-            }, 200);
+            }, 500);
         }
     }).change();
     $('.sitemap_builder').click(function () {

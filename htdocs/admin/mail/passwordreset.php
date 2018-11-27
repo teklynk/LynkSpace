@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+define('ALLOW_INC', TRUE);
+
 if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] == 'index.php') {
 
     require_once(__DIR__ . '/../../config/config.php');
@@ -39,7 +41,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
 
     } else {
         //Reset the user password
-        if ($_POST['password_reset'] == 'true' && !empty($_POST['key'])) {
+        if ($_POST['password_reset'] == 'true' && isset($_POST['key'])) {
 
             $newUserPassword = sqlEscapeStr($_POST['password']);
             $newUserPasswordConfirm = sqlEscapeStr($_POST['user_password_confirm']);
@@ -65,7 +67,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
                 mysqli_query($db_conn, $userUpdate);
 
                 //Clear password_reset column and password_reset_date column. Set to nothing
-                $userResetUpdate = "UPDATE users SET password_reset='', password_reset_date='' WHERE username='" . $user_name . "' AND email='" . $email_address . "';";
+                $userResetUpdate = "UPDATE users SET password_reset='', password_reset_date='0000-00-00' WHERE username='" . $user_name . "' AND email='" . $email_address . "';";
                 mysqli_query($db_conn, $userResetUpdate);
 
                 mail($email_address, $email_subject, $email_body, $headers);
@@ -73,12 +75,14 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
                 //redirect to successful reset message
                 header("Location: $redirectPage", true, 302);
                 echo "<script>window.location.href='$redirectPage';</script>";
+	            exit();
 
             } else {
 
                 //redirect to error message
                 header("Location: $errorPageNotFound", true, 302);
                 echo "<script>window.location.href='$errorPageNotFound';</script>";
+                exit();
 
             }
 
@@ -104,6 +108,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
             //send password reset request message
             header("Location: $redirectPageRequest", true, 302);
             echo "<script>window.location.href='$redirectPageRequest';</script>";
+	        exit();
         }
 
     }

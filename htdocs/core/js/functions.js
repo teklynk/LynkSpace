@@ -5,23 +5,6 @@ $(document).ready(function () {
     $('iframe, frame, embed, video, object').addClass('embed-responsive-item iframe');
     $('table, frameset').addClass('table-responsive');
 
-    // Sticky Footer initial page load and resize
-    $(window).on('load resize', function () {
-        var bodyHeight = $(window).height();
-        var navbarHeight = $('.navbar-static-top:first').height();
-        var bannerHeight = $('.bannerwrapper:first').height();
-        var sitesearchHeight = $('.sitesearch:first').height();
-        var searchlocationHeight = $('.searchlocations:first').height();
-        var searchpacHeight = $('.searchpac:first').height();
-        var databasesHeight = $('.databases:first').height();
-        var footerHeight = $('.footer:first').height();
-        var calcContentHeight = bodyHeight - navbarHeight - bannerHeight - searchlocationHeight - sitesearchHeight - searchpacHeight - databasesHeight - footerHeight - 300; //change last value to compensate for padding.
-
-        if (calcContentHeight > 0) {
-            $('.content:first').css({'min-height': calcContentHeight});
-        }
-    });
-
     //Scroll to top button
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {

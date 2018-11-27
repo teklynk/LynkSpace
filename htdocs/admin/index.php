@@ -39,6 +39,7 @@ if ($reCaptcha_enabled == true && $_POST["g-recaptcha-response"]) {
 // Check that everything is installed on the server.
 checkDependencies();
 
+// Login Action
 if (!empty($_POST)) {
 
     // Make sure post values is okay and cleaned
@@ -74,9 +75,6 @@ if (!empty($_POST)) {
     }
 
     if ($sucessfulResponse == true && isset($_SESSION['unique_referrer']) && $_SESSION['file_referrer'] == 'index.php') {
-
-
-
 
         $userLogin = mysqli_query($db_conn, "SELECT id, username, password, email, level, loc_id FROM users WHERE username='" . $userName . "' AND password='" . $userPassword . "' AND email='" . $userEmail . "' LIMIT 1;");
         $rowLogin = mysqli_fetch_array($userLogin, MYSQLI_ASSOC);
@@ -145,6 +143,7 @@ if (isset($_SESSION['loggedIn'])) {
     // Redirect user to setup page
     header("Location: setup.php?loc_id=" . $_SESSION['user_loc_id'] . "", true, 302);
     echo "<script>window.location.href='setup.php?loc_id=" . $_SESSION['user_loc_id'] . "';</script>";
+    exit();
 
 }
 
@@ -257,7 +256,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                 robot</label>
                                         </div>
                                     <?php } ?>
-                                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+
                                     <button class="btn btn-lg btn-primary btn-block" name="forgot_password_submit"
                                             id="sign_in" disabled="disabled" type="submit">Reset Password
                                     </button>
@@ -334,7 +333,7 @@ if (isset($_SESSION['loggedIn'])) {
                                                 robot</label>
                                         </div>
                                     <?php } ?>
-                                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+
                                     <input type="hidden" id="password_reset" name="password_reset"
                                            value="<?php echo $_GET['passwordreset']; ?>"/>
                                     <input type="hidden" id="key" name="key" value="<?php echo $_GET['key']; ?>"/>

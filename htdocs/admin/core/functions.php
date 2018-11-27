@@ -1266,7 +1266,7 @@ function dbQuery($method = null, $table = null, $fields = null, $values = null, 
 //CSRF token validation
 function csrf_validate($token)
 {
-    if (!empty($_POST)) {
+    if (!empty($_POST) && $_POST['csrf']) {
         if (safeCleanStr($_POST['csrf']) != $token) {
             //Clear session.
             session_unset();
