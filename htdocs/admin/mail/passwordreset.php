@@ -34,10 +34,12 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
     if (empty($user_name) || empty($email_address) || !validateEmail($email_address)) {
         header("Location: $errorPage", true, 302);
         echo "<script>window.location.href='$errorPage';</script>";
+        exit();
 
     } elseif ($rowUsers['username'] != $user_name || $rowUsers['email'] != $email_address) {
         header("Location: $errorPageNotFound", true, 302);
         echo "<script>window.location.href='$errorPageNotFound';</script>";
+        exit();
 
     } else {
         //Reset the user password
@@ -89,7 +91,7 @@ if ($_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] ==
         } else {
 
             //Send email with password reset instructions.
-            $tempPasswordHashed = sha1(blowfishSalt . safeCleanStr($temp_password_reset_hash));
+            $tempPasswordHashed = sha1(blowfishSalt . sqlEscapeStr($temp_password_reset_hash));
 
             // Create the email and send the message
             $email_subject = "$server_domain - User Account Information Change: $user_name";
