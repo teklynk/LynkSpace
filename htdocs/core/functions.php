@@ -1380,20 +1380,25 @@ function getGoogleAnalyticsTrackingCode( $uidcode ) {
 //Google Translate Widget
 //getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN')
 function getGoogleTranslateCode( $languages ) {
-	?>
-    <!-- Google Translate -->
-    <div id="google_translate_element"></div>
-    <script type="text/javascript" language="javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: '<?php echo $languages; ?>',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-	<?php
+	if ( ! empty( $languages ) ) {
+		?>
+        <!-- Google Translate -->
+        <div id="google_translate_element"></div>
+        <script type="text/javascript" language="javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: '<?php echo $languages; ?>',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        </script>
+		<?php
+		return true;
+	} else {
+		return false;
+    }
 }
 
 //Disqus service
@@ -1415,6 +1420,9 @@ function getDisqusCode( $page_url, $unique_identifier ) {
             })();
         </script>
 		<?php
+		return true;
+	} else {
+		return false;
 	}
 }
 
