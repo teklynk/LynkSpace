@@ -63,7 +63,7 @@ if (!empty($_POST)) {
             <h1 class="page-header">
                 Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom"
                                      title="Preview the Contact Page" class="btn btn-info"
-                                     onclick="showMyModal('contact.php?loc_id=<?php echo loc_id; ?>', '../contact.php?loc_id=<?php echo loc_id; ?>#contact')">
+                                     onclick="showMyModal('../contact.php?loc_id=<?php echo loc_id; ?>', '../contact.php?loc_id=<?php echo loc_id; ?>#contact')">
                     <i class="fa fa-eye"></i></button>
             </h1>
         </div>

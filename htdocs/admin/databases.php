@@ -118,7 +118,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                                 echo "Databases (" . $getCustSection . " - Edit) <a href='databases.php' role='button' class='btn btn-link'> Cancel</a></h1>";
                             } else {
                                 echo "Databases (" . $getCustSection . ")&nbsp;";
-                                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Databases Page' class='btn btn-info' onclick=\"showMyModal('databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "', '../databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "#databases')\"><i class='fa fa-eye'></i></button>";
+                                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Databases Page' class='btn btn-info' onclick=\"showMyModal('../databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "', '../databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "#databases')\"><i class='fa fa-eye'></i></button>";
                             }
                             ?>
                         </h1>

@@ -61,7 +61,7 @@ if ($_GET['preview'] > "") {
             <li class='active'>Services</li>
             </ol>";
                 echo "<h1 class='page-header'>Services&nbsp;";
-                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Services Page' class='btn btn-info' onclick=\"showMyModal('services.php?loc_id=" . loc_id . "', '../services.php?loc_id=" . loc_id . "#services')\"><i class='fa fa-eye'></i></button>";
+                echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Services Page' class='btn btn-info' onclick=\"showMyModal('../services.php?loc_id=" . loc_id . "', '../services.php?loc_id=" . loc_id . "#services')\"><i class='fa fa-eye'></i></button>";
                 echo "</h1>";
             }
             ?>

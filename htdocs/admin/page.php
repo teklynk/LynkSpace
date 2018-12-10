@@ -256,7 +256,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                                 <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='".$pageId."' type='checkbox' " . $isActive . ">
                                 </td>
                                 <td class='col-xs-2'>
-                                <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "', '../page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Preview' class='btn btn-info' onclick=\"showMyModal('../page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "', '../page.php?loc_id=" . loc_id . "&page_id=" . $pageId . "')\"><i class='fa fa-fw fa-eye'></i></button>
                                 <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='page.php?loc_id=" . loc_id . "&deletepage=".$pageId."&deletetitle=" . $pageTitle . "&guid=" . $pageGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                                 </td>
                                 </tr>";
