@@ -502,13 +502,11 @@ function sanitizeStr($cleanStr)
 //sanitize integers - removes anything that is not a number
 function sanitizeInt($cleanInt)
 {
-    $cleanInt = preg_replace("/^([0-9]+)$/", "", $cleanInt);
+	if (filter_var(trim($cleanInt), FILTER_VALIDATE_INT) === false) {
+		$cleanInt = 0;
+	}
 
-    if ($cleanInt == "") {
-        $cleanInt = 0;
-    }
-
-    return filter_var(trim((INT)$cleanInt), FILTER_SANITIZE_NUMBER_INT);
+    return (INT)$cleanInt;
 }
 
 //validate url - Check if the variable $cleanStr is a valid URL
