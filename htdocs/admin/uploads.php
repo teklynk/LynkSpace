@@ -5,16 +5,9 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Get the file name from the URL
-if ($_GET["share"]) {
-    $urlParam = $_GET['share'];
-} elseif ($_GET['delete']) {
-    $urlParam = $_GET['delete'];
-} else {
-    $urlParam = '';
-}
-
-$action = safeCleanStr($_POST['action']);
+$getUploadGuid = isset($_GET['guid']) ? $_GET['guid'] : NULL;
+$getUploadId = isset($_GET['delete']) ? $_GET['delete'] : NULL;
+$action = isset($_POST['action']) ? $_POST['action'] : NULL;
 
 $fileList = getAllUploads(1, 'upload', loc_id, 'ASC'); //returns an array
 
@@ -36,11 +29,7 @@ if (!empty($_POST) && $action == 'uploadFile') {
         array('png', 'gif', 'jpg')
     );
 
-    if ($uploadError == false) {
-	    flashMessageSet('success', 'The file has been uploaded.');
-    } else {
-	    flashMessageSet('danger', 'Invalid file format or the file is too large.');
-    }
+    flashMessageSet('success', 'The file has been uploaded.');
 
     //Redirect
     header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
@@ -49,16 +38,16 @@ if (!empty($_POST) && $action == 'uploadFile') {
 }
 
 //Delete confirm modal
-if ($_GET['delete'] && !$_GET['confirm']) {
+if ($getUploadId && !$_GET['confirm']) {
 
-    $theFile = getSingleUploads($_GET['delete'], $_GET['guid']);
+    $theFile = getSingleUploads($getUploadId, $getUploadGuid);
 
     if ($_GET['isshared'] == 'false') {
         showModalConfirm(
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "?",
-            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . loc_id . "&delete=" . $getUploadId . "&confirm=yes&guid=" . $getUploadGuid . "",
             false
         );
     } else {
@@ -66,14 +55,14 @@ if ($_GET['delete'] && !$_GET['confirm']) {
             "confirm",
             "Delete File?",
             "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
+            "uploads.php?loc_id=" . loc_id . "&delete=" . $getUploadId . "&confirm=yes&guid=" . $getUploadGuid . "",
             false
         );
     }
 
-} elseif ($_GET['delete'] && $_GET['confirm'] == 'yes' && $_GET['guid']) {
+} elseif ($getUploadId && $_GET['confirm'] == 'yes' && $getUploadGuid) {
     //Remove and delete the file
-    deleteUploads(image_dir, $_GET['delete'], $_GET['guid']);
+    deleteUploads(image_dir, $getUploadId, $getUploadGuid);
 
     flashMessageSet('success', 'The file has been deleted.');
 
@@ -87,7 +76,7 @@ if ($_GET['delete'] && !$_GET['confirm']) {
 //Share settings - Actions, Modal, Form - Admin user only feature
 if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
 
-    $theFile = getSingleUploads($_GET['share'], $_GET['guid']);
+    $theFile = getSingleUploads($_GET['share'], $getUploadGuid);
 
     //Share setting/options Modal with Form
     showModalConfirm(
@@ -165,12 +154,15 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         </div>
     </div>
 
+    <?php
+    //Alert messages
+    echo flashMessageGet('success');
+    echo flashMessageGet('danger');
+    ?>
+
     <div class="row">
         <div class="col-lg-12">
             <?php
-            //Alert messages
-            echo flashMessageGet('success');
-            echo flashMessageGet('danger');
 
             if (!is_writable('../uploads')) {
                 echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
@@ -205,7 +197,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                         <th>Name</th>
                         <?php
                         // if is admin then show the table header
-                        if ($adminIsCheck == "true" && multiBranch == 'true') {
+                        if ($adminIsCheck == 'true' && multiBranch == 'true') {
                             echo "<th>Shared</th>";
                         }
                         ?>
@@ -243,7 +235,7 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                         echo "<tr data-index='" . $count . "'>
                             <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . $previewSource . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
 
-                        if ($adminIsCheck == "true" && multiBranch == 'true') {
+                        if ($adminIsCheck == 'true' && multiBranch == 'true') {
                             echo "<td class='col-xs-1'>
                                 <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";

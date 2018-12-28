@@ -15,24 +15,23 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] != 1 ) {
 	echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-$pageMsg = "";
-
 //css file that can be edited
 $fileToEdit_dir = __DIR__ . "/../themes/" . themeOption . "/css/custom-style.css";
 
 //Dynamic CSS - Location of dynamic-style.php that is inside the themes folder
 require_once( __DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php" );
 
-//check if file is writable
-if ( ! is_writable( $fileToEdit_dir ) ) {
-	die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
+//open file for Reading
+if (file_exists($fileToEdit_dir)){
+	//check if file is writable
+	if ( ! is_writable( $fileToEdit_dir ) ) {
+		die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
+	}
+	$handle   = fopen( $fileToEdit_dir, 'r' );
+	$fileData = fread( $handle, filesize( $fileToEdit_dir ) );
 }
 
-//open file for Reading
-$handle   = fopen( $fileToEdit_dir, 'r' );
-$fileData = fread( $handle, filesize( $fileToEdit_dir ) );
-
-if ( $_POST['save_main'] ) {
+if ( isset($_POST['save_main']) ) {
 
 	$theme_defaults = safeCleanStr($_POST['theme_defaults']);
 	$element_count  = safeCleanStr($_POST['element_count']);
@@ -211,9 +210,9 @@ if ( loc_id == 1 ) {
     <div class="form-group">
                 <span><small>
                     <?php
-                    //if (file_exists($fileToEdit_dir)) {
-                    //    echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
-                    //}
+                    if (file_exists($fileToEdit_dir)) {
+                        echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
+                    }
                     ?>
                 </small></span>
     </div>

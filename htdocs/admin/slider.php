@@ -5,19 +5,19 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'slider.php';
 
-$pagePreviewId   = sanitizeInt( $_GET['preview'] );
-$delslideId = safeCleanStr($_GET['deleteslide']);
-$theslideGuid = safeCleanStr($_GET['guid']);
-$delslideTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-$delslideToken = safeCleanStr($_GET['token']);
-$slide_count = safeCleanStr($_POST['slide_count']);
+$pagePreviewId = isset($_GET['preview']) ? $_GET['preview'] : NULL;
+$slide_count = isset($_POST['slide_count']) ? $_POST['slide_count'] : NULL;
+$delslideToken = isset($_GET['token']) ? $_GET['token'] : NULL;
+$delslideTitle = isset($_GET['deletetitle']) ? $_GET['deletetitle'] : NULL;
+$theslideGuid = isset($_GET['guid']) ? $_GET['guid'] : NULL;
+$delslideId = isset($_GET['deleteslide']) ? $_GET['deleteslide'] : NULL;
+$newSlide = isset($_GET['newslide']) ? $_GET['newslide'] : NULL;
+$editSlide = isset($_GET['editslide']) ? $_GET['editslide'] : NULL;
 
 //slide preview
 if ($pagePreviewId > "") {
 
-    $slidePreviewId = $pagePreviewId;
-
-    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
+    $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
 
     echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
@@ -33,9 +33,6 @@ if ($pagePreviewId > "") {
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
-
-$newSlide = safeCleanStr($_GET['newslide']);
-$editSlide = safeCleanStr($_GET['editslide']);
 ?>
 
     <div class="row">
@@ -72,7 +69,7 @@ $editSlide = safeCleanStr($_GET['editslide']);
     <div class="col-lg-12">
 <?php
 
-if ($newSlide || $editSlide) {
+if ($newSlide == 'true' || $editSlide) {
 
     $theslideId = $editSlide;
     $slideLabel = "Edit Slide Title";
@@ -106,7 +103,7 @@ if ($newSlide || $editSlide) {
         $rowSlides = mysqli_fetch_array($sqlSlides, MYSQLI_ASSOC);
 
         //Create new slide
-    } elseif ($newSlide) {
+    } elseif ($newSlide == 'true') {
 
         $slideLabel = "New Slide Title";
 
@@ -181,7 +178,7 @@ if ($newSlide || $editSlide) {
 
             <?php
             // if is admin then show the table header
-            if ($adminIsCheck == "true") {
+            if ($adminIsCheck == 'true') {
                 echo "<div class='form-group'>";
                 echo "<label for='location_type'>Location Group</label>";
 
@@ -284,7 +281,7 @@ if ($newSlide || $editSlide) {
     }
 
     //update heading on submit
-    if (($_POST['save_main'])) {
+    if (isset($_POST['save_main'])) {
 
         $slider_defaults = safeCleanStr($_POST['slider_defaults']);
         $main_heading = safeCleanStr($_POST['main_heading']);
@@ -363,10 +360,6 @@ if ($newSlide || $editSlide) {
     <h2></h2>
     <div>
     <?php
-    if ($slideMsg != "") {
-        echo $slideMsg;
-    }
-
     echo "<form name='sliderForm' class='dirtyForm' method='post' action=''>
 		<div class='form-group required'>
 		<label for='main_heading'>Heading</label>
@@ -378,7 +371,7 @@ if ($newSlide || $editSlide) {
 		<th>Sort</th>
 		<th>Slide Title</th>";
     // if is admin then show the table header
-    if ($adminIsCheck == "true") {
+    if ($adminIsCheck == 'true') {
         echo "<th>Location Group</th>";
     }
 
@@ -419,7 +412,7 @@ if ($newSlide || $editSlide) {
 			</td>";
 
         //If admin, show location type drop down list else show a hidden input with the locations type value
-        if ($adminIsCheck == "true") {
+        if ($adminIsCheck == 'true') {
             echo "<td>";
             echo "<select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='location_type[]'>";
             echo getLocGroups($slideLocType);

@@ -276,7 +276,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
                 //Delete the file if it is not an image
                 if (file_exists($target_file)) {
                     $uploadError = true;
-                    unlink($target_file) OR die('Could not delete file');
+                    unlink($target_file) OR DIE('Could not delete file');
                 }
 
             }
@@ -287,7 +287,7 @@ function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null,
     }
 }
 
-function getAllUploads($type_id = null, $type = null, $loc, $orderBy = 'DESC')
+function getAllUploads($type_id = null, $type = null, $loc, $orderBy)
 {
     global $db_conn;
 
@@ -295,7 +295,7 @@ function getAllUploads($type_id = null, $type = null, $loc, $orderBy = 'DESC')
 
     if (isset($loc) && !empty($loc)) {
 
-        $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id=" . $loc . " ORDER BY datetime " . $orderBy . ";");
+        $sqlUploads = mysqli_query($db_conn, "SELECT * FROM uploads WHERE type_id = " . $type_id . " AND type='" . $type . "' AND loc_id = " . $loc . " ORDER BY datetime " . $orderBy . ";");
         $rowUploads = mysqli_fetch_all($sqlUploads, MYSQLI_ASSOC);
     }
 

@@ -53,7 +53,7 @@ if ( $pagePreviewId > "" ) {
             <li class='active'>New Staff Member</li>
             </ol>";
 			echo "<h1 class='page-header'>Staff (New) <a href='staff.php' class='btn btn-link' role='button'> Cancel</a></h1>";
-		} elseif ( $theTeamId == 'true' ) {
+		} elseif ( $theTeamId ) {
 			echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li><a href='staff.php?loc_id=" . loc_id . "'>Staff</a></li>
@@ -79,7 +79,7 @@ if ( $pagePreviewId > "" ) {
     <div class="col-lg-12">
 		<?php
 
-		if ( $getNewTeam == 'true' || $theTeamId == 'true' ) {
+		if ( $getNewTeam == 'true' || $theTeamId ) {
 
 			$teamLabel      = "Edit Staff Title";
 			$theTeamName    = safeCleanStr( addslashes( $_POST['team_name'] ) );
