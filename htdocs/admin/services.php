@@ -14,6 +14,7 @@ $delserviceGuid  = safeCleanStr( $_GET['guid'] );
 $pagePreviewId   = sanitizeInt( $_GET['preview'] );
 $theserviceId    = sanitizeInt( $_GET['editservice'] );
 $theServiceGuid  = safeCleanStr( $_GET['guid'] );
+$newService      = safeCleanStr( $_GET['newservice'] );
 
 //Page preview
 if ( $pagePreviewId > "" ) {
@@ -49,7 +50,7 @@ if ( $pagePreviewId > "" ) {
     <div class="row">
         <div class="col-lg-12">
 			<?php
-			if ( $_GET['newservice'] == 'true' ) {
+			if ( $newService == 'true' ) {
 				echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li><a href='services.php?loc_id=" . loc_id . "'>Services</a></li>
@@ -79,7 +80,7 @@ if ( $pagePreviewId > "" ) {
     <div class="col-lg-12">
 <?php
 
-if ( $_GET['newservice'] || $theserviceId ) {
+if ( $newService == 'true' || $theserviceId ) {
 
 	$serviceMsg = "";
 
@@ -101,7 +102,7 @@ if ( $_GET['newservice'] || $theserviceId ) {
 		$rowServices = mysqli_fetch_array( $sqlServices, MYSQLI_ASSOC );
 
 		//Create new service
-	} elseif ( $_GET['newservice'] ) {
+	} elseif ( $newService == 'true' ) {
 
 		$serviceLabel = "New Service Title";
 

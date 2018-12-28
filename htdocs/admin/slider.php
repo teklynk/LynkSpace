@@ -5,10 +5,17 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'slider.php';
 
-//slide preview
-if ($_GET['preview'] > "") {
+$pagePreviewId   = sanitizeInt( $_GET['preview'] );
+$delslideId = safeCleanStr($_GET['deleteslide']);
+$theslideGuid = safeCleanStr($_GET['guid']);
+$delslideTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+$delslideToken = safeCleanStr($_GET['token']);
+$slide_count = safeCleanStr($_POST['slide_count']);
 
-    $slidePreviewId = $_GET['preview'];
+//slide preview
+if ($pagePreviewId > "") {
+
+    $slidePreviewId = $pagePreviewId;
 
     $sqlSlidePreview = mysqli_query($db_conn, "SELECT id, title, content, link, image, loc_id FROM slider WHERE id=" . $slidePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
     $rowSlidePreview = mysqli_fetch_array($sqlSlidePreview);
@@ -58,15 +65,16 @@ $editSlide = safeCleanStr($_GET['editslide']);
             ?>
         </div>
     </div>
+
+    <?php echo flashMessageGet( 'success' ); ?>
+
     <div class="row">
     <div class="col-lg-12">
 <?php
 
 if ($newSlide || $editSlide) {
 
-    $slideMsg = "";
     $theslideId = $editSlide;
-    $theslideGuid = safeCleanStr($_GET['guid']);
     $slideLabel = "Edit Slide Title";
     $slide_title = safeCleanStr(addslashes($_POST['slide_title']));
     $slide_content = safeCleanStr($_POST['slide_content']);
@@ -85,7 +93,13 @@ if ($newSlide || $editSlide) {
             $slideUpdate = "UPDATE slider SET title='" . $slide_title . "', content='" . $slide_content . "', startdate='" . $start_date . "', enddate='" . $end_date . "', link='" . $slide_link . "', image='" . $slide_image . "', loc_type='" . $location_type . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . loc_id . ";";
             mysqli_query($db_conn, $slideUpdate);
 
-            $slideMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='slider.php?loc_id=" . loc_id . "' class='alert-link'>Back</a> | The slide " . $slide_title . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
+	        flashMessageSet( 'success', $slide_title . " has been updated." );
+
+	        //Redirect back to uploads page
+	        header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
+	        echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
+	        exit();
+
         }
 
         $sqlSlides = mysqli_query($db_conn, "SELECT id, title, image, content, guid, startdate, enddate, link, loc_type, active, sort, author_name, datetime, loc_id FROM slider WHERE id=" . $theslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . loc_id . ";");
@@ -101,14 +115,13 @@ if ($newSlide || $editSlide) {
             $slideInsert = "INSERT INTO slider (title, content, guid, link, image, startdate, enddate, loc_type, sort, active, author_name, loc_id) VALUES ('" . $slide_title . "', '" . $slide_content . "', '" . getGuid() . "', '" . $slide_link . "', '" . $slide_image . "', '" . $start_date . "', '" . $end_date . "', '" . $location_type . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . loc_id . ");";
             mysqli_query($db_conn, $slideInsert);
 
-            header("slider.php?loc_id=" . loc_id . "", true, 302);
-            echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
-        }
-    }
+	        flashMessageSet( 'success', $slide_title . " has been added." );
 
-    //alert messages
-    if ($slideMsg != "") {
-        echo $slideMsg;
+	        //Redirect back to uploads page
+	        header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
+	        echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
+	        exit();
+        }
     }
 
     if ($rowSlides['image'] == "") {
@@ -118,6 +131,7 @@ if ($newSlide || $editSlide) {
     }
 
     ?>
+
     <div class="col-lg-8">
         <form name="slideForm" class="dirtyForm" method="post">
 
@@ -244,14 +258,7 @@ if ($newSlide || $editSlide) {
 
     <?php
 } else {
-    $deleteMsg = "";
-    $deleteConfirm = "";
-    $slideMsg = "";
-    $delslideId = safeCleanStr($_GET['deleteslide']);
-    $delslideGuid = safeCleanStr($_GET['guid']);
-    $delslideTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-    $delslideToken = safeCleanStr($_GET['token']);
-    $slide_count = safeCleanStr($_POST['slide_count']);
+
 
     //delete slide
     if ($delslideId && $delslideTitle && !$_GET['confirm']) {
@@ -260,16 +267,20 @@ if ($newSlide || $editSlide) {
             "confirm",
             "Delete Slide?",
             "Are you sure you want to delete: " . $delslideTitle . "?",
-            "slider.php?loc_id=" . loc_id . "&deleteslide=" . $delslideId . "&guid=" . $delslideGuid . "&deletetitle=" . $delslideTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . ""
+            "slider.php?loc_id=" . loc_id . "&deleteslide=" . $delslideId . "&guid=" . $theslideGuid . "&deletetitle=" . $delslideTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . ""
         );
 
-    } elseif ($_GET['deleteslide'] && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $delslideGuid && $delslideToken == $_SESSION['unique_referrer']) {
+    } elseif ($delslideId && $_GET['deletetitle'] && $_GET['confirm'] == 'yes' && $theslideGuid && $delslideToken == $_SESSION['unique_referrer']) {
         //delete slide after clicking Yes
-        $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND guid='" . $delslideGuid . "' AND loc_id=" . loc_id . ";";
+        $slideDelete = "DELETE FROM slider WHERE id=" . $delslideId . " AND guid='" . $theslideGuid . "' AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $slideDelete);
 
-        $deleteMsg = "<div class='alert alert-success'>" . $delslideTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
-        echo $deleteMsg;
+	    flashMessageSet( 'success', $delslideTitle . " has been deleted." );
+
+	    //Redirect back to uploads page
+	    header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
     //update heading on submit
@@ -300,7 +311,13 @@ if ($newSlide || $editSlide) {
 
         }
 
-        $slideMsg = "<div class='alert alert-success'>The slider has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='slider.php?loc_id=" . loc_id . "'\">×</button></div>";
+	    flashMessageSet( 'success', 'The slider has been updated.' );
+
+	    //Redirect back to uploads page
+	    header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
+	    exit();
+
     }
 
     $sqlSetup = mysqli_query($db_conn, "SELECT sliderheading, slider_use_defaults FROM setup WHERE loc_id=" . loc_id . ";");
