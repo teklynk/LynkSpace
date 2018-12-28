@@ -1,127 +1,139 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'staff.php';
 
+$deleteConfirm = '';
+$delteamId     = safeCleanStr( $_GET['deleteteam'] );
+$delteamTitle  = safeCleanStr( addslashes( $_GET['deletetitle'] ) );
+$getTeamToken  = safeCleanStr( $_GET['token'] );
+$getNewTeam    = safeCleanStr( $_GET['newteam'] );
+$theTeamGuid   = safeCleanStr( $_GET['guid'] );
+$pagePreviewId = safeCleanStr( $_GET['preview'] );
+$theTeamId     = safeCleanStr( $_GET['editteam'] );
+
 //Page preview
-if ($_GET['preview'] > "") {
+if ( $pagePreviewId > "" ) {
 
-    $pagePreviewId = safeCleanStr($_GET['preview']);
+	$sqlteamPreview = mysqli_query( $db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";" );
+	$rowTeamPreview = mysqli_fetch_array( $sqlteamPreview, MYSQLI_ASSOC );
 
-    $sqlteamPreview = mysqli_query($db_conn, "SELECT id, title, image, content, name, loc_id FROM team WHERE id=" . $pagePreviewId . " AND loc_id=" . $_SESSION['loc_id'] . ";");
-    $rowTeamPreview = mysqli_fetch_array($sqlteamPreview, MYSQLI_ASSOC);
+	echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
+	echo "<div class='col-lg-12'>";
 
-    echo "<style type='text/css'>html, body {margin-top:0 !important;} nav, .row, .version {display:none !important;} #wrapper {padding-left: 0px !important;} #page-wrapper {min-height: 200px !important;}</style>";
-    echo "<div class='col-lg-12'>";
+	if ( $rowTeamPreview['image'] > "" ) {
+		echo "<p><img src='" . $rowTeamPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
+	}
 
-    if ($rowTeamPreview['image'] > "") {
-        echo "<p><img src='" . $rowTeamPreview['image'] . "' style='max-width:350px; max-height:150px;' /></p>";
-    }
+	if ( $rowTeamPreview['name'] > "" ) {
+		echo "<h4>" . $rowTeamPreview['name'] . "</h4>";
+	}
 
-    if ($rowTeamPreview['name'] > "") {
-        echo "<h4>" . $rowTeamPreview['name'] . "</h4>";
-    }
+	if ( $rowTeamPreview['title'] > "" ) {
+		echo "<p>" . $rowTeamPreview['title'] . "</p>";
+	}
 
-    if ($rowTeamPreview['title'] > "") {
-        echo "<p>" . $rowTeamPreview['title'] . "</p>";
-    }
+	echo "<p>" . $rowTeamPreview['content'] . "</p>";
 
-    echo "<p>" . $rowTeamPreview['content'] . "</p>";
+	echo "<br/><p><b>Page URL:</b> <a href='../staff.php?loc_id=" . loc_id . "' title='Page URL' target='_blank'>staff.php?loc_id=" . loc_id . "</a></p>";
 
-    echo "<br/><p><b>Page URL:</b> <a href='../staff.php?loc_id=" . loc_id . "' title='Page URL' target='_blank'>staff.php?loc_id=" . loc_id . "</a></p>";
-
-    echo "</div>";
+	echo "</div>";
 }
 ?>
+
 <div class="row">
     <div class="col-lg-12">
-        <?php
-        if ($_GET['newteam'] == 'true') {
-            echo "<ol class='breadcrumb'>
+		<?php
+		if ( $getNewTeam == 'true' ) {
+			echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li><a href='staff.php?loc_id=" . loc_id . "'>Staff</a></li>
             <li class='active'>New Staff Member</li>
             </ol>";
-            echo "<h1 class='page-header'>Staff (New) <a href='staff.php' class='btn btn-link' role='button'> Cancel</a></h1>";
-        } elseif ($_GET['editteam']) {
-            echo "<ol class='breadcrumb'>
+			echo "<h1 class='page-header'>Staff (New) <a href='staff.php' class='btn btn-link' role='button'> Cancel</a></h1>";
+		} elseif ( $theTeamId == 'true' ) {
+			echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li><a href='staff.php?loc_id=" . loc_id . "'>Staff</a></li>
             <li class='active'>Edit Staff</li>
             </ol>";
-            echo "<h1 class='page-header'>Staff (Edit) <a href='staff.php' role='button' class='btn btn-link'> Cancel</a></h1>";
-        } else {
-            echo "<ol class='breadcrumb'>
+			echo "<h1 class='page-header'>Staff (Edit) <a href='staff.php' role='button' class='btn btn-link'> Cancel</a></h1>";
+		} else {
+			echo "<ol class='breadcrumb'>
             <li><a href='setup.php?loc_id=" . loc_id . "'>Home</a></li>
             <li class='active'>Staff</li>
             </ol>";
-            echo "<h1 class='page-header'>Staff&nbsp;";
-            echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Staff Page' class='btn btn-info' onclick=\"showMyModal('../staff.php?loc_id=" . loc_id . "', '../staff.php?loc_id=" . loc_id . "#team')\"><i class='fa fa-eye'></i></button>";
-            echo "</h1>";
-        }
-        ?>
+			echo "<h1 class='page-header'>Staff&nbsp;";
+			echo "<button type='button' data-toggle='tooltip' data-placement='bottom' title='Preview the Staff Page' class='btn btn-info' onclick=\"showMyModal('../staff.php?loc_id=" . loc_id . "', '../staff.php?loc_id=" . loc_id . "#team')\"><i class='fa fa-eye'></i></button>";
+			echo "</h1>";
+		}
+		?>
     </div>
 </div>
+
+<?php echo flashMessageGet( 'success' ); ?>
+
 <div class="row">
     <div class="col-lg-12">
-        <?php
+		<?php
 
-        if ($_GET['newteam'] || $_GET['editteam']) {
+		if ( $getNewTeam == 'true' || $theTeamId == 'true' ) {
 
-            $teamMsg = '';
-            $theTeamId = safeCleanStr($_GET['editteam']);
-            $teamLabel = "Edit Staff Title";
-            $theTeamGuid = safeCleanStr($_GET['guid']);
-            $theTeamName = safeCleanStr(addslashes($_POST['team_name']));
-            $theTeamTitle = safeCleanStr(addslashes($_POST['team_title']));
-            $theTeamContent = sqlEscapeStr($_POST['team_content']);
-            $theTeamImage = safeCleanStr($_POST['team_image']);
-            $getNewTeam = safeCleanStr($_GET['newteam']);
+			$teamLabel      = "Edit Staff Title";
+			$theTeamName    = safeCleanStr( addslashes( $_POST['team_name'] ) );
+			$theTeamTitle   = safeCleanStr( addslashes( $_POST['team_title'] ) );
+			$theTeamContent = sqlEscapeStr( $_POST['team_content'] );
+			$theTeamImage   = safeCleanStr( $_POST['team_image'] );
 
-            $sqlteam = mysqli_query($db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theTeamId' AND loc_id=" . loc_id . ";");
-            $rowTeam = mysqli_fetch_array($sqlteam, MYSQLI_ASSOC);
 
-            //Update existing team
-            if ($theTeamId) {
+			$sqlteam = mysqli_query( $db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theTeamId' AND loc_id=" . loc_id . ";" );
+			$rowTeam = mysqli_fetch_array( $sqlteam, MYSQLI_ASSOC );
 
-                //update data on submit
-                if (!empty($theTeamName)) {
+			//Update existing team
+			if ( $theTeamId ) {
 
-                    $teamUpdate = "UPDATE team SET title='" . $theTeamTitle . "', content='" . $theTeamContent . "', name='" . $theTeamName . "', image='" . $theTeamImage . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theTeamId . " AND loc_id=" . loc_id . " AND guid='" . $theTeamGuid . "';";
-                    mysqli_query($db_conn, $teamUpdate);
+				//update data on submit
+				if ( ! empty( $theTeamName ) ) {
 
-                    $teamMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='staff.php?loc_id=" . loc_id . "' class='alert-link'>Back</a> | The team member " . $theTeamName . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . loc_id . "'\">×</button></div>";
-                }
+					$teamUpdate = "UPDATE team SET title='" . $theTeamTitle . "', content='" . $theTeamContent . "', name='" . $theTeamName . "', image='" . $theTeamImage . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theTeamId . " AND loc_id=" . loc_id . " AND guid='" . $theTeamGuid . "';";
+					mysqli_query( $db_conn, $teamUpdate );
 
-                //Create new team
-            } elseif ($getNewTeam) {
+					flashMessageSet( 'success', $theTeamName . " has been updated." );
 
-                $teamLabel = "New Staff Title";
+					//Redirect back to uploads page
+					header( "Location: staff.php?loc_id=" . loc_id . "", true, 302 );
+					echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
+					exit();
+				}
 
-                //insert data on submit
-                if (!empty($theTeamTitle)) {
-                    $teamInsert = "INSERT INTO team (title, content, guid, image, name, sort, active, author_name, loc_id) VALUES ('" . $theTeamTitle . "', '" . $theTeamContent . "', '" . getGuid() . "', '" . $theTeamImage . "', '" . $theTeamName . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . loc_id . ");";
-                    mysqli_query($db_conn, $teamInsert);
+				//Create new team
+			} elseif ( $getNewTeam ) {
 
-                    header("Location: staff.php?loc_id=" . loc_id . "", true, 302);
-                    echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
+				$teamLabel = "New Staff Title";
 
-                }
-            }
+				//insert data on submit
+				if ( ! empty( $theTeamTitle ) ) {
+					$teamInsert = "INSERT INTO team (title, content, guid, image, name, sort, active, author_name, loc_id) VALUES ('" . $theTeamTitle . "', '" . $theTeamContent . "', '" . getGuid() . "', '" . $theTeamImage . "', '" . $theTeamName . "', 0, 'false', '" . $_SESSION['user_name'] . "', " . loc_id . ");";
+					mysqli_query( $db_conn, $teamInsert );
 
-            //alert messages
-            if ($teamMsg != '') {
-                echo $teamMsg;
-            }
+					flashMessageSet( 'success', $theTeamName . " has been added." );
 
-            if ($rowTeam['image'] == '') {
-                $thumbNail = "//placehold.it/140x100&text=No Image";
-            } else {
-                $thumbNail = $rowTeam['image'];
-            }
-            ?>
+					//Redirect back to uploads page
+					header( "Location: staff.php?loc_id=" . loc_id . "", true, 302 );
+					echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
+					exit();
+
+				}
+			}
+
+			if ( $rowTeam['image'] == '' ) {
+				$thumbNail = "//placehold.it/140x100&text=No Image";
+			} else {
+				$thumbNail = $rowTeam['image'];
+			}
+			?>
             <div class="col-lg-8">
                 <form name="teamForm" class="dirtyForm" method="post">
 
@@ -135,35 +147,35 @@ if ($_GET['preview'] > "") {
                                 data-dropup-auto="false" data-size="10" name="team_image" id="team_image"
                                 title="Choose an existing image">
                             <option value="">None</option>
-                            <?php
-                            echo getImageDropdownList(loc_id, $rowTeam['image']);
-                            ?>
+							<?php
+							echo getImageDropdownList( loc_id, $rowTeam['image'] );
+							?>
                         </select>
                     </div>
                     <hr/>
                     <div class="form-group required">
                         <label>Name</label>
                         <input type="text" class="form-control count-text" name="team_name" maxlength="255"
-                               value="<?php if ($theTeamId) {
-                                   echo $rowTeam['name'];
-                               } ?>" placeholder="Name" autofocus required>
+                               value="<?php if ( $theTeamId ) {
+							       echo $rowTeam['name'];
+						       } ?>" placeholder="Name" autofocus required>
                     </div>
                     <div class="form-group required">
                         <label>Title</label>
                         <input type="text" class="form-control count-text" name="team_title" maxlength="255"
-                               value="<?php if ($theTeamId) {
-                                   echo $rowTeam['title'];
-                               } ?>" placeholder="Title" required>
+                               value="<?php if ( $theTeamId ) {
+							       echo $rowTeam['title'];
+						       } ?>" placeholder="Title" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control count-text" rows="3" name="team_content" placeholder="Text"
-                                  maxlength="999"><?php if ($theTeamId) {
-                                echo $rowTeam['content'];
-                            } ?></textarea>
+                                  maxlength="999"><?php if ( $theTeamId ) {
+								echo $rowTeam['content'];
+							} ?></textarea>
                     </div>
 
-                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                     <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
                         Save Changes
@@ -172,73 +184,74 @@ if ($_GET['preview'] > "") {
 
                 </form>
             </div>
-            <?php
-        } else {
-            $deleteMsg = '';
-            $deleteConfirm = '';
-            $teamMsg = '';
-            $delteamId = safeCleanStr($_GET['deleteteam']);
-            $delteamTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-            $delteamGuid = safeCleanStr($_GET['guid']);
-            $delteamToken = safeCleanStr($_GET['token']);
+			<?php
+		} else {
 
-            //delete team
-            if ($delteamId && $delteamTitle && !$_GET['confirm']) {
+			//delete team
+			if ( $delteamId && $delteamTitle && ! $_GET['confirm'] ) {
 
-                showModalConfirm(
-                    "confirm",
-                    "Delete Staff?",
-                    "Are you sure you want to delete: " . $delteamTitle . "?",
-                    "staff.php?loc_id=" . loc_id . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes&guid=" . $delteamGuid . "&token=" . $_SESSION['unique_referrer'] . "",
-                    false
-                );
+				showModalConfirm(
+					"confirm",
+					"Delete Staff?",
+					"Are you sure you want to delete: " . $delteamTitle . "?",
+					"staff.php?loc_id=" . loc_id . "&deleteteam=" . $delteamId . "&deletetitle=" . $delteamTitle . "&confirm=yes&guid=" . $theTeamGuid . "&token=" . $_SESSION['unique_referrer'] . "",
+					false
+				);
 
-            } elseif ($delteamId && $delteamTitle && $_GET['confirm'] == 'yes' && $delteamGuid && $delteamToken == $_SESSION['unique_referrer']) {
-                //delete team after clicking Yes
-                $teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND guid='" . $delteamGuid . "' AND loc_id=" . loc_id . ";";
-                mysqli_query($db_conn, $teamDelete);
+			} elseif ( $delteamId && $delteamTitle && $_GET['confirm'] == 'yes' && $theTeamGuid && $getTeamToken == $_SESSION['unique_referrer'] ) {
+				//delete team after clicking Yes
+				$teamDelete = "DELETE FROM team WHERE id=" . $delteamId . " AND guid='" . $theTeamGuid . "' AND loc_id=" . loc_id . ";";
+				mysqli_query( $db_conn, $teamDelete );
 
-                $deleteMsg = "<div class='alert alert-success'>" . $delteamTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . loc_id . "'\">×</button></div>";
-                echo $deleteMsg;
-            }
+				flashMessageSet( 'success', $delteamTitle . " has been deleted." );
 
-            //update heading on submit
-            if (safeCleanStr($_POST['save_main'])) {
-                $setupTeamHeading = safeCleanStr($_POST['team_heading']);
-                $setupTeamContent = sqlEscapeStr($_POST['main_content']);
+				//Redirect back to uploads page
+				header( "Location: staff.php?loc_id=" . loc_id . "", true, 302 );
+				echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
+				exit();
+			}
 
-                $postTeamCount = safeCleanStr($_POST['team_count']);
-                $postTeamSort = safeCleanStr($_POST['team_sort']);
-                $postTeamId = safeCleanStr($_POST['team_id']);
+			//update heading on submit
+			if ( safeCleanStr( $_POST['save_main'] ) ) {
+				$setupTeamHeading = safeCleanStr( $_POST['team_heading'] );
+				$setupTeamContent = sqlEscapeStr( $_POST['main_content'] );
+				$postTeamCount    = safeCleanStr( $_POST['team_count'] );
+				$postTeamSort     = safeCleanStr( $_POST['team_sort'] );
+				$postTeamId       = safeCleanStr( $_POST['team_id'] );
 
-                $setupUpdate = "UPDATE setup SET teamheading='" . $setupTeamHeading . "', teamcontent='" . $setupTeamContent . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
-                mysqli_query($db_conn, $setupUpdate);
+				$setupUpdate = "UPDATE setup SET teamheading='" . $setupTeamHeading . "', teamcontent='" . $setupTeamContent . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+				mysqli_query( $db_conn, $setupUpdate );
 
-                for ($i = 0; $i < $postTeamCount; $i++) {
+				for ( $i = 0; $i < $postTeamCount; $i ++ ) {
 
-                    $teamUpdate = "UPDATE team SET sort=" . $postTeamSort[$i] . " WHERE id=" . $postTeamId[$i] . ";";
-                    mysqli_query($db_conn, $teamUpdate);
+					$teamUpdate = "UPDATE team SET sort=" . $postTeamSort[ $i ] . " WHERE id=" . $postTeamId[ $i ] . ";";
+					mysqli_query( $db_conn, $teamUpdate );
 
-                }
+				}
 
-                $teamMsg = "<div class='alert alert-success'>The team has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='staff.php?loc_id=" . loc_id . "'\">×</button></div>";
-            }
+				flashMessageSet( 'success', "The staff has been updated." );
 
-            $sqlSetup = mysqli_query($db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . loc_id . ";");
-            $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+				//Redirect back to uploads page
+				header( "Location: staff.php?loc_id=" . loc_id . "", true, 302 );
+				echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
+				exit();
+			}
 
-            //Modal preview box
-            showModalPreview("webpageDialog");
+			$sqlSetup = mysqli_query( $db_conn, "SELECT teamheading, team_use_defaults, teamcontent FROM setup WHERE loc_id=" . loc_id . ";" );
+			$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
-            //use default view
-            if ($rowSetup['team_use_defaults'] == 'true') {
-                $selDefaults = ' CHECKED ';
-            } else {
-                $selDefaults = '';
-            }
+			//Modal preview box
+			showModalPreview( "webpageDialog" );
 
-            if (loc_id != 1) {
-                ?>
+			//use default view
+			if ( $rowSetup['team_use_defaults'] == 'true' ) {
+				$selDefaults = ' CHECKED ';
+			} else {
+				$selDefaults = '';
+			}
+
+			if ( loc_id != 1 ) {
+				?>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="teamdefaults">
@@ -247,9 +260,9 @@ if ($_GET['preview'] > "") {
                                 <label>
                                     <input class="team_defaults_checkbox defaults-toggle"
                                            id="<?php echo loc_id ?>" name="team_defaults"
-                                           type="checkbox" <?php if (loc_id) {
-                                        echo $selDefaults;
-                                    } ?> data-toggle="toggle">
+                                           type="checkbox" <?php if ( loc_id ) {
+										echo $selDefaults;
+									} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -257,21 +270,17 @@ if ($_GET['preview'] > "") {
                 </div>
 
                 <hr/>
-                <?php
-            }
-            ?>
+				<?php
+			}
+			?>
 
             <button type="button" class="btn btn-primary"
                     onclick="window.location='?newteam=true&loc_id=<?php echo loc_id; ?>';"><i
-                    class='fa fa-fw fa-plus'></i> Add a New Staff Member
+                        class='fa fa-fw fa-plus'></i> Add a New Staff Member
             </button>
             <h2></h2>
             <div>
-                <?php
-                if ($teamMsg != '') {
-                    echo $teamMsg;
-                }
-                ?>
+
                 <form name="teamForm" class="dirtyForm" method="post" action="">
                     <div class="form-group required">
                         <label>Heading</label>
@@ -294,26 +303,26 @@ if ($_GET['preview'] > "") {
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        $teamCount = '';
-                        $sqlTeam = mysqli_query($db_conn, "SELECT id, title, image, content, guid, name, sort, active, loc_id FROM team WHERE loc_id=" . loc_id . " ORDER BY sort, title ASC;");
-                        while ($rowTeam = mysqli_fetch_array($sqlTeam, MYSQLI_ASSOC)) {
-                            $teamId = $rowTeam['id'];
-                            $teamTitle = $rowTeam['title'];
-                            $teamName = safeCleanStr(addslashes($rowTeam['name']));
-                            $teamContent = $rowTeam['content'];
-                            $teamActive = $rowTeam['active'];
-                            $teamSort = $rowTeam['sort'];
-                            $teamGuid = $rowTeam['guid'];
-                            $teamCount++;
+						<?php
+						$teamCount = '';
+						$sqlTeam   = mysqli_query( $db_conn, "SELECT id, title, image, content, guid, name, sort, active, loc_id FROM team WHERE loc_id=" . loc_id . " ORDER BY sort, title ASC;" );
+						while ( $rowTeam = mysqli_fetch_array( $sqlTeam, MYSQLI_ASSOC ) ) {
+							$teamId      = $rowTeam['id'];
+							$teamTitle   = $rowTeam['title'];
+							$teamName    = safeCleanStr( addslashes( $rowTeam['name'] ) );
+							$teamContent = $rowTeam['content'];
+							$teamActive  = $rowTeam['active'];
+							$teamSort    = $rowTeam['sort'];
+							$teamGuid    = $rowTeam['guid'];
+							$teamCount ++;
 
-                            if ($rowTeam['active'] == 'true') {
-                                $isActive = ' CHECKED ';
-                            } else {
-                                $isActive = '';
-                            }
+							if ( $rowTeam['active'] == 'true' ) {
+								$isActive = ' CHECKED ';
+							} else {
+								$isActive = '';
+							}
 
-                            echo "<tr>
+							echo "<tr>
                         <td class='col-xs-1'>
                         <input class='form-control' name='team_sort[]' value='" . $teamSort . "' type='number' maxlength='3' required>
                         </td>
@@ -329,12 +338,12 @@ if ($_GET['preview'] > "") {
 						<button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='staff.php?loc_id=" . loc_id . "&deleteteam=" . $teamId . "&deletetitle=" . $teamName . "&guid=" . $teamGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
 						</td>
 						</tr>";
-                        }
-                        ?>
+						}
+						?>
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                    <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                     <input type="hidden" name="save_main" value="true"/>
                     <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>
@@ -344,13 +353,13 @@ if ($_GET['preview'] > "") {
                     <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
                 </form>
             </div>
-            <?php
-        } //end of long else
+			<?php
+		} //end of long else
 
-        echo "</div>
+		echo "</div>
 	</div>
 	<p></p>";
-        ?>
+		?>
         <!-- Modal javascript logic -->
         <script type="text/javascript">
             $(document).ready(function () {
@@ -368,6 +377,6 @@ if ($_GET['preview'] > "") {
                 }
             });
         </script>
-        <?php
-        require_once(__DIR__ . '/includes/footer.inc.php');
-        ?>
+		<?php
+		require_once( __DIR__ . '/includes/footer.inc.php' );
+		?>
