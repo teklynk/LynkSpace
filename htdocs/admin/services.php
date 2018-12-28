@@ -76,6 +76,9 @@ if ( $pagePreviewId > "" ) {
 			?>
         </div>
     </div>
+
+    <?php echo flashMessageGet( 'success' ); ?>
+
     <div class="row">
     <div class="col-lg-12">
 <?php
@@ -95,7 +98,13 @@ if ( $newService == 'true' || $theserviceId ) {
 			$servicesUpdate = "UPDATE services SET title='" . safeCleanStr( $_POST['service_title'] ) . "', content='" . sqlEscapeStr( $_POST['service_content'] ) . "', link='" . safeCleanStr( $_POST['service_link'] ) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . loc_id . " AND guid='" . $theServiceGuid . "';";
 			mysqli_query( $db_conn, $servicesUpdate );
 
-			$serviceMsg = "<div class='alert alert-success'><i class='fa fa-long-arrow-left'></i><a href='services.php?loc_id=" . loc_id . "' class='alert-link'>Back</a> | The service " . safeCleanStr( $_POST['service_title'] ) . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='services.php?loc_id=" . loc_id . "'\">×</button></div>";
+			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been updated." );
+
+			//Redirect back to uploads page
+			header( "Location: services.php?loc_id=" . loc_id . "", true, 302 );
+			echo "<script>window.location.href='services.php?loc_id=" . loc_id . "';</script>";
+			exit();
+
 		}
 
 		$sqlServices = mysqli_query( $db_conn, "SELECT id, title, icon, image, content, link, active, author_name, datetime, loc_id FROM services WHERE id=" . $theserviceId . " AND loc_id=" . loc_id . ";" );
@@ -111,7 +120,7 @@ if ( $newService == 'true' || $theserviceId ) {
 			$servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr( $_POST['service_title'] ) . "', '" . safeCleanStr( $_POST['service_content'] ) . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr( $_POST['service_link'] ) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . loc_id . ");";
 			mysqli_query( $db_conn, $servicesInsert );
 
-			flashMessageSet( 'success', 'The services section has been updated.' );
+			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been added." );
 
 			//Redirect back to uploads page
 			header( "Location: services.php?loc_id=" . loc_id . "", true, 302 );
@@ -120,8 +129,6 @@ if ( $newService == 'true' || $theserviceId ) {
 		}
 	}
 
-	//Alert messages
-	echo flashMessageGet( 'success' );
 	?>
     <div class="col-lg-8">
         <form name="serviceForm" class="dirtyForm" method="post" action="">
@@ -303,9 +310,7 @@ if ( $newService == 'true' || $theserviceId ) {
     </button>
     <h2></h2>
     <div>
-		<?php
-		echo flashMessageGet( 'success' );
-		?>
+
         <form name="servicesForm" class="dirtyForm" method="post">
             <div class="form-group required">
                 <label>Heading</label>
