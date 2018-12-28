@@ -5,8 +5,8 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'databases.php';
 
-$getCustSection = isset($_GET['section']) ? safeCleanStr($_GET['section']) : false;
-$getCustPreview = isset($_GET['preview']) ? safeCleanStr($_GET['preview']) : false;
+$getCustSection = isset($_GET['section']) ? safeCleanStr($_GET['section']) : null;
+$getCustPreview = isset($_GET['preview']) ? safeCleanStr($_GET['preview']) : null;
 
 //Redirect to section=1 if section is not in querystring
 if ($getCustSection == "" && loc_id) {
@@ -76,6 +76,8 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     $maxSections = (int)$rowSections['section'];
     $custMenuStr .= "<option value=" . $rowSections['section'] . " " . $isSectionSelected . ">" . $rowSections['section'] . "</option>";
 }
+
+echo flashMessageGet('success');
 
 ?>
     <div class="row">
@@ -147,7 +149,7 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
                                         class="fa fa-plus"></i></button>
                                 <button class="btn btn-danger" type="button" data-toggle="tooltip"
                                         data-placement="bottom" title="Delete this Database Page"
-                                        onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&deletesection=true&loc_id=<?php echo loc_id; ?>'"><i
+                                        onclick="window.location.href='databases.php?section=<?php echo $getCustSection; ?>&deletesection=true&guid=<?php echo getSectionGuid($getCustSection); ?>&loc_id=<?php echo loc_id; ?>'"><i
                                         class="fa fa-trash"></i></button>
                             </span>
 
@@ -208,9 +210,6 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 	        exit();
         }
     }
-
-	//Alert messages
-	echo flashMessageGet('success');
     ?>
     <div class="col-lg-8">
         <form name="customerForm" class="dirtyForm" method="post" action="">
@@ -368,7 +367,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
     //Display deleted message
     if ($_GET['sectiondeleted'] == true) {
-        flashMessageSet('success', "Section " . $getCustSection . " has been deleted.");
+        flashMessageSet('success', "Section has been deleted.");
         echo flashMessageGet('success');
     } elseif ($_GET['databasedeleted'] == true) {
         flashMessageSet('success', $delcustomerName . " has been deleted.");

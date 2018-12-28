@@ -20,6 +20,13 @@ function getGuid($prefix = false, $entropy = false)
     return sha1(uniqid($prefix, $entropy));
 }
 
+function getSectionGuid($section){
+	global $db_conn;
+	$sqlSectionGuid = mysqli_query($db_conn, "SELECT section, guid FROM sections_customers WHERE section='" . $section . "';");
+	$rowSectionGuid = mysqli_fetch_array($sqlSectionGuid, MYSQLI_ASSOC);
+	return $rowSectionGuid['guid'];
+}
+
 function loginAttempts($userIp, $maxAttempts, $maxTimeout)
 {
 
