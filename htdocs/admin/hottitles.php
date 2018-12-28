@@ -5,6 +5,11 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'hottitles.php';
 
+$delhottitlesId = safeCleanStr($_GET['deletehottitles']);
+$delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
+$delhottitlesGuid = safeCleanStr($_GET['guid']);
+$delhottitlesToken = safeCleanStr($_GET['token']);
+
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
 $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
@@ -22,11 +27,6 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
     </div>
 </div>
 <?php
-
-$delhottitlesId = safeCleanStr($_GET['deletehottitles']);
-$delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-$delhottitlesGuid = safeCleanStr($_GET['guid']);
-$delhottitlesToken = safeCleanStr($_GET['token']);
 
 //delete hottitle
 if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
