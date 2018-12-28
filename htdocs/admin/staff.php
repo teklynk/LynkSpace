@@ -205,7 +205,7 @@ if ( $pagePreviewId > "" ) {
 
 				flashMessageSet( 'success', $delteamTitle . " has been deleted." );
 
-				//Redirect back to uploads page
+				//Redirect back to main page
 				header( "Location: staff.php?loc_id=" . loc_id . "", true, 302 );
 				echo "<script>window.location.href='staff.php?loc_id=" . loc_id . "';</script>";
 				exit();

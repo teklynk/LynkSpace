@@ -11,14 +11,22 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
     echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-$pageMsg = "";
-$deleteMsg = "";
 $usersCount = 0;
 
-//delete user
+//Delete user
 $deluserId = safeCleanStr($_GET['deleteuser']);
 $deluserTitle = safeCleanStr(addslashes($_GET['deletetitle']));
 $deluserGuid = safeCleanStr($_GET['guid']);
+
+//Add User
+//insert data on submit
+$userName = sqlEscapeStr($_POST['user_name']);
+$userEmail = safeCleanStr($_POST['user_email']);
+$userPassword = sha1(blowfishSalt . safeCleanStr($_POST['user_password']));
+$userPasswordConfirm = safeCleanStr($_POST['user_password_confirm']);
+$userLevel = safeCleanStr($_POST['user_level']);
+$userLocation = safeCleanStr($_POST['user_location']);
+$userIp = getRealIpAddr();
 
 if ($deluserId && $deluserTitle && !$_GET['confirm']) {
     showModalConfirm(
@@ -40,18 +48,13 @@ if ($deluserId && $deluserTitle && !$_GET['confirm']) {
         NULL
     );
 
-    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . loc_id . "'\">×</button></div>";
-}
+	flashMessageSet( 'success', $deluserTitle . " has been deleted." );
 
-//Add User
-//insert data on submit
-$userName = sqlEscapeStr($_POST['user_name']);
-$userEmail = safeCleanStr($_POST['user_email']);
-$userPassword = sha1(blowfishSalt . safeCleanStr($_POST['user_password']));
-$userPasswordConfirm = $_POST['user_password_confirm'];
-$userLevel = safeCleanStr($_POST['user_level']);
-$userLocation = safeCleanStr($_POST['user_location']);
-$userIp = getRealIpAddr();
+	//Redirect back to main page
+	header( "Location: usermanager.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='usermanager.php?loc_id=" . loc_id . "';</script>";
+	exit();
+}
 
 if ($_POST['save_main']) {
     if ($_POST['user_password'] == $_POST['user_password_confirm']) {
@@ -80,11 +83,21 @@ if ($_POST['save_main']) {
                 NULL
             );
 
-            $pageMsg = "<div class='alert alert-success'>The user " . $userName . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+	        flashMessageSet( 'success', $userName . " has been added." );
+
+	        //Redirect back to main page
+	        header( "Location: usermanager.php?loc_id=" . loc_id . "", true, 302 );
+	        echo "<script>window.location.href='usermanager.php?loc_id=" . loc_id . "';</script>";
+	        exit();
         }
 
     } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+	    flashMessageSet( 'success', "Passwords do not match." );
+
+	    //Redirect back to main page
+	    header( "Location: usermanager.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='usermanager.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 }
 
@@ -102,16 +115,8 @@ if ($_POST['save_main']) {
         </div>
     </div>
 
-<?php
-if ($errorMsg != "") {
-    echo $errorMsg;
-} else {
-    echo $pageMsg;
-}
-if ($deleteMsg != "") {
-    echo $deleteMsg;
-}
-?>
+    <?php echo flashMessageGet( 'success' ); ?>
+
     <!-- Add user form-->
     <button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
         <i class='fa fa-fw fa-plus'></i> Add a User
@@ -275,6 +280,7 @@ if ($deleteMsg != "") {
                         if ($_SESSION['user_id'] == $usersID) {
                             $disable = 'disabled';
                             $usersID = '';
+	                        $usersGuid = '';
                         } else {
                             $disable = '';
                         }

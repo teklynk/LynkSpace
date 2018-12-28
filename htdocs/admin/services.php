@@ -100,7 +100,7 @@ if ( $newService == 'true' || $theserviceId ) {
 
 			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been updated." );
 
-			//Redirect back to uploads page
+			//Redirect back to main page
 			header( "Location: services.php?loc_id=" . loc_id . "", true, 302 );
 			echo "<script>window.location.href='services.php?loc_id=" . loc_id . "';</script>";
 			exit();
@@ -122,7 +122,7 @@ if ( $newService == 'true' || $theserviceId ) {
 
 			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been added." );
 
-			//Redirect back to uploads page
+			//Redirect back to main page
 			header( "Location: services.php?loc_id=" . loc_id . "", true, 302 );
 			echo "<script>window.location.href='services.php?loc_id=" . loc_id . "';</script>";
 			exit();
@@ -240,7 +240,7 @@ if ( $newService == 'true' || $theserviceId ) {
 
 		flashMessageSet( 'success', $delserviceTitle . " has been deleted." );
 
-		//Redirect back to uploads page
+		//Redirect back to main page
 		header( "Location: services.php?loc_id=" . loc_id . "", true, 302 );
 		echo "<script>window.location.href='services.php?loc_id=" . loc_id . "';</script>";
 		exit();
