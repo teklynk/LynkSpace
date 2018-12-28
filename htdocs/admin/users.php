@@ -10,7 +10,6 @@ $user_email            = validateEmail( $_POST['user_email'] );
 $user_password         = safeCleanStr( $_POST['user_password'] );
 $user_password_confirm = safeCleanStr( $_POST['user_password_confirm'] );
 $user_id               = sanitizeInt( $_POST['user_id'] );
-$getUpdatePassword     = safeCleanStr( $_GET['updatepassword'] );
 
 $sqlUsers = dbQuery(
 	'select',
@@ -37,24 +36,11 @@ if ( ! empty( $_POST ) ) {
 			null
 		);
 
-		flashMessageSet( 'success', "The user has been updated." );
+		flashMessageSet( 'success', $user_name . " has been updated." );
 	} else {
 		flashMessageSet( 'success', "Passwords do not match." );
 	}
 
-	if ( $getUpdatePassword == 'true' ) {
-		header( "Location: users.php?passwordupdated=true&loc_id=" . loc_id . "", true, 302 );
-		echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . loc_id . "';</script>";
-	}
-
-}
-
-if ( $getUpdatePassword == 'true' ) {
-	flashMessageSet( 'success', "Please update your password." );
-}
-
-if ( $getUpdatePassword == 'true' ) {
-	flashMessageSet( 'success', "The user has been updated." );
 }
 ?>
     <div class="row">
