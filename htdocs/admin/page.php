@@ -7,8 +7,8 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'page.php';
 
-$getNewpage = safeCleanStr($_GET['newpage']);
-$getEditpage = safeCleanStr($_GET['editpage']);
+$getNewpage = isset( $_GET['newpage'] ) ? safeCleanStr( $_GET['newpage'] ) : null;
+$getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : null;
 
 ?>
     <div class="row">
@@ -44,16 +44,16 @@ $getEditpage = safeCleanStr($_GET['editpage']);
 
             if ($getNewpage || $getEditpage) {
 
-                $page_title = safeCleanStr($_POST['page_title']);
-                $page_content = sqlEscapeStr($_POST['page_content']);
-                $page_keywords = sqlEscapeStr($_POST['page_keywords']);
+                $page_title = isset( $_POST['page_title'] ) ? safeCleanStr( $_POST['page_title'] ) : null;
+                $page_content = isset( $_POST['page_content'] ) ? safeCleanStr( $_POST['page_content'] ) : null;
+                $page_keywords = isset( $_POST['page_keywords'] ) ? safeCleanStr( $_POST['page_keywords'] ) : null;
 
                 // Update existing page
                 if ($getEditpage) {
 
                     $thePageId = safeCleanStr($getEditpage);
                     $pageLabel = "Edit Page Title";
-                    $thePageGuid = safeCleanStr($_GET['guid']);
+                    $thePageGuid = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
 
                     //update data on submit
                     if (!empty($page_title)) {
@@ -74,7 +74,7 @@ $getEditpage = safeCleanStr($_GET['editpage']);
                     $pageLabel = "New Page Title";
 
                     //insert data on submit
-                    if (!empty(safeCleanStr($page_title))) {
+                    if (!empty($page_title)) {
                         $pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
                         mysqli_query($db_conn, $pageInsert);
 
@@ -145,11 +145,11 @@ $getEditpage = safeCleanStr($_GET['editpage']);
 
             } else {
 
-            $delPageId = safeCleanStr($_GET['deletepage']);
-            $delPageGuid = safeCleanStr($_GET['guid']);
-            $delPageToken = safeCleanStr($_GET['token']);
-            $delPageTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-            $main_heading = safeCleanStr(addslashes($_POST['main_heading']));
+            $delPageId = isset( $_GET['deletepage'] ) ? safeCleanStr( $_GET['deletepage'] ) : null;
+            $delPageGuid = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+            $delPageToken = isset( $_GET['token'] ) ? safeCleanStr( $_GET['token'] ) : null;
+            $delPageTitle = isset( $_GET['deletetitle'] ) ? safeCleanStr( $_GET['deletetitle'] ) : null;
+            $main_heading = isset( $_GET['main_heading'] ) ? safeCleanStr( $_GET['main_heading'] ) : null;
 
             //delete page
             if ($delPageId && $delPageTitle && !$_GET['confirm']) {

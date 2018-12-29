@@ -5,16 +5,13 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'services.php';
 
-$deleteMsg       = "";
-$deleteConfirm   = "";
-$serviceMsg      = "";
-$delserviceId    = sanitizeInt( $_GET['deleteservice'] );
-$delserviceTitle = safeCleanStr( addslashes( $_GET['deletetitle'] ) );
-$delserviceGuid  = safeCleanStr( $_GET['guid'] );
-$pagePreviewId   = sanitizeInt( $_GET['preview'] );
-$theserviceId    = sanitizeInt( $_GET['editservice'] );
-$theServiceGuid  = safeCleanStr( $_GET['guid'] );
-$newService      = safeCleanStr( $_GET['newservice'] );
+$delserviceId    = isset( $_GET['deleteservice'] ) ? safeCleanStr( $_GET['deleteservice'] ) : null;
+$delserviceTitle = isset( $_GET['deletetitle'] ) ? safeCleanStr( $_GET['deletetitle'] ) : null;
+$delserviceGuid  = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$pagePreviewId   = isset( $_GET['preview'] ) ? safeCleanStr( $_GET['preview'] ) : null;
+$theserviceId    = isset( $_GET['editservice'] ) ? safeCleanStr( $_GET['editservice'] ) : null;
+$theServiceGuid  = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$newService      = isset( $_GET['newservice'] ) ? safeCleanStr( $_GET['newservice'] ) : null;
 
 //Page preview
 if ( $pagePreviewId > "" ) {
@@ -84,8 +81,6 @@ if ( $pagePreviewId > "" ) {
 <?php
 
 if ( $newService == 'true' || $theserviceId ) {
-
-	$serviceMsg = "";
 
 	//Update existing service
 	if ( $theserviceId ) {
@@ -247,7 +242,7 @@ if ( $newService == 'true' || $theserviceId ) {
 	}
 
 	//update heading on submit
-	if ( $_POST['save_main'] ) {
+	if ( isset($_POST['save_main']) ) {
 
 		if ( $_POST['services_defaults'] == 'on' ) {
 			$_POST['services_defaults'] = 'true';
