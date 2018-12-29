@@ -1,16 +1,16 @@
 <!-- Hot titles request -->
 <?php
 //Check if requested via Ajax
-if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-    die('Direct access not permitted');
+if ( empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) != 'xmlhttprequest' ) {
+	die( 'Direct access not permitted' );
 }
 
-if (!empty($_GET['rssurl'])) {
+if ( ! empty( $_GET['rssurl'] ) ) {
 
-    require_once(__DIR__ . '/../../config/config.php');
-    require_once(__DIR__ . '/../functions.php');
+	require_once( __DIR__ . '/../../config/config.php' );
+	require_once( __DIR__ . '/../functions.php' );
 
-    ?>
+	?>
 
     <script type="text/javascript">
         //Hot titles carousel
@@ -44,15 +44,15 @@ if (!empty($_GET['rssurl'])) {
         });
     </script>
 
-    <?php
+	<?php
 
-    $rssUrl = $_GET['rssurl'];
-    //example: getHottitlesCarousel("http://test.library.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
-    getHottitlesCarousel($rssUrl, 'MD', 'true', 50);
+	$rssUrl = $_GET['rssurl'];
+	//example: getHottitlesCarousel("http://test.library.com:8080/list/dynamic/1921419/rss", 'MD', 'true', 30);
+	getHottitlesCarousel( $rssUrl, 'MD', 'true', 50 );
 
 } else {
 
-    die('URL not found');
+	die( 'URL not found' );
 
 }
 ?>

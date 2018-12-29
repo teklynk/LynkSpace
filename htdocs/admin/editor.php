@@ -22,7 +22,7 @@ $fileToEdit_dir = __DIR__ . "/../themes/" . themeOption . "/css/custom-style.css
 require_once( __DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php" );
 
 //open file for Reading
-if (file_exists($fileToEdit_dir)){
+if ( file_exists( $fileToEdit_dir ) ) {
 	//check if file is writable
 	if ( ! is_writable( $fileToEdit_dir ) ) {
 		die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
@@ -31,7 +31,7 @@ if (file_exists($fileToEdit_dir)){
 	$fileData = fread( $handle, filesize( $fileToEdit_dir ) );
 }
 
-if ( isset($_POST['save_main']) ) {
+if ( isset( $_POST['save_main'] ) ) {
 
 	$theme_defaults = isset( $_POST['theme_defaults'] ) ? safeCleanStr( $_POST['theme_defaults'] ) : null;
 	$element_count  = isset( $_POST['element_count'] ) ? safeCleanStr( $_POST['element_count'] ) : null;
@@ -89,10 +89,10 @@ if ( isset($_POST['save_main']) ) {
 	$sqlSetup = mysqli_query( $db_conn, "SELECT theme_use_defaults, loc_id FROM setup WHERE loc_id=" . loc_id . ";" );
 	$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
-	flashMessageSet('success','Theme has been updated');
+	flashMessageSet( 'success', 'Theme has been updated' );
 
 	//Redirect back to uploads page
-	header("Location: editor.php?loc_id=" . loc_id . "", true, 302);
+	header( "Location: editor.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='editor.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
@@ -113,7 +113,7 @@ if ( isset($_POST['save_main']) ) {
         <div class="col-lg-8">
 			<?php
 			//Alert messages
-			echo flashMessageGet('success');
+			echo flashMessageGet( 'success' );
 
 			//use default theme
 			if ( $rowSetup['theme_use_defaults'] == 'true' ) {
@@ -121,7 +121,7 @@ if ( isset($_POST['save_main']) ) {
 			} else {
 				$selThemeDefaults = "";
 			}
-			if (file_exists( $fileToEdit_dir ) && ! is_writable( $fileToEdit_dir ) ) {
+			if ( file_exists( $fileToEdit_dir ) && ! is_writable( $fileToEdit_dir ) ) {
 				die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 			}
 
@@ -210,8 +210,8 @@ if ( loc_id == 1 ) {
     <div class="form-group">
                 <span><small>
                     <?php
-                    if (file_exists($fileToEdit_dir)) {
-                        echo "Updated: ".date('m-d-Y, H:i:s',filemtime($fileToEdit_dir));
+                    if ( file_exists( $fileToEdit_dir ) ) {
+	                    echo "Updated: " . date( 'm-d-Y, H:i:s', filemtime( $fileToEdit_dir ) );
                     }
                     ?>
                 </small></span>

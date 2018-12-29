@@ -6,13 +6,13 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 $_SESSION['file_referrer'] = 'staff.php';
 
 $deleteConfirm = '';
-$delteamId     = isset($_GET['team_title']) ? safeCleanStr($_GET['team_title']) : NULL;
-$delteamTitle  = isset($_GET['deletetitle']) ? safeCleanStr($_GET['deletetitle']) : NULL;
-$getTeamToken  = isset($_GET['token']) ? safeCleanStr($_GET['token']) : NULL;
-$getNewTeam    = isset($_GET['newteam']) ? safeCleanStr($_GET['newteam']) : NULL;
-$theTeamGuid   = isset($_GET['guid']) ? safeCleanStr($_GET['guid']) : NULL;
-$pagePreviewId = isset($_GET['preview']) ? safeCleanStr($_GET['preview']) : NULL;
-$theTeamId     = isset($_GET['editteam']) ? safeCleanStr($_GET['editteam']) : NULL;
+$delteamId     = isset( $_GET['team_title'] ) ? safeCleanStr( $_GET['team_title'] ) : null;
+$delteamTitle  = isset( $_GET['deletetitle'] ) ? safeCleanStr( $_GET['deletetitle'] ) : null;
+$getTeamToken  = isset( $_GET['token'] ) ? safeCleanStr( $_GET['token'] ) : null;
+$getNewTeam    = isset( $_GET['newteam'] ) ? safeCleanStr( $_GET['newteam'] ) : null;
+$theTeamGuid   = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$pagePreviewId = isset( $_GET['preview'] ) ? safeCleanStr( $_GET['preview'] ) : null;
+$theTeamId     = isset( $_GET['editteam'] ) ? safeCleanStr( $_GET['editteam'] ) : null;
 
 //Page preview
 if ( $pagePreviewId > "" ) {
@@ -82,10 +82,10 @@ if ( $pagePreviewId > "" ) {
 		if ( $getNewTeam == 'true' || $theTeamId ) {
 
 			$teamLabel      = "Edit Staff Title";
-			$theTeamName    = isset($_POST['team_name']) ? safeCleanStr(addslashes($_POST['team_name'])) : NULL;
-			$theTeamTitle   = isset($_POST['team_title']) ? safeCleanStr(addslashes($_POST['team_title'])) : NULL;
-			$theTeamContent = isset($_POST['team_content']) ? sqlEscapeStr($_POST['team_content']) : NULL;
-			$theTeamImage   = isset($_POST['team_image']) ? sqlEscapeStr($_POST['team_image']) : NULL;
+			$theTeamName    = isset( $_POST['team_name'] ) ? safeCleanStr( addslashes( $_POST['team_name'] ) ) : null;
+			$theTeamTitle   = isset( $_POST['team_title'] ) ? safeCleanStr( addslashes( $_POST['team_title'] ) ) : null;
+			$theTeamContent = isset( $_POST['team_content'] ) ? sqlEscapeStr( $_POST['team_content'] ) : null;
+			$theTeamImage   = isset( $_POST['team_image'] ) ? sqlEscapeStr( $_POST['team_image'] ) : null;
 
 
 			$sqlteam = mysqli_query( $db_conn, "SELECT id, title, image, content, name, sort, active, author_name, datetime FROM team WHERE id='$theTeamId' AND loc_id=" . loc_id . ";" );
@@ -213,11 +213,11 @@ if ( $pagePreviewId > "" ) {
 
 			//update heading on submit
 			if ( isset( $_POST['save_main'] ) ) {
-				$setupTeamHeading = isset($_POST['team_heading']) ? safeCleanStr($_POST['team_heading']) : NULL;
-				$setupTeamContent = isset($_POST['main_content']) ? safeCleanStr($_POST['main_content']) : NULL;
-				$postTeamCount    = isset($_POST['team_count']) ? safeCleanStr($_POST['team_count']) : NULL;
-				$postTeamSort     = isset($_POST['team_sort']) ? safeCleanStr($_POST['team_sort']) : NULL;
-				$postTeamId       = isset($_POST['team_id']) ? safeCleanStr($_POST['team_id']) : NULL;
+				$setupTeamHeading = isset( $_POST['team_heading'] ) ? safeCleanStr( $_POST['team_heading'] ) : null;
+				$setupTeamContent = isset( $_POST['main_content'] ) ? safeCleanStr( $_POST['main_content'] ) : null;
+				$postTeamCount    = isset( $_POST['team_count'] ) ? safeCleanStr( $_POST['team_count'] ) : null;
+				$postTeamSort     = isset( $_POST['team_sort'] ) ? safeCleanStr( $_POST['team_sort'] ) : null;
+				$postTeamId       = isset( $_POST['team_id'] ) ? safeCleanStr( $_POST['team_id'] ) : null;
 
 				$setupUpdate = "UPDATE setup SET teamheading='" . $setupTeamHeading . "', teamcontent='" . $setupTeamContent . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 				mysqli_query( $db_conn, $setupUpdate );

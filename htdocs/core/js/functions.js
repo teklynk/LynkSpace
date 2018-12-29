@@ -33,21 +33,21 @@ function toggleSrc(rss, loc_id) {
         $('#hottitlesCarousel .carousel-control').addClass('hidden');
         //disables the tabs until request finishes
         $('#hottitlesTabs li.hot-tab a').addClass('disable-anchor');
-        setTimeout(function() {
+        setTimeout(function () {
             $.ajax({
-                url: 'core/ajax/request_hottitles.php?loc_id='+loc_id+'&rssurl='+rss,
+                url: 'core/ajax/request_hottitles.php?loc_id=' + loc_id + '&rssurl=' + rss,
                 type: 'GET',
                 timeout: 10000, //10 seconds
-                tryCount : 0,
-                retryLimit : 2,
-                success: function(result){
+                tryCount: 0,
+                retryLimit: 2,
+                success: function (result) {
                     $('#hottitlesTabs li.hot-tab a').removeClass('disable-anchor');
                     $('#hottitlesCarousel').removeClass('loader');
                     $('#hottitlesCarousel .carousel-control').removeClass('hidden');
                     $('#hottitlesCarousel .carousel-inner').removeClass('hidden');
                     $('#hottitlesCarousel .carousel-inner').html(result); //show hot titles
                 },
-                error: function() {
+                error: function () {
                     this.tryCount++;
                     if (this.tryCount <= this.retryLimit) {
                         //try again

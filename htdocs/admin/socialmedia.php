@@ -11,15 +11,15 @@ $rowSocial = mysqli_fetch_array( $sqlSocial, MYSQLI_ASSOC );
 //update table on submit
 if ( ! empty( $_POST ) ) {
 
-	$social_heading   = isset($_POST['social_heading']) ? safeCleanStr(addslashes($_POST['social_heading'])) : NULL;
-	$social_defaults  = isset($_POST['social_defaults']) ? safeCleanStr($_POST['social_defaults']) : NULL;
-	$social_facebook  = isset($_POST['social_facebook']) ? safeCleanStr($_POST['social_facebook']) : NULL;
-	$social_youtube   = isset($_POST['social_youtube']) ? safeCleanStr($_POST['social_youtube']) : NULL;
-	$social_twitter   = isset($_POST['social_twitter']) ? safeCleanStr($_POST['social_twitter']) : NULL;
-	$social_google    = isset($_POST['social_google']) ? safeCleanStr($_POST['social_google']) : NULL;
-	$social_pinterest = isset($_POST['social_pinterest']) ? safeCleanStr($_POST['social_pinterest']) : NULL;
-	$social_instagram = isset($_POST['social_instagram']) ? safeCleanStr($_POST['social_instagram']) : NULL;
-	$social_tumblr    = isset($_POST['social_tumblr']) ? safeCleanStr($_POST['social_tumblr']) : NULL;
+	$social_heading   = isset( $_POST['social_heading'] ) ? safeCleanStr( addslashes( $_POST['social_heading'] ) ) : null;
+	$social_defaults  = isset( $_POST['social_defaults'] ) ? safeCleanStr( $_POST['social_defaults'] ) : null;
+	$social_facebook  = isset( $_POST['social_facebook'] ) ? safeCleanStr( $_POST['social_facebook'] ) : null;
+	$social_youtube   = isset( $_POST['social_youtube'] ) ? safeCleanStr( $_POST['social_youtube'] ) : null;
+	$social_twitter   = isset( $_POST['social_twitter'] ) ? safeCleanStr( $_POST['social_twitter'] ) : null;
+	$social_google    = isset( $_POST['social_google'] ) ? safeCleanStr( $_POST['social_google'] ) : null;
+	$social_pinterest = isset( $_POST['social_pinterest'] ) ? safeCleanStr( $_POST['social_pinterest'] ) : null;
+	$social_instagram = isset( $_POST['social_instagram'] ) ? safeCleanStr( $_POST['social_instagram'] ) : null;
+	$social_tumblr    = isset( $_POST['social_tumblr'] ) ? safeCleanStr( $_POST['social_tumblr'] ) : null;
 
 	if ( ! empty( $social_heading ) ) {
 

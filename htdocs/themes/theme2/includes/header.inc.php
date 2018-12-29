@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
+if ( ! defined( 'ALLOW_INC' ) ) {
+	die( 'Direct access not permitted' );
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
+	<?php
 
-    getLocation(loc_id);
+	getLocation( loc_id );
 
-    getCoreHeader(loc_id);
+	getCoreHeader( loc_id );
 
-    ?>
+	?>
 
     <script type="text/javascript" language="javascript">
         $(window).scroll(function () {
@@ -58,16 +58,16 @@ if (!defined('ALLOW_INC')) {
 <?php
 
 //only show on index.php/homepage
-if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
+if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
 
-    getEvents(loc_id);
+	getEvents( loc_id );
 
-    if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
-        echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'>&times;</button>
+	if ( ! empty( $eventAlert && $eventAlertDateCheck == 'true' ) ) {
+		echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'>&times;</button>
         <div><button type='button' class='btn btn-link notify-close text-white' data-dismiss='alert'>(Click to close)</button></div></div>";
-    } else {
-        echo "<div class='alert notify-bar hidden'></div>";
-    }
+	} else {
+		echo "<div class='alert notify-bar hidden'></div>";
+	}
 }
 ?>
 
@@ -76,10 +76,10 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
     <nav id="top" class="navbar-static-top" role="navigation">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-Search">
-            <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-            getNav(loc_id, 'Search', 'true', 'right', 'false');
-            ?>
+			<?php
+			//EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+			getNav( loc_id, 'Search', 'true', 'right', 'false' );
+			?>
         </div>
         <!-- /.navbar-collapse -->
     </nav>
@@ -87,24 +87,24 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
 
 <div class="container bannerwrapper header-top">
     <div class="pull-left col-xs-12 col-sm-6 col-lg-6">
-        <?php
-        if (!empty($setupLogo)) {
-            ?>
+		<?php
+		if ( ! empty( $setupLogo ) ) {
+			?>
             <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
-                        class="pull-left img-nonresponsive" src="<?php getLogo(loc_id, 'relative'); ?>"
+                        class="pull-left img-nonresponsive" src="<?php getLogo( loc_id, 'relative' ); ?>"
                         alt="Home" title="Home" border="0"/></a>
-            <?php
-        }
-        ?>
+			<?php
+		}
+		?>
     </div>
     <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
-        <?php
-        if (loc_id == 1 && multiBranch == 'true') {
-            require_once(__DIR__ . '/searchlocations.inc.php');
-        } else {
-            require_once(__DIR__ . '/searchpac.inc.php');
-        }
-        ?>
+		<?php
+		if ( loc_id == 1 && multiBranch == 'true' ) {
+			require_once( __DIR__ . '/searchlocations.inc.php' );
+		} else {
+			require_once( __DIR__ . '/searchpac.inc.php' );
+		}
+		?>
     </div>
 </div>
 
@@ -118,10 +118,10 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
-        <?php
-        //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-        getNav(loc_id, 'Top', 'true', 'center', 'false');
-        ?>
+		<?php
+		//EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+		getNav( loc_id, 'Top', 'true', 'center', 'false' );
+		?>
     </div>
     <!-- /.navbar-collapse -->
 </nav>

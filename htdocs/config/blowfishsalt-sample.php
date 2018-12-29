@@ -1,3 +1,3 @@
 <?php
-define('blowfishSalt', '');
+define( 'blowfishSalt', '' );
 ?>

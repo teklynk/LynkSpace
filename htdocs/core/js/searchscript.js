@@ -76,6 +76,7 @@ function getSearchString(e, t, n, r, i, s, o) {
     }
     return false
 }
+
 function getScoutLink(e, t, n, r, i) {
     var s;
     try {
@@ -101,6 +102,7 @@ function getScoutLink(e, t, n, r, i) {
     }
     return false
 }
+
 function inputValidator(e, t, n, r) {
     if (e === undefined) {
         throw new Error("Version number undefined in calling function.")
@@ -114,7 +116,8 @@ function inputValidator(e, t, n, r) {
     if (n.substring(0, 7) == "config=") {
         n = n.substring(7, n.length)
     }
-    if (t.substring(0, 7) == "http://" || t.substring(0, 8) == "https://") {} else {
+    if (t.substring(0, 7) == "http://" || t.substring(0, 8) == "https://") {
+    } else {
         t = "http://" + t
     }
     if (t.substring(t.length - 1, t.length) == "/") {

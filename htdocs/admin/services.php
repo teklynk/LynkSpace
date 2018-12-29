@@ -74,7 +74,7 @@ if ( $pagePreviewId > "" ) {
         </div>
     </div>
 
-    <?php echo flashMessageGet( 'success' ); ?>
+<?php echo flashMessageGet( 'success' ); ?>
 
     <div class="row">
     <div class="col-lg-12">
@@ -242,7 +242,7 @@ if ( $newService == 'true' || $theserviceId ) {
 	}
 
 	//update heading on submit
-	if ( isset($_POST['save_main']) ) {
+	if ( isset( $_POST['save_main'] ) ) {
 
 		if ( $_POST['services_defaults'] == 'on' ) {
 			$_POST['services_defaults'] = 'true';

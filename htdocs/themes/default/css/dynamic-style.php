@@ -7,52 +7,52 @@
 //$themeCssSelectors = ['.themebasecolor', '.p,h1,h2,h3,h4', 'a'];
 //$themeCssProperties = ['background-color', 'color', 'color'];
 
-$themeCssLabels = [
-    'Base Color',
-    'Buttons',
-    'Buttons: Hover',
-    'Fonts',
-    'Links',
-    'Links: Hover',
-    'Navigation Bar',
-    'Navigation Bar: Links',
-    'Navigation Bar: Sub-Links',
-    'Footer Background',
-    'Footer: Fonts',
-    'Footer: Links',
-    'Alert Box: Background',
-    'Alert Box: Font'
+$themeCssLabels     = [
+	'Base Color',
+	'Buttons',
+	'Buttons: Hover',
+	'Fonts',
+	'Links',
+	'Links: Hover',
+	'Navigation Bar',
+	'Navigation Bar: Links',
+	'Navigation Bar: Sub-Links',
+	'Footer Background',
+	'Footer: Fonts',
+	'Footer: Links',
+	'Alert Box: Background',
+	'Alert Box: Font'
 ];
-$themeCssSelectors = [
-    '.themebase-bgcolor,.grad-blue',
-    '.btn-primary,ul.nav-pills>li.active>a,ul.nav-pills>li>a',
-    '.btn-primary:hover,.btn-primary:focus',
-    'p,h1,h2,h3,h4,.text-primary,.service-item .text-primary',
-    'a,a:link',
-    'a:hover,a:focus,.fa-inverse-socialmedia:hover',
-    '.themebase-navbarbgcolor',
-    'ul.navbar-Top>li>a,.fa-inverse-socialmedia',
-    '.dropdown-menu>li>a',
-    '.themebase-footerbgcolor,.footer',
-    '#generalinfo>p',
-    'ul.navbar-Footer>li>a',
-    '.notify-bar',
-    '.notify-bar>.text-white'
+$themeCssSelectors  = [
+	'.themebase-bgcolor,.grad-blue',
+	'.btn-primary,ul.nav-pills>li.active>a,ul.nav-pills>li>a',
+	'.btn-primary:hover,.btn-primary:focus',
+	'p,h1,h2,h3,h4,.text-primary,.service-item .text-primary',
+	'a,a:link',
+	'a:hover,a:focus,.fa-inverse-socialmedia:hover',
+	'.themebase-navbarbgcolor',
+	'ul.navbar-Top>li>a,.fa-inverse-socialmedia',
+	'.dropdown-menu>li>a',
+	'.themebase-footerbgcolor,.footer',
+	'#generalinfo>p',
+	'ul.navbar-Footer>li>a',
+	'.notify-bar',
+	'.notify-bar>.text-white'
 ];
 $themeCssProperties = [
-    'background',
-    'background',
-    'background',
-    'color',
-    'color',
-    'color',
-    'background',
-    'color',
-    'color',
-    'background',
-    'color',
-    'color',
-    'background',
-    'color'
+	'background',
+	'background',
+	'background',
+	'color',
+	'color',
+	'color',
+	'background',
+	'color',
+	'color',
+	'background',
+	'color',
+	'color',
+	'background',
+	'color'
 ];
 ?>

@@ -38,19 +38,24 @@ h1, .h1 {
 h3.sublinktitle {
     margin: 10px 0 0 0;
 }
+
 .text-white {
     color: #fff;
 }
+
 .nav-header {
     padding: 4px 12px 4px 12px;
     background-color: #286192;
 }
+
 .header-top {
 
 }
+
 .navbar-Search {
     padding: 4px 12px 4px 12px;
 }
+
 .nav-top {
     background-color: #337ab7;
     border-radius: 0;
@@ -58,9 +63,11 @@ h3.sublinktitle {
     margin-bottom: 0 !important;
     border: 0;
 }
-.navbar-default .navbar-nav>li>a {
+
+.navbar-default .navbar-nav > li > a {
     color: #fff;
 }
+
 footer {
     background-color: #cccccc;
     bottom: 0;
@@ -77,9 +84,16 @@ footer a {
 footer a:hover {
 
 }
+
 /* nav bar search box - drop down menu button */
-.navbar .navbar-search .dropdown-menu { min-width: 25px; }
-.dropdown-menu .label-icon { margin-left: 5px; }
+.navbar .navbar-search .dropdown-menu {
+    min-width: 25px;
+}
+
+.dropdown-menu .label-icon {
+    margin-left: 5px;
+}
+
 .btn-outline {
     background-color: transparent;
     color: inherit;
@@ -109,21 +123,25 @@ footer a:hover {
 .label {
     font-weight: normal;
 }
-.my-group .form-control{
-    width:50%;
+
+.my-group .form-control {
+    width: 50%;
 }
 
 #google_translate_element {
     padding: 4px;
 }
-.nav-header .navbar-Search>li>a {
+
+.nav-header .navbar-Search > li > a {
     padding-top: 0;
     padding-bottom: 0;
 }
+
 .navbar-brand {
     padding: 4px 40px 4px 0px;
     height: 100px;
 }
+
 .navbarButton {
     font-family: "Century Gothic", Sans-serif;
     border: 0;
@@ -238,7 +256,6 @@ footer a:hover {
     font-weight: bold;
 }
 
-
 .bannerwrapper {
     padding: 10px 10px 10px 10px;
     background-color: #ffffff;
@@ -248,8 +265,9 @@ footer a:hover {
     margin-top: 0;
     margin-bottom: 20px;
 }
+
 .sitesearchheading {
-    display:none;
+    display: none;
 }
 
 .grad-violet {
@@ -315,9 +333,11 @@ footer a:hover {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 #sitesearch {
 
 }
+
 /*** PANEL DEFAULT ***/
 .panel.with-nav-tabs .panel-heading {
     padding: 5px 5px 0 5px;
@@ -376,22 +396,26 @@ footer a:hover {
     margin-bottom: 0;
 }
 
-#searchpac .nav-tabs>li, #searchlocations .nav-tabs>li {
+#searchpac .nav-tabs > li, #searchlocations .nav-tabs > li {
     margin-bottom: -2px;
 }
 
 #sliderCarousel.carousel {
     height: 400px;
 }
+
 .sitesearch {
     min-height: 400px;
 }
+
 .col-md-12 > p > img, .col-md-8 > p > img, .col-md-4 > p > img, .col-md-4 > img, .col-md-2 > img {
     margin: 8px;
 }
+
 .footer-nav > ul {
     display: inline-block;
 }
+
 .footer-nav, .footer-subnav {
     margin: 0 10px 0 10px;
     padding: 0;
@@ -453,14 +477,17 @@ footer a:hover {
     padding: 0 15px;
     margin-bottom: 12px;
 }
-.footer-nav>ul>li {
+
+.footer-nav > ul > li {
     display: inline-block;
     float: none !important;
 }
-.footer-nav>ul {
+
+.footer-nav > ul {
     display: inline-block;
     float: none !important;
 }
+
 .footer > .navbar-nav > ul > li > a:hover {
     background: none;
     display: inline-block;
@@ -481,28 +508,34 @@ footer a:hover {
 .fa-9x {
     font-size: 9em;
 }
+
 .fa-10x {
     font-size: 10em;
 }
+
 .img-circle {
-    padding:3px !important;
+    padding: 3px !important;
 }
 
 .copyright {
     margin-top: 30px;
 }
+
 .row_pad {
     margin-top: 0;
     padding: 0 15px 0 15px;
 }
+
 .cat-title:not(:first-child) {
     margin-top: 30px !important;
 }
+
 .cat-title {
     margin-bottom: 4px !important;
     margin-top: 12px;
     border-bottom: solid 1px #eee !important;
 }
+
 .database-item, .service-item {
     float: left !important;
     margin-top: 15px !important;
@@ -510,8 +543,9 @@ footer a:hover {
 }
 
 div.database-break {
-    clear:both;
+    clear: both;
 }
+
 .team-item:nth-child(6), .service-item:nth-child(6) {
     clear: both;
 }
@@ -552,6 +586,7 @@ div.database-break {
     display: inline-block;
     float: none;
 }
+
 .navbar .navbar-collapse {
     text-align: center;
 }
@@ -568,7 +603,7 @@ div.database-break {
 }
 
 .container iframe {
-/*    width: 100%;*/
+    /*    width: 100%;*/
     border: none;
 }
 
@@ -595,19 +630,23 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     display: inline-block;
     color: #990000;
 }
-#hottitlesTabs .nav-pills>li.active>a {
 
+#hottitlesTabs .nav-pills > li.active > a {
 
 }
+
 .btn-primary {
     border-color: transparent;
 }
+
 .btn-primary:hover, .btn-primary:focus {
     border-color: transparent;
 }
+
 .service-item .text-primary {
 
 }
+
 #sliderCarousel.carousel .fill {
     width: 100%;
     height: 100%;
@@ -616,9 +655,11 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 #sliderCarousel .carousel-control {
 
 }
+
 #sliderCarousel:hover .carousel-control {
 
 }
@@ -626,64 +667,81 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
 #sliderCarousel .carousel-control i {
 
 }
+
 #hottitlesCarousel .carousel-control i {
 
 }
+
 #hottitlesCarousel .carousel-control {
 
 }
+
 #hottitlesCarousel:hover .carousel-control {
 
 }
+
 .navbar-Top {
     margin-bottom: -2px !important;
 }
-.navbar-nav>li>a {
+
+.navbar-nav > li > a {
     padding-top: 9px;
     padding-bottom: 8px;
 }
+
 @media (max-width: 1276px) {
     #sliderCarousel.carousel {
         height: 330px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
 }
+
 @media (max-width: 1023px) {
     #sliderCarousel.carousel {
         height: 325px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
 }
+
 @media (max-width: 990px) {
     #sliderCarousel.carousel {
         height: 250px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
 }
+
 @media (max-width: 800px) {
     #sliderCarousel.carousel {
         height: 250px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
 }
+
 @media (max-width: 760px) {
     #sliderCarousel.carousel {
         height: 250px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
+
     #sliderCarousel .carousel-caption {
-        bottom:20%;
+        bottom: 20%;
     }
+
     .navbar-Top > li > a {
         padding: 10px 10px !important;
     }
@@ -724,7 +782,6 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         display: none;
     }
 
-
     footer {
         padding: 20px;
         width: 100%;
@@ -741,68 +798,90 @@ a.offscreen:focus, a.offscreen:active, a.offscreen:hover {
         width: 100%;
     }
 
-    #sliderCarousel .carousel-control {visibility: visible;}
-    #hottitlesCarousel .carousel-control {visibility: visible;}
+    #sliderCarousel .carousel-control {
+        visibility: visible;
+    }
+
+    #hottitlesCarousel .carousel-control {
+        visibility: visible;
+    }
 }
+
 @media (max-width: 700px) {
     #sliderCarousel.carousel {
         height: 215px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
+
     .container-fluid {
         padding: 0;
     }
 }
+
 @media (max-width: 596px) {
     #sliderCarousel.carousel {
         height: 170px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: contain;
     }
+
     #sliderCarousel .carousel-caption {
-        bottom:10%;
+        bottom: 10%;
     }
+
     #sliderCarousel .carousel-control {
         background: none;
         visibility: visible;
         width: 5%;
     }
+
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
         visibility: visible;
     }
 }
+
 @media (max-width: 476px) {
     #sliderCarousel.carousel {
         height: 130px;
     }
+
     #sliderCarousel.carousel .fill {
         background-size: cover;
     }
+
     #sliderCarousel .carousel-caption {
         padding: 2px;
         margin: 2px;
     }
+
     #sliderCarousel .carousel-caption h2 {
         font-size: 12pt;
         padding: 2px;
     }
+
     #sliderCarousel .carousel-caption p {
         display: none;
     }
+
     #sliderCarousel .carousel-caption .btn {
         padding: 2px 4px 2px 4px;
         font-size: 8pt;
     }
+
     #sliderCarousel .carousel-control, #sliderCarousel:hover .carousel-control {
         visibility: visible;
     }
+
     #hottitlesCarousel .carousel-control, #hottitlesCarousel:hover .carousel-control {
         visibility: visible;
     }
 }
+
 @media (max-width: 316px) {
     #sliderCarousel.carousel {
         display: none;

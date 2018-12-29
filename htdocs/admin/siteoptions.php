@@ -1,55 +1,55 @@
 <?php
 session_start();
 
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'siteoptions.php';
 
 //Keeps user in the default location when on this page. Only Default loc can edit this page.
-if (loc_id != 1) {
-    header('Location: siteoptions.php?loc_id=1', true, 302);
-    echo "<script>window.location.href='siteoptions.php?loc_id=1';</script>";
-    exit();
+if ( loc_id != 1 ) {
+	header( 'Location: siteoptions.php?loc_id=1', true, 302 );
+	echo "<script>window.location.href='siteoptions.php?loc_id=1';</script>";
+	exit();
 }
 
 //check if user is logged in and is admin
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
+if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5( $_SESSION['user_name'] ) ) {
 
-    if (isset($_POST['save_main'])) {
+	if ( isset( $_POST['save_main'] ) ) {
 
-        $site_customer_id = isset( $_POST['site_customer_id'] ) ? safeCleanStr($_POST['site_customer_id']) : null;
-        $site_theme = isset( $_POST['site_theme'] ) ? safeCleanStr($_POST['site_theme']) : null;
-        $site_loc_types = isset( $_POST['site_loc_types'] ) ? safeCleanStr($_POST['site_loc_types']) : null;
-        $site_analytics = isset( $_POST['site_analytics'] ) ? safeCleanStr($_POST['site_analytics']) : null;
-        $site_session_timeout = isset( $_POST['site_session_timeout'] ) ? safeCleanStr($_POST['site_session_timeout']) : null;
-        $site_carousel_speed = isset( $_POST['site_carousel_speed'] ) ? safeCleanStr($_POST['site_carousel_speed']) : null;
-        $site_pacurl = isset( $_POST['site_pacurl'] ) ? validateUrl($_POST['site_pacurl']) : null;
-        $ls2pac_label = isset( $_POST['ls2pac_label'] ) ? safeCleanStr($_POST['ls2pac_label']) : null;
-        $ls2pac_placeholder = isset( $_POST['ls2pac_placeholder'] ) ? safeCleanStr($_POST['ls2pac_placeholder']) : null;
-        $ls2kids_label = isset( $_POST['ls2kids_label'] ) ? safeCleanStr($_POST['ls2kids_label']) : null;
-        $ls2kids_placeholder = isset( $_POST['ls2kids_placeholder'] ) ? safeCleanStr($_POST['ls2kids_placeholder']) : null;
-        $site_homepageurl = isset( $_POST['site_homepageurl'] ) ? validateUrl($_POST['site_homepageurl']) : null;
-        $site_iprange = isset( $_POST['site_iprange'] ) ? safeCleanStr($_POST['site_iprange']) : null;
+		$site_customer_id     = isset( $_POST['site_customer_id'] ) ? safeCleanStr( $_POST['site_customer_id'] ) : null;
+		$site_theme           = isset( $_POST['site_theme'] ) ? safeCleanStr( $_POST['site_theme'] ) : null;
+		$site_loc_types       = isset( $_POST['site_loc_types'] ) ? safeCleanStr( $_POST['site_loc_types'] ) : null;
+		$site_analytics       = isset( $_POST['site_analytics'] ) ? safeCleanStr( $_POST['site_analytics'] ) : null;
+		$site_session_timeout = isset( $_POST['site_session_timeout'] ) ? safeCleanStr( $_POST['site_session_timeout'] ) : null;
+		$site_carousel_speed  = isset( $_POST['site_carousel_speed'] ) ? safeCleanStr( $_POST['site_carousel_speed'] ) : null;
+		$site_pacurl          = isset( $_POST['site_pacurl'] ) ? validateUrl( $_POST['site_pacurl'] ) : null;
+		$ls2pac_label         = isset( $_POST['ls2pac_label'] ) ? safeCleanStr( $_POST['ls2pac_label'] ) : null;
+		$ls2pac_placeholder   = isset( $_POST['ls2pac_placeholder'] ) ? safeCleanStr( $_POST['ls2pac_placeholder'] ) : null;
+		$ls2kids_label        = isset( $_POST['ls2kids_label'] ) ? safeCleanStr( $_POST['ls2kids_label'] ) : null;
+		$ls2kids_placeholder  = isset( $_POST['ls2kids_placeholder'] ) ? safeCleanStr( $_POST['ls2kids_placeholder'] ) : null;
+		$site_homepageurl     = isset( $_POST['site_homepageurl'] ) ? validateUrl( $_POST['site_homepageurl'] ) : null;
+		$site_iprange         = isset( $_POST['site_iprange'] ) ? safeCleanStr( $_POST['site_iprange'] ) : null;
 
-        //Update record in DB
-        $configUpdate = "UPDATE config SET customer_id='" . $site_customer_id . "', theme='" . $site_theme . "', loc_types='" . $site_loc_types . "', analytics='" . $site_analytics . "', session_timeout=" . $site_session_timeout . ", carousel_speed='" . $site_carousel_speed . "', setuppacurl='" . $site_pacurl . "', searchlabel_ls2pac='" . $ls2pac_label . "', searchplaceholder_ls2pac='" . $ls2pac_placeholder . "', searchlabel_ls2kids='" . $ls2kids_label . "', searchplaceholder_ls2kids='" . $ls2kids_placeholder . "', homepageurl='" . $site_homepageurl . "', iprange='" . $site_iprange . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1;";
-        mysqli_query($db_conn, $configUpdate);
+		//Update record in DB
+		$configUpdate = "UPDATE config SET customer_id='" . $site_customer_id . "', theme='" . $site_theme . "', loc_types='" . $site_loc_types . "', analytics='" . $site_analytics . "', session_timeout=" . $site_session_timeout . ", carousel_speed='" . $site_carousel_speed . "', setuppacurl='" . $site_pacurl . "', searchlabel_ls2pac='" . $ls2pac_label . "', searchplaceholder_ls2pac='" . $ls2pac_placeholder . "', searchlabel_ls2kids='" . $ls2kids_label . "', searchplaceholder_ls2kids='" . $ls2kids_placeholder . "', homepageurl='" . $site_homepageurl . "', iprange='" . $site_iprange . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=1;";
+		mysqli_query( $db_conn, $configUpdate );
 
-	    flashMessageSet( 'success', "Site options have been updated." );
+		flashMessageSet( 'success', "Site options have been updated." );
 
-	    //Redirect back to main page
-	    header( "Location: siteoptions.php?loc_id=" . loc_id . "", true, 302 );
-	    echo "<script>window.location.href='siteoptions.php?loc_id=" . loc_id . "';</script>";
-	    exit();
-    }
+		//Redirect back to main page
+		header( "Location: siteoptions.php?loc_id=" . loc_id . "", true, 302 );
+		echo "<script>window.location.href='siteoptions.php?loc_id=" . loc_id . "';</script>";
+		exit();
+	}
 
-    //Get data
-    $sqlConfig = mysqli_query($db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchplaceholder_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1;");
-    $rowConfig = mysqli_fetch_array($sqlConfig, MYSQLI_ASSOC);
+	//Get data
+	$sqlConfig = mysqli_query( $db_conn, "SELECT customer_id, theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchplaceholder_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2kids, session_timeout, carousel_speed, analytics, datetime, author_name FROM config WHERE id=1;" );
+	$rowConfig = mysqli_fetch_array( $sqlConfig, MYSQLI_ASSOC );
 
-    ?>
+	?>
 
     <div class="row">
         <div class="col-lg-12">
@@ -64,26 +64,25 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
         </div>
 
 
-
         <div class="col-lg-8">
 
-            <?php
-            //alert messages
-            echo flashMessageGet( 'success' );
+			<?php
+			//alert messages
+			echo flashMessageGet( 'success' );
 
-            if (!is_writable('../sitemap.xml')) {
-                echo "<div class='alert alert-danger'>Unable to write to sitemap.xml. Check file permissions.</div>";
-            }
-            if (!is_writable('../robots.txt')) {
-                echo "<div class='alert alert-danger'>Unable to write to robots.txt. Check file permissions.</div>";
-            }
-            //multibranch active
-            if ($rowConfig['multibranch'] == 'true') {
-                $selActive = "CHECKED";
-            } else {
-                $selActive = "";
-            }
-            ?>
+			if ( ! is_writable( '../sitemap.xml' ) ) {
+				echo "<div class='alert alert-danger'>Unable to write to sitemap.xml. Check file permissions.</div>";
+			}
+			if ( ! is_writable( '../robots.txt' ) ) {
+				echo "<div class='alert alert-danger'>Unable to write to robots.txt. Check file permissions.</div>";
+			}
+			//multibranch active
+			if ( $rowConfig['multibranch'] == 'true' ) {
+				$selActive = "CHECKED";
+			} else {
+				$selActive = "";
+			}
+			?>
             <form name="siteoptionsform" class="dirtyForm" method="post">
                 <div class="form-group">
                     <a href="../themes/<?php echo $rowConfig['theme']; ?>/screenshot.png" target="_blank"
@@ -98,9 +97,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <label for="site_theme">Themes</label>
                     <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
                             data-size="10" name="site_theme" id="site_theme">
-                        <?php
-                        echo getThemesDropdownList($rowConfig['theme']);
-                        ?>
+						<?php
+						echo getThemesDropdownList( $rowConfig['theme'] );
+						?>
                     </select>
                 </div>
                 <hr/>
@@ -121,16 +120,16 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                         </label>
                     </div>
                 </div>
-                <?php
-                if ($rowConfig['multibranch'] == 'true') {
-                    echo "<div class='form-group'>";
-                    echo "<label for='site_loc_types'>Location Groups</label>";
-                    echo "<input type='text' class='form-control count-text' name='site_loc_types' maxlength='255' value='" . $rowConfig['loc_types'] . "' placeholder='1,2,3,4,5'>";
-                    echo "</div>";
-                } else {
-                    echo "<input type='hidden' name='site_loc_types' value='Default'>";
-                }
-                ?>
+				<?php
+				if ( $rowConfig['multibranch'] == 'true' ) {
+					echo "<div class='form-group'>";
+					echo "<label for='site_loc_types'>Location Groups</label>";
+					echo "<input type='text' class='form-control count-text' name='site_loc_types' maxlength='255' value='" . $rowConfig['loc_types'] . "' placeholder='1,2,3,4,5'>";
+					echo "</div>";
+				} else {
+					echo "<input type='hidden' name='site_loc_types' value='Default'>";
+				}
+				?>
                 <div class="form-group">
                     <label for="site_homepageurl">Home Page URL</label>
                     <input type="url" pattern="<?php echo urlValidationPattern; ?>" class="form-control count-text"
@@ -235,10 +234,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowConfig['datetime'])) . " By: " . $rowConfig['author_name']; ?></small></span>
+                    <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowConfig['datetime'] ) ) . " By: " . $rowConfig['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="siteoptionsform_submit" class="btn btn-primary"><i
@@ -250,12 +249,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
 
         </div>
     </div><!--close main container-->
-    <?php
+	<?php
 
 } else {
-    //redirect user if not admin
-    header('Location: index.php?logout=true', true, 302);
-    echo "<script>window.location.href='index.php?logout=true';</script>";
+	//redirect user if not admin
+	header( 'Location: index.php?logout=true', true, 302 );
+	echo "<script>window.location.href='index.php?logout=true';</script>";
 }
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

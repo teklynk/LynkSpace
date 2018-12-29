@@ -6,7 +6,7 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 $_SESSION['file_referrer'] = 'navigation.php';
 
 //Used throughout the code
-$getNavSection = safeCleanStr( addslashes( $_GET['section'] ) );
+$getNavSection = isset( $_GET['section'] ) ? safeCleanStr( $_GET['section'] ) : null;
 
 //update table on submit
 if ( ! empty( $_POST ) ) {
@@ -59,26 +59,33 @@ if ( ! empty( $_POST ) ) {
 		echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
 		exit();
 
-	}
+	} else {
 
-	$nav_count = safeCleanStr( $_POST['nav_count'] );
+		$nav_count = isset( $_POST['nav_count'] ) ? safeCleanStr( $_POST['nav_count'] ) : null;
 
-	for ( $i = 0; $i < $nav_count; $i ++ ) {
+		for ( $i = 0; $i < $nav_count; $i ++ ) {
 
-		$nav_sort = safeCleanStr( $_POST['nav_sort'][ $i ] );
-		$nav_name = safeCleanStr( $_POST['nav_name'][ $i ] );
-		$nav_url  = safeCleanStr( $_POST['nav_url'][ $i ] );
-		$nav_cat  = safeCleanStr( $_POST['nav_cat'][ $i ] );
-		$nav_id   = safeCleanStr( $_POST['nav_id'][ $i ] );
+			$nav_sort = isset( $_POST['nav_sort'][ $i ] ) ? safeCleanStr( $_POST['nav_sort'][ $i ] ) : null;
+			$nav_name = isset( $_POST['nav_name'][ $i ] ) ? safeCleanStr( $_POST['nav_name'][ $i ] ) : null;
+			$nav_url  = isset( $_POST['nav_url'][ $i ] ) ? safeCleanStr( $_POST['nav_url'][ $i ] ) : null;
+			$nav_cat  = isset( $_POST['nav_cat'][ $i ] ) ? safeCleanStr( $_POST['nav_cat'][ $i ] ) : null;
+			$nav_id   = isset( $_POST['nav_id'][ $i ] ) ? safeCleanStr( $_POST['nav_id'][ $i ] ) : null;
 
-		if ( $nav_cat == "" ) {
-			$nav_cat = 0; //None
+			if ( $nav_cat == "" ) {
+				$nav_cat = 0; //None
+			}
+
+			$navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "', loc_id=" . loc_id . " WHERE id=" . $nav_id . ";";
+			mysqli_query( $db_conn, $navUpdate );
 		}
 
-		$navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "', loc_id=" . loc_id . " WHERE id=" . $nav_id . ";";
-		mysqli_query( $db_conn, $navUpdate );
-	}
+		flashMessageSet( 'success', " Navigation section has been updated." );
 
+		//Redirect back to uploads page
+		header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+		echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+		exit();
+	}
 }
 
 //loop through the array of navSections
@@ -190,7 +197,7 @@ if ( $getNavSection == $navSections[0] ) {
 			$delNavTitle   = isset( $_GET['deletename'] ) ? safeCleanStr( addslashes( $_GET['deletename'] ) ) : null;
 
 			//delete category
-			$delCatId = isset( $_GET['deletecat'] ) ? safeCleanStr( addslashes( $_GET['deletecat'] ) ) : null;
+			$delCatId    = isset( $_GET['deletecat'] ) ? safeCleanStr( addslashes( $_GET['deletecat'] ) ) : null;
 			$delCatTitle = isset( $_GET['deletecatname'] ) ? safeCleanStr( addslashes( $_GET['deletecatname'] ) ) : null;
 
 			//rename category

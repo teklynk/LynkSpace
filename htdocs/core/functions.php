@@ -7,7 +7,7 @@ function getLocation( $loc ) {
 	global $locationID;
 	global $db_conn;
 
-	if ( isset($loc) && ctype_digit( $loc ) ) {
+	if ( isset( $loc ) && ctype_digit( $loc ) ) {
 
 		$sqlGetLocation = mysqli_query( $db_conn, "SELECT id, name, active FROM locations WHERE active='true' AND id=" . $loc . ";" );
 		$rowGetLocation = mysqli_fetch_array( $sqlGetLocation, MYSQLI_ASSOC );
@@ -67,27 +67,27 @@ function getPage( $loc ) {
 		$pageId = null;
 	}
 
-	if (isset($loc) && !empty($loc)) {
+	if ( isset( $loc ) && ! empty( $loc ) ) {
 
-		if (ctype_digit($pageId)) {
-			$sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageId . " AND loc_id=" . $loc . ";");
-			$rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
+		if ( ctype_digit( $pageId ) ) {
+			$sqlPage = mysqli_query( $db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageId . " AND loc_id=" . $loc . ";" );
+			$rowPage = mysqli_fetch_array( $sqlPage, MYSQLI_ASSOC );
 
-			if ($rowPage['active'] == 'true' && $pageId == $rowPage['id']) {
+			if ( $rowPage['active'] == 'true' && $pageId == $rowPage['id'] ) {
 
-				$pageTitle = $rowPage['title'];
-				$pageContent = $rowPage['content'];
+				$pageTitle    = $rowPage['title'];
+				$pageContent  = $rowPage['content'];
 				$pageKeywords = $rowPage['keywords'];
 
 			} else {
 
-				$pageTitle = "Page not found";
+				$pageTitle   = "Page not found";
 				$pageContent = "This page is not available.";
 			}
 
 		} else {
 
-			$pageTitle = "Page not found";
+			$pageTitle   = "Page not found";
 			$pageContent = "This page is not available.";
 		}
 	}
@@ -108,65 +108,65 @@ function getContactInfo( $loc ) {
 	global $contactFormMsg;
 	global $db_conn;
 
-	if (isset($loc) && !empty($loc)) {
+	if ( isset( $loc ) && ! empty( $loc ) ) {
 
-		$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $loc . ";");
-		$rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
+		$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $loc . ";" );
+		$rowContact = mysqli_fetch_array( $sqlContact, MYSQLI_ASSOC );
 
-		if ($rowContact['use_defaults'] == "true" || $rowContact['use_defaults'] == "" || $rowContact['use_defaults'] == null) {
-			$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=1;");
-			$rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
+		if ( $rowContact['use_defaults'] == "true" || $rowContact['use_defaults'] == "" || $rowContact['use_defaults'] == null ) {
+			$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=1;" );
+			$rowContact = mysqli_fetch_array( $sqlContact, MYSQLI_ASSOC );
 		}
 
-		if (isset($_GET['msgsent']) == "thankyou") {
+		if ( isset( $_GET['msgsent'] ) == "thankyou" ) {
 			$contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
-		} elseif (isset($_GET['msgsent']) == "error") {
+		} elseif ( isset( $_GET['msgsent'] ) == "error" ) {
 			$contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
 		} else {
 			$contactFormMsg = "";
 		}
 
-		if (!empty($rowContact['heading'])) {
+		if ( ! empty( $rowContact['heading'] ) ) {
 			$contactHeading = $rowContact['heading'];
 		}
 
-		if (!empty($rowContact['introtext'])) {
+		if ( ! empty( $rowContact['introtext'] ) ) {
 			$contactBlurb = $rowContact['introtext'];
 		}
 
-		if (!empty($rowContact['mapcode'])) {
+		if ( ! empty( $rowContact['mapcode'] ) ) {
 			$contactMap = $rowContact['mapcode'];
 		}
 
-		if (!empty($rowContact['address'])) {
+		if ( ! empty( $rowContact['address'] ) ) {
 			$contactAddress = $rowContact['address'];
 		}
 
-		if (!empty($rowContact['city'])) {
+		if ( ! empty( $rowContact['city'] ) ) {
 			$contactCity = $rowContact['city'];
 		}
 
-		if (!empty($rowContact['state'])) {
+		if ( ! empty( $rowContact['state'] ) ) {
 			$contactState = $rowContact['state'];
 		}
 
-		if (!empty($rowContact['zipcode'])) {
+		if ( ! empty( $rowContact['zipcode'] ) ) {
 			$contactZipcode = $rowContact['zipcode'];
 		}
 
-		if (!empty($rowContact['phone'])) {
+		if ( ! empty( $rowContact['phone'] ) ) {
 			$contactPhone = $rowContact['phone'];
 		}
 
-		if (!empty($rowContact['email'])) {
+		if ( ! empty( $rowContact['email'] ) ) {
 			$contactEmail = $rowContact['email'];
 		}
 
-		if (!empty($rowContact['hours'])) {
+		if ( ! empty( $rowContact['hours'] ) ) {
 			$contactHours = $rowContact['hours'];
 		}
 
-		if (!empty($rowContact['sendtoemail'])) {
+		if ( ! empty( $rowContact['sendtoemail'] ) ) {
 			$contactFormSendToEmail = $rowContact['sendtoemail'];
 		}
 	}
@@ -183,30 +183,30 @@ function getServices( $loc ) {
 	global $servicesIcon;
 	global $db_conn;
 
-	if (isset($loc) && !empty($loc)) {
+	if ( isset( $loc ) && ! empty( $loc ) ) {
 
-		$sqlServicesSetup = mysqli_query($db_conn, "SELECT services_use_defaults FROM setup WHERE loc_id=" . $loc . ";");
-		$rowServicesSetup = mysqli_fetch_array($sqlServicesSetup, MYSQLI_ASSOC);
+		$sqlServicesSetup = mysqli_query( $db_conn, "SELECT services_use_defaults FROM setup WHERE loc_id=" . $loc . ";" );
+		$rowServicesSetup = mysqli_fetch_array( $sqlServicesSetup, MYSQLI_ASSOC );
 
 		//toggle default location value
-		if ($rowServicesSetup['services_use_defaults'] == 'true' || $rowServicesSetup['services_use_defaults'] == "" || $rowServicesSetup['services_use_defaults'] == null) {
+		if ( $rowServicesSetup['services_use_defaults'] == 'true' || $rowServicesSetup['services_use_defaults'] == "" || $rowServicesSetup['services_use_defaults'] == null ) {
 			$servicesDefaultLoc = 1;
 		} else {
 			$servicesDefaultLoc = $loc;
 		}
 
-		$sqlServicesHeading = mysqli_query($db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=" . $servicesDefaultLoc . ";");
-		$rowServicesHeading = mysqli_fetch_array($sqlServicesHeading, MYSQLI_ASSOC);
+		$sqlServicesHeading = mysqli_query( $db_conn, "SELECT servicesheading, servicescontent FROM setup WHERE loc_id=" . $servicesDefaultLoc . ";" );
+		$rowServicesHeading = mysqli_fetch_array( $sqlServicesHeading, MYSQLI_ASSOC );
 
 		$servicesHeading = $rowServicesHeading['servicesheading'];
 
-		if (!empty($rowServicesHeading['servicescontent'])) {
+		if ( ! empty( $rowServicesHeading['servicescontent'] ) ) {
 			$servicesBlurb = $rowServicesHeading['servicescontent'];
 		}
 
-		$sqlServices = mysqli_query($db_conn, "SELECT id, icon, image, title, link, content, sort, active FROM services WHERE active='true' AND loc_id=" . $servicesDefaultLoc . " ORDER BY sort, title ASC;"); //While loop
-		$servicesNumRows = mysqli_num_rows($sqlServices);
-		$servicesCount = 0;
+		$sqlServices     = mysqli_query( $db_conn, "SELECT id, icon, image, title, link, content, sort, active FROM services WHERE active='true' AND loc_id=" . $servicesDefaultLoc . " ORDER BY sort, title ASC;" ); //While loop
+		$servicesNumRows = mysqli_num_rows( $sqlServices );
+		$servicesCount   = 0;
 	}
 }
 
@@ -223,29 +223,29 @@ function getTeam( $loc ) {
 	global $teamNumRows;
 	global $db_conn;
 
-	if (isset($loc) && !empty($loc)) {
+	if ( isset( $loc ) && ! empty( $loc ) ) {
 
-		$sqlTeamSetup = mysqli_query($db_conn, "SELECT team_use_defaults FROM setup WHERE loc_id=" . $loc . ";");
-		$rowTeamSetup = mysqli_fetch_array($sqlTeamSetup, MYSQLI_ASSOC);
+		$sqlTeamSetup = mysqli_query( $db_conn, "SELECT team_use_defaults FROM setup WHERE loc_id=" . $loc . ";" );
+		$rowTeamSetup = mysqli_fetch_array( $sqlTeamSetup, MYSQLI_ASSOC );
 
 		//toggle default location value
-		if ($rowTeamSetup['team_use_defaults'] == 'true' || $rowTeamSetup['team_use_defaults'] == "" || $rowTeamSetup['team_use_defaults'] == null) {
+		if ( $rowTeamSetup['team_use_defaults'] == 'true' || $rowTeamSetup['team_use_defaults'] == "" || $rowTeamSetup['team_use_defaults'] == null ) {
 			$teamDefaultLoc = 1;
 		} else {
 			$teamDefaultLoc = $loc;
 		}
 
-		$sqlTeamHeading = mysqli_query($db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=" . $teamDefaultLoc . ";");
-		$rowTeamHeading = mysqli_fetch_array($sqlTeamHeading, MYSQLI_ASSOC);
+		$sqlTeamHeading = mysqli_query( $db_conn, "SELECT teamheading, teamcontent FROM setup WHERE loc_id=" . $teamDefaultLoc . ";" );
+		$rowTeamHeading = mysqli_fetch_array( $sqlTeamHeading, MYSQLI_ASSOC );
 
 		$teamHeading = $rowTeamHeading['teamheading'];
 
-		if (!empty($rowTeamHeading['teamcontent'])) {
+		if ( ! empty( $rowTeamHeading['teamcontent'] ) ) {
 			$teamBlurb = $rowTeamHeading['teamcontent'];
 		}
 
-		$sqlTeam = mysqli_query($db_conn, "SELECT id, image, title, name, content, sort, active FROM team WHERE active='true' AND loc_id=" . $teamDefaultLoc . " ORDER BY sort, title ASC;"); //While loop
-		$teamNumRows = mysqli_num_rows($sqlTeam);
+		$sqlTeam     = mysqli_query( $db_conn, "SELECT id, image, title, name, content, sort, active FROM team WHERE active='true' AND loc_id=" . $teamDefaultLoc . " ORDER BY sort, title ASC;" ); //While loop
+		$teamNumRows = mysqli_num_rows( $sqlTeam );
 	}
 }
 
@@ -420,21 +420,21 @@ function getSetup( $loc ) {
 	global $setupLogoDefaults;
 	global $db_conn;
 
-	if (isset($loc) && !empty($loc)) {
+	if ( isset( $loc ) && ! empty( $loc ) ) {
 
-		$sqlSetup = mysqli_query($db_conn, "SELECT title, author, keywords, description, config, logo, logo_use_defaults, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=1;");
-		$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+		$sqlSetup = mysqli_query( $db_conn, "SELECT title, author, keywords, description, config, logo, logo_use_defaults, ls2pac, ls2kids, searchdefault, loc_id FROM setup WHERE loc_id=1;" );
+		$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
-		$setupDescription = $rowSetup['description'];
-		$setupKeywords = $rowSetup['keywords'];
-		$setupAuthor = $rowSetup['author'];
-		$setupTitle = $rowSetup['title'];
-		$setupConfig = $rowSetup['config'];
-		$setupLogo = $rowSetup['logo'];
-		$setupLs2pac = $rowSetup['ls2pac'];
-		$setupLs2kids = $rowSetup['ls2kids'];
+		$setupDescription   = $rowSetup['description'];
+		$setupKeywords      = $rowSetup['keywords'];
+		$setupAuthor        = $rowSetup['author'];
+		$setupTitle         = $rowSetup['title'];
+		$setupConfig        = $rowSetup['config'];
+		$setupLogo          = $rowSetup['logo'];
+		$setupLs2pac        = $rowSetup['ls2pac'];
+		$setupLs2kids       = $rowSetup['ls2kids'];
 		$setupSearchDefault = $rowSetup['searchdefault'];
-		$setupLogoDefaults = $rowSetup['logo_use_defaults'];
+		$setupLogoDefaults  = $rowSetup['logo_use_defaults'];
 	}
 }
 
@@ -1401,7 +1401,7 @@ function getGoogleTranslateCode( $languages ) {
 		return true;
 	} else {
 		return false;
-    }
+	}
 }
 
 //Disqus service

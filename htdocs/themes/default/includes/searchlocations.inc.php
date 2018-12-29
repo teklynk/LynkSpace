@@ -1,12 +1,12 @@
 <?php
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
+if ( ! defined( 'ALLOW_INC' ) ) {
+	die( 'Direct access not permitted' );
 }
 ?>
 <!-- Search Locations Section -->
 <a name="search" tabindex="-1"></a>
 <?php
-getSetup(loc_id); //from functions.php
+getSetup( loc_id ); //from functions.php
 ?>
 
 <script type="text/javascript" language="javascript">
@@ -14,7 +14,7 @@ getSetup(loc_id); //from functions.php
     $(document).ready(function () {
         //jQueryUI AutoComplete
         $(function () {
-            var availableTags = [<?php getLocList(loc_id, 'true');?>];
+            var availableTags = [<?php getLocList( loc_id, 'true' );?>];
             $('#loc_name').autocomplete({
                 source: availableTags,
                 minLength: 3,
@@ -35,35 +35,35 @@ getSetup(loc_id); //from functions.php
             <h1 class="text-white searchlocationsheading">Search</h1>
 
             <div class="panel with-nav-tabs panel-default">
-                <?php
-                if ($setupLs2pac == 'true' || $setupLs2kids == 'true') {
-                    ?>
+				<?php
+				if ( $setupLs2pac == 'true' || $setupLs2kids == 'true' ) {
+					?>
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <?php
-                            echo "<li class='active'><a href='#tab1default' data-toggle='tab'>Schools</a></li>";
+							<?php
+							echo "<li class='active'><a href='#tab1default' data-toggle='tab'>Schools</a></li>";
 
-                            if ($setupSearchDefault == 1) {
-                                if ($setupLs2pac == 'true') {
-                                    echo "<li><a href='#tab2default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
-                                }
-                                if ($setupLs2kids == 'true') {
-                                    echo "<li><a href='#tab3default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
-                                }
-                            } else {
-                                if ($setupLs2kids == 'true') {
-                                    echo "<li><a href='#tab3default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
-                                }
-                                if ($setupLs2pac == 'true') {
-                                    echo "<li><a href='#tab2default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
-                                }
-                            }
-                            ?>
+							if ( $setupSearchDefault == 1 ) {
+								if ( $setupLs2pac == 'true' ) {
+									echo "<li><a href='#tab2default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
+								}
+								if ( $setupLs2kids == 'true' ) {
+									echo "<li><a href='#tab3default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
+								}
+							} else {
+								if ( $setupLs2kids == 'true' ) {
+									echo "<li><a href='#tab3default' data-toggle='tab'>" . setupLS2KidsLabel . "</a></li>";
+								}
+								if ( $setupLs2pac == 'true' ) {
+									echo "<li><a href='#tab2default' data-toggle='tab'>" . setupLS2PACLabel . "</a></li>";
+								}
+							}
+							?>
                         </ul>
                     </div>
-                    <?php
-                }
-                ?>
+					<?php
+				}
+				?>
 
                 <div class="panel-body">
                     <div class="tab-content">
@@ -85,9 +85,9 @@ getSetup(loc_id); //from functions.php
                                 </div>
                             </form>
                         </div>
-                        <?php
-                        if ($setupLs2pac == 'true') {
-                            ?>
+						<?php
+						if ( $setupLs2pac == 'true' ) {
+							?>
                             <!-- LS2PACSearch Form -->
                             <div class="tab-pane fade in" id="tab2default">
                                 <form name="ls2pacForm" method="post"
@@ -105,11 +105,11 @@ getSetup(loc_id); //from functions.php
                                     </div>
                                 </form>
                             </div>
-                            <?php
-                        }
+							<?php
+						}
 
-                        if ($setupLs2kids == 'true') {
-                            ?>
+						if ( $setupLs2kids == 'true' ) {
+							?>
                             <!-- LS2Kids Search Form -->
                             <div class="tab-pane fade in" id="tab3default">
                                 <form name="ls2kidspacForm" method="post"
@@ -127,19 +127,19 @@ getSetup(loc_id); //from functions.php
                                     </div>
                                 </form>
                             </div>
-                            <?php
-                        }
-                        ?>
+							<?php
+						}
+						?>
 
                     </div>
 
                 </div>
             </div>
             <div class="input-group col-md-12 text-center center-block">
-                <?php
-                //EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
-                getNav(loc_id, 'Search', 'false', 'center', 'false');
-                ?>
+				<?php
+				//EXAMPLE: getNav($navSection,$dropdown,$pull,$sitesearchlink)
+				getNav( loc_id, 'Search', 'false', 'center', 'false' );
+				?>
             </div>
         </div>
 
