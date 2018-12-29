@@ -204,7 +204,7 @@ if ( $newService == 'true' || $theserviceId ) {
 					} ?></textarea>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+            <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
             <button type="submit" name="sservices_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
                 Changes
@@ -367,7 +367,7 @@ if ( $newService == 'true' || $theserviceId ) {
                 </tbody>
             </table>
 
-            <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+            <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
             <input type="hidden" name="service_count" value="<?php echo $serviceCount; ?>"/>
             <input type="hidden" name="save_main" value="true"/>

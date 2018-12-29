@@ -142,7 +142,7 @@ if (!defined('ALLOW_INC')) {
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <div class="alert alert-danger fade in" role="alert" >
+            <div class="alert alert-warning fade in" role="alert" >
                 <h4>Did you know that your Internet Explorer is out of date?</h4>
                 <p>To get the best possible experience using our site we recommend that you use Google Chrome. To visit the Chrome download page, click the Get Chrome button below.</p>
                 <p><a href="https://www.google.com/chrome/browser/" target="_blank" class="btn btn-danger">Get Chrome</a></p>

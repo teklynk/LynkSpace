@@ -132,7 +132,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                         </div>
 
                         <input type="hidden" name="csrf"
-                               value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                               value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                         <button type="submit" name="page_submit" class="btn btn-primary"><i
                                     class='fa fa-fw fa-save'></i> Save Changes
@@ -268,7 +268,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                         </table>
 
                         <input type="hidden" name="csrf"
-                               value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                               value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                         <button type="submit" name="pageNew_submit" class="btn btn-primary"><i
                                     class='fa fa-fw fa-save'></i> Save Changes

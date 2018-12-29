@@ -117,7 +117,7 @@ if ( ! empty( $_POST ) ) {
                     <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowFeatured['datetime'] ) ) . " By: " . $rowFeatured['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="featured_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
                     Save Changes

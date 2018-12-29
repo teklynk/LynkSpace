@@ -90,7 +90,7 @@ if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
 	showModalConfirm(
 		"confirm",
 		"Share Image? <br><small>" . $theFile['file_name'] . "</small>",
-		"<form name='share_form' id='share_form' method='post' action='' enctype='multipart/form-data'>
+		"<form name='share_form' id='share_form' method='post' action=''>
         <div class='form-group'>
             <label for='share_location_type'>Location Group</label>
             <select id='share_location_type' class='form-control selectpicker show-tick' data-id='share_location_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups( $rowSharedUploadsOption['shared'] ) . "</select>
@@ -101,7 +101,7 @@ if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
             <select id='share_location_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_location_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList( $rowSharedUploadsOption['shared'], 'true' ) . "</select>
             <input type='hidden' name='action' value='shareFile'/>
         </div>",
-		"<input type='hidden' name='csrf' value='" .  csrf_validate( $_SESSION['unique_referrer']) . "'>
+		"<input type='hidden' name='csrf' value='" .  csrf_validate( $_SESSION['unique_referrer'] ) . "'>
         <button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
         <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>
         </form>",
@@ -117,39 +117,26 @@ if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
 		} elseif ( $locListOptions) {
 			$sharedOptions = $locListOptions;
 		} else {
-			$sharedOptions = '';
+			$sharedOptions = "";
 		}
 
-		if ( $rowSharedUploadsOption['guid'] == $getUploadGuid ) {
+		//die($sharedOptions);
+
+		if ( $rowSharedUploadsOption['guid'] == $getUploadGuid && $sharedOptions) {
 			//Do Update
 			$sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE guid='" . $getUploadGuid . "' AND loc_id=" . loc_id . ";";
 			mysqli_query( $db_conn, $sharedUploadsOptionUpdate );
-		} else {
-			//Do Insert
-			$sharedUploadsOptionInsert = "INSERT INTO uploads (shared, file_name, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
-			mysqli_query( $db_conn, $sharedUploadsOptionInsert );
-		}
 
-		header( "Location: uploads.php?loc_id=" . loc_id . "", true, 302 );
-		echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
-		exit();
+			flashMessageSet( 'success', 'The file is now being shared.' );
+
+			header( "Location: uploads.php?loc_id=" . loc_id . "", true, 302 );
+			echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
+			exit();
+		}
 	}
 
 }
 ?>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTable').dataTable({
-                "iDisplayLength": 25,
-                "order": [[2, "desc"]],
-                "columnDefs": [{
-                    "targets": 'no-sort',
-                    "orderable": false
-                }]
-            });
-        });
-    </script>
 
     <div class="row">
         <div class="col-lg-12">
@@ -167,17 +154,14 @@ if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
 //Alert messages
 echo flashMessageGet( 'success' );
 echo flashMessageGet( 'danger' );
+
+if ( ! is_writable( '../uploads' ) ) {
+	echo "<div class='alert alert-warning fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
+}
 ?>
 
     <div class="row">
         <div class="col-lg-12">
-			<?php
-
-			if ( ! is_writable( '../uploads' ) ) {
-				echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
-			}
-			?>
-
             <form name="uploadForm" id="uploadForm" method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Upload Image</label>
@@ -185,7 +169,7 @@ echo flashMessageGet( 'danger' );
                     <input type="hidden" name="action" value="uploadFile">
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="upload_submit" id="upload_submit" form='uploadForm'
                         class="btn btn-primary disabled"
@@ -285,7 +269,6 @@ echo flashMessageGet( 'danger' );
         </div>
     </div>
 
-    <!-- Modal javascript logic -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
@@ -305,6 +288,14 @@ echo flashMessageGet( 'danger' );
                     $('#confirm').modal('show');
                 }, 100);
             }
+            $('#dataTable').dataTable({
+                "iDisplayLength": 25,
+                "order": [[2, "desc"]],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false
+                }]
+            });
         });
     </script>
 

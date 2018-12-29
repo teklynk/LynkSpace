@@ -61,7 +61,7 @@ function loginAttempts( $userIp, $maxAttempts, $maxTimeout ) {
 				} else {
 					$loginFailed = true;
 					echo "<style>#wrapper {padding-left: 0 !important;}</style>";
-					echo "<div class='alert alert-danger'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
+					echo "<div class='alert alert-warning'>Maximum failed login attempts has been reached. Please wait " . $maxTimeout . " seconds before trying again. <a href='index.php'>Back to login</a></div>";
 					die();
 				}
 
@@ -823,19 +823,19 @@ function checkDependencies() {
 
 	foreach ( $apacheModulesArray as $module ) {
 		if ( ! in_array( $module, apache_get_modules() ) ) {
-			echo "<div class='alert alert-danger'><span>" . $module . " is not installed on the server.</span></div>";
+			echo "<div class='alert alert-warning'><span>" . $module . " is not installed on the server.</span></div>";
 		}
 	}
 
 	foreach ( $phpExtentionsArray as $extention ) {
 		if ( ! in_array( $extention, get_loaded_extensions() ) ) {
-			echo "<div class='alert alert-danger'><span>" . $extention . " is not installed on the server.</span></div>";
+			echo "<div class='alert alert-warning'><span>" . $extention . " is not installed on the server.</span></div>";
 		}
 	}
 
 	foreach ( $filesArray as $file ) {
 		if ( ! file_exists( $file ) || ! is_writable( $file ) ) {
-			echo "<div class='alert alert-danger'><span>" . $file . " does not exist and/or is not writable.</span></div>";
+			echo "<div class='alert alert-warning'><span>" . $file . " does not exist and/or is not writable.</span></div>";
 		}
 	}
 
@@ -1230,7 +1230,8 @@ function csrf_validate( $token ) {
 			exit( 'Direct access not permitted' );
 		}
 	}
-	print_r( $token );
+
+	return $token;
 }
 
 //Variable to hide elements from non-admin users

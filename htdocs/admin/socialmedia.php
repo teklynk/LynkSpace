@@ -149,7 +149,7 @@ if ( ! empty( $_POST ) ) {
                        placeholder="https://www.youtube.com/user/username">
             </div>
 
-            <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+            <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
             <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
                 Save Changes

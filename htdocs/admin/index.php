@@ -113,7 +113,7 @@ if ( ! empty( $_POST ) ) {
 		} else {
 
 			session_unset();
-			$message = "<div class='alert alert-danger' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+			$message = "<div class='alert alert-warning' role='alert'>Your username and/or password was incorrect. Please try again.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 		}
 
 	}
@@ -122,19 +122,19 @@ if ( ! empty( $_POST ) ) {
 
 // Reset password error messages
 if ( $_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'notfound' ) {
-	$message = "<div class='alert alert-danger' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+	$message = "<div class='alert alert-warning' role='alert'>Invalid email. Please see your Website Administrator to correct.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 } elseif ( $_GET['forgotpassword'] == 'true' && $_GET['msgsent'] == 'error' ) {
-	$message = "<div class='alert alert-danger' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+	$message = "<div class='alert alert-warning' role='alert'>An error occurred while resetting your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
 // Password reset instructions
 if ( $_GET['msgsent'] == 'resetinstructions' ) {
-	$message = "<div class='alert alert-danger' role='alert'>Please check your email for instructions on how to reset your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+	$message = "<div class='alert alert-warning' role='alert'>Please check your email for instructions on how to reset your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
 // Password reset message
 if ( $_GET['msgsent'] == 'reset' ) {
-	$message = "<div class='alert alert-danger' role='alert'>Your password is reset. Please sign in with your new password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
+	$message = "<div class='alert alert-warning' role='alert'>Your password is reset. Please sign in with your new password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='index.php'\">×</button></div>";
 }
 
 // If logged in then...

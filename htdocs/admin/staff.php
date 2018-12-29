@@ -175,7 +175,7 @@ if ( $pagePreviewId > "" ) {
 							} ?></textarea>
                     </div>
 
-                    <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                    <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                     <button type="submit" name="team_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
                         Save Changes
@@ -343,7 +343,7 @@ if ( $pagePreviewId > "" ) {
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                    <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                     <input type="hidden" name="save_main" value="true"/>
                     <input type="hidden" name="team_count" value="<?php echo $teamCount; ?> "/>

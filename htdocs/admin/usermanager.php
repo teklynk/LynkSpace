@@ -71,7 +71,7 @@ if ( $_POST['save_main'] ) {
 		$rowCheckUser = mysqli_num_rows( $sqlUsersInfo );
 
 		if ( $rowCheckUser > 0 ) {
-			$pageMsg = "<div class='alert alert-danger'>Username: " . $userName . " and Email: " . $userEmail . " already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+			$pageMsg = "<div class='alert alert-warning'>Username: " . $userName . " and Email: " . $userEmail . " already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
 		} else {
 
 			dbQuery(
@@ -213,7 +213,7 @@ if ( $_POST['save_main'] ) {
                             <div class="form-group">
 
                                 <input type="hidden" name="csrf"
-                                       value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                                       value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i

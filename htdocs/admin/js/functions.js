@@ -59,7 +59,7 @@ $(document).ready(function () {
     });
 
     //Boostrap alert fadeout and close function
-    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    $('div.alert-success').delay(3000).fadeOut(250);
 
     //Character Counter
     //Taken from https://www.codefromjames.com/scripts/charcount.js

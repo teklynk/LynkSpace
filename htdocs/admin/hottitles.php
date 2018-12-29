@@ -213,7 +213,7 @@ if ( loc_id != 1 ) {
                         <div class="form-group">
 
                             <input type="hidden" name="csrf"
-                                   value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                                   value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                             <input type="hidden" name="add_hottitles" value="true"/>
                             <button type="submit" name="hottitlesAdd_submit" class="btn btn-primary"><i
@@ -315,7 +315,7 @@ if ( loc_id != 1 ) {
                     </table>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <input type="hidden" name="hottitles_count" value="<?php echo $hottitlesCount; ?>"/>
                 <input type="hidden" name="save_main" value="true"/>

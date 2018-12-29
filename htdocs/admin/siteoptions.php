@@ -71,10 +71,10 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] == 1 && $_SESSION
 			echo flashMessageGet( 'success' );
 
 			if ( ! is_writable( '../sitemap.xml' ) ) {
-				echo "<div class='alert alert-danger'>Unable to write to sitemap.xml. Check file permissions.</div>";
+				echo "<div class='alert alert-warning'>Unable to write to sitemap.xml. Check file permissions.</div>";
 			}
 			if ( ! is_writable( '../robots.txt' ) ) {
-				echo "<div class='alert alert-danger'>Unable to write to robots.txt. Check file permissions.</div>";
+				echo "<div class='alert alert-warning'>Unable to write to robots.txt. Check file permissions.</div>";
 			}
 			//multibranch active
 			if ( $rowConfig['multibranch'] == 'true' ) {
@@ -237,7 +237,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] == 1 && $_SESSION
                     <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowConfig['datetime'] ) ) . " By: " . $rowConfig['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <input type="hidden" name="save_main" value="true"/>
                 <button type="submit" name="siteoptionsform_submit" class="btn btn-primary"><i

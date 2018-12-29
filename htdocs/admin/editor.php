@@ -25,7 +25,7 @@ require_once( __DIR__ . "/../themes/" . themeOption . "/css/dynamic-style.php" )
 if ( file_exists( $fileToEdit_dir ) ) {
 	//check if file is writable
 	if ( ! is_writable( $fileToEdit_dir ) ) {
-		die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
+		die( "<div class='alert alert-warning fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 	}
 	$handle   = fopen( $fileToEdit_dir, 'r' );
 	$fileData = fread( $handle, filesize( $fileToEdit_dir ) );
@@ -81,7 +81,7 @@ if ( isset( $_POST['save_main'] ) ) {
 
 			closedir( $handle );
 		} else {
-			die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
+			die( "<div class='alert alert-warning fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 		}
 	}
 
@@ -122,7 +122,7 @@ if ( isset( $_POST['save_main'] ) ) {
 				$selThemeDefaults = "";
 			}
 			if ( file_exists( $fileToEdit_dir ) && ! is_writable( $fileToEdit_dir ) ) {
-				die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
+				die( "<div class='alert alert-warning fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 			}
 
 			if ( loc_id != 1 ) {
@@ -217,7 +217,7 @@ if ( loc_id == 1 ) {
                 </small></span>
     </div>
 
-    <input type="hidden" name="csrf" value="<?php csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+    <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
     <input type="hidden" name="save_main" value="true"/>
     <button type="submit" name="editor_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save Changes
