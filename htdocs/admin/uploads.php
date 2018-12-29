@@ -5,9 +5,13 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-$getUploadGuid = isset( $_POST['guid'] ) ? safeCleanStr( $_POST['guid'] ) : null;
-$getUploadId   = isset( $_POST['delete'] ) ? safeCleanStr( $_POST['delete'] ) : null;
+$getUploadGuid = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$getUploadId   = isset( $_GET['delete'] ) ? safeCleanStr( $_GET['delete'] ) : null;
 $action        = isset( $_POST['action'] ) ? safeCleanStr( $_POST['action'] ) : null;
+$getConfirm    = isset( $_GET['confirm'] ) ? safeCleanStr( $_GET['confirm'] ) : null;
+$getIsShared   = isset( $_GET['share'] ) ? safeCleanStr( $_GET['share'] ) : null;
+$share_location_type = isset( $_POST['share_location_type'] ) ? safeCleanStr( $_POST['share_location_type'] ) : null;
+$share_location_list = isset( $_POST['share_location_list'] ) ? safeCleanStr( $_POST['share_location_list'] ) : null;
 
 $fileList = getAllUploads( 1, 'upload', loc_id, 'ASC' ); //returns an array
 
@@ -38,11 +42,11 @@ if ( ! empty( $_POST ) && $action == 'uploadFile' ) {
 }
 
 //Delete confirm modal
-if ( $getUploadId && ! $_GET['confirm'] ) {
+if ( $getUploadId && ! $getConfirm ) {
 
 	$theFile = getSingleUploads( $getUploadId, $getUploadGuid );
 
-	if ( $_GET['isshared'] == 'false' ) {
+	if ( $getIsShared == 'false' ) {
 		showModalConfirm(
 			"confirm",
 			"Delete File?",
@@ -60,7 +64,7 @@ if ( $getUploadId && ! $_GET['confirm'] ) {
 		);
 	}
 
-} elseif ( $getUploadId && $_GET['confirm'] == 'yes' && $getUploadGuid ) {
+} elseif ( $getUploadId && $getConfirm == 'yes' && $getUploadGuid ) {
 	//Remove and delete the file
 	deleteUploads( image_dir, $getUploadId, $getUploadGuid );
 
@@ -74,28 +78,33 @@ if ( $getUploadId && ! $_GET['confirm'] ) {
 
 //TODO: Refactor shared files logic and queries. Can be improved and reduced
 //Share settings - Actions, Modal, Form - Admin user only feature
-if ( isset( $_GET['share'] ) && $adminIsCheck == "true" && multiBranch == 'true' ) {
+if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
 
-	$theFile = getSingleUploads( $_GET['share'], $getUploadGuid );
+	$theFile = getSingleUploads( $getUploadId, $getUploadGuid );
+
+	//Check shared_uploads table for any shared images
+	$sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, guid, loc_id FROM uploads WHERE guid='" . $getUploadGuid . "' AND loc_id=" . loc_id . ";");
+	$rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
 
 	//Share setting/options Modal with Form
 	showModalConfirm(
 		"confirm",
-		"Share Image? <br><small>" . $getFileName . "</small>",
-		"<form name='share_form' id='share_form' method='post'>
+		"Share Image? <br><small>" . $theFile['file_name'] . "</small>",
+		"<form name='share_form' id='share_form' method='post' action='' enctype='multipart/form-data'>
         <div class='form-group'>
             <label for='share_location_type'>Location Group</label>
-            <select id='share_loc_type' class='form-control selectpicker show-tick' data-id='share_loc_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups( $rowSharedUploadsOption['shared'] ) . "</select>
+            <select id='share_location_type' class='form-control selectpicker show-tick' data-id='share_location_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups( $rowSharedUploadsOption['shared'] ) . "</select>
             <div class='text-center'>
                 <h3>- OR -</h3>
             </div>
             <label for='share_location_list'>Location(s)</label>
-            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList( $rowSharedUploadsOption['shared'], 'true' ) . "</select>
-            <input type='hidden' name='action' value='shareFile'>
-            <input type='hidden' name='csrf' value='" . $_SESSION['unique_referrer'] . "'/>
+            <select id='share_location_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_location_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList( $rowSharedUploadsOption['shared'], 'true' ) . "</select>
+            <input type='hidden' name='action' value='shareFile'/>
         </div>",
-		"<button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
-        <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button></form>",
+		"<input type='hidden' name='csrf' value='" .  csrf_validate( $_SESSION['unique_referrer']) . "'>
+        <button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
+        <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>
+        </form>",
 		true
 	);
 
@@ -103,17 +112,17 @@ if ( isset( $_GET['share'] ) && $adminIsCheck == "true" && multiBranch == 'true'
 
 		$locListOptions = implode( ',', $share_location_list ); //Convert array to string
 
-		if ( $share_location_type <> '' ) {
-			$sharedOptions = safeCleanStr( $share_location_type ); //Clean string
-		} elseif ( $locListOptions <> '' ) {
-			$sharedOptions = safeCleanStr( $locListOptions ); //Clean string
+		if ( $share_location_type ) {
+			$sharedOptions = $share_location_type;
+		} elseif ( $locListOptions) {
+			$sharedOptions = $locListOptions;
 		} else {
 			$sharedOptions = '';
 		}
 
-		if ( $rowSharedUploadsOption['file_name'] == $getFileName ) {
+		if ( $rowSharedUploadsOption['guid'] == $getUploadGuid ) {
 			//Do Update
-			$sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE file_name='" . $getFileName . "' AND loc_id=" . loc_id . ";";
+			$sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE guid='" . $getUploadGuid . "' AND loc_id=" . loc_id . ";";
 			mysqli_query( $db_conn, $sharedUploadsOptionUpdate );
 		} else {
 			//Do Insert
@@ -238,7 +247,7 @@ echo flashMessageGet( 'danger' );
 
 						if ( $adminIsCheck == 'true' && multiBranch == 'true' ) {
 							echo "<td class='col-xs-1'>
-                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
+                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . $file['id'] . "&guid=" . $file['guid'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
 						}
 

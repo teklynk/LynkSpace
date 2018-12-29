@@ -76,7 +76,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `customer_id`, `theme`, `iprange`, `multibranch`, `loc_types`, `homepageurl`, `setuppacurl`, `searchlabel_ls2pac`, `searchlabel_ls2kids`, `searchplaceholder_ls2pac`, `searchplaceholder_ls2kids`, `searchform`, `session_timeout`, `carousel_speed`, `analytics`, `datetime`, `author_name`) VALUES
-  (1, '', 'default', '', 'false', '1,2,3', '', '', 'Catalog', 'Kid\'s Catalog', 'Find anything at the library. Start here.', 'Find children\'s books and more.', '', 60, '5', '', CURRENT_TIMESTAMP(), '');
+  (1, '', 'default', '', 'false', '1,2,3', 'Default', '', '', 'Catalog', 'Kid\'s Catalog', 'Find anything at the library. Start here.', 'Find children\'s books and more.', '', 60, '5', '', CURRENT_TIMESTAMP(), '');
 
 -- --------------------------------------------------------
 
