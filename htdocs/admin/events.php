@@ -12,13 +12,12 @@ $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
 //update table on submit
 if (!empty($_POST)) {
-
-    $event_defaults = $_POST['event_defaults'];
-    $event_heading = sqlEscapeStr($_POST['event_heading']);
-    $event_alert = sqlEscapeStr($_POST['event_alert']);
+	$event_defaults = isset($_POST['event_defaults']) ? safeCleanStr($_POST['event_defaults']) : NULL;
+    $event_heading = isset($_POST['event_heading']) ? safeCleanStr($_POST['event_heading']) : NULL;
+    $event_alert = isset($_POST['event_alert']) ? safeCleanStr($_POST['event_alert']) : NULL;
     $event_startdate = dateTimeFormat(1, $_POST['event_startdate']);
     $event_enddate = dateTimeFormat(1, $_POST['event_enddate']);
-    $event_calendar = trim($_POST['event_calendar']);
+    $event_calendar = isset($_POST['event_calendar']) ? safeCleanStr($_POST['event_calendar']) : NULL;
 
     if ($event_defaults == 'on') {
         $event_defaults = 'true';
@@ -77,6 +76,7 @@ if (!empty($_POST)) {
             } else {
                 $startDate = dateTimeFormat(1, $rowEvent['startdate']);
             }
+
             if ($rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == ''  || $rowEvent['enddate'] == NULL) {
                 $endDate = "";
             } else {
