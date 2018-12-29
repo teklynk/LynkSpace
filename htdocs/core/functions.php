@@ -1054,7 +1054,7 @@ function getHottitlesCarousel( $xmlurl, $jacketSize, $dummyJackets, $maxcnt ) {
 		die( 'URL not found or parameters are not correct. Customer number not set in Admin -> Site Options.' );
 	}
 
-	if ( ! empty( $xmlurl ) ) {
+	if ( isset( $xmlurl ) ) {
 		$ch      = curl_init();
 		$timeout = 20;
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
@@ -1082,10 +1082,6 @@ function getHottitlesCarousel( $xmlurl, $jacketSize, $dummyJackets, $maxcnt ) {
 
 	$itemcount = 0;
 
-	//Use the ls2content round-robin load balancer
-	$loadBalancerArr = array( null, 2, 3, 4 );
-	$loadBalancer    = $loadBalancerArr[ array_rand( $loadBalancerArr ) ];
-
 	//Set a maximum maxcnt
 	if ( $maxcnt >= 50 ) {
 		$maxcnt = 50;
@@ -1106,7 +1102,7 @@ function getHottitlesCarousel( $xmlurl, $jacketSize, $dummyJackets, $maxcnt ) {
 			$xmlisbn = (string) $xmlitem->ISBN;
 
 			//https://ls2content2.tlcdelivers.com/tlccontent?customerid=960748&appid=ls2pac&requesttype=BOOKJACKET-MD&isbn=9781597561075
-			$xmlimage = "https://ls2content" . $loadBalancer . ".tlcdelivers.com/tlccontent?customerid=" . customerNumber . "&appid=ls2pac&requesttype=BOOKJACKET-$jacketSize&isbn=$xmlisbn";
+			$xmlimage = "https://ls2content.tlcdelivers.com/tlccontent?customerid=" . customerNumber . "&appid=ls2pac&requesttype=BOOKJACKET-" . $jacketSize . "&isbn=" . $xmlisbn . "";
 
 			//http://173.163.174.146:8080/?config=ysm#section=search&term=The Black Book
 			$xmllink = setupPACURL . "/?config=ysm#section=search&term=" . $xmltitle;
@@ -1160,9 +1156,6 @@ function getHottitlesCarousel( $xmlurl, $jacketSize, $dummyJackets, $maxcnt ) {
 
 			//Replace http with https
 			$xmlimage = trim( str_replace( 'http:', 'https:', $xmlimage ) );
-
-			//Use the ls2content round-robin load balancer
-			$xmlimage = trim( str_replace( "ls2content", "ls2content" . $loadBalancer . "", $xmlimage ) );
 
 			if ( $jacketSize == 'SM' ) {
 				$xmlimage = trim( str_replace( 'BOOKJACKET-MD', 'BOOKJACKET-SM', $xmlimage ) );
