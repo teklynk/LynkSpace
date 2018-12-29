@@ -22,8 +22,6 @@ $rowLocation = mysqli_fetch_array($sqlLocation, MYSQLI_ASSOC);
 $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . loc_id . ";");
 $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
-$pageMsg = '';
-
 //update table on submit
 if (!empty($_POST['site_title'])) {
 
@@ -58,6 +56,13 @@ if (!empty($_POST['site_title'])) {
         //Update Setup
         $setupUpdate = "UPDATE setup SET title='" . safeCleanStr($_POST['site_title']) . "', author='" . safeCleanStr($site_author) . "', keywords='" . safeCleanStr($site_keywords) . "', description='" . safeCleanStr($site_description) . "', config='" . safeCleanStr($_POST['site_config']) . "', logo='" . safeCleanStr($_POST['site_logo']) . "', logo_use_defaults='" . $_POST['logo_defaults'] . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $setupUpdate);
+
+	    flashMessageSet( 'success', "The setup has been updated." );
+
+	    //Redirect back to main page
+	    header( "Location: setup.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='setup.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     } else {
         //Insert Location
         $locationInsert = "INSERT INTO locations (id, name, type, datetime, active) VALUES (" . loc_id . ", '" . safeCleanStr($_POST['location_name']) . "', '" . safeCleanStr($_POST['location_type']) . "', '" . date("Y-m-d H:i:s") . "', 'false');";
@@ -77,6 +82,13 @@ if (!empty($_POST['site_title'])) {
         //Events
         $eventsInsert = "INSERT INTO events (heading, use_defaults, loc_id) VALUES ('Upcoming Events', 'true', " . loc_id . ");";
         mysqli_query($db_conn, $eventsInsert);
+
+	    flashMessageSet( 'success', "The location has been added." );
+
+	    //Redirect back to main page
+	    header( "Location: setup.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='setup.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
     //Reset/Reload loc_list drop down to get the newest locations
@@ -91,8 +103,12 @@ if (!empty($_POST['site_title'])) {
     $sqlSetup = mysqli_query($db_conn, "SELECT title, author, description, keywords, config, ls2pac, ls2kids, searchdefault, logo, logo_use_defaults, author_name, datetime, loc_id FROM setup WHERE loc_id=" . loc_id . ";");
     $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
-    $pageMsg = "<div class='alert alert-success'>The setup section has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='setup.php?loc_id=" . loc_id . "'\">×</button></div>";
+	flashMessageSet( 'success', "The setup section has been updated." );
 
+	//Redirect back to main page
+	header( "Location: setup.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='setup.php?loc_id=" . loc_id . "';</script>";
+	exit();
 }
 
 if ($_GET['deleteloc'] == 'true') {
@@ -120,8 +136,12 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id != 1 && $_GE
         unset($_SESSION['loc_list']);
         $_SESSION['loc_list'] = getLocList(loc_id, 'false');
 
-        header("Location: setup.php?loc_id=1", true, 302);
-        echo "<script>window.location.href='setup.php?loc_id=1';</script>";
+	    flashMessageSet( 'success', "The location has been deleted." );
+
+	    //Redirect back to main page
+	    header( "Location: setup.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='setup.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 }
 
@@ -145,18 +165,14 @@ if ($_SESSION['user_level'] == 1 && multiBranch == 'true' && loc_id != 1 && $_GE
             ?>
         </div>
     </div>
+
+    <?php echo flashMessageGet( 'success' ); ?>
+
     <div class="row">
         <div class="col-lg-8">
             <?php
             $isActive_default1 = '';
             $isActive_default2 = '';
-            $errorMsg = '';
-
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
 
             if ($rowLocation['active'] == 'true') {
                 $isActive_location = "CHECKED";

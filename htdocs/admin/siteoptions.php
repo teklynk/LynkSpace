@@ -17,29 +17,32 @@ if (loc_id != 1) {
 //check if user is logged in and is admin
 if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5($_SESSION['user_name'])) {
 
-    $pageMsg = "";
+    if (isset($_POST['save_main'])) {
 
-    if ($_POST['save_main']) {
-
-        $site_customer_id = safeCleanStr($_POST['site_customer_id']);
-        $site_theme = safeCleanStr($_POST['site_theme']);
-        $site_loc_types = safeCleanStr($_POST['site_loc_types']);
-        $site_analytics = safeCleanStr($_POST['site_analytics']);
-        $site_session_timeout = safeCleanStr($_POST['site_session_timeout']);
-        $site_carousel_speed = safeCleanStr($_POST['site_carousel_speed']);
-        $site_pacurl = validateUrl($_POST['site_pacurl']);
-        $ls2pac_label = safeCleanStr($_POST['ls2pac_label']);
-        $ls2pac_placeholder = safeCleanStr($_POST['ls2pac_placeholder']);
-        $ls2kids_label = safeCleanStr($_POST['ls2kids_label']);
-        $ls2kids_placeholder = safeCleanStr($_POST['ls2kids_placeholder']);
-        $site_homepageurl = validateUrl($_POST['site_homepageurl']);
-        $site_iprange = safeCleanStr($_POST['site_iprange']);
+        $site_customer_id = isset( $_POST['site_customer_id'] ) ? safeCleanStr($_POST['site_customer_id']) : null;
+        $site_theme = isset( $_POST['site_theme'] ) ? safeCleanStr($_POST['site_theme']) : null;
+        $site_loc_types = isset( $_POST['site_loc_types'] ) ? safeCleanStr($_POST['site_loc_types']) : null;
+        $site_analytics = isset( $_POST['site_analytics'] ) ? safeCleanStr($_POST['site_analytics']) : null;
+        $site_session_timeout = isset( $_POST['site_session_timeout'] ) ? safeCleanStr($_POST['site_session_timeout']) : null;
+        $site_carousel_speed = isset( $_POST['site_carousel_speed'] ) ? safeCleanStr($_POST['site_carousel_speed']) : null;
+        $site_pacurl = isset( $_POST['site_pacurl'] ) ? validateUrl($_POST['site_pacurl']) : null;
+        $ls2pac_label = isset( $_POST['ls2pac_label'] ) ? safeCleanStr($_POST['ls2pac_label']) : null;
+        $ls2pac_placeholder = isset( $_POST['ls2pac_placeholder'] ) ? safeCleanStr($_POST['ls2pac_placeholder']) : null;
+        $ls2kids_label = isset( $_POST['ls2kids_label'] ) ? safeCleanStr($_POST['ls2kids_label']) : null;
+        $ls2kids_placeholder = isset( $_POST['ls2kids_placeholder'] ) ? safeCleanStr($_POST['ls2kids_placeholder']) : null;
+        $site_homepageurl = isset( $_POST['site_homepageurl'] ) ? validateUrl($_POST['site_homepageurl']) : null;
+        $site_iprange = isset( $_POST['site_iprange'] ) ? safeCleanStr($_POST['site_iprange']) : null;
 
         //Update record in DB
         $configUpdate = "UPDATE config SET customer_id='" . $site_customer_id . "', theme='" . $site_theme . "', loc_types='" . $site_loc_types . "', analytics='" . $site_analytics . "', session_timeout=" . $site_session_timeout . ", carousel_speed='" . $site_carousel_speed . "', setuppacurl='" . $site_pacurl . "', searchlabel_ls2pac='" . $ls2pac_label . "', searchplaceholder_ls2pac='" . $ls2pac_placeholder . "', searchlabel_ls2kids='" . $ls2kids_label . "', searchplaceholder_ls2kids='" . $ls2kids_placeholder . "', homepageurl='" . $site_homepageurl . "', iprange='" . $site_iprange . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=1;";
         mysqli_query($db_conn, $configUpdate);
 
-        $pageMsg = "<div class='alert alert-success'>Site options have been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='siteoptions.php'\">×</button></div>";
+	    flashMessageSet( 'success', "Site options have been updated." );
+
+	    //Redirect back to main page
+	    header( "Location: siteoptions.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='siteoptions.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
     //Get data
@@ -60,13 +63,14 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
             </h1>
         </div>
 
+
+
         <div class="col-lg-8">
+
             <?php
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
+            //alert messages
+            echo flashMessageGet( 'success' );
+
             if (!is_writable('../sitemap.xml')) {
                 echo "<div class='alert alert-danger'>Unable to write to sitemap.xml. Check file permissions.</div>";
             }
@@ -206,7 +210,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] == 1 && $_SESSION['s
                     <label for="site_iprange">Admin Panel IP Range Access</label>
                     <small>
                         &nbsp;&nbsp;Restrict access to external and/or internal IP addresses.&nbsp;&nbsp;Your IP address
-                        is <?php echo getRealIpAddr(); ?></i>
+                        is <?php echo getRealIpAddr(); ?>
                     </small>
                     <input type="text" class="form-control count-text" name="site_iprange" maxlength="999"
                            value="<?php echo $rowConfig['iprange']; ?>" placeholder="192.168.0,10.10.0,127.0.0"
