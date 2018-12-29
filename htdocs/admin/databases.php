@@ -77,8 +77,6 @@ while ($rowSections = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC)) {
     $custMenuStr .= "<option value=" . $rowSections['section'] . " " . $isSectionSelected . ">" . $rowSections['section'] . "</option>";
 }
 
-echo flashMessageGet('success');
-
 ?>
     <div class="row">
         <div class="col-lg-12">
@@ -107,6 +105,7 @@ echo flashMessageGet('success');
             ?>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
@@ -163,7 +162,10 @@ echo flashMessageGet('success');
     </div>
     <div class="row">
     <div class="col-lg-12">
+
 <?php
+
+echo flashMessageGet('success');
 
 if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
 
@@ -344,7 +346,12 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         $sectionDeleteDatabases = "DELETE FROM customers WHERE section='" . $getCustSection . "' AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $sectionDeleteDatabases);
 
-        echo "<script>window.location.href='databases.php?section=1&loc_id=" . $_SESSION['loc_id'] . "&sectiondeleted=true';</script>";
+	    flashMessageSet('success', "Section has been deleted.");
+
+	    //Redirect back to uploads page
+	    header( "Location: databases.php?section=1&loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='databases.php?section=1&loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
     //delete customer
@@ -362,20 +369,16 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         $customerDelete = "DELETE FROM customers WHERE id=" . $delcustomerId . " AND guid='" . $delcustomerGuid . "' AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $customerDelete);
 
-        echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . $_SESSION['loc_id'] . "&deletename=" . $delcustomerName . "&databasedeleted=true';</script>";
-    }
+	    flashMessageSet('success', $delcustomerName . " has been deleted.");
 
-    //Display deleted message
-    if ($_GET['sectiondeleted'] == true) {
-        flashMessageSet('success', "Section has been deleted.");
-        echo flashMessageGet('success');
-    } elseif ($_GET['databasedeleted'] == true) {
-        flashMessageSet('success', $delcustomerName . " has been deleted.");
-        echo flashMessageGet('success');
+	    //Redirect back to uploads page
+	    header( "Location: databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
     //update heading on submit
-    if ($_POST['save_main']) {
+    if (isset($_POST['save_main'])) {
 
         $sqlSections = mysqli_query($db_conn, "SELECT section, loc_id FROM sections_customers WHERE section='" . $getCustSection . "' AND loc_id=" . loc_id . ";");
         $rowSection = mysqli_fetch_array($sqlSections, MYSQLI_ASSOC);
@@ -406,6 +409,11 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         }
 
 	    flashMessageSet('success','Databases section has been updated');
+
+	    //Redirect back to uploads page
+	    header( "Location: databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='databases.php?section=" . $getCustSection . "&loc_id=" . loc_id . "';</script>";
+	    exit();
 
     }
 
@@ -452,7 +460,6 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
         mysqli_query($db_conn, $custRenameCatUpdate);
 
         flashMessageSet('success', $renameCatTitle . " category has been updated.");
-        echo flashMessageGet('success');
     }
 
     // add category
@@ -475,7 +482,6 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
     // add category message
     if (!empty($_GET['addcat'])) {
         flashMessageSet('success', $_GET['addcat'] . " category has been added.");
-        flashMessageGet('success');
     }
 
     //Modal preview box
@@ -588,10 +594,7 @@ if (isset($_GET['newcustomer']) || isset($_GET['editcustomer'])) {
     </button>
     <h2></h2>
     <div>
-        <?php
-        //Alert messages
-        echo flashMessageGet('success');
-        ?>
+
         <form name="customerForm" class="dirtyForm" method="post" action="">
             <div class="form-group required">
                 <label>Heading</label>
