@@ -91,7 +91,7 @@ if ( $newSlide == 'true' || $editSlide ) {
 
 			flashMessageSet( 'success', $slide_title . " has been updated." );
 
-			//Redirect back to uploads page
+			//Redirect back to main page
 			header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
 			echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
 			exit();
@@ -113,7 +113,7 @@ if ( $newSlide == 'true' || $editSlide ) {
 
 			flashMessageSet( 'success', $slide_title . " has been added." );
 
-			//Redirect back to uploads page
+			//Redirect back to main page
 			header( "Location: slider.php?loc_id=" . loc_id . "", true, 302 );
 			echo "<script>window.location.href='slider.php?loc_id=" . loc_id . "';</script>";
 			exit();

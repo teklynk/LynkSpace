@@ -28,6 +28,8 @@ $rowLocations = mysqli_fetch_array($sqlLocations, MYSQLI_ASSOC);
 </div>
 <?php
 
+echo flashMessageGet('success');
+
 //delete hottitle
 if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
 
@@ -46,7 +48,11 @@ if ($delhottitlesId && $delhottitlesTitle && !$_GET['confirm']) {
     mysqli_query($db_conn, $hottitlesDelete);
 
     flashMessageSet('success', $delhottitlesTitle . " has been deleted.");
-    echo flashMessageGet('success');
+
+	//Redirect back to main page
+	header( "Location: hottitles.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='hottitles.php?loc_id=" . loc_id . "';</script>";
+	exit();
 
 }
 
@@ -72,7 +78,11 @@ if (!empty($_POST['save_main'])) {
     }
 
     flashMessageSet('success', 'The hot titles section has been updated.');
-    echo flashMessageGet('success');
+
+	//Redirect back to main page
+	header( "Location: hottitles.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='hottitles.php?loc_id=" . loc_id . "';</script>";
+	exit();
 
 }
 
@@ -94,12 +104,20 @@ if ($_POST['add_hottitles']) {
         mysqli_query($db_conn, $hottitlesInsert);
 
         flashMessageSet('success', 'The hot titles has been updated.');
-        echo flashMessageGet('success');
+
+	    //Redirect back to main page
+	    header( "Location: hottitles.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='hottitles.php?loc_id=" . loc_id . "';</script>";
+	    exit();
 
     } else {
 
         flashMessageSet('danger', $hottitles_url . " is not a valid RSS feed.");
-        echo flashMessageGet('danger');
+
+	    //Redirect back to main page
+	    header( "Location: hottitles.php?loc_id=" . loc_id . "", true, 302 );
+	    echo "<script>window.location.href='hottitles.php?loc_id=" . loc_id . "';</script>";
+	    exit();
     }
 
 }
