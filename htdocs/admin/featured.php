@@ -13,10 +13,10 @@ $rowFeatured = mysqli_fetch_array($sqlFeatured, MYSQLI_ASSOC);
 //update table on submit
 if (!empty($_POST)) {
 
-    $featured_defaults = safeCleanStr($_POST['featured_defaults']);
-    $featured_heading = safeCleanStr($_POST['featured_heading']);
-    $featured_introtext = safeCleanStr($_POST['featured_introtext']);
-    $featured_content = trim($_POST['featured_content']);
+    $featured_defaults = isset($_POST['featured_defaults']) ? safeCleanStr($_POST['featured_defaults']) : NULL;
+    $featured_heading = isset($_POST['featured_heading']) ? safeCleanStr($_POST['featured_heading']) : NULL;
+    $featured_introtext = isset($_POST['featured_introtext']) ? safeCleanStr($_POST['featured_introtext']) : NULL;
+    $featured_content = isset($_POST['featured_introtext']) ? trim($_POST['featured_introtext']) : NULL;
 
     if ($featured_defaults == 'on') {
         $featured_defaults = 'true';

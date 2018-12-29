@@ -5,9 +5,9 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-$getUploadGuid = isset($_GET['guid']) ? $_GET['guid'] : NULL;
-$getUploadId = isset($_GET['delete']) ? $_GET['delete'] : NULL;
-$action = isset($_POST['action']) ? $_POST['action'] : NULL;
+$getUploadGuid = isset($_POST['guid']) ? safeCleanStr($_POST['guid']) : NULL;
+$getUploadId = isset($_POST['delete']) ? safeCleanStr($_POST['delete']) : NULL;
+$action = isset($_POST['action']) ? safeCleanStr($_POST['action']) : NULL;
 
 $fileList = getAllUploads(1, 'upload', loc_id, 'ASC'); //returns an array
 

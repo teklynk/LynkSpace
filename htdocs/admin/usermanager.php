@@ -20,12 +20,12 @@ $deluserGuid  = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : false;
 
 //Add User
 //insert data on submit
-$userName            = sqlEscapeStr( $_POST['user_name'] );
-$userEmail           = safeCleanStr( $_POST['user_email'] );
+$userName            = isset($_POST['user_name']) ? sqlEscapeStr($_POST['user_name']) : NULL;
+$userEmail           = isset($_POST['user_email']) ? validateEmail($_POST['user_email']) : NULL;
 $userPassword        = sha1( blowfishSalt . safeCleanStr( $_POST['user_password'] ) );
-$userPasswordConfirm = safeCleanStr( $_POST['user_password_confirm'] );
-$userLevel           = safeCleanStr( $_POST['user_level'] );
-$userLocation        = safeCleanStr( $_POST['user_location'] );
+$userPasswordConfirm = isset($_POST['user_password_confirm']) ? safeCleanStr($_POST['user_password_confirm']) : NULL;
+$userLevel           = isset($_POST['user_level']) ? safeCleanStr($_POST['user_level']) : NULL;
+$userLocation        = isset($_POST['user_location']) ? safeCleanStr($_POST['user_location']) : NULL;
 $userIp              = getRealIpAddr();
 
 if ( $deluserId && $deluserTitle && ! $_GET['confirm'] ) {

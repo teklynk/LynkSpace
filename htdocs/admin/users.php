@@ -5,11 +5,11 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'users.php';
 
-$user_name             = safeCleanStr( $_POST['user_name'] );
-$user_email            = validateEmail( $_POST['user_email'] );
-$user_password         = safeCleanStr( $_POST['user_password'] );
-$user_password_confirm = safeCleanStr( $_POST['user_password_confirm'] );
-$user_id               = sanitizeInt( $_POST['user_id'] );
+$user_name             = isset($_POST['user_name']) ? safeCleanStr($_POST['user_name']) : NULL;
+$user_email            = isset($_POST['user_email']) ? validateEmail($_POST['user_email']) : NULL;
+$user_password         = isset($_POST['user_password']) ? safeCleanStr($_POST['user_password']) : NULL;
+$user_password_confirm = isset($_POST['user_password_confirm']) ? safeCleanStr($_POST['user_password_confirm']) : NULL;
+$user_id               = isset($_POST['user_id']) ? sanitizeInt($_POST['user_id']) : NULL;
 
 $sqlUsers = dbQuery(
 	'select',

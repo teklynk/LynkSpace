@@ -5,10 +5,10 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'hottitles.php';
 
-$delhottitlesId = safeCleanStr($_GET['deletehottitles']);
-$delhottitlesTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-$delhottitlesGuid = safeCleanStr($_GET['guid']);
-$delhottitlesToken = safeCleanStr($_GET['token']);
+$delhottitlesId = isset( $_GET['deletehottitles'] ) ? safeCleanStr( $_GET['deletehottitles'] ) : null;
+$delhottitlesTitle = isset( $_GET['deletetitle'] ) ? safeCleanStr( $_GET['deletetitle'] ) : null;
+$delhottitlesGuid = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$delhottitlesToken = isset( $_GET['token'] ) ? safeCleanStr( $_GET['token'] ) : null;
 
 //get location type from locations table
 $sqlLocations = mysqli_query($db_conn, "SELECT id, type FROM locations WHERE id=" . loc_id . ";");
@@ -67,11 +67,11 @@ if (!empty($_POST['save_main'])) {
 
     for ($i = 0; $i < $hottitles_count; $i++) {
 
-        $hottitles_sort = safeCleanStr($_POST['hottitles_sort'][$i]);
-        $hottitles_title = safeCleanStr($_POST['hottitles_title'][$i]);
-        $hottitles_url = validateUrl($_POST['hottitles_url'][$i]);
-        $location_type = safeCleanStr($_POST['location_type'][$i]);
-        $hottitles_id = safeCleanStr($_POST['hottitles_id'][$i]);
+        $hottitles_sort = isset( $_POST['hottitles_sort'][$i] ) ? safeCleanStr( $_POST['hottitles_sort'][$i] ) : null;
+        $hottitles_title = isset( $_POST['hottitles_title'][$i] ) ? safeCleanStr( $_POST['hottitles_title'][$i] ) : null;
+        $hottitles_url = isset( $_POST['hottitles_url'][$i] ) ? validateUrl( $_POST['hottitles_url'][$i] ) : null;
+        $location_type = isset( $_POST['location_type'][$i] ) ? safeCleanStr( $_POST['location_type'][$i] ) : null;
+        $hottitles_id = isset( $_POST['hottitles_id'][$i] ) ? safeCleanStr( $_POST['hottitles_id'][$i] ) : null;
 
         $hottitlesUpdate = "UPDATE hottitles SET sort=" . $hottitles_sort . ", title='" . $hottitles_title . "', url='" . $hottitles_url . "', loc_type='" . $location_type . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $hottitles_id . " AND loc_id=" . loc_id . ";";
         mysqli_query($db_conn, $hottitlesUpdate);
@@ -88,9 +88,9 @@ if (!empty($_POST['save_main'])) {
 
 if ($_POST['add_hottitles']) {
 
-    $hottitles_title = safeCleanStr($_POST['hottitles_title']);
-    $hottitles_url = validateUrl(safeCleanStr($_POST['hottitles_url']));
-    $location_type = safeCleanStr($_POST['location_type']);
+    $hottitles_title = isset( $_POST['hottitles_title'] ) ? safeCleanStr( $_POST['hottitles_title'] ) : null;
+    $hottitles_url = isset( $_POST['hottitles_url'] ) ? safeCleanStr( $_POST['hottitles_url'] ) : null;
+    $location_type = isset( $_POST['location_type'] ) ? safeCleanStr( $_POST['location_type'] ) : null;
 
     //Insert Hot Titles
     if (strpos($hottitles_url, 'econtent') || strpos($hottitles_url, 'dynamic') || strpos($hottitles_url, 'static')) {

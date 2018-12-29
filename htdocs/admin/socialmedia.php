@@ -11,15 +11,15 @@ $rowSocial = mysqli_fetch_array( $sqlSocial, MYSQLI_ASSOC );
 //update table on submit
 if ( ! empty( $_POST ) ) {
 
-	$social_heading   = safeCleanStr( addslashes( $_POST['social_heading'] ) );
-	$social_defaults  = safeCleanStr( $_POST['social_defaults'] );
-	$social_facebook  = safeCleanStr( $_POST['social_facebook'] );
-	$social_youtube   = safeCleanStr( $_POST['social_youtube'] );
-	$social_twitter   = safeCleanStr( $_POST['social_twitter'] );
-	$social_google    = safeCleanStr( $_POST['social_google'] );
-	$social_pinterest = safeCleanStr( $_POST['social_pinterest'] );
-	$social_instagram = safeCleanStr( $_POST['social_instagram'] );
-	$social_tumblr    = safeCleanStr( $_POST['social_tumblr'] );
+	$social_heading   = isset($_POST['social_heading']) ? safeCleanStr(addslashes($_POST['social_heading'])) : NULL;
+	$social_defaults  = isset($_POST['social_defaults']) ? safeCleanStr($_POST['social_defaults']) : NULL;
+	$social_facebook  = isset($_POST['social_facebook']) ? safeCleanStr($_POST['social_facebook']) : NULL;
+	$social_youtube   = isset($_POST['social_youtube']) ? safeCleanStr($_POST['social_youtube']) : NULL;
+	$social_twitter   = isset($_POST['social_twitter']) ? safeCleanStr($_POST['social_twitter']) : NULL;
+	$social_google    = isset($_POST['social_google']) ? safeCleanStr($_POST['social_google']) : NULL;
+	$social_pinterest = isset($_POST['social_pinterest']) ? safeCleanStr($_POST['social_pinterest']) : NULL;
+	$social_instagram = isset($_POST['social_instagram']) ? safeCleanStr($_POST['social_instagram']) : NULL;
+	$social_tumblr    = isset($_POST['social_tumblr']) ? safeCleanStr($_POST['social_tumblr']) : NULL;
 
 	if ( ! empty( $social_heading ) ) {
 

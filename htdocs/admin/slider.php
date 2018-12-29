@@ -74,8 +74,8 @@ if ( $newSlide == 'true' || $editSlide ) {
 	$slideLabel    = "Edit Slide Title";
 	$slide_title   = isset( $_POST['slide_title'] ) ? safeCleanStr( addslashes( $_POST['slide_title'] ) ) : null;
 	$slide_content = isset( $_POST['slide_content'] ) ? safeCleanStr( addslashes( $_POST['slide_content'] ) ) : null;
-	$start_date    = dateTimeFormat( 1, $_POST['start_date'] );
-	$end_date      = dateTimeFormat( 1, $_POST['end_date'] );
+	$start_date    = dateTimeFormat( 1, safeCleanStr( $_POST['start_date']) );
+	$end_date      = dateTimeFormat( 1, safeCleanStr( $_POST['end_date'] ));
 	$slide_link    = isset( $_POST['slide_link'] ) ? safeCleanStr( addslashes( $_POST['slide_link'] ) ) : null;
 	$slide_image   = isset( $_POST['slide_image'] ) ? safeCleanStr( addslashes( $_POST['slide_image'] ) ) : null;
 	$location_type = isset( $_POST['location_type'] ) ? safeCleanStr( addslashes( $_POST['location_type'] ) ) : null;

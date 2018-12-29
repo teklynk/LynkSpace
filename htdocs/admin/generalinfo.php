@@ -7,9 +7,9 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'generalinfo.php';
 
-$generalinfo_defaults = safeCleanStr($_POST['generalinfo_defaults']);
-$generalinfo_heading = safeCleanStr($_POST['generalinfo_heading']);
-$generalinfo_content = trim($_POST['generalinfo_content']);
+$generalinfo_defaults = isset( $_POST['generalinfo_defaults'] ) ? safeCleanStr( $_POST['generalinfo_defaults'] ) : null;
+$generalinfo_heading = isset( $_POST['generalinfo_heading'] ) ? safeCleanStr( $_POST['generalinfo_heading'] ) : null;
+$generalinfo_content = isset( $_POST['generalinfo_content'] ) ? trim( $_POST['generalinfo_content'] ) : null;
 
 $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . loc_id . ";");
 $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);

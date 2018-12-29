@@ -43,9 +43,9 @@ checkDependencies();
 if (!empty($_POST)) {
 
     // Make sure post values is okay and cleaned
-    $postPassword = sqlEscapeStr($_POST['password']);
-	$userName = sqlEscapeStr($_POST['username']);
-	$userEmail = validateEmail($_POST['email']);
+    $postPassword = isset( $_POST['password'] ) ? sqlEscapeStr( $_POST['password'] ) : null;
+	$userName = isset( $_POST['username'] ) ? sqlEscapeStr( $_POST['username'] ) : null;
+	$userEmail = isset( $_POST['email'] ) ? validateEmail( $_POST['email'] ) : null;
 	$userPassword = sha1(blowfishSalt . $postPassword);
 
     // Check and record failed login attempts

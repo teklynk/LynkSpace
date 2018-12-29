@@ -33,9 +33,9 @@ if (file_exists($fileToEdit_dir)){
 
 if ( isset($_POST['save_main']) ) {
 
-	$theme_defaults = safeCleanStr($_POST['theme_defaults']);
-	$element_count  = safeCleanStr($_POST['element_count']);
-	$edit_file      = sanitizeStr( $_POST['edit_file'] );
+	$theme_defaults = isset( $_POST['theme_defaults'] ) ? safeCleanStr( $_POST['theme_defaults'] ) : null;
+	$element_count  = isset( $_POST['element_count'] ) ? safeCleanStr( $_POST['element_count'] ) : null;
+	$edit_file      = isset( $_POST['edit_file'] ) ? sanitizeStr( $_POST['edit_file'] ) : null;
 
 	//use theme defaults
 	if ( $theme_defaults == 'on' ) {
@@ -46,9 +46,9 @@ if ( isset($_POST['save_main']) ) {
 
 	for ( $i = 0; $i < $element_count; $i ++ ) {
 
-		$selector = safeCleanStr($_POST['selector'][ $i ]);
-		$property = safeCleanStr($_POST['property'][ $i ]);
-		$cssvalue = safeCleanStr($_POST['cssvalue'][ $i ]);
+		$selector = isset( $_POST['selector'][ $i ] ) ? safeCleanStr( $_POST['selector'][ $i ] ) : null;
+		$property = isset( $_POST['property'][ $i ] ) ? safeCleanStr( $_POST['property'][ $i ] ) : null;
+		$cssvalue = isset( $_POST['cssvalue'][ $i ] ) ? safeCleanStr( $_POST['cssvalue'][ $i ] ) : null;
 
 		$sqlThemeOptions = mysqli_query( $db_conn, "SELECT id, themename, selector, property, cssvalue, loc_id FROM theme_options WHERE themename='" . themeOption . "' AND selector='" . $selector . "' AND loc_id=" . loc_id . ";" );
 		$rowThemeOptions = mysqli_fetch_array( $sqlThemeOptions, MYSQLI_ASSOC );
@@ -121,7 +121,7 @@ if ( isset($_POST['save_main']) ) {
 			} else {
 				$selThemeDefaults = "";
 			}
-			if ( ! is_writable( $fileToEdit_dir ) ) {
+			if (file_exists( $fileToEdit_dir ) && ! is_writable( $fileToEdit_dir ) ) {
 				die( "<div class='alert alert-danger fade in'>Unable to write to " . $fileToEdit_dir . ". Check file permissions.</div>" );
 			}
 

@@ -5,19 +5,19 @@ require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'contactus.php';
 
-$contact_heading = safeCleanStr($_POST['contact_heading']) ?: NULL;
-$contact_defaults = $_POST['contact_defaults'] ?: NULL;
-$contact_introtext = safeCleanStr($_POST['contact_introtext']) ?: NULL;
-$contact_mapcode = trim($_POST['contact_mapcode']) ?: NULL;
-$contact_email = validateEmail($_POST['contact_email']) ?: NULL;
-$contact_sendtoemail = validateEmail($_POST['contact_sendtoemail']) ?: NULL;
-$contact_address = safeCleanStr($_POST['contact_address']) ?: NULL;
-$contact_city = safeCleanStr($_POST['contact_city']) ?: NULL;
-$contact_state = safeCleanStr($_POST['contact_state']) ?: NULL;
-$contact_zipcode = safeCleanStr($_POST['contact_zipcode']) ?: NULL;
-$contact_phone = safeCleanStr($_POST['contact_phone']) ?: NULL;
-$contact_hours = safeCleanStr($_POST['contact_hours']) ?: NULL;
-$contact_defaults = safeCleanStr($_POST['contact_defaults']) ?: NULL;
+$contact_heading = isset($_POST['contact_heading']) ? safeCleanStr($_POST['contact_heading']) : NULL;
+$contact_defaults = isset($_POST['contact_defaults']) ? safeCleanStr($_POST['contact_defaults']) : NULL;
+$contact_introtext = isset($_POST['contact_introtext']) ? safeCleanStr($_POST['contact_introtext']) : NULL;
+$contact_mapcode = isset($_POST['contact_mapcode']) ? trim($_POST['contact_mapcode']) : NULL;
+$contact_email = isset($_POST['contact_email']) ? validateEmail($_POST['contact_email']) : NULL;
+$contact_sendtoemail = isset($_POST['contact_sendtoemail']) ? validateEmail($_POST['contact_sendtoemail']) : NULL;
+$contact_address = isset($_POST['contact_address']) ? safeCleanStr($_POST['contact_address']) : NULL;
+$contact_city = isset($_POST['contact_city']) ? safeCleanStr($_POST['contact_city']) : NULL;
+$contact_state = isset($_POST['contact_state']) ? safeCleanStr($_POST['contact_state']) : NULL;
+$contact_zipcode = isset($_POST['contact_zipcode']) ? safeCleanStr($_POST['contact_zipcode']) : NULL;
+$contact_phone = isset($_POST['contact_phone']) ? safeCleanStr($_POST['contact_phone']) : NULL;
+$contact_hours = isset($_POST['contact_hours']) ? safeCleanStr($_POST['contact_hours']) : NULL;
+$contact_defaults = isset($_POST['contact_defaults']) ? safeCleanStr($_POST['contact_defaults']) : NULL;
 
 $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";");
 $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);

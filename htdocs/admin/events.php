@@ -15,8 +15,8 @@ if (!empty($_POST)) {
 	$event_defaults = isset($_POST['event_defaults']) ? safeCleanStr($_POST['event_defaults']) : NULL;
     $event_heading = isset($_POST['event_heading']) ? safeCleanStr($_POST['event_heading']) : NULL;
     $event_alert = isset($_POST['event_alert']) ? safeCleanStr($_POST['event_alert']) : NULL;
-    $event_startdate = dateTimeFormat(1, $_POST['event_startdate']);
-    $event_enddate = dateTimeFormat(1, $_POST['event_enddate']);
+    $event_startdate = dateTimeFormat(1, safeCleanStr($_POST['event_startdate']));
+    $event_enddate = dateTimeFormat(1, safeCleanStr($_POST['event_enddate']));
     $event_calendar = isset($_POST['event_calendar']) ? safeCleanStr($_POST['event_calendar']) : NULL;
 
     if ($event_defaults == 'on') {

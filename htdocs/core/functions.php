@@ -302,6 +302,7 @@ function getNav( $loc, $navSection, $dropdown, $pull ) {
 	}
 
 	if ( isset( $loc ) && ! empty( $loc ) ) {
+
 		//check if using default location
 		$sqlNavDefaults = mysqli_query( $db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . $loc . ";" );
 		$rowNavDefaults = mysqli_fetch_array( $sqlNavDefaults, MYSQLI_ASSOC );
@@ -328,16 +329,17 @@ function getNav( $loc, $navSection, $dropdown, $pull ) {
 			$navLinksSort         = $rowNavLinks[1];
 			$navLinksName         = $rowNavLinks[2];
 			$navLinksUrl          = $rowNavLinks[3];
-			$navLinksCatId        = $rowNavLinks[4];
-			$navLinksSection      = $rowNavLinks[5];
-			$navLinksActive       = $rowNavLinks[6];
-			$navLinksWin          = $rowNavLinks[7];
-			$navLinksLocId        = $rowNavLinks[8];
-			$navLinksDateTime     = $rowNavLinks[9];
-			$navLinks_Author      = $rowNavLinks[10];
-			$navLinks_CatId       = $rowNavLinks[11];
-			$navLinks_CatName     = $rowNavLinks[12];
-			$navLinks_CatNavLocId = $rowNavLinks[13];
+			$navLinksGuid         = $rowNavLinks[4];
+			$navLinksCatId        = $rowNavLinks[5];
+			$navLinksSection      = $rowNavLinks[6];
+			$navLinksActive       = $rowNavLinks[7];
+			$navLinksWin          = $rowNavLinks[8];
+			$navLinksLocId        = $rowNavLinks[9];
+			$navLinksDateTime     = $rowNavLinks[10];
+			$navLinks_Author      = $rowNavLinks[11];
+			$navLinks_CatId       = $rowNavLinks[12];
+			$navLinks_CatName     = $rowNavLinks[13];
+			$navLinks_CatNavLocId = $rowNavLinks[14];
 
 			//Check if link contains shortcode
 			$navLinksUrl = getShortCode( $navLinksUrl );
@@ -354,7 +356,7 @@ function getNav( $loc, $navSection, $dropdown, $pull ) {
 
 				if ( $navLinksCatId != $tempLink ) {
 
-					$sqlNavCatLinks = mysqli_query( $db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='" . $navSection . "' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id='" . $navDefaultLoc . "' ORDER BY navigation.sort, navigation.name ASC;" );
+					$sqlNavCatLinks = mysqli_query( $db_conn, "SELECT * FROM navigation JOIN category_navigation ON navigation.catid=category_navigation.id WHERE section='" . $navSection . "' AND category_navigation.id=" . $navLinksCatId . " AND active='true' AND loc_id=" . $navDefaultLoc . " ORDER BY navigation.sort, navigation.name ASC;" );
 					//returns: navigation.id, navigation.name, navigation.url, navigation.catid, navigation.section, navigation.active, navigation.win, navigation.loc_id, navigation.datetime, category_navigation.id, category_navigation.cat_name, category_navigation.nav_loc_id
 
 					echo "<li class='$dropdown'>";
@@ -367,10 +369,11 @@ function getNav( $loc, $navSection, $dropdown, $pull ) {
 						$navCatLinksSort       = $rowNavCatLinks[1];
 						$navCatLinksName       = $rowNavCatLinks[2];
 						$navCatLinksUrl        = $rowNavCatLinks[3];
-						$navCatLinksCatID      = $rowNavCatLinks[4];
-						$navCatLinksCatSection = $rowNavCatLinks[5];
-						$navCatLinksActive     = $rowNavCatLinks[6];
-						$navCatLinksWin        = $rowNavCatLinks[7];
+						$navCatLinksGuid       = $rowNavCatLinks[4];
+						$navCatLinksCatID      = $rowNavCatLinks[5];
+						$navCatLinksCatSection = $rowNavCatLinks[6];
+						$navCatLinksActive     = $rowNavCatLinks[7];
+						$navCatLinksWin        = $rowNavCatLinks[8];
 
 						//Check if cat link contains shortcode
 						$navCatLinksUrl = getShortCode( $navCatLinksUrl );
