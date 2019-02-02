@@ -1,42 +1,42 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-define('tinyMCE', TRUE);
+define( 'tinyMCE', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'generalinfo.php';
 
-$sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . loc_id . ";");
-$rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
+$generalinfo_defaults = isset( $_POST['generalinfo_defaults'] ) ? safeCleanStr( $_POST['generalinfo_defaults'] ) : null;
+$generalinfo_heading  = isset( $_POST['generalinfo_heading'] ) ? safeCleanStr( $_POST['generalinfo_heading'] ) : null;
+$generalinfo_content  = isset( $_POST['generalinfo_content'] ) ? trim( $_POST['generalinfo_content'] ) : null;
+
+$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . loc_id . ";" );
+$rowGeneralinfo = mysqli_fetch_array( $sqlGeneralinfo, MYSQLI_ASSOC );
 
 //update table on submit
-if (!empty($_POST)) {
+if ( ! empty( $_POST ) ) {
 
-    $generalinfo_defaults = safeCleanStr($_POST['generalinfo_defaults']);
-    $generalinfo_heading = safeCleanStr($_POST["generalinfo_heading"]);
-    $generalinfo_content = trim($_POST['generalinfo_content']);
+	if ( $generalinfo_defaults == 'on' ) {
+		$generalinfo_defaults = 'true';
+	} else {
+		$generalinfo_defaults = 'false';
+	}
 
-    if ($generalinfo_defaults == 'on') {
-        $generalinfo_defaults = 'true';
-    } else {
-        $generalinfo_defaults = 'false';
-    }
+	if ( $rowGeneralinfo['loc_id'] == loc_id ) {
+		//Do Update
+		$generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		mysqli_query( $db_conn, $generalinfoUpdate );
+	} else {
+		//Do Insert
+		$generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		mysqli_query( $db_conn, $generalinfoInsert );
+	}
 
-    if ($rowGeneralinfo['loc_id'] == loc_id) {
-        //Do Update
-        $generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
-        mysqli_query($db_conn, $generalinfoUpdate);
-    } else {
-        //Do Insert
-        $generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
-        mysqli_query($db_conn, $generalinfoInsert);
-    }
-
-	flashMessageSet('success', 'The general info section has been updated.');
+	flashMessageSet( 'success', 'The general info section has been updated.' );
 
 	//Redirect back to uploads page
-	header("Location: generalinfo.php?loc_id=" . loc_id . "", true, 302);
+	header( "Location: generalinfo.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='generalinfo.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
@@ -55,23 +55,23 @@ if (!empty($_POST)) {
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <?php
+		<?php
 
-        //Alert messages
-        echo flashMessageGet('success');
+		//Alert messages
+		echo flashMessageGet( 'success' );
 
-        //use default view
-        if ($rowGeneralinfo['use_defaults'] == 'true') {
-            $selDefaults = "CHECKED";
-        } else {
-            $selDefaults = "";
-        }
-        ?>
+		//use default view
+		if ( $rowGeneralinfo['use_defaults'] == 'true' ) {
+			$selDefaults = "CHECKED";
+		} else {
+			$selDefaults = "";
+		}
+		?>
         <form name="generalinfoForm" class="dirtyForm" method="post">
 
-            <?php
-            if (loc_id != 1) {
-                ?>
+			<?php
+			if ( loc_id != 1 ) {
+				?>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="generalinfodefaults">
@@ -80,9 +80,9 @@ if (!empty($_POST)) {
                                 <label>
                                     <input class="generalinfo_defaults_checkbox defaults-toggle"
                                            id="<?php echo loc_id ?>" name="generalinfo_defaults"
-                                           type="checkbox" <?php if (loc_id) {
-                                        echo $selDefaults;
-                                    } ?> data-toggle="toggle">
+                                           type="checkbox" <?php if ( loc_id ) {
+										echo $selDefaults;
+									} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -90,9 +90,9 @@ if (!empty($_POST)) {
                 </div>
 
                 <hr/>
-                <?php
-            }
-            ?>
+				<?php
+			}
+			?>
 
             <div class="form-group required">
                 <label>Heading</label>
@@ -107,10 +107,10 @@ if (!empty($_POST)) {
             </div>
 
             <div class="form-group">
-                <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowGeneralinfo['datetime'])) . " By: " . $rowGeneralinfo['author_name']; ?></small></span>
+                <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowGeneralinfo['datetime'] ) ) . " By: " . $rowGeneralinfo['author_name']; ?></small></span>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+            <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
             <button type="submit" name="generalinfo_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
                 Save Changes
@@ -123,5 +123,5 @@ if (!empty($_POST)) {
 </div>
 
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

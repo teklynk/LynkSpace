@@ -1,53 +1,53 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'contactus.php';
 
-$sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";");
-$rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
+$contact_heading     = isset( $_POST['contact_heading'] ) ? safeCleanStr( $_POST['contact_heading'] ) : null;
+$contact_defaults    = isset( $_POST['contact_defaults'] ) ? safeCleanStr( $_POST['contact_defaults'] ) : null;
+$contact_introtext   = isset( $_POST['contact_introtext'] ) ? safeCleanStr( $_POST['contact_introtext'] ) : null;
+$contact_mapcode     = isset( $_POST['contact_mapcode'] ) ? trim( $_POST['contact_mapcode'] ) : null;
+$contact_email       = isset( $_POST['contact_email'] ) ? validateEmail( $_POST['contact_email'] ) : null;
+$contact_sendtoemail = isset( $_POST['contact_sendtoemail'] ) ? validateEmail( $_POST['contact_sendtoemail'] ) : null;
+$contact_address     = isset( $_POST['contact_address'] ) ? safeCleanStr( $_POST['contact_address'] ) : null;
+$contact_city        = isset( $_POST['contact_city'] ) ? safeCleanStr( $_POST['contact_city'] ) : null;
+$contact_state       = isset( $_POST['contact_state'] ) ? safeCleanStr( $_POST['contact_state'] ) : null;
+$contact_zipcode     = isset( $_POST['contact_zipcode'] ) ? safeCleanStr( $_POST['contact_zipcode'] ) : null;
+$contact_phone       = isset( $_POST['contact_phone'] ) ? safeCleanStr( $_POST['contact_phone'] ) : null;
+$contact_hours       = isset( $_POST['contact_hours'] ) ? safeCleanStr( $_POST['contact_hours'] ) : null;
+$contact_defaults    = isset( $_POST['contact_defaults'] ) ? safeCleanStr( $_POST['contact_defaults'] ) : null;
+
+$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";" );
+$rowContact = mysqli_fetch_array( $sqlContact, MYSQLI_ASSOC );
 
 //update table on submit
-if (!empty($_POST)) {
+if ( ! empty( $_POST ) ) {
 
-    $contact_heading = safeCleanStr($_POST['contact_heading']);
-    $contact_defaults = $_POST['contact_defaults'];
-    $contact_introtext = safeCleanStr($_POST['contact_introtext']);
-    $contact_mapcode = trim($_POST['contact_mapcode']);
-    $contact_email = validateEmail($_POST['contact_email']);
-    $contact_sendtoemail = validateEmail($_POST['contact_sendtoemail']);
-    $contact_address = safeCleanStr($_POST['contact_address']);
-    $contact_city = safeCleanStr($_POST['contact_city']);
-    $contact_state = safeCleanStr($_POST['contact_state']);
-    $contact_zipcode = safeCleanStr($_POST['contact_zipcode']);
-    $contact_phone = safeCleanStr($_POST['contact_phone']);
-    $contact_hours = safeCleanStr($_POST['contact_hours']);
-    $contact_defaults = safeCleanStr($_POST['contact_defaults']);
+	if ( $contact_defaults == 'on' ) {
+		$contact_defaults = 'true';
+	} else {
+		$contact_defaults = 'false';
+	}
 
-    if ($contact_defaults == 'on') {
-        $contact_defaults = 'true';
-    } else {
-        $contact_defaults = 'false';
-    }
+	if ( $rowContact['loc_id'] == loc_id ) {
+		//Do Update
+		$contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		mysqli_query( $db_conn, $contactUpdate );
+	} else {
+		//Do Insert
+		$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		mysqli_query( $db_conn, $contactInsert );
+	}
 
-    if ($rowContact['loc_id'] == loc_id) {
-        //Do Update
-        $contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
-        mysqli_query($db_conn, $contactUpdate);
-    } else {
-        //Do Insert
-        $contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
-        mysqli_query($db_conn, $contactInsert);
-    }
+	$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";" );
+	$rowContact = mysqli_fetch_array( $sqlContact, MYSQLI_ASSOC );
 
-    $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";");
-    $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
-
-	flashMessageSet('success','The contact section has been updated.');
+	flashMessageSet( 'success', 'The contact section has been updated.' );
 
 	//Redirect back to uploads page
-	header("Location: contactus.php?loc_id=" . loc_id . "", true, 302);
+	header( "Location: contactus.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='contactus.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
@@ -63,7 +63,7 @@ if (!empty($_POST)) {
             <h1 class="page-header">
                 Contact&nbsp;<button type="button" data-toggle="tooltip" data-placement="bottom"
                                      title="Preview the Contact Page" class="btn btn-info"
-                                     onclick="showMyModal('contact.php?loc_id=<?php echo loc_id; ?>', '../contact.php?loc_id=<?php echo loc_id; ?>#contact')">
+                                     onclick="showMyModal('../contact.php?loc_id=<?php echo loc_id; ?>', '../contact.php?loc_id=<?php echo loc_id; ?>#contact')">
                     <i class="fa fa-eye"></i></button>
             </h1>
         </div>
@@ -71,21 +71,21 @@ if (!empty($_POST)) {
 
     <div class="row">
         <div class="col-lg-8">
-            <?php
-            //Alert messages
-            echo flashMessageGet('success');
+			<?php
+			//Alert messages
+			echo flashMessageGet( 'success' );
 
-            //use default view
-            if ($rowContact['use_defaults'] == 'true') {
-                $selDefaults = "CHECKED";
-            } else {
-                $selDefaults = "";
-            }
-            ?>
+			//use default view
+			if ( $rowContact['use_defaults'] == 'true' ) {
+				$selDefaults = "CHECKED";
+			} else {
+				$selDefaults = "";
+			}
+			?>
             <form name="contactForm" class="dirtyForm" method="post">
-                <?php
-                if (loc_id != 1) {
-                    ?>
+				<?php
+				if ( loc_id != 1 ) {
+					?>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group" id="contactdefaults">
@@ -94,9 +94,9 @@ if (!empty($_POST)) {
                                     <label>
                                         <input class="contact_defaults_checkbox defaults-toggle"
                                                id="<?php echo loc_id ?>" name="contact_defaults"
-                                               type="checkbox" <?php if (loc_id) {
-                                            echo $selDefaults;
-                                        } ?> data-toggle="toggle">
+                                               type="checkbox" <?php if ( loc_id ) {
+											echo $selDefaults;
+										} ?> data-toggle="toggle">
                                     </label>
                                 </div>
                             </div>
@@ -104,9 +104,9 @@ if (!empty($_POST)) {
                     </div>
 
                     <hr/>
-                    <?php
-                }
-                ?>
+					<?php
+				}
+				?>
                 <div class="form-group required">
                     <label for="contact_heading">Heading</label>
                     <input type="text" class="form-control count-text" name="contact_heading" maxlength="255"
@@ -174,10 +174,10 @@ if (!empty($_POST)) {
                 </div>
 
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowContact['datetime'])) . " By: " . $rowContact['author_name']; ?></small></span>
+                    <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowContact['datetime'] ) ) . " By: " . $rowContact['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="contact_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i>
                     Save Changes
@@ -191,7 +191,7 @@ if (!empty($_POST)) {
     <!--modal preview window-->
 <?php
 //Modal preview box
-showModalPreview("webpageDialog");
+showModalPreview( "webpageDialog" );
 
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

@@ -1,137 +1,150 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'navigation.php';
 
 //Used throughout the code
-$getNavSection = safeCleanStr(addslashes($_GET['section']));
+$getNavSection = isset( $_GET['section'] ) ? safeCleanStr( $_GET['section'] ) : null;
 
 //update table on submit
-if (!empty($_POST)) {
+if ( ! empty( $_POST ) ) {
 
-    $nav_newname = safeCleanStr($_POST['nav_newname']);
+	$nav_newname = safeCleanStr( $_POST['nav_newname'] );
 
-    if (!empty($nav_newname)) {
+	if ( ! empty( $nav_newname ) ) {
 
-        $nav_newcat = safeCleanStr($_POST['nav_newcat']);
-        $exist_cat = safeCleanStr($_POST['exist_cat']);
-        $exist_cat_main = safeCleanStr($_POST['exist_cat_main']);
-        $nav_newurl = safeCleanStr($_POST['nav_newurl']);
+		$nav_newcat     = isset( $_POST['nav_newcat'] ) ? safeCleanStr( $_POST['nav_newcat'] ) : null;
+		$exist_cat      = isset( $_POST['exist_cat'] ) ? safeCleanStr( $_POST['exist_cat'] ) : null;
+		$exist_cat_main = isset( $_POST['exist_cat_main'] ) ? safeCleanStr( $_POST['exist_cat_main'] ) : null;
+		$nav_newurl     = isset( $_POST['nav_newurl'] ) ? safeCleanStr( $_POST['nav_newurl'] ) : null;
 
-        //Create new category if newcat is true
-        if (!empty($nav_newcat) && $exist_cat == "") {
-            $navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
-            mysqli_query($db_conn, $navNewCat);
+		//Create new category if newcat is true
+		if ( ! empty( $nav_newcat ) && $exist_cat == "" ) {
+			$navNewCat = "INSERT INTO category_navigation (cat_name, author_name, datetime, nav_loc_id) VALUES ('" . $nav_newcat . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . $_SESSION['loc_id'] . ");";
+			mysqli_query( $db_conn, $navNewCat );
 
-            //get the new cat id
-            $sqlNavCatID = mysqli_query($db_conn, "SELECT id, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " ORDER BY id DESC LIMIT 1;");
-            $rowMaxCat = mysqli_fetch_array($sqlNavCatID, MYSQLI_ASSOC);
-            $navMaxCatId = $rowMaxCat[0];
-        }
+			//get the new cat id
+			$sqlNavCatID = mysqli_query( $db_conn, "SELECT id, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " ORDER BY id DESC LIMIT 1;" );
+			$rowMaxCat   = mysqli_fetch_array( $sqlNavCatID, MYSQLI_ASSOC );
+			$navMaxCatId = $rowMaxCat[0];
+		}
 
-        if ($exist_cat == "" && $nav_newcat > "") {
+		if ( $exist_cat == "" && $nav_newcat > "" ) {
 
-            $getTheCat = $navMaxCatId; //create & add new category name & get it's id
+			$getTheCat = $navMaxCatId; //create & add new category name & get it's id
 
-        } elseif ($exist_cat > "" && $nav_newcat > "") {
+		} elseif ( $exist_cat > "" && $nav_newcat > "" ) {
 
-            $getTheCat = $exist_cat; //use existing category id from add/edit category section
+			$getTheCat = $exist_cat; //use existing category id from add/edit category section
 
-        } elseif ($exist_cat_main > 0) {
+		} elseif ( $exist_cat_main > 0 ) {
 
-            $getTheCat = $exist_cat_main; //use existing category id from main page
+			$getTheCat = $exist_cat_main; //use existing category id from main page
 
-        } else {
+		} else {
 
-            $getTheCat = 0; //None
+			$getTheCat = 0; //None
 
-        }
+		}
 
-        $navNew = "INSERT INTO navigation (name, url, guid, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', '" . getGuid() . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ")";
-        mysqli_query($db_conn, $navNew);
+		$navNew = "INSERT INTO navigation (name, url, guid, sort, catid, section, active, win, author_name, datetime, loc_id) VALUES ('" . $nav_newname . "', '" . $nav_newurl . "', '" . getGuid() . "', 0, $getTheCat, '" . $getNavSection . "', 'false', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . $_SESSION['loc_id'] . ")";
+		mysqli_query( $db_conn, $navNew );
 
-    }
+		flashMessageSet( 'success', $nav_newname . " has been added." );
 
-    $nav_count = safeCleanStr($_POST['nav_count']);
+		//Redirect back to uploads page
+		header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+		echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+		exit();
 
-    for ($i = 0; $i < $nav_count; $i++) {
+	} else {
 
-        $nav_sort = safeCleanStr($_POST['nav_sort'][$i]);
-        $nav_name = safeCleanStr($_POST['nav_name'][$i]);
-        $nav_url = safeCleanStr($_POST['nav_url'][$i]);
-        $nav_cat = safeCleanStr($_POST['nav_cat'][$i]);
-        $nav_id = safeCleanStr($_POST['nav_id'][$i]);
+		$nav_count = isset( $_POST['nav_count'] ) ? safeCleanStr( $_POST['nav_count'] ) : null;
 
-        if ($nav_cat == "") {
-            $nav_cat = 0; //None
-        }
+		for ( $i = 0; $i < $nav_count; $i ++ ) {
 
-        $navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "', loc_id=" . loc_id . " WHERE id=" . $nav_id . ";";
-        mysqli_query($db_conn, $navUpdate);
-    }
+			$nav_sort = isset( $_POST['nav_sort'][ $i ] ) ? safeCleanStr( $_POST['nav_sort'][ $i ] ) : null;
+			$nav_name = isset( $_POST['nav_name'][ $i ] ) ? safeCleanStr( $_POST['nav_name'][ $i ] ) : null;
+			$nav_url  = isset( $_POST['nav_url'][ $i ] ) ? safeCleanStr( $_POST['nav_url'][ $i ] ) : null;
+			$nav_cat  = isset( $_POST['nav_cat'][ $i ] ) ? safeCleanStr( $_POST['nav_cat'][ $i ] ) : null;
+			$nav_id   = isset( $_POST['nav_id'][ $i ] ) ? safeCleanStr( $_POST['nav_id'][ $i ] ) : null;
 
-    $pageMsg = "<div class='alert alert-success fade in' data-alert='alert'>The navigation has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
+			if ( $nav_cat == "" ) {
+				$nav_cat = 0; //None
+			}
+
+			$navUpdate = "UPDATE navigation SET sort=" . $nav_sort . ", name='" . $nav_name . "', url='" . $nav_url . "', catid=" . $nav_cat . ", author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "', loc_id=" . loc_id . " WHERE id=" . $nav_id . ";";
+			mysqli_query( $db_conn, $navUpdate );
+		}
+
+		flashMessageSet( 'success', " Navigation section has been updated." );
+
+		//Redirect back to uploads page
+		header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+		echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+		exit();
+	}
 }
 
 //loop through the array of navSections
-$navMenuStr = '';
-$navArrlength = count($navSections);
+$navMenuStr   = '';
+$navArrlength = count( $navSections );
 
-for ($x = 0; $x < $navArrlength; $x++) {
+for ( $x = 0; $x < $navArrlength; $x ++ ) {
 
-    if ($navSections[$x] == $getNavSection) {
+	if ( $navSections[ $x ] == $getNavSection ) {
 
-        $isSectionSelected = ' SELECTED ';
+		$isSectionSelected = ' SELECTED ';
 
-    } else {
+	} else {
 
-        $isSectionSelected = '';
+		$isSectionSelected = '';
 
-    }
+	}
 
-    $navMenuStr .= "<option value=" . $navSections[$x] . " " . $isSectionSelected . ">" . $navSections[$x] . "</option>";
+	$navMenuStr .= "<option value=" . $navSections[ $x ] . " " . $isSectionSelected . ">" . $navSections[ $x ] . "</option>";
 
-    $navSectionFirstItem = $navSections[0];
+	$navSectionFirstItem = $navSections[0];
 }
 
 //Redirect to section=top if section is not in querystring
-if ($getNavSection == "" && loc_id) {
-    header("Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "", true, 302);
-    echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "';</script>";
+if ( $getNavSection == "" && loc_id ) {
+	header( "Location: navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='navigation.php?section=" . $navSectionFirstItem . "&loc_id=" . loc_id . "';</script>";
 }
 
 //check if using default location
-$sqlSetup = mysqli_query($db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . loc_id . ";");
-$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+$sqlSetup = mysqli_query( $db_conn, "SELECT navigation_use_defaults_1, navigation_use_defaults_2, navigation_use_defaults_3 FROM setup WHERE loc_id=" . loc_id . ";" );
+$rowSetup = mysqli_fetch_array( $sqlSetup, MYSQLI_ASSOC );
 
 //set Default toggle depending on which navigation you are on
-if ($getNavSection == $navSections[0]) {
-    $navSubSection = '1';
-    //use default view
-    if ($rowSetup['navigation_use_defaults_1'] == 'true') {
-        $selDefaults = ' CHECKED ';
-    } else {
-        $selDefaults = '';
-    }
-} elseif ($getNavSection == $navSections[1]) {
-    $navSubSection = '2';
-    //use default view
-    if ($rowSetup['navigation_use_defaults_2'] == 'true') {
-        $selDefaults = ' CHECKED ';
-        $navSubSection = '2';
-    } else {
-        $selDefaults = '';
-    }
-} elseif ($getNavSection == $navSections[2]) {
-    $navSubSection = '3';
-    //use default view
-    if ($rowSetup['navigation_use_defaults_3'] == 'true') {
-        $selDefaults = ' CHECKED ';
-    } else {
-        $selDefaults = '';
-    }
+if ( $getNavSection == $navSections[0] ) {
+	$navSubSection = '1';
+	//use default view
+	if ( $rowSetup['navigation_use_defaults_1'] == 'true' ) {
+		$selDefaults = ' CHECKED ';
+	} else {
+		$selDefaults = '';
+	}
+} elseif ( $getNavSection == $navSections[1] ) {
+	$navSubSection = '2';
+	//use default view
+	if ( $rowSetup['navigation_use_defaults_2'] == 'true' ) {
+		$selDefaults   = ' CHECKED ';
+		$navSubSection = '2';
+	} else {
+		$selDefaults = '';
+	}
+} elseif ( $getNavSection == $navSections[2] ) {
+	$navSubSection = '3';
+	//use default view
+	if ( $rowSetup['navigation_use_defaults_3'] == 'true' ) {
+		$selDefaults = ' CHECKED ';
+	} else {
+		$selDefaults = '';
+	}
 }
 ?>
     <div class="row">
@@ -157,7 +170,7 @@ if ($getNavSection == $navSections[0]) {
                             <label for="nav_menu">Navigation Sections</label>
                             <select class="form-control selectpicker show-tick" data-container="body"
                                     data-dropup-auto="false" data-size="10" name="nav_menu" id="nav_menu">
-                                <?php echo $navMenuStr; ?>
+								<?php echo $navMenuStr; ?>
                             </select>
                         </div>
                     </div>
@@ -166,110 +179,114 @@ if ($getNavSection == $navSections[0]) {
         </div>
     </div>
 
+<?php echo flashMessageGet( 'success' ); ?>
+
     <div class="row">
         <div class="col-lg-12">
-            <?php
+			<?php
 
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
+			//add category
+			$addCatNavName = isset( $_GET['addcatname'] ) ? safeCleanStr( addslashes( $_GET['addcatname'] ) ) : null;
+			$addCatNav     = isset( $_GET['addcat'] ) ? safeCleanStr( $_GET['addcat'] ) : null;
 
-            //add category
-            $addCatNavName = safeCleanStr($_GET['addcatname']);
-            $addCatNav = safeCleanStr($_GET['addcat']);
+			//delete nav
+			$deleteConfirm = '';
+			$delNavId      = isset( $_GET['deletenav'] ) ? safeCleanStr( $_GET['deletenav'] ) : null;
+			$delNavGuid    = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+			$delNavToken   = isset( $_GET['token'] ) ? safeCleanStr( $_GET['token'] ) : null;
+			$delNavTitle   = isset( $_GET['deletename'] ) ? safeCleanStr( addslashes( $_GET['deletename'] ) ) : null;
 
-            //delete nav
-            $deleteMsg = '';
-            $deleteConfirm = '';
-            $pageMsg = '';
-            $delNavId = safeCleanStr($_GET['deletenav']);
-            $delNavGuid = safeCleanStr($_GET['guid']);
-            $delNavToken = safeCleanStr($_GET['token']);
-            $delNavTitle = safeCleanStr(addslashes($_GET['deletename']));
+			//delete category
+			$delCatId    = isset( $_GET['deletecat'] ) ? safeCleanStr( addslashes( $_GET['deletecat'] ) ) : null;
+			$delCatTitle = isset( $_GET['deletecatname'] ) ? safeCleanStr( addslashes( $_GET['deletecatname'] ) ) : null;
 
-            //delete category
-            $delCatId = safeCleanStr($_GET['deletecat']);
-            $delCatTitle = safeCleanStr(addslashes($_GET['deletecatname']));
+			//rename category
+			$renameConfirm  = '';
+			$renameCatId    = isset( $_GET['renamecat'] ) ? safeCleanStr( addslashes( $_GET['renamecat'] ) ) : null;
+			$renameCatTitle = isset( $_GET['newcatname'] ) ? safeCleanStr( addslashes( $_GET['newcatname'] ) ) : null;
 
-            //rename category
-            $renameMsg = '';
-            $renameConfirm = '';
-            $renameCatId = safeCleanStr(addslashes($_GET['renamecat']));
-            $renameCatTitle = safeCleanStr(addslashes($_GET['newcatname']));
+			//Delete nav link
+			if ( $delNavId && $delNavTitle && ! $_GET['confirm'] ) {
+				showModalConfirm(
+					"confirm",
+					"Delete Navigation Link?",
+					"Are you sure you want to delete: " . $delNavTitle . "?",
+					"navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&guid=" . $delNavGuid . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+					false
+				);
 
-            //Delete nav link
-            if ($delNavId && $delNavTitle && !$_GET['confirm']) {
-                showModalConfirm(
-                    "confirm",
-                    "Delete Navigation Link?",
-                    "Are you sure you want to delete: " . $delNavTitle . "?",
-                    "navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletenav=" . $delNavId . "&guid=" . $delNavGuid . "&deletename=" . $delNavTitle . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
-                    false
-                );
+			} elseif ( $delNavId && $delNavTitle && $_GET['confirm'] == 'yes' && $delNavGuid && $delNavToken == $_SESSION['unique_referrer'] ) {
 
-            } elseif ($delNavId && $delNavTitle && $_GET['confirm'] == 'yes' && $delNavGuid && $delNavToken == $_SESSION['unique_referrer']) {
+				//delete nav after clicking Yes
+				$navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . loc_id . ";";
+				mysqli_query( $db_conn, $navDelete );
 
-                //delete nav after clicking Yes
-                $navDelete = "DELETE FROM navigation WHERE id=" . $delNavId . " AND guid='" . $delNavGuid . "' AND " . loc_id . ";";
-                mysqli_query($db_conn, $navDelete);
+				flashMessageSet( 'success', $delNavTitle . " has been deleted." );
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delNavTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
-                echo $deleteMsg;
-            }
+				//Redirect back to uploads page
+				header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+				echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+				exit();
+			}
 
 
-            //Delete category and set nav categories to zero
-            if ($delCatId && $delCatTitle && !$_GET['confirm']) {
-                showModalConfirm(
-                    "confirm",
-                    "Delete Navigation Category?",
-                    "Are you sure you want to delete: " . $delCatTitle . "?",
-                    "navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&confirm=yes",
-                    false
-                );
+			//Delete category and set nav categories to zero
+			if ( $delCatId && $delCatTitle && ! $_GET['confirm'] ) {
+				showModalConfirm(
+					"confirm",
+					"Delete Navigation Category?",
+					"Are you sure you want to delete: " . $delCatTitle . "?",
+					"navigation.php?loc_id=" . loc_id . "&section=" . $getNavSection . "&deletecat=" . $delCatId . "&deletecatname=" . $delCatTitle . "&confirm=yes",
+					false
+				);
 
-            } elseif ($delCatId && $delCatTitle && $_GET['confirm'] == 'yes') {
+			} elseif ( $delCatId && $delCatTitle && $_GET['confirm'] == 'yes' ) {
 
-                $navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . loc_id . " AND catid=" . $delCatId . ";";
-                mysqli_query($db_conn, $navCatUpdate);
+				$navCatUpdate = "UPDATE navigation SET catid=0, author_name='" . $_SESSION['user_name'] . "' WHERE loc_id=" . loc_id . " AND catid=" . $delCatId . ";";
+				mysqli_query( $db_conn, $navCatUpdate );
 
-                //delete category after clicking Yes
-                $navCatDelete = "DELETE FROM category_navigation WHERE id=" . $delCatId . " AND loc_id=" . loc_id . ";";
-                mysqli_query($db_conn, $navCatDelete);
+				//delete category after clicking Yes
+				$navCatDelete = "DELETE FROM category_navigation WHERE id=" . $delCatId . " AND nav_loc_id=" . loc_id . ";";
+				mysqli_query( $db_conn, $navCatDelete );
 
-                $deleteMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $delCatTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
-                echo $deleteMsg;
-            }
+				flashMessageSet( 'success', $delCatTitle . " category has been deleted." );
 
-            //Rename category and set nav categories to new name
-            if ($renameCatId && $renameCatTitle) {
+				//Redirect back to uploads page
+				header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+				echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+				exit();
+			}
 
-                $navRenameCatUpdate = "UPDATE category_navigation SET cat_name='" . $renameCatTitle . "', nav_section='" . $getNavSection . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE id=" . $renameCatId . ";";
-                mysqli_query($db_conn, $navRenameCatUpdate);
+			//Rename category and set nav categories to new name
+			if ( $renameCatId && $renameCatTitle ) {
 
-                $renameMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $renameCatTitle . " has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
-                echo $renameMsg;
-            }
+				$navRenameCatUpdate = "UPDATE category_navigation SET cat_name='" . $renameCatTitle . "', nav_section='" . $getNavSection . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $renameCatId . ";";
+				mysqli_query( $db_conn, $navRenameCatUpdate );
 
-            // add category
-            if ($addCatNavName > "") {
-                $navAddCat = "INSERT INTO category_navigation (cat_name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . $addCatNavName . "', '" . $getNavSection . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . $_SESSION['loc_id'] . ");";
-                mysqli_query($db_conn, $navAddCat);
-                header("Location: navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $addCatNavName . "", true, 302);
-                echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . $_SESSION['loc_id'] . "&addcat=" . $addCatNavName . "';</script>";
+				flashMessageSet( 'success', $renameCatTitle . " has been updated." );
 
-            }
+				//Redirect back to uploads page
+				header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "", true, 302 );
+				echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "';</script>";
+				exit();
+			}
 
-            // add category message
-            if (!empty($addCatNav)) {
-                $addMsg = "<div class='alert alert-success fade in' data-alert='alert'>" . $addCatNav . " category has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "'\">×</button></div>";
-                echo $addMsg;
-            }
+			// add category
+			if ( $addCatNavName > "" ) {
+				$navAddCat = "INSERT INTO category_navigation (cat_name, nav_section, author_name, datetime, nav_loc_id) VALUES ('" . $addCatNavName . "', '" . $getNavSection . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . $_SESSION['loc_id'] . ");";
+				mysqli_query( $db_conn, $navAddCat );
 
-            if (loc_id != 1) {
-                ?>
+				flashMessageSet( 'success', $addCatNavName . " has been added." );
+
+				//Redirect back to uploads page
+				header( "Location: navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "&addcat=" . $addCatNavName . "", true, 302 );
+				echo "<script>window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "&addcat=" . $addCatNavName . "';</script>";
+				exit();
+
+			}
+
+			if ( loc_id != 1 ) {
+				?>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="navigationdefaults">
@@ -277,12 +294,12 @@ if ($getNavSection == $navSections[0]) {
                             <div class="checkbox">
                                 <label for="navigation_defaults_<?php echo $navSubSection ?>">
                                     <input
-                                        class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle"
-                                        id="<?php echo loc_id ?>"
-                                        name="navigation_defaults_<?php echo $navSubSection ?>"
-                                        type="checkbox" <?php if (loc_id) {
-                                        echo $selDefaults;
-                                    } ?> data-toggle="toggle">
+                                            class="navigation_defaults_checkbox_<?php echo $navSubSection ?> defaults-toggle"
+                                            id="<?php echo loc_id ?>"
+                                            name="navigation_defaults_<?php echo $navSubSection ?>"
+                                            type="checkbox" <?php if ( loc_id ) {
+										echo $selDefaults;
+									} ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -290,9 +307,9 @@ if ($getNavSection == $navSections[0]) {
                 </div>
 
                 <hr/>
-                <?php
-            }
-            ?>
+				<?php
+			}
+			?>
 
             <!-- Category Section -->
             <button type="button" class="btn btn-primary" data-toggle="collapse" id="addCat_button"
@@ -336,21 +353,21 @@ if ($getNavSection == $navSections[0]) {
                                     <select class="form-control selectpicker bs-placeholder show-tick"
                                             data-container="body" data-dropup-auto="false" data-size="10"
                                             name="exist_cat" id="exist_cat" title="Choose an existing category">
-                                        <?php
-                                        echo "<option value='0'>None</option>";
-                                        //get and build category list, find selected
-                                        $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;");
-                                        while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat, MYSQLI_ASSOC)) {
+										<?php
+										echo "<option value='0'>None</option>";
+										//get and build category list, find selected
+										$sqlNavExistCat = mysqli_query( $db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;" );
+										while ( $rowExistNavCat = mysqli_fetch_array( $sqlNavExistCat, MYSQLI_ASSOC ) ) {
 
-                                            if ($rowExistNavCat['id'] != 0) {
-                                                $navExistCatId = safeCleanStr($rowExistNavCat['id']);
-                                                $navExistCatName = safeCleanStr(addslashes($rowExistNavCat['cat_name']));
+											if ( $rowExistNavCat['id'] != 0 ) {
+												$navExistCatId   = safeCleanStr( $rowExistNavCat['id'] );
+												$navExistCatName = safeCleanStr( addslashes( $rowExistNavCat['cat_name'] ) );
 
-                                                echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
-                                            }
+												echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
+											}
 
-                                        }
-                                        ?>
+										}
+										?>
                                     </select>
                                 </div>
                             </div>
@@ -368,10 +385,10 @@ if ($getNavSection == $navSections[0]) {
                         <select class="form-control selectpicker bs-placeholder show-tick" data-container="body"
                                 data-dropup-auto="false" data-size="10" name="exist_page" id="exist_page"
                                 title="Choose an existing page">
-                            <?php
-                            echo "<option value=''>None</option>";
-                            echo getPages(loc_id);
-                            ?>
+							<?php
+							echo "<option value=''>None</option>";
+							echo getPages( loc_id );
+							?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -389,21 +406,21 @@ if ($getNavSection == $navSections[0]) {
                         <select class="form-control selectpicker bs-placeholder show-tick" data-container="body"
                                 data-dropup-auto="false" data-size="10" name="exist_cat_main" id="exist_cat_main"
                                 title="Choose an existing category">
-                            <?php
-                            echo "<option value='0'>None</option>";
-                            //get and build category list, find selected
-                            $sqlNavExistCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;");
-                            while ($rowExistNavCat = mysqli_fetch_array($sqlNavExistCat, MYSQLI_ASSOC)) {
+							<?php
+							echo "<option value='0'>None</option>";
+							//get and build category list, find selected
+							$sqlNavExistCat = mysqli_query( $db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;" );
+							while ( $rowExistNavCat = mysqli_fetch_array( $sqlNavExistCat, MYSQLI_ASSOC ) ) {
 
-                                if ($rowExistNavCat['id'] != 0) {
-                                    $navExistCatId = $rowExistNavCat['id'];
-                                    $navExistCatName = $rowExistNavCat['cat_name'];
+								if ( $rowExistNavCat['id'] != 0 ) {
+									$navExistCatId   = $rowExistNavCat['id'];
+									$navExistCatName = $rowExistNavCat['cat_name'];
 
-                                    echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
-                                }
+									echo "<option value=" . $navExistCatId . ">" . $navExistCatName . "</option>";
+								}
 
-                            }
-                            ?>
+							}
+							?>
                         </select>
                     </div>
                 </fieldset>
@@ -422,71 +439,71 @@ if ($getNavSection == $navSections[0]) {
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        $navCount = "";
+						<?php
+						$navCount = "";
 
-                        $sqlNav = mysqli_query($db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . loc_id . " ORDER BY sort, catid;");
-                        while ($rowNav = mysqli_fetch_array($sqlNav, MYSQLI_ASSOC)) {
-                            $navId = safeCleanStr($rowNav['id']);
-                            $navGuid = safeCleanStr($rowNav['guid']);
-                            $navName = safeCleanStr(addslashes($rowNav['name']));
-                            $navURL = safeCleanStr($rowNav['url']);
-                            $navSort = safeCleanStr($rowNav['sort']);
-                            $navActive = safeCleanStr($rowNav['active']);
-                            $navWin = safeCleanStr($rowNav['win']);
-                            $navCat = safeCleanStr($rowNav['catid']);
-                            $navSection = safeCleanStr($rowNav['section']);
-                            $navCount++;
+						$sqlNav = mysqli_query( $db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . loc_id . " ORDER BY sort, catid;" );
+						while ( $rowNav = mysqli_fetch_array( $sqlNav, MYSQLI_ASSOC ) ) {
+							$navId      = safeCleanStr( $rowNav['id'] );
+							$navGuid    = safeCleanStr( $rowNav['guid'] );
+							$navName    = safeCleanStr( addslashes( $rowNav['name'] ) );
+							$navURL     = safeCleanStr( $rowNav['url'] );
+							$navSort    = safeCleanStr( $rowNav['sort'] );
+							$navActive  = safeCleanStr( $rowNav['active'] );
+							$navWin     = safeCleanStr( $rowNav['win'] );
+							$navCat     = safeCleanStr( $rowNav['catid'] );
+							$navSection = safeCleanStr( $rowNav['section'] );
+							$navCount ++;
 
-                            if ($navWin == 'true') {
-                                $isActive = "CHECKED";
-                            } else {
-                                $isActive = "";
-                            }
-                            if ($navActive == 'true') {
-                                $isActiveLink = "CHECKED";
-                            } else {
-                                $isActiveLink = "";
-                            }
+							if ( $navWin == 'true' ) {
+								$isActive = "CHECKED";
+							} else {
+								$isActive = "";
+							}
+							if ( $navActive == 'true' ) {
+								$isActiveLink = "CHECKED";
+							} else {
+								$isActiveLink = "";
+							}
 
-                            echo "<tr>
+							echo "<tr>
 							<td class='col-xs-1'><input type='hidden' name='nav_id[]' value='" . $navId . "' >
 							<input class='form-control' name='nav_sort[]' value='" . $navSort . "' type='number' maxlength='3' required></td>
 							<td><input class='form-control' name='nav_name[]' value='" . $navName . "' type='text'></td>
 							<td><input class='form-control' name='nav_url[]' value='" . $navURL . "' type='text'></td>";
-                            echo "<td><select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='nav_cat[]'>'";
-                            echo "<option value='0'>None</option>";
-                            //get and build category list, find selected
-                            $sqlNavCat = mysqli_query($db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;");
-                            while ($rowNavCat = mysqli_fetch_array($sqlNavCat, MYSQLI_ASSOC)) {
-                                if ($rowNavCat['id'] != 0) {
-                                    $navCatId = $rowNavCat['id'];
-                                    $navCatName = $rowNavCat['cat_name'];
+							echo "<td><select class='form-control selectpicker show-tick' data-container='body' data-dropup-auto='false' data-size='10' name='nav_cat[]'>'";
+							echo "<option value='0'>None</option>";
+							//get and build category list, find selected
+							$sqlNavCat = mysqli_query( $db_conn, "SELECT id, cat_name, nav_section, nav_loc_id FROM category_navigation WHERE nav_loc_id=" . $_SESSION['loc_id'] . " AND nav_section='" . $getNavSection . "' ORDER BY cat_name;" );
+							while ( $rowNavCat = mysqli_fetch_array( $sqlNavCat, MYSQLI_ASSOC ) ) {
+								if ( $rowNavCat['id'] != 0 ) {
+									$navCatId   = $rowNavCat['id'];
+									$navCatName = $rowNavCat['cat_name'];
 
-                                    if ($navCatId == $navCat) {
-                                        $isCatSelected = ' SELECTED ';
-                                    } else {
-                                        $isCatSelected = '';
-                                    }
+									if ( $navCatId == $navCat ) {
+										$isCatSelected = ' SELECTED ';
+									} else {
+										$isCatSelected = '';
+									}
 
-                                    echo "<option value=" . $navCatId . " " . $isCatSelected . ">" . $navCatName . "</option>";
-                                }
-                            }
+									echo "<option value=" . $navCatId . " " . $isCatSelected . ">" . $navCatName . "</option>";
+								}
+							}
 
-                            echo "</select></td>
+							echo "</select></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Open in a new window' class='checkbox nav_win_checkbox' id=" . $navId . " type='checkbox' " . $isActive . "></td>
 							<td class='col-xs-1'><input data-toggle='toggle' title='Active' class='checkbox nav_active_checkbox' id=" . $navId . " type='checkbox' " . $isActiveLink . "></td>
 							<td class='col-xs-1'><button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='navigation.php?section=" . $getNavSection . "&loc_id=" . loc_id . "&deletenav=" . $navId . "&guid=" . $navGuid . "&deletename=" . $navName . "'\"><i class='fa fa-fw fa-trash'></i></button></td>
 							</tr>";
-                        }
+						}
 
-                        echo "<input type='hidden' name='nav_count' value=" . $navCount . " >";
-                        ?>
+						echo "<input type='hidden' name='nav_count' value=" . $navCount . " >";
+						?>
                         </tbody>
                     </table>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="nav_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
                     Changes
@@ -515,5 +532,5 @@ if ($getNavSection == $navSections[0]) {
         });
     </script>
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

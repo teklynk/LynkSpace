@@ -1,6 +1,6 @@
 <?php
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
+if ( ! defined( 'ALLOW_INC' ) ) {
+	die( 'Direct access not permitted' );
 }
 ?>
 
@@ -21,8 +21,8 @@ if (!defined('ALLOW_INC')) {
                 <li>
                 </li>
             </ul>
-            <span class="copyright">&copy; <?php echo date("Y"); ?>&nbsp;<a href="<?php echo cmsWebsite; ?>"
-                                                                            target="_blank"><?php echo cmsTitle; ?></a></span>
+            <span class="copyright">&copy; <?php echo date( "Y" ); ?>&nbsp;<a href="<?php echo cmsWebsite; ?>"
+                                                                              target="_blank"><?php echo cmsTitle; ?></a></span>
         </div>
     </footer>
 
@@ -32,6 +32,6 @@ if (!defined('ALLOW_INC')) {
     </body>
     </html>
 <?php
-mysqli_close($db_conn);
+mysqli_close( $db_conn );
 die();
 ?>

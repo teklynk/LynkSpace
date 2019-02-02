@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
+if ( ! defined( 'ALLOW_INC' ) ) {
+	die( 'Direct access not permitted' );
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
+	<?php
 
-    getLocation(loc_id);
+	getLocation( loc_id );
 
-    getCoreHeader(loc_id);
+	getCoreHeader( loc_id );
 
-    ?>
+	?>
     <script type="text/javascript" language="javascript">
         $(window).scroll(function () {
             var scroll = $(window).scrollTop();
@@ -57,16 +57,16 @@ if (!defined('ALLOW_INC')) {
 <?php
 
 //only show on index.php/homepage
-if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
+if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
 
-    getEvents(loc_id);
+	getEvents( loc_id );
 
-    if (!empty($eventAlert && $eventAlertDateCheck == 'true')) {
-        echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'><span>&times;</span></button>
+	if ( ! empty( $eventAlert && $eventAlertDateCheck == 'true' ) ) {
+		echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'><span>&times;</span></button>
         <div><button type='button' class='btn btn-link notify-close text-white' data-dismiss='alert'>(Click to close)</button></div></div>";
-    } else {
-        echo "<div class='alert notify-bar hidden'></div>";
-    }
+	} else {
+		echo "<div class='alert notify-bar hidden'></div>";
+	}
 }
 ?>
 
@@ -81,21 +81,21 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'index.php') {
                 <span class="toggbutton">MENU</span>
             </button>
             <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
-                        class="pull-left img-nonresponsive" src="<?php getLogo(loc_id, 'relative'); ?>"
+                        class="pull-left img-nonresponsive" src="<?php getLogo( loc_id, 'relative' ); ?>"
                         alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navTabs navbar-Top" id="navbar-collapse-1">
-            <?php
-            //EXAMPLE: getNav($navSection,$dropdown,$pull)
-            getNav(loc_id, 'Top', 'true', 'left');
-            ?>
+			<?php
+			//EXAMPLE: getNav($navSection,$dropdown,$pull)
+			getNav( loc_id, 'Top', 'true', 'left' );
+			?>
             <div class="socialDiv pull-right hidden-xs hidden-sm">
-                <?php
-                getGoogleTranslateCode('ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN');
-                ?>
+				<?php
+				getGoogleTranslateCode( 'ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN' );
+				?>
 
-                <?php require_once(__DIR__ . '/socialmedia.inc.php'); ?>
+				<?php require_once( __DIR__ . '/socialmedia.inc.php' ); ?>
             </div>
             <div style="clear:both;"></div>
         </div>

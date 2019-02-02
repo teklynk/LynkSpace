@@ -1,48 +1,47 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-define('tinyMCE', TRUE);
+define( 'tinyMCE', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'events.php';
 
-$sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";");
-$rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
+$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
+$rowEvent = mysqli_fetch_array( $sqlEvent, MYSQLI_ASSOC );
 
 //update table on submit
-if (!empty($_POST)) {
+if ( ! empty( $_POST ) ) {
+	$event_defaults  = isset( $_POST['event_defaults'] ) ? safeCleanStr( $_POST['event_defaults'] ) : null;
+	$event_heading   = isset( $_POST['event_heading'] ) ? safeCleanStr( $_POST['event_heading'] ) : null;
+	$event_alert     = isset( $_POST['event_alert'] ) ? safeCleanStr( $_POST['event_alert'] ) : null;
+	$event_startdate = dateTimeFormat( 1, safeCleanStr( $_POST['event_startdate'] ) );
+	$event_enddate   = dateTimeFormat( 1, safeCleanStr( $_POST['event_enddate'] ) );
+	$event_calendar  = isset( $_POST['event_calendar'] ) ? safeCleanStr( $_POST['event_calendar'] ) : null;
 
-    $event_defaults = $_POST['event_defaults'];
-    $event_heading = sqlEscapeStr($_POST['event_heading']);
-    $event_alert = sqlEscapeStr($_POST['event_alert']);
-    $event_startdate = dateTimeFormat(1, $_POST['event_startdate']);
-    $event_enddate = dateTimeFormat(1, $_POST['event_enddate']);
-    $event_calendar = trim($_POST['event_calendar']);
+	if ( $event_defaults == 'on' ) {
+		$event_defaults = 'true';
+	} else {
+		$event_defaults = 'false';
+	}
 
-    if ($event_defaults == 'on') {
-        $event_defaults = 'true';
-    } else {
-        $event_defaults = 'false';
-    }
+	if ( $rowEvent['loc_id'] == loc_id ) {
+		//Do Update
+		$eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		mysqli_query( $db_conn, $eventUpdate );
+	} else {
+		//Do Insert
+		$eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		mysqli_query( $db_conn, $eventInsert );
+	}
 
-    if ($rowEvent['loc_id'] == loc_id) {
-        //Do Update
-        $eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
-        mysqli_query($db_conn, $eventUpdate);
-    } else {
-        //Do Insert
-        $eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
-        mysqli_query($db_conn, $eventInsert);
-    }
+	$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
+	$rowEvent = mysqli_fetch_array( $sqlEvent, MYSQLI_ASSOC );
 
-    $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";");
-    $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
-
-	flashMessageSet('success','The events section has been updated.');
+	flashMessageSet( 'success', 'The events section has been updated.' );
 
 	//Redirect back to uploads page
-	header("Location: events.php?loc_id=" . loc_id . "", true, 302);
+	header( "Location: events.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='events.php?loc_id=" . loc_id . "';</script>";
 	exit();
 }
@@ -61,34 +60,35 @@ if (!empty($_POST)) {
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <?php
-            //Alert messages
-            echo flashMessageGet('success');
+			<?php
+			//Alert messages
+			echo flashMessageGet( 'success' );
 
-            //use default view
-            if ($rowEvent['use_defaults'] == 'true') {
-                $selDefaults = "CHECKED";
-            } else {
-                $selDefaults = "";
-            }
+			//use default view
+			if ( $rowEvent['use_defaults'] == 'true' ) {
+				$selDefaults = "CHECKED";
+			} else {
+				$selDefaults = "";
+			}
 
-            if ($rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == '' || $rowEvent['startdate'] == NULL) {
-                $startDate = "";
-            } else {
-                $startDate = dateTimeFormat(1, $rowEvent['startdate']);
-            }
-            if ($rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == ''  || $rowEvent['enddate'] == NULL) {
-                $endDate = "";
-            } else {
-                $endDate = dateTimeFormat(1, $rowEvent['enddate']);
-            }
+			if ( $rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == '' || $rowEvent['startdate'] == null ) {
+				$startDate = "";
+			} else {
+				$startDate = dateTimeFormat( 1, $rowEvent['startdate'] );
+			}
 
-            ?>
+			if ( $rowEvent['enddate'] == '0000-00-00' || $rowEvent['enddate'] == '' || $rowEvent['enddate'] == null ) {
+				$endDate = "";
+			} else {
+				$endDate = dateTimeFormat( 1, $rowEvent['enddate'] );
+			}
+
+			?>
             <form name="eventsForm" class="dirtyForm" method="post">
 
-                <?php
-                if (loc_id != 1) {
-                    ?>
+				<?php
+				if ( loc_id != 1 ) {
+					?>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group" id="eventdefaults">
@@ -97,9 +97,9 @@ if (!empty($_POST)) {
                                     <label>
                                         <input class="event_defaults_checkbox defaults-toggle"
                                                id="<?php echo loc_id ?>" name="event_defaults"
-                                               type="checkbox" <?php if (loc_id) {
-                                            echo $selDefaults;
-                                        } ?> data-toggle="toggle">
+                                               type="checkbox" <?php if ( loc_id ) {
+											echo $selDefaults;
+										} ?> data-toggle="toggle">
                                     </label>
                                 </div>
                             </div>
@@ -107,9 +107,9 @@ if (!empty($_POST)) {
                     </div>
 
                     <hr/>
-                    <?php
-                }
-                ?>
+					<?php
+				}
+				?>
                 <div class="form-group">
                     <label for="event_heading">Heading</label>
                     <input type="text" class="form-control count-text" name="event_heading" maxlength="255"
@@ -168,10 +168,10 @@ if (!empty($_POST)) {
                 <hr/>
 
                 <div class="form-group">
-                    <span><small><?php echo "Updated: " . date('m-d-Y, H:i:s', strtotime($rowEvent['datetime'])) . " By: " . $rowEvent['author_name']; ?></small></span>
+                    <span><small><?php echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowEvent['datetime'] ) ) . " By: " . $rowEvent['author_name']; ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="event_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
                     Changes
@@ -181,5 +181,5 @@ if (!empty($_POST)) {
         </div>
     </div>
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

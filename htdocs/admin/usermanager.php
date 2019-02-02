@@ -1,91 +1,99 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'usermanager.php';
 
 // Only allow Admin users have access to this page
-if (isset($_SESSION['loggedIn']) && $_SESSION['user_level'] != 1) {
-    header('Location: index.php?logout=true', true, 302);
-    echo "<script>window.location.href='index.php?logout=true';</script>";
+if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] != 1 ) {
+	header( 'Location: index.php?logout=true', true, 302 );
+	echo "<script>window.location.href='index.php?logout=true';</script>";
 }
 
-$pageMsg = "";
-$deleteMsg = "";
 $usersCount = 0;
 
-//delete user
-$deluserId = safeCleanStr($_GET['deleteuser']);
-$deluserTitle = safeCleanStr(addslashes($_GET['deletetitle']));
-$deluserGuid = safeCleanStr($_GET['guid']);
-
-if ($deluserId && $deluserTitle && !$_GET['confirm']) {
-    showModalConfirm(
-        "confirm",
-        "Delete User?",
-        "Are you sure you want to delete: " . $deluserTitle . "?",
-        "usermanager.php?loc_id=" . loc_id . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&guid=" . $deluserGuid . "&confirm=yes",
-        false
-    );
-
-} elseif ($deluserId && $deluserTitle && $deluserGuid && $_GET['confirm'] == 'yes') {
-    //delete user after clicking Yes
-    dbQuery(
-        'delete',
-        'users',
-        NULL,
-        NULL,
-        'id=' . $deluserId .' AND guid="' . $deluserGuid . '" ',
-        NULL
-    );
-
-    $deleteMsg = "<div class='alert alert-success'>" . $deluserTitle . " has been deleted.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php?loc_id=" . loc_id . "'\">×</button></div>";
-}
+//Delete user
+$deluserId    = isset( $_GET['deleteuser'] ) ? safeCleanStr( $_GET['deleteuser'] ) : false;
+$deluserTitle = isset( $_GET['deletetitle'] ) ? safeCleanStr( addslashes( $_GET['deletetitle'] ) ) : false;
+$deluserGuid  = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : false;
 
 //Add User
 //insert data on submit
-$userName = sqlEscapeStr($_POST['user_name']);
-$userEmail = safeCleanStr($_POST['user_email']);
-$userPassword = sha1(blowfishSalt . safeCleanStr($_POST['user_password']));
-$userPasswordConfirm = $_POST['user_password_confirm'];
-$userLevel = safeCleanStr($_POST['user_level']);
-$userLocation = safeCleanStr($_POST['user_location']);
-$userIp = getRealIpAddr();
+$userName            = isset( $_POST['user_name'] ) ? sqlEscapeStr( $_POST['user_name'] ) : null;
+$userEmail           = isset( $_POST['user_email'] ) ? validateEmail( $_POST['user_email'] ) : null;
+$userPassword        = sha1( blowfishSalt . safeCleanStr( $_POST['user_password'] ) );
+$userPasswordConfirm = isset( $_POST['user_password_confirm'] ) ? safeCleanStr( $_POST['user_password_confirm'] ) : null;
+$userLevel           = isset( $_POST['user_level'] ) ? safeCleanStr( $_POST['user_level'] ) : null;
+$userLocation        = isset( $_POST['user_location'] ) ? safeCleanStr( $_POST['user_location'] ) : null;
+$userIp              = getRealIpAddr();
 
-if ($_POST['save_main']) {
-    if ($_POST['user_password'] == $_POST['user_password_confirm']) {
+if ( $deluserId && $deluserTitle && ! $_GET['confirm'] ) {
+	showModalConfirm(
+		"confirm",
+		"Delete User?",
+		"Are you sure you want to delete: " . $deluserTitle . "?",
+		"usermanager.php?loc_id=" . loc_id . "&deleteuser=" . $deluserId . "&deletetitle=" . $deluserTitle . "&guid=" . $deluserGuid . "&confirm=yes",
+		false
+	);
 
-        $sqlUsersInfo = dbQuery(
-            'select',
-            'users',
-            'username, email',
-            NULL,
-            'username="' . $userName . '" AND email="' . $userEmail . '" ',
-            NULL
-        );
+} elseif ( $deluserId && $deluserTitle && $deluserGuid && $_GET['confirm'] == 'yes' ) {
+	//delete user after clicking Yes
+	dbQuery(
+		'delete',
+		'users',
+		null,
+		null,
+		'id=' . $deluserId . ' AND guid="' . $deluserGuid . '" ',
+		null
+	);
 
-        $rowCheckUser = mysqli_num_rows($sqlUsersInfo);
+	flashMessageSet( 'success', $deluserTitle . " has been deleted." );
 
-        if ($rowCheckUser > 0) {
-            $pageMsg = "<div class='alert alert-danger'>Username: " . $userName . " and Email: " . $userEmail . " already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
-        } else {
+	//Redirect back to main page
+	header( "Location: usermanager.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='usermanager.php?loc_id=" . loc_id . "';</script>";
+	exit();
+}
 
-            dbQuery(
-                'insert',
-                'users',
-                'username, email, password, password_reset, password_reset_date, level, guid, clientip, datetime, loc_id',
-                ' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . getGuid() . '", "' . $userIp . '", "' . date("Y-m-d h:i:s") . '", "' . $userLocation . '" ',
-                NULL,
-                NULL
-            );
+if ( $_POST['save_main'] ) {
+	if ( $_POST['user_password'] == $_POST['user_password_confirm'] ) {
 
-            $pageMsg = "<div class='alert alert-success'>The user " . $userName . " has been added.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
-        }
+		$sqlUsersInfo = dbQuery(
+			'select',
+			'users',
+			'username, email',
+			null,
+			'username="' . $userName . '" AND email="' . $userEmail . '" ',
+			null
+		);
 
-    } else {
-        $pageMsg = "<div class='alert alert-danger'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
-    }
+		$rowCheckUser = mysqli_num_rows( $sqlUsersInfo );
+
+		if ( $rowCheckUser > 0 ) {
+			$pageMsg = "<div class='alert alert-warning'>Username: " . $userName . " and Email: " . $userEmail . " already exist. Try a different username or email.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='usermanager.php'\">×</button></div>";
+		} else {
+
+			dbQuery(
+				'insert',
+				'users',
+				'username, email, password, password_reset, password_reset_date, level, guid, clientip, datetime, loc_id',
+				' "' . $userName . '", "' . $userEmail . '", "' . $userPassword . '", "", now(), ' . $userLevel . ', "' . getGuid() . '", "' . $userIp . '", "' . date( "Y-m-d h:i:s" ) . '", "' . $userLocation . '" ',
+				null,
+				null
+			);
+
+			flashMessageSet( 'success', $userName . " has been added." );
+
+			//Redirect back to main page
+			header( "Location: usermanager.php?loc_id=" . loc_id . "", true, 302 );
+			echo "<script>window.location.href='usermanager.php?loc_id=" . loc_id . "';</script>";
+			exit();
+		}
+
+	} else {
+		flashMessageSet( 'success', "Passwords do not match." );
+	}
 }
 
 ?>
@@ -102,16 +110,8 @@ if ($_POST['save_main']) {
         </div>
     </div>
 
-<?php
-if ($errorMsg != "") {
-    echo $errorMsg;
-} else {
-    echo $pageMsg;
-}
-if ($deleteMsg != "") {
-    echo $deleteMsg;
-}
-?>
+<?php echo flashMessageGet( 'success' ); ?>
+
     <!-- Add user form-->
     <button type="button" class="btn btn-primary" data-toggle="collapse" id="addUser_button" data-target="#addUserDiv">
         <i class='fa fa-fw fa-plus'></i> Add a User
@@ -172,9 +172,9 @@ if ($deleteMsg != "") {
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        if (multiBranch == 'true') {
-                            ?>
+						<?php
+						if ( multiBranch == 'true' ) {
+							?>
                             <div class="col-lg-12">
                                 <div class="form-group required">
                                     <label for="user_location">User Location</label>
@@ -184,17 +184,17 @@ if ($deleteMsg != "") {
                                         <select class="form-control selectpicker show-tick" data-live-search="true"
                                                 data-container="body" data-dropup-auto="false" data-size="10"
                                                 name="user_location" title="Choose a location" required>
-                                            <?php echo getLocList(loc_id, 'true'); ?>
+											<?php echo getLocList( loc_id, 'true' ); ?>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        } else {
-                            //Set user_location = 1 if not a multibranch
-                            echo "<input type='hidden' name='user_location' id='user_location' value='1'/>";
-                        }
-                        ?>
+							<?php
+						} else {
+							//Set user_location = 1 if not a multibranch
+							echo "<input type='hidden' name='user_location' id='user_location' value='1'/>";
+						}
+						?>
                         <div class="col-lg-12">
                             <div class="form-group required">
                                 <label for="user_level">User Level</label>
@@ -213,11 +213,11 @@ if ($deleteMsg != "") {
                             <div class="form-group">
 
                                 <input type="hidden" name="csrf"
-                                       value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                                       value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                                 <input type="hidden" name="save_main" value="true">
                                 <button type="submit" name="user_submit" class="btn btn-primary"><i
-                                        class='fa fa-fw fa-save'></i> Save Changes
+                                            class='fa fa-fw fa-save'></i> Save Changes
                                 </button>
                             </div>
                         </div>
@@ -247,60 +247,61 @@ if ($deleteMsg != "") {
                     </thead>
                     <tbody>
 
-                    <?php
-                    //Get user info, exclude super admin user
+					<?php
+					//Get user info, exclude super admin user
 
-                    $sqlUsers = dbQuery(
-                        'select',
-                        'users',
-                        'id, username, email, clientip, level, guid, datetime, loc_id',
-                        NULL,
-                        NULL,
-                        'level, email, username ASC'
-                    );
-                    //$sqlUsers = mysqli_query($db_conn, $sqlUsers);
-                    while ($rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC)) {
+					$sqlUsers = dbQuery(
+						'select',
+						'users',
+						'id, username, email, clientip, level, guid, datetime, loc_id',
+						null,
+						null,
+						'level, email, username ASC'
+					);
+					//$sqlUsers = mysqli_query($db_conn, $sqlUsers);
+					while ( $rowUsers = mysqli_fetch_array( $sqlUsers, MYSQLI_ASSOC ) ) {
 
-                        $usersID = $rowUsers['id'];
-                        $usersName = safeCleanStr(addslashes($rowUsers['username']));
-                        $usersEmail = $rowUsers['email'];
-                        $usersClientIP = $rowUsers['clientip'];
-                        $usersLevel = $rowUsers['level'];
-                        $usersDateTime = $rowUsers['datetime'];
-                        $usersLocID = $rowUsers['loc_id'];
-                        $usersGuid = $rowUsers['guid'];
-                        $usersCount++;
+						$usersID       = $rowUsers['id'];
+						$usersName     = safeCleanStr( addslashes( $rowUsers['username'] ) );
+						$usersEmail    = $rowUsers['email'];
+						$usersClientIP = $rowUsers['clientip'];
+						$usersLevel    = $rowUsers['level'];
+						$usersDateTime = $rowUsers['datetime'];
+						$usersLocID    = $rowUsers['loc_id'];
+						$usersGuid     = $rowUsers['guid'];
+						$usersCount ++;
 
-                        //Prevent someone from accidentally deleting self.
-                        if ($_SESSION['user_id'] == $usersID) {
-                            $disable = 'disabled';
-                            $usersID = '';
-                        } else {
-                            $disable = '';
-                        }
+						//Prevent someone from accidentally deleting self.
+						if ( $_SESSION['user_id'] == $usersID ) {
+							$disable   = 'disabled';
+							$usersID   = '';
+							$usersGuid = '';
+						} else {
+							$disable = '';
+						}
 
-                        if ($usersLevel == 1) {
-                            $usersLevel = 'Admin';
-                        } else {
-                            $usersLevel = 'User';
-                        }
+						if ( $usersLevel == 1 ) {
+							$usersLevel = 'Admin';
+						} else {
+							$usersLevel = 'User';
+						}
 
-                        //get location name for each user
-                        $sqlUsersLocName = dbQuery(
-                            'select',
-                            'locations',
-                            'id, name',
-                            NULL,
-                            'id=' . $usersLocID,
-                            NULL
-                        );
+						//get location name for each user
+						$sqlUsersLocName = dbQuery(
+							'select',
+							'locations',
+							'id, name',
+							null,
+							'id=' . $usersLocID,
+							null
+						);
 
-                        $rowLocName = mysqli_fetch_array($sqlUsersLocName, MYSQLI_ASSOC);
+						$rowLocName = mysqli_fetch_array( $sqlUsersLocName, MYSQLI_ASSOC );
 
-                        $locationName = $rowLocName['name'];
+						$locationName = $rowLocName['name'];
 
-                        echo "<tr>
-                            <td><div class='text-center'><img class='img-circle' src=" . getGravatar($usersEmail, 28) . "/></div></td>
+						echo "<tr>
+                            <td><div class='text-center'><img class='img-circle' src=" . getGravatar( $usersEmail, 28 ) . "/></div></td>
                             <td>$usersName</td>
                             <td>$usersEmail</td>
                             <td>$usersLevel</td>
@@ -311,8 +312,8 @@ if ($deleteMsg != "") {
                                 <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger " . $disable . "' " . $disable . " onclick=\"window.location.href='usermanager.php?loc_id=" . loc_id . "&deleteuser=" . $usersID . "&deletetitle=" . $usersName . "&guid=" . $usersGuid . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                         </tr>";
-                    }
-                    ?>
+					}
+					?>
                     </tbody>
                 </table>
             </div>
@@ -336,5 +337,5 @@ if ($deleteMsg != "") {
         });
     </script>
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

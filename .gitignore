@@ -7,7 +7,6 @@
 /htdocs/config/blowfishsalt.php
 /htdocs/config/dbconn.php
 /htdocs/config/config.php
-/htdocs/admin/css/*
 /.htaccess
 /htdocs/.htaccess
 /htdocs/admin/backups/*

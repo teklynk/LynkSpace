@@ -1,157 +1,142 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'uploads.php';
 
-//Get the file name from the URL
-if ($_GET["share"]) {
-    $urlParam = $_GET['share'];
-} elseif ($_GET['delete']) {
-    $urlParam = $_GET['delete'];
-} else {
-    $urlParam = '';
-}
+$getUploadGuid = isset( $_GET['guid'] ) ? safeCleanStr( $_GET['guid'] ) : null;
+$getUploadId   = isset( $_GET['delete'] ) ? safeCleanStr( $_GET['delete'] ) : null;
+$action        = isset( $_POST['action'] ) ? safeCleanStr( $_POST['action'] ) : null;
+$getConfirm    = isset( $_GET['confirm'] ) ? safeCleanStr( $_GET['confirm'] ) : null;
+$getIsShared   = isset( $_GET['share'] ) ? safeCleanStr( $_GET['share'] ) : null;
+$share_location_type = isset( $_POST['share_location_type'] ) ? safeCleanStr( $_POST['share_location_type'] ) : null;
+$share_location_list = isset( $_POST['share_location_list'] ) ? safeCleanStr( $_POST['share_location_list'] ) : null;
 
-$action = safeCleanStr($_POST['action']);
-
-$fileList = getAllUploads(1, 'upload', loc_id, 'ASC'); //returns an array
+$fileList = getAllUploads( 1, 'upload', loc_id, 'ASC' ); //returns an array
 
 //Upload Action - Do the upload
-if (!empty($_POST) && $action == 'uploadFile') {
+if ( ! empty( $_POST ) && $action == 'uploadFile' ) {
 //function fileUploads($postAction, $target, $maxFileSize = 2048000, $type = null, $type_id = null, $user = null, $loc_id, $uniqueFileNames = true, $storeOnDb = true, $storeOnDisk = true, $allowedFileTypes = array())
 
-    fileUploads(
-        $action == 'uploadFile',
-        image_dir,
-        2048000,
-        'upload',
-	    loc_id,
-        $_SESSION['user_name'],
-	    loc_id,
-        true,
-        true,
-        true,
-        array('png', 'gif', 'jpg')
-    );
+	fileUploads(
+		$action == 'uploadFile',
+		image_dir,
+		2048000,
+		'upload',
+		loc_id,
+		$_SESSION['user_name'],
+		loc_id,
+		true,
+		true,
+		true,
+		array( 'png', 'gif', 'jpg' )
+	);
 
-    if ($uploadError == false) {
-	    flashMessageSet('success', 'The file has been uploaded.');
-    } else {
-	    flashMessageSet('danger', 'Invalid file format or the file is too large.');
-    }
+	flashMessageSet( 'success', 'The file has been uploaded.' );
 
-    //Redirect
-    header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
-    echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
-    exit();
+	//Redirect
+	header( "Location: uploads.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
+	exit();
 }
 
 //Delete confirm modal
-if ($_GET['delete'] && !$_GET['confirm']) {
+if ( $getUploadId && ! $getConfirm ) {
 
-    $theFile = getSingleUploads($_GET['delete'], $_GET['guid']);
+	$theFile = getSingleUploads( $getUploadId, $getUploadGuid );
 
-    if ($_GET['isshared'] == 'false') {
-        showModalConfirm(
-            "confirm",
-            "Delete File?",
-            "Are you sure you want to delete: " . $theFile['file_name'] . "?",
-            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
-            false
-        );
-    } else {
-        showModalConfirm(
-            "confirm",
-            "Delete File?",
-            "Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
-            "uploads.php?loc_id=" . loc_id . "&delete=" . $_GET['delete'] . "&confirm=yes&guid=" . $_GET['guid'] . "",
-            false
-        );
-    }
+	if ( $getIsShared == 'false' ) {
+		showModalConfirm(
+			"confirm",
+			"Delete File?",
+			"Are you sure you want to delete: " . $theFile['file_name'] . "?",
+			"uploads.php?loc_id=" . loc_id . "&delete=" . $getUploadId . "&confirm=yes&guid=" . $getUploadGuid . "",
+			false
+		);
+	} else {
+		showModalConfirm(
+			"confirm",
+			"Delete File?",
+			"Are you sure you want to delete: " . $theFile['file_name'] . "? <div class='alert alert-warning'><i class='fa fa-chain-broken'></i> <strong>Warning!</strong> This image is shared with other locations. Deleting this image may cause broken links on the site.</div> ",
+			"uploads.php?loc_id=" . loc_id . "&delete=" . $getUploadId . "&confirm=yes&guid=" . $getUploadGuid . "",
+			false
+		);
+	}
 
-} elseif ($_GET['delete'] && $_GET['confirm'] == 'yes' && $_GET['guid']) {
-    //Remove and delete the file
-    deleteUploads(image_dir, $_GET['delete'], $_GET['guid']);
+} elseif ( $getUploadId && $getConfirm == 'yes' && $getUploadGuid ) {
+	//Remove and delete the file
+	deleteUploads( image_dir, $getUploadId, $getUploadGuid );
 
-    flashMessageSet('success', 'The file has been deleted.');
+	flashMessageSet( 'success', 'The file has been deleted.' );
 
-    //Redirect back to uploads page
-    header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
-    echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
-    exit();
+	//Redirect back to uploads page
+	header( "Location: uploads.php?loc_id=" . loc_id . "", true, 302 );
+	echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
+	exit();
 }
 
 //TODO: Refactor shared files logic and queries. Can be improved and reduced
 //Share settings - Actions, Modal, Form - Admin user only feature
-if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
+if ( $getIsShared && $adminIsCheck == "true" && multiBranch == 'true' ) {
 
-    $theFile = getSingleUploads($_GET['share'], $_GET['guid']);
+	$theFile = getSingleUploads( $getUploadId, $getUploadGuid );
 
-    //Share setting/options Modal with Form
-    showModalConfirm(
-        "confirm",
-        "Share Image? <br><small>" . $getFileName . "</small>",
-        "<form name='share_form' id='share_form' method='post'>
+	//Check shared_uploads table for any shared images
+	$sqlSharedUploadsOption = mysqli_query($db_conn, "SELECT shared, guid, loc_id FROM uploads WHERE guid='" . $getUploadGuid . "' AND loc_id=" . loc_id . ";");
+	$rowSharedUploadsOption = mysqli_fetch_array($sqlSharedUploadsOption, MYSQLI_ASSOC);
+
+	//Share setting/options Modal with Form
+	showModalConfirm(
+		"confirm",
+		"Share Image? <br><small>" . $theFile['file_name'] . "</small>",
+		"<form name='share_form' id='share_form' method='post' action=''>
         <div class='form-group'>
             <label for='share_location_type'>Location Group</label>
-            <select id='share_loc_type' class='form-control selectpicker show-tick' data-id='share_loc_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups($rowSharedUploadsOption['shared']) . "</select>
+            <select id='share_location_type' class='form-control selectpicker show-tick' data-id='share_location_type' data-dropup-auto='false' data-size='10' name='share_location_type' title='Share to a location group'><option value=''>None</option>" . getLocGroups( $rowSharedUploadsOption['shared'] ) . "</select>
             <div class='text-center'>
                 <h3>- OR -</h3>
             </div>
             <label for='share_location_list'>Location(s)</label>
-            <select id='share_loc_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_loc_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList($rowSharedUploadsOption['shared'], 'true') . "</select>
-            <input type='hidden' name='action' value='shareFile'>
-            <input type='hidden' name='csrf' value='" . $_SESSION['unique_referrer'] . "'/>
+            <select id='share_location_list' class='form-control selectpicker' multiple='multiple' data-live-search='true' data-id='share_location_list' data-dropup-auto='false' data-size='10' tabindex='1' name='share_location_list[]' title='Share to specific location(s)'><option value=''>None</option>" . getLocList( $rowSharedUploadsOption['shared'], 'true' ) . "</select>
+            <input type='hidden' name='action' value='shareFile'/>
         </div>",
-        "<button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
-        <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button></form>",
-        true
-    );
+		"<input type='hidden' name='csrf' value='" .  csrf_validate( $_SESSION['unique_referrer'] ) . "'>
+        <button type='submit' class='btn btn-primary' name='share_submit' form='share_form' value='submit'><i class='fa fa-save'></i> Save</button>
+        <button type='button' class='btn btn-link' data-dismiss='modal'>Cancel</button>
+        </form>",
+		true
+	);
 
-    if ($share_location_type || $share_location_list) {
+	if ( $share_location_type || $share_location_list ) {
 
-        $locListOptions = implode(',', $share_location_list); //Convert array to string
+		$locListOptions = implode( ',', $share_location_list ); //Convert array to string
 
-        if ($share_location_type <> '') {
-            $sharedOptions = safeCleanStr($share_location_type); //Clean string
-        } elseif ($locListOptions <> '') {
-            $sharedOptions = safeCleanStr($locListOptions); //Clean string
-        } else {
-            $sharedOptions = '';
-        }
+		if ( $share_location_type ) {
+			$sharedOptions = $share_location_type;
+		} elseif ( $locListOptions) {
+			$sharedOptions = $locListOptions;
+		} else {
+			$sharedOptions = "";
+		}
 
-        if ($rowSharedUploadsOption['file_name'] == $getFileName) {
-            //Do Update
-            $sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE file_name='" . $getFileName . "' AND loc_id=" . loc_id . ";";
-            mysqli_query($db_conn, $sharedUploadsOptionUpdate);
-        } else {
-            //Do Insert
-            $sharedUploadsOptionInsert = "INSERT INTO uploads (shared, file_name, datetime, loc_id) VALUES ('" . $sharedOptions . "', '" . $getFileName . "', '" . date("Y-m-d H:i:s") . "', " . loc_id . ");";
-            mysqli_query($db_conn, $sharedUploadsOptionInsert);
-        }
+		//die($sharedOptions);
 
-        header("Location: uploads.php?loc_id=" . loc_id . "", true, 302);
-        echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
-        exit();
-    }
+		if ( $rowSharedUploadsOption['guid'] == $getUploadGuid && $sharedOptions) {
+			//Do Update
+			$sharedUploadsOptionUpdate = "UPDATE uploads SET shared='" . $sharedOptions . "', datetime='" . date( "Y-m-d H:i:s" ) . "' WHERE guid='" . $getUploadGuid . "' AND loc_id=" . loc_id . ";";
+			mysqli_query( $db_conn, $sharedUploadsOptionUpdate );
+
+			flashMessageSet( 'success', 'The file is now being shared.' );
+
+			header( "Location: uploads.php?loc_id=" . loc_id . "", true, 302 );
+			echo "<script>window.location.href='uploads.php?loc_id=" . loc_id . "';</script>";
+			exit();
+		}
+	}
 
 }
 ?>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTable').dataTable({
-                "iDisplayLength": 25,
-                "order": [[2, "desc"]],
-                "columnDefs": [{
-                    "targets": 'no-sort',
-                    "orderable": false
-                }]
-            });
-        });
-    </script>
 
     <div class="row">
         <div class="col-lg-12">
@@ -165,18 +150,18 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         </div>
     </div>
 
+<?php
+//Alert messages
+echo flashMessageGet( 'success' );
+echo flashMessageGet( 'danger' );
+
+if ( ! is_writable( '../uploads' ) ) {
+	echo "<div class='alert alert-warning fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
+}
+?>
+
     <div class="row">
         <div class="col-lg-12">
-            <?php
-            //Alert messages
-            echo flashMessageGet('success');
-            echo flashMessageGet('danger');
-
-            if (!is_writable('../uploads')) {
-                echo "<div class='alert alert-danger fade in'>Unable to write to the uploads folder. Check folder permissions.</div>";
-            }
-            ?>
-
             <form name="uploadForm" id="uploadForm" method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Upload Image</label>
@@ -184,9 +169,10 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <input type="hidden" name="action" value="uploadFile">
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
-                <button type="submit" name="upload_submit" id="upload_submit" form='uploadForm' class="btn btn-primary disabled"
+                <button type="submit" name="upload_submit" id="upload_submit" form='uploadForm'
+                        class="btn btn-primary disabled"
                         data-toggle="tooltip" data-original-title=".jpg, .gif, .png - 2mb file size limit"
                         data-placement="right" disabled><i class="fa fa-fw fa-upload"></i> Upload
                     Image
@@ -203,62 +189,62 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <?php
-                        // if is admin then show the table header
-                        if ($adminIsCheck == "true" && multiBranch == 'true') {
-                            echo "<th>Shared</th>";
-                        }
-                        ?>
+						<?php
+						// if is admin then show the table header
+						if ( $adminIsCheck == 'true' && multiBranch == 'true' ) {
+							echo "<th>Shared</th>";
+						}
+						?>
                         <th>Size</th>
                         <th>Date</th>
                         <th class="no-sort">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
+					<?php
 
-                    $count = 0;
+					$count = 0;
 
-                    foreach ($fileList as $file) {
+					foreach ( $fileList as $file ) {
 
-                        $count++;
-                        $fileSize = filesizeFormatted($file['file_size'], false);
+						$count ++;
+						$fileSize = filesizeFormatted( $file['file_size'], false );
 
-                        if ($file['shared'] <> '') {
-                            $isShared = 'btn btn-primary';
-                            $isSharedVal = 'true';
-                        } else {
-                            $isShared = 'btn btn-default';
-                            $isSharedVal = 'false';
-                        }
+						if ( $file['shared'] <> '' ) {
+							$isShared    = 'btn btn-primary';
+							$isSharedVal = 'true';
+						} else {
+							$isShared    = 'btn btn-default';
+							$isSharedVal = 'false';
+						}
 
-                        //Check if file is binary in the database.
-                        if ($file['file_data']) {
-                            $previewSource = renderBinaryImage($file['file_mime'], $file['file_data']);
-                        } else {
-                            $previewSource = image_dir . $file['file_name'];
-                        }
+						//Check if file is binary in the database.
+						if ( $file['file_data'] ) {
+							$previewSource = renderBinaryImage( $file['file_mime'], $file['file_data'] );
+						} else {
+							$previewSource = image_dir . $file['file_name'];
+						}
 
-                        //Preview modal
-                        echo "<tr data-index='" . $count . "'>
-                            <td><a href='#' onclick=\"showMyModal('" . str_replace('../', '', image_dir) . $file['file_name'] . " : " . $fileSize . "', '" . $previewSource . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
+						//Preview modal
+						echo "<tr data-index='" . $count . "'>
+                            <td><a href='#' onclick=\"showMyModal('" . str_replace( '../', '', image_dir ) . $file['file_name'] . " : " . $fileSize . "', '" . $previewSource . "')\" title='Preview'>" . $file['file_name'] . "</a></td>";
 
-                        if ($adminIsCheck == "true" && multiBranch == 'true') {
-                            echo "<td class='col-xs-1'>
-                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . image_dir . $file['file_name'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
+						if ( $adminIsCheck == 'true' && multiBranch == 'true' ) {
+							echo "<td class='col-xs-1'>
+                                <button type='button' data-toggle='tooltip' title='Share' class='" . $isShared . "' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&share=" . $file['id'] . "&guid=" . $file['guid'] . "'\"><i class='fa fa-fw fa-share-alt'></i></button>
                                 <span class='hidden'>" . $isShared . "</span></td>";
-                        }
+						}
 
-                        echo "<td class='col-xs-1'>" . $fileSize . "</td>
+						echo "<td class='col-xs-1'>" . $fileSize . "</td>
                             <td class='col-xs-2'>" . $file['datetime'] . "</td>
                             <td class='col-xs-1'>
                             <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger' onclick=\"window.location.href='uploads.php?loc_id=" . loc_id . "&delete=" . $file['id'] . "&guid=" . $file['guid'] . "&isshared=" . $isSharedVal . "'\"><i class='fa fa-fw fa-trash'></i></button>
                             </td>
                             </tr>";
 
-                    }
+					}
 
-                    ?>
+					?>
                     </tbody>
                 </table>
             </div>
@@ -283,7 +269,6 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
         </div>
     </div>
 
-    <!-- Modal javascript logic -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#confirm').on('hidden.bs.modal', function () {
@@ -303,9 +288,17 @@ if (isset($_GET['share']) && $adminIsCheck == "true" && multiBranch == 'true') {
                     $('#confirm').modal('show');
                 }, 100);
             }
+            $('#dataTable').dataTable({
+                "iDisplayLength": 25,
+                "order": [[2, "desc"]],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false
+                }]
+            });
         });
     </script>
 
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>

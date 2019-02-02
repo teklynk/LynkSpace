@@ -1,6 +1,6 @@
 <?php
-if (!defined('ALLOW_INC')) {
-	die('Direct access not permitted');
+if ( ! defined( 'ALLOW_INC' ) ) {
+	die( 'Direct access not permitted' );
 }
 ?>
 <!-- Search Site Section -->

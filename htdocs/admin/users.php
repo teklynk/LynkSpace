@@ -1,56 +1,46 @@
 <?php
-define('ALLOW_INC', TRUE);
+define( 'ALLOW_INC', true );
 
-require_once(__DIR__ . '/includes/header.inc.php');
+require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'users.php';
 
+$user_name             = isset( $_POST['user_name'] ) ? safeCleanStr( $_POST['user_name'] ) : null;
+$user_email            = isset( $_POST['user_email'] ) ? validateEmail( $_POST['user_email'] ) : null;
+$user_password         = isset( $_POST['user_password'] ) ? safeCleanStr( $_POST['user_password'] ) : null;
+$user_password_confirm = isset( $_POST['user_password_confirm'] ) ? safeCleanStr( $_POST['user_password_confirm'] ) : null;
+$user_id               = isset( $_POST['user_id'] ) ? sanitizeInt( $_POST['user_id'] ) : null;
+
 $sqlUsers = dbQuery(
-    'select',
-    'users',
-    'username, password, email, datetime, id',
-    NULL,
-    'id=' . loc_id,
-    NULL
+	'select',
+	'users',
+	'username, password, email, datetime, id',
+	null,
+	'id=' . loc_id,
+	null
 );
-$rowUsers = mysqli_fetch_array($sqlUsers, MYSQLI_ASSOC);
+
+$rowUsers = mysqli_fetch_array( $sqlUsers, MYSQLI_ASSOC );
 
 //update table on submit
-if (!empty($_POST)) {
-    $user_name = (string)safeCleanStr($_POST['user_name']);
-    $user_email = (string)validateEmail($_POST['user_email']);
-    $user_password = (string)safeCleanStr($_POST['user_password']);
-    $user_password_confirm = (string)safeCleanStr($_POST['user_password_confirm']);
-    $user_id = (int)safeCleanStr($_POST['user_id']);
+if ( ! empty( $_POST ) ) {
 
-    if ($user_password == $user_password_confirm) {
+	if ( $user_password == $user_password_confirm ) {
 
-        dbQuery(
-            'update',
-            'users',
-            'username, password, email, datetime, clientip',
-            " '" . $user_name . "', SHA1('" . blowfishSalt . $user_password . "'), '" . $user_email . "', '" . date('Y-m-d H:i:s') . "', '" . getRealIpAddr() . "' ",
-            "id=" . loc_id . " ",
-            NULL
-        );
+		dbQuery(
+			'update',
+			'users',
+			'username, password, email, datetime, clientip',
+			" '" . $user_name . "', SHA1('" . blowfishSalt . $user_password . "'), '" . $user_email . "', '" . date( 'Y-m-d H:i:s' ) . "', '" . getRealIpAddr() . "' ",
+			"id=" . loc_id . " ",
+			null
+		);
 
-        $pageMsg = "<div class='alert alert-success fade in'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
-    } else {
-        $pageMsg = "<div class='alert alert-danger fade in'>Passwords do not match.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
-    }
+		flashMessageSet( 'success', $user_name . " has been updated." );
+	} else {
+		flashMessageSet( 'success', "Passwords do not match." );
+	}
 
-    if ($_GET['updatepassword'] == 'true') {
-        header("Location: users.php?passwordupdated=true&loc_id=" . loc_id . "", true, 302);
-        echo "<script>window.location.href='users.php?passwordupdated=true&loc_id=" . loc_id . "';</script>";
-    }
-}
-
-if ($_GET['updatepassword'] == 'true') {
-    $pageMsg = "<div class='alert alert-warning'>Please update your password.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\"></button></div>";
-}
-
-if ($_GET['passwordupdated'] == 'true') {
-    $pageMsg = "<div class='alert alert-success'>The user has been updated.<button type='button' class='close' data-dismiss='alert' onclick=\"window.location.href='users.php?loc_id=" . loc_id . "'\">×</button></div>";
 }
 ?>
     <div class="row">
@@ -65,20 +55,15 @@ if ($_GET['passwordupdated'] == 'true') {
         </div>
     </div>
 
+<?php echo flashMessageGet( 'success' ); ?>
+
     <div class="row">
         <div class="col-lg-8">
-            <?php
-            if ($errorMsg != "") {
-                echo $errorMsg;
-            } else {
-                echo $pageMsg;
-            }
-            ?>
             <form name="userForm" class="dirtyForm" method="post">
                 <div class="form-group">
                     <div class="input-group">
                         <img class='img-circle img-responsive'
-                             src="<?php echo getGravatar($rowUsers['email'], 60); ?>"/>
+                             src="<?php echo getGravatar( $rowUsers['email'], 60 ); ?>"/>
                     </div>
                 </div>
 
@@ -124,10 +109,10 @@ if ($_GET['passwordupdated'] == 'true') {
                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>
 
                 <div class="form-group">
-                    <span><small><?php echo "Last Logged In: " . date('m-d-Y, H:i:s', strtotime($rowUsers['datetime'])); ?></small></span>
+                    <span><small><?php echo "Last Logged In: " . date( 'm-d-Y, H:i:s', strtotime( $rowUsers['datetime'] ) ); ?></small></span>
                 </div>
 
-                <input type="hidden" name="csrf" value="<?php csrf_validate($_SESSION['unique_referrer']); ?>"/>
+                <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
 
                 <button type="submit" name="user_submit" class="btn btn-primary"><i class='fa fa-fw fa-save'></i> Save
                     Changes
@@ -140,5 +125,5 @@ if ($_GET['passwordupdated'] == 'true') {
     </div>
 
 <?php
-require_once(__DIR__ . '/includes/footer.inc.php');
+require_once( __DIR__ . '/includes/footer.inc.php' );
 ?>
