@@ -3,7 +3,7 @@
 /vendor/
 /node_modules/
 .idea/
-#/htdocs/uploads/*
+/htdocs/uploads/*
 /htdocs/config/blowfishsalt.php
 /htdocs/config/dbconn.php
 /htdocs/config/config.php
