@@ -644,32 +644,25 @@ function getPages( $loc ) {
 }
 
 //List files inside a directory/folder
-function getDirContents( $src ) {
+function dirToArray($dir, $fileIgnoreArray = array()) {
 
-	global $fileIgnoreArray;
+    $result = array();
 
-	if ( $handle = opendir( $src ) ) {
+    $cdir = scandir($dir);
+    foreach ($cdir as $key => $value) {
+        if (!in_array($value,array(".",".."))) {
+            if ( in_array( $value, $fileIgnoreArray ) ) {
+                continue;
+            }
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+            } else {
+                $result[] = $value;
+            }
+        }
+    }
 
-		echo "<ul>";
-
-		while ( false !== ( $file = readdir( $handle ) ) ) {
-
-			if ( in_array( $file, $fileIgnoreArray ) ) {
-				continue;
-			}
-
-			echo "<li>" . $file . "</li>";
-		}
-
-		closedir( $handle );
-
-		echo "</ul>";
-
-		return true;
-	} else {
-		return false;
-	}
-
+    return $result;
 }
 
 //Images folder drop down list
