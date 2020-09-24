@@ -18,7 +18,7 @@ if ( ! empty( $_POST ) ) {
 		$nav_newcat     = isset( $_POST['nav_newcat'] ) ? safeCleanStr( $_POST['nav_newcat'] ) : null;
 		$exist_cat      = isset( $_POST['exist_cat'] ) ? safeCleanStr( $_POST['exist_cat'] ) : null;
 		$exist_cat_main = isset( $_POST['exist_cat_main'] ) ? safeCleanStr( $_POST['exist_cat_main'] ) : null;
-		$nav_newurl     = isset( $_POST['nav_newurl'] ) ? safeCleanStr( $_POST['nav_newurl'] ) : null;
+		$nav_newurl     = isset( $_POST['nav_newurl'] ) ? $_POST['nav_newurl'] : null;
 
 		//Create new category if newcat is true
 		if ( ! empty( $nav_newcat ) && $exist_cat == "" ) {
@@ -447,7 +447,7 @@ if ( $getNavSection == $navSections[0] ) {
 							$navId      = safeCleanStr( $rowNav['id'] );
 							$navGuid    = safeCleanStr( $rowNav['guid'] );
 							$navName    = safeCleanStr( addslashes( $rowNav['name'] ) );
-							$navURL     = safeCleanStr( $rowNav['url'] );
+							$navURL     = $rowNav['url'];
 							$navSort    = safeCleanStr( $rowNav['sort'] );
 							$navActive  = safeCleanStr( $rowNav['active'] );
 							$navWin     = safeCleanStr( $rowNav['win'] );
