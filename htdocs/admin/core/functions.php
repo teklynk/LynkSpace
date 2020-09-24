@@ -796,7 +796,7 @@ function checkDependencies() {
 		'mod_vhost_alias'
 	);
 
-	$phpExtentionsArray = array(
+	$phpExtensionsArray = array(
 		'curl',
 		'xml',
 		'zip',
@@ -820,9 +820,9 @@ function checkDependencies() {
 		}
 	}
 
-	foreach ( $phpExtentionsArray as $extention ) {
-		if ( ! in_array( $extention, get_loaded_extensions() ) ) {
-			echo "<div class='alert alert-warning'><span>" . $extention . " is not installed on the server.</span></div>";
+	foreach ( $phpExtensionsArray as $extension ) {
+		if ( ! in_array( $extension, get_loaded_extensions() ) ) {
+			echo "<div class='alert alert-warning'><span>" . $extension . " is not installed on the server.</span></div>";
 		}
 	}
 

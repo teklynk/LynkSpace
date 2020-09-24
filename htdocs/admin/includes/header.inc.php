@@ -193,7 +193,7 @@ if (!defined('ALLOW_INC')) {
 
             <!-- Updates and Alerts Button-->
             <li class="update-menu">
-                <?php checkForUpdates(); ?>
+                <?php //checkForUpdates(); ?>
             </li>
 
             <li class="dropdown user-menu">
