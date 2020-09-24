@@ -84,7 +84,7 @@ if ( $pagePreviewId > "" ) {
 			$teamLabel      = "Edit Staff Title";
 			$theTeamName    = isset( $_POST['team_name'] ) ? safeCleanStr( addslashes( $_POST['team_name'] ) ) : null;
 			$theTeamTitle   = isset( $_POST['team_title'] ) ? safeCleanStr( addslashes( $_POST['team_title'] ) ) : null;
-			$theTeamContent = isset( $_POST['team_content'] ) ? $_POST['team_content'] : null;
+			$theTeamContent = isset( $_POST['team_content'] ) ? sqlEscapeStr($_POST['team_content']) : null;
 			$theTeamImage   = isset( $_POST['team_image'] ) ? sqlEscapeStr( $_POST['team_image'] ) : null;
 
 
@@ -214,7 +214,7 @@ if ( $pagePreviewId > "" ) {
 			//update heading on submit
 			if ( isset( $_POST['save_main'] ) ) {
 				$setupTeamHeading = isset( $_POST['team_heading'] ) ? safeCleanStr( $_POST['team_heading'] ) : null;
-				$setupTeamContent = isset( $_POST['main_content'] ) ? safeCleanStr( $_POST['main_content'] ) : null;
+				$setupTeamContent = isset( $_POST['main_content'] ) ? sqlEscapeStr( $_POST['main_content'] ) : null;
 				$postTeamCount    = isset( $_POST['team_count'] ) ? safeCleanStr( $_POST['team_count'] ) : null;
 				$postTeamSort     = isset( $_POST['team_sort'] ) ? safeCleanStr( $_POST['team_sort'] ) : null;
 				$postTeamId       = isset( $_POST['team_id'] ) ? safeCleanStr( $_POST['team_id'] ) : null;
@@ -309,7 +309,7 @@ if ( $pagePreviewId > "" ) {
 						while ( $rowTeam = mysqli_fetch_array( $sqlTeam, MYSQLI_ASSOC ) ) {
 							$teamId      = $rowTeam['id'];
 							$teamTitle   = $rowTeam['title'];
-							$teamName    = safeCleanStr( addslashes( $rowTeam['name'] ) );
+							$teamName    = $rowTeam['name'];
 							$teamContent = $rowTeam['content'];
 							$teamActive  = $rowTeam['active'];
 							$teamSort    = $rowTeam['sort'];

@@ -45,7 +45,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 			if ( $getNewpage || $getEditpage ) {
 
 				$page_title    = isset( $_POST['page_title'] ) ? safeCleanStr( $_POST['page_title'] ) : null;
-				$page_content  = isset( $_POST['page_content'] ) ? $_POST['page_content'] : null;
+				$page_content  = isset( $_POST['page_content'] ) ? sqlEscapeStr($_POST['page_content']) : null;
 				$page_keywords = isset( $_POST['page_keywords'] ) ? safeCleanStr( $_POST['page_keywords'] ) : null;
 
 				// Update existing page

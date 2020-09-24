@@ -174,7 +174,7 @@ if ( isset( $_GET['newcustomer'] ) || isset( $_GET['editcustomer'] ) ) {
 	$customer_image_select = safeCleanStr( $_POST['customer_image_select'] );
 	$customer_exist_cat    = safeCleanStr( $_POST['customer_exist_cat'] );
 	$customer_link         = safeCleanStr( $_POST['customer_link'] );
-	$customer_content      = $_POST['customer_content'];
+	$customer_content      = sqlEscapeStr($_POST['customer_content']);
 
 	//Update existing customer
 	if ( isset( $_GET['editcustomer'] ) ) {
