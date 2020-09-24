@@ -27,7 +27,7 @@ echo $pageContent;
 
 echo "</div>";
 
-echo "<div>" . getDisqusCode( pageUrlStr, $_SESSION['unique_referrer'] ) . "</div>";
+echo "<div>" . getDisqusCode( 'http://' . $serverHostname, $_SESSION['unique_referrer'] ) . "</div>";
 
 echo "</div>";
 echo "</div>";

@@ -1399,14 +1399,15 @@ function getGoogleTranslateCode( $languages ) {
 
 //Disqus service
 function getDisqusCode( $page_url, $unique_identifier ) {
+
 	if ( ! empty( disqus_url ) ) {
 		?>
         <!-- Disqus service -->
         <div id="disqus_thread"></div>
         <script type="text/javascript" language="javascript">
             var disqus_config = function () {
-                this.page.url = <?php echo $page_url; ?>;
-                this.page.identifier = <?php echo $unique_identifier; ?>;
+                this.page.url = '<?php echo $page_url; ?>';
+                this.page.identifier = '<?php echo $unique_identifier; ?>';
             };
             (function () {
                 var d = document, s = d.createElement('script');
@@ -1416,9 +1417,6 @@ function getDisqusCode( $page_url, $unique_identifier ) {
             })();
         </script>
 		<?php
-		return true;
-	} else {
-		return false;
 	}
 }
 
