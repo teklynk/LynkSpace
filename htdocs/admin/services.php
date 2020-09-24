@@ -90,7 +90,7 @@ if ( $newService == 'true' || $theserviceId ) {
 		//update data on submit
 		if ( ! empty( $_POST['service_title'] ) ) {
 
-			$servicesUpdate = "UPDATE services SET title='" . safeCleanStr( $_POST['service_title'] ) . "', content='" . sqlEscapeStr( $_POST['service_content'] ) . "', link='" . safeCleanStr( $_POST['service_link'] ) . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . loc_id . " AND guid='" . $theServiceGuid . "';";
+			$servicesUpdate = "UPDATE services SET title='" . safeCleanStr( $_POST['service_title'] ) . "', content='" . $_POST['service_content'] . "', link='" . $_POST['service_link'] . "', icon='" . $_POST['service_icon_select'] . "', image='" . $_POST['service_image_select'] . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $theserviceId . " AND loc_id=" . loc_id . " AND guid='" . $theServiceGuid . "';";
 			mysqli_query( $db_conn, $servicesUpdate );
 
 			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been updated." );
@@ -112,7 +112,7 @@ if ( $newService == 'true' || $theserviceId ) {
 
 		//insert data on submit
 		if ( ! empty( $_POST['service_title'] ) ) {
-			$servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr( $_POST['service_title'] ) . "', '" . safeCleanStr( $_POST['service_content'] ) . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . safeCleanStr( $_POST['service_link'] ) . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . loc_id . ");";
+			$servicesInsert = "INSERT INTO services (title, content, guid, icon, image, link, active, sort, author_name, loc_id) VALUES ('" . sqlEscapeStr( $_POST['service_title'] ) . "', '" . $_POST['service_content'] . "', '" . getGuid() . "', '" . $_POST['service_icon_select'] . "', '" . $_POST['service_image_select'] . "', '" . $_POST['service_link'] . "', 'false', 0, '" . $_SESSION['user_name'] . "', " . loc_id . ");";
 			mysqli_query( $db_conn, $servicesInsert );
 
 			flashMessageSet( 'success', "The service " . safeCleanStr( $_POST['service_title'] ) . " has been added." );

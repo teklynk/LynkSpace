@@ -80,7 +80,7 @@ if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
                 <i class="fa fa-bars fa-2x"></i>
                 <span class="toggbutton">MENU</span>
             </button>
-            <a href="<?php echo homePageURL; ?>" class="navbar-brand" target="_blank"><img
+            <a href="<?php echo homePageURL; ?>" class="navbar-brand"><img
                         class="pull-left img-nonresponsive" src="<?php getLogo( loc_id, 'relative' ); ?>"
                         alt="Home" title="Home" border="0"/></a>
         </div>

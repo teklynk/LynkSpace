@@ -84,7 +84,7 @@ if ( $pagePreviewId > "" ) {
 			$teamLabel      = "Edit Staff Title";
 			$theTeamName    = isset( $_POST['team_name'] ) ? safeCleanStr( addslashes( $_POST['team_name'] ) ) : null;
 			$theTeamTitle   = isset( $_POST['team_title'] ) ? safeCleanStr( addslashes( $_POST['team_title'] ) ) : null;
-			$theTeamContent = isset( $_POST['team_content'] ) ? sqlEscapeStr( $_POST['team_content'] ) : null;
+			$theTeamContent = isset( $_POST['team_content'] ) ? $_POST['team_content'] : null;
 			$theTeamImage   = isset( $_POST['team_image'] ) ? sqlEscapeStr( $_POST['team_image'] ) : null;
 
 

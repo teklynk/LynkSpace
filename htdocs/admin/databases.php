@@ -174,7 +174,7 @@ if ( isset( $_GET['newcustomer'] ) || isset( $_GET['editcustomer'] ) ) {
 	$customer_image_select = safeCleanStr( $_POST['customer_image_select'] );
 	$customer_exist_cat    = safeCleanStr( $_POST['customer_exist_cat'] );
 	$customer_link         = safeCleanStr( $_POST['customer_link'] );
-	$customer_content      = sqlEscapeStr( $_POST['customer_content'] );
+	$customer_content      = $_POST['customer_content'];
 
 	//Update existing customer
 	if ( isset( $_GET['editcustomer'] ) ) {
@@ -324,7 +324,7 @@ if ( isset( $_GET['newcustomer'] ) || isset( $_GET['editcustomer'] ) ) {
 	$delcustomerName   = safeCleanStr( addslashes( $_GET['deletename'] ) );
 	$deleteSectionName = safeCleanStr( addslashes( $_GET['section'] ) );
 	$customer_heading  = safeCleanStr( $_POST['customer_heading'] );
-	$main_content      = sqlEscapeStr( $_POST['main_content'] );
+	$main_content      = $_POST['main_content'];
 	$cust_count        = safeCleanStr( $_POST['cust_count'] );
 
 	//Delete Section and all databases in the section

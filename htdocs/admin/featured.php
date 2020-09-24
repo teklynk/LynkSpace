@@ -16,7 +16,7 @@ if ( ! empty( $_POST ) ) {
 	$featured_defaults  = isset( $_POST['featured_defaults'] ) ? safeCleanStr( $_POST['featured_defaults'] ) : null;
 	$featured_heading   = isset( $_POST['featured_heading'] ) ? safeCleanStr( $_POST['featured_heading'] ) : null;
 	$featured_introtext = isset( $_POST['featured_introtext'] ) ? safeCleanStr( $_POST['featured_introtext'] ) : null;
-	$featured_content   = isset( $_POST['featured_introtext'] ) ? trim( $_POST['featured_introtext'] ) : null;
+	$featured_content   = isset( $_POST['featured_content'] ) ? $_POST['featured_content'] : null;
 
 	if ( $featured_defaults == 'on' ) {
 		$featured_defaults = 'true';
