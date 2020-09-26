@@ -9,7 +9,7 @@ if ( ! defined( 'ALLOW_INC' ) ) {
 getSocialMediaIcons( loc_id, "square", "top" );
 //EXAMPLE: getSocialMediaIcons("circle","top")
 //EXAMPLE: getSocialMediaIcons("square","footer")
-if ( ! empty( $socialMediaIcons ) ) {
+if ( ! empty( $socialMediaIcons ) && $socialMediaActive) {
 	echo $socialMediaIcons;
 }
 ?>

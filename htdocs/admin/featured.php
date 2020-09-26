@@ -44,7 +44,7 @@ if ( ! empty( $_POST ) ) {
 
 	flashMessageSet( 'success', 'The featured section has been updated.' );
 
-	//Redirect back to uploads page
+	//Redirect back to featured page
 	header( "Location: featured.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='featured.php?loc_id=" . loc_id . "';</script>";
 	exit();

@@ -43,7 +43,7 @@ if ( ! empty( $_POST ) ) {
 
 	flashMessageSet( 'success', 'The general info section has been updated.' );
 
-	//Redirect back to uploads page
+	//Redirect back to generalinfo page
 	header( "Location: generalinfo.php?loc_id=" . loc_id . "", true, 302 );
 	echo "<script>window.location.href='generalinfo.php?loc_id=" . loc_id . "';</script>";
 	exit();
@@ -86,7 +86,7 @@ if ( ! empty( $_POST ) ) {
 
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="form-group" id="generalinfodefaults">
+                    <div class="form-group" id="generalinfo_active">
                         <label>Active</label>
                         <div class="checkbox">
                             <label>

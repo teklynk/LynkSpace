@@ -653,51 +653,63 @@ function getSocialMediaIcons($loc, $shape, $section)
     global $socialMediaHeading;
     global $sqlSocialMedia;
     global $rowSocialMedia;
+    global $socialMediaActive;
     global $db_conn;
 
     if (isset($loc) && !empty($loc)) {
-        $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=" . $loc . ";");
+        $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE active='true' AND loc_id=" . $loc . ";");
         $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
 
         //use default location
         if ($rowSocialMedia['use_defaults'] == "true" || $rowSocialMedia['use_defaults'] == "" || $rowSocialMedia['use_defaults'] == null) {
-            $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE loc_id=1;");
+            $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE active='true' AND loc_id=1;");
             $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
         }
 
         $socialMediaHeading = "";
         $socialMediaIcons = "";
 
-        if (!empty($rowSocialMedia['heading'])) {
-            $socialMediaHeading = $rowSocialMedia['heading'];
-        }
+        if ($rowSocialMedia) {
 
-        if (!empty($rowSocialMedia['facebook'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['facebook']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
+            $socialMediaActive = true;
 
-        if (!empty($rowSocialMedia['google'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['google']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
 
-        if (!empty($rowSocialMedia['pinterest'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['pinterest']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
+            if (!empty($rowSocialMedia['heading'])) {
+                $socialMediaHeading = $rowSocialMedia['heading'];
+            }
 
-        if (!empty($rowSocialMedia['twitter'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['twitter']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
+            if (!empty($rowSocialMedia['facebook'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['facebook']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
 
-        if (!empty($rowSocialMedia['instagram'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['instagram']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
+            if (!empty($rowSocialMedia['google'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['google']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
 
-        if (!empty($rowSocialMedia['youtube'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['youtube']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-        }
+            if (!empty($rowSocialMedia['pinterest'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['pinterest']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
 
-        if (!empty($rowSocialMedia['tumblr'])) {
-            $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['tumblr']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            if (!empty($rowSocialMedia['twitter'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['twitter']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
+
+            if (!empty($rowSocialMedia['instagram'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['instagram']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
+
+            if (!empty($rowSocialMedia['youtube'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['youtube']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
+
+            if (!empty($rowSocialMedia['tumblr'])) {
+                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['tumblr']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            }
+
+        } else {
+
+            $socialMediaActive = false;
+
         }
     }
 }

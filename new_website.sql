@@ -1240,6 +1240,7 @@ CREATE TABLE `socialmedia` (
   `instagram` text NOT NULL,
   `youtube` text NOT NULL,
   `tumblr` text NOT NULL,
+  `active` text NOT NULL,
   `use_defaults` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
