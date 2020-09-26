@@ -7,7 +7,7 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'featured.php';
 
-$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . loc_id . ";" );
+$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, active, loc_id FROM featured WHERE loc_id=" . loc_id . ";" );
 $rowFeatured = mysqli_fetch_array( $sqlFeatured, MYSQLI_ASSOC );
 
 //update table on submit
@@ -17,6 +17,7 @@ if ( ! empty( $_POST ) ) {
 	$featured_heading   = isset( $_POST['featured_heading'] ) ? safeCleanStr( $_POST['featured_heading'] ) : null;
 	$featured_introtext = isset( $_POST['featured_introtext'] ) ? safeCleanStr( $_POST['featured_introtext'] ) : null;
 	$featured_content   = isset( $_POST['featured_content'] ) ? sqlEscapeStr($_POST['featured_content']) : null;
+    $featured_active    = isset( $_POST['featured_active'] ) ? safeCleanStr($_POST['featured_active']) : null;
 
 	if ( $featured_defaults == 'on' ) {
 		$featured_defaults = 'true';
@@ -24,18 +25,22 @@ if ( ! empty( $_POST ) ) {
 		$featured_defaults = 'false';
 	}
 
+    //Active?
+    if ( $featured_active == 'on' ) {
+        $featured_active = 'true';
+    } else {
+        $featured_active = 'false';
+    }
+
 	if ( $rowFeatured['loc_id'] == loc_id ) {
 		//Do Update
-		$featuredUpdate = "UPDATE featured SET heading='" . $featured_heading . "', introtext='" . $featured_introtext . "', content='" . $featured_content . "', use_defaults='" . $featured_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		$featuredUpdate = "UPDATE featured SET heading='" . $featured_heading . "', introtext='" . $featured_introtext . "', content='" . $featured_content . "', use_defaults='" . $featured_defaults . "', active='" . $featured_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 		mysqli_query( $db_conn, $featuredUpdate );
 	} else {
 		//Do Insert
-		$featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $featured_heading . "', '" . $featured_introtext . "', '" . $featured_content . "', '" . $featured_defaults . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		$featuredInsert = "INSERT INTO featured (heading, introtext, content, use_defaults, active, author_name, datetime, loc_id) VALUES ('" . $featured_heading . "', '" . $featured_introtext . "', '" . $featured_content . "', '" . $featured_defaults . "', '" . $featured_active . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 		mysqli_query( $db_conn, $featuredInsert );
 	}
-
-	$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, use_defaults, author_name, datetime, loc_id FROM featured WHERE loc_id=" . loc_id . ";" );
-	$rowFeatured = mysqli_fetch_array( $sqlFeatured, MYSQLI_ASSOC );
 
 	flashMessageSet( 'success', 'The featured section has been updated.' );
 
@@ -70,8 +75,36 @@ if ( ! empty( $_POST ) ) {
 			} else {
 				$selDefaults = "";
 			}
+
+            //use default view
+            if ( $rowFeatured['active'] == 'true' ) {
+                $selActive = "CHECKED";
+            } else {
+                $selActive = "";
+            }
 			?>
             <form name="landingForm" class="dirtyForm" method="post">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" id="featured_active">
+                            <label>Active</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="featured_active_checkbox"
+                                           id="<?php echo loc_id ?>" name="featured_active"
+                                           type="checkbox" <?php if ( loc_id ) {
+                                        echo $selActive;
+                                    } ?> data-toggle="toggle">
+                                </label>
+                                <small>
+                                    &nbsp;&nbsp;Display/Hide on web site
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 				<?php
 				if ( loc_id != 1 ) {
 					?>

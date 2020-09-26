@@ -954,32 +954,43 @@ function getFeatured( $loc ) {
 	global $featuredContent;
 	global $featuredHeading;
 	global $featuredBlurb;
+	global $featuredActive;
 	global $imagePath;
 	global $db_conn;
 
 	if ( isset( $loc ) && ! empty( $loc ) ) {
-		$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, use_defaults FROM featured WHERE loc_id=" . $loc . ";" );
+		$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, active, use_defaults FROM featured WHERE active='true' AND loc_id=" . $loc . ";" );
 		$rowFeatured = mysqli_fetch_array( $sqlFeatured, MYSQLI_ASSOC );
 		$imagePath   = $loc;
 
-		if ( $rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == null ) {
-			$sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content FROM featured WHERE loc_id=1;" );
-			$rowFeatured = mysqli_fetch_array( $sqlFeatured, MYSQLI_ASSOC );
+		if ($rowFeatured) {
+            $featuredActive = true;
 
-			$imagePath = 1;
-		}
+            if ( $rowFeatured['use_defaults'] == "true" || $rowFeatured['use_defaults'] == "" || $rowFeatured['use_defaults'] == null ) {
+                $sqlFeatured = mysqli_query( $db_conn, "SELECT heading, introtext, content, active FROM featured WHERE active='true' AND loc_id=1;" );
+                $rowFeatured = mysqli_fetch_array( $sqlFeatured, MYSQLI_ASSOC );
 
-		if ( ! empty( $rowFeatured['heading'] ) ) {
-			$featuredHeading = $rowFeatured['heading'];
-		}
+                $imagePath = 1;
+            }
 
-		if ( ! empty( $rowFeatured['introtext'] ) ) {
-			$featuredBlurb = $rowFeatured['introtext'];
-		}
+            if ( ! empty( $rowFeatured['heading'] ) ) {
+                $featuredHeading = $rowFeatured['heading'];
+            }
 
-		if ( ! empty( $rowFeatured['content'] ) ) {
-			$featuredContent = $rowFeatured['content'];
-		}
+            if ( ! empty( $rowFeatured['introtext'] ) ) {
+                $featuredBlurb = $rowFeatured['introtext'];
+            }
+
+            if ( ! empty( $rowFeatured['content'] ) ) {
+                $featuredContent = $rowFeatured['content'];
+            }
+
+        } else {
+
+            $featuredActive = false;
+
+        }
+
 	}
 
 }
