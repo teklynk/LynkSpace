@@ -10,8 +10,9 @@ $_SESSION['file_referrer'] = 'generalinfo.php';
 $generalinfo_defaults = isset( $_POST['generalinfo_defaults'] ) ? safeCleanStr( $_POST['generalinfo_defaults'] ) : null;
 $generalinfo_heading  = isset( $_POST['generalinfo_heading'] ) ? safeCleanStr( $_POST['generalinfo_heading'] ) : null;
 $generalinfo_content  = isset( $_POST['generalinfo_content'] ) ? sqlEscapeStr($_POST['generalinfo_content']) : null;
+$generalinfo_active    = isset( $_POST['generalinfo_active'] ) ? safeCleanStr($_POST['generalinfo_active']) : null;
 
-$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, use_defaults, author_name, datetime, loc_id FROM generalinfo WHERE loc_id=" . loc_id . ";" );
+$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, use_defaults, author_name, active, datetime, loc_id FROM generalinfo WHERE loc_id=" . loc_id . ";" );
 $rowGeneralinfo = mysqli_fetch_array( $sqlGeneralinfo, MYSQLI_ASSOC );
 
 //update table on submit
@@ -23,13 +24,20 @@ if ( ! empty( $_POST ) ) {
 		$generalinfo_defaults = 'false';
 	}
 
-	if ( $rowGeneralinfo['loc_id'] == loc_id ) {
+    //Active?
+    if ( $generalinfo_active == 'on' ) {
+        $generalinfo_active = 'true';
+    } else {
+        $generalinfo_active = 'false';
+    }
+
+    if ( $rowGeneralinfo['loc_id'] == loc_id ) {
 		//Do Update
-		$generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		$generalinfoUpdate = "UPDATE generalinfo SET heading='" . $generalinfo_heading . "', content='" . $generalinfo_content . "', use_defaults='" . $generalinfo_defaults . "', active='" . $generalinfo_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 		mysqli_query( $db_conn, $generalinfoUpdate );
 	} else {
 		//Do Insert
-		$generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		$generalinfoInsert = "INSERT INTO generalinfo (heading, content, use_defaults, active, author_name, datetime, loc_id) VALUES ('" . $generalinfo_heading . "', '" . $generalinfo_content . "', 'true', '" . $generalinfo_active . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 		mysqli_query( $db_conn, $generalinfoInsert );
 	}
 
@@ -66,8 +74,35 @@ if ( ! empty( $_POST ) ) {
 		} else {
 			$selDefaults = "";
 		}
+
+        //Active
+        if ( $rowGeneralinfo['active'] == 'true' ) {
+            $selActive = "CHECKED";
+        } else {
+            $selActive = "";
+        }
 		?>
         <form name="generalinfoForm" class="dirtyForm" method="post">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group" id="generalinfodefaults">
+                        <label>Active</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="generalinfo_active_checkbox"
+                                       id="<?php echo loc_id ?>" name="generalinfo_active"
+                                       type="checkbox" <?php if ( loc_id ) {
+                                    echo $selActive;
+                                } ?> data-toggle="toggle">
+                            </label>
+                            <small>
+                                &nbsp;&nbsp;Display/Hide on web site
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 			<?php
 			if ( loc_id != 1 ) {

@@ -76,7 +76,7 @@ if ( ! empty( $_POST ) ) {
 				$selDefaults = "";
 			}
 
-            //use default view
+            //Active
             if ( $rowFeatured['active'] == 'true' ) {
                 $selActive = "CHECKED";
             } else {

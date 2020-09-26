@@ -927,25 +927,33 @@ function getSlider( $loc, $sliderType ) {
 function getGeneralInfo( $loc ) {
 	global $generalInfoContent;
 	global $generalInfoHeading;
+    global $generalInfoActive;
 	global $db_conn;
 
 	if ( isset( $loc ) && ! empty( $loc ) ) {
-		$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=" . $loc . ";" );
+		$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, active, use_defaults FROM generalinfo WHERE active='true' AND loc_id=" . $loc . ";" );
 		$rowGeneralinfo = mysqli_fetch_array( $sqlGeneralinfo, MYSQLI_ASSOC );
 
-		//use default location
-		if ( $rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == null ) {
-			$sqlGeneralinfo = mysqli_query( $db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE loc_id=1;" );
-			$rowGeneralinfo = mysqli_fetch_array( $sqlGeneralinfo, MYSQLI_ASSOC );
-		}
+		if ($rowGeneralinfo) {
+            $generalInfoActive = true;
 
-		if ( ! empty( $rowGeneralinfo['content'] ) ) {
-			$generalInfoContent = $rowGeneralinfo['content'];
-		}
+            //use default location
+            if ($rowGeneralinfo['use_defaults'] == "true" || $rowGeneralinfo['use_defaults'] == "" || $rowGeneralinfo['use_defaults'] == null) {
+                $sqlGeneralinfo = mysqli_query($db_conn, "SELECT heading, content, use_defaults FROM generalinfo WHERE active='true' AND loc_id=1;");
+                $rowGeneralinfo = mysqli_fetch_array($sqlGeneralinfo, MYSQLI_ASSOC);
+            }
 
-		if ( ! empty( $rowGeneralinfo['heading'] ) ) {
-			$generalInfoHeading = $rowGeneralinfo['heading'];
-		}
+            if (!empty($rowGeneralinfo['content'])) {
+                $generalInfoContent = $rowGeneralinfo['content'];
+            }
+
+            if (!empty($rowGeneralinfo['heading'])) {
+                $generalInfoHeading = $rowGeneralinfo['heading'];
+            }
+
+        } else {
+            $generalInfoActive = false;
+        }
 	}
 
 }

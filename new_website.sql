@@ -174,6 +174,7 @@ CREATE TABLE `generalinfo` (
   `content` text NOT NULL,
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` text NOT NULL,
   `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
