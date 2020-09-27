@@ -7,7 +7,7 @@ require_once( __DIR__ . '/includes/header.inc.php' );
 
 $_SESSION['file_referrer'] = 'events.php';
 
-$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
+$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, active, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
 $rowEvent = mysqli_fetch_array( $sqlEvent, MYSQLI_ASSOC );
 
 //update table on submit
@@ -18,24 +18,33 @@ if ( ! empty( $_POST ) ) {
 	$event_startdate = dateTimeFormat( 1, safeCleanStr( $_POST['event_startdate'] ) );
 	$event_enddate   = dateTimeFormat( 1, safeCleanStr( $_POST['event_enddate'] ) );
 	$event_calendar  = isset( $_POST['event_calendar'] ) ? sqlEscapeStr($_POST['event_calendar']) : null;
+    $event_active  = isset( $_POST['event_active'] ) ? safeCleanStr($_POST['event_active']) : null;
 
+    //default check
 	if ( $event_defaults == 'on' ) {
 		$event_defaults = 'true';
 	} else {
 		$event_defaults = 'false';
 	}
 
+	//active check
+    if ( $event_active == 'on' ) {
+        $event_active = 'true';
+    } else {
+        $event_active = 'false';
+    }
+
 	if ( $rowEvent['loc_id'] == loc_id ) {
 		//Do Update
-		$eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		$eventUpdate = "UPDATE events SET heading='" . $event_heading . "', alert='" . $event_alert . "', startdate='" . $event_startdate . "', enddate='" . $event_enddate . "', calendar='" . $event_calendar . "', use_defaults='" . $event_defaults . "', active='" . $event_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 		mysqli_query( $db_conn, $eventUpdate );
 	} else {
 		//Do Insert
-		$eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		$eventInsert = "INSERT INTO events (heading, alert, startdate, enddate, calendar, use_defaults, active, author_name, datetime, loc_id) VALUES ('" . $event_heading . "', '" . $event_alert . "', '" . $event_startdate . "', '" . $event_enddate . "', '" . $event_calendar . "', '" . $event_defaults . "', '" . $event_active . "', ''" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 		mysqli_query( $db_conn, $eventInsert );
 	}
 
-	$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
+	$sqlEvent = mysqli_query( $db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, active, author_name, datetime, loc_id FROM events WHERE loc_id=" . loc_id . ";" );
 	$rowEvent = mysqli_fetch_array( $sqlEvent, MYSQLI_ASSOC );
 
 	flashMessageSet( 'success', 'The events section has been updated.' );
@@ -71,6 +80,13 @@ if ( ! empty( $_POST ) ) {
 				$selDefaults = "";
 			}
 
+			//Active
+            if ( $rowEvent['active'] == 'true' ) {
+                $selActive = "CHECKED";
+            } else {
+                $selActive = "";
+            }
+
 			if ( $rowEvent['startdate'] == '0000-00-00' || $rowEvent['startdate'] == '' || $rowEvent['startdate'] == null ) {
 				$startDate = "";
 			} else {
@@ -85,6 +101,26 @@ if ( ! empty( $_POST ) ) {
 
 			?>
             <form name="eventsForm" class="dirtyForm" method="post">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group" id="eventactive">
+                            <label>Active</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="event_active_checkbox"
+                                           id="<?php echo loc_id ?>" name="event_active"
+                                           type="checkbox" <?php if ( loc_id ) {
+                                        echo $selActive;
+                                    } ?> data-toggle="toggle">
+                                </label>
+                                <small>
+                                    &nbsp;&nbsp;Display/Hide on web site
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 				<?php
 				if ( loc_id != 1 ) {

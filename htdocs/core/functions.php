@@ -1052,35 +1052,46 @@ function getEvents($loc)
     global $eventEnddate;
     global $eventCalendar;
     global $eventAlertDateCheck;
+    global $eventActive;
     global $db_conn;
 
     if (isset($loc) && !empty($loc)) {
-        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=" . $loc . ";");
+        $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, active, author_name, datetime, loc_id FROM events WHERE active='true' AND loc_id=" . $loc . ";");
         $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
 
-        if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == null) {
-            $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, author_name, datetime, loc_id FROM events WHERE loc_id=1;");
-            $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
-        }
+        if ($rowEvent) {
 
-        if (!empty($rowEvent['heading'])) {
-            $eventHeading = $rowEvent['heading'];
-        }
+            $eventActive = true;
 
-        if (!empty($rowEvent['alert'])) {
-            $eventAlert = $rowEvent['alert'];
-            $eventStartdate = $rowEvent['startdate'];
-            $eventEnddate = $rowEvent['enddate'];
-
-            if (strtotime(date('Y-m-d')) >= strtotime($eventStartdate) && strtotime(date('Y-m-d')) <= strtotime($eventEnddate)) {
-                $eventAlertDateCheck = 'true';
-            } else {
-                $eventAlertDateCheck = 'false';
+            if ($rowEvent['use_defaults'] == "true" || $rowEvent['use_defaults'] == "" || $rowEvent['use_defaults'] == null) {
+                $sqlEvent = mysqli_query($db_conn, "SELECT heading, alert, startdate, enddate, calendar, use_defaults, active, author_name, datetime, loc_id FROM events WHERE active='true' AND loc_id=1;");
+                $rowEvent = mysqli_fetch_array($sqlEvent, MYSQLI_ASSOC);
             }
-        }
 
-        if (!empty($rowEvent['calendar'])) {
-            $eventCalendar = $rowEvent['calendar'];
+            if (!empty($rowEvent['heading'])) {
+                $eventHeading = $rowEvent['heading'];
+            }
+
+            if (!empty($rowEvent['alert'])) {
+                $eventAlert = $rowEvent['alert'];
+                $eventStartdate = $rowEvent['startdate'];
+                $eventEnddate = $rowEvent['enddate'];
+
+                if (strtotime(date('Y-m-d')) >= strtotime($eventStartdate) && strtotime(date('Y-m-d')) <= strtotime($eventEnddate)) {
+                    $eventAlertDateCheck = 'true';
+                } else {
+                    $eventAlertDateCheck = 'false';
+                }
+            }
+
+            if (!empty($rowEvent['calendar'])) {
+                $eventCalendar = $rowEvent['calendar'];
+            }
+
+        } else {
+
+            $eventActive = false;
+
         }
     }
 }

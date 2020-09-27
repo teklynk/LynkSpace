@@ -61,7 +61,7 @@ if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
 
 	getEvents( loc_id );
 
-	if ( ! empty( $eventAlert && $eventAlertDateCheck == 'true' ) ) {
+	if ( ! empty( $eventAlert && $eventAlertDateCheck == 'true' && $eventActive) ) {
 		echo "<div class='alert fade in notify-bar'><h3 class='text-white'>" . $eventAlert . "</h3><button type='button' class='close alert_close_x' data-dismiss='alert'><span>&times;</span></button>
         <div><button type='button' class='btn btn-link notify-close text-white' data-dismiss='alert'>(Click to close)</button></div></div>";
 	} else {

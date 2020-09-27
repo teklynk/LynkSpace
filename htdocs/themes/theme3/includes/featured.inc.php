@@ -37,33 +37,40 @@ if ($featuredActive) {
 
         echo "</div>";
 
-        echo "<div class='col-lg-4 text-white events'>";
+        if ($eventActive) {
 
-        if (!empty($eventCalendar)) {
+            echo "<div class='col-lg-4 text-white events'>";
 
-            if (!empty($eventHeading)) {
-                echo "<h3>" . $eventHeading . "</h3>";
+            if (!empty($eventCalendar)) {
+
+                if (!empty($eventHeading)) {
+                    echo "<h3>" . $eventHeading . "</h3>";
+                }
+
+                echo "<div class='eventsbox'>" . $eventCalendar . "</div>";
             }
 
-            echo "<div class='eventsbox'>" . $eventCalendar . "</div>";
+            echo "</div>";
         }
-
-        echo "</div>";
 
     } elseif (empty($featuredHeading) && !empty($eventCalendar)) {
 
-        echo "<div class='col-lg-12 text-white events'>";
+        if ($eventActive) {
 
-        if (!empty($eventCalendar)) {
+            echo "<div class='col-lg-12 text-white events'>";
 
-            if (!empty($eventHeading)) {
-                echo "<h3>" . $eventHeading . "</h3>";
+            if (!empty($eventCalendar)) {
+
+                if (!empty($eventHeading)) {
+                    echo "<h3>" . $eventHeading . "</h3>";
+                }
+
+                echo "<div class='eventsbox'>" . $eventCalendar . "</div>";
             }
 
-            echo "<div class='eventsbox'>" . $eventCalendar . "</div>";
-        }
+            echo "</div>";
 
-        echo "</div>";
+        }
 
     } else {
 
