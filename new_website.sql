@@ -140,6 +140,7 @@ CREATE TABLE `events` (
   `enddate` date NOT NULL,
   `calendar` text NOT NULL,
   `use_defaults` text NOT NULL,
+  `active` text NOT NULL,
   `author_name` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `loc_id` int(11) NOT NULL
