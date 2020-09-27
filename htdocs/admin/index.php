@@ -19,6 +19,9 @@ $sucessfulResponse = null;
 // Get client IP address
 $user_ip = getRealIpAddr();
 
+// Check that everything is installed on the server.
+checkDependencies();
+
 // Google Recaptcha validation
 if ( recaptcha_secret_key && recaptcha_site_key ) {
 	$reCaptcha_enabled = true;
@@ -35,9 +38,6 @@ if ( $reCaptcha_enabled == true && $_POST["g-recaptcha-response"] ) {
 		$_POST["g-recaptcha-response"]
 	);
 }
-
-// Check that everything is installed on the server.
-checkDependencies();
 
 // Login Action
 if ( ! empty( $_POST ) ) {

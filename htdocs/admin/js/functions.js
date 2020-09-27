@@ -885,10 +885,3 @@ function showMyModal(myTitle, myFile) {
     $('#webserviceDialog').modal('show');
     $('#changlogDialog').modal('show');
 }
-
-//Page Load/Performance Checker
-window.onload = function () {
-    var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-    console.log('Page load time is ' + loadTime);
-    console.log(window.performance);
-};
