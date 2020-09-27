@@ -97,6 +97,7 @@ CREATE TABLE `contactus` (
   `zipcode` text NOT NULL,
   `phone` text NOT NULL,
   `hours` text NOT NULL,
+  `active` text NOT NULL,
   `use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,

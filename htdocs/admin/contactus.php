@@ -18,8 +18,9 @@ $contact_zipcode     = isset( $_POST['contact_zipcode'] ) ? safeCleanStr( $_POST
 $contact_phone       = isset( $_POST['contact_phone'] ) ? safeCleanStr( $_POST['contact_phone'] ) : null;
 $contact_hours       = isset( $_POST['contact_hours'] ) ? safeCleanStr( $_POST['contact_hours'] ) : null;
 $contact_defaults    = isset( $_POST['contact_defaults'] ) ? safeCleanStr( $_POST['contact_defaults'] ) : null;
+$contact_active      = isset( $_POST['contact_active'] ) ? safeCleanStr( $_POST['contact_active'] ) : null;
 
-$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";" );
+$sqlContact = mysqli_query( $db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, active, use_defaults, author_name, datetime, loc_id FROM contactus WHERE loc_id=" . loc_id . ";" );
 $rowContact = mysqli_fetch_array( $sqlContact, MYSQLI_ASSOC );
 
 //update table on submit
@@ -31,13 +32,19 @@ if ( ! empty( $_POST ) ) {
 		$contact_defaults = 'false';
 	}
 
+    if ( $contact_active == 'on' ) {
+        $contact_active = 'true';
+    } else {
+        $contact_active = 'false';
+    }
+
 	if ( $rowContact['loc_id'] == loc_id ) {
 		//Do Update
-		$contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
+		$contactUpdate = "UPDATE contactus SET heading='" . $contact_heading . "', introtext='" . $contact_introtext . "', mapcode='" . $contact_mapcode . "', email='" . $contact_email . "', sendtoemail='" . $contact_sendtoemail . "', address='" . $contact_address . "', city='" . $contact_city . "', state='" . $contact_state . "', zipcode='" . $contact_zipcode . "', phone='" . $contact_phone . "', hours='" . $contact_hours . "', use_defaults='" . $contact_defaults . "', active='" . $contact_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . loc_id . ";";
 		mysqli_query( $db_conn, $contactUpdate );
 	} else {
 		//Do Insert
-		$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', 'true', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+		$contactInsert = "INSERT INTO contactus (heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, hours, active, use_defaults, author_name, datetime, loc_id) VALUES ('" . $contact_heading . "', '" . $contact_introtext . "', '" . $contact_mapcode . "', '" . $contact_email . "', '" . $contact_sendtoemail . "', '" . $contact_address . "', '" . $contact_city . "', '" . $contact_state . "', '" . $contact_zipcode . "', '" . $contact_phone . "', '" . $contact_hours . "', '" . $contact_active . "', 'true', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 		mysqli_query( $db_conn, $contactInsert );
 	}
 
@@ -81,8 +88,36 @@ if ( ! empty( $_POST ) ) {
 			} else {
 				$selDefaults = "";
 			}
+
+            //Active
+            if ( $rowContact['active'] == 'true' ) {
+                $selActive = "CHECKED";
+            } else {
+                $selActive = "";
+            }
 			?>
             <form name="contactForm" class="dirtyForm" method="post">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" id="contact_active">
+                            <label>Active</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="contact_active_checkbox"
+                                           id="<?php echo loc_id ?>" name="contact_active"
+                                           type="checkbox" <?php if ( loc_id ) {
+                                        echo $selActive;
+                                    } ?> data-toggle="toggle">
+                                </label>
+                                <small>
+                                    &nbsp;&nbsp;Display/Hide on web site
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 				<?php
 				if ( loc_id != 1 ) {
 					?>

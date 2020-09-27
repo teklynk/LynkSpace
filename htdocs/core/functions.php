@@ -111,68 +111,79 @@ function getContactInfo($loc)
     global $contactHours;
     global $contactFormSendToEmail;
     global $contactFormMsg;
+    global $contactActive;
     global $db_conn;
 
     if (isset($loc) && !empty($loc)) {
 
-        $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=" . $loc . ";");
+        $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours, active FROM contactus WHERE active = 'true' AND loc_id=" . $loc . ";");
         $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
 
         if ($rowContact['use_defaults'] == "true" || $rowContact['use_defaults'] == "" || $rowContact['use_defaults'] == null) {
-            $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours FROM contactus WHERE loc_id=1;");
+            $sqlContact = mysqli_query($db_conn, "SELECT heading, introtext, mapcode, email, sendtoemail, address, city, state, zipcode, phone, use_defaults, hours, active FROM contactus WHERE active = 'true' AND loc_id=1;");
             $rowContact = mysqli_fetch_array($sqlContact, MYSQLI_ASSOC);
         }
 
-        if (isset($_GET['msgsent']) == "thankyou") {
-            $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
-        } elseif (isset($_GET['msgsent']) == "error") {
-            $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
+        if ($rowContact) {
+
+            $contactActive = true;
+
+            if (isset($_GET['msgsent']) == "thankyou") {
+                $contactFormMsg = "<div id='success'><div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>Your message has been sent. </strong></div></div>";
+            } elseif (isset($_GET['msgsent']) == "error") {
+                $contactFormMsg = "<div id='success'><div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true' onclick=\"window.location.href='#'\">×</button><strong>An error occured while sending your message. </strong></div></div>";
+            } else {
+                $contactFormMsg = "";
+            }
+
+            if (!empty($rowContact['heading'])) {
+                $contactHeading = $rowContact['heading'];
+            }
+
+            if (!empty($rowContact['introtext'])) {
+                $contactBlurb = $rowContact['introtext'];
+            }
+
+            if (!empty($rowContact['mapcode'])) {
+                $contactMap = $rowContact['mapcode'];
+            }
+
+            if (!empty($rowContact['address'])) {
+                $contactAddress = $rowContact['address'];
+            }
+
+            if (!empty($rowContact['city'])) {
+                $contactCity = $rowContact['city'];
+            }
+
+            if (!empty($rowContact['state'])) {
+                $contactState = $rowContact['state'];
+            }
+
+            if (!empty($rowContact['zipcode'])) {
+                $contactZipcode = $rowContact['zipcode'];
+            }
+
+            if (!empty($rowContact['phone'])) {
+                $contactPhone = $rowContact['phone'];
+            }
+
+            if (!empty($rowContact['email'])) {
+                $contactEmail = $rowContact['email'];
+            }
+
+            if (!empty($rowContact['hours'])) {
+                $contactHours = $rowContact['hours'];
+            }
+
+            if (!empty($rowContact['sendtoemail'])) {
+                $contactFormSendToEmail = $rowContact['sendtoemail'];
+            }
+
         } else {
-            $contactFormMsg = "";
-        }
 
-        if (!empty($rowContact['heading'])) {
-            $contactHeading = $rowContact['heading'];
-        }
+            $contactActive = false;
 
-        if (!empty($rowContact['introtext'])) {
-            $contactBlurb = $rowContact['introtext'];
-        }
-
-        if (!empty($rowContact['mapcode'])) {
-            $contactMap = $rowContact['mapcode'];
-        }
-
-        if (!empty($rowContact['address'])) {
-            $contactAddress = $rowContact['address'];
-        }
-
-        if (!empty($rowContact['city'])) {
-            $contactCity = $rowContact['city'];
-        }
-
-        if (!empty($rowContact['state'])) {
-            $contactState = $rowContact['state'];
-        }
-
-        if (!empty($rowContact['zipcode'])) {
-            $contactZipcode = $rowContact['zipcode'];
-        }
-
-        if (!empty($rowContact['phone'])) {
-            $contactPhone = $rowContact['phone'];
-        }
-
-        if (!empty($rowContact['email'])) {
-            $contactEmail = $rowContact['email'];
-        }
-
-        if (!empty($rowContact['hours'])) {
-            $contactHours = $rowContact['hours'];
-        }
-
-        if (!empty($rowContact['sendtoemail'])) {
-            $contactFormSendToEmail = $rowContact['sendtoemail'];
         }
     }
 }
