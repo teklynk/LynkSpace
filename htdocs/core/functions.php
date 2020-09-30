@@ -63,6 +63,7 @@ function getPage($loc)
     global $pageContent;
     global $pageKeywords;
     global $pageId;
+    global $pageArray;
     global $db_conn;
 
     if (isset($_GET['page_id'])) {
@@ -74,8 +75,10 @@ function getPage($loc)
     if (isset($loc) && !empty($loc)) {
 
         if (ctype_digit($pageId)) {
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE id=" . $pageId . " AND loc_id=" . $loc . ";");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
             $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
+
+            $pageArray = $rowPage;
 
             if ($rowPage['active'] == 'true' && $pageId == $rowPage['id']) {
 
@@ -88,6 +91,12 @@ function getPage($loc)
                 $pageTitle = "Page not found";
                 $pageContent = "This page is not available.";
             }
+
+        } elseif (!$pageId) {
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY datetime DESC;");
+            $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
+
+            $pageArray = $rowPage;
 
         } else {
 

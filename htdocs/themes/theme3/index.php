@@ -15,7 +15,7 @@ echo "<div class='container bannerwrapper'>";
 echo "</div>";
 echo "</div>";
 
-require_once( __DIR__ . '/includes/services.inc.php' );
+require_once( __DIR__ . '/includes/pages.inc.php' );
 
 echo "</div>";
 
