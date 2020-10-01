@@ -47,6 +47,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 				$page_title    = isset( $_POST['page_title'] ) ? safeCleanStr( $_POST['page_title'] ) : null;
 				$page_content  = isset( $_POST['page_content'] ) ? sqlEscapeStr($_POST['page_content']) : null;
 				$page_keywords = isset( $_POST['page_keywords'] ) ? safeCleanStr( $_POST['page_keywords'] ) : null;
+                $page_image = isset( $_POST['page_image'] ) ? safeCleanStr( $_POST['page_image'] ) : null;
 
 				// Update existing page
 				if ( $getEditpage ) {
@@ -58,14 +59,14 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 					//update data on submit
 					if ( ! empty( $page_title ) ) {
 
-						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
+						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
 						mysqli_query( $db_conn, $pageUpdate );
 
 						//Alert messages
 						flashMessageSet( 'success', "The page " . $page_title . " has been updated." );
 					}
 
-					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
+					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, image, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
 					$rowPages = mysqli_fetch_array( $sqlPages, MYSQLI_ASSOC );
 
 					//Create new page
@@ -75,7 +76,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 					//insert data on submit
 					if ( ! empty( $page_title ) ) {
-						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 						mysqli_query( $db_conn, $pageInsert );
 
 						//Alert Set messages
@@ -108,6 +109,17 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                                    value="<?php if ( $getEditpage ) {
 								       echo $rowPages['keywords'];
 							       } ?>" placeholder="tech, coding, tutorials, books">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="page_image">Set a featured image</label>
+                            <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
+                                    data-size="10" name="page_image" id="page_image" title="Choose an existing image">
+                                <option value="">None</option>
+                                <?php
+                                echo getImageDropdownList( loc_id, $rowPages['image'] );
+                                ?>
+                            </select>
                         </div>
 
                         <hr/>

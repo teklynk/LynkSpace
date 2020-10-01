@@ -1076,6 +1076,7 @@ CREATE TABLE `pages` (
   `content` text NOT NULL,
   `guid` text NOT NULL,
   `keywords` text NOT NULL,
+  `image` text NOT NULL,
   `active` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,

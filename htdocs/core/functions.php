@@ -62,6 +62,7 @@ function getPage($loc)
     global $pageTitle;
     global $pageContent;
     global $pageKeywords;
+    global $pageImage;
     global $pageId;
     global $pageArray;
     global $db_conn;
@@ -75,7 +76,7 @@ function getPage($loc)
     if (isset($loc) && !empty($loc)) {
 
         if (ctype_digit($pageId)) {
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
             $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
             $pageArray = $rowPage;
@@ -85,6 +86,7 @@ function getPage($loc)
                 $pageTitle = $rowPage['title'];
                 $pageContent = $rowPage['content'];
                 $pageKeywords = $rowPage['keywords'];
+                $pageImage = $rowPage['image'];
 
             } else {
 
@@ -93,7 +95,7 @@ function getPage($loc)
             }
 
         } elseif (!$pageId) {
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY datetime DESC;");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, active, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY datetime DESC;");
             $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
 
             $pageArray = $rowPage;
