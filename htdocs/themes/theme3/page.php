@@ -23,7 +23,12 @@ echo "</div>";
 
 echo "<div class='col-xs-12 col-lg-12 page-content'>";
 
-echo $pageContent;
+if ( ! empty( $pageImage ) ) {
+    echo "<div class='col-md-4'><img src='" . $pageImage . "' border='0' class='img-responsive'></div>";
+    echo "<div class='col-md-8'>" . $pageContent . "</div>";
+} else {
+    echo "<div class='col-md-12'>" . $pageContent . "</div>";
+}
 
 echo "</div>";
 
