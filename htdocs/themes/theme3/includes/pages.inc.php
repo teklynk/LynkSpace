@@ -21,7 +21,7 @@ if ( count($pageArray) > 0 ) {
 
         $pageDate = date("F jS, Y", strtotime($pageData['created']));
 
-        echo "<div class='col-sm-6 col-md-6 col-lg-6 page-item'>";
+        echo "<div class='col-sm-12 col-md-6 col-lg-4 page-item'>";
         echo "<div class='panel panel-default text-center'>";
 
         echo "<div class='panel-body'>";
