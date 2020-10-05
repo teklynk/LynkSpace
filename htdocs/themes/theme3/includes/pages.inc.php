@@ -19,6 +19,8 @@ if ( count($pageArray) > 0 ) {
 
     foreach($pageArray as $pageData) {
 
+        $pageDate = date("F jS, Y", strtotime($pageData['created']));
+
         echo "<div class='col-sm-6 col-md-6 col-lg-6 page-item'>";
         echo "<div class='panel panel-default text-center'>";
 
@@ -30,6 +32,10 @@ if ( count($pageArray) > 0 ) {
 
         if ( ! empty( $pageData['title'] ) ) {
             echo "<h1>" . $pageData['title'] . "</h1>";
+        }
+
+        if ( ! empty( $pageData['created'] ) ) {
+            echo "<span class='date small'><strong>" . $pageDate . "</strong></span>";
         }
 
         if ( ! empty( $pageData['content'] ) ) {

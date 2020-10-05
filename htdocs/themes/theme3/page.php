@@ -7,9 +7,11 @@ echo "<div class='page-page'>";
 
 require_once( __DIR__ . '/includes/featured.inc.php' );
 
+//reformat the created date to human readable
+$pageDate = date("F jS, Y", strtotime($pageCreated));
+
 echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
 echo "<div class='container bannerwrapper'>";
-
 
 echo "</div>";
 echo "</div>";
@@ -19,6 +21,7 @@ echo "<div class='row row_pad content' id='page'>";
 
 echo "<div class='col-lg-12'>";
 echo "<h1 class='page'>" . $pageTitle . "</h1>";
+echo "<span class='date small'><strong>" . $pageDate . "</strong></span>";
 echo "</div>";
 
 echo "<div class='col-xs-12 col-lg-12 page-content'>";

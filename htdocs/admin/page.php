@@ -76,7 +76,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 					//insert data on submit
 					if ( ! empty( $page_title ) ) {
-						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, active, author_name, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 						mysqli_query( $db_conn, $pageInsert );
 
 						//Alert Set messages
