@@ -1,0 +1,13 @@
+#sliderCarousel .carousel-control i {
+    margin-top: 3px;
+}
+.row_pad {
+    margin-top: 41px;
+}
+.row_pad .page-content {
+    margin-bottom: 41px;
+}
+#page .date {
+    display: block;
+    margin-bottom: 20px;
+}

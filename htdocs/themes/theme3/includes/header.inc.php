@@ -81,7 +81,7 @@ if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
                 <span class="toggbutton">MENU</span>
             </button>
             <a href="<?php echo homePageURL; ?>" class="navbar-brand"><img
-                        class="pull-left img-nonresponsive" src="<?php getLogo( loc_id, 'relative' ); ?>"
+                        class="pull-left img-nonresponsive img-circle" src="<?php getLogo( loc_id, 'relative' ); ?>"
                         alt="Home" title="Home" border="0"/></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,10 +91,6 @@ if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'index.php' ) {
 			getNav( loc_id, 'Top', 'true', 'left' );
 			?>
             <div class="socialDiv pull-right hidden-xs hidden-sm">
-				<?php
-				getGoogleTranslateCode( 'ar,en,es,fr,pl,tl,uk,ur,vi,zh-CN' );
-				?>
-
 				<?php require_once( __DIR__ . '/socialmedia.inc.php' ); ?>
             </div>
             <div style="clear:both;"></div>

@@ -48,6 +48,14 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 				$page_content   = isset( $_POST['page_content'] ) ? sqlEscapeStr($_POST['page_content']) : null;
 				$page_keywords  = isset( $_POST['page_keywords'] ) ? safeCleanStr( $_POST['page_keywords'] ) : null;
                 $page_image     = isset( $_POST['page_image'] ) ? safeCleanStr( $_POST['page_image'] ) : null;
+                $page_featured_image_active = isset( $_POST['featured_image_status'] ) ? safeCleanStr( $_POST['featured_image_status'] ) : null;
+
+                //location Active?
+                if ( $page_featured_image_active == 'on' ) {
+                    $page_featured_image_active = 'true';
+                } else {
+                    $page_featured_image_active = 'false';
+                }
 
 				// Update existing page
 				if ( $getEditpage ) {
@@ -59,15 +67,22 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 					//update data on submit
 					if ( ! empty( $page_title ) ) {
 
-						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
+						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', featured_image_active='" . $page_featured_image_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
 						mysqli_query( $db_conn, $pageUpdate );
 
 						//Alert messages
 						flashMessageSet( 'success', "The page " . $page_title . " has been updated." );
 					}
 
-					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, image, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
+					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, image, featured_image_active, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
 					$rowPages = mysqli_fetch_array( $sqlPages, MYSQLI_ASSOC );
+
+					//check if featured image is active
+                    if ( $rowPages['featured_image_active'] == 'true' ) {
+                        $isActive_featured_image = "CHECKED";
+                    } else {
+                        $isActive_featured_image = "";
+                    }
 
 					//Create new page
 				} elseif ( $getNewpage ) {
@@ -76,7 +91,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 					//insert data on submit
 					if ( ! empty( $page_title ) ) {
-						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, featured_image_active, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', '" . $page_featured_image_active . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 						mysqli_query( $db_conn, $pageInsert );
 
 						//Alert Set messages
@@ -112,7 +127,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                         </div>
 
                         <div class="form-group">
-                            <label for="page_image">Set a featured image</label>
+                            <label for="page_image">Set a Featured Image</label>
                             <select class="form-control selectpicker show-tick" data-container="body" data-dropup-auto="false"
                                     data-size="10" name="page_image" id="page_image" title="Choose an existing image">
                                 <option value="">None</option>
@@ -120,6 +135,26 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                                 echo getImageDropdownList( loc_id, $rowPages['image'] );
                                 ?>
                             </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" id="featured_image_active">
+                                    <label>Show Featured Image</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input class="featured_image_checkbox"
+                                                   id="<?php echo loc_id ?>" name="featured_image_status"
+                                                   type="checkbox" <?php if ( loc_id ) {
+                                                echo $isActive_featured_image;
+                                            } ?> data-toggle="toggle">
+                                        </label>
+                                        <small>
+                                            &nbsp;&nbsp;Show the featured image on page body.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <hr/>

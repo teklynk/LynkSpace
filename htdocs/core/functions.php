@@ -63,6 +63,7 @@ function getPage($loc)
     global $pageContent;
     global $pageKeywords;
     global $pageImage;
+    global $pageFeaturedImageActive;
     global $pageCreated;
     global $pageId;
     global $pageArray;
@@ -78,7 +79,7 @@ function getPage($loc)
 
         if (ctype_digit($pageId)) {
             //get one item where page_id
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, created, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, featured_image_active, created, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
             $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
             $pageArray = $rowPage;
@@ -89,6 +90,7 @@ function getPage($loc)
                 $pageContent = $rowPage['content'];
                 $pageKeywords = $rowPage['keywords'];
                 $pageImage = $rowPage['image'];
+                $pageFeaturedImageActive = $rowPage['featured_image_active'];
                 $pageCreated = $rowPage['created'];
 
             } else {
@@ -99,7 +101,7 @@ function getPage($loc)
 
         //return an array of all items
         } elseif (!$pageId) {
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC;");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC;");
             $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
 
             $pageArray = $rowPage;

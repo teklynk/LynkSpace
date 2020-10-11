@@ -1078,6 +1078,7 @@ CREATE TABLE `pages` (
   `keywords` text NOT NULL,
   `image` text NOT NULL,
   `active` text NOT NULL,
+  `featured_image_active` text NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author_name` text NOT NULL,

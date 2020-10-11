@@ -26,8 +26,8 @@ if ( count($pageArray) > 0 ) {
 
         echo "<div class='panel-body'>";
 
-        if ( ! empty( $pageData['image'] ) ) {
-            echo "<a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "'><img src='" . $pageData['image'] . "' border='0' class='img-responsive'/></a>";
+        if ( ! empty( $pageData['image']) ) {
+            echo "<a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "'><img src='" . $pageData['image'] . "' border='0' class='img-rounded'/></a>";
         }
 
         if ( ! empty( $pageData['title'] ) ) {
