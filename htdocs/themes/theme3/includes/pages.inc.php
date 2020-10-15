@@ -26,24 +26,24 @@ if ( count($pageArray) > 0 ) {
 
         echo "<div class='panel-body'>";
 
-        if ( ! empty( $pageData['image']) ) {
-            echo "<a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "'><img src='" . $pageData['image'] . "' border='0' class='img-rounded'/></a>";
-        }
-
         if ( ! empty( $pageData['title'] ) ) {
-            echo "<h1>" . $pageData['title'] . "</h1>";
+            echo "<h1 class='page_title'>" . $pageData['title'] . "</h1>";
         }
 
         if ( ! empty( $pageData['created'] ) ) {
-            echo "<span class='date small'><strong>" . $pageDate . "</strong></span>";
+            echo "<span class='page_created date small'><strong>" . $pageDate . "</strong></span>";
         }
 
-        if ( ! empty( $pageData['content'] ) ) {
-            echo "<p>" . $pageData['content'] . "</p>";
+        if ( ! empty( $pageData['image'] ) ) {
+            echo "<div class='page_featured_image'><a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "'><img src='" . $pageData['image'] . "' border='0'/></a></div>";
+        }
+
+        if ( ! empty( $pageData['sub_heading'] ) ) {
+            echo "<div class='page_sub_heading'><p>" . $pageData['sub_heading'] . "</p></div>";
         }
 
         if ( ! empty( $pageData['id'] ) ) {
-            echo "<a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "' class='btn btn-primary'>Read More</a>";
+            echo "<div class='page_read_more_btn'><a href='page.php?page_id=" . $pageData['id'] . "&loc_id=" . $pageData['loc_id'] . "' class='btn btn-primary'>Read More</a></div>";
         }
 
         echo "</div>";

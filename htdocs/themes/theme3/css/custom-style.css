@@ -11,3 +11,16 @@
     display: block;
     margin-bottom: 20px;
 }
+#pages .page_title {
+    display: block;
+    margin-bottom: 0px;
+}
+#pages .page_created {
+    display: block;
+    margin-bottom: 12px;
+}
+
+#pages .page_read_more_btn {
+    display: block;
+    margin-top: 12px;
+}

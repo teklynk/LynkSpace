@@ -49,6 +49,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 				$page_keywords  = isset( $_POST['page_keywords'] ) ? safeCleanStr( $_POST['page_keywords'] ) : null;
                 $page_image     = isset( $_POST['page_image'] ) ? safeCleanStr( $_POST['page_image'] ) : null;
                 $page_featured_image_active = isset( $_POST['featured_image_status'] ) ? safeCleanStr( $_POST['featured_image_status'] ) : null;
+                $page_sub_heading = isset( $_POST['page_sub_heading'] ) ? safeCleanStr( $_POST['page_sub_heading'] ) : null;
 
                 //location Active?
                 if ( $page_featured_image_active == 'on' ) {
@@ -67,14 +68,14 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 					//update data on submit
 					if ( ! empty( $page_title ) ) {
 
-						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', featured_image_active='" . $page_featured_image_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
+						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', sub_heading='" . $page_sub_heading . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', featured_image_active='" . $page_featured_image_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
 						mysqli_query( $db_conn, $pageUpdate );
 
 						//Alert messages
 						flashMessageSet( 'success', "The page " . $page_title . " has been updated." );
 					}
 
-					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, image, featured_image_active, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
+					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
 					$rowPages = mysqli_fetch_array( $sqlPages, MYSQLI_ASSOC );
 
 					//check if featured image is active
@@ -91,7 +92,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 					//insert data on submit
 					if ( ! empty( $page_title ) ) {
-						$pageInsert = "INSERT INTO pages (title, content, guid, keywords, image, featured_image_active, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', '" . $page_featured_image_active . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+						$pageInsert = "INSERT INTO pages (title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_sub_heading . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', '" . $page_featured_image_active . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 						mysqli_query( $db_conn, $pageInsert );
 
 						//Alert Set messages
@@ -116,6 +117,14 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                                    value="<?php if ( $getEditpage ) {
 								       echo $rowPages['title'];
 							       } ?>" placeholder="Page Title" autofocus required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sub Heading</label>
+                            <input type="text" class="form-control count-text" name="page_sub_heading" maxlength="255"
+                                   value="<?php if ( $getEditpage ) {
+                                       echo $rowPages['sub_heading'];
+                                   } ?>" placeholder="Sub Heading">
                         </div>
 
                         <div class="form-group">
@@ -276,17 +285,21 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
                             <thead>
                             <tr>
                                 <th>Page Title</th>
+                                <th>Heading</th>
+                                <th>Created</th>
                                 <th>Active</th>
                                 <th class="no-sort">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
 							<?php
-							$sqlPages = mysqli_query( $db_conn, "SELECT id, title, content, guid, keywords, active, loc_id FROM pages WHERE loc_id=" . loc_id . " ORDER BY datetime DESC;" );
+							$sqlPages = mysqli_query( $db_conn, "SELECT id, title, sub_heading, content, guid, keywords, created, active, loc_id FROM pages WHERE loc_id=" . loc_id . " ORDER BY created DESC;" );
 							while ( $rowPages = mysqli_fetch_array( $sqlPages, MYSQLI_ASSOC ) ) {
 
 								$pageId       = $rowPages['id'];
 								$pageTitle    = safeCleanStr( addslashes( $rowPages['title'] ) );
+                                $pageHeading  = safeCleanStr( addslashes( $rowPages['sub_heading'] ) );
+                                $pageCreated  = safeCleanStr( $rowPages['created'] );
 								$pageContent  = sqlEscapeStr( $rowPages['content'] );
 								$pageKeywords = safeCleanStr( $rowPages['keywords'] );
 								$pageActive   = safeCleanStr( $rowPages['active'] );
@@ -300,6 +313,8 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 								echo "<tr>
                                 <td><a href='page.php?loc_id=" . loc_id . "&editpage=" . $pageId . "&guid=" . $pageGuid . "' title='Edit'>" . $pageTitle . "</a></td>
+                                <td>" . $pageHeading . "</td>
+                                <td>" . $pageCreated . "</td>
                                 <td class='col-xs-1'>
                                 <input data-toggle='toggle' title='Page Active' class='checkbox page_status_checkbox' id='" . $pageId . "' type='checkbox' " . $isActive . ">
                                 </td>

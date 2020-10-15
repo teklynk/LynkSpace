@@ -1073,6 +1073,7 @@ CREATE TABLE `navigation` (
 CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
+  `sub_heading` text NOT NULL,
   `content` text NOT NULL,
   `guid` text NOT NULL,
   `keywords` text NOT NULL,
