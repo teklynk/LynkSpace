@@ -68,14 +68,14 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 					//update data on submit
 					if ( ! empty( $page_title ) ) {
 
-						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', sub_heading='" . $page_sub_heading . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', featured_image_active='" . $page_featured_image_active . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
+						$pageUpdate = "UPDATE pages SET title='" . $page_title . "', sub_heading='" . $page_sub_heading . "', content='" . $page_content . "', keywords='" . $page_keywords . "', image='" . $page_image . "', featured_image_active='" . $page_featured_image_active . "', author_name='" . $_SESSION['user_name'] . "' WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";";
 						mysqli_query( $db_conn, $pageUpdate );
 
 						//Alert messages
 						flashMessageSet( 'success', "The page " . $page_title . " has been updated." );
 					}
 
-					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, datetime, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
+					$sqlPages = mysqli_query( $db_conn, "SELECT id, title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, updated, loc_id FROM pages WHERE id=" . $thePageId . " AND guid='" . $thePageGuid . "' AND loc_id=" . loc_id . ";" );
 					$rowPages = mysqli_fetch_array( $sqlPages, MYSQLI_ASSOC );
 
 					//check if featured image is active
@@ -92,7 +92,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
 					//insert data on submit
 					if ( ! empty( $page_title ) ) {
-						$pageInsert = "INSERT INTO pages (title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, created, datetime, loc_id) VALUES ('" . $page_title . "', '" . $page_sub_heading . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', '" . $page_featured_image_active . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
+						$pageInsert = "INSERT INTO pages (title, sub_heading, content, guid, keywords, image, featured_image_active, active, author_name, created, loc_id) VALUES ('" . $page_title . "', '" . $page_sub_heading . "', '" . $page_content . "', '" . getGuid() . "', '" . $page_keywords . "', '" . $page_image . "', '" . $page_featured_image_active . "', 'false', '" . $_SESSION['user_name'] . "', '" . date( "Y-m-d H:i:s" ) . "', " . loc_id . ");";
 						mysqli_query( $db_conn, $pageInsert );
 
 						//Alert Set messages
@@ -183,7 +183,7 @@ $getEditpage = isset( $_GET['editpage'] ) ? safeCleanStr( $_GET['editpage'] ) : 
 
                         <div class="form-group">
                             <span><small><?php if ( $getEditpage ) {
-			                            echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowPages['datetime'] ) ) . " By: " . $rowPages['author_name'];
+			                            echo "Updated: " . date( 'm-d-Y, H:i:s', strtotime( $rowPages['updated'] ) ) . " By: " . $rowPages['author_name'];
 		                            } ?></small></span>
                         </div>
 
