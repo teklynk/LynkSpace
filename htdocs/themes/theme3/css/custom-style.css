@@ -7,9 +7,15 @@
 .row_pad .page-content {
     margin-bottom: 41px;
 }
-#page .date {
+#page .date, #page .keywords {
     display: block;
     margin-bottom: 20px;
+}
+#page span.keyword_link {
+    margin-right: 4px;
+}
+span.keyword_link::after {
+    content: ",";
 }
 #pages .page_title {
     display: block;

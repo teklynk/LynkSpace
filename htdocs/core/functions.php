@@ -68,14 +68,21 @@ function getPage($loc)
     global $pageCreated;
     global $pageId;
     global $pageArray;
+    global $getPageKeywords;
     global $db_conn;
 
     $pageArray = array();
 
-    if (isset($_GET['page_id'])) {
-        $pageId = $_GET['page_id'];
+    if (isset($_GET['page_id']) && !empty($_GET['page_id'])) {
+        $pageId = trim($_GET['page_id']);
     } else {
         $pageId = null;
+    }
+
+    if (isset($_GET['keywords']) && !empty($_GET['keywords'])) {
+        $getPageKeywords = trim($_GET['keywords']);
+    } else {
+        $getPageKeywords = null;
     }
 
     if (isset($loc) && !empty($loc)) {
@@ -105,13 +112,19 @@ function getPage($loc)
 
         //return an array of all items
         } elseif (!$pageId) {
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC;");
-            $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
+
+            if ($getPageKeywords) {
+                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND keywords LIKE '%" . $getPageKeywords . "%' ORDER BY created DESC;");
+                $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
+            } else {
+                //search using keyword
+                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC;");
+                $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
+            }
 
             $pageArray = $rowPage;
 
         } else {
-
             $pageTitle = "Page not found";
             $pageContent = "This page is not available.";
         }
