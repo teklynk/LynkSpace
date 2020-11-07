@@ -12,7 +12,7 @@ getPage( loc_id );
 echo "<a name='pages'></a>";
 
 if ( is_array($pageArray) && count($pageArray) > 0 ) {
-    echo 'test';
+
     echo "<div class='container-fluid services'>";
     echo "<div class='container bannerwrapper'>";
 
