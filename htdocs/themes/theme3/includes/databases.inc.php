@@ -120,13 +120,8 @@ if ( $customerNumRows > 0 ) {
 	echo "</div>";
 
 } else {
-	echo "<div class='container-fluid databases'>";
-	echo "<div class='container bannerwrapper'>";
 
-	echo "<div class='col-lg-12'><h1 class='page'>Page not found</h1></div>";
-	echo "<div class='col-xs-12 col-lg-12'>This page is not available.</div>";
+    require_once(__DIR__ . '/pagenotfound.inc.php');
 
-	echo "</div>";
-	echo "</div>";
 }
 ?>

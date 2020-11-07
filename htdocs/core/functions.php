@@ -103,11 +103,6 @@ function getPage($loc)
                 $pageImage = $rowPage['image'];
                 $pageFeaturedImageActive = $rowPage['featured_image_active'];
                 $pageCreated = $rowPage['created'];
-
-            } else {
-
-                $pageTitle = "Page not found";
-                $pageContent = "This page is not available.";
             }
 
         //return an array of all items
@@ -123,10 +118,6 @@ function getPage($loc)
             }
 
             $pageArray = $rowPage;
-
-        } else {
-            $pageTitle = "Page not found";
-            $pageContent = "This page is not available.";
         }
     }
 }

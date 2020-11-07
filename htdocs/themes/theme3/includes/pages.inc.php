@@ -12,6 +12,7 @@ getPage( loc_id );
 echo "<a name='pages'></a>";
 
 if ( is_array($pageArray) && count($pageArray) > 0 ) {
+    echo 'test';
     echo "<div class='container-fluid services'>";
     echo "<div class='container bannerwrapper'>";
 
@@ -63,7 +64,7 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
 } else {
 
-    echo "Page not found";
+    require_once(__DIR__ . '/pagenotfound.inc.php');
 
 }
 ?>
