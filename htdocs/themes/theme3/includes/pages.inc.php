@@ -17,6 +17,10 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
     echo "<div class='row' id='pages'>";
 
+    if (isset($_GET['keywords'])) {
+        echo "<div class='col-12 keyword_results_title'><h5><b>Showing results for:</b> '" . trim($_GET['keywords']) . "'</h5></div>";
+    }
+
     foreach($pageArray as $pageData) {
 
         $pageDate = date("F jS, Y", strtotime($pageData['created']));
