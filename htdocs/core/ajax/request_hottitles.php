@@ -7,7 +7,7 @@ if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 if (isset($_GET['rssurl'])) {
 
-    require_once(__DIR__ . '/../../config/config.php');
+    require_once( __DIR__ . '/../../../config/config.php' );
     require_once(__DIR__ . '/../functions.php');
 
     ?>

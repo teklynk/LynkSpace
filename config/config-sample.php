@@ -35,22 +35,16 @@ $serverProtocol = '//';
 $serverHostname = $_SERVER['SERVER_NAME'];
 
 //Location ID
-define( 'loc_id', (INT) $getLocId );
+define('loc_id', (INT)$getLocId);
 
 //Admin directory path
-define( 'admin', __DIR__ . '/../admin' );
-
-//Themes directory path
-define( 'themes', __DIR__ . '/../themes' );
+define('admin', __DIR__ . '/../admin');
 
 //Core directory path
-define( 'core', __DIR__ . '/../core' );
+define('core', __DIR__ . '/core');
 
-//Config directory path
-define( 'config', __DIR__ . '/../config' );
-
-//Themes directory path
-define( 'uploads', __DIR__ . '/../uploads' );
+//Uploads directory path
+define('uploads', __DIR__ . '/../uploads');
 
 //Get server port number. if not port 80
 if ( $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ) {
