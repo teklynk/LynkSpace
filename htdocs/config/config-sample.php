@@ -9,7 +9,9 @@ require_once( 'dbconn.php' );
 require_once( 'blowfishsalt.php' );
 
 $rowConfig = '';
-$db_conn   = '';
+$db_conn = '';
+$errorMsg = '';
+$pageMsg = '';
 
 $getLocId = isset( $_GET['loc_id'] ) ? $_GET['loc_id'] : null;
 
@@ -235,5 +237,8 @@ define( 'disqus_url', "" );
 //Recaptcha API Key
 define( 'recaptcha_secret_key', "" );
 define( 'recaptcha_site_key', "" );
+
+//Other API Keys apiKeysArray[0]
+//define('apiKeysArray', array('api1', 'api2', 'api3', 'api4'));
 
 ?>
