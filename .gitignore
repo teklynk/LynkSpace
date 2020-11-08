@@ -4,9 +4,9 @@
 /node_modules/
 .idea/
 /htdocs/uploads/*
-/htdocs/config/blowfishsalt.php
-/htdocs/config/dbconn.php
-/htdocs/config/config.php
+/config/blowfishsalt.php
+/config/dbconn.php
+/config/config.php
 /.htaccess
 /htdocs/.htaccess
 /htdocs/admin/backups/*
