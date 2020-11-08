@@ -6,13 +6,8 @@ if ( ! defined( 'ALLOW_INC' ) ) {
 getGeneralInfo( loc_id );
 
 if ($generalInfoActive) {
-    ?>
-    <!-- General Info Section -->
-    <a name="generalinfo" tabindex="-1"></a>
-    <?php
-
-
     if (!empty($generalInfoContent)) {
+        echo "<a name='generalinfo' tabindex='-1'></a>";
         echo "<div class='container-fluid page-container row' id='generalinfo'>";
 
         if (!empty($generalInfoHeading)) {
@@ -27,5 +22,7 @@ if ($generalInfoActive) {
 
         echo "</div>";
     }
+} else {
+    echo "";
 }
 ?>

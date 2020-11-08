@@ -2,12 +2,10 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-    <!-- Databases Section -->
-    <a name="databases" tabindex="-1"></a>
-<?php
 
 if ( $customerNumRows > 0 ) {
+
+    echo "<a name='databases' tabindex='-1'></a>";
 
 	echo "<div class='container-fluid cat_databases'>";
 	echo "<div class='container bannerwrapper'>";
@@ -100,5 +98,10 @@ if ( $customerNumRows > 0 ) {
 
 	echo "</div>";
 	echo "</div>";
+
+} else {
+
+    echo "";
+
 }
 ?>

@@ -2,16 +2,13 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-    <!-- Databases Section -->
-    <a name="databases" tabindex="-1"></a>
-<?php
 
 getCustomers( loc_id, 'featured' );
 
 $customersItemCount = 0;
 
 if ( $customerNumRows > 0 ) {
+    echo "<a name='databases' tabindex='-1'></a>";
 	echo "<div class='page-container container-fluid featureddatabases'>";
 	echo "<div class='container bannerwrapper'>";
 
@@ -95,5 +92,7 @@ if ( $customerNumRows > 0 ) {
 
 	echo "</div>";
 	echo "</div>";
+} else {
+    echo "";
 }
 ?>

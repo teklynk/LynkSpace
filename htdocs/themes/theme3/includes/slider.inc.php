@@ -16,7 +16,7 @@ echo "</header>";
 
 echo "</div>";
 
-if ( $sliderCount == 0 ) {
+if ( $sliderCount === 0 ) {
 	echo "<style>.slider {display:none !important;}</style>";
 }
 ?>

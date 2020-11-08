@@ -2,16 +2,12 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-    <!-- Services Section -->
-    <a name="services" tabindex="-1"></a>
-<?php
 
 getServices( loc_id );
 
-echo "<a name='services'></a>";
-
 if ( $servicesNumRows > 0 ) {
+    echo "<a name='services' tabindex='-1'></a>";
+    echo "<a name='services'></a>";
 	echo "<div class='container-fluid services'>";
 	echo "<div class='container bannerwrapper'>";
 
@@ -79,6 +75,10 @@ if ( $servicesNumRows > 0 ) {
 
 	echo "</div>";
 	echo "</div>";
+
+} else {
+
+    echo "";
 
 }
 ?>

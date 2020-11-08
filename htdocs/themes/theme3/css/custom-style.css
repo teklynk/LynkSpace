@@ -7,7 +7,11 @@
 .row_pad .page-content {
     margin-bottom: 41px;
 }
-#page .date, #page .keywords {
+#page .date {
+    display: block;
+    margin-bottom: 2px;
+}
+#page .keywords {
     display: block;
     margin-bottom: 20px;
 }
@@ -17,7 +21,9 @@
 span.keyword_link::after {
     content: ",";
 }
-
+span.keyword_link:last-child::after {
+    content: "";
+}
 div.keyword_results_title {
     margin: 0 0 36px 15px;
 }

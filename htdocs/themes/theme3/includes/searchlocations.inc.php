@@ -2,10 +2,7 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-<!-- Search Locations Section -->
-<a name="search" tabindex="-1"></a>
-<?php
+
 getSetup( loc_id ); //from functions.php
 ?>
 
@@ -26,6 +23,9 @@ getSetup( loc_id ); //from functions.php
         });
     });
 </script>
+
+<!-- Search Locations Section -->
+<a name="search" tabindex="-1"></a>
 
 <div class="row" id="searchlocations">
     <div class="col-xs-12 col-lg-12">

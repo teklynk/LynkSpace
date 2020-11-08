@@ -2,16 +2,12 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-    <!-- Team Section -->
-    <a name="team" tabindex="-1"></a>
-<?php
 
 getTeam( loc_id );
 
-echo "<a name='team'></a>";
-
 if ( $teamNumRows > 0 ) {
+    echo "<a name='team' tabindex='-1'></a>";
+
 	echo "<div class='container-fluid team'>";
 	echo "<div class='container bannerwrapper'>";
 
@@ -64,6 +60,10 @@ if ( $teamNumRows > 0 ) {
 
 	echo "</div>";
 	echo "</div>";
+
+} else {
+
+    echo "";
 
 }
 ?>

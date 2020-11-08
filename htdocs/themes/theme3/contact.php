@@ -135,6 +135,18 @@ if ($contactActive) {
 
     <?php
 
+} else {
+
+    echo "<div class='container' id='contact'>
+    <div class='content'>
+    <div class='row row_pad'>";
+
+        require_once( __DIR__ . '/includes/pagenotfound.inc.php' );
+
+    echo "</div>
+    </div>
+    </div>";
+
 } //end if $contactActive
 
 require_once( __DIR__ . '/includes/footer.inc.php' );

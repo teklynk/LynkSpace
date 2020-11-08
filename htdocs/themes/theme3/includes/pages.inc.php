@@ -2,16 +2,12 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
     die( 'Direct access not permitted' );
 }
-?>
-    <!-- Pages Section -->
-    <a name="pages" tabindex="-1"></a>
-<?php
 
 getPage( loc_id );
 
-echo "<a name='pages'></a>";
-
 if ( is_array($pageArray) && count($pageArray) > 0 ) {
+
+    echo "<a name='pages' tabindex='-1'></a>";
 
     echo "<div class='container-fluid services'>";
     echo "<div class='container bannerwrapper'>";
@@ -64,7 +60,7 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
 } else {
 
-    require_once(__DIR__ . '/pagenotfound.inc.php');
+    echo "";
 
 }
 ?>

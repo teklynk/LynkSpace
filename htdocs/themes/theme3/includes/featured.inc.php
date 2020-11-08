@@ -88,5 +88,7 @@ if ($featuredActive) {
 
     echo "<div style='clear:both;'></div>";
 
+} else {
+    echo "";
 }
 ?>

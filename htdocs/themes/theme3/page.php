@@ -39,7 +39,7 @@ if (is_array($pageArray) && count($pageArray) > 0) {
     echo "<div class='col-lg-12'>";
     echo "<h1 class='page'>" . $pageTitle . "</h1>";
     echo "<span class='date small'><strong>" . $pageDate . "</strong></span>";
-    echo "<span class='keywords small'><strong>" . rtrim($keywords, ',') . "</strong></span>";
+    echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span>";
     echo "</div>";
 
     echo "<div class='col-xs-12 col-lg-12 page-content'>";
@@ -67,8 +67,15 @@ if (is_array($pageArray) && count($pageArray) > 0) {
 
     echo "</div>";
     echo "</div>";
+    echo "<div class='container' id='pages'>
+    <div class='content'>
+    <div class='row row_pad'>";
 
-    require_once(__DIR__ . '/includes/pagenotfound.inc.php');
+        require_once(__DIR__ . '/includes/pagenotfound.inc.php');
+
+    echo "</div>
+    </div>
+    </div>";
 }
 
 require_once(__DIR__ . '/includes/footer.inc.php');

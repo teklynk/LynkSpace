@@ -40,5 +40,7 @@ if ( $hottitlesCount > 0 ) {
 	echo "</div>"; //.container
 	echo "</div>"; //.grad-blue
 
+} else {
+    echo "";
 }
 ?>

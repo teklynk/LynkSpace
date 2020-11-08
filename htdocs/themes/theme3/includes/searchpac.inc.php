@@ -2,15 +2,13 @@
 if ( ! defined( 'ALLOW_INC' ) ) {
 	die( 'Direct access not permitted' );
 }
-?>
-    <!-- Search PAC Section -->
-    <a name="search" tabindex="-1"></a>
-<?php
 
 getSetup( loc_id ); //from functions.php
 
 if ( $setupLs2pac == 'true' || $setupLs2kids == 'true' ) {
 	?>
+    <!-- Search PAC Section -->
+    <a name="search" tabindex="-1"></a>
 
     <div class="row" id="searchpac">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -117,5 +115,7 @@ if ( $setupLs2pac == 'true' || $setupLs2kids == 'true' ) {
         </div>
     </div>
 	<?php
+} else {
+    echo "";
 }
 ?>
