@@ -187,7 +187,6 @@ define( 'carouselSpeed', $carousel_speed_seconds );
 
 //Version Number
 $versionFile = __DIR__ . '/../version.txt';
-$versionFile = str_replace( 'config', '', $versionFile );
 define( 'ysmVersion', file_get_contents( $versionFile ) );
 
 //Updates remote URL requires: http:// or https://
