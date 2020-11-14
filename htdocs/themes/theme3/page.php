@@ -25,7 +25,7 @@ if (!empty($pageKeywords)) {
     }
 }
 
-if (is_array($pageArray) && count($pageArray) > 0) {
+if (is_array($pageArray) && array_count_values($pageArray) > 0) {
 
     echo "<div class='grad-blue themebase-bgcolor container-fluid search'>";
     echo "<div class='container bannerwrapper'>";
