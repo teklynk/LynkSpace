@@ -384,7 +384,7 @@ $(document).ready(function () {
     });
     //Ajax Calls
     $('#nav_Table .nav_win_checkbox').change(function () {
-        $.get('ajax/update_navwin.php?update=true', {
+        $.get('core/ajax/update_navwin.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -395,7 +395,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('#nav_Table .nav_active_checkbox').change(function () {
-        $.get('ajax/update_navactive.php?update=true', {
+        $.get('core/ajax/update_navactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -415,7 +415,7 @@ $(document).ready(function () {
     }
     //Ajax calls for PAC setting checkboxes and radios
     $('.searchopt_checkbox').change(function () {
-        $.get('ajax/update_searchoptions.php?update=true', {
+        $.get('core/ajax/update_searchoptions.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -434,7 +434,7 @@ $(document).ready(function () {
             $('.ls2kids_default').attr('disabled', true);
             $('.ls2pac_default').prop('checked', true);
             $('.ls2kids_default').prop('checked', false);
-            $.get('ajax/update_searchdefault.php?update=true', {
+            $.get('core/ajax/update_searchdefault.php?update=true', {
                 value: 1,
                 checked: this.checked
             });
@@ -443,7 +443,7 @@ $(document).ready(function () {
             $('.ls2kids_default').attr('disabled', true);
             $('.ls2pac_default').prop('checked', false);
             $('.ls2kids_default').prop('checked', true);
-            $.get('ajax/update_searchdefault.php?update=true', {
+            $.get('core/ajax/update_searchdefault.php?update=true', {
                 value: 2,
                 checked: this.checked
             });
@@ -453,14 +453,14 @@ $(document).ready(function () {
         } else if ($('.ls2kids_active').prop('checked') == false && $('.ls2pac_active').prop('checked') == false) {
             $('.ls2pac_default').prop('checked', false);
             $('.ls2kids_default').prop('checked', false);
-            $.get('ajax/update_searchdefault.php?update=true', {
+            $.get('core/ajax/update_searchdefault.php?update=true', {
                 value: 0,
                 checked: this.checked
             });
         }
     });
     $('.searchopt_radio').change(function () {
-        $.get('ajax/update_searchdefault.php?update=true', {
+        $.get('core/ajax/update_searchdefault.php?update=true', {
             value: this.value,
             checked: this.checked
         });
@@ -470,7 +470,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.page_status_checkbox').change(function () {
-        $.get('ajax/update_pageactive.php?update=true', {
+        $.get('core/ajax/update_pageactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -480,7 +480,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.slider_status_checkbox').change(function () {
-        $.get('ajax/update_slideractive.php?update=true', {
+        $.get('core/ajax/update_slideractive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -490,7 +490,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.services_status_checkbox').change(function () {
-        $.get('ajax/update_servicesactive.php?update=true', {
+        $.get('core/ajax/update_servicesactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -500,7 +500,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.team_status_checkbox').change(function () {
-        $.get('ajax/update_staffactive.php?update=true', {
+        $.get('core/ajax/update_staffactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -510,7 +510,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.customer_status_checkbox').change(function () {
-        $.get('ajax/update_customersactive.php?update=true', {
+        $.get('core/ajax/update_customersactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -520,7 +520,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.hottitles_status_checkbox').change(function () {
-        $.get('ajax/update_hottitlesactive.php?update=true', {
+        $.get('core/ajax/update_hottitlesactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -530,7 +530,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.customer_featured_checkbox').change(function () {
-        $.get('ajax/update_customersfeatured.php?update=true', {
+        $.get('core/ajax/update_customersfeatured.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -540,7 +540,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.hottitles_defaults_checkbox').change(function () {
-        $.get('ajax/update_hottitlesdefaults.php?update=true', {
+        $.get('core/ajax/update_hottitlesdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -550,7 +550,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.featured_defaults_checkbox').change(function () {
-        $.get('ajax/update_featureddefaults.php?update=true', {
+        $.get('core/ajax/update_featureddefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -560,7 +560,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.event_defaults_checkbox').change(function () {
-        $.get('ajax/update_eventdefaults.php?update=true', {
+        $.get('core/ajax/update_eventdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -570,7 +570,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.multibranch_checkbox').change(function () {
-        $.get('ajax/update_multibranch.php?update=true', {
+        $.get('core/ajax/update_multibranch.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -580,7 +580,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.generalinfo_defaults_checkbox').change(function () {
-        $.get('ajax/update_generalinfodefaults.php?update=true', {
+        $.get('core/ajax/update_generalinfodefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -590,7 +590,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.contact_defaults_checkbox').change(function () {
-        $.get('ajax/update_contactdefaults.php?update=true', {
+        $.get('core/ajax/update_contactdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -600,7 +600,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.social_defaults_checkbox').change(function () {
-        $.get('ajax/update_socialmediadefaults.php?update=true', {
+        $.get('core/ajax/update_socialmediadefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -610,7 +610,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.slider_defaults_checkbox').change(function () {
-        $.get('ajax/update_sliderdefaults.php?update=true', {
+        $.get('core/ajax/update_sliderdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -620,7 +620,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.databases_defaults_checkbox').change(function () {
-        $.get('ajax/update_databasesdefaults.php?update=true&section=' + getUrlVars()['section'], {
+        $.get('core/ajax/update_databasesdefaults.php?update=true&section=' + getUrlVars()['section'], {
             id: this.id,
             checked: this.checked
         });
@@ -630,7 +630,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.databases_defaults_checkbox_2').change(function () {
-        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=2', {
+        $.get('core/ajax/update_databasesdefaults.php?update=true&sub_section=2', {
             id: this.id,
             checked: this.checked
         });
@@ -640,7 +640,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.databases_defaults_checkbox_3').change(function () {
-        $.get('ajax/update_databasesdefaults.php?update=true&sub_section=3', {
+        $.get('core/ajax/update_databasesdefaults.php?update=true&sub_section=3', {
             id: this.id,
             checked: this.checked
         });
@@ -650,7 +650,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.navigation_defaults_checkbox_1').change(function () {
-        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=1', {
+        $.get('core/ajax/update_navigationdefaults.php?update=true&sub_section=1', {
             id: this.id,
             checked: this.checked
         });
@@ -660,7 +660,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.navigation_defaults_checkbox_2').change(function () {
-        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=2', {
+        $.get('core/ajax/update_navigationdefaults.php?update=true&sub_section=2', {
             id: this.id,
             checked: this.checked
         });
@@ -670,7 +670,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.navigation_defaults_checkbox_3').change(function () {
-        $.get('ajax/update_navigationdefaults.php?update=true&sub_section=3', {
+        $.get('core/ajax/update_navigationdefaults.php?update=true&sub_section=3', {
             id: this.id,
             checked: this.checked
         });
@@ -680,7 +680,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.services_defaults_checkbox').change(function () {
-        $.get('ajax/update_servicesdefaults.php?update=true', {
+        $.get('core/ajax/update_servicesdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -690,7 +690,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.team_defaults_checkbox').change(function () {
-        $.get('ajax/update_staffdefaults.php?update=true', {
+        $.get('core/ajax/update_staffdefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -700,7 +700,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.location_status_checkbox').change(function () {
-        $.get('ajax/update_setupactive.php?update=true', {
+        $.get('core/ajax/update_setupactive.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -710,7 +710,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.theme_defaults_checkbox').change(function () {
-        $.get('ajax/update_themedefaults.php?update=true', {
+        $.get('core/ajax/update_themedefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -720,7 +720,7 @@ $(document).ready(function () {
         }, 500);
     });
     $('.logo_defaults_checkbox').change(function () {
-        $.get('ajax/update_logodefaults.php?update=true', {
+        $.get('core/ajax/update_logodefaults.php?update=true', {
             id: this.id,
             checked: this.checked
         });
@@ -746,7 +746,7 @@ $(document).ready(function () {
         }
     }).change();
     $('.sitemap_builder').click(function () {
-        $.get('ajax/update_sitemapxml.php?update=true', {
+        $.get('core/ajax/update_sitemapxml.php?update=true', {
             success: function () {
                 $('.sitemap_builder').attr('disabled', true);
                 $('.sitemap_builder>i').addClass('fa-spin');

@@ -1,2 +1,13 @@
 User-agent: *
-Disallow: /
+Disallow: /admin/
+Disallow: /ajax/
+Disallow: /css/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /themes/
+Disallow: /mail/
+Disallow: /core/
+Disallow: /js/
+Disallow: /migration/
+Disallow: /vendor/
+Sitemap: //lynkspace.local/sitemap.xml

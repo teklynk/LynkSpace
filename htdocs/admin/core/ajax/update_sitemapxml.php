@@ -10,11 +10,11 @@ session_start();
 //check if user is logged in and that the requesting page is valid.
 if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['user_level'] == 1 && $_SESSION['session_hash'] == md5( $_SESSION['user_name'] ) && $_SESSION['file_referrer'] == 'siteoptions.php' ) {
 
-	require_once( __DIR__ . '/../../../config/config.php' );
+	require_once( __DIR__ . '/../../../../config/config.php' );
 
 	if ( ! empty( $_GET ) && $_GET['update'] ) {
 
-		$sitemapFileLoc = "../../sitemap.xml";
+		$sitemapFileLoc = "../../../sitemap.xml";
 
 		$otherPages = array( "index.php", "staff.php", "services.php", "contact.php", "databases.php" );
 
