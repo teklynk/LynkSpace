@@ -582,33 +582,33 @@ function getCoreHeader($loc, $addHeader = null)
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/assets/css/main.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/main.min.css?v=<?php echo ysmVersion; ?>">
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/assets/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/assets/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/assets/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!--Dynamic CSS -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/assets/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/assets/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/assets/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- LS2 search script -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/assets/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/assets/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php if (!empty(setupPACURL)) { ?>
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
@@ -1218,7 +1218,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == 'true') {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../themes/assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
@@ -1279,7 +1279,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == true) {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../themes/assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
