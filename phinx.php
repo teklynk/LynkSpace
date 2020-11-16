@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/htdocs/config/dbconn.php');
+require_once(__DIR__ . '/config/dbconn.php');
 
 return
     [
