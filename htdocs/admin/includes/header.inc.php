@@ -15,7 +15,7 @@ if (!defined('ALLOW_INC')) {
     require_once(__DIR__ . '/../../../config/config.php');
 
     //Admin panel functions
-    require_once(__DIR__ . '/../core/functions.php');
+    require_once(__DIR__ . '/../core/admin-functions.php');
 
     //Check for IP restrictions
     checkIPRange();
