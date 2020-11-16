@@ -5,7 +5,7 @@ define( 'ALLOW_INC', true );
 
 if ( $_POST['user_name'] && $_POST['user_email'] && $_SESSION['file_referrer'] == 'index.php' ) {
 
-	require_once( __DIR__ . '/../../config/config.php' );
+	require_once( __DIR__ . '/../../../config/config.php' );
 	require_once( __DIR__ . '/../core/functions.php' );
 
 	//create a random hashed string and set it as a session variable
