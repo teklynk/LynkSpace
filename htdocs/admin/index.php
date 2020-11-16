@@ -167,7 +167,7 @@ if (isset($_SESSION['loggedIn'])) {
         html, body {
             margin: 0 !important;
             padding: 0 !important;
-            background: #fcfcfc url('images/color-splash-3.jpg') no-repeat center center fixed;
+            background: #fcfcfc url('assets/images/color-splash-3.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

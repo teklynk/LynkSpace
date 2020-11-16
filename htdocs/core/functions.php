@@ -582,33 +582,33 @@ function getCoreHeader($loc, $addHeader = null)
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/assets/css/main.min.css?v=<?php echo ysmVersion; ?>">
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
+          href="<?php echo serverUrlStr; ?>/assets/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/assets/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/assets/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!--Dynamic CSS -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
+          href="<?php echo serverUrlStr; ?>/assets/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/assets/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/assets/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- LS2 search script -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/assets/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/assets/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php if (!empty(setupPACURL)) { ?>
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
@@ -1218,7 +1218,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == 'true') {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
@@ -1279,7 +1279,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == true) {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
@@ -1356,7 +1356,7 @@ function getHottitlesTabs($loc)
                 $hotActive = '';
             }
 
-            if ($hottitlesCount > 0) {
+            if ($hottitlesCount > 0 && $hottitlesUrl) {
                 $hottitlesTabs .= "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hottitlesCount');\">$hottitlesTile</a></li>";
             }
         }
