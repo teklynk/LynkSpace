@@ -3,7 +3,7 @@
 define( 'ALLOW_INC', true );
 
 require_once (__DIR__ . '/../config/config.php');
-require_once (__DIR__ . '/../htdocs/admin/core/functions.php');
+require_once (__DIR__ . '/../htdocs/admin/core/admin-functions.php');
 
 $uploadsPath = __DIR__ . '/../htdocs/uploads';
 

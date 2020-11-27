@@ -821,7 +821,7 @@ function getCustomers($loc, $custType)
 
 }
 
-function getSlider($loc, $sliderType)
+function getSlider($loc, $sliderType, $array_only=null)
 {
     //EXAMPLE: getSlider($_GET['loc_id'], "slide")
     //EXAMPLE: getSlider($_GET['loc_id'], "random")
@@ -835,9 +835,11 @@ function getSlider($loc, $sliderType)
     global $sliderLocType;
     global $imagePath;
     global $locTypes;
+    global $sliderArray;
     global $db_conn;
 
     $sliderOrderBy = '';
+    $sliderArray = array();
 
     if ($sliderType == "slide") {
         $sliderOrderBy = "ORDER BY sort, title ASC";
@@ -881,7 +883,8 @@ function getSlider($loc, $sliderType)
             echo "<style>#sliderCarousel .carousel-control {display: none !important;}</style>";
         }
 
-        if ($sliderNumRows > 0) {
+        //build html for slider
+        if ($sliderNumRows > 0 && $array_only == null) {
 
             if ($sliderType == "slide") {
 
@@ -971,7 +974,7 @@ function getSlider($loc, $sliderType)
                     $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
                 }
             } else {
-                $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);;
+                $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
                 $sliderLink = $rowSlider['link'];
                 $sliderTitle = $rowSlider['title'];
                 $sliderContent = $rowSlider['content'];
@@ -984,6 +987,8 @@ function getSlider($loc, $sliderType)
             $sliderImageList = rtrim($sliderImageList, ",");
             $sliderImageArr = explode(",", $sliderImageList);
 
+        } else {
+            return $sliderArray = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
         }
     }
 }
