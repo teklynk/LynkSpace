@@ -416,7 +416,7 @@ function blowfishSaltRandomString( $saltThisString ) {
 
 //Generates a drop down list of theme thumbnails
 function getThemesDropdownList( $theme_selected ) {
-	global $themesStr;
+	global $themDropDownList;
 
 	// Get theme names from themes folder
 	$themeDirectories = glob( '../themes/*', GLOB_ONLYDIR );
@@ -425,18 +425,20 @@ function getThemesDropdownList( $theme_selected ) {
 
 	// Build themes drop down list
 	foreach ( $themeDirectories as $themes ) {
-		$themes          = str_replace( '../themes/', '', $themes );
-		$themesImg       = '../themes/' . $themes . '/screenshot.png';
-		$themesThumbnail = '../themes/' . $themes . '/screenshot_thumb.png';
+		//ignore assets directory
+		if ($themes != '../themes/assets') {
+            $themes = str_replace('../themes/', '', $themes);
+            $themesImg = '../themes/' . $themes . '/screenshot.png';
+            $themesThumbnail = '../themes/' . $themes . '/screenshot_thumb.png';
 
-		if ( $themes == $theme_selected ) {
-			$isThemeSelected = ' SELECTED ';
-		} else {
-			$isThemeSelected = '';
-		}
+            if ($themes == $theme_selected) {
+                $isThemeSelected = ' SELECTED ';
+            } else {
+                $isThemeSelected = '';
+            }
 
-		$themDropDownList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords( $themes ) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords( $themes ) . "</option>";
-
+            $themDropDownList .= "<option data-ays-ignore='true' data-content=\"<span class='img-label'><img class='img-select-option' src='" . $themesThumbnail . "'/>&nbsp;" . ucwords($themes) . "</span>\" value='" . $themes . "' $isThemeSelected>" . ucwords($themes) . "</option>";
+        }
 	}
 
 	return $themDropDownList;
