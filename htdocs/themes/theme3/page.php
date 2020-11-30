@@ -39,7 +39,13 @@ if (is_array($pageArray) && array_count_values($pageArray) > 0) {
     echo "<div class='col-lg-12'>";
     echo "<h1 class='page'>" . $pageTitle . "</h1>";
     echo "<span class='date small'><strong>" . $pageDate . "</strong></span>";
-    echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span>";
+
+    if ($keywords){
+        echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span><br />";
+    } else {
+        echo "<p><br /></p>";
+    }
+
     echo "</div>";
 
     echo "<div class='col-xs-12 col-lg-12 page-content'>";
