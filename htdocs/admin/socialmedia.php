@@ -1,57 +1,100 @@
 <?php
-define( 'ALLOW_INC', true );
+define('ALLOW_INC', true);
 
-require_once( __DIR__ . '/includes/header.inc.php' );
+require_once(__DIR__ . '/includes/header.inc.php');
 
 $_SESSION['file_referrer'] = 'socialmedia.php';
 
-$sqlSocial = mysqli_query( $db_conn, "SELECT heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, active, use_defaults, loc_id FROM socialmedia WHERE loc_id=" . loc_id . ";" );
-$rowSocial = mysqli_fetch_array( $sqlSocial, MYSQLI_ASSOC );
+$socialCount = 0;
 
-//update table on submit
-if ( ! empty( $_POST ) ) {
+$sqlSetup = mysqli_query($db_conn, "SELECT socialmediaheading, socialmedia_use_defaults FROM setup WHERE loc_id=" . loc_id . ";");
+$rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
-    $social_active    = isset( $_POST['social_active'] ) ? safeCleanStr($_POST['social_active']) : null;
-	$social_heading   = isset( $_POST['social_heading'] ) ? safeCleanStr( addslashes( $_POST['social_heading'] ) ) : null;
-	$social_defaults  = isset( $_POST['social_defaults'] ) ? sqlEscapeStr($_POST['social_defaults']) : null;
-	$social_facebook  = isset( $_POST['social_facebook'] ) ? sqlEscapeStr($_POST['social_facebook']) : null;
-	$social_youtube   = isset( $_POST['social_youtube'] ) ? sqlEscapeStr($_POST['social_youtube']) : null;
-	$social_twitter   = isset( $_POST['social_twitter'] ) ? sqlEscapeStr($_POST['social_twitter']) : null;
-	$social_google    = isset( $_POST['social_google'] ) ? sqlEscapeStr($_POST['social_google']) : null;
-	$social_pinterest = isset( $_POST['social_pinterest'] ) ? sqlEscapeStr($_POST['social_pinterest']) : null;
-	$social_instagram = isset( $_POST['social_instagram'] ) ? sqlEscapeStr($_POST['social_instagram']) : null;
-	$social_tumblr    = isset( $_POST['social_tumblr'] ) ? sqlEscapeStr($_POST['social_tumblr']) : null;
+//onload, get data from table as array
+$sqlSocial = mysqli_query($db_conn, "SELECT id, sort, name, url, active, guid FROM sociallinks WHERE loc_id=" . loc_id . " ORDER BY sort, name;");
+$rowSocial = mysqli_fetch_all($sqlSocial, MYSQLI_ASSOC);
 
-	if ( ! empty( $social_heading ) ) {
+$delSocialTitle = isset($_GET['deletename']) ? safeCleanStr(addslashes($_GET['deletename'])) : null;
+$delSocialId = isset($_GET['deletesociallink']) ? safeCleanStr(addslashes($_GET['deletesociallink'])) : null;
+$delSocialToken = isset($_GET['token']) ? safeCleanStr($_GET['token']) : null;
+$delSocialGuid = isset($_GET['guid']) ? safeCleanStr($_GET['guid']) : null;
 
-		if ( $social_defaults == 'on' ) {
-			$social_defaults = 'true';
-		} else {
-			$social_defaults = 'false';
-		}
+//delete action
+if ($delSocialId && $delSocialTitle && !$_GET['confirm']) {
+    showModalConfirm(
+        "confirm",
+        "Delete Social Link?",
+        "Are you sure you want to delete: " . $delSocialTitle . "?",
+        "socialmedia.php?loc_id=" . loc_id . "&deletesociallink=" . $delSocialId . "&deletename=" . $delSocialTitle . "&guid=" . $delSocialGuid . "&confirm=yes&token=" . $_SESSION['unique_referrer'] . "",
+        false
+    );
+} elseif ($delSocialId && $delSocialTitle && $_GET['confirm'] == 'yes' && $delSocialToken == $_SESSION['unique_referrer']) {
 
-        if ( $social_active == 'on' ) {
-            $social_active = 'true';
+    //delete nav after clicking Yes
+    $socialDelete = "DELETE FROM sociallinks WHERE id=" . $delSocialId . " AND guid='" . $delSocialGuid . "' AND loc_id=" . loc_id . ";";
+    mysqli_query($db_conn, $socialDelete);
+
+    flashMessageSet('success', $delSocialTitle . " has been deleted.");
+
+    //Redirect back to uploads page
+    header("Location: socialmedia.php?loc_id=" . loc_id . "", true, 302);
+    echo "<script>window.location.href='socialmedia.php?loc_id=" . loc_id . "';</script>";
+    exit();
+}
+
+//on post
+if (!empty($_POST)) {
+
+    //values for setup table
+    $social_active = isset($_POST['social_active']) ? safeCleanStr($_POST['social_active']) : null;
+    $social_heading = isset($_POST['social_heading']) ? safeCleanStr(addslashes($_POST['social_heading'])) : null;
+    $social_defaults = isset($_POST['social_defaults']) ? sqlEscapeStr($_POST['social_defaults']) : null;
+
+    //values for sociallinks post data
+    $social_sort_new = isset($_POST['social_sort_new']) ? safeCleanStr($_POST['social_sort_new']) : null;
+    $social_name_new = isset($_POST['social_name_new']) ? safeCleanStr($_POST['social_name_new']) : null;
+    $social_url_new = isset($_POST['social_url_new']) ? safeCleanStr($_POST['social_url_new']) : null;
+    $socialCount = isset($_POST['social_count']) ? safeCleanStr($_POST['social_count']) : null;
+
+    if (!empty($social_heading)) {
+
+        if ($social_defaults == 'on') {
+            $social_defaults = 'true';
         } else {
-            $social_active = 'false';
+            $social_defaults = 'false';
         }
 
-		if ( $rowSocial['loc_id'] == loc_id ) {
-			//Do Update
-			$socialUpdate = "UPDATE socialmedia SET heading='" . $social_heading . "', facebook='" . $social_facebook . "', youtube='" . $social_youtube . "', twitter='" . $social_twitter . "', google='" . $social_google . "', pinterest='" . $social_pinterest . "', instagram='" . $social_instagram . "', tumblr='" . $social_tumblr . "', active='" . $social_active . "', use_defaults='" . $social_defaults . "' WHERE loc_id=" . loc_id . ";";
-			mysqli_query( $db_conn, $socialUpdate );
-		} else {
-			//Do Insert
-			$socialInsert = "INSERT INTO socialmedia (heading, facebook, youtube, twitter, google, pinterest, instagram, tumblr, active, use_defaults, loc_id) VALUES ('" . $social_heading . "', '" . $social_facebook . "', '" . $social_youtube . "', '" . $social_twitter . "', '" . $social_google . "', '" . $social_pinterest . "', '" . $social_instagram . "', '" . $social_tumblr . "', '" . $social_active . "', '" . $social_defaults . "', " . loc_id . ");";
-			mysqli_query( $db_conn, $socialInsert );
-		}
+        $setupUpdate = "UPDATE setup SET socialmediaheading='" . $social_heading . "', socialmedia_use_defaults='" . $social_defaults . "', datetime='" . date("Y-m-d H:i:s") . "' WHERE loc_id=" . loc_id . ";";
+        mysqli_query($db_conn, $setupUpdate);
 
-	}
+    }
 
-	flashMessageSet( 'success', "The social media section has been updated." );
+    if (!empty($social_name_new)) {
+
+        //Do Insert
+        $socialInsert = "INSERT INTO sociallinks (sort, name, url, author_name, DATETIME, active, loc_id, guid) VALUES ('" . $social_sort_new . "', '" . $social_name_new . "', '" . $social_url_new . "', '" . $_SESSION['user_name'] . "', '" . date("Y-m-d H:i:s") . "', 0, " . loc_id . ", '" . getGuid() . "');";
+        mysqli_query($db_conn, $socialInsert);
+
+    } else {
+
+        for ($i = 0; $i < $socialCount; $i++) {
+
+            $social_sort = isset($_POST['social_sort'][$i]) ? safeCleanStr($_POST['social_sort'][$i]) : null;
+            $social_name = isset($_POST['social_name'][$i]) ? safeCleanStr($_POST['social_name'][$i]) : null;
+            $social_url = isset($_POST['social_url'][$i]) ? safeCleanStr($_POST['social_url'][$i]) : null;
+            $social_id = isset($_POST['social_id'][$i]) ? safeCleanStr($_POST['social_id'][$i]) : null;
+
+            $socialUpdate = "UPDATE sociallinks SET sort=" . $social_sort . ", name='" . $social_name . "', url='" . $social_url . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date("Y-m-d H:i:s") . "', loc_id=" . loc_id . " WHERE id=" . $social_id . ";";
+            mysqli_query($db_conn, $socialUpdate);
+
+        }
+
+    }
+
+    flashMessageSet('success', "The social media section has been updated.");
 
     //Redirect back to socialmedia page
-    header( "Location: socialmedia.php?loc_id=" . loc_id . "", true, 302 );
+    header("Location: socialmedia.php?loc_id=" . loc_id . "", true, 302);
     echo "<script>window.location.href='socialmedia.php?loc_id=" . loc_id . "';</script>";
     exit();
 }
@@ -70,51 +113,25 @@ if ( ! empty( $_POST ) ) {
     </div>
 </div>
 
-<?php echo flashMessageGet( 'success' ); ?>
+<?php echo flashMessageGet('success'); ?>
 
 <div class="row">
     <div class="col-lg-8">
-		<?php
+        <?php
 
-		//use default view
-		if ( $rowSocial['use_defaults'] == 'true' ) {
-			$selDefaults = "CHECKED";
-		} else {
-			$selDefaults = "";
-		}
-
-        //Active
-        if ( $rowSocial['active'] == 'true' ) {
-            $selActive = "CHECKED";
+        //use default view
+        if ($rowSocial['use_defaults'] == 'true') {
+            $selDefaults = "CHECKED";
         } else {
-            $selActive = "";
+            $selDefaults = "";
         }
-		?>
+
+        ?>
         <form name="socialmediaForm" class="dirtyForm" method="post">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group" id="social_active">
-                        <label>Active</label>
-                        <div class="checkbox">
-                            <label>
-                                <input class="social_active_checkbox"
-                                       id="<?php echo loc_id ?>" name="social_active"
-                                       type="checkbox" <?php if ( loc_id ) {
-                                    echo $selActive;
-                                } ?> data-toggle="toggle">
-                            </label>
-                            <small>
-                                &nbsp;&nbsp;Display/Hide on web site
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-			<?php
-			if ( loc_id != 1 ) {
-				?>
+            <?php
+            if (loc_id != 1) {
+                ?>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group" id="socialdefaults">
@@ -123,9 +140,9 @@ if ( ! empty( $_POST ) ) {
                                 <label>
                                     <input class="social_defaults_checkbox defaults-toggle"
                                            id="<?php echo loc_id ?>" name="social_defaults"
-                                           type="checkbox" <?php if ( loc_id ) {
-										echo $selDefaults;
-									} ?> data-toggle="toggle">
+                                           type="checkbox" <?php if (loc_id) {
+                                        echo $selDefaults;
+                                    } ?> data-toggle="toggle">
                                 </label>
                             </div>
                         </div>
@@ -133,61 +150,103 @@ if ( ! empty( $_POST ) ) {
                 </div>
 
                 <hr/>
-				<?php
-			}
-			?>
+                <?php
+            }
+            ?>
+
             <div class="form-group required">
                 <label>Heading</label>
                 <input type="text" class="form-control" name="social_heading" maxlength="255"
-                       value="<?php echo $rowSocial['heading']; ?>" placeholder="Follow Me" autofocus required>
-            </div>
-            <div class="form-group">
-                <label>Facebook</label>
-                <input class="form-control" name="social_facebook" maxlength="255"
-                       value="<?php echo $rowSocial['facebook']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.facebook.com/username">
-            </div>
-            <div class="form-group">
-                <label>Twitter</label>
-                <input class="form-control" name="social_twitter" maxlength="255"
-                       value="<?php echo $rowSocial['twitter']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.twitter.com/username">
-            </div>
-            <div class="form-group">
-                <label>Google+</label>
-                <input class="form-control" name="social_google" maxlength="255"
-                       value="<?php echo $rowSocial['google']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>"
-                       placeholder="https://plus.google.com/8675309/posts">
-            </div>
-            <div class="form-group">
-                <label>Pinterest</label>
-                <input class="form-control" name="social_pinterest" maxlength="255"
-                       value="<?php echo $rowSocial['pinterest']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.pinterest.com/username/">
-            </div>
-            <div class="form-group">
-                <label>Instagram</label>
-                <input class="form-control" name="social_instagram" maxlength="255"
-                       value="<?php echo $rowSocial['instagram']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.instagram.com/username/">
-            </div>
-            <div class="form-group">
-                <label>Tumblr</label>
-                <input class="form-control" name="social_tumblr" maxlength="255"
-                       value="<?php echo $rowSocial['tumblr']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>" placeholder="https://username.tumblr.com/">
-            </div>
-            <div class="form-group">
-                <label>YouTube</label>
-                <input class="form-control" name="social_youtube" maxlength="255"
-                       value="<?php echo $rowSocial['youtube']; ?>" type="url"
-                       pattern="<?php echo urlValidationPattern; ?>"
-                       placeholder="https://www.youtube.com/user/username">
+                       value="<?php echo $rowSetup['socialmediaheading']; ?>" placeholder="Follow Me" autofocus
+                       required>
             </div>
 
-            <input type="hidden" name="csrf" value="<?php echo csrf_validate( $_SESSION['unique_referrer'] ); ?>"/>
+            <div class="row">
+                <div class="col-lg-1"><label>Sort</label></div>
+                <div class="col-lg-4"><label>Name</label></div>
+                <div class="col-lg-5"><label>URL</label></div>
+                <div class="col-lg-1"><label>Active</label></div>
+                <div class="col-lg-1"><label>Actions</label></div>
+            </div>
 
+            <?php
+            //loop through rows in sociallinks table
+            foreach ($rowSocial as $social) {
+
+                $socialCount++;
+
+                $socialActive = safeCleanStr($social['active']);
+
+                if ($socialActive == 'true') {
+                    $isActiveLink = "CHECKED";
+                } else {
+                    $isActiveLink = "";
+                }
+
+                ?>
+                <div class="row" id="social_Table">
+                    <div class="col-lg-1">
+                        <input class="form-control" name="social_sort[]" maxlength="2" min="0" max="99"
+                               value="<?php echo $social['sort']; ?>" type="number" placeholder="">
+                    </div>
+                    <div class="col-lg-4">
+                        <input class="form-control" name="social_name[]" maxlength="255"
+                               value="<?php echo $social['name']; ?>" type="text" placeholder="">
+                    </div>
+                    <div class="col-lg-5">
+                        <input class="form-control" name="social_url[]" maxlength="255"
+                               value="<?php echo $social['url']; ?>" type="url"
+                               pattern="<?php echo urlValidationPattern; ?>" placeholder="">
+                        <input type="hidden" name="social_id[]" value="<?php echo $social['id']; ?>">
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox" style="display: inline-block; margin: 0;">
+                            <label>
+                                <input class="sociallink_active_checkbox"
+                                       id="<?php echo $social['id'] ?>" name="sociallink_active"
+                                       type="checkbox" <?php echo $isActiveLink; ?> data-toggle="toggle">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type='button' data-toggle='tooltip' title='Delete' class='btn btn-danger'
+                                onclick='window.location.href="socialmedia.php?loc_id=<?php echo loc_id; ?>&deletesociallink=<?php echo $social['id']; ?>&deletename=<?php echo $social['name']; ?>&guid=<?php echo $social['guid']; ?>"'>
+                            <i class='fa fa-fw fa-trash'></i></button>
+                    </div>
+                </div>
+                <br/>
+                <?php
+            }
+            ?>
+
+            <div class="row">
+                <div class="col-lg-1">
+                    <input class="form-control" name="social_sort_new" maxlength="2" min="0" max="99"
+                           value="" type="number" placeholder="0">
+                </div>
+
+                <div class="col-lg-4">
+                    <input class="form-control" name="social_name_new" maxlength="255"
+                           value="" type="text" placeholder="Social Media">
+                </div>
+
+                <div class="col-lg-5">
+                    <input class="form-control" name="social_url_new" maxlength="255"
+                           value="" type="url"
+                           pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.socialmedia.com">
+                </div>
+                <div class="col-lg-1">
+
+                </div>
+                <div class="col-lg-1">
+
+                </div>
+            </div>
+
+            <input type="hidden" name="social_count" value="<?php echo $socialCount; ?>">
+            <input type="hidden" name="csrf" value="<?php echo csrf_validate($_SESSION['unique_referrer']); ?>"/>
+
+            <hr/>
             <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
                 Save Changes
             </button>
@@ -197,6 +256,24 @@ if ( ! empty( $_POST ) ) {
 
     </div>
 </div>
+
+<!-- Modal javascript logic -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#confirm').on('hidden.bs.modal', function () {
+            setTimeout(function () {
+                window.location.href = 'socialmedia.php?loc_id=<?php echo loc_id; ?>';
+            }, 100);
+        });
+
+        var url = window.location.href;
+        if (url.indexOf('deletesociallink') != -1 && url.indexOf('confirm') == -1) {
+            setTimeout(function () {
+                $('#confirm').modal('show');
+            }, 100);
+        }
+    });
+</script>
 <?php
-require_once( __DIR__ . '/includes/footer.inc.php' );
+require_once(__DIR__ . '/includes/footer.inc.php');
 ?>

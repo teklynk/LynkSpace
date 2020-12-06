@@ -4,7 +4,7 @@ if ( empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_
     die( 'Direct access not permitted' );
 }
 
-//updates the social media default. Called from js/functions.js via jquery/ajax.
+//updates the active checkboxes on socialmedia.php. Called from js/functions.js via jquery/ajax.
 session_start();
 
 //check if user is logged in and that the requesting page is valid.
@@ -13,15 +13,15 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
     require_once( __DIR__ . '/../../../../config/config.php' );
 
     if ( ! empty( $_GET ) && $_GET['update'] ) {
-        $socialDefaultsID      = $_GET['id'];
-        $socialDefaultsChecked = $_GET['checked'];
+        $socialActiveID      = $_GET['id'];
+        $socialActiveChecked = $_GET['checked'];
 
-        $socialDefaultsUpdate = "UPDATE setup SET socialmedia_use_defaults='" . $socialDefaultsChecked . "', author_name='" . $_SESSION['user_name'] . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE loc_id=" . $socialDefaultsID . ";";
-        mysqli_query( $db_conn, $socialDefaultsUpdate );
+        $navActiveUpdate = "UPDATE sociallinks SET active='" . $socialActiveChecked . "', DATETIME='" . date("Y-m-d H:i:s") . "' WHERE id=" . $socialActiveID . ";";
+        mysqli_query( $db_conn, $navActiveUpdate );
 
         mysqli_close( $db_conn );
 
-        die( 'Social Media Defaults ' . $socialDefaultsID . ' set ' . $socialDefaultsChecked );
+        die( 'Socialmedia ' . $socialActiveID . ' set ' . $socialActiveChecked );
     }
 
 } else {

@@ -405,6 +405,17 @@ $(document).ready(function () {
             $('#nav_Table .nav_active_checkbox').attr('disabled', false);
         }, 500);
     });
+    $('#social_Table .sociallink_active_checkbox').change(function () {
+        $.get('core/ajax/update_socialmediaactive.php?update=true', {
+            id: this.id,
+            checked: this.checked
+        });
+
+        $('#nav_Table .nav_active_checkbox').attr('disabled', true);
+        setTimeout(function () {
+            $('#nav_Table .nav_active_checkbox').attr('disabled', false);
+        }, 500);
+    });
     //Disable radio buttons if one checkbox is active
     if ($('.ls2kids_active').prop('checked') == true && $('.ls2pac_active').prop('checked') == true) {
         $('.ls2pac_default').attr('disabled', false);

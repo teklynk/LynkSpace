@@ -16,7 +16,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
 		$navWinID      = $_GET['id'];
 		$navWinChecked = $_GET['checked'];
 
-		$navUpdate = "UPDATE navigation SET win='" . $navWinChecked . "' WHERE id=" . $navWinID . ";";
+		$navUpdate = "UPDATE navigation SET win='" . $navWinChecked . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $navWinID . ";";
 		mysqli_query( $db_conn, $navUpdate );
 
 		mysqli_close( $db_conn );

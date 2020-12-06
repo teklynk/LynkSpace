@@ -17,7 +17,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
 		$customersActiveChecked = $_GET['checked'];
 
 		if ( $customersActiveID ) {
-			$customersActiveUpdate = "UPDATE customers SET active='" . $customersActiveChecked . "' WHERE id=" . $customersActiveID . ";";
+			$customersActiveUpdate = "UPDATE customers SET active='" . $customersActiveChecked . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $customersActiveID . ";";
 		}
 
 		mysqli_query( $db_conn, $customersActiveUpdate );

@@ -17,7 +17,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
 		$servicesActiveChecked = $_GET['checked'];
 
 		if ( $servicesActiveID ) {
-			$servicesActiveUpdate = "UPDATE services SET active='" . $servicesActiveChecked . "' WHERE id=" . $servicesActiveID . ";";
+			$servicesActiveUpdate = "UPDATE services SET active='" . $servicesActiveChecked . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $servicesActiveID . ";";
 		}
 
 		mysqli_query( $db_conn, $servicesActiveUpdate );

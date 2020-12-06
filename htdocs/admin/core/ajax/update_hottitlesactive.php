@@ -17,7 +17,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
 		$hottitlesActiveChecked = $_GET['checked'];
 
 		if ( $hottitlesActiveID ) {
-			$hottitlesActiveUpdate = "UPDATE hottitles SET active='" . $hottitlesActiveChecked . "' WHERE id=" . $hottitlesActiveID . ";";
+			$hottitlesActiveUpdate = "UPDATE hottitles SET active='" . $hottitlesActiveChecked . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $hottitlesActiveID . ";";
 		}
 
 		mysqli_query( $db_conn, $hottitlesActiveUpdate );

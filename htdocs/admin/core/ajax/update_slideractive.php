@@ -17,7 +17,7 @@ if ( isset( $_SESSION['loggedIn'] ) && $_SESSION['session_hash'] == md5( $_SESSI
 		$sliderActiveChecked = $_GET['checked'];
 
 		if ( $sliderActiveID ) {
-			$sliderActiveUpdate = "UPDATE slider SET active='" . $sliderActiveChecked . "' WHERE id=" . $sliderActiveID . ";";
+			$sliderActiveUpdate = "UPDATE slider SET active='" . $sliderActiveChecked . "', DATETIME='" . date( "Y-m-d H:i:s" ) . "' WHERE id=" . $sliderActiveID . ";";
 		}
 
 		mysqli_query( $db_conn, $sliderActiveUpdate );
