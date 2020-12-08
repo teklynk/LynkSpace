@@ -105,7 +105,7 @@ function getPage($loc)
                 $pageCreated = $rowPage['created'];
             }
 
-        //return an array of all items
+            //return an array of all items
         } elseif (!$pageId) {
 
             if ($getPageKeywords) {
@@ -681,7 +681,23 @@ function getAbsoluteImagePath($imagePath)
     return $absolutePath;
 }
 
-function getSocialMediaIcons($loc, $shape=null, $section=null)
+function array_in_string($str, array $arr)
+{
+
+    foreach ($arr as $arr_value) {
+
+        if (strpos($str, $arr_value) !== false) {
+
+            return true;
+
+        }
+
+    }
+
+    return false;
+}
+
+function getSocialMediaIcons($loc, $shape = null, $section = null, $size = null)
 {
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")
@@ -691,9 +707,17 @@ function getSocialMediaIcons($loc, $shape=null, $section=null)
     global $socialMediaActive;
     global $db_conn;
 
+    if (!$size) {
+        $size = 2;
+    }
+
     $socialMediaArray = array();
+    $iconsArray = array();
+    $socialMediaHeading = "";
+    $socialMediaIcons = "";
 
     if (isset($loc) && !empty($loc)) {
+
         $sqlSetup = mysqli_query($db_conn, "SELECT socialmedia_use_defaults, socialmediaheading FROM setup WHERE loc_id=" . $loc . ";");
         $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
@@ -706,8 +730,14 @@ function getSocialMediaIcons($loc, $shape=null, $section=null)
 
         $socialMediaArray = mysqli_fetch_all($sqlSocialMediaArray, MYSQLI_ASSOC);
 
-        $socialMediaHeading = "";
-        $socialMediaIcons = "";
+        //Array of font-awesome icons
+        $sqlIcons = mysqli_query($db_conn, "SELECT icon FROM icons_list;");
+        $icons = mysqli_fetch_all($sqlIcons, MYSQLI_ASSOC);
+
+        //create array of icon values
+        foreach ($icons as $iconKey => $iconValue) {
+            $iconsArray[] = $iconValue['icon'];
+        }
 
         if (!empty($socialMediaArray)) {
 
@@ -718,7 +748,12 @@ function getSocialMediaIcons($loc, $shape=null, $section=null)
             }
 
             foreach ($socialMediaArray as $socialMediaIcon) {
-                $socialMediaIcons.= "<a href=" . trim(strtolower($socialMediaIcon['url'])) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-" . trim(strtolower($socialMediaIcon['name'])) . " fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+                if (in_array(trim($socialMediaIcon['name']), $iconsArray)) {
+                    $socialMediaIcons .= "<a href=" . trim(strtolower($socialMediaIcon['url'])) . " target='_blank'><span class='fa-stack fa-" . $size . "x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-" . trim(strtolower($socialMediaIcon['name'])) . " fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+                } else {
+                    //if no font-awesome icon is found
+                    $socialMediaIcons .= "<a href=" . trim(strtolower($socialMediaIcon['url'])) . " target='_blank'><span class='fa-stack fa-" . $size . "x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-link fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+                }
             }
 
         } else {
@@ -800,7 +835,7 @@ function getCustomers($loc, $custType)
 
 }
 
-function getSlider($loc, $sliderType, $array_only=null)
+function getSlider($loc, $sliderType, $array_only = null)
 {
     //EXAMPLE: getSlider($_GET['loc_id'], "slide")
     //EXAMPLE: getSlider($_GET['loc_id'], "random")

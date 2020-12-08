@@ -35,7 +35,7 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
         }
 
         if ( ! empty( $pageData['created'] ) ) {
-            echo "<span class='page_created date small'><strong>" . $pageDate . "</strong></span>";
+            echo "<span class='page_created date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;<strong>" . $pageDate . "</strong></span>";
         }
 
         if ( ! empty( $pageData['image'] ) ) {
@@ -57,6 +57,11 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
         if($pgCount % 2 == 0){
             echo "<div class='clearfix'></div>";
+        }
+
+        //only show 12 new posts
+        if ($pgCount == 12) {
+            break;
         }
     }
 
