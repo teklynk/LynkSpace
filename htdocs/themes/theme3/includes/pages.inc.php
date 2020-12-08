@@ -7,9 +7,11 @@ getPage( loc_id );
 
 if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
+    $pgCount = 0;
+
     echo "<a name='pages' tabindex='-1'></a>";
 
-    echo "<div class='container-fluid services'>";
+    echo "<div class='container-fluid pages'>";
     echo "<div class='container bannerwrapper'>";
 
     echo "<div class='row' id='pages'>";
@@ -21,8 +23,9 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
     foreach($pageArray as $pageData) {
 
         $pageDate = date("F jS, Y", strtotime($pageData['created']));
+        $pgCount ++;
 
-        echo "<div class='col-sm-12 col-md-6 col-lg-4 page-item'>";
+        echo "<div class='col-sm-12 col-md-6 col-lg-6 page-item'>";
         echo "<div class='panel panel-default text-center'>";
 
         echo "<div class='panel-body'>";
@@ -51,6 +54,10 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
 
         echo "</div>";
         echo "</div>";
+
+        if($pgCount % 2 == 0){
+            echo "<div class='clearfix'></div>";
+        }
     }
 
     echo "</div>";
