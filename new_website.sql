@@ -1239,7 +1239,7 @@ CREATE TABLE `slider` (
 --
 
 CREATE TABLE `sociallinks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `url` text NOT NULL,
   `active` text NOT NULL,
