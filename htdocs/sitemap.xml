@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>//lynkspace.local/page.php?page_id=1&amp;loc_id=1</loc>
-		<lastmod>2020-09-24 13:12:49</lastmod>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>//lynkspace.local/index.php?loc_id=2</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
 		<loc>//lynkspace.local/index.php?loc_id=1</loc>
 		<changefreq>monthly</changefreq>
 	</url>

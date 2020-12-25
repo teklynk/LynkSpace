@@ -105,7 +105,7 @@ function getPage($loc)
                 $pageCreated = $rowPage['created'];
             }
 
-        //return an array of all items
+            //return an array of all items
         } elseif (!$pageId) {
 
             if ($getPageKeywords) {
@@ -582,33 +582,33 @@ function getCoreHeader($loc, $addHeader = null)
 
     <!-- Core CSS Libraries -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/main.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/main.min.css?v=<?php echo ysmVersion; ?>">
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/jquery-ui-1.10.4.custom.min.css?v=<?php echo ysmVersion; ?>"/>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/font-awesome.min.css?v=<?php echo ysmVersion; ?>">
 
     <!-- Default CSS - Do not remove-->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/core-style.min.css?v=<?php echo ysmVersion; ?>">
 
     <!--Dynamic CSS -->
     <link rel="stylesheet" type="text/css"
-          href="<?php echo serverUrlStr; ?>/core/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
+          href="<?php echo serverUrlStr; ?>/themes/assets/css/dynamic-style.php?loc_id=<?php echo $loc; ?>">
 
     <!-- Core JS Libraries -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/main.min.js?v=<?php echo ysmVersion; ?>"></script>
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/jquery-ui-1.10.4.custom.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- LS2 search script -->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/searchscript.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <!-- Core js file-->
     <script type="text/javascript" language="javascript"
-            src="<?php echo serverUrlStr; ?>/core/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
+            src="<?php echo serverUrlStr; ?>/themes/assets/js/functions.min.js?v=<?php echo ysmVersion; ?>"></script>
 
     <?php if (!empty(setupPACURL)) { ?>
     <!-- getSearchString (version #, this, domain, config, branch, searchBoxType [ls2, kids5, kids, classic]?, new window?)-->
@@ -681,65 +681,79 @@ function getAbsoluteImagePath($imagePath)
     return $absolutePath;
 }
 
-function getSocialMediaIcons($loc, $shape, $section)
+function array_in_string($str, array $arr)
+{
+
+    foreach ($arr as $arr_value) {
+
+        if (strpos($str, $arr_value) !== false) {
+
+            return true;
+
+        }
+
+    }
+
+    return false;
+}
+
+function getSocialMediaIcons($loc, $shape = null, $section = null, $size = null)
 {
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "circle","top")
     //EXAMPLE: getSocialMediaIcons($_GET['loc_id'], "square","footer")
     global $socialMediaIcons;
+    global $socialMediaArray;
     global $socialMediaHeading;
-    global $sqlSocialMedia;
-    global $rowSocialMedia;
     global $socialMediaActive;
     global $db_conn;
 
+    if (!$size) {
+        $size = 2;
+    }
+
+    $socialMediaArray = array();
+    $iconsArray = array();
+    $socialMediaHeading = "";
+    $socialMediaIcons = "";
+
     if (isset($loc) && !empty($loc)) {
-        $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE active='true' AND loc_id=" . $loc . ";");
-        $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
+
+        $sqlSetup = mysqli_query($db_conn, "SELECT socialmedia_use_defaults, socialmediaheading FROM setup WHERE loc_id=" . $loc . ";");
+        $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
 
         //use default location
-        if ($rowSocialMedia['use_defaults'] == "true" || $rowSocialMedia['use_defaults'] == "" || $rowSocialMedia['use_defaults'] == null) {
-            $sqlSocialMedia = mysqli_query($db_conn, "SELECT * FROM socialmedia WHERE active='true' AND loc_id=1;");
-            $rowSocialMedia = mysqli_fetch_array($sqlSocialMedia, MYSQLI_ASSOC);
+        if ($rowSetup['socialmedia_use_defaults'] == "true" || $rowSetup['socialmedia_use_defaults'] == "" || $rowSetup['socialmedia_use_defaults'] == null) {
+            $sqlSocialMediaArray = mysqli_query($db_conn, "SELECT id, sort, name, url FROM sociallinks WHERE active='true' AND loc_id=1 ORDER BY sort, name;");
+        } else {
+            $sqlSocialMediaArray = mysqli_query($db_conn, "SELECT id, sort, name, url FROM sociallinks WHERE active='true' AND loc_id=" . $loc . " ORDER BY sort, name;");
         }
 
-        $socialMediaHeading = "";
-        $socialMediaIcons = "";
+        $socialMediaArray = mysqli_fetch_all($sqlSocialMediaArray, MYSQLI_ASSOC);
 
-        if ($rowSocialMedia) {
+        //Array of font-awesome icons
+        $sqlIcons = mysqli_query($db_conn, "SELECT icon FROM icons_list;");
+        $icons = mysqli_fetch_all($sqlIcons, MYSQLI_ASSOC);
+
+        //create array of icon values
+        foreach ($icons as $iconKey => $iconValue) {
+            $iconsArray[] = $iconValue['icon'];
+        }
+
+        if (!empty($socialMediaArray)) {
 
             $socialMediaActive = true;
 
-
-            if (!empty($rowSocialMedia['heading'])) {
-                $socialMediaHeading = $rowSocialMedia['heading'];
+            if (!empty($rowSetup['socialmediaheading'])) {
+                $socialMediaHeading = $rowSetup['socialmediaheading'];
             }
 
-            if (!empty($rowSocialMedia['facebook'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['facebook']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['google'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['google']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['pinterest'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['pinterest']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['twitter'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['twitter']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['instagram'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['instagram']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-instagram fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['youtube'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['youtube']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-youtube fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
-            }
-
-            if (!empty($rowSocialMedia['tumblr'])) {
-                $socialMediaIcons .= "<a href=" . trim($rowSocialMedia['tumblr']) . " target='_blank'><span class='fa-stack fa-2x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-tumblr fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+            foreach ($socialMediaArray as $socialMediaIcon) {
+                if (in_array(trim($socialMediaIcon['name']), $iconsArray)) {
+                    $socialMediaIcons .= "<a href=" . trim(strtolower($socialMediaIcon['url'])) . " target='_blank'><span class='fa-stack fa-" . $size . "x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-" . trim(strtolower($socialMediaIcon['name'])) . " fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+                } else {
+                    //if no font-awesome icon is found
+                    $socialMediaIcons .= "<a href=" . trim(strtolower($socialMediaIcon['url'])) . " target='_blank'><span class='fa-stack fa-" . $size . "x social-$section'><i class='fa fa-$shape fa-stack-2x'></i><i class='fa fa-link fa-stack-1x fa-lg fa-inverse-socialmedia'></i></span></a>";
+                }
             }
 
         } else {
@@ -821,7 +835,7 @@ function getCustomers($loc, $custType)
 
 }
 
-function getSlider($loc, $sliderType)
+function getSlider($loc, $sliderType, $array_only = null)
 {
     //EXAMPLE: getSlider($_GET['loc_id'], "slide")
     //EXAMPLE: getSlider($_GET['loc_id'], "random")
@@ -835,9 +849,11 @@ function getSlider($loc, $sliderType)
     global $sliderLocType;
     global $imagePath;
     global $locTypes;
+    global $sliderArray;
     global $db_conn;
 
     $sliderOrderBy = '';
+    $sliderArray = array();
 
     if ($sliderType == "slide") {
         $sliderOrderBy = "ORDER BY sort, title ASC";
@@ -881,7 +897,8 @@ function getSlider($loc, $sliderType)
             echo "<style>#sliderCarousel .carousel-control {display: none !important;}</style>";
         }
 
-        if ($sliderNumRows > 0) {
+        //build html for slider
+        if ($sliderNumRows > 0 && $array_only == null) {
 
             if ($sliderType == "slide") {
 
@@ -971,7 +988,7 @@ function getSlider($loc, $sliderType)
                     $sliderImageList = getAbsoluteImagePath($rowSlider['image']);
                 }
             } else {
-                $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);;
+                $rowSlider = mysqli_fetch_array($sqlSlider, MYSQLI_ASSOC);
                 $sliderLink = $rowSlider['link'];
                 $sliderTitle = $rowSlider['title'];
                 $sliderContent = $rowSlider['content'];
@@ -984,6 +1001,8 @@ function getSlider($loc, $sliderType)
             $sliderImageList = rtrim($sliderImageList, ",");
             $sliderImageArr = explode(",", $sliderImageList);
 
+        } else {
+            return $sliderArray = mysqli_fetch_all($sqlSlider, MYSQLI_ASSOC);
         }
     }
 }
@@ -1218,7 +1237,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == 'true') {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-isbn='" . $xmlisbn . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../themes/assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
@@ -1279,7 +1298,7 @@ function getHottitlesCarousel($xmlurl, $jacketSize, $dummyJackets, $maxcnt)
             } else {
                 if ($dummyJackets == true) {
                     //TLC dummy book jacket img
-                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../core/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
+                    echo "<a href='" . htmlspecialchars($xmllink, ENT_QUOTES) . "' title='" . htmlspecialchars($xmltitle, ENT_QUOTES) . "' target='_blank' data-resource-id='" . $xmlResourceId . "' data-item-count='" . $itemcount . "'><span class='dummy-title'>" . htmlspecialchars($xmltitle, ENT_QUOTES) . "</span><img class='dummy-jacket $jacketSize img-responsive center-block' src='../themes/assets/images/gray-bookjacket-" . strtolower($jacketSize) . ".png'></a>";
                 }
             }
 
@@ -1356,7 +1375,7 @@ function getHottitlesTabs($loc)
                 $hotActive = '';
             }
 
-            if ($hottitlesCount > 0) {
+            if ($hottitlesCount > 0 && $hottitlesUrl) {
                 $hottitlesTabs .= "<li class='hot-tab $hotActive'><a data-toggle='tab' onclick=\"toggleSrc('$hottitlesUrl', '$hottitlesLocID', '$hottitlesCount');\">$hottitlesTile</a></li>";
             }
         }

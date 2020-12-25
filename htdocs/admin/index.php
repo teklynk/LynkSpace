@@ -167,7 +167,7 @@ if (isset($_SESSION['loggedIn'])) {
         html, body {
             margin: 0 !important;
             padding: 0 !important;
-            background: #fcfcfc url('images/color-splash-3.jpg') no-repeat center center fixed;
+            background: #fcfcfc url('assets/images/color-splash-3.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -231,7 +231,7 @@ if (isset($_SESSION['loggedIn'])) {
                         if ($_GET['forgotpassword']) {
                             ?>
                             <form name="frmForgotPassword" class="form-signin" method="post"
-                                  action="mail/passwordreset.php">
+                                  action="core/mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="input-group">
@@ -285,7 +285,7 @@ if (isset($_SESSION['loggedIn'])) {
                         } elseif ($_GET['passwordreset'] == "true" && $_GET['key']) {
                             ?>
                             <form name="frmResetPassword" class="form-signin" method="post"
-                                  action="mail/passwordreset.php">
+                                  action="core/mail/passwordreset.php">
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="input-group">

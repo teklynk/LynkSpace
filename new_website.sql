@@ -1161,6 +1161,7 @@ CREATE TABLE `setup` (
   `sliderheading` text NOT NULL,
   `teamheading` text NOT NULL,
   `hottitlesheading` text NOT NULL,
+  `socialmediasheading` text NOT NULL,
   `servicescontent` text NOT NULL,
   `teamcontent` text NOT NULL,
   `slider_use_defaults` text NOT NULL,
@@ -1170,6 +1171,7 @@ CREATE TABLE `setup` (
   `services_use_defaults` text NOT NULL,
   `team_use_defaults` text NOT NULL,
   `hottitles_use_defaults` text NOT NULL,
+  `socialmedia_use_defaults` text NOT NULL,
   `logo_use_defaults` text NOT NULL,
   `theme_use_defaults` text NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1181,8 +1183,8 @@ CREATE TABLE `setup` (
 -- Dumping data for table `setup`
 --
 
-INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `logo_use_defaults`, `theme_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
-  (1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', CURRENT_TIMESTAMP(), 'admin', 1);
+INSERT INTO `setup` (`id`, `title`, `keywords`, `description`, `config`, `logo`, `ls2pac`, `ls2kids`, `searchdefault`, `author`, `pageheading`, `socialmediasheading`, `servicesheading`, `sliderheading`, `teamheading`, `hottitlesheading`, `servicescontent`, `teamcontent`, `slider_use_defaults`, `socialmedia_use_defaults`, `navigation_use_defaults_1`, `navigation_use_defaults_2`, `navigation_use_defaults_3`, `services_use_defaults`, `team_use_defaults`, `hottitles_use_defaults`, `logo_use_defaults`, `theme_use_defaults`, `datetime`, `author_name`, `loc_id`) VALUES
+  (1, 'My Library', '', '', 'ysm', '', 'false', 'false', 0, '', 'Pages', 'Follow Me', 'Services', 'Slides', 'Meet the Team', 'New Titles', '', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', CURRENT_TIMESTAMP(), 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1233,21 +1235,18 @@ CREATE TABLE `slider` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `socialmedia`
+-- Table structure for table `sociallinks`
 --
 
-CREATE TABLE `socialmedia` (
+CREATE TABLE `sociallinks` (
   `id` int(11) NOT NULL,
-  `heading` text NOT NULL,
-  `facebook` text NOT NULL,
-  `twitter` text NOT NULL,
-  `pinterest` text NOT NULL,
-  `google` text NOT NULL,
-  `instagram` text NOT NULL,
-  `youtube` text NOT NULL,
-  `tumblr` text NOT NULL,
+  `name` text NOT NULL,
+  `url` text NOT NULL,
   `active` text NOT NULL,
-  `use_defaults` text NOT NULL,
+  `sort` int(11) NOT NULL,
+  `guid` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `author_name` text NOT NULL,
   `loc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1441,11 +1440,11 @@ ALTER TABLE `slider`
   ADD KEY `slider_loc_id_fk` (`loc_id`);
 
 --
--- Indexes for table `socialmedia`
+-- Indexes for table `sociallinks`
 --
-ALTER TABLE `socialmedia`
+ALTER TABLE `sociallinks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `socialmedia_loc_id_fk` (`loc_id`);
+  ADD KEY `sociallinks_loc_id_fk` (`loc_id`);
 
 --
 -- Indexes for table `team`
@@ -1576,9 +1575,9 @@ ALTER TABLE `uploads`
 ALTER TABLE `slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `socialmedia`
+-- AUTO_INCREMENT for table `sociallinks`
 --
-ALTER TABLE `socialmedia`
+ALTER TABLE `sociallinks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `team`
@@ -1673,10 +1672,10 @@ ALTER TABLE `slider`
   ADD CONSTRAINT `slider_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `socialmedia`
+-- Constraints for table `sociallinks`
 --
-ALTER TABLE `socialmedia`
-  ADD CONSTRAINT `socialmedia_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sociallinks`
+  ADD CONSTRAINT `sociallinks_loc_id_fk` FOREIGN KEY (`loc_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `team`

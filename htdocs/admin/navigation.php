@@ -440,7 +440,7 @@ if ( $getNavSection == $navSections[0] ) {
                         </thead>
                         <tbody>
 						<?php
-						$navCount = "";
+						$navCount = 0;
 
 						$sqlNav = mysqli_query( $db_conn, "SELECT id, name, url, guid, sort, active, win, section, catid, loc_id FROM navigation WHERE section='" . $getNavSection . "' AND loc_id=" . loc_id . " ORDER BY sort, catid;" );
 						while ( $rowNav = mysqli_fetch_array( $sqlNav, MYSQLI_ASSOC ) ) {
