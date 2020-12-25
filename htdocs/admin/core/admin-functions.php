@@ -851,8 +851,6 @@ function checkDependencies()
     );
 
     $filesArray = array(
-        dbFileLoc,
-        dbBlowfishLoc,
         sitemapFilename,
         robotsFilename
     );
