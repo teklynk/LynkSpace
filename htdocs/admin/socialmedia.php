@@ -184,7 +184,7 @@ if (!empty($_POST)) {
                 }
 
                 ?>
-                <div class="row" id="social_Table">
+                <div class="row mb-8" id="social_Table">
                     <div class="col-lg-1">
                         <input class="form-control" name="social_sort[]" maxlength="2" min="0" max="99"
                                value="<?php echo $social['sort']; ?>" type="number" placeholder="">
@@ -214,26 +214,30 @@ if (!empty($_POST)) {
                             <i class='fa fa-fw fa-trash'></i></button>
                     </div>
                 </div>
-                <br/>
                 <?php
             }
             ?>
+
+            <hr />
 
             <div class="row">
                 <div class="col-lg-1">
                     <input class="form-control" name="social_sort_new" maxlength="2" min="0" max="99"
                            value="" type="number" placeholder="0">
+                    <small>Order #</small>
                 </div>
 
                 <div class="col-lg-4">
                     <input class="form-control" name="social_name_new" maxlength="255"
                            value="" type="text" placeholder="Social Media">
+                    <small>Text shown for the link</small>
                 </div>
 
                 <div class="col-lg-5">
                     <input class="form-control" name="social_url_new" maxlength="255"
                            value="" type="url"
                            pattern="<?php echo urlValidationPattern; ?>" placeholder="https://www.socialmedia.com">
+                    <small>Where should the link go? Type the full url, like this: https://socialmedia.com/user</small>
                 </div>
                 <div class="col-lg-1">
 
@@ -243,14 +247,17 @@ if (!empty($_POST)) {
                 </div>
             </div>
 
-            <input type="hidden" name="social_count" value="<?php echo $socialCount; ?>">
-            <input type="hidden" name="csrf" value="<?php echo csrf_validate($_SESSION['unique_referrer']); ?>"/>
+            <div class="row mt-16">
+                <div class="col-lg-12">
+                    <input type="hidden" name="social_count" value="<?php echo $socialCount; ?>">
+                    <input type="hidden" name="csrf" value="<?php echo csrf_validate($_SESSION['unique_referrer']); ?>"/>
 
-            <hr/>
-            <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
-                Save Changes
-            </button>
-            <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
+                    <button type="submit" name="socialmedia_submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>
+                        Save Changes
+                    </button>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Reset</button>
+                </div>
+            </div>
 
         </form>
 
