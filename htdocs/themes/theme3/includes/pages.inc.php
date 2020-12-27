@@ -31,7 +31,7 @@ if ( is_array($pageArray) && count($pageArray) > 0 ) {
         echo "<div class='panel-body'>";
 
         if ( ! empty( $pageData['title'] ) ) {
-            echo "<h1 class='page_title'>" . $pageData['title'] . "</h1>";
+            echo "<h2 class='page_title'>" . $pageData['title'] . "</h2>";
         }
 
         if ( ! empty( $pageData['created'] ) ) {
