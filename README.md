@@ -80,3 +80,20 @@ Install Guide
 
 - Visit http://your_domain.com/admin 
     - You should now be prompted to create an Admin user.
+    
+Screenshots
+# Screenshots
+![screenshot01](https://github.com/teklynk/lynkspace/blob/development/screenshot01.png)
+![screenshot02](https://github.com/teklynk/lynkspace/blob/development/screenshot02.png)
+![screenshot03](https://github.com/teklynk/lynkspace/blob/development/screenshot03.png)
+![screenshot04](https://github.com/teklynk/lynkspace/blob/development/screenshot04.png)
+![screenshot05](https://github.com/teklynk/lynkspace/blob/development/screenshot05.png)
+![screenshot06](https://github.com/teklynk/lynkspace/blob/development/screenshot06.png)
+![screenshot07](https://github.com/teklynk/lynkspace/blob/development/screenshot07.png)
+![screenshot08](https://github.com/teklynk/lynkspace/blob/development/screenshot08.png)
+![screenshot09](https://github.com/teklynk/lynkspace/blob/development/screenshot09.png)
+![screenshot10](https://github.com/teklynk/lynkspace/blob/development/screenshot10.png)
+![screenshot11](https://github.com/teklynk/lynkspace/blob/development/screenshot11.png)
+![screenshot12](https://github.com/teklynk/lynkspace/blob/development/screenshot12.png)
+![screenshot13](https://github.com/teklynk/lynkspace/blob/development/screenshot13.png)
+![screenshot14](https://github.com/teklynk/lynkspace/blob/development/screenshot14.png)
