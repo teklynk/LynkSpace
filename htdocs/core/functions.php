@@ -57,7 +57,7 @@ function getPageList()
     echo $pageListJson;
 }
 
-function getPage($loc)
+function getPage($loc, $start_from = null, $rows_limit = null)
 {
     global $pageTitle;
     global $pageSubHeading;
@@ -69,9 +69,20 @@ function getPage($loc)
     global $pageId;
     global $pageArray;
     global $getPageKeywords;
+    global $pageHeading;
+    global $pageTotal;
     global $db_conn;
 
+    $limit = '';
+
+    if (!is_null($rows_limit) && is_null($start_from)) {
+        $limit = 'LIMIT ' . $rows_limit;
+    } elseif (!is_null($rows_limit) && !is_null($start_from)) {
+        $limit = 'LIMIT ' . $start_from . ',' . $rows_limit;
+    }
+
     $pageArray = array();
+    $pageHeading = '';
 
     if (isset($_GET['page_id']) && !empty($_GET['page_id'])) {
         $pageId = trim($_GET['page_id']);
@@ -87,6 +98,19 @@ function getPage($loc)
 
     if (isset($loc) && !empty($loc)) {
 
+        //get page heading from setup table
+        $sqlSetup = mysqli_query($db_conn, "SELECT pageheading FROM setup WHERE loc_id=" . loc_id . " LIMIT 1;");
+        $rowSetup = mysqli_fetch_array($sqlSetup, MYSQLI_ASSOC);
+
+        $pageHeading = $rowSetup['pageheading'];
+
+        //Get total number of active pages
+        $sqlPageTotal = mysqli_query($db_conn, "SELECT count(id) FROM pages WHERE active='true' AND loc_id=" . $loc . ";");
+        $rowPageTotal = mysqli_fetch_row($sqlPageTotal);
+
+        $pageTotal = $rowPageTotal[0];
+
+        //return single page
         if (ctype_digit($pageId)) {
             //get one item where page_id
             $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, created, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
@@ -105,15 +129,21 @@ function getPage($loc)
                 $pageCreated = $rowPage['created'];
             }
 
-            //return an array of all items
+            //return an array of all pages
         } elseif (!$pageId) {
 
             if ($getPageKeywords) {
-                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND keywords LIKE '%" . $getPageKeywords . "%' ORDER BY created DESC;");
+                //Get total number of active pages where keyword matches
+                $sqlPageTotal = mysqli_query($db_conn, "SELECT count(id) FROM pages WHERE active='true' AND keywords LIKE '%" . $getPageKeywords . "%' AND loc_id=" . $loc . ";");
+                $rowPageTotal = mysqli_fetch_row($sqlPageTotal);
+
+                $pageTotal = $rowPageTotal[0];
+
+                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND keywords LIKE '%" . $getPageKeywords . "%' ORDER BY created DESC $limit;");
                 $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
             } else {
                 //search using keyword
-                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC;");
+                $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, active, created, loc_id FROM pages WHERE active='true' AND loc_id=" . $loc . " ORDER BY created DESC $limit;");
                 $rowPage = mysqli_fetch_all($sqlPage, MYSQLI_ASSOC);
             }
 

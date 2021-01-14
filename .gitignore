@@ -9,11 +9,10 @@
 /config/config.php
 /.htaccess
 /htdocs/.htaccess
-/htdocs/admin/backups/*
-/htdocs/admin/upgrade/*
 /htdocs/robots.txt
 /htdocs/sitemap.xml
-/htdocs/~install.old
+/cli/tmp/*
+/htdocs/static/*
 
 ## Some common .gitignore configurations
 # Compiled source #

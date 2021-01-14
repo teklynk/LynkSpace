@@ -2,31 +2,14 @@
 //This is the main Config/Setup file for the admin panel and Global variables used throughout the site. Change values as needed.
 //Create a virtual host alias for the directory that the project files are in.
 
-//Contains DB connection
-require_once( 'dbconn.php' );
+require_once('sqlconfig.php');
 
-//Blowfish Salt goes here after the installer runs.
-require_once( 'blowfishsalt.php' );
+//Blowfish Salt. Add your own salt/hash
+define('blowfishSalt', '');
 
-$rowConfig = '';
-$db_conn = '';
+$getLocId = isset($_GET['loc_id']) ? $_GET['loc_id'] : null;
 $errorMsg = '';
 $pageMsg = '';
-
-$getLocId = isset( $_GET['loc_id'] ) ? $_GET['loc_id'] : null;
-
-//Establish config connection
-$db_conn = mysqli_connect( db_servername, db_username, db_password );
-mysqli_select_db( $db_conn, db_name );
-mysqli_set_charset( $db_conn, 'UTF-8' );
-
-// If DB not found then halt the script and display a link to the install page.
-if ( mysqli_connect_error() || mysqli_connect_errno() ) {
-	die( "MySQL Error: " . mysqli_connect_error() . " : " . mysqli_connect_errno() );
-} else {
-	$sqlConfig = mysqli_query( $db_conn, "SELECT theme, iprange, multibranch, loc_types, homepageurl, setuppacurl, searchlabel_ls2pac, searchlabel_ls2kids, searchplaceholder_ls2pac, searchplaceholder_ls2kids, customer_id, session_timeout, carousel_speed, analytics FROM config WHERE id=1;" );
-	$rowConfig = mysqli_fetch_array( $sqlConfig, MYSQLI_ASSOC );
-}
 
 //Protocol-relative/agnostic (https:// or http:// or //)
 $serverProtocol = '//';
