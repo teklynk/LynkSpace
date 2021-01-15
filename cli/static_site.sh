@@ -8,24 +8,37 @@
 # Define source and destination paths and domain name
 httrackpath=/usr/bin/httrack
 domain=lynkspace.local
+proddomain=teklynk.com
 temppath=/var/www/html/LynkSpace/cli/tmp
 staticsitepath=/var/www/html/LynkSpace/htdocs/static
 
 # Purge the temp/source directory
-#rm -r $temppath/*
+rm -r $temppath/*
 
-#sleep 3
+sleep 3
 
 # Run HTTrack
 $httrackpath http://$domain -O $temppath -v -a -w --footer ""
 
+sleep 3
+
 # Find and remove HTTrack comment lines
 find $temppath -type f -name '*.html' -exec sed -i 's#<!-- Added by HTTrack --><meta http-equiv=\"content-type\" content=\"text\/html;charset=UTF-8\" \/><!-- \/Added by HTTrack -->#''#g' {} +
 
-# Purge the destination/static site directory
-#rm -r $staticsitepath/*
+sleep 3
 
-#sleep 3
+# Find and replace local domain with production domain
+find $temppath -type f -name "*.html" -exec sed -i 's#'"$domain"'#'"$proddomain"'#g' {} +
+
+sleep 3
+
+# Remove white space and line breaks
+find $temppath -type f -name "*.html" -exec sed -i '/^[[:space:]]*$/d' {} +
+
+# Purge the destination/static site directory
+rm -r $staticsitepath/*
+
+sleep 3
 
 # Copy source/temp path to destination/static path
 cp -r $temppath/$domain/* $staticsitepath/
