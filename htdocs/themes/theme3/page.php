@@ -37,7 +37,11 @@ if (is_array($pageArray) && array_count_values($pageArray) > 0) {
     echo "<div class='row row_pad content' id='page'>";
 
     echo "<div class='col-sm-12 col-md-12 col-lg-12 '>";
-    echo "<h1 class='page'>" . $pageTitle . "</h1>";
+
+    if ( ! empty( $pageTitle ) ) {
+        echo "<h2 class='page_title'>" . $pageTitle . "</h2>";
+    }
+
     echo "<span class='date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;<strong>" . $pageDate . "</strong></span>";
 
     if ($keywords) {
@@ -74,7 +78,7 @@ if (is_array($pageArray) && array_count_values($pageArray) > 0) {
     echo "</div>";
     echo "<div class='container' id='pages'>
     <div class='content'>
-    <div class='row row_pad'><div class='col-sm-12 col-md-12 col-lg-12 page-content'>";
+    <div class='row'><div class='col-sm-12 col-md-12 col-lg-12 page-content'>";
 
     require_once(__DIR__ . '/includes/pagenotfound.inc.php');
 
