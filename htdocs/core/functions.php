@@ -67,6 +67,7 @@ function getPage($loc, $start_from = null, $rows_limit = null)
     global $pageFeaturedImageActive;
     global $pageCreated;
     global $pageId;
+    global $pageAuthor;
     global $pageArray;
     global $getPageKeywords;
     global $pageHeading;
@@ -113,7 +114,7 @@ function getPage($loc, $start_from = null, $rows_limit = null)
         //return single page
         if (ctype_digit($pageId)) {
             //get one item where page_id
-            $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, created, active, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
+            $sqlPage = mysqli_query($db_conn, "SELECT id, title, sub_heading, content, keywords, image, featured_image_active, created, active, author_name, loc_id FROM pages WHERE active='true' AND id=" . $pageId . " AND loc_id=" . $loc . " LIMIT 1;");
             $rowPage = mysqli_fetch_array($sqlPage, MYSQLI_ASSOC);
 
             $pageArray = $rowPage;
@@ -123,6 +124,7 @@ function getPage($loc, $start_from = null, $rows_limit = null)
                 $pageTitle = $rowPage['title'];
                 $pageSubHeading = $rowPage['sub_heading'];
                 $pageContent = $rowPage['content'];
+                $pageAuthor = $rowPage['author_name'];
                 $pageKeywords = $rowPage['keywords'];
                 $pageImage = $rowPage['image'];
                 $pageFeaturedImageActive = $rowPage['featured_image_active'];
@@ -1427,7 +1429,7 @@ function getSiteSearchResults($searchTerm, $showPageContent)
 
     $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, created, updated, author_name, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' OR keywords LIKE '$siteSearchTerm' AND active='true' ORDER BY title ASC;");
 
-    echo "<ul>";
+    echo "<ul class='search-results'>";
 
     while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch, MYSQLI_ASSOC)) {
         $siteSearchCount++;
@@ -1440,18 +1442,19 @@ function getSiteSearchResults($searchTerm, $showPageContent)
         $siteSearchActive = $rowSiteSearch['active'];
         $siteSearchCreated = $rowSiteSearch['created'];
         $siteSearchUpdate = $rowSiteSearch['updated'];
+        $siteSearchKeywords = rtrim($siteSearchKeywords, ',');
 
         $keywordsArray = explode(",", $siteSearchKeywords);
 
         if ($siteSearchActive == 'true') {
             echo "<li>" . PHP_EOL;
-            echo "<h3 class='post-title search-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3>" . PHP_EOL;
+            echo "<h3 class='post-title search-title'><a class='search-links' href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3>" . PHP_EOL;
             echo "<span class='search-created small'><i class='fa fa-calendar' aria-hidden='true'></i> " . date("F jS, Y", strtotime($siteSearchCreated)) . "</span>" . PHP_EOL;
             echo "<span class='search-author small'><i class='fa fa-user' aria-hidden='true'></i> " . $siteSearchAuthor . "</span>" . PHP_EOL;
             echo "<span class='search-keywords small'><i class='fa fa-tags' aria-hidden='true'></i> ";
 
             foreach($keywordsArray as $keyword) {
-                echo "<a href='index.php?loc_id=" . $siteSearchLodId . "&keywords=". trim($keyword) . "' target='_self'>" . $keyword . ",</a>";
+                echo "<a class='search-keyword-links' href='index.php?loc_id=" . $siteSearchLodId . "&keywords=". trim($keyword) . "' target='_self'>" . $keyword . ",</a>";
             }
 
             echo "</span>" . PHP_EOL;

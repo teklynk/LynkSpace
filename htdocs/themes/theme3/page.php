@@ -42,13 +42,23 @@ if (is_array($pageArray) && array_count_values($pageArray) > 0) {
 
     if ( ! empty( $pageTitle ) ) {
         echo "<h2 class='page_title'>" . $pageTitle . "</h2>";
-        echo "<span class='date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;<strong>" . $pageDate . "</strong></span>";
 
-        if ($keywords) {
-            echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span>";
+        if ($pageDate) {
+            echo "<span class='date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;" . $pageDate . "</span>";
         } else {
             echo "<p><br /></p>";
         }
+        if ($pageAuthor) {
+            echo "<span class='author small'><i class='fa fa-user' aria-hidden='true'></i>&nbsp;" . $pageAuthor . "</span>";
+        } else {
+            echo "<p><br /></p>";
+        }
+        if ($keywords) {
+            echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;" . rtrim($keywords, ',') . "</span>";
+        } else {
+            echo "<p><br /></p>";
+        }
+
     }
 
     echo "</div>";
