@@ -38,16 +38,17 @@ if (is_array($pageArray) && array_count_values($pageArray) > 0) {
 
     echo "<div class='col-sm-12 col-md-12 col-lg-12 '>";
 
+    require_once(__DIR__ . '/includes/searchsite.inc.php');
+
     if ( ! empty( $pageTitle ) ) {
         echo "<h2 class='page_title'>" . $pageTitle . "</h2>";
-    }
+        echo "<span class='date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;<strong>" . $pageDate . "</strong></span>";
 
-    echo "<span class='date small'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;<strong>" . $pageDate . "</strong></span>";
-
-    if ($keywords) {
-        echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span>";
-    } else {
-        echo "<p><br /></p>";
+        if ($keywords) {
+            echo "<span class='keywords small'><i class='fa fa-tags' aria-hidden='true'></i>&nbsp;<strong>" . rtrim($keywords, ',') . "</strong></span>";
+        } else {
+            echo "<p><br /></p>";
+        }
     }
 
     echo "</div>";

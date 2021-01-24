@@ -1425,25 +1425,45 @@ function getSiteSearchResults($searchTerm, $showPageContent)
     $siteSearchTerm = "%" . mysqli_real_escape_string($db_conn, strip_tags(trim($searchTerm))) . "%";
     $siteSearchCount = 0;
 
-    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' OR keywords LIKE '$siteSearchTerm' ORDER BY title ASC;");
+    $sqlSiteSearch = mysqli_query($db_conn, "SELECT id, title, content, keywords, active, created, updated, author_name, loc_id FROM pages WHERE title LIKE '$siteSearchTerm' OR content LIKE '$siteSearchTerm' OR keywords LIKE '$siteSearchTerm' AND active='true' ORDER BY title ASC;");
+
+    echo "<ul>";
 
     while ($rowSiteSearch = mysqli_fetch_array($sqlSiteSearch, MYSQLI_ASSOC)) {
         $siteSearchCount++;
         $siteSearchId = $rowSiteSearch['id'];
         $siteSearchLodId = $rowSiteSearch['loc_id'];
         $siteSearchTitle = $rowSiteSearch['title'];
+        $siteSearchAuthor = $rowSiteSearch['author_name'];
         $siteSearchContent = $rowSiteSearch['content'];
         $siteSearchKeywords = $rowSiteSearch['keywords'];
         $siteSearchActive = $rowSiteSearch['active'];
+        $siteSearchCreated = $rowSiteSearch['created'];
+        $siteSearchUpdate = $rowSiteSearch['updated'];
+
+        $keywordsArray = explode(",", $siteSearchKeywords);
 
         if ($siteSearchActive == 'true') {
-            echo "<hr/><h3 class='post-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3>" . PHP_EOL;
+            echo "<li>" . PHP_EOL;
+            echo "<h3 class='post-title search-title'><a href='page.php?loc_id=$siteSearchLodId&page_id=$siteSearchId' target='_self'>" . $siteSearchTitle . "</a></h3>" . PHP_EOL;
+            echo "<span class='search-created small'><i class='fa fa-calendar' aria-hidden='true'></i> " . date("F jS, Y", strtotime($siteSearchCreated)) . "</span>" . PHP_EOL;
+            echo "<span class='search-author small'><i class='fa fa-user' aria-hidden='true'></i> " . $siteSearchAuthor . "</span>" . PHP_EOL;
+            echo "<span class='search-keywords small'><i class='fa fa-tags' aria-hidden='true'></i> ";
+
+            foreach($keywordsArray as $keyword) {
+                echo "<a href='index.php?loc_id=" . $siteSearchLodId . "&keywords=". trim($keyword) . "' target='_self'>" . $keyword . ",</a>";
+            }
+
+            echo "</span>" . PHP_EOL;
+            echo "</li>" . PHP_EOL;
 
             if ($showPageContent == 'true') {
                 echo "<p class='post-content'>" . $siteSearchContent . "</p><br/>" . PHP_EOL;
             }
         }
     }
+
+    echo "</ul>";
 }
 
 function getUrlContents($getUrl)

@@ -10,7 +10,7 @@ if ( ! defined( 'ALLOW_INC' ) ) {
 <div class="panel panel-default">
     <div class="panel-body">
         <!-- Site Search Form -->
-        <form name="siteSearchForm" method="post" action="?loc_id=<?php echo loc_id; ?>">
+        <form name="siteSearchForm" method="post" action="page.php?loc_id=<?php echo loc_id; ?>">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
                     <input type="text" class="form-control" id="sitesearchterm" name="sitesearchterm"
@@ -25,3 +25,9 @@ if ( ! defined( 'ALLOW_INC' ) ) {
         </form>
     </div>
 </div>
+
+<?php
+if (!empty($_POST['sitesearchterm'])) {
+    getSiteSearchResults($_POST['sitesearchterm'],false);
+}
+?>

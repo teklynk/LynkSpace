@@ -32,8 +32,10 @@ find $temppath -type f -name "*.html" -exec sed -i 's#'"$domain"'#'"$proddomain"
 
 sleep 3
 
-# Remove white space and line breaks
-find $temppath -type f -name "*.html" -exec sed -i '/^[[:space:]]*$/d' {} +
+# Remove white space and line breaks - Minify
+find $temppath -type f -name "*.html" -exec sed -i ':a;N;$!ba;s/>\s*</></g' {} +
+
+sleep 3
 
 # Purge the destination/static site directory
 rm -r $staticsitepath/*
