@@ -7,8 +7,8 @@
 
 # Define source and destination paths and domain name
 httrackpath=/usr/bin/httrack
-domain=lynkspace.local
-proddomain=teklynk.com
+domain=http://lynkspace.local/
+proddomain=static-lynkspace.local
 temppath=/var/www/html/LynkSpace/cli/tmp
 staticsitepath=/var/www/html/LynkSpace/htdocs/static
 

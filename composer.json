@@ -2,6 +2,7 @@
   "require": {
     "vlucas/phpdotenv": "2.4",
     "robmorgan/phinx": "^0.9.2",
-    "monolog/monolog": "^1.0"
+    "monolog/monolog": "^1.0",
+    "ext-mysqli": "*"
   }
 }

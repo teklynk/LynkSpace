@@ -79,6 +79,10 @@ Install Guide
 
 - Visit http://your_domain.com/admin 
     - You should now be prompted to create an Admin user. Be sure to do this!
+
+- Copy install.php to the admin directory.
+    - Visit http://yoursite.com/admin/install.php
+    
     
 Screenshots
 # Screenshots
